@@ -13,38 +13,101 @@ The system calculates planetary positions relative to the natal Moon (1-12 house
 and determines whether transits are favorable, unfavorable, or obstructed.
 """
 
-from typing import Dict, List, Optional, Any
+from typing import Any
+
+from packages.core.src.knowledge_loader import get_transit_rules
+
+# Module-level cache for transit rules
+_transit_rules_cache: dict[str, Any] | None = None
 
 
-# Gochara favorable house positions for each planet
-# These are the houses FROM THE NATAL MOON where each planet gives good results
-GOCHARA_FAVORABLE = {
-    "sun": [3, 6, 10, 11],
-    "moon": [1, 3, 6, 7, 10, 11],
-    "mars": [3, 6, 11],
-    "mercury": [2, 4, 6, 8, 10, 11],
-    "jupiter": [2, 5, 7, 9, 11],
-    "venus": [1, 2, 3, 4, 5, 8, 9, 11, 12],
-    "saturn": [3, 6, 11],
-    "rahu": [3, 6, 10, 11],
-    "ketu": [3, 6, 10, 11],
-}
+def _get_transit_rules() -> dict[str, Any]:
+    """Get cached transit rules from JSON."""
+    global _transit_rules_cache
+    if _transit_rules_cache is None:
+        _transit_rules_cache = get_transit_rules()
+    return _transit_rules_cache
 
-# Vedha (obstruction) points for favorable transits
-# Format: {planet: {favorable_house: obstructing_house}}
-# When a benefic planet is in a favorable position, planets in vedha houses obstruct results
-VEDHA_POINTS = {
-    "sun": {3: 9, 6: 12, 10: 4, 11: 5},
-    "moon": {1: 5, 3: 9, 6: 12, 7: 2, 10: 4, 11: 8},
-    "mars": {3: 12, 6: 9, 11: 5},
-    "mercury": {2: 5, 4: 3, 6: 9, 8: 1, 10: 8, 11: 12},
-    "jupiter": {2: 12, 5: 4, 7: 3, 9: 10, 11: 8},
-    "venus": {1: 8, 2: 7, 3: 1, 4: 10, 5: 9, 8: 5, 9: 11, 11: 6, 12: 3},
-    "saturn": {3: 12, 6: 9, 11: 5},
-}
+
+def _get_gochara_favorable() -> dict[str, list[int]]:
+    """Get gochara favorable positions from JSON, with fallback."""
+    rules = _get_transit_rules()
+    data = rules.get("gochara_favorable", {})
+
+    if data:
+        return data
+
+    # Fallback to defaults
+    return {
+        "sun": [3, 6, 10, 11],
+        "moon": [1, 3, 6, 7, 10, 11],
+        "mars": [3, 6, 11],
+        "mercury": [2, 4, 6, 8, 10, 11],
+        "jupiter": [2, 5, 7, 9, 11],
+        "venus": [1, 2, 3, 4, 5, 8, 9, 11, 12],
+        "saturn": [3, 6, 11],
+        "rahu": [3, 6, 10, 11],
+        "ketu": [3, 6, 10, 11],
+    }
+
+
+def _get_vedha_points() -> dict[str, dict[int, int]]:
+    """Get vedha points from JSON, with fallback."""
+    rules = _get_transit_rules()
+    data = rules.get("vedha_points", {})
+
+    if data:
+        # Convert string keys to int for nested dicts
+        result = {}
+        for planet, vedha_dict in data.items():
+            if isinstance(vedha_dict, dict):
+                result[planet] = {int(k): v for k, v in vedha_dict.items()}
+        return result
+
+    # Fallback to defaults
+    return {
+        "sun": {3: 9, 6: 12, 10: 4, 11: 5},
+        "moon": {1: 5, 3: 9, 6: 12, 7: 2, 10: 4, 11: 8},
+        "mars": {3: 12, 6: 9, 11: 5},
+        "mercury": {2: 5, 4: 3, 6: 9, 8: 1, 10: 8, 11: 12},
+        "jupiter": {2: 12, 5: 4, 7: 3, 9: 10, 11: 8},
+        "venus": {1: 8, 2: 7, 3: 1, 4: 10, 5: 9, 8: 5, 9: 11, 11: 6, 12: 3},
+        "saturn": {3: 12, 6: 9, 11: 5},
+    }
+
+
+def _get_transit_effects() -> dict[str, dict[int, list[str]]]:
+    """Get transit effects from JSON, with fallback."""
+    rules = _get_transit_rules()
+    data = rules.get("transit_effects", {})
+
+    if data:
+        # Convert string keys to int and flatten positive/negative to single list
+        result = {}
+        for planet, house_dict in data.items():
+            result[planet] = {}
+            for house_str, effects in house_dict.items():
+                house = int(house_str)
+                if isinstance(effects, dict):
+                    # Combine positive and negative effects
+                    combined = effects.get("positive", []) + effects.get("negative", [])
+                    result[planet][house] = combined
+                elif isinstance(effects, list):
+                    result[planet][house] = effects
+        return result
+
+    # Will use inline defaults in the code
+    return {}
+
+
+# Backwards-compatible exports (loaded at module level)
+GOCHARA_FAVORABLE = _get_gochara_favorable()
+VEDHA_POINTS = _get_vedha_points()
+_transit_effects_from_json = _get_transit_effects()
 
 # Transit effects for each planet in each house from Moon
-TRANSIT_EFFECTS = {
+# Use JSON data if available, otherwise use defaults
+_DEFAULT_TRANSIT_EFFECTS = {
     "sun": {
         1: ["Authority", "Fame", "Confidence", "Leadership"],
         2: ["Financial challenges", "Speech issues", "Family tension"],
@@ -173,6 +236,11 @@ TRANSIT_EFFECTS = {
     },
 }
 
+# Use JSON data if available, otherwise use defaults
+TRANSIT_EFFECTS = (
+    _transit_effects_from_json if _transit_effects_from_json else _DEFAULT_TRANSIT_EFFECTS
+)
+
 
 def _calculate_house_from_moon(natal_moon_rashi: int, transit_rashi: int) -> int:
     """Calculate house position of transit planet relative to natal Moon.
@@ -188,9 +256,7 @@ def _calculate_house_from_moon(natal_moon_rashi: int, transit_rashi: int) -> int
     return house
 
 
-def _get_transit_effects_for_house(
-    planet: str, house_from_moon: int
-) -> List[str]:
+def _get_transit_effects_for_house(planet: str, house_from_moon: int) -> list[str]:
     """Get the effects of a planet in a specific house from Moon.
 
     Args:
@@ -205,9 +271,7 @@ def _get_transit_effects_for_house(
     return []
 
 
-def check_sade_sati(
-    natal_moon_rashi: int, saturn_rashi: int
-) -> Dict[str, Any]:
+def check_sade_sati(natal_moon_rashi: int, saturn_rashi: int) -> dict[str, Any]:
     """Check if Sade Sati (7.5-year Saturn transit) is active and determine phase.
 
     Sade Sati occurs when Saturn transits:
@@ -229,7 +293,7 @@ def check_sade_sati(
     """
     house_from_moon = _calculate_house_from_moon(natal_moon_rashi, saturn_rashi)
 
-    if house_from_moon == 12:
+    if house_from_moon == 12:  # noqa: SIM116
         return {
             "active": True,
             "phase": "rising",
@@ -304,9 +368,7 @@ def check_sade_sati(
         }
 
 
-def check_dhaiya(
-    natal_moon_rashi: int, saturn_rashi: int
-) -> Dict[str, Any]:
+def check_dhaiya(natal_moon_rashi: int, saturn_rashi: int) -> dict[str, Any]:
     """Check for Dhaiya (Small Panoti / Kantaka Shani).
 
     Dhaiya occurs when Saturn transits the 4th or 8th house from the natal Moon.
@@ -390,8 +452,8 @@ def get_gochara(
     natal_moon_rashi: int,
     transit_planet: str,
     transit_rashi: int,
-    all_transit_rashis: Optional[Dict[str, int]] = None,
-) -> Dict[str, Any]:
+    all_transit_rashis: dict[str, int] | None = None,
+) -> dict[str, Any]:
     """Analyze a single planet's transit (Gochara) effects.
 
     This function determines whether a transiting planet is in a favorable,
@@ -439,9 +501,7 @@ def get_gochara(
                 if other_planet.lower() == planet_lower:
                     continue
 
-                other_house = _calculate_house_from_moon(
-                    natal_moon_rashi, other_rashi
-                )
+                other_house = _calculate_house_from_moon(natal_moon_rashi, other_rashi)
 
                 if other_house == vedha_house:
                     # Sun-Saturn don't cause vedha to each other
@@ -449,11 +509,8 @@ def get_gochara(
                     other_planet_normalized = other_planet.lower()
 
                     sun_saturn_exception = (
-                        (planet_lower_normalized == "sun"
-                         and other_planet_normalized == "saturn")
-                        or (planet_lower_normalized == "saturn"
-                            and other_planet_normalized == "sun")
-                    )
+                        planet_lower_normalized == "sun" and other_planet_normalized == "saturn"
+                    ) or (planet_lower_normalized == "saturn" and other_planet_normalized == "sun")
 
                     if not sun_saturn_exception:
                         has_vedha = True
@@ -479,8 +536,8 @@ def get_gochara(
 
 
 def get_full_transit_analysis(
-    natal_moon_rashi: int, transit_positions: Dict[str, int]
-) -> Dict[str, Any]:
+    natal_moon_rashi: int, transit_positions: dict[str, int]
+) -> dict[str, Any]:
     """Complete transit analysis for all planets.
 
     This provides a comprehensive analysis of current transits, including
@@ -503,12 +560,11 @@ def get_full_transit_analysis(
     if not isinstance(transit_positions, dict):
         raise ValueError("transit_positions must be a dictionary")
 
-    if not all(isinstance(v, int) and 0 <= v <= 11
-               for v in transit_positions.values()):
+    if not all(isinstance(v, int) and 0 <= v <= 11 for v in transit_positions.values()):
         raise ValueError("All rashi values must be integers 0-11")
 
     # Saturn-specific analyses
-    saturn_rashi = transit_positions.get("saturn", None)
+    saturn_rashi = transit_positions.get("saturn")
     sade_sati_analysis = (
         check_sade_sati(natal_moon_rashi, saturn_rashi)
         if saturn_rashi is not None
@@ -526,12 +582,7 @@ def get_full_transit_analysis(
     unfavorable_count = 0
 
     for planet, rashi in transit_positions.items():
-        gochara = get_gochara(
-            natal_moon_rashi,
-            planet,
-            rashi,
-            transit_positions
-        )
+        gochara = get_gochara(natal_moon_rashi, planet, rashi, transit_positions)
         planet_transits[planet] = gochara
 
         if gochara["net_effect"] == "favorable":
@@ -584,7 +635,9 @@ def _determine_overall_trend(favorable: int, unfavorable: int) -> str:
 
 
 def get_transiting_planet_house(
-    natal_moon_rashi: int, transit_planet: str, transit_rashi: int
+    natal_moon_rashi: int,
+    transit_planet: str,  # noqa: ARG001
+    transit_rashi: int,
 ) -> int:
     """Get the house position of a transiting planet from natal Moon.
 
@@ -601,9 +654,7 @@ def get_transiting_planet_house(
     return _calculate_house_from_moon(natal_moon_rashi, transit_rashi)
 
 
-def is_planet_favorable_in_house(
-    planet: str, house_from_moon: int
-) -> bool:
+def is_planet_favorable_in_house(planet: str, house_from_moon: int) -> bool:
     """Check if a planet is in a naturally favorable house from Moon.
 
     Args:
@@ -618,7 +669,7 @@ def is_planet_favorable_in_house(
 
 
 def validate_transit_data(
-    natal_moon_rashi: int, transit_positions: Dict[str, int]
+    natal_moon_rashi: int, transit_positions: dict[str, int]
 ) -> tuple[bool, str]:
     """Validate transit data for consistency and validity.
 
@@ -649,18 +700,12 @@ def validate_transit_data(
             return False, f"Rashi for {planet} must be integer, got {type(rashi)}"
 
         if not (0 <= rashi <= 11):
-            return (
-                False,
-                f"Rashi for {planet} must be between 0 and 11, got {rashi}"
-            )
+            return (False, f"Rashi for {planet} must be between 0 and 11, got {rashi}")
 
     return True, "Data is valid"
 
 
-def get_transit_positions(
-    julian_day: float,
-    ayanamsa: str = "lahiri"
-) -> Dict[str, Dict[str, Any]]:
+def get_transit_positions(julian_day: float, ayanamsa: str = "lahiri") -> dict[str, dict[str, Any]]:
     """Get current planetary transit positions.
 
     This is a convenience function that wraps cosmos.get_all_planets
@@ -681,24 +726,32 @@ def get_transit_positions(
     """
     # Import cosmos functions (lazy import to avoid circular dependency)
     import sys
-    import os
-    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+    from pathlib import Path
+
+    sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
     from packages.cosmos.src import get_all_planets, get_ayanamsa
 
     # Convert ayanamsa string to float value
-    if isinstance(ayanamsa, str):
-        ayanamsa_value = get_ayanamsa(julian_day, ayanamsa)
-    else:
-        ayanamsa_value = ayanamsa
+    ayanamsa_value = get_ayanamsa(julian_day, ayanamsa) if isinstance(ayanamsa, str) else ayanamsa
 
     # Get raw planetary positions
     planets_raw = get_all_planets(julian_day, ayanamsa=ayanamsa_value)
 
     # Add rashi information
     RASHI_NAMES = [
-        "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
-        "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"
+        "Aries",
+        "Taurus",
+        "Gemini",
+        "Cancer",
+        "Leo",
+        "Virgo",
+        "Libra",
+        "Scorpio",
+        "Sagittarius",
+        "Capricorn",
+        "Aquarius",
+        "Pisces",
     ]
 
     transit_positions = {}
@@ -711,7 +764,7 @@ def get_transit_positions(
             "rashi_num": rashi_idx,
             "degree_in_rashi": longitude % 30,
             "is_retrograde": data.get("is_retrograde", False),
-            "speed": data.get("speed", 0.0)
+            "speed": data.get("speed", 0.0),
         }
 
     return transit_positions
@@ -719,18 +772,18 @@ def get_transit_positions(
 
 # Define public API
 __all__ = [
+    # Constants
+    "GOCHARA_FAVORABLE",
+    "TRANSIT_EFFECTS",
+    "VEDHA_POINTS",
+    "check_dhaiya",
+    "check_sade_sati",
+    "get_full_transit_analysis",
     # Main analysis functions
     "get_gochara",
-    "check_sade_sati",
-    "check_dhaiya",
-    "get_full_transit_analysis",
     "get_transit_positions",
     # Helper functions
     "get_transiting_planet_house",
     "is_planet_favorable_in_house",
     "validate_transit_data",
-    # Constants
-    "GOCHARA_FAVORABLE",
-    "VEDHA_POINTS",
-    "TRANSIT_EFFECTS",
 ]

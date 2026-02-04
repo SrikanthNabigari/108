@@ -1,0 +1,350 @@
+{
+  "metadata": {
+    "description": "Pratyantardasha (Sub-sub-period) calculation and interpretation rules",
+    "level": 3,
+    "source": "BPHS Chapter 46",
+    "created": "2026-02-04",
+    "version": "1.0"
+  },
+  "calculation": {
+    "formula": "AD_duration × PD_planet_years / 120",
+    "sequence": "Same as Vimshottari sequence starting from AD lord",
+    "vimshottari_sequence": ["ketu", "venus", "sun", "moon", "mars", "rahu", "jupiter", "saturn", "mercury"],
+    "planet_years": {
+      "ketu": 7,
+      "venus": 20,
+      "sun": 6,
+      "moon": 10,
+      "mars": 7,
+      "rahu": 18,
+      "jupiter": 16,
+      "saturn": 19,
+      "mercury": 17
+    },
+    "calculation_example": {
+      "scenario": "Jupiter Mahadasha (16 years), Sun Antardasha (duration 7 months 24 days), Venus Pratyantardasha",
+      "ad_duration_days": 234,
+      "formula_application": "234 × 20 / 120 = 39 days",
+      "result": "Venus PD lasts 39 days"
+    }
+  },
+  "interpretation_rules": {
+    "primary_influence": {
+      "planet": "Mahadasha lord",
+      "percentage": 40,
+      "significance": "Overall theme and context"
+    },
+    "secondary_influence": {
+      "planet": "Antardasha lord",
+      "percentage": 35,
+      "significance": "Period characteristics and general trend"
+    },
+    "tertiary_influence": {
+      "planet": "Pratyantardasha lord",
+      "percentage": 25,
+      "significance": "Specific events and precise timing"
+    },
+    "timing_significance": "Most precise for event timing and daily predictions",
+    "orb_of_influence": {
+      "entry": {
+        "duration_days": "1-2",
+        "description": "Effects begin 1-2 days before exact start"
+      },
+      "peak": {
+        "duration": "Middle third",
+        "description": "Maximum manifestation of planetary energies"
+      },
+      "exit": {
+        "duration_days": "1-2",
+        "description": "Effects fade in last few days before next PD"
+      }
+    }
+  },
+  "effect_modifiers": {
+    "all_lords_friendly": {
+      "strength_multiplier": 1.5,
+      "description": "Highly auspicious period with smooth progress",
+      "characteristics": ["Easy achievements", "Good health", "Positive relationships", "Financial gains"]
+    },
+    "two_friendly_one_enemy": {
+      "strength_multiplier": 0.9,
+      "description": "Generally positive with some obstacles",
+      "characteristics": ["Mixed results", "Moderate progress", "Some challenges", "Overall beneficial"]
+    },
+    "md_ad_friendly_pd_enemy": {
+      "strength_multiplier": 0.8,
+      "description": "Good overall context but specific events challenging",
+      "characteristics": ["Good foundation", "Specific obstacles", "Requires effort", "Eventual success after effort"]
+    },
+    "ad_friendly_md_enemy": {
+      "strength_multiplier": 0.75,
+      "description": "Some relief during challenging main period",
+      "characteristics": ["Temporary improvement", "Brief respite", "Limited duration", "Temporary benefits"]
+    },
+    "all_lords_enemies": {
+      "strength_multiplier": 0.4,
+      "description": "Difficult period requiring patience and caution",
+      "characteristics": ["Multiple obstacles", "Health concerns", "Financial losses", "Relationship strain", "Requires spiritual practice"]
+    }
+  },
+  "special_combinations": {
+    "triple_same_planet": {
+      "example": "Sun-Sun-Sun (Sun MD, Sun AD, Sun PD)",
+      "description": "Maximum expression of planetary energy",
+      "effects": "Intense but short-lived peak of that planet's significations",
+      "duration": "Rare occurrence, highly powerful but brief",
+      "characteristics": ["Intense focus", "Peak manifestation", "Dramatic results", "Short duration"]
+    },
+    "yogakaraka_pd": {
+      "description": "When PD lord is yogakaraka for the natal chart",
+      "effects": "Favorable results even in difficult MD-AD combinations",
+      "strength": "Overrides some malefic influences",
+      "importance": "Critical for positive outcomes in challenging periods"
+    },
+    "functional_malefic_pd": {
+      "description": "When PD lord is functional malefic for the chart",
+      "effects": "Temporary obstacles even in good MD-AD combinations",
+      "nature": "Specific challenges related to PD lord's significations",
+      "temporary": "Effects limited to PD duration"
+    },
+    "retrograde_pd_lord": {
+      "description": "When PD lord is retrograde in transit",
+      "effects": "Delayed results, revisiting of past themes",
+      "characteristics": ["Inner reflection", "Review of past", "Delayed manifestation", "Psychological processing"]
+    },
+    "exalted_pd_lord": {
+      "description": "When PD lord is in exaltation sign",
+      "effects": "Strengthened positive effects",
+      "amplification": "Results come more easily and quickly"
+    },
+    "debilitated_pd_lord": {
+      "description": "When PD lord is in debilitation sign",
+      "effects": "Weakened results or obstacles",
+      "mitigation": "Extra effort required for success"
+    }
+  },
+  "event_timing": {
+    "description": "Pratyantardasha is the key period for precise event prediction",
+    "rules": [
+      {
+        "event": "Marriage",
+        "indicators": ["Venus or 7th lord PD in compatible MD-AD", "Supporting transits"],
+        "optimal_conditions": "Benefic Venus PD, 7th house activation"
+      },
+      {
+        "event": "Career change",
+        "indicators": ["Saturn or 10th lord PD", "MD-AD supporting professional growth"],
+        "optimal_conditions": "Strategic Saturn or benefic 10th lord PD"
+      },
+      {
+        "event": "Childbirth",
+        "indicators": ["Jupiter or 5th lord PD", "5th house/5th lord strong"],
+        "optimal_conditions": "Benefic Jupiter or 5th lord PD, compatible transits"
+      },
+      {
+        "event": "Health crisis",
+        "indicators": ["6th or 8th lord PD in afflicted MD-AD", "6th/8th houses activated"],
+        "avoidance": "Precautions during such periods"
+      },
+      {
+        "event": "Financial gain",
+        "indicators": ["2nd or 11th lord PD in benefic MD-AD", "Strong 2nd/11th houses"],
+        "optimal_conditions": "Benefic 2nd/11th lord PD with supporting transits"
+      },
+      {
+        "event": "Travel",
+        "indicators": ["Rahu or 3rd/9th lord PD", "Indicating short or long journeys"],
+        "planning": "Coordinate with overall dasha trends"
+      },
+      {
+        "event": "Spiritual events",
+        "indicators": ["Ketu or 12th/9th lord PD", "Spiritual growth indicators"],
+        "characteristics": ["Inner transformation", "Meditation breakthroughs", "Pilgrimage"]
+      },
+      {
+        "event": "Financial loss",
+        "indicators": ["12th lord PD in difficult MD-AD", "8th lord PD malefic"],
+        "caution": "Exercise prudence during such periods"
+      },
+      {
+        "event": "Conflict resolution",
+        "indicators": ["6th lord PD with benefic placement", "Overcoming enemies"],
+        "potential": "Settlement of disputes"
+      },
+      {
+        "event": "Property transactions",
+        "indicators": ["4th lord PD, Saturn involvement", "Real estate matters"],
+        "success": "When supportive lord and favorable transits"
+      }
+    ]
+  },
+  "house_lord_effects": {
+    "description": "Effects when PD lord owns specific houses in natal chart",
+    "effects_by_house": {
+      "1st_lord": {
+        "significations": ["Self", "Health", "Personality", "New beginnings", "Physical body"],
+        "events": "Personal transformation, health changes, new initiatives",
+        "nature": "Self-focused events and personal growth"
+      },
+      "2nd_lord": {
+        "significations": ["Finance", "Family", "Speech", "Food", "Wealth"],
+        "events": "Financial matters, family discussions, income changes",
+        "nature": "Economic and familial affairs"
+      },
+      "3rd_lord": {
+        "significations": ["Siblings", "Short travel", "Communication", "Courage", "Neighbors"],
+        "events": "Sibling interactions, short journeys, writing, communication",
+        "nature": "Social and communicative activities"
+      },
+      "4th_lord": {
+        "significations": ["Home", "Mother", "Education", "Vehicles", "Land", "Happiness"],
+        "events": "Home changes, mother's matters, education, property",
+        "nature": "Domestic and educational affairs"
+      },
+      "5th_lord": {
+        "significations": ["Children", "Creativity", "Romance", "Speculation", "Education", "Intelligence"],
+        "events": "Childbirth, creative expression, love affairs, investments",
+        "nature": "Creative and romantic pursuits"
+      },
+      "6th_lord": {
+        "significations": ["Health issues", "Enemies", "Debts", "Service", "Litigation", "Disease"],
+        "events": "Health problems, conflicts, debt settlement, service work",
+        "nature": "Challenges and obstacles to overcome"
+      },
+      "7th_lord": {
+        "significations": ["Partnerships", "Marriage", "Business", "Relationships", "Spouse"],
+        "events": "Marriage, business partnerships, contractual matters",
+        "nature": "Relationship and partnership developments"
+      },
+      "8th_lord": {
+        "significations": ["Transformation", "Inheritance", "Sudden events", "Longevity", "Mysteries", "Sexuality"],
+        "events": "Sudden changes, inheritance, transformation, deep psychology",
+        "nature": "Profound changes and transformative experiences"
+      },
+      "9th_lord": {
+        "significations": ["Fortune", "Father", "Long travel", "Dharma", "Higher learning", "Luck"],
+        "events": "Long journeys, spiritual growth, good fortune, father's matters",
+        "nature": "Expansion and spiritual advancement"
+      },
+      "10th_lord": {
+        "significations": ["Career", "Status", "Authority", "Public image", "Father", "Profession"],
+        "events": "Career advancement, job changes, status improvement",
+        "nature": "Professional and public accomplishments"
+      },
+      "11th_lord": {
+        "significations": ["Gains", "Friends", "Desires", "Income", "Organizations", "Ambitions"],
+        "events": "Achievement of goals, financial gains, friendships",
+        "nature": "Fulfillment of wishes and social connections"
+      },
+      "12th_lord": {
+        "significations": ["Losses", "Foreign land", "Spirituality", "Expenses", "Liberation", "Hospitals"],
+        "events": "Foreign travel, spiritual pursuits, losses, expenditures",
+        "nature": "Liberation, foreign matters, and spiritual growth"
+      }
+    }
+  },
+  "strength_assessment": {
+    "very_strong": {
+      "conditions": ["PD lord exalted or own sign", "All three lords friendly", "Benefic planets as PD lord"],
+      "expected_results": "Easy manifestation, favorable outcomes, minimal obstacles"
+    },
+    "strong": {
+      "conditions": ["PD lord well-placed", "Two friendly lords", "Natural benefics as PD lord"],
+      "expected_results": "Good results with moderate effort, positive progress"
+    },
+    "moderate": {
+      "conditions": ["PD lord neutral position", "Mixed planetary friendships", "Neutral planets as PD lord"],
+      "expected_results": "Mixed results, requires planning, some obstacles manageable"
+    },
+    "weak": {
+      "conditions": ["PD lord debilitated", "Malefic planets as PD lord", "One friendly lord"],
+      "expected_results": "Challenges predominant, requires caution and effort"
+    },
+    "very_weak": {
+      "conditions": ["PD lord very weak", "All malefic planets as PD lord", "No friendly lords"],
+      "expected_results": "Difficult period, requires spiritual practice and patience"
+    }
+  },
+  "sookshma_dasha": {
+    "description": "Fourth level - further division of Pratyantardasha into 9 sub-periods",
+    "level": 4,
+    "calculation": "PD_duration × planet_years / 120",
+    "sequence": "Same Vimshottari sequence starting from PD lord",
+    "duration_range": "Days to weeks",
+    "usage": "Ultra-precise timing, rarely calculated except for critical events",
+    "precision": "Most detailed level commonly used in practice",
+    "applications": [
+      "Muhurta selection for important ceremonies",
+      "Daily event prediction",
+      "Timing of health crises",
+      "Specific transaction timing"
+    ]
+  },
+  "prana_dasha": {
+    "description": "Fifth level - finest division used in advanced calculations",
+    "level": 5,
+    "calculation": "Sookshma_duration × planet_years / 120",
+    "duration_range": "Hours to days",
+    "usage": "Theoretical level, used in advanced timing rarely",
+    "precision": "Extremely detailed but requires exceptional skill",
+    "applications": [
+      "Precise minute-level timing",
+      "Advanced muhurta selection",
+      "Research purposes",
+      "Expert predictive astrology"
+    ]
+  },
+  "practical_guidelines": {
+    "prediction_methodology": [
+      "Identify current Mahadasha and Antardasha",
+      "Determine Pratyantardasha sequence from AD lord",
+      "Assess strength of all three lords",
+      "Consider house lordships in natal chart",
+      "Evaluate planetary transits during PD",
+      "Apply effect modifiers based on lord relationships",
+      "Predict specific events based on combinations"
+    ],
+    "precision_levels": {
+      "month_level": "Accurate to within 1-2 weeks",
+      "fortnight_level": "Accurate to within 1-2 days",
+      "day_level": "Requires Sookshma Dasha calculation",
+      "hour_level": "Requires Prana Dasha calculation"
+    },
+    "common_mistakes_to_avoid": [
+      "Ignoring the strength of AD and MD lords",
+      "Not considering house lordships",
+      "Overlooking transits of major planets",
+      "Misunderstanding effect modifiers",
+      "Not accounting for retrograde planets",
+      "Ignoring natal chart yogas",
+      "Over-relying on single indicators"
+    ],
+    "best_practices": [
+      "Always check all three dasha lords",
+      "Consider planetary strength in divisional charts",
+      "Cross-reference with transit predictions",
+      "Use Sookshma Dasha for important events",
+      "Combine with Transits for accuracy",
+      "Consider Natal Yogas and Doshas",
+      "Account for Retrograde movements",
+      "Verify predictions against actual events for learning"
+    ]
+  },
+  "special_notes": {
+    "shortest_pd_periods": {
+      "description": "PD periods for shortest-lived planets",
+      "sun_pd": "Approximately 1 month during long ADs",
+      "mars_pd": "Approximately 1.5 months",
+      "ketu_pd": "Approximately 1.5 months"
+    },
+    "longest_pd_periods": {
+      "description": "PD periods for longest-lived planets",
+      "venus_pd": "Approximately 4-5 months during long ADs",
+      "saturn_pd": "Approximately 4 months",
+      "mercury_pd": "Approximately 3.5 months"
+    },
+    "variability": "PD duration varies based on parent AD duration",
+    "research_value": "Pratyantardasha is most useful for practical event prediction",
+    "validation": "Verify predictions against actual events for chart rectification"
+  }
+}

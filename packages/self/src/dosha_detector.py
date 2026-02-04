@@ -11,16 +11,18 @@ Doshas represent karmic challenges or afflictions that require remedial measures
 Each dosha detection includes severity assessment and cancellation conditions.
 """
 
-from typing import List, Optional, Dict, Tuple
 from dataclasses import dataclass
+from typing import Any, ClassVar
 
-from packages.core.src.models import BirthChart, PlanetPosition, DetectedDosha
 from packages.core.src.constants import Planet, Rashi
+from packages.core.src.knowledge_loader import get_dosha_rules
+from packages.core.src.models import BirthChart, DetectedDosha, PlanetPosition
 
 
 @dataclass
 class AspectInfo:
     """Information about planetary aspects."""
+
     planet1: Planet
     planet2: Planet
     distance: float  # Angular distance in degrees
@@ -45,10 +47,10 @@ class DoshaDetector:
     """
 
     # Houses that trigger Mangal Dosha when Mars is present
-    MANGAL_CRITICAL_HOUSES = [1, 2, 4, 7, 8, 12]
+    MANGAL_CRITICAL_HOUSES: ClassVar[list[int]] = [1, 2, 4, 7, 8, 12]
 
     # Kaal Sarp Dosha types based on Rahu position
-    KAAL_SARP_TYPES = {
+    KAAL_SARP_TYPES: ClassVar[dict[int, str]] = {
         1: "Anant",
         2: "Kulik",
         3: "Vasuki",
@@ -60,76 +62,58 @@ class DoshaDetector:
         9: "Shankhchud",
         10: "Ghatak",
         11: "Vishdhar",
-        12: "Sheshnag"
+        12: "Sheshnag",
     }
 
     # Angular orbs for aspects (in degrees)
-    CONJUNCTION_ORB = 8  # Conjunction allowance
-    OPPOSITION_ORB = 8   # Opposition (180°) allowance
-    TRINE_ORB = 6        # Trine (120°) allowance
-    SQUARE_ORB = 6       # Square (90°) allowance
-    SEXTILE_ORB = 4      # Sextile (60°) allowance
+    CONJUNCTION_ORB: ClassVar[int] = 8  # Conjunction allowance
+    OPPOSITION_ORB: ClassVar[int] = 8  # Opposition (180°) allowance
+    TRINE_ORB: ClassVar[int] = 6  # Trine (120°) allowance
+    SQUARE_ORB: ClassVar[int] = 6  # Square (90°) allowance
+    SEXTILE_ORB: ClassVar[int] = 4  # Sextile (60°) allowance
 
     # Mars exaltation and own sign details
-    MARS_OWN_SIGNS = [Rashi.ARIES, Rashi.SCORPIO]
-    MARS_EXALTED_SIGN = Rashi.CAPRICORN
+    MARS_OWN_SIGNS: ClassVar[list[Rashi]] = [Rashi.ARIES, Rashi.SCORPIO]
+    MARS_EXALTED_SIGN: ClassVar[Rashi] = Rashi.CAPRICORN
 
     # Jupiter aspects (for cancellation and strengthening)
-    JUPITER_FULL_ASPECT_DISTANCE = 120  # Jupiter's 5th and 9th aspect
+    JUPITER_FULL_ASPECT_DISTANCE: ClassVar[int] = 120  # Jupiter's 5th and 9th aspect
 
-    def __init__(self):
-        """Initialize the dosha detector."""
-        self.dosha_rules = self._load_dosha_rules()
+    def __init__(self) -> None:
+        """Initialize the dosha detector with rules from JSON."""
+        self._dosha_rules: dict[str, Any] | None = None
 
-    def _load_dosha_rules(self) -> Dict[str, Dict]:
-        """Load dosha detection rules and thresholds.
+    @property
+    def dosha_rules(self) -> dict[str, Any]:
+        """Lazy load dosha rules from JSON knowledge base."""
+        if self._dosha_rules is None:
+            self._dosha_rules = get_dosha_rules()
+        return self._dosha_rules
+
+    def _get_dosha_config(self, dosha_id: str) -> dict[str, Any]:
+        """Get configuration for a specific dosha from JSON.
+
+        Args:
+            dosha_id: The dosha identifier (e.g., 'mangal_dosha')
 
         Returns:
-            Dictionary containing dosha-specific rules and parameters
+            Dictionary with dosha configuration
         """
-        return {
-            "mangal": {
-                "critical_houses": self.MANGAL_CRITICAL_HOUSES,
-                "severe_houses": [7, 8],
-                "moderate_houses": [4, 12],
-                "mild_houses": [1, 2],
-                "viewpoints": ["lagna", "moon", "venus"],
-                "cancellation_conditions": [
-                    "mars_in_own_sign",
-                    "mars_in_exalted_sign",
-                    "mars_aspected_by_jupiter",
-                    "mars_conjunct_jupiter",
-                    "strong_mars_in_natal_chart"
-                ]
-            },
-            "kaal_sarp": {
-                "description": "All planets hemmed between Rahu-Ketu axis",
-                "types": self.KAAL_SARP_TYPES,
-                "cancellation_conditions": [
-                    "rahu_in_12th_house",
-                    "rahu_aspected_by_jupiter",
-                    "ketu_in_6th_house",
-                    "jupiter_conjunction_rahu"
-                ]
-            },
-            "pitra": {
-                "description": "Ancestral karma affliction",
-                "triggers": ["sun_rahu_conjunction_in_trikona"],
-                "severity_factors": ["sun_in_1st", "sun_in_5th", "sun_in_9th"]
-            },
-            "grahan": {
-                "sun_triggers": ["sun_rahu", "sun_ketu"],
-                "moon_triggers": ["moon_rahu", "moon_ketu"],
-                "severity": "moderate"
-            },
-            "guru_chandal": {
-                "description": "Jupiter-Rahu conjunction or opposition",
-                "triggers": ["jupiter_rahu_conjunction", "jupiter_rahu_opposition"],
-                "severity": "variable"
-            }
-        }
+        return self.dosha_rules.get(dosha_id, {})
 
-    def detect_all(self, chart: BirthChart) -> List[DetectedDosha]:
+    def _get_dosha_remedies(self, dosha_id: str) -> list[str]:
+        """Get remedies for a specific dosha from JSON.
+
+        Args:
+            dosha_id: The dosha identifier
+
+        Returns:
+            List of remedy strings
+        """
+        config = self._get_dosha_config(dosha_id)
+        return config.get("remedies", [])
+
+    def detect_all(self, chart: BirthChart) -> list[DetectedDosha]:
         """Detect all doshas present in the birth chart.
 
         Systematically checks all major doshas and returns a list
@@ -160,14 +144,11 @@ class DoshaDetector:
             doshas.append(guru_chandal)
 
         # Check for cancellation conditions for each dosha
-        doshas = [
-            d for d in doshas
-            if not self.check_dosha_cancellation(d, chart)
-        ]
+        doshas = [d for d in doshas if not self.check_dosha_cancellation(d, chart)]
 
         return doshas
 
-    def detect_mangal_dosha(self, chart: BirthChart) -> Optional[DetectedDosha]:
+    def detect_mangal_dosha(self, chart: BirthChart) -> DetectedDosha | None:
         """Detect Mangal Dosha (Mars affliction).
 
         Mangal Dosha occurs when Mars is present in critical houses
@@ -194,30 +175,22 @@ class DoshaDetector:
         mars_pos = chart.planets[Planet.MARS]
 
         # Check Mars position from three viewpoints
-        dosha_from_lagna = self._check_mars_in_critical_houses(
-            mars_pos, chart.lagna_rashi, "Lagna"
-        )
+        dosha_from_lagna = self._check_mars_in_critical_houses(mars_pos, chart.lagna_rashi, "Lagna")
 
-        dosha_from_moon = self._check_mars_in_critical_houses(
-            mars_pos, chart.moon_rashi, "Moon"
-        )
+        dosha_from_moon = self._check_mars_in_critical_houses(mars_pos, chart.moon_rashi, "Moon")
 
         # Get Venus position for third viewpoint
         venus_pos = chart.planets[Planet.VENUS]
-        dosha_from_venus = self._check_mars_in_critical_houses(
-            mars_pos, venus_pos.rashi, "Venus"
-        )
+        dosha_from_venus = self._check_mars_in_critical_houses(mars_pos, venus_pos.rashi, "Venus")
 
         # Determine if dosha is present from any viewpoint
         all_checks = [
             (dosha_from_lagna, "Lagna"),
             (dosha_from_moon, "Moon"),
-            (dosha_from_venus, "Venus")
+            (dosha_from_venus, "Venus"),
         ]
 
-        dosha_present_checks = [
-            (house, viewpoint) for house, viewpoint in all_checks if house
-        ]
+        dosha_present_checks = [(house, viewpoint) for house, viewpoint in all_checks if house]
 
         if not dosha_present_checks:
             return None
@@ -229,13 +202,10 @@ class DoshaDetector:
 
         if most_severe_house in severe_houses:
             severity = "severe"
-            severity_score = 3
         elif most_severe_house in moderate_houses:
             severity = "moderate"
-            severity_score = 2
         else:
             severity = "mild"
-            severity_score = 1
 
         # Determine description with viewpoint information
         viewpoints = [vp for _, vp in dosha_present_checks]
@@ -259,17 +229,18 @@ class DoshaDetector:
             severity=severity,
             involved_planets=[Planet.MARS],
             description=description.strip(),
-            remedies=[
+            remedies=self._get_dosha_remedies("mangal_dosha")
+            or [
                 "Chant Mangala Stotram daily",
                 "Donate red items and copper articles",
                 "Wear coral gemstone on Tuesday",
                 "Perform Mangal puja or Hanuman worship",
                 "Recite Hanuman Chalisa",
-                "Fast on Tuesdays"
-            ]
+                "Fast on Tuesdays",
+            ],
         )
 
-    def detect_kaal_sarp_dosha(self, chart: BirthChart) -> Optional[DetectedDosha]:
+    def detect_kaal_sarp_dosha(self, chart: BirthChart) -> DetectedDosha | None:
         """Detect Kaal Sarp Dosha (Rahu-Ketu axis affliction).
 
         Kaal Sarp Dosha occurs when all planets (excluding Rahu and Ketu)
@@ -302,8 +273,15 @@ class DoshaDetector:
         # Get all planet positions (excluding Rahu/Ketu)
         planet_positions = {
             p: chart.planets[p]
-            for p in [Planet.SUN, Planet.MOON, Planet.MARS,
-                     Planet.MERCURY, Planet.JUPITER, Planet.VENUS, Planet.SATURN]
+            for p in [
+                Planet.SUN,
+                Planet.MOON,
+                Planet.MARS,
+                Planet.MERCURY,
+                Planet.JUPITER,
+                Planet.VENUS,
+                Planet.SATURN,
+            ]
         }
 
         # Check if all planets are between Rahu and Ketu
@@ -336,7 +314,7 @@ class DoshaDetector:
             "Shankhchud": "creating spiritual confusion and wrong guidance",
             "Ghatak": "obstructing career growth and public reputation",
             "Vishdhar": "causing betrayal by friends and associates",
-            "Sheshnag": "leading to spiritual stagnation and isolation"
+            "Sheshnag": "leading to spiritual stagnation and isolation",
         }
 
         effect_text = type_effects.get(dosha_type, "creating general karmic obstacles")
@@ -355,7 +333,8 @@ class DoshaDetector:
             severity="severe",
             involved_planets=[Planet.RAHU, Planet.KETU],
             description=description,
-            remedies=[
+            remedies=self._get_dosha_remedies("kaal_sarp_dosha")
+            or [
                 "Perform Kaal Sarp Dosha puja/homa",
                 "Rahu-Ketu shanti rituals",
                 "Visit Trimbakeshwar temple (Nasik)",
@@ -363,11 +342,11 @@ class DoshaDetector:
                 "Wear Blue Sapphire (if Rahu) or Hessonite (if Ketu)",
                 "Chant Rahu and Ketu mantras",
                 "Perform Rudra Abhishek",
-                "Donate black items and iron"
-            ]
+                "Donate black items and iron",
+            ],
         )
 
-    def detect_pitra_dosha(self, chart: BirthChart) -> Optional[DetectedDosha]:
+    def detect_pitra_dosha(self, chart: BirthChart) -> DetectedDosha | None:
         """Detect Pitra Dosha (ancestral karma affliction).
 
         Pitra Dosha indicates unresolved ancestral karma and debt to ancestors.
@@ -401,17 +380,14 @@ class DoshaDetector:
         sun_in_dharma = sun_pos.house in [1, 5, 9]
 
         # Secondary condition: Sun in dharma house with Rahu/Ketu aspect
-        sun_rahu_aspect = self._are_planets_aspecting(
-            sun_pos, rahu_pos, self.OPPOSITION_ORB
-        )
-        sun_ketu_aspect = self._are_planets_aspecting(
-            sun_pos, ketu_pos, self.OPPOSITION_ORB
-        )
+        sun_rahu_aspect = self._are_planets_aspecting(sun_pos, rahu_pos, self.OPPOSITION_ORB)
+        sun_ketu_aspect = self._are_planets_aspecting(sun_pos, ketu_pos, self.OPPOSITION_ORB)
 
         # Determine if Pitra Dosha is present
-        if not ((sun_rahu_conj or sun_ketu_conj) and sun_in_dharma):
-            if not (sun_in_dharma and (sun_rahu_aspect or sun_ketu_aspect)):
-                return None
+        has_conjunction = (sun_rahu_conj or sun_ketu_conj) and sun_in_dharma
+        has_aspect = sun_in_dharma and (sun_rahu_aspect or sun_ketu_aspect)
+        if not has_conjunction and not has_aspect:
+            return None
 
         # Determine severity based on house
         if sun_pos.house == 1:
@@ -435,9 +411,13 @@ class DoshaDetector:
             name="Pitra Dosha",
             is_present=True,
             severity=severity,
-            involved_planets=[Planet.SUN, Planet.RAHU if sun_rahu_conj or sun_rahu_aspect else Planet.KETU],
+            involved_planets=[
+                Planet.SUN,
+                Planet.RAHU if sun_rahu_conj or sun_rahu_aspect else Planet.KETU,
+            ],
             description=description,
-            remedies=[
+            remedies=self._get_dosha_remedies("pitra_dosha")
+            or [
                 "Perform Pitra Tarpan rituals",
                 "Offer water and food to crows (ancestors)",
                 "Visit pilgrimage sites and offer prayers",
@@ -445,11 +425,11 @@ class DoshaDetector:
                 "Chant Surya Namaskar and Sun mantras",
                 "Donate to charitable causes",
                 "Serve elderly people and parents with devotion",
-                "Perform Rudrabhishek to appease ancestral spirits"
-            ]
+                "Perform Rudrabhishek to appease ancestral spirits",
+            ],
         )
 
-    def detect_grahan_dosha(self, chart: BirthChart) -> Optional[DetectedDosha]:
+    def detect_grahan_dosha(self, chart: BirthChart) -> DetectedDosha | None:
         """Detect Grahan Dosha (eclipse shadow affliction).
 
         Grahan Dosha occurs when:
@@ -499,14 +479,15 @@ class DoshaDetector:
                     f"This affects career, authority, and vital life force. "
                     f"May cause lack of recognition, health issues, and reduced confidence."
                 ),
-                remedies=[
+                remedies=self._get_dosha_remedies("surya_grahan_dosha")
+                or [
                     "Chant Surya Namaskar daily",
                     "Perform Sun puja and rituals",
                     "Wear ruby gemstone",
                     "Meditate on Sun during sunrise",
                     "Fast on Sundays",
-                    "Donate red items and wheat"
-                ]
+                    "Donate red items and wheat",
+                ],
             )
 
         # Check Moon-Rahu/Ketu conjunction
@@ -526,20 +507,21 @@ class DoshaDetector:
                     f"This affects emotional stability, peace of mind, and comfort. "
                     f"May cause anxiety, sleep disturbances, and relationship challenges."
                 ),
-                remedies=[
+                remedies=self._get_dosha_remedies("chandra_grahan_dosha")
+                or [
                     "Chant Moon mantras and Soma mantras",
                     "Perform Moon puja",
                     "Wear pearl or moonstone",
                     "Meditate during full moon",
                     "Fast on Mondays",
                     "Donate white items and milk",
-                    "Practice calming pranayama"
-                ]
+                    "Practice calming pranayama",
+                ],
             )
 
         return None
 
-    def detect_guru_chandal_dosha(self, chart: BirthChart) -> Optional[DetectedDosha]:
+    def detect_guru_chandal_dosha(self, chart: BirthChart) -> DetectedDosha | None:
         """Detect Guru Chandal Dosha (Jupiter-Rahu affliction).
 
         Guru Chandal Dosha occurs when Jupiter and Rahu are in conjunction
@@ -584,8 +566,8 @@ class DoshaDetector:
 
         # Check if Jupiter is strong (own/exalted sign)
         jupiter_strong = (
-            jupiter_pos.rashi in [Rashi.SAGITTARIUS, Rashi.PISCES] or
-            jupiter_pos.rashi == Rashi.CANCER
+            jupiter_pos.rashi in [Rashi.SAGITTARIUS, Rashi.PISCES]
+            or jupiter_pos.rashi == Rashi.CANCER
         )
 
         description = (
@@ -604,7 +586,8 @@ class DoshaDetector:
             severity=severity,
             involved_planets=[Planet.JUPITER, Planet.RAHU],
             description=description.strip(),
-            remedies=[
+            remedies=self._get_dosha_remedies("guru_chandal_dosha")
+            or [
                 "Chant Jupiter mantras (Brihaspati Mantra)",
                 "Perform Jupiter puja on Thursdays",
                 "Wear yellow sapphire gemstone",
@@ -612,8 +595,8 @@ class DoshaDetector:
                 "Fast on Thursdays",
                 "Seek guidance from authentic gurus",
                 "Study spiritual texts and philosophy",
-                "Serve a true spiritual master"
-            ]
+                "Serve a true spiritual master",
+            ],
         )
 
     def check_dosha_cancellation(self, dosha: DetectedDosha, chart: BirthChart) -> bool:
@@ -725,11 +708,8 @@ class DoshaDetector:
     # Helper methods
 
     def _check_mars_in_critical_houses(
-        self,
-        mars_pos: PlanetPosition,
-        reference_rashi: Rashi,
-        viewpoint_name: str
-    ) -> Optional[int]:
+        self, mars_pos: PlanetPosition, reference_rashi: Rashi, _viewpoint_name: str
+    ) -> int | None:
         """Check if Mars is in critical houses from a given reference rashi.
 
         Args:
@@ -741,9 +721,7 @@ class DoshaDetector:
             House number if Mars is in critical house, None otherwise
         """
         # Calculate house distance from reference rashi to Mars rashi
-        house_distance = self._get_house_distance(
-            reference_rashi, mars_pos.rashi
-        )
+        house_distance = self._get_house_distance(reference_rashi, mars_pos.rashi)
 
         if house_distance in self.MANGAL_CRITICAL_HOUSES:
             return house_distance
@@ -761,9 +739,18 @@ class DoshaDetector:
             House distance (1-12) where 1 is same sign, 2 is next sign, etc.
         """
         rashi_order = [
-            Rashi.ARIES, Rashi.TAURUS, Rashi.GEMINI, Rashi.CANCER,
-            Rashi.LEO, Rashi.VIRGO, Rashi.LIBRA, Rashi.SCORPIO,
-            Rashi.SAGITTARIUS, Rashi.CAPRICORN, Rashi.AQUARIUS, Rashi.PISCES
+            Rashi.ARIES,
+            Rashi.TAURUS,
+            Rashi.GEMINI,
+            Rashi.CANCER,
+            Rashi.LEO,
+            Rashi.VIRGO,
+            Rashi.LIBRA,
+            Rashi.SCORPIO,
+            Rashi.SAGITTARIUS,
+            Rashi.CAPRICORN,
+            Rashi.AQUARIUS,
+            Rashi.PISCES,
         ]
 
         from_idx = rashi_order.index(from_rashi)
@@ -774,10 +761,7 @@ class DoshaDetector:
         return distance + 1 if distance >= 0 else distance + 13
 
     def _check_planets_between_axis(
-        self,
-        planets: Dict[Planet, PlanetPosition],
-        axis_start: float,
-        axis_end: float
+        self, planets: dict[Planet, PlanetPosition], axis_start: float, axis_end: float
     ) -> bool:
         """Check if all planets are between two axis points.
 
@@ -790,18 +774,11 @@ class DoshaDetector:
             True if all planets are between the axis, False otherwise
         """
         for planet_pos in planets.values():
-            if not self._is_longitude_between(
-                planet_pos.longitude, axis_start, axis_end
-            ):
+            if not self._is_longitude_between(planet_pos.longitude, axis_start, axis_end):
                 return False
         return True
 
-    def _is_longitude_between(
-        self,
-        longitude: float,
-        start: float,
-        end: float
-    ) -> bool:
+    def _is_longitude_between(self, longitude: float, start: float, end: float) -> bool:
         """Check if a longitude is between start and end (considering zodiac wrap).
 
         Args:
@@ -824,10 +801,7 @@ class DoshaDetector:
             return longitude >= start or longitude <= end
 
     def _are_planets_conjunct(
-        self,
-        planet1: PlanetPosition,
-        planet2: PlanetPosition,
-        orb: float = None
+        self, planet1: PlanetPosition, planet2: PlanetPosition, orb: float | None = None
     ) -> bool:
         """Check if two planets are in conjunction (same sign).
 
@@ -854,10 +828,7 @@ class DoshaDetector:
         return distance <= orb
 
     def _are_planets_aspecting(
-        self,
-        planet1: PlanetPosition,
-        planet2: PlanetPosition,
-        orb: float
+        self, planet1: PlanetPosition, planet2: PlanetPosition, orb: float
     ) -> bool:
         """Check if two planets are aspecting each other (any major aspect).
 
@@ -876,10 +847,7 @@ class DoshaDetector:
         return abs(distance - 180) <= orb
 
     def _are_planets_in_opposition(
-        self,
-        planet1: PlanetPosition,
-        planet2: PlanetPosition,
-        orb: float = None
+        self, planet1: PlanetPosition, planet2: PlanetPosition, orb: float | None = None
     ) -> bool:
         """Check if two planets are in opposition (180° apart).
 

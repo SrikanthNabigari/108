@@ -1,0 +1,2501 @@
+{
+  "metadata": {
+    "description": "Complete Antardasha effects for Vimshottari Dasha system (9 Mahadashas × 9 Antardashas)",
+    "total_combinations": 81,
+    "source": "Brihat Parashara Hora Shastra (BPHS), Phaladeepika, Jataka Bharatiya",
+    "dasha_system": "Vimshottari Dasha (120-year cycle)",
+    "last_updated": "2026-02-04"
+  },
+  "antardasha_effects": {
+    "sun": {
+      "sun": {
+        "duration_formula": "MD_years × AD_years / 120 = 6 × 6 / 120 = 0.3 years (3.6 months)",
+        "relationship": "same",
+        "general_effects": [
+          "Peak of solar authority and personal power",
+          "Intense self-assertion and ego manifestation",
+          "Health requires careful attention",
+          "Leadership opportunities emerge",
+          "Father's influence becomes prominent"
+        ],
+        "positive": [
+          "Victory in competitions and conflicts",
+          "Administrative success and promotions",
+          "Physical vitality and confidence peak",
+          "Recognition of abilities and achievements"
+        ],
+        "negative": [
+          "Excessive pride leading to conflicts",
+          "Health issues from overwork and stress",
+          "Heart problems or eye troubles possible",
+          "Strained relationships due to dominance"
+        ],
+        "health": "Heart, spine, eyes, and circulation require attention. Avoid overexertion. Solar plexus imbalances possible.",
+        "career": "Excellent for leadership roles, government positions, and authority-based work. Peak performance period.",
+        "relationships": "Ego clashes common. Need for humility. Father may require attention. Dominance issues in partnerships.",
+        "finances": "Good income opportunities through position and authority. Avoid speculation. Maintain reserves."
+      },
+      "moon": {
+        "duration_formula": "6 × 10 / 120 = 0.5 years (6 months)",
+        "relationship": "friend",
+        "general_effects": [
+          "Balance between will and emotion",
+          "Mind-body harmony strengthens",
+          "Mother's influence becomes protective",
+          "Emotional expression improves despite solar dominance",
+          "Public interaction increases"
+        ],
+        "positive": [
+          "Emotional intelligence tempers authority",
+          "Success in public-facing roles",
+          "Mother's support brings benefits",
+          "Improved mental clarity",
+          "Travel opportunities emerge"
+        ],
+        "negative": [
+          "Emotional sensitivity conflicts with ego",
+          "Mood swings despite confidence",
+          "Relationship complications from mixed signals",
+          "Travel may cause health disruptions"
+        ],
+        "health": "Improved balance. Emotional stress may affect digestion. Stay hydrated.",
+        "career": "Public relations, hospitality, nursing roles excel. Administrative work with emotional intelligence.",
+        "relationships": "Better understanding with mother. Marriage benefits from emotional expression. Domestic harmony improves.",
+        "finances": "Income from public services. Good for property and real estate dealings."
+      },
+      "mars": {
+        "duration_formula": "6 × 7 / 120 = 0.35 years (4.2 months)",
+        "relationship": "neutral",
+        "general_effects": [
+          "Aggressive energy and warrior spirit dominant",
+          "High vitality and action-orientation",
+          "Conflict and disputes likely",
+          "Physical strength peaks",
+          "Bold initiatives and risk-taking"
+        ],
+        "positive": [
+          "Success in military, sports, and competition",
+          "Courage to face challenges",
+          "Physical strength and stamina",
+          "Victory in conflicts and legal matters"
+        ],
+        "negative": [
+          "High accident and injury risk",
+          "Conflicts with authority figures",
+          "Aggression creates enemies",
+          "Possible legal troubles",
+          "Rash decisions cause losses"
+        ],
+        "health": "Accidents, injuries, fever, inflammation risk. Blood pressure may rise. Avoid dangerous activities.",
+        "career": "Military, police, sports, surgery, or construction work favorable. Competitive success.",
+        "relationships": "Aggressive behavior damages relationships. Spouse may feel threatened. Marital discord possible.",
+        "finances": "Speculative gains possible but risky. Losses through hasty decisions likely."
+      },
+      "mercury": {
+        "duration_formula": "6 × 17 / 120 = 0.85 years (10.2 months)",
+        "relationship": "friend",
+        "general_effects": [
+          "Intellectual authority merges with practical thinking",
+          "Communication becomes powerful tool",
+          "Business and trade flourish",
+          "Mental clarity peaks with leadership",
+          "Logical analysis strengthens authority"
+        ],
+        "positive": [
+          "Business success and negotiations",
+          "Writing and publication success",
+          "Administrative efficiency improves",
+          "Intellectual achievements recognized",
+          "Teaching and speaking influence"
+        ],
+        "negative": [
+          "Overanalysis paralyzes decision-making",
+          "Nervous strain from mental activity",
+          "Deception and dishonesty temptations",
+          "Siblings or relatives may oppose"
+        ],
+        "health": "Nervous system stress. Maintain proper sleep. Breathing exercises help.",
+        "career": "Management, business, writing, and teaching excel. Intellectual work recognized.",
+        "relationships": "Communication improves relationships. Misunderstandings rare. Mental connection deepens.",
+        "finances": "Income through business, writing, or intellectual property. Trading success likely."
+      },
+      "jupiter": {
+        "duration_formula": "6 × 16 / 120 = 0.8 years (9.6 months)",
+        "relationship": "friend",
+        "general_effects": [
+          "Wisdom tempers authority with benevolence",
+          "Spiritual growth combines with worldly success",
+          "Teacher and guide role emerges",
+          "Expansion of influence and reach",
+          "Moral authority strengthens"
+        ],
+        "positive": [
+          "Wealth and abundance multiply",
+          "Respect and honor widely gained",
+          "Spiritual insights guide decisions",
+          "Mentorship opportunities appear",
+          "Higher education or advanced learning"
+        ],
+        "negative": [
+          "Over-expansion leads to losses",
+          "Arrogance from success",
+          "Over-generosity creates dependents",
+          "Legal complications from overreach"
+        ],
+        "health": "Generally good. Weight gain possible. Maintain exercise and moderation.",
+        "career": "Leadership in education, law, religion, or government. Exceptional success period.",
+        "relationships": "Benevolent authority creates harmony. Family benefits. Spouse respects growth.",
+        "finances": "Major wealth accumulation possible. Inheritance or gains from position. Generous giving."
+      },
+      "venus": {
+        "duration_formula": "6 × 25 / 120 = 1.25 years (15 months)",
+        "relationship": "enemy",
+        "general_effects": [
+          "Luxury and indulgence tempt authority",
+          "Desire for pleasure conflicts with duty",
+          "Relationship complications likely",
+          "Artistic interests distract from power",
+          "Sensuality gains expression"
+        ],
+        "positive": [
+          "Arts and creative work flourish",
+          "Romantic opportunities emerge",
+          "Luxury and comfort increase",
+          "Artistic recognition possible",
+          "Partnership advantages in business"
+        ],
+        "negative": [
+          "Moral compromises for pleasure",
+          "Marital discord from indulgence",
+          "Financial waste on luxury",
+          "Health issues from excess",
+          "Loss of authority respect through loose behavior"
+        ],
+        "health": "Reproductive health requires attention. Excess alcohol or substance issues possible.",
+        "career": "Arts, entertainment, and luxury goods succeed. But loss of focus on primary duties.",
+        "relationships": "Affair risk increases. Marital strain from indulgence. Attraction complications.",
+        "finances": "Income through arts and beauty fields. But losses through extravagance."
+      },
+      "saturn": {
+        "duration_formula": "6 × 19 / 120 = 0.95 years (11.4 months)",
+        "relationship": "enemy",
+        "general_effects": [
+          "Authority challenged by karmic limitations",
+          "Delays and obstacles increase",
+          "Responsibility and karma come due",
+          "Discipline becomes mandatory",
+          "Suffering possible despite position"
+        ],
+        "positive": [
+          "Karmic debts settle",
+          "Wise discernment and judgment",
+          "Lasting achievements through discipline",
+          "Authority strengthened through integrity",
+          "Spiritual maturity increases"
+        ],
+        "negative": [
+          "Health deterioration and pain",
+          "Loss of position and respect",
+          "Legal troubles and controversies",
+          "Poverty despite prior wealth",
+          "Relationships collapse under pressure",
+          "Severe mental depression possible"
+        ],
+        "health": "Chronic pain, joint problems, low energy. Mental health requires attention. Serious illness possible.",
+        "career": "Career setbacks, demotion, or loss of employment. Health restricts work capacity.",
+        "relationships": "Relationships suffer under Saturn's pressure. Separation and loss possible.",
+        "finances": "Financial losses, debts, and poverty possible. Avoid speculation entirely."
+      },
+      "rahu": {
+        "duration_formula": "6 × 18 / 120 = 0.9 years (10.8 months)",
+        "relationship": "neutral",
+        "general_effects": [
+          "Authority clouded by obsessions",
+          "Illusion of power combined with reality",
+          "Foreign connections gain importance",
+          "Material desires intensify",
+          "Deceptive opportunities emerge"
+        ],
+        "positive": [
+          "Foreign opportunities and travel",
+          "Material success through unconventional means",
+          "Power over masses through manipulation",
+          "Technology and innovation success",
+          "Foreign alliances benefit position"
+        ],
+        "negative": [
+          "Deception and dishonesty tempt",
+          "Addiction to power and control",
+          "Foreign entanglements cause problems",
+          "Confusion about goals and direction",
+          "Sudden losses through deception",
+          "Health issues from toxins and poisons"
+        ],
+        "health": "Toxin exposure risk. Addiction vulnerability increases. Mysterious health issues possible.",
+        "career": "Success through unconventional methods. Foreign connections help. But reputation risks.",
+        "relationships": "Deception damages relationships. Foreign affairs possible. Trust breaks.",
+        "finances": "Risky gains from unconventional sources. Sudden losses also possible."
+      },
+      "ketu": {
+        "duration_formula": "6 × 7 / 120 = 0.35 years (4.2 months)",
+        "relationship": "neutral",
+        "general_effects": [
+          "Authority dissolves into spiritual detachment",
+          "Power becomes meaningless",
+          "Past karma releases through loss",
+          "Spiritual transformation through authority loss",
+          "Isolation despite position"
+        ],
+        "positive": [
+          "Spiritual liberation from ego",
+          "Detachment frees from worldly desires",
+          "Healing through releasing control",
+          "Occult knowledge acquisition",
+          "Past karma completions"
+        ],
+        "negative": [
+          "Complete loss of power and position",
+          "Isolation and loneliness",
+          "Meaninglessness despite success",
+          "Health crises force transformation",
+          "Relationships end unexpectedly",
+          "Financial collapse possible"
+        ],
+        "health": "Sudden health crises. Chronic mysterious conditions. Injuries from detachment.",
+        "career": "Career ends or transforms completely. Forced retirement or role change.",
+        "relationships": "Relationships dissolve. Emotional detachment increases. Isolation likely.",
+        "finances": "Financial losses and poverty. Forced simplification of lifestyle."
+      }
+    },
+    "moon": {
+      "sun": {
+        "duration_formula": "10 × 6 / 120 = 0.5 years (6 months)",
+        "relationship": "friend",
+        "general_effects": [
+          "Emotional expression gains leadership",
+          "Feelings become authoritative",
+          "Mind asserts with confidence",
+          "Protective nurturing toward others",
+          "Public emotional connection"
+        ],
+        "positive": [
+          "Success in public and service roles",
+          "Emotional intelligence leads effectively",
+          "Mother-figure role brings respect",
+          "Mind clarity with emotional depth",
+          "Travel with purpose and direction"
+        ],
+        "negative": [
+          "Mood swings affect decision-making",
+          "Emotional outbursts create enemies",
+          "Sensitivity leads to hurt feelings",
+          "Moody authority alienates people",
+          "Health affected by emotional stress"
+        ],
+        "health": "Mental health good. But digestive issues from stress. Hydration important.",
+        "career": "Social work, nursing, hospitality, teaching excel. Public service roles favorable.",
+        "relationships": "Mother relationship deepens. Marriage improves through emotional expression.",
+        "finances": "Income from public services and property. Real estate investments favorable."
+      },
+      "moon": {
+        "duration_formula": "10 × 10 / 120 = 0.833 years (10 months)",
+        "relationship": "same",
+        "general_effects": [
+          "Emotional peak and psychological intensity",
+          "Moon's influence multiplies",
+          "Sensitivity reaches maximum",
+          "Public connection is strongest",
+          "Nurturing becomes paramount"
+        ],
+        "positive": [
+          "Highest public acclaim and popularity",
+          "Emotional fulfillment possible",
+          "Mother-related gains and benefits",
+          "Travel brings happiness",
+          "Artistic and creative expression peaks"
+        ],
+        "negative": [
+          "Depression and mental disturbance likely",
+          "Dependency and clingy behavior",
+          "Water-related dangers increase",
+          "Excess eating or weight gain",
+          "Mood disorders may manifest",
+          "Obsessive behaviors possible"
+        ],
+        "health": "Mental health requires careful attention. Emotional disorders possible. Sleep may suffer.",
+        "career": "Arts, hospitality, nursing, and public services excel. Peak performance period.",
+        "relationships": "Mother becomes central figure. Marriage deepens but moodiness causes strain.",
+        "finances": "Income from hospitality and property. But waste through emotional spending."
+      },
+      "mars": {
+        "duration_formula": "10 × 7 / 120 = 0.583 years (7 months)",
+        "relationship": "enemy",
+        "general_effects": [
+          "Emotional aggression and anger rise",
+          "Passion and intensity increase",
+          "Conflict from reactive emotions",
+          "Energy meets emotional sensitivity",
+          "Courage combined with moodiness"
+        ],
+        "positive": [
+          "Emotional expression becomes assertive",
+          "Passion drives accomplishments",
+          "Courage to face emotional challenges",
+          "Success in sports and physical pursuits",
+          "Action-oriented emotional responses"
+        ],
+        "negative": [
+          "Anger and emotional outbursts frequent",
+          "Aggressive responses hurt relationships",
+          "Accidents and injuries possible",
+          "Women may face harassment",
+          "Financial losses from anger-driven decisions",
+          "Health issues from inflammation"
+        ],
+        "health": "Fever, inflammation, and heat-related issues. Emotional stress causes physical problems.",
+        "career": "Military, police, sports, or construction favorable. But interpersonal conflicts.",
+        "relationships": "Marital discord from anger. Emotional abuse risk. Family conflicts likely.",
+        "finances": "Losses through emotional reactions and fights. Avoid legal disputes."
+      },
+      "mercury": {
+        "duration_formula": "10 × 17 / 120 = 1.417 years (17 months)",
+        "relationship": "friend",
+        "general_effects": [
+          "Mind and emotions integrate well",
+          "Communication becomes more emotionally intelligent",
+          "Intellectual clarity with emotional depth",
+          "Short journeys and communication excel",
+          "Nervous system balance improves"
+        ],
+        "positive": [
+          "Writing and speaking success with emotional touch",
+          "Business communication improved",
+          "Intellectual work with emotional intelligence",
+          "Short travels bring pleasure",
+          "Sibling relationships improve"
+        ],
+        "negative": [
+          "Over-sensitivity in communication",
+          "Emotional overthinking harms decisions",
+          "Siblings create emotional complications",
+          "Nervous anxiety increases",
+          "Communication misunderstandings frequent"
+        ],
+        "health": "Nervous system generally balanced. Sleep quality improves. Breathing issues rare.",
+        "career": "Teaching, writing, communication roles excel. Public speaking improved.",
+        "relationships": "Improved understanding in relationships. Communication deepens connection.",
+        "finances": "Income from communication and short journeys. Trade and business favorable."
+      },
+      "jupiter": {
+        "duration_formula": "10 × 16 / 120 = 1.333 years (16 months)",
+        "relationship": "friend",
+        "general_effects": [
+          "Wisdom balances emotional sensitivity",
+          "Spiritual-emotional integration",
+          "Generosity and kindness peak",
+          "Faith and belief guide emotions",
+          "Teaching and guidance through emotion"
+        ],
+        "positive": [
+          "Spiritual growth and enlightenment",
+          "Generosity brings abundance back",
+          "Learning and education excel",
+          "Mother-figure role expands positively",
+          "Emotional clarity and wisdom",
+          "Pilgrimage and sacred journeys"
+        ],
+        "negative": [
+          "Over-generosity creates dependents",
+          "Emotional excess and overindulgence",
+          "Weight gain from comfort eating",
+          "Over-expansion of family commitments",
+          "Spiritual delusion possible"
+        ],
+        "health": "Generally excellent health. Weight management important. Excess alcohol risk.",
+        "career": "Teaching, spiritual work, counseling, and education excel exceptionally.",
+        "relationships": "Family harmony excellent. Mother benefits. Marriage spiritually deepens.",
+        "finances": "Wealth through educational and spiritual work. Inheritance possible."
+      },
+      "venus": {
+        "duration_formula": "10 × 25 / 120 = 2.083 years (25 months)",
+        "relationship": "enemy",
+        "general_effects": [
+          "Sensuality and romance intensify",
+          "Beauty and art gain emotional importance",
+          "Desire for pleasure and comfort",
+          "Romantic emotional expression",
+          "Artistic sensitivity peaks"
+        ],
+        "positive": [
+          "Artistic and creative expression excels",
+          "Romance and love flourish",
+          "Marriage becomes blissful",
+          "Beauty and aesthetics bring income",
+          "Pleasure and comfort increase",
+          "Sexual satisfaction improves"
+        ],
+        "negative": [
+          "Attachment to pleasure becomes addictive",
+          "Emotional dependency in relationships",
+          "Over-spending on luxuries",
+          "Affair risk and infidelity",
+          "Marital complications from jealousy",
+          "Reproductive health issues possible"
+        ],
+        "health": "Reproductive health needs attention. Excess pleasure damages health. Moderation needed.",
+        "career": "Arts, entertainment, beauty, and luxury succeed. But lack of focus possible.",
+        "relationships": "Marriage reaches peak intimacy. But jealousy and possessiveness emerge.",
+        "finances": "Income through arts and beauty. But major expenses on luxury and pleasure."
+      },
+      "saturn": {
+        "duration_formula": "10 × 19 / 120 = 1.583 years (19 months)",
+        "relationship": "enemy",
+        "general_effects": [
+          "Emotional suffering and sorrow",
+          "Depression and grief dominant",
+          "Karma of past emotional actions due",
+          "Isolation despite need for connection",
+          "Mental anguish and heaviness"
+        ],
+        "positive": [
+          "Emotional maturity through suffering",
+          "Wisdom from emotional hardship",
+          "Detachment from emotional attachments",
+          "Discipline in emotional expression",
+          "Karmic debts settle"
+        ],
+        "negative": [
+          "Severe depression and mental illness",
+          "Loneliness and isolation",
+          "Loss of loved ones",
+          "Relationship endings",
+          "Health problems and chronic illness",
+          "Poverty and financial distress"
+        ],
+        "health": "Mental health critical. Depression likely. Chronic illness possible. Pain and suffering.",
+        "career": "Career stagnation or loss. Health limits work capacity. Retirement possible.",
+        "relationships": "Relationships end or become distant. Loss of loved ones. Emotional isolation.",
+        "finances": "Financial losses and hardship. Poverty possible. Debts accumulate."
+      },
+      "rahu": {
+        "duration_formula": "10 × 18 / 120 = 1.5 years (18 months)",
+        "relationship": "neutral",
+        "general_effects": [
+          "Emotions cloud with obsession",
+          "Addictive behaviors and attachments",
+          "Foreign emotional entanglements",
+          "Psychological confusion possible",
+          "Unusual emotional patterns emerge"
+        ],
+        "positive": [
+          "Foreign travel and emotional adventure",
+          "Unconventional relationships flourish",
+          "Psychic and intuitive abilities increase",
+          "Success through psychological manipulation",
+          "Material comforts increase"
+        ],
+        "negative": [
+          "Emotional addiction and obsession",
+          "Foreign romantic entanglements",
+          "Mental confusion and delusion",
+          "Sudden emotional crises",
+          "Addiction vulnerability high",
+          "Psychological disorders possible"
+        ],
+        "health": "Mental health unstable. Addiction risks high. Toxic exposures possible.",
+        "career": "Unconventional work succeeds. Foreign connections help. But reputation risks.",
+        "relationships": "Obsessive emotional attachments. Foreign affairs likely. Trust breaks.",
+        "finances": "Risky gains through unconventional means. Sudden losses possible."
+      },
+      "ketu": {
+        "duration_formula": "10 × 7 / 120 = 0.583 years (7 months)",
+        "relationship": "neutral",
+        "general_effects": [
+          "Emotions dissolve into detachment",
+          "Psychological emptiness possible",
+          "Past emotional karma releases",
+          "Spiritual awakening through emotional loss",
+          "Isolation and withdrawal"
+        ],
+        "positive": [
+          "Spiritual awakening through emotion release",
+          "Detachment from emotional attachments",
+          "Inner peace through letting go",
+          "Past trauma healing",
+          "Occult knowledge activation"
+        ],
+        "negative": [
+          "Emotional numbness and depression",
+          "Loss of emotional connections",
+          "Relationships suddenly end",
+          "Isolation and loneliness",
+          "Meaninglessness despite comforts",
+          "Health crises with psychological impact"
+        ],
+        "health": "Mental health suffers. Emotional numbness. Psychological crisis possible.",
+        "career": "Career ends or transforms. Forced change of direction.",
+        "relationships": "Relationships dissolve. Emotional detachment increases.",
+        "finances": "Financial losses. Simplification of lifestyle forced."
+      }
+    },
+    "mars": {
+      "sun": {
+        "duration_formula": "7 × 6 / 120 = 0.35 years (4.2 months)",
+        "relationship": "neutral",
+        "general_effects": [
+          "Action and authority merge powerfully",
+          "Aggressive leadership style",
+          "Courage and boldness increase",
+          "Warrior-like assertion of will",
+          "Risk-taking becomes pronounced"
+        ],
+        "positive": [
+          "Success in competitive situations",
+          "Military and police advancement",
+          "Sports achievements",
+          "Overcoming obstacles and enemies",
+          "Physical strength and vitality"
+        ],
+        "negative": [
+          "Accidents and injuries likely",
+          "Conflicts with authority",
+          "Aggressive behavior alienates",
+          "Rash decisions cause losses",
+          "Legal troubles possible"
+        ],
+        "health": "Injury and accident risk very high. Fever, inflammation. Blood pressure rises.",
+        "career": "Military, police, sports, and surgery excel. Success in combat fields.",
+        "relationships": "Aggression damages relationships severely. Spouse feels threatened.",
+        "finances": "Risky speculation leads to losses. Avoid financial ventures."
+      },
+      "moon": {
+        "duration_formula": "7 × 10 / 120 = 0.583 years (7 months)",
+        "relationship": "enemy",
+        "general_effects": [
+          "Emotional passion and aggression",
+          "Anger and reactive behavior",
+          "Energy meets sensitivity",
+          "Conflict from mixed impulses",
+          "Physical action meets emotional reaction"
+        ],
+        "positive": [
+          "Passionate pursuit of goals",
+          "Courage in emotional situations",
+          "Action-oriented solutions",
+          "Success in physical pursuits",
+          "Emotional expression becomes bold"
+        ],
+        "negative": [
+          "Anger and emotional volatility",
+          "Aggressive responses damage relationships",
+          "Accidents during emotional states",
+          "Women may face harassment",
+          "Family conflicts intensify",
+          "Health suffers from inflammation"
+        ],
+        "health": "Inflammation, fever, heat issues. Emotional stress increases physical problems.",
+        "career": "Physical work and military excel. But interpersonal conflicts damage career.",
+        "relationships": "Marital discord from anger and aggression. Family relationships suffer.",
+        "finances": "Losses from angry impulsive decisions. Accidents cost money."
+      },
+      "mars": {
+        "duration_formula": "7 × 7 / 120 = 0.408 years (5 months)",
+        "relationship": "same",
+        "general_effects": [
+          "Maximum energy and aggression",
+          "War-like assertiveness peaks",
+          "Conflict and competition intense",
+          "Physical strength at maximum",
+          "Ambition and drive extreme"
+        ],
+        "positive": [
+          "Victory in all competitions",
+          "Military and athletic success",
+          "Enemies defeated",
+          "Physical accomplishments peak",
+          "Confidence and courage maximum"
+        ],
+        "negative": [
+          "Extreme accident and injury risk",
+          "Violent conflicts likely",
+          "Legal troubles and imprisonment possible",
+          "Loss of property through violence",
+          "Health crises from overexertion",
+          "Enemies created by aggression"
+        ],
+        "health": "Injury risk extremely high. Surgery complications possible. Fever and inflammation severe.",
+        "career": "Military, police, and sports excel. But risk of injury or legal troubles.",
+        "relationships": "Relationships collapse from violence. Spouse or partner may leave.",
+        "finances": "Financial losses from legal troubles. Property losses from violence."
+      },
+      "mercury": {
+        "duration_formula": "7 × 17 / 120 = 0.992 years (12 months)",
+        "relationship": "friend",
+        "general_effects": [
+          "Action meets intelligence",
+          "Tactical thinking and strategy",
+          "Aggressive communication",
+          "Quick decision-making",
+          "Mental alertness and cunning"
+        ],
+        "positive": [
+          "Business success through aggressive strategy",
+          "Sales and marketing excel",
+          "Short journeys with purpose",
+          "Competitive advantage in negotiations",
+          "Intellectual success in technical fields"
+        ],
+        "negative": [
+          "Deception and dishonesty tempt",
+          "Hasty communication creates conflicts",
+          "Sibling conflicts and betrayals",
+          "Traveling accidents",
+          "Short-tempered in communications"
+        ],
+        "health": "Injuries during travel. Nervous strain from stress. Breathing issues possible.",
+        "career": "Sales, marketing, strategy, and technical work excel. Competitive success.",
+        "relationships": "Communication becomes aggressive. Misunderstandings create conflicts.",
+        "finances": "Income from business and sales. But risky speculation possible."
+      },
+      "jupiter": {
+        "duration_formula": "7 × 16 / 120 = 0.933 years (11 months)",
+        "relationship": "friend",
+        "general_effects": [
+          "Wisdom tempers aggression",
+          "Just action and righteous assertiveness",
+          "Courage combined with wisdom",
+          "Expansion through action",
+          "Leadership with moral authority"
+        ],
+        "positive": [
+          "Success in righteous causes",
+          "Expansion of power and wealth",
+          "Leadership respected and trusted",
+          "Victory through wisdom",
+          "Charitable actions bring rewards",
+          "Travel brings fortune"
+        ],
+        "negative": [
+          "Over-expansion and excess",
+          "Arrogance from success",
+          "Over-aggression loses support",
+          "Over-extension of resources",
+          "Legal troubles from overreach"
+        ],
+        "health": "Generally good. Weight gain possible. Maintain exercise discipline.",
+        "career": "Leadership in expansion and conquest. Success in law and management.",
+        "relationships": "Leadership respected at home. Family benefits from expansion.",
+        "finances": "Wealth expands significantly. Inheritance or gains from position."
+      },
+      "venus": {
+        "duration_formula": "7 × 25 / 120 = 1.458 years (17.5 months)",
+        "relationship": "enemy",
+        "general_effects": [
+          "Passion and pleasure intensify",
+          "Sexual energy and desire peak",
+          "Conflict from competing desires",
+          "Aggression meets sensuality",
+          "Physical satisfaction sought aggressively"
+        ],
+        "positive": [
+          "Romantic passion and sexual satisfaction",
+          "Arts with dynamic energy",
+          "Beauty pursued with vigor",
+          "Success in entertainment",
+          "Luxury and comfort gained"
+        ],
+        "negative": [
+          "Sexual aggression and harassment risk",
+          "Marital discord from infidelity",
+          "Excessive sensual indulgence",
+          "Financial waste on pleasure",
+          "Health issues from excess",
+          "Moral compromises for pleasure"
+        ],
+        "health": "Reproductive health suffers. STDs possible. Excess weakens immunity.",
+        "career": "Arts and entertainment succeed. But moral compromises damage reputation.",
+        "relationships": "Marital discord from aggression and infidelity. Relationship violence risk.",
+        "finances": "Income from arts. But major losses from sexual entanglements."
+      },
+      "saturn": {
+        "duration_formula": "7 × 19 / 120 = 1.108 years (13.3 months)",
+        "relationship": "enemy",
+        "general_effects": [
+          "Action blocked by karma and restrictions",
+          "Energy frustrated by limitations",
+          "Suffering from past aggression",
+          "Patience and discipline forced",
+          "Karmic debts come due"
+        ],
+        "positive": [
+          "Discipline hardens character",
+          "Wise restraint prevents harm",
+          "Karmic debts settle",
+          "Long-term planning succeeds",
+          "Spiritual maturity through constraint"
+        ],
+        "negative": [
+          "Complete restriction of action",
+          "Extreme physical pain and suffering",
+          "Serious accidents and injuries",
+          "Imprisonment or legal judgment",
+          "Loss of property and wealth",
+          "Depression and despair"
+        ],
+        "health": "Serious injuries and chronic pain. Accidents very likely. Major health crises.",
+        "career": "Career ends or severe restrictions. Health prevents work.",
+        "relationships": "Relationships end under pressure. Separation or divorce possible.",
+        "finances": "Financial loss and poverty. Debts multiply. Legal costs drain resources."
+      },
+      "rahu": {
+        "duration_formula": "7 × 18 / 120 = 1.05 years (12.6 months)",
+        "relationship": "neutral",
+        "general_effects": [
+          "Action clouds with obsession",
+          "Aggressive pursuit of desires",
+          "Unconventional methods employed",
+          "Foreign conflicts and entanglements",
+          "Manipulation and deception"
+        ],
+        "positive": [
+          "Unconventional success through action",
+          "Foreign ventures succeed",
+          "Technology and innovation success",
+          "Power over masses through manipulation",
+          "Material gains through aggressive means"
+        ],
+        "negative": [
+          "Violent conflict and accidents",
+          "Imprisonment or legal troubles",
+          "Deception and dishonesty",
+          "Enemies created by aggression",
+          "Foreign entanglements cause losses",
+          "Addiction to excitement"
+        ],
+        "health": "Injury and accident risks high. Poisoning or toxin exposure. Addiction risk.",
+        "career": "Unconventional success possible. But reputation risks and legal troubles.",
+        "relationships": "Aggression and deception damage trust. Affairs create conflict.",
+        "finances": "Risky gains from unconventional ventures. Sudden losses likely."
+      },
+      "ketu": {
+        "duration_formula": "7 × 7 / 120 = 0.408 years (5 months)",
+        "relationship": "neutral",
+        "general_effects": [
+          "Energy dissipates into spiritual detachment",
+          "Action loses purpose and direction",
+          "Fighting ceases when goal dissolves",
+          "Past karma through conflict releases",
+          "Isolation despite warrior spirit"
+        ],
+        "positive": [
+          "Spiritual awakening through conflict release",
+          "Detachment from materialistic drive",
+          "Inner peace through surrender",
+          "Past trauma heals",
+          "Occult knowledge activation"
+        ],
+        "negative": [
+          "Loss of motivation and drive",
+          "Meaninglessness despite action",
+          "Sudden health crises",
+          "Injuries from carelessness",
+          "Career and relationships collapse",
+          "Isolation and loneliness"
+        ],
+        "health": "Sudden serious health crises. Injuries from detachment and carelessness.",
+        "career": "Career ends or transforms completely. Role collapses.",
+        "relationships": "Relationships dissolve suddenly. Separation forced.",
+        "finances": "Financial losses and collapse. Property may be lost."
+      }
+    },
+    "mercury": {
+      "sun": {
+        "duration_formula": "17 × 6 / 120 = 0.85 years (10.2 months)",
+        "relationship": "friend",
+        "general_effects": [
+          "Intellectual leadership and authority",
+          "Communication becomes commanding",
+          "Business and commerce flourish",
+          "Logical authority respected",
+          "Teaching and speaking influence"
+        ],
+        "positive": [
+          "Business and trading success",
+          "Writing and publication triumph",
+          "Leadership in intellectual fields",
+          "Administrative efficiency excels",
+          "Negotiations succeed"
+        ],
+        "negative": [
+          "Overconfidence in intellect",
+          "Nervous strain and stress",
+          "Deception temptations",
+          "Arrogance in communication",
+          "Travel complications"
+        ],
+        "health": "Nervous strain requires attention. Sleep maintenance important.",
+        "career": "Business, management, writing, and teaching excel exceptionally.",
+        "relationships": "Communication deepens understanding. Marriage improves.",
+        "finances": "Income from business and intellectual property. Strong earnings."
+      },
+      "moon": {
+        "duration_formula": "17 × 10 / 120 = 1.417 years (17 months)",
+        "relationship": "friend",
+        "general_effects": [
+          "Mind and emotion integrate beautifully",
+          "Emotional intelligence in communication",
+          "Writing and speaking with feeling",
+          "Intellect serves intuition",
+          "Nervous system balance improves"
+        ],
+        "positive": [
+          "Writing and poetry excellence",
+          "Teaching with emotional connection",
+          "Business psychology understanding",
+          "Travel bringing happiness",
+          "Sibling relationships improve"
+        ],
+        "negative": [
+          "Over-sensitivity in decisions",
+          "Emotional overthinking",
+          "Sibling emotional complications",
+          "Travel causing emotional disruption",
+          "Nervous anxiety occasionally"
+        ],
+        "health": "Generally good nervous system balance. Sleep quality improves.",
+        "career": "Teaching, writing, psychology, and communications excel.",
+        "relationships": "Understanding improves relationships. Marriage communication deepens.",
+        "finances": "Income from writing, teaching, and travel. Property dealings favorable."
+      },
+      "mars": {
+        "duration_formula": "17 × 7 / 120 = 0.992 years (11.9 months)",
+        "relationship": "friend",
+        "general_effects": [
+          "Intellectual strategy and tactical thinking",
+          "Aggressive communication and persuasion",
+          "Quick decision-making combined with cunning",
+          "Competitive intelligence",
+          "Conflict through debate and argument"
+        ],
+        "positive": [
+          "Sales and marketing excellence",
+          "Negotiation success through strategy",
+          "Competitive advantage in business",
+          "Technical and engineering success",
+          "Legal advocacy effectiveness"
+        ],
+        "negative": [
+          "Harsh communication and criticism",
+          "Arguments and disputes frequent",
+          "Deception and dishonesty",
+          "Sibling conflicts",
+          "Travel accidents",
+          "Short-tempered communications"
+        ],
+        "health": "Nervous strain from stress. Traveling accidents possible.",
+        "career": "Sales, marketing, strategy, and law excel. Competitive success.",
+        "relationships": "Communication aggressive. Arguments frequent and damaging.",
+        "finances": "Income from business and sales. But risky speculation."
+      },
+      "mercury": {
+        "duration_formula": "17 × 17 / 120 = 2.408 years (28.9 months)",
+        "relationship": "same",
+        "general_effects": [
+          "Intellectual peak and brilliance",
+          "Communication at maximum effectiveness",
+          "Business and commerce excel",
+          "Mental clarity and sharp thinking",
+          "Quick wit and cleverness"
+        ],
+        "positive": [
+          "Business and trading success peak",
+          "Writing and publication excellence",
+          "Sales and marketing triumph",
+          "Teaching and speaking perfect",
+          "Intellectual achievements recognized",
+          "Travel brings benefits"
+        ],
+        "negative": [
+          "Over-analysis paralyzes action",
+          "Deception and dishonesty tempt",
+          "Nervous anxiety and stress",
+          "Sibling complications",
+          "Travel fatigue and accidents",
+          "Over-communication creates problems"
+        ],
+        "health": "Nervous system stress requires attention. Sleep maintenance critical.",
+        "career": "Business, trading, writing, teaching, and sales excel. Peak period.",
+        "relationships": "Communication excellent. Understanding deepens. Misunderstandings rare.",
+        "finances": "Income from business and communications peaks. Strong earnings period."
+      },
+      "jupiter": {
+        "duration_formula": "17 × 16 / 120 = 2.267 years (27.2 months)",
+        "relationship": "friend",
+        "general_effects": [
+          "Wisdom guides intelligence",
+          "Communication combined with ethics",
+          "Teaching and learning excellence",
+          "Business with moral authority",
+          "Intellectual and spiritual growth"
+        ],
+        "positive": [
+          "Education and higher learning excel",
+          "Teaching brings respect and honor",
+          "Business ethics create reputation",
+          "Wealth through intellectual work",
+          "Mentorship opportunities",
+          "Long-distance travel brings fortune"
+        ],
+        "negative": [
+          "Over-expansion of commitments",
+          "Over-generosity creates problems",
+          "Over-analysis delays decisions",
+          "Weight gain from comfort",
+          "Overconfidence in knowledge"
+        ],
+        "health": "Generally excellent. Weight management important.",
+        "career": "Teaching, education, law, and business excel. Exceptional success.",
+        "relationships": "Marriage benefits from understanding and ethics. Family harmony.",
+        "finances": "Wealth through education and intellectual property. Inheritance possible."
+      },
+      "venus": {
+        "duration_formula": "17 × 25 / 120 = 3.542 years (42.5 months)",
+        "relationship": "enemy",
+        "general_effects": [
+          "Pleasure distracts from intellect",
+          "Beauty and art through communication",
+          "Sensuality affects judgment",
+          "Desire for comfort and luxury",
+          "Artistic intellectual expression"
+        ],
+        "positive": [
+          "Arts and entertainment succeed",
+          "Creative writing and expression",
+          "Beauty in business and commerce",
+          "Romantic communication",
+          "Luxury and comfort increase"
+        ],
+        "negative": [
+          "Pleasure distracts from work",
+          "Financial waste on luxury",
+          "Relationship complications",
+          "Affair and infidelity risk",
+          "Loss of focus and direction",
+          "Moral compromises"
+        ],
+        "health": "Generally good. Excess pleasure weakens. Moderation important.",
+        "career": "Arts, entertainment, beauty, and design succeed. But focus may waver.",
+        "relationships": "Romantic communication improves. But jealousy and possessiveness emerge.",
+        "finances": "Income from arts and beauty. But major expenses on luxury."
+      },
+      "saturn": {
+        "duration_formula": "17 × 19 / 120 = 2.692 years (32.3 months)",
+        "relationship": "enemy",
+        "general_effects": [
+          "Intellect limited by karma",
+          "Communication restricted and delayed",
+          "Learning becomes difficult",
+          "Mental depression and despair",
+          "Karmic debts of speech come due"
+        ],
+        "positive": [
+          "Intellectual discipline develops wisdom",
+          "Careful communication prevents harm",
+          "Long-term planning succeeds",
+          "Karmic speech debts settle",
+          "Spiritual maturity through hardship"
+        ],
+        "negative": [
+          "Loss of communication abilities",
+          "Mental illness and depression",
+          "Learning disabilities manifest",
+          "Speech problems develop",
+          "Sibling losses or conflicts",
+          "Financial losses from poor decisions"
+        ],
+        "health": "Mental health critical. Depression likely. Sleep problems severe.",
+        "career": "Career stagnation or loss. Communication abilities impaired. Retirement likely.",
+        "relationships": "Communication breaks down. Sibling losses. Marriages fail from silence.",
+        "finances": "Financial losses from poor judgment. Debts multiply. Property losses."
+      },
+      "rahu": {
+        "duration_formula": "17 × 18 / 120 = 2.55 years (30.6 months)",
+        "relationship": "neutral",
+        "general_effects": [
+          "Intellect clouds with obsession",
+          "Communication becomes deceptive",
+          "Unconventional ideas emerge",
+          "Foreign communications and connections",
+          "Psychological cunning increases"
+        ],
+        "positive": [
+          "Unconventional business success",
+          "Foreign trade and communications",
+          "Technology and innovation excel",
+          "Psychological manipulation skills",
+          "Material success through cunning"
+        ],
+        "negative": [
+          "Deception and fraud tempt",
+          "Confusion and mental delusion",
+          "Fraudulent communications",
+          "Sibling betrayals",
+          "Foreign business entanglements",
+          "Addiction to stimulation"
+        ],
+        "health": "Mental health unstable. Addiction risks. Toxic exposures.",
+        "career": "Unconventional success possible. But fraud and reputation risks.",
+        "relationships": "Deception damages trust. Sibling betrayals likely.",
+        "finances": "Risky gains from unconventional ventures. Fraud possible."
+      },
+      "ketu": {
+        "duration_formula": "17 × 7 / 120 = 0.992 years (11.9 months)",
+        "relationship": "neutral",
+        "general_effects": [
+          "Intellect dissolves into emptiness",
+          "Communication loses purpose",
+          "Knowledge becomes meaningless",
+          "Mental detachment from learning",
+          "Isolation despite communication ability"
+        ],
+        "positive": [
+          "Spiritual awakening through knowledge release",
+          "Detachment from mental attachments",
+          "Inner silence and peace",
+          "Past karma completes",
+          "Occult knowledge awakens"
+        ],
+        "negative": [
+          "Memory loss and cognitive decline",
+          "Communication abilities fade",
+          "Learning becomes impossible",
+          "Mental confusion and emptiness",
+          "Sibling relationships dissolve",
+          "Career confusion and loss"
+        ],
+        "health": "Mental health unstable. Memory loss possible. Cognitive problems.",
+        "career": "Career ends or transforms. Retirement forced. Skills fade.",
+        "relationships": "Sibling relationships dissolve. Communication stops.",
+        "finances": "Financial confusion. Contracts and deals fail."
+      }
+    },
+    "jupiter": {
+      "sun": {
+        "duration_formula": "16 × 6 / 120 = 0.8 years (9.6 months)",
+        "relationship": "friend",
+        "general_effects": [
+          "Wisdom gains authority and power",
+          "Benevolent leadership emerges",
+          "Expansion of influence and reach",
+          "Moral authority strengthens",
+          "Teacher and guide role manifests"
+        ],
+        "positive": [
+          "Leadership widely respected",
+          "Wealth and honor accumulate",
+          "Spiritual authority recognized",
+          "Mentorship brings rewards",
+          "Government positions and favors"
+        ],
+        "negative": [
+          "Over-expansion of ambitions",
+          "Arrogance from success",
+          "Over-generosity creates dependents",
+          "Over-reach in authority",
+          "Complacency from success"
+        ],
+        "health": "Generally excellent. Weight gain possible from comfort.",
+        "career": "Leadership, education, law, and government excel. Success assured.",
+        "relationships": "Family benefits from success. Mother respected. Marriage harmonious.",
+        "finances": "Wealth accumulates significantly. Inheritance or gains from position."
+      },
+      "moon": {
+        "duration_formula": "16 × 10 / 120 = 1.333 years (16 months)",
+        "relationship": "friend",
+        "general_effects": [
+          "Emotional wisdom and spiritual maturity",
+          "Faith guides emotional expression",
+          "Generosity and compassion peak",
+          "Public spiritual influence",
+          "Protective guidance of others"
+        ],
+        "positive": [
+          "Spiritual growth and enlightenment",
+          "Emotional fulfillment and peace",
+          "Generosity brings abundance back",
+          "Mother-figure role expands",
+          "Learning and pilgrimage success",
+          "Public popularity increases"
+        ],
+        "negative": [
+          "Over-generosity creates dependents",
+          "Emotional excess and overindulgence",
+          "Weight gain from comfort",
+          "Over-expansion of family",
+          "Spiritual delusion possible"
+        ],
+        "health": "Excellent health. Weight management important. Excess alcohol risk.",
+        "career": "Teaching, spiritual work, counseling, and education excel.",
+        "relationships": "Family harmony excellent. Mother benefits. Marriage deepens spiritually.",
+        "finances": "Wealth through educational work. Property gains. Inheritance likely."
+      },
+      "mars": {
+        "duration_formula": "16 × 7 / 120 = 0.933 years (11.2 months)",
+        "relationship": "friend",
+        "general_effects": [
+          "Wisdom tempers aggression wisely",
+          "Just action and righteous courage",
+          "Strength combined with morality",
+          "Expansion through proper action",
+          "Leadership with ethical authority"
+        ],
+        "positive": [
+          "Success in righteous causes",
+          "Expansion of power and property",
+          "Victory through wisdom",
+          "Respected leadership emerges",
+          "Charitable actions rewarded",
+          "Travel brings fortune"
+        ],
+        "negative": [
+          "Over-expansion and excess",
+          "Arrogance from success",
+          "Over-aggression loses support",
+          "Over-extension of resources",
+          "Over-confidence in strength"
+        ],
+        "health": "Generally good. Weight gain possible. Maintain exercise.",
+        "career": "Leadership in expansion, law, and management excel.",
+        "relationships": "Leadership respected at home. Family benefits.",
+        "finances": "Wealth expands. Inheritance or gains from position."
+      },
+      "mercury": {
+        "duration_formula": "16 × 17 / 120 = 2.267 years (27.2 months)",
+        "relationship": "friend",
+        "general_effects": [
+          "Wisdom guides intellect and communication",
+          "Teaching with moral authority",
+          "Business with ethical foundation",
+          "Intellectual and spiritual growth",
+          "Learning combines theory and practice"
+        ],
+        "positive": [
+          "Education and higher learning excel",
+          "Teaching brings honor and respect",
+          "Business ethics create reputation",
+          "Wealth through intellectual work",
+          "Mentorship and guidance roles",
+          "Long-distance communication benefits"
+        ],
+        "negative": [
+          "Over-expansion of commitments",
+          "Over-generosity creates problems",
+          "Over-analysis delays decisions",
+          "Overconfidence in knowledge",
+          "Over-communication possible"
+        ],
+        "health": "Generally excellent. Weight management important.",
+        "career": "Teaching, education, law, business, and writing excel.",
+        "relationships": "Understanding improves relationships. Marriage benefits from ethics.",
+        "finances": "Wealth through education and intellectual property. Inheritance."
+      },
+      "jupiter": {
+        "duration_formula": "16 × 16 / 120 = 2.133 years (25.6 months)",
+        "relationship": "same",
+        "general_effects": [
+          "Wisdom and benevolence at peak",
+          "Spiritual and material abundance",
+          "Teacher and guide role paramount",
+          "Expansion in all areas",
+          "Higher consciousness awakens"
+        ],
+        "positive": [
+          "Exceptional wealth and success",
+          "Spiritual enlightenment possible",
+          "Respected leadership and honor",
+          "Learning and education triumph",
+          "Pilgrimage and sacred journeys",
+          "Mentorship brings great rewards"
+        ],
+        "negative": [
+          "Over-expansion creates losses",
+          "Arrogance from success",
+          "Over-generosity creates dependents",
+          "Complacency sets in",
+          "Over-optimism causes blindness to risks"
+        ],
+        "health": "Excellent health. Weight gain from comfort. Moderation needed.",
+        "career": "Teaching, law, religion, and government excel. Peak period.",
+        "relationships": "Family harmony excellent. Marriage becomes ideal. Respect universal.",
+        "finances": "Major wealth accumulation. Inheritance. Expansion in all assets."
+      },
+      "venus": {
+        "duration_formula": "16 × 25 / 120 = 3.333 years (40 months)",
+        "relationship": "enemy",
+        "general_effects": [
+          "Beauty and pleasure gain wisdom",
+          "Art and culture flourish spiritually",
+          "Romance with deeper meaning",
+          "Luxury combined with ethics",
+          "Sensuality becomes refined"
+        ],
+        "positive": [
+          "Arts and culture succeed",
+          "Marriage becomes blissful",
+          "Romantic fulfillment with depth",
+          "Beauty and luxury increase",
+          "Spiritual partnership possible",
+          "Wealth through arts"
+        ],
+        "negative": [
+          "Over-indulgence despite wisdom",
+          "Attachment to luxury",
+          "Financial extravagance",
+          "Affair and infidelity",
+          "Over-expansion of desires",
+          "Moral compromises"
+        ],
+        "health": "Generally good. Weight gain from comfort. Moderation important.",
+        "career": "Arts, culture, beauty, and entertainment succeed.",
+        "relationships": "Marriage becomes deeply satisfying. Romance flourishes with meaning.",
+        "finances": "Income from arts. But major expenses on luxury."
+      },
+      "saturn": {
+        "duration_formula": "16 × 19 / 120 = 2.533 years (30.4 months)",
+        "relationship": "enemy",
+        "general_effects": [
+          "Wisdom limited by karmic lessons",
+          "Spiritual growth through suffering",
+          "Expansion blocked by restrictions",
+          "Faith tested severely",
+          "Moral character refined through hardship"
+        ],
+        "positive": [
+          "Spiritual maturity through hardship",
+          "Wise discernment develops",
+          "Karmic debts settle",
+          "Discipline hardens character",
+          "Long-term benefits emerge"
+        ],
+        "negative": [
+          "Loss of faith and hope",
+          "Spiritual depression",
+          "Restriction of expansion plans",
+          "Loss of wealth and position",
+          "Health problems and suffering",
+          "Isolation despite wisdom"
+        ],
+        "health": "Health problems may arise. Depression likely. Chronic conditions.",
+        "career": "Career stagnation despite capability. Restrictions prevent progress.",
+        "relationships": "Relationships under pressure. Marriage may fail. Loss of loved ones.",
+        "finances": "Financial losses despite earning power. Debts and restrictions."
+      },
+      "rahu": {
+        "duration_formula": "16 × 18 / 120 = 2.4 years (28.8 months)",
+        "relationship": "neutral",
+        "general_effects": [
+          "Wisdom clouds with obsession",
+          "Expansion through unconventional means",
+          "Foreign spiritual connections",
+          "Psychological manipulation of belief",
+          "Deceptive appearances of success"
+        ],
+        "positive": [
+          "Unconventional spiritual success",
+          "Foreign connections benefit",
+          "Material success through cunning",
+          "Technology and innovation",
+          "Psychological influence over masses"
+        ],
+        "negative": [
+          "Spiritual deception and fraud",
+          "False gurus and misleading teachers",
+          "Obsession with material expansion",
+          "Foreign entanglements",
+          "Confusion about spiritual truth",
+          "Addiction to material comforts"
+        ],
+        "health": "Mental health unstable. Addiction risks. Spiritual confusion.",
+        "career": "Unconventional success possible. But fraud and deception risks.",
+        "relationships": "False intimacy and deception. Relationships collapse from dishonesty.",
+        "finances": "Risky gains from unconventional means. Fraud and losses."
+      },
+      "ketu": {
+        "duration_formula": "16 × 7 / 120 = 0.933 years (11.2 months)",
+        "relationship": "neutral",
+        "general_effects": [
+          "Wisdom dissolves into detachment",
+          "Spiritual transcendence through loss",
+          "Expansion ceases as desires fade",
+          "Faith questioned and abandoned",
+          "Isolation despite spiritual knowledge"
+        ],
+        "positive": [
+          "Spiritual liberation possible",
+          "Detachment from material attachments",
+          "Inner peace through surrender",
+          "Occult knowledge activation",
+          "Past karma completions"
+        ],
+        "negative": [
+          "Loss of faith and meaning",
+          "Spiritual emptiness",
+          "Loss of wealth and position",
+          "Isolation and loneliness",
+          "Meaninglessness despite knowledge",
+          "Health crises"
+        ],
+        "health": "Health crises possible. Sudden illness. Recovery through simplification.",
+        "career": "Career ends. Retirement forced. Transformation of life path.",
+        "relationships": "Relationships dissolve. Isolation forced. Loss of loved ones.",
+        "finances": "Financial losses. Simplification of lifestyle. Poverty possible."
+      }
+    },
+    "venus": {
+      "sun": {
+        "duration_formula": "25 × 6 / 120 = 1.25 years (15 months)",
+        "relationship": "enemy",
+        "general_effects": [
+          "Pleasure conflicts with authority",
+          "Desire distracts from duty",
+          "Sensuality gains expression",
+          "Luxury becomes important",
+          "Aesthetic sense strengthens"
+        ],
+        "positive": [
+          "Artistic recognition and success",
+          "Romance and partnership luck",
+          "Beauty and luxury increase",
+          "Arts and entertainment success",
+          "Business with creative flair"
+        ],
+        "negative": [
+          "Moral compromises for pleasure",
+          "Loss of respect through indulgence",
+          "Marital discord from infidelity",
+          "Waste of authority on luxuries",
+          "Health from excess",
+          "Financial waste"
+        ],
+        "health": "Health from overindulgence. Excess alcohol or substance issues.",
+        "career": "Arts, entertainment, and beauty succeed. But reputation risks.",
+        "relationships": "Marital discord from indulgence and infidelity. Relationship strain.",
+        "finances": "Income from arts and beauty. But major extravagance."
+      },
+      "moon": {
+        "duration_formula": "25 × 10 / 120 = 2.083 years (25 months)",
+        "relationship": "enemy",
+        "general_effects": [
+          "Emotional pleasure and satisfaction",
+          "Sensuality and romance intensify",
+          "Beauty and art gain emotional importance",
+          "Desire for comfort and luxury",
+          "Artistic emotional expression"
+        ],
+        "positive": [
+          "Artistic and creative expression excels",
+          "Romance and love flourish",
+          "Marriage becomes blissful",
+          "Beauty and aesthetics bring income",
+          "Pleasure and comfort increase",
+          "Sexual satisfaction improves"
+        ],
+        "negative": [
+          "Attachment to pleasure becomes addictive",
+          "Emotional dependency in relationships",
+          "Over-spending on luxuries",
+          "Affair risk and infidelity",
+          "Marital complications from jealousy",
+          "Reproductive health issues possible"
+        ],
+        "health": "Reproductive health needs attention. Weight gain. Moderation needed.",
+        "career": "Arts, entertainment, beauty, and hospitality excel.",
+        "relationships": "Marriage reaches peak intimacy. But jealousy and possessiveness emerge.",
+        "finances": "Income through arts and beauty. But major expenses."
+      },
+      "mars": {
+        "duration_formula": "25 × 7 / 120 = 1.458 years (17.5 months)",
+        "relationship": "enemy",
+        "general_effects": [
+          "Passion and sexual energy peak",
+          "Aggression meets sensuality",
+          "Conflict from competing desires",
+          "Physical satisfaction aggressively sought",
+          "Romance with aggressive energy"
+        ],
+        "positive": [
+          "Romantic passion and sexual satisfaction",
+          "Arts with dynamic energy",
+          "Beauty pursued with vigor",
+          "Success in entertainment",
+          "Luxury and comfort gained"
+        ],
+        "negative": [
+          "Sexual aggression and harassment",
+          "Marital discord from infidelity",
+          "Excessive sensual indulgence",
+          "Financial waste on pleasure",
+          "Health from excess",
+          "Moral compromises"
+        ],
+        "health": "Reproductive health suffers. STDs possible. Excess weakens.",
+        "career": "Arts and entertainment succeed. But moral damage.",
+        "relationships": "Marital discord from aggression and infidelity. Violence risk.",
+        "finances": "Income from arts. But major losses from entanglements."
+      },
+      "mercury": {
+        "duration_formula": "25 × 17 / 120 = 3.542 years (42.5 months)",
+        "relationship": "enemy",
+        "general_effects": [
+          "Pleasure distracts intellect",
+          "Beauty through communication",
+          "Sensuality affects judgment",
+          "Desire for comfort and luxury",
+          "Artistic expression through intellect"
+        ],
+        "positive": [
+          "Arts and entertainment succeed",
+          "Creative writing and expression",
+          "Beauty in business",
+          "Romantic communication",
+          "Luxury and comfort increase"
+        ],
+        "negative": [
+          "Pleasure distracts from work",
+          "Financial waste on luxury",
+          "Relationship complications",
+          "Affair and infidelity",
+          "Loss of focus and direction",
+          "Moral compromises"
+        ],
+        "health": "Generally good. Excess pleasure weakens.",
+        "career": "Arts, entertainment, beauty, and design excel.",
+        "relationships": "Romantic communication improves. But jealousy emerges.",
+        "finances": "Income from arts. But major expenses."
+      },
+      "jupiter": {
+        "duration_formula": "25 × 16 / 120 = 3.333 years (40 months)",
+        "relationship": "enemy",
+        "general_effects": [
+          "Beauty and pleasure gain wisdom",
+          "Art and culture flourish spiritually",
+          "Romance with deeper meaning",
+          "Luxury combined with ethics",
+          "Sensuality becomes refined"
+        ],
+        "positive": [
+          "Arts and culture succeed",
+          "Marriage becomes blissful with depth",
+          "Romantic fulfillment with meaning",
+          "Beauty and luxury increase",
+          "Spiritual partnership possible",
+          "Wealth through arts"
+        ],
+        "negative": [
+          "Over-indulgence despite wisdom",
+          "Attachment to luxury",
+          "Financial extravagance",
+          "Affair and infidelity",
+          "Over-expansion of desires",
+          "Moral compromises"
+        ],
+        "health": "Generally good. Weight gain. Moderation important.",
+        "career": "Arts, culture, beauty, and entertainment excel.",
+        "relationships": "Marriage becomes deeply satisfying. Romance flourishes.",
+        "finances": "Income from arts. Major expenses on luxury."
+      },
+      "venus": {
+        "duration_formula": "25 × 25 / 120 = 5.208 years (62.5 months)",
+        "relationship": "same",
+        "general_effects": [
+          "Love, beauty, and pleasure peak",
+          "Sensuality and romance at maximum",
+          "Artistic success paramount",
+          "Luxury and comfort abound",
+          "Sexual satisfaction highest"
+        ],
+        "positive": [
+          "Romance and marriage blissful",
+          "Artistic achievement and recognition",
+          "Beauty and aesthetics bring success",
+          "Entertainment and luxury succeed",
+          "Sexual fulfillment and joy",
+          "Wealth through beauty and arts"
+        ],
+        "negative": [
+          "Over-indulgence and addiction",
+          "Attachment to pleasure becomes enslaving",
+          "Financial waste and bankruptcy",
+          "Infidelity and affair complications",
+          "Marital discord from excess",
+          "Health from overindulgence",
+          "Moral and sexual misconduct"
+        ],
+        "health": "Health suffers from excess. Reproductive issues. Obesity risk.",
+        "career": "Arts, entertainment, and beauty excel. Peak success period.",
+        "relationships": "Marriage reaches ultimate bliss. But jealousy and possessiveness.",
+        "finances": "Income from arts and beauty peaks. But major extravagance."
+      },
+      "saturn": {
+        "duration_formula": "25 × 19 / 120 = 3.958 years (47.5 months)",
+        "relationship": "enemy",
+        "general_effects": [
+          "Beauty and pleasure denied",
+          "Love and romance become painful",
+          "Separation and loss in relationships",
+          "Poverty despite desire for luxury",
+          "Karmic love debts due"
+        ],
+        "positive": [
+          "Maturity and wisdom in relationships",
+          "Karmic debts in love settle",
+          "Discipline in sensual expression",
+          "Long-term love bonds form",
+          "Spiritual love deepens"
+        ],
+        "negative": [
+          "Relationship endings and separations",
+          "Loss of loved ones",
+          "Marital discord and divorce",
+          "Isolation despite desire for connection",
+          "Loss of beauty and aging",
+          "Financial losses and poverty"
+        ],
+        "health": "Reproductive health problems. Chronic pain possible. Aging effects.",
+        "career": "Career stagnation. Lack of progress despite effort.",
+        "relationships": "Relationships suffer severely. Separation and divorce likely.",
+        "finances": "Financial losses and poverty. Debts and restrictions."
+      },
+      "rahu": {
+        "duration_formula": "25 × 18 / 120 = 3.75 years (45 months)",
+        "relationship": "neutral",
+        "general_effects": [
+          "Beauty and pleasure cloud with obsession",
+          "Unconventional romantic pursuits",
+          "Foreign love entanglements",
+          "Deceptive appearances of pleasure",
+          "Addictive attachments form"
+        ],
+        "positive": [
+          "Unconventional romance succeeds",
+          "Foreign romantic connections",
+          "Material comforts increase",
+          "Success in beauty and fashion",
+          "Sexual fulfillment through unconventional means"
+        ],
+        "negative": [
+          "Obsessive romantic attachments",
+          "Foreign affairs create turmoil",
+          "Addiction to pleasure and substances",
+          "Deception in relationships",
+          "Affair complications and pregnancy scares",
+          "STDs and reproductive issues"
+        ],
+        "health": "Reproductive health risks. Addiction vulnerability. Toxin exposure.",
+        "career": "Unconventional success in beauty. But reputation risks.",
+        "relationships": "Obsessive attachments. Foreign affairs damage trust. Deception.",
+        "finances": "Risky gains from beauty/entertainment. Sudden losses."
+      },
+      "ketu": {
+        "duration_formula": "25 × 7 / 120 = 1.458 years (17.5 months)",
+        "relationship": "neutral",
+        "general_effects": [
+          "Beauty and pleasure dissolve",
+          "Love becomes detached",
+          "Romance loses meaning",
+          "Sensuality fades away",
+          "Isolation despite attractiveness"
+        ],
+        "positive": [
+          "Spiritual awakening through detachment",
+          "Release from attachments",
+          "Inner beauty emerges",
+          "Meaningful relationships form",
+          "Occult knowledge about desire"
+        ],
+        "negative": [
+          "Loss of attractiveness or health",
+          "Relationships dissolve suddenly",
+          "Emotional numbness and coldness",
+          "Loss of interest in romance",
+          "Isolation and loneliness",
+          "Meaninglessness despite beauty"
+        ],
+        "health": "Health issues affect appearance. Sudden illness possible.",
+        "career": "Career in beauty or arts ends. New direction forced.",
+        "relationships": "Relationships dissolve. Emotional detachment. Loneliness.",
+        "finances": "Financial losses in arts. Forced simplification."
+      }
+    },
+    "saturn": {
+      "sun": {
+        "duration_formula": "19 × 6 / 120 = 0.95 years (11.4 months)",
+        "relationship": "enemy",
+        "general_effects": [
+          "Authority challenged by karma",
+          "Delays and obstacles in leadership",
+          "Responsibility and suffering",
+          "Discipline becomes mandatory",
+          "Suffering possible despite position"
+        ],
+        "positive": [
+          "Karmic debts settle",
+          "Wise discernment develops",
+          "Lasting achievements through discipline",
+          "Authority strengthened through integrity",
+          "Spiritual maturity increases"
+        ],
+        "negative": [
+          "Health deterioration and pain",
+          "Loss of position and respect",
+          "Legal troubles and controversies",
+          "Poverty despite prior wealth",
+          "Relationships collapse",
+          "Mental depression severe"
+        ],
+        "health": "Chronic pain, joint problems, low energy. Serious illness possible.",
+        "career": "Career setbacks, demotion, or loss. Health restricts work.",
+        "relationships": "Relationships suffer. Separation and loss possible.",
+        "finances": "Financial losses and poverty. Debts accumulate."
+      },
+      "moon": {
+        "duration_formula": "19 × 10 / 120 = 1.583 years (19 months)",
+        "relationship": "enemy",
+        "general_effects": [
+          "Emotional suffering and sorrow",
+          "Depression and grief dominant",
+          "Karma of emotional actions due",
+          "Isolation despite need",
+          "Mental anguish and heaviness"
+        ],
+        "positive": [
+          "Emotional maturity through suffering",
+          "Wisdom from emotional hardship",
+          "Detachment from attachments",
+          "Discipline in emotional expression",
+          "Karmic debts settle"
+        ],
+        "negative": [
+          "Severe depression and mental illness",
+          "Loneliness and isolation",
+          "Loss of loved ones",
+          "Relationship endings",
+          "Health problems and chronic illness",
+          "Poverty and financial distress"
+        ],
+        "health": "Mental health critical. Depression likely. Chronic illness.",
+        "career": "Career stagnation or loss. Health limits work.",
+        "relationships": "Relationships end or become distant. Loss of loved ones.",
+        "finances": "Financial losses and hardship. Poverty possible."
+      },
+      "mars": {
+        "duration_formula": "19 × 7 / 120 = 1.108 years (13.3 months)",
+        "relationship": "enemy",
+        "general_effects": [
+          "Action blocked by karma and restrictions",
+          "Energy frustrated by limitations",
+          "Suffering from past aggression",
+          "Patience and discipline forced",
+          "Karmic debts come due"
+        ],
+        "positive": [
+          "Discipline hardens character",
+          "Wise restraint prevents harm",
+          "Karmic debts settle",
+          "Long-term planning succeeds",
+          "Spiritual maturity through constraint"
+        ],
+        "negative": [
+          "Complete restriction of action",
+          "Extreme physical pain and suffering",
+          "Serious accidents and injuries",
+          "Imprisonment or legal judgment",
+          "Loss of property and wealth",
+          "Depression and despair"
+        ],
+        "health": "Serious injuries and chronic pain. Accidents very likely.",
+        "career": "Career ends or severe restrictions. Health prevents work.",
+        "relationships": "Relationships end under pressure. Separation or divorce.",
+        "finances": "Financial loss and poverty. Debts multiply."
+      },
+      "mercury": {
+        "duration_formula": "19 × 17 / 120 = 2.692 years (32.3 months)",
+        "relationship": "enemy",
+        "general_effects": [
+          "Intellect limited by karma",
+          "Communication restricted and delayed",
+          "Learning becomes difficult",
+          "Mental depression and despair",
+          "Karmic debts of speech due"
+        ],
+        "positive": [
+          "Intellectual discipline develops wisdom",
+          "Careful communication prevents harm",
+          "Long-term planning succeeds",
+          "Karmic speech debts settle",
+          "Spiritual maturity through hardship"
+        ],
+        "negative": [
+          "Loss of communication abilities",
+          "Mental illness and depression",
+          "Learning disabilities manifest",
+          "Speech problems develop",
+          "Sibling losses or conflicts",
+          "Financial losses from poor decisions"
+        ],
+        "health": "Mental health critical. Depression likely. Sleep problems.",
+        "career": "Career stagnation or loss. Communication impaired.",
+        "relationships": "Communication breaks down. Sibling losses.",
+        "finances": "Financial losses from poor judgment. Debts."
+      },
+      "jupiter": {
+        "duration_formula": "19 × 16 / 120 = 2.533 years (30.4 months)",
+        "relationship": "enemy",
+        "general_effects": [
+          "Wisdom limited by karmic lessons",
+          "Spiritual growth through suffering",
+          "Expansion blocked by restrictions",
+          "Faith tested severely",
+          "Moral character refined through hardship"
+        ],
+        "positive": [
+          "Spiritual maturity through hardship",
+          "Wise discernment develops",
+          "Karmic debts settle",
+          "Discipline hardens character",
+          "Long-term benefits emerge"
+        ],
+        "negative": [
+          "Loss of faith and hope",
+          "Spiritual depression",
+          "Restriction of expansion plans",
+          "Loss of wealth and position",
+          "Health problems and suffering",
+          "Isolation despite wisdom"
+        ],
+        "health": "Health problems may arise. Depression likely.",
+        "career": "Career stagnation despite capability. Restrictions.",
+        "relationships": "Relationships under pressure. Marriage may fail.",
+        "finances": "Financial losses. Debts and restrictions."
+      },
+      "venus": {
+        "duration_formula": "19 × 25 / 120 = 3.958 years (47.5 months)",
+        "relationship": "enemy",
+        "general_effects": [
+          "Beauty and pleasure denied",
+          "Love and romance become painful",
+          "Separation and loss in relationships",
+          "Poverty despite desire for luxury",
+          "Karmic love debts due"
+        ],
+        "positive": [
+          "Maturity and wisdom in relationships",
+          "Karmic debts in love settle",
+          "Discipline in sensual expression",
+          "Long-term love bonds form",
+          "Spiritual love deepens"
+        ],
+        "negative": [
+          "Relationship endings and separations",
+          "Loss of loved ones",
+          "Marital discord and divorce",
+          "Isolation despite desire",
+          "Loss of beauty and aging",
+          "Financial losses and poverty"
+        ],
+        "health": "Reproductive health problems. Chronic pain. Aging effects.",
+        "career": "Career stagnation. Lack of progress.",
+        "relationships": "Relationships suffer severely. Separation and divorce.",
+        "finances": "Financial losses and poverty. Debts."
+      },
+      "saturn": {
+        "duration_formula": "19 × 19 / 120 = 3.017 years (36.2 months)",
+        "relationship": "same",
+        "general_effects": [
+          "Maximum karmic restriction and testing",
+          "Suffering and hardship at peak",
+          "Discipline enforced through pain",
+          "Complete life restructuring",
+          "Spiritual transformation through loss"
+        ],
+        "positive": [
+          "Complete karmic cleansing",
+          "Spiritual enlightenment possible",
+          "Character becomes unshakeable",
+          "Wisdom from extreme hardship",
+          "Complete rebirth and renewal"
+        ],
+        "negative": [
+          "Extreme suffering and hardship",
+          "Complete loss of wealth and position",
+          "Severe health crises and chronic illness",
+          "Relationship devastation and losses",
+          "Mental illness and depression severe",
+          "Possible suicide risk",
+          "Imprisonment and legal ruin"
+        ],
+        "health": "Severe health crises. Chronic pain and illness. Mental health critical.",
+        "career": "Career completely ends. Forced complete change. Poverty.",
+        "relationships": "All relationships collapse. Isolation complete. Loss of loved ones.",
+        "finances": "Complete financial ruin. Bankruptcy. Homelessness possible."
+      },
+      "rahu": {
+        "duration_formula": "19 × 18 / 120 = 2.85 years (34.2 months)",
+        "relationship": "neutral",
+        "general_effects": [
+          "Restrictions cloud with obsession",
+          "Karmic confusion and delusion",
+          "Unconventional suffering",
+          "Foreign complications in limitations",
+          "Karmic traps and snares"
+        ],
+        "positive": [
+          "Karmic lessons through confusion",
+          "Spiritual awakening through obsession",
+          "Unconventional solutions work",
+          "Hidden knowledge emerges"
+        ],
+        "negative": [
+          "Karmic obsessions and addictions",
+          "Confusion about limitations and future",
+          "Foreign entanglements cause suffering",
+          "Sudden reversals and losses",
+          "Psychological disorders manifest",
+          "Corruption and fraud tempt"
+        ],
+        "health": "Mental health unstable. Addiction and substance abuse. Illness.",
+        "career": "Career restrictions compound. Unconventional troubles.",
+        "relationships": "Relationship complications. Foreign entanglements. Confusion.",
+        "finances": "Financial confusion. Fraud and deception. Sudden losses."
+      },
+      "ketu": {
+        "duration_formula": "19 × 7 / 120 = 1.108 years (13.3 months)",
+        "relationship": "neutral",
+        "general_effects": [
+          "Restrictions dissolve into detachment",
+          "Suffering releases through surrender",
+          "Karmic completion through loss",
+          "Spiritual liberation through surrender",
+          "Complete letting go"
+        ],
+        "positive": [
+          "Karmic completion and closure",
+          "Spiritual liberation possible",
+          "Inner peace through surrender",
+          "Past karma fully resolves",
+          "Occult knowledge activation"
+        ],
+        "negative": [
+          "Complete loss and collapse",
+          "Meaninglessness and emptiness",
+          "Forced isolation and withdrawal",
+          "Loss of all supports",
+          "Health crises and disability",
+          "Complete life dissolution"
+        ],
+        "health": "Serious health crises. Recovery through complete change.",
+        "career": "Career completely ends. Retirement or disability.",
+        "relationships": "All relationships dissolve. Complete isolation.",
+        "finances": "Complete financial loss. Homelessness or poverty."
+      }
+    },
+    "rahu": {
+      "sun": {
+        "duration_formula": "18 × 6 / 120 = 0.9 years (10.8 months)",
+        "relationship": "neutral",
+        "general_effects": [
+          "Authority clouded by obsession",
+          "Power mixed with illusion",
+          "Foreign connections important",
+          "Material desires intensify",
+          "Deceptive opportunities"
+        ],
+        "positive": [
+          "Foreign opportunities and success",
+          "Material success through unconventional means",
+          "Power through manipulation",
+          "Technology and innovation success",
+          "Foreign alliances help"
+        ],
+        "negative": [
+          "Deception and dishonesty tempt",
+          "Addiction to power and control",
+          "Foreign entanglements cause problems",
+          "Confusion about goals",
+          "Sudden losses through deception",
+          "Health issues from toxins"
+        ],
+        "health": "Toxin exposure risk. Addiction vulnerability. Mysterious health issues.",
+        "career": "Success through unconventional methods. Foreign help. Reputation risks.",
+        "relationships": "Deception damages relationships. Foreign affairs possible.",
+        "finances": "Risky gains from unconventional sources. Sudden losses."
+      },
+      "moon": {
+        "duration_formula": "18 × 10 / 120 = 1.5 years (18 months)",
+        "relationship": "neutral",
+        "general_effects": [
+          "Emotions cloud with obsession",
+          "Addictive behaviors and attachments",
+          "Foreign emotional entanglements",
+          "Psychological confusion",
+          "Unusual emotional patterns"
+        ],
+        "positive": [
+          "Foreign travel and emotional adventure",
+          "Unconventional relationships flourish",
+          "Psychic abilities increase",
+          "Success through psychological manipulation",
+          "Material comforts increase"
+        ],
+        "negative": [
+          "Emotional addiction and obsession",
+          "Foreign romantic entanglements",
+          "Mental confusion and delusion",
+          "Sudden emotional crises",
+          "Addiction vulnerability high",
+          "Psychological disorders"
+        ],
+        "health": "Mental health unstable. Addiction risks high. Toxic exposures.",
+        "career": "Unconventional work succeeds. Foreign connections help.",
+        "relationships": "Obsessive emotional attachments. Foreign affairs. Trust breaks.",
+        "finances": "Risky gains through unconventional means. Sudden losses."
+      },
+      "mars": {
+        "duration_formula": "18 × 7 / 120 = 1.05 years (12.6 months)",
+        "relationship": "neutral",
+        "general_effects": [
+          "Action clouds with obsession",
+          "Aggressive pursuit of desires",
+          "Unconventional methods employed",
+          "Foreign conflicts and entanglements",
+          "Manipulation and deception"
+        ],
+        "positive": [
+          "Unconventional success through action",
+          "Foreign ventures succeed",
+          "Technology and innovation success",
+          "Power through manipulation",
+          "Material gains through aggressive means"
+        ],
+        "negative": [
+          "Violent conflict and accidents",
+          "Imprisonment or legal troubles",
+          "Deception and dishonesty",
+          "Enemies created by aggression",
+          "Foreign entanglements cause losses",
+          "Addiction to excitement"
+        ],
+        "health": "Injury and accident risks high. Poisoning or toxin exposure.",
+        "career": "Unconventional success possible. Reputation risks and legal troubles.",
+        "relationships": "Aggression and deception damage trust. Affairs create conflict.",
+        "finances": "Risky gains from unconventional ventures. Sudden losses."
+      },
+      "mercury": {
+        "duration_formula": "18 × 17 / 120 = 2.55 years (30.6 months)",
+        "relationship": "neutral",
+        "general_effects": [
+          "Intellect clouds with obsession",
+          "Communication becomes deceptive",
+          "Unconventional ideas emerge",
+          "Foreign communications and connections",
+          "Psychological cunning increases"
+        ],
+        "positive": [
+          "Unconventional business success",
+          "Foreign trade and communications",
+          "Technology and innovation excel",
+          "Psychological manipulation skills",
+          "Material success through cunning"
+        ],
+        "negative": [
+          "Deception and fraud tempt",
+          "Confusion and mental delusion",
+          "Fraudulent communications",
+          "Sibling betrayals",
+          "Foreign business entanglements",
+          "Addiction to stimulation"
+        ],
+        "health": "Mental health unstable. Addiction risks. Toxic exposures.",
+        "career": "Unconventional success possible. But fraud and reputation risks.",
+        "relationships": "Deception damages trust. Sibling betrayals likely.",
+        "finances": "Risky gains from unconventional ventures. Fraud possible."
+      },
+      "jupiter": {
+        "duration_formula": "18 × 16 / 120 = 2.4 years (28.8 months)",
+        "relationship": "neutral",
+        "general_effects": [
+          "Wisdom clouds with obsession",
+          "Expansion through unconventional means",
+          "Foreign spiritual connections",
+          "Psychological manipulation of belief",
+          "Deceptive appearances of success"
+        ],
+        "positive": [
+          "Unconventional spiritual success",
+          "Foreign connections benefit",
+          "Material success through cunning",
+          "Technology and innovation",
+          "Psychological influence over masses"
+        ],
+        "negative": [
+          "Spiritual deception and fraud",
+          "False gurus and misleading teachers",
+          "Obsession with material expansion",
+          "Foreign entanglements",
+          "Confusion about spiritual truth",
+          "Addiction to material comforts"
+        ],
+        "health": "Mental health unstable. Addiction risks. Spiritual confusion.",
+        "career": "Unconventional success possible. But fraud and deception risks.",
+        "relationships": "False intimacy and deception. Relationships collapse.",
+        "finances": "Risky gains from unconventional means. Fraud and losses."
+      },
+      "venus": {
+        "duration_formula": "18 × 25 / 120 = 3.75 years (45 months)",
+        "relationship": "neutral",
+        "general_effects": [
+          "Beauty and pleasure cloud with obsession",
+          "Unconventional romantic pursuits",
+          "Foreign love entanglements",
+          "Deceptive appearances of pleasure",
+          "Addictive attachments form"
+        ],
+        "positive": [
+          "Unconventional romance succeeds",
+          "Foreign romantic connections",
+          "Material comforts increase",
+          "Success in beauty and fashion",
+          "Sexual fulfillment through unconventional means"
+        ],
+        "negative": [
+          "Obsessive romantic attachments",
+          "Foreign affairs create turmoil",
+          "Addiction to pleasure and substances",
+          "Deception in relationships",
+          "Affair complications",
+          "STDs and reproductive issues"
+        ],
+        "health": "Reproductive health risks. Addiction vulnerability. Toxin exposure.",
+        "career": "Unconventional success in beauty. But reputation risks.",
+        "relationships": "Obsessive attachments. Foreign affairs damage trust.",
+        "finances": "Risky gains from beauty/entertainment. Sudden losses."
+      },
+      "saturn": {
+        "duration_formula": "18 × 19 / 120 = 2.85 years (34.2 months)",
+        "relationship": "neutral",
+        "general_effects": [
+          "Restrictions cloud with obsession",
+          "Karmic confusion and delusion",
+          "Unconventional suffering",
+          "Foreign complications in limitations",
+          "Karmic traps and snares"
+        ],
+        "positive": [
+          "Karmic lessons through confusion",
+          "Spiritual awakening through obsession",
+          "Unconventional solutions work",
+          "Hidden knowledge emerges"
+        ],
+        "negative": [
+          "Karmic obsessions and addictions",
+          "Confusion about limitations",
+          "Foreign entanglements cause suffering",
+          "Sudden reversals and losses",
+          "Psychological disorders manifest",
+          "Corruption and fraud tempt"
+        ],
+        "health": "Mental health unstable. Addiction and substance abuse.",
+        "career": "Career restrictions compound. Unconventional troubles.",
+        "relationships": "Relationship complications. Foreign entanglements.",
+        "finances": "Financial confusion. Fraud and deception. Sudden losses."
+      },
+      "rahu": {
+        "duration_formula": "18 × 18 / 120 = 2.7 years (32.4 months)",
+        "relationship": "same",
+        "general_effects": [
+          "Obsession and obsession multiply",
+          "Illusion and delusion at peak",
+          "Foreign entanglements compound",
+          "Deception reaches maximum",
+          "Addictive behaviors intensify"
+        ],
+        "positive": [
+          "Unconventional success peaks",
+          "Foreign ventures flourish",
+          "Material success through manipulation",
+          "Technology breakthrough possible",
+          "Power over masses"
+        ],
+        "negative": [
+          "Extreme obsessions and addictions",
+          "Massive deception and fraud",
+          "Foreign entanglements catastrophic",
+          "Sudden total collapse",
+          "Psychological breakdown",
+          "Imprisonment or exile possible",
+          "Complete social ruin"
+        ],
+        "health": "Mental health critical. Severe addiction. Psychosis possible.",
+        "career": "Career collapses from fraud. Legal ruin. Imprisonment.",
+        "relationships": "Relationships destroyed. Total deception exposure.",
+        "finances": "Complete financial fraud and collapse. Ruin."
+      },
+      "ketu": {
+        "duration_formula": "18 × 7 / 120 = 1.05 years (12.6 months)",
+        "relationship": "neutral",
+        "general_effects": [
+          "Obsessions dissolve into detachment",
+          "Illusions shatter suddenly",
+          "Foreign entanglements released",
+          "Deceptions exposed and cleared",
+          "Addictions conquered through loss"
+        ],
+        "positive": [
+          "Spiritual awakening through loss",
+          "Detachment from obsessions",
+          "Illusions dispelled",
+          "Inner truth revealed",
+          "Occult knowledge activation"
+        ],
+        "negative": [
+          "Sudden exposure of deceptions",
+          "Loss of false gains",
+          "Foreign entanglements collapse",
+          "Social ruin and humiliation",
+          "Psychological crisis",
+          "Loss of identity and belonging"
+        ],
+        "health": "Mental health crisis possible. Psychological trauma.",
+        "career": "Career collapses. Exposure and ruin. Forced new direction.",
+        "relationships": "Relationships destroyed by deception exposure. Isolation.",
+        "finances": "Financial collapse. All false gains lost. Ruin."
+      }
+    },
+    "ketu": {
+      "sun": {
+        "duration_formula": "7 × 6 / 120 = 0.35 years (4.2 months)",
+        "relationship": "neutral",
+        "general_effects": [
+          "Authority dissolves into detachment",
+          "Power becomes meaningless",
+          "Past karma releases through loss",
+          "Spiritual transformation through authority loss",
+          "Isolation despite position"
+        ],
+        "positive": [
+          "Spiritual liberation from ego",
+          "Detachment frees from desires",
+          "Healing through releasing control",
+          "Occult knowledge acquisition",
+          "Past karma completions"
+        ],
+        "negative": [
+          "Complete loss of power and position",
+          "Isolation and loneliness",
+          "Meaninglessness despite success",
+          "Health crises force transformation",
+          "Relationships end unexpectedly",
+          "Financial collapse"
+        ],
+        "health": "Sudden health crises. Chronic mysterious conditions. Injuries.",
+        "career": "Career ends or transforms completely. Forced retirement.",
+        "relationships": "Relationships dissolve. Emotional detachment increases.",
+        "finances": "Financial losses and poverty. Forced simplification."
+      },
+      "moon": {
+        "duration_formula": "7 × 10 / 120 = 0.583 years (7 months)",
+        "relationship": "neutral",
+        "general_effects": [
+          "Emotions dissolve into detachment",
+          "Psychological emptiness",
+          "Past emotional karma releases",
+          "Spiritual awakening through loss",
+          "Isolation and withdrawal"
+        ],
+        "positive": [
+          "Spiritual awakening through emotion",
+          "Detachment from attachments",
+          "Inner peace through letting go",
+          "Past trauma healing",
+          "Occult knowledge activation"
+        ],
+        "negative": [
+          "Emotional numbness and depression",
+          "Loss of emotional connections",
+          "Relationships suddenly end",
+          "Isolation and loneliness",
+          "Meaninglessness despite comforts",
+          "Health crises with psychological impact"
+        ],
+        "health": "Mental health suffers. Emotional numbness. Psychological crisis.",
+        "career": "Career ends or transforms. Forced change of direction.",
+        "relationships": "Relationships dissolve. Emotional detachment increases.",
+        "finances": "Financial losses. Simplification of lifestyle forced."
+      },
+      "mars": {
+        "duration_formula": "7 × 7 / 120 = 0.408 years (5 months)",
+        "relationship": "neutral",
+        "general_effects": [
+          "Energy dissipates into detachment",
+          "Action loses purpose",
+          "Fighting ceases when goal dissolves",
+          "Past karma through conflict releases",
+          "Isolation despite warrior spirit"
+        ],
+        "positive": [
+          "Spiritual awakening through conflict",
+          "Detachment from materialistic drive",
+          "Inner peace through surrender",
+          "Past trauma heals",
+          "Occult knowledge activation"
+        ],
+        "negative": [
+          "Loss of motivation and drive",
+          "Meaninglessness despite action",
+          "Sudden health crises",
+          "Injuries from carelessness",
+          "Career and relationships collapse",
+          "Isolation and loneliness"
+        ],
+        "health": "Sudden serious health crises. Injuries from detachment.",
+        "career": "Career ends or transforms completely. Role collapses.",
+        "relationships": "Relationships dissolve suddenly. Separation forced.",
+        "finances": "Financial losses and collapse. Property may be lost."
+      },
+      "mercury": {
+        "duration_formula": "7 × 17 / 120 = 0.992 years (11.9 months)",
+        "relationship": "neutral",
+        "general_effects": [
+          "Intellect dissolves into emptiness",
+          "Communication loses purpose",
+          "Knowledge becomes meaningless",
+          "Mental detachment from learning",
+          "Isolation despite communication ability"
+        ],
+        "positive": [
+          "Spiritual awakening through knowledge",
+          "Detachment from mental attachments",
+          "Inner silence and peace",
+          "Past karma completes",
+          "Occult knowledge awakens"
+        ],
+        "negative": [
+          "Memory loss and cognitive decline",
+          "Communication abilities fade",
+          "Learning becomes impossible",
+          "Mental confusion and emptiness",
+          "Sibling relationships dissolve",
+          "Career confusion and loss"
+        ],
+        "health": "Mental health unstable. Memory loss possible. Cognitive problems.",
+        "career": "Career ends or transforms. Retirement forced. Skills fade.",
+        "relationships": "Sibling relationships dissolve. Communication stops.",
+        "finances": "Financial confusion. Contracts and deals fail."
+      },
+      "jupiter": {
+        "duration_formula": "7 × 16 / 120 = 0.933 years (11.2 months)",
+        "relationship": "neutral",
+        "general_effects": [
+          "Wisdom dissolves into detachment",
+          "Spiritual transcendence through loss",
+          "Expansion ceases as desires fade",
+          "Faith questioned and abandoned",
+          "Isolation despite spiritual knowledge"
+        ],
+        "positive": [
+          "Spiritual liberation possible",
+          "Detachment from attachments",
+          "Inner peace through surrender",
+          "Occult knowledge activation",
+          "Past karma completions"
+        ],
+        "negative": [
+          "Loss of faith and meaning",
+          "Spiritual emptiness",
+          "Loss of wealth and position",
+          "Isolation and loneliness",
+          "Meaninglessness despite knowledge",
+          "Health crises"
+        ],
+        "health": "Health crises possible. Sudden illness. Recovery through simplification.",
+        "career": "Career ends. Retirement forced. Transformation of life path.",
+        "relationships": "Relationships dissolve. Isolation forced. Loss of loved ones.",
+        "finances": "Financial losses. Simplification of lifestyle. Poverty."
+      },
+      "venus": {
+        "duration_formula": "7 × 25 / 120 = 1.458 years (17.5 months)",
+        "relationship": "neutral",
+        "general_effects": [
+          "Beauty and pleasure dissolve",
+          "Love becomes detached",
+          "Romance loses meaning",
+          "Sensuality fades away",
+          "Isolation despite attractiveness"
+        ],
+        "positive": [
+          "Spiritual awakening through detachment",
+          "Release from attachments",
+          "Inner beauty emerges",
+          "Meaningful relationships form",
+          "Occult knowledge about desire"
+        ],
+        "negative": [
+          "Loss of attractiveness or health",
+          "Relationships dissolve suddenly",
+          "Emotional numbness and coldness",
+          "Loss of interest in romance",
+          "Isolation and loneliness",
+          "Meaninglessness despite beauty"
+        ],
+        "health": "Health issues affect appearance. Sudden illness possible.",
+        "career": "Career in beauty or arts ends. New direction forced.",
+        "relationships": "Relationships dissolve. Emotional detachment. Loneliness.",
+        "finances": "Financial losses in arts. Forced simplification."
+      },
+      "saturn": {
+        "duration_formula": "7 × 19 / 120 = 1.108 years (13.3 months)",
+        "relationship": "neutral",
+        "general_effects": [
+          "Restrictions dissolve into detachment",
+          "Suffering releases through surrender",
+          "Karmic completion through loss",
+          "Spiritual liberation through surrender",
+          "Complete letting go"
+        ],
+        "positive": [
+          "Karmic completion and closure",
+          "Spiritual liberation possible",
+          "Inner peace through surrender",
+          "Past karma fully resolves",
+          "Occult knowledge activation"
+        ],
+        "negative": [
+          "Complete loss and collapse",
+          "Meaninglessness and emptiness",
+          "Forced isolation and withdrawal",
+          "Loss of all supports",
+          "Health crises and disability",
+          "Complete life dissolution"
+        ],
+        "health": "Serious health crises. Recovery through complete change.",
+        "career": "Career completely ends. Retirement or disability.",
+        "relationships": "All relationships dissolve. Complete isolation.",
+        "finances": "Complete financial loss. Homelessness or poverty."
+      },
+      "rahu": {
+        "duration_formula": "7 × 18 / 120 = 1.05 years (12.6 months)",
+        "relationship": "neutral",
+        "general_effects": [
+          "Obsessions dissolve into detachment",
+          "Illusions shatter suddenly",
+          "Foreign entanglements released",
+          "Deceptions exposed and cleared",
+          "Addictions conquered through loss"
+        ],
+        "positive": [
+          "Spiritual awakening through loss",
+          "Detachment from obsessions",
+          "Illusions dispelled",
+          "Inner truth revealed",
+          "Occult knowledge activation"
+        ],
+        "negative": [
+          "Sudden exposure of deceptions",
+          "Loss of false gains",
+          "Foreign entanglements collapse",
+          "Social ruin and humiliation",
+          "Psychological crisis",
+          "Loss of identity and belonging"
+        ],
+        "health": "Mental health crisis possible. Psychological trauma.",
+        "career": "Career collapses. Exposure and ruin. Forced new direction.",
+        "relationships": "Relationships destroyed by deception exposure. Isolation.",
+        "finances": "Financial collapse. All false gains lost. Ruin."
+      },
+      "ketu": {
+        "duration_formula": "7 × 7 / 120 = 0.408 years (5 months)",
+        "relationship": "same",
+        "general_effects": [
+          "Complete detachment and dissolution",
+          "All illusions shatter completely",
+          "Past karma releases entirely",
+          "Spiritual liberation at peak",
+          "Complete surrender and emptiness"
+        ],
+        "positive": [
+          "Ultimate spiritual liberation",
+          "Complete karma resolution",
+          "Enlightenment possible",
+          "Inner silence and bliss",
+          "Past completely released"
+        ],
+        "negative": [
+          "Complete loss of everything",
+          "Total isolation and emptiness",
+          "Identity dissolution",
+          "Life meaning completely lost",
+          "Health complete breakdown",
+          "Social and financial ruin complete"
+        ],
+        "health": "Critical health crises. Complete physical breakdown possible.",
+        "career": "Career completely ends. Life completely transforms.",
+        "relationships": "All relationships and connections dissolve.",
+        "finances": "Complete financial destruction. Loss of everything."
+      }
+    }
+  },
+  "relationship_modifiers": {
+    "friend_friend": {
+      "strength_modifier": 1.25,
+      "effects": "Enhanced positive effects, mutual cooperation, beneficial outcomes amplified",
+      "examples": "Sun-Mercury, Jupiter-Mercury, Mercury-Jupiter"
+    },
+    "friend_neutral": {
+      "strength_modifier": 1.0,
+      "effects": "Positive effects with some neutral periods, generally favorable",
+      "examples": "Sun-Mars, Mars-Mercury, Jupiter-Mars"
+    },
+    "friend_enemy": {
+      "strength_modifier": 0.75,
+      "effects": "Mixed results with conflicts and reconciliations, unstable period",
+      "examples": "Venus-Mars, Saturn-Venus, Rahu-Jupiter"
+    },
+    "neutral_neutral": {
+      "strength_modifier": 0.85,
+      "effects": "Balanced effects, neither strongly positive nor negative",
+      "examples": "Mars-Mars (same), Sun-Mars, Rahu-Mars"
+    },
+    "enemy_enemy": {
+      "strength_modifier": 0.5,
+      "effects": "Challenging period with obstacles and suffering, difficult circumstances",
+      "examples": "Venus-Saturn, Saturn-Venus, Saturn-Saturn"
+    },
+    "enemy_neutral": {
+      "strength_modifier": 0.65,
+      "effects": "Difficult period with some relief, obstacles gradually decrease",
+      "examples": "Saturn-Mars, Saturn-Mercury, Venus-Mars"
+    }
+  },
+  "duration_calculation": {
+    "formula": "Mahadasha_years × Antardasha_years / 120",
+    "explanation": "In Vimshottari Dasha, the cycle is 120 years total. Antardasha duration is calculated proportionally.",
+    "vimshottari_years": {
+      "sun": 6,
+      "moon": 10,
+      "mars": 7,
+      "mercury": 17,
+      "jupiter": 16,
+      "venus": 25,
+      "saturn": 19,
+      "rahu": 18,
+      "ketu": 7
+    }
+  },
+  "interpretation_guidelines": {
+    "combined_effects": "Antardasha effects are modified by Mahadasha lord. A benefic antardasha in malefic Mahadasha shows some relief, while malefic in benefic causes temporary setbacks.",
+    "planetary_friendship": "Friend planets enhance cooperation. Enemy planets create conflict. Neutral planets provide balance.",
+    "strength_assessment": "Consider both planets' positions in birth chart, aspects, and current transit conditions when assessing intensity.",
+    "remedial_measures": "Mantra, charity, and worship of antardasha lord can mitigate negative effects and enhance positive ones.",
+    "planning": "Important life decisions best made when antardasha supports the area of life involved."
+  }
+}

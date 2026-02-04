@@ -22,9 +22,31 @@ The module supports evaluation of various activities:
 - Vehicle purchase (Yantra Kray)
 """
 
+from collections.abc import Callable
 from datetime import datetime, timedelta
-from typing import Dict, List, Optional, Tuple, Callable
 from enum import Enum
+from typing import Any
+
+from packages.core.src.knowledge_loader import get_muhurta_rules
+
+# Module-level cache for muhurta rules
+_muhurta_rules_cache: dict[str, Any] | None = None
+
+
+def _get_muhurta_rules() -> dict[str, Any]:
+    """Get cached muhurta rules from JSON."""
+    global _muhurta_rules_cache
+    if _muhurta_rules_cache is None:
+        _muhurta_rules_cache = get_muhurta_rules()
+    return _muhurta_rules_cache
+
+
+def _get_inauspicious_slots(period_type: str) -> dict[str, int]:
+    """Get inauspicious period slots from JSON with fallback."""
+    rules = _get_muhurta_rules()
+    periods = rules.get("inauspicious_periods", {})
+    period_data = periods.get(period_type, {})
+    return period_data.get("slots_by_weekday", {})
 
 
 class MuhurtaQuality(Enum):
@@ -49,7 +71,7 @@ class ActivityType(Enum):
 
 # Rahu Kaal timing (portion of day to avoid)
 # Hours from sunrise, each slot = day_duration/8
-RAHU_KAAL = {
+_DEFAULT_RAHU_KAAL = {
     "sunday": 8,
     "monday": 2,
     "tuesday": 7,
@@ -60,7 +82,7 @@ RAHU_KAAL = {
 }
 
 # Yamaghanda Kaal (even more inauspicious than Rahu Kaal)
-YAMAGHANDA = {
+_DEFAULT_YAMAGHANDA = {
     "sunday": 5,
     "monday": 4,
     "tuesday": 3,
@@ -71,7 +93,7 @@ YAMAGHANDA = {
 }
 
 # Gulika Kaal
-GULIKA = {
+_DEFAULT_GULIKA = {
     "sunday": 7,
     "monday": 6,
     "tuesday": 5,
@@ -80,6 +102,11 @@ GULIKA = {
     "friday": 2,
     "saturday": 1,
 }
+
+# Backwards-compatible exports - try JSON first, then fall back to defaults
+RAHU_KAAL = _get_inauspicious_slots("rahu_kaal") or _DEFAULT_RAHU_KAAL
+YAMAGHANDA = _get_inauspicious_slots("yamaghanda") or _DEFAULT_YAMAGHANDA
+GULIKA = _get_inauspicious_slots("gulika") or _DEFAULT_GULIKA
 
 # Activity-specific Muhurta rules
 ACTIVITY_RULES = {
@@ -247,9 +274,7 @@ CHOGHADIYA_QUALITY = {
 }
 
 
-def calculate_rahu_kaal(
-    sunrise: datetime, sunset: datetime, weekday: str
-) -> Dict[str, any]:
+def calculate_rahu_kaal(sunrise: datetime, sunset: datetime, weekday: str) -> dict[str, Any]:
     """Calculate Rahu Kaal timing for the day.
 
     Rahu Kaal is an inauspicious period of approximately 90 minutes
@@ -280,9 +305,7 @@ def calculate_rahu_kaal(
     """
     weekday_lower = weekday.lower()
     if weekday_lower not in RAHU_KAAL:
-        raise ValueError(
-            f"Invalid weekday: {weekday}. Must be Monday-Sunday (case-insensitive)"
-        )
+        raise ValueError(f"Invalid weekday: {weekday}. Must be Monday-Sunday (case-insensitive)")
 
     day_duration = (sunset - sunrise).total_seconds()
     slot_duration = day_duration / 8
@@ -304,9 +327,7 @@ def calculate_rahu_kaal(
     }
 
 
-def calculate_yamaghanda(
-    sunrise: datetime, sunset: datetime, weekday: str
-) -> Dict[str, any]:
+def calculate_yamaghanda(sunrise: datetime, sunset: datetime, weekday: str) -> dict[str, Any]:
     """Calculate Yamaghanda Kaal timing for the day.
 
     Yamaghanda is even more inauspicious than Rahu Kaal and should be
@@ -325,9 +346,7 @@ def calculate_yamaghanda(
     """
     weekday_lower = weekday.lower()
     if weekday_lower not in YAMAGHANDA:
-        raise ValueError(
-            f"Invalid weekday: {weekday}. Must be Monday-Sunday (case-insensitive)"
-        )
+        raise ValueError(f"Invalid weekday: {weekday}. Must be Monday-Sunday (case-insensitive)")
 
     day_duration = (sunset - sunrise).total_seconds()
     slot_duration = day_duration / 8
@@ -349,9 +368,7 @@ def calculate_yamaghanda(
     }
 
 
-def calculate_gulika(
-    sunrise: datetime, sunset: datetime, weekday: str
-) -> Dict[str, any]:
+def calculate_gulika(sunrise: datetime, sunset: datetime, weekday: str) -> dict[str, Any]:
     """Calculate Gulika Kaal timing for the day.
 
     Gulika Kaal is another inauspicious period that should be avoided,
@@ -370,9 +387,7 @@ def calculate_gulika(
     """
     weekday_lower = weekday.lower()
     if weekday_lower not in GULIKA:
-        raise ValueError(
-            f"Invalid weekday: {weekday}. Must be Monday-Sunday (case-insensitive)"
-        )
+        raise ValueError(f"Invalid weekday: {weekday}. Must be Monday-Sunday (case-insensitive)")
 
     day_duration = (sunset - sunrise).total_seconds()
     slot_duration = day_duration / 8
@@ -396,7 +411,7 @@ def calculate_gulika(
 
 def calculate_all_inauspicious(
     sunrise: datetime, sunset: datetime, weekday: str
-) -> Dict[str, Dict[str, any]]:
+) -> dict[str, dict[str, Any]]:
     """Calculate all inauspicious periods for the day.
 
     Args:
@@ -422,7 +437,7 @@ def calculate_all_inauspicious(
 
 def calculate_choghadiya(
     sunrise: datetime, sunset: datetime, weekday: str, is_night: bool = False
-) -> List[Dict[str, any]]:
+) -> list[dict[str, Any]]:
     """Calculate Choghadiya (8 periods) for the day or night.
 
     Choghadiya divides the day/night into 8 equal periods, each with
@@ -449,9 +464,7 @@ def calculate_choghadiya(
     """
     weekday_lower = weekday.lower()
     if weekday_lower not in CHOGHADIYA_ORDER["day"]:
-        raise ValueError(
-            f"Invalid weekday: {weekday}. Must be Monday-Sunday (case-insensitive)"
-        )
+        raise ValueError(f"Invalid weekday: {weekday}. Must be Monday-Sunday (case-insensitive)")
 
     period_type = "night" if is_night else "day"
     choghadiya_names = CHOGHADIYA_ORDER[period_type][weekday_lower]
@@ -491,7 +504,7 @@ def calculate_choghadiya(
     return choghadiya_periods
 
 
-def _get_choghadiya_activities(choghadiya_name: str) -> List[str]:
+def _get_choghadiya_activities(choghadiya_name: str) -> list[str]:
     """Get recommended activities for a specific Choghadiya.
 
     Args:
@@ -520,8 +533,8 @@ def _get_choghadiya_activities(choghadiya_name: str) -> List[str]:
 
 
 def evaluate_muhurta(
-    activity: str, panchanga: Dict[str, any], datetime_obj: datetime
-) -> Dict[str, any]:
+    activity: str, panchanga: dict[str, Any], datetime_obj: datetime
+) -> dict[str, Any]:
     """Evaluate Muhurta quality for a specific activity.
 
     Calculates a comprehensive score based on Tithi, Nakshatra, Vara,
@@ -552,8 +565,7 @@ def evaluate_muhurta(
     """
     if activity not in ACTIVITY_RULES:
         raise ValueError(
-            f"Unknown activity: {activity}. "
-            f"Supported: {', '.join(ACTIVITY_RULES.keys())}"
+            f"Unknown activity: {activity}. " f"Supported: {', '.join(ACTIVITY_RULES.keys())}"
         )
 
     rules = ACTIVITY_RULES[activity]
@@ -671,12 +683,12 @@ def _generate_recommendation(quality: MuhurtaQuality, activity: str) -> str:
 
 def evaluate_with_inauspicious_check(
     activity: str,
-    panchanga: Dict[str, any],
+    panchanga: dict[str, Any],
     datetime_obj: datetime,
     sunrise: datetime,
     sunset: datetime,
     weekday: str,
-) -> Dict[str, any]:
+) -> dict[str, Any]:
     """Evaluate Muhurta including inauspicious period checks.
 
     Performs the standard Muhurta evaluation and also checks if the
@@ -757,7 +769,7 @@ def find_next_good_muhurta(
     days_to_search: int = 30,
     max_results: int = 5,
     min_quality: str = "good",
-) -> List[Dict[str, any]]:
+) -> list[dict[str, Any]]:
     """Find upcoming good Muhurtas for a specific activity.
 
     Searches forward from start_date to find the best available times
@@ -790,9 +802,7 @@ def find_next_good_muhurta(
     if min_quality not in quality_levels:
         raise ValueError(f"min_quality must be one of: {', '.join(quality_levels)}")
 
-    min_quality_score = {"excellent": 80, "good": 65, "fair": 45, "poor": 0}[
-        min_quality
-    ]
+    min_quality_score = {"excellent": 80, "good": 65, "fair": 45, "poor": 0}[min_quality]
 
     good_muhurtas = []
     current = start_date
@@ -846,7 +856,7 @@ def get_choghadiya_at_time(
     weekday: str,
     query_time: datetime,
     is_night: bool = False,
-) -> Optional[Dict[str, any]]:
+) -> dict[str, Any] | None:
     """Get the Choghadiya period active at a specific time.
 
     Args:
@@ -868,7 +878,7 @@ def get_choghadiya_at_time(
     return None
 
 
-def validate_muhurta_input(panchanga: Dict[str, any]) -> bool:
+def validate_muhurta_input(panchanga: dict[str, Any]) -> bool:
     """Validate that panchanga data contains required fields.
 
     Args:
@@ -893,8 +903,6 @@ def validate_muhurta_input(panchanga: Dict[str, any]) -> bool:
 
         for subfield in subfields:
             if subfield not in panchanga[field]:
-                raise KeyError(
-                    f"Missing required subfield: {field}.{subfield}"
-                )
+                raise KeyError(f"Missing required subfield: {field}.{subfield}")
 
     return True

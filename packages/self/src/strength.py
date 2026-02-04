@@ -9,11 +9,12 @@ References:
 - Classical Jyotish texts
 """
 
-from typing import Dict, List, Tuple
 from dataclasses import dataclass
 from math import fabs
+from typing import Any
 
 from packages.core.src.constants import Planet, Rashi
+from packages.core.src.knowledge_loader import get_ashtakavarga_rules, get_shadbala_rules
 from packages.core.src.models import BirthChart, PlanetPosition
 
 
@@ -42,162 +43,203 @@ class ShadbalaComponents:
 
 
 class StrengthCalculator:
-    """Calculate planetary strengths using Shadbala and Ashtakavarga."""
+    """Calculate planetary strengths using Shadbala and Ashtakavarga.
 
-    # Natural strength values (Naisargika Bala) in virupas (out of 60)
-    NAISARGIKA_BALA = {
-        Planet.SUN: 60.0,
-        Planet.MOON: 51.43,
-        Planet.MARS: 17.14,
-        Planet.MERCURY: 25.71,
-        Planet.JUPITER: 34.29,
-        Planet.VENUS: 42.86,
-        Planet.SATURN: 8.57,
-        Planet.RAHU: 0.0,
-        Planet.KETU: 0.0,
-    }
+    Loads rules from knowledge/rules/shadbala_rules.json and ashtakavarga_rules.json.
+    """
 
-    # Strong directions for Dig Bala (house number where planet gains strength)
-    DIG_BALA_HOUSES = {
-        Planet.JUPITER: 1,  # East (Lagna/1st house)
-        Planet.MERCURY: 1,  # East
-        Planet.SUN: 10,  # South (Midheaven/10th house)
-        Planet.MARS: 10,  # South
-        Planet.SATURN: 7,  # West (7th house)
-        Planet.MOON: 4,  # North (4th house)
-        Planet.VENUS: 4,  # North
-        Planet.RAHU: 1,  # East (like Jupiter)
-        Planet.KETU: 7,  # West (like Saturn)
-    }
+    def __init__(self) -> None:
+        """Initialize with rules from JSON knowledge files."""
+        self._shadbala_rules: dict[str, Any] | None = None
+        self._ashtakavarga_rules: dict[str, Any] | None = None
 
-    # Exaltation points (rashi, degree within rashi)
-    EXALTATION_POINTS = {
-        Planet.SUN: (Rashi.ARIES, 10.0),
-        Planet.MOON: (Rashi.TAURUS, 3.0),
-        Planet.MARS: (Rashi.CAPRICORN, 28.0),
-        Planet.MERCURY: (Rashi.VIRGO, 15.0),
-        Planet.JUPITER: (Rashi.CANCER, 5.0),
-        Planet.VENUS: (Rashi.PISCES, 27.0),
-        Planet.SATURN: (Rashi.LIBRA, 20.0),
-        Planet.RAHU: (Rashi.GEMINI, 20.0),  # Approximate
-        Planet.KETU: (Rashi.SAGITTARIUS, 20.0),  # Approximate
-    }
+    @property
+    def shadbala_rules(self) -> dict[str, Any]:
+        """Lazy load shadbala rules."""
+        if self._shadbala_rules is None:
+            self._shadbala_rules = get_shadbala_rules()
+        return self._shadbala_rules
 
-    # Debilitation points (opposite of exaltation)
-    DEBILITATION_POINTS = {
-        Planet.SUN: (Rashi.LIBRA, 10.0),
-        Planet.MOON: (Rashi.SCORPIO, 3.0),
-        Planet.MARS: (Rashi.CANCER, 28.0),
-        Planet.MERCURY: (Rashi.PISCES, 15.0),
-        Planet.JUPITER: (Rashi.CAPRICORN, 5.0),
-        Planet.VENUS: (Rashi.VIRGO, 27.0),
-        Planet.SATURN: (Rashi.ARIES, 20.0),
-        Planet.RAHU: (Rashi.SAGITTARIUS, 20.0),
-        Planet.KETU: (Rashi.GEMINI, 20.0),
-    }
+    @property
+    def ashtakavarga_rules(self) -> dict[str, Any]:
+        """Lazy load ashtakavarga rules."""
+        if self._ashtakavarga_rules is None:
+            self._ashtakavarga_rules = get_ashtakavarga_rules()
+        return self._ashtakavarga_rules
 
-    # Own signs (Swarucha Rashi)
-    OWN_SIGNS = {
-        Planet.SUN: [Rashi.LEO],
-        Planet.MOON: [Rashi.CANCER],
-        Planet.MARS: [Rashi.ARIES, Rashi.SCORPIO],
-        Planet.MERCURY: [Rashi.GEMINI, Rashi.VIRGO],
-        Planet.JUPITER: [Rashi.SAGITTARIUS, Rashi.PISCES],
-        Planet.VENUS: [Rashi.TAURUS, Rashi.LIBRA],
-        Planet.SATURN: [Rashi.CAPRICORN, Rashi.AQUARIUS],
-        Planet.RAHU: [Rashi.VIRGO],  # Exaltation sign
-        Planet.KETU: [Rashi.PISCES],  # Exaltation sign
-    }
+    def _get_naisargika_bala(self, planet: Planet) -> float:
+        """Get natural strength from JSON rules."""
+        naisargika = self.shadbala_rules.get("components", {}).get("naisargika_bala", {})
+        planet_values = naisargika.get("planet_values", {})
+        return float(planet_values.get(planet.value, 0.0))
 
-    # Friendly planets by sign and ownership
-    FRIENDS = {
-        Planet.SUN: [Planet.MOON, Planet.MARS, Planet.JUPITER],
-        Planet.MOON: [Planet.SUN, Planet.MERCURY],
-        Planet.MARS: [Planet.SUN, Planet.MOON, Planet.JUPITER],
-        Planet.MERCURY: [Planet.SUN, Planet.VENUS],
-        Planet.JUPITER: [Planet.SUN, Planet.MOON, Planet.MARS],
-        Planet.VENUS: [Planet.MERCURY, Planet.SATURN],
-        Planet.SATURN: [Planet.MERCURY, Planet.VENUS],
-        Planet.RAHU: [Planet.MERCURY, Planet.VENUS, Planet.SATURN],
-        Planet.KETU: [Planet.MARS, Planet.SATURN, Planet.VENUS],
-    }
+    def _get_dig_bala_house(self, planet: Planet) -> int:
+        """Get strong house for directional strength from JSON rules."""
+        dig_bala = self.shadbala_rules.get("components", {}).get("dig_bala", {})
+        directions = dig_bala.get("directions", {})
 
-    # Ashtakavarga points contributed by each planet to signs
-    # Based on classical rules from BPHS
-    ASHTAKAVARGA_POINTS = {
-        Planet.SUN: {
-            "sun": [1, 2, 4, 7, 8, 9, 10, 11],
-            "moon": [3, 6, 10, 11],
-            "mars": [1, 2, 4, 7, 8, 9, 10, 11],
-            "mercury": [3, 5, 6, 9, 10, 11, 12],
-            "jupiter": [5, 6, 9, 11],
-            "venus": [6, 7, 12],
-            "saturn": [1, 2, 4, 7, 8, 9, 10, 11],
-            "lagna": [3, 4, 6, 10, 11, 12],
-        },
-        Planet.MOON: {
-            "sun": [3, 6, 11],
-            "moon": [3, 6, 10, 11],
-            "mars": [6, 3, 11],
-            "mercury": [4, 8, 12],
-            "jupiter": [5, 9, 12],
-            "venus": [4, 8, 12],
-            "saturn": [2, 4, 8, 12],
-            "lagna": [4, 8, 12],
-        },
-        Planet.MARS: {
-            "sun": [1, 2, 4, 7, 8, 9, 10, 11],
-            "moon": [3, 6, 10, 11],
-            "mars": [1, 2, 4, 7, 8, 9, 10, 11],
-            "mercury": [3, 5, 6, 9, 10, 11, 12],
-            "jupiter": [5, 6, 9, 11],
-            "venus": [6, 7, 12],
-            "saturn": [1, 2, 4, 7, 8, 9, 10, 11],
-            "lagna": [3, 6, 11],
-        },
-        Planet.MERCURY: {
-            "sun": [3, 5, 6, 9, 10, 11, 12],
-            "moon": [4, 8, 12],
-            "mars": [3, 5, 6, 9, 10, 11, 12],
-            "mercury": [3, 5, 6, 9, 10, 11, 12],
-            "jupiter": [4, 5, 8, 9, 12],
-            "venus": [3, 5, 6, 9, 10, 11, 12],
-            "saturn": [3, 5, 6, 9, 10, 11, 12],
-            "lagna": [3, 5, 6, 9, 10, 11, 12],
-        },
-        Planet.JUPITER: {
-            "sun": [5, 6, 9, 11],
-            "moon": [5, 9, 12],
-            "mars": [5, 6, 9, 11],
-            "mercury": [4, 5, 8, 9, 12],
-            "jupiter": [5, 6, 9, 11],
-            "venus": [5, 9, 12],
-            "saturn": [5, 9, 12],
-            "lagna": [5, 9, 12],
-        },
-        Planet.VENUS: {
-            "sun": [6, 7, 12],
-            "moon": [4, 8, 12],
-            "mars": [6, 7, 12],
-            "mercury": [3, 5, 6, 9, 10, 11, 12],
-            "jupiter": [5, 9, 12],
-            "venus": [6, 7, 12],
-            "saturn": [3, 5, 6, 9, 10, 11, 12],
-            "lagna": [1, 2, 12],
-        },
-        Planet.SATURN: {
-            "sun": [1, 2, 4, 7, 8, 9, 10, 11],
-            "moon": [2, 4, 8, 12],
-            "mars": [1, 2, 4, 7, 8, 9, 10, 11],
-            "mercury": [3, 5, 6, 9, 10, 11, 12],
-            "jupiter": [5, 9, 12],
-            "venus": [3, 5, 6, 9, 10, 11, 12],
-            "saturn": [1, 2, 4, 7, 8, 9, 10, 11],
-            "lagna": [3, 6, 11],
-        },
-    }
+        # Map planets to their strong direction
+        for _direction, data in directions.items():
+            if planet.value in data.get("strong_planets", []):
+                houses = data.get("houses", [1])
+                return houses[0] if houses else 1
+        return 1  # Default to 1st house
 
-    def calculate_shadbala(self, planet: Planet, chart: BirthChart) -> Dict:
+    def _get_exaltation_point(self, planet: Planet) -> tuple[Rashi | None, float]:
+        """Get exaltation rashi and degree from JSON rules."""
+        uchcha = self.shadbala_rules.get("components", {}).get("sthana_bala", {})
+        uchcha_rules = uchcha.get("sub_components", {}).get("uchcha_bala", {}).get("rules", {})
+        planet_data = uchcha_rules.get(planet.value, {})
+
+        if not planet_data:
+            return None, 0.0
+
+        rashi_name = planet_data.get("exaltation_rashi", "").upper()
+        degree = float(planet_data.get("exaltation_point", 0))
+
+        try:
+            rashi = Rashi[rashi_name] if rashi_name else None
+        except KeyError:
+            rashi = None
+
+        return rashi, degree % 30  # Degree within sign
+
+    def _get_debilitation_point(self, planet: Planet) -> tuple[Rashi | None, float]:
+        """Get debilitation rashi and degree from JSON rules."""
+        uchcha = self.shadbala_rules.get("components", {}).get("sthana_bala", {})
+        uchcha_rules = uchcha.get("sub_components", {}).get("uchcha_bala", {}).get("rules", {})
+        planet_data = uchcha_rules.get(planet.value, {})
+
+        if not planet_data:
+            return None, 0.0
+
+        rashi_name = planet_data.get("debilitation_rashi", "").upper()
+        degree = float(planet_data.get("debilitation_point", 0))
+
+        try:
+            rashi = Rashi[rashi_name] if rashi_name else None
+        except KeyError:
+            rashi = None
+
+        return rashi, degree % 30
+
+    def _get_own_signs(self, planet: Planet) -> list[Rashi]:
+        """Get own signs from JSON rules."""
+        rulerships = self.shadbala_rules.get("planet_rulerships", {})
+        planet_data = rulerships.get(planet.value, {})
+        sign_names = planet_data.get("own_signs", [])
+
+        result = []
+        for name in sign_names:
+            try:
+                result.append(Rashi[name.upper()])
+            except KeyError:
+                continue
+        return result
+
+    def _get_friends(self, planet: Planet) -> list[Planet]:
+        """Get friendly planets from JSON rules."""
+        relations = self.shadbala_rules.get("friend_enemy_relations", {})
+        planet_data = relations.get(planet.value, {})
+        friend_names = planet_data.get("friends", [])
+
+        result = []
+        for name in friend_names:
+            if name == "none":
+                continue
+            try:
+                result.append(Planet[name.upper()])
+            except KeyError:
+                continue
+        return result
+
+    def _get_ashtakavarga_points(self, planet: Planet) -> dict[str, list[int]]:
+        """Get ashtakavarga contribution points from JSON rules."""
+        av_rules = self.ashtakavarga_rules
+        planet_key = planet.value
+
+        # Get the contribution table for this planet
+        contributions = av_rules.get("planet_contributions", {}).get(planet_key, {})
+        return contributions if contributions else self._get_default_ashtakavarga(planet)
+
+    def _get_default_ashtakavarga(self, planet: Planet) -> dict[str, list[int]]:
+        """Fallback ashtakavarga points if not in JSON."""
+        # Classic BPHS-based defaults
+        defaults = {
+            Planet.SUN: {
+                "sun": [1, 2, 4, 7, 8, 9, 10, 11],
+                "moon": [3, 6, 10, 11],
+                "mars": [1, 2, 4, 7, 8, 9, 10, 11],
+                "mercury": [3, 5, 6, 9, 10, 11, 12],
+                "jupiter": [5, 6, 9, 11],
+                "venus": [6, 7, 12],
+                "saturn": [1, 2, 4, 7, 8, 9, 10, 11],
+                "lagna": [3, 4, 6, 10, 11, 12],
+            },
+            Planet.MOON: {
+                "sun": [3, 6, 11],
+                "moon": [3, 6, 10, 11],
+                "mars": [6, 3, 11],
+                "mercury": [4, 8, 12],
+                "jupiter": [5, 9, 12],
+                "venus": [4, 8, 12],
+                "saturn": [2, 4, 8, 12],
+                "lagna": [4, 8, 12],
+            },
+            Planet.MARS: {
+                "sun": [1, 2, 4, 7, 8, 9, 10, 11],
+                "moon": [3, 6, 10, 11],
+                "mars": [1, 2, 4, 7, 8, 9, 10, 11],
+                "mercury": [3, 5, 6, 9, 10, 11, 12],
+                "jupiter": [5, 6, 9, 11],
+                "venus": [6, 7, 12],
+                "saturn": [1, 2, 4, 7, 8, 9, 10, 11],
+                "lagna": [3, 6, 11],
+            },
+            Planet.MERCURY: {
+                "sun": [3, 5, 6, 9, 10, 11, 12],
+                "moon": [4, 8, 12],
+                "mars": [3, 5, 6, 9, 10, 11, 12],
+                "mercury": [3, 5, 6, 9, 10, 11, 12],
+                "jupiter": [4, 5, 8, 9, 12],
+                "venus": [3, 5, 6, 9, 10, 11, 12],
+                "saturn": [3, 5, 6, 9, 10, 11, 12],
+                "lagna": [3, 5, 6, 9, 10, 11, 12],
+            },
+            Planet.JUPITER: {
+                "sun": [5, 6, 9, 11],
+                "moon": [5, 9, 12],
+                "mars": [5, 6, 9, 11],
+                "mercury": [4, 5, 8, 9, 12],
+                "jupiter": [5, 6, 9, 11],
+                "venus": [5, 9, 12],
+                "saturn": [5, 9, 12],
+                "lagna": [5, 9, 12],
+            },
+            Planet.VENUS: {
+                "sun": [6, 7, 12],
+                "moon": [4, 8, 12],
+                "mars": [6, 7, 12],
+                "mercury": [3, 5, 6, 9, 10, 11, 12],
+                "jupiter": [5, 9, 12],
+                "venus": [6, 7, 12],
+                "saturn": [3, 5, 6, 9, 10, 11, 12],
+                "lagna": [1, 2, 12],
+            },
+            Planet.SATURN: {
+                "sun": [1, 2, 4, 7, 8, 9, 10, 11],
+                "moon": [2, 4, 8, 12],
+                "mars": [1, 2, 4, 7, 8, 9, 10, 11],
+                "mercury": [3, 5, 6, 9, 10, 11, 12],
+                "jupiter": [5, 9, 12],
+                "venus": [3, 5, 6, 9, 10, 11, 12],
+                "saturn": [1, 2, 4, 7, 8, 9, 10, 11],
+                "lagna": [3, 6, 11],
+            },
+        }
+        return defaults.get(planet, {})
+
+    def calculate_shadbala(self, planet: Planet, chart: BirthChart) -> dict:
         """Calculate complete Shadbala (six-fold strength) for a planet.
 
         Args:
@@ -222,7 +264,7 @@ class StrengthCalculator:
         dig_bala = self._calc_dig_bala(planet, pos, chart)
         kala_bala = self._calc_kala_bala(planet, pos, chart)
         chesta_bala = self._calc_chesta_bala(pos)
-        naisargika_bala = self.NAISARGIKA_BALA.get(planet, 0.0)
+        naisargika_bala = self._get_naisargika_bala(planet)
         drik_bala = self._calc_drik_bala(planet, chart)
 
         components = {
@@ -244,7 +286,7 @@ class StrengthCalculator:
             "strength_rating": self._get_strength_rating(total),
         }
 
-    def _calc_sthana_bala(self, planet: Planet, pos: PlanetPosition, chart: BirthChart) -> float:
+    def _calc_sthana_bala(self, planet: Planet, pos: PlanetPosition, _chart: BirthChart) -> float:
         """Calculate Sthana Bala (positional strength).
 
         Components:
@@ -264,10 +306,10 @@ class StrengthCalculator:
 
     def _calc_uchcha_bala(self, planet: Planet, rashi: Rashi, rashi_degree: float) -> float:
         """Calculate Uchcha Bala (exaltation strength, 0-60 virupas)."""
-        if planet not in self.EXALTATION_POINTS:
-            return 30.0  # Default for unknown planets
+        exalt_rashi, exalt_deg = self._get_exaltation_point(planet)
 
-        exalt_rashi, exalt_deg = self.EXALTATION_POINTS[planet]
+        if exalt_rashi is None:
+            return 30.0  # Default for unknown planets
 
         # If planet is in exaltation sign, calculate strength based on degree
         if rashi == exalt_rashi:
@@ -278,9 +320,7 @@ class StrengthCalculator:
             return max(0.0, min(60.0, strength))
 
         # Check debilitation sign (opposite of exaltation)
-        debil_rashi, debil_deg = self.DEBILITATION_POINTS.get(
-            planet, (None, None)
-        )
+        debil_rashi, debil_deg = self._get_debilitation_point(planet)
         if rashi == debil_rashi and debil_rashi is not None:
             distance = fabs(rashi_degree - debil_deg)
             strength = -60.0 * (1.0 - (distance / 30.0))
@@ -299,12 +339,13 @@ class StrengthCalculator:
         base_strength = 10.0
 
         # If in own sign, add bonus
-        if rashi in self.OWN_SIGNS.get(planet, []):
+        own_signs = self._get_own_signs(planet)
+        if rashi in own_signs:
             base_strength += 5.0
 
         return base_strength
 
-    def _calc_ojhayugma_bala(self, planet: Planet, rashi: Rashi) -> float:
+    def _calc_ojhayugma_bala(self, _planet: Planet, rashi: Rashi) -> float:
         """Calculate Ojhayugmarasyamsa Bala (odd/even sign placement).
 
         Measures planet's strength in odd vs even signs.
@@ -333,7 +374,7 @@ class StrengthCalculator:
         else:  # house in [3, 6, 9, 12]
             return 15.0  # Apoklima (cadent)
 
-    def _calc_drekkana_bala(self, rashi_degree: float) -> float:
+    def _calc_drekkana_bala(self, _rashi_degree: float) -> float:
         """Calculate Drekkana Bala (decanate placement).
 
         Each sign is divided into 3 decanates (10° each).
@@ -342,7 +383,7 @@ class StrengthCalculator:
         # Simplified: 10 points for favorable decanate placement
         return 10.0
 
-    def _calc_dig_bala(self, planet: Planet, pos: PlanetPosition, chart: BirthChart) -> float:
+    def _calc_dig_bala(self, planet: Planet, pos: PlanetPosition, _chart: BirthChart) -> float:
         """Calculate Dig Bala (directional strength, 0-60 virupas).
 
         Each planet is strongest in a particular direction/house:
@@ -353,10 +394,7 @@ class StrengthCalculator:
 
         Formula: 60 - (distance_from_strong_house * 60/180)
         """
-        if planet not in self.DIG_BALA_HOUSES:
-            return 0.0
-
-        strong_house = self.DIG_BALA_HOUSES[planet]
+        strong_house = self._get_dig_bala_house(planet)
         actual_house = pos.house
 
         # Calculate shortest distance between houses (considering circular nature)
@@ -415,7 +453,7 @@ class StrengthCalculator:
             else:
                 return 10.0
 
-    def _calc_paksha_bala(self, planet: Planet, chart: BirthChart) -> float:
+    def _calc_paksha_bala(self, _planet: Planet, _chart: BirthChart) -> float:
         """Lunar phase strength (Paksha Bala).
 
         Moon is strong during waxing phase (Shukla Paksha).
@@ -425,7 +463,7 @@ class StrengthCalculator:
         # Full implementation requires Tithi calculation
         return 10.0
 
-    def _calc_ayana_bala(self, latitude: float) -> float:
+    def _calc_ayana_bala(self, _latitude: float) -> float:
         """Declination strength (Ayana Bala).
 
         Based on the declination of the planet.
@@ -500,9 +538,7 @@ class StrengthCalculator:
         else:
             return "very_weak"
 
-    def calculate_ashtakavarga(
-        self, planet: Planet, chart: BirthChart
-    ) -> List[int]:
+    def calculate_ashtakavarga(self, planet: Planet, chart: BirthChart) -> list[int]:
         """Calculate Ashtakavarga for a planet (bindus in each sign).
 
         Ashtakavarga measures a planet's strength in each of the 12 signs
@@ -517,10 +553,9 @@ class StrengthCalculator:
         """
         bindus = [0] * 12
 
-        if planet not in self.ASHTAKAVARGA_POINTS:
+        planet_data = self._get_ashtakavarga_points(planet)
+        if not planet_data:
             return bindus
-
-        planet_data = self.ASHTAKAVARGA_POINTS[planet]
 
         # Calculate contribution from each reference point
         references = {
@@ -554,7 +589,7 @@ class StrengthCalculator:
 
         return bindus
 
-    def calculate_sarvashtakavarga(self, chart: BirthChart) -> List[int]:
+    def calculate_sarvashtakavarga(self, chart: BirthChart) -> list[int]:
         """Calculate Sarvashtakavarga (SAV) - total bindus for each sign.
 
         This is the sum of Ashtakavarga from all 7 planets.
@@ -601,20 +636,19 @@ class StrengthCalculator:
             Dignity string
         """
         # Check exaltation
-        if planet in self.EXALTATION_POINTS:
-            exalt_rashi, _ = self.EXALTATION_POINTS[planet]
-            if sign == exalt_rashi:
-                return "exalted"
+        exalt_rashi, _ = self._get_exaltation_point(planet)
+        if exalt_rashi and sign == exalt_rashi:
+            return "exalted"
 
         # Check own sign
-        if sign in self.OWN_SIGNS.get(planet, []):
+        own_signs = self._get_own_signs(planet)
+        if sign in own_signs:
             return "own"
 
         # Check debilitation
-        if planet in self.DEBILITATION_POINTS:
-            debil_rashi, _ = self.DEBILITATION_POINTS[planet]
-            if sign == debil_rashi:
-                return "debilitated"
+        debil_rashi, _ = self._get_debilitation_point(planet)
+        if debil_rashi and sign == debil_rashi:
+            return "debilitated"
 
         # Determine sign ruler (simplified)
         sign_rulers = {
@@ -635,18 +669,20 @@ class StrengthCalculator:
         sign_ruler = sign_rulers.get(sign)
 
         # Check if planet is friendly with sign ruler
-        if sign_ruler and sign_ruler in self.FRIENDS.get(planet, []):
+        friends = self._get_friends(planet)
+        if sign_ruler and sign_ruler in friends:
             return "friendly"
 
         # Check if planet is enemy with sign ruler
-        if sign_ruler and sign_ruler not in self.FRIENDS.get(planet, []):
+        if sign_ruler and sign_ruler not in friends:
             # Check if they are mutual enemies
-            if planet not in self.FRIENDS.get(sign_ruler, []):
+            ruler_friends = self._get_friends(sign_ruler)
+            if planet not in ruler_friends:
                 return "enemy"
 
         return "neutral"
 
-    def get_all_planet_strengths(self, chart: BirthChart) -> Dict[str, Dict]:
+    def get_all_planet_strengths(self, chart: BirthChart) -> dict[str, dict]:
         """Calculate Shadbala for all planets in the chart.
 
         Args:
@@ -669,13 +705,11 @@ class StrengthCalculator:
             Planet.KETU,
         ]:
             if planet in chart.planets:
-                strengths[planet.value] = self.calculate_shadbala(
-                    planet, chart
-                )
+                strengths[planet.value] = self.calculate_shadbala(planet, chart)
 
         return strengths
 
-    def analyze_strength_profile(self, chart: BirthChart) -> Dict:
+    def analyze_strength_profile(self, chart: BirthChart) -> dict:
         """Analyze overall strength profile of the chart.
 
         Returns a comprehensive analysis of planetary strengths.
@@ -689,30 +723,14 @@ class StrengthCalculator:
         all_strengths = self.get_all_planet_strengths(chart)
 
         # Find strongest and weakest planets
-        planet_totals = {
-            name: data["total"] for name, data in all_strengths.items()
-        }
-        strongest = max(
-            planet_totals.items(), key=lambda x: x[1]
-        )
+        planet_totals = {name: data["total"] for name, data in all_strengths.items()}
+        strongest = max(planet_totals.items(), key=lambda x: x[1])
         weakest = min(planet_totals.items(), key=lambda x: x[1])
 
         # Count planets in each strength category
-        very_strong = sum(
-            1
-            for p in all_strengths.values()
-            if p["is_strong"] and p["total"] >= 360
-        )
-        strong = sum(
-            1
-            for p in all_strengths.values()
-            if p["is_strong"] and p["total"] < 360
-        )
-        weak = sum(
-            1
-            for p in all_strengths.values()
-            if not p["is_strong"]
-        )
+        very_strong = sum(1 for p in all_strengths.values() if p["is_strong"] and p["total"] >= 360)
+        strong = sum(1 for p in all_strengths.values() if p["is_strong"] and p["total"] < 360)
+        weak = sum(1 for p in all_strengths.values() if not p["is_strong"])
 
         sav = self.calculate_sarvashtakavarga(chart)
         avg_sav = sum(sav) / 12 if sav else 0
@@ -728,12 +746,10 @@ class StrengthCalculator:
             "weak_count": weak,
             "sarvashtakavarga": sav,
             "average_sav": round(avg_sav, 2),
-            "chart_strength_level": self._get_chart_strength_level(
-                all_strengths
-            ),
+            "chart_strength_level": self._get_chart_strength_level(all_strengths),
         }
 
-    def _get_chart_strength_level(self, all_strengths: Dict) -> str:
+    def _get_chart_strength_level(self, all_strengths: dict) -> str:
         """Determine overall chart strength level."""
         totals = [p["total"] for p in all_strengths.values()]
         avg_total = sum(totals) / len(totals) if totals else 0
