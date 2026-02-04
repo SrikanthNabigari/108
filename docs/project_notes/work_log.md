@@ -1,5 +1,94 @@
 # 108 Work Log
 
+## 2026-02-04 (Session 8 - Claude Cowork)
+
+### Summary
+Massive expansion of Jyotish knowledge base from classical texts. Created 522 yogas and 55 doshas.
+
+### Knowledge Expansion Completed
+
+| Before | After | Source Texts |
+|--------|-------|--------------|
+| 8 yogas | **522 yogas** | BPHS, Phaladeepika, Brihat Jataka, Saravali, Jataka Parijata, Uttara Kalamrita |
+| 7 doshas | **55 doshas** | BPHS, Phaladeepika, Traditional |
+
+### Yoga Categories (522 total)
+| Category | Count |
+|----------|-------|
+| special | 200 |
+| raja | 71 |
+| arishta | 54 |
+| dhana | 47 |
+| parivartana | 33 |
+| nakshatra | 27 |
+| chandra | 23 |
+| nabhas | 18 |
+| surya | 14 |
+| viparita_raja | 7 |
+| daridra | 7 |
+| pancha_mahapurusha | 5 |
+| neecha_bhanga | 5 |
+| dasha | 5 |
+| sanyasa | 3 |
+| transit | 3 |
+
+### Dosha Categories (55 total)
+- **graha** (17): Mangal, Kaal Sarp (12 types), Pitra, Grahan, Guru Chandal, etc.
+- **bhava** (11): Putra, Vivah, Dhan, Karma, Arogya, etc.
+- **nakshatra** (4): Nadi, Bhakoot, Gana, Gandmool
+- **yoga_dosha** (6): Shrapit, Chandra Grahan, Surya Grahan, Duryoga, etc.
+- **muhurta** (2): Amavasya, Purnima-related
+
+### New Files Created
+| File | Size | Content |
+|------|------|---------|
+| `knowledge/rules/yoga_detection_expanded.json` | 70KB | Part 1 - 98 yogas |
+| `knowledge/rules/yoga_detection_part2.json` | 40KB | Part 2 - 56 yogas |
+| `knowledge/rules/yoga_detection_part3.json` | 30KB | Part 3 - 46 yogas |
+| `knowledge/rules/yoga_detection_part4.json` | 29KB | Part 4 - 56 yogas |
+| `knowledge/rules/yoga_detection_part5.json` | 34KB | Part 5 - 91 yogas |
+| `knowledge/rules/yoga_detection_part6.json` | 31KB | Part 6 - 88 yogas |
+| `knowledge/rules/yoga_detection_part7.json` | 21KB | Part 7 - 87 yogas |
+| `knowledge/rules/yoga_master.json` | **307KB** | All 522 yogas consolidated |
+| `knowledge/rules/dosha_detection_expanded.json` | 38KB | 55 doshas |
+| `knowledge/rules/dosha_master.json` | **41KB** | 55 doshas consolidated |
+| `scripts/consolidate_knowledge.py` | 2KB | Merge script |
+
+### Files Modified (Source Code)
+| File | Change |
+|------|--------|
+| `services/mcp/knowledge_server.py` | Load from `yoga_master.json` and `dosha_master.json` |
+| `packages/self/src/yoga_detector.py` | Load from `yoga_master.json` |
+
+---
+
+### 🔧 TASKS FOR CLAUDE CODE (Server/Docker)
+
+**Priority: Restart MCP servers to load new knowledge**
+
+1. **Restart MCP Knowledge Server**
+   - The knowledge_server.py now points to master files
+   - Requires restart to clear cache and load 522 yogas + 55 doshas
+   ```bash
+   # Restart MCP servers (method depends on setup)
+   # Option 1: If using Claude Desktop, restart the app
+   # Option 2: If running manually, kill and restart python processes
+   ```
+
+2. **Verify New Knowledge Loading**
+   ```bash
+   # Test via MCP tool
+   # list_all("yogas") should return count: 522
+   # list_all("doshas") should return count: 55
+   ```
+
+3. **Optional: Update patterns_server.py**
+   - The `detect_yogas` MCP tool uses `YogaDetector` class
+   - Already updated to use `yoga_master.json`
+   - May need docker container restart if running in container
+
+---
+
 ## 2026-02-04 (Session 7 - Claude Code)
 
 ### Summary

@@ -1,0 +1,231 @@
+{
+  "version": "1.0",
+  "description": "Complete planetary dignities database for Vedic astrology (Jyotish). Single source of truth for dignity calculations.",
+  "planets": {
+    "sun": {
+      "name": "Sun",
+      "symbol": "☉",
+      "own_signs": ["leo"],
+      "exaltation": {
+        "sign": "aries",
+        "degree": 10,
+        "orb": 5
+      },
+      "debilitation": {
+        "sign": "libra",
+        "degree": 10,
+        "orb": 5
+      },
+      "moolatrikona": {
+        "sign": "leo",
+        "start_degree": 0,
+        "end_degree": 20
+      },
+      "combustion_distance": null,
+      "notes": "Sun cannot be combusted (it is the source of combustion). Natural significator of soul, vitality, authority."
+    },
+    "moon": {
+      "name": "Moon",
+      "symbol": "☽",
+      "own_signs": ["cancer"],
+      "exaltation": {
+        "sign": "taurus",
+        "degree": 3,
+        "orb": 5
+      },
+      "debilitation": {
+        "sign": "scorpio",
+        "degree": 3,
+        "orb": 5
+      },
+      "moolatrikona": {
+        "sign": "taurus",
+        "start_degree": 3,
+        "end_degree": 30
+      },
+      "combustion_distance": 12,
+      "notes": "Fastest moving planet. Natural significator of mind, emotions, motherhood. Combustion affects emotional clarity."
+    },
+    "mars": {
+      "name": "Mars",
+      "symbol": "♂",
+      "own_signs": ["aries", "scorpio"],
+      "exaltation": {
+        "sign": "capricorn",
+        "degree": 28,
+        "orb": 5
+      },
+      "debilitation": {
+        "sign": "cancer",
+        "degree": 28,
+        "orb": 5
+      },
+      "moolatrikona": {
+        "sign": "aries",
+        "start_degree": 0,
+        "end_degree": 12
+      },
+      "combustion_distance": 17,
+      "notes": "Significator of courage, action, conflict, passion. Combustion reduces assertiveness and courage."
+    },
+    "mercury": {
+      "name": "Mercury",
+      "symbol": "☿",
+      "own_signs": ["gemini", "virgo"],
+      "exaltation": {
+        "sign": "virgo",
+        "degree": 15,
+        "orb": 5
+      },
+      "debilitation": {
+        "sign": "pisces",
+        "degree": 15,
+        "orb": 5
+      },
+      "moolatrikona": {
+        "sign": "virgo",
+        "start_degree": 15,
+        "end_degree": 20
+      },
+      "combustion_distance": 14,
+      "combustion_retrograde_distance": 12,
+      "notes": "Significator of intellect, communication, commerce. Combustion affects clarity of thought and expression. Different orb when retrograde."
+    },
+    "jupiter": {
+      "name": "Jupiter",
+      "symbol": "♃",
+      "own_signs": ["sagittarius", "pisces"],
+      "exaltation": {
+        "sign": "cancer",
+        "degree": 5,
+        "orb": 5
+      },
+      "debilitation": {
+        "sign": "capricorn",
+        "degree": 5,
+        "orb": 5
+      },
+      "moolatrikona": {
+        "sign": "sagittarius",
+        "start_degree": 0,
+        "end_degree": 10
+      },
+      "combustion_distance": 11,
+      "notes": "Significator of wisdom, prosperity, fortune, spirituality. Combustion diminishes benefic influence and luck."
+    },
+    "venus": {
+      "name": "Venus",
+      "symbol": "♀",
+      "own_signs": ["taurus", "libra"],
+      "exaltation": {
+        "sign": "pisces",
+        "degree": 27,
+        "orb": 5
+      },
+      "debilitation": {
+        "sign": "virgo",
+        "degree": 27,
+        "orb": 5
+      },
+      "moolatrikona": {
+        "sign": "libra",
+        "start_degree": 0,
+        "end_degree": 15
+      },
+      "combustion_distance": 10,
+      "combustion_retrograde_distance": 8,
+      "notes": "Significator of love, beauty, luxury, relationships. Combustion affects relationships and aesthetic sensibilities. Different orb when retrograde."
+    },
+    "saturn": {
+      "name": "Saturn",
+      "symbol": "♄",
+      "own_signs": ["capricorn", "aquarius"],
+      "exaltation": {
+        "sign": "libra",
+        "degree": 20,
+        "orb": 5
+      },
+      "debilitation": {
+        "sign": "aries",
+        "degree": 20,
+        "orb": 5
+      },
+      "moolatrikona": {
+        "sign": "aquarius",
+        "start_degree": 0,
+        "end_degree": 20
+      },
+      "combustion_distance": 15,
+      "notes": "Significator of discipline, karma, limitation, age. Combustion weakens Saturn's stabilizing and learning influences."
+    },
+    "rahu": {
+      "name": "Rahu",
+      "symbol": "☊",
+      "own_signs": [],
+      "exaltation": {
+        "sign": "taurus",
+        "degree": null,
+        "orb": 5
+      },
+      "exaltation_secondary": {
+        "sign": "gemini",
+        "degree": null,
+        "orb": 5
+      },
+      "debilitation": {
+        "sign": "scorpio",
+        "degree": null,
+        "orb": 5
+      },
+      "debilitation_secondary": {
+        "sign": "sagittarius",
+        "degree": null,
+        "orb": 5
+      },
+      "moolatrikona": null,
+      "combustion_distance": null,
+      "notes": "Shadow planet (lunar node). No traditional own signs. Exalted in Taurus or Gemini depending on tradition. Debilitated in Scorpio or Sagittarius. No combustion as shadow body."
+    },
+    "ketu": {
+      "name": "Ketu",
+      "symbol": "☋",
+      "own_signs": [],
+      "exaltation": {
+        "sign": "scorpio",
+        "degree": null,
+        "orb": 5
+      },
+      "debilitation": {
+        "sign": "taurus",
+        "degree": null,
+        "orb": 5
+      },
+      "moolatrikona": null,
+      "combustion_distance": null,
+      "notes": "Shadow planet (lunar node, opposite Rahu). No traditional own signs. Exalted in Scorpio, debilitated in Taurus. No combustion as shadow body. Represents dissipation, spirituality, past-life karma."
+    }
+  },
+  "sources": {
+    "primary": "Brihat Parashara Hora Shastra (BPHS) - Classical Jyotish text",
+    "exaltation_orbs": "5 degrees standard (some traditions use 3-8 degrees)",
+    "combustion": "Based on heliacal rising/setting cycles and Sun's angular distance"
+  },
+  "dignity_ranks": {
+    "1_exalted": "Planet in exaltation sign at or near exact degree",
+    "2_own_sign": "Planet in own sign",
+    "3_moolatrikona": "Planet in moolatrikona region (special portion of own sign)",
+    "4_friendly_sign": "Planet in sign of friendly planet",
+    "5_neutral_sign": "Planet in sign of neutral planet",
+    "6_enemy_sign": "Planet in sign of enemy planet",
+    "7_debilitated": "Planet in debilitation sign at or near exact degree",
+    "8_combusted": "Planet too close to Sun (specific distance threshold)"
+  },
+  "computation_notes": {
+    "exaltation_orb": "Typically 5 degrees from exact degree, though some use 3-8 degrees depending on tradition",
+    "debilitation": "Works inversely to exaltation - planet is weak in these conditions",
+    "moolatrikona": "Considered intermediate dignity - stronger than friendly/neutral but weaker than exaltation",
+    "combustion": "Occurs when planet is within combustion distance of Sun. Effect varies by planet.",
+    "retrograde_combustion": "Mercury and Venus have different combustion orbs when retrograde",
+    "shadow_planets": "Rahu and Ketu have no combustion and their dignity calculation is less precise than classical planets"
+  }
+}

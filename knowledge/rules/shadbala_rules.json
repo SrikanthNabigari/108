@@ -1,0 +1,609 @@
+{
+  "shadbala_rules": {
+    "description": "Complete Shadbala (Six-fold Strength) rules from BPHS Chapter 27",
+    "total_max_virupas": 360,
+    "components": {
+      "sthana_bala": {
+        "name": "Positional Strength",
+        "max_virupas": 180,
+        "description": "Strength derived from planetary position in signs, houses, and divisional charts",
+        "sub_components": {
+          "uchcha_bala": {
+            "name": "Exaltation Strength",
+            "max_virupas": 60,
+            "description": "Strength from exalted position in rashi chart",
+            "calculation": "Planet position relative to exaltation point",
+            "rules": {
+              "sun": {
+                "exaltation_point": 10,
+                "exaltation_rashi": "aries",
+                "debilitation_point": 190,
+                "debilitation_rashi": "libra"
+              },
+              "moon": {
+                "exaltation_point": 33,
+                "exaltation_rashi": "taurus",
+                "debilitation_point": 213,
+                "debilitation_rashi": "scorpio"
+              },
+              "mars": {
+                "exaltation_point": 298,
+                "exaltation_rashi": "capricorn",
+                "debilitation_point": 118,
+                "debilitation_rashi": "cancer"
+              },
+              "mercury": {
+                "exaltation_point": 165,
+                "exaltation_rashi": "virgo",
+                "debilitation_point": 345,
+                "debilitation_rashi": "pisces"
+              },
+              "jupiter": {
+                "exaltation_point": 95,
+                "exaltation_rashi": "cancer",
+                "debilitation_point": 275,
+                "debilitation_rashi": "capricorn"
+              },
+              "venus": {
+                "exaltation_point": 357,
+                "exaltation_rashi": "pisces",
+                "debilitation_point": 177,
+                "debilitation_rashi": "virgo"
+              },
+              "saturn": {
+                "exaltation_point": 200,
+                "exaltation_rashi": "libra",
+                "debilitation_point": 20,
+                "debilitation_rashi": "aries"
+              },
+              "rahu": {
+                "exaltation_point": 20,
+                "exaltation_rashi": "taurus",
+                "debilitation_point": 200,
+                "debilitation_rashi": "scorpio"
+              },
+              "ketu": {
+                "exaltation_point": 200,
+                "exaltation_rashi": "scorpio",
+                "debilitation_point": 20,
+                "debilitation_rashi": "taurus"
+              }
+            }
+          },
+          "saptavargaja_bala": {
+            "name": "Seven-Varga Strength",
+            "max_virupas": 60,
+            "description": "Strength from favorable positions in 7 divisional charts",
+            "vargas": {
+              "D1": {
+                "name": "Rashi Chart",
+                "weight": 5
+              },
+              "D2": {
+                "name": "Hora Chart",
+                "weight": 2
+              },
+              "D3": {
+                "name": "Drekkana Chart",
+                "weight": 3
+              },
+              "D9": {
+                "name": "Navamsha Chart",
+                "weight": 9
+              },
+              "D12": {
+                "name": "Dwadasamsha Chart",
+                "weight": 2
+              },
+              "D30": {
+                "name": "Trimshamsha Chart",
+                "weight": 4
+              },
+              "D7": {
+                "name": "Saptamsha Chart",
+                "weight": 2.5
+              }
+            },
+            "own_sign_values": {
+              "sun": 30,
+              "moon": 30,
+              "mars": 30,
+              "mercury": 30,
+              "jupiter": 30,
+              "venus": 30,
+              "saturn": 30,
+              "rahu": 30,
+              "ketu": 30
+            },
+            "exalted_sign_values": {
+              "sun": 60,
+              "moon": 60,
+              "mars": 60,
+              "mercury": 60,
+              "jupiter": 60,
+              "venus": 60,
+              "saturn": 60,
+              "rahu": 60,
+              "ketu": 60
+            },
+            "friendly_sign_values": {
+              "sun": 15,
+              "moon": 15,
+              "mars": 15,
+              "mercury": 15,
+              "jupiter": 15,
+              "venus": 15,
+              "saturn": 15,
+              "rahu": 15,
+              "ketu": 15
+            },
+            "neutral_sign_values": {
+              "sun": 7.5,
+              "moon": 7.5,
+              "mars": 7.5,
+              "mercury": 7.5,
+              "jupiter": 7.5,
+              "venus": 7.5,
+              "saturn": 7.5,
+              "rahu": 7.5,
+              "ketu": 7.5
+            },
+            "enemy_sign_values": {
+              "sun": 0,
+              "moon": 0,
+              "mars": 0,
+              "mercury": 0,
+              "jupiter": 0,
+              "venus": 0,
+              "saturn": 0,
+              "rahu": 0,
+              "ketu": 0
+            }
+          },
+          "ojhayugma_bala": {
+            "name": "Odd/Even Strength",
+            "max_virupas": 15,
+            "description": "Strength from odd/even rashi positions",
+            "rules": {
+              "sun": "strong_in_odd_rashi",
+              "moon": "strong_in_even_rashi",
+              "mars": "strong_in_odd_rashi",
+              "mercury": "strong_in_even_rashi",
+              "jupiter": "strong_in_odd_rashi",
+              "venus": "strong_in_even_rashi",
+              "saturn": "strong_in_even_rashi",
+              "rahu": "strong_in_odd_rashi",
+              "ketu": "strong_in_even_rashi"
+            }
+          },
+          "kendradi_bala": {
+            "name": "Angular Strength",
+            "max_virupas": 60,
+            "description": "Strength from house position",
+            "house_values": {
+              "kendra": {
+                "houses": [1, 4, 7, 10],
+                "virupas": 60
+              },
+              "panapara": {
+                "houses": [2, 5, 8, 11],
+                "virupas": 30
+              },
+              "apoklima": {
+                "houses": [3, 6, 9, 12],
+                "virupas": 15
+              }
+            }
+          },
+          "drekkana_bala": {
+            "name": "Decanate Strength",
+            "max_virupas": 15,
+            "description": "Strength from decanate (drekkana) position within sign",
+            "rules": {
+              "first_drekkana": {
+                "degrees": "0-10",
+                "value": 15
+              },
+              "second_drekkana": {
+                "degrees": "10-20",
+                "value": 10
+              },
+              "third_drekkana": {
+                "degrees": "20-30",
+                "value": 5
+              }
+            }
+          }
+        }
+      },
+      "dig_bala": {
+        "name": "Directional Strength",
+        "max_virupas": 60,
+        "description": "Strength from favorable angular positions (quadrants)",
+        "directions": {
+          "east": {
+            "angle": 0,
+            "strong_planets": ["mercury", "jupiter"],
+            "houses": [1],
+            "max_at": 0
+          },
+          "south": {
+            "angle": 90,
+            "strong_planets": ["sun", "mars"],
+            "houses": [10],
+            "max_at": 90
+          },
+          "west": {
+            "angle": 180,
+            "strong_planets": ["saturn"],
+            "houses": [7],
+            "max_at": 180
+          },
+          "north": {
+            "angle": 270,
+            "strong_planets": ["moon", "venus"],
+            "houses": [4],
+            "max_at": 270
+          }
+        },
+        "calculation": "Based on house position and angular distance from strongest quadrant"
+      },
+      "kala_bala": {
+        "name": "Temporal Strength",
+        "max_virupas": 180,
+        "description": "Strength derived from time of birth and current time",
+        "sub_components": {
+          "nathonnatha_bala": {
+            "name": "Day/Night Strength",
+            "max_virupas": 30,
+            "description": "Planets are strong during their respective day or night",
+            "rules": {
+              "day_planets": {
+                "planets": ["sun", "jupiter", "venus"],
+                "strong_during": "daytime"
+              },
+              "night_planets": {
+                "planets": ["moon", "mars", "saturn"],
+                "strong_during": "nighttime"
+              },
+              "both_planets": {
+                "planets": ["mercury"],
+                "strong_during": "both"
+              }
+            }
+          },
+          "paksha_bala": {
+            "name": "Lunar Phase Strength",
+            "max_virupas": 30,
+            "description": "Waxing moon planets vs waning moon planets",
+            "rules": {
+              "waxing_moon": {
+                "planets": ["sun", "moon", "jupiter", "venus"],
+                "strong_during": "sukla_paksha",
+                "degrees_from_sun": "0-180"
+              },
+              "waning_moon": {
+                "planets": ["mars", "saturn"],
+                "strong_during": "krishna_paksha",
+                "degrees_from_sun": "180-360"
+              }
+            }
+          },
+          "tribhaga_bala": {
+            "name": "Day Thirds Strength",
+            "max_virupas": 30,
+            "description": "Strength based on which third of day the event occurs",
+            "thirds": {
+              "first_third": {
+                "planets": ["sun"],
+                "value": 30
+              },
+              "second_third": {
+                "planets": ["moon"],
+                "value": 30
+              },
+              "third_third": {
+                "planets": ["mars"],
+                "value": 30
+              }
+            }
+          },
+          "hora_bala": {
+            "name": "Hora (Hour) Strength",
+            "max_virupas": 15,
+            "description": "Based on planetary hours",
+            "calculation": "Planet is strong during its own hora"
+          },
+          "vara_bala": {
+            "name": "Weekday Strength",
+            "max_virupas": 15,
+            "description": "Planet is strong on its own weekday",
+            "weekdays": {
+              "sunday": "sun",
+              "monday": "moon",
+              "tuesday": "mars",
+              "wednesday": "mercury",
+              "thursday": "jupiter",
+              "friday": "venus",
+              "saturday": "saturn"
+            }
+          },
+          "masa_bala": {
+            "name": "Month Strength",
+            "max_virupas": 15,
+            "description": "Based on lunar months",
+            "calculation": "Different lunar months favor different planets"
+          },
+          "abda_bala": {
+            "name": "Year Strength",
+            "max_virupas": 15,
+            "description": "Based on birth year and current year",
+            "calculation": "Planetary strength varies by year and ayana"
+          },
+          "ayana_bala": {
+            "name": "Declination Strength",
+            "max_virupas": 30,
+            "description": "Based on sun's declination (uttarayana vs daksinayana)",
+            "rules": {
+              "uttarayana": {
+                "description": "Sun moving north (Jan 14 - Jul 14)",
+                "strong_planets": ["sun", "jupiter", "venus", "mercury"]
+              },
+              "daksinayana": {
+                "description": "Sun moving south (Jul 14 - Jan 14)",
+                "strong_planets": ["moon", "mars", "saturn"]
+              }
+            }
+          },
+          "yuddha_bala": {
+            "name": "Planetary War Strength",
+            "max_virupas": 0,
+            "description": "Winner of planetary war gains strength, loser loses strength",
+            "calculation": "Based on latitude difference and speed",
+            "rules": {
+              "within_conjunction": "Planets within 1 degree longitude",
+              "winner": "Planet moving faster gains yuddha bala",
+              "loser": "Planet moving slower loses strength"
+            }
+          }
+        }
+      },
+      "chesta_bala": {
+        "name": "Motional Strength",
+        "max_virupas": 60,
+        "description": "Strength from planet's motion (direct vs retrograde)",
+        "calculation": "Based on planet's speed relative to average",
+        "rules": {
+          "direct_motion": {
+            "description": "Planet moving forward in zodiac",
+            "value": "Based on excess speed"
+          },
+          "retrograde_motion": {
+            "description": "Planet moving backward in zodiac",
+            "value": "Loses strength"
+          },
+          "stationary": {
+            "description": "Planet at standstill (turning direct or retrograde)",
+            "value": "Zero strength"
+          }
+        },
+        "average_speeds": {
+          "sun": 1.0,
+          "moon": 13.2,
+          "mars": 0.52,
+          "mercury": 1.04,
+          "jupiter": 0.08,
+          "venus": 1.01,
+          "saturn": 0.03,
+          "rahu": -0.053,
+          "ketu": -0.053
+        }
+      },
+      "naisargika_bala": {
+        "name": "Natural Strength",
+        "max_virupas": 60,
+        "description": "Inherent strength of planets (fixed and immutable)",
+        "planet_values": {
+          "sun": 60,
+          "moon": 51.43,
+          "venus": 42.86,
+          "jupiter": 34.29,
+          "mercury": 25.71,
+          "mars": 17.14,
+          "saturn": 8.57,
+          "rahu": 8.57,
+          "ketu": 8.57
+        },
+        "notes": "These are fixed values that do not change. Natural strength reflects the innate power hierarchy of planets."
+      },
+      "drik_bala": {
+        "name": "Aspectual Strength",
+        "max_virupas": 60,
+        "description": "Strength from aspects and conjunctions with other planets",
+        "aspects": {
+          "conjunctions": {
+            "description": "Same sign or within orb",
+            "value_per_planet": "varies"
+          },
+          "full_aspects": {
+            "description": "Primary aspects (7th, 4th, 8th houses)",
+            "sun": [7],
+            "moon": [7],
+            "mars": [4, 8, 7],
+            "mercury": [7],
+            "jupiter": [5, 7, 9],
+            "venus": [7],
+            "saturn": [3, 7, 10],
+            "rahu": [5, 7, 9],
+            "ketu": [5, 7, 9]
+          },
+          "benefic_planets": ["sun", "moon", "jupiter", "venus", "mercury"],
+          "malefic_planets": ["mars", "saturn", "rahu", "ketu"],
+          "conjunction_strength": {
+            "benefic_with_planet": "Increases strength",
+            "malefic_with_planet": "May decrease strength",
+            "aspecting": "Based on aspect type and planetary nature"
+          }
+        },
+        "calculation": "Sum of all aspects received minus malefic influences"
+      }
+    },
+    "strength_categories": {
+      "very_strong": {
+        "min_virupas": 360,
+        "description": "Excellent positional strength"
+      },
+      "strong": {
+        "min_virupas": 240,
+        "max_virupas": 359,
+        "description": "Good positional strength"
+      },
+      "moderate": {
+        "min_virupas": 120,
+        "max_virupas": 239,
+        "description": "Average positional strength"
+      },
+      "weak": {
+        "min_virupas": 60,
+        "max_virupas": 119,
+        "description": "Below average strength"
+      },
+      "very_weak": {
+        "min_virupas": 0,
+        "max_virupas": 59,
+        "description": "Very poor strength"
+      }
+    },
+    "minimum_required_thresholds": {
+      "sun": {
+        "minimum_virupas": 180,
+        "description": "Sun should have at least 180 virupas to give favorable results"
+      },
+      "moon": {
+        "minimum_virupas": 180,
+        "description": "Moon should have at least 180 virupas for mental stability"
+      },
+      "mars": {
+        "minimum_virupas": 120,
+        "description": "Mars minimum threshold for positive energy"
+      },
+      "mercury": {
+        "minimum_virupas": 120,
+        "description": "Mercury minimum for intellectual faculties"
+      },
+      "jupiter": {
+        "minimum_virupas": 180,
+        "description": "Jupiter should be strong for good fortune"
+      },
+      "venus": {
+        "minimum_virupas": 150,
+        "description": "Venus minimum for relationships and wealth"
+      },
+      "saturn": {
+        "minimum_virupas": 120,
+        "description": "Saturn minimum for stability and longevity"
+      },
+      "rahu": {
+        "minimum_virupas": 100,
+        "description": "Rahu minimum to mitigate malefic effects"
+      },
+      "ketu": {
+        "minimum_virupas": 100,
+        "description": "Ketu minimum to reduce karmic challenges"
+      }
+    },
+    "planet_rulerships": {
+      "sun": {
+        "own_signs": ["leo"],
+        "exaltation": "aries",
+        "debilitation": "libra",
+        "mool_trikona": "leo"
+      },
+      "moon": {
+        "own_signs": ["cancer"],
+        "exaltation": "taurus",
+        "debilitation": "scorpio",
+        "mool_trikona": "cancer"
+      },
+      "mars": {
+        "own_signs": ["aries", "scorpio"],
+        "exaltation": "capricorn",
+        "debilitation": "cancer",
+        "mool_trikona": "aries"
+      },
+      "mercury": {
+        "own_signs": ["gemini", "virgo"],
+        "exaltation": "virgo",
+        "debilitation": "pisces",
+        "mool_trikona": "virgo"
+      },
+      "jupiter": {
+        "own_signs": ["sagittarius", "pisces"],
+        "exaltation": "cancer",
+        "debilitation": "capricorn",
+        "mool_trikona": "sagittarius"
+      },
+      "venus": {
+        "own_signs": ["taurus", "libra"],
+        "exaltation": "pisces",
+        "debilitation": "virgo",
+        "mool_trikona": "libra"
+      },
+      "saturn": {
+        "own_signs": ["capricorn", "aquarius"],
+        "exaltation": "libra",
+        "debilitation": "aries",
+        "mool_trikona": "aquarius"
+      },
+      "rahu": {
+        "exaltation": "taurus",
+        "debilitation": "scorpio",
+        "neutral_signs": "all_except_exalted_debilitated"
+      },
+      "ketu": {
+        "exaltation": "scorpio",
+        "debilitation": "taurus",
+        "neutral_signs": "all_except_exalted_debilitated"
+      }
+    },
+    "friend_enemy_relations": {
+      "sun": {
+        "friends": ["moon", "mars", "jupiter"],
+        "enemies": ["venus", "saturn"],
+        "neutral": ["mercury"]
+      },
+      "moon": {
+        "friends": ["sun", "mercury"],
+        "enemies": ["none"],
+        "neutral": ["mars", "jupiter", "venus", "saturn"]
+      },
+      "mars": {
+        "friends": ["sun", "moon", "jupiter"],
+        "enemies": ["mercury", "venus"],
+        "neutral": ["saturn"]
+      },
+      "mercury": {
+        "friends": ["sun", "venus"],
+        "enemies": ["moon", "mars"],
+        "neutral": ["jupiter", "saturn"]
+      },
+      "jupiter": {
+        "friends": ["sun", "moon", "mars"],
+        "enemies": ["mercury", "venus"],
+        "neutral": ["saturn"]
+      },
+      "venus": {
+        "friends": ["mercury", "saturn"],
+        "enemies": ["sun", "moon", "mars", "jupiter"],
+        "neutral": ["none"]
+      },
+      "saturn": {
+        "friends": ["mercury", "venus"],
+        "enemies": ["sun", "moon", "mars"],
+        "neutral": ["jupiter"]
+      }
+    },
+    "reference": "BPHS (Brihat Parashara Hora Shastra) Chapter 27 - Shadbala Calculation",
+    "last_updated": "2025-02-04"
+  }
+}

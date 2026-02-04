@@ -1,0 +1,1187 @@
+{
+  "metadata": {
+    "part": 2,
+    "description": "Additional yogas - Raja Yogas by Lagna, Nakshatra Yogas, More Special Yogas"
+  },
+  "yoga_rules": {
+    "raja_yoga_aries_lagna_mars_sun": {
+      "id": "raja_yoga_aries_lagna_mars_sun",
+      "name": "Raja Yoga for Aries Lagna (Mars-Sun)",
+      "sanskrit": "मेष लग्न राज योग",
+      "category": "raja",
+      "source": "BPHS",
+      "applicable_lagna": "aries",
+      "description": "For Aries lagna, Mars (1st lord) and Sun (5th lord) conjunction or mutual aspect creates powerful raja yoga.",
+      "detection": {
+        "lagna": "aries",
+        "conditions": [
+          {"type": "lords_conjunction_or_aspect", "lords": ["1st", "5th"]}
+        ]
+      },
+      "effects": [
+        "Leadership and authority",
+        "Government favor",
+        "Success in politics",
+        "Fame through courage"
+      ]
+    },
+    "raja_yoga_aries_lagna_mars_jupiter": {
+      "id": "raja_yoga_aries_lagna_mars_jupiter",
+      "name": "Raja Yoga for Aries Lagna (Mars-Jupiter)",
+      "sanskrit": "मेष लग्न राज योग",
+      "category": "raja",
+      "source": "BPHS",
+      "applicable_lagna": "aries",
+      "description": "For Aries lagna, Mars (1st lord) and Jupiter (9th lord) conjunction is extremely powerful raja yoga.",
+      "detection": {
+        "lagna": "aries",
+        "conditions": [
+          {"type": "lords_conjunction_or_aspect", "lords": ["1st", "9th"]}
+        ]
+      },
+      "effects": [
+        "Great fortune",
+        "Spiritual leadership",
+        "Wealth and fame",
+        "Father's blessings"
+      ]
+    },
+    "raja_yoga_taurus_lagna_venus_saturn": {
+      "id": "raja_yoga_taurus_lagna_venus_saturn",
+      "name": "Raja Yoga for Taurus Lagna (Venus-Saturn)",
+      "sanskrit": "वृषभ लग्न राज योग",
+      "category": "raja",
+      "source": "BPHS",
+      "applicable_lagna": "taurus",
+      "description": "For Taurus lagna, Venus (1st lord) and Saturn (9th, 10th lord) conjunction is yogakaraka combination.",
+      "detection": {
+        "lagna": "taurus",
+        "conditions": [
+          {"type": "lords_conjunction_or_aspect", "lords": ["1st", "9th"]}
+        ]
+      },
+      "effects": [
+        "Saturn as yogakaraka brings great success",
+        "Career and fortune aligned",
+        "Steady rise to power",
+        "Long-lasting achievements"
+      ]
+    },
+    "raja_yoga_gemini_lagna_mercury_venus": {
+      "id": "raja_yoga_gemini_lagna_mercury_venus",
+      "name": "Raja Yoga for Gemini Lagna (Mercury-Venus)",
+      "sanskrit": "मिथुन लग्न राज योग",
+      "category": "raja",
+      "source": "BPHS",
+      "applicable_lagna": "gemini",
+      "description": "For Gemini lagna, Mercury (1st lord) and Venus (5th lord) conjunction brings creative success.",
+      "detection": {
+        "lagna": "gemini",
+        "conditions": [
+          {"type": "lords_conjunction_or_aspect", "lords": ["1st", "5th"]}
+        ]
+      },
+      "effects": [
+        "Creative and artistic success",
+        "Good communication skills",
+        "Intelligent children",
+        "Success in entertainment"
+      ]
+    },
+    "raja_yoga_cancer_lagna_moon_mars": {
+      "id": "raja_yoga_cancer_lagna_moon_mars",
+      "name": "Raja Yoga for Cancer Lagna (Moon-Mars)",
+      "sanskrit": "कर्क लग्न राज योग",
+      "category": "raja",
+      "source": "BPHS",
+      "applicable_lagna": "cancer",
+      "description": "For Cancer lagna, Moon (1st lord) and Mars (5th, 10th lord - yogakaraka) conjunction is extremely powerful.",
+      "detection": {
+        "lagna": "cancer",
+        "conditions": [
+          {"type": "lords_conjunction_or_aspect", "lords": ["1st", "5th"]}
+        ]
+      },
+      "effects": [
+        "Mars as yogakaraka brings great success",
+        "Property and career success",
+        "Courage with emotional intelligence",
+        "Government positions"
+      ]
+    },
+    "raja_yoga_leo_lagna_sun_mars": {
+      "id": "raja_yoga_leo_lagna_sun_mars",
+      "name": "Raja Yoga for Leo Lagna (Sun-Mars)",
+      "sanskrit": "सिंह लग्न राज योग",
+      "category": "raja",
+      "source": "BPHS",
+      "applicable_lagna": "leo",
+      "description": "For Leo lagna, Sun (1st lord) and Mars (4th, 9th lord) conjunction brings property and fortune.",
+      "detection": {
+        "lagna": "leo",
+        "conditions": [
+          {"type": "lords_conjunction_or_aspect", "lords": ["1st", "9th"]}
+        ]
+      },
+      "effects": [
+        "Leadership and authority",
+        "Property acquisition",
+        "Fortune through courage",
+        "Father's blessings"
+      ]
+    },
+    "raja_yoga_virgo_lagna_mercury_venus": {
+      "id": "raja_yoga_virgo_lagna_mercury_venus",
+      "name": "Raja Yoga for Virgo Lagna (Mercury-Venus)",
+      "sanskrit": "कन्या लग्न राज योग",
+      "category": "raja",
+      "source": "BPHS",
+      "applicable_lagna": "virgo",
+      "description": "For Virgo lagna, Mercury (1st lord) and Venus (2nd, 9th lord) brings wealth and fortune.",
+      "detection": {
+        "lagna": "virgo",
+        "conditions": [
+          {"type": "lords_conjunction_or_aspect", "lords": ["1st", "9th"]}
+        ]
+      },
+      "effects": [
+        "Wealth through intelligence",
+        "Good speech and communication",
+        "Fortune in business",
+        "Artistic talents"
+      ]
+    },
+    "raja_yoga_libra_lagna_venus_saturn": {
+      "id": "raja_yoga_libra_lagna_venus_saturn",
+      "name": "Raja Yoga for Libra Lagna (Venus-Saturn)",
+      "sanskrit": "तुला लग्न राज योग",
+      "category": "raja",
+      "source": "BPHS",
+      "applicable_lagna": "libra",
+      "description": "For Libra lagna, Venus (1st lord) and Saturn (4th, 5th lord - yogakaraka) is extremely powerful.",
+      "detection": {
+        "lagna": "libra",
+        "conditions": [
+          {"type": "lords_conjunction_or_aspect", "lords": ["1st", "5th"]}
+        ]
+      },
+      "effects": [
+        "Saturn as yogakaraka brings lasting success",
+        "Property and intelligence",
+        "Disciplined approach",
+        "Success after patience"
+      ]
+    },
+    "raja_yoga_scorpio_lagna_mars_moon": {
+      "id": "raja_yoga_scorpio_lagna_mars_moon",
+      "name": "Raja Yoga for Scorpio Lagna (Mars-Moon)",
+      "sanskrit": "वृश्चिक लग्न राज योग",
+      "category": "raja",
+      "source": "BPHS",
+      "applicable_lagna": "scorpio",
+      "description": "For Scorpio lagna, Mars (1st lord) and Moon (9th lord) conjunction brings fortune and transformation.",
+      "detection": {
+        "lagna": "scorpio",
+        "conditions": [
+          {"type": "lords_conjunction_or_aspect", "lords": ["1st", "9th"]}
+        ]
+      },
+      "effects": [
+        "Deep fortune",
+        "Transformative success",
+        "Mother's blessings",
+        "Occult knowledge"
+      ]
+    },
+    "raja_yoga_sagittarius_lagna_jupiter_mars": {
+      "id": "raja_yoga_sagittarius_lagna_jupiter_mars",
+      "name": "Raja Yoga for Sagittarius Lagna (Jupiter-Mars)",
+      "sanskrit": "धनु लग्न राज योग",
+      "category": "raja",
+      "source": "BPHS",
+      "applicable_lagna": "sagittarius",
+      "description": "For Sagittarius lagna, Jupiter (1st lord) and Mars (5th lord) conjunction brings intelligence and success.",
+      "detection": {
+        "lagna": "sagittarius",
+        "conditions": [
+          {"type": "lords_conjunction_or_aspect", "lords": ["1st", "5th"]}
+        ]
+      },
+      "effects": [
+        "Wisdom and courage combined",
+        "Success in education",
+        "Good children",
+        "Speculative gains"
+      ]
+    },
+    "raja_yoga_capricorn_lagna_saturn_venus": {
+      "id": "raja_yoga_capricorn_lagna_saturn_venus",
+      "name": "Raja Yoga for Capricorn Lagna (Saturn-Venus)",
+      "sanskrit": "मकर लग्न राज योग",
+      "category": "raja",
+      "source": "BPHS",
+      "applicable_lagna": "capricorn",
+      "description": "For Capricorn lagna, Saturn (1st lord) and Venus (5th, 10th lord - yogakaraka) is extremely auspicious.",
+      "detection": {
+        "lagna": "capricorn",
+        "conditions": [
+          {"type": "lords_conjunction_or_aspect", "lords": ["1st", "5th"]}
+        ]
+      },
+      "effects": [
+        "Venus as yogakaraka brings luxury and success",
+        "Career and creativity aligned",
+        "Artistic career success",
+        "Beautiful spouse"
+      ]
+    },
+    "raja_yoga_aquarius_lagna_saturn_venus": {
+      "id": "raja_yoga_aquarius_lagna_saturn_venus",
+      "name": "Raja Yoga for Aquarius Lagna (Saturn-Venus)",
+      "sanskrit": "कुंभ लग्न राज योग",
+      "category": "raja",
+      "source": "BPHS",
+      "applicable_lagna": "aquarius",
+      "description": "For Aquarius lagna, Saturn (1st lord) and Venus (4th, 9th lord - yogakaraka) brings property and fortune.",
+      "detection": {
+        "lagna": "aquarius",
+        "conditions": [
+          {"type": "lords_conjunction_or_aspect", "lords": ["1st", "9th"]}
+        ]
+      },
+      "effects": [
+        "Venus as yogakaraka brings fortune",
+        "Property and vehicles",
+        "Artistic success",
+        "Happy home life"
+      ]
+    },
+    "raja_yoga_pisces_lagna_jupiter_mars": {
+      "id": "raja_yoga_pisces_lagna_jupiter_mars",
+      "name": "Raja Yoga for Pisces Lagna (Jupiter-Mars)",
+      "sanskrit": "मीन लग्न राज योग",
+      "category": "raja",
+      "source": "BPHS",
+      "applicable_lagna": "pisces",
+      "description": "For Pisces lagna, Jupiter (1st lord) and Mars (2nd, 9th lord) brings wealth and fortune.",
+      "detection": {
+        "lagna": "pisces",
+        "conditions": [
+          {"type": "lords_conjunction_or_aspect", "lords": ["1st", "9th"]}
+        ]
+      },
+      "effects": [
+        "Wealth through wisdom",
+        "Fortune and speech",
+        "Spiritual success",
+        "Father's wealth"
+      ]
+    },
+
+    "nakshatra_yoga_ashwini_ketu": {
+      "id": "nakshatra_yoga_ashwini_ketu",
+      "name": "Ashwini Nakshatra Yoga",
+      "sanskrit": "अश्विनी नक्षत्र योग",
+      "category": "nakshatra",
+      "source": "Brihat Jataka",
+      "description": "Moon in Ashwini nakshatra with strong Ketu. Brings healing abilities and speed.",
+      "detection": {
+        "conditions": [
+          {"type": "moon_in_nakshatra", "nakshatra": "ashwini"},
+          {"type": "ketu_strong"}
+        ]
+      },
+      "effects": [
+        "Healing abilities",
+        "Quick thinking",
+        "Medical profession",
+        "Horse riding skills",
+        "Pioneering nature"
+      ]
+    },
+    "nakshatra_yoga_bharani_venus": {
+      "id": "nakshatra_yoga_bharani_venus",
+      "name": "Bharani Nakshatra Yoga",
+      "sanskrit": "भरणी नक्षत्र योग",
+      "category": "nakshatra",
+      "source": "Brihat Jataka",
+      "description": "Moon in Bharani nakshatra with strong Venus. Brings creative and nurturing abilities.",
+      "detection": {
+        "conditions": [
+          {"type": "moon_in_nakshatra", "nakshatra": "bharani"},
+          {"type": "venus_strong"}
+        ]
+      },
+      "effects": [
+        "Creative talents",
+        "Nurturing nature",
+        "Artistic abilities",
+        "Strong will",
+        "Transformation powers"
+      ]
+    },
+    "nakshatra_yoga_krittika_sun": {
+      "id": "nakshatra_yoga_krittika_sun",
+      "name": "Krittika Nakshatra Yoga",
+      "sanskrit": "कृत्तिका नक्षत्र योग",
+      "category": "nakshatra",
+      "source": "Brihat Jataka",
+      "description": "Moon in Krittika nakshatra with strong Sun. Brings authority and fire element mastery.",
+      "detection": {
+        "conditions": [
+          {"type": "moon_in_nakshatra", "nakshatra": "krittika"},
+          {"type": "sun_strong"}
+        ]
+      },
+      "effects": [
+        "Authority and leadership",
+        "Fire-related work",
+        "Sharp intelligence",
+        "Fame and honor",
+        "Cooking/culinary skills"
+      ]
+    },
+    "nakshatra_yoga_rohini_moon": {
+      "id": "nakshatra_yoga_rohini_moon",
+      "name": "Rohini Nakshatra Yoga",
+      "sanskrit": "रोहिणी नक्षत्र योग",
+      "category": "nakshatra",
+      "source": "Brihat Jataka",
+      "description": "Moon in Rohini nakshatra (its own favorite nakshatra). Most auspicious moon placement.",
+      "detection": {
+        "conditions": [
+          {"type": "moon_in_nakshatra", "nakshatra": "rohini"}
+        ]
+      },
+      "effects": [
+        "Beautiful appearance",
+        "Artistic talents",
+        "Agriculture success",
+        "Wealth and prosperity",
+        "Romantic nature"
+      ]
+    },
+    "nakshatra_yoga_mrigashira_mars": {
+      "id": "nakshatra_yoga_mrigashira_mars",
+      "name": "Mrigashira Nakshatra Yoga",
+      "sanskrit": "मृगशिरा नक्षत्र योग",
+      "category": "nakshatra",
+      "source": "Brihat Jataka",
+      "description": "Moon in Mrigashira nakshatra with strong Mars. Brings searching and research abilities.",
+      "detection": {
+        "conditions": [
+          {"type": "moon_in_nakshatra", "nakshatra": "mrigashira"},
+          {"type": "mars_strong"}
+        ]
+      },
+      "effects": [
+        "Research abilities",
+        "Seeking nature",
+        "Travel and exploration",
+        "Gentle yet curious",
+        "Success in investigation"
+      ]
+    },
+    "nakshatra_yoga_ardra_rahu": {
+      "id": "nakshatra_yoga_ardra_rahu",
+      "name": "Ardra Nakshatra Yoga",
+      "sanskrit": "आर्द्रा नक्षत्र योग",
+      "category": "nakshatra",
+      "source": "Brihat Jataka",
+      "description": "Moon in Ardra nakshatra with strong Rahu. Brings transformation and destruction-creation cycle.",
+      "detection": {
+        "conditions": [
+          {"type": "moon_in_nakshatra", "nakshatra": "ardra"},
+          {"type": "rahu_strong"}
+        ]
+      },
+      "effects": [
+        "Transformation abilities",
+        "Intense nature",
+        "Storm-like personality",
+        "Success after struggles",
+        "Occult interests"
+      ]
+    },
+    "nakshatra_yoga_punarvasu_jupiter": {
+      "id": "nakshatra_yoga_punarvasu_jupiter",
+      "name": "Punarvasu Nakshatra Yoga",
+      "sanskrit": "पुनर्वसु नक्षत्र योग",
+      "category": "nakshatra",
+      "source": "Brihat Jataka",
+      "description": "Moon in Punarvasu nakshatra with strong Jupiter. Brings renewal and spiritual wisdom.",
+      "detection": {
+        "conditions": [
+          {"type": "moon_in_nakshatra", "nakshatra": "punarvasu"},
+          {"type": "jupiter_strong"}
+        ]
+      },
+      "effects": [
+        "Renewal abilities",
+        "Spiritual wisdom",
+        "Return of lost things",
+        "Teaching abilities",
+        "Philosophical nature"
+      ]
+    },
+    "nakshatra_yoga_pushya_saturn": {
+      "id": "nakshatra_yoga_pushya_saturn",
+      "name": "Pushya Nakshatra Yoga",
+      "sanskrit": "पुष्य नक्षत्र योग",
+      "category": "nakshatra",
+      "source": "Brihat Jataka",
+      "description": "Moon in Pushya nakshatra (most auspicious) with dignified Saturn. Peak nourishment yoga.",
+      "detection": {
+        "conditions": [
+          {"type": "moon_in_nakshatra", "nakshatra": "pushya"},
+          {"type": "saturn_dignified"}
+        ]
+      },
+      "effects": [
+        "Nourishing nature",
+        "Success in all ventures",
+        "Most auspicious nakshatra",
+        "Wealth and prosperity",
+        "Helping others"
+      ]
+    },
+    "nakshatra_yoga_ashlesha_mercury": {
+      "id": "nakshatra_yoga_ashlesha_mercury",
+      "name": "Ashlesha Nakshatra Yoga",
+      "sanskrit": "आश्लेषा नक्षत्र योग",
+      "category": "nakshatra",
+      "source": "Brihat Jataka",
+      "description": "Moon in Ashlesha nakshatra with strong Mercury. Brings serpent wisdom and mysticism.",
+      "detection": {
+        "conditions": [
+          {"type": "moon_in_nakshatra", "nakshatra": "ashlesha"},
+          {"type": "mercury_strong"}
+        ]
+      },
+      "effects": [
+        "Serpent wisdom",
+        "Mystical abilities",
+        "Hypnotic speech",
+        "Kundalini awakening potential",
+        "Success in occult"
+      ]
+    },
+    "nakshatra_yoga_magha_ketu": {
+      "id": "nakshatra_yoga_magha_ketu",
+      "name": "Magha Nakshatra Yoga",
+      "sanskrit": "मघा नक्षत्र योग",
+      "category": "nakshatra",
+      "source": "Brihat Jataka",
+      "description": "Moon in Magha nakshatra with strong Ketu. Brings ancestral blessings and royal nature.",
+      "detection": {
+        "conditions": [
+          {"type": "moon_in_nakshatra", "nakshatra": "magha"},
+          {"type": "ketu_strong"}
+        ]
+      },
+      "effects": [
+        "Royal nature",
+        "Ancestral blessings",
+        "Leadership qualities",
+        "Connection to past lives",
+        "Government positions"
+      ]
+    },
+    "nakshatra_yoga_purva_phalguni_venus": {
+      "id": "nakshatra_yoga_purva_phalguni_venus",
+      "name": "Purva Phalguni Nakshatra Yoga",
+      "sanskrit": "पूर्व फाल्गुनी नक्षत्र योग",
+      "category": "nakshatra",
+      "source": "Brihat Jataka",
+      "description": "Moon in Purva Phalguni nakshatra with strong Venus. Brings enjoyment and creative success.",
+      "detection": {
+        "conditions": [
+          {"type": "moon_in_nakshatra", "nakshatra": "purva_phalguni"},
+          {"type": "venus_strong"}
+        ]
+      },
+      "effects": [
+        "Enjoyment of life",
+        "Creative talents",
+        "Marriage success",
+        "Artistic abilities",
+        "Entertainment industry"
+      ]
+    },
+    "nakshatra_yoga_uttara_phalguni_sun": {
+      "id": "nakshatra_yoga_uttara_phalguni_sun",
+      "name": "Uttara Phalguni Nakshatra Yoga",
+      "sanskrit": "उत्तर फाल्गुनी नक्षत्र योग",
+      "category": "nakshatra",
+      "source": "Brihat Jataka",
+      "description": "Moon in Uttara Phalguni nakshatra with strong Sun. Brings patronage and generosity.",
+      "detection": {
+        "conditions": [
+          {"type": "moon_in_nakshatra", "nakshatra": "uttara_phalguni"},
+          {"type": "sun_strong"}
+        ]
+      },
+      "effects": [
+        "Patronage and support",
+        "Generous nature",
+        "Leadership in service",
+        "Helpful to others",
+        "Marriage contracts"
+      ]
+    },
+    "nakshatra_yoga_hasta_moon": {
+      "id": "nakshatra_yoga_hasta_moon",
+      "name": "Hasta Nakshatra Yoga",
+      "sanskrit": "हस्त नक्षत्र योग",
+      "category": "nakshatra",
+      "source": "Brihat Jataka",
+      "description": "Moon in Hasta nakshatra (Moon ruled). Brings dexterity and healing hands.",
+      "detection": {
+        "conditions": [
+          {"type": "moon_in_nakshatra", "nakshatra": "hasta"}
+        ]
+      },
+      "effects": [
+        "Healing hands",
+        "Dexterity and skill",
+        "Craftsmanship",
+        "Surgery abilities",
+        "Magic and illusion"
+      ]
+    },
+    "nakshatra_yoga_chitra_mars": {
+      "id": "nakshatra_yoga_chitra_mars",
+      "name": "Chitra Nakshatra Yoga",
+      "sanskrit": "चित्रा नक्षत्र योग",
+      "category": "nakshatra",
+      "source": "Brihat Jataka",
+      "description": "Moon in Chitra nakshatra with strong Mars. Brings creativity and architecture skills.",
+      "detection": {
+        "conditions": [
+          {"type": "moon_in_nakshatra", "nakshatra": "chitra"},
+          {"type": "mars_strong"}
+        ]
+      },
+      "effects": [
+        "Creative brilliance",
+        "Architecture skills",
+        "Jewelry making",
+        "Beautiful creations",
+        "Artistic vision"
+      ]
+    },
+    "nakshatra_yoga_swati_rahu": {
+      "id": "nakshatra_yoga_swati_rahu",
+      "name": "Swati Nakshatra Yoga",
+      "sanskrit": "स्वाति नक्षत्र योग",
+      "category": "nakshatra",
+      "source": "Brihat Jataka",
+      "description": "Moon in Swati nakshatra with strong Rahu. Brings independence and trade success.",
+      "detection": {
+        "conditions": [
+          {"type": "moon_in_nakshatra", "nakshatra": "swati"},
+          {"type": "rahu_strong"}
+        ]
+      },
+      "effects": [
+        "Independence",
+        "Trade and commerce",
+        "Diplomatic skills",
+        "Wind element mastery",
+        "Flexibility and adaptation"
+      ]
+    },
+    "nakshatra_yoga_vishakha_jupiter": {
+      "id": "nakshatra_yoga_vishakha_jupiter",
+      "name": "Vishakha Nakshatra Yoga",
+      "sanskrit": "विशाखा नक्षत्र योग",
+      "category": "nakshatra",
+      "source": "Brihat Jataka",
+      "description": "Moon in Vishakha nakshatra with strong Jupiter. Brings determination and goal achievement.",
+      "detection": {
+        "conditions": [
+          {"type": "moon_in_nakshatra", "nakshatra": "vishakha"},
+          {"type": "jupiter_strong"}
+        ]
+      },
+      "effects": [
+        "Strong determination",
+        "Goal achievement",
+        "Dual nature",
+        "Competition success",
+        "Religious leadership"
+      ]
+    },
+    "nakshatra_yoga_anuradha_saturn": {
+      "id": "nakshatra_yoga_anuradha_saturn",
+      "name": "Anuradha Nakshatra Yoga",
+      "sanskrit": "अनुराधा नक्षत्र योग",
+      "category": "nakshatra",
+      "source": "Brihat Jataka",
+      "description": "Moon in Anuradha nakshatra with dignified Saturn. Brings devotion and organizational skills.",
+      "detection": {
+        "conditions": [
+          {"type": "moon_in_nakshatra", "nakshatra": "anuradha"},
+          {"type": "saturn_dignified"}
+        ]
+      },
+      "effects": [
+        "Devotion and loyalty",
+        "Organizational skills",
+        "Success in foreign lands",
+        "Friendship and cooperation",
+        "Numerology skills"
+      ]
+    },
+    "nakshatra_yoga_jyeshtha_mercury": {
+      "id": "nakshatra_yoga_jyeshtha_mercury",
+      "name": "Jyeshtha Nakshatra Yoga",
+      "sanskrit": "ज्येष्ठा नक्षत्र योग",
+      "category": "nakshatra",
+      "source": "Brihat Jataka",
+      "description": "Moon in Jyeshtha nakshatra with strong Mercury. Brings seniority and protective nature.",
+      "detection": {
+        "conditions": [
+          {"type": "moon_in_nakshatra", "nakshatra": "jyeshtha"},
+          {"type": "mercury_strong"}
+        ]
+      },
+      "effects": [
+        "Eldest/senior position",
+        "Protective nature",
+        "Intelligence and wit",
+        "Success in communication",
+        "Leadership among peers"
+      ]
+    },
+    "nakshatra_yoga_mula_ketu": {
+      "id": "nakshatra_yoga_mula_ketu",
+      "name": "Mula Nakshatra Yoga",
+      "sanskrit": "मूल नक्षत्र योग",
+      "category": "nakshatra",
+      "source": "Brihat Jataka",
+      "description": "Moon in Mula nakshatra with strong Ketu. Brings root-level transformation and research.",
+      "detection": {
+        "conditions": [
+          {"type": "moon_in_nakshatra", "nakshatra": "mula"},
+          {"type": "ketu_strong"}
+        ]
+      },
+      "effects": [
+        "Root-level transformation",
+        "Research abilities",
+        "Uprooting old patterns",
+        "Spiritual awakening",
+        "Medical/pharmacy skills"
+      ]
+    },
+    "nakshatra_yoga_purva_ashadha_venus": {
+      "id": "nakshatra_yoga_purva_ashadha_venus",
+      "name": "Purva Ashadha Nakshatra Yoga",
+      "sanskrit": "पूर्वाषाढ़ा नक्षत्र योग",
+      "category": "nakshatra",
+      "source": "Brihat Jataka",
+      "description": "Moon in Purva Ashadha nakshatra with strong Venus. Brings invincibility in early battles.",
+      "detection": {
+        "conditions": [
+          {"type": "moon_in_nakshatra", "nakshatra": "purva_ashadha"},
+          {"type": "venus_strong"}
+        ]
+      },
+      "effects": [
+        "Early victory",
+        "Invincibility",
+        "Purification abilities",
+        "Water element mastery",
+        "Success in initial efforts"
+      ]
+    },
+    "nakshatra_yoga_uttara_ashadha_sun": {
+      "id": "nakshatra_yoga_uttara_ashadha_sun",
+      "name": "Uttara Ashadha Nakshatra Yoga",
+      "sanskrit": "उत्तराषाढ़ा नक्षत्र योग",
+      "category": "nakshatra",
+      "source": "Brihat Jataka",
+      "description": "Moon in Uttara Ashadha nakshatra with strong Sun. Brings final victory and leadership.",
+      "detection": {
+        "conditions": [
+          {"type": "moon_in_nakshatra", "nakshatra": "uttara_ashadha"},
+          {"type": "sun_strong"}
+        ]
+      },
+      "effects": [
+        "Final victory",
+        "Lasting success",
+        "Leadership among leaders",
+        "Universal achievement",
+        "Government positions"
+      ]
+    },
+    "nakshatra_yoga_shravana_moon": {
+      "id": "nakshatra_yoga_shravana_moon",
+      "name": "Shravana Nakshatra Yoga",
+      "sanskrit": "श्रवण नक्षत्र योग",
+      "category": "nakshatra",
+      "source": "Brihat Jataka",
+      "description": "Moon in Shravana nakshatra (Moon ruled). Brings listening skills and learning abilities.",
+      "detection": {
+        "conditions": [
+          {"type": "moon_in_nakshatra", "nakshatra": "shravana"}
+        ]
+      },
+      "effects": [
+        "Excellent listening skills",
+        "Learning abilities",
+        "Knowledge acquisition",
+        "Media and communication",
+        "Teaching abilities"
+      ]
+    },
+    "nakshatra_yoga_dhanishtha_mars": {
+      "id": "nakshatra_yoga_dhanishtha_mars",
+      "name": "Dhanishtha Nakshatra Yoga",
+      "sanskrit": "धनिष्ठा नक्षत्र योग",
+      "category": "nakshatra",
+      "source": "Brihat Jataka",
+      "description": "Moon in Dhanishtha nakshatra with strong Mars. Brings wealth and musical talents.",
+      "detection": {
+        "conditions": [
+          {"type": "moon_in_nakshatra", "nakshatra": "dhanishtha"},
+          {"type": "mars_strong"}
+        ]
+      },
+      "effects": [
+        "Wealth accumulation",
+        "Musical talents",
+        "Rhythm and timing",
+        "Fame and recognition",
+        "Success in groups"
+      ]
+    },
+    "nakshatra_yoga_shatabhisha_rahu": {
+      "id": "nakshatra_yoga_shatabhisha_rahu",
+      "name": "Shatabhisha Nakshatra Yoga",
+      "sanskrit": "शतभिषा नक्षत्र योग",
+      "category": "nakshatra",
+      "source": "Brihat Jataka",
+      "description": "Moon in Shatabhisha nakshatra with strong Rahu. Brings healing of 100 diseases.",
+      "detection": {
+        "conditions": [
+          {"type": "moon_in_nakshatra", "nakshatra": "shatabhisha"},
+          {"type": "rahu_strong"}
+        ]
+      },
+      "effects": [
+        "Healing abilities",
+        "Medical profession",
+        "Secretive nature",
+        "Research in medicine",
+        "Alternative healing"
+      ]
+    },
+    "nakshatra_yoga_purva_bhadrapada_jupiter": {
+      "id": "nakshatra_yoga_purva_bhadrapada_jupiter",
+      "name": "Purva Bhadrapada Nakshatra Yoga",
+      "sanskrit": "पूर्व भाद्रपद नक्षत्र योग",
+      "category": "nakshatra",
+      "source": "Brihat Jataka",
+      "description": "Moon in Purva Bhadrapada nakshatra with strong Jupiter. Brings intense transformation and fire mastery.",
+      "detection": {
+        "conditions": [
+          {"type": "moon_in_nakshatra", "nakshatra": "purva_bhadrapada"},
+          {"type": "jupiter_strong"}
+        ]
+      },
+      "effects": [
+        "Intense transformation",
+        "Fire mastery",
+        "Occult knowledge",
+        "Spiritual awakening",
+        "Success in extreme situations"
+      ]
+    },
+    "nakshatra_yoga_uttara_bhadrapada_saturn": {
+      "id": "nakshatra_yoga_uttara_bhadrapada_saturn",
+      "name": "Uttara Bhadrapada Nakshatra Yoga",
+      "sanskrit": "उत्तर भाद्रपद नक्षत्र योग",
+      "category": "nakshatra",
+      "source": "Brihat Jataka",
+      "description": "Moon in Uttara Bhadrapada nakshatra with dignified Saturn. Brings depth and cosmic wisdom.",
+      "detection": {
+        "conditions": [
+          {"type": "moon_in_nakshatra", "nakshatra": "uttara_bhadrapada"},
+          {"type": "saturn_dignified"}
+        ]
+      },
+      "effects": [
+        "Deep wisdom",
+        "Cosmic consciousness",
+        "Controlled passions",
+        "Kundalini mastery",
+        "Spiritual depth"
+      ]
+    },
+    "nakshatra_yoga_revati_mercury": {
+      "id": "nakshatra_yoga_revati_mercury",
+      "name": "Revati Nakshatra Yoga",
+      "sanskrit": "रेवती नक्षत्र योग",
+      "category": "nakshatra",
+      "source": "Brihat Jataka",
+      "description": "Moon in Revati nakshatra with strong Mercury. Brings nourishment and journey completion.",
+      "detection": {
+        "conditions": [
+          {"type": "moon_in_nakshatra", "nakshatra": "revati"},
+          {"type": "mercury_strong"}
+        ]
+      },
+      "effects": [
+        "Nourishing nature",
+        "Journey completion",
+        "Wealth and prosperity",
+        "Animal welfare",
+        "Safe travels"
+      ]
+    },
+
+    "budhan_yoga": {
+      "id": "budhan_yoga",
+      "name": "Budhan Yoga",
+      "sanskrit": "बुधन योग",
+      "category": "special",
+      "source": "Saravali",
+      "description": "Mercury in kendra from Moon, unaspected by malefics. Brings intelligence and communication.",
+      "detection": {
+        "conditions": [
+          {"type": "mercury_in_kendra_from_moon"},
+          {"type": "no_malefic_aspect"}
+        ],
+        "all_conditions_required": true
+      },
+      "effects": [
+        "High intelligence",
+        "Communication mastery",
+        "Success in writing",
+        "Business acumen",
+        "Diplomatic skills"
+      ]
+    },
+    "nipuna_yoga": {
+      "id": "nipuna_yoga",
+      "name": "Nipuna Yoga",
+      "sanskrit": "निपुण योग",
+      "category": "special",
+      "source": "Phaladeepika",
+      "description": "Sun and Mercury within 10 degrees (not combust) in good house. Brings skill mastery.",
+      "detection": {
+        "conditions": [
+          {"type": "sun_mercury_within_10_degrees"},
+          {"type": "mercury_not_combust"},
+          {"type": "in_good_house"}
+        ],
+        "all_conditions_required": true
+      },
+      "effects": [
+        "Skill mastery",
+        "Expertise in profession",
+        "Fame through skills",
+        "Intelligent speech",
+        "Success in technical fields"
+      ]
+    },
+    "danda_yoga_benefic": {
+      "id": "danda_yoga_benefic",
+      "name": "Danda Yoga (Benefic)",
+      "sanskrit": "दण्ड योग",
+      "category": "special",
+      "source": "Saravali",
+      "description": "All benefics in kendras while malefics in 3, 6, 11. Brings authority and righteousness.",
+      "detection": {
+        "conditions": [
+          {"type": "all_benefics_in_kendras"},
+          {"type": "malefics_in_3_6_11"}
+        ],
+        "all_conditions_required": true
+      },
+      "effects": [
+        "Authority figure",
+        "Righteous power",
+        "Success through justice",
+        "Government positions",
+        "Respected leader"
+      ]
+    },
+    "veena_yoga": {
+      "id": "veena_yoga",
+      "name": "Veena Yoga",
+      "sanskrit": "वीणा योग",
+      "category": "special",
+      "source": "Saravali",
+      "description": "All planets in seven consecutive signs starting from any sign. Musical instrument yoga.",
+      "detection": {
+        "conditions": [
+          {"type": "all_planets_in_seven_consecutive_signs"}
+        ]
+      },
+      "effects": [
+        "Musical talents",
+        "Artistic abilities",
+        "Famous performer",
+        "Wealthy",
+        "Skilled in fine arts"
+      ]
+    },
+    "damini_yoga": {
+      "id": "damini_yoga",
+      "name": "Damini Yoga",
+      "sanskrit": "दामिनी योग",
+      "category": "special",
+      "source": "Saravali",
+      "description": "All planets in six consecutive signs. Lightning yoga - quick success.",
+      "detection": {
+        "conditions": [
+          {"type": "all_planets_in_six_consecutive_signs"}
+        ]
+      },
+      "effects": [
+        "Quick success",
+        "Sudden gains",
+        "Charitable nature",
+        "Fame and honor",
+        "Generous disposition"
+      ]
+    },
+    "pattika_yoga": {
+      "id": "pattika_yoga",
+      "name": "Pattika Yoga",
+      "sanskrit": "पट्टिका योग",
+      "category": "special",
+      "source": "Saravali",
+      "description": "All planets in five consecutive signs. Binding/ribbon yoga.",
+      "detection": {
+        "conditions": [
+          {"type": "all_planets_in_five_consecutive_signs"}
+        ]
+      },
+      "effects": [
+        "Success through bonds",
+        "Contracts and agreements",
+        "Steady progress",
+        "Family-oriented",
+        "Moderate wealth"
+      ]
+    },
+    "sankhya_yoga": {
+      "id": "sankhya_yoga",
+      "name": "Sankhya Yoga",
+      "sanskrit": "संख्या योग",
+      "category": "special",
+      "source": "BPHS",
+      "description": "All seven planets spread in all seven different signs. Brings variety and versatility.",
+      "detection": {
+        "conditions": [
+          {"type": "all_planets_in_different_signs"}
+        ]
+      },
+      "effects": [
+        "Versatile talents",
+        "Multiple careers",
+        "Varied experiences",
+        "Jack of all trades",
+        "Adaptability"
+      ]
+    },
+    "aakrithi_vallaki_yoga": {
+      "id": "aakrithi_vallaki_yoga",
+      "name": "Vallaki Yoga",
+      "sanskrit": "वल्लकी योग",
+      "category": "special",
+      "source": "Brihat Jataka",
+      "description": "All planets in seven houses from lagna (1st to 7th). Lute/instrument yoga.",
+      "detection": {
+        "conditions": [
+          {"type": "all_planets_in_houses_1_to_7"}
+        ]
+      },
+      "effects": [
+        "Musical talents",
+        "Artistic nature",
+        "Love of fine arts",
+        "Wealthy and happy",
+        "Good spouse"
+      ]
+    },
+    "aakrithi_gada_yoga": {
+      "id": "aakrithi_gada_yoga",
+      "name": "Gada Yoga",
+      "sanskrit": "गदा योग",
+      "category": "special",
+      "source": "Brihat Jataka",
+      "description": "All planets in two adjacent kendras (1-4 or 4-7 or 7-10 or 10-1). Mace yoga.",
+      "detection": {
+        "conditions": [
+          {"type": "all_planets_in_two_adjacent_kendras"}
+        ]
+      },
+      "effects": [
+        "Wealth through hard work",
+        "Strong constitution",
+        "Authority",
+        "Success in competitions",
+        "Athletic abilities"
+      ]
+    },
+    "aakrithi_shakata_yoga": {
+      "id": "aakrithi_shakata_yoga",
+      "name": "Shakata Aakrithi Yoga",
+      "sanskrit": "शकट आकृति योग",
+      "category": "special",
+      "source": "Brihat Jataka",
+      "description": "All planets in 1st and 7th houses only. Cart yoga - ups and downs.",
+      "detection": {
+        "conditions": [
+          {"type": "all_planets_in_1_and_7_only"}
+        ]
+      },
+      "effects": [
+        "Fluctuating fortunes",
+        "Ups and downs",
+        "Travel-related career",
+        "Partnerships important",
+        "Foreign connections"
+      ]
+    },
+    "aakrithi_shringataka_yoga": {
+      "id": "aakrithi_shringataka_yoga",
+      "name": "Shringataka Yoga",
+      "sanskrit": "शृंगाटक योग",
+      "category": "special",
+      "source": "Brihat Jataka",
+      "description": "All planets in trikonas (1, 5, 9). Triangle yoga - highly auspicious.",
+      "detection": {
+        "conditions": [
+          {"type": "all_planets_in_trikonas"}
+        ]
+      },
+      "effects": [
+        "Highly auspicious",
+        "Great fortune",
+        "Intelligent",
+        "Spiritual success",
+        "Wealth and fame"
+      ]
+    },
+    "aakrithi_hala_yoga": {
+      "id": "aakrithi_hala_yoga",
+      "name": "Hala Yoga",
+      "sanskrit": "हल योग",
+      "category": "special",
+      "source": "Brihat Jataka",
+      "description": "All planets in 2, 6, 10 or 3, 7, 11 or 4, 8, 12. Plough yoga.",
+      "detection": {
+        "conditions": [
+          {"type": "all_planets_in_alternate_triads"}
+        ]
+      },
+      "effects": [
+        "Agricultural success",
+        "Land ownership",
+        "Hard work rewarded",
+        "Simple lifestyle",
+        "Service to others"
+      ]
+    },
+
+    "mahabhagya_yoga_male": {
+      "id": "mahabhagya_yoga_male",
+      "name": "Mahabhagya Yoga (Male)",
+      "sanskrit": "महाभाग्य योग",
+      "category": "special",
+      "source": "BPHS",
+      "description": "For male: Day birth, Sun, Moon, and Lagna all in odd signs. Great fortune yoga.",
+      "detection": {
+        "conditions": [
+          {"type": "male_native"},
+          {"type": "day_birth"},
+          {"type": "sun_in_odd_sign"},
+          {"type": "moon_in_odd_sign"},
+          {"type": "lagna_in_odd_sign"}
+        ],
+        "all_conditions_required": true
+      },
+      "effects": [
+        "Great fortune",
+        "Long life",
+        "Handsome appearance",
+        "Respected by rulers",
+        "Wealthy and famous"
+      ]
+    },
+    "mahabhagya_yoga_female": {
+      "id": "mahabhagya_yoga_female",
+      "name": "Mahabhagya Yoga (Female)",
+      "sanskrit": "महाभाग्य योग",
+      "category": "special",
+      "source": "BPHS",
+      "description": "For female: Night birth, Sun, Moon, and Lagna all in even signs. Great fortune yoga.",
+      "detection": {
+        "conditions": [
+          {"type": "female_native"},
+          {"type": "night_birth"},
+          {"type": "sun_in_even_sign"},
+          {"type": "moon_in_even_sign"},
+          {"type": "lagna_in_even_sign"}
+        ],
+        "all_conditions_required": true
+      },
+      "effects": [
+        "Great fortune",
+        "Long life",
+        "Beautiful appearance",
+        "Happy marriage",
+        "Wealthy and famous"
+      ]
+    },
+    "kahala_yoga_alt": {
+      "id": "kahala_yoga_alt",
+      "name": "Kahala Yoga (Alternate)",
+      "sanskrit": "कहल योग",
+      "category": "special",
+      "source": "Phaladeepika",
+      "description": "4th and 9th lords in mutual kendras, lagna lord strong. Brings bravery.",
+      "detection": {
+        "conditions": [
+          {"type": "4th_9th_lords_mutual_kendras"},
+          {"type": "lagna_lord_strong"}
+        ],
+        "all_conditions_required": true
+      },
+      "effects": [
+        "Bold and brave",
+        "Army commander",
+        "Good health",
+        "Victory in battles",
+        "Stubborn but successful"
+      ]
+    },
+    "koorma_yoga": {
+      "id": "koorma_yoga",
+      "name": "Koorma Yoga",
+      "sanskrit": "कूर्म योग",
+      "category": "special",
+      "source": "BPHS",
+      "description": "Benefics in 5, 6, 7 from lagna in exaltation/own signs. Tortoise yoga.",
+      "detection": {
+        "conditions": [
+          {"type": "benefics_exalted_or_own_in_5_6_7"}
+        ]
+      },
+      "effects": [
+        "Long life",
+        "Religious",
+        "Charitable",
+        "Famous leader",
+        "Happy disposition"
+      ]
+    }
+  }
+}

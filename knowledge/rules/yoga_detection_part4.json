@@ -1,0 +1,568 @@
+{
+  "metadata": {
+    "part": 4,
+    "description": "Phaladeepika Yogas, Additional Raja Yogas, Wealth Combinations, Karaka Yogas"
+  },
+  "yoga_rules": {
+    "subha_yoga_type1": {
+      "id": "subha_yoga_type1",
+      "name": "Subha Yoga (Benefic Conjunction)",
+      "sanskrit": "शुभ योग",
+      "category": "special",
+      "source": "Phaladeepika",
+      "description": "All three natural benefics (Jupiter, Venus, Mercury) in kendras or trikonas.",
+      "detection": {"conditions": [{"type": "all_benefics_in_kendra_or_trikona"}]},
+      "effects": ["Great auspiciousness", "Wealth and fame", "Happy life", "Good family", "Success in all ventures"]
+    },
+    "ashubha_yoga": {
+      "id": "ashubha_yoga",
+      "name": "Ashubha Yoga",
+      "sanskrit": "अशुभ योग",
+      "category": "arishta",
+      "source": "Phaladeepika",
+      "description": "All three natural malefics (Sun, Mars, Saturn) in kendras afflicting.",
+      "detection": {"conditions": [{"type": "all_malefics_in_kendras_afflicting"}]},
+      "effects": ["Difficulties in life", "Health challenges", "Career struggles", "Need for remedies"]
+    },
+    "adhiyoga_mercury": {
+      "id": "adhiyoga_mercury",
+      "name": "Adhi Yoga from Mercury",
+      "sanskrit": "आधि योग",
+      "category": "raja",
+      "source": "Phaladeepika",
+      "description": "Benefics in 6th, 7th, 8th from Mercury. Leadership in communication.",
+      "detection": {"conditions": [{"type": "benefics_in_6_7_8_from_mercury"}]},
+      "effects": ["Communication leadership", "Publishing success", "Administrative ability", "Business acumen"]
+    },
+    "adhiyoga_lagna": {
+      "id": "adhiyoga_lagna",
+      "name": "Adhi Yoga from Lagna",
+      "sanskrit": "आधि योग",
+      "category": "raja",
+      "source": "Phaladeepika",
+      "description": "Benefics in 6th, 7th, 8th from Lagna. Health, partnership, and transformation blessed.",
+      "detection": {"conditions": [{"type": "benefics_in_6_7_8_from_lagna"}]},
+      "effects": ["Victory over enemies", "Good partnerships", "Transformation abilities", "Long life"]
+    },
+    "lagnadhi_yoga": {
+      "id": "lagnadhi_yoga",
+      "name": "Lagnadhi Yoga",
+      "sanskrit": "लग्नाधि योग",
+      "category": "raja",
+      "source": "BPHS",
+      "description": "Jupiter, Mercury, Venus in 7th or 8th from lagna. Protection through partnerships.",
+      "detection": {"conditions": [{"type": "benefics_in_7_8_from_lagna"}]},
+      "effects": ["Protected through partners", "Good spouse", "Transformation brings gain", "Long life"]
+    },
+    "chapa_yoga_benefic": {
+      "id": "chapa_yoga_benefic",
+      "name": "Chapa Yoga (Benefic)",
+      "sanskrit": "चाप योग",
+      "category": "special",
+      "source": "Phaladeepika",
+      "description": "All benefics in lagna, 7th, and 4th or 10th. Bow of blessings.",
+      "detection": {"conditions": [{"type": "benefics_in_1_4_7_or_1_7_10"}]},
+      "effects": ["Blessed life", "Success in all directions", "Good family", "Career success", "Happy marriage"]
+    },
+    "ardha_chandra_benefic": {
+      "id": "ardha_chandra_benefic",
+      "name": "Ardha Chandra Yoga (Benefic Moon)",
+      "sanskrit": "अर्ध चंद्र योग",
+      "category": "special",
+      "source": "Phaladeepika",
+      "description": "Moon bright (Shukla Paksha) in kendra aspected by benefics. Half-moon blessings.",
+      "detection": {"conditions": [{"type": "bright_moon_in_kendra_aspected_benefics"}]},
+      "effects": ["Mental peace", "Public success", "Mother's blessings", "Emotional stability", "Fame"]
+    },
+    "karaka_yoga_sun_10th": {
+      "id": "karaka_yoga_sun_10th",
+      "name": "Karaka Yoga (Sun in 10th)",
+      "sanskrit": "कारक योग",
+      "category": "special",
+      "source": "Phaladeepika",
+      "description": "Sun (karaka for 10th) strong in 10th house. Natural significator in its house.",
+      "detection": {"conditions": [{"type": "sun_strong_in_10th"}]},
+      "effects": ["Government positions", "Authority and power", "Father's blessings", "Fame", "Leadership"]
+    },
+    "karaka_yoga_moon_4th": {
+      "id": "karaka_yoga_moon_4th",
+      "name": "Karaka Yoga (Moon in 4th)",
+      "sanskrit": "कारक योग",
+      "category": "special",
+      "source": "Phaladeepika",
+      "description": "Moon (karaka for 4th) strong in 4th house. Emotional peace and property.",
+      "detection": {"conditions": [{"type": "moon_strong_in_4th"}]},
+      "effects": ["Emotional peace", "Mother's blessings", "Property", "Vehicles", "Domestic happiness"]
+    },
+    "karaka_yoga_mars_3rd": {
+      "id": "karaka_yoga_mars_3rd",
+      "name": "Karaka Yoga (Mars in 3rd)",
+      "sanskrit": "कारक योग",
+      "category": "special",
+      "source": "Phaladeepika",
+      "description": "Mars (karaka for 3rd) strong in 3rd house. Courage and siblings blessed.",
+      "detection": {"conditions": [{"type": "mars_strong_in_3rd"}]},
+      "effects": ["Courage and valor", "Good siblings", "Communication skills", "Short journeys success", "Writing ability"]
+    },
+    "karaka_yoga_mercury_4th": {
+      "id": "karaka_yoga_mercury_4th",
+      "name": "Karaka Yoga (Mercury in 4th)",
+      "sanskrit": "कारक योग",
+      "category": "special",
+      "source": "Phaladeepika",
+      "description": "Mercury strong in 4th house. Education and intelligence blessed.",
+      "detection": {"conditions": [{"type": "mercury_strong_in_4th"}]},
+      "effects": ["Higher education", "Good memory", "Multiple properties", "Intellectual family", "Good vehicles"]
+    },
+    "karaka_yoga_jupiter_2nd": {
+      "id": "karaka_yoga_jupiter_2nd",
+      "name": "Karaka Yoga (Jupiter in 2nd)",
+      "sanskrit": "कारक योग",
+      "category": "special",
+      "source": "Phaladeepika",
+      "description": "Jupiter (karaka for wealth) strong in 2nd house. Natural wealth giver.",
+      "detection": {"conditions": [{"type": "jupiter_strong_in_2nd"}]},
+      "effects": ["Wealth through wisdom", "Good family", "Sweet speech", "Rich food", "Good values"]
+    },
+    "karaka_yoga_jupiter_5th": {
+      "id": "karaka_yoga_jupiter_5th",
+      "name": "Karaka Yoga (Jupiter in 5th)",
+      "sanskrit": "कारक योग",
+      "category": "special",
+      "source": "Phaladeepika",
+      "description": "Jupiter (karaka for children) strong in 5th house. Children and wisdom blessed.",
+      "detection": {"conditions": [{"type": "jupiter_strong_in_5th"}]},
+      "effects": ["Good children", "High intelligence", "Speculative gains", "Creative success", "Spiritual wisdom"]
+    },
+    "karaka_yoga_jupiter_9th": {
+      "id": "karaka_yoga_jupiter_9th",
+      "name": "Karaka Yoga (Jupiter in 9th)",
+      "sanskrit": "कारक योग",
+      "category": "special",
+      "source": "Phaladeepika",
+      "description": "Jupiter (karaka for fortune) strong in 9th house. Fortune fully blessed.",
+      "detection": {"conditions": [{"type": "jupiter_strong_in_9th"}]},
+      "effects": ["Great fortune", "Guru's blessings", "Spiritual success", "Higher education", "Long journeys"]
+    },
+    "karaka_yoga_venus_7th": {
+      "id": "karaka_yoga_venus_7th",
+      "name": "Karaka Yoga (Venus in 7th)",
+      "sanskrit": "कारक योग",
+      "category": "special",
+      "source": "Phaladeepika",
+      "description": "Venus (karaka for marriage) strong in 7th house. Marriage blessed.",
+      "detection": {"conditions": [{"type": "venus_strong_in_7th"}]},
+      "effects": ["Happy marriage", "Beautiful spouse", "Partnership success", "Business success", "Foreign gains"]
+    },
+    "karaka_yoga_saturn_8th": {
+      "id": "karaka_yoga_saturn_8th",
+      "name": "Karaka Yoga (Saturn in 8th)",
+      "sanskrit": "कारक योग",
+      "category": "special",
+      "source": "Phaladeepika",
+      "description": "Saturn (karaka for longevity) strong in 8th house. Long life blessed.",
+      "detection": {"conditions": [{"type": "saturn_strong_in_8th"}]},
+      "effects": ["Long life", "Inheritance", "Occult knowledge", "Research abilities", "Transformation mastery"]
+    },
+    "karaka_yoga_saturn_6th": {
+      "id": "karaka_yoga_saturn_6th",
+      "name": "Karaka Yoga (Saturn in 6th)",
+      "sanskrit": "कारक योग",
+      "category": "special",
+      "source": "Phaladeepika",
+      "description": "Saturn strong in 6th house. Victory over enemies.",
+      "detection": {"conditions": [{"type": "saturn_strong_in_6th"}]},
+      "effects": ["Victory over enemies", "Service success", "Debt cleared", "Good health routines", "Steady work"]
+    },
+    "raja_lakshana_yoga": {
+      "id": "raja_lakshana_yoga",
+      "name": "Raja Lakshana Yoga",
+      "sanskrit": "राज लक्षण योग",
+      "category": "raja",
+      "source": "Phaladeepika",
+      "description": "4 or more planets in exaltation or own signs. Royal characteristics.",
+      "detection": {"conditions": [{"type": "four_plus_planets_exalted_or_own"}]},
+      "effects": ["Royal status", "Great fame", "Multiple talents", "Leadership", "Wealthy and powerful"]
+    },
+    "panch_grahi_yoga": {
+      "id": "panch_grahi_yoga",
+      "name": "Panch Grahi Yoga",
+      "sanskrit": "पंच ग्रही योग",
+      "category": "special",
+      "source": "BPHS",
+      "description": "Five planets in one sign. Intense concentration of energy.",
+      "detection": {"conditions": [{"type": "five_planets_in_one_sign"}]},
+      "effects": ["Intense focus", "Extreme results", "Single-pointed nature", "Effects depend on sign/house", "Powerful period when activated"]
+    },
+    "shad_grahi_yoga": {
+      "id": "shad_grahi_yoga",
+      "name": "Shad Grahi Yoga",
+      "sanskrit": "षड् ग्रही योग",
+      "category": "special",
+      "source": "BPHS",
+      "description": "Six planets in one sign. Extremely rare and powerful.",
+      "detection": {"conditions": [{"type": "six_planets_in_one_sign"}]},
+      "effects": ["Extremely rare yoga", "All-or-nothing results", "Massive transformation", "Extraordinary life", "Historical significance"]
+    },
+    "sapta_grahi_yoga": {
+      "id": "sapta_grahi_yoga",
+      "name": "Sapta Grahi Yoga",
+      "sanskrit": "सप्त ग्रही योग",
+      "category": "special",
+      "source": "BPHS",
+      "description": "Seven planets in one sign. Extraordinarily rare.",
+      "detection": {"conditions": [{"type": "seven_planets_in_one_sign"}]},
+      "effects": ["Once in centuries occurrence", "Massive global impact", "Revolutionary life", "Extraordinary destiny", "Historical figure"]
+    },
+    "graha_malika_1_to_6": {
+      "id": "graha_malika_1_to_6",
+      "name": "Graha Malika Yoga (1-6)",
+      "sanskrit": "ग्रह मालिका योग",
+      "category": "special",
+      "source": "Phaladeepika",
+      "description": "Planets forming chain from 1st to 6th house. Service-oriented garland.",
+      "detection": {"conditions": [{"type": "planets_consecutive_1_to_6"}]},
+      "effects": ["Service-oriented success", "Health through work", "Victory over enemies", "Steady progress", "Government service"]
+    },
+    "graha_malika_2_to_7": {
+      "id": "graha_malika_2_to_7",
+      "name": "Graha Malika Yoga (2-7)",
+      "sanskrit": "ग्रह मालिका योग",
+      "category": "special",
+      "source": "Phaladeepika",
+      "description": "Planets forming chain from 2nd to 7th house. Wealth-partnership garland.",
+      "detection": {"conditions": [{"type": "planets_consecutive_2_to_7"}]},
+      "effects": ["Wealth through partnerships", "Business success", "Good family and marriage", "Trading profits", "Public dealings"]
+    },
+    "graha_malika_3_to_8": {
+      "id": "graha_malika_3_to_8",
+      "name": "Graha Malika Yoga (3-8)",
+      "sanskrit": "ग्रह मालिका योग",
+      "category": "special",
+      "source": "Phaladeepika",
+      "description": "Planets forming chain from 3rd to 8th house. Transformation garland.",
+      "detection": {"conditions": [{"type": "planets_consecutive_3_to_8"}]},
+      "effects": ["Transformation through courage", "Occult interests", "Sibling help in crisis", "Communication about mysteries", "Research abilities"]
+    },
+    "graha_malika_4_to_9": {
+      "id": "graha_malika_4_to_9",
+      "name": "Graha Malika Yoga (4-9)",
+      "sanskrit": "ग्रह मालिका योग",
+      "category": "special",
+      "source": "Phaladeepika",
+      "description": "Planets forming chain from 4th to 9th house. Fortune-property garland.",
+      "detection": {"conditions": [{"type": "planets_consecutive_4_to_9"}]},
+      "effects": ["Property and fortune", "Educational success", "Father-mother blessings", "Spiritual property", "Domestic happiness"]
+    },
+    "graha_malika_5_to_10": {
+      "id": "graha_malika_5_to_10",
+      "name": "Graha Malika Yoga (5-10)",
+      "sanskrit": "ग्रह मालिका योग",
+      "category": "special",
+      "source": "Phaladeepika",
+      "description": "Planets forming chain from 5th to 10th house. Creative-career garland.",
+      "detection": {"conditions": [{"type": "planets_consecutive_5_to_10"}]},
+      "effects": ["Creative career", "Children help career", "Speculation leads to status", "Entertainment industry", "Fame through creativity"]
+    },
+    "graha_malika_6_to_11": {
+      "id": "graha_malika_6_to_11",
+      "name": "Graha Malika Yoga (6-11)",
+      "sanskrit": "ग्रह मालिका योग",
+      "category": "special",
+      "source": "Phaladeepika",
+      "description": "Planets forming chain from 6th to 11th house. Service-gains garland.",
+      "detection": {"conditions": [{"type": "planets_consecutive_6_to_11"}]},
+      "effects": ["Gains through service", "Victory leads to gains", "Health profession", "Employment agency", "Network through service"]
+    },
+    "graha_malika_7_to_12": {
+      "id": "graha_malika_7_to_12",
+      "name": "Graha Malika Yoga (7-12)",
+      "sanskrit": "ग्रह मालिका योग",
+      "category": "special",
+      "source": "Phaladeepika",
+      "description": "Planets forming chain from 7th to 12th house. Partnership-liberation garland.",
+      "detection": {"conditions": [{"type": "planets_consecutive_7_to_12"}]},
+      "effects": ["Foreign partnerships", "Spiritual marriage", "Liberation through partnership", "Import-export", "Bed pleasures"]
+    },
+    "graha_malika_8_to_1": {
+      "id": "graha_malika_8_to_1",
+      "name": "Graha Malika Yoga (8-1)",
+      "sanskrit": "ग्रह मालिका योग",
+      "category": "special",
+      "source": "Phaladeepika",
+      "description": "Planets forming chain from 8th house through 12th to 1st. Transformation-rebirth garland.",
+      "detection": {"conditions": [{"type": "planets_consecutive_8_to_1"}]},
+      "effects": ["Rebirth through transformation", "Phoenix-like nature", "Rise after fall", "Occult to self", "Research leads to identity"]
+    },
+    "kalasarpa_anuloma": {
+      "id": "kalasarpa_anuloma",
+      "name": "Kala Sarpa Yoga (Anuloma)",
+      "sanskrit": "काल सर्प योग",
+      "category": "special",
+      "source": "Various",
+      "description": "All planets between Rahu and Ketu (Rahu to Ketu direction). Forward serpent.",
+      "detection": {"conditions": [{"type": "all_planets_between_rahu_ketu_forward"}]},
+      "effects": ["Forward karma", "External struggles", "World-oriented challenges", "Material focus", "Eventually overcomes"]
+    },
+    "kalasarpa_viloma": {
+      "id": "kalasarpa_viloma",
+      "name": "Kala Sarpa Yoga (Viloma)",
+      "sanskrit": "काल सर्प योग",
+      "category": "special",
+      "source": "Various",
+      "description": "All planets between Ketu and Rahu (Ketu to Rahu direction). Reverse serpent.",
+      "detection": {"conditions": [{"type": "all_planets_between_ketu_rahu_reverse"}]},
+      "effects": ["Past life karma", "Internal struggles", "Spiritual focus", "Detachment tendency", "Eventually liberates"]
+    },
+    "partial_kalasarpa": {
+      "id": "partial_kalasarpa",
+      "name": "Partial Kala Sarpa Yoga",
+      "sanskrit": "आंशिक काल सर्प योग",
+      "category": "special",
+      "source": "Various",
+      "description": "Most planets between nodes but one or two outside. Partial serpent grip.",
+      "detection": {"conditions": [{"type": "partial_kalasarpa_condition"}]},
+      "effects": ["Milder effects", "Some relief", "One area of life free", "Easier to overcome", "Partial remedy helpful"]
+    },
+    "anant_kalasarpa": {
+      "id": "anant_kalasarpa",
+      "name": "Anant Kala Sarpa (Rahu in 1st)",
+      "sanskrit": "अनंत काल सर्प",
+      "category": "special",
+      "source": "Various",
+      "description": "Kala Sarpa with Rahu in 1st house. Infinite serpent affecting self.",
+      "detection": {"conditions": [{"type": "kalasarpa_rahu_in_1st"}]},
+      "effects": ["Self-identity struggles", "Ambition and desire", "Foreign connections", "Unconventional path", "Eventually finds true self"]
+    },
+    "kulik_kalasarpa": {
+      "id": "kulik_kalasarpa",
+      "name": "Kulik Kala Sarpa (Rahu in 2nd)",
+      "sanskrit": "कुलिक काल सर्प",
+      "category": "special",
+      "source": "Various",
+      "description": "Kala Sarpa with Rahu in 2nd house. Serpent affecting wealth and speech.",
+      "detection": {"conditions": [{"type": "kalasarpa_rahu_in_2nd"}]},
+      "effects": ["Wealth challenges", "Speech difficulties", "Family karma", "Eventually wealth comes", "Foreign wealth possible"]
+    },
+    "vasuki_kalasarpa": {
+      "id": "vasuki_kalasarpa",
+      "name": "Vasuki Kala Sarpa (Rahu in 3rd)",
+      "sanskrit": "वासुकि काल सर्प",
+      "category": "special",
+      "source": "Various",
+      "description": "Kala Sarpa with Rahu in 3rd house. King serpent affecting siblings and courage.",
+      "detection": {"conditions": [{"type": "kalasarpa_rahu_in_3rd"}]},
+      "effects": ["Sibling karma", "Courage issues", "Communication challenges", "Short journeys difficult", "Eventually very courageous"]
+    },
+    "shankpal_kalasarpa": {
+      "id": "shankpal_kalasarpa",
+      "name": "Shankpal Kala Sarpa (Rahu in 4th)",
+      "sanskrit": "शंखपाल काल सर्प",
+      "category": "special",
+      "source": "Various",
+      "description": "Kala Sarpa with Rahu in 4th house. Conch serpent affecting home and mother.",
+      "detection": {"conditions": [{"type": "kalasarpa_rahu_in_4th"}]},
+      "effects": ["Home instability", "Mother karma", "Property challenges", "Education disrupted", "Eventually peaceful home"]
+    },
+    "padma_kalasarpa": {
+      "id": "padma_kalasarpa",
+      "name": "Padma Kala Sarpa (Rahu in 5th)",
+      "sanskrit": "पद्म काल सर्प",
+      "category": "special",
+      "source": "Various",
+      "description": "Kala Sarpa with Rahu in 5th house. Lotus serpent affecting children and intelligence.",
+      "detection": {"conditions": [{"type": "kalasarpa_rahu_in_5th"}]},
+      "effects": ["Children karma", "Education challenges", "Speculation losses", "Romance issues", "Eventually creative success"]
+    },
+    "mahapadma_kalasarpa": {
+      "id": "mahapadma_kalasarpa",
+      "name": "Mahapadma Kala Sarpa (Rahu in 6th)",
+      "sanskrit": "महापद्म काल सर्प",
+      "category": "special",
+      "source": "Various",
+      "description": "Kala Sarpa with Rahu in 6th house. Great lotus serpent affecting enemies and health.",
+      "detection": {"conditions": [{"type": "kalasarpa_rahu_in_6th"}]},
+      "effects": ["Health challenges", "Enemy troubles", "Debt issues", "Service difficulties", "Eventually victorious"]
+    },
+    "takshak_kalasarpa": {
+      "id": "takshak_kalasarpa",
+      "name": "Takshak Kala Sarpa (Rahu in 7th)",
+      "sanskrit": "तक्षक काल सर्प",
+      "category": "special",
+      "source": "Various",
+      "description": "Kala Sarpa with Rahu in 7th house. Powerful serpent affecting marriage.",
+      "detection": {"conditions": [{"type": "kalasarpa_rahu_in_7th"}]},
+      "effects": ["Marriage delays", "Partnership karma", "Business challenges", "Foreign spouse", "Eventually successful marriage"]
+    },
+    "karkotak_kalasarpa": {
+      "id": "karkotak_kalasarpa",
+      "name": "Karkotak Kala Sarpa (Rahu in 8th)",
+      "sanskrit": "कर्कोटक काल सर्प",
+      "category": "special",
+      "source": "Various",
+      "description": "Kala Sarpa with Rahu in 8th house. Serpent affecting longevity and transformation.",
+      "detection": {"conditions": [{"type": "kalasarpa_rahu_in_8th"}]},
+      "effects": ["Sudden changes", "Hidden enemies", "Inheritance issues", "Occult interests", "Eventually transformation mastery"]
+    },
+    "shankhchud_kalasarpa": {
+      "id": "shankhchud_kalasarpa",
+      "name": "Shankhchud Kala Sarpa (Rahu in 9th)",
+      "sanskrit": "शंखचूड़ काल सर्प",
+      "category": "special",
+      "source": "Various",
+      "description": "Kala Sarpa with Rahu in 9th house. Conch-crested serpent affecting fortune.",
+      "detection": {"conditions": [{"type": "kalasarpa_rahu_in_9th"}]},
+      "effects": ["Fortune blocked", "Father karma", "Guru issues", "Long journey problems", "Eventually spiritual success"]
+    },
+    "ghatak_kalasarpa": {
+      "id": "ghatak_kalasarpa",
+      "name": "Ghatak Kala Sarpa (Rahu in 10th)",
+      "sanskrit": "घातक काल सर्प",
+      "category": "special",
+      "source": "Various",
+      "description": "Kala Sarpa with Rahu in 10th house. Striking serpent affecting career.",
+      "detection": {"conditions": [{"type": "kalasarpa_rahu_in_10th"}]},
+      "effects": ["Career instability", "Father karma", "Fame fluctuations", "Government issues", "Eventually great success"]
+    },
+    "vishdhar_kalasarpa": {
+      "id": "vishdhar_kalasarpa",
+      "name": "Vishdhar Kala Sarpa (Rahu in 11th)",
+      "sanskrit": "विषधर काल सर्प",
+      "category": "special",
+      "source": "Various",
+      "description": "Kala Sarpa with Rahu in 11th house. Poison-holder serpent affecting gains.",
+      "detection": {"conditions": [{"type": "kalasarpa_rahu_in_11th"}]},
+      "effects": ["Gains delayed", "Elder sibling karma", "Network issues", "Desires unfulfilled", "Eventually abundant gains"]
+    },
+    "sheshnag_kalasarpa": {
+      "id": "sheshnag_kalasarpa",
+      "name": "Sheshnag Kala Sarpa (Rahu in 12th)",
+      "sanskrit": "शेषनाग काल सर्प",
+      "category": "special",
+      "source": "Various",
+      "description": "Kala Sarpa with Rahu in 12th house. Divine serpent affecting liberation.",
+      "detection": {"conditions": [{"type": "kalasarpa_rahu_in_12th"}]},
+      "effects": ["Expenses high", "Sleep issues", "Foreign settlement", "Spiritual tendencies", "Eventually moksha potential"]
+    },
+    "mukta_yoga": {
+      "id": "mukta_yoga",
+      "name": "Mukta Yoga",
+      "sanskrit": "मुक्त योग",
+      "category": "special",
+      "source": "Phaladeepika",
+      "description": "All benefics in kendras, all malefics in 3, 6, 11. Liberation yoga.",
+      "detection": {"conditions": [{"type": "benefics_kendras_malefics_3_6_11"}]},
+      "effects": ["Freedom and liberation", "Success without effort", "Blessed life", "Enemies defeated", "Spiritual liberation"]
+    },
+    "yuga_yoga_four_kendras": {
+      "id": "yuga_yoga_four_kendras",
+      "name": "Yuga Yoga (Four Kendras)",
+      "sanskrit": "युग योग",
+      "category": "special",
+      "source": "Brihat Jataka",
+      "description": "All four kendras occupied by benefics only. Era-defining yoga.",
+      "detection": {"conditions": [{"type": "all_kendras_benefic_only"}]},
+      "effects": ["Era-defining success", "Historical impact", "Great fame", "Wealth and power", "Remembered for generations"]
+    },
+    "amrita_yoga": {
+      "id": "amrita_yoga",
+      "name": "Amrita Yoga (Nectar)",
+      "sanskrit": "अमृत योग",
+      "category": "special",
+      "source": "Phaladeepika",
+      "description": "Jupiter in 5th aspecting lagna lord, and lagna lord in trikona. Immortal fame.",
+      "detection": {"conditions": [{"type": "jupiter_5th_aspects_lagna_lord_in_trikona"}]},
+      "effects": ["Immortal fame", "Long-lasting legacy", "Wisdom teacher", "Children bring fame", "Divine blessings"]
+    },
+    "kalanala_yoga": {
+      "id": "kalanala_yoga",
+      "name": "Kalanala Yoga (Time Fire)",
+      "sanskrit": "कालानल योग",
+      "category": "special",
+      "source": "BPHS",
+      "description": "Mars in 7th, Saturn in 8th, and 4th lord afflicted. Fire of time - transformative.",
+      "detection": {"conditions": [{"type": "mars_7th_saturn_8th_4th_lord_afflicted"}]},
+      "effects": ["Transformative life", "Partnerships test strength", "Property challenges", "Eventually emerges stronger", "Phoenix nature"]
+    },
+    "vanchita_yoga": {
+      "id": "vanchita_yoga",
+      "name": "Vanchita Yoga",
+      "sanskrit": "वांछित योग",
+      "category": "special",
+      "source": "BPHS",
+      "description": "5th lord strong with 11th lord. Desires fulfilled yoga.",
+      "detection": {"conditions": [{"type": "5th_11th_lords_connected_strong"}]},
+      "effects": ["Desires fulfilled", "Speculation gains", "Children bring gains", "Creative income", "Network brings creativity"]
+    },
+    "avayoga": {
+      "id": "avayoga",
+      "name": "Avayoga (Non-yoga)",
+      "sanskrit": "अवयोग",
+      "category": "arishta",
+      "source": "BPHS",
+      "description": "No planets in kendras or trikonas. Lack of support yoga.",
+      "detection": {"conditions": [{"type": "no_planets_in_kendra_or_trikona"}]},
+      "effects": ["Lack of support", "Self-reliance needed", "Struggles in life", "But builds character", "Success through determination"]
+    },
+    "duryoga": {
+      "id": "duryoga",
+      "name": "Duryoga (Bad Yoga)",
+      "sanskrit": "दुर्योग",
+      "category": "arishta",
+      "source": "BPHS",
+      "description": "10th lord in dusthana afflicted. Career difficulties.",
+      "detection": {"conditions": [{"type": "10th_lord_in_dusthana_afflicted"}]},
+      "effects": ["Career challenges", "Fame issues", "Father problems", "Eventually overcomes", "Unconventional career"]
+    },
+    "maha_yoga": {
+      "id": "maha_yoga",
+      "name": "Maha Yoga (Great Yoga)",
+      "sanskrit": "महायोग",
+      "category": "raja",
+      "source": "BPHS",
+      "description": "Lagna lord, 9th lord, and 10th lord all strong in kendras. Triple greatness.",
+      "detection": {"conditions": [{"type": "1st_9th_10th_lords_strong_kendras"}]},
+      "effects": ["Triple greatness", "Self, fortune, career aligned", "Exceptional success", "Fame and power", "Leadership destiny"]
+    },
+    "sarva_yoga": {
+      "id": "sarva_yoga",
+      "name": "Sarva Yoga (Complete Yoga)",
+      "sanskrit": "सर्व योग",
+      "category": "raja",
+      "source": "BPHS",
+      "description": "All kendra and trikona lords well-placed. Complete success.",
+      "detection": {"conditions": [{"type": "all_kendra_trikona_lords_well_placed"}]},
+      "effects": ["Complete success", "All areas of life blessed", "Wealth, fame, family", "Health and happiness", "Rare and auspicious"]
+    },
+    "uttama_yoga": {
+      "id": "uttama_yoga",
+      "name": "Uttama Yoga (Supreme Yoga)",
+      "sanskrit": "उत्तम योग",
+      "category": "raja",
+      "source": "Phaladeepika",
+      "description": "Lagna lord exalted in kendra aspected by Jupiter. Supreme success.",
+      "detection": {"conditions": [{"type": "lagna_lord_exalted_kendra_jupiter_aspect"}]},
+      "effects": ["Supreme success", "Jupiter's blessings", "Wisdom and power", "Long-lasting fame", "Divine favor"]
+    },
+    "madhya_yoga": {
+      "id": "madhya_yoga",
+      "name": "Madhya Yoga (Medium Yoga)",
+      "sanskrit": "मध्य योग",
+      "category": "raja",
+      "source": "Phaladeepika",
+      "description": "Lagna lord in own sign in kendra. Medium level success guaranteed.",
+      "detection": {"conditions": [{"type": "lagna_lord_own_sign_kendra"}]},
+      "effects": ["Guaranteed medium success", "Stable life", "Self-reliance", "Good reputation", "Comfortable living"]
+    },
+    "adhama_yoga": {
+      "id": "adhama_yoga",
+      "name": "Adhama Yoga (Low Yoga)",
+      "sanskrit": "अधम योग",
+      "category": "arishta",
+      "source": "Phaladeepika",
+      "description": "Lagna lord debilitated in dusthana afflicted. Low start but can improve.",
+      "detection": {"conditions": [{"type": "lagna_lord_debilitated_dusthana_afflicted"}]},
+      "effects": ["Low start in life", "Many challenges", "But can improve", "Character building", "Late success possible"]
+    }
+  }
+}

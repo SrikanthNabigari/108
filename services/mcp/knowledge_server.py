@@ -3,16 +3,17 @@
 
 Provides lookup tools for Jyotish knowledge base - planets, nakshatras, yogas, etc.
 """
-import sys
+
 import json
+import sys
 from pathlib import Path
-from typing import Dict, List, Any, Optional
+from typing import Any
 
 # Add packages to path
 SERVICES_ROOT = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(SERVICES_ROOT))
 
-from mcp.server.fastmcp import FastMCP
+from mcp.server.fastmcp import FastMCP  # noqa: E402
 
 # Initialize MCP server
 mcp = FastMCP("108-knowledge")
@@ -23,47 +24,49 @@ DEFINITIONS_DIR = KNOWLEDGE_DIR / "definitions"
 RULES_DIR = KNOWLEDGE_DIR / "rules"
 
 # Cache for loaded JSON files
-_cache: Dict[str, Any] = {}
+_cache: dict[str, Any] = {}
 
 
-def _load_json(filepath: Path) -> Dict:
+def _load_json(filepath: Path) -> dict:
     """Load JSON file with caching."""
     key = str(filepath)
     if key not in _cache:
         if filepath.exists():
-            with open(filepath, 'r', encoding='utf-8') as f:
+            with filepath.open(encoding="utf-8") as f:
                 _cache[key] = json.load(f)
         else:
             _cache[key] = {}
     return _cache[key]
 
 
-def _get_planets() -> Dict:
+def _get_planets() -> dict:
     return _load_json(DEFINITIONS_DIR / "planets.json").get("planets", {})
 
 
-def _get_rashis() -> Dict:
+def _get_rashis() -> dict:
     return _load_json(DEFINITIONS_DIR / "rashis.json").get("rashis", {})
 
 
-def _get_nakshatras() -> List:
+def _get_nakshatras() -> list:
     return _load_json(DEFINITIONS_DIR / "nakshatras.json").get("nakshatras", [])
 
 
-def _get_houses() -> Dict:
+def _get_houses() -> dict:
     return _load_json(DEFINITIONS_DIR / "houses.json").get("houses", {})
 
 
-def _get_yoga_rules() -> Dict:
-    return _load_json(RULES_DIR / "yoga_detection.json").get("yoga_rules", {})
+def _get_yoga_rules() -> dict:
+    # Use master file with 522 yogas (consolidated from all parts)
+    return _load_json(RULES_DIR / "yoga_master.json").get("yoga_rules", {})
 
 
-def _get_dosha_rules() -> Dict:
-    return _load_json(RULES_DIR / "dosha_detection.json").get("dosha_rules", {})
+def _get_dosha_rules() -> dict:
+    # Use master file with 55 doshas (expanded from classical texts)
+    return _load_json(RULES_DIR / "dosha_master.json").get("dosha_rules", {})
 
 
 @mcp.tool()
-def lookup_planet(planet_id: str) -> Dict[str, Any]:
+def lookup_planet(planet_id: str) -> dict[str, Any]:
     """
     Get complete planet definition.
 
@@ -83,13 +86,13 @@ def lookup_planet(planet_id: str) -> Dict[str, Any]:
             return {
                 "found": True,
                 "planet": data,
-                "summary": f"{data['name']} ({data['sanskrit']}) is a {data['nature']} planet ruling {', '.join(data['owns_signs'])}."
+                "summary": f"{data['name']} ({data['sanskrit']}) is a {data['nature']} planet ruling {', '.join(data['owns_signs'])}.",
             }
         else:
             return {
                 "found": False,
                 "error": f"Planet '{planet_id}' not found",
-                "available": list(planets.keys())
+                "available": list(planets.keys()),
             }
 
     except Exception as e:
@@ -97,7 +100,7 @@ def lookup_planet(planet_id: str) -> Dict[str, Any]:
 
 
 @mcp.tool()
-def lookup_rashi(rashi_id: str) -> Dict[str, Any]:
+def lookup_rashi(rashi_id: str) -> dict[str, Any]:
     """
     Get complete rashi (zodiac sign) definition.
 
@@ -116,13 +119,13 @@ def lookup_rashi(rashi_id: str) -> Dict[str, Any]:
             return {
                 "found": True,
                 "rashi": data,
-                "summary": f"{data['name']} ({data['sanskrit']}) is a {data['element']} {data['quality']} sign ruled by {data['ruler']}."
+                "summary": f"{data['name']} ({data['sanskrit']}) is a {data['element']} {data['quality']} sign ruled by {data['ruler']}.",
             }
         else:
             return {
                 "found": False,
                 "error": f"Rashi '{rashi_id}' not found",
-                "available": list(rashis.keys())
+                "available": list(rashis.keys()),
             }
 
     except Exception as e:
@@ -130,7 +133,7 @@ def lookup_rashi(rashi_id: str) -> Dict[str, Any]:
 
 
 @mcp.tool()
-def lookup_nakshatra(nakshatra_name: str) -> Dict[str, Any]:
+def lookup_nakshatra(nakshatra_name: str) -> dict[str, Any]:
     """
     Get complete nakshatra definition.
 
@@ -150,13 +153,13 @@ def lookup_nakshatra(nakshatra_name: str) -> Dict[str, Any]:
                 return {
                     "found": True,
                     "nakshatra": nak,
-                    "summary": f"{nak['name']} ({nak.get('sanskrit', '')}) is ruled by {nak['ruler']}, deity: {nak['deity']}, symbol: {nak['symbol']}."
+                    "summary": f"{nak['name']} ({nak.get('sanskrit', '')}) is ruled by {nak['ruler']}, deity: {nak['deity']}, symbol: {nak['symbol']}.",
                 }
 
         return {
             "found": False,
             "error": f"Nakshatra '{nakshatra_name}' not found",
-            "available": [n["name"] for n in nakshatras]
+            "available": [n["name"] for n in nakshatras],
         }
 
     except Exception as e:
@@ -164,7 +167,7 @@ def lookup_nakshatra(nakshatra_name: str) -> Dict[str, Any]:
 
 
 @mcp.tool()
-def lookup_house(house_number: int) -> Dict[str, Any]:
+def lookup_house(house_number: int) -> dict[str, Any]:
     """
     Get complete house (bhava) definition.
 
@@ -183,13 +186,13 @@ def lookup_house(house_number: int) -> Dict[str, Any]:
             return {
                 "found": True,
                 "house": data,
-                "summary": f"House {house_number} ({data['name']}/{data['sanskrit']}) signifies: {', '.join(data['significations'][:5])}..."
+                "summary": f"House {house_number} ({data['name']}/{data['sanskrit']}) signifies: {', '.join(data['significations'][:5])}...",
             }
         else:
             return {
                 "found": False,
                 "error": f"House {house_number} not found (must be 1-12)",
-                "available": list(houses.keys())
+                "available": list(houses.keys()),
             }
 
     except Exception as e:
@@ -197,7 +200,7 @@ def lookup_house(house_number: int) -> Dict[str, Any]:
 
 
 @mcp.tool()
-def lookup_yoga(yoga_id: str) -> Dict[str, Any]:
+def lookup_yoga(yoga_id: str) -> dict[str, Any]:
     """
     Get yoga definition and interpretation.
 
@@ -217,7 +220,7 @@ def lookup_yoga(yoga_id: str) -> Dict[str, Any]:
             return {
                 "found": True,
                 "yoga": data,
-                "summary": f"{data['name']}: {data.get('description', 'No description')}"
+                "summary": f"{data['name']}: {data.get('description', 'No description')}",
             }
 
         # Try partial match
@@ -227,13 +230,13 @@ def lookup_yoga(yoga_id: str) -> Dict[str, Any]:
                     "found": True,
                     "yoga": data,
                     "matched_id": key,
-                    "summary": f"{data['name']}: {data.get('description', 'No description')}"
+                    "summary": f"{data['name']}: {data.get('description', 'No description')}",
                 }
 
         return {
             "found": False,
             "error": f"Yoga '{yoga_id}' not found",
-            "available": list(yogas.keys())
+            "available": list(yogas.keys()),
         }
 
     except Exception as e:
@@ -241,7 +244,7 @@ def lookup_yoga(yoga_id: str) -> Dict[str, Any]:
 
 
 @mcp.tool()
-def lookup_dosha(dosha_id: str) -> Dict[str, Any]:
+def lookup_dosha(dosha_id: str) -> dict[str, Any]:
     """
     Get dosha definition, effects, and remedies.
 
@@ -260,7 +263,7 @@ def lookup_dosha(dosha_id: str) -> Dict[str, Any]:
             return {
                 "found": True,
                 "dosha": data,
-                "summary": f"{data['name']}: {data.get('description', 'No description')}"
+                "summary": f"{data['name']}: {data.get('description', 'No description')}",
             }
 
         # Try partial match
@@ -270,13 +273,13 @@ def lookup_dosha(dosha_id: str) -> Dict[str, Any]:
                     "found": True,
                     "dosha": data,
                     "matched_id": key,
-                    "summary": f"{data['name']}: {data.get('description', 'No description')}"
+                    "summary": f"{data['name']}: {data.get('description', 'No description')}",
                 }
 
         return {
             "found": False,
             "error": f"Dosha '{dosha_id}' not found",
-            "available": list(doshas.keys())
+            "available": list(doshas.keys()),
         }
 
     except Exception as e:
@@ -284,10 +287,7 @@ def lookup_dosha(dosha_id: str) -> Dict[str, Any]:
 
 
 @mcp.tool()
-def search_knowledge(
-    query: str,
-    category: str = None
-) -> Dict[str, Any]:
+def search_knowledge(query: str, category: str | None = None) -> dict[str, Any]:
     """
     Search across knowledge base.
 
@@ -306,7 +306,9 @@ def search_knowledge(
         if not category or category == "planet":
             for key, data in _get_planets().items():
                 if _matches(query_lower, [key, data.get("name", ""), data.get("sanskrit", "")]):
-                    results.append({"type": "planet", "id": key, "name": data["name"], "data": data})
+                    results.append(
+                        {"type": "planet", "id": key, "name": data["name"], "data": data}
+                    )
 
         # Search rashis
         if not category or category == "rashi":
@@ -317,14 +319,26 @@ def search_knowledge(
         # Search nakshatras
         if not category or category == "nakshatra":
             for data in _get_nakshatras():
-                if _matches(query_lower, [data.get("name", ""), data.get("sanskrit", ""), data.get("ruler", "")]):
-                    results.append({"type": "nakshatra", "id": data["name"], "name": data["name"], "data": data})
+                if _matches(
+                    query_lower,
+                    [data.get("name", ""), data.get("sanskrit", ""), data.get("ruler", "")],
+                ):
+                    results.append(
+                        {
+                            "type": "nakshatra",
+                            "id": data["name"],
+                            "name": data["name"],
+                            "data": data,
+                        }
+                    )
 
         # Search houses
         if not category or category == "house":
             for key, data in _get_houses().items():
                 significations = " ".join(data.get("significations", []))
-                if _matches(query_lower, [data.get("name", ""), data.get("sanskrit", ""), significations]):
+                if _matches(
+                    query_lower, [data.get("name", ""), data.get("sanskrit", ""), significations]
+                ):
                     results.append({"type": "house", "id": key, "name": data["name"], "data": data})
 
         # Search yogas
@@ -343,7 +357,7 @@ def search_knowledge(
             "query": query,
             "category": category,
             "total_results": len(results),
-            "results": results[:20]  # Limit to 20 results
+            "results": results[:20],  # Limit to 20 results
         }
 
     except Exception as e:
@@ -351,7 +365,7 @@ def search_knowledge(
 
 
 @mcp.tool()
-def list_all(category: str) -> Dict[str, Any]:
+def list_all(category: str) -> dict[str, Any]:
     """
     List all items in a category.
 
@@ -376,7 +390,11 @@ def list_all(category: str) -> Dict[str, Any]:
 
         elif category == "houses":
             data = _get_houses()
-            return {"category": category, "count": len(data), "items": [f"{k}: {v['name']}" for k, v in data.items()]}
+            return {
+                "category": category,
+                "count": len(data),
+                "items": [f"{k}: {v['name']}" for k, v in data.items()],
+            }
 
         elif category == "yogas":
             data = _get_yoga_rules()
@@ -389,19 +407,16 @@ def list_all(category: str) -> Dict[str, Any]:
         else:
             return {
                 "error": f"Unknown category: {category}",
-                "available": ["planets", "rashis", "nakshatras", "houses", "yogas", "doshas"]
+                "available": ["planets", "rashis", "nakshatras", "houses", "yogas", "doshas"],
             }
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__}
 
 
-def _matches(query: str, fields: List[str]) -> bool:
+def _matches(query: str, fields: list[str]) -> bool:
     """Check if query matches any field."""
-    for field in fields:
-        if field and query in field.lower():
-            return True
-    return False
+    return any(field and query in field.lower() for field in fields)
 
 
 if __name__ == "__main__":

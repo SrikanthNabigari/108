@@ -1,0 +1,1299 @@
+{
+  "metadata": {
+    "version": "2.0.0",
+    "total_doshas": 55,
+    "sources": [
+      "Brihat Parashara Hora Shastra (BPHS)",
+      "Phaladeepika",
+      "Brihat Jataka",
+      "Muhurta Chintamani",
+      "Jataka Parijata"
+    ],
+    "categories": {
+      "graha": "Planet-based doshas",
+      "bhava": "House-based doshas",
+      "nakshatra": "Nakshatra-based doshas",
+      "yoga_dosha": "Yoga-based afflictions",
+      "muhurta": "Timing-based doshas"
+    }
+  },
+  "dosha_rules": {
+    "mangal_dosha": {
+      "id": "mangal_dosha",
+      "name": "Mangal Dosha (Kuja Dosha)",
+      "sanskrit": "मंगल दोष",
+      "category": "graha",
+      "source": "BPHS",
+      "description": "Mars in 1st, 2nd, 4th, 7th, 8th, or 12th house from Lagna, Moon, or Venus. Affects marriage.",
+      "detection": {
+        "planet": "mars",
+        "conditions": [
+          {"type": "mars_in_houses", "houses": [1, 2, 4, 7, 8, 12], "from": ["lagna", "moon", "venus"]}
+        ]
+      },
+      "severity_levels": {
+        "high": "Mars in 7th or 8th",
+        "medium": "Mars in 1st, 4th, or 12th",
+        "low": "Mars in 2nd"
+      },
+      "effects": [
+        "Delay in marriage",
+        "Conflict in marriage",
+        "Spouse health issues",
+        "Possible separation",
+        "Aggression in partnerships"
+      ],
+      "cancellation": [
+        {"type": "mars_in_own_sign"},
+        {"type": "mars_in_exalted_sign"},
+        {"type": "mars_aspected_by_jupiter"},
+        {"type": "both_partners_have_mangal_dosha"},
+        {"type": "mars_in_aries_leo_aquarius_cancer"},
+        {"type": "jupiter_venus_conjunction_in_lagna"},
+        {"type": "7th_lord_in_9th"}
+      ],
+      "remedies": [
+        "Mangal Dosha pooja",
+        "Recite Hanuman Chalisa",
+        "Wear red coral after analysis",
+        "Donate red lentils on Tuesday",
+        "Kumbh Vivah (marriage to pot/tree)"
+      ]
+    },
+    "kaal_sarp_dosha": {
+      "id": "kaal_sarp_dosha",
+      "name": "Kaal Sarp Dosha",
+      "sanskrit": "काल सर्प दोष",
+      "category": "graha",
+      "source": "Various texts",
+      "description": "All planets hemmed between Rahu and Ketu axis. Creates karmic restrictions.",
+      "detection": {
+        "conditions": [
+          {"type": "all_planets_between_rahu_ketu"}
+        ]
+      },
+      "sub_types": [
+        "Anant (Rahu in 1st)",
+        "Kulik (Rahu in 2nd)",
+        "Vasuki (Rahu in 3rd)",
+        "Shankpal (Rahu in 4th)",
+        "Padma (Rahu in 5th)",
+        "Mahapadma (Rahu in 6th)",
+        "Takshak (Rahu in 7th)",
+        "Karkotak (Rahu in 8th)",
+        "Shankhchud (Rahu in 9th)",
+        "Ghatak (Rahu in 10th)",
+        "Vishdhar (Rahu in 11th)",
+        "Sheshnag (Rahu in 12th)"
+      ],
+      "effects": [
+        "Struggles and obstacles",
+        "Delay in achievements",
+        "Karmic restrictions",
+        "Fear and anxiety",
+        "Eventually overcomes"
+      ],
+      "remedies": [
+        "Kaal Sarp Dosha Nivaran Pooja",
+        "Visit Trimbakeshwar or Kalahasti",
+        "Recite Rahu-Ketu mantras",
+        "Donate on Nag Panchami",
+        "Feed snakes (snake idol/pictures)"
+      ]
+    },
+    "pitra_dosha": {
+      "id": "pitra_dosha",
+      "name": "Pitra Dosha",
+      "sanskrit": "पितृ दोष",
+      "category": "graha",
+      "source": "BPHS",
+      "description": "Sun afflicted by Rahu/Ketu, or 9th house afflicted. Ancestral karma affects native.",
+      "detection": {
+        "conditions": [
+          {"type": "sun_conjunct_rahu_or_ketu"},
+          {"type": "9th_house_afflicted"},
+          {"type": "9th_lord_afflicted"}
+        ],
+        "any_condition": true
+      },
+      "effects": [
+        "Unexplained obstacles",
+        "Lack of father's blessings",
+        "Ancestral karma",
+        "Children problems",
+        "Repeated misfortunes"
+      ],
+      "remedies": [
+        "Pind Daan at Gaya",
+        "Tarpan for ancestors",
+        "Narayan Bali Puja",
+        "Shradh ceremonies",
+        "Donate to brahmins"
+      ]
+    },
+    "grahan_dosha": {
+      "id": "grahan_dosha",
+      "name": "Grahan Dosha (Eclipse Dosha)",
+      "sanskrit": "ग्रहण दोष",
+      "category": "graha",
+      "source": "BPHS",
+      "description": "Birth during eclipse or Sun/Moon conjunct Rahu/Ketu. Eclipse energy affects native.",
+      "detection": {
+        "conditions": [
+          {"type": "birth_during_eclipse"},
+          {"type": "sun_conjunct_rahu_within_degrees", "degrees": 10},
+          {"type": "moon_conjunct_rahu_within_degrees", "degrees": 12}
+        ],
+        "any_condition": true
+      },
+      "effects": [
+        "Health vulnerabilities",
+        "Mental fluctuations",
+        "Eye problems",
+        "Father/Mother health issues",
+        "Spiritual sensitivity"
+      ],
+      "remedies": [
+        "Grahan Dosha Shanti Puja",
+        "Recite Surya/Chandra mantras",
+        "Donate during eclipses",
+        "Perform Rudra Abhishek",
+        "Feed cows"
+      ]
+    },
+    "guru_chandal_dosha": {
+      "id": "guru_chandal_dosha",
+      "name": "Guru Chandal Dosha",
+      "sanskrit": "गुरु चाण्डाल दोष",
+      "category": "graha",
+      "source": "BPHS",
+      "description": "Jupiter conjunct or aspected by Rahu. Corrupts wisdom and guidance.",
+      "detection": {
+        "conditions": [
+          {"type": "jupiter_conjunct_rahu"},
+          {"type": "jupiter_aspected_by_rahu"}
+        ],
+        "any_condition": true
+      },
+      "effects": [
+        "Wrong decisions",
+        "Bad advice from gurus",
+        "Misguided wisdom",
+        "Problems with teachers",
+        "Lack of faith"
+      ],
+      "remedies": [
+        "Worship Lord Vishnu",
+        "Recite Vishnu Sahasranama",
+        "Wear yellow sapphire (if suitable)",
+        "Respect teachers and elders",
+        "Donate yellow items on Thursday"
+      ]
+    },
+    "shani_dosha": {
+      "id": "shani_dosha",
+      "name": "Shani Dosha",
+      "sanskrit": "शनि दोष",
+      "category": "graha",
+      "source": "BPHS",
+      "description": "Saturn afflicting key houses (1st, 4th, 7th, 10th) or conjunct luminaries.",
+      "detection": {
+        "conditions": [
+          {"type": "saturn_in_kendra_afflicting"},
+          {"type": "saturn_conjunct_sun"},
+          {"type": "saturn_conjunct_moon"}
+        ],
+        "any_condition": true
+      },
+      "effects": [
+        "Delays in life",
+        "Hard work required",
+        "Struggles and limitations",
+        "Health issues",
+        "Eventually brings maturity"
+      ],
+      "remedies": [
+        "Worship Lord Hanuman",
+        "Recite Shani Stotra",
+        "Donate black items on Saturday",
+        "Help disabled and elderly",
+        "Oil massage before bath Saturday"
+      ]
+    },
+    "kemdrum_dosha": {
+      "id": "kemdrum_dosha",
+      "name": "Kemdrum Dosha",
+      "sanskrit": "केमद्रुम दोष",
+      "category": "graha",
+      "source": "BPHS",
+      "description": "No planets in 2nd or 12th from Moon (except Sun, Rahu, Ketu). Lonely Moon.",
+      "detection": {
+        "conditions": [
+          {"type": "no_planet_2nd_12th_from_moon"}
+        ]
+      },
+      "effects": [
+        "Financial struggles",
+        "Loneliness",
+        "Lack of support",
+        "Mental stress",
+        "Can be cancelled"
+      ],
+      "cancellation": [
+        {"type": "planet_in_kendra_from_moon"},
+        {"type": "moon_aspected_by_benefic"},
+        {"type": "moon_in_kendra_from_lagna"},
+        {"type": "full_moon"},
+        {"type": "moon_in_own_or_exalted_sign"}
+      ],
+      "remedies": [
+        "Worship Goddess Durga",
+        "Recite Chandra mantras",
+        "Fast on Monday",
+        "Donate white items",
+        "Wear pearl (if suitable)"
+      ]
+    },
+    "nadi_dosha": {
+      "id": "nadi_dosha",
+      "name": "Nadi Dosha",
+      "sanskrit": "नाड़ी दोष",
+      "category": "nakshatra",
+      "source": "Muhurta texts",
+      "description": "Same Nadi (Vata/Pitta/Kapha) in both partners. Affects progeny and compatibility.",
+      "detection": {
+        "conditions": [
+          {"type": "same_nadi_both_partners"}
+        ]
+      },
+      "types": [
+        "Aadi Nadi (Vata) - Beginning",
+        "Madhya Nadi (Pitta) - Middle",
+        "Antya Nadi (Kapha) - End"
+      ],
+      "effects": [
+        "Progeny problems",
+        "Health compatibility issues",
+        "Emotional disconnect",
+        "Separation possibility",
+        "Physical constitution mismatch"
+      ],
+      "cancellation": [
+        {"type": "same_rashi_different_nakshatra"},
+        {"type": "same_nakshatra_different_rashi"},
+        {"type": "one_nakshatra_is_rohini_ardra_pushya_etc"}
+      ],
+      "remedies": [
+        "Nadi Dosha Nivaran Puja",
+        "Donate gold",
+        "Mahamrityunjaya Japa",
+        "Vishnu Puja",
+        "Cow donation"
+      ]
+    },
+    "bhakoot_dosha": {
+      "id": "bhakoot_dosha",
+      "name": "Bhakoot Dosha",
+      "sanskrit": "भकूट दोष",
+      "category": "nakshatra",
+      "source": "Muhurta texts",
+      "description": "Incompatible Moon sign combinations (2-12, 5-9, 6-8). Affects wealth and children.",
+      "detection": {
+        "conditions": [
+          {"type": "moon_signs_2_12"},
+          {"type": "moon_signs_5_9"},
+          {"type": "moon_signs_6_8"}
+        ],
+        "any_condition": true
+      },
+      "effects": [
+        "Financial conflicts",
+        "Children delays",
+        "Misunderstandings",
+        "Separation possibility",
+        "Career clashes"
+      ],
+      "cancellation": [
+        {"type": "same_lord_for_both_rashis"},
+        {"type": "lords_are_friends"},
+        {"type": "high_total_ashtakoot_score"}
+      ],
+      "remedies": [
+        "Bhakoot Dosha Shanti",
+        "Navagraha Puja",
+        "Recite Durga Saptashati",
+        "Donate to poor couples",
+        "Lakshmi Puja together"
+      ]
+    },
+    "gana_dosha": {
+      "id": "gana_dosha",
+      "name": "Gana Dosha",
+      "sanskrit": "गण दोष",
+      "category": "nakshatra",
+      "source": "Muhurta texts",
+      "description": "Incompatible Gana (Deva-Rakshasa combination). Temperament mismatch.",
+      "detection": {
+        "conditions": [
+          {"type": "deva_rakshasa_combination"}
+        ]
+      },
+      "types": [
+        "Deva Gana - Divine temperament",
+        "Manushya Gana - Human temperament",
+        "Rakshasa Gana - Demonic temperament"
+      ],
+      "effects": [
+        "Temperament clashes",
+        "Different value systems",
+        "Arguments and conflicts",
+        "Difficulty understanding each other",
+        "But can complement if managed"
+      ],
+      "cancellation": [
+        {"type": "high_total_ashtakoot_score"},
+        {"type": "mutual_respect_commitment"}
+      ],
+      "remedies": [
+        "Ganapati Puja together",
+        "Couple meditation",
+        "Donate to orphanages",
+        "Respect differences",
+        "Shiva-Parvati worship"
+      ]
+    },
+    "gandmool_dosha": {
+      "id": "gandmool_dosha",
+      "name": "Gandmool Dosha",
+      "sanskrit": "गंडमूल दोष",
+      "category": "nakshatra",
+      "source": "BPHS",
+      "description": "Birth in Gandanta nakshatras (Ashwini, Ashlesha, Magha, Jyeshtha, Mula, Revati).",
+      "detection": {
+        "conditions": [
+          {"type": "moon_in_gandmool_nakshatra"}
+        ]
+      },
+      "gandanta_points": [
+        "Junction of water and fire signs",
+        "End of Cancer-start of Leo (Ashlesha-Magha)",
+        "End of Scorpio-start of Sagittarius (Jyeshtha-Mula)",
+        "End of Pisces-start of Aries (Revati-Ashwini)"
+      ],
+      "effects": [
+        "Early life struggles",
+        "Father or mother health (depending on nakshatra)",
+        "Transformation required",
+        "Spiritual significance",
+        "Eventually becomes strong"
+      ],
+      "remedies": [
+        "Gandmool Shanti Puja",
+        "Perform Shanti on 27th day",
+        "Donate to charity",
+        "Recite specific nakshatra mantras",
+        "Worship nakshatra deity"
+      ]
+    },
+    "chandra_dosha": {
+      "id": "chandra_dosha",
+      "name": "Chandra Dosha (Moon Affliction)",
+      "sanskrit": "चंद्र दोष",
+      "category": "graha",
+      "source": "BPHS",
+      "description": "Moon weak, debilitated, or heavily afflicted. Affects mind and emotions.",
+      "detection": {
+        "conditions": [
+          {"type": "moon_debilitated"},
+          {"type": "moon_in_6_8_12"},
+          {"type": "moon_conjunct_malefics"},
+          {"type": "moon_in_dark_half_weak"}
+        ],
+        "any_condition": true
+      },
+      "effects": [
+        "Mental instability",
+        "Emotional issues",
+        "Mother's health concerns",
+        "Sleep problems",
+        "Anxiety and worry"
+      ],
+      "remedies": [
+        "Worship Goddess Durga",
+        "Chandra mantra japa",
+        "Wear pearl (if suitable)",
+        "Fast on Monday",
+        "Donate white items"
+      ]
+    },
+    "surya_dosha": {
+      "id": "surya_dosha",
+      "name": "Surya Dosha (Sun Affliction)",
+      "sanskrit": "सूर्य दोष",
+      "category": "graha",
+      "source": "BPHS",
+      "description": "Sun weak, debilitated, or heavily afflicted. Affects authority and father.",
+      "detection": {
+        "conditions": [
+          {"type": "sun_debilitated"},
+          {"type": "sun_in_6_8_12"},
+          {"type": "sun_conjunct_malefics"}
+        ],
+        "any_condition": true
+      },
+      "effects": [
+        "Father health issues",
+        "Authority problems",
+        "Government obstacles",
+        "Lack of confidence",
+        "Eye problems"
+      ],
+      "remedies": [
+        "Surya Namaskar",
+        "Recite Aditya Hridaya Stotra",
+        "Offer water to Sun",
+        "Wear ruby (if suitable)",
+        "Donate wheat on Sunday"
+      ]
+    },
+    "budha_dosha": {
+      "id": "budha_dosha",
+      "name": "Budha Dosha (Mercury Affliction)",
+      "sanskrit": "बुध दोष",
+      "category": "graha",
+      "source": "BPHS",
+      "description": "Mercury weak, debilitated, combust, or afflicted. Affects communication and intellect.",
+      "detection": {
+        "conditions": [
+          {"type": "mercury_debilitated"},
+          {"type": "mercury_combust"},
+          {"type": "mercury_with_malefics"}
+        ],
+        "any_condition": true
+      },
+      "effects": [
+        "Communication problems",
+        "Learning difficulties",
+        "Business losses",
+        "Nervous issues",
+        "Skin problems"
+      ],
+      "remedies": [
+        "Worship Lord Vishnu",
+        "Recite Vishnu Sahasranama",
+        "Wear emerald (if suitable)",
+        "Donate green items Wednesday",
+        "Feed green vegetables to cows"
+      ]
+    },
+    "guru_dosha": {
+      "id": "guru_dosha",
+      "name": "Guru Dosha (Jupiter Affliction)",
+      "sanskrit": "गुरु दोष",
+      "category": "graha",
+      "source": "BPHS",
+      "description": "Jupiter weak, debilitated, or afflicted. Affects wisdom, children, and fortune.",
+      "detection": {
+        "conditions": [
+          {"type": "jupiter_debilitated"},
+          {"type": "jupiter_in_6_8_12"},
+          {"type": "jupiter_combust"}
+        ],
+        "any_condition": true
+      },
+      "effects": [
+        "Lack of wisdom",
+        "Children problems",
+        "Fortune blocked",
+        "Teacher issues",
+        "Legal problems"
+      ],
+      "remedies": [
+        "Worship Lord Brihaspati",
+        "Recite Guru mantra",
+        "Wear yellow sapphire (if suitable)",
+        "Donate yellow items Thursday",
+        "Respect teachers and elders"
+      ]
+    },
+    "shukra_dosha": {
+      "id": "shukra_dosha",
+      "name": "Shukra Dosha (Venus Affliction)",
+      "sanskrit": "शुक्र दोष",
+      "category": "graha",
+      "source": "BPHS",
+      "description": "Venus weak, debilitated, combust, or afflicted. Affects marriage and comforts.",
+      "detection": {
+        "conditions": [
+          {"type": "venus_debilitated"},
+          {"type": "venus_combust"},
+          {"type": "venus_with_malefics"}
+        ],
+        "any_condition": true
+      },
+      "effects": [
+        "Marriage problems",
+        "Lack of luxury",
+        "Vehicle issues",
+        "Creative blocks",
+        "Relationship troubles"
+      ],
+      "remedies": [
+        "Worship Goddess Lakshmi",
+        "Recite Shukra mantra",
+        "Wear diamond (if suitable)",
+        "Donate white items Friday",
+        "Respect women"
+      ]
+    },
+    "rahu_dosha": {
+      "id": "rahu_dosha",
+      "name": "Rahu Dosha",
+      "sanskrit": "राहु दोष",
+      "category": "graha",
+      "source": "BPHS",
+      "description": "Rahu afflicting key planets or houses. Creates illusion and confusion.",
+      "detection": {
+        "conditions": [
+          {"type": "rahu_with_lagna_lord"},
+          {"type": "rahu_in_1_5_7_9"},
+          {"type": "rahu_with_luminaries"}
+        ],
+        "any_condition": true
+      },
+      "effects": [
+        "Confusion and illusion",
+        "Foreign/unusual problems",
+        "Unexpected obstacles",
+        "Hidden enemies",
+        "Fear and anxiety"
+      ],
+      "remedies": [
+        "Rahu Shanti Puja",
+        "Recite Rahu mantra",
+        "Donate to sweepers",
+        "Feed birds",
+        "Wear Gomed (if suitable)"
+      ]
+    },
+    "ketu_dosha": {
+      "id": "ketu_dosha",
+      "name": "Ketu Dosha",
+      "sanskrit": "केतु दोष",
+      "category": "graha",
+      "source": "BPHS",
+      "description": "Ketu afflicting key planets or houses. Creates detachment and confusion.",
+      "detection": {
+        "conditions": [
+          {"type": "ketu_with_lagna_lord"},
+          {"type": "ketu_in_1_5_7_9"},
+          {"type": "ketu_with_luminaries"}
+        ],
+        "any_condition": true
+      },
+      "effects": [
+        "Sudden losses",
+        "Detachment issues",
+        "Spiritual confusion",
+        "Past life karma",
+        "Hidden fears"
+      ],
+      "remedies": [
+        "Ketu Shanti Puja",
+        "Recite Ketu mantra",
+        "Donate blankets to poor",
+        "Worship Lord Ganesha",
+        "Wear Cat's Eye (if suitable)"
+      ]
+    },
+    "angarak_dosha": {
+      "id": "angarak_dosha",
+      "name": "Angarak Dosha (Mars-Rahu)",
+      "sanskrit": "अंगारक दोष",
+      "category": "graha",
+      "source": "BPHS",
+      "description": "Mars conjunct Rahu. Creates aggression and accidents.",
+      "detection": {
+        "conditions": [
+          {"type": "mars_conjunct_rahu"}
+        ]
+      },
+      "effects": [
+        "Aggression and anger",
+        "Accident prone",
+        "Legal troubles",
+        "Blood-related issues",
+        "Conflicts and fights"
+      ],
+      "remedies": [
+        "Angarak Dosha Shanti",
+        "Worship Lord Hanuman",
+        "Recite Hanuman Chalisa",
+        "Donate red items Tuesday",
+        "Avoid aggression"
+      ]
+    },
+    "shapit_dosha": {
+      "id": "shapit_dosha",
+      "name": "Shapit Dosha (Cursed Yoga)",
+      "sanskrit": "शापित दोष",
+      "category": "graha",
+      "source": "BPHS",
+      "description": "Saturn conjunct Rahu. Past life curse affecting present.",
+      "detection": {
+        "conditions": [
+          {"type": "saturn_conjunct_rahu"}
+        ]
+      },
+      "effects": [
+        "Unexplained obstacles",
+        "Karmic debt",
+        "Delays and denials",
+        "Fear of unknown",
+        "Past life issues"
+      ],
+      "remedies": [
+        "Shapit Dosha Nivaran",
+        "Naga Puja",
+        "Shani-Rahu Shanti together",
+        "Donate to disabled",
+        "Serve elders"
+      ]
+    },
+    "vish_dosha": {
+      "id": "vish_dosha",
+      "name": "Vish Dosha (Poison Yoga)",
+      "sanskrit": "विष दोष",
+      "category": "graha",
+      "source": "BPHS",
+      "description": "Saturn conjunct Moon. Mental heaviness and depression.",
+      "detection": {
+        "conditions": [
+          {"type": "saturn_conjunct_moon"}
+        ]
+      },
+      "effects": [
+        "Mental heaviness",
+        "Depression tendencies",
+        "Mother issues",
+        "Emotional coldness",
+        "Late bloomer"
+      ],
+      "remedies": [
+        "Vish Yoga Nivaran",
+        "Worship Lord Shiva",
+        "Recite Mahamrityunjaya",
+        "Donate to old age homes",
+        "Care for mother"
+      ]
+    },
+    "putra_dosha": {
+      "id": "putra_dosha",
+      "name": "Putra Dosha (Children Affliction)",
+      "sanskrit": "पुत्र दोष",
+      "category": "bhava",
+      "source": "BPHS",
+      "description": "5th house or lord severely afflicted. Delays or denies children.",
+      "detection": {
+        "conditions": [
+          {"type": "5th_house_afflicted"},
+          {"type": "5th_lord_debilitated_or_afflicted"},
+          {"type": "jupiter_afflicted"}
+        ],
+        "any_condition": true
+      },
+      "effects": [
+        "Delay in children",
+        "Children health issues",
+        "Miscarriage possibility",
+        "Problems with children",
+        "Adoption possibility"
+      ],
+      "remedies": [
+        "Santana Gopala Puja",
+        "Worship Lord Krishna",
+        "Recite Putra Kameshti mantras",
+        "Donate to orphanages",
+        "Feed birds and cows"
+      ]
+    },
+    "vivah_dosha": {
+      "id": "vivah_dosha",
+      "name": "Vivah Dosha (Marriage Affliction)",
+      "sanskrit": "विवाह दोष",
+      "category": "bhava",
+      "source": "BPHS",
+      "description": "7th house or lord severely afflicted. Delays or troubles marriage.",
+      "detection": {
+        "conditions": [
+          {"type": "7th_house_afflicted"},
+          {"type": "7th_lord_debilitated_or_afflicted"},
+          {"type": "venus_afflicted"}
+        ],
+        "any_condition": true
+      },
+      "effects": [
+        "Marriage delays",
+        "Partnership problems",
+        "Spouse health issues",
+        "Business troubles",
+        "Separation possibility"
+      ],
+      "remedies": [
+        "Vivah Dosha Shanti",
+        "Worship Goddess Parvati",
+        "Recite Parvati Stotra",
+        "Donate to poor girls marriage",
+        "Fast on Friday"
+      ]
+    },
+    "dhan_dosha": {
+      "id": "dhan_dosha",
+      "name": "Dhan Dosha (Wealth Affliction)",
+      "sanskrit": "धन दोष",
+      "category": "bhava",
+      "source": "BPHS",
+      "description": "2nd and 11th houses or lords severely afflicted. Blocks wealth.",
+      "detection": {
+        "conditions": [
+          {"type": "2nd_house_afflicted"},
+          {"type": "11th_house_afflicted"},
+          {"type": "2nd_11th_lords_afflicted"}
+        ],
+        "any_condition": true
+      },
+      "effects": [
+        "Wealth struggles",
+        "Gains blocked",
+        "Family wealth issues",
+        "Speech problems",
+        "Financial instability"
+      ],
+      "remedies": [
+        "Lakshmi Puja",
+        "Recite Lakshmi Stotra",
+        "Donate food on Friday",
+        "Worship Kubera",
+        "Give charity regularly"
+      ]
+    },
+    "karma_dosha": {
+      "id": "karma_dosha",
+      "name": "Karma Dosha (Career Affliction)",
+      "sanskrit": "कर्म दोष",
+      "category": "bhava",
+      "source": "BPHS",
+      "description": "10th house or lord severely afflicted. Career obstacles.",
+      "detection": {
+        "conditions": [
+          {"type": "10th_house_afflicted"},
+          {"type": "10th_lord_debilitated_or_afflicted"}
+        ],
+        "any_condition": true
+      },
+      "effects": [
+        "Career struggles",
+        "Job instability",
+        "Father issues",
+        "Reputation problems",
+        "Authority conflicts"
+      ],
+      "remedies": [
+        "Surya Puja",
+        "Recite Aditya Hridaya",
+        "Donate to father/elderly",
+        "Work sincerely",
+        "Serve government officials"
+      ]
+    },
+    "arogya_dosha": {
+      "id": "arogya_dosha",
+      "name": "Arogya Dosha (Health Affliction)",
+      "sanskrit": "आरोग्य दोष",
+      "category": "bhava",
+      "source": "BPHS",
+      "description": "Lagna, 6th, or 8th severely afflicted. General health issues.",
+      "detection": {
+        "conditions": [
+          {"type": "lagna_heavily_afflicted"},
+          {"type": "6th_house_heavily_afflicted"},
+          {"type": "8th_house_heavily_afflicted"}
+        ],
+        "any_condition": true
+      },
+      "effects": [
+        "General health issues",
+        "Chronic diseases",
+        "Low vitality",
+        "Accidents possibility",
+        "Hospital visits"
+      ],
+      "remedies": [
+        "Mahamrityunjaya Japa",
+        "Dhanvantari Puja",
+        "Donate medicines",
+        "Regular health checkups",
+        "Healthy lifestyle"
+      ]
+    },
+    "bhratru_dosha": {
+      "id": "bhratru_dosha",
+      "name": "Bhratru Dosha (Sibling Affliction)",
+      "sanskrit": "भ्रातृ दोष",
+      "category": "bhava",
+      "source": "BPHS",
+      "description": "3rd house or lord severely afflicted. Sibling problems.",
+      "detection": {
+        "conditions": [
+          {"type": "3rd_house_afflicted"},
+          {"type": "3rd_lord_afflicted"},
+          {"type": "mars_afflicted"}
+        ],
+        "any_condition": true
+      },
+      "effects": [
+        "Sibling conflicts",
+        "No siblings or separation",
+        "Courage issues",
+        "Communication problems",
+        "Short journey issues"
+      ],
+      "remedies": [
+        "Mars Shanti",
+        "Worship Lord Kartikeya",
+        "Donate red items",
+        "Help siblings",
+        "Practice courage"
+      ]
+    },
+    "matru_dosha": {
+      "id": "matru_dosha",
+      "name": "Matru Dosha (Mother Affliction)",
+      "sanskrit": "मातृ दोष",
+      "category": "bhava",
+      "source": "BPHS",
+      "description": "4th house or Moon severely afflicted. Mother-related problems.",
+      "detection": {
+        "conditions": [
+          {"type": "4th_house_afflicted"},
+          {"type": "moon_afflicted"},
+          {"type": "4th_lord_afflicted"}
+        ],
+        "any_condition": true
+      },
+      "effects": [
+        "Mother health issues",
+        "Separation from mother",
+        "Domestic unhappiness",
+        "Property problems",
+        "Educational breaks"
+      ],
+      "remedies": [
+        "Moon Shanti",
+        "Worship Goddess Durga",
+        "Care for mother",
+        "Donate white items Monday",
+        "Feed cows"
+      ]
+    },
+    "pitru_dosha_bhava": {
+      "id": "pitru_dosha_bhava",
+      "name": "Pitru Bhava Dosha (Father House Affliction)",
+      "sanskrit": "पितृ भाव दोष",
+      "category": "bhava",
+      "source": "BPHS",
+      "description": "9th house, Sun, or 9th lord severely afflicted. Father-related problems.",
+      "detection": {
+        "conditions": [
+          {"type": "9th_house_afflicted"},
+          {"type": "sun_afflicted"},
+          {"type": "9th_lord_afflicted"}
+        ],
+        "any_condition": true
+      },
+      "effects": [
+        "Father health issues",
+        "Lack of father's blessings",
+        "Fortune blocked",
+        "Guru problems",
+        "Higher education issues"
+      ],
+      "remedies": [
+        "Sun Shanti",
+        "Worship Lord Surya",
+        "Care for father",
+        "Donate wheat Sunday",
+        "Respect elders"
+      ]
+    },
+    "sukha_dosha": {
+      "id": "sukha_dosha",
+      "name": "Sukha Dosha (Happiness Affliction)",
+      "sanskrit": "सुख दोष",
+      "category": "bhava",
+      "source": "BPHS",
+      "description": "4th house severely afflicted by multiple malefics. Lack of peace.",
+      "detection": {
+        "conditions": [
+          {"type": "4th_house_multiple_malefics"}
+        ]
+      },
+      "effects": [
+        "Lack of peace",
+        "Domestic unrest",
+        "Vehicle problems",
+        "Property issues",
+        "No comfort"
+      ],
+      "remedies": [
+        "Moon and Venus Shanti",
+        "Worship Lord Ganesha",
+        "Create peaceful home",
+        "Donate comfort items",
+        "Meditation practice"
+      ]
+    },
+    "moksha_dosha": {
+      "id": "moksha_dosha",
+      "name": "Moksha Dosha (Liberation Affliction)",
+      "sanskrit": "मोक्ष दोष",
+      "category": "bhava",
+      "source": "BPHS",
+      "description": "12th house severely afflicted. Spiritual progress blocked.",
+      "detection": {
+        "conditions": [
+          {"type": "12th_house_heavily_afflicted"},
+          {"type": "12th_lord_heavily_afflicted"}
+        ],
+        "any_condition": true
+      },
+      "effects": [
+        "Spiritual confusion",
+        "Sleep problems",
+        "Excessive expenses",
+        "Foreign troubles",
+        "Liberation delayed"
+      ],
+      "remedies": [
+        "Ketu Shanti",
+        "Worship Lord Vishnu",
+        "Meditation practice",
+        "Donate to ashrams",
+        "Practice detachment"
+      ]
+    },
+    "mrityu_dosha": {
+      "id": "mrityu_dosha",
+      "name": "Mrityu Dosha (Longevity Affliction)",
+      "sanskrit": "मृत्यु दोष",
+      "category": "bhava",
+      "source": "BPHS",
+      "description": "8th house and Saturn severely afflicted. Longevity concerns.",
+      "detection": {
+        "conditions": [
+          {"type": "8th_house_badly_afflicted"},
+          {"type": "saturn_badly_afflicted"},
+          {"type": "8th_lord_badly_afflicted"}
+        ],
+        "all_conditions_required": true
+      },
+      "effects": [
+        "Longevity concerns",
+        "Sudden events",
+        "Chronic issues",
+        "Inheritance problems",
+        "Fear of death"
+      ],
+      "remedies": [
+        "Mahamrityunjaya Japa (108 daily)",
+        "Saturn Shanti",
+        "Donate black items Saturday",
+        "Help disabled",
+        "Feed crows"
+      ]
+    },
+    "sarpa_dosha": {
+      "id": "sarpa_dosha",
+      "name": "Sarpa Dosha (Serpent Curse)",
+      "sanskrit": "सर्प दोष",
+      "category": "graha",
+      "source": "Lal Kitab",
+      "description": "Rahu-Ketu afflicting 5th house or lord. Past life serpent karma.",
+      "detection": {
+        "conditions": [
+          {"type": "rahu_or_ketu_in_5th"},
+          {"type": "5th_lord_with_rahu_or_ketu"}
+        ],
+        "any_condition": true
+      },
+      "effects": [
+        "Children problems",
+        "Serpent-related fear",
+        "Past life karma",
+        "Unexpected troubles",
+        "Mystical experiences"
+      ],
+      "remedies": [
+        "Nag Panchami Puja",
+        "Visit Nag temples",
+        "Sarpa Dosha Nivaran",
+        "Feed milk to snake idols",
+        "Never harm snakes"
+      ]
+    },
+    "shrapit_yoga": {
+      "id": "shrapit_yoga",
+      "name": "Shrapit Yoga",
+      "sanskrit": "शापित योग",
+      "category": "yoga_dosha",
+      "source": "BPHS",
+      "description": "Saturn and Rahu in same house. Curse from past life.",
+      "detection": {
+        "conditions": [
+          {"type": "saturn_rahu_same_house"}
+        ]
+      },
+      "effects": [
+        "Past life curse active",
+        "Unexplained obstacles",
+        "Karmic debts",
+        "Delays in all matters",
+        "Requires spiritual effort"
+      ],
+      "remedies": [
+        "Shrapit Yoga Nivaran",
+        "Rahu-Shani Shanti together",
+        "Donate black items",
+        "Help disabled and elderly",
+        "Sarpa Puja"
+      ]
+    },
+    "chandra_grahan_dosha": {
+      "id": "chandra_grahan_dosha",
+      "name": "Chandra Grahan Dosha",
+      "sanskrit": "चंद्र ग्रहण दोष",
+      "category": "graha",
+      "source": "BPHS",
+      "description": "Moon conjunct Rahu or Ketu within 12 degrees. Mental eclipse.",
+      "detection": {
+        "conditions": [
+          {"type": "moon_conjunct_rahu_within_12"},
+          {"type": "moon_conjunct_ketu_within_12"}
+        ],
+        "any_condition": true
+      },
+      "effects": [
+        "Mental fluctuations",
+        "Mother health concerns",
+        "Emotional instability",
+        "Psychic sensitivity",
+        "Sleep disturbances"
+      ],
+      "remedies": [
+        "Chandra Grahan Shanti",
+        "Worship Goddess Durga",
+        "Recite Chandra kavach",
+        "Donate white items",
+        "Fast on Purnima"
+      ]
+    },
+    "surya_grahan_dosha": {
+      "id": "surya_grahan_dosha",
+      "name": "Surya Grahan Dosha",
+      "sanskrit": "सूर्य ग्रहण दोष",
+      "category": "graha",
+      "source": "BPHS",
+      "description": "Sun conjunct Rahu or Ketu within 10 degrees. Authority eclipse.",
+      "detection": {
+        "conditions": [
+          {"type": "sun_conjunct_rahu_within_10"},
+          {"type": "sun_conjunct_ketu_within_10"}
+        ],
+        "any_condition": true
+      },
+      "effects": [
+        "Authority problems",
+        "Father health issues",
+        "Government obstacles",
+        "Ego challenges",
+        "Recognition delayed"
+      ],
+      "remedies": [
+        "Surya Grahan Shanti",
+        "Worship Lord Surya",
+        "Recite Aditya Hridaya",
+        "Donate wheat on Sunday",
+        "Offer water to Sun"
+      ]
+    },
+    "duryoga_dosha": {
+      "id": "duryoga_dosha",
+      "name": "Duryoga Dosha",
+      "sanskrit": "दुर्योग दोष",
+      "category": "yoga_dosha",
+      "source": "BPHS",
+      "description": "10th lord in dusthana afflicted. Career struggles.",
+      "detection": {
+        "conditions": [
+          {"type": "10th_lord_in_6_8_12_afflicted"}
+        ]
+      },
+      "effects": [
+        "Career struggles",
+        "Job losses",
+        "Reputation damage",
+        "Father troubles",
+        "Authority conflicts"
+      ],
+      "remedies": [
+        "10th lord Shanti",
+        "Worship Surya",
+        "Work sincerely",
+        "Donate to elderly",
+        "Career counseling"
+      ]
+    },
+    "daridra_dosha": {
+      "id": "daridra_dosha",
+      "name": "Daridra Dosha",
+      "sanskrit": "दरिद्र दोष",
+      "category": "yoga_dosha",
+      "source": "BPHS",
+      "description": "11th lord in dusthana afflicted. Gains blocked.",
+      "detection": {
+        "conditions": [
+          {"type": "11th_lord_in_6_8_12_afflicted"}
+        ]
+      },
+      "effects": [
+        "Gains blocked",
+        "Financial struggles",
+        "Network problems",
+        "Elder sibling issues",
+        "Desires unfulfilled"
+      ],
+      "remedies": [
+        "Jupiter and 11th lord Shanti",
+        "Worship Lakshmi",
+        "Donate regularly",
+        "Help poor",
+        "Build positive network"
+      ]
+    },
+    "kemadruma_chandra": {
+      "id": "kemadruma_chandra",
+      "name": "Kemdrum Chandra Dosha",
+      "sanskrit": "केमद्रुम चंद्र दोष",
+      "category": "yoga_dosha",
+      "source": "BPHS",
+      "description": "Moon alone without planets in 2nd or 12th from it. Lonely Moon.",
+      "detection": {
+        "conditions": [
+          {"type": "no_planets_2nd_12th_from_moon"},
+          {"type": "no_cancellation_present"}
+        ],
+        "all_conditions_required": true
+      },
+      "effects": [
+        "Loneliness",
+        "Lack of support",
+        "Financial struggles",
+        "Mental stress",
+        "Self-reliance needed"
+      ],
+      "remedies": [
+        "Worship Goddess Durga",
+        "Chandra Shanti",
+        "Fast on Monday",
+        "Donate white items",
+        "Build support network"
+      ]
+    },
+    "amavasya_dosha": {
+      "id": "amavasya_dosha",
+      "name": "Amavasya Dosha (New Moon Birth)",
+      "sanskrit": "अमावस्या दोष",
+      "category": "muhurta",
+      "source": "Muhurta texts",
+      "description": "Birth on Amavasya (New Moon). Dark Moon effects.",
+      "detection": {
+        "conditions": [
+          {"type": "birth_on_amavasya"}
+        ]
+      },
+      "effects": [
+        "Mother health concerns",
+        "Emotional challenges",
+        "Hidden talents",
+        "Spiritual sensitivity",
+        "Need for light"
+      ],
+      "remedies": [
+        "Amavasya Dosha Shanti",
+        "Worship on every Amavasya",
+        "Donate to ancestors",
+        "Perform Tarpan",
+        "Light lamp daily"
+      ]
+    },
+    "shani_sade_sati": {
+      "id": "shani_sade_sati",
+      "name": "Shani Sade Sati",
+      "sanskrit": "शनि साढ़े साती",
+      "category": "transit",
+      "source": "Transit principles",
+      "description": "Saturn transiting 12th, 1st, 2nd from natal Moon. 7.5 year period of testing.",
+      "detection": {
+        "conditions": [
+          {"type": "saturn_in_12_1_2_from_moon"}
+        ]
+      },
+      "phases": {
+        "rising": "Saturn in 12th from Moon - Beginning phase",
+        "peak": "Saturn over Moon - Peak intensity",
+        "setting": "Saturn in 2nd from Moon - Final phase"
+      },
+      "effects": [
+        "Testing and challenges",
+        "Career changes",
+        "Health attention needed",
+        "Financial caution",
+        "Spiritual growth opportunity"
+      ],
+      "remedies": [
+        "Hanuman worship Saturday",
+        "Shani Stotra recitation",
+        "Donate black items",
+        "Help disabled",
+        "Oil massage before Saturday bath"
+      ]
+    },
+    "shani_dhaiya": {
+      "id": "shani_dhaiya",
+      "name": "Shani Dhaiya (Small Panoti)",
+      "sanskrit": "शनि ढैय्या",
+      "category": "transit",
+      "source": "Transit principles",
+      "description": "Saturn transiting 4th or 8th from natal Moon. 2.5 year testing period.",
+      "detection": {
+        "conditions": [
+          {"type": "saturn_in_4_or_8_from_moon"}
+        ]
+      },
+      "effects": [
+        "Property challenges",
+        "Mother health (4th)",
+        "Sudden changes (8th)",
+        "Mental stress",
+        "Career adjustments"
+      ],
+      "remedies": [
+        "Saturn Shanti",
+        "Hanuman Chalisa",
+        "Donate to elderly",
+        "Help disabled",
+        "Patience and persistence"
+      ]
+    }
+  }
+}

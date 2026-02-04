@@ -1,0 +1,240 @@
+{
+  "ashtakavarga": {
+    "description": "Ashtakavarga is a method of measuring benefic influence (bindus) that planets contribute to each sign. Source: BPHS Chapter 66",
+    "total_planets": 7,
+    "max_bindus_per_sign": 56,
+    "min_bindus_per_sign": 0,
+    "planets": {
+      "sun": {
+        "name": "Sun",
+        "benefic_houses": {
+          "from_sun": [1, 2, 4, 7, 8, 9, 10, 11],
+          "from_moon": [3, 6, 10, 11],
+          "from_mars": [1, 2, 4, 7, 8, 9, 10, 11],
+          "from_mercury": [3, 5, 6, 9, 10, 11, 12],
+          "from_jupiter": [5, 6, 9, 11],
+          "from_venus": [6, 7, 12],
+          "from_saturn": [1, 2, 4, 7, 8, 9, 10, 11],
+          "from_lagna": [3, 4, 6, 10, 11, 12]
+        },
+        "total_benefic_houses": 8,
+        "description": "Sun's ashtakavarga calculation uses reference points from all 8 factors"
+      },
+      "moon": {
+        "name": "Moon",
+        "benefic_houses": {
+          "from_sun": [3, 6, 7, 8, 10, 11],
+          "from_moon": [1, 3, 6, 7, 10, 11],
+          "from_mars": [2, 3, 5, 6, 9, 10, 11],
+          "from_mercury": [1, 3, 4, 5, 7, 8, 10, 11],
+          "from_jupiter": [1, 4, 7, 8, 10, 11, 12],
+          "from_venus": [3, 4, 5, 7, 9, 10, 11],
+          "from_saturn": [3, 5, 6, 11],
+          "from_lagna": [3, 6, 10, 11]
+        },
+        "total_benefic_houses": 8,
+        "description": "Moon's ashtakavarga represents emotional and psychological benefic influences"
+      },
+      "mars": {
+        "name": "Mars",
+        "benefic_houses": {
+          "from_sun": [1, 2, 4, 7, 8, 9, 10, 11],
+          "from_moon": [3, 6, 9, 10, 11, 12],
+          "from_mars": [1, 2, 4, 7, 8, 9, 10, 11],
+          "from_mercury": [2, 3, 5, 6, 9, 10, 11, 12],
+          "from_jupiter": [5, 6, 9, 11],
+          "from_venus": [1, 2, 4, 7, 8, 9, 10, 11],
+          "from_saturn": [3, 6, 9, 10, 11, 12],
+          "from_lagna": [3, 6, 9, 10, 11, 12]
+        },
+        "total_benefic_houses": 8,
+        "description": "Mars's ashtakavarga indicates courage, energy, and drive in various signs"
+      },
+      "mercury": {
+        "name": "Mercury",
+        "benefic_houses": {
+          "from_sun": [3, 5, 6, 9, 10, 11, 12],
+          "from_moon": [1, 3, 4, 5, 7, 8, 10, 11],
+          "from_mars": [2, 3, 5, 6, 9, 10, 11, 12],
+          "from_mercury": [1, 2, 4, 7, 8, 9, 10, 11],
+          "from_jupiter": [1, 4, 5, 7, 8, 9, 10, 11],
+          "from_venus": [1, 3, 4, 5, 7, 9, 10, 11],
+          "from_saturn": [1, 2, 4, 7, 8, 9, 10, 11],
+          "from_lagna": [1, 4, 7, 10]
+        },
+        "total_benefic_houses": 8,
+        "description": "Mercury's ashtakavarga represents intellect, communication, and analytical abilities"
+      },
+      "jupiter": {
+        "name": "Jupiter",
+        "benefic_houses": {
+          "from_sun": [5, 6, 9, 11],
+          "from_moon": [1, 4, 7, 8, 10, 11, 12],
+          "from_mars": [5, 6, 9, 11],
+          "from_mercury": [1, 4, 5, 7, 8, 9, 10, 11],
+          "from_jupiter": [1, 2, 4, 7, 8, 9, 10, 11],
+          "from_venus": [1, 2, 4, 7, 8, 9, 10, 11],
+          "from_saturn": [5, 6, 9, 11],
+          "from_lagna": [1, 2, 4, 5, 7, 9, 11]
+        },
+        "total_benefic_houses": 8,
+        "description": "Jupiter's ashtakavarga indicates wisdom, prosperity, and spiritual development"
+      },
+      "venus": {
+        "name": "Venus",
+        "benefic_houses": {
+          "from_sun": [6, 7, 12],
+          "from_moon": [3, 4, 5, 7, 9, 10, 11],
+          "from_mars": [1, 2, 4, 7, 8, 9, 10, 11],
+          "from_mercury": [1, 3, 4, 5, 7, 9, 10, 11],
+          "from_jupiter": [1, 2, 4, 7, 8, 9, 10, 11],
+          "from_venus": [1, 3, 4, 5, 7, 9, 10, 11],
+          "from_saturn": [6, 7, 12],
+          "from_lagna": [2, 5, 7, 12]
+        },
+        "total_benefic_houses": 8,
+        "description": "Venus's ashtakavarga represents love, relationships, creativity, and material comfort"
+      },
+      "saturn": {
+        "name": "Saturn",
+        "benefic_houses": {
+          "from_sun": [1, 2, 4, 7, 8, 9, 10, 11],
+          "from_moon": [3, 5, 6, 11],
+          "from_mars": [3, 6, 9, 10, 11, 12],
+          "from_mercury": [1, 2, 4, 7, 8, 9, 10, 11],
+          "from_jupiter": [5, 6, 9, 11],
+          "from_venus": [6, 7, 12],
+          "from_saturn": [1, 2, 4, 7, 8, 9, 10, 11],
+          "from_lagna": [1, 4, 7, 10]
+        },
+        "total_benefic_houses": 8,
+        "description": "Saturn's ashtakavarga indicates discipline, longevity, and karmic lessons"
+      }
+    },
+    "sarvashtakavarga": {
+      "description": "Sarvashtakavarga (SAV) is the total of all planet bindus for each sign. Ranges from 0-56.",
+      "interpretation_ranges": {
+        "very_weak": {
+          "min": 0,
+          "max": 12,
+          "meaning": "Very weak influence; challenging period or house; requires careful planning and effort",
+          "effects": "Low benefic influence, obstacles, delays, need for extra effort"
+        },
+        "weak": {
+          "min": 13,
+          "max": 24,
+          "meaning": "Weak influence; some challenges but manageable with effort",
+          "effects": "Limited benefic influence, mixed results, need for strategic approach"
+        },
+        "moderate": {
+          "min": 25,
+          "max": 36,
+          "meaning": "Moderate influence; balanced period with both challenges and opportunities",
+          "effects": "Reasonable benefic influence, balanced outcomes, normal progress"
+        },
+        "strong": {
+          "min": 37,
+          "max": 44,
+          "meaning": "Strong influence; favorable period with good opportunities",
+          "effects": "Good benefic influence, favorable outcomes, positive progression"
+        },
+        "very_strong": {
+          "min": 45,
+          "max": 56,
+          "meaning": "Very strong influence; highly auspicious period; excellent results expected",
+          "effects": "Excellent benefic influence, highly favorable outcomes, significant achievements"
+        }
+      },
+      "average_sav": 28,
+      "comment": "Average SAV is 28. Values above 28 are above average; values below 28 are below average"
+    },
+    "kakshya_rules": {
+      "description": "Kakshya divisions provide sub-divisions within each sign for more detailed analysis",
+      "definition": "Kakshya is a subdivision system that divides each house/sign into smaller segments based on planetary strengths",
+      "divisions_in_sign": 2,
+      "each_kakshya_degrees": 15,
+      "total_degrees_in_sign": 30,
+      "kakshya_types": {
+        "first_kakshya": {
+          "position": "0-15 degrees within sign",
+          "strength_interpretation": "First half of sign; earlier manifestation of energies"
+        },
+        "second_kakshya": {
+          "position": "15-30 degrees within sign",
+          "strength_interpretation": "Second half of sign; later manifestation of energies"
+        }
+      },
+      "strength_modification": {
+        "rule": "SAV strength is modified based on kakshya position and planetary placement within the kakshya",
+        "application": "Use kakshya for precise timing of transits and sub-period analysis"
+      }
+    },
+    "transit_strength_interpretation": {
+      "description": "Rules for interpreting planetary strength during transits based on ashtakavarga",
+      "general_rule": "A transiting planet in a sign with high SAV tends to produce benefic results",
+      "high_sav_transit": {
+        "condition": "Planet transiting sign with SAV > 36",
+        "result": "Favorable period; planet produces predominantly positive effects",
+        "duration": "Effects typically manifest throughout transit period"
+      },
+      "moderate_sav_transit": {
+        "condition": "Planet transiting sign with SAV 25-36",
+        "result": "Mixed period; balanced outcomes with both challenges and opportunities",
+        "duration": "Effects manifest with variation"
+      },
+      "low_sav_transit": {
+        "condition": "Planet transiting sign with SAV < 25",
+        "result": "Challenging period; planet may produce adverse or minimal effects",
+        "duration": "Requires careful planning and remedial measures"
+      },
+      "transiting_planet_strength": {
+        "description": "Each transiting planet also has its own ashtakavarga strength",
+        "consideration": "Combine transit SAV with individual planet's ashtakavarga for comprehensive analysis"
+      },
+      "timing_indicators": {
+        "exact_sade_sati": "During Sade Sati, check Saturn's ashtakavarga in involved signs",
+        "dhaiya_period": "During Dhaiya, check Saturn's ashtakavarga in 4th and 8th from Moon",
+        "mahadasha_analysis": "Combine dasha period with ashtakavarga strength for period assessment"
+      }
+    },
+    "ashtakavarga_calculation_method": {
+      "step_1": "For each planet, calculate its ashtakavarga by counting benefic houses from 8 reference points",
+      "step_2": "Reference points are: Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn, and Lagna",
+      "step_3": "For each reference point, add 1 bindu for each sign where that planet's benefic houses fall",
+      "step_4": "Sum all bindus (max 8 per sign since 8 reference points)",
+      "step_5": "Create ashtakavarga chart showing bindu count for each sign for each planet",
+      "step_6": "Calculate Sarvashtakavarga by summing all planet bindus for each sign (max 56)",
+      "step_7": "Interpret using SAV ranges for predictive analysis"
+    },
+    "bindus_per_reference_point": {
+      "description": "Each of the 8 reference points contributes 0-1 bindu per sign based on benefic house rules",
+      "maximum_per_sign": 8,
+      "reference_points_list": [
+        "Sun",
+        "Moon",
+        "Mars",
+        "Mercury",
+        "Jupiter",
+        "Venus",
+        "Saturn",
+        "Lagna (Ascendant)"
+      ]
+    },
+    "strong_signs_interpretation": {
+      "definition": "Signs with high SAV (45+) are considered strong/auspicious positions",
+      "usage": "Strong SAV signs indicate favorable timing for activities and natural support from universal energies",
+      "weak_signs_interpretation": "Signs with low SAV (0-12) require extra effort and careful planning"
+    },
+    "combined_ashtakavarga": {
+      "definition": "Combination of all individual planet ashtakavarga charts into single comprehensive chart",
+      "benefit": "Provides holistic view of overall strength and weakness across all signs",
+      "application": "Used for dasha timing, transit prediction, and muhurta selection"
+    },
+    "methodology_notes": {
+      "source": "Brihat Parashara Hora Shastra (BPHS) Chapter 66",
+      "ancient_text": "Traditional Vedic astrology system based on Sanskrit original texts",
+      "accuracy": "Values based on classical interpretations of BPHS Chapter 66",
+      "application_note": "Use in conjunction with natal chart analysis, dasha periods, and transits for complete prediction"
+    }
+  }
+}

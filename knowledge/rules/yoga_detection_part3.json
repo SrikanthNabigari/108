@@ -1,0 +1,998 @@
+{
+  "metadata": {
+    "part": 3,
+    "description": "More Dhana Yogas, Arishta Yogas, Daridra Yogas, and Additional Special Yogas"
+  },
+  "yoga_rules": {
+    "dhana_yoga_jupiter_mercury": {
+      "id": "dhana_yoga_jupiter_mercury",
+      "name": "Dhana Yoga (Jupiter-Mercury)",
+      "sanskrit": "धन योग",
+      "category": "dhana",
+      "source": "Phaladeepika",
+      "description": "Jupiter and Mercury in kendras or trikonas from each other. Brings wisdom-based wealth.",
+      "detection": {
+        "conditions": [
+          {"type": "jupiter_mercury_in_kendra_or_trikona"}
+        ]
+      },
+      "effects": [
+        "Wealth through wisdom",
+        "Business success",
+        "Educational wealth",
+        "Writing/publishing income",
+        "Advisory fees"
+      ]
+    },
+    "dhana_yoga_venus_moon": {
+      "id": "dhana_yoga_venus_moon",
+      "name": "Dhana Yoga (Venus-Moon)",
+      "sanskrit": "धन योग",
+      "category": "dhana",
+      "source": "Phaladeepika",
+      "description": "Venus and Moon in 2nd or 11th house. Brings wealth through arts and public.",
+      "detection": {
+        "conditions": [
+          {"type": "venus_moon_in_2_or_11"}
+        ]
+      },
+      "effects": [
+        "Wealth through arts",
+        "Public popularity brings money",
+        "Luxury items trade",
+        "Fashion/beauty industry",
+        "Entertainment income"
+      ]
+    },
+    "dhana_yoga_2nd_lord_11th": {
+      "id": "dhana_yoga_2nd_lord_11th",
+      "name": "Dhana Yoga (2nd Lord in 11th)",
+      "sanskrit": "धन योग",
+      "category": "dhana",
+      "source": "BPHS",
+      "description": "2nd lord in 11th house. Direct wealth-gains connection.",
+      "detection": {
+        "conditions": [
+          {"type": "2nd_lord_in_11th"}
+        ]
+      },
+      "effects": [
+        "Steady wealth accumulation",
+        "Family business profits",
+        "Multiple income streams",
+        "Gains through speech/face",
+        "Financial security"
+      ]
+    },
+    "dhana_yoga_11th_lord_2nd": {
+      "id": "dhana_yoga_11th_lord_2nd",
+      "name": "Dhana Yoga (11th Lord in 2nd)",
+      "sanskrit": "धन योग",
+      "category": "dhana",
+      "source": "BPHS",
+      "description": "11th lord in 2nd house. Gains flow to family wealth.",
+      "detection": {
+        "conditions": [
+          {"type": "11th_lord_in_2nd"}
+        ]
+      },
+      "effects": [
+        "Gains become savings",
+        "Family wealth increases",
+        "Elder siblings help finances",
+        "Network brings wealth",
+        "Friends in high places"
+      ]
+    },
+    "dhana_yoga_9th_lord_2nd": {
+      "id": "dhana_yoga_9th_lord_2nd",
+      "name": "Dhana Yoga (9th Lord in 2nd)",
+      "sanskrit": "धन योग",
+      "category": "dhana",
+      "source": "BPHS",
+      "description": "9th lord in 2nd house. Fortune flows to wealth house.",
+      "detection": {
+        "conditions": [
+          {"type": "9th_lord_in_2nd"}
+        ]
+      },
+      "effects": [
+        "Lucky wealth",
+        "Father's wealth",
+        "Fortune through speech",
+        "Religious income",
+        "Guru's blessings bring money"
+      ]
+    },
+    "dhana_yoga_5th_lord_2nd": {
+      "id": "dhana_yoga_5th_lord_2nd",
+      "name": "Dhana Yoga (5th Lord in 2nd)",
+      "sanskrit": "धन योग",
+      "category": "dhana",
+      "source": "BPHS",
+      "description": "5th lord in 2nd house. Intelligence and speculation bring wealth.",
+      "detection": {
+        "conditions": [
+          {"type": "5th_lord_in_2nd"}
+        ]
+      },
+      "effects": [
+        "Speculative gains",
+        "Creative income",
+        "Children bring wealth",
+        "Entertainment income",
+        "Investment success"
+      ]
+    },
+    "dhana_yoga_1st_lord_2nd": {
+      "id": "dhana_yoga_1st_lord_2nd",
+      "name": "Dhana Yoga (1st Lord in 2nd)",
+      "sanskrit": "धन योग",
+      "category": "dhana",
+      "source": "BPHS",
+      "description": "Lagna lord in 2nd house. Self-effort brings wealth.",
+      "detection": {
+        "conditions": [
+          {"type": "1st_lord_in_2nd"}
+        ]
+      },
+      "effects": [
+        "Self-made wealth",
+        "Earnings through personality",
+        "Face/voice brings income",
+        "Family business success",
+        "Early financial independence"
+      ]
+    },
+    "shukra_yoga": {
+      "id": "shukra_yoga",
+      "name": "Shukra Yoga",
+      "sanskrit": "शुक्र योग",
+      "category": "dhana",
+      "source": "BPHS",
+      "description": "Venus in 4th, 5th, 7th, or 9th house in own or exalted sign. Brings luxury wealth.",
+      "detection": {
+        "conditions": [
+          {"type": "venus_in_4_5_7_9"},
+          {"type": "venus_in_own_or_exalted"}
+        ],
+        "all_conditions_required": true
+      },
+      "effects": [
+        "Luxury and comfort",
+        "Beautiful possessions",
+        "Happy relationships",
+        "Artistic wealth",
+        "Vehicles and properties"
+      ]
+    },
+    "maha_dhana_yoga": {
+      "id": "maha_dhana_yoga",
+      "name": "Maha Dhana Yoga",
+      "sanskrit": "महाधन योग",
+      "category": "dhana",
+      "source": "BPHS",
+      "description": "2nd, 5th, 9th, and 11th lords all strong and well-placed. Brings immense wealth.",
+      "detection": {
+        "conditions": [
+          {"type": "2nd_lord_strong"},
+          {"type": "5th_lord_strong"},
+          {"type": "9th_lord_strong"},
+          {"type": "11th_lord_strong"}
+        ],
+        "all_conditions_required": true
+      },
+      "effects": [
+        "Immense wealth",
+        "Multiple sources of income",
+        "Fortune and luck",
+        "Generational wealth",
+        "Never faces poverty"
+      ]
+    },
+    "uttama_dhana_yoga": {
+      "id": "uttama_dhana_yoga",
+      "name": "Uttama Dhana Yoga",
+      "sanskrit": "उत्तम धन योग",
+      "category": "dhana",
+      "source": "Phaladeepika",
+      "description": "2nd lord exalted or in own sign in kendra. Supreme wealth yoga.",
+      "detection": {
+        "conditions": [
+          {"type": "2nd_lord_exalted_or_own"},
+          {"type": "2nd_lord_in_kendra"}
+        ],
+        "all_conditions_required": true
+      },
+      "effects": [
+        "Supreme wealth",
+        "Aristocratic lifestyle",
+        "Wealthy family",
+        "Fine speech",
+        "Rich food and comforts"
+      ]
+    },
+
+    "balarishta_yoga_moon_8th": {
+      "id": "balarishta_yoga_moon_8th",
+      "name": "Balarishta Yoga (Moon in 8th)",
+      "sanskrit": "बालारिष्ट योग",
+      "category": "arishta",
+      "source": "BPHS",
+      "description": "Moon in 8th house afflicted by malefics. Childhood health issues.",
+      "detection": {
+        "conditions": [
+          {"type": "moon_in_8th"},
+          {"type": "moon_afflicted"}
+        ],
+        "all_conditions_required": true
+      },
+      "effects": [
+        "Childhood health issues",
+        "Mother's health concerns",
+        "Early life difficulties",
+        "Need for careful upbringing"
+      ],
+      "cancellation": [
+        {"type": "jupiter_aspect"},
+        {"type": "moon_in_own_navamsa"},
+        {"type": "strong_lagna_lord"}
+      ]
+    },
+    "arishta_yoga_lagna_weak": {
+      "id": "arishta_yoga_lagna_weak",
+      "name": "Arishta Yoga (Weak Lagna)",
+      "sanskrit": "अरिष्ट योग",
+      "category": "arishta",
+      "source": "BPHS",
+      "description": "Lagna lord debilitated and afflicted by malefics. General life difficulties.",
+      "detection": {
+        "conditions": [
+          {"type": "lagna_lord_debilitated"},
+          {"type": "lagna_lord_afflicted"}
+        ],
+        "all_conditions_required": true
+      },
+      "effects": [
+        "General life difficulties",
+        "Weak constitution",
+        "Struggles in self-expression",
+        "Need for extra effort"
+      ],
+      "cancellation": [
+        {"type": "neecha_bhanga"},
+        {"type": "benefic_aspect"}
+      ]
+    },
+    "arishta_yoga_sun_moon_6_8": {
+      "id": "arishta_yoga_sun_moon_6_8",
+      "name": "Arishta Yoga (Luminaries in 6/8)",
+      "sanskrit": "अरिष्ट योग",
+      "category": "arishta",
+      "source": "BPHS",
+      "description": "Sun and Moon both in 6th or 8th houses. Health and vitality issues.",
+      "detection": {
+        "conditions": [
+          {"type": "sun_in_6_or_8"},
+          {"type": "moon_in_6_or_8"}
+        ],
+        "all_conditions_required": true
+      },
+      "effects": [
+        "Health vulnerabilities",
+        "Vitality issues",
+        "Parent health concerns",
+        "Need for health awareness"
+      ],
+      "cancellation": [
+        {"type": "benefic_aspects"},
+        {"type": "strong_lagna"}
+      ]
+    },
+    "mrityubhaga_yoga": {
+      "id": "mrityubhaga_yoga",
+      "name": "Mrityubhaga Yoga",
+      "sanskrit": "मृत्युभाग योग",
+      "category": "arishta",
+      "source": "BPHS",
+      "description": "Planet at exact degree of mrityubhaga (death-bringing degree). Requires specific remedies.",
+      "detection": {
+        "conditions": [
+          {"type": "planet_in_mrityubhaga"}
+        ]
+      },
+      "effects": [
+        "Challenges related to that planet's significations",
+        "Need for specific remedies",
+        "Careful attention during dashas",
+        "Transformation through crisis"
+      ]
+    },
+    "vish_yoga": {
+      "id": "vish_yoga",
+      "name": "Vish Yoga (Poison Yoga)",
+      "sanskrit": "विष योग",
+      "category": "arishta",
+      "source": "BPHS",
+      "description": "Saturn and Moon conjunction without benefic aspect. Mental tensions.",
+      "detection": {
+        "conditions": [
+          {"type": "saturn_moon_conjunction"},
+          {"type": "no_benefic_aspect"}
+        ],
+        "all_conditions_required": true
+      },
+      "effects": [
+        "Mental tensions",
+        "Emotional heaviness",
+        "Mother's difficulties",
+        "Depression tendencies",
+        "But also depth and wisdom"
+      ],
+      "cancellation": [
+        {"type": "jupiter_aspect"},
+        {"type": "saturn_in_own_sign"}
+      ]
+    },
+    "putra_shoka_yoga": {
+      "id": "putra_shoka_yoga",
+      "name": "Putra Shoka Yoga",
+      "sanskrit": "पुत्र शोक योग",
+      "category": "arishta",
+      "source": "BPHS",
+      "description": "5th lord in 6th, 8th, or 12th afflicted. Difficulties with children.",
+      "detection": {
+        "conditions": [
+          {"type": "5th_lord_in_dusthana"},
+          {"type": "5th_lord_afflicted"}
+        ],
+        "all_conditions_required": true
+      },
+      "effects": [
+        "Difficulties with children",
+        "Late children",
+        "Children's health concerns",
+        "Need for patience"
+      ],
+      "cancellation": [
+        {"type": "jupiter_aspect_on_5th"},
+        {"type": "5th_lord_with_benefic"}
+      ]
+    },
+    "kalatra_shoka_yoga": {
+      "id": "kalatra_shoka_yoga",
+      "name": "Kalatra Shoka Yoga",
+      "sanskrit": "कलत्र शोक योग",
+      "category": "arishta",
+      "source": "BPHS",
+      "description": "7th lord in 6th, 8th, or 12th afflicted. Marriage difficulties.",
+      "detection": {
+        "conditions": [
+          {"type": "7th_lord_in_dusthana"},
+          {"type": "7th_lord_afflicted"}
+        ],
+        "all_conditions_required": true
+      },
+      "effects": [
+        "Marriage challenges",
+        "Partner's health issues",
+        "Partnership difficulties",
+        "Need for patience in relationships"
+      ],
+      "cancellation": [
+        {"type": "venus_strong"},
+        {"type": "7th_lord_with_benefic"}
+      ]
+    },
+    "papa_kartari_yoga": {
+      "id": "papa_kartari_yoga",
+      "name": "Papa Kartari Yoga",
+      "sanskrit": "पाप कर्तरी योग",
+      "category": "arishta",
+      "source": "BPHS",
+      "description": "House or planet hemmed between two malefics. Creates restriction.",
+      "detection": {
+        "conditions": [
+          {"type": "hemmed_by_malefics"}
+        ]
+      },
+      "effects": [
+        "Restriction of significations",
+        "Struggles in that area",
+        "Need for extra effort",
+        "Blocked energies"
+      ]
+    },
+    "shubha_kartari_yoga": {
+      "id": "shubha_kartari_yoga",
+      "name": "Shubha Kartari Yoga",
+      "sanskrit": "शुभ कर्तरी योग",
+      "category": "special",
+      "source": "BPHS",
+      "description": "House or planet hemmed between two benefics. Creates protection and support.",
+      "detection": {
+        "conditions": [
+          {"type": "hemmed_by_benefics"}
+        ]
+      },
+      "effects": [
+        "Protection of significations",
+        "Support in that area",
+        "Easy success",
+        "Blessed energies"
+      ]
+    },
+
+    "daridra_yoga_9th_12th": {
+      "id": "daridra_yoga_9th_12th",
+      "name": "Daridra Yoga (9th Lord in 12th)",
+      "sanskrit": "दरिद्र योग",
+      "category": "daridra",
+      "source": "BPHS",
+      "description": "9th lord in 12th house afflicted. Fortune gets spent/lost.",
+      "detection": {
+        "conditions": [
+          {"type": "9th_lord_in_12th"},
+          {"type": "9th_lord_afflicted"}
+        ],
+        "all_conditions_required": true
+      },
+      "effects": [
+        "Fortune spent on losses",
+        "Money flows away",
+        "Bad luck in finances",
+        "Foreign expenditure"
+      ],
+      "cancellation": [
+        {"type": "viparita_raja_present"},
+        {"type": "benefic_aspect"}
+      ]
+    },
+    "daridra_yoga_2nd_6th": {
+      "id": "daridra_yoga_2nd_6th",
+      "name": "Daridra Yoga (2nd Lord in 6th)",
+      "sanskrit": "दरिद्र योग",
+      "category": "daridra",
+      "source": "BPHS",
+      "description": "2nd lord in 6th house afflicted. Wealth lost to debts and enemies.",
+      "detection": {
+        "conditions": [
+          {"type": "2nd_lord_in_6th"},
+          {"type": "2nd_lord_afflicted"}
+        ],
+        "all_conditions_required": true
+      },
+      "effects": [
+        "Debts consume wealth",
+        "Legal expenses",
+        "Health expenses",
+        "Struggle for money"
+      ],
+      "cancellation": [
+        {"type": "harsha_yoga_present"},
+        {"type": "6th_lord_weak"}
+      ]
+    },
+    "daridra_yoga_2nd_8th": {
+      "id": "daridra_yoga_2nd_8th",
+      "name": "Daridra Yoga (2nd Lord in 8th)",
+      "sanskrit": "दरिद्र योग",
+      "category": "daridra",
+      "source": "BPHS",
+      "description": "2nd lord in 8th house afflicted. Sudden wealth losses.",
+      "detection": {
+        "conditions": [
+          {"type": "2nd_lord_in_8th"},
+          {"type": "2nd_lord_afflicted"}
+        ],
+        "all_conditions_required": true
+      },
+      "effects": [
+        "Sudden wealth losses",
+        "Inheritance issues",
+        "Family wealth problems",
+        "Financial crises"
+      ],
+      "cancellation": [
+        {"type": "sarala_yoga_present"},
+        {"type": "8th_lord_weak"}
+      ]
+    },
+    "daridra_yoga_jupiter_12th": {
+      "id": "daridra_yoga_jupiter_12th",
+      "name": "Daridra Yoga (Jupiter in 12th debilitated)",
+      "sanskrit": "दरिद्र योग",
+      "category": "daridra",
+      "source": "Phaladeepika",
+      "description": "Jupiter debilitated in 12th house. Lack of wisdom leads to losses.",
+      "detection": {
+        "conditions": [
+          {"type": "jupiter_in_12th"},
+          {"type": "jupiter_debilitated"}
+        ],
+        "all_conditions_required": true
+      },
+      "effects": [
+        "Poor financial decisions",
+        "Lack of wisdom",
+        "Excessive expenses",
+        "Foreign losses"
+      ],
+      "cancellation": [
+        {"type": "neecha_bhanga"},
+        {"type": "venus_strong"}
+      ]
+    },
+    "daridra_yoga_venus_6th": {
+      "id": "daridra_yoga_venus_6th",
+      "name": "Daridra Yoga (Venus in 6th afflicted)",
+      "sanskrit": "दरिद्र योग",
+      "category": "daridra",
+      "source": "Phaladeepika",
+      "description": "Venus in 6th house afflicted by malefics. Luxury through debt.",
+      "detection": {
+        "conditions": [
+          {"type": "venus_in_6th"},
+          {"type": "venus_afflicted"}
+        ],
+        "all_conditions_required": true
+      },
+      "effects": [
+        "Debt for luxuries",
+        "Relationship-related expenses",
+        "Legal issues in partnerships",
+        "Beauty industry struggles"
+      ],
+      "cancellation": [
+        {"type": "harsha_yoga"},
+        {"type": "venus_in_own_sign"}
+      ]
+    },
+
+    "yoga_malika_1_7": {
+      "id": "yoga_malika_1_7",
+      "name": "Malika Yoga (1st to 7th)",
+      "sanskrit": "मालिका योग",
+      "category": "special",
+      "source": "Saravali",
+      "description": "All planets occupying consecutive houses from 1st to 7th. Garland yoga.",
+      "detection": {
+        "conditions": [
+          {"type": "planets_consecutive_1_to_7"}
+        ]
+      },
+      "effects": [
+        "Like wearing a garland",
+        "Success and happiness",
+        "Fame and fortune",
+        "Multiple achievements",
+        "Respected personality"
+      ]
+    },
+    "yoga_malika_4_10": {
+      "id": "yoga_malika_4_10",
+      "name": "Malika Yoga (4th to 10th)",
+      "sanskrit": "मालिका योग",
+      "category": "special",
+      "source": "Saravali",
+      "description": "All planets occupying consecutive houses from 4th to 10th. Career garland.",
+      "detection": {
+        "conditions": [
+          {"type": "planets_consecutive_4_to_10"}
+        ]
+      },
+      "effects": [
+        "Career success",
+        "Property and profession",
+        "Domestic-professional balance",
+        "Rise in status",
+        "Authority positions"
+      ]
+    },
+    "yoga_malika_7_1": {
+      "id": "yoga_malika_7_1",
+      "name": "Malika Yoga (7th to 1st)",
+      "sanskrit": "मालिका योग",
+      "category": "special",
+      "source": "Saravali",
+      "description": "All planets occupying consecutive houses from 7th to 1st (7-12, 1). Partnership garland.",
+      "detection": {
+        "conditions": [
+          {"type": "planets_consecutive_7_to_1"}
+        ]
+      },
+      "effects": [
+        "Success through partnerships",
+        "Foreign connections",
+        "Spiritual growth",
+        "Expenses lead to self-growth",
+        "Marriage brings success"
+      ]
+    },
+    "yoga_malika_10_4": {
+      "id": "yoga_malika_10_4",
+      "name": "Malika Yoga (10th to 4th)",
+      "sanskrit": "मालिका योग",
+      "category": "special",
+      "source": "Saravali",
+      "description": "All planets occupying consecutive houses from 10th to 4th. Career-home garland.",
+      "detection": {
+        "conditions": [
+          {"type": "planets_consecutive_10_to_4"}
+        ]
+      },
+      "effects": [
+        "Career leads to home comfort",
+        "Professional success brings property",
+        "Status and stability",
+        "Fame and domestic peace",
+        "Well-rounded success"
+      ]
+    },
+
+    "parvata_yoga": {
+      "id": "parvata_yoga",
+      "name": "Parvata Yoga",
+      "sanskrit": "पर्वत योग",
+      "category": "special",
+      "source": "BPHS",
+      "description": "Lagna and 12th lords in mutual kendras, or benefics in kendras and malefics in 3, 6, 11. Mountain yoga.",
+      "detection": {
+        "conditions": [
+          {"type": "lagna_12th_mutual_kendras"}
+        ]
+      },
+      "effects": [
+        "Steady like a mountain",
+        "Fame and fortune",
+        "Prosperous and charitable",
+        "Leader and orator",
+        "Long life"
+      ]
+    },
+    "padma_yoga": {
+      "id": "padma_yoga",
+      "name": "Padma Yoga",
+      "sanskrit": "पद्म योग",
+      "category": "special",
+      "source": "Saravali",
+      "description": "5th lord in own/exalted sign in kendra from lagna. Lotus yoga.",
+      "detection": {
+        "conditions": [
+          {"type": "5th_lord_strong_in_kendra"}
+        ]
+      },
+      "effects": [
+        "Like a lotus - pure success",
+        "Good fortune",
+        "Intelligent children",
+        "Creative success",
+        "Fame and recognition"
+      ]
+    },
+    "kamala_yoga": {
+      "id": "kamala_yoga",
+      "name": "Kamala Yoga",
+      "sanskrit": "कमल योग",
+      "category": "special",
+      "source": "BPHS",
+      "description": "All planets in kendras. Lotus/throne yoga.",
+      "detection": {
+        "conditions": [
+          {"type": "all_planets_in_kendras"}
+        ]
+      },
+      "effects": [
+        "Royal status",
+        "Extreme success",
+        "Like sitting on throne",
+        "Wealth and fame",
+        "Many servants"
+      ]
+    },
+    "vajra_yoga": {
+      "id": "vajra_yoga",
+      "name": "Vajra Yoga",
+      "sanskrit": "वज्र योग",
+      "category": "special",
+      "source": "BPHS",
+      "description": "Benefics in lagna and 7th, malefics in 4th and 10th. Diamond yoga.",
+      "detection": {
+        "conditions": [
+          {"type": "benefics_in_1_7"},
+          {"type": "malefics_in_4_10"}
+        ],
+        "all_conditions_required": true
+      },
+      "effects": [
+        "Strong constitution",
+        "Happy beginning and end",
+        "Struggles in middle life",
+        "Eventually successful",
+        "Hard exterior, soft interior"
+      ]
+    },
+    "yava_yoga": {
+      "id": "yava_yoga",
+      "name": "Yava Yoga",
+      "sanskrit": "यव योग",
+      "category": "special",
+      "source": "BPHS",
+      "description": "Malefics in lagna and 7th, benefics in 4th and 10th. Barley yoga.",
+      "detection": {
+        "conditions": [
+          {"type": "malefics_in_1_7"},
+          {"type": "benefics_in_4_10"}
+        ],
+        "all_conditions_required": true
+      },
+      "effects": [
+        "Difficult start and end",
+        "Prosperous middle life",
+        "Charitable nature",
+        "Good in middle years",
+        "Needs savings for later"
+      ]
+    },
+    "shashak_yoga": {
+      "id": "shashak_yoga",
+      "name": "Shashak Yoga",
+      "sanskrit": "शशक योग",
+      "category": "special",
+      "source": "Saravali",
+      "description": "All planets in 4 consecutive houses starting from a kendra. Rabbit yoga.",
+      "detection": {
+        "conditions": [
+          {"type": "planets_in_4_consecutive_from_kendra"}
+        ]
+      },
+      "effects": [
+        "Quick movements",
+        "Short-lived success",
+        "Need for stability",
+        "Alert nature",
+        "Adaptability"
+      ]
+    },
+    "shringataka_yoga": {
+      "id": "shringataka_yoga",
+      "name": "Shringataka Yoga",
+      "sanskrit": "शृंगाटक योग",
+      "category": "special",
+      "source": "BPHS",
+      "description": "All planets in trikonas (1, 5, 9) only. Triangle yoga.",
+      "detection": {
+        "conditions": [
+          {"type": "all_planets_in_1_5_9"}
+        ]
+      },
+      "effects": [
+        "Highly fortunate",
+        "Spiritual success",
+        "Intelligent and wise",
+        "Fame and recognition",
+        "Divine blessings"
+      ]
+    },
+    "chatussagara_yoga": {
+      "id": "chatussagara_yoga",
+      "name": "Chatussagara Yoga",
+      "sanskrit": "चतुस्सागर योग",
+      "category": "special",
+      "source": "BPHS",
+      "description": "All planets in kendras. Four oceans yoga.",
+      "detection": {
+        "conditions": [
+          {"type": "all_planets_in_kendras_only"}
+        ]
+      },
+      "effects": [
+        "Fame reaches four directions",
+        "Like emperor",
+        "Respected by all",
+        "Wealth and power",
+        "Long-lasting fame"
+      ]
+    },
+    "koorma_yoga_alt": {
+      "id": "koorma_yoga_alt",
+      "name": "Koorma Yoga (Alternate)",
+      "sanskrit": "कूर्म योग",
+      "category": "special",
+      "source": "Saravali",
+      "description": "Benefics in 5, 6, 7 from lagna, malefics in 1, 3, 4, 8, 9, 10, 11, 12. Tortoise yoga.",
+      "detection": {
+        "conditions": [
+          {"type": "specific_tortoise_pattern"}
+        ]
+      },
+      "effects": [
+        "Long life",
+        "Slow but steady progress",
+        "Protected",
+        "Religious nature",
+        "Famous leader"
+      ]
+    },
+    "gaja_yoga": {
+      "id": "gaja_yoga",
+      "name": "Gaja Yoga",
+      "sanskrit": "गज योग",
+      "category": "special",
+      "source": "Saravali",
+      "description": "Jupiter in own/exalted sign in kendra from lagna. Elephant yoga.",
+      "detection": {
+        "conditions": [
+          {"type": "jupiter_strong_in_kendra"}
+        ]
+      },
+      "effects": [
+        "Majestic presence",
+        "Wisdom and power",
+        "Wealth and respect",
+        "Teaching abilities",
+        "Royal connections"
+      ]
+    },
+    "simha_yoga": {
+      "id": "simha_yoga",
+      "name": "Simha Yoga",
+      "sanskrit": "सिंह योग",
+      "category": "special",
+      "source": "Saravali",
+      "description": "Sun in own/exalted sign in kendra from lagna. Lion yoga.",
+      "detection": {
+        "conditions": [
+          {"type": "sun_strong_in_kendra"}
+        ]
+      },
+      "effects": [
+        "Lion-like courage",
+        "Leadership",
+        "Government favor",
+        "Fame and authority",
+        "Bold personality"
+      ]
+    },
+    "vrishabha_yoga": {
+      "id": "vrishabha_yoga",
+      "name": "Vrishabha Yoga",
+      "sanskrit": "वृषभ योग",
+      "category": "special",
+      "source": "Saravali",
+      "description": "Venus in own/exalted sign in kendra. Bull yoga - steady wealth.",
+      "detection": {
+        "conditions": [
+          {"type": "venus_strong_in_kendra"}
+        ]
+      },
+      "effects": [
+        "Steady wealth",
+        "Strong constitution",
+        "Agricultural success",
+        "Patient nature",
+        "Luxurious life"
+      ]
+    },
+    "mesha_yoga": {
+      "id": "mesha_yoga",
+      "name": "Mesha Yoga",
+      "sanskrit": "मेष योग",
+      "category": "special",
+      "source": "Saravali",
+      "description": "Mars in own/exalted sign in kendra. Ram yoga - courage and initiative.",
+      "detection": {
+        "conditions": [
+          {"type": "mars_strong_in_kendra"}
+        ]
+      },
+      "effects": [
+        "Courageous initiative",
+        "Leadership in action",
+        "Military success",
+        "Property acquisition",
+        "Bold decisions"
+      ]
+    },
+    "kanya_yoga": {
+      "id": "kanya_yoga",
+      "name": "Kanya Yoga",
+      "sanskrit": "कन्या योग",
+      "category": "special",
+      "source": "Saravali",
+      "description": "Mercury in own/exalted sign in kendra. Virgin yoga - purity and discrimination.",
+      "detection": {
+        "conditions": [
+          {"type": "mercury_strong_in_kendra"}
+        ]
+      },
+      "effects": [
+        "Pure discrimination",
+        "Analytical skills",
+        "Business success",
+        "Communication mastery",
+        "Service excellence"
+      ]
+    },
+    "tula_yoga": {
+      "id": "tula_yoga",
+      "name": "Tula Yoga",
+      "sanskrit": "तुला योग",
+      "category": "special",
+      "source": "Saravali",
+      "description": "Venus in Libra in kendra. Scales yoga - balance and justice.",
+      "detection": {
+        "conditions": [
+          {"type": "venus_in_libra_in_kendra"}
+        ]
+      },
+      "effects": [
+        "Balance and harmony",
+        "Justice-oriented",
+        "Diplomatic success",
+        "Partnership success",
+        "Artistic recognition"
+      ]
+    },
+    "makara_yoga": {
+      "id": "makara_yoga",
+      "name": "Makara Yoga",
+      "sanskrit": "मकर योग",
+      "category": "special",
+      "source": "Saravali",
+      "description": "Saturn in own/exalted sign in kendra. Crocodile yoga - patience and ambition.",
+      "detection": {
+        "conditions": [
+          {"type": "saturn_strong_in_kendra"}
+        ]
+      },
+      "effects": [
+        "Patient ambition",
+        "Slow but certain rise",
+        "Government positions",
+        "Long-term success",
+        "Authority in later life"
+      ]
+    },
+    "kumbha_yoga": {
+      "id": "kumbha_yoga",
+      "name": "Kumbha Yoga",
+      "sanskrit": "कुंभ योग",
+      "category": "special",
+      "source": "Saravali",
+      "description": "Saturn in Aquarius in kendra. Water-bearer yoga - humanitarian success.",
+      "detection": {
+        "conditions": [
+          {"type": "saturn_in_aquarius_in_kendra"}
+        ]
+      },
+      "effects": [
+        "Humanitarian success",
+        "Scientific achievements",
+        "Group leadership",
+        "Innovative thinking",
+        "Social reforms"
+      ]
+    },
+    "meena_yoga": {
+      "id": "meena_yoga",
+      "name": "Meena Yoga",
+      "sanskrit": "मीन योग",
+      "category": "special",
+      "source": "Saravali",
+      "description": "Jupiter in Pisces in kendra. Fish yoga - spiritual and intuitive success.",
+      "detection": {
+        "conditions": [
+          {"type": "jupiter_in_pisces_in_kendra"}
+        ]
+      },
+      "effects": [
+        "Spiritual success",
+        "Intuitive abilities",
+        "Teaching and guidance",
+        "Foreign connections",
+        "Moksha potential"
+      ]
+    }
+  }
+}

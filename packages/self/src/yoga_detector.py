@@ -8,23 +8,23 @@ This module provides comprehensive yoga detection capabilities, including:
 - Strength calculation for detected yogas
 """
 
-from typing import Any, Dict, List, Optional, Set, Tuple
-from pathlib import Path
+import contextlib
 import json
 import logging
+from pathlib import Path
+from typing import Any, ClassVar
 
 from packages.core.src import (
-    Planet,
-    Rashi,
     BirthChart,
     DetectedYoga,
+    Planet,
+    Rashi,
     YogaCategory,
-    PlanetPosition,
+    calculate_aspect_houses,
+    is_dusthana,
     is_kendra,
     is_trikona,
-    is_dusthana,
     is_upachaya,
-    calculate_aspect_houses,
 )
 
 logger = logging.getLogger(__name__)
@@ -38,7 +38,7 @@ class YogaDetector:
     """
 
     # Planet rulership: which signs each planet rules
-    PLANET_RULERSHIP = {
+    PLANET_RULERSHIP: ClassVar[dict[Planet, list[Rashi]]] = {
         Planet.SUN: [Rashi.LEO],
         Planet.MOON: [Rashi.CANCER],
         Planet.MARS: [Rashi.ARIES, Rashi.SCORPIO],
@@ -51,7 +51,7 @@ class YogaDetector:
     }
 
     # Planet exaltation signs
-    PLANET_EXALTATION = {
+    PLANET_EXALTATION: ClassVar[dict[Planet, Rashi]] = {
         Planet.SUN: Rashi.ARIES,
         Planet.MOON: Rashi.TAURUS,
         Planet.MARS: Rashi.CAPRICORN,
@@ -64,7 +64,7 @@ class YogaDetector:
     }
 
     # Planet debilitation (opposite of exaltation)
-    PLANET_DEBILITATION = {
+    PLANET_DEBILITATION: ClassVar[dict[Planet, Rashi]] = {
         Planet.SUN: Rashi.LIBRA,
         Planet.MOON: Rashi.SCORPIO,
         Planet.MARS: Rashi.CANCER,
@@ -78,7 +78,7 @@ class YogaDetector:
 
     def __init__(self):
         """Initialize the yoga detector with rules from JSON configuration."""
-        self.yoga_rules: Dict[str, Dict[str, Any]] = self._load_yoga_rules()
+        self.yoga_rules: dict[str, dict[str, Any]] = self._load_yoga_rules()
         self.condition_evaluators = {
             "in_kendra": self._eval_in_kendra,
             "in_trikona": self._eval_in_trikona,
@@ -98,14 +98,14 @@ class YogaDetector:
             "all_in_beneficial_houses": self._eval_all_in_beneficial,
         }
 
-    def _load_yoga_rules(self) -> Dict[str, Dict[str, Any]]:
+    def _load_yoga_rules(self) -> dict[str, dict[str, Any]]:
         """Load yoga detection rules from JSON configuration file.
 
         Returns:
             Dictionary of yoga rules keyed by yoga ID
         """
         rules_path = (
-            Path(__file__).parent.parent.parent.parent / "knowledge" / "rules" / "yoga_detection.json"
+            Path(__file__).parent.parent.parent.parent / "knowledge" / "rules" / "yoga_master.json"
         )
 
         if not rules_path.exists():
@@ -113,14 +113,14 @@ class YogaDetector:
             return {}
 
         try:
-            with open(rules_path, "r") as f:
+            with rules_path.open() as f:
                 data = json.load(f)
             return data.get("yoga_rules", {})
-        except (json.JSONDecodeError, IOError) as e:
+        except (OSError, json.JSONDecodeError) as e:
             logger.error(f"Error loading yoga rules: {e}")
             return {}
 
-    def detect_all_yogas(self, chart: BirthChart) -> List[DetectedYoga]:
+    def detect_all_yogas(self, chart: BirthChart) -> list[DetectedYoga]:
         """Detect all yogas present in a birth chart.
 
         Args:
@@ -142,9 +142,7 @@ class YogaDetector:
 
         return detected
 
-    def detect_yoga(
-        self, rule: Dict[str, Any], chart: BirthChart
-    ) -> Optional[DetectedYoga]:
+    def detect_yoga(self, rule: dict[str, Any], chart: BirthChart) -> DetectedYoga | None:
         """Detect a single yoga based on its detection rule.
 
         Args:
@@ -196,17 +194,13 @@ class YogaDetector:
         planets = detection.get("planets", [])
 
         if planet:
-            try:
+            with contextlib.suppress(ValueError):
                 involved.append(Planet(planet))
-            except ValueError:
-                pass
 
         for p in planets:
             if p not in ["ninth_lord", "tenth_lord", "fifth_lord"]:
-                try:
+                with contextlib.suppress(ValueError):
                     involved.append(Planet(p))
-                except ValueError:
-                    pass
 
         return DetectedYoga(
             yoga_id=rule.get("id", "unknown"),
@@ -218,7 +212,7 @@ class YogaDetector:
             description=rule.get("description", ""),
         )
 
-    def _evaluate_condition(self, condition: Dict[str, Any], chart: BirthChart) -> bool:
+    def _evaluate_condition(self, condition: dict[str, Any], chart: BirthChart) -> bool:
         """Evaluate a single condition against the chart.
 
         Args:
@@ -237,9 +231,7 @@ class YogaDetector:
 
         return evaluator(condition, chart)
 
-    def _calculate_strength(
-        self, rule: Dict[str, Any], chart: BirthChart
-    ) -> float:
+    def _calculate_strength(self, rule: dict[str, Any], chart: BirthChart) -> float:
         """Calculate yoga strength based on strength factors.
 
         Args:
@@ -257,9 +249,7 @@ class YogaDetector:
 
         return min(1.0, max(0.0, strength))
 
-    def _evaluate_strength_factor(
-        self, factor: Dict[str, Any], chart: BirthChart
-    ) -> float:
+    def _evaluate_strength_factor(self, factor: dict[str, Any], chart: BirthChart) -> float:
         """Evaluate a strength factor and return boost value.
 
         Args:
@@ -311,7 +301,7 @@ class YogaDetector:
 
         return 0.0
 
-    def _is_yoga_cancelled(self, rule: Dict[str, Any], chart: BirthChart) -> bool:
+    def _is_yoga_cancelled(self, rule: dict[str, Any], chart: BirthChart) -> bool:
         """Check if yoga has cancellation conditions that negate its benefits.
 
         Args:
@@ -337,13 +327,10 @@ class YogaDetector:
 
                 pos = chart.planets[planet]
 
-                if cancel_type == "planet_combust":
-                    if self._is_combust(planet, chart):
-                        return True
-
-                elif cancel_type == "planet_retrograde":
-                    if pos.is_retrograde:
-                        return True
+                if (cancel_type == "planet_combust" and self._is_combust(planet, chart)) or (
+                    cancel_type == "planet_retrograde" and pos.is_retrograde
+                ):
+                    return True
 
             except ValueError:
                 continue
@@ -352,7 +339,7 @@ class YogaDetector:
 
     # Condition Evaluators
 
-    def _eval_in_kendra(self, condition: Dict[str, Any], chart: BirthChart) -> bool:
+    def _eval_in_kendra(self, condition: dict[str, Any], chart: BirthChart) -> bool:
         """Check if planet is in kendra (1, 4, 7, 10) house."""
         planet_name = condition.get("planet")
         reference = condition.get("reference", "lagna")
@@ -378,7 +365,7 @@ class YogaDetector:
         except ValueError:
             return False
 
-    def _eval_in_trikona(self, condition: Dict[str, Any], chart: BirthChart) -> bool:
+    def _eval_in_trikona(self, condition: dict[str, Any], chart: BirthChart) -> bool:
         """Check if planet is in trikona (1, 5, 9) house."""
         planet_name = condition.get("planet")
         reference = condition.get("reference", "lagna")
@@ -403,7 +390,7 @@ class YogaDetector:
         except ValueError:
             return False
 
-    def _eval_in_dusthana(self, condition: Dict[str, Any], chart: BirthChart) -> bool:
+    def _eval_in_dusthana(self, condition: dict[str, Any], chart: BirthChart) -> bool:
         """Check if planet is in dusthana (6, 8, 12) house."""
         planet_name = condition.get("planet")
 
@@ -421,7 +408,7 @@ class YogaDetector:
         except ValueError:
             return False
 
-    def _eval_in_upachaya(self, condition: Dict[str, Any], chart: BirthChart) -> bool:
+    def _eval_in_upachaya(self, condition: dict[str, Any], chart: BirthChart) -> bool:
         """Check if planet is in upachaya (3, 6, 10, 11) house."""
         planet_name = condition.get("planet")
 
@@ -439,7 +426,7 @@ class YogaDetector:
         except ValueError:
             return False
 
-    def _eval_in_own_sign(self, condition: Dict[str, Any], chart: BirthChart) -> bool:
+    def _eval_in_own_sign(self, condition: dict[str, Any], chart: BirthChart) -> bool:
         """Check if planet is in its own sign."""
         planet_name = condition.get("planet")
 
@@ -457,7 +444,7 @@ class YogaDetector:
         except ValueError:
             return False
 
-    def _eval_in_exalted_sign(self, condition: Dict[str, Any], chart: BirthChart) -> bool:
+    def _eval_in_exalted_sign(self, condition: dict[str, Any], chart: BirthChart) -> bool:
         """Check if planet is in exalted sign."""
         planet_name = condition.get("planet")
 
@@ -475,7 +462,7 @@ class YogaDetector:
         except ValueError:
             return False
 
-    def _eval_in_own_or_exalted(self, condition: Dict[str, Any], chart: BirthChart) -> bool:
+    def _eval_in_own_or_exalted(self, condition: dict[str, Any], chart: BirthChart) -> bool:
         """Check if planet is in own or exalted sign."""
         planet_name = condition.get("planet")
 
@@ -488,15 +475,14 @@ class YogaDetector:
                 return False
 
             pos = chart.planets[planet]
-            return (
-                self._is_in_own_sign(planet, pos.rashi)
-                or self._is_in_exalted_sign(planet, pos.rashi)
+            return self._is_in_own_sign(planet, pos.rashi) or self._is_in_exalted_sign(
+                planet, pos.rashi
             )
 
         except ValueError:
             return False
 
-    def _eval_in_sign(self, condition: Dict[str, Any], chart: BirthChart) -> bool:
+    def _eval_in_sign(self, condition: dict[str, Any], chart: BirthChart) -> bool:
         """Check if planet is in specified sign(s)."""
         planet_name = condition.get("planet")
         signs = condition.get("signs", [])
@@ -515,7 +501,7 @@ class YogaDetector:
         except ValueError:
             return False
 
-    def _eval_in_house(self, condition: Dict[str, Any], chart: BirthChart) -> bool:
+    def _eval_in_house(self, condition: dict[str, Any], chart: BirthChart) -> bool:
         """Check if planet is in specified house(s)."""
         planet_name = condition.get("planet")
         houses = condition.get("houses", [])
@@ -549,7 +535,7 @@ class YogaDetector:
         except ValueError:
             return False
 
-    def _eval_in_houses(self, condition: Dict[str, Any], chart: BirthChart) -> bool:
+    def _eval_in_houses(self, condition: dict[str, Any], chart: BirthChart) -> bool:
         """Check if planets are in specified houses from reference point."""
         planets = condition.get("planets", [])
         houses = condition.get("houses", [])
@@ -585,7 +571,7 @@ class YogaDetector:
 
         return not any_planet
 
-    def _eval_conjunct(self, condition: Dict[str, Any], chart: BirthChart) -> bool:
+    def _eval_conjunct(self, condition: dict[str, Any], chart: BirthChart) -> bool:
         """Check if planets are conjunct (in the same sign)."""
         planets = condition.get("planets", [])
 
@@ -605,7 +591,7 @@ class YogaDetector:
 
         return len(set(signs)) == 1  # All in same sign
 
-    def _eval_aspected_by(self, condition: Dict[str, Any], chart: BirthChart) -> bool:
+    def _eval_aspected_by(self, condition: dict[str, Any], chart: BirthChart) -> bool:
         """Check if planet is aspected by specified planets."""
         target_planet = condition.get("planet")
         aspecting_planets = condition.get("planets", [])
@@ -639,7 +625,7 @@ class YogaDetector:
         except ValueError:
             return False
 
-    def _eval_lord_in_house(self, condition: Dict[str, Any], chart: BirthChart) -> bool:
+    def _eval_lord_in_house(self, condition: dict[str, Any], chart: BirthChart) -> bool:
         """Check if lord of a house is in specified house."""
         from_house = condition.get("from_house")
         in_house = condition.get("in_house")
@@ -653,7 +639,7 @@ class YogaDetector:
 
         return chart.planets[lord].house == in_house
 
-    def _eval_exchange(self, condition: Dict[str, Any], chart: BirthChart) -> bool:
+    def _eval_exchange(self, condition: dict[str, Any], chart: BirthChart) -> bool:
         """Check if two planets have exchange of lordship."""
         planet1_name = condition.get("planet1")
         planet2_name = condition.get("planet2")
@@ -672,17 +658,14 @@ class YogaDetector:
             pos2 = chart.planets[planet2]
 
             # Check if planet1 is in sign ruled by planet2 and vice versa
-            return (
-                pos1.rashi in self.PLANET_RULERSHIP.get(planet2, [])
-                and pos2.rashi in self.PLANET_RULERSHIP.get(planet1, [])
-            )
+            return pos1.rashi in self.PLANET_RULERSHIP.get(
+                planet2, []
+            ) and pos2.rashi in self.PLANET_RULERSHIP.get(planet1, [])
 
         except ValueError:
             return False
 
-    def _eval_in_kendra_or_trikona(
-        self, condition: Dict[str, Any], chart: BirthChart
-    ) -> bool:
+    def _eval_in_kendra_or_trikona(self, condition: dict[str, Any], chart: BirthChart) -> bool:
         """Check if planets form kendra or trikona relationship."""
         planets = condition.get("planets", [])
 
@@ -716,7 +699,7 @@ class YogaDetector:
         except ValueError:
             return False
 
-    def _eval_all_in_beneficial(self, condition: Dict[str, Any], chart: BirthChart) -> bool:
+    def _eval_all_in_beneficial(self, condition: dict[str, Any], chart: BirthChart) -> bool:
         """Check if all planets are in beneficial houses."""
         planets = condition.get("planets", [])
 
@@ -793,7 +776,7 @@ class YogaDetector:
         house = ((planet_idx - ref_idx) % 12) + 1
         return house
 
-    def _get_house_lord(self, house: int, chart: BirthChart) -> Optional[Planet]:
+    def _get_house_lord(self, house: int, chart: BirthChart) -> Planet | None:
         """Get the lord (ruling planet) of a house."""
         # Get the sign of the house cusp
         house_cusp_longitude = chart.houses.cusps[house - 1]
@@ -809,9 +792,7 @@ class YogaDetector:
 
         return None
 
-    def _have_mutual_aspect(
-        self, planet1_name: str, planet2_name: str, chart: BirthChart
-    ) -> bool:
+    def _have_mutual_aspect(self, planet1_name: str, planet2_name: str, chart: BirthChart) -> bool:
         """Check if two planets have mutual aspect."""
         try:
             p1 = Planet(planet1_name)
@@ -837,10 +818,10 @@ class YogaDetector:
 
     def _count_planets_in_houses(
         self,
-        planets: List[str],
-        houses: List[int],
+        planets: list[str],
+        houses: list[int],
         chart: BirthChart,
-        reference: Optional[str] = None,
+        reference: str | None = None,
     ) -> int:
         """Count how many planets are in specified houses."""
         count = 0
@@ -863,12 +844,12 @@ class YogaDetector:
 
         return count
 
-    def get_yoga_strength(self, yoga: DetectedYoga, chart: BirthChart) -> float:
+    def get_yoga_strength(self, yoga: DetectedYoga, _chart: BirthChart) -> float:
         """Get the current strength of a detected yoga.
 
         Args:
             yoga: The detected yoga
-            chart: The birth chart
+            _chart: The birth chart (reserved for future use)
 
         Returns:
             Strength value between 0.0 and 1.0
@@ -876,7 +857,7 @@ class YogaDetector:
         return yoga.strength
 
 
-def detect_all_yogas(chart: BirthChart) -> List[DetectedYoga]:
+def detect_all_yogas(chart: BirthChart) -> list[DetectedYoga]:
     """Convenience function to detect all yogas in a birth chart.
 
     Args:
@@ -889,7 +870,7 @@ def detect_all_yogas(chart: BirthChart) -> List[DetectedYoga]:
     return detector.detect_all_yogas(chart)
 
 
-def detect_yoga(yoga_rule: Dict[str, Any], chart: BirthChart) -> Optional[DetectedYoga]:
+def detect_yoga(yoga_rule: dict[str, Any], chart: BirthChart) -> DetectedYoga | None:
     """Convenience function to detect a single yoga.
 
     Args:
@@ -903,9 +884,7 @@ def detect_yoga(yoga_rule: Dict[str, Any], chart: BirthChart) -> Optional[Detect
     return detector.detect_yoga(yoga_rule, chart)
 
 
-def evaluate_condition(
-    condition: Dict[str, Any], chart: BirthChart
-) -> bool:
+def evaluate_condition(condition: dict[str, Any], chart: BirthChart) -> bool:
     """Convenience function to evaluate a single condition.
 
     Args:

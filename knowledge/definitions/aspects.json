@@ -1,0 +1,297 @@
+{
+  "metadata": {
+    "source": "BPHS (Brihat Parasara Hora Sastra) Chapter 28",
+    "subject": "Planetary Aspects (Graha Drishti)",
+    "version": "1.0",
+    "description": "Complete planetary aspect rules including universal aspects, special aspects, aspect orbs, and graha drishti percentages"
+  },
+  "universal_aspects": {
+    "description": "All planets aspect the 7th house with full strength",
+    "7th_house": {
+      "strength": 1.0,
+      "percentage": 100,
+      "note": "All 9 planets (Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn, Rahu, Ketu) aspect the 7th house with full drishti"
+    }
+  },
+  "special_aspects": {
+    "description": "Special aspects for specific planets beyond the universal 7th house aspect",
+    "mars": {
+      "planet": "Mars",
+      "aspects": {
+        "4th_house": {
+          "strength": 0.75,
+          "percentage": 75,
+          "description": "Mars aspects 4th house with 3/4 strength"
+        },
+        "7th_house": {
+          "strength": 1.0,
+          "percentage": 100,
+          "description": "Mars aspects 7th house with full strength (universal aspect)"
+        },
+        "8th_house": {
+          "strength": 0.75,
+          "percentage": 75,
+          "description": "Mars aspects 8th house with 3/4 strength"
+        }
+      }
+    },
+    "jupiter": {
+      "planet": "Jupiter",
+      "aspects": {
+        "5th_house": {
+          "strength": 1.0,
+          "percentage": 100,
+          "description": "Jupiter aspects 5th house with full strength"
+        },
+        "7th_house": {
+          "strength": 1.0,
+          "percentage": 100,
+          "description": "Jupiter aspects 7th house with full strength (universal aspect)"
+        },
+        "9th_house": {
+          "strength": 1.0,
+          "percentage": 100,
+          "description": "Jupiter aspects 9th house with full strength"
+        }
+      }
+    },
+    "saturn": {
+      "planet": "Saturn",
+      "aspects": {
+        "3rd_house": {
+          "strength": 0.75,
+          "percentage": 75,
+          "description": "Saturn aspects 3rd house with 3/4 strength"
+        },
+        "7th_house": {
+          "strength": 1.0,
+          "percentage": 100,
+          "description": "Saturn aspects 7th house with full strength (universal aspect)"
+        },
+        "10th_house": {
+          "strength": 0.75,
+          "percentage": 75,
+          "description": "Saturn aspects 10th house with 3/4 strength"
+        }
+      }
+    },
+    "rahu": {
+      "planet": "Rahu",
+      "aspects": {
+        "5th_house": {
+          "strength": 1.0,
+          "percentage": 100,
+          "description": "Rahu aspects 5th house with full strength (like Jupiter)"
+        },
+        "7th_house": {
+          "strength": 1.0,
+          "percentage": 100,
+          "description": "Rahu aspects 7th house with full strength (universal aspect)"
+        },
+        "9th_house": {
+          "strength": 1.0,
+          "percentage": 100,
+          "description": "Rahu aspects 9th house with full strength (like Jupiter)"
+        }
+      }
+    },
+    "ketu": {
+      "planet": "Ketu",
+      "aspects": {
+        "5th_house": {
+          "strength": 1.0,
+          "percentage": 100,
+          "description": "Ketu aspects 5th house with full strength (like Jupiter)"
+        },
+        "7th_house": {
+          "strength": 1.0,
+          "percentage": 100,
+          "description": "Ketu aspects 7th house with full strength (universal aspect)"
+        },
+        "9th_house": {
+          "strength": 1.0,
+          "percentage": 100,
+          "description": "Ketu aspects 9th house with full strength (like Jupiter)"
+        }
+      }
+    },
+    "sun": {
+      "planet": "Sun",
+      "aspects": {
+        "7th_house": {
+          "strength": 1.0,
+          "percentage": 100,
+          "description": "Sun aspects 7th house with full strength (universal aspect)"
+        }
+      }
+    },
+    "moon": {
+      "planet": "Moon",
+      "aspects": {
+        "7th_house": {
+          "strength": 1.0,
+          "percentage": 100,
+          "description": "Moon aspects 7th house with full strength (universal aspect)"
+        }
+      }
+    },
+    "mercury": {
+      "planet": "Mercury",
+      "aspects": {
+        "7th_house": {
+          "strength": 1.0,
+          "percentage": 100,
+          "description": "Mercury aspects 7th house with full strength (universal aspect)"
+        }
+      }
+    },
+    "venus": {
+      "planet": "Venus",
+      "aspects": {
+        "7th_house": {
+          "strength": 1.0,
+          "percentage": 100,
+          "description": "Venus aspects 7th house with full strength (universal aspect)"
+        }
+      }
+    }
+  },
+  "aspect_orbs": {
+    "description": "Orb ranges for traditional Western-style aspects (for reference in Vedic context)",
+    "conjunction": {
+      "aspect_type": "conjunction",
+      "orb_degrees": 8,
+      "description": "0 degrees separation"
+    },
+    "opposition": {
+      "aspect_type": "opposition",
+      "orb_degrees": 8,
+      "description": "180 degrees separation"
+    },
+    "trine": {
+      "aspect_type": "trine",
+      "orb_degrees": 6,
+      "description": "120 degrees separation"
+    },
+    "square": {
+      "aspect_type": "square",
+      "orb_degrees": 6,
+      "description": "90 degrees separation"
+    },
+    "sextile": {
+      "aspect_type": "sextile",
+      "orb_degrees": 4,
+      "description": "60 degrees separation"
+    }
+  },
+  "graha_drishti_percentage": {
+    "description": "House-wise drishti (aspect) strength percentages for all planets",
+    "full_aspect": {
+      "percentage": 100,
+      "strength": 1.0,
+      "houses": [7],
+      "description": "Full aspect on 7th house - All planets"
+    },
+    "three_quarter_aspect": {
+      "percentage": 75,
+      "strength": 0.75,
+      "houses": [3, 10],
+      "planets": ["Mars", "Saturn"],
+      "description": "3/4 aspect - Mars on 4th & 8th; Saturn on 3rd & 10th"
+    },
+    "half_aspect": {
+      "percentage": 50,
+      "strength": 0.5,
+      "houses": [4, 8],
+      "planets": ["Mars"],
+      "description": "1/2 aspect - Mars on 4th & 8th houses"
+    },
+    "quarter_aspect": {
+      "percentage": 25,
+      "strength": 0.25,
+      "houses": [5, 9],
+      "planets": ["Jupiter", "Rahu", "Ketu"],
+      "description": "1/4 aspect - Jupiter, Rahu, Ketu on 5th & 9th houses"
+    }
+  },
+  "house_aspect_matrix": {
+    "description": "Complete matrix showing which planets aspect which houses",
+    "houses": {
+      "1st": {
+        "aspected_by": ["None (except from opposite 7th)"],
+        "note": "Ascendant house, aspect source"
+      },
+      "2nd": {
+        "aspected_by": ["None (except from opposite 8th)"],
+        "note": "Family, wealth"
+      },
+      "3rd": {
+        "aspected_by": ["Saturn (0.75)"],
+        "note": "Communication, siblings"
+      },
+      "4th": {
+        "aspected_by": ["Mars (0.75)"],
+        "note": "Home, mother, property"
+      },
+      "5th": {
+        "aspected_by": ["Jupiter (1.0)", "Rahu (1.0)", "Ketu (1.0)"],
+        "note": "Creativity, children, romance"
+      },
+      "6th": {
+        "aspected_by": ["None (except from opposite 12th)"],
+        "note": "Health, enemies, debts"
+      },
+      "7th": {
+        "aspected_by": ["Sun (1.0)", "Moon (1.0)", "Mars (1.0)", "Mercury (1.0)", "Jupiter (1.0)", "Venus (1.0)", "Saturn (1.0)", "Rahu (1.0)", "Ketu (1.0)"],
+        "note": "Partnership, marriage, contracts - Universal aspect house"
+      },
+      "8th": {
+        "aspected_by": ["Mars (0.75)"],
+        "note": "Transformation, inheritance, occult"
+      },
+      "9th": {
+        "aspected_by": ["Jupiter (1.0)", "Rahu (1.0)", "Ketu (1.0)"],
+        "note": "Dharma, religion, fortune, higher learning"
+      },
+      "10th": {
+        "aspected_by": ["Saturn (0.75)"],
+        "note": "Career, status, authority"
+      },
+      "11th": {
+        "aspected_by": ["None (except from opposite 5th)"],
+        "note": "Gains, friends, wishes"
+      },
+      "12th": {
+        "aspected_by": ["None (except from opposite 6th)"],
+        "note": "Losses, isolation, spirituality"
+      }
+    }
+  },
+  "application_rules": {
+    "conjunction_based_aspects": {
+      "description": "In Vedic astrology, aspects are primarily based on house positions rather than degrees",
+      "rule": "A planet aspects the 7th house from its position, plus any special aspects based on its nature",
+      "example": "Mars in 1st house aspects the 4th (3/4), 7th (full), and 8th (3/4) houses"
+    },
+    "conjunction_conjunction": {
+      "description": "When planets occupy the same house (conjunction)",
+      "effect": "Both planets aspect each other with full strength regardless of degree separation within the house"
+    },
+    "multiple_planets_same_house": {
+      "description": "When multiple planets aspect the same house",
+      "effect": "Each planet's aspect contributes separately; the combined effect is evaluated based on planet natures and their mutual relationships"
+    },
+    "aspect_strength_calculation": {
+      "formula": "Aspect Strength = Base Strength × Benefic/Malefic Factor × Dignity Factor",
+      "benefic_planets": ["Sun", "Moon", "Jupiter", "Venus"],
+      "malefic_planets": ["Mars", "Saturn", "Rahu", "Ketu"],
+      "neutral_planets": ["Mercury"]
+    }
+  },
+  "vedic_principles": {
+    "drishti_definition": "Drishti means 'sight' or 'vision' - the aspect or influence a planet casts upon houses and other planets",
+    "house_based": "Unlike Western astrology which uses degree-based aspects, Vedic astrology uses house-based aspects",
+    "strength_hierarchy": "Full (7th) > 3/4 (3rd, 10th for Mars/Saturn) > 1/2 (4th, 8th for Mars) > 1/4 (5th, 9th for Jupiter/Rahu/Ketu)",
+    "interpretation": "Aspect strength indicates how much influence a planet exerts on the aspected house and its significations"
+  }
+}

@@ -1,0 +1,521 @@
+{
+  "metadata": {
+    "description": "Planetary relationships according to BPHS (Brihat Parasara Hora Shastra)",
+    "version": "1.0",
+    "source": "BPHS Chapter on Natural Planetary Friendships and Enmities",
+    "planets": ["sun", "moon", "mars", "mercury", "jupiter", "venus", "saturn", "rahu", "ketu"]
+  },
+  "natural_relationships": {
+    "sun": {
+      "friends": ["moon", "mars", "jupiter"],
+      "enemies": ["venus", "saturn"],
+      "neutral": ["mercury"]
+    },
+    "moon": {
+      "friends": ["sun", "mercury"],
+      "enemies": [],
+      "neutral": ["mars", "jupiter", "venus", "saturn"]
+    },
+    "mars": {
+      "friends": ["sun", "moon", "jupiter"],
+      "enemies": ["mercury"],
+      "neutral": ["venus", "saturn"]
+    },
+    "mercury": {
+      "friends": ["sun", "venus"],
+      "enemies": ["moon"],
+      "neutral": ["mars", "jupiter", "saturn"]
+    },
+    "jupiter": {
+      "friends": ["sun", "moon", "mars"],
+      "enemies": ["mercury", "venus"],
+      "neutral": ["saturn"]
+    },
+    "venus": {
+      "friends": ["mercury", "saturn"],
+      "enemies": ["sun", "moon"],
+      "neutral": ["mars", "jupiter"]
+    },
+    "saturn": {
+      "friends": ["mercury", "venus"],
+      "enemies": ["sun", "moon", "mars"],
+      "neutral": ["jupiter"]
+    },
+    "rahu": {
+      "friends": ["mercury", "venus", "saturn"],
+      "enemies": ["sun", "moon", "mars"],
+      "neutral": ["jupiter"]
+    },
+    "ketu": {
+      "friends": ["mars", "venus", "saturn"],
+      "enemies": ["sun", "moon"],
+      "neutral": ["mercury", "jupiter"]
+    }
+  },
+  "temporary_relationships": {
+    "description": "Houses that create temporary friendships and enmities",
+    "temporary_friend_houses": [2, 3, 4, 10, 11, 12],
+    "temporary_enemy_houses": [1, 5, 6, 7, 8, 9],
+    "rules": {
+      "friend": "Two planets separated by houses 2, 3, 4, 10, 11, 12 from each other become temporary friends",
+      "enemy": "Two planets separated by houses 1, 5, 6, 7, 8, 9 from each other become temporary enemies"
+    }
+  },
+  "compound_relationship_matrix": {
+    "description": "Relationship between natural and temporary relationships creates compound relationships",
+    "rules": {
+      "adhi_mitra": {
+        "name": "Intimate Friend",
+        "calculation": "friend + friend (natural friend + temporary friend)",
+        "strength": "strongest"
+      },
+      "mitra": {
+        "name": "Friend",
+        "calculation": "friend + neutral OR friend alone (natural friend without temporary enmity)",
+        "strength": "strong"
+      },
+      "sama": {
+        "name": "Neutral",
+        "calculation": "friend + enemy (natural friend + temporary enemy) OR enemy + friend (natural enemy + temporary friend)",
+        "strength": "moderate"
+      },
+      "satru": {
+        "name": "Enemy",
+        "calculation": "enemy + neutral OR enemy alone (natural enemy without temporary friendship)",
+        "strength": "strong_negative"
+      },
+      "adhi_satru": {
+        "name": "Bitter Enemy",
+        "calculation": "enemy + enemy (natural enemy + temporary enemy)",
+        "strength": "strongest_negative"
+      }
+    }
+  },
+  "compound_relationships_all_planets": {
+    "sun": {
+      "with_moon": {
+        "natural": "friend",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["adhi_mitra", "mitra", "sama"]
+      },
+      "with_mars": {
+        "natural": "friend",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["adhi_mitra", "mitra", "sama"]
+      },
+      "with_mercury": {
+        "natural": "neutral",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["mitra", "sama", "satru"]
+      },
+      "with_jupiter": {
+        "natural": "friend",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["adhi_mitra", "mitra", "sama"]
+      },
+      "with_venus": {
+        "natural": "enemy",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["sama", "satru", "adhi_satru"]
+      },
+      "with_saturn": {
+        "natural": "enemy",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["sama", "satru", "adhi_satru"]
+      },
+      "with_rahu": {
+        "natural": "enemy",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["sama", "satru", "adhi_satru"]
+      },
+      "with_ketu": {
+        "natural": "enemy",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["sama", "satru", "adhi_satru"]
+      }
+    },
+    "moon": {
+      "with_sun": {
+        "natural": "friend",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["adhi_mitra", "mitra", "sama"]
+      },
+      "with_mars": {
+        "natural": "neutral",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["mitra", "sama", "satru"]
+      },
+      "with_mercury": {
+        "natural": "friend",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["adhi_mitra", "mitra", "sama"]
+      },
+      "with_jupiter": {
+        "natural": "neutral",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["mitra", "sama", "satru"]
+      },
+      "with_venus": {
+        "natural": "enemy",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["sama", "satru", "adhi_satru"]
+      },
+      "with_saturn": {
+        "natural": "neutral",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["mitra", "sama", "satru"]
+      },
+      "with_rahu": {
+        "natural": "enemy",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["sama", "satru", "adhi_satru"]
+      },
+      "with_ketu": {
+        "natural": "enemy",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["sama", "satru", "adhi_satru"]
+      }
+    },
+    "mars": {
+      "with_sun": {
+        "natural": "friend",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["adhi_mitra", "mitra", "sama"]
+      },
+      "with_moon": {
+        "natural": "neutral",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["mitra", "sama", "satru"]
+      },
+      "with_mercury": {
+        "natural": "enemy",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["sama", "satru", "adhi_satru"]
+      },
+      "with_jupiter": {
+        "natural": "friend",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["adhi_mitra", "mitra", "sama"]
+      },
+      "with_venus": {
+        "natural": "neutral",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["mitra", "sama", "satru"]
+      },
+      "with_saturn": {
+        "natural": "neutral",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["mitra", "sama", "satru"]
+      },
+      "with_rahu": {
+        "natural": "enemy",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["sama", "satru", "adhi_satru"]
+      },
+      "with_ketu": {
+        "natural": "friend",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["adhi_mitra", "mitra", "sama"]
+      }
+    },
+    "mercury": {
+      "with_sun": {
+        "natural": "friend",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["adhi_mitra", "mitra", "sama"]
+      },
+      "with_moon": {
+        "natural": "friend",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["adhi_mitra", "mitra", "sama"]
+      },
+      "with_mars": {
+        "natural": "enemy",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["sama", "satru", "adhi_satru"]
+      },
+      "with_jupiter": {
+        "natural": "enemy",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["sama", "satru", "adhi_satru"]
+      },
+      "with_venus": {
+        "natural": "friend",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["adhi_mitra", "mitra", "sama"]
+      },
+      "with_saturn": {
+        "natural": "friend",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["adhi_mitra", "mitra", "sama"]
+      },
+      "with_rahu": {
+        "natural": "friend",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["adhi_mitra", "mitra", "sama"]
+      },
+      "with_ketu": {
+        "natural": "neutral",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["mitra", "sama", "satru"]
+      }
+    },
+    "jupiter": {
+      "with_sun": {
+        "natural": "friend",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["adhi_mitra", "mitra", "sama"]
+      },
+      "with_moon": {
+        "natural": "neutral",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["mitra", "sama", "satru"]
+      },
+      "with_mars": {
+        "natural": "friend",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["adhi_mitra", "mitra", "sama"]
+      },
+      "with_mercury": {
+        "natural": "enemy",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["sama", "satru", "adhi_satru"]
+      },
+      "with_venus": {
+        "natural": "enemy",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["sama", "satru", "adhi_satru"]
+      },
+      "with_saturn": {
+        "natural": "neutral",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["mitra", "sama", "satru"]
+      },
+      "with_rahu": {
+        "natural": "neutral",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["mitra", "sama", "satru"]
+      },
+      "with_ketu": {
+        "natural": "neutral",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["mitra", "sama", "satru"]
+      }
+    },
+    "venus": {
+      "with_sun": {
+        "natural": "enemy",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["sama", "satru", "adhi_satru"]
+      },
+      "with_moon": {
+        "natural": "enemy",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["sama", "satru", "adhi_satru"]
+      },
+      "with_mars": {
+        "natural": "neutral",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["mitra", "sama", "satru"]
+      },
+      "with_mercury": {
+        "natural": "friend",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["adhi_mitra", "mitra", "sama"]
+      },
+      "with_jupiter": {
+        "natural": "enemy",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["sama", "satru", "adhi_satru"]
+      },
+      "with_saturn": {
+        "natural": "friend",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["adhi_mitra", "mitra", "sama"]
+      },
+      "with_rahu": {
+        "natural": "friend",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["adhi_mitra", "mitra", "sama"]
+      },
+      "with_ketu": {
+        "natural": "friend",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["adhi_mitra", "mitra", "sama"]
+      }
+    },
+    "saturn": {
+      "with_sun": {
+        "natural": "enemy",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["sama", "satru", "adhi_satru"]
+      },
+      "with_moon": {
+        "natural": "neutral",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["mitra", "sama", "satru"]
+      },
+      "with_mars": {
+        "natural": "neutral",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["mitra", "sama", "satru"]
+      },
+      "with_mercury": {
+        "natural": "friend",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["adhi_mitra", "mitra", "sama"]
+      },
+      "with_jupiter": {
+        "natural": "neutral",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["mitra", "sama", "satru"]
+      },
+      "with_venus": {
+        "natural": "friend",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["adhi_mitra", "mitra", "sama"]
+      },
+      "with_rahu": {
+        "natural": "friend",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["adhi_mitra", "mitra", "sama"]
+      },
+      "with_ketu": {
+        "natural": "friend",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["adhi_mitra", "mitra", "sama"]
+      }
+    },
+    "rahu": {
+      "with_sun": {
+        "natural": "enemy",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["sama", "satru", "adhi_satru"]
+      },
+      "with_moon": {
+        "natural": "enemy",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["sama", "satru", "adhi_satru"]
+      },
+      "with_mars": {
+        "natural": "enemy",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["sama", "satru", "adhi_satru"]
+      },
+      "with_mercury": {
+        "natural": "friend",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["adhi_mitra", "mitra", "sama"]
+      },
+      "with_jupiter": {
+        "natural": "neutral",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["mitra", "sama", "satru"]
+      },
+      "with_venus": {
+        "natural": "friend",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["adhi_mitra", "mitra", "sama"]
+      },
+      "with_saturn": {
+        "natural": "friend",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["adhi_mitra", "mitra", "sama"]
+      },
+      "with_ketu": {
+        "natural": "neutral",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["mitra", "sama", "satru"]
+      }
+    },
+    "ketu": {
+      "with_sun": {
+        "natural": "enemy",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["sama", "satru", "adhi_satru"]
+      },
+      "with_moon": {
+        "natural": "enemy",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["sama", "satru", "adhi_satru"]
+      },
+      "with_mars": {
+        "natural": "friend",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["adhi_mitra", "mitra", "sama"]
+      },
+      "with_mercury": {
+        "natural": "neutral",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["mitra", "sama", "satru"]
+      },
+      "with_jupiter": {
+        "natural": "neutral",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["mitra", "sama", "satru"]
+      },
+      "with_venus": {
+        "natural": "friend",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["adhi_mitra", "mitra", "sama"]
+      },
+      "with_saturn": {
+        "natural": "friend",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["adhi_mitra", "mitra", "sama"]
+      },
+      "with_rahu": {
+        "natural": "neutral",
+        "temporary_depends_on": "house_position",
+        "possible_compound": ["mitra", "sama", "satru"]
+      }
+    }
+  },
+  "relationship_types": {
+    "adhi_mitra": {
+      "english_name": "Intimate Friend",
+      "sanskrit_name": "Adhi Mitra",
+      "strength_level": 5,
+      "description": "Strongest positive relationship - both natural friend and temporary friend"
+    },
+    "mitra": {
+      "english_name": "Friend",
+      "sanskrit_name": "Mitra",
+      "strength_level": 4,
+      "description": "Positive relationship - natural friend or natural friend with temporary neutral"
+    },
+    "sama": {
+      "english_name": "Neutral",
+      "sanskrit_name": "Sama",
+      "strength_level": 3,
+      "description": "Mixed relationship - natural friend with temporary enemy or vice versa"
+    },
+    "satru": {
+      "english_name": "Enemy",
+      "sanskrit_name": "Shatru",
+      "strength_level": 2,
+      "description": "Negative relationship - natural enemy or natural enemy with temporary neutral"
+    },
+    "adhi_satru": {
+      "english_name": "Bitter Enemy",
+      "sanskrit_name": "Adhi Shatru",
+      "strength_level": 1,
+      "description": "Strongest negative relationship - both natural enemy and temporary enemy"
+    }
+  },
+  "calculation_method": {
+    "step_1": "Determine natural relationship from natural_relationships object",
+    "step_2": "Calculate house distance between planets (1-12 houses in zodiac)",
+    "step_3": "Determine temporary relationship based on house distance",
+    "step_4": "Combine natural + temporary using compound_relationship_matrix",
+    "step_5": "Result is final compound relationship strength"
+  },
+  "notes": {
+    "nodes_are_shadow_planets": "Rahu and Ketu are shadow planets (nodes of the moon), not physical planets",
+    "rahu_ketu_houses": "Rahu and Ketu are always 6 houses apart (opposite in zodiac)",
+    "temporary_friends": "Planets in houses 2, 3, 4, 10, 11, 12 from each other (kendras, panaphara)",
+    "temporary_enemies": "Planets in houses 1, 5, 6, 7, 8, 9 from each other (upachayas, apoklimas)",
+    "mutual_friendship": "If A is friend to B, B must be friend to A (symmetric relationship)",
+    "practical_application": "Compound relationships help in timing events, predicting planetary effects, and yogas"
+  }
+}
