@@ -155,6 +155,22 @@ def get_aspects() -> dict[str, Any]:
     return load_definition("aspects").get("aspects", {})
 
 
+def get_antardasha_effects() -> dict[str, Any]:
+    """Get Antardasha effects (81 combinations: 9x9).
+
+    Structure: effects[mahadasha_lord][antardasha_lord] -> effect details
+    """
+    return load_rules("antardasha_effects").get("antardasha_effects", {})
+
+
+def get_pratyantardasha_effects() -> dict[str, Any]:
+    """Get Pratyantardasha effects (729 combinations: 9x9x9).
+
+    Structure: effects[mahadasha_lord][antardasha_lord][pratyantardasha_lord] -> effect details
+    """
+    return load_rules("pratyantardasha_master").get("pratyantardasha_effects", {})
+
+
 def clear_cache() -> None:
     """Clear the knowledge cache (useful for testing)."""
     _load_json_file.cache_clear()

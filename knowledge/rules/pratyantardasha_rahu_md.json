@@ -1,0 +1,2791 @@
+{
+  "mahadasha": "rahu",
+  "mahadasha_duration_years": 18,
+  "mahadasha_themes": [
+    "Obsession",
+    "Illusion",
+    "Foreign",
+    "Technology",
+    "Unconventional",
+    "Material desire",
+    "Worldly ambition",
+    "Deception",
+    "Shadows",
+    "Expansion through desire"
+  ],
+  "pratyantardasha_info": {
+    "total_combinations": 81,
+    "antardasha_count": 9,
+    "pratyantardasha_per_ad": 9,
+    "mahadasha_total_days": 6570,
+    "average_ad_days": 730,
+    "average_pd_days": 81
+  },
+  "pratyantardasha_combinations": {
+    "rahu_rahu": {
+      "antardasha_lord": "rahu",
+      "antardasha_duration_days": 730,
+      "antardasha_themes": ["Peak obsession", "Maximum illusion", "Foreign ventures", "Deception risk", "Worldly ambition apex"],
+      "pratyantardasha": {
+        "rahu_rahu_rahu": {
+          "sequence": [1, 1, 1],
+          "duration_days": 81,
+          "theme": "MAXIMUM obsession and illusion - foreign peak",
+          "description": "Extreme obsession with desires, maximum deception risk, foreign ventures reach peak, illusions dominate perception, material ambitions at maximum intensity",
+          "effects": [
+            "Obsessive behavior intensifies dramatically",
+            "Illusions and delusions at peak intensity",
+            "Foreign opportunities or foreign entanglements at maximum",
+            "Deception risk extremely high - both self-deception and external",
+            "Material desires consume all mental energy",
+            "Technology and unconventional pursuits peak",
+            "Shadow aspects fully activated"
+          ],
+          "health": {
+            "risks": ["Psychological obsession", "Sleep disorders from obsessive thinking", "Stress-related illnesses", "Paranoia", "Addictive tendencies"],
+            "remedies": ["Meditation on detachment", "Grounding practices", "Reality testing", "Mental health support", "Ayurvedic cooling herbs"]
+          },
+          "career": {
+            "opportunities": ["Foreign tech ventures", "Obsessive focus yields breakthroughs", "Unconventional business success"],
+            "challenges": ["Deceptive business practices tempting", "Legal risks high", "Unrealistic expectations", "Obsessive overwork"]
+          },
+          "relationships": {
+            "effects": ["Obsessive attachment patterns", "Possessive tendencies peak", "Illusions about partner", "Manipulation risk high", "Foreign relationship complications"],
+            "remedies": ["Reality-based communication", "Honest self-assessment", "Relationship counseling"]
+          },
+          "timing_events": {
+            "peak_intensity_days": [15, 45],
+            "challenges_peak": [35, 65],
+            "recovery_days": [70, 81]
+          },
+          "spiritual_perspective": "Complete shadow identification - highest point of illusory consciousness, critical turning point for growth or complete entrapment"
+        },
+        "rahu_rahu_ketu": {
+          "sequence": [1, 1, 2],
+          "duration_days": 81,
+          "theme": "Illusion meets release - foreign spiritual crisis",
+          "description": "Deceptive foreign pursuits suddenly questioned, illusions crumble, shadow self exposed, spiritual reawakening forced, material obsessions interrupted",
+          "effects": [
+            "Sudden disillusionment with foreign ventures or people",
+            "Illusions collapse forcing reality confrontation",
+            "Spiritual crisis or breakthrough",
+            "Obsessions lose their grip",
+            "Material pursuits questioned",
+            "Foreign entanglements untangle",
+            "Shadow patterns exposed and challenged"
+          ],
+          "health": {
+            "risks": ["Psychological crisis", "Detachment disorders", "Existential anxiety", "Sleep disruption"],
+            "remedies": ["Spiritual practices", "Therapy and counseling", "Meditation", "Past-life regression work"]
+          },
+          "career": {
+            "opportunities": ["Break from deceptive paths", "Spiritual career shift", "Release from obsessive projects"],
+            "challenges": ["Abrupt project endings", "Foreign deal collapses", "Disorientation in career direction"]
+          },
+          "relationships": {
+            "effects": ["Truth comes to light", "Deceptive relationships exposed", "Obsessive patterns broken", "Spiritual partnerships form"],
+            "remedies": ["Honest communication", "Release unhealthy attachments"]
+          },
+          "timing_events": {
+            "crisis_peak": [20, 40],
+            "breakthrough_days": [50, 75],
+            "clarity_days": [75, 81]
+          },
+          "spiritual_perspective": "Rahu-Ketu axis activated - shadow meets its opposite, illusion unmasks itself"
+        },
+        "rahu_rahu_jupiter": {
+          "sequence": [1, 1, 3],
+          "duration_days": 81,
+          "theme": "Obsession meets wisdom - Guru Chandal tension",
+          "description": "Foreign learning opportunities, philosophical obsessions, wisdom sought through deceptive means, guru-student dynamics charged, higher learning twisted by desire",
+          "effects": [
+            "Guru Chandal yoga activated - wisdom and illusion clash",
+            "Foreign education or foreign gurus attract",
+            "Obsessive spiritual seeking",
+            "Philosophical theories become obsessions",
+            "Religious or spiritual deception risk",
+            "Wisdom distorted by material desire",
+            "Foreign wisdom traditions exploited"
+          ],
+          "health": {
+            "risks": ["Over-indulgence from emotional confusion", "Liver congestion", "Digestive issues from stress", "Obesity from escapism"],
+            "remedies": ["Guru meditation", "Sincere spiritual practice", "Liver cleansing", "Sattvic diet"]
+          },
+          "career": {
+            "opportunities": ["Teaching foreign subjects", "Philosophical writing", "Spiritual but materialistic ventures", "Educational tech startups"],
+            "challenges": ["False teachers encountered", "Deceptive gurus", "Educational fraud risk", "Wisdom misused"]
+          },
+          "relationships": {
+            "effects": ["Guru-disciple relationships charged", "Spiritual partnerships tested", "Teacher-student dynamics problematic", "Wisdom used to manipulate"],
+            "remedies": ["Authentic spiritual teachers", "Humble learning attitude"]
+          },
+          "timing_events": {
+            "guru_encounters": [15, 35],
+            "tension_peak": [40, 60],
+            "wisdom_clarity": [65, 81]
+          },
+          "spiritual_perspective": "Guru Chandal - highest wisdom meets deepest illusion, critical test of spiritual sincerity"
+        },
+        "rahu_rahu_saturn": {
+          "sequence": [1, 1, 4],
+          "duration_days": 81,
+          "theme": "Obsessive fears and karmic debts",
+          "description": "Hidden fears surface, karmic debts demand payment, foreign pressures intensify, obsessive fear patterns, shadows of past catch up",
+          "effects": [
+            "Fear becomes obsessive and paralyzing",
+            "Karmic consequences of deceptive acts surface",
+            "Hidden enemies emerge",
+            "Restrictions and limitations pile up",
+            "Foreign complications become severe",
+            "Old debts resurface",
+            "Anxious obsessions dominate"
+          ],
+          "health": {
+            "risks": ["Anxiety disorders", "Fear-based illnesses", "Chronic pain", "Skin conditions", "Depression"],
+            "remedies": ["Saturnine practices", "Grounding", "Discipline and structure", "Acceptance of karma"]
+          },
+          "career": {
+            "opportunities": ["Disciplined obsessive focus", "Long-term foreign projects", "Building solid foundations slowly"],
+            "challenges": ["Work restrictions", "Foreign bureaucracy", "Fear of failure", "Hidden obstacles"]
+          },
+          "relationships": {
+            "effects": ["Fear-based control patterns", "Karmic relationship lessons", "Hidden resentments surface", "Obligation and duty burden"],
+            "remedies": ["Karmic acceptance", "Honest communication about fears"]
+          },
+          "timing_events": {
+            "fear_peaks": [10, 30, 50, 70],
+            "karmic_events": [25, 55],
+            "resolution_days": [75, 81]
+          },
+          "spiritual_perspective": "Rahu-Saturn axis - illusion meets limitation, shadow meets teacher, karmic debts demand resolution"
+        },
+        "rahu_rahu_venus": {
+          "sequence": [1, 1, 5],
+          "duration_days": 81,
+          "theme": "Obsessive love, forbidden pleasures, material indulgence",
+          "description": "Love becomes obsessive and deceptive, sensual desires intensify, forbidden relationships tempt, material possessions obsessed over, pleasure-seeking peaks",
+          "effects": [
+            "Love becomes obsessive possession",
+            "Sensual desires intensify dramatically",
+            "Forbidden relationships attract",
+            "Material wealth obsession peaks",
+            "Artistic pursuits twisted by desire",
+            "Beauty and luxury become obsessions",
+            "Relationship deceptions likely"
+          ],
+          "health": {
+            "risks": ["Reproductive health issues", "Addictive sensual pursuits", "Skin conditions", "Overindulgence effects"],
+            "remedies": ["Brahmacharya practices", "Detachment from sensuality", "Heart-opening meditation"]
+          },
+          "career": {
+            "opportunities": ["Creative pursuits", "Luxury goods business", "Relationship-based work", "Arts and beauty industries"],
+            "challenges": ["Workplace relationships problematic", "Financial irresponsibility", "Loss through deception"]
+          },
+          "relationships": {
+            "effects": ["Obsessive attachment", "Possessive love", "Forbidden liaisons", "Deceptive infidelity", "Material dependence"],
+            "remedies": ["Honest communication", "Release of possession", "Spiritual love practices"]
+          },
+          "timing_events": {
+            "passion_peaks": [20, 50],
+            "temptation_days": [30, 60],
+            "clarity_days": [70, 81]
+          },
+          "spiritual_perspective": "Rahu-Venus shadow - desire distorted into obsession, illusion of love as possession"
+        },
+        "rahu_rahu_mercury": {
+          "sequence": [1, 1, 6],
+          "duration_days": 81,
+          "theme": "Tech mastery and deceptive communication",
+          "description": "Obsessive tech focus, communication becomes deceptive, technology addiction peaks, clever manipulation through words, foreign tech ventures",
+          "effects": [
+            "Technology mastery through obsessive focus",
+            "Communication becomes deceptive and manipulative",
+            "Intellectual obsessions dominate",
+            "Tech addiction and screen dependency peak",
+            "Clever mental strategies for deception",
+            "Foreign tech partnerships form",
+            "Writing or speaking skills twisted for manipulation"
+          ],
+          "health": {
+            "risks": ["Tech addiction", "Anxiety from constant connectivity", "Nervous disorders", "Sleep disruption", "Eye strain"],
+            "remedies": ["Digital detox periods", "Meditation", "Nervous system calming"]
+          },
+          "career": {
+            "opportunities": ["Tech breakthroughs", "Coding mastery", "Tech startup success", "Communication tech", "Unconventional business ideas"],
+            "challenges": ["Cyber fraud temptation", "Communication fraud", "Data theft considerations", "Hacking temptation"]
+          },
+          "relationships": {
+            "effects": ["Deceptive texting and online behavior", "Relationship conflicts via communication", "Tech-based infidelity", "Manipulation through words"],
+            "remedies": ["Honest communication", "Tech boundaries in relationships"]
+          },
+          "timing_events": {
+            "tech_breakthroughs": [15, 40],
+            "communication_peaks": [25, 55],
+            "deception_risks": [35, 65]
+          },
+          "spiritual_perspective": "Rahu-Mercury shadow - intellect divorced from wisdom, clever manipulation replacing sincere communication"
+        },
+        "rahu_rahu_sun": {
+          "sequence": [1, 1, 7],
+          "duration_days": 81,
+          "theme": "Ego-driven obsession, false authority",
+          "description": "Ego becomes obsessive and grandiose, false authority sought, shadow self masquerades as enlightened, leadership through deception, status obsession",
+          "effects": [
+            "Ego-driven obsession intensifies",
+            "Grandiosity and false sense of importance",
+            "Leadership through deception and manipulation",
+            "Status and recognition obsessed over",
+            "Authority figures clash with",
+            "False enlightenment proclaimed",
+            "Shadow self inflated into false persona"
+          ],
+          "health": {
+            "risks": ["Heart problems from stress", "Hypertension", "Excessive pride", "Narcissistic disorders"],
+            "remedies": ["Ego dissolution practices", "Service to others", "Humility cultivation"]
+          },
+          "career": {
+            "opportunities": ["Leadership positions", "Public visibility", "Authority establishment", "Foreign dignities"],
+            "challenges": ["Deceptive leadership", "Loss of reputation", "Authority conflicts", "False credentials exposed"]
+          },
+          "relationships": {
+            "effects": ["Arrogant obsession with control", "Deceptive leadership in relationships", "Demands for admiration", "Disrespect for others"],
+            "remedies": ["Humility practices", "Equal partnerships"]
+          },
+          "timing_events": {
+            "ego_peaks": [10, 40, 70],
+            "authority_conflicts": [25, 55],
+            "humiliation_days": [75, 81]
+          },
+          "spiritual_perspective": "Rahu-Sun shadow - ego identity fully activated, illusion of separate self at maximum"
+        },
+        "rahu_rahu_moon": {
+          "sequence": [1, 1, 8],
+          "duration_days": 81,
+          "theme": "Emotional obsessions, mental illusions",
+          "description": "Emotions become obsessive and deceptive, mental confusion peaks, emotional manipulation, psychological games, emotional dependency on illusions",
+          "effects": [
+            "Emotional obsessions control mind",
+            "Mental confusion and illusions peak",
+            "Emotional manipulation and games",
+            "Psychological defense mechanisms activated",
+            "Mother or maternal figures problematic",
+            "Home issues and family deceptions",
+            "Emotional dependency on illusions"
+          ],
+          "health": {
+            "risks": ["Mental health disorders", "Anxiety and panic", "Insomnia", "Emotional trauma", "Digestive issues from stress"],
+            "remedies": ["Mental health support", "Emotional release practices", "Moon meditation"]
+          },
+          "career": {
+            "opportunities": ["Psychology or counseling work", "Emotional intelligence development", "Nurturing careers"],
+            "challenges": ["Emotional outbursts at work", "Mental clarity lost", "Family business conflicts"]
+          },
+          "relationships": {
+            "effects": ["Emotional manipulation peaks", "Codependency patterns", "Maternal relationship issues", "Psychological games", "Mood swings"],
+            "remedies": ["Therapy", "Emotional honesty", "Healthy boundaries"]
+          },
+          "timing_events": {
+            "emotional_peaks": [15, 45, 75],
+            "mental_confusion": [20, 50],
+            "clarity_breakthrough": [75, 81]
+          },
+          "spiritual_perspective": "Rahu-Moon shadow - emotional illusions fully activated, psychological self fully identified with delusions"
+        },
+        "rahu_rahu_mars": {
+          "sequence": [1, 1, 9],
+          "duration_days": 81,
+          "theme": "Aggressive obsessions, violent deceptions",
+          "description": "Aggression becomes obsessive, confrontations intensify, deceptive tactics used, anger masks deeper obsessions, conflict-driven ambitions",
+          "effects": [
+            "Aggression and obsession combine dangerously",
+            "Confrontations and conflicts escalate",
+            "Deceptive tactics in competition",
+            "Violent thoughts or tendencies may emerge",
+            "Anger masks shadow obsessions",
+            "Foreign conflicts or military matters",
+            "Competitive deceptions"
+          ],
+          "health": {
+            "risks": ["Accidents and injuries", "Aggression-related illness", "Fever and inflammation", "Trauma", "Surgery risk"],
+            "remedies": ["Anger management", "Martial discipline", "Non-violence practices"]
+          },
+          "career": {
+            "opportunities": ["Competitive advantage", "Military or defense work", "Aggressive business tactics", "Sports and competition"],
+            "challenges": ["Violence in workplace", "Legal conflicts", "Aggression toward authority", "Injury at work"]
+          },
+          "relationships": {
+            "effects": ["Domestic violence risk", "Aggressive obsession with partner", "Conflict-driven passion", "Deceptive aggression", "Abuse patterns"],
+            "remedies": ["Conflict resolution", "Anger management", "Non-violence commitment"]
+          },
+          "timing_events": {
+            "conflict_peaks": [15, 35, 55, 75],
+            "injury_risk": [25, 65],
+            "peace_days": [75, 81]
+          },
+          "spiritual_perspective": "Rahu-Mars shadow - desire and force combined, illusion of domination through violence"
+        }
+      }
+    },
+    "rahu_ketu": {
+      "antardasha_lord": "ketu",
+      "antardasha_duration_days": 730,
+      "antardasha_themes": ["Release", "Detachment", "Spiritual isolation", "Loss of illusions", "Past life connections"],
+      "pratyantardasha": {
+        "rahu_ketu_rahu": {
+          "sequence": [1, 2, 1],
+          "duration_days": 81,
+          "theme": "Illusions resurface after release",
+          "description": "Detachment broken, illusions return, obsessive patterns restart, spiritual progress lost, foreign entanglements return",
+          "effects": [
+            "Detachment effort interrupted",
+            "Illusions re-establish grip",
+            "Obsessions resurface",
+            "Spiritual release becomes temporary",
+            "Foreign matters reactivate",
+            "Material desires return",
+            "Cycle repeats"
+          ],
+          "health": {
+            "risks": ["Return of stress disorders", "Anxiety resurgence", "Chronic condition flare-ups"],
+            "remedies": ["Sustained detachment practice", "Spiritual consistency"]
+          },
+          "career": {
+            "opportunities": ["Restart projects with new wisdom"],
+            "challenges": ["Reversal of previous gains"]
+          },
+          "relationships": {
+            "effects": ["Return to obsessive patterns", "Relationship reactivation"],
+            "remedies": ["Clear boundaries from restart"]
+          },
+          "timing_events": {
+            "illusion_return": [5, 25],
+            "struggle_peak": [40, 70],
+            "clarity_moments": [75, 81]
+          },
+          "spiritual_perspective": "Rahu resurfaces - cycle of illusion continues until fully processed"
+        },
+        "rahu_ketu_ketu": {
+          "sequence": [1, 2, 2],
+          "duration_days": 81,
+          "theme": "SHADOW AXIS ACTIVATED - spiritual crisis or breakthrough",
+          "description": "Rahu-Ketu axis fully activated, illusions completely dismantled, past-life karma surfaces, spiritual crisis forces evolution, loss brings enlightenment potential",
+          "effects": [
+            "Rahu-Ketu axis fully activated",
+            "Complete illusion dissolution",
+            "Past-life memories or karmic patterns surface",
+            "Spiritual crisis or emergency",
+            "All material supports removed",
+            "Forced detachment from everything",
+            "Potential for major spiritual breakthrough"
+          ],
+          "health": {
+            "risks": ["Existential crisis", "Spiritual emergency", "Loss of identity", "Dissociation", "Complete health collapse"],
+            "remedies": ["Spiritual guidance essential", "Past-life regression", "Ketu meditation", "Acceptance of loss"]
+          },
+          "career": {
+            "opportunities": ["Complete career transformation", "Spiritual vocations", "Renunciation of worldly pursuits"],
+            "challenges": ["Total loss of career", "Unemployment", "Loss of all professional status"]
+          },
+          "relationships": {
+            "effects": ["All relationships severed", "Complete emotional detachment", "Solitude and isolation", "Loss of all support systems", "Past-life partner connections"],
+            "remedies": ["Spiritual community", "Acceptance of divine will"]
+          },
+          "timing_events": {
+            "crisis_peak": [10, 40],
+            "dissolution_days": [30, 60],
+            "breakthrough_potential": [60, 81]
+          },
+          "spiritual_perspective": "CRITICAL JUNCTURE: Shadow axis fully activated - either complete spiritual death and rebirth or deepest entrapment, no middle ground"
+        },
+        "rahu_ketu_jupiter": {
+          "sequence": [1, 2, 3],
+          "duration_days": 81,
+          "theme": "Detachment meets wisdom, spiritual release",
+          "description": "Spiritual teacher provides liberation wisdom, detachment supported by understanding, higher knowledge frees from illusions, genuine spiritual practice emerges",
+          "effects": [
+            "Spiritual wisdom becomes liberating",
+            "Detachment supported by understanding",
+            "True guru appears",
+            "Religious or spiritual breakthroughs",
+            "Illusions understood intellectually",
+            "Forgiveness and acceptance emerge",
+            "Spiritual practices deepen"
+          ],
+          "health": {
+            "risks": ["Ascetic practices extreme", "Nutritional deficiencies from renunciation"],
+            "remedies": ["Balanced spiritual practice", "Proper nutrition with detachment"]
+          },
+          "career": {
+            "opportunities": ["Spiritual teaching", "Counseling and guidance", "Wisdom-based work", "Humanitarian service"],
+            "challenges": ["Rejection of career", "Loss of status willingly"]
+          },
+          "relationships": {
+            "effects": ["Spiritual partnerships form", "Release of unhealthy attachments", "Guru-disciple relationships", "Unconditional love emerges"],
+            "remedies": ["Spiritual community support"]
+          },
+          "timing_events": {
+            "guru_encounter": [15, 35],
+            "wisdom_breakthrough": [40, 65],
+            "liberation_days": [70, 81]
+          },
+          "spiritual_perspective": "Ketu-Jupiter - wisdom of release, understanding that liberates from illusion"
+        },
+        "rahu_ketu_saturn": {
+          "sequence": [1, 2, 4],
+          "duration_days": 81,
+          "theme": "Karmic completion, accepting limitations",
+          "description": "Karmic debts paid through loss, limitations accepted with surrender, past karma resolved, discipline of detachment, sacred duty fulfilled",
+          "effects": [
+            "Karmic debts resolved through loss",
+            "Limitations accepted gracefully",
+            "Detachment from worldly desires",
+            "Discipline and structure support release",
+            "Past actions face consequences",
+            "Duty fulfilled before release",
+            "Saturn's lessons about acceptance"
+          ],
+          "health": {
+            "risks": ["Acceptance of chronic conditions", "Living with limitations"],
+            "remedies": ["Saturnine discipline supports healing", "Acceptance brings peace"]
+          },
+          "career": {
+            "opportunities": ["Service-oriented work", "Institutional roles", "Structured spiritual practice"],
+            "challenges": ["Career losses accepted", "Status relinquished"]
+          },
+          "relationships": {
+            "effects": ["Karmic relationship lessons", "Duty and responsibility", "Loss as teacher", "Acceptance and forgiveness"],
+            "remedies": ["Karmic understanding"]
+          },
+          "timing_events": {
+            "karmic_events": [15, 45],
+            "acceptance_peak": [50, 75],
+            "peace_days": [75, 81]
+          },
+          "spiritual_perspective": "Saturn-Ketu - duty and release, karmic closure through acceptance"
+        },
+        "rahu_ketu_venus": {
+          "sequence": [1, 2, 5],
+          "duration_days": 81,
+          "theme": "Release of attachments, love becomes unconditional",
+          "description": "Detachment from possessive love, sensual desires release, material possessions lose appeal, unconditional love emerges, beauty appreciated without grasping",
+          "effects": [
+            "Release of obsessive love patterns",
+            "Sensual desires lose power",
+            "Material possessions become unimportant",
+            "Unconditional love emerges",
+            "Beauty appreciated without attachment",
+            "Artists and creators release ego",
+            "Charitable giving increases"
+          ],
+          "health": {
+            "risks": ["Relationship loss grief", "Loss of self-esteem through loss"],
+            "remedies": ["Unconditional love practices", "Self-compassion"]
+          },
+          "career": {
+            "opportunities": ["Charity and humanitarian work", "Art for expression not status", "Service-based beauty work"],
+            "challenges": ["Loss of wealth", "Relationship-based career ends"]
+          },
+          "relationships": {
+            "effects": ["Release of possessive love", "Acceptance of loss", "Unconditional care emerges", "Relationships become spiritual", "Detachment from outcomes"],
+            "remedies": ["Loving detachment practice"]
+          },
+          "timing_events": {
+            "attachment_release": [15, 45],
+            "relationship_loss": [25, 55],
+            "unconditional_love_peak": [65, 81]
+          },
+          "spiritual_perspective": "Venus-Ketu - love released from possession, beauty appreciated without grasping"
+        },
+        "rahu_ketu_mercury": {
+          "sequence": [1, 2, 6],
+          "duration_days": 81,
+          "theme": "Release of mental attachments, wise silence",
+          "description": "Detachment from intellectual pursuits, words lose power, communication becomes minimalist, wisdom of silence, mental chatter dissolves",
+          "effects": [
+            "Release of intellectual obsessions",
+            "Words and communication become less important",
+            "Mental chatter quiets",
+            "Wisdom in silence emerges",
+            "Deceptive communication patterns stop",
+            "Truth speaking becomes natural",
+            "Tech addiction releases"
+          ],
+          "health": {
+            "risks": ["Communication loss", "Muteness or speech disorders as teaching"],
+            "remedies": ["Meditation on silence", "Wise communication"]
+          },
+          "career": {
+            "opportunities": ["Writing with detachment", "Teaching through silence", "Meditation instruction"],
+            "challenges": ["Loss of speaking ability", "Communication career ends"]
+          },
+          "relationships": {
+            "effects": ["Release of verbal manipulation", "Honest communication emerges", "Listening deepens", "Words become precious"],
+            "remedies": ["Mindful speech practice"]
+          },
+          "timing_events": {
+            "intellectual_release": [10, 40],
+            "silence_days": [45, 70],
+            "wisdom_speech": [70, 81]
+          },
+          "spiritual_perspective": "Mercury-Ketu - wisdom of silence, intellect surrendered to higher knowing"
+        },
+        "rahu_ketu_sun": {
+          "sequence": [1, 2, 7],
+          "duration_days": 81,
+          "theme": "Ego death, loss of identity",
+          "description": "Ego dissolves completely, false identity dies, personal will surrenders to divine will, status and recognition become meaningless, self-less service",
+          "effects": [
+            "Ego death and dissolution",
+            "Identity crisis resolved through surrender",
+            "Personal will surrenders",
+            "Status and recognition become unimportant",
+            "Leadership surrendered",
+            "False authority collapses",
+            "Service to higher power begins"
+          ],
+          "health": {
+            "risks": ["Identity loss crisis", "Depression from ego death", "Loss of vitality"],
+            "remedies": ["Surrender practices", "Divine connection"]
+          },
+          "career": {
+            "opportunities": ["Service-based leadership", "Humble work", "Spiritual authority", "Teaching through example"],
+            "challenges": ["Loss of career identity", "Loss of status completely"]
+          },
+          "relationships": {
+            "effects": ["Release of narcissistic patterns", "Equal relationships form", "Service to others", "Humble partnerships"],
+            "remedies": ["Selfless service"]
+          },
+          "timing_events": {
+            "ego_crisis": [10, 35],
+            "death_peak": [40, 60],
+            "rebirth_days": [65, 81]
+          },
+          "spiritual_perspective": "Sun-Ketu - ego death, individuality dissolves into universal consciousness"
+        },
+        "rahu_ketu_moon": {
+          "sequence": [1, 2, 8],
+          "duration_days": 81,
+          "theme": "Emotional detachment, past-life mother patterns",
+          "description": "Release of emotional attachments, past-life mother connections surface, emotional independence emerges, psychological wounds heal through release",
+          "effects": [
+            "Emotional detachment increases",
+            "Past-life mother patterns visible",
+            "Emotional independence emerges",
+            "Psychological wounds begin healing",
+            "Mental clarity increases",
+            "Emotional manipulation stops",
+            "Home and family lose binding power"
+          ],
+          "health": {
+            "risks": ["Emotional numbness", "Dissociation from feelings"],
+            "remedies": ["Gentle emotional processing", "Moon meditation"]
+          },
+          "career": {
+            "opportunities": ["Psychological counseling", "Therapy work", "Emotional healing professions"],
+            "challenges": ["Loss of emotional support", "Family business ends"]
+          },
+          "relationships": {
+            "effects": ["Release of codependency", "Mother issues resolve", "Emotional independence achieved", "Healthy boundaries firm"],
+            "remedies": ["Inner child healing"]
+          },
+          "timing_events": {
+            "emotional_release": [15, 45],
+            "mother_patterns_surface": [25, 55],
+            "independence_peak": [65, 81]
+          },
+          "spiritual_perspective": "Moon-Ketu - emotional karma released, past-life mother relationships healed"
+        },
+        "rahu_ketu_mars": {
+          "sequence": [1, 2, 9],
+          "duration_days": 81,
+          "theme": "Release of aggression, surrender of will",
+          "description": "Aggression dissolves through detachment, fighting spirit surrenders, conflicts end through acceptance, past-life warrior karma resolved",
+          "effects": [
+            "Aggression and combativeness release",
+            "Fighting spirit surrenders",
+            "Conflicts end through acceptance",
+            "Non-violence becomes natural",
+            "Past-life warrior karma resolved",
+            "Assertiveness becomes wise action",
+            "Reconciliation with enemies"
+          ],
+          "health": {
+            "risks": ["Loss of vitality and strength", "Weakness as teaching"],
+            "remedies": ["Gentle exercise", "Non-violence practices"]
+          },
+          "career": {
+            "opportunities": ["Peace work and conflict resolution", "Non-violent activism", "Martial arts as meditation"],
+            "challenges": ["Loss of competitive drive", "Military career ends"]
+          },
+          "relationships": {
+            "effects": ["Release of aggression toward partners", "Conflict ends", "Reconciliation", "Peaceful communication", "Forgiveness"],
+            "remedies": ["Non-violence commitment"]
+          },
+          "timing_events": {
+            "aggression_release": [15, 40],
+            "conflict_peace": [45, 65],
+            "reconciliation_days": [70, 81]
+          },
+          "spiritual_perspective": "Mars-Ketu - warrior surrenders, force released into non-violence"
+        }
+      }
+    },
+    "rahu_jupiter": {
+      "antardasha_lord": "jupiter",
+      "antardasha_duration_days": 730,
+      "antardasha_themes": ["Expansion", "Wisdom", "Foreign travel", "Teaching", "Fortune"],
+      "pratyantardasha": {
+        "rahu_jupiter_rahu": {
+          "sequence": [1, 3, 1],
+          "duration_days": 81,
+          "theme": "Obsessive expansion, deceptive wisdom",
+          "description": "Foreign expansion obsessed, wisdom twisted by desire, learning becomes deceptive, grandiose plans, material ambitions through knowledge",
+          "effects": [
+            "Obsessive expansion plans",
+            "Deceptive wisdom seeking",
+            "Foreign travel obsession",
+            "Over-confidence in plans",
+            "Material ambition through education",
+            "Guru dependency",
+            "Grandiose expectations"
+          ],
+          "health": {
+            "risks": ["Liver congestion from excess", "Weight gain", "Digestive issues"],
+            "remedies": ["Moderation", "Sattvic diet"]
+          },
+          "career": {
+            "opportunities": ["Educational expansion", "Foreign business growth", "Teaching positions"],
+            "challenges": ["Overextension", "Failed business expansion"]
+          },
+          "relationships": {
+            "effects": ["Obsessive learning with partners", "Dominating through knowledge", "Expansion of affair"],
+            "remedies": ["Humility in relationships"]
+          },
+          "timing_events": {
+            "expansion_peaks": [15, 50],
+            "overextension": [40, 70],
+            "correction_days": [75, 81]
+          },
+          "spiritual_perspective": "Rahu-Jupiter shadow - knowledge inflates ego rather than liberating it"
+        },
+        "rahu_jupiter_ketu": {
+          "sequence": [1, 3, 2],
+          "duration_days": 81,
+          "theme": "Wisdom teaches detachment",
+          "description": "Learning brings liberation from illusions, wisdom dismantles false beliefs, foreign experiences teach surrender, expansion releases attachments",
+          "effects": [
+            "Wisdom brings detachment",
+            "False beliefs collapse",
+            "Foreign experiences teach surrender",
+            "Expansion toward liberation",
+            "Learning becomes spiritual",
+            "Guru teaches release",
+            "Understanding brings freedom"
+          ],
+          "health": {
+            "risks": ["Loss of health from asceticism"],
+            "remedies": ["Balanced wisdom practices"]
+          },
+          "career": {
+            "opportunities": ["Spiritual teaching emerges", "Wisdom-based counseling"],
+            "challenges": ["Worldly success releases"]
+          },
+          "relationships": {
+            "effects": ["Relationships teach lessons", "Detachment from outcomes", "Spiritual partnerships"],
+            "remedies": ["Loving detachment"]
+          },
+          "timing_events": {
+            "wisdom_breakthrough": [20, 50],
+            "liberation_peak": [55, 75],
+            "freedom_days": [75, 81]
+          },
+          "spiritual_perspective": "Jupiter-Ketu - wisdom that liberates, knowledge that releases"
+        },
+        "rahu_jupiter_jupiter": {
+          "sequence": [1, 3, 3],
+          "duration_days": 81,
+          "theme": "Maximum wisdom expansion, peak fortune",
+          "description": "Wisdom and fortune at peak, learning flourishes, foreign travels successful, expansion supported by luck, teaching effectiveness maximum",
+          "effects": [
+            "Maximum wisdom manifestation",
+            "Fortune and luck peak",
+            "Foreign travel highly successful",
+            "Teaching effectiveness at maximum",
+            "Learning rapid and complete",
+            "Prosperity expands",
+            "Opportunities abundant"
+          ],
+          "health": {
+            "risks": ["Excess leading to liver issues", "Overindulgence"],
+            "remedies": ["Moderate indulgence", "Gratitude practice"]
+          },
+          "career": {
+            "opportunities": ["Career peak", "Teaching success", "Foreign success", "Business expansion", "Lucky opportunities"],
+            "challenges": ["Complacency from success"]
+          },
+          "relationships": {
+            "effects": ["Relationships flourish", "Teaching and learning together", "Foreign partnerships", "Expansion of love"],
+            "remedies": ["Gratitude for blessings"]
+          },
+          "timing_events": {
+            "peak_fortune": [10, 45, 80],
+            "expansion_success": [25, 65],
+            "harvest_days": [70, 81]
+          },
+          "spiritual_perspective": "Jupiter at fullest expression - wisdom, fortune, and benevolence in flow"
+        },
+        "rahu_jupiter_saturn": {
+          "sequence": [1, 3, 4],
+          "duration_days": 81,
+          "theme": "Wisdom through limitation, teaching through hardship",
+          "description": "Learning restricted by circumstances, wisdom gained through suffering, expansion blocked by discipline, foreign barriers teach patience",
+          "effects": [
+            "Learning made difficult but deep",
+            "Wisdom emerges from hardship",
+            "Expansion meets obstacles",
+            "Foreign travel blocked or delayed",
+            "Teacher becomes stern",
+            "Success slow but lasting",
+            "Discipline deepens understanding"
+          ],
+          "health": {
+            "risks": ["Chronic illness interrupts learning", "Leg or joint pain", "Slow healing"],
+            "remedies": ["Patient healing", "Discipline helps recovery"]
+          },
+          "career": {
+            "opportunities": ["Solid educational foundation", "Teaching technical subjects", "Slow career growth into stability"],
+            "challenges": ["Limited opportunities", "Delayed expansion", "Restricted foreign travel"]
+          },
+          "relationships": {
+            "effects": ["Relationship delays", "Teaching through limitation", "Patience tested", "Long-term commitment builds"],
+            "remedies": ["Patience and acceptance"]
+          },
+          "timing_events": {
+            "obstacle_peaks": [15, 45],
+            "breakthrough_days": [50, 70],
+            "stability_achieved": [75, 81]
+          },
+          "spiritual_perspective": "Saturn-Jupiter - wisdom that endures, teaching that lasts through discipline"
+        },
+        "rahu_jupiter_venus": {
+          "sequence": [1, 3, 5],
+          "duration_days": 81,
+          "theme": "Abundance and beauty, generous love",
+          "description": "Wealth expansion through arts, beauty and wisdom combine, generosity increases, foreign beauty appreciated, sensuality blessed by fortune",
+          "effects": [
+            "Wealth and beauty expand",
+            "Artistic success flourishes",
+            "Generosity and abundance",
+            "Foreign beauty attractions",
+            "Sensuality becomes graceful",
+            "Wealth increases through arts",
+            "Love relationships fortunate"
+          ],
+          "health": {
+            "risks": ["Overindulgence in pleasures", "Weight from excess"],
+            "remedies": ["Graceful moderation"]
+          },
+          "career": {
+            "opportunities": ["Art and beauty careers", "Jewelry and luxury goods", "Hospitality success", "Relationship counseling"],
+            "challenges": ["Wealth lost through indulgence"]
+          },
+          "relationships": {
+            "effects": ["Love relationships flourish", "Generous partnerships", "Beauty and grace in love", "Abundance shared"],
+            "remedies": ["Gratitude for partnerships"]
+          },
+          "timing_events": {
+            "abundance_peaks": [10, 40, 70],
+            "love_success": [20, 60],
+            "gratitude_days": [75, 81]
+          },
+          "spiritual_perspective": "Venus-Jupiter - love and wisdom, beauty and fortune in harmony"
+        },
+        "rahu_jupiter_mercury": {
+          "sequence": [1, 3, 6],
+          "duration_days": 81,
+          "theme": "Communication mastery, teaching excellence",
+          "description": "Teaching and communication peak, foreign language learning, writing success, wisdom through words, networking expands, intellectual brilliance",
+          "effects": [
+            "Communication effectiveness peak",
+            "Teaching through clear speech",
+            "Writing success and publication",
+            "Language learning rapid",
+            "Networking expands opportunities",
+            "Intellectual insight deepens",
+            "Foreign communication smooth"
+          ],
+          "health": {
+            "risks": ["Throat or speech strain from overuse"],
+            "remedies": ["Vocal rest", "Throat health practices"]
+          },
+          "career": {
+            "opportunities": ["Writing and publishing", "Teaching communication", "Journalism success", "Foreign correspondence", "Tech education"],
+            "challenges": ["Over-commitment through communication"]
+          },
+          "relationships": {
+            "effects": ["Communication clarity improves", "Teaching partnerships", "Intellectual rapport", "Honest dialogue"],
+            "remedies": ["Mindful communication"]
+          },
+          "timing_events": {
+            "communication_peaks": [15, 50],
+            "writing_success": [25, 60],
+            "mastery_days": [70, 81]
+          },
+          "spiritual_perspective": "Mercury-Jupiter - wisdom expressed clearly, knowledge shared generously"
+        },
+        "rahu_jupiter_sun": {
+          "sequence": [1, 3, 7],
+          "duration_days": 81,
+          "theme": "Leadership and fortune, authority blessed",
+          "description": "Leadership flourishes with wisdom, authority becomes benevolent, public recognition increases, foreign dignities, noble character emerges",
+          "effects": [
+            "Leadership effectiveness peak",
+            "Authority becomes wise and benevolent",
+            "Public recognition increases",
+            "Foreign diplomatic success",
+            "Nobility and integrity visible",
+            "Character reputation shines",
+            "Fortune follows leadership"
+          ],
+          "health": {
+            "risks": ["Heart strain from excess activity"],
+            "remedies": ["Heart health practices"]
+          },
+          "career": {
+            "opportunities": ["Leadership positions", "Public recognition", "Diplomatic roles", "Authority roles blessed", "Foreign dignities"],
+            "challenges": ["Pride from success"]
+          },
+          "relationships": {
+            "effects": ["Respect increases", "Leadership in relationships", "Noble character shown", "Honor and dignity"],
+            "remedies": ["Humility practice"]
+          },
+          "timing_events": {
+            "recognition_peaks": [10, 40, 70],
+            "authority_growth": [20, 60],
+            "honor_days": [75, 81]
+          },
+          "spiritual_perspective": "Sun-Jupiter - kingdom of light, benevolent authority"
+        },
+        "rahu_jupiter_moon": {
+          "sequence": [1, 3, 8],
+          "duration_days": 81,
+          "theme": "Emotional wisdom, nurturing expansion",
+          "description": "Emotional intelligence increases, nurturing nature blessed, family expansion, psychological healing through wisdom, mother figures helpful",
+          "effects": [
+            "Emotional wisdom deepens",
+            "Nurturing and care expand",
+            "Family and home blessed",
+            "Psychological healing accelerates",
+            "Mother figures become beneficial",
+            "Emotional intelligence peaks",
+            "Comfort and abundance in home"
+          ],
+          "health": {
+            "risks": ["Digestive issues from overeating"],
+            "remedies": ["Balanced diet", "Emotional moderation"]
+          },
+          "career": {
+            "opportunities": ["Psychology and counseling", "Teaching children", "Hospitality success", "Family business expansion"],
+            "challenges": ["Home-work balance"]
+          },
+          "relationships": {
+            "effects": ["Family relationships heal", "Mothering nature blessed", "Emotional support increases", "Family expansion"],
+            "remedies": ["Loving presence"]
+          },
+          "timing_events": {
+            "family_peaks": [15, 45],
+            "healing_days": [30, 60],
+            "abundance_days": [70, 81]
+          },
+          "spiritual_perspective": "Moon-Jupiter - emotional abundance, nurturing wisdom"
+        },
+        "rahu_jupiter_mars": {
+          "sequence": [1, 3, 9],
+          "duration_days": 81,
+          "theme": "Courageous action, fortunate victories",
+          "description": "Courage blessed by fortune, victories assured, aggressive expansion successful, martial prowess honored, competition won, foreign conflicts favorable",
+          "effects": [
+            "Courage and confidence peak",
+            "Victories and wins assured",
+            "Expansion through action",
+            "Competition favored",
+            "Foreign conflicts favorable",
+            "Martial skill honored",
+            "Aggressive plans succeed"
+          ],
+          "health": {
+            "risks": ["Injury from over-confidence"],
+            "remedies": ["Humility in physical activities"]
+          },
+          "career": {
+            "opportunities": ["Military advancement", "Competitive business", "Sports success", "Aggressive expansion wins"],
+            "challenges": ["Over-confidence causing losses"]
+          },
+          "relationships": {
+            "effects": ["Passionate romance", "Aggressive love blessed", "Victory in conflicts", "Strong partnerships"],
+            "remedies": ["Temper confidence with wisdom"]
+          },
+          "timing_events": {
+            "victory_peaks": [10, 40, 70],
+            "expansion_success": [25, 60],
+            "triumph_days": [75, 81]
+          },
+          "spiritual_perspective": "Mars-Jupiter - courageous wisdom, victory through righteousness"
+        }
+      }
+    },
+    "rahu_saturn": {
+      "antardasha_lord": "saturn",
+      "antardasha_duration_days": 730,
+      "antardasha_themes": ["Limitation", "Karma", "Discipline", "Fear", "Hidden enemies"],
+      "pratyantardasha": {
+        "rahu_saturn_rahu": {
+          "sequence": [1, 4, 1],
+          "duration_days": 81,
+          "theme": "Obsessive fears from limitation",
+          "description": "Obsessive fears intensify through restrictions, deception through fear, foreign obstacles create paranoia, limitation breeding obsession",
+          "effects": [
+            "Obsessive fear patterns",
+            "Restrictions breed anxiety",
+            "Hidden enemies perceived everywhere",
+            "Paranoia from limitation",
+            "Foreign barriers obsessed over",
+            "Deceptive defense mechanisms",
+            "Fear creates worse delusions"
+          ],
+          "health": {
+            "risks": ["Anxiety disorders", "Skin conditions", "Chronic pain", "Depression", "Paranoia"],
+            "remedies": ["Reality testing", "Anxiety management"]
+          },
+          "career": {
+            "opportunities": ["Obsessive focus on work"],
+            "challenges": ["Work restrictions", "Fear of failure", "Hidden obstacles at work"]
+          },
+          "relationships": {
+            "effects": ["Fear-based control", "Paranoid about partner", "Obsessive checking", "Mistrust"],
+            "remedies": ["Trust building"]
+          },
+          "timing_events": {
+            "fear_peaks": [15, 45, 75],
+            "obstacle_days": [25, 55],
+            "reassurance_needed": [70, 81]
+          },
+          "spiritual_perspective": "Rahu-Saturn shadow - illusion and fear feeding each other in dark cycle"
+        },
+        "rahu_saturn_ketu": {
+          "sequence": [1, 4, 2],
+          "duration_days": 81,
+          "theme": "Karmic lessons through loss and limitation",
+          "description": "Karma demands payment through restriction, loss enforces detachment, limitation becomes teacher, past actions face consequences",
+          "effects": [
+            "Karmic consequences come due",
+            "Loss and limitation teach",
+            "Detachment through forced loss",
+            "Past actions have consequences",
+            "Restriction becomes blessing",
+            "Acceptance of karma grows",
+            "Spiritual maturity through suffering"
+          ],
+          "health": {
+            "risks": ["Chronic illness", "Disability", "Age-related decline"],
+            "remedies": ["Karmic acceptance", "Spiritual practice"]
+          },
+          "career": {
+            "opportunities": ["Service work", "Work with the suffering", "Teaching through limitation"],
+            "challenges": ["Career loss", "Limited opportunities"]
+          },
+          "relationships": {
+            "effects": ["Karmic relationship lessons", "Loss teaches love", "Acceptance of separation"],
+            "remedies": ["Karmic understanding"]
+          },
+          "timing_events": {
+            "karmic_events": [10, 40],
+            "acceptance_peak": [45, 70],
+            "peace_days": [75, 81]
+          },
+          "spiritual_perspective": "Saturn-Ketu - karma honored, limitation becomes gateway to freedom"
+        },
+        "rahu_saturn_jupiter": {
+          "sequence": [1, 4, 3],
+          "duration_days": 81,
+          "theme": "Wisdom through hardship, learning from limitation",
+          "description": "Wisdom earned through suffering, learning despite obstacles, fortune comes through discipline, restricted expansion becomes deep",
+          "effects": [
+            "Wisdom gained from hardship",
+            "Learning deepens through struggle",
+            "Fortune comes through discipline",
+            "Expansion slow but solid",
+            "Teaching from experience",
+            "Compassion through suffering",
+            "Deep learning achieved"
+          ],
+          "health": {
+            "risks": ["Illness becomes teacher"],
+            "remedies": ["Spiritual wisdom helps healing"]
+          },
+          "career": {
+            "opportunities": ["Teaching hard truths", "Counseling the suffering", "Building solid career slowly"],
+            "challenges": ["Slow career growth"]
+          },
+          "relationships": {
+            "effects": ["Relationships tested and strengthened", "Deep compassion", "Mature love"],
+            "remedies": ["Wisdom in relationships"]
+          },
+          "timing_events": {
+            "hardship_peak": [15, 45],
+            "breakthrough_days": [50, 70],
+            "wisdom_days": [75, 81]
+          },
+          "spiritual_perspective": "Jupiter-Saturn - wisdom earned through discipline, fortune through commitment"
+        },
+        "rahu_saturn_saturn": {
+          "sequence": [1, 4, 4],
+          "duration_days": 81,
+          "theme": "Maximum limitation and karmic weight",
+          "description": "Restrictions and obstacles at maximum, karmic debts demand full payment, fear and limitation combine heavily, past returns fully",
+          "effects": [
+            "Maximum restriction and limitation",
+            "Heavy karmic weight",
+            "Multiple obstacles simultaneously",
+            "Fear and doubt peak",
+            "Hidden enemies active",
+            "Debt and obligation overwhelming",
+            "Tests of patience and faith"
+          ],
+          "health": {
+            "risks": ["Chronic illness", "Multiple health problems", "Aging effects", "Disability", "Depression"],
+            "remedies": ["Saturn worship", "Discipline and acceptance"]
+          },
+          "career": {
+            "opportunities": ["Slow building of career", "Long-term projects"],
+            "challenges": ["Maximum career restrictions", "Blocked advancement", "Job loss likely"]
+          },
+          "relationships": {
+            "effects": ["Relationship endings", "Duty and obligation burden", "Loss and separation", "Karmic tests"],
+            "remedies": ["Acceptance and surrender"]
+          },
+          "timing_events": {
+            "darkest_days": [10, 35, 55, 75],
+            "heaviest_weight": [40, 70],
+            "glimmers_of_hope": [75, 81]
+          },
+          "spiritual_perspective": "Saturn at maximum - the great teacher at fullest intensity, crucible for soul evolution"
+        },
+        "rahu_saturn_venus": {
+          "sequence": [1, 4, 5],
+          "duration_days": 81,
+          "theme": "Love tested by limitation, delayed union",
+          "description": "Love restricted and tested, sensuality denied by circumstances, relationships delayed, material loss, but commitment deepened",
+          "effects": [
+            "Love relationships tested severely",
+            "Sensuality restricted",
+            "Material loss in relationships",
+            "Union delayed or denied",
+            "Wealth loss possible",
+            "Commitment deepened through test",
+            "Values clarified through loss"
+          ],
+          "health": {
+            "risks": ["Reproductive health issues", "Skin conditions", "Loss of vitality"],
+            "remedies": ["Patient healing"]
+          },
+          "career": {
+            "opportunities": ["Steady building of wealth", "Long-term value creation"],
+            "challenges": ["Financial losses", "Wealth restrictions"]
+          },
+          "relationships": {
+            "effects": ["Relationship delays or endings", "Commitment tested", "Love through hardship", "Separation or death"],
+            "remedies": ["Faithful love despite challenges"]
+          },
+          "timing_events": {
+            "separation_peaks": [15, 45],
+            "grief_days": [25, 55],
+            "acceptance_days": [70, 81]
+          },
+          "spiritual_perspective": "Venus-Saturn - love purified through limitation, commitment proven"
+        },
+        "rahu_saturn_mercury": {
+          "sequence": [1, 4, 6],
+          "duration_days": 81,
+          "theme": "Communication hampered, learning restricted",
+          "description": "Speech difficulties or restrictions, learning blocked by circumstances, communication awkward, mental strain, writing challenged",
+          "effects": [
+            "Communication difficult",
+            "Learning restricted",
+            "Speech problems or silencing",
+            "Mental strain and confusion",
+            "Intellectual capacity tested",
+            "Writing difficult",
+            "Tech limitations"
+          ],
+          "health": {
+            "risks": ["Speech disorders", "Nerve problems", "Anxiety", "Mental fog"],
+            "remedies": ["Speech therapy", "Mental clarity practices"]
+          },
+          "career": {
+            "opportunities": ["Careful analytical work", "Writing that endures"],
+            "challenges": ["Communication blocked at work", "Tech failures", "Writing rejected"]
+          },
+          "relationships": {
+            "effects": ["Communication breakdown", "Misunderstandings", "Silent treatment", "Listening deepens"],
+            "remedies": ["Patient communication"]
+          },
+          "timing_events": {
+            "communication_blocks": [15, 45],
+            "breakthrough_days": [50, 70],
+            "clarity_emerges": [75, 81]
+          },
+          "spiritual_perspective": "Mercury-Saturn - speech purified through restriction, wisdom through silence"
+        },
+        "rahu_saturn_sun": {
+          "sequence": [1, 4, 7],
+          "duration_days": 81,
+          "theme": "Authority challenged, reputation tested",
+          "description": "Leadership questioned, authority diminished, reputation attacked, status loss, ego humbled, light dimmed by shadow",
+          "effects": [
+            "Authority challenged",
+            "Leadership loses power",
+            "Status and reputation threatened",
+            "Public criticism",
+            "Ego severely humbled",
+            "Character tested",
+            "Light obscured temporarily"
+          ],
+          "health": {
+            "risks": ["Heart stress from worry", "Vitality loss"],
+            "remedies": ["Heart health, meditation"]
+          },
+          "career": {
+            "opportunities": ["Humble leadership", "Character building"],
+            "challenges": ["Loss of position", "Public scandal", "Status collapse"]
+          },
+          "relationships": {
+            "effects": ["Respect diminished", "Humbling experiences", "Ego death beginning"],
+            "remedies": ["Humble service"]
+          },
+          "timing_events": {
+            "challenge_peaks": [10, 40, 70],
+            "darkest_period": [35, 65],
+            "light_returns": [75, 81]
+          },
+          "spiritual_perspective": "Sun-Saturn - ego dissolution, authority returns purified"
+        },
+        "rahu_saturn_moon": {
+          "sequence": [1, 4, 8],
+          "duration_days": 81,
+          "theme": "Emotional sorrow, mental darkness",
+          "description": "Depression and sorrow peak, emotional restriction, mental health challenged, mother figure absent, home disrupted, inner child suffering",
+          "effects": [
+            "Depression and melancholy",
+            "Emotional restriction",
+            "Mental health severely tested",
+            "Mother or maternal figures absent",
+            "Home disrupted",
+            "Inner child wounded",
+            "Emotional hardness develops"
+          ],
+          "health": {
+            "risks": ["Depression", "Anxiety", "Digestive issues", "Breast health issues"],
+            "remedies": ["Mental health support", "Moon meditation"]
+          },
+          "career": {
+            "opportunities": ["Understanding suffering", "Healing others"],
+            "challenges": ["Family business fails", "Home-based work disrupted"]
+          },
+          "relationships": {
+            "effects": ["Mother relationship ends or estranges", "Family separation", "Emotional coldness", "Grief and sorrow"],
+            "remedies": ["Inner child healing"]
+          },
+          "timing_events": {
+            "sorrow_peaks": [15, 45],
+            "darkness_deepest": [40, 70],
+            "healing_begins": [75, 81]
+          },
+          "spiritual_perspective": "Moon-Saturn - emotional karma cleared, inner mother internalized"
+        },
+        "rahu_saturn_mars": {
+          "sequence": [1, 4, 9],
+          "duration_days": 81,
+          "theme": "Aggression thwarted, energy contained",
+          "description": "Energy blocked and frustrated, aggression meets walls, assertiveness curtailed, conflicts dangerous, patience demanded, warrior spirit tested",
+          "effects": [
+            "Energy and aggression blocked",
+            "Frustration from constraints",
+            "Assertiveness curtailed",
+            "Conflicts dangerous if provoked",
+            "Patience severely tested",
+            "Warrior spirit imprisoned",
+            "Slow building of strength"
+          ],
+          "health": {
+            "risks": ["Injury from frustration", "Blood pressure issues", "Fever from blocked energy"],
+            "remedies": ["Controlled exercise", "Anger management"]
+          },
+          "career": {
+            "opportunities": ["Disciplined ambition", "Patient building"],
+            "challenges": ["Blocked advancement", "Work frustration", "Aggression at work dangerous"]
+          },
+          "relationships": {
+            "effects": ["Conflict dangerous", "Aggression turns inward", "Patience tested", "Domination attempt fails"],
+            "remedies": ["Non-violence practice"]
+          },
+          "timing_events": {
+            "frustration_peaks": [15, 45, 75],
+            "containment_extreme": [35, 65],
+            "release_days": [75, 81]
+          },
+          "spiritual_perspective": "Mars-Saturn - warrior's patience, strength through discipline"
+        }
+      }
+    },
+    "rahu_venus": {
+      "antardasha_lord": "venus",
+      "antardasha_duration_days": 730,
+      "antardasha_themes": ["Sensuality", "Beauty", "Wealth", "Relationships", "Art and creativity"],
+      "pratyantardasha": {
+        "rahu_venus_rahu": {
+          "sequence": [1, 5, 1],
+          "duration_days": 81,
+          "theme": "OBSESSIVE LOVE AND FORBIDDEN PLEASURES",
+          "description": "Love becomes obsessive and deceptive, sensual desires intensify to fever pitch, forbidden relationships tempt, wealth obsession peaks, material desire as illusion",
+          "effects": [
+            "Obsessive love attachment",
+            "Deceptive romantic relationships",
+            "Forbidden liaisons attract",
+            "Sensual addiction peaks",
+            "Wealth and luxury obsessed",
+            "Beauty pursued obsessively",
+            "Possession and control in love"
+          ],
+          "health": {
+            "risks": ["Reproductive health problems", "Sexual dysfunction", "Skin conditions", "Obesity from indulgence"],
+            "remedies": ["Brahmacharya practice", "Detachment from sensuality"]
+          },
+          "career": {
+            "opportunities": ["Luxury and beauty business", "Arts pursued obsessively"],
+            "challenges": ["Workplace romance scandal", "Financial loss through indulgence"]
+          },
+          "relationships": {
+            "effects": [
+              "Obsessive attachment",
+              "Deceptive infidelity",
+              "Forbidden relationship",
+              "Possessive control",
+              "Material demands excessive"
+            ],
+            "remedies": ["Honest relationship examination"]
+          },
+          "timing_events": {
+            "passion_peaks": [20, 50],
+            "temptation_extreme": [30, 60],
+            "reality_check": [70, 81]
+          },
+          "spiritual_perspective": "Rahu-Venus shadow - desire and illusion fused, love as possession and control"
+        },
+        "rahu_venus_ketu": {
+          "sequence": [1, 5, 2],
+          "duration_days": 81,
+          "theme": "Release of possessive love, unconditional giving",
+          "description": "Detachment from material love, sensual desires lose grip, possessions become meaningless, unconditional love emerges, beauty appreciated without attachment",
+          "effects": [
+            "Release of possessive love",
+            "Sensual desires diminish",
+            "Material values shift",
+            "Unconditional love emerges",
+            "Beauty appreciated without grasping",
+            "Wealth becomes unimportant",
+            "Charitable giving increases"
+          ],
+          "health": {
+            "risks": ["Loss of self-esteem", "Grief from love loss"],
+            "remedies": ["Self-compassion", "Loving detachment"]
+          },
+          "career": {
+            "opportunities": ["Charity work", "Arts for expression not profit", "Service-based beauty"],
+            "challenges": ["Wealth loss", "Career in love/beauty ends"]
+          },
+          "relationships": {
+            "effects": ["Release of possessive love", "Unconditional care", "Love becomes spiritual", "Detachment from outcomes"],
+            "remedies": ["Loving detachment practice"]
+          },
+          "timing_events": {
+            "attachment_release": [15, 45],
+            "love_loss": [25, 55],
+            "unconditional_love": [65, 81]
+          },
+          "spiritual_perspective": "Venus-Ketu - love released from possession, beauty seen as divine"
+        },
+        "rahu_venus_jupiter": {
+          "sequence": [1, 5, 3],
+          "duration_days": 81,
+          "theme": "Abundance and beauty, generous wealth",
+          "description": "Wealth and beauty expand greatly, generosity and prosperity, foreign attractions, sensuality blessed, arts flourish, fortunate love relationships",
+          "effects": [
+            "Wealth expansion significant",
+            "Beauty and attractiveness peak",
+            "Generosity and abundance",
+            "Artistic success",
+            "Love relationships fortunate",
+            "Foreign beauty appreciated",
+            "Luxury and comfort increase"
+          ],
+          "health": {
+            "risks": ["Overindulgence", "Weight gain"],
+            "remedies": ["Graceful moderation"]
+          },
+          "career": {
+            "opportunities": ["Art and beauty careers prosper", "Jewelry business success", "Relationship business", "Luxury goods"],
+            "challenges": ["Complacency from wealth"]
+          },
+          "relationships": {
+            "effects": ["Love flourishes", "Generous partnerships", "Beauty and grace in love", "Abundance shared"],
+            "remedies": ["Gratitude for blessings"]
+          },
+          "timing_events": {
+            "abundance_peaks": [10, 40, 70],
+            "love_success": [20, 60],
+            "gratitude_days": [75, 81]
+          },
+          "spiritual_perspective": "Venus-Jupiter - love and fortune, beauty and benevolence in harmony"
+        },
+        "rahu_venus_saturn": {
+          "sequence": [1, 5, 4],
+          "duration_days": 81,
+          "theme": "Love tested by limitation, delayed union",
+          "description": "Love severely tested and delayed, sensuality restricted, wealth loss, relationships challenged, commitment deepened through hardship, values clarified",
+          "effects": [
+            "Love relationships tested severely",
+            "Sensuality denied",
+            "Material loss",
+            "Union delayed or denied",
+            "Commitment deepened",
+            "Values clarified",
+            "Patience in love increased"
+          ],
+          "health": {
+            "risks": ["Reproductive issues", "Skin conditions", "Loss of attractiveness"],
+            "remedies": ["Patient health practices"]
+          },
+          "career": {
+            "opportunities": ["Steady wealth building", "Long-term value"],
+            "challenges": ["Financial losses", "Wealth restricted"]
+          },
+          "relationships": {
+            "effects": ["Relationship delays", "Separation or loss", "Love through hardship", "Commitment tested"],
+            "remedies": ["Faithful love despite challenges"]
+          },
+          "timing_events": {
+            "separation_peaks": [15, 45],
+            "grief_days": [25, 55],
+            "acceptance_days": [70, 81]
+          },
+          "spiritual_perspective": "Venus-Saturn - love purified through limitation, commitment proven true"
+        },
+        "rahu_venus_venus": {
+          "sequence": [1, 5, 5],
+          "duration_days": 81,
+          "theme": "MAXIMUM beauty, sensuality, and wealth",
+          "description": "Beauty and sensuality at peak, wealth maximum, love relationships flourish, artistic expression greatest, attractiveness and charm supreme",
+          "effects": [
+            "Maximum beauty and attractiveness",
+            "Wealth at peak",
+            "Sensual pleasures peak",
+            "Love relationships flourish",
+            "Artistic expression greatest",
+            "Charm and grace supreme",
+            "All Venus matters at maximum"
+          ],
+          "health": {
+            "risks": ["Overindulgence effects", "Weight gain"],
+            "remedies": ["Balanced pleasure"]
+          },
+          "career": {
+            "opportunities": ["Art and beauty careers peak", "Wealth maximum", "Love and relationship success"],
+            "challenges": ["Complacency and loss of drive"]
+          },
+          "relationships": {
+            "effects": ["Love relationships at best", "Attractiveness and charm", "Generosity and grace", "Pleasure and intimacy"],
+            "remedies": ["Gratitude for blessings"]
+          },
+          "timing_events": {
+            "peak_beauty": [10, 45, 80],
+            "pleasure_maximum": [20, 65],
+            "harvest_days": [70, 81]
+          },
+          "spiritual_perspective": "Venus at fullest expression - love, beauty, wealth, and grace in divine flow"
+        },
+        "rahu_venus_mercury": {
+          "sequence": [1, 5, 6],
+          "duration_days": 81,
+          "theme": "Charming communication, artistic intelligence",
+          "description": "Communication becomes charming and persuasive, writing and speaking successful, artistic talents expressed, wit and humor peak, foreign relationships through words",
+          "effects": [
+            "Communication becomes charming",
+            "Persuasive and articulate",
+            "Writing success",
+            "Wit and humor peak",
+            "Artistic expression verbal",
+            "Networking socially successful",
+            "Foreign communication smooth"
+          ],
+          "health": {
+            "risks": ["Throat strain from overuse"],
+            "remedies": ["Vocal rest"]
+          },
+          "career": {
+            "opportunities": ["Writing and publishing", "Public speaking", "Relationship counseling", "Artistic communication"],
+            "challenges": ["Over-commitment through charm"]
+          },
+          "relationships": {
+            "effects": ["Communication charming", "Flattery and persuasion", "Wit appreciated", "Intellectual rapport"],
+            "remedies": ["Honest communication"]
+          },
+          "timing_events": {
+            "communication_peak": [15, 50],
+            "wit_success": [25, 60],
+            "mastery_days": [70, 81]
+          },
+          "spiritual_perspective": "Mercury-Venus - wisdom expressed with beauty, knowledge delivered with charm"
+        },
+        "rahu_venus_sun": {
+          "sequence": [1, 5, 7],
+          "duration_days": 81,
+          "theme": "Authority with grace, noble beauty",
+          "description": "Leadership with charm and grace, authority becomes attractive, reputation for beauty and elegance, public appreciation, regal bearing, noble character",
+          "effects": [
+            "Leadership with charm",
+            "Authority becomes attractive",
+            "Public appreciation high",
+            "Beauty and elegance noticed",
+            "Regal and noble bearing",
+            "Respect and admiration increase",
+            "Character shines with beauty"
+          ],
+          "health": {
+            "risks": ["Heart strain from excess activity"],
+            "remedies": ["Heart health practices"]
+          },
+          "career": {
+            "opportunities": ["Leadership roles", "Public visibility", "Prestigious positions", "Beauty and authority"],
+            "challenges": ["Pride and vanity"]
+          },
+          "relationships": {
+            "effects": ["Admiration and respect", "Grace in relationships", "Leadership with love", "Noble partnerships"],
+            "remedies": ["Humble grace"]
+          },
+          "timing_events": {
+            "recognition_peaks": [10, 40, 70],
+            "admiration_growth": [20, 60],
+            "honor_days": [75, 81]
+          },
+          "spiritual_perspective": "Sun-Venus - authority with love, power expressed through beauty"
+        },
+        "rahu_venus_moon": {
+          "sequence": [1, 5, 8],
+          "duration_days": 81,
+          "theme": "Emotional beauty, nurturing love",
+          "description": "Emotional intelligence and grace, nurturing nature blessed, family relationships flourish, psychological healing through love, sensuality and emotion blend",
+          "effects": [
+            "Emotional grace and beauty",
+            "Nurturing nature blessed",
+            "Family relationships flourish",
+            "Psychological healing through love",
+            "Mother figures become helpful",
+            "Sensuality and emotion blend",
+            "Home becomes beautiful"
+          ],
+          "health": {
+            "risks": ["Digestive issues from overeating"],
+            "remedies": ["Balanced eating"]
+          },
+          "career": {
+            "opportunities": ["Psychology and counseling", "Family therapy", "Hospitality success", "Beauty and comfort business"],
+            "challenges": ["Home-work balance"]
+          },
+          "relationships": {
+            "effects": ["Family relationships heal", "Nurturing love", "Emotional support", "Sensual intimacy", "Family expansion"],
+            "remedies": ["Loving presence"]
+          },
+          "timing_events": {
+            "family_peaks": [15, 45],
+            "healing_days": [30, 60],
+            "abundance_days": [70, 81]
+          },
+          "spiritual_perspective": "Moon-Venus - emotional wisdom, love that nurtures and heals"
+        },
+        "rahu_venus_mars": {
+          "sequence": [1, 5, 9],
+          "duration_days": 81,
+          "theme": "Passionate love, sensual power",
+          "description": "Passion and desire at peak, sensuality heightened, power in relationships, attractive and magnetic, romance and adventure, foreign attractions",
+          "effects": [
+            "Passion and desire peak",
+            "Sensual attractiveness maximum",
+            "Romantic and magnetic",
+            "Power in relationships",
+            "Adventure and excitement",
+            "Foreign romantic attractions",
+            "Sexuality confident"
+          ],
+          "health": {
+            "risks": ["Excess sexual activity", "Reproductive stress"],
+            "remedies": ["Balanced sexuality"]
+          },
+          "career": {
+            "opportunities": ["Passionate creative work", "Relationship-based business", "Performance arts"],
+            "challenges": ["Workplace romance complications"]
+          },
+          "relationships": {
+            "effects": ["Passionate romance", "Sensual power", "Attractive magnetism", "Adventure with partner", "Assertive love"],
+            "remedies": ["Balanced passion"]
+          },
+          "timing_events": {
+            "passion_peaks": [10, 40, 70],
+            "attraction_maximum": [20, 60],
+            "intensity_days": [75, 81]
+          },
+          "spiritual_perspective": "Mars-Venus - passion without obsession, sensuality as sacred dance"
+        }
+      }
+    },
+    "rahu_mercury": {
+      "antardasha_lord": "mercury",
+      "antardasha_duration_days": 730,
+      "antardasha_themes": ["Communication", "Technology", "Commerce", "Intelligence", "Wit"],
+      "pratyantardasha": {
+        "rahu_mercury_rahu": {
+          "sequence": [1, 6, 1],
+          "duration_days": 81,
+          "theme": "TECH MASTERY AND DECEPTIVE COMMUNICATION",
+          "description": "Technology obsession peaks, communication becomes deceptive and manipulative, clever tricks for gain, tech addiction severe, intellectual obsessions dominate",
+          "effects": [
+            "Technology mastery through obsession",
+            "Communication deceptive and manipulative",
+            "Intellectual obsessions dominate",
+            "Tech addiction severe",
+            "Clever mental strategies",
+            "Foreign tech ventures",
+            "Writing twisted for manipulation"
+          ],
+          "health": {
+            "risks": ["Tech addiction", "Anxiety from connectivity", "Nervous disorders", "Sleep disruption", "Eye strain"],
+            "remedies": ["Digital detox", "Meditation"]
+          },
+          "career": {
+            "opportunities": ["Tech breakthroughs", "Coding mastery", "Tech startups", "Unconventional ideas"],
+            "challenges": ["Cyber fraud temptation", "Data theft risk", "Hacking temptation"]
+          },
+          "relationships": {
+            "effects": ["Deceptive online behavior", "Tech-based infidelity", "Manipulation through words", "Relationship conflicts via communication"],
+            "remedies": ["Honest communication"]
+          },
+          "timing_events": {
+            "tech_breakthroughs": [15, 40],
+            "communication_peaks": [25, 55],
+            "deception_risks": [35, 65]
+          },
+          "spiritual_perspective": "Rahu-Mercury shadow - intellect divorced from wisdom, cleverness replacing sincerity"
+        },
+        "rahu_mercury_ketu": {
+          "sequence": [1, 6, 2],
+          "duration_days": 81,
+          "theme": "Release of mental attachments, wise silence",
+          "description": "Detachment from intellectual pursuits, words lose power, communication becomes minimalist, wisdom of silence, mental chatter dissolves, deception stops",
+          "effects": [
+            "Release of intellectual obsessions",
+            "Words and communication minimized",
+            "Mental chatter quiets",
+            "Wisdom in silence emerges",
+            "Deceptive patterns stop",
+            "Truth speaking natural",
+            "Tech addiction releases"
+          ],
+          "health": {
+            "risks": ["Communication loss", "Selective mutism"],
+            "remedies": ["Meditation on silence"]
+          },
+          "career": {
+            "opportunities": ["Writing with detachment", "Teaching through silence", "Meditation instruction"],
+            "challenges": ["Communication career ends"]
+          },
+          "relationships": {
+            "effects": ["Release of manipulation", "Honest communication", "Listening deepens", "Words precious"],
+            "remedies": ["Mindful speech"]
+          },
+          "timing_events": {
+            "intellectual_release": [10, 40],
+            "silence_days": [45, 70],
+            "wisdom_speech": [70, 81]
+          },
+          "spiritual_perspective": "Mercury-Ketu - wisdom of silence, intellect surrendered to truth"
+        },
+        "rahu_mercury_jupiter": {
+          "sequence": [1, 6, 3],
+          "duration_days": 81,
+          "theme": "Communication mastery, teaching excellence",
+          "description": "Teaching and communication peak, language learning, writing success, wisdom through words, networking expands, intellectual brilliance, foreign learning",
+          "effects": [
+            "Communication effectiveness peak",
+            "Teaching through clear speech",
+            "Writing success and publication",
+            "Language learning rapid",
+            "Networking expands",
+            "Intellectual insight deepens",
+            "Foreign communication smooth"
+          ],
+          "health": {
+            "risks": ["Throat strain from overuse"],
+            "remedies": ["Vocal rest"]
+          },
+          "career": {
+            "opportunities": ["Writing and publishing", "Teaching communication", "Journalism", "Foreign correspondence", "Tech education"],
+            "challenges": ["Over-commitment through communication"]
+          },
+          "relationships": {
+            "effects": ["Communication clarity improves", "Teaching partnerships", "Intellectual rapport", "Honest dialogue"],
+            "remedies": ["Mindful communication"]
+          },
+          "timing_events": {
+            "communication_peaks": [15, 50],
+            "writing_success": [25, 60],
+            "mastery_days": [70, 81]
+          },
+          "spiritual_perspective": "Mercury-Jupiter - wisdom expressed clearly, knowledge shared generously"
+        },
+        "rahu_mercury_saturn": {
+          "sequence": [1, 6, 4],
+          "duration_days": 81,
+          "theme": "Communication hampered, learning restricted",
+          "description": "Speech difficulties or restrictions, learning blocked, communication awkward, mental strain, writing challenged, discipline in communication",
+          "effects": [
+            "Communication difficult",
+            "Learning restricted",
+            "Speech problems",
+            "Mental strain",
+            "Intellectual capacity tested",
+            "Writing difficult",
+            "Tech limitations"
+          ],
+          "health": {
+            "risks": ["Speech disorders", "Nerve problems", "Anxiety", "Mental fog"],
+            "remedies": ["Speech therapy", "Mental clarity"]
+          },
+          "career": {
+            "opportunities": ["Careful analytical work", "Writing that endures"],
+            "challenges": ["Communication blocked at work", "Tech failures", "Writing rejected"]
+          },
+          "relationships": {
+            "effects": ["Communication breakdown", "Misunderstandings", "Silent treatment", "Listening deepens"],
+            "remedies": ["Patient communication"]
+          },
+          "timing_events": {
+            "communication_blocks": [15, 45],
+            "breakthrough_days": [50, 70],
+            "clarity_emerges": [75, 81]
+          },
+          "spiritual_perspective": "Mercury-Saturn - speech purified through restriction, wisdom through silence"
+        },
+        "rahu_mercury_venus": {
+          "sequence": [1, 6, 5],
+          "duration_days": 81,
+          "theme": "Charming communication, artistic intelligence",
+          "description": "Communication charming and persuasive, writing and speaking successful, artistic talents expressed, wit and humor peak, social success, foreign relationships",
+          "effects": [
+            "Communication charming",
+            "Persuasive and articulate",
+            "Writing success",
+            "Wit and humor peak",
+            "Artistic expression verbal",
+            "Networking successful",
+            "Foreign communication smooth"
+          ],
+          "health": {
+            "risks": ["Throat strain"],
+            "remedies": ["Vocal rest"]
+          },
+          "career": {
+            "opportunities": ["Writing and publishing", "Public speaking", "Counseling", "Artistic communication"],
+            "challenges": ["Over-commitment through charm"]
+          },
+          "relationships": {
+            "effects": ["Communication charming", "Flattery and persuasion", "Wit appreciated", "Intellectual rapport"],
+            "remedies": ["Honest communication"]
+          },
+          "timing_events": {
+            "communication_peak": [15, 50],
+            "wit_success": [25, 60],
+            "mastery_days": [70, 81]
+          },
+          "spiritual_perspective": "Mercury-Venus - wisdom with beauty, knowledge with charm"
+        },
+        "rahu_mercury_mercury": {
+          "sequence": [1, 6, 6],
+          "duration_days": 81,
+          "theme": "MAXIMUM intellectual and communication power",
+          "description": "Intellect at peak, all forms of communication excel, technology mastery, wit and humor at maximum, networking peak, multiple projects possible",
+          "effects": [
+            "Maximum intellectual power",
+            "All communication excel",
+            "Technology mastery",
+            "Multiple projects possible",
+            "Networking at peak",
+            "Writing and speaking superb",
+            "Quick wit and humor"
+          ],
+          "health": {
+            "risks": ["Nervous exhaustion", "Over-thinking"],
+            "remedies": ["Mental rest", "Meditation"]
+          },
+          "career": {
+            "opportunities": ["Tech success", "Writing peak", "Communication mastery", "Teaching excellence", "Multiple income streams"],
+            "challenges": ["Over-extension"]
+          },
+          "relationships": {
+            "effects": ["Communication excellent", "Intellectual partnerships", "Wit shared", "Multiple relationships possible"],
+            "remedies": ["Focus and commitment"]
+          },
+          "timing_events": {
+            "mental_peak": [10, 45, 80],
+            "success_maximum": [20, 65],
+            "mastery_days": [70, 81]
+          },
+          "spiritual_perspective": "Mercury at fullest expression - wisdom, intelligence, and communication in divine harmony"
+        },
+        "rahu_mercury_sun": {
+          "sequence": [1, 6, 7],
+          "duration_days": 81,
+          "theme": "Leadership and authority through intelligence",
+          "description": "Leadership through intellect and communication, authority in intellectual matters, public speaking success, authority figures impressed, reputation for intelligence",
+          "effects": [
+            "Leadership through intelligence",
+            "Authority in intellectual matters",
+            "Public speaking success",
+            "Authority figures impressed",
+            "Reputation for intelligence",
+            "Character shines with brilliance",
+            "Ideas gain acceptance"
+          ],
+          "health": {
+            "risks": ["Nervous tension from activity"],
+            "remedies": ["Mental rest"]
+          },
+          "career": {
+            "opportunities": ["Leadership positions", "Public recognition", "Intellectual authority", "Teaching roles", "Media success"],
+            "challenges": ["Pride in intellect"]
+          },
+          "relationships": {
+            "effects": ["Respect increases", "Leadership through words", "Intellectual partnerships", "Honor in communication"],
+            "remedies": ["Humility in knowledge"]
+          },
+          "timing_events": {
+            "recognition_peaks": [10, 40, 70],
+            "authority_growth": [20, 60],
+            "honor_days": [75, 81]
+          },
+          "spiritual_perspective": "Sun-Mercury - brilliance of intellect, leadership through wisdom"
+        },
+        "rahu_mercury_moon": {
+          "sequence": [1, 6, 8],
+          "duration_days": 81,
+          "theme": "Emotional intelligence, nurturing communication",
+          "description": "Emotional intelligence increases, nurturing through communication, psychology and counseling, intuitive communication, family communication heals",
+          "effects": [
+            "Emotional intelligence peaks",
+            "Communication nurturing",
+            "Psychology and counseling",
+            "Intuitive communication",
+            "Family relationships heal",
+            "Words bring comfort",
+            "Mind and emotion balance"
+          ],
+          "health": {
+            "risks": ["Anxiety from sensitivity"],
+            "remedies": ["Emotional grounding"]
+          },
+          "career": {
+            "opportunities": ["Counseling and psychology", "Emotional intelligence coaching", "Family therapy", "Writing about emotions"],
+            "challenges": ["Over-emotional communication"]
+          },
+          "relationships": {
+            "effects": ["Communication heals", "Emotional support through words", "Family dialogue improves", "Listening with empathy"],
+            "remedies": ["Balanced expression"]
+          },
+          "timing_events": {
+            "healing_days": [15, 45],
+            "communication_peak": [30, 60],
+            "harmony_days": [70, 81]
+          },
+          "spiritual_perspective": "Moon-Mercury - heart and mind in harmony, wisdom expressed with compassion"
+        },
+        "rahu_mercury_mars": {
+          "sequence": [1, 6, 9],
+          "duration_days": 81,
+          "theme": "Sharp communication, aggressive intellect",
+          "description": "Communication becomes sharp and cutting, wit becomes weapon, intellectual aggression, debate and argument excel, competitive communication wins",
+          "effects": [
+            "Communication sharp and cutting",
+            "Wit becomes weapon",
+            "Intellectual aggression",
+            "Debate and argument excel",
+            "Competitive communication",
+            "Sarcasm and criticism peak",
+            "Arguments won through cleverness"
+          ],
+          "health": {
+            "risks": ["Nervous agitation", "Anxiety from conflict"],
+            "remedies": ["Calming practices"]
+          },
+          "career": {
+            "opportunities": ["Debate and argument", "Competitive communication", "Aggressive marketing", "Legal communication"],
+            "challenges": ["Communication conflicts", "Offensive speech"]
+          },
+          "relationships": {
+            "effects": ["Arguments sharp and hurtful", "Sarcasm and criticism", "Wit becomes weapon", "Conflict through words"],
+            "remedies": ["Compassionate communication"]
+          },
+          "timing_events": {
+            "conflict_peaks": [15, 45, 75],
+            "sharpness_maximum": [30, 60],
+            "peace_days": [75, 81]
+          },
+          "spiritual_perspective": "Mars-Mercury - intellect as warrior, wisdom for victory but risk of harm"
+        }
+      }
+    },
+    "rahu_sun": {
+      "antardasha_lord": "sun",
+      "antardasha_duration_days": 730,
+      "antardasha_themes": ["Authority", "Ego", "Leadership", "Vitality", "Power"],
+      "pratyantardasha": {
+        "rahu_sun_rahu": {
+          "sequence": [1, 7, 1],
+          "duration_days": 81,
+          "theme": "EGO-DRIVEN OBSESSION, FALSE AUTHORITY",
+          "description": "Ego becomes obsessive and grandiose, false authority sought, shadow self masquerades as enlightened, leadership through deception, status obsession peaks",
+          "effects": [
+            "Ego-driven obsession",
+            "Grandiosity and false importance",
+            "Leadership through deception",
+            "Status and recognition obsessed",
+            "Authority figures clashed with",
+            "False enlightenment proclaimed",
+            "Shadow self inflated"
+          ],
+          "health": {
+            "risks": ["Heart problems from stress", "Hypertension", "Excessive pride issues"],
+            "remedies": ["Ego dissolution", "Service to others"]
+          },
+          "career": {
+            "opportunities": ["Leadership positions", "Public visibility", "Authority establishment", "Foreign dignities"],
+            "challenges": ["Deceptive leadership", "Loss of reputation", "False credentials exposed"]
+          },
+          "relationships": {
+            "effects": ["Arrogant control", "Deceptive leadership", "Admiration demands", "Disrespect for others"],
+            "remedies": ["Humility practices"]
+          },
+          "timing_events": {
+            "ego_peaks": [10, 40, 70],
+            "authority_conflicts": [25, 55],
+            "humiliation_days": [75, 81]
+          },
+          "spiritual_perspective": "Rahu-Sun shadow - ego identity fully activated, illusion of separate self at maximum"
+        },
+        "rahu_sun_ketu": {
+          "sequence": [1, 7, 2],
+          "duration_days": 81,
+          "theme": "Ego death, loss of identity",
+          "description": "Ego dissolves completely, false identity dies, personal will surrenders, status becomes meaningless, self-less service begins, true self emerges",
+          "effects": [
+            "Ego death and dissolution",
+            "Identity crisis resolved",
+            "Personal will surrenders",
+            "Status becomes unimportant",
+            "Leadership surrendered",
+            "False authority collapses",
+            "Service to higher power"
+          ],
+          "health": {
+            "risks": ["Identity loss crisis", "Depression", "Loss of vitality"],
+            "remedies": ["Surrender practices", "Divine connection"]
+          },
+          "career": {
+            "opportunities": ["Service-based leadership", "Humble work", "Spiritual authority", "Teaching through example"],
+            "challenges": ["Loss of career identity", "Loss of status"]
+          },
+          "relationships": {
+            "effects": ["Release of narcissism", "Equal relationships", "Service to others", "Humble partnerships"],
+            "remedies": ["Selfless service"]
+          },
+          "timing_events": {
+            "ego_crisis": [10, 35],
+            "death_peak": [40, 60],
+            "rebirth_days": [65, 81]
+          },
+          "spiritual_perspective": "Sun-Ketu - ego death, individuality dissolves into universal consciousness"
+        },
+        "rahu_sun_jupiter": {
+          "sequence": [1, 7, 3],
+          "duration_days": 81,
+          "theme": "Leadership and fortune, authority blessed",
+          "description": "Leadership flourishes with wisdom, authority becomes benevolent, public recognition, foreign dignities, noble character emerges, fortune follows leadership",
+          "effects": [
+            "Leadership effectiveness peak",
+            "Authority becomes wise",
+            "Public recognition increases",
+            "Foreign diplomatic success",
+            "Nobility and integrity visible",
+            "Character reputation shines",
+            "Fortune follows leadership"
+          ],
+          "health": {
+            "risks": ["Heart strain from excess"],
+            "remedies": ["Heart health"]
+          },
+          "career": {
+            "opportunities": ["Leadership positions", "Public recognition", "Diplomatic roles", "Authority roles", "Foreign dignities"],
+            "challenges": ["Pride from success"]
+          },
+          "relationships": {
+            "effects": ["Respect increases", "Leadership in relationships", "Noble character", "Honor and dignity"],
+            "remedies": ["Humility practice"]
+          },
+          "timing_events": {
+            "recognition_peaks": [10, 40, 70],
+            "authority_growth": [20, 60],
+            "honor_days": [75, 81]
+          },
+          "spiritual_perspective": "Sun-Jupiter - benevolent authority, kingdom of light"
+        },
+        "rahu_sun_saturn": {
+          "sequence": [1, 7, 4],
+          "duration_days": 81,
+          "theme": "Authority challenged, reputation tested",
+          "description": "Leadership questioned, authority diminished, reputation attacked, status loss, ego humbled, light dimmed by shadow but character tested",
+          "effects": [
+            "Authority challenged",
+            "Leadership loses power",
+            "Status and reputation threatened",
+            "Public criticism",
+            "Ego severely humbled",
+            "Character tested",
+            "Light obscured temporarily"
+          ],
+          "health": {
+            "risks": ["Heart stress", "Vitality loss"],
+            "remedies": ["Heart health, meditation"]
+          },
+          "career": {
+            "opportunities": ["Humble leadership", "Character building"],
+            "challenges": ["Loss of position", "Public scandal", "Status collapse"]
+          },
+          "relationships": {
+            "effects": ["Respect diminished", "Humbling experiences", "Ego death beginning"],
+            "remedies": ["Humble service"]
+          },
+          "timing_events": {
+            "challenge_peaks": [10, 40, 70],
+            "darkest_period": [35, 65],
+            "light_returns": [75, 81]
+          },
+          "spiritual_perspective": "Sun-Saturn - ego dissolution, authority returns purified"
+        },
+        "rahu_sun_venus": {
+          "sequence": [1, 7, 5],
+          "duration_days": 81,
+          "theme": "Authority with grace, noble beauty",
+          "description": "Leadership with charm and grace, authority becomes attractive, reputation for elegance, public appreciation, regal bearing, noble character",
+          "effects": [
+            "Leadership with charm",
+            "Authority becomes attractive",
+            "Public appreciation high",
+            "Beauty and elegance noticed",
+            "Regal and noble bearing",
+            "Respect and admiration increase",
+            "Character shines with beauty"
+          ],
+          "health": {
+            "risks": ["Heart strain"],
+            "remedies": ["Heart health"]
+          },
+          "career": {
+            "opportunities": ["Leadership roles", "Public visibility", "Prestigious positions", "Beauty and authority"],
+            "challenges": ["Pride and vanity"]
+          },
+          "relationships": {
+            "effects": ["Admiration and respect", "Grace in relationships", "Leadership with love", "Noble partnerships"],
+            "remedies": ["Humble grace"]
+          },
+          "timing_events": {
+            "recognition_peaks": [10, 40, 70],
+            "admiration_growth": [20, 60],
+            "honor_days": [75, 81]
+          },
+          "spiritual_perspective": "Sun-Venus - authority with love, power expressed through beauty"
+        },
+        "rahu_sun_mercury": {
+          "sequence": [1, 7, 6],
+          "duration_days": 81,
+          "theme": "Leadership and authority through intelligence",
+          "description": "Leadership through intellect, authority in intellectual matters, public speaking success, authority figures impressed, reputation for intelligence grows",
+          "effects": [
+            "Leadership through intelligence",
+            "Authority in intellectual matters",
+            "Public speaking success",
+            "Authority figures impressed",
+            "Reputation for intelligence",
+            "Character shines with brilliance",
+            "Ideas gain acceptance"
+          ],
+          "health": {
+            "risks": ["Nervous tension"],
+            "remedies": ["Mental rest"]
+          },
+          "career": {
+            "opportunities": ["Leadership positions", "Public recognition", "Intellectual authority", "Teaching roles", "Media success"],
+            "challenges": ["Pride in intellect"]
+          },
+          "relationships": {
+            "effects": ["Respect increases", "Leadership through words", "Intellectual partnerships", "Honor in communication"],
+            "remedies": ["Humility in knowledge"]
+          },
+          "timing_events": {
+            "recognition_peaks": [10, 40, 70],
+            "authority_growth": [20, 60],
+            "honor_days": [75, 81]
+          },
+          "spiritual_perspective": "Sun-Mercury - brilliance of intellect, leadership through wisdom"
+        },
+        "rahu_sun_sun": {
+          "sequence": [1, 7, 7],
+          "duration_days": 81,
+          "theme": "MAXIMUM ego, power, and vitality",
+          "description": "Ego and vitality at maximum, leadership effectiveness peak, authority and power supreme, public recognition and honor at highest, personal power maximum",
+          "effects": [
+            "Maximum ego and vitality",
+            "Leadership effectiveness peak",
+            "Authority and power supreme",
+            "Public recognition at highest",
+            "Personal power maximum",
+            "Character visibility peak",
+            "All Sun matters at maximum"
+          ],
+          "health": {
+            "risks": ["Heart overload", "Excessive activity"],
+            "remedies": ["Heart health", "Moderation"]
+          },
+          "career": {
+            "opportunities": ["Career peak", "Leadership success", "Public recognition", "Authority maximum", "Power and position"],
+            "challenges": ["Arrogance and overreach"]
+          },
+          "relationships": {
+            "effects": ["Admiration peak", "Leadership in relationships", "Respect maximum", "Attention and honor"],
+            "remedies": ["Humility and grace"]
+          },
+          "timing_events": {
+            "peak_power": [10, 45, 80],
+            "maximum_authority": [20, 65],
+            "triumph_days": [70, 81]
+          },
+          "spiritual_perspective": "Sun at fullest expression - ego, power, vitality, and authority in complete manifestation"
+        },
+        "rahu_sun_moon": {
+          "sequence": [1, 7, 8],
+          "duration_days": 81,
+          "theme": "Leadership with emotional wisdom",
+          "description": "Leadership with emotional intelligence, authority that nurtures, heart-centered power, public emotional appeal, character with compassion, authority beloved",
+          "effects": [
+            "Leadership with emotional wisdom",
+            "Authority that nurtures",
+            "Heart-centered power",
+            "Public emotional appeal",
+            "Character with compassion",
+            "Authority beloved by people",
+            "Emotional leadership peak"
+          ],
+          "health": {
+            "risks": ["Heart-emotional strain"],
+            "remedies": ["Emotional heart practices"]
+          },
+          "career": {
+            "opportunities": ["Emotional leadership", "Public appeal", "Counseling with authority", "Family-based leadership"],
+            "challenges": ["Emotional overwhelm from leadership"]
+          },
+          "relationships": {
+            "effects": ["Leadership with love", "Emotional authority", "Beloved by family", "Nurturing power", "Public affection"],
+            "remedies": ["Emotional balance"]
+          },
+          "timing_events": {
+            "emotional_peak": [15, 45],
+            "public_appeal": [20, 60],
+            "love_authority": [70, 81]
+          },
+          "spiritual_perspective": "Moon-Sun - emotional leadership, heart-centered authority"
+        },
+        "rahu_sun_mars": {
+          "sequence": [1, 7, 9],
+          "duration_days": 81,
+          "theme": "Courageous leadership, victorious authority",
+          "description": "Leadership with courage and aggression, power and force combined, victories assured, authority enforced through strength, warrior leader, competition won",
+          "effects": [
+            "Leadership with courage",
+            "Power and force combined",
+            "Victories assured",
+            "Authority enforced through strength",
+            "Warrior leader emerges",
+            "Competition dominated",
+            "Aggressive success"
+          ],
+          "health": {
+            "risks": ["Injury from overconfidence", "High blood pressure"],
+            "remedies": ["Humility in strength"]
+          },
+          "career": {
+            "opportunities": ["Military leadership", "Competitive dominance", "Aggressive business success", "Warrior roles"],
+            "challenges": ["Over-confidence causing losses"]
+          },
+          "relationships": {
+            "effects": ["Dominant leadership", "Powerful personality", "Victory in conflicts", "Aggressive authority"],
+            "remedies": ["Temper with wisdom"]
+          },
+          "timing_events": {
+            "victory_peaks": [10, 40, 70],
+            "power_maximum": [25, 60],
+            "triumph_days": [75, 81]
+          },
+          "spiritual_perspective": "Mars-Sun - warrior leader, power expressed through righteous action"
+        }
+      }
+    },
+    "rahu_moon": {
+      "antardasha_lord": "moon",
+      "antardasha_duration_days": 730,
+      "antardasha_themes": ["Emotions", "Mind", "Family", "Comfort", "Nurturing"],
+      "pratyantardasha": {
+        "rahu_moon_rahu": {
+          "sequence": [1, 8, 1],
+          "duration_days": 81,
+          "theme": "EMOTIONAL OBSESSIONS, MENTAL ILLUSIONS",
+          "description": "Emotions become obsessive and deceptive, mental confusion peaks, emotional manipulation, psychological games, emotional dependency on illusions",
+          "effects": [
+            "Emotional obsessions control mind",
+            "Mental confusion peaks",
+            "Emotional manipulation and games",
+            "Psychological defense mechanisms",
+            "Mother or maternal figures problematic",
+            "Home issues and family deceptions",
+            "Emotional dependency on illusions"
+          ],
+          "health": {
+            "risks": ["Mental health disorders", "Anxiety and panic", "Insomnia", "Emotional trauma", "Digestive issues"],
+            "remedies": ["Mental health support", "Moon meditation"]
+          },
+          "career": {
+            "opportunities": ["Psychology or counseling work", "Emotional intelligence development"],
+            "challenges": ["Emotional outbursts at work", "Mental clarity lost", "Family business conflicts"]
+          },
+          "relationships": {
+            "effects": ["Emotional manipulation peaks", "Codependency patterns", "Maternal issues", "Psychological games", "Mood swings"],
+            "remedies": ["Therapy", "Emotional honesty"]
+          },
+          "timing_events": {
+            "emotional_peaks": [15, 45, 75],
+            "mental_confusion": [20, 50],
+            "clarity_breakthrough": [75, 81]
+          },
+          "spiritual_perspective": "Rahu-Moon shadow - emotional illusions fully activated, psychological identification with delusions"
+        },
+        "rahu_moon_ketu": {
+          "sequence": [1, 8, 2],
+          "duration_days": 81,
+          "theme": "Emotional detachment, past-life mother patterns",
+          "description": "Release of emotional attachments, past-life mother connections surface, emotional independence emerges, psychological wounds heal through release",
+          "effects": [
+            "Emotional detachment increases",
+            "Past-life mother patterns visible",
+            "Emotional independence emerges",
+            "Psychological wounds heal",
+            "Mental clarity increases",
+            "Emotional manipulation stops",
+            "Home and family lose binding power"
+          ],
+          "health": {
+            "risks": ["Emotional numbness", "Dissociation"],
+            "remedies": ["Emotional processing", "Moon meditation"]
+          },
+          "career": {
+            "opportunities": ["Psychological counseling", "Therapy work", "Emotional healing"],
+            "challenges": ["Loss of emotional support", "Family business ends"]
+          },
+          "relationships": {
+            "effects": ["Release of codependency", "Mother issues resolve", "Emotional independence", "Healthy boundaries"],
+            "remedies": ["Inner child healing"]
+          },
+          "timing_events": {
+            "emotional_release": [15, 45],
+            "mother_patterns_surface": [25, 55],
+            "independence_peak": [65, 81]
+          },
+          "spiritual_perspective": "Moon-Ketu - emotional karma released, past-life mother relationships healed"
+        },
+        "rahu_moon_jupiter": {
+          "sequence": [1, 8, 3],
+          "duration_days": 81,
+          "theme": "Emotional wisdom, nurturing expansion",
+          "description": "Emotional intelligence increases, nurturing nature blessed, family expansion, psychological healing through wisdom, mother figures beneficial",
+          "effects": [
+            "Emotional wisdom deepens",
+            "Nurturing and care expand",
+            "Family and home blessed",
+            "Psychological healing accelerates",
+            "Mother figures become beneficial",
+            "Emotional intelligence peaks",
+            "Comfort and abundance in home"
+          ],
+          "health": {
+            "risks": ["Digestive issues from overeating"],
+            "remedies": ["Balanced diet"]
+          },
+          "career": {
+            "opportunities": ["Psychology and counseling", "Teaching children", "Hospitality success", "Family business expansion"],
+            "challenges": ["Home-work balance"]
+          },
+          "relationships": {
+            "effects": ["Family relationships heal", "Mothering nature blessed", "Emotional support increases", "Family expansion"],
+            "remedies": ["Loving presence"]
+          },
+          "timing_events": {
+            "family_peaks": [15, 45],
+            "healing_days": [30, 60],
+            "abundance_days": [70, 81]
+          },
+          "spiritual_perspective": "Moon-Jupiter - emotional abundance, nurturing wisdom"
+        },
+        "rahu_moon_saturn": {
+          "sequence": [1, 8, 4],
+          "duration_days": 81,
+          "theme": "Emotional sorrow, mental darkness",
+          "description": "Depression and sorrow peak, emotional restriction, mental health challenged, mother figure absent, home disrupted, inner child suffering",
+          "effects": [
+            "Depression and melancholy",
+            "Emotional restriction",
+            "Mental health severely tested",
+            "Mother or maternal figures absent",
+            "Home disrupted",
+            "Inner child wounded",
+            "Emotional hardness develops"
+          ],
+          "health": {
+            "risks": ["Depression", "Anxiety", "Digestive issues", "Breast health issues"],
+            "remedies": ["Mental health support", "Moon meditation"]
+          },
+          "career": {
+            "opportunities": ["Understanding suffering", "Healing others"],
+            "challenges": ["Family business fails", "Home-based work disrupted"]
+          },
+          "relationships": {
+            "effects": ["Mother relationship ends", "Family separation", "Emotional coldness", "Grief and sorrow"],
+            "remedies": ["Inner child healing"]
+          },
+          "timing_events": {
+            "sorrow_peaks": [15, 45],
+            "darkness_deepest": [40, 70],
+            "healing_begins": [75, 81]
+          },
+          "spiritual_perspective": "Moon-Saturn - emotional karma cleared, inner mother internalized"
+        },
+        "rahu_moon_venus": {
+          "sequence": [1, 8, 5],
+          "duration_days": 81,
+          "theme": "Emotional beauty, nurturing love",
+          "description": "Emotional intelligence and grace, nurturing nature blessed, family relationships flourish, psychological healing through love, sensuality and emotion blend",
+          "effects": [
+            "Emotional grace and beauty",
+            "Nurturing nature blessed",
+            "Family relationships flourish",
+            "Psychological healing through love",
+            "Mother figures become helpful",
+            "Sensuality and emotion blend",
+            "Home becomes beautiful"
+          ],
+          "health": {
+            "risks": ["Digestive issues from overeating"],
+            "remedies": ["Balanced eating"]
+          },
+          "career": {
+            "opportunities": ["Psychology and counseling", "Family therapy", "Hospitality success", "Beauty and comfort business"],
+            "challenges": ["Home-work balance"]
+          },
+          "relationships": {
+            "effects": ["Family relationships heal", "Nurturing love", "Emotional support", "Sensual intimacy", "Family expansion"],
+            "remedies": ["Loving presence"]
+          },
+          "timing_events": {
+            "family_peaks": [15, 45],
+            "healing_days": [30, 60],
+            "abundance_days": [70, 81]
+          },
+          "spiritual_perspective": "Venus-Moon - emotional wisdom, love that nurtures and heals"
+        },
+        "rahu_moon_mercury": {
+          "sequence": [1, 8, 6],
+          "duration_days": 81,
+          "theme": "Emotional intelligence, nurturing communication",
+          "description": "Emotional intelligence increases, nurturing through communication, psychology and counseling, intuitive communication, family communication heals",
+          "effects": [
+            "Emotional intelligence peaks",
+            "Communication nurturing",
+            "Psychology and counseling",
+            "Intuitive communication",
+            "Family relationships heal",
+            "Words bring comfort",
+            "Mind and emotion balance"
+          ],
+          "health": {
+            "risks": ["Anxiety from sensitivity"],
+            "remedies": ["Emotional grounding"]
+          },
+          "career": {
+            "opportunities": ["Counseling and psychology", "Emotional intelligence coaching", "Family therapy", "Writing about emotions"],
+            "challenges": ["Over-emotional communication"]
+          },
+          "relationships": {
+            "effects": ["Communication heals", "Emotional support through words", "Family dialogue improves", "Listening with empathy"],
+            "remedies": ["Balanced expression"]
+          },
+          "timing_events": {
+            "healing_days": [15, 45],
+            "communication_peak": [30, 60],
+            "harmony_days": [70, 81]
+          },
+          "spiritual_perspective": "Moon-Mercury - heart and mind in harmony, wisdom with compassion"
+        },
+        "rahu_moon_sun": {
+          "sequence": [1, 8, 7],
+          "duration_days": 81,
+          "theme": "Leadership with emotional wisdom",
+          "description": "Leadership with emotional intelligence, authority that nurtures, heart-centered power, public emotional appeal, character with compassion, authority beloved",
+          "effects": [
+            "Leadership with emotional wisdom",
+            "Authority that nurtures",
+            "Heart-centered power",
+            "Public emotional appeal",
+            "Character with compassion",
+            "Authority beloved by people",
+            "Emotional leadership peak"
+          ],
+          "health": {
+            "risks": ["Heart-emotional strain"],
+            "remedies": ["Emotional heart practices"]
+          },
+          "career": {
+            "opportunities": ["Emotional leadership", "Public appeal", "Counseling with authority", "Family-based leadership"],
+            "challenges": ["Emotional overwhelm"]
+          },
+          "relationships": {
+            "effects": ["Leadership with love", "Emotional authority", "Beloved by family", "Nurturing power", "Public affection"],
+            "remedies": ["Emotional balance"]
+          },
+          "timing_events": {
+            "emotional_peak": [15, 45],
+            "public_appeal": [20, 60],
+            "love_authority": [70, 81]
+          },
+          "spiritual_perspective": "Moon-Sun - emotional leadership, heart-centered authority"
+        },
+        "rahu_moon_moon": {
+          "sequence": [1, 8, 8],
+          "duration_days": 81,
+          "theme": "MAXIMUM emotion, comfort, and family",
+          "description": "Emotions and comfort at maximum, family matters at peak, psychological sensitivity peak, nurturing nature fullest, home and family maximum support",
+          "effects": [
+            "Maximum emotion and sensitivity",
+            "Comfort and security peak",
+            "Family matters at maximum",
+            "Nurturing nature at fullest",
+            "Home and family blessed",
+            "Psychological sensitivity peak",
+            "All Moon matters at maximum"
+          ],
+          "health": {
+            "risks": ["Overeating and weight gain", "Emotional health challenges"],
+            "remedies": ["Emotional balance", "Healthy living"]
+          },
+          "career": {
+            "opportunities": ["Family-based work", "Nurturing careers", "Home business success", "Psychology work", "Teaching children"],
+            "challenges": ["Work-family imbalance"]
+          },
+          "relationships": {
+            "effects": ["Family relationships at best", "Emotional support maximum", "Nurturing at peak", "Family comfort", "Mother role peak"],
+            "remedies": ["Balanced family involvement"]
+          },
+          "timing_events": {
+            "family_peak": [10, 45, 80],
+            "comfort_maximum": [20, 65],
+            "nurturance_days": [70, 81]
+          },
+          "spiritual_perspective": "Moon at fullest expression - emotion, family, comfort, and nurturing in divine flow"
+        },
+        "rahu_moon_mars": {
+          "sequence": [1, 8, 9],
+          "duration_days": 81,
+          "theme": "Passionate emotions, aggressive nurturing",
+          "description": "Emotions become passionate and intense, nurturing becomes assertive, family conflicts escalate, protective aggression, emotional power in relationships",
+          "effects": [
+            "Emotions become passionate and intense",
+            "Nurturing becomes assertive",
+            "Family conflicts escalate",
+            "Protective aggression emerges",
+            "Emotional power in relationships",
+            "Mood swings and anger",
+            "Mother issues trigger aggression"
+          ],
+          "health": {
+            "risks": ["Emotional outbursts", "Digestive issues from anger", "Fever from emotional heat"],
+            "remedies": ["Anger management", "Emotional processing"]
+          },
+          "career": {
+            "opportunities": ["Passionate nurturing work", "Family-based aggression", "Protective careers"],
+            "challenges": ["Family business conflicts", "Domestic violence risk"]
+          },
+          "relationships": {
+            "effects": ["Passionate emotions", "Protective aggression", "Family conflicts", "Emotional intensity", "Mother-based conflicts"],
+            "remedies": ["Anger management", "Healthy boundaries"]
+          },
+          "timing_events": {
+            "emotional_peaks": [15, 45, 75],
+            "conflict_peaks": [25, 55],
+            "peace_days": [75, 81]
+          },
+          "spiritual_perspective": "Mars-Moon - passionate emotion, protective aggression, warrior mother"
+        }
+      }
+    },
+    "rahu_mars": {
+      "antardasha_lord": "mars",
+      "antardasha_duration_days": 730,
+      "antardasha_themes": ["Aggression", "Courage", "Action", "Energy", "Conflict"],
+      "pratyantardasha": {
+        "rahu_mars_rahu": {
+          "sequence": [1, 9, 1],
+          "duration_days": 81,
+          "theme": "AGGRESSIVE OBSESSIONS, VIOLENT DECEPTIONS",
+          "description": "Aggression becomes obsessive, confrontations intensify, deceptive tactics used, anger masks obsessions, conflict-driven ambitions, violence tempts",
+          "effects": [
+            "Aggression and obsession combine",
+            "Confrontations and conflicts escalate",
+            "Deceptive tactics in competition",
+            "Violent thoughts or tendencies",
+            "Anger masks obsessions",
+            "Foreign conflicts or military",
+            "Competitive deceptions"
+          ],
+          "health": {
+            "risks": ["Accidents and injuries", "Aggression-related illness", "Fever and inflammation", "Trauma", "Surgery risk"],
+            "remedies": ["Anger management", "Non-violence practices"]
+          },
+          "career": {
+            "opportunities": ["Competitive advantage", "Military or defense work", "Aggressive business tactics", "Sports and competition"],
+            "challenges": ["Violence in workplace", "Legal conflicts", "Injury at work"]
+          },
+          "relationships": {
+            "effects": ["Domestic violence risk", "Aggressive obsession with partner", "Conflict-driven passion", "Deceptive aggression", "Abuse patterns"],
+            "remedies": ["Conflict resolution", "Non-violence"]
+          },
+          "timing_events": {
+            "conflict_peaks": [15, 35, 55, 75],
+            "injury_risk": [25, 65],
+            "peace_days": [75, 81]
+          },
+          "spiritual_perspective": "Rahu-Mars shadow - desire and force combined, illusion of domination through violence"
+        },
+        "rahu_mars_ketu": {
+          "sequence": [1, 9, 2],
+          "duration_days": 81,
+          "theme": "Release of aggression, surrender of will",
+          "description": "Aggression dissolves through detachment, fighting spirit surrenders, conflicts end through acceptance, past-life warrior karma resolved",
+          "effects": [
+            "Aggression and combativeness release",
+            "Fighting spirit surrenders",
+            "Conflicts end through acceptance",
+            "Non-violence becomes natural",
+            "Past-life warrior karma resolved",
+            "Assertiveness becomes wise action",
+            "Reconciliation with enemies"
+          ],
+          "health": {
+            "risks": ["Loss of vitality and strength"],
+            "remedies": ["Gentle exercise", "Non-violence"]
+          },
+          "career": {
+            "opportunities": ["Peace work and conflict resolution", "Non-violent activism", "Martial arts as meditation"],
+            "challenges": ["Loss of competitive drive", "Military career ends"]
+          },
+          "relationships": {
+            "effects": ["Release of aggression", "Conflict ends", "Reconciliation", "Peaceful communication", "Forgiveness"],
+            "remedies": ["Non-violence commitment"]
+          },
+          "timing_events": {
+            "aggression_release": [15, 40],
+            "conflict_peace": [45, 65],
+            "reconciliation_days": [70, 81]
+          },
+          "spiritual_perspective": "Mars-Ketu - warrior surrenders, force released into non-violence"
+        },
+        "rahu_mars_jupiter": {
+          "sequence": [1, 9, 3],
+          "duration_days": 81,
+          "theme": "Courageous action, fortunate victories",
+          "description": "Courage blessed by fortune, victories assured, aggressive expansion successful, martial prowess honored, competition won, foreign conflicts favorable",
+          "effects": [
+            "Courage and confidence peak",
+            "Victories and wins assured",
+            "Expansion through action",
+            "Competition favored",
+            "Foreign conflicts favorable",
+            "Martial skill honored",
+            "Aggressive plans succeed"
+          ],
+          "health": {
+            "risks": ["Injury from over-confidence"],
+            "remedies": ["Humility in physical activities"]
+          },
+          "career": {
+            "opportunities": ["Military advancement", "Competitive business", "Sports success", "Aggressive expansion wins"],
+            "challenges": ["Over-confidence causing losses"]
+          },
+          "relationships": {
+            "effects": ["Passionate romance", "Aggressive love blessed", "Victory in conflicts", "Strong partnerships"],
+            "remedies": ["Temper confidence with wisdom"]
+          },
+          "timing_events": {
+            "victory_peaks": [10, 40, 70],
+            "expansion_success": [25, 60],
+            "triumph_days": [75, 81]
+          },
+          "spiritual_perspective": "Mars-Jupiter - courageous wisdom, victory through righteousness"
+        },
+        "rahu_mars_saturn": {
+          "sequence": [1, 9, 4],
+          "duration_days": 81,
+          "theme": "Aggression thwarted, energy contained",
+          "description": "Energy blocked and frustrated, aggression meets walls, assertiveness curtailed, conflicts dangerous, patience demanded, warrior spirit tested",
+          "effects": [
+            "Energy and aggression blocked",
+            "Frustration from constraints",
+            "Assertiveness curtailed",
+            "Conflicts dangerous if provoked",
+            "Patience severely tested",
+            "Warrior spirit imprisoned",
+            "Slow building of strength"
+          ],
+          "health": {
+            "risks": ["Injury from frustration", "Blood pressure issues"],
+            "remedies": ["Controlled exercise"]
+          },
+          "career": {
+            "opportunities": ["Disciplined ambition", "Patient building"],
+            "challenges": ["Blocked advancement", "Work frustration"]
+          },
+          "relationships": {
+            "effects": ["Conflict dangerous", "Aggression turns inward", "Patience tested", "Domination fails"],
+            "remedies": ["Non-violence practice"]
+          },
+          "timing_events": {
+            "frustration_peaks": [15, 45, 75],
+            "containment_extreme": [35, 65],
+            "release_days": [75, 81]
+          },
+          "spiritual_perspective": "Mars-Saturn - warrior's patience, strength through discipline"
+        },
+        "rahu_mars_venus": {
+          "sequence": [1, 9, 5],
+          "duration_days": 81,
+          "theme": "Passionate love, sensual power",
+          "description": "Passion and desire at peak, sensuality heightened, power in relationships, attractive and magnetic, romance and adventure, foreign attractions",
+          "effects": [
+            "Passion and desire peak",
+            "Sensual attractiveness maximum",
+            "Romantic and magnetic",
+            "Power in relationships",
+            "Adventure and excitement",
+            "Foreign romantic attractions",
+            "Sexuality confident"
+          ],
+          "health": {
+            "risks": ["Excess sexual activity"],
+            "remedies": ["Balanced sexuality"]
+          },
+          "career": {
+            "opportunities": ["Passionate creative work", "Relationship-based business", "Performance arts"],
+            "challenges": ["Workplace romance complications"]
+          },
+          "relationships": {
+            "effects": ["Passionate romance", "Sensual power", "Attractive magnetism", "Adventure with partner"],
+            "remedies": ["Balanced passion"]
+          },
+          "timing_events": {
+            "passion_peaks": [10, 40, 70],
+            "attraction_maximum": [20, 60],
+            "intensity_days": [75, 81]
+          },
+          "spiritual_perspective": "Mars-Venus - passion without obsession, sensuality as sacred dance"
+        },
+        "rahu_mars_mercury": {
+          "sequence": [1, 9, 6],
+          "duration_days": 81,
+          "theme": "Sharp communication, aggressive intellect",
+          "description": "Communication becomes sharp and cutting, wit becomes weapon, intellectual aggression, debate excel, competitive communication wins",
+          "effects": [
+            "Communication sharp and cutting",
+            "Wit becomes weapon",
+            "Intellectual aggression",
+            "Debate and argument excel",
+            "Competitive communication",
+            "Sarcasm and criticism peak",
+            "Arguments won through cleverness"
+          ],
+          "health": {
+            "risks": ["Nervous agitation", "Anxiety from conflict"],
+            "remedies": ["Calming practices"]
+          },
+          "career": {
+            "opportunities": ["Debate and argument", "Competitive communication", "Aggressive marketing", "Legal communication"],
+            "challenges": ["Communication conflicts", "Offensive speech"]
+          },
+          "relationships": {
+            "effects": ["Arguments sharp and hurtful", "Sarcasm and criticism", "Wit becomes weapon", "Conflict through words"],
+            "remedies": ["Compassionate communication"]
+          },
+          "timing_events": {
+            "conflict_peaks": [15, 45, 75],
+            "sharpness_maximum": [30, 60],
+            "peace_days": [75, 81]
+          },
+          "spiritual_perspective": "Mars-Mercury - intellect as warrior, wisdom for victory"
+        },
+        "rahu_mars_sun": {
+          "sequence": [1, 9, 7],
+          "duration_days": 81,
+          "theme": "Courageous leadership, victorious authority",
+          "description": "Leadership with courage and aggression, power and force combined, victories assured, authority enforced through strength, warrior leader, competition won",
+          "effects": [
+            "Leadership with courage",
+            "Power and force combined",
+            "Victories assured",
+            "Authority enforced through strength",
+            "Warrior leader emerges",
+            "Competition dominated",
+            "Aggressive success"
+          ],
+          "health": {
+            "risks": ["Injury from overconfidence", "High blood pressure"],
+            "remedies": ["Humility in strength"]
+          },
+          "career": {
+            "opportunities": ["Military leadership", "Competitive dominance", "Aggressive business success"],
+            "challenges": ["Over-confidence causing losses"]
+          },
+          "relationships": {
+            "effects": ["Dominant leadership", "Powerful personality", "Victory in conflicts", "Aggressive authority"],
+            "remedies": ["Temper with wisdom"]
+          },
+          "timing_events": {
+            "victory_peaks": [10, 40, 70],
+            "power_maximum": [25, 60],
+            "triumph_days": [75, 81]
+          },
+          "spiritual_perspective": "Mars-Sun - warrior leader, power through righteous action"
+        },
+        "rahu_mars_moon": {
+          "sequence": [1, 9, 8],
+          "duration_days": 81,
+          "theme": "Passionate emotions, aggressive nurturing",
+          "description": "Emotions become passionate and intense, nurturing becomes assertive, family conflicts escalate, protective aggression, emotional power in relationships",
+          "effects": [
+            "Emotions become passionate and intense",
+            "Nurturing becomes assertive",
+            "Family conflicts escalate",
+            "Protective aggression emerges",
+            "Emotional power in relationships",
+            "Mood swings and anger",
+            "Mother issues trigger aggression"
+          ],
+          "health": {
+            "risks": ["Emotional outbursts", "Digestive issues from anger"],
+            "remedies": ["Anger management"]
+          },
+          "career": {
+            "opportunities": ["Passionate nurturing work", "Protective careers"],
+            "challenges": ["Family business conflicts", "Domestic violence risk"]
+          },
+          "relationships": {
+            "effects": ["Passionate emotions", "Protective aggression", "Family conflicts", "Emotional intensity"],
+            "remedies": ["Anger management"]
+          },
+          "timing_events": {
+            "emotional_peaks": [15, 45, 75],
+            "conflict_peaks": [25, 55],
+            "peace_days": [75, 81]
+          },
+          "spiritual_perspective": "Mars-Moon - passionate emotion, protective aggression"
+        },
+        "rahu_mars_mars": {
+          "sequence": [1, 9, 9],
+          "duration_days": 81,
+          "theme": "MAXIMUM aggression, power, and conflict",
+          "description": "Aggression and energy at maximum, power and force supreme, conflict and competition at peak, all Mars matters at maximum, warrior spirit fullest",
+          "effects": [
+            "Maximum aggression and energy",
+            "Power and force supreme",
+            "Conflict and competition peak",
+            "Warrior spirit fullest",
+            "All Mars matters at maximum",
+            "Assertiveness at maximum",
+            "Victories and wins assured"
+          ],
+          "health": {
+            "risks": ["Accidents and serious injuries", "Surgery risk high", "Fever and inflammation", "Trauma and injury"],
+            "remedies": ["Caution and safety", "Non-violence"]
+          },
+          "career": {
+            "opportunities": ["Military peak", "Competition dominance", "Aggressive business success", "Sports victories", "Power and position"],
+            "challenges": ["Violence and legal issues"]
+          },
+          "relationships": {
+            "effects": ["Passionate relationships", "Aggressive love", "Dominant power", "Conflict and passion", "Warrior partnerships"],
+            "remedies": ["Temper with compassion"]
+          },
+          "timing_events": {
+            "peak_power": [10, 45, 80],
+            "maximum_conflict": [20, 65],
+            "triumph_days": [70, 81]
+          },
+          "spiritual_perspective": "Mars at fullest expression - power, energy, aggression, and will at complete manifestation"
+        }
+      }
+    }
+  },
+  "summary": {
+    "mahadasha_name": "Rahu Mahadasha",
+    "duration": "18 years",
+    "total_pratyantardashas": 81,
+    "key_themes": {
+      "shadow_axis": "Rahu-Ketu-Ketu combination represents the most critical juncture - complete spiritual death or rebirth",
+      "maximum_obsession": "Rahu-Rahu-Rahu represents maximum illusion, obsession, and deception at peak",
+      "guru_chandal": "Rahu-Jupiter combinations activate complex guru-student wisdom-desire dynamics",
+      "emotional_shadow": "Rahu-Moon combinations intensify emotional illusions and psychological patterns",
+      "karmic_tests": "Rahu-Saturn combinations present severe karmic lessons and limitation tests"
+    },
+    "general_guidance": "Rahu Mahadasha is about material expansion through desire, foreign ventures, technology, and unconventional pursuits. The shadow is obsession, deception, and illusion. Success requires awareness of obsessive patterns and conscious use of intelligence without deception. Spiritual practice and reality-testing essential to avoid complete entrapment in illusions.",
+    "remedies_overall": [
+      "Regular meditation on detachment",
+      "Reality-based thinking and reality testing",
+      "Technology use with awareness",
+      "Foreign ventures with caution",
+      "Spiritual practice to counter illusion",
+      "Honesty and transparency in all dealings",
+      "Service to ground in reality",
+      "Guru connection for higher perspective"
+    ]
+  }
+}

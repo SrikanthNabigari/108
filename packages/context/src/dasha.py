@@ -19,7 +19,15 @@ The Vimshottari Dasha system consists of 9 planetary periods totaling 120 years:
 from datetime import datetime, timedelta
 from typing import Any
 
-from packages.core.src.knowledge_loader import get_dasha_rules
+from packages.core.src.knowledge_loader import (
+    get_antardasha_effects as get_antardasha_effects_data,
+)
+from packages.core.src.knowledge_loader import (
+    get_dasha_rules,
+)
+from packages.core.src.knowledge_loader import (
+    get_pratyantardasha_effects as get_pratyantardasha_effects_data,
+)
 
 # Module-level cache for dasha rules
 _dasha_rules_cache: dict[str, Any] | None = None
@@ -633,3 +641,79 @@ def validate_dasha_data(birth_datetime: datetime, moon_longitude: float) -> dict
             "total_span_years": 0,
             "message": f"Error in dasha calculation: {e}",
         }
+
+
+# =============================================================================
+# Dasha Effects Retrieval Functions
+# =============================================================================
+
+
+def get_antardasha_effect(mahadasha_lord: str, antardasha_lord: str) -> dict[str, Any] | None:
+    """Get detailed effects for a specific Antardasha combination.
+
+    Retrieves interpretation and effects for one of 81 possible MD-AD combinations.
+
+    Args:
+        mahadasha_lord: Mahadasha planet (sun, moon, mars, mercury, jupiter,
+                       venus, saturn, rahu, ketu)
+        antardasha_lord: Antardasha planet
+
+    Returns:
+        Dictionary with effects including:
+        - general_effects: List of general themes
+        - positive: Positive outcomes
+        - negative: Challenges to watch
+        - health: Health-related effects
+        - career: Career/profession effects
+        - relationships: Relationship dynamics
+        - finances: Financial indications
+        - spiritual: Spiritual growth aspects
+
+        Returns None if combination not found.
+
+    Example:
+        >>> effects = get_antardasha_effect("jupiter", "venus")
+        >>> print(effects["general_effects"])
+        ['Expansion of pleasures and comforts', ...]
+    """
+    effects_data = get_antardasha_effects_data()
+    md_effects = effects_data.get(mahadasha_lord.lower(), {})
+    return md_effects.get(antardasha_lord.lower())
+
+
+def get_pratyantardasha_effect(
+    mahadasha_lord: str, antardasha_lord: str, pratyantardasha_lord: str
+) -> dict[str, Any] | None:
+    """Get detailed effects for a specific Pratyantardasha combination.
+
+    Retrieves interpretation for one of 729 possible MD-AD-PD combinations
+    (9 x 9 x 9 = 729).
+
+    Args:
+        mahadasha_lord: Mahadasha planet
+        antardasha_lord: Antardasha planet
+        pratyantardasha_lord: Pratyantardasha planet
+
+    Returns:
+        Dictionary with effects including:
+        - theme: Overall theme of this period
+        - duration_description: Human-readable duration
+        - effects: General effects
+        - health: Health indications
+        - career: Professional matters
+        - relationships: Relationship dynamics
+        - finances: Financial outlook
+        - timing: Auspicious timing within period
+        - recommendations: Suggested actions
+
+        Returns None if combination not found.
+
+    Example:
+        >>> effects = get_pratyantardasha_effect("jupiter", "venus", "saturn")
+        >>> print(effects["theme"])
+        'Balancing expansion with discipline'
+    """
+    effects_data = get_pratyantardasha_effects_data()
+    md_effects = effects_data.get(mahadasha_lord.lower(), {})
+    ad_effects = md_effects.get(antardasha_lord.lower(), {})
+    return ad_effects.get(pratyantardasha_lord.lower())

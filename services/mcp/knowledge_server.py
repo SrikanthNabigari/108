@@ -287,6 +287,112 @@ def lookup_dosha(dosha_id: str) -> dict[str, Any]:
 
 
 @mcp.tool()
+def lookup_antardasha_effects(mahadasha_lord: str, antardasha_lord: str) -> dict[str, Any]:
+    """
+    Lookup Antardasha effects from knowledge base.
+
+    Provides detailed interpretation for any of the 81 Mahadasha-Antardasha combinations.
+
+    Args:
+        mahadasha_lord: Mahadasha planet (sun, moon, mars, mercury, jupiter, venus, saturn, rahu, ketu)
+        antardasha_lord: Antardasha planet
+
+    Returns:
+        Effects including general themes, positive/negative outcomes, health, career, relationships
+    """
+    try:
+        data = _load_json(RULES_DIR / "antardasha_effects.json")
+        effects = data.get("antardasha_effects", {})
+
+        md_key = mahadasha_lord.lower()
+        ad_key = antardasha_lord.lower()
+
+        md_effects = effects.get(md_key, {})
+        ad_effects = md_effects.get(ad_key)
+
+        if ad_effects:
+            return {
+                "found": True,
+                "mahadasha": md_key,
+                "antardasha": ad_key,
+                "effects": ad_effects,
+                "summary": (
+                    f"{mahadasha_lord.capitalize()}-{antardasha_lord.capitalize()} Antardasha: "
+                    + (
+                        ad_effects.get("general_effects", ["No summary available"])[0]
+                        if ad_effects.get("general_effects")
+                        else "Effects data available"
+                    )
+                ),
+            }
+        else:
+            return {
+                "found": False,
+                "mahadasha": md_key,
+                "antardasha": ad_key,
+                "error": f"No effects found for {mahadasha_lord}-{antardasha_lord} combination",
+            }
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__}
+
+
+@mcp.tool()
+def lookup_pratyantardasha_effects(
+    mahadasha_lord: str, antardasha_lord: str, pratyantardasha_lord: str
+) -> dict[str, Any]:
+    """
+    Lookup Pratyantardasha effects from knowledge base (729 combinations).
+
+    Provides detailed interpretation for any of the 729 MD-AD-PD combinations.
+
+    Args:
+        mahadasha_lord: Mahadasha planet
+        antardasha_lord: Antardasha planet
+        pratyantardasha_lord: Pratyantardasha planet
+
+    Returns:
+        Effects including theme, health, career, relationships, finances, timing
+    """
+    try:
+        data = _load_json(RULES_DIR / "pratyantardasha_master.json")
+        effects = data.get("pratyantardasha_effects", {})
+
+        md_key = mahadasha_lord.lower()
+        ad_key = antardasha_lord.lower()
+        pd_key = pratyantardasha_lord.lower()
+
+        pd_effects = effects.get(md_key, {}).get(ad_key, {}).get(pd_key)
+
+        if pd_effects:
+            return {
+                "found": True,
+                "mahadasha": md_key,
+                "antardasha": ad_key,
+                "pratyantardasha": pd_key,
+                "effects": pd_effects,
+                "summary": (
+                    f"{md_key.capitalize()}-{ad_key.capitalize()}-{pd_key.capitalize()} "
+                    f"Pratyantardasha: {pd_effects.get('theme', 'Effects data available')}"
+                ),
+            }
+        else:
+            return {
+                "found": False,
+                "mahadasha": md_key,
+                "antardasha": ad_key,
+                "pratyantardasha": pd_key,
+                "error": (
+                    f"No effects found for {mahadasha_lord}-{antardasha_lord}-"
+                    f"{pratyantardasha_lord} combination"
+                ),
+            }
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__}
+
+
+@mcp.tool()
 def search_knowledge(query: str, category: str | None = None) -> dict[str, Any]:
     """
     Search across knowledge base.

@@ -17,6 +17,7 @@ from .knowledge_loader import (
     clear_cache as clear_knowledge_cache,
 )
 from .knowledge_loader import (
+    get_antardasha_effects,
     get_ashtakavarga_rules,
     get_aspects,
     get_compatibility_rules,
@@ -27,6 +28,7 @@ from .knowledge_loader import (
     get_muhurta_rules,
     get_nakshatras,
     get_planets,
+    get_pratyantardasha_effects,
     get_rashis,
     get_relationships,
     get_remedies,
@@ -92,6 +94,7 @@ __all__ = [
     "YogaCategory",
     "calculate_aspect_houses",
     "clear_knowledge_cache",
+    "get_antardasha_effects",
     "get_ashtakavarga_rules",
     "get_aspects",
     "get_compatibility_rules",
@@ -104,6 +107,7 @@ __all__ = [
     "get_nakshatras",
     "get_opposite_sign",
     "get_planets",
+    "get_pratyantardasha_effects",
     "get_rashis",
     "get_relationships",
     "get_remedies",

@@ -1,0 +1,1566 @@
+{
+  "mahadasha": "jupiter",
+  "duration_years": 16,
+  "total_antardasha": 9,
+  "total_pratyantardasha": 81,
+  "description": "Complete Pratyantardasha rules for Jupiter Mahadasha (16 years) with all 81 combinations",
+  "jupiter_themes": {
+    "primary": "Wisdom, expansion, dharma, optimism",
+    "secondary": "Children, guru, wealth, husband (for women)",
+    "shadow": "Over-expansion, dogmatism, loss through excess"
+  },
+  "antardasha_lords": [
+    "sun",
+    "moon",
+    "mars",
+    "mercury",
+    "jupiter",
+    "venus",
+    "saturn",
+    "rahu",
+    "ketu"
+  ],
+  "antardasha_durations_months": {
+    "sun": 16,
+    "moon": 32,
+    "mars": 24,
+    "mercury": 32,
+    "jupiter": 40,
+    "venus": 48,
+    "saturn": 56,
+    "rahu": 64,
+    "ketu": 40
+  },
+  "pratyantardasha_combinations": {
+    "jupiter_sun": {
+      "ad_lord": "sun",
+      "pd_lord": "sun",
+      "duration_days": 48,
+      "duration_months": 1.6,
+      "theme": "Divine authority, spiritual leadership, righteous action",
+      "description": "Jupiter (wisdom, dharma, guru) ruled by Sun (authority, soul, leadership). This is the spiritual apex of Jupiter's influence. Maximum spiritual insight, divine grace, and ability to guide others with moral clarity.",
+      "effects": {
+        "overall": "Peak spiritual wisdom, authoritative teaching, moral authority established",
+        "positive": "Divine inspiration, successful spiritual guidance, recognition as guru, enlightenment experiences, powerful decision-making",
+        "challenging": "Ego in spiritual matters, arrogance disguised as wisdom, authoritarian tendencies, burn-out from excessive work"
+      },
+      "health": "Strong vitality, positive energy, heart and spine benefits from spiritual practice, high confidence boosts immunity",
+      "career": "Promotion through moral conduct, teaching positions, leadership roles, spiritual guidance recognized, authority gained",
+      "relationships": "Respected in family and community, spouse/partner inspired by moral conduct, children admire guidance, mentorship roles flourish",
+      "timing_events": "Initiation into higher wisdom traditions, public recognition of spiritual work, major teaching opportunities, expanded influence"
+    },
+    "jupiter_sun_moon": {
+      "ad_lord": "sun",
+      "pd_lord": "moon",
+      "duration_days": 96,
+      "duration_months": 3.2,
+      "theme": "Emotional wisdom, compassionate leadership, nurturing through teaching",
+      "description": "Sun's direct PD brings emotional sensitivity to Jupiter-Sun's authority. Moon adds nurturing, caring, and emotional intelligence to leadership and wisdom-sharing.",
+      "effects": {
+        "overall": "Wise emotional understanding, caring authority, compassionate teaching",
+        "positive": "Emotional maturity, intuitive wisdom, nurturance through knowledge-sharing, family gains through wisdom, Mother blessed",
+        "challenging": "Emotional overwhelm in teaching roles, mood swings affecting authority, being too soft in leadership"
+      },
+      "health": "Emotional balance, breast/chest health benefits, improved digestion, reduced anxiety",
+      "career": "Counseling, psychology, emotional coaching, nurturing teaching roles, family business success",
+      "relationships": "Family unity through wise counsel, Mother's health/happiness improves, spouse/children benefit from caring guidance",
+      "timing_events": "Family gatherings bringing wisdom-sharing, caring for elderly parents, teaching children/grandchildren"
+    },
+    "jupiter_sun_mars": {
+      "ad_lord": "sun",
+      "pd_lord": "mars",
+      "duration_days": 72,
+      "duration_months": 2.4,
+      "theme": "Righteous action, bold dharma, warrior wisdom",
+      "description": "Jupiter-Sun's spiritual authority combined with Mars' action and courage. This creates the warrior-teacher archetype - wisdom applied with courage and protection of dharma.",
+      "effects": {
+        "overall": "Courageous dharma, bold wisdom, righteous action, protection of values",
+        "positive": "Fighting for just causes with wisdom, taking action on spiritual beliefs, courage to stand for truth, strong will supporting dharma",
+        "challenging": "Aggressive righteousness, becoming dogmatic, conflict in defense of beliefs, over-assertiveness"
+      },
+      "health": "Physical energy increases, reduced lethargy, sports/martial practice beneficial, injury risk if careless",
+      "career": "Military/police leadership with moral compass, social activism with wisdom, protective professions with authority",
+      "relationships": "Defending family honor with wisdom, protective spouse/partner role, standing up for loved ones' rights",
+      "timing_events": "Taking decisive action on core beliefs, conflicts resolved through righteous action, sports/martial achievements"
+    },
+    "jupiter_sun_mercury": {
+      "ad_lord": "sun",
+      "pd_lord": "mercury",
+      "duration_days": 96,
+      "duration_months": 3.2,
+      "theme": "Wise communication, teaching, intellectual authority",
+      "description": "Jupiter-Sun's spiritual authority enhanced by Mercury's communication and intellect. This creates the scholar-teacher who can articulate wisdom and guide through knowledge.",
+      "effects": {
+        "overall": "Eloquent wisdom, teaching through writing/speech, intellectual authority",
+        "positive": "Excellent teaching ability, books/writings gain recognition, speeches inspire others, communication of wisdom becomes powerful",
+        "challenging": "Over-intellectualizing spirituality, becoming pedantic, disconnection from intuition, verbose teaching"
+      },
+      "health": "Mental clarity, improved memory, respiratory benefits, voice/throat strengthened",
+      "career": "Writing, public speaking, teaching, journalism with moral authority, editing/publishing of wisdom texts",
+      "relationships": "Excellent communication with spouse/children, teaching them through wisdom, respect through eloquence",
+      "timing_events": "Publishing opportunities, teaching platforms emerge, important speeches/lectures, intellectual recognition"
+    },
+    "jupiter_sun_jupiter": {
+      "ad_lord": "sun",
+      "pd_lord": "jupiter",
+      "duration_days": 120,
+      "duration_months": 4,
+      "theme": "Maximum spiritual wisdom, peak guru period, divine grace",
+      "description": "Jupiter within Jupiter-Sun. This is the absolute peak of Jupiter's benefic influence. Double Jupiter amplification creates unprecedented wisdom, spiritual elevation, and divine grace.",
+      "effects": {
+        "overall": "Peak spiritual wisdom, divine grace, guru at their highest, maximum dharma fulfillment",
+        "positive": "Enlightenment experiences, supreme spiritual knowledge, disciples/students multiply, divine grace unprecedented, all Jupiter matters flourish",
+        "challenging": "Excessive expansion causing overcommitment, becoming unrealistic, losing grounding in practical matters"
+      },
+      "health": "Peak vitality, excellent immunity, all health improves, spiritual practices yield maximum benefits",
+      "career": "Teaching career peaks, author gains massive recognition, guru status solidified, expansion of influence worldwide",
+      "relationships": "Spouse/children blessed abundantly, family prosperity peaks, legacy secured, ancestral blessings manifest",
+      "timing_events": "Major spiritual initiation, guru status achieved, books/teachings widely published, expanded influence, blessings multiply"
+    },
+    "jupiter_sun_venus": {
+      "ad_lord": "sun",
+      "pd_lord": "venus",
+      "duration_days": 144,
+      "duration_months": 4.8,
+      "theme": "Wisdom meets luxury, dharma and beauty, blessed partnerships",
+      "description": "Jupiter-Sun's spiritual authority blessed by Venus' wealth, luxury, and relationships. Wisdom brings material prosperity and attracts beneficial partnerships.",
+      "effects": {
+        "overall": "Wealth through wisdom, beautiful relationships, dharma attracting prosperity",
+        "positive": "Wealth gained through spiritual work, successful partnerships, marriage/relationships blessed, luxury homes/possessions, teachers attract wealthy students",
+        "challenging": "Becoming attached to wealth acquired, relationships tested by materialism, spiritual compromise for comfort"
+      },
+      "health": "Enhanced vitality through pleasurable activities, balanced lifestyle benefits, reproductive health benefits",
+      "career": "Teaching brings wealth, partnerships with wealthy individuals, luxury goods/arts business if aligned with dharma",
+      "relationships": "Marriage/partnerships blessed with prosperity, spouse brings wealth/status, children marry well, social status elevated",
+      "timing_events": "Wealthy partnerships form, marriage/major relationship commitment, acquisition of luxury home/property, abundance manifest"
+    },
+    "jupiter_sun_saturn": {
+      "ad_lord": "sun",
+      "pd_lord": "saturn",
+      "duration_days": 168,
+      "duration_months": 5.6,
+      "theme": "Structured wisdom, disciplined dharma, lasting authority",
+      "description": "Jupiter-Sun's spiritual authority grounded by Saturn's discipline and structure. This creates lasting, grounded wisdom rather than expansive idealism. Slow but permanent achievement.",
+      "effects": {
+        "overall": "Disciplined wisdom, structured dharma practice, lasting spiritual authority",
+        "positive": "Building permanent spiritual foundation, discipline in practice bears fruit, authority through proven track record, delayed but lasting success",
+        "challenging": "Slow progress causing frustration, restrictive spiritual rules limiting growth, taking too long to see results, heaviness in approach"
+      },
+      "health": "Sustained energy through discipline, bone/skeletal health strengthens, chronic issues slowly resolve with consistent practice",
+      "career": "Building lasting career foundation through moral conduct, slow promotion but very secure, legacy institution-building",
+      "relationships": "Long-term relationships deepen, marriage/partnerships become very stable and mature, children inherit solid values",
+      "timing_events": "Long-term projects come to fruition, permanent position established, legacy secured, karmic debts paid"
+    },
+    "jupiter_sun_rahu": {
+      "ad_lord": "sun",
+      "pd_lord": "rahu",
+      "duration_days": 192,
+      "duration_months": 6.4,
+      "theme": "Guru-Chandal yoga potential, ambitious wisdom, foreign influence",
+      "description": "Jupiter-Sun's spiritual authority with Rahu's ambition and foreign/unconventional influence. This can manifest as guru-chandal yoga (guru afflicted by shadow) or as expansion through unconventional/foreign wisdom.",
+      "effects": {
+        "overall": "Ambition in spiritual matters, foreign/unconventional wisdom, potential guru-chandal challenges",
+        "positive": "Foreign wisdom traditions learned, unconventional teaching methods succeed, international guru status, ambition drives spiritual growth, exotic knowledge gained",
+        "challenging": "Guru-Chandal: false gurus, spiritual scandal, misuse of authority, deception in teaching, disciples led astray, loss of moral credibility if unaware"
+      },
+      "health": "Obsessive health practices, anxiety about health, digestive issues from stress, need to ground in reality",
+      "career": "International teaching/guidance work, unconventional methods gain recognition, foreign opportunities, potential for scandal if not careful",
+      "relationships": "Attraction to foreign/unusual partners, relationships with unconventional dynamics, disciples/followers become obsessive",
+      "timing_events": "Foreign travel for teaching/wisdom, unconventional partnerships, potential scandal if unethical, international recognition"
+    },
+    "jupiter_sun_ketu": {
+      "ad_lord": "sun",
+      "pd_lord": "ketu",
+      "duration_days": 120,
+      "duration_months": 4,
+      "theme": "Detached wisdom, spiritual liberation, renunciation",
+      "description": "Jupiter-Sun's spiritual authority with Ketu's detachment and liberation themes. This creates the teacher who has transcended ego and teaches from true non-attachment.",
+      "effects": {
+        "overall": "Non-attached wisdom, spiritual liberation, enlightenment-oriented teaching",
+        "positive": "True spiritual detachment achieved, teaching from liberated state, disciples benefit from highest wisdom, material detachment brings true freedom",
+        "challenging": "Over-detachment from family duties, renunciation impulses may neglect relationships, lack of grounding, appearing removed from life"
+      },
+      "health": "Spiritual practices yield liberation experiences, past health issues finally resolve through detachment",
+      "career": "Teaching focused on liberation/detachment, monastic or renunciate paths, transcendent wisdom sought after",
+      "relationships": "Relationships transform through detachment, family accepts spiritual priorities, teaching transcends personal bonds",
+      "timing_events": "Spiritual breakthroughs, initiation into liberation paths, renunciation of worldly attachments, past life patterns release"
+    },
+    "jupiter_moon": {
+      "ad_lord": "moon",
+      "pd_lord": "sun",
+      "duration_days": 96,
+      "duration_months": 3.2,
+      "theme": "Nurturing wisdom, emotional teaching, Mother blessed",
+      "description": "Jupiter (wisdom) ruled by Moon (emotions, nurturing, Mother). This is the caring guru, the emotional teacher, the wisdom that heals hearts.",
+      "effects": {
+        "overall": "Compassionate wisdom, nurturing teaching, emotional healing through knowledge",
+        "positive": "Wise emotional guidance, Mother blessed with health/happiness, teaching that touches hearts, family gains wisdom, intuitive understanding",
+        "challenging": "Emotional overwhelm with too many seeking guidance, moodiness affecting teaching, becoming too absorbed in others' emotional needs"
+      },
+      "health": "Emotional balance improves, digestive health strengthens, breast/chest health benefits, immunity from positive emotions",
+      "career": "Counseling, psychology, family guidance, nurturing teaching roles, Mother's business success, emotional healing professions",
+      "relationships": "Family unity through wise counsel, Mother's health/happiness paramount, spouse/children feel nurtured through guidance, caretaker roles flourish",
+      "timing_events": "Family gatherings with wisdom-sharing, caring for Mother/elderly, teaching children/grandchildren, emotional healing events"
+    },
+    "jupiter_moon_moon": {
+      "ad_lord": "moon",
+      "pd_lord": "moon",
+      "duration_days": 192,
+      "duration_months": 6.4,
+      "theme": "Maximum emotional wisdom, Mother at peak, nurturance supreme",
+      "description": "Moon within Jupiter-Moon. Double Moon amplification creates unprecedented emotional wisdom, maternal blessings, and heart-centered guidance.",
+      "effects": {
+        "overall": "Peak emotional wisdom, Mother supremely blessed, nurturance at maximum",
+        "positive": "Profound emotional intelligence, Mother's blessings unlimited, family harmony peak, children thrive under guidance, healing touch",
+        "challenging": "Over-emotional, loss of objectivity, being too absorbed in feelings, emotional manipulation possible if not aware"
+      },
+      "health": "Emotional health at peak, digestive health excellent, breast/chest health optimal, intuition guides healing",
+      "career": "Counseling/psychology careers peak, teaching becomes highly effective, Mother's ventures succeed, family business flourishes",
+      "relationships": "Mother-child bond supremely blessed, spouse/children feel deeply nurtured, family becomes emotionally healthy",
+      "timing_events": "Mother's major blessings, family harmony peaks, emotional healing milestones, deep bonding events"
+    },
+    "jupiter_moon_mars": {
+      "ad_lord": "moon",
+      "pd_lord": "mars",
+      "duration_days": 144,
+      "duration_months": 4.8,
+      "theme": "Courageous nurture, protective wisdom, brave care",
+      "description": "Jupiter-Moon's emotional wisdom and nurture with Mars' courage and protection. This creates the protective teacher, the brave nurturer, Mother-warrior energy.",
+      "effects": {
+        "overall": "Protective nurture, brave compassion, fighting for family's welfare",
+        "positive": "Defending loved ones with wisdom, protective instincts strong, courage in care-giving, standing up for family rights",
+        "challenging": "Aggressive emotions, fighting with those you nurture, overprotective behavior, Mars makes emotions more volatile"
+      },
+      "health": "Energy increases but emotions volatile, must avoid aggression to prevent physical issues, sports/martial practice helpful",
+      "career": "Military/protective professions with emotional intelligence, family business protection, advocacy/social work with passion",
+      "relationships": "Protective spouse role, defending family honor, children feel safe and supported, standing up for loved ones",
+      "timing_events": "Conflict resolved through protective action, defending family interests, sports/martial achievements"
+    },
+    "jupiter_moon_mercury": {
+      "ad_lord": "moon",
+      "pd_lord": "mercury",
+      "duration_days": 192,
+      "duration_months": 6.4,
+      "theme": "Emotionally intelligent communication, intuitive teaching, caring speech",
+      "description": "Jupiter-Moon's emotional wisdom enhanced by Mercury's communication. This is the teacher who speaks from the heart, communication that heals, words that nurture.",
+      "effects": {
+        "overall": "Heart-centered communication, intuitive teaching, words that heal and guide",
+        "positive": "Excellent communication from intuition, teaching through stories/emotional connection, writing touches hearts, speech inspires change",
+        "challenging": "Over-talkative about emotions, losing emotional privacy, communication becomes too sentimental, difficulty with objectivity"
+      },
+      "health": "Mental clarity from emotional intuition, throat/voice strengthened, memory excellent for emotional learning",
+      "career": "Counseling through communication, emotional writing/blogs, teaching psychology/emotions, poetry/arts with emotional depth",
+      "relationships": "Excellent communication with spouse/children, emotional intimacy through openness, family bonds deepen through dialogue",
+      "timing_events": "Writing/publishing of emotional wisdom, teaching platforms emerge, important conversations transform relationships"
+    },
+    "jupiter_moon_jupiter": {
+      "ad_lord": "moon",
+      "pd_lord": "jupiter",
+      "duration_days": 240,
+      "duration_months": 8,
+      "theme": "Maximum nurturance, Mother supremely blessed, wisdom and care",
+      "description": "Jupiter within Jupiter-Moon. Double Jupiter brings unprecedented nurturing wisdom, maternal blessings, and expansive compassion.",
+      "effects": {
+        "overall": "Peak nurturing wisdom, Mother supremely blessed, compassion unlimited",
+        "positive": "Mother's blessings peak, family prosperity expands, children thrive abundantly, compassion becomes transformative, teaching reaches many hearts",
+        "challenging": "Over-expanding family commitments, becoming too giving, being taken advantage of, loss through excessive care"
+      },
+      "health": "Peak emotional and physical health, immunity excellent, all healing modalities work well",
+      "career": "Teaching/counseling peaks, Mother's ventures expand dramatically, family business success, large student/client base",
+      "relationships": "Mother blessed abundantly, children thrive, spouse/family prospers, legacy of love established",
+      "timing_events": "Mother's major blessings, family expansion/birth, teaching success multiplies, abundance manifest through care"
+    },
+    "jupiter_moon_venus": {
+      "ad_lord": "moon",
+      "pd_lord": "venus",
+      "duration_days": 288,
+      "duration_months": 9.6,
+      "theme": "Love and wisdom, beauty in teaching, relationships blessed",
+      "description": "Jupiter-Moon's emotional wisdom blessed by Venus' love and relationships. This creates loving teaching, beauty in nurture, and relationships that bring joy.",
+      "effects": {
+        "overall": "Love-centered wisdom, beautiful relationships, teaching through love",
+        "positive": "Relationships flourish with wisdom, marriage/partnerships bloom, teaching touches hearts deeply, beauty brings prosperity, Mother gains wealth",
+        "challenging": "Becoming too attached to relationships, romance clouds judgment, material desires increase, pleasure-seeking may distract from duty"
+      },
+      "health": "Enhanced vitality through love and beauty, reproductive health excellent, relaxation benefits health",
+      "career": "Love-based teaching/counseling, arts/beauty with emotional depth, relationship coaching, Mother's ventures thrive",
+      "relationships": "Marriage/partnerships blessed, spouse brings happiness/prosperity, children marry well, family life beautiful and secure",
+      "timing_events": "Marriage/major relationship, acquisition of beautiful home, prosperity through loved ones, family celebration"
+    },
+    "jupiter_moon_saturn": {
+      "ad_lord": "moon",
+      "pd_lord": "saturn",
+      "duration_days": 336,
+      "duration_months": 11.2,
+      "theme": "Patient nurture, disciplined care, lasting maternal bonds",
+      "description": "Jupiter-Moon's emotional wisdom grounded by Saturn's discipline and time. This creates patient, structured care, lasting maternal bonds, mature relationships.",
+      "effects": {
+        "overall": "Patient nurture, disciplined care-giving, lasting family bonds",
+        "positive": "Deep maturity in relationships, patient care yields lasting bonds, Mother's long-term health improves, family responsibilities met with wisdom",
+        "challenging": "Emotional coldness, difficulty expressing feelings, relationships feel heavy/restricted, slow emotional progress"
+      },
+      "health": "Sustained emotional stability, chronic emotional issues resolve slowly through discipline, bones/joints strengthen",
+      "career": "Long-term family business success, patient mentoring/counseling, institutional care roles, Mother's legacy secured",
+      "relationships": "Relationships deepen and mature, marriage becomes very stable, children inherit solid values, long-term family security",
+      "timing_events": "Long-term relationship milestones, family legacy secured, Mother's health/prosperity established permanently"
+    },
+    "jupiter_moon_rahu": {
+      "ad_lord": "moon",
+      "pd_lord": "rahu",
+      "duration_days": 384,
+      "duration_months": 12.8,
+      "theme": "Obsessive emotions, foreign nurture, unconventional family",
+      "description": "Jupiter-Moon's emotional wisdom with Rahu's obsession and unconventional influence. This can create obsessive emotional attachments or unconventional family/nurturing arrangements.",
+      "effects": {
+        "overall": "Intense emotions, foreign/unconventional family influences, obsessive care-giving",
+        "positive": "Unconventional teaching methods work well, foreign mother/family connections, intuitive intelligence amplified, unique emotional wisdom",
+        "challenging": "Emotional obsession, clinging to relationships, anxiety about family, Mother may bring complications, confusion in emotions"
+      },
+      "health": "Anxiety about health, digestive issues from stress, emotional obsessions affect physical health, need grounding practices",
+      "career": "Foreign/unconventional teaching, unusual family business ventures, emotional psychology work, Mother may be unconventional",
+      "relationships": "Intense emotional attachments, unconventional family arrangements, foreign family members significant, need boundaries",
+      "timing_events": "Foreign family connections, unconventional relationships, emotional intensity events, Mother's unexpected changes"
+    },
+    "jupiter_moon_ketu": {
+      "ad_lord": "moon",
+      "pd_lord": "ketu",
+      "duration_days": 240,
+      "duration_months": 8,
+      "theme": "Detached care, spiritual nurture, liberation through compassion",
+      "description": "Jupiter-Moon's emotional wisdom with Ketu's detachment. This creates caring without attachment, spiritual nurturing, teaching from non-dual awareness.",
+      "effects": {
+        "overall": "Non-attached care, spiritual nurturing, compassion from liberation",
+        "positive": "True care without clinging, spiritual nurturing, family released to their path, compassion from enlightened perspective",
+        "challenging": "Appearing cold/detached in care, family feels emotionally distant, over-detachment from relationships, renunciation impulses"
+      },
+      "health": "Emotional trauma releases, past family patterns dissolve, spiritual practices heal deeply",
+      "career": "Spiritual counseling, teaching liberation, monastic/renunciate roles, past-life healing work",
+      "relationships": "Family transforms through detachment, releasing old emotional patterns, relationships transcend personal bonds",
+      "timing_events": "Emotional release/healing, spiritual breakthroughs, past family karma resolves, detachment from old patterns"
+    },
+    "jupiter_mars": {
+      "ad_lord": "mars",
+      "pd_lord": "sun",
+      "duration_days": 72,
+      "duration_months": 2.4,
+      "theme": "Courageous dharma, warrior wisdom, bold action",
+      "description": "Jupiter (wisdom, dharma) ruled by Mars (action, courage, warrior). This is action guided by wisdom, the warrior-teacher, dharma enforced through strength.",
+      "effects": {
+        "overall": "Courageous wisdom, bold action, righteous strength, warrior dharma",
+        "positive": "Taking bold action on principles, courage to defend what's right, strength serves dharma, action succeeds through wisdom-guidance",
+        "challenging": "Aggressive righteousness, dogmatic fighting, conflict over beliefs, excessive force used in pursuit of dharma, arrogance"
+      },
+      "health": "Physical energy excellent, strength increases, vigor enhanced, but injury risk if reckless",
+      "career": "Military/police leadership, protection work with integrity, sports/martial arts, action-oriented wisdom professions",
+      "relationships": "Defending family with strength, spouse/children feel protected, standing up for loved ones' rights, leadership in relationships",
+      "timing_events": "Taking decisive action on core beliefs, conflicts resolved through strength, sports/martial achievements, leadership established"
+    },
+    "jupiter_mars_moon": {
+      "ad_lord": "mars",
+      "pd_lord": "moon",
+      "duration_days": 144,
+      "duration_months": 4.8,
+      "theme": "Protective compassion, fierce nurture, brave care",
+      "description": "Jupiter-Mars' courageous action softened by Moon's emotion and nurture. This creates the protective caregiver, fierce defender of the vulnerable, brave compassion.",
+      "effects": {
+        "overall": "Protective nurture, fierce care, brave compassion",
+        "positive": "Defending vulnerable with wisdom and care, protective instincts combined with nurturing, courage in caring roles",
+        "challenging": "Emotional aggression, fighting those you care for, overprotective behavior, emotions make aggression volatile"
+      },
+      "health": "Energy tempered by emotional balance, but volatility possible, physical activity helps emotional release",
+      "career": "Protective professions with emotional intelligence, advocacy for vulnerable, family protection roles",
+      "relationships": "Protective spouse/parent, defending family honor with compassion, children feel safe and cherished",
+      "timing_events": "Defending loved ones, protective action taken, family conflicts resolved, caring leadership established"
+    },
+    "jupiter_mars_mars": {
+      "ad_lord": "mars",
+      "pd_lord": "mars",
+      "duration_days": 108,
+      "duration_months": 3.6,
+      "theme": "Maximum courageous action, warrior peak, aggressive dharma",
+      "description": "Mars within Jupiter-Mars. Double Mars amplification creates peak warrior energy, maximum action, bold courage, but also peak aggression risk.",
+      "effects": {
+        "overall": "Peak warrior energy, maximum courageous action, aggressive dharma enforcement",
+        "positive": "Bold action succeeds, warrior strength at peak, aggressive defense of principles succeeds, competition won through wisdom-guided strength",
+        "challenging": "Maximum aggression, violence possible if uncontrolled, excessive force, dogmatic fighting, conflicts escalate"
+      },
+      "health": "Peak physical energy, injury risk very high, need discipline to avoid accidents, martial practice beneficial if controlled",
+      "career": "Military/combat career peaks, action-based professions succeed, competition/sports victories",
+      "relationships": "Domineering in relationships if unaware, spouse/children may fear aggression, need to balance strength with compassion",
+      "timing_events": "Major conflicts, combat/sports victory, action-based achievements, need careful energy management"
+    },
+    "jupiter_mars_mercury": {
+      "ad_lord": "mars",
+      "pd_lord": "mercury",
+      "duration_days": 144,
+      "duration_months": 4.8,
+      "theme": "Aggressive communication, powerful speech, action through words",
+      "description": "Jupiter-Mars' courageous action enhanced by Mercury's communication. This creates powerful speech, aggressive communication, action through words and intellect.",
+      "effects": {
+        "overall": "Powerful speech, aggressive communication, words drive action",
+        "positive": "Speech becomes powerful and convincing, communication creates action, debates won through logic and strength, powerful writing",
+        "challenging": "Aggressive speech, cutting words, communication creates conflict, too assertive verbally, harsh criticism"
+      },
+      "health": "Mental energy very high, throat/voice strong but risk of strain, need to monitor speech impact",
+      "career": "Powerful speaking/writing, debate/argument professions, commanding communication roles, media with impact",
+      "relationships": "Powerful communication but risk of hurting with words, spouse/children need to accept direct speech style",
+      "timing_events": "Powerful speeches, important communications create change, writing/publications have impact"
+    },
+    "jupiter_mars_jupiter": {
+      "ad_lord": "mars",
+      "pd_lord": "jupiter",
+      "duration_days": 180,
+      "duration_months": 6,
+      "theme": "Expansion through action, blessed courage, dharma enforced",
+      "description": "Jupiter within Jupiter-Mars. Double Jupiter brings expansion of Mars' courageous action, blessed strength, dharma powerfully manifested through action.",
+      "effects": {
+        "overall": "Expansion through courageous action, blessed warrior energy, dharma enforced",
+        "positive": "Action succeeds beyond expectation, courage leads to abundant success, dharma flourishes through strength, leadership expands",
+        "challenging": "Over-expansion through aggression, becoming overly dominant, using strength excessively, expansion creates new conflicts"
+      },
+      "health": "Peak physical strength, energy excellent, but overuse injury possible, need balanced activity",
+      "career": "Action-based career expands dramatically, leadership multiplies, business ventures through action succeed abundantly",
+      "relationships": "Family prospers through protective strength, children learn bold action from example, leadership respected",
+      "timing_events": "Major action-based success, expansion through courage, leadership opportunities multiply, dharma manifests visibly"
+    },
+    "jupiter_mars_venus": {
+      "ad_lord": "mars",
+      "pd_lord": "venus",
+      "duration_days": 216,
+      "duration_months": 7.2,
+      "theme": "Courage in relationships, passionate wisdom, action in love",
+      "description": "Jupiter-Mars' courageous action blessed by Venus' love and beauty. This creates passionate action, courage in relationships, love-guided aggression.",
+      "effects": {
+        "overall": "Passionate action, courageous relationships, love-guided strength",
+        "positive": "Relationships passionate and protected, courage in love matters, marriage/partnerships physically intimate and passionate, wealth through action",
+        "challenging": "Aggressive passion, fighting in relationships, physical intensity may overwhelm, passion clouds judgment"
+      },
+      "health": "Physical vitality high, passion energizes, but aggression must be channeled into sports/martial practice",
+      "career": "Action-based professions prosper, business ventures succeed, relationships bring prosperity, luxury through strength",
+      "relationships": "Marriage/partnerships passionate and protected, spouse feels secure and desired, children learn courage and compassion",
+      "timing_events": "Passionate relationship events, physical intimacy peaks, marriage/major commitment, prosperity through partnerships"
+    },
+    "jupiter_mars_saturn": {
+      "ad_lord": "mars",
+      "pd_lord": "saturn",
+      "duration_days": 252,
+      "duration_months": 8.4,
+      "theme": "Disciplined action, structured courage, lasting strength",
+      "description": "Jupiter-Mars' courageous action grounded by Saturn's discipline and structure. This creates disciplined action, sustainable strength, lasting achievement through sustained effort.",
+      "effects": {
+        "overall": "Disciplined action, structured courage, lasting strength-based achievement",
+        "positive": "Disciplined action yields lasting results, sustained effort brings success, structured approach to goals, karma repaid through discipline",
+        "challenging": "Slow action causing frustration, discipline restricts spontaneity, heavy energy, difficulty starting new actions"
+      },
+      "health": "Sustained physical strength, bones/joints strengthen, chronic issues resolve through disciplined practice",
+      "career": "Long-term action-based career success, slow but very solid advancement, building lasting institutions",
+      "relationships": "Long-term relationship stability, marriage/partnerships mature and secure, children inherit discipline and strength",
+      "timing_events": "Long-term projects bear fruit, permanent position established, legacy of strength secured, karma resolved"
+    },
+    "jupiter_mars_rahu": {
+      "ad_lord": "mars",
+      "pd_lord": "rahu",
+      "duration_days": 288,
+      "duration_months": 9.6,
+      "theme": "Ambitious action, foreign/unconventional courage, obsessive pursuits",
+      "description": "Jupiter-Mars' courageous action with Rahu's ambition and unconventional influence. This can create ambitious warriors or reckless pursuits of foreign/unconventional goals.",
+      "effects": {
+        "overall": "Ambitious courageous action, foreign/unconventional pursuits, obsessive drives",
+        "positive": "Ambitious goals achieved through courage, foreign/unconventional ventures succeed, unconventional strength recognized, unique approach wins",
+        "challenging": "Reckless ambition, pursuing forbidden/unconventional goals, aggressive pursuit of obsessions, loss through overreach"
+      },
+      "health": "High energy but anxiety possible, digestive stress from pushing hard, need grounding practices",
+      "career": "Foreign/unconventional action-based ventures, ambitious projects, military/police with unconventional methods",
+      "relationships": "Intense, unconventional relationships, foreign partners attractive, need healthy boundaries",
+      "timing_events": "Foreign travel for adventure/action, unconventional success, ambitious projects launch, intensity peaks"
+    },
+    "jupiter_mars_ketu": {
+      "ad_lord": "mars",
+      "pd_lord": "ketu",
+      "duration_days": 180,
+      "duration_months": 6,
+      "theme": "Detached action, spiritual warrior, liberation through courage",
+      "description": "Jupiter-Mars' courageous action with Ketu's detachment. This creates the detached warrior, spiritual action, courage in renunciation.",
+      "effects": {
+        "overall": "Detached action, spiritual warrior, liberation-oriented courage",
+        "positive": "Action without ego attachment, spiritual pursuits pursued courageously, renunciation of worldly pursuits, past-life warrior karma resolves",
+        "challenging": "Detachment may seem cold/uncaring, reckless action without concern for consequences, loss through detachment"
+      },
+      "health": "Physical energy with spiritual awareness, past trauma releases, spiritual practices deepen",
+      "career": "Spiritual warrior roles, renunciate paths, action without personal stake, liberation-focused pursuits",
+      "relationships": "Relationships released to their karma, family accepts spiritual focus, teaching from detached strength",
+      "timing_events": "Spiritual breakthroughs through action, past-life warrior patterns resolve, release of aggressive tendencies"
+    },
+    "jupiter_mercury": {
+      "ad_lord": "mercury",
+      "pd_lord": "sun",
+      "duration_days": 96,
+      "duration_months": 3.2,
+      "theme": "Wise communication, intellectual guidance, teaching through words",
+      "description": "Jupiter (wisdom, teaching) ruled by Mercury (communication, intellect). This is the master communicator, scholar-teacher, wisdom articulated brilliantly.",
+      "effects": {
+        "overall": "Wise communication, intellectual teaching, powerful speech/writing",
+        "positive": "Teaching succeeds through excellent communication, writing/books widely recognized, speeches inspire and guide, intellectual authority established",
+        "challenging": "Over-intellectualizing wisdom, disconnection from intuition, becoming pedantic, words without depth or practice"
+      },
+      "health": "Mental clarity excellent, improved memory, nervous system benefits from focused study, respiratory health good",
+      "career": "Writing, teaching, speaking, intellectual guidance, journalism, publication success, scholarly recognition",
+      "relationships": "Excellent communication with spouse/children, teaching through words effective, family learns through discussion",
+      "timing_events": "Publishing opportunities, teaching platforms, important communications, intellectual recognition"
+    },
+    "jupiter_mercury_moon": {
+      "ad_lord": "mercury",
+      "pd_lord": "moon",
+      "duration_days": 192,
+      "duration_months": 6.4,
+      "theme": "Emotionally intelligent communication, intuitive teaching, words that heal",
+      "description": "Jupiter-Mercury's wise communication enhanced by Moon's emotion and intuition. This creates communication that touches hearts, intuitive wisdom shared effectively.",
+      "effects": {
+        "overall": "Heart-centered communication, intuitive wise speech, emotionally intelligent teaching",
+        "positive": "Communication touches hearts deeply, intuitive wisdom expressed beautifully, teaching transforms emotions positively, stories/examples resonate",
+        "challenging": "Over-emotional communication, loss of objectivity, becoming too sentimental, personal feelings cloud message"
+      },
+      "health": "Mental clarity with emotional balance, throat/digestion good, intuition sharpens thinking",
+      "career": "Emotional writing/teaching, psychology communication, counseling through dialogue, poetry/arts with wisdom",
+      "relationships": "Excellent emotional communication, family feels understood through words, spouse/children connect emotionally",
+      "timing_events": "Writing that touches people, teaching that heals emotions, important conversations transform relationships"
+    },
+    "jupiter_mercury_mars": {
+      "ad_lord": "mercury",
+      "pd_lord": "mars",
+      "duration_days": 144,
+      "duration_months": 4.8,
+      "theme": "Aggressive communication, powerful speech, action through intellect",
+      "description": "Jupiter-Mercury's wise communication amplified by Mars' aggression and action. This creates powerful, persuasive speech, communication that drives action.",
+      "effects": {
+        "overall": "Powerful speech, persuasive communication, words drive action",
+        "positive": "Speech becomes very persuasive and powerful, debates won brilliantly, communication creates change, powerful writing/speaking",
+        "challenging": "Aggressive speech, cutting words, communication creates conflict, harsh tone, verbally overpowering others"
+      },
+      "health": "Mental energy high, throat/voice strong but risk of strain, need to moderate intensity",
+      "career": "Powerful speaking/writing, debate/argument professions, commanding communication, impactful media work",
+      "relationships": "Powerful communication but risk of harsh words, spouse/children need to accept direct/strong style",
+      "timing_events": "Powerful speeches, important communications have impact, writing/publications gain attention, debates won"
+    },
+    "jupiter_mercury_mercury": {
+      "ad_lord": "mercury",
+      "pd_lord": "mercury",
+      "duration_days": 192,
+      "duration_months": 6.4,
+      "theme": "Maximum wise communication, intellectual peak, teaching excellence",
+      "description": "Mercury within Jupiter-Mercury. Double Mercury amplification creates peak communication skills, maximum intellectual capacity, teaching mastery through words.",
+      "effects": {
+        "overall": "Peak wise communication, maximum intellect, teaching through words at highest level",
+        "positive": "Communication becomes masterful, intellectual capacity peaks, teaching extraordinarily effective, books/writings widely published and praised",
+        "challenging": "Over-communication, excessive talking, difficulty listening, mental overload, disconnection from emotion/intuition"
+      },
+      "health": "Mental clarity at peak, excellent memory, nervousness possible from overactivity, need relaxation",
+      "career": "Teaching/writing/speaking career peaks, intellectual recognition peaks, multiple publications possible, authority in field",
+      "relationships": "Family benefits greatly from communication and teaching, spouse/children intellectually stimulated and guided",
+      "timing_events": "Major publications, teaching platform opportunities expand, intellectual recognition peaks, communication success multiplied"
+    },
+    "jupiter_mercury_jupiter": {
+      "ad_lord": "mercury",
+      "pd_lord": "jupiter",
+      "duration_days": 240,
+      "duration_months": 8,
+      "theme": "Expanded wisdom through communication, broadened teaching, abundance of knowledge",
+      "description": "Jupiter within Jupiter-Mercury. Double Jupiter brings expansion of wise communication, broader teaching influence, wisdom reaches many.",
+      "effects": {
+        "overall": "Expanded wise communication, teaching reaches far and wide, wisdom multiplied through sharing",
+        "positive": "Teaching influence expands dramatically, books become best-sellers, speaking platforms multiply, wisdom reaches global audience",
+        "challenging": "Over-expansion of commitments, promising too much, spreading attention too thin, quality diluted by quantity"
+      },
+      "health": "Intellectual and physical health excellent, good immunity through knowledge-sharing",
+      "career": "Teaching/writing/speaking career expands dramatically, audience grows exponentially, multiple successful projects",
+      "relationships": "Family benefits abundantly from guidance and teaching, children develop into successful people",
+      "timing_events": "Major publication success, teaching platforms expand internationally, wisdom recognized widely, abundance through communication"
+    },
+    "jupiter_mercury_venus": {
+      "ad_lord": "mercury",
+      "pd_lord": "venus",
+      "duration_days": 288,
+      "duration_months": 9.6,
+      "theme": "Beautiful communication, wise relationships, eloquent love",
+      "description": "Jupiter-Mercury's wise communication blessed by Venus' love and beauty. This creates beautiful speech, eloquent expression of love, communication that attracts.",
+      "effects": {
+        "overall": "Beautiful communication, eloquent love, wise relationships flourish",
+        "positive": "Communication becomes beautiful and attractive, writing gains success/admiration, relationships flourish through good words, marriage partnerships beautiful",
+        "challenging": "Becoming too focused on beauty/pleasure in speech, romantic communication may lack depth, seduction through words"
+      },
+      "health": "Good health through pleasurable communication, throat/voice benefits from relaxation, balance good",
+      "career": "Beautiful writing/speaking, arts with intellectual depth, relationship-based communication, sales/marketing of wisdom/beauty",
+      "relationships": "Communication strengthens partnerships, marriage/relationships flourish, spouse/children feel valued through words, social harmony",
+      "timing_events": "Beautiful communication events, marriage/partnerships, publication success bringing reward, social success"
+    },
+    "jupiter_mercury_saturn": {
+      "ad_lord": "mercury",
+      "pd_lord": "saturn",
+      "duration_days": 336,
+      "duration_months": 11.2,
+      "theme": "Disciplined communication, structured teaching, lasting wisdom shared",
+      "description": "Jupiter-Mercury's wise communication grounded by Saturn's discipline and structure. This creates disciplined teaching, structured knowledge-sharing, lasting written works.",
+      "effects": {
+        "overall": "Disciplined communication, structured teaching, lasting intellectual work",
+        "positive": "Communication becomes more serious and powerful through discipline, writing becomes enduring classics, systematic teaching yields lasting results",
+        "challenging": "Slow communication progress, difficulty expressing spontaneously, heavy tone, over-structured approach may lack warmth"
+      },
+      "health": "Mental clarity sustained through discipline, good health from consistent practice, bones/joints strengthen",
+      "career": "Long-term teaching/writing success, systematic approach builds lasting reputation, institutional teaching work",
+      "relationships": "Long-term relationships strengthen through consistent good communication, marriage deepens, children inherit discipline and learning",
+      "timing_events": "Long-term literary/teaching projects bear fruit, permanent intellectual position established, legacy created"
+    },
+    "jupiter_mercury_rahu": {
+      "ad_lord": "mercury",
+      "pd_lord": "rahu",
+      "duration_days": 384,
+      "duration_months": 12.8,
+      "theme": "Obsessive communication, foreign knowledge, unconventional wisdom",
+      "description": "Jupiter-Mercury's wise communication with Rahu's obsession and foreign influence. This creates obsessive learning, foreign language/wisdom, unconventional teaching methods.",
+      "effects": {
+        "overall": "Obsessive learning, foreign/unconventional wisdom, intense communication",
+        "positive": "Foreign language/wisdom mastered, unconventional teaching succeeds, unique communication style recognized, intense focus yields breakthroughs",
+        "challenging": "Obsessive communication, information overload, scattered focus, unconventional ideas may face resistance, foreign/foreign learning may be impractical"
+      },
+      "health": "Mental overactivity, anxiety about knowledge, need to control information intake, digestive stress from pushing",
+      "career": "Foreign language/knowledge careers, unconventional teaching, foreign communication roles, intense research/study",
+      "relationships": "Communication becomes obsessive, foreign language partners/teachers important, relationships intense but potentially unstable",
+      "timing_events": "Foreign travel for learning, unconventional wisdom discovered, communication breakthroughs, intensity in learning"
+    },
+    "jupiter_mercury_ketu": {
+      "ad_lord": "mercury",
+      "pd_lord": "ketu",
+      "duration_days": 240,
+      "duration_months": 8,
+      "theme": "Non-dual wisdom, transcendent teaching, liberation through knowledge",
+      "description": "Jupiter-Mercury's wise communication with Ketu's detachment and liberation. This creates teaching from non-dual awareness, detached wisdom shared,transcendent knowledge.",
+      "effects": {
+        "overall": "Non-dual wisdom, transcendent teaching, liberation-focused knowledge",
+        "positive": "Teaching from enlightened perspective, wisdom transcends logic, disciples benefit from highest understanding, past intellectual patterns release",
+        "challenging": "Over-detachment from communication, teaching seems removed from life, difficulty connecting through words, appearing abstract"
+      },
+      "health": "Mental clarity from spiritual perspective, past mental patterns resolve, meditation/spiritual learning deepen",
+      "career": "Spiritual teaching, non-dual wisdom communication, liberation-focused knowledge work, transcendent writing",
+      "relationships": "Teaching transcends personal bonds, communication releases old patterns, family accepts spiritual focus",
+      "timing_events": "Spiritual knowledge breakthroughs, past mental karma resolves, transcendent communication events"
+    },
+    "jupiter_jupiter": {
+      "ad_lord": "jupiter",
+      "pd_lord": "sun",
+      "duration_days": 120,
+      "duration_months": 4,
+      "theme": "Maximum wisdom, peak spiritual authority, divine grace",
+      "description": "Jupiter ruled by itself. This is the absolute peak of Jupiter's benefic influence. Maximum wisdom, spiritual authority, and divine grace.",
+      "effects": {
+        "overall": "Peak spiritual wisdom, maximum benefic influence, divine grace at maximum",
+        "positive": "Enlightenment experiences possible, guru status achieved, divine blessings unlimited, all Jupiter matters flourish beyond expectation",
+        "challenging": "Excessive expansion causing overcommitment, becoming unrealistic in growth expectations, loss through over-expansion"
+      },
+      "health": "Peak vitality, excellent immunity, all health matters benefit, spiritual practices yield maximum results",
+      "career": "Guru status established, teaching career reaches peak, business expansion exceeds expectations, authority recognized",
+      "relationships": "Spouse/children blessed abundantly, family prospers beyond measure, legacy secured, ancestral blessings manifest",
+      "timing_events": "Major spiritual initiation, guru status confirmed, divine blessings multiplied, legacy established, expansion unprecedented"
+    },
+    "jupiter_jupiter_moon": {
+      "ad_lord": "jupiter",
+      "pd_lord": "moon",
+      "duration_days": 240,
+      "duration_months": 8,
+      "theme": "Double Jupiter + Moon = wisdom + nurture, maximum caring guidance",
+      "description": "Jupiter within Jupiter-Sun, with Moon PD. Triple benefic influence creates wisdom combined with nurturing, the most blessed teaching period.",
+      "effects": {
+        "overall": "Wisdom meets nurture, maximum blessed guidance, caring expertise",
+        "positive": "Teaching from wisdom and compassion, disciples flourish under guidance, family prosperity peaks, Mother blessed abundantly",
+        "challenging": "Over-giving, being taken advantage of, loss through excessive care, emotional overwhelm"
+      },
+      "health": "Peak vitality combined with emotional balance, immunity excellent, digestive health optimal",
+      "career": "Teaching/counseling career peaks, Mother's ventures expand dramatically, family business succeeds abundantly",
+      "relationships": "Family harmony peaks, Mother blessed, spouse/children thrive, emotional bonds deepen",
+      "timing_events": "Mother's major blessings, family expansion, teaching success multiplied, abundance through care"
+    },
+    "jupiter_jupiter_mars": {
+      "ad_lord": "jupiter",
+      "pd_lord": "mars",
+      "duration_days": 180,
+      "duration_months": 6,
+      "theme": "Double Jupiter + Mars = wisdom + action, blessed courageous expansion",
+      "description": "Jupiter within Jupiter with Mars PD. Double Jupiter combined with Mars creates wise action, courageous expansion, dharma manifested powerfully.",
+      "effects": {
+        "overall": "Blessed courageous action, wisdom-guided expansion, dharma powerfully manifested",
+        "positive": "Expansion through wise action, courageous leadership succeeds, dharma enforced effectively, business growth accelerates",
+        "challenging": "Over-aggressive expansion, reckless growth, becoming too dominant, expansion creates new conflicts"
+      },
+      "health": "Peak strength and energy, excellent vitality, injury risk if overextended",
+      "career": "Action-based career expands dramatically, leadership multiplies, business ventures succeed abundantly",
+      "relationships": "Family prospers through strong leadership, children learn courage and wisdom, protection and guidance strong",
+      "timing_events": "Major expansion through action, leadership opportunities multiply, dharma manifests visibly, abundance through courage"
+    },
+    "jupiter_jupiter_mercury": {
+      "ad_lord": "jupiter",
+      "pd_lord": "mercury",
+      "duration_days": 240,
+      "duration_months": 8,
+      "theme": "Double Jupiter + Mercury = wisdom + communication, teaching reaches multitudes",
+      "description": "Jupiter within Jupiter with Mercury PD. Double Jupiter amplifies Mercury's communication, wisdom reaches far and wide through eloquent teaching.",
+      "effects": {
+        "overall": "Wisdom communicated powerfully, teaching reaches multitudes, intellectual authority peaks",
+        "positive": "Teaching/writing succeeds wildly, publications gain massive recognition, communication inspires millions, intellectual authority supreme",
+        "challenging": "Over-communication, spreading attention too thin, quality diluted by quantity, becoming too expansive in commitments"
+      },
+      "health": "Intellectual and physical health excellent, mental clarity at peak, good immunity",
+      "career": "Teaching/writing/speaking career explodes, books become bestsellers, platforms multiply internationally, authority in field",
+      "relationships": "Family benefits abundantly from guidance, children develop into successful people, teaching legacy secured",
+      "timing_events": "Major publication success, teaching platforms expand globally, intellectual recognition peaks, fame through wisdom"
+    },
+    "jupiter_jupiter_jupiter": {
+      "ad_lord": "jupiter",
+      "pd_lord": "jupiter",
+      "duration_days": 300,
+      "duration_months": 10,
+      "theme": "TRIPLE JUPITER = Absolute maximum blessing, divine grace peak",
+      "description": "Jupiter within Jupiter within Jupiter. This is the absolute zenith of Jupiter's benefic power. Triple Jupiter creates unprecedented blessing, divine grace, and expansion.",
+      "effects": {
+        "overall": "ABSOLUTE MAXIMUM BLESSING, divine grace at zenith, unprecedented expansion",
+        "positive": "Supreme enlightenment experiences, guru at absolute peak, all matters flourish beyond imagination, divine blessings unlimited, miracles manifest",
+        "challenging": "Extreme expansion creating overwhelm, unrealistic expectations, becoming unreachable in spiritual pride, loss through excessive growth"
+      },
+      "health": "PEAK VITALITY AND HEALTH, excellent immunity, all practices work optimally, healing power strong",
+      "career": "CAREER AT ABSOLUTE PEAK, unprecedented success, global recognition, wealth multiplies, legacy established",
+      "relationships": "FAMILY BLESSED SUPREMELY, spouse/children thrive beyond measure, ancestral blessings manifest fully, legacy secured eternally",
+      "timing_events": "ABSOLUTE PEAK SPIRITUAL PERIOD, enlightenment possible, guru status confirmed at highest level, divine blessings rain down"
+    },
+    "jupiter_jupiter_venus": {
+      "ad_lord": "jupiter",
+      "pd_lord": "venus",
+      "duration_days": 360,
+      "duration_months": 12,
+      "theme": "Double Jupiter + Venus = wisdom + love, blessed relationships and prosperity",
+      "description": "Jupiter within Jupiter with Venus PD. Double Jupiter blessed by Venus' love creates loving wisdom, relationships that thrive, prosperity through grace.",
+      "effects": {
+        "overall": "Love-blessed wisdom, relationships thrive, prosperity flows through grace",
+        "positive": "Relationships flourish beautifully, marriage/partnerships bloom abundantly, wealth through wisdom and love, teaching touches hearts",
+        "challenging": "Becoming too attached to beauty/pleasure, romance clouds judgment, material desires increase, pleasure-seeking distracts"
+      },
+      "health": "Excellent health through joy and love, vitality from happiness, reproductive health excellent",
+      "career": "Teaching/wisdom work brings wealth, partnerships prosper abundantly, luxury goods/beauty business succeeds",
+      "relationships": "Marriage/partnerships supremely blessed, spouse brings joy and prosperity, children marry well, family life beautiful",
+      "timing_events": "Marriage/major relationship, acquisition of beautiful home/possessions, prosperity through loved ones, family celebration"
+    },
+    "jupiter_jupiter_saturn": {
+      "ad_lord": "jupiter",
+      "pd_lord": "saturn",
+      "duration_days": 420,
+      "duration_months": 14,
+      "theme": "Double Jupiter + Saturn = wisdom + structure, lasting blessing secured",
+      "description": "Jupiter within Jupiter with Saturn PD. Double Jupiter grounded by Saturn creates lasting, solid achievement, permanent blessing, structured expansion.",
+      "effects": {
+        "overall": "Lasting blessing secured, permanent success achieved, structured expansion",
+        "positive": "Building permanent foundation for blessings, discipline solidifies gains, slow but very lasting success, legacy secured permanently",
+        "challenging": "Slow progress despite blessings, restriction of expansion, heaviness despite benefits, frustration from slow pace"
+      },
+      "health": "Sustained excellent health, chronic issues resolve permanently, bones/joints strengthen",
+      "career": "Long-term career success secured permanently, slow but very solid advancement, institutional building succeeds",
+      "relationships": "Long-term relationships become very stable and mature, marriage deepens profoundly, children inherit solid values",
+      "timing_events": "Long-term projects bear major fruit, permanent success position established, legacy secured permanently, karmic debts paid"
+    },
+    "jupiter_jupiter_rahu": {
+      "ad_lord": "jupiter",
+      "pd_lord": "rahu",
+      "duration_days": 480,
+      "duration_months": 16,
+      "theme": "Double Jupiter + Rahu = wisdom + ambition, foreign/unconventional expansion",
+      "description": "Jupiter within Jupiter with Rahu PD. Double Jupiter with Rahu's ambition creates ambitious wisdom-expansion, foreign opportunities, unconventional success.",
+      "effects": {
+        "overall": "Ambitious wisdom-expansion, foreign/unconventional opportunities, growth through unconventional means",
+        "positive": "Foreign teaching/expansion succeeds, unconventional wisdom recognized globally, ambitious growth realized, unique approach wins",
+        "challenging": "Reckless ambition despite wisdom, pursuing impractical foreign ventures, over-expansion through unconventional means, loss through overreach"
+      },
+      "health": "High energy but anxiety possible, need grounding practices, stress from ambitious pursuits",
+      "career": "Foreign/unconventional ventures succeed, ambitious teaching/business expands internationally, unique approach recognized",
+      "relationships": "Intense relationships, foreign partners, unconventional family arrangements, need healthy boundaries",
+      "timing_events": "Foreign expansion, unconventional success multiplied, ambitious projects launch and succeed, international recognition"
+    },
+    "jupiter_jupiter_ketu": {
+      "ad_lord": "jupiter",
+      "pd_lord": "ketu",
+      "duration_days": 300,
+      "duration_months": 10,
+      "theme": "Double Jupiter + Ketu = wisdom + detachment, liberation through blessing",
+      "description": "Jupiter within Jupiter with Ketu PD. Double Jupiter with Ketu's detachment creates wisdom from non-attachment, blessing through renunciation, liberation-oriented blessings.",
+      "effects": {
+        "overall": "Liberation through wisdom, non-attached blessings, spiritual advancement peaks",
+        "positive": "Spiritual advancement through detachment, liberation experiences, past karma resolves, teaching from enlightened state",
+        "challenging": "Over-detachment from worldly duties, renunciation impulses neglect relationships, appearing removed from life"
+      },
+      "health": "Spiritual practices yield transformation, past health patterns release, energy becomes transcendent",
+      "career": "Spiritual teaching/guidance work, renunciate paths, liberation-focused pursuits, transcendent wisdom sought",
+      "relationships": "Relationships transform through detachment, family accepts spiritual priorities, teaching transcends personal bonds",
+      "timing_events": "Spiritual breakthroughs, liberation experiences, past karma releases, renunciation of old patterns"
+    },
+    "jupiter_venus": {
+      "ad_lord": "venus",
+      "pd_lord": "sun",
+      "duration_days": 144,
+      "duration_months": 4.8,
+      "theme": "Wisdom blessed by beauty and love, wealth through teaching",
+      "description": "Jupiter (wisdom) ruled by Venus (love, beauty, wealth, relationships). This is the gracious guru, wisdom that attracts through charm, teaching that brings prosperity.",
+      "effects": {
+        "overall": "Beautiful wisdom, prosperous teaching, love-blessed guidance, gracious authority",
+        "positive": "Teaching attracts wealth and admirers, relationships flourish, marriage/partnerships blessed, luxury follows wisdom-sharing",
+        "challenging": "Becoming attached to beauty/pleasure from teaching, romance clouds judgment in guidance, material desires increase"
+      },
+      "health": "Enhanced vitality through beauty and pleasure, reproductive health excellent, relaxation benefits health",
+      "career": "Teaching brings wealth and admiration, beautiful teaching methods successful, partnerships prosper, luxury through wisdom",
+      "relationships": "Marriage/partnerships blessed abundantly, spouse brings joy/prosperity, children marry well, social popularity high",
+      "timing_events": "Marriage/major relationship, acquisition of beauty/luxury, teaching success brings prosperity, social elevation"
+    },
+    "jupiter_venus_moon": {
+      "ad_lord": "venus",
+      "pd_lord": "moon",
+      "duration_days": 288,
+      "duration_months": 9.6,
+      "theme": "Love, beauty, nurture, blessed family and relationships",
+      "description": "Jupiter-Venus with Moon PD. This creates loving nurture, beautiful family bonds, teaching through emotional beauty, relationships deeply cherished.",
+      "effects": {
+        "overall": "Love-centered nurture, beautiful relationships, emotionally blessed teaching",
+        "positive": "Family relationships deeply loving and beautiful, Mother blessed with prosperity, teaching touches hearts with grace, marriage beautiful and blessed",
+        "challenging": "Over-emotional attachments, romantic illusions about relationships, becoming too absorbed in pleasure and love"
+      },
+      "health": "Emotional joy enhances health, reproductive health excellent, family health improves through love",
+      "career": "Teaching/counseling combined with beauty, family business prospers, love-based guidance successful",
+      "relationships": "Family love reaches peak beauty, Mother blessed abundantly, spouse/children feel deeply cherished, family becomes harmonious",
+      "timing_events": "Family gatherings with love/beauty, Mother's blessings, marriage/partnerships, family expansion through love"
+    },
+    "jupiter_venus_mars": {
+      "ad_lord": "venus",
+      "pd_lord": "mars",
+      "duration_days": 216,
+      "duration_months": 7.2,
+      "theme": "Passionate love and wisdom, courageous in relationships, action in love",
+      "description": "Jupiter-Venus with Mars PD. This creates passionate wisdom-teaching, courageous love, action-backed commitment, desire strongly manifested.",
+      "effects": {
+        "overall": "Passionate wisdom, courageous love, desire-driven action",
+        "positive": "Relationships passionate and protected, marriage physically and emotionally fulfilling, acting on desires with wisdom, prosperity through passionate work",
+        "challenging": "Aggressive passion, conflicts in relationships, physical intensity overwhelming, desire clouds judgment"
+      },
+      "health": "Physical vitality high from passion and energy, need to channel aggression into healthy outlets",
+      "career": "Passionate work brings prosperity, relationships with business partners strong and productive, action-based ventures succeed",
+      "relationships": "Marriage/partnerships passionate and protected, spouse desired and protected, children learn courage and passion",
+      "timing_events": "Passionate relationship events, physical intimacy peaks, marriage/major commitment, prosperity through collaboration"
+    },
+    "jupiter_venus_mercury": {
+      "ad_lord": "venus",
+      "pd_lord": "mercury",
+      "duration_days": 288,
+      "duration_months": 9.6,
+      "theme": "Beautiful communication, eloquent love, gracious speech",
+      "description": "Jupiter-Venus with Mercury PD. This creates beautiful communication, eloquent expression of love and wisdom, attractive speech, gracious dialogue.",
+      "effects": {
+        "overall": "Beautiful communication, eloquent love expressed, gracious dialogue",
+        "positive": "Speech becomes charming and persuasive, writing attractive and popular, relationships flourish through good words, communication brings prosperity",
+        "challenging": "Becoming overly romantic in speech, losing objectivity, seduction through words, communication lacks depth"
+      },
+      "health": "Good health through pleasant communication, throat/voice benefits from relaxation and pleasure",
+      "career": "Beautiful writing/speaking successful, relationship-based communication work, sales/marketing of beauty/wisdom prospers",
+      "relationships": "Communication strengthens relationships, marriage/partnerships flourish through eloquence, spouse/children feel valued and attractive",
+      "timing_events": "Beautiful communication events, relationship success through dialogue, publication/speaking success"
+    },
+    "jupiter_venus_jupiter": {
+      "ad_lord": "venus",
+      "pd_lord": "jupiter",
+      "duration_days": 360,
+      "duration_months": 12,
+      "theme": "Maximum love-blessed wisdom, expanded relationships and prosperity",
+      "description": "Jupiter within Jupiter-Venus. Double Jupiter brings unprecedented love-blessed expansion, relationships thrive magnificently, wisdom brings abundant prosperity.",
+      "effects": {
+        "overall": "Maximum love-blessed expansion, relationships multiply and prosper, wisdom brings abundance",
+        "positive": "Relationships flourish exponentially, marriage/partnerships bloom abundantly, wealth multiplies through love and wisdom, teaching reaches loving audience",
+        "challenging": "Over-expansion of relationships, commitments multiply, pleasure-seeking distracts, loss through excessive generosity in love"
+      },
+      "health": "Peak health from happiness and love, vitality excellent, reproductive health optimal",
+      "career": "Teaching/wisdom work brings great wealth, partnerships multiply successfully, beauty/luxury business expands dramatically",
+      "relationships": "Marriage/partnerships supremely blessed, spouse brings multiplied joy/prosperity, children marry well, family life flourishes",
+      "timing_events": "Marriage/major relationships multiply, acquisition of beauty/luxury, prosperity through loved ones multiplies, family celebration"
+    },
+    "jupiter_venus_venus": {
+      "ad_lord": "venus",
+      "pd_lord": "venus",
+      "duration_days": 288,
+      "duration_months": 9.6,
+      "theme": "MAXIMUM BEAUTY, love and luxury, blessed relationships and pleasure",
+      "description": "Venus within Jupiter-Venus. Double Venus amplification creates peak beauty, luxury, pleasure, love, and relationship blessings.",
+      "effects": {
+        "overall": "PEAK BEAUTY AND LUXURY, maximum love blessings, pleasure supreme",
+        "positive": "Relationships reach maximum beauty and fulfillment, beauty and luxury abundant, pleasure and joy at peak, wealth flows through love",
+        "challenging": "Excessive material attachment, pleasure addiction, relationships lose depth through excess, loss through over-indulgence"
+      },
+      "health": "Peak pleasure-based health, reproductive health optimal, vitality from joy",
+      "career": "Beauty/luxury/entertainment careers peak, wealth multiplies through relationships, partnerships flourish",
+      "relationships": "Love and relationships at absolute peak, marriage supremely blessed, spouse brings maximum joy/prosperity, beauty everywhere",
+      "timing_events": "Love at peak, marriage/major relationships, acquisition of luxury/beauty, wealth multiplies"
+    },
+    "jupiter_venus_saturn": {
+      "ad_lord": "venus",
+      "pd_lord": "saturn",
+      "duration_days": 336,
+      "duration_months": 11.2,
+      "theme": "Patient love, disciplined relationships, lasting beauty and wealth",
+      "description": "Jupiter-Venus with Saturn PD. This creates patient, mature, lasting love and relationships, wealth secured through discipline, beauty that endures.",
+      "effects": {
+        "overall": "Patient lasting love, disciplined beauty, wealth secured permanently",
+        "positive": "Relationships deepen and mature beautifully, marriage becomes very stable and lasting, wealth secured permanently through discipline",
+        "challenging": "Love/relationships feel restricted, difficulty expressing affection freely, relationships heavy despite beauty, slow progress in love"
+      },
+      "health": "Sustained health through disciplined living, bones/joints strengthen, chronic issues resolve slowly",
+      "career": "Long-term partnerships succeed, wealth secured permanently, luxury through patient effort, legacy of beauty established",
+      "relationships": "Long-term relationships become very stable and mature, marriage deepens profoundly, children learn love and discipline",
+      "timing_events": "Long-term relationships bear fruit, permanent wealth position secured, legacy of love established"
+    },
+    "jupiter_venus_rahu": {
+      "ad_lord": "venus",
+      "pd_lord": "rahu",
+      "duration_days": 384,
+      "duration_months": 12.8,
+      "theme": "Obsessive love, foreign/unconventional relationships, ambiguous desires",
+      "description": "Jupiter-Venus with Rahu PD. This creates intense attraction, obsessive love, foreign partners, unconventional relationships, ambiguous desires.",
+      "effects": {
+        "overall": "Intense attraction, obsessive love, unconventional relationships, ambiguous desires",
+        "positive": "Exotic/foreign partnerships, unconventional relationships succeed, intense love drives ambition, unique beauty recognized",
+        "challenging": "Obsessive love, clinging relationships, foreign partners bring complications, infatuation clouds judgment, loss through obsession"
+      },
+      "health": "Anxiety about relationships, digestive stress from emotional obsession, need grounding practices",
+      "career": "Foreign partnerships, unconventional beauty/luxury business, intense work with partners, ambiguous ventures",
+      "relationships": "Intense obsessive attractions, foreign partners significant, unconventional relationship dynamics, need healthy boundaries",
+      "timing_events": "Foreign relationship connections, intense love events, unconventional partnerships form, obsession peaks"
+    },
+    "jupiter_venus_ketu": {
+      "ad_lord": "venus",
+      "pd_lord": "ketu",
+      "duration_days": 240,
+      "duration_months": 8,
+      "theme": "Non-attached love, spiritual beauty, detached relationships",
+      "description": "Jupiter-Venus with Ketu PD. This creates love without attachment, spiritual beauty, teaching that transcends personal relationships.",
+      "effects": {
+        "overall": "Non-attached love, spiritual beauty, transcendent relationships",
+        "positive": "True love without clinging, spiritual beauty recognized, relationships release to destiny, past love patterns resolve",
+        "challenging": "Appearing cold/detached in relationships, family feels emotionally distant, loss of relationship depth through detachment"
+      },
+      "health": "Emotional trauma releases, past relationship patterns dissolve, spiritual practices deepen",
+      "career": "Teaching/guidance without personal attachment, spiritual beauty work, past-life relationship healing",
+      "relationships": "Relationships transform through detachment, releasing old love patterns, family accepts spiritual focus",
+      "timing_events": "Emotional release from past relationships, spiritual breakthroughs in love, past relationship karma resolves"
+    },
+    "jupiter_saturn": {
+      "ad_lord": "saturn",
+      "pd_lord": "sun",
+      "duration_days": 168,
+      "duration_months": 5.6,
+      "theme": "Disciplined wisdom, structured dharma, slow lasting success",
+      "description": "Jupiter (wisdom, expansion) ruled by Saturn (discipline, time, restriction). This is slow but very solid achievement, wisdom grounded in reality, lasting spiritual authority.",
+      "effects": {
+        "overall": "Disciplined wisdom, structured dharma, slow solid success, lasting authority",
+        "positive": "Building permanent spiritual foundation, discipline in practice bears fruit, authority through proven track record, slow but very lasting achievement",
+        "challenging": "Slow progress despite efforts, restrictions on expansion, heaviness and limitation feelings, frustration with pace, aging process begins"
+      },
+      "health": "Sustained energy through discipline, bones/skeletal health strengthens, chronic issues slowly resolve, aging process visible",
+      "career": "Building lasting career foundation through moral conduct, slow promotion but very secure, legacy institution-building",
+      "relationships": "Long-term relationships deepen, marriage/partnerships become very stable and mature, children inherit solid values",
+      "timing_events": "Long-term projects come to fruition, permanent position established, legacy secured, karmic debts paid, aging begins"
+    },
+    "jupiter_saturn_moon": {
+      "ad_lord": "saturn",
+      "pd_lord": "moon",
+      "duration_days": 336,
+      "duration_months": 11.2,
+      "theme": "Patient nurture, mature care, stable family bonds",
+      "description": "Jupiter-Saturn with Moon PD. This creates patient, mature emotional care, stable family bonds, lasting nurture through discipline.",
+      "effects": {
+        "overall": "Patient mature nurture, stable family bonds, lasting care",
+        "positive": "Deep maturity in family care, patience yields lasting bonds, Mother's health secured permanently, family very stable",
+        "challenging": "Emotional coldness, difficulty expressing feelings freely, relationships feel heavy, slow emotional progress"
+      },
+      "health": "Sustained emotional stability, family health improves steadily, chronic issues resolve through patient care",
+      "career": "Long-term family care/business success, patient mentoring, institutional care roles, Mother's legacy secured",
+      "relationships": "Family bonds deepen and mature, marriage becomes very stable, children inherit discipline and love",
+      "timing_events": "Long-term family milestones, Mother's permanent health/prosperity, family legacy secured"
+    },
+    "jupiter_saturn_mars": {
+      "ad_lord": "saturn",
+      "pd_lord": "mars",
+      "duration_days": 252,
+      "duration_months": 8.4,
+      "theme": "Disciplined action, sustained effort, hard-won strength",
+      "description": "Jupiter-Saturn with Mars PD. This creates sustained effort, disciplined action, hard-won success through perseverance, patient strength building.",
+      "effects": {
+        "overall": "Disciplined action, sustained effort, hard-won success",
+        "positive": "Disciplined action yields lasting results, sustained effort brings success, structured approach to goals, strength built through time",
+        "challenging": "Slow action causing frustration, discipline restricts spontaneity, heavy energy, difficulty starting new ventures"
+      },
+      "health": "Sustained strength through disciplined practice, bones/joints strengthen, chronic issues resolve through consistent effort",
+      "career": "Long-term action-based success, slow but very solid advancement, building lasting institutions through sustained effort",
+      "relationships": "Long-term relationship stability, marriage matures, children learn discipline and strength",
+      "timing_events": "Long-term projects bear fruit, permanent success position, hard-won victories, legacy of strength"
+    },
+    "jupiter_saturn_mercury": {
+      "ad_lord": "saturn",
+      "pd_lord": "mercury",
+      "duration_days": 336,
+      "duration_months": 11.2,
+      "theme": "Disciplined communication, serious teaching, lasting wisdom",
+      "description": "Jupiter-Saturn with Mercury PD. This creates serious, disciplined communication, systematic teaching, enduring written works.",
+      "effects": {
+        "overall": "Disciplined communication, serious teaching, lasting intellectual work",
+        "positive": "Communication becomes serious and powerful, writing becomes enduring classics, systematic teaching yields lasting results",
+        "challenging": "Slow communication progress, difficulty expressing spontaneously, heavy tone, over-structured approach"
+      },
+      "health": "Mental clarity sustained through discipline, good health from consistent practice",
+      "career": "Long-term teaching/writing success, systematic approach builds lasting reputation, institutional teaching",
+      "relationships": "Long-term relationships strengthen, marriage deepens, children inherit discipline and learning",
+      "timing_events": "Long-term literary projects bear fruit, permanent intellectual position, lasting legacy"
+    },
+    "jupiter_saturn_jupiter": {
+      "ad_lord": "saturn",
+      "pd_lord": "jupiter",
+      "duration_days": 420,
+      "duration_months": 14,
+      "theme": "Lasting blessing secured, permanent expansion grounded, solid wisdom",
+      "description": "Jupiter within Jupiter-Saturn. Double Jupiter brings expansion but grounded by Saturn, permanent blessing secured, solid lasting achievement.",
+      "effects": {
+        "overall": "Lasting blessing secured, permanent success, solid expansion",
+        "positive": "Building permanent blessed foundation, discipline solidifies gains, slow but very lasting success, legacy permanently secured",
+        "challenging": "Slow expansion despite blessings, restrictions limit growth, heaviness despite benefits, frustration from slow pace"
+      },
+      "health": "Sustained excellent health, chronic issues resolve permanently, bones/joints strengthen",
+      "career": "Long-term career success secured permanently, slow but very solid advancement, institutional building succeeds",
+      "relationships": "Long-term relationships become very stable, marriage deeply secure, children inherit solid values",
+      "timing_events": "Long-term projects bear major fruit, permanent success position, legacy permanently secured, karmic debts paid"
+    },
+    "jupiter_saturn_venus": {
+      "ad_lord": "saturn",
+      "pd_lord": "venus",
+      "duration_days": 384,
+      "duration_months": 12.8,
+      "theme": "Patient love, mature relationships, lasting beauty and wealth",
+      "description": "Jupiter-Saturn with Venus PD. This creates patient, mature, lasting love and wealth, beauty that endures, relationships that deepen with time.",
+      "effects": {
+        "overall": "Patient lasting love, mature relationships, enduring wealth and beauty",
+        "positive": "Relationships deepen beautifully over time, marriage becomes very stable and lasting, wealth secured permanently",
+        "challenging": "Love feels restricted, difficulty expressing affection, relationships heavy, slow progress in love/pleasure"
+      },
+      "health": "Sustained health through disciplined living, bones/joints strengthen, reproductive health improves slowly",
+      "career": "Long-term partnerships succeed, wealth secured permanently, legacy of beauty established",
+      "relationships": "Long-term relationships become very stable, marriage deepens profoundly, children learn love and discipline",
+      "timing_events": "Long-term relationships bear fruit, permanent wealth position, legacy of love established"
+    },
+    "jupiter_saturn_saturn": {
+      "ad_lord": "saturn",
+      "pd_lord": "saturn",
+      "duration_days": 448,
+      "duration_months": 14.9,
+      "theme": "MAXIMUM DISCIPLINE, hardest period, ultimate lasting achievement",
+      "description": "Saturn within Jupiter-Saturn. Double Saturn amplification creates the most challenging, most disciplined, and ultimately most lasting period.",
+      "effects": {
+        "overall": "MAXIMUM DISCIPLINE AND RESTRICTION, hardest period, ultimate lasting achievement",
+        "positive": "Building most solid, lasting foundation, discipline yields permanent success, karmic debts heavily paid, ultimate legacy secured",
+        "challenging": "MAXIMUM HARDSHIP AND RESTRICTION, slow painful progress, losses and delays, aging and health limitations, heaviness extreme"
+      },
+      "health": "Aging process accelerates, health challenges possible, bones/joints face issues, chronic problems may worsen, need consistent practice",
+      "career": "Very slow career progress, but ultimately very secure foundation, hard work required, legacy ultimately lasting",
+      "relationships": "Relationships face severe tests, marriage may be strained, slow relationship progress, ultimate maturity if survived",
+      "timing_events": "Severe karmic debts paid, ultimate testing period, lasting foundation built through hardship"
+    },
+    "jupiter_saturn_rahu": {
+      "ad_lord": "saturn",
+      "pd_lord": "rahu",
+      "duration_days": 504,
+      "duration_months": 16.8,
+      "theme": "Restrictive ambition, foreign delays, unconventional hardship",
+      "description": "Jupiter-Saturn with Rahu PD. This creates restrictive ambition, foreign/unconventional obstacles, prolonged hardship through unconventional means.",
+      "effects": {
+        "overall": "Restrictive ambition, foreign obstacles, unconventional hardship",
+        "positive": "Ambitious goals pursued despite obstacles, foreign learning through hardship, unconventional path ultimately succeeds",
+        "challenging": "Severe restrictions on ambitions, foreign obstacles compound hardship, unconventional ventures fail, loss through overreach"
+      },
+      "health": "Sustained stress, anxiety about obstacles, need grounding practices, digestive stress from hardship",
+      "career": "Ambitions restricted but foreign opportunities, unconventional ventures face obstacles, slow unconventional progress",
+      "relationships": "Relationships tested severely, foreign partnerships problematic, unconventional arrangements face hardship",
+      "timing_events": "Sustained hardship period, foreign obstacles, unconventional failures, need patience and perseverance"
+    },
+    "jupiter_saturn_ketu": {
+      "ad_lord": "saturn",
+      "pd_lord": "ketu",
+      "duration_days": 360,
+      "duration_months": 12,
+      "theme": "Karmic completion, spiritual maturity, liberation through discipline",
+      "description": "Jupiter-Saturn with Ketu PD. This creates karmic completion through discipline, spiritual maturity through hardship, liberation through renunciation.",
+      "effects": {
+        "overall": "Karmic completion, spiritual maturity, liberation through discipline",
+        "positive": "Karmic debts paid completely, spiritual maturity achieved, renunciation of old patterns, liberation approached",
+        "challenging": "Over-focus on past karma, appearing detached from current life, renunciation impulses, loss through letting go"
+      },
+      "health": "Past health patterns finally release, spiritual practices yield transformation, chronic issues resolve",
+      "career": "Spiritual maturity in work, renunciate paths, past-life work karma completes, transcendent focus",
+      "relationships": "Relationships release to destiny, family accepts spiritual focus, teaching transcends bonds",
+      "timing_events": "Major karmic completion, spiritual breakthroughs, past life patterns release, liberation approaches"
+    },
+    "jupiter_rahu": {
+      "ad_lord": "rahu",
+      "pd_lord": "sun",
+      "duration_days": 192,
+      "duration_months": 6.4,
+      "theme": "Guru-Chandal yoga potential, ambitious wisdom, foreign influence",
+      "description": "Jupiter (wisdom, guru) ruled by Rahu (obsession, foreign, unconventional). This can manifest as guru-chandal yoga (afflicted guru/false teachers) or as unconventional wisdom expanding through foreign means.",
+      "effects": {
+        "overall": "Ambitious wisdom, foreign/unconventional influence, guru-chandal potential",
+        "positive": "Foreign wisdom traditions mastered, unconventional teaching methods succeed, ambitious guru status, exotic knowledge gained",
+        "challenging": "Guru-Chandal: false teachings, spiritual scandal, misuse of authority for ambition, disciples misled, moral credibility lost"
+      },
+      "health": "Obsessive practices, anxiety about health, need grounding, stress from ambition",
+      "career": "International teaching work, unconventional methods, foreign opportunities, risk of scandal if unethical",
+      "relationships": "Attraction to foreign/unusual partners, relationships unconventional, disciples obsessive, need boundaries",
+      "timing_events": "Foreign travel for teaching, unconventional success, potential scandal, international recognition"
+    },
+    "jupiter_rahu_moon": {
+      "ad_lord": "rahu",
+      "pd_lord": "moon",
+      "duration_days": 384,
+      "duration_months": 12.8,
+      "theme": "Obsessive emotions, foreign family, unconventional nurture",
+      "description": "Jupiter-Rahu with Moon PD. This creates obsessive emotional attachments, foreign family influences, unconventional nurturing arrangements.",
+      "effects": {
+        "overall": "Obsessive emotions, foreign family influences, unconventional nurturing",
+        "positive": "Unconventional family/emotional wisdom, foreign connections, intuitive intensity, unique emotional expressions",
+        "challenging": "Emotional obsession, clinging relationships, anxiety about family, complications from unconventional arrangements"
+      },
+      "health": "Anxiety, digestive stress, emotional obsessions affect health, need grounding",
+      "career": "Unconventional counseling/teaching, foreign family business, emotional psychology work",
+      "relationships": "Intense emotional attachments, foreign family members significant, unconventional family dynamics",
+      "timing_events": "Foreign family connections, unconventional relationships, emotional intensity peaks"
+    },
+    "jupiter_rahu_mars": {
+      "ad_lord": "rahu",
+      "pd_lord": "mars",
+      "duration_days": 288,
+      "duration_months": 9.6,
+      "theme": "Ambitious courageous action, foreign/unconventional pursuits, obsessive drives",
+      "description": "Jupiter-Rahu with Mars PD. This creates ambitious aggressive action, foreign/unconventional ventures pursued obsessively, reckless expansion.",
+      "effects": {
+        "overall": "Ambitious courageous action, unconventional pursuits obsessively, reckless ambition",
+        "positive": "Ambitious goals achieved through courage, foreign/unconventional ventures succeed, unconventional strength recognized",
+        "challenging": "Reckless ambition, pursuing forbidden ventures, aggressive obsessions, loss through overreach"
+      },
+      "health": "High energy but anxiety, digestive stress from pushing hard, need grounding",
+      "career": "Foreign/unconventional ventures, ambitious projects, military/police unconventional methods",
+      "relationships": "Intense unconventional relationships, foreign partners, need healthy boundaries",
+      "timing_events": "Foreign adventure, unconventional success, ambitious intensity peaks"
+    },
+    "jupiter_rahu_mercury": {
+      "ad_lord": "rahu",
+      "pd_lord": "mercury",
+      "duration_days": 384,
+      "duration_months": 12.8,
+      "theme": "Obsessive learning, foreign knowledge, unconventional communication",
+      "description": "Jupiter-Rahu with Mercury PD. This creates obsessive learning, foreign language/knowledge mastery, unconventional teaching spreading intensely.",
+      "effects": {
+        "overall": "Obsessive learning, foreign knowledge, unconventional communication",
+        "positive": "Foreign language/knowledge mastered intensely, unconventional ideas spread, unique communication recognized, intense focus yields breakthroughs",
+        "challenging": "Obsessive information gathering, scattered attention, unconventional ideas face resistance, information overload"
+      },
+      "health": "Mental overactivity, anxiety about knowledge, need to control intake, stress",
+      "career": "Foreign language/knowledge careers, unconventional teaching, foreign communication roles",
+      "relationships": "Obsessive communication, foreign language partners, relationships potentially unstable",
+      "timing_events": "Foreign learning, unconventional wisdom, communication breakthroughs, intensity peaks"
+    },
+    "jupiter_rahu_jupiter": {
+      "ad_lord": "rahu",
+      "pd_lord": "jupiter",
+      "duration_days": 480,
+      "duration_months": 16,
+      "theme": "Ambitious wisdom expansion, foreign/unconventional opportunities, dangerous guru-chandal",
+      "description": "Jupiter within Jupiter-Rahu. Double Jupiter with Rahu creates ambitious expansion, foreign opportunities, but also strong guru-chandal risk.",
+      "effects": {
+        "overall": "Ambitious wisdom expansion, foreign/unconventional growth, guru-chandal risk",
+        "positive": "Foreign teaching/expansion succeeds, unconventional wisdom recognized globally, ambitious growth realized",
+        "challenging": "Strong guru-chandal: misleading students, false teachings, spiritual scandal, loss of credibility if unethical"
+      },
+      "health": "High energy but anxiety, need grounding, stress from ambition",
+      "career": "Foreign/unconventional business expands, ambitious teaching/ventures, international recognition",
+      "relationships": "Intense relationships, foreign partners significant, unconventional family arrangements",
+      "timing_events": "Foreign expansion, unconventional success multiplies, ambitious ventures, international recognition"
+    },
+    "jupiter_rahu_venus": {
+      "ad_lord": "rahu",
+      "pd_lord": "venus",
+      "duration_days": 576,
+      "duration_months": 19.2,
+      "theme": "Obsessive love, foreign/unconventional relationships, ambiguous desires",
+      "description": "Jupiter-Rahu with Venus PD. This creates intense attraction, obsessive love, foreign partners, ambiguous relationship desires.",
+      "effects": {
+        "overall": "Intense attraction, obsessive love, unconventional relationships, ambiguous desires",
+        "positive": "Exotic/foreign partnerships, unconventional beauty/luxury, intense love drives success, unique beauty recognized",
+        "challenging": "Obsessive love/clinging, foreign partners problematic, infatuation clouds judgment, loss through obsession"
+      },
+      "health": "Anxiety about relationships, stress from emotional obsession, need grounding",
+      "career": "Foreign partnerships, unconventional beauty/luxury business, intense collaborative ventures",
+      "relationships": "Intense obsessive attractions, foreign partners, unconventional dynamics, need boundaries",
+      "timing_events": "Foreign relationship connections, intense love events, unconventional partnerships"
+    },
+    "jupiter_rahu_saturn": {
+      "ad_lord": "rahu",
+      "pd_lord": "saturn",
+      "duration_days": 672,
+      "duration_months": 22.4,
+      "theme": "Restrictive ambition, foreign delays, unconventional hardship",
+      "description": "Jupiter-Rahu with Saturn PD. This creates severe restrictions on ambitions, foreign obstacles, prolonged hardship through unconventional means.",
+      "effects": {
+        "overall": "Restrictive ambition, foreign obstacles, unconventional hardship",
+        "positive": "Ambitious goals pursued despite obstacles, foreign learning through hardship, unconventional path succeeds if patient",
+        "challenging": "MAXIMUM HARDSHIP: severe restrictions, foreign obstacles, unconventional failures, prolonged pain"
+      },
+      "health": "Sustained stress and anxiety, digestive issues, chronic problems possible, need consistent practices",
+      "career": "Severe restrictions on unconventional ventures, foreign obstacles compound, very slow progress",
+      "relationships": "Relationships tested severely, foreign partnerships problematic, unconventional arrangements fail",
+      "timing_events": "SEVERE HARDSHIP PERIOD, foreign obstacles, unconventional failures, need patience"
+    },
+    "jupiter_rahu_rahu": {
+      "ad_lord": "rahu",
+      "pd_lord": "rahu",
+      "duration_days": 576,
+      "duration_months": 19.2,
+      "theme": "MAXIMUM OBSESSION, foreign ambitions, guru-chandal at peak",
+      "description": "Rahu within Jupiter-Rahu. Double Rahu amplification creates peak obsession, maximum foreign/unconventional ambition, strongest guru-chandal manifestation.",
+      "effects": {
+        "overall": "MAXIMUM OBSESSION AND AMBITION, peak guru-chandal, foreign influence extreme",
+        "positive": "Foreign/unconventional ambitions achieved obsessively, unique success recognized, intense focus yields breakthroughs",
+        "challenging": "PEAK GURU-CHANDAL: misleading many students, major spiritual scandal possible, false teachings spread, loss of moral credibility"
+      },
+      "health": "Peak anxiety and obsession, stress extreme, need major grounding, health may suffer",
+      "career": "Obsessive foreign/unconventional ventures, risk of spectacular failure, intense competition",
+      "relationships": "Relationships obsessive and intense, foreign partners problematic, major relationship crises possible",
+      "timing_events": "PEAK OBSESSION PERIOD, foreign/unconventional extremes, potential scandal, major crises"
+    },
+    "jupiter_rahu_ketu": {
+      "ad_lord": "rahu",
+      "pd_lord": "ketu",
+      "duration_days": 384,
+      "duration_months": 12.8,
+      "theme": "Obsessive detachment, foreign renunciation, unconventional liberation",
+      "description": "Jupiter-Rahu with Ketu PD. This creates obsessive detachment, foreign renunciation impulses, unconventional liberation paths.",
+      "effects": {
+        "overall": "Obsessive detachment, foreign renunciation, unconventional liberation",
+        "positive": "Obsessive pursuit of liberation, foreign/unconventional spiritual paths, renunciation pursued intensely",
+        "challenging": "Over-detachment from relationships, foreign renunciation impulses, appearing removed from life, obsessive spirituality"
+      },
+      "health": "Spiritual obsession affects health, need to balance material and spiritual, stress from intensity",
+      "career": "Foreign/unconventional spiritual work, renunciate paths pursued obsessively, past-life karma work",
+      "relationships": "Relationships release obsessively, family accepts intense spiritual focus, teaching transcends bonds",
+      "timing_events": "Spiritual obsession peaks, foreign spiritual connections, unconventional breakthroughs"
+    },
+    "jupiter_ketu": {
+      "ad_lord": "ketu",
+      "pd_lord": "sun",
+      "duration_days": 120,
+      "duration_months": 4,
+      "theme": "Detached wisdom, spiritual liberation, renunciation authority",
+      "description": "Jupiter (wisdom, dharma) ruled by Ketu (detachment, liberation, past life). This is the liberated teacher, wisdom from non-attachment, spiritual authority from enlightenment.",
+      "effects": {
+        "overall": "Non-attached wisdom, spiritual liberation, enlightenment-focused teaching",
+        "positive": "True spiritual detachment achieved, teaching from liberated state, disciples benefit from highest wisdom, material detachment brings freedom",
+        "challenging": "Over-detachment from worldly duties, renunciation impulses neglect relationships, appearing removed from life, loss of grounding"
+      },
+      "health": "Spiritual practices yield liberation experiences, past health issues finally resolve, energy becomes transcendent",
+      "career": "Teaching focused on liberation, monastic/renunciate paths, transcendent wisdom sought after",
+      "relationships": "Relationships transform through detachment, family accepts spiritual priorities, teaching transcends personal bonds",
+      "timing_events": "Spiritual breakthroughs, initiation into liberation paths, renunciation of worldly patterns, past-life patterns release"
+    },
+    "jupiter_ketu_moon": {
+      "ad_lord": "ketu",
+      "pd_lord": "moon",
+      "duration_days": 240,
+      "duration_months": 8,
+      "theme": "Non-attached care, spiritual nurture, liberation through compassion",
+      "description": "Jupiter-Ketu with Moon PD. This creates caring without clinging, spiritual nurturing, compassion from enlightened perspective.",
+      "effects": {
+        "overall": "Non-attached care, spiritual nurture, compassion from liberation",
+        "positive": "True care without attachment, family released to their path, compassion from enlightened state, healing through non-dual wisdom",
+        "challenging": "Appearing cold/detached in care, family feels emotionally distant, over-detachment from relationships"
+      },
+      "health": "Emotional trauma releases deeply, past family patterns dissolve, spiritual healing occurs",
+      "career": "Spiritual counseling, teaching liberation, monastic/renunciate roles, healing work",
+      "relationships": "Family transforms through detachment, releasing old patterns, relationships transcend bonds",
+      "timing_events": "Emotional release/healing, spiritual breakthroughs, past family karma resolves"
+    },
+    "jupiter_ketu_mars": {
+      "ad_lord": "ketu",
+      "pd_lord": "mars",
+      "duration_days": 180,
+      "duration_months": 6,
+      "theme": "Detached action, spiritual warrior, liberation through courage",
+      "description": "Jupiter-Ketu with Mars PD. This creates the detached warrior, action from non-attachment, spiritual courage, renunciation through strength.",
+      "effects": {
+        "overall": "Detached action, spiritual warrior, liberation through courage",
+        "positive": "Action without ego attachment, spiritual pursuits pursued courageously, renunciation of worldly pursuits, warrior karma resolves",
+        "challenging": "Detachment may seem cold/uncaring, reckless action without concern, loss through detachment"
+      },
+      "health": "Physical energy with spiritual awareness, past trauma releases, strength becomes transcendent",
+      "career": "Spiritual warrior roles, renunciate paths, action without personal stake, liberation-focused pursuits",
+      "relationships": "Relationships released to karma, family accepts spiritual focus, teaching from detached strength",
+      "timing_events": "Spiritual breakthroughs through action, warrior patterns resolve, past-life karma releases"
+    },
+    "jupiter_ketu_mercury": {
+      "ad_lord": "ketu",
+      "pd_lord": "mercury",
+      "duration_days": 240,
+      "duration_months": 8,
+      "theme": "Non-dual wisdom, transcendent teaching, liberation through knowledge",
+      "description": "Jupiter-Ketu with Mercury PD. This creates teaching from non-dual awareness, transcendent knowledge, wisdom that liberates.",
+      "effects": {
+        "overall": "Non-dual wisdom, transcendent teaching, liberation-focused knowledge",
+        "positive": "Teaching from enlightened perspective, wisdom transcends logic, past intellectual patterns release, disciples benefit from highest understanding",
+        "challenging": "Over-detachment from communication, teaching seems removed from life, difficulty connecting through words"
+      },
+      "health": "Mental clarity from spiritual perspective, past mental patterns resolve, meditation deepens",
+      "career": "Spiritual teaching, non-dual wisdom communication, liberation-focused knowledge work",
+      "relationships": "Teaching transcends personal bonds, family accepts spiritual focus, communication releases patterns",
+      "timing_events": "Spiritual knowledge breakthroughs, past mental karma resolves, transcendent communication"
+    },
+    "jupiter_ketu_jupiter": {
+      "ad_lord": "ketu",
+      "pd_lord": "jupiter",
+      "duration_days": 300,
+      "duration_months": 10,
+      "theme": "Liberation through wisdom, spiritual expansion, enlightenment approached",
+      "description": "Jupiter within Jupiter-Ketu. Double Jupiter brings expansion of liberation, spiritual advancement peaks, enlightenment-oriented expansion.",
+      "effects": {
+        "overall": "Liberation through wisdom, spiritual expansion, enlightenment approached",
+        "positive": "Spiritual advancement through detachment, liberation experiences multiply, teaching from enlightened state, past karma resolves significantly",
+        "challenging": "Over-detachment from worldly duties, renunciation impulses strong, appearing removed from life"
+      },
+      "health": "Spiritual practices yield transformation, past health patterns release, energy becomes transcendent",
+      "career": "Spiritual teaching/guidance work, liberation-focused pursuits, transcendent wisdom sought",
+      "relationships": "Relationships transform through detachment, family accepts spiritual priorities, teaching transcends bonds",
+      "timing_events": "Spiritual breakthroughs multiply, liberation approaches, past karma resolves, enlightenment possible"
+    },
+    "jupiter_ketu_venus": {
+      "ad_lord": "ketu",
+      "pd_lord": "venus",
+      "duration_days": 288,
+      "duration_months": 9.6,
+      "theme": "Non-attached love, spiritual beauty, detached relationships flourish",
+      "description": "Jupiter-Ketu with Venus PD. This creates love without clinging, spiritual beauty, relationships that release to destiny.",
+      "effects": {
+        "overall": "Non-attached love, spiritual beauty, transcendent relationships",
+        "positive": "True love without clinging, spiritual beauty recognized, relationships release to destiny, past love karma resolves",
+        "challenging": "Appearing cold/detached in relationships, family feels distant, loss of relationship depth"
+      },
+      "health": "Emotional trauma releases, past relationship patterns dissolve, spiritual practices deepen health",
+      "career": "Spiritual guidance, teaching without personal attachment, past-life relationship healing",
+      "relationships": "Relationships transform through detachment, releasing old patterns, family accepts focus",
+      "timing_events": "Emotional release from past, spiritual breakthroughs in relationships, past karma resolves"
+    },
+    "jupiter_ketu_saturn": {
+      "ad_lord": "ketu",
+      "pd_lord": "saturn",
+      "duration_days": 360,
+      "duration_months": 12,
+      "theme": "Karmic completion, spiritual maturity, liberation through discipline",
+      "description": "Jupiter-Ketu with Saturn PD. This creates complete karmic resolution through discipline, spiritual maturity, liberation through renunciation of old patterns.",
+      "effects": {
+        "overall": "Karmic completion, spiritual maturity, liberation through discipline",
+        "positive": "Karmic debts paid completely, spiritual maturity deepens, renunciation of old patterns, liberation approached",
+        "challenging": "Over-focus on past karma, appearing detached from current life, renunciation impulses"
+      },
+      "health": "Past health patterns finally release, spiritual practices yield transformation, chronic issues resolve",
+      "career": "Spiritual maturity in work, renunciate paths, past-life karma completes, transcendent focus",
+      "relationships": "Relationships release to destiny, family accepts spiritual focus, teaching transcends bonds",
+      "timing_events": "Major karmic completion, spiritual breakthroughs, past-life patterns release, liberation approaches"
+    },
+    "jupiter_ketu_rahu": {
+      "ad_lord": "ketu",
+      "pd_lord": "rahu",
+      "duration_days": 384,
+      "duration_months": 12.8,
+      "theme": "Obsessive detachment, foreign renunciation, unconventional liberation",
+      "description": "Jupiter-Ketu with Rahu PD. This creates obsessive detachment, foreign renunciation impulses, unconventional liberation pursued intensely.",
+      "effects": {
+        "overall": "Obsessive detachment, foreign renunciation, unconventional liberation",
+        "positive": "Foreign/unconventional spiritual paths pursued obsessively, renunciation intensely sought, liberation from foreign influences",
+        "challenging": "Over-detachment from relationships, foreign renunciation impulses, obsessive spirituality, appearing removed"
+      },
+      "health": "Spiritual obsession affects health, need balance, stress from intensity",
+      "career": "Foreign/unconventional spiritual work, renunciate paths pursued obsessively, past-life work",
+      "relationships": "Relationships release obsessively, family accepts intense spiritual focus, teaching transcends",
+      "timing_events": "Spiritual obsession peaks, foreign spiritual paths, unconventional breakthroughs"
+    },
+    "jupiter_ketu_ketu": {
+      "ad_lord": "ketu",
+      "pd_lord": "ketu",
+      "duration_days": 240,
+      "duration_months": 8,
+      "theme": "MAXIMUM DETACHMENT, peak liberation, enlightenment achieved",
+      "description": "Ketu within Jupiter-Ketu. Double Ketu amplification creates peak detachment, maximum liberation, enlightenment approaches or is achieved.",
+      "effects": {
+        "overall": "MAXIMUM DETACHMENT AND LIBERATION, peak enlightenment approach, ultimate freedom",
+        "positive": "Enlightenment may be achieved, complete liberation from worldly desires, past-life patterns completely release, ultimate freedom",
+        "challenging": "Extreme detachment from all relationships and duties, appearing completely removed from life, loss of all worldly connections"
+      },
+      "health": "Spiritual transcendence, past patterns completely release, energy becomes completely transcendent",
+      "career": "Complete spiritual focus, renunciation of worldly work, liberation work only",
+      "relationships": "All relationships completely release, family accepts complete renunciation, teaching completely transcends",
+      "timing_events": "PEAK ENLIGHTENMENT PERIOD, complete liberation, past-life karma completely resolves, ultimate freedom achieved"
+    },
+    "jupiter_sun_sun": {
+      "ad_lord": "sun",
+      "pd_lord": "sun",
+      "duration_days": 48,
+      "duration_months": 1.6,
+      "theme": "Divine authority, spiritual leadership, righteous action",
+      "description": "Jupiter (wisdom, dharma, guru) ruled by Sun (authority, soul, leadership). This is the spiritual apex of Jupiter's influence. Maximum spiritual insight, divine grace, and ability to guide others with moral clarity.",
+      "effects": {
+        "overall": "Peak spiritual wisdom, authoritative teaching, moral authority established",
+        "positive": "Divine inspiration, successful spiritual guidance, recognition as guru, enlightenment experiences, powerful decision-making",
+        "challenging": "Ego in spiritual matters, arrogance disguised as wisdom, authoritarian tendencies, burn-out from excessive work"
+      },
+      "health": "Strong vitality, positive energy, heart and spine benefits from spiritual practice, high confidence boosts immunity",
+      "career": "Promotion through moral conduct, teaching positions, leadership roles, spiritual guidance recognized, authority gained",
+      "relationships": "Respected in family and community, spouse/partner inspired by moral conduct, children admire guidance, mentorship roles flourish",
+      "timing_events": "Initiation into higher wisdom traditions, public recognition of spiritual work, major teaching opportunities, expanded influence"
+    },
+    "jupiter_moon_sun": {
+      "ad_lord": "moon",
+      "pd_lord": "sun",
+      "duration_days": 96,
+      "duration_months": 3.2,
+      "theme": "Emotional wisdom radiates authority, compassionate leadership, nurturing guidance recognized",
+      "description": "Jupiter-Moon's emotional nurture and compassion elevated by Sun's authority and recognition. The caring teacher becomes publicly recognized and esteemed. Wisdom flows through emotional intelligence with paternal authority.",
+      "effects": {
+        "overall": "Emotionally wise leadership, recognized compassion, paternal/maternal authority established",
+        "positive": "Mother/Father gains recognition, emotional wisdom brings public respect, nurturing leadership admired, compassionate guidance transforms others",
+        "challenging": "Emotional dependency in leadership roles, excessive sentimentality in authority, difficulty being firm when needed, family conflicts with public duties"
+      },
+      "health": "Emotional vitality strong, heart strengthened through compassion, breast/chest health excellent, immunity boosted by positive emotions",
+      "career": "Teaching/counseling leadership recognized, psychology/therapy gains prominence, family business gains authority, emotional coaching becomes profession",
+      "relationships": "Mother/Father gains honor and respect, spouse/partner admires emotional strength, children see nurturing authority, family reputation rises",
+      "timing_events": "Parent gains public recognition, family name rises in status, teaching/counseling role expands influence, emotional wisdom brings honor"
+    },
+    "jupiter_mars_sun": {
+      "ad_lord": "mars",
+      "pd_lord": "sun",
+      "duration_days": 144,
+      "duration_months": 4.8,
+      "theme": "Courageous wisdom recognized, warrior authority, dynamic leadership",
+      "description": "Jupiter-Mars' courageous action and warrior spirit elevated by Sun's authority and recognition. The brave teacher becomes a leader. Wisdom through action, authority through courage, leadership through righteous strength.",
+      "effects": {
+        "overall": "Dynamic leadership, courageous authority, warrior-sage energy",
+        "positive": "Leadership through decisive action, courage brings recognition, warrior-wisdom respected, authority established through strength, military/administrative success",
+        "challenging": "Aggressive authority, domineering leadership, courage becomes recklessness, authority used to dominate rather than guide"
+      },
+      "health": "High physical vitality and strength, excellent for athletic pursuits, heart strong, surgery/medical interventions successful if needed",
+      "career": "Military/administrative leadership flourishes, sports/athletics gain prominence, business leadership respected, protection/security roles rise",
+      "relationships": "Spouse/partner admires courage and authority, children see strong and wise leadership, family honor defended, respect in community",
+      "timing_events": "Leadership position gained, promotion to authority role, military/administrative success, athletic/martial achievements recognized"
+    },
+    "jupiter_mercury_sun": {
+      "ad_lord": "mercury",
+      "pd_lord": "sun",
+      "duration_days": 128,
+      "duration_months": 4.27,
+      "theme": "Intelligent wisdom recognized, communicative authority, scholarly leadership",
+      "description": "Jupiter-Mercury's learning and communication blessed by Sun's authority and recognition. The wise communicator becomes a recognized authority. Intellectual brilliance transforms into leadership, words carry paternal weight.",
+      "effects": {
+        "overall": "Authoritative communication, recognized intelligence, leadership through wisdom and speech",
+        "positive": "Teaching/writing career rises, communication brings authority, intellectual work recognized publicly, learning becomes profession, words carry power",
+        "challenging": "Intellectual arrogance, dogmatic communication, pride in knowledge, speaking with authority on matters poorly understood"
+      },
+      "health": "Mental clarity excellent, nerve health strong, vision benefits, speech enhanced, stomach/intestines function well",
+      "career": "Teaching/lecturing gains prominence, writing/publishing success, administrative communication roles, business communication leadership",
+      "relationships": "Intellectual partner gains respect, children benefit from wise guidance, siblings/relatives admire learning, mentorship roles multiply",
+      "timing_events": "Publication/teaching opportunity recognized, communication gains authority, learning achievement honored, intellectual work becomes profession"
+    },
+    "jupiter_jupiter_sun": {
+      "ad_lord": "jupiter",
+      "pd_lord": "sun",
+      "duration_days": 160,
+      "duration_months": 5.33,
+      "theme": "Wisdom magnified, guru recognized, spiritual authority supreme",
+      "description": "Jupiter Mahadasha and Antardasha both together, blessed by Sun's recognition and paternal authority. Maximum expansion of wisdom and dharma. The guru is recognized publicly. Spiritual authority at its zenith.",
+      "effects": {
+        "overall": "Supreme wisdom recognized, guru status established, spiritual authority magnified",
+        "positive": "Major spiritual advancement, guru recognition worldwide, children's prosperity, wealth multiplies, divine grace overflowing, enlightenment possible",
+        "challenging": "Excessive expansion, over-confidence, dogmatism, resistance to growth beyond current understanding, false guru complex"
+      },
+      "health": "Excellent health, vitality abundant, liver function optimal, immunity excellent, longevity enhanced",
+      "career": "Spiritual teaching gains prominence, wisdom-based business expands greatly, leadership roles multiply, advisory positions gained",
+      "relationships": "Children gain immensely, spouse/partner honored, family reputation rises, grandchildren benefit from legacy, mentorship multiplies",
+      "timing_events": "Major spiritual initiation, public recognition of teaching, children's major achievements, family expansion and prosperity"
+    },
+    "jupiter_venus_sun": {
+      "ad_lord": "venus",
+      "pd_lord": "sun",
+      "duration_days": 192,
+      "duration_months": 6.4,
+      "theme": "Love wisdom recognized, luxurious prosperity, artistic authority",
+      "description": "Jupiter-Venus' love and beauty blessed by Sun's authority and recognition. The lover becomes a leader. Artistic wisdom gains public recognition. Prosperity through grace and beauty, authority through refinement.",
+      "effects": {
+        "overall": "Prosperous leadership, beautiful authority, love-based power",
+        "positive": "Marriage/partnerships honored, artistic work recognized publicly, luxury and wealth multiply, wife/partner gains status, creativity flows with authority",
+        "challenging": "Excessive indulgence in luxury, using beauty to dominate, relationships through vanity, prosperity becomes superficial"
+      },
+      "health": "Vitality excellent, skin/complexion glows, reproductive health strong, eyes bright, overall physical beauty enhanced",
+      "career": "Artistic pursuits gain recognition, beauty/luxury business flourishes, hospitality/entertainment leadership, wealth through creative work",
+      "relationships": "Marriage/partnerships flourish with great honor, wife/partner gains prominence, romantic relationships blessed and publicly recognized, creative partnerships thrive",
+      "timing_events": "Marriage/major partnership honored, artistic work gains public recognition, wealth through beauty/creativity, luxury achievements celebrated"
+    },
+    "jupiter_saturn_sun": {
+      "ad_lord": "saturn",
+      "pd_lord": "sun",
+      "duration_days": 224,
+      "duration_months": 7.47,
+      "theme": "Disciplined wisdom honored, karmic authority, longevity and legacy",
+      "description": "Jupiter-Saturn's spiritual maturity and karma deeply honored by Sun's authority and recognition. The discipline becomes esteemed, the elder gains respect. Hard-won wisdom becomes public legacy. Authority through proven responsibility.",
+      "effects": {
+        "overall": "Established legacy, respected discipline, karmic authority recognized",
+        "positive": "Career reaches peak through persistence, elder status gained, responsibility brings honor, wisdom through experience recognized, longevity assured",
+        "challenging": "Heavy karmic burdens, delays in recognition, harsh discipline affects others, authority through fear rather than love, slowness frustrates"
+      },
+      "health": "Bones strengthen, longevity increases, chronic issues resolve slowly but steadily, endurance excellent",
+      "career": "Government/administrative positions reached, elderly advisory roles gained, long-term projects recognize fruition, legacy establishment",
+      "relationships": "Elder respect grows, family admires discipline, children learn responsibility, grandchildren honor legacy, spouse/partner supports through trials",
+      "timing_events": "Career reaches peak, recognition of lifelong work, legacy establishment, promotion after long service, elder honors received"
+    },
+    "jupiter_rahu_sun": {
+      "ad_lord": "rahu",
+      "pd_lord": "sun",
+      "duration_days": 256,
+      "duration_months": 8.53,
+      "theme": "Ambition and expansion, unconventional authority, progressive recognition",
+      "description": "Jupiter-Rahu's worldly expansion amplified by Sun's recognition and status. Ambitious growth comes into public light. Unconventional wisdom gains acceptance. Authority through breaking boundaries and expanding possibilities.",
+      "effects": {
+        "overall": "Ambitious achievement recognized, unconventional authority rises, expansive success",
+        "positive": "Career breakthrough into new domains, public recognition of innovative work, international expansion, leadership of new ventures, status/prestige gained",
+        "challenging": "Runaway ambition, unconventional behavior scandalizes, status anxiety, empty achievements, authority through deception discovered"
+      },
+      "health": "High vitality but nervous tension, must avoid intoxicants, detoxification beneficial, energy erratic, skin conditions possible",
+      "career": "International business expands, innovative ventures gain backing, new industry leadership, unconventional success recognized, status advancement",
+      "relationships": "Ambitious partnerships succeed, spouse/partner benefits from expansion, social status rises through ambitious projects, networking brings gains",
+      "timing_events": "Career breakthrough into new field, international opportunity recognized, ambitious project launched publicly, status elevation through innovation"
+    },
+    "jupiter_ketu_sun": {
+      "ad_lord": "ketu",
+      "pd_lord": "sun",
+      "duration_days": 160,
+      "duration_months": 5.33,
+      "theme": "Spiritual authority established, renunciate wisdom, transcendent recognition",
+      "description": "Jupiter-Ketu's spiritual detachment blessed by Sun's recognition and leadership. The renunciate becomes a guide. Transcendent wisdom gains public respect. Authority through enlightenment rather than power, leadership through letting go.",
+      "effects": {
+        "overall": "Spiritual authority recognized, detached leadership, transcendent wisdom honored",
+        "positive": "Spiritual teaching gains followers, enlightenment experiences deepen, detachment brings peace, renunciate wisdom respected, karmic resolution",
+        "challenging": "Excessive detachment from family, renunciation damages relationships, isolation despite recognition, difficulty in practical matters"
+      },
+      "health": "Spiritual practices enhance all aspects, detachment brings peace, chronic issues resolve through surrender, longevity through wisdom",
+      "career": "Spiritual teaching career flourishes, ashram/spiritual organization leadership, meditation/yoga teaching gains prominence, counseling through wisdom",
+      "relationships": "Spiritual partners/students gather, family learns from detachment, mentorship flourishes, spiritual descendants created, community respect grows",
+      "timing_events": "Spiritual teaching reaches wider audience, enlightenment experiences deepen, spiritual organization/ashram founded, transcendent recognition received"
+    }
+  }
+}

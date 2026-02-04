@@ -1,0 +1,1822 @@
+{
+  "mahadasha": "Venus",
+  "duration_years": 20,
+  "theme": "Love, beauty, marriage, arts, luxury, sensuality, comfort, vehicles, wife (for men)",
+  "antardasha_count": 9,
+  "pratyantardasha_per_ad": 9,
+  "total_combinations": 81,
+  "venus_antardasha": [
+    {
+      "antardasha": "Venus-Venus",
+      "ad_duration_years": 2.667,
+      "ad_theme": "Peak love, beauty, marriage, artistic expression",
+      "pratyantardasha": [
+        {
+          "pd_name": "Venus-Venus-Venus",
+          "duration_days": 120,
+          "sequence": "V-V-V",
+          "strength": "Supreme",
+          "theme": "MAXIMUM love, beauty, luxury, marriage peak, artistic mastery",
+          "effects": [
+            "Absolute peak in love affairs and marriage bliss",
+            "Exceptional artistic and creative expression",
+            "Luxury goods, vehicles, property acquisitions",
+            "Sexual fulfillment and sensual pleasures",
+            "Social popularity and charm at peak",
+            "Finances flourish through beauty/arts sector",
+            "Beauty treatments and physical transformation succeed"
+          ],
+          "health": "Excellent vitality, glowing skin, attraction increases",
+          "career": "Peak success in arts, entertainment, jewelry, cosmetics, luxury brands",
+          "relationships": "Marriage or deep commitment blossoms, spouse/partner deeply satisfied",
+          "romantic_intensity": "Extremely high",
+          "timing_events": "Best for: Wedding ceremonies, proposals, artistic performances, launching beauty business",
+          "duration_period": "~4 months into V-V Antardasha"
+        },
+        {
+          "pd_name": "Venus-Venus-Mercury",
+          "duration_days": 120,
+          "sequence": "V-V-Hg",
+          "strength": "Very Strong",
+          "theme": "Love with communication, artistic sales, romantic poetry, beauty writing",
+          "effects": [
+            "Romantic poetry, love letters, beautiful communication",
+            "Success in beauty/art marketing and sales",
+            "Attractive, witty, charismatic conversations",
+            "Social gatherings, dating, romantic encounters multiply",
+            "Writing about love, arts, beauty becomes profitable",
+            "Intellectual attraction in relationships"
+          ],
+          "health": "Excellent, skin glows, voice becomes melodious",
+          "career": "Success in beauty marketing, art criticism, romance writing, public relations",
+          "relationships": "Romantic communication improves, new attractions through conversations",
+          "romantic_intensity": "High with intellectual connection",
+          "timing_events": "Good for: Love proposals via communication, publishing beauty/arts content, dating online",
+          "duration_period": "~4 months into V-V Antardasha"
+        },
+        {
+          "pd_name": "Venus-Venus-Moon",
+          "duration_days": 120,
+          "sequence": "V-V-Mo",
+          "strength": "Very Strong",
+          "theme": "Emotional love, nurturing beauty, domestic bliss, artistic inspiration",
+          "effects": [
+            "Deep emotional love and marriage harmony",
+            "Nurturing, caring, emotionally attractive",
+            "Home becomes beautiful, comfort increases",
+            "Family relationships improve and strengthen",
+            "Artistic inspiration flows from emotions",
+            "Mother/feminine energies bring beauty blessings",
+            "Public affection and appreciation"
+          ],
+          "health": "Excellent digestion, emotional balance, reproductive health good",
+          "career": "Success in: home décor, hospitality, beauty at home, emotional arts",
+          "relationships": "Marriage/partnership becomes emotionally deep and secure",
+          "romantic_intensity": "High with emotional depth",
+          "timing_events": "Good for: Emotional commitments, home beautification, family gatherings",
+          "duration_period": "~4 months into V-V Antardasha"
+        },
+        {
+          "pd_name": "Venus-Venus-Sun",
+          "duration_days": 120,
+          "sequence": "V-V-Su",
+          "strength": "Very Strong",
+          "theme": "Confident beauty, regal charm, authoritative love, prestigious marriage",
+          "effects": [
+            "Confident, charming, magnetic personality",
+            "Love from high-status or authoritative partners",
+            "Generous, royal, luxurious lifestyle",
+            "Leading artistic/beauty projects with authority",
+            "Father/male figures bring beauty blessings",
+            "Government honors or prestigious recognition",
+            "Proud, commanding, respected in society"
+          ],
+          "health": "Excellent vitality, strong heart, radiant appearance",
+          "career": "Leadership in beauty/luxury sectors, prestigious artistic positions",
+          "relationships": "Marriage brings status elevation, partner highly respected",
+          "romantic_intensity": "High with pride and authority",
+          "timing_events": "Good for: High-profile relationships, leadership appointments, luxury acquisitions",
+          "duration_period": "~4 months into V-V Antardasha"
+        },
+        {
+          "pd_name": "Venus-Venus-Mars",
+          "duration_days": 120,
+          "sequence": "V-V-Ma",
+          "strength": "Very Strong",
+          "theme": "Passionate beauty, romantic intensity, aggressive charm, physical attraction",
+          "effects": [
+            "Intense romantic and sexual passion",
+            "Aggressive pursuit of love interests",
+            "Warrior-like determination in romantic endeavors",
+            "Physical fitness enhances beauty",
+            "Competitive success in beauty/art competitions",
+            "Confident, bold, risk-taking approach to love",
+            "Powerful attraction and magnetic charisma"
+          ],
+          "health": "High energy, strong physique, excellent stamina",
+          "career": "Success in competitive beauty contests, sports, martial arts combined with arts",
+          "relationships": "Intensely passionate romance, sexual satisfaction high",
+          "romantic_intensity": "VERY HIGH - passionate and aggressive",
+          "timing_events": "Good for: Passionate declarations, physical achievements, competitive arts",
+          "duration_period": "~4 months into V-V Antardasha"
+        },
+        {
+          "pd_name": "Venus-Venus-Jupiter",
+          "duration_days": 120,
+          "sequence": "V-V-Ju",
+          "strength": "Supreme",
+          "theme": "Blessed beauty, fortune in love, marriage expansion, artistic abundance",
+          "effects": [
+            "Great fortune in love and marriage",
+            "Expansion of beauty and luxury in life",
+            "Marriage brings financial abundance",
+            "Wisdom in romantic choices",
+            "Artistic talents blessed with success",
+            "Spiritual beauty becomes visible",
+            "Children or family expansion possible",
+            "Religious/spiritual marriage ceremonies"
+          ],
+          "health": "Excellent health, vitality increases, reproductive blessings",
+          "career": "Peak success in arts, beauty, expansion of business, teaching beauty arts",
+          "relationships": "Marriage or partnership brings expansion, children, financial blessing",
+          "romantic_intensity": "High with wisdom and expansion",
+          "timing_events": "Best for: Marriage, children planning, major relationship milestones, business expansion",
+          "duration_period": "~4 months into V-V Antardasha"
+        },
+        {
+          "pd_name": "Venus-Venus-Saturn",
+          "duration_days": 120,
+          "sequence": "V-V-Sa",
+          "strength": "Strong",
+          "theme": "Mature love, enduring beauty, responsibility in relationships, artistic discipline",
+          "effects": [
+            "Deep, enduring love based on commitment",
+            "Mature, responsible approach to marriage",
+            "Long-lasting beauty and skin care success",
+            "Delayed gratification yields strong results",
+            "Patience in artistic endeavors brings mastery",
+            "Older partners or age-gap relationships",
+            "Traditional marriage ceremonies and values"
+          ],
+          "health": "Skin care discipline shows results, bone health, joint flexibility",
+          "career": "Success through: traditional crafts, jewelry making, sustained artistic efforts",
+          "relationships": "Marriage based on duty and commitment, long-lasting partnership",
+          "romantic_intensity": "Moderate - mature and enduring",
+          "timing_events": "Good for: Committed long-term relationships, traditional ceremonies, sustained efforts",
+          "duration_period": "~4 months into V-V Antardasha"
+        },
+        {
+          "pd_name": "Venus-Venus-Rahu",
+          "duration_days": 120,
+          "sequence": "V-V-Ra",
+          "strength": "Strong",
+          "theme": "Obsessive beauty, foreign romance, unconventional love, ambitious arts",
+          "effects": [
+            "Obsessive love or attraction",
+            "Foreign partner or international romance",
+            "Unconventional relationship choices",
+            "Ambitious artistic pursuits and innovation",
+            "Excessive luxury desires and spending",
+            "Social status obsession",
+            "Technology-enabled romance (online dating)"
+          ],
+          "health": "Excess can cause skin issues, need for moderation in sensuality",
+          "career": "Success in: international beauty business, unconventional arts, foreign trade",
+          "relationships": "Foreign partner likely, unconventional arrangements, obsessive attachment possible",
+          "romantic_intensity": "High but obsessive",
+          "timing_events": "Good for: International relationships, unconventional partnerships, foreign investments",
+          "duration_period": "~4 months into V-V Antardasha"
+        },
+        {
+          "pd_name": "Venus-Venus-Ketu",
+          "duration_days": 120,
+          "sequence": "V-V-Ke",
+          "strength": "Moderate",
+          "theme": "Spiritual love, detachment from pleasures, artistic transcendence, inner beauty",
+          "effects": [
+            "Spiritual love and marriage",
+            "Detachment from material beauty obsession",
+            "Inner beauty and spiritual transformation",
+            "Mystical or transcendent artistic experiences",
+            "Previous life partner recognitions",
+            "Artistic focus on spiritual themes",
+            "Renunciation of superficial pleasures"
+          ],
+          "health": "Spiritual healing, reduced need for sensuality, meditation benefits",
+          "career": "Success in: spiritual arts, meditation practices, mystical creativity, ascetic crafts",
+          "relationships": "Spiritual marriage focus, detachment from ego in love",
+          "romantic_intensity": "Low - transcendent and detached",
+          "timing_events": "Good for: Spiritual commitments, artistic transcendence, inner transformation",
+          "duration_period": "~4 months into V-V Antardasha"
+        }
+      ]
+    },
+    {
+      "antardasha": "Venus-Mercury",
+      "ad_duration_years": 2.133,
+      "ad_theme": "Romantic communication, beauty marketing, artistic commerce, witty charm",
+      "pratyantardasha": [
+        {
+          "pd_name": "Venus-Mercury-Venus",
+          "duration_days": 96,
+          "sequence": "V-Hg-V",
+          "strength": "Very Strong",
+          "theme": "Charming romantic communication, beauty sales, artistic marketing",
+          "effects": [
+            "Beautiful, persuasive communication attracts partners",
+            "Success in beauty/art marketing and sales",
+            "Writing about love and beauty becomes profitable",
+            "Social media presence for beauty/arts grows",
+            "Witty, charming conversations attract admirers",
+            "Business partnerships in beauty sector flourish"
+          ],
+          "health": "Good skin, attractive voice, nervous system balanced",
+          "career": "Peak in beauty marketing, art sales, cosmetics business, public relations",
+          "relationships": "Romantic attraction through communication, dating multiplies, social popularity",
+          "romantic_intensity": "High with intellectual element",
+          "timing_events": "Good for: Launching beauty campaigns, publishing, social media growth",
+          "duration_period": "~3 months into V-Hg Antardasha"
+        },
+        {
+          "pd_name": "Venus-Mercury-Mercury",
+          "duration_days": 96,
+          "sequence": "V-Hg-Hg",
+          "strength": "Strong",
+          "theme": "Trade in beauty, mercantile charm, gossip attracts, deals in arts",
+          "effects": [
+            "Success in beauty trade and commerce",
+            "Multiple short romantic interests",
+            "Mercantile charm and business acumen",
+            "Sibling/relative relationships improve",
+            "Travel for beauty/art business",
+            "Contracts and deals in beauty sector finalize"
+          ],
+          "health": "Good nervous system, some skin concerns from stress possible",
+          "career": "Success in: beauty retail, art dealers, cosmetics trade, agents, brokers",
+          "relationships": "Multiple attractive interests, casual romantic encounters, networking increases",
+          "romantic_intensity": "Moderate - scattered attention",
+          "timing_events": "Good for: Business deals, trade missions, short romantic encounters",
+          "duration_period": "~3 months into V-Hg Antardasha"
+        },
+        {
+          "pd_name": "Venus-Mercury-Moon",
+          "duration_days": 96,
+          "sequence": "V-Hg-Mo",
+          "strength": "Strong",
+          "theme": "Emotional communication, domestic beauty commerce, nurturing arts trade",
+          "effects": [
+            "Emotional communication attracts listeners",
+            "Family beauty business ventures succeed",
+            "Nurturing, caring communication style",
+            "Mother/feminine support for artistic endeavors",
+            "Home-based beauty/art business flourishes",
+            "Public appreciation for emotional expressions"
+          ],
+          "health": "Good emotional balance, some stress-related skin issues possible",
+          "career": "Success in: home beauty services, family business, emotional arts",
+          "relationships": "Emotional communication deepens bonds, family relationships improve",
+          "romantic_intensity": "Moderate with emotional depth",
+          "timing_events": "Good for: Family business launches, emotional expressions, home projects",
+          "duration_period": "~3 months into V-Hg Antardasha"
+        },
+        {
+          "pd_name": "Venus-Mercury-Sun",
+          "duration_days": 96,
+          "sequence": "V-Hg-Su",
+          "strength": "Strong",
+          "theme": "Authoritative beauty commerce, confident charm, leadership in arts trade",
+          "effects": [
+            "Confident, authoritative communication attracts respect",
+            "Leadership in beauty/art business ventures",
+            "Father/male support for artistic pursuits",
+            "Government contracts in beauty sector",
+            "Prestigious communications about beauty arts",
+            "Public recognition as beauty/art authority"
+          ],
+          "health": "Good vitality, confident appearance, heart health",
+          "career": "Leadership in beauty business, prestigious art commissions, authority in sector",
+          "relationships": "Authoritative charm attracts high-status partners, respect increases",
+          "romantic_intensity": "High with authority",
+          "timing_events": "Good for: Leadership appointments, prestigious contracts, authority building",
+          "duration_period": "~3 months into V-Hg Antardasha"
+        },
+        {
+          "pd_name": "Venus-Mercury-Mars",
+          "duration_days": 96,
+          "sequence": "V-Hg-Ma",
+          "strength": "Strong",
+          "theme": "Aggressive marketing, competitive beauty commerce, passionate deals, sharp wit",
+          "effects": [
+            "Aggressive marketing and sales tactics succeed",
+            "Sharp, cutting wit attracts and entertains",
+            "Competitive advantage in beauty/art business",
+            "Quick, forceful decision-making in deals",
+            "Physical attractiveness increases through fitness",
+            "Warrior-like determination in business negotiations"
+          ],
+          "health": "High energy, strong physique, possible stress-related issues",
+          "career": "Success in: competitive beauty markets, aggressive marketing, forceful sales",
+          "relationships": "Passionate romantic communications, sexually attractive, competitive pursuit",
+          "romantic_intensity": "Very high - passionate and aggressive",
+          "timing_events": "Good for: Competitive campaigns, aggressive business moves, bold declarations",
+          "duration_period": "~3 months into V-Hg Antardasha"
+        },
+        {
+          "pd_name": "Venus-Mercury-Jupiter",
+          "duration_days": 96,
+          "sequence": "V-Hg-Ju",
+          "strength": "Very Strong",
+          "theme": "Expanded beauty commerce, wise communication, blessed deals, profitable arts trade",
+          "effects": [
+            "Expansion of beauty/art business ventures",
+            "Wise, eloquent communication attracts followers",
+            "Financial abundance through art/beauty trade",
+            "Publishing success about beauty and arts",
+            "Education and teaching beauty/arts succeed",
+            "Blessed contracts and favorable deals"
+          ],
+          "health": "Excellent health, good digestion, vitality high",
+          "career": "Peak success in beauty business expansion, art education, publishing, trading",
+          "relationships": "Communication brings expansion, beneficial partnerships, children/family growth",
+          "romantic_intensity": "High with wisdom and expansion",
+          "timing_events": "Best for: Business expansion, publishing, teaching appointments, major deals",
+          "duration_period": "~3 months into V-Hg Antardasha"
+        },
+        {
+          "pd_name": "Venus-Mercury-Saturn",
+          "duration_days": 96,
+          "sequence": "V-Hg-Sa",
+          "strength": "Moderate-Strong",
+          "theme": "Disciplined beauty commerce, serious communication, sustained arts trade, careful deals",
+          "effects": [
+            "Disciplined approach to beauty business",
+            "Serious, mature communication",
+            "Long-term contracts and sustainable deals",
+            "Skilled craftsmanship in beauty/arts trade",
+            "Delayed rewards but solid success",
+            "Structured business partnerships"
+          ],
+          "health": "Good with discipline, bone health, joint care needed",
+          "career": "Success through: disciplined arts practice, traditional beauty crafts, sustained efforts",
+          "relationships": "Serious, long-term communication focus, mature partnerships",
+          "romantic_intensity": "Moderate - mature and disciplined",
+          "timing_events": "Good for: Long-term contracts, sustained business efforts, traditional partnerships",
+          "duration_period": "~3 months into V-Hg Antardasha"
+        },
+        {
+          "pd_name": "Venus-Mercury-Rahu",
+          "duration_days": 96,
+          "sequence": "V-Hg-Ra",
+          "strength": "Moderate-Strong",
+          "theme": "Ambitious beauty marketing, foreign trade in arts, unconventional commerce, obsessive deals",
+          "effects": [
+            "Ambitious expansion in foreign markets",
+            "Unconventional business methods succeed",
+            "Technology-driven beauty/art marketing",
+            "Obsessive communication and networking",
+            "Foreign partners and international deals",
+            "Excessive promises may backfire"
+          ],
+          "health": "Some nervousness, skin issues from stress possible",
+          "career": "Success in: international beauty trade, foreign commerce, tech-driven marketing",
+          "relationships": "Foreign communications, unconventional partnerships, networking obsession",
+          "romantic_intensity": "High but obsessive",
+          "timing_events": "Good for: International deals, foreign partnerships, tech marketing launches",
+          "duration_period": "~3 months into V-Hg Antardasha"
+        },
+        {
+          "pd_name": "Venus-Mercury-Ketu",
+          "duration_days": 96,
+          "sequence": "V-Hg-Ke",
+          "strength": "Moderate",
+          "theme": "Spiritual communication, detached arts trade, mystical beauty insights, transcendent commerce",
+          "effects": [
+            "Mystical or spiritual communication",
+            "Detachment from material beauty business",
+            "Spiritual insights about arts and beauty",
+            "Transcendent writing or teachings",
+            "Previous life business recognitions",
+            "Reduced interest in commerce or profits"
+          ],
+          "health": "Spiritual healing through communication, meditation benefits",
+          "career": "Success in: spiritual teachings, transcendent arts, mystical writings",
+          "relationships": "Spiritual communication focus, detachment from romantic pursuits",
+          "romantic_intensity": "Low - transcendent",
+          "timing_events": "Good for: Spiritual teachings, mystical writings, inner transformation",
+          "duration_period": "~3 months into V-Hg Antardasha"
+        }
+      ]
+    },
+    {
+      "antardasha": "Venus-Moon",
+      "ad_duration_years": 2.133,
+      "ad_theme": "Emotional beauty, domestic bliss, nurturing love, emotional arts, family harmony",
+      "pratyantardasha": [
+        {
+          "pd_name": "Venus-Moon-Venus",
+          "duration_days": 96,
+          "sequence": "V-Mo-V",
+          "strength": "Very Strong",
+          "theme": "Emotional love, nurturing beauty, deep domestic happiness, romantic sensitivity",
+          "effects": [
+            "Deep emotional love and attachment",
+            "Nurturing, caring, attractive to others",
+            "Home becomes beautiful and comfortable",
+            "Emotional expressions increase attraction",
+            "Mother/feminine support brings blessings",
+            "Public appreciation for beauty and care",
+            "Family relationships deepen"
+          ],
+          "health": "Excellent digestion, reproductive health good, emotional balance",
+          "career": "Success in: home décor, hospitality, emotional arts, beauty at home",
+          "relationships": "Marriage/partnership becomes deeply emotional and secure",
+          "romantic_intensity": "Very high with emotional depth",
+          "timing_events": "Good for: Home beautification, family commitments, emotional bonds",
+          "duration_period": "~3 months into V-Mo Antardasha"
+        },
+        {
+          "pd_name": "Venus-Moon-Mercury",
+          "duration_days": 96,
+          "sequence": "V-Mo-Hg",
+          "strength": "Strong",
+          "theme": "Emotional communication, nurturing words, family conversations, caring expression",
+          "effects": [
+            "Beautiful, caring, emotionally intelligent communication",
+            "Writing about emotions and beauty succeeds",
+            "Family communication improves",
+            "Sibling/relative relationships deepen",
+            "Public speaking with emotional appeal",
+            "Mercantile skills with emotional touch"
+          ],
+          "health": "Good nervous system, emotional balance, skin health",
+          "career": "Success in: emotional writing, family counseling, hospitality business",
+          "relationships": "Emotional communication deepens bonds, caring expressions attract",
+          "romantic_intensity": "High with emotional intelligence",
+          "timing_events": "Good for: Family talks, emotional publications, bonding activities",
+          "duration_period": "~3 months into V-Mo Antardasha"
+        },
+        {
+          "pd_name": "Venus-Moon-Moon",
+          "duration_days": 96,
+          "sequence": "V-Mo-Mo",
+          "strength": "Strong",
+          "theme": "Maximum emotional sensitivity, maternal beauty, public affection, nurturing focus",
+          "effects": [
+            "Extreme emotional sensitivity and receptivity",
+            "Maternal, nurturing behavior patterns",
+            "Public affection and emotional displays",
+            "Strong mother/feminine influence",
+            "Mood-dependent attractiveness",
+            "Emotional vulnerability possible"
+          ],
+          "health": "Reproductive health good, digestive health, mood swings possible",
+          "career": "Success in: childcare, nursing, hospitality, beauty at home",
+          "relationships": "Emotionally intense, dependent on mood, family focus",
+          "romantic_intensity": "Very high but mood-dependent",
+          "timing_events": "Good for: Family events, emotional commitments, home projects",
+          "duration_period": "~3 months into V-Mo Antardasha"
+        },
+        {
+          "pd_name": "Venus-Moon-Sun",
+          "duration_days": 96,
+          "sequence": "V-Mo-Su",
+          "strength": "Strong",
+          "theme": "Confident emotional expression, authoritative nurturing, regal home, proud family",
+          "effects": [
+            "Confident emotional expression",
+            "Father/male support brings blessings",
+            "Authoritative but nurturing leadership",
+            "Proud of family and home",
+            "Generous, luxurious domestic life",
+            "Public recognition for care and nurturing"
+          ],
+          "health": "Good vitality, strong heart, radiant appearance",
+          "career": "Leadership in: hospitality, home decoration, family business, public service",
+          "relationships": "Authoritative but caring love, family pride, respected in community",
+          "romantic_intensity": "High with pride and authority",
+          "timing_events": "Good for: Family pride moments, leadership in family, community service",
+          "duration_period": "~3 months into V-Mo Antardasha"
+        },
+        {
+          "pd_name": "Venus-Moon-Mars",
+          "duration_days": 96,
+          "sequence": "V-Mo-Ma",
+          "strength": "Strong",
+          "theme": "Passionate emotional love, aggressive protection, intense family devotion, fierce beauty",
+          "effects": [
+            "Intensely passionate and protective love",
+            "Aggressive defense of family/home",
+            "Warrior-like devotion to loved ones",
+            "Physical fitness enhances emotional attractiveness",
+            "Competitive in protecting family interests",
+            "Passionate emotional expressions"
+          ],
+          "health": "High energy, strong physique, passionate vitality",
+          "career": "Success in: sports linked to family, protective services, passionate hospitality",
+          "relationships": "Intensely passionate love, protective devotion, sexually attractive",
+          "romantic_intensity": "VERY HIGH - passionate and protective",
+          "timing_events": "Good for: Passionate declarations, protective actions, family defense",
+          "duration_period": "~3 months into V-Mo Antardasha"
+        },
+        {
+          "pd_name": "Venus-Moon-Jupiter",
+          "duration_days": 96,
+          "sequence": "V-Mo-Ju",
+          "strength": "Very Strong",
+          "theme": "Blessed emotional love, fortunate family, expanded nurturing, marriage expansion",
+          "effects": [
+            "Great fortune in family and home life",
+            "Children or family expansion",
+            "Wisdom in emotional matters",
+            "Spiritual family connections",
+            "Generous, nurturing lifestyle",
+            "Mother/feminine support brings abundance"
+          ],
+          "health": "Excellent health, reproductive blessings, vitality high",
+          "career": "Success in: family business, childcare, teaching, hospitality expansion",
+          "relationships": "Marriage brings family blessing, children, expansion of happiness",
+          "romantic_intensity": "High with wisdom and blessing",
+          "timing_events": "Best for: Marriage, children planning, family celebrations, expansion",
+          "duration_period": "~3 months into V-Mo Antardasha"
+        },
+        {
+          "pd_name": "Venus-Moon-Saturn",
+          "duration_days": 96,
+          "sequence": "V-Mo-Sa",
+          "strength": "Moderate-Strong",
+          "theme": "Mature family love, responsible nurturing, enduring home, disciplined emotional care",
+          "effects": [
+            "Mature, responsible approach to family",
+            "Long-lasting emotional bonds",
+            "Discipline in nurturing and caring",
+            "Older parents or parent-like figures",
+            "Steady, reliable emotional support",
+            "Traditional family values"
+          ],
+          "health": "Good with discipline, bone health, reproductive care",
+          "career": "Success through: traditional family crafts, sustained hospitality, elder care",
+          "relationships": "Mature, long-lasting family bonds, duty-based partnerships",
+          "romantic_intensity": "Moderate - mature and responsible",
+          "timing_events": "Good for: Long-term family commitments, traditional ceremonies, elder care",
+          "duration_period": "~3 months into V-Mo Antardasha"
+        },
+        {
+          "pd_name": "Venus-Moon-Rahu",
+          "duration_days": 96,
+          "sequence": "V-Mo-Ra",
+          "strength": "Moderate-Strong",
+          "theme": "Obsessive family love, foreign mother figures, unconventional home, ambitious family expansion",
+          "effects": [
+            "Obsessive attachment to family/home",
+            "Foreign family connections or immigration",
+            "Unconventional family arrangements",
+            "Ambitious family expansion plans",
+            "Mother/feminine obsession possible",
+            "Technology in home life (smart homes)"
+          ],
+          "health": "Some stress-related digestive issues, moderation needed",
+          "career": "Success in: international hospitality, foreign family business, real estate expansion",
+          "relationships": "Foreign family connections, unconventional living arrangements, obsessive bonds",
+          "romantic_intensity": "High but obsessive",
+          "timing_events": "Good for: International family expansion, unconventional homes, foreign real estate",
+          "duration_period": "~3 months into V-Mo Antardasha"
+        },
+        {
+          "pd_name": "Venus-Moon-Ketu",
+          "duration_days": 96,
+          "sequence": "V-Mo-Ke",
+          "strength": "Moderate",
+          "theme": "Spiritual family love, detached nurturing, transcendent home, past life family",
+          "effects": [
+            "Spiritual family connections",
+            "Detachment from material family obsession",
+            "Transcendent love and compassion",
+            "Past life family recognitions",
+            "Reduced interest in nurturing/caregiving",
+            "Mystical home experiences"
+          ],
+          "health": "Spiritual healing, reduced stress, meditation benefits",
+          "career": "Success in: spiritual family teachings, transcendent hospitality, mystical arts",
+          "relationships": "Spiritual family focus, detachment from emotional dependency",
+          "romantic_intensity": "Low - transcendent and detached",
+          "timing_events": "Good for: Spiritual family gatherings, past life healing, transcendence",
+          "duration_period": "~3 months into V-Mo Antardasha"
+        }
+      ]
+    },
+    {
+      "antardasha": "Venus-Sun",
+      "ad_duration_years": 2.133,
+      "ad_theme": "Confident beauty, authoritative love, royal charm, prestigious marriage, powerful charm",
+      "pratyantardasha": [
+        {
+          "pd_name": "Venus-Sun-Venus",
+          "duration_days": 96,
+          "sequence": "V-Su-V",
+          "strength": "Very Strong",
+          "theme": "Regal beauty, confident love, authoritative charm, prestigious marriage, royal luxury",
+          "effects": [
+            "Radiant, confident, authoritative charm",
+            "Love from prestigious or high-status partners",
+            "Regal, generous, luxurious lifestyle",
+            "Commanding physical beauty and presence",
+            "Government honors and official recognition",
+            "Leading artistic/beauty projects with power"
+          ],
+          "health": "Excellent vitality, glowing skin, strong heart, radiant appearance",
+          "career": "Leadership in beauty/luxury sectors, prestigious art commissions, authority building",
+          "relationships": "Marriage to high-status partner, respected and honored in community",
+          "romantic_intensity": "Very high with pride and authority",
+          "timing_events": "Good for: Prestigious relationships, leadership appointments, luxury acquisitions",
+          "duration_period": "~3 months into V-Su Antardasha"
+        },
+        {
+          "pd_name": "Venus-Sun-Mercury",
+          "duration_days": 96,
+          "sequence": "V-Su-Hg",
+          "strength": "Strong",
+          "theme": "Authoritative communication, confident marketing, leadership in commerce, prestigious sales",
+          "effects": [
+            "Authoritative, commanding communication",
+            "Success in authoritative beauty marketing",
+            "Leadership in business communications",
+            "Public speaking with confidence",
+            "Prestigious business partnerships",
+            "Government/official dealings in commerce"
+          ],
+          "health": "Good skin, strong voice, confident appearance",
+          "career": "Leadership in beauty marketing, prestigious communications, authoritative sales",
+          "relationships": "Commanding attraction through communication, leadership respect",
+          "romantic_intensity": "High with authority and confidence",
+          "timing_events": "Good for: Leadership communications, prestigious campaigns, authoritative announcements",
+          "duration_period": "~3 months into V-Su Antardasha"
+        },
+        {
+          "pd_name": "Venus-Sun-Moon",
+          "duration_days": 96,
+          "sequence": "V-Su-Mo",
+          "strength": "Strong",
+          "theme": "Proud emotional expression, authoritative nurturing, regal home, confident family",
+          "effects": [
+            "Confident emotional expression",
+            "Authoritative but generous family leadership",
+            "Proud of home and family",
+            "Father/male figures bring support",
+            "Public affection and emotional displays",
+            "Regal domestic life"
+          ],
+          "health": "Good vitality, strong heart, radiant appearance, reproductive health",
+          "career": "Leadership in hospitality, home luxury, family business, public service",
+          "relationships": "Authoritative but caring love, family pride, respected leadership",
+          "romantic_intensity": "High with pride and authority",
+          "timing_events": "Good for: Family pride moments, leadership in family, community authority",
+          "duration_period": "~3 months into V-Su Antardasha"
+        },
+        {
+          "pd_name": "Venus-Sun-Sun",
+          "duration_days": 96,
+          "sequence": "V-Su-Su",
+          "strength": "Very Strong",
+          "theme": "Maximum radiance, supreme authority, commanding beauty, regal presence, royal power",
+          "effects": [
+            "Extreme radiance and magnetism",
+            "Supreme authority and commanding presence",
+            "Generosity and royal lifestyle",
+            "Father/male figures highly influential",
+            "Government positions and honors",
+            "Leading and controlling others easily"
+          ],
+          "health": "Excellent vitality, glowing complexion, strong heart, peak physical power",
+          "career": "Peak leadership, government positions, prestigious authority, commanding influence",
+          "relationships": "Marriage to very high-status partner, regal relationship, respected authority",
+          "romantic_intensity": "VERY HIGH - authoritative and commanding",
+          "timing_events": "Best for: Government appointments, prestigious relationships, authority positions",
+          "duration_period": "~3 months into V-Su Antardasha"
+        },
+        {
+          "pd_name": "Venus-Sun-Mars",
+          "duration_days": 96,
+          "sequence": "V-Su-Ma",
+          "strength": "Very Strong",
+          "theme": "Aggressive confidence, powerful beauty, warrior charm, commanding passion, forceful leadership",
+          "effects": [
+            "Powerfully attractive and commanding",
+            "Aggressive pursuit of high-status relationships",
+            "Forceful leadership and authority",
+            "Competitive domination in beauty/arts",
+            "Physical power and athletic achievement",
+            "Warrior-like determination and courage"
+          ],
+          "health": "Excellent strength, high energy, powerful physique, peak vitality",
+          "career": "Leadership in competitive beauty, sports authority, commanding business",
+          "relationships": "Intensely passionate with commanding authority, dominating attraction",
+          "romantic_intensity": "VERY HIGH - aggressive and powerful",
+          "timing_events": "Good for: Competitive victories, forceful leadership, ambitious conquests",
+          "duration_period": "~3 months into V-Su Antardasha"
+        },
+        {
+          "pd_name": "Venus-Sun-Jupiter",
+          "duration_days": 96,
+          "sequence": "V-Su-Ju",
+          "strength": "Supreme",
+          "theme": "Blessed authority, fortunate leadership, expansive luxury, royal abundance, divine power",
+          "effects": [
+            "Great fortune in love and marriage",
+            "Expansion of authority and power",
+            "Generous, luxurious, magnificent lifestyle",
+            "Spiritual authority and wisdom",
+            "Marriage brings expansion and blessing",
+            "Leadership recognized and honored"
+          ],
+          "health": "Excellent health, high vitality, reproductive blessings, peak power",
+          "career": "Supreme leadership, expansion of authority, prestigious expansion, divine favor",
+          "relationships": "Marriage brings great fortune, expansion, blessing, high-status elevation",
+          "romantic_intensity": "VERY HIGH - blessed and expansive",
+          "timing_events": "Best for: Supreme leadership, marriage, major expansion, divine recognition",
+          "duration_period": "~3 months into V-Su Antardasha"
+        },
+        {
+          "pd_name": "Venus-Sun-Saturn",
+          "duration_days": 96,
+          "sequence": "V-Su-Sa",
+          "strength": "Strong",
+          "theme": "Mature authority, responsible leadership, enduring power, disciplined luxury",
+          "effects": [
+            "Mature, responsible leadership",
+            "Long-lasting authority based on discipline",
+            "Older authoritative figures bring support",
+            "Sustained power and influence",
+            "Traditional authority and respect",
+            "Powerful but restrained"
+          ],
+          "health": "Good with discipline, bone health, sustained vitality",
+          "career": "Mature leadership, sustained authority, traditional positions of power",
+          "relationships": "Mature authority in relationships, long-lasting power, duty-based leadership",
+          "romantic_intensity": "Moderate - mature and responsible",
+          "timing_events": "Good for: Long-term authority positions, traditional leadership, sustained power",
+          "duration_period": "~3 months into V-Su Antardasha"
+        },
+        {
+          "pd_name": "Venus-Sun-Rahu",
+          "duration_days": 96,
+          "sequence": "V-Su-Ra",
+          "strength": "Moderate-Strong",
+          "theme": "Ambitious authority, obsessive power, unconventional leadership, foreign status",
+          "effects": [
+            "Ambitious pursuit of power and status",
+            "Obsessive desire for authority",
+            "Unconventional leadership styles",
+            "Foreign partnerships and status",
+            "Government or official ambitions",
+            "Excessive pride or arrogance possible"
+          ],
+          "health": "Good vitality but stress from ambition possible",
+          "career": "Ambitious leadership, foreign authority, unconventional power structures",
+          "relationships": "Foreign high-status relationships, obsessive power dynamics",
+          "romantic_intensity": "High with obsessive ambition",
+          "timing_events": "Good for: Ambitious authority projects, foreign leadership, status pursuit",
+          "duration_period": "~3 months into V-Su Antardasha"
+        },
+        {
+          "pd_name": "Venus-Sun-Ketu",
+          "duration_days": 96,
+          "sequence": "V-Su-Ke",
+          "strength": "Moderate",
+          "theme": "Spiritual authority, detached power, transcendent leadership, inner radiance",
+          "effects": [
+            "Spiritual authority and wisdom",
+            "Detachment from material power obsession",
+            "Transcendent leadership and influence",
+            "Inner radiance and enlightenment",
+            "Past life authority recognitions",
+            "Surrender of external power"
+          ],
+          "health": "Spiritual healing, reduced stress, meditation benefits",
+          "career": "Success in: spiritual leadership, transcendent authority, mystical influence",
+          "relationships": "Spiritual authority focus, detachment from romantic pursuits",
+          "romantic_intensity": "Low - transcendent and detached",
+          "timing_events": "Good for: Spiritual leadership, transcendent authority, inner enlightenment",
+          "duration_period": "~3 months into V-Su Antardasha"
+        }
+      ]
+    },
+    {
+      "antardasha": "Venus-Mars",
+      "ad_duration_years": 1.6,
+      "ad_theme": "Passionate beauty, intense love, aggressive romance, sexual intensity, warrior charm, competitive arts",
+      "pratyantardasha": [
+        {
+          "pd_name": "Venus-Mars-Venus",
+          "duration_days": 72,
+          "sequence": "V-Ma-V",
+          "strength": "Very Strong",
+          "theme": "Intensely passionate love, warrior charm, sexual intensity, aggressive beauty, fiery romance",
+          "effects": [
+            "EXTREMELY passionate romantic and sexual desire",
+            "Warrior-like pursuit of beloved",
+            "Physical beauty and fitness peak",
+            "Aggressive, bold romantic declarations",
+            "Intense magnetic charm and attraction",
+            "Competitive advantage in love"
+          ],
+          "health": "Peak physical fitness, excellent stamina, strong sexual vitality",
+          "career": "Success in: competitive beauty, sports, martial arts, passionate arts",
+          "relationships": "Intensely passionate affair or romance, sexually satisfied",
+          "romantic_intensity": "SUPREME - extremely passionate and intense",
+          "timing_events": "Good for: Passionate declarations, physical achievements, intense romantic encounters",
+          "duration_period": "~2.4 months into V-Ma Antardasha"
+        },
+        {
+          "pd_name": "Venus-Mars-Mercury",
+          "duration_days": 72,
+          "sequence": "V-Ma-Hg",
+          "strength": "Strong",
+          "theme": "Aggressive communication, passionate words, witty arguments, forceful persuasion",
+          "effects": [
+            "Aggressive, persuasive communication",
+            "Sharp, cutting wit and humor",
+            "Forceful business negotiations",
+            "Quick, passionate speech",
+            "Fighting spirit in communications",
+            "Competitive advantage in sales/trade"
+          ],
+          "health": "Good energy, some stress possible from aggression",
+          "career": "Success in: aggressive marketing, forceful sales, competitive business",
+          "relationships": "Passionate communication, aggressive attraction, quick-witted charm",
+          "romantic_intensity": "Very high - aggressive and passionate",
+          "timing_events": "Good for: Aggressive campaigns, forceful proposals, competitive deals",
+          "duration_period": "~2.4 months into V-Ma Antardasha"
+        },
+        {
+          "pd_name": "Venus-Mars-Moon",
+          "duration_days": 72,
+          "sequence": "V-Ma-Mo",
+          "strength": "Strong",
+          "theme": "Passionately protective love, fierce family devotion, aggressive nurturing, intense domestic",
+          "effects": [
+            "Protective, fierce devotion to loved ones",
+            "Aggressive defense of family/home",
+            "Passionate emotional expressions",
+            "Intense domestic life and passion",
+            "Physical attraction through fitness",
+            "Competitive family protection"
+          ],
+          "health": "High energy, strong physique, passionate vitality",
+          "career": "Success in: protective services, family business, passionate hospitality",
+          "relationships": "Intensely passionate love, protective and fierce devotion",
+          "romantic_intensity": "VERY HIGH - passionate and protective",
+          "timing_events": "Good for: Passionate family moments, protective actions, intense bonds",
+          "duration_period": "~2.4 months into V-Ma Antardasha"
+        },
+        {
+          "pd_name": "Venus-Mars-Sun",
+          "duration_days": 72,
+          "sequence": "V-Ma-Su",
+          "strength": "Very Strong",
+          "theme": "Aggressive authority, warrior power, forceful leadership, commanding passion, powerful conquest",
+          "effects": [
+            "Aggressively commanding and authoritative",
+            "Warrior leadership and power",
+            "Forceful conquests and victories",
+            "Powerful physical presence",
+            "Dominant authority and control",
+            "Fearless leadership and initiative"
+          ],
+          "health": "Excellent strength, peak power, high energy, warrior vitality",
+          "career": "Aggressive leadership, forceful authority, military/warrior roles",
+          "relationships": "Dominantly attractive, aggressively passionate, commanding respect",
+          "romantic_intensity": "VERY HIGH - aggressive and powerful",
+          "timing_events": "Good for: Aggressive leadership, conquests, powerful initiatives",
+          "duration_period": "~2.4 months into V-Ma Antardasha"
+        },
+        {
+          "pd_name": "Venus-Mars-Mars",
+          "duration_days": 72,
+          "sequence": "V-Ma-Ma",
+          "strength": "Very Strong",
+          "theme": "MAXIMUM passion, extreme aggression, warrior intensity, sexual power, fierce competition",
+          "effects": [
+            "ABSOLUTE PEAK sexual and romantic passion",
+            "Extremely aggressive and forceful",
+            "Warrior-like intensity and courage",
+            "Dominating competitive power",
+            "Physical strength and combat ability",
+            "Fearless, bold, reckless behavior possible"
+          ],
+          "health": "Peak physical power, high energy, possible injury risk from aggression",
+          "career": "Success in: combat sports, military, aggressive competition, warfare arts",
+          "relationships": "Supremely passionate, sexually intense, potentially aggressive or possessive",
+          "romantic_intensity": "ABSOLUTE PEAK - extremely intense and aggressive",
+          "timing_events": "Good for: Physical conquests, competitive victories, intense romantic moments",
+          "duration_period": "~2.4 months into V-Ma Antardasha"
+        },
+        {
+          "pd_name": "Venus-Mars-Jupiter",
+          "duration_days": 72,
+          "sequence": "V-Ma-Ju",
+          "strength": "Very Strong",
+          "theme": "Blessed aggression, fortunate passion, warrior expansion, fortunate romance, lucky conquest",
+          "effects": [
+            "Blessed passion and romantic fortune",
+            "Expansion of aggressive power",
+            "Fortunate victories and conquests",
+            "Generous warrior spirit",
+            "Marriage brings passionate blessing",
+            "Expansion of sexual relationships"
+          ],
+          "health": "Excellent health, high vitality, blessed physical power",
+          "career": "Fortunate aggressive ventures, expansion of power, blessed victories",
+          "relationships": "Passionate marriage brings blessing, expansion of romance, fortunate affairs",
+          "romantic_intensity": "VERY HIGH - blessed and passionate",
+          "timing_events": "Best for: Passionate marriage, blessed conquests, fortunate expansion",
+          "duration_period": "~2.4 months into V-Ma Antardasha"
+        },
+        {
+          "pd_name": "Venus-Mars-Saturn",
+          "duration_days": 72,
+          "sequence": "V-Ma-Sa",
+          "strength": "Moderate-Strong",
+          "theme": "Disciplined aggression, restrained passion, warrior discipline, controlled intensity",
+          "effects": [
+            "Disciplined, controlled aggression",
+            "Restrained but intense passion",
+            "Warrior discipline and perseverance",
+            "Long-lasting aggressive power",
+            "Delayed gratification yields strong results",
+            "Patience in conquests"
+          ],
+          "health": "Good with discipline, bone health, controlled vitality",
+          "career": "Success through: disciplined aggression, sustained warrior efforts",
+          "relationships": "Disciplined passion, restrained intensity, long-lasting power",
+          "romantic_intensity": "Moderate-High - controlled intensity",
+          "timing_events": "Good for: Long-term aggressive projects, disciplined conquest, sustained power",
+          "duration_period": "~2.4 months into V-Ma Antardasha"
+        },
+        {
+          "pd_name": "Venus-Mars-Rahu",
+          "duration_days": 72,
+          "sequence": "V-Ma-Ra",
+          "strength": "Moderate-Strong",
+          "theme": "Obsessive passion, foreign aggression, unconventional romance, ambitious conquest",
+          "effects": [
+            "Obsessive passionate attachment",
+            "Aggressive foreign conquests",
+            "Unconventional aggressive behavior",
+            "Ambitious expansion of power",
+            "Obsessive sexual pursuit",
+            "Excessive passion possible"
+          ],
+          "health": "High energy but stress possible from obsession",
+          "career": "Success in: foreign aggressive ventures, unconventional competition",
+          "relationships": "Obsessively passionate, foreign romance, aggressive pursuit",
+          "romantic_intensity": "Very High - obsessive and aggressive",
+          "timing_events": "Good for: Obsessive pursuits, foreign expansion, aggressive ventures",
+          "duration_period": "~2.4 months into V-Ma Antardasha"
+        },
+        {
+          "pd_name": "Venus-Mars-Ketu",
+          "duration_days": 72,
+          "sequence": "V-Ma-Ke",
+          "strength": "Moderate",
+          "theme": "Spiritual passion, detached aggression, transcendent warrior, mystical intensity",
+          "effects": [
+            "Spiritual passion and transcendent intensity",
+            "Detachment from material passion obsession",
+            "Mystical warrior spirit",
+            "Transcendent love experiences",
+            "Previous life warrior recognitions",
+            "Surrender of aggressive pursuits"
+          ],
+          "health": "Spiritual vitality, meditation benefits, reduced anger",
+          "career": "Success in: spiritual warrior teachings, transcendent arts, mystical practices",
+          "relationships": "Spiritual passion focus, detachment from possessive intensity",
+          "romantic_intensity": "Low - transcendent and spiritual",
+          "timing_events": "Good for: Spiritual warrior practices, transcendent experiences, inner conquest",
+          "duration_period": "~2.4 months into V-Ma Antardasha"
+        }
+      ]
+    },
+    {
+      "antardasha": "Venus-Jupiter",
+      "ad_duration_years": 2.667,
+      "ad_theme": "Blessed beauty, fortunate love, marriage expansion, artistic abundance, wisdom in love, prosperous arts",
+      "pratyantardasha": [
+        {
+          "pd_name": "Venus-Jupiter-Venus",
+          "duration_days": 120,
+          "sequence": "V-Ju-V",
+          "strength": "Supreme",
+          "theme": "SUPREMELY blessed beauty, fortunate marriage, artistic abundance, prosperity in love",
+          "effects": [
+            "SUPREME fortune in love and marriage",
+            "Expansion of beauty and luxury in life",
+            "Artistic talents blessed with exceptional success",
+            "Marriage brings financial abundance",
+            "Wisdom in romantic choices",
+            "Great fortune in all romantic endeavors",
+            "Children and family expansion"
+          ],
+          "health": "Excellent health, reproductive blessings, vitality peak",
+          "career": "Peak success in arts, beauty, expansion of business, teaching success",
+          "relationships": "Marriage or partnership brings great expansion, children, financial blessing",
+          "romantic_intensity": "VERY HIGH - blessed and expansive",
+          "timing_events": "Best for: Marriage, children planning, major relationship milestones, business expansion",
+          "duration_period": "~4 months into V-Ju Antardasha"
+        },
+        {
+          "pd_name": "Venus-Jupiter-Mercury",
+          "duration_days": 120,
+          "sequence": "V-Ju-Hg",
+          "strength": "Very Strong",
+          "theme": "Expanded communication, blessed commerce, profitable beauty trade, wise negotiation",
+          "effects": [
+            "Expansion of beauty/art business ventures",
+            "Wise, eloquent communication",
+            "Financial abundance through commerce",
+            "Publishing success about beauty and arts",
+            "Education and teaching success",
+            "Blessed business partnerships and deals"
+          ],
+          "health": "Excellent health, good digestion, strong nervous system",
+          "career": "Peak success in beauty business expansion, art education, publishing, trading",
+          "relationships": "Communication brings expansion, beneficial partnerships, growth",
+          "romantic_intensity": "High with wisdom and expansion",
+          "timing_events": "Best for: Business expansion, publishing, teaching appointments, major deals",
+          "duration_period": "~4 months into V-Ju Antardasha"
+        },
+        {
+          "pd_name": "Venus-Jupiter-Moon",
+          "duration_days": 120,
+          "sequence": "V-Ju-Mo",
+          "strength": "Very Strong",
+          "theme": "Blessed family, fortunate home, expanded nurturing, marriage brings children",
+          "effects": [
+            "Great fortune in family and home",
+            "Children and family expansion",
+            "Wisdom in emotional matters",
+            "Spiritual family connections",
+            "Generous, luxurious domestic life",
+            "Mother/feminine blessings bring abundance"
+          ],
+          "health": "Excellent health, reproductive blessings, high vitality",
+          "career": "Success in family business, childcare, teaching, hospitality expansion",
+          "relationships": "Marriage brings children, family blessing, expansion of happiness",
+          "romantic_intensity": "High with wisdom and blessing",
+          "timing_events": "Best for: Marriage, children planning, family celebrations, expansion",
+          "duration_period": "~4 months into V-Ju Antardasha"
+        },
+        {
+          "pd_name": "Venus-Jupiter-Sun",
+          "duration_days": 120,
+          "sequence": "V-Ju-Su",
+          "strength": "Very Strong",
+          "theme": "Blessed authority, fortunate leadership, expanded power, royal expansion, divine blessing",
+          "effects": [
+            "Great fortune in leadership and authority",
+            "Expansion of power and influence",
+            "Wise, generous leadership",
+            "Government honors and recognition",
+            "Marriage brings status elevation",
+            "Children or family expansion"
+          ],
+          "health": "Excellent health, strong heart, peak vitality, radiant appearance",
+          "career": "Peak leadership, expansion of authority, prestigious appointments, divine favor",
+          "relationships": "Marriage brings great status, expansion, blessing, high elevation",
+          "romantic_intensity": "VERY HIGH - blessed and expansive",
+          "timing_events": "Best for: Supreme leadership, marriage, major expansion, divine recognition",
+          "duration_period": "~4 months into V-Ju Antardasha"
+        },
+        {
+          "pd_name": "Venus-Jupiter-Mars",
+          "duration_days": 120,
+          "sequence": "V-Ju-Ma",
+          "strength": "Very Strong",
+          "theme": "Blessed aggression, fortunate passion, warrior expansion, lucky romance, blessed victory",
+          "effects": [
+            "Great fortune in passionate pursuits",
+            "Expansion of aggressive power",
+            "Blessed victories and conquests",
+            "Generous warrior spirit",
+            "Sexual relationships bring blessing",
+            "Expansion of romantic fortune"
+          ],
+          "health": "Excellent health, high vitality, blessed physical power",
+          "career": "Fortunate aggressive ventures, expansion of power, blessed victories",
+          "relationships": "Passionate marriage brings blessing, expansion of romance, fortunate affairs",
+          "romantic_intensity": "VERY HIGH - blessed and passionate",
+          "timing_events": "Best for: Passionate marriage, blessed conquests, fortunate expansion",
+          "duration_period": "~4 months into V-Ju Antardasha"
+        },
+        {
+          "pd_name": "Venus-Jupiter-Jupiter",
+          "duration_days": 120,
+          "sequence": "V-Ju-Ju",
+          "strength": "Supreme",
+          "theme": "ABSOLUTE BLESSING, fortune overflows, prosperity unlimited, marriage expansion peak",
+          "effects": [
+            "SUPREME fortune in all areas",
+            "Unlimited expansion and prosperity",
+            "Greatest blessing in marriage and love",
+            "Children and family expansion",
+            "Artistic talents blessed immensely",
+            "Spiritual wisdom and grace",
+            "All desires fulfilled"
+          ],
+          "health": "Peak health, reproductive blessings, supreme vitality, glowing appearance",
+          "career": "Absolute peak success, unlimited expansion, greatest professional blessing",
+          "relationships": "Supreme marriage blessing, children, expansion of all romantic fortune",
+          "romantic_intensity": "ABSOLUTE PEAK - supremely blessed",
+          "timing_events": "Best for: All major life events, marriage, children, expansion, achievements",
+          "duration_period": "~4 months into V-Ju Antardasha"
+        },
+        {
+          "pd_name": "Venus-Jupiter-Saturn",
+          "duration_days": 120,
+          "sequence": "V-Ju-Sa",
+          "strength": "Strong",
+          "theme": "Wise expansion, responsible growth, sustained prosperity, disciplined fortune",
+          "effects": [
+            "Wise, responsible expansion",
+            "Sustained, long-lasting prosperity",
+            "Disciplined approach to fortune",
+            "Older mentors bring wisdom",
+            "Steady financial growth",
+            "Traditional marriage values"
+          ],
+          "health": "Good health with discipline, bone health, sustained vitality",
+          "career": "Sustained expansion, disciplined growth, long-term prosperity",
+          "relationships": "Steady, long-lasting relationships, mature partnership growth",
+          "romantic_intensity": "Moderate-High - blessed but disciplined",
+          "timing_events": "Good for: Long-term expansion, sustained growth, mature partnerships",
+          "duration_period": "~4 months into V-Ju Antardasha"
+        },
+        {
+          "pd_name": "Venus-Jupiter-Rahu",
+          "duration_days": 120,
+          "sequence": "V-Ju-Ra",
+          "strength": "Strong",
+          "theme": "Ambitious expansion, foreign fortune, unconventional prosperity, blessed innovation",
+          "effects": [
+            "Ambitious expansion of fortune",
+            "Foreign partnerships bring prosperity",
+            "Unconventional paths to success",
+            "Expansion through innovation",
+            "Technology-driven prosperity",
+            "Social status ambition fulfilled"
+          ],
+          "health": "Good health but some stress from ambition possible",
+          "career": "Success in: international expansion, unconventional growth, innovative ventures",
+          "relationships": "Foreign partnerships bring blessing, unconventional prosperity",
+          "romantic_intensity": "High with ambitious expansion",
+          "timing_events": "Good for: International expansion, foreign partnerships, innovative ventures",
+          "duration_period": "~4 months into V-Ju Antardasha"
+        },
+        {
+          "pd_name": "Venus-Jupiter-Ketu",
+          "duration_days": 120,
+          "sequence": "V-Ju-Ke",
+          "strength": "Moderate-Strong",
+          "theme": "Spiritual blessing, detached prosperity, transcendent wisdom, divine grace",
+          "effects": [
+            "Spiritual blessing and grace",
+            "Detachment from material expansion",
+            "Transcendent wisdom and spiritual growth",
+            "Inner prosperity and enlightenment",
+            "Previous life fortune recognitions",
+            "Surrender brings greatest blessings"
+          ],
+          "health": "Spiritual healing, meditation benefits, inner transformation",
+          "career": "Success in: spiritual teachings, transcendent wisdom, mystical practices",
+          "relationships": "Spiritual partnership focus, transcendent love experiences",
+          "romantic_intensity": "Low - transcendent and spiritual",
+          "timing_events": "Good for: Spiritual growth, transcendent experiences, inner enlightenment",
+          "duration_period": "~4 months into V-Ju Antardasha"
+        }
+      ]
+    },
+    {
+      "antardasha": "Venus-Saturn",
+      "ad_duration_years": 3.2,
+      "ad_theme": "Mature love, enduring beauty, responsible relationships, disciplined arts, delayed but solid success",
+      "pratyantardasha": [
+        {
+          "pd_name": "Venus-Saturn-Venus",
+          "duration_days": 144,
+          "sequence": "V-Sa-V",
+          "strength": "Strong",
+          "theme": "Mature love, enduring beauty, committed marriage, responsibility in relationships, solid luxury",
+          "effects": [
+            "Deep, enduring love based on commitment",
+            "Mature, responsible approach to marriage",
+            "Long-lasting beauty through discipline",
+            "Delayed gratification yields strong results",
+            "Patience in artistic endeavors brings mastery",
+            "Older partners or age-gap relationships",
+            "Traditional marriage values and ceremonies"
+          ],
+          "health": "Good skin through discipline, bone health, joint flexibility improves",
+          "career": "Success through: traditional crafts, jewelry making, sustained artistic efforts",
+          "relationships": "Marriage based on duty and commitment, long-lasting partnership",
+          "romantic_intensity": "Moderate - mature and enduring",
+          "timing_events": "Good for: Committed long-term relationships, traditional ceremonies, sustained efforts",
+          "duration_period": "~4.8 months into V-Sa Antardasha"
+        },
+        {
+          "pd_name": "Venus-Saturn-Mercury",
+          "duration_days": 144,
+          "sequence": "V-Sa-Hg",
+          "strength": "Moderate-Strong",
+          "theme": "Disciplined communication, serious commerce, sustained business, careful contracts",
+          "effects": [
+            "Disciplined, serious business communication",
+            "Long-term contracts and sustainable deals",
+            "Skilled craftsmanship in arts trade",
+            "Patient negotiation and deals",
+            "Older business partners bring stability",
+            "Structured business relationships"
+          ],
+          "health": "Good with discipline, nervous system steady, skin care discipline",
+          "career": "Success through: disciplined arts practice, traditional beauty crafts, sustained efforts",
+          "relationships": "Serious, long-term communication focus, mature partnerships",
+          "romantic_intensity": "Moderate - mature and disciplined",
+          "timing_events": "Good for: Long-term contracts, sustained business efforts, traditional partnerships",
+          "duration_period": "~4.8 months into V-Sa Antardasha"
+        },
+        {
+          "pd_name": "Venus-Saturn-Moon",
+          "duration_days": 144,
+          "sequence": "V-Sa-Mo",
+          "strength": "Moderate-Strong",
+          "theme": "Mature family, responsible nurturing, enduring home, disciplined emotional care",
+          "effects": [
+            "Mature, responsible approach to family",
+            "Long-lasting emotional bonds",
+            "Discipline in nurturing and caring",
+            "Older parents or parent-like figures",
+            "Steady, reliable emotional support",
+            "Traditional family values and structure"
+          ],
+          "health": "Good with discipline, reproductive care, emotional balance",
+          "career": "Success through: traditional family crafts, sustained hospitality, elder care",
+          "relationships": "Mature, long-lasting family bonds, duty-based partnerships",
+          "romantic_intensity": "Moderate - mature and responsible",
+          "timing_events": "Good for: Long-term family commitments, traditional ceremonies, elder care",
+          "duration_period": "~4.8 months into V-Sa Antardasha"
+        },
+        {
+          "pd_name": "Venus-Saturn-Sun",
+          "duration_days": 144,
+          "sequence": "V-Sa-Su",
+          "strength": "Moderate-Strong",
+          "theme": "Mature authority, responsible leadership, enduring power, disciplined strength, sustained influence",
+          "effects": [
+            "Mature, responsible leadership",
+            "Long-lasting authority based on discipline",
+            "Older authoritative figures support",
+            "Sustained power and influence",
+            "Traditional authority and respect",
+            "Powerful but restrained"
+          ],
+          "health": "Good with discipline, sustained vitality, strong constitution",
+          "career": "Mature leadership, sustained authority, traditional positions of power",
+          "relationships": "Mature authority in relationships, long-lasting power, duty-based leadership",
+          "romantic_intensity": "Moderate - mature and responsible",
+          "timing_events": "Good for: Long-term authority positions, traditional leadership, sustained power",
+          "duration_period": "~4.8 months into V-Sa Antardasha"
+        },
+        {
+          "pd_name": "Venus-Saturn-Mars",
+          "duration_days": 144,
+          "sequence": "V-Sa-Ma",
+          "strength": "Moderate-Strong",
+          "theme": "Disciplined aggression, restrained passion, warrior discipline, controlled intensity, patient conquest",
+          "effects": [
+            "Disciplined, controlled aggression",
+            "Restrained but intense passion",
+            "Warrior discipline and perseverance",
+            "Long-lasting aggressive power",
+            "Delayed gratification yields strong results",
+            "Patience in conquests brings victory"
+          ],
+          "health": "Good with discipline, bone health, controlled vitality",
+          "career": "Success through: disciplined aggression, sustained warrior efforts",
+          "relationships": "Disciplined passion, restrained intensity, long-lasting power",
+          "romantic_intensity": "Moderate-High - controlled intensity",
+          "timing_events": "Good for: Long-term aggressive projects, disciplined conquest, sustained power",
+          "duration_period": "~4.8 months into V-Sa Antardasha"
+        },
+        {
+          "pd_name": "Venus-Saturn-Jupiter",
+          "duration_days": 144,
+          "sequence": "V-Sa-Ju",
+          "strength": "Strong",
+          "theme": "Wise expansion, responsible growth, sustained prosperity, disciplined fortune, long-term blessing",
+          "effects": [
+            "Wise, responsible expansion",
+            "Sustained, long-lasting prosperity",
+            "Disciplined approach to fortune",
+            "Older mentors bring wisdom",
+            "Steady financial growth",
+            "Traditional values with prosperity"
+          ],
+          "health": "Good health with discipline, high vitality, sustained wellness",
+          "career": "Sustained expansion, disciplined growth, long-term prosperity and success",
+          "relationships": "Steady, long-lasting relationships, mature partnership growth, blessing",
+          "romantic_intensity": "Moderate-High - blessed but disciplined",
+          "timing_events": "Good for: Long-term expansion, sustained growth, mature partnerships",
+          "duration_period": "~4.8 months into V-Sa Antardasha"
+        },
+        {
+          "pd_name": "Venus-Saturn-Saturn",
+          "duration_days": 144,
+          "sequence": "V-Sa-Sa",
+          "strength": "Moderate",
+          "theme": "Maximum discipline, severe restriction, major delays, deep responsibility, hard-won success",
+          "effects": [
+            "Severe restrictions and delays",
+            "Maximum discipline required",
+            "Difficult, hardship-filled period",
+            "Deep responsibility and duty",
+            "Delayed rewards come only through hard work",
+            "Possible separation or restriction in love"
+          ],
+          "health": "Joint and bone issues possible, need for careful care",
+          "career": "Success only through extreme discipline, hard-won mastery",
+          "relationships": "Love restriction, separation possible, long delays, duty-based bonds",
+          "romantic_intensity": "Low - restricted and delayed",
+          "timing_events": "Challenging period, test of commitment, requires perseverance",
+          "duration_period": "~4.8 months into V-Sa Antardasha"
+        },
+        {
+          "pd_name": "Venus-Saturn-Rahu",
+          "duration_days": 144,
+          "sequence": "V-Sa-Ra",
+          "strength": "Moderate",
+          "theme": "Ambitious restriction, delayed foreign partnerships, unconventional discipline, frustrated ambition",
+          "effects": [
+            "Restrictions on ambitious plans",
+            "Delayed foreign partnerships",
+            "Unconventional discipline required",
+            "Frustrated ambition and growth",
+            "Slow progress on foreign ventures",
+            "Obsessive restriction possible"
+          ],
+          "health": "Some stress from restriction, moderation needed",
+          "career": "Slow progress on international ventures, restrictive discipline",
+          "relationships": "Foreign partnerships delayed, restricted growth, challenging dynamics",
+          "romantic_intensity": "Low - restricted and frustrated",
+          "timing_events": "Challenging period, requires patience with restrictions",
+          "duration_period": "~4.8 months into V-Sa Antardasha"
+        },
+        {
+          "pd_name": "Venus-Saturn-Ketu",
+          "duration_days": 144,
+          "sequence": "V-Sa-Ke",
+          "strength": "Moderate",
+          "theme": "Spiritual discipline, detached restriction, transcendent asceticism, soul purification",
+          "effects": [
+            "Spiritual discipline and asceticism",
+            "Detachment from material obsession",
+            "Transcendent spiritual growth through restriction",
+            "Soul purification and transformation",
+            "Previous life karmic completion",
+            "Surrender of worldly attachments"
+          ],
+          "health": "Spiritual healing, meditation deepens, inner transformation",
+          "career": "Success in: spiritual asceticism, transcendent practices, mystical disciplines",
+          "relationships": "Spiritual focus, detachment from worldly relationships",
+          "romantic_intensity": "Very Low - transcendent asceticism",
+          "timing_events": "Good for: Spiritual transformation, ascetic practices, inner purification",
+          "duration_period": "~4.8 months into V-Sa Antardasha"
+        }
+      ]
+    },
+    {
+      "antardasha": "Venus-Rahu",
+      "ad_duration_years": 3.2,
+      "ad_theme": "Obsessive love, foreign romance, unconventional relationships, ambitious arts, material obsession, status seeking",
+      "pratyantardasha": [
+        {
+          "pd_name": "Venus-Rahu-Venus",
+          "duration_days": 144,
+          "sequence": "V-Ra-V",
+          "strength": "Strong",
+          "theme": "Obsessive beauty, foreign romance, unconventional love, ambitious arts, status obsession",
+          "effects": [
+            "Obsessive love or attraction",
+            "Foreign partner or international romance",
+            "Unconventional relationship choices",
+            "Ambitious artistic pursuits",
+            "Excessive luxury desires",
+            "Social status obsession",
+            "Technology-enabled romance"
+          ],
+          "health": "Excess can cause skin issues, moderation needed",
+          "career": "Success in: international beauty business, unconventional arts, foreign trade",
+          "relationships": "Foreign partner likely, unconventional arrangements, obsessive attachment",
+          "romantic_intensity": "High but obsessive",
+          "timing_events": "Good for: International relationships, unconventional partnerships, foreign investments",
+          "duration_period": "~4.8 months into V-Ra Antardasha"
+        },
+        {
+          "pd_name": "Venus-Rahu-Mercury",
+          "duration_days": 144,
+          "sequence": "V-Ra-Hg",
+          "strength": "Moderate-Strong",
+          "theme": "Ambitious beauty marketing, foreign trade, unconventional commerce, obsessive deals",
+          "effects": [
+            "Ambitious expansion in foreign markets",
+            "Unconventional business methods succeed",
+            "Technology-driven beauty marketing",
+            "Obsessive communication and networking",
+            "Foreign partners and international deals",
+            "Excessive promises may backfire"
+          ],
+          "health": "Some nervousness, skin issues from stress possible",
+          "career": "Success in: international beauty trade, foreign commerce, tech-driven marketing",
+          "relationships": "Foreign communications, unconventional partnerships, networking obsession",
+          "romantic_intensity": "High but obsessive",
+          "timing_events": "Good for: International deals, foreign partnerships, tech marketing launches",
+          "duration_period": "~4.8 months into V-Ra Antardasha"
+        },
+        {
+          "pd_name": "Venus-Rahu-Moon",
+          "duration_days": 144,
+          "sequence": "V-Ra-Mo",
+          "strength": "Moderate-Strong",
+          "theme": "Obsessive family love, foreign mother figures, unconventional home, ambitious family expansion",
+          "effects": [
+            "Obsessive attachment to family/home",
+            "Foreign family connections or immigration",
+            "Unconventional family arrangements",
+            "Ambitious family expansion plans",
+            "Mother/feminine obsession possible",
+            "Technology in home life"
+          ],
+          "health": "Some stress-related digestive issues, moderation needed",
+          "career": "Success in: international hospitality, foreign family business, real estate expansion",
+          "relationships": "Foreign family connections, unconventional living, obsessive bonds",
+          "romantic_intensity": "High but obsessive",
+          "timing_events": "Good for: International family expansion, unconventional homes, foreign real estate",
+          "duration_period": "~4.8 months into V-Ra Antardasha"
+        },
+        {
+          "pd_name": "Venus-Rahu-Sun",
+          "duration_days": 144,
+          "sequence": "V-Ra-Su",
+          "strength": "Moderate-Strong",
+          "theme": "Ambitious authority, obsessive power, unconventional leadership, foreign status",
+          "effects": [
+            "Ambitious pursuit of power and status",
+            "Obsessive desire for authority",
+            "Unconventional leadership styles",
+            "Foreign partnerships and status",
+            "Government or official ambitions",
+            "Excessive pride or arrogance possible"
+          ],
+          "health": "Good vitality but stress from ambition possible",
+          "career": "Ambitious leadership, foreign authority, unconventional power structures",
+          "relationships": "Foreign high-status relationships, obsessive power dynamics",
+          "romantic_intensity": "High with obsessive ambition",
+          "timing_events": "Good for: Ambitious authority projects, foreign leadership, status pursuit",
+          "duration_period": "~4.8 months into V-Ra Antardasha"
+        },
+        {
+          "pd_name": "Venus-Rahu-Mars",
+          "duration_days": 144,
+          "sequence": "V-Ra-Ma",
+          "strength": "Moderate-Strong",
+          "theme": "Obsessive passion, foreign aggression, unconventional romance, ambitious conquest",
+          "effects": [
+            "Obsessive passionate attachment",
+            "Aggressive foreign conquests",
+            "Unconventional aggressive behavior",
+            "Ambitious expansion of power",
+            "Obsessive sexual pursuit",
+            "Excessive passion possible"
+          ],
+          "health": "High energy but stress possible from obsession",
+          "career": "Success in: foreign aggressive ventures, unconventional competition",
+          "relationships": "Obsessively passionate, foreign romance, aggressive pursuit",
+          "romantic_intensity": "Very High - obsessive and aggressive",
+          "timing_events": "Good for: Obsessive pursuits, foreign expansion, aggressive ventures",
+          "duration_period": "~4.8 months into V-Ra Antardasha"
+        },
+        {
+          "pd_name": "Venus-Rahu-Jupiter",
+          "duration_days": 144,
+          "sequence": "V-Ra-Ju",
+          "strength": "Strong",
+          "theme": "Ambitious expansion, foreign fortune, unconventional prosperity, blessed innovation",
+          "effects": [
+            "Ambitious expansion of fortune",
+            "Foreign partnerships bring prosperity",
+            "Unconventional paths to success",
+            "Expansion through innovation",
+            "Technology-driven prosperity",
+            "Social status ambition fulfilled"
+          ],
+          "health": "Good health but some stress from ambition possible",
+          "career": "Success in: international expansion, unconventional growth, innovative ventures",
+          "relationships": "Foreign partnerships bring blessing, unconventional prosperity",
+          "romantic_intensity": "High with ambitious expansion",
+          "timing_events": "Good for: International expansion, foreign partnerships, innovative ventures",
+          "duration_period": "~4.8 months into V-Ra Antardasha"
+        },
+        {
+          "pd_name": "Venus-Rahu-Saturn",
+          "duration_days": 144,
+          "sequence": "V-Ra-Sa",
+          "strength": "Moderate",
+          "theme": "Restrictions on ambition, delayed foreign ventures, unconventional discipline, frustrated growth",
+          "effects": [
+            "Restrictions on ambitious plans",
+            "Delayed foreign partnerships",
+            "Unconventional discipline required",
+            "Frustrated ambition and growth",
+            "Slow progress on foreign ventures",
+            "Obsessive restriction possible"
+          ],
+          "health": "Some stress from restriction, moderation needed",
+          "career": "Slow progress on international ventures, restrictive discipline",
+          "relationships": "Foreign partnerships delayed, restricted growth, challenging dynamics",
+          "romantic_intensity": "Low - restricted and frustrated",
+          "timing_events": "Challenging period, requires patience with restrictions",
+          "duration_period": "~4.8 months into V-Ra Antardasha"
+        },
+        {
+          "pd_name": "Venus-Rahu-Rahu",
+          "duration_days": 144,
+          "sequence": "V-Ra-Ra",
+          "strength": "Moderate-Strong",
+          "theme": "MAXIMUM obsession, extreme ambition, unconventional excess, foreign obsession, status madness",
+          "effects": [
+            "EXTREME obsession and obsessive attachment",
+            "Unlimited ambition and desires",
+            "Foreign obsessions and attractions",
+            "Unconventional behavior patterns",
+            "Excessive materialism and obsession",
+            "Addiction to status and luxury possible"
+          ],
+          "health": "Skin issues from excess, stress-related problems, moderation critical",
+          "career": "Obsessive foreign ventures, unconventional extremes",
+          "relationships": "Obsessively foreign attachments, extreme unconventional dynamics",
+          "romantic_intensity": "Very High - obsessive and excessive",
+          "timing_events": "Challenging period, requires moderation on obsessions",
+          "duration_period": "~4.8 months into V-Ra Antardasha"
+        },
+        {
+          "pd_name": "Venus-Rahu-Ketu",
+          "duration_days": 144,
+          "sequence": "V-Ra-Ke",
+          "strength": "Moderate",
+          "theme": "Spiritual obsession release, detached ambition, transcendent unconventionality, karmic resolution",
+          "effects": [
+            "Release of obsessive attachments",
+            "Spiritual breakthrough from obsession",
+            "Transcendent detachment from status",
+            "Previous life obsession resolution",
+            "Spiritual transformation through release",
+            "Surrender of worldly ambitions"
+          ],
+          "health": "Spiritual healing, detachment benefits, inner peace",
+          "career": "Success in: spiritual teachings, transcendent unconventional practices",
+          "relationships": "Spiritual obsession release, transcendent detachment",
+          "romantic_intensity": "Low - transcendent detachment",
+          "timing_events": "Good for: Spiritual breakthroughs, obsession release, transcendent transformation",
+          "duration_period": "~4.8 months into V-Ra Antardasha"
+        }
+      ]
+    },
+    {
+      "antardasha": "Venus-Ketu",
+      "ad_duration_years": 1.6,
+      "ad_theme": "Detachment from pleasures, spiritual love, transcendent arts, ascetic beauty, inner transformation, past life resolution",
+      "pratyantardasha": [
+        {
+          "pd_name": "Venus-Ketu-Venus",
+          "duration_days": 72,
+          "sequence": "V-Ke-V",
+          "strength": "Moderate",
+          "theme": "Spiritual love, detachment from pleasures, artistic transcendence, inner beauty",
+          "effects": [
+            "Spiritual love and marriage",
+            "Detachment from material beauty obsession",
+            "Inner beauty and spiritual transformation",
+            "Mystical or transcendent artistic experiences",
+            "Previous life partner recognitions",
+            "Artistic focus on spiritual themes",
+            "Renunciation of superficial pleasures"
+          ],
+          "health": "Spiritual healing, reduced need for sensuality, meditation benefits",
+          "career": "Success in: spiritual arts, meditation practices, mystical creativity, ascetic crafts",
+          "relationships": "Spiritual marriage focus, detachment from ego in love",
+          "romantic_intensity": "Low - transcendent and detached",
+          "timing_events": "Good for: Spiritual commitments, artistic transcendence, inner transformation",
+          "duration_period": "~2.4 months into V-Ke Antardasha"
+        },
+        {
+          "pd_name": "Venus-Ketu-Mercury",
+          "duration_days": 72,
+          "sequence": "V-Ke-Hg",
+          "strength": "Moderate",
+          "theme": "Spiritual communication, detached arts trade, mystical beauty insights, transcendent commerce",
+          "effects": [
+            "Mystical or spiritual communication",
+            "Detachment from material beauty business",
+            "Spiritual insights about arts and beauty",
+            "Transcendent writing or teachings",
+            "Previous life business recognitions",
+            "Reduced interest in commerce or profits"
+          ],
+          "health": "Spiritual healing through communication, meditation benefits",
+          "career": "Success in: spiritual teachings, transcendent arts, mystical writings",
+          "relationships": "Spiritual communication focus, detachment from romantic pursuits",
+          "romantic_intensity": "Low - transcendent",
+          "timing_events": "Good for: Spiritual teachings, mystical writings, inner transformation",
+          "duration_period": "~2.4 months into V-Ke Antardasha"
+        },
+        {
+          "pd_name": "Venus-Ketu-Moon",
+          "duration_days": 72,
+          "sequence": "V-Ke-Mo",
+          "strength": "Moderate",
+          "theme": "Spiritual family love, detached nurturing, transcendent home, past life family",
+          "effects": [
+            "Spiritual family connections",
+            "Detachment from material family obsession",
+            "Transcendent love and compassion",
+            "Past life family recognitions",
+            "Reduced interest in nurturing/caregiving",
+            "Mystical home experiences"
+          ],
+          "health": "Spiritual healing, reduced stress, meditation benefits",
+          "career": "Success in: spiritual family teachings, transcendent hospitality, mystical arts",
+          "relationships": "Spiritual family focus, detachment from emotional dependency",
+          "romantic_intensity": "Low - transcendent and detached",
+          "timing_events": "Good for: Spiritual family gatherings, past life healing, transcendence",
+          "duration_period": "~2.4 months into V-Ke Antardasha"
+        },
+        {
+          "pd_name": "Venus-Ketu-Sun",
+          "duration_days": 72,
+          "sequence": "V-Ke-Su",
+          "strength": "Moderate",
+          "theme": "Spiritual authority, detached power, transcendent leadership, inner radiance",
+          "effects": [
+            "Spiritual authority and wisdom",
+            "Detachment from material power obsession",
+            "Transcendent leadership and influence",
+            "Inner radiance and enlightenment",
+            "Past life authority recognitions",
+            "Surrender of external power"
+          ],
+          "health": "Spiritual healing, reduced stress, meditation benefits",
+          "career": "Success in: spiritual leadership, transcendent authority, mystical influence",
+          "relationships": "Spiritual authority focus, detachment from romantic pursuits",
+          "romantic_intensity": "Low - transcendent and detached",
+          "timing_events": "Good for: Spiritual leadership, transcendent authority, inner enlightenment",
+          "duration_period": "~2.4 months into V-Ke Antardasha"
+        },
+        {
+          "pd_name": "Venus-Ketu-Mars",
+          "duration_days": 72,
+          "sequence": "V-Ke-Ma",
+          "strength": "Moderate",
+          "theme": "Spiritual passion, detached aggression, transcendent warrior, mystical intensity",
+          "effects": [
+            "Spiritual passion and transcendent intensity",
+            "Detachment from material passion obsession",
+            "Mystical warrior spirit",
+            "Transcendent love experiences",
+            "Previous life warrior recognitions",
+            "Surrender of aggressive pursuits"
+          ],
+          "health": "Spiritual vitality, meditation benefits, reduced anger",
+          "career": "Success in: spiritual warrior teachings, transcendent arts, mystical practices",
+          "relationships": "Spiritual passion focus, detachment from possessive intensity",
+          "romantic_intensity": "Low - transcendent and spiritual",
+          "timing_events": "Good for: Spiritual warrior practices, transcendent experiences, inner conquest",
+          "duration_period": "~2.4 months into V-Ke Antardasha"
+        },
+        {
+          "pd_name": "Venus-Ketu-Jupiter",
+          "duration_days": 72,
+          "sequence": "V-Ke-Ju",
+          "strength": "Moderate-Strong",
+          "theme": "Spiritual blessing, detached prosperity, transcendent wisdom, divine grace",
+          "effects": [
+            "Spiritual blessing and grace",
+            "Detachment from material expansion",
+            "Transcendent wisdom and spiritual growth",
+            "Inner prosperity and enlightenment",
+            "Previous life fortune recognitions",
+            "Surrender brings greatest blessings"
+          ],
+          "health": "Spiritual healing, meditation benefits, inner transformation",
+          "career": "Success in: spiritual teachings, transcendent wisdom, mystical practices",
+          "relationships": "Spiritual partnership focus, transcendent love experiences",
+          "romantic_intensity": "Low - transcendent and spiritual",
+          "timing_events": "Good for: Spiritual growth, transcendent experiences, inner enlightenment",
+          "duration_period": "~2.4 months into V-Ke Antardasha"
+        },
+        {
+          "pd_name": "Venus-Ketu-Saturn",
+          "duration_days": 72,
+          "sequence": "V-Ke-Sa",
+          "strength": "Moderate",
+          "theme": "Spiritual discipline, detached restriction, transcendent asceticism, soul purification",
+          "effects": [
+            "Spiritual discipline and asceticism",
+            "Detachment from material obsession",
+            "Transcendent spiritual growth through restriction",
+            "Soul purification and transformation",
+            "Previous life karmic completion",
+            "Surrender of worldly attachments"
+          ],
+          "health": "Spiritual healing through discipline, meditation deepens, inner transformation",
+          "career": "Success in: spiritual asceticism, transcendent practices, mystical disciplines",
+          "relationships": "Spiritual focus, detachment from worldly relationships",
+          "romantic_intensity": "Very Low - transcendent asceticism",
+          "timing_events": "Good for: Spiritual transformation, ascetic practices, inner purification",
+          "duration_period": "~2.4 months into V-Ke Antardasha"
+        },
+        {
+          "pd_name": "Venus-Ketu-Rahu",
+          "duration_days": 72,
+          "sequence": "V-Ke-Ra",
+          "strength": "Moderate",
+          "theme": "Spiritual obsession release, detached ambition, transcendent unconventionality, karmic resolution",
+          "effects": [
+            "Release of obsessive attachments",
+            "Spiritual breakthrough from obsession",
+            "Transcendent detachment from status",
+            "Previous life obsession resolution",
+            "Spiritual transformation through release",
+            "Surrender of worldly ambitions"
+          ],
+          "health": "Spiritual healing, detachment benefits, inner peace",
+          "career": "Success in: spiritual teachings, transcendent unconventional practices",
+          "relationships": "Spiritual obsession release, transcendent detachment",
+          "romantic_intensity": "Low - transcendent detachment",
+          "timing_events": "Good for: Spiritual breakthroughs, obsession release, transcendent transformation",
+          "duration_period": "~2.4 months into V-Ke Antardasha"
+        },
+        {
+          "pd_name": "Venus-Ketu-Ketu",
+          "duration_days": 72,
+          "sequence": "V-Ke-Ke",
+          "strength": "Moderate",
+          "theme": "MAXIMUM detachment, complete transcendence, absolute renunciation, soul liberation",
+          "effects": [
+            "COMPLETE detachment from all worldly desires",
+            "Transcendent spiritual enlightenment",
+            "Maximum renunciation of pleasures",
+            "Complete soul liberation possible",
+            "Total transformation and metamorphosis",
+            "Past life complete karmic resolution"
+          ],
+          "health": "Spiritual transformation, inner peace, meditation peak, transcendence",
+          "career": "Complete focus on spiritual pursuits, renunciation of material wealth",
+          "relationships": "Complete detachment from romantic bonds, spiritual focus only",
+          "romantic_intensity": "NONE - absolute spiritual transcendence",
+          "timing_events": "Transformative period, spiritual liberation, past life resolution",
+          "duration_period": "~2.4 months into V-Ke Antardasha"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_pratyantardasha": 81,
+    "total_duration_years": 20,
+    "strongest_combinations": [
+      "Venus-Venus-Venus (maximum love and luxury)",
+      "Venus-Jupiter-Jupiter (absolute blessing)",
+      "Venus-Sun-Jupiter (blessed authority and expansion)",
+      "Venus-Mars-Mars (supreme passion)"
+    ],
+    "most_challenging_combinations": [
+      "Venus-Saturn-Saturn (severe restriction and delay)",
+      "Venus-Rahu-Rahu (obsessive excess)",
+      "Venus-Ketu-Ketu (complete renunciation)"
+    ],
+    "marriage_favorable_periods": [
+      "Venus-Venus-Venus",
+      "Venus-Jupiter-Jupiter",
+      "Venus-Moon-Jupiter",
+      "Venus-Sun-Jupiter"
+    ],
+    "artistic_peak_periods": [
+      "Venus-Venus-Venus",
+      "Venus-Mercury-Jupiter",
+      "Venus-Jupiter-Jupiter"
+    ],
+    "key_themes": {
+      "love_marriage": "Strongest during V-V, V-Ju, V-Su periods",
+      "arts_beauty": "Peak success in V-V, V-Hg, V-Ju combinations",
+      "luxury_wealth": "Best during V-V-V, V-Ju-Ju, V-Su-Ju",
+      "spiritual_transformation": "V-Ke periods for inner growth",
+      "challenges": "V-Sa and restrictions, V-Ra obsessions"
+    }
+  }
+}

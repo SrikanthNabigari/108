@@ -1,0 +1,964 @@
+{
+  "metadata": {
+    "mahadasha": "mars",
+    "md_years": 7,
+    "md_duration_days": 2555,
+    "total_combinations": 81,
+    "structure": "9 antardasha × 9 pratyantardasha = 81 combinations",
+    "mars_themes": [
+      "Energy and dynamism",
+      "Courage and bravery",
+      "Siblings and kinship",
+      "Property and land",
+      "Accidents and injuries",
+      "Surgery and medical procedures",
+      "Military and combat",
+      "Sports and physical activity",
+      "Passion and aggression"
+    ]
+  },
+  "mars_mahadasha": {
+    "sun_antardasha": {
+      "duration_days": 284,
+      "sun_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Fiery willpower dominates - ego-driven energy",
+        "intensity": "Very High",
+        "effects": "Double Sun fire creates dominating personality, leadership urges, administrative authority, competitive spirit, intense determination",
+        "health": "High fever risk, inflammation, eye issues, heart stress from overexertion, high blood pressure, sunburn, exhaustion",
+        "career": "Promotion opportunities, leadership roles, authority expansion, high visibility, competitive victories, entrepreneurial surge",
+        "relationships": "Ego clashes with authority figures, dominance issues in partnerships, paternal conflicts, pride becomes obstacle",
+        "timing_events": "Executive appointments, awards and honors, successful battles or competitions, medical heat treatments",
+        "remedies": "Surya Namaskar, ruby gemstone, charity of food items, avoid direct confrontation"
+      },
+      "moon_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Emotional impulse combined with warrior energy",
+        "intensity": "High",
+        "effects": "Emotional volatility with aggressive undercurrents, mood swings driving actions, maternal support, nurturing instinct mixed with assertiveness, domestic energy",
+        "health": "Emotional stress causing physical symptoms, digestive issues, gynecological problems, emotional anxiety, fever spikes",
+        "career": "Work-life balance issues, emotional decision-making, property dealings, real estate transactions, domestic business",
+        "relationships": "Maternal bonding strengthens, emotional conflicts with family, possessive tendencies, domestic tension, emotional outbursts",
+        "timing_events": "Property acquisition or disputes, family restructuring, emotional breakthroughs, maternal health matters",
+        "remedies": "Chandra puja, pearl wear, milk charity, emotional restraint practices, meditation"
+      },
+      "mars_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "EXTREME FIRE - Double Mars warrior peak",
+        "intensity": "Extreme",
+        "effects": "Uncontrolled aggression, maximum physical energy, competitive ferocity, warrior mindset at peak, sexual passion surge, impulsiveness at maximum",
+        "health": "ACCIDENT PEAK - Severe injury risk, surgery possible, inflammation extreme, burns, cuts, wounds, high blood pressure, adrenaline overdose",
+        "career": "Aggressive business takeovers, military/police advancement, dangerous sports peak, construction/demolition work, conflict-based victories",
+        "relationships": "Aggressive arguments, violent impulses, sexual passion extreme, sibling conflicts peak, marital strife possible, domination issues critical",
+        "timing_events": "Major accidents or injuries, surgical interventions, military engagements, aggressive business moves, competitive championships",
+        "remedies": "Intensive Hanuman worship, mangal dosha mitigation, red coral wearing, restraint exercises, avoid recklessness absolutely"
+      },
+      "mercury_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Warrior intellect - action combined with thought",
+        "intensity": "High",
+        "effects": "Strategic aggression, intellectual combat, sharp communication, skillful debate, mechanical aptitude, trade warfare, nervous energy management",
+        "health": "Nervous tension from overthinking, speech-related stress, hand/arm injuries, respiratory issues, mental strain causing physical symptoms",
+        "career": "Successful negotiations, sales victories, mechanical engineering, writing about war/sports, teaching combat skills, business negotiations",
+        "relationships": "Argumentative communication style, sibling conflicts through words, intellectual superiority claims, witty but cutting remarks",
+        "timing_events": "Important contracts, business communications, travel accidents, teaching opportunities, skill certifications",
+        "remedies": "Budha mantra, green stone wear, logical thinking practice, communication mindfulness"
+      },
+      "jupiter_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Righteous warrior - dharmic action",
+        "intensity": "High",
+        "effects": "Courageous protection of dharma, righteous battles, spiritual warrior awakening, expansion through action, wisdom in conflict, generous aggression",
+        "health": "Overall good health with energetic vitality, some inflammation from excess activity, blood pressure elevation possible, liver heat",
+        "career": "Leadership in ethical causes, military/police honors, judicial victories, religious institution work, teaching martial arts, protective professions",
+        "relationships": "Protective of loved ones, spiritual authority, guiding family members, mentoring relationships, righteous stand-taking",
+        "timing_events": "Ethical victories, honors and awards, religious pilgrimages, protection of family honor, expansion of responsibilities",
+        "remedies": "Jupiter worship, yellow sapphire wear, spiritual practice, ethical action emphasis, charity"
+      },
+      "venus_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Passion and desire - Mars-Venus magnetism",
+        "intensity": "High",
+        "effects": "Sexual passion extreme, creative aggression, artistic combat, passionate romance, sensual energy surge, desire-driven actions, beauty-through-strength",
+        "health": "Sexual vitality strong, reproductive health active, skin/beauty good, throat issues possible, kidney stress from excessive passion",
+        "career": "Artistic achievements through effort, beauty industry success, entertainment/sports, music with power, passionate creative work, luxury goods",
+        "relationships": "Romance and sexual passion peak, attraction magnetism strong, marital intimacy increases, possessive desires, relationship passion intensifies",
+        "timing_events": "New relationships beginning, romantic commitments, artistic creations, beauty-related successes, passionate projects launching",
+        "remedies": "Venus worship, diamond/emerald wear, artistic practice, relationship mindfulness, moderation in desires"
+      },
+      "saturn_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Energy blocked by limitation - frustration maximum",
+        "intensity": "High-Negative",
+        "effects": "Severe energy frustration, blocked ambitions, slow progress despite effort, hard work without rewards, delays in action, systematic obstruction",
+        "health": "Chronic pain, joint problems, slow recovery from injuries, arthritis emerging, muscle weakness, fatigue despite rest, bone density issues",
+        "career": "Career obstacles, slow advancement, authority figures block progress, bureaucratic delays, hard work without recognition, separation from success",
+        "relationships": "Relationship coldness, emotional distance despite passion attempts, paternal conflicts, authority clashes, loneliness despite activity",
+        "timing_events": "Delays and frustrations, blocked initiatives, health deterioration, separation events, limitation experiences, hard karma manifestation",
+        "remedies": "Shani puja intensive, iron wear, labor and service, patience practice, acceptance meditation, karmic understanding"
+      },
+      "rahu_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Obsessive aggression - foreign and unconventional energy",
+        "intensity": "High-Unusual",
+        "effects": "Obsessive aggression, unconventional actions, foreign conflicts, shadow desires dominate, illicit aggression, addiction to action, obsessive passion",
+        "health": "Mysterious health issues, shadow infections, allergic reactions, obsessive behaviors affecting health, hidden injuries, toxic exposure",
+        "career": "Success in unconventional fields, foreign military/business, black market dealings, shadow enterprises, breaking rules successfully, innovation through chaos",
+        "relationships": "Obsessive relationships, foreign affairs, shadow relationships, boundary violations, unconventional partnership arrangements, secret conflicts",
+        "timing_events": "Foreign travels with aggression, unconventional victories, hidden conflicts emerging, obsessive pursuits beginning, shadow events manifesting",
+        "remedies": "Rahu puja, shadow work, clarifying intentions, ethical boundaries, avoiding obsession"
+      },
+      "ketu_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Warrior spirit without direction - spiritual detachment",
+        "intensity": "Medium-High",
+        "effects": "Spiritual warrior energy, detachment from material battles, past-life aggression surfacing, directional confusion, unconscious aggression patterns, liberation through struggle",
+        "health": "Mysterious health fluctuations, past-life disease patterns, psychosomatic symptoms, infections without clear cause, spiritual healing opportunities",
+        "career": "Spiritual teaching of martial arts, research into past patterns, unconventional career shifts, liberation-focused work, detachment from success",
+        "relationships": "Karmic relationship endings, spiritual detachment from partnerships, isolation despite activity, past-life connection experiencing, karmic completion",
+        "timing_events": "Spiritual initiations, mysterious endings, karmic completion events, past-life memories surfacing, spiritual warrior experiences",
+        "remedies": "Ketu puja, spiritual practices, past-life understanding, detachment development, karmic acceptance"
+      }
+    },
+    "moon_antardasha": {
+      "duration_days": 284,
+      "sun_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Emotional energy with solar confidence",
+        "intensity": "High",
+        "effects": "Emotional confidence, feeling-driven leadership, nurturing aggression, protective authority, emotional bravery, mother-nature connection, confident emotional expression",
+        "health": "Emotional health good, cardiac wellness, eye clarity, heat-related fevers, emotional stress management needed, inflammatory conditions",
+        "career": "Emotional intelligence leadership, nurturing profession authority, public facing roles, maternal business, real estate success, hospitality leadership",
+        "relationships": "Maternal bonding strong, paternal connection improves, emotional openness with authority, family leadership, protective relationships",
+        "timing_events": "Maternal honors, property acquisitions, emotional breakthroughs, family leadership roles, public recognition of nurturing work",
+        "remedies": "Combined Sun-Moon puja, pearl and ruby wear, balanced practice"
+      },
+      "moon_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Double Moon emotion - intuitive warrior energy",
+        "intensity": "Medium-High",
+        "effects": "Emotional sensitivity high, intuitive decision-making, moodiness with action, nurturing impulse strong, mother-figure prominence, domestic focus, emotional cyclical patterns",
+        "health": "Emotional wellbeing essential, water-retention issues, gynecological cycles, feeding problems, emotional eating, fluid imbalances, mood-based health fluctuations",
+        "career": "Care-giving careers peak, hospitality success, real estate, domestic business, emotional intelligence valued, nurturing professions, family business management",
+        "relationships": "Family relationships central, maternal bonding critical, emotional intimacy, domestic partnerships, possessive tendencies, family priorities dominate",
+        "timing_events": "Family gatherings, maternal events, property transactions, emotional openings, nurturing responsibilities, domestic restructuring",
+        "remedies": "Moon worship, pearl wear, water charity, emotional expression, nurturing activities"
+      },
+      "mars_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Emotional aggression - feelings drive action",
+        "intensity": "High",
+        "effects": "Aggressive emotional expression, passionate outbursts, emotional warrior, protective aggression, family feuds possible, moody combativeness, defensive reactions",
+        "health": "Emotional stress causing accidents, fever with emotional triggers, gynecological issues, digestive stress from emotions, accident during emotional states",
+        "career": "Aggressive emotional workers, protective professions, physical care work, emotional intensity careers, real estate battles, property disputes, sports driven by emotion",
+        "relationships": "Emotional arguments aggressive, family conflicts, passionate defenses, sibling disputes, protective possessiveness, emotional manipulation possible",
+        "timing_events": "Family conflicts, emotional confrontations, property disputes, accident during emotional turmoil, family restructuring through conflict",
+        "remedies": "Emotional regulation, Mars-Moon puja, restraint practice, conflict meditation"
+      },
+      "mercury_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Emotional communication - feelings expressed through words",
+        "intensity": "Medium",
+        "effects": "Expressive communication of emotions, chatty emotional nature, witty sensitivity, intellectual emotional processing, communication about feelings, trade of emotional items",
+        "health": "Nervous emotional tension, speech-related stress, respiration affected by emotions, mental health important, learning challenges with emotions",
+        "career": "Emotional counseling, psychology, communication about care, teaching feelings, writing emotional content, emotional trade, marketing emotional products",
+        "relationships": "Emotional communication important, expressing feelings through words, sibling emotional bonding, intellectual discussions of emotions, emotional writing",
+        "timing_events": "Emotional conversations, important discussions, learning opportunities, communication breakthroughs, teaching moments",
+        "remedies": "Mercury-Moon puja, communication practice, emotional expression training"
+      },
+      "jupiter_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Emotional wisdom - nurturing spiritual growth",
+        "intensity": "Medium-High",
+        "effects": "Emotional wisdom, maternal spirituality, protective faith, expanded nurturing, philosophical emotions, generous emotional expression, spiritual motherhood",
+        "health": "Good overall health, emotional wellness strong, liver health good, possible weight gain from comfort eating, expansion of emotional capacity",
+        "career": "Spiritual counseling, religious education, philosophical teaching, maternal spiritual work, charitable nurturing, expansion of care services",
+        "relationships": "Spiritual family bonding, maternal spiritual guidance, expanded emotional circles, philosophical partnerships, wisdom-sharing relationships",
+        "timing_events": "Spiritual family gatherings, emotional wisdom teaching, expanded responsibilities, religious celebrations, maternal spiritual events",
+        "remedies": "Jupiter-Moon puja, yellow sapphire wear, spiritual nurturing practice"
+      },
+      "venus_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Emotional beauty - nurturing love and sensuality",
+        "intensity": "Medium-High",
+        "effects": "Emotional romantic nature, nurturing love, sensual emotionality, creative home-making, beautiful domestic life, comfortable sexuality, artistic emotions",
+        "health": "Good health with sensual wellness, reproductive health strong, beauty of body increases, throat/kidney minor issues, comfort in physicality",
+        "career": "Home decoration, culinary arts, beauty from home, artistic domestic work, sensual creative work, love-based careers, comfort products",
+        "relationships": "Romantic emotional expression, home-based love, family romance, aesthetic partnerships, sensual comfort in relationships, artistic collaboration",
+        "timing_events": "Romantic domestic moments, home beautification, sensual partnerships beginning, artistic family projects, comfortable relationship phases",
+        "remedies": "Venus-Moon puja, diamond wear, artistic home practice"
+      },
+      "saturn_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Emotional hardship - sadness and limitation",
+        "intensity": "High-Negative",
+        "effects": "Deep sadness possible, emotional blocks, maternal separation or loss, restricted emotional expression, heavy emotional burdens, serious mood disorders, karmic emotional lessons",
+        "health": "Depression risk, emotional health critical, chronic fatigue, digestive disorders from stress, aging signs, weakness, immune system strain",
+        "career": "Career delays in nurturing fields, restrictions in growth, hard work in care fields, separation from career success, limitation of opportunities",
+        "relationships": "Maternal separation possible, relationship emotional coldness, restricted emotional expression, loneliness, family distance, paternal coldness, emotional pain",
+        "timing_events": "Maternal loss or separation, relationship endings, emotional depression periods, karmic life lessons, separation from comfort, hard experiences",
+        "remedies": "Saturn-Moon puja, iron wear, acceptance practice, emotional support seeking, maternal karma understanding"
+      },
+      "rahu_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Obsessive emotions - chaotic nurturing urges",
+        "intensity": "Medium-High",
+        "effects": "Obsessive emotional patterns, chaotic nurturing, emotional addiction, shadow maternal patterns, unconventional emotional expression, obsessive care-giving, emotional illusions",
+        "health": "Emotional health confused, mysterious psychological issues, allergic emotional responses, shadow trauma resurfacing, emotional addiction behaviors",
+        "career": "Success through emotional chaos, unconventional nurturing work, shadow care work, manipulation through emotions, success despite emotional turmoil",
+        "relationships": "Obsessive emotional attachments, chaotic family patterns, shadow maternal relationships, emotional manipulation, unconventional nurturing, boundaries crossed",
+        "timing_events": "Obsessive relationship phases, chaotic family events, emotional turmoil periods, shadow family patterns emerging, unconventional family changes",
+        "remedies": "Rahu-Moon puja, emotional clarity practice, boundary setting"
+      },
+      "ketu_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Detached emotions - spiritual emotional wisdom",
+        "intensity": "Medium",
+        "effects": "Emotional detachment, spiritual emotions, past-life emotional patterns, liberation from emotional patterns, karmic family completion, spiritual motherhood, karmic emotions",
+        "health": "Emotional fluctuations, mysterious health patterns, psychosomatic symptoms, past-life health patterns resurfacing, spiritual healing possible",
+        "career": "Spiritual emotional work, past-life healing careers, karmic completion in nurturing, unconventional emotional paths, spiritual teaching of emotions",
+        "relationships": "Karmic family relationships, spiritual emotional bonds, past-life family connections, emotional detachment bringing peace, relationship karmic completion",
+        "timing_events": "Karmic family completions, past-life emotional memories, spiritual emotional initiations, relationship endings resolving past lives",
+        "remedies": "Ketu-Moon puja, spiritual emotional practice, karmic acceptance"
+      }
+    },
+    "mars_antardasha": {
+      "duration_days": 284,
+      "sun_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Double Mars with solar confidence - warrior peak",
+        "intensity": "Extreme",
+        "effects": "Maximum warrior energy, solar-boosted aggression, confident domination, leadership through force, competitive ferocity, courageous acts, fearless confrontation",
+        "health": "CRITICAL ACCIDENT PERIOD - severe injury risk, surgery possible, inflammation extreme, high blood pressure, adrenaline overdose, eyestrain, cardiac stress",
+        "career": "Military/police rapid advancement, aggressive business expansion, competitive victories, dangerous profession peak, leadership through domination, sports championships",
+        "relationships": "Aggressive domination attempts, marital strife high, ego clashes severe, sibling conflicts peak, authority battles, paternal competition, sexual aggression",
+        "timing_events": "Major accidents/injuries, surgical emergencies, military engagements, aggressive business takeovers, competitive championships, violent incidents possible",
+        "remedies": "Intensive Mars-Sun puja, mangal dosha mitigation, red coral emergency measures, absolute restraint, spiritual guidance"
+      },
+      "moon_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Aggressive emotions - mood swings with combat",
+        "intensity": "High",
+        "effects": "Emotional aggression extreme, mood swings driving violence, protective aggression, family feuds peak, emotional warrior, defensive attacks, moody combativeness",
+        "health": "Emotional stress causing accidents, fever from emotional triggers, gynecological issues, digestive upset from anger, accident during mood swings, inflammation",
+        "career": "Aggressive emotional workers, protective/security roles, physical care work with aggression, emotional intensity careers, real estate conflicts, property battles",
+        "relationships": "Family conflicts severe, emotional arguments violent, protective aggression, sibling feuds, possessive conflicts, defensive attacks, family restructuring",
+        "timing_events": "Family conflicts explosive, emotional confrontations, property disputes, accidents during emotional turbulence, family separation events",
+        "remedies": "Mars-Moon puja, anger management, emotional restraint practice"
+      },
+      "mars_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "TRIPLE MARS FIRE - ABSOLUTE PEAK DANGER",
+        "intensity": "EXTREME-CRITICAL",
+        "effects": "Uncontrollable aggression, maximum physical power, warrior fury unleashed, recklessness at peak, sexual passion extreme, sibling conflicts murderous, accident/surgery peak catastrophic",
+        "health": "MAXIMUM DANGER - Severe accidents certain risk, major surgery period, life-threatening injuries possible, extreme inflammation, cardiac emergencies, blood pressure critical, poisoning risk, burns/cuts severe",
+        "career": "Dangerous work peak, military combat, violent professions, reckless business moves, competitive aggression extreme, dangerous machinery work, sexual harassment risk, violence in workplace",
+        "relationships": "Marital violence possible, aggressive domination extreme, sexual coercion risk, sibling murder potential, family violence, revenge fantasies, legal violence consequences",
+        "timing_events": "MAJOR ACCIDENTS/INJURIES HIGHLY PROBABLE, surgical emergencies, violent altercations, military combat, extreme competitive events, family violence, legal consequences",
+        "remedies": "INTENSIVE HANUMAN WORSHIP, mangal dosha extreme mitigation, complete lifestyle restraint, professional psychological support, avoid all risk-taking absolutely, spiritual intervention recommended"
+      },
+      "mercury_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Intellectual warrior - strategic aggression",
+        "intensity": "High",
+        "effects": "Strategic combat, intellectual aggression, witty warfare, mechanical skill with force, skilled debate, sharp communication, technical combat, nervous energy high",
+        "health": "Nervous tension extreme, speech stress, hand/arm injuries, mechanical accident risk, respiratory issues, mental strain causing physical symptoms, repetitive strain injuries",
+        "career": "Strategic military work, technical combat roles, skilled debate victories, mechanical engineer success, writing about conflict, sales through aggression, teaching martial arts",
+        "relationships": "Argumentative communication intense, witty but cutting remarks, sibling intellectual conflicts, communication aggression, debate dominance, intellectual superiority",
+        "timing_events": "Important strategic communications, business negotiations, travel accidents, mechanical accidents, teaching opportunities, skill-based victories",
+        "remedies": "Mars-Mercury puja, logical thinking practice, communication restraint"
+      },
+      "jupiter_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Righteous warrior at peak - dharmic action expansive",
+        "intensity": "High",
+        "effects": "Powerful dharmic warrior, courageous protection of others, righteous battles, spiritual warrior activated, expansion through virtuous action, wisdom in conflict, heroic deeds",
+        "health": "Good overall health with vitality, some inflammatory heat, possible blood pressure elevation, generally resilient, energy high and sustained",
+        "career": "Leadership in causes, military/police honors, judicial victories, religious institution prominence, martial arts teaching success, protective professions peak, righteous expansion",
+        "relationships": "Protective of loved ones strong, spiritual authority in family, guiding family members, mentoring relationships, righteous stand-taking, ethical partnership",
+        "timing_events": "Ethical victories celebrated, honors and awards received, religious pilgrimages, family honor protection, responsibility expansion, righteous achievements",
+        "remedies": "Mars-Jupiter puja, spiritual practice, ethical action emphasis, charity, dharmic focus"
+      },
+      "venus_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "PASSION PEAK - Mars-Venus magnetic attraction",
+        "intensity": "High",
+        "effects": "Sexual passion and desire at peak, creative aggression, artistic combat style, romantic passion intense, sensual warrior, beauty through strength, passionate projects",
+        "health": "Sexual vitality strong and healthy, reproductive system active, skin beautiful, throat/kidney possible stress, energy from passion, physical attractiveness increases",
+        "career": "Artistic work succeeding through effort, beauty industry peak, entertainment/sports success, music with power, passionate creative achievements, luxury goods trading",
+        "relationships": "Romantic passion extreme, sexual magnetism peak, attraction power maximum, marital intimacy intense, possessive desires high, romance and combat intertwined",
+        "timing_events": "New relationships beginning intensely, romantic commitments made, artistic creations completed, beauty-related successes, passionate projects launching",
+        "remedies": "Mars-Venus puja, artistic practice, relationship mindfulness, passion moderation"
+      },
+      "saturn_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "BLOCKED WARRIOR - frustration and limitation maximum",
+        "intensity": "High-Negative",
+        "effects": "Severe energy frustration, warrior blocked, slow progress despite massive effort, delays in action, systematic obstruction, hard work without recognition, defeated feeling",
+        "health": "Chronic pain from overexertion, joint problems, slow injury recovery, muscle weakness, bone density decline, arthritis emerging, exhaustion despite effort, accident from fatigue",
+        "career": "Career obstacles severe, advancement blocked, authority figures obstruct, bureaucratic delays, hard work unrewarded, separation from success, professional frustration peak",
+        "relationships": "Relationship coldness despite passion, emotional distance, paternal conflicts, authority clashes, loneliness despite activity, rejected aggression, sexual frustration",
+        "timing_events": "Delays and frustrations mounting, blocked initiatives, health deterioration, separation events, limitation experiences, hard karma manifestation, defeat experiences",
+        "remedies": "Mars-Saturn puja intensive, iron wear, labor acceptance, patience practice, karmic understanding, professional help"
+      },
+      "rahu_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "OBSESSIVE WARRIOR - unconventional aggression peak",
+        "intensity": "High-Unusual",
+        "effects": "Obsessive aggression and violence tendencies, unconventional methods, foreign conflicts, shadow desires dominate, illicit aggression, addiction to action, obsessive sexuality",
+        "health": "Mysterious injuries, shadow infections, allergic reactions, obsessive behaviors harming health, hidden injuries, toxic exposure, mysterious inflammation",
+        "career": "Success in black market, foreign military operations, unconventional business aggression, rule-breaking success, breaking taboos, shadow enterprises, innovation through chaos",
+        "relationships": "Obsessive relationships, foreign affairs, shadow relationships, boundary violations, sexual obsession, unconventional arrangements, secret conflicts, stalking behavior possible",
+        "timing_events": "Foreign conflicts, unconventional victories, obsessive pursuit beginning, hidden aggression surfacing, shadow relationships, boundary-breaking events",
+        "remedies": "Mars-Rahu puja, boundary clarification, ethical intention setting, shadow work"
+      },
+      "ketu_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Detached warrior - spiritual combat energy",
+        "intensity": "Medium-High",
+        "effects": "Spiritual warrior activation, detachment from material battles, past-life warrior patterns surfacing, directional confusion in action, unconscious aggression patterns, liberation through struggle",
+        "health": "Mysterious fluctuations, past-life injury patterns, psychosomatic symptoms, spiritual healing opportunities, mysterious inflammation, infections without cause",
+        "career": "Spiritual martial arts teaching, research into past patterns, karmic warrior work, unconventional spiritual paths, liberation-focused aggression, detachment from victory",
+        "relationships": "Karmic relationship completions, spiritual warrior bonding, past-life aggression patterns, isolation despite activity, karmic sibling connections, past-life conflicts",
+        "timing_events": "Spiritual initiations, mysterious endings, past-life memories, karmic warrior experiences, spiritual combat lessons, liberation events",
+        "remedies": "Mars-Ketu puja, spiritual practice, past-life work, detachment development, karmic acceptance"
+      }
+    },
+    "mercury_antardasha": {
+      "duration_days": 284,
+      "sun_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Intellectual warrior - strategic action with authority",
+        "intensity": "High",
+        "effects": "Strategic combat intelligence, intellectual leadership, sharp administrative thinking, skillful commanding, mechanical mastery, authoritative communication, confident logic",
+        "health": "Nervous tension from intensity, eye strain from focus, hand/arm stress, respiratory issues, mental strain manifesting physically, speech strain, headaches from concentration",
+        "career": "Strategic military leadership, technical administrative work, skilled business competition, mechanical engineering success, authoritative communication roles, teaching combat strategies",
+        "relationships": "Intellectual domination in partnerships, witty but commanding, sibling intellectual bonds, communication authority, debate victories, leadership in discussions",
+        "timing_events": "Strategic communications, business negotiations, technical certifications, important contracts, teaching opportunities, travel for business",
+        "remedies": "Mercury-Sun puja, logical balance, communication mindfulness"
+      },
+      "moon_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Emotional intelligence with analytical skills",
+        "intensity": "Medium-High",
+        "effects": "Emotional analysis, feeling-based communication, intuitive intelligence, analytical nurturing, communicative care-giving, emotional-intellectual processing, witty sensitivity",
+        "health": "Nervous emotional tension, speech stress from emotions, respiratory issues, learning affects emotions, mental emotional balance critical, anxiety management needed",
+        "career": "Emotional counseling with analysis, psychology with teaching, care communication, emotional intelligence roles, trade of emotional items, communication in nurturing fields",
+        "relationships": "Emotional expression through communication, sibling emotional bonding, witty emotional discussions, intellectual emotional processing, caring but analytical",
+        "timing_events": "Emotional conversations, learning opportunities, important discussions, teaching emotional content, communication breakthroughs",
+        "remedies": "Mercury-Moon puja, communication-emotion balance"
+      },
+      "mars_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Warrior intelligence - strategic aggression",
+        "intensity": "High",
+        "effects": "Strategic combat thinking, intellectual martial skills, witty aggression, mechanical combat, analytical warfare strategy, sharp debate aggression, nervous combat energy",
+        "health": "Nervous tension extreme, hand/arm injury risk, eye strain, mechanical accident risk, speech stress, repetitive strain injuries, respiratory issues from stress",
+        "career": "Strategic military work, technical defense roles, skilled debate victories, mechanical combat engineering, sales through intellectual combat, martial strategy teaching",
+        "relationships": "Argumentative intensity high, witty but aggressive communication, sibling intellectual conflicts, debate domination, communication warfare, intellectual superiority",
+        "timing_events": "Strategic communications, business negotiations, mechanical accidents, travel accidents, contract disputes, competitive communications",
+        "remedies": "Mercury-Mars puja, communication restraint, logical dispute resolution"
+      },
+      "mercury_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Double Mercury intellect - communication and trade peak",
+        "intensity": "High",
+        "effects": "Maximum intellectual activity, communication excellence, trade success peak, mechanical skill at peak, writing success, learning peak, nervous energy manageable but high",
+        "health": "Nervous system stressed, eye strain significant, hand/arm overuse, speech fatigue, respiratory issues, mental concentration demanding physical toll, insomnia possible",
+        "career": "Communication excellence, writing success, teaching peak, trade/business success, mechanical mastery, travel for business, skilled negotiations, intellectual work peak",
+        "relationships": "Communication is strength, sibling bonding through words, witty partnerships, intellectual collaboration, teaching relationships, communication-based intimacy",
+        "timing_events": "Important communications, successful negotiations, business transactions, travel, learning certifications, publishing success, contract signings",
+        "remedies": "Mercury worship, emerald wear, communication balance, eye care, nervous system support"
+      },
+      "jupiter_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Wise intelligence - expanded knowledge",
+        "intensity": "Medium-High",
+        "effects": "Expanded intellectual capacity, wisdom in communication, philosophical thinking, generous sharing of knowledge, spiritual intelligence, broad-minded learning, teaching wisdom",
+        "health": "Good overall health, possible weight gain from sedentary study, liver health good, expansion of mental capacity, generally healthy learning period",
+        "career": "Teaching success, higher education advancement, philosophical business, wisdom-based consulting, expansion of communication reach, spiritual teaching, expanded knowledge work",
+        "relationships": "Wise communication, teaching partnerships, spiritual intellectual bonding, philosophical discussions, generous knowledge sharing, mentor relationships",
+        "timing_events": "Educational advancement, teaching opportunities, wisdom gained, expanded communication networks, philosophical breakthroughs, travel for learning",
+        "remedies": "Mercury-Jupiter puja, knowledge practice, teaching focus"
+      },
+      "venus_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Artistic communication - beauty through words",
+        "intensity": "Medium-High",
+        "effects": "Artistic communication, beautiful writing/speech, creative commerce, charming communication, sensual language, artistic trade, poetry and art expression, attractive voice",
+        "health": "Good health with artistic vitality, throat health important, kidney possible stress, beauty increases, sensual wellness, voice becoming attractive",
+        "career": "Successful writing, creative communication, artistic trade, beauty industry communication, music and speech, charm in sales, artistic business, sensual communication",
+        "relationships": "Charming communication, romantic communication, artistic partnership, beautiful expression, sensual language, attraction through words, love-based learning",
+        "timing_events": "Artistic communications, successful creative projects, romantic communications, beautiful creations, artistic partnerships beginning, love messages",
+        "remedies": "Mercury-Venus puja, artistic expression practice"
+      },
+      "saturn_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Serious study - communication limitation",
+        "intensity": "Medium-High",
+        "effects": "Serious learning period, communication delays, limited social interaction, focused study, structured thinking, slow progress in learning, heavy intellectual burdens",
+        "health": "Mental strain significant, stress affecting speech, nervous system strained, focus causing physical tension, insomnia possible, eye strain from sustained work",
+        "career": "Slow career progress through learning, serious technical study, limited communication growth, restricted advancement, hard intellectual work, patience required in business",
+        "relationships": "Reduced communication, relationship distance, limited social circle, serious discussions, strained communication, isolated learning, limited relationship growth",
+        "timing_events": "Delays in learning, communication obstacles, business slowdown, restricted advancement, limitation periods, karmic learning experiences",
+        "remedies": "Mercury-Saturn puja, discipline practice, communication patience"
+      },
+      "rahu_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Unconventional thinking - obsessive learning",
+        "intensity": "Medium-High",
+        "effects": "Unconventional intelligence, obsessive learning, shadow thoughts, unconventional communication, foreign language success, rule-breaking thinking, illicit trade, obsessive reading",
+        "health": "Nervous health confused, mysterious learning disabilities, allergic reactions, obsessive behaviors, mental health unclear, shadow thoughts affecting health",
+        "career": "Success in unconventional fields, foreign trade/communication, shadow business, unconventional teaching, breaking communication rules, hacking/manipulation, innovation",
+        "relationships": "Unconventional communication, foreign relationships, obsessive discussions, boundary-crossing conversations, shadow relationships, manipulation through words",
+        "timing_events": "Unconventional learning, foreign communication, obsessive study, boundary-breaking conversations, unusual trade, rule-breaking success",
+        "remedies": "Mercury-Rahu puja, ethical thinking practice, boundary clarity"
+      },
+      "ketu_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Spiritual knowledge - detached thinking",
+        "intensity": "Medium",
+        "effects": "Spiritual intelligence, detached thinking, past-life knowledge surfacing, directional confusion in learning, unconscious knowledge patterns, liberation through understanding",
+        "health": "Mysterious learning disabilities, past-life thought patterns, psychosomatic symptoms, spiritual healing through knowledge, mysterious mind states",
+        "career": "Spiritual teaching, research into past patterns, karmic knowledge work, meditation teaching, unconventional spiritual paths, detached learning, wisdom traditions",
+        "relationships": "Karmic intellectual bonds, spiritual communication, past-life knowledge sharing, detached learning together, karmic learning partnerships, spiritual discussions",
+        "timing_events": "Spiritual learning, past-life knowledge, karmic communications, intellectual liberation, mysterious understanding, spiritual teaching opportunities",
+        "remedies": "Mercury-Ketu puja, spiritual knowledge practice, past-life understanding"
+      }
+    },
+    "jupiter_antardasha": {
+      "duration_days": 284,
+      "sun_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Righteous authority - dharmic leadership",
+        "intensity": "High",
+        "effects": "Powerful dharmic leadership, righteous authority, courageous expansion, wise domination, spiritual administration, ethical governance, heroic leadership, generous authority",
+        "health": "Good overall health, high vitality, possible blood pressure elevation from responsibility, generally resilient, energy sustained and abundant",
+        "career": "Leadership in ethical institutions, government positions, judicial authority, religious leadership, teaching authority, expansion of responsibilities, dharmic business leadership",
+        "relationships": "Spiritual leadership in family, protective wisdom, ethical partnership, mentoring relationships, righteous authority, family respect increases, patriarchal strength",
+        "timing_events": "Leadership opportunities, ethical victories, honors and awards, governmental positions, religious advancement, responsibility expansion, respect gained",
+        "remedies": "Jupiter-Sun puja, yellow sapphire wear, spiritual leadership practice"
+      },
+      "moon_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Spiritual nurturing - expanded care",
+        "intensity": "Medium-High",
+        "effects": "Spiritual motherhood, expanded nurturing, wisdom in care-giving, generous emotional support, philosophical emotions, protective wisdom, spiritual family bonding, expanded compassion",
+        "health": "Good health, possible weight gain from comfort, liver health good, emotional wellness strong, expansion of emotional capacity, generally healthy period",
+        "career": "Expanded care work, spiritual counseling, teaching about emotions, religious education, expanded charitable work, philosophical care-giving, maternal spiritual work",
+        "relationships": "Spiritual family bonding, maternal wisdom expansion, expanded emotional circles, philosophical partnerships, wisdom-sharing, protective care expansion, family expansion",
+        "timing_events": "Spiritual family events, expanded responsibilities, emotional wisdom gained, religious family gatherings, teaching opportunities, family expansion",
+        "remedies": "Jupiter-Moon puja, yellow sapphire wear, nurturing practice"
+      },
+      "mars_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Righteous warrior - dharmic action peak",
+        "intensity": "High",
+        "effects": "Powerful dharmic warrior, courageous protection of dharma, righteous battles, spiritual warrior activation, expansion through virtuous action, heroic deeds, wisdom in combat",
+        "health": "Good overall health with warrior vitality, some inflammatory heat possible, blood pressure elevation, generally resilient, energy high and directed",
+        "career": "Military/police honors, leadership in causes, judicial victories, religious institution authority, martial arts teaching success, protective professions peak, righteous expansion",
+        "relationships": "Protective of loved ones strong, family honor defense, ethical stand-taking, righteous partnerships, spiritual warrior bonding, mentoring relationships strong",
+        "timing_events": "Ethical victories, honors received, righteous achievements, family honor protection, responsibility expansion, religious advancement, courageous acts",
+        "remedies": "Jupiter-Mars puja, spiritual practice, ethical action emphasis"
+      },
+      "mercury_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Wise communication - expanded teaching",
+        "intensity": "Medium-High",
+        "effects": "Expanded intellectual capacity, wisdom in communication, philosophical teaching, generous knowledge sharing, expanded learning, spiritual intelligence, broad-minded thinking",
+        "health": "Good health overall, possible weight gain from study, nervous system generally healthy, learning supports wellbeing, expansion of mental capacity",
+        "career": "Teaching success expanded, higher education advancement, philosophical business, wisdom consulting, communication reach expanded, spiritual teaching, expansion of knowledge work",
+        "relationships": "Wise communication, teaching partnerships, spiritual intellectual bonding, philosophical discussions, generous knowledge sharing, mentor relationships, expanded networks",
+        "timing_events": "Educational advancement, teaching opportunities, wisdom gained, expanded communication, philosophical breakthroughs, travel for learning, publication success",
+        "remedies": "Jupiter-Mercury puja, teaching practice, knowledge sharing"
+      },
+      "jupiter_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Double Jupiter blessing - expansion peak",
+        "intensity": "High",
+        "effects": "Maximum expansion, abundance peak, wisdom at peak, spiritual growth rapid, generous expressions, religious devotion strong, dharmic success certain, luck and grace manifest",
+        "health": "Excellent health overall, possible weight gain from abundance, liver health excellent, vitality high, energy sustained, healing capacity strong, resistance to disease",
+        "career": "Career expansion maximum, promotion opportunities abundant, business success peak, educational advancement rapid, international opportunities, wealth expansion, dharmic success",
+        "relationships": "Family expansion possible, relationship harmony peak, spiritual bonding, generous partnerships, mentor relationships valued, family blessings manifest, social expansion",
+        "timing_events": "Expansion events, abundance manifestation, educational achievements, career promotions, spiritual growth milestones, family expansion, international opportunities, luck peaks",
+        "remedies": "Jupiter worship, yellow sapphire wear, charity and giving, spiritual practice, gratitude practice"
+      },
+      "venus_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Spiritual love - expanded compassion and beauty",
+        "intensity": "High",
+        "effects": "Spiritual love expansion, compassionate wisdom, beautiful relationships, expanded romantic circles, generous affection, sensual spirituality, artistic expansion, dharmic love",
+        "health": "Excellent health, reproductive health strong, beauty increases, skin radiance, sensual wellness, generally vital, expansion of physical capacity",
+        "career": "Successful artistic expansion, beauty industry growth, entertainment success, relationship-based work, charitable beauty work, sensual creative expansion, love-based business",
+        "relationships": "Romantic expansion, relationship harmony peak, spiritual love, compassionate partnerships, artistic collaboration, expanded social circles, family expansion, new relationships",
+        "timing_events": "Romantic expansion, new relationships, artistic successes, beauty expansion, sensual partnerships beginning, social expansion, love manifestations",
+        "remedies": "Jupiter-Venus puja, diamond wear, artistic practice, love expansion"
+      },
+      "saturn_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Mature wisdom - dharmic limitation",
+        "intensity": "Medium-High",
+        "effects": "Mature wisdom developing, dharmic responsibility, slow expansion, careful growth, serious spiritual practice, limitation bringing wisdom, karmic lessons in expansion, patience required",
+        "health": "Mixed health, possible chronic conditions, expansion limited by age, wisdom in health management, slow recovery possible, but generally stable",
+        "career": "Slow career expansion, serious responsibility taking, dharmic work emphasis, expansion limited but stable, slow achievement, patience required, long-term building",
+        "relationships": "Maturity in relationships, serious partnerships, responsibility emphasis, spiritual maturity, long-term relationship building, limited but stable growth",
+        "timing_events": "Slow expansion, maturity development, responsibility assuming, limitation periods, karmic wisdom gained, long-term achievement, spiritual maturation",
+        "remedies": "Jupiter-Saturn puja, acceptance practice, dharmic responsibility emphasis"
+      },
+      "rahu_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Unconventional expansion - shadow dharma",
+        "intensity": "Medium-High",
+        "effects": "Unconventional expansion, shadow beliefs, unconventional dharma, expansion through rule-breaking, obsessive faith, foreign expansion, illicit wealth possible, inflation and excess",
+        "health": "Health confused, mysterious expansion issues, allergic growth, obsessive behaviors, hidden health gains/losses, expansion health paradox",
+        "career": "Unconventional expansion, foreign opportunity success, shadow wealth growth, rule-breaking success, illicit expansion, unconventional dharmic work, expansion through chaos",
+        "relationships": "Unconventional partnerships, foreign relationships, obsessive faith-based relationships, shadow partnerships, expansion through boundaries crossed, unconventional families",
+        "timing_events": "Unconventional expansion, foreign opportunities, obsessive faith periods, boundary-breaking success, shadow wealth, expansion through illicit means",
+        "remedies": "Jupiter-Rahu puja, ethical expansion emphasis, clarity in beliefs"
+      },
+      "ketu_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Spiritual liberation - detached wisdom",
+        "intensity": "Medium",
+        "effects": "Spiritual wisdom, detachment from material expansion, past-life dharmic wisdom, liberation through understanding, karmic dharma understanding, spiritual detachment, wisdom traditions",
+        "health": "Mysterious health fluctuations, past-life wisdom patterns, spiritual healing, psychosomatic symptoms, healing through detachment, mystery in health",
+        "career": "Spiritual teaching, research into dharma, karmic wisdom work, detached spiritual expansion, unconventional spiritual paths, liberation-focused career",
+        "relationships": "Karmic spiritual partnerships, past-life dharmic bonds, detached spiritual wisdom, karmic completion through teaching, spiritual liberation relationships",
+        "timing_events": "Spiritual initiations, karmic wisdom, past-life dharmic memories, liberation through understanding, spiritual growth peaks, karmic dharma completion",
+        "remedies": "Jupiter-Ketu puja, spiritual practice deepening, karmic acceptance"
+      }
+    },
+    "venus_antardasha": {
+      "duration_days": 284,
+      "sun_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Passionate authority - love and power",
+        "intensity": "High",
+        "effects": "Passionate leadership, authoritative romance, magnetic charisma, confident sensuality, powerful attraction, dominating love, creative power, attractive authority, romantic success",
+        "health": "Good health with radiant beauty, eye clarity, heart vitality, heat from passion possible, reproductive health strong, physical attractiveness peak",
+        "career": "Success in beauty/entertainment, leadership in romantic industries, powerful creative work, authoritative charm, successful business through attraction, luxury goods leadership",
+        "relationships": "Romantic attraction extreme, passionate relationships, dominating love, charismatic partnerships, sexual vitality peak, romantic achievements, powerful partnerships",
+        "timing_events": "New romantic relationships, passionate commitments, beauty achievements, successful creative projects, romantic successes, attraction peak",
+        "remedies": "Venus-Sun puja, diamond wear, balanced passion, love consciousness"
+      },
+      "moon_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Emotional beauty - nurturing sensuality",
+        "intensity": "Medium-High",
+        "effects": "Emotional romantic nature, nurturing love, sensual emotionality, creative home-making, beautiful domestic life, comfortable sexuality, artistic emotions, protective love",
+        "health": "Good health with sensual wellness, reproductive health strong, body beauty increases, emotional health excellent, comfort in physicality, nurturing vitality",
+        "career": "Home decoration, culinary arts, beauty from home, artistic domestic work, sensual creative work, love-based careers, comfort product business, home-based art",
+        "relationships": "Romantic emotional expression, home-based love, family romance, aesthetic partnerships, sensual comfort, artistic family collaboration, romantic home creation",
+        "timing_events": "Romantic domestic moments, home beautification, sensual partnerships beginning, artistic family projects, comfortable relationship phases, love nest creation",
+        "remedies": "Venus-Moon puja, diamond wear, artistic home practice"
+      },
+      "mars_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "PASSION PEAK - Mars-Venus magnetism maximum",
+        "intensity": "High",
+        "effects": "Sexual passion and desire at peak, creative aggression, artistic combat, romantic passion intense, sensual warrior, beauty through strength, passionate accomplishments peak",
+        "health": "Sexual vitality strong and healthy, reproductive system active, skin beautiful, physical attractiveness increases, throat/kidney possible stress, passionate energy",
+        "career": "Artistic achievement through effort, beauty industry success, entertainment/sports achievement, music with power, passionate creative work, luxury goods, beauty victories",
+        "relationships": "Romantic passion extreme, sexual magnetism peak, attraction power maximum, marital intimacy intense, possessive desires high, romance and combat intertwined",
+        "timing_events": "New relationships beginning intensely, romantic commitments, artistic creations completed, beauty-related successes, passionate projects achieving completion",
+        "remedies": "Venus-Mars puja, artistic practice, passion moderation, relationship mindfulness"
+      },
+      "mercury_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Artistic communication - beauty through words",
+        "intensity": "Medium-High",
+        "effects": "Artistic communication, beautiful writing/speech, creative commerce, charming communication, sensual language, artistic trade, poetry and art expression, attractive voice",
+        "health": "Good health with artistic vitality, throat health good, kidney possible stress, beauty increases, sensual wellness, voice becoming attractive, communication ease",
+        "career": "Successful writing, creative communication, artistic trade, beauty industry communication, music and speech, charm in sales, artistic business, sensual commerce",
+        "relationships": "Charming communication, romantic communication, artistic partnership, beautiful expression, sensual language, attraction through words, love-based learning",
+        "timing_events": "Artistic communications, successful creative projects, romantic communications, beautiful creations, artistic partnerships beginning, love messages sent/received",
+        "remedies": "Venus-Mercury puja, artistic expression practice"
+      },
+      "jupiter_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Spiritual love - expanded compassion",
+        "intensity": "High",
+        "effects": "Spiritual love expansion, compassionate wisdom, beautiful relationships, expanded romantic circles, generous affection, sensual spirituality, artistic expansion, dharmic love",
+        "health": "Excellent health, reproductive health strong, beauty increases, skin radiance, sensual wellness, generally vital, expansion of physical capacity",
+        "career": "Successful artistic expansion, beauty industry growth, entertainment success, relationship-based work, charitable beauty work, sensual creative expansion, love-based business",
+        "relationships": "Romantic expansion, relationship harmony peak, spiritual love, compassionate partnerships, artistic collaboration, expanded social circles, family expansion",
+        "timing_events": "Romantic expansion, new relationships, artistic successes, beauty expansion, sensual partnerships beginning, social expansion, love manifestations peak",
+        "remedies": "Venus-Jupiter puja, diamond wear, artistic practice, love expansion"
+      },
+      "venus_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Double Venus beauty and love - pleasure peak",
+        "intensity": "High",
+        "effects": "Maximum beauty and attraction, love and pleasure peak, romantic success certain, sexual vitality peak, artistic achievement maximum, sensual enjoyment peak, charm at maximum",
+        "health": "Excellent health overall, reproductive health strong, beauty peak, radiant complexion, sensual wellness peak, physical attractiveness maximum, vitality high",
+        "career": "Maximum success in beauty/entertainment, creative achievement peak, sensual business success, relationship-based work peak, artistic success maximum, luxury goods success",
+        "relationships": "Romantic success peak, attraction power maximum, sexual satisfaction peak, love relationships flourish, partnerships harmonious, romantic achievements maximum, family expansion",
+        "timing_events": "Major romantic achievements, marriage/partnership commitments peak, artistic success peak, beauty accolades, sensual experiences peak, love manifestations abundant",
+        "remedies": "Venus worship, diamond wear, love consciousness, artistic practice, gratitude for beauty"
+      },
+      "saturn_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Love delayed - relationship testing",
+        "intensity": "Medium-High",
+        "effects": "Relationship testing period, delayed romantic fulfillment, sexual restraint required, beauty fading concerns, love separation possible, serious relationship lessons, maturity in love",
+        "health": "Mixed health, aging concerns possible, reproductive health strained, beauty concerns, possible delays in healing, but generally stable if careful",
+        "career": "Slow progress in creative/beauty fields, delayed success, restriction in sensual business, serious relationship-based work, long-term artistic building",
+        "relationships": "Relationship strain, delayed romance, sexual restraint, separation possible, serious partnership work, maturity developing, karmic relationships surfacing",
+        "timing_events": "Relationship testing, delays in romantic plans, separation periods possible, maturity lessons, long-term relationship building, karmic relationship work",
+        "remedies": "Venus-Saturn puja, relationship commitment, karmic acceptance, patience practice"
+      },
+      "rahu_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Obsessive love - passion illusions",
+        "intensity": "Medium-High",
+        "effects": "Obsessive romantic attachment, illicit relationships, shadow desires dominate, unconventional love, obsessive sexuality, foreign relationships, addiction to pleasure, illusion in romance",
+        "health": "Health confused, mysterious reproductive issues, allergic reactions, obsessive behaviors affecting health, shadow health gains/losses, sensual addiction concerns",
+        "career": "Success in unconventional beauty/entertainment, shadow business relationships, illicit sensual commerce, rule-breaking artistic success, unconventional partnerships, beauty through chaos",
+        "relationships": "Obsessive relationships, foreign affairs, shadow relationships, boundary violations, sexual obsession, unconventional arrangements, secret love affairs, stalking behavior possible",
+        "timing_events": "Obsessive romantic periods, foreign love affairs, unconventional partnerships, boundary-breaking relationships, secret romance, shadow love manifestations",
+        "remedies": "Venus-Rahu puja, boundary clarity, ethical love practice, intention clarification"
+      },
+      "ketu_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Detached love - spiritual partnership",
+        "intensity": "Medium",
+        "effects": "Spiritual love, detachment from romantic illusions, past-life relationship patterns, liberation through love, karmic partnerships, platonic spiritual bonds, wisdom in love",
+        "health": "Mysterious health fluctuations, past-life beauty patterns, psychosomatic symptoms, spiritual healing through love, mysterious reproductive fluctuations",
+        "career": "Spiritual artistic work, research into love patterns, karmic relationship work, detached artistic expression, spiritual beauty teaching, unconventional creative paths",
+        "relationships": "Karmic spiritual partnerships, past-life love bonds, detached spiritual love, relationship karmic completion, platonic spiritual bonding, past-life reunion possible",
+        "timing_events": "Spiritual love initiations, karmic partnership completion, past-life love memories, spiritual love growth, relationship liberation events, karmic completion",
+        "remedies": "Venus-Ketu puja, spiritual love practice, karmic acceptance"
+      }
+    },
+    "saturn_antardasha": {
+      "duration_days": 284,
+      "sun_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Authority delayed - leadership tested",
+        "intensity": "High-Negative",
+        "effects": "Leadership blocked, authority questioned, power delayed, ambitious plans thwarted, recognition denied, respect withheld, harsh superiors, oppressive authority structures",
+        "health": "Heat with obstruction, eye strain, heart stress, high blood pressure despite restriction, cardiac weakness, vital force blocked, exhaustion from limitation",
+        "career": "Career advancement blocked, promotion delayed indefinitely, authority figures obstruct, recognition withheld, leadership opportunities denied, professional frustration peak",
+        "relationships": "Paternal conflict severe, authority clashes, respect issues, leadership in relationships rejected, ego humiliation, powerful figures dominate, pride wounded",
+        "timing_events": "Career delays, authority blocks, promotion denials, leadership rejection, respect losses, blocked advancement, career stagnation period",
+        "remedies": "Saturn-Sun puja intensive, iron wear, acceptance practice, patience development"
+      },
+      "moon_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Emotional burden - sadness and loss",
+        "intensity": "High-Negative",
+        "effects": "Deep sadness, emotional heaviness, maternal separation or loss possible, restricted emotional expression, heavy emotional burdens, serious mood disorders, depression risk",
+        "health": "Depression possible, emotional health critical, fatigue chronic, digestive disorders, aging signs, weakness, immune system strain, emotional health primary concern",
+        "career": "Career delays in nurturing fields, restrictions in growth, hard work in care fields, separation from success, limitation of opportunities, professional stagnation",
+        "relationships": "Maternal separation/loss possible, relationship coldness, restricted emotional expression, loneliness, family distance, paternal coldness, emotional pain deep",
+        "timing_events": "Maternal loss/separation, relationship endings, depression periods, karmic life lessons, separation from comfort, hard experiences, family distance growing",
+        "remedies": "Saturn-Moon puja intensive, iron wear, acceptance practice, professional emotional support"
+      },
+      "mars_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "BLOCKED WARRIOR - frustration maximum",
+        "intensity": "High-Negative",
+        "effects": "Severe warrior energy frustration, action constantly blocked, slow progress despite massive effort, defeats accumulating, hard work unrewarded, defeated feeling, exhaustion from futility",
+        "health": "Chronic pain from frustration, joint problems, slow injury recovery, muscle weakness, bone density decline, arthritis emerging, exhaustion despite effort, accident from fatigue",
+        "career": "Career obstacles severe, advancement completely blocked, authority figures obstruct, bureaucratic delays persistent, hard work unrewarded, separation from success inevitable",
+        "relationships": "Relationship coldness despite passion attempts, emotional distance, paternal conflicts, authority clashes, loneliness despite activity, rejected aggression, sexual frustration",
+        "timing_events": "Accumulated delays and frustrations, blocked initiatives mounting, health deterioration, separation events, limitation experiences peak, hard karma manifestation",
+        "remedies": "Saturn-Mars puja intensive, iron wear, acceptance meditation, professional help, karmic understanding work"
+      },
+      "mercury_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Serious study - communication limitation",
+        "intensity": "Medium-High",
+        "effects": "Serious learning period, communication delays, limited social interaction, focused study, structured thinking, slow progress in learning, heavy intellectual burdens, restriction",
+        "health": "Mental strain significant, stress affecting speech, nervous system strained, focus causing physical tension, insomnia possible, eye strain from sustained work, fatigue from study",
+        "career": "Slow career progress through forced learning, serious technical study, limited communication growth, restricted advancement, hard intellectual work, patience required",
+        "relationships": "Reduced communication, relationship distance, limited social circle, serious discussions, strained communication, isolated learning, limited relationship growth",
+        "timing_events": "Delays in learning, communication obstacles, business slowdown, restricted advancement, limitation periods, karmic learning experiences, hard lessons learned",
+        "remedies": "Saturn-Mercury puja, discipline practice, communication patience, acceptance of learning pace"
+      },
+      "jupiter_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Mature wisdom - dharmic limitation",
+        "intensity": "Medium-High",
+        "effects": "Mature wisdom developing, dharmic responsibility, slow expansion, careful growth, serious spiritual practice, limitation bringing wisdom, karmic lessons, patient accumulation",
+        "health": "Mixed health, possible chronic conditions, expansion limited by restriction, wisdom in health management, slow recovery, but generally stable",
+        "career": "Slow career expansion, serious responsibility taking, dharmic work emphasis, expansion limited but stable, slow achievement, patience required, long-term careful building",
+        "relationships": "Maturity in relationships, serious partnerships, responsibility emphasis, spiritual maturity, long-term relationship building, limited but stable growth",
+        "timing_events": "Slow expansion, maturity development, responsibility assuming, limitation periods, karmic wisdom gained, long-term achievement, spiritual maturation advancing",
+        "remedies": "Saturn-Jupiter puja, dharmic responsibility emphasis, acceptance practice"
+      },
+      "venus_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Love delayed - relationship testing",
+        "intensity": "Medium-High",
+        "effects": "Relationship testing severe, delayed romantic fulfillment, sexual restraint required, beauty fading concerns, love separation possible, serious relationship lessons, maturity in love forced",
+        "health": "Mixed health, aging concerns, reproductive health strained, beauty concerns, possible delays in healing, but generally stable if careful practiced",
+        "career": "Slow progress in creative/beauty fields, delayed success, restriction in sensual business, serious relationship-based work, long-term artistic careful building",
+        "relationships": "Relationship strain testing, delayed romance, sexual restraint necessary, separation possible, serious partnership work, maturity forced, karmic relationships surfacing",
+        "timing_events": "Relationship testing peaks, delays in romantic plans, separation periods possible, maturity lessons forced, long-term relationship building, karmic relationship work",
+        "remedies": "Venus-Saturn puja, relationship commitment deepening, karmic acceptance, patience extended"
+      },
+      "saturn_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "DOUBLE SATURN LIMITATION - maximum hardship",
+        "intensity": "Extreme-Negative",
+        "effects": "Maximum limitation and obstruction, severe blockage period, all efforts frustrated, defeats accumulating, hard karma peak, isolation and loneliness, despair possible, life tests extreme",
+        "health": "CRITICAL HEALTH PERIOD - chronic conditions peak, pain severe, aging accelerates, immune system weakened, recovery very slow, death contemplation possible, depression severe",
+        "career": "Career completely stalled, no advancement whatsoever, dismissal/separation possible, hard labor only, isolation from success, professional despair, bankruptcy possible",
+        "relationships": "Relationship breakdown possible, separation certain, severe loneliness, isolation from all support, emotional pain peak, family separation, karmic relationship endings",
+        "timing_events": "Major life tests and failures, separation events certain, health crisis possible, career collapse possible, relationship dissolution, karmic peak experiences, rock-bottom periods",
+        "remedies": "INTENSIVE Saturn worship, iron wear extended, acceptance meditation deep, professional psychological/spiritual help recommended, karmic acceptance work essential"
+      },
+      "rahu_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Obsessive limitation - shadow restriction",
+        "intensity": "Medium-High",
+        "effects": "Obsessive restriction patterns, limitation through chaos, shadow blockages, unconventional hardships, obsessive work without reward, foreign restriction, illicit limitation consequences",
+        "health": "Mysterious chronic conditions, shadow infections, allergic restrictions, obsessive behaviors harming health, hidden pain, toxic restriction exposure",
+        "career": "Success despite restrictions through unconventional means, but success unstable, shadow business limitations, rule-breaking bringing restriction, karmic blockage through illicit means",
+        "relationships": "Obsessive restrictions, shadow relationship blockages, foreign separation, boundary violations causing limitation, secret restrictions, unconventional hardship patterns",
+        "timing_events": "Obsessive limitation periods, shadow blockages surfacing, foreign restriction, unconventional hardship, boundary consequence limitations, secret restrictive events",
+        "remedies": "Saturn-Rahu puja, boundary clarity, ethical behavior emphasis, shadow work acceptance"
+      },
+      "ketu_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Spiritual detachment - limitation as liberation",
+        "intensity": "Medium",
+        "effects": "Spiritual detachment from limitations, past-life karma working, liberation through restriction, karmic limitation acceptance, spiritual darkening, wisdom through hardship, surrender",
+        "health": "Mysterious chronic patterns, past-life karma health, psychosomatic symptoms, spiritual healing through restriction, mystery in limitations, pain with spiritual meaning",
+        "career": "Karmic limitation work, spiritual limitation teaching, research into limitation, detached from career outcomes, unconventional spiritual hardship paths, liberation through restriction",
+        "relationships": "Karmic limitation partnerships, past-life karma completion, spiritual detachment from relationships, isolation bringing peace, karmic relationship endings, spiritual solitude",
+        "timing_events": "Karmic limitation completion, spiritual initiations through hardship, past-life karma resolution, spiritual detachment, isolation periods with meaning, karmic acceptance",
+        "remedies": "Saturn-Ketu puja, spiritual acceptance deepening, karmic understanding, detachment practice"
+      }
+    },
+    "rahu_antardasha": {
+      "duration_days": 284,
+      "sun_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Unconventional authority - shadow leadership",
+        "intensity": "High-Unusual",
+        "effects": "Unconventional authority, shadow leadership, rule-breaking confidence, foreign authority figures, illicit power, unconventional success through rule-breaking, authoritative delusion possible",
+        "health": "Mysterious health issues, shadow infections, allergic reactions, poisoning risk, hidden injuries, toxic exposure, mysterious inflammation, mysterious high fever",
+        "career": "Success in unconventional/black market, foreign military/government, rule-breaking leadership success, shadow enterprise authority, breaking taboos successfully, innovation through chaos",
+        "relationships": "Unconventional authority relationships, foreign affairs with power, shadow relationships, boundary violations, illicit power dynamics, charismatic illusion attraction",
+        "timing_events": "Foreign authority opportunities, unconventional power, rule-breaking success, shadow authority manifestation, hidden leadership, boundary-breaking achievements",
+        "remedies": "Rahu-Sun puja, ethical authority clarity, boundary setting, shadow work"
+      },
+      "moon_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Obsessive emotions - chaotic nurturing",
+        "intensity": "Medium-High",
+        "effects": "Obsessive emotional patterns, chaotic nurturing urges, emotional addiction, shadow maternal patterns, unconventional emotional expression, obsessive care-giving, emotional illusions strong",
+        "health": "Emotional health confused, mysterious psychological issues, allergic emotional responses, shadow trauma resurfacing, emotional addiction behaviors, mysterious mood states",
+        "career": "Success through emotional chaos, unconventional nurturing work, shadow care work, manipulation through emotions, success despite emotional turmoil, chaotic care businesses",
+        "relationships": "Obsessive emotional attachments, chaotic family patterns, shadow maternal relationships, emotional manipulation, unconventional nurturing, boundaries crossed regularly",
+        "timing_events": "Obsessive relationship phases, chaotic family events, emotional turmoil periods, shadow family patterns emerging, unconventional family changes, obsessive patterns",
+        "remedies": "Rahu-Moon puja, emotional clarity practice, boundary setting, shadow pattern understanding"
+      },
+      "mars_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "OBSESSIVE WARRIOR - unconventional aggression",
+        "intensity": "High-Unusual",
+        "effects": "Obsessive aggression and violence tendencies, unconventional methods, foreign conflicts, shadow desires dominate, illicit aggression, addiction to action, obsessive sexuality strong",
+        "health": "Mysterious injuries, shadow infections, allergic reactions, obsessive behaviors harming health, hidden injuries, toxic exposure, mysterious inflammation, mysterious injuries",
+        "career": "Success in black market, foreign military operations, unconventional business aggression, rule-breaking success, breaking taboos, shadow enterprises, innovation through chaos",
+        "relationships": "Obsessive relationships, foreign affairs, shadow relationships, boundary violations, sexual obsession, unconventional arrangements, secret conflicts, stalking behavior possible",
+        "timing_events": "Foreign conflicts, unconventional victories, obsessive pursuit beginning, hidden aggression surfacing, shadow relationships, boundary-breaking events manifest",
+        "remedies": "Rahu-Mars puja intensive, boundary clarification, ethical intention setting, shadow work deepening"
+      },
+      "mercury_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Unconventional thinking - obsessive learning",
+        "intensity": "Medium-High",
+        "effects": "Unconventional intelligence, obsessive learning, shadow thoughts, unconventional communication, foreign language success, rule-breaking thinking, illicit trade, obsessive reading habits",
+        "health": "Nervous health confused, mysterious learning disabilities, allergic reactions, obsessive behaviors, mental health unclear, shadow thoughts affecting health",
+        "career": "Success in unconventional fields, foreign trade/communication, shadow business, unconventional teaching, breaking communication rules, hacking/manipulation, innovation through chaos",
+        "relationships": "Unconventional communication, foreign relationships, obsessive discussions, boundary-crossing conversations, shadow relationships, manipulation through words",
+        "timing_events": "Unconventional learning, foreign communication, obsessive study, boundary-breaking conversations, unusual trade, rule-breaking success periods",
+        "remedies": "Rahu-Mercury puja, ethical thinking practice, boundary clarity, communication integrity"
+      },
+      "jupiter_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Unconventional expansion - shadow dharma",
+        "intensity": "Medium-High",
+        "effects": "Unconventional expansion, shadow beliefs, unconventional dharma, expansion through rule-breaking, obsessive faith, foreign expansion, illicit wealth possible, inflation of ego",
+        "health": "Health confused, mysterious expansion issues, allergic growth, obsessive behaviors, hidden health gains/losses, expansion health paradox, mysterious vitality",
+        "career": "Unconventional expansion, foreign opportunity success, shadow wealth growth, rule-breaking success, illicit expansion, unconventional dharmic work, expansion through chaos",
+        "relationships": "Unconventional partnerships, foreign relationships, obsessive faith-based relationships, shadow partnerships, expansion through boundaries crossed, unconventional families",
+        "timing_events": "Unconventional expansion, foreign opportunities, obsessive faith periods, boundary-breaking success, shadow wealth, expansion through illicit means",
+        "remedies": "Rahu-Jupiter puja, ethical expansion emphasis, clarity in beliefs, dharmic alignment work"
+      },
+      "venus_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Obsessive love - passion illusions",
+        "intensity": "Medium-High",
+        "effects": "Obsessive romantic attachment, illicit relationships, shadow desires dominate, unconventional love, obsessive sexuality, foreign relationships, addiction to pleasure, illusion in romance",
+        "health": "Health confused, mysterious reproductive issues, allergic reactions, obsessive behaviors affecting health, shadow health gains/losses, sensual addiction concerns",
+        "career": "Success in unconventional beauty/entertainment, shadow business relationships, illicit sensual commerce, rule-breaking artistic success, unconventional partnerships, beauty through chaos",
+        "relationships": "Obsessive relationships, foreign affairs, shadow relationships, boundary violations, sexual obsession, unconventional arrangements, secret love affairs, stalking behavior possible",
+        "timing_events": "Obsessive romantic periods, foreign love affairs, unconventional partnerships, boundary-breaking relationships, secret romance, shadow love manifestations",
+        "remedies": "Venus-Rahu puja, boundary clarity, ethical love practice, intention clarification, shadow love work"
+      },
+      "saturn_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Obsessive limitation - shadow restriction",
+        "intensity": "Medium-High",
+        "effects": "Obsessive restriction patterns, limitation through chaos, shadow blockages, unconventional hardships, obsessive work without reward, foreign restriction, illicit limitation consequences",
+        "health": "Mysterious chronic conditions, shadow infections, allergic restrictions, obsessive behaviors harming health, hidden pain, toxic restriction exposure, mysterious pain",
+        "career": "Success despite restrictions through unconventional means unstable, shadow business limitations, rule-breaking bringing restriction, karmic blockage through illicit means",
+        "relationships": "Obsessive restrictions, shadow relationship blockages, foreign separation, boundary violations causing limitation, secret restrictions, unconventional hardship patterns",
+        "timing_events": "Obsessive limitation periods, shadow blockages surfacing, foreign restriction, unconventional hardship, boundary consequence limitations, secret restrictive events",
+        "remedies": "Rahu-Saturn puja, boundary clarity, ethical behavior emphasis, shadow work acceptance, limitation understanding"
+      },
+      "rahu_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "DOUBLE RAHU CHAOS - shadow confusion peak",
+        "intensity": "High-Unusual",
+        "effects": "Maximum shadow energy, obsession peaks, illusions dominate, rule-breaking chaos, unconventional success through illicit means, addiction behaviors peak, confusion maximum, delusion possible",
+        "health": "Health mysteries peak, mysterious conditions, allergic chaos, obsessive behaviors maximum, hidden injuries, toxic exposure maximum, mysterious health crises possible",
+        "career": "Success through dark/unconventional means peak, black market peak, foreign success through rule-breaking, shadow enterprises flourish, taboo-breaking success, innovation through chaos peak",
+        "relationships": "Obsessive relationships peak, affairs and chaos, boundary violations maximum, shadow relationships multiply, unconventional partnerships chaos, relationship confusion peak",
+        "timing_events": "Shadow events manifestation peak, obsessive pursuits culmination, unconventional victories, hidden conflicts surfacing maximum, dark successes, boundary-breaking events culmination",
+        "remedies": "INTENSIVE Rahu puja, shadow work deepening, ethical boundary setting essential, intention clarification critical, professional guidance recommended, karmic shadow acceptance"
+      },
+      "ketu_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Detached from chaos - spiritual liberation through shadow",
+        "intensity": "Medium",
+        "effects": "Spiritual detachment from shadow, past-life chaos patterns, liberation through understanding, karmic shadow completion, spiritual darkening then illumination, wisdom through chaos",
+        "health": "Mysterious fluctuations, past-life shadow health patterns, psychosomatic symptoms, spiritual healing through shadow, mystery in health, hidden injury healing",
+        "career": "Research into shadow patterns, karmic chaos work, spiritual shadow teaching, detached shadow research, unconventional spiritual work, liberation through chaos understanding",
+        "relationships": "Karmic chaos completion, past-life shadow relationships, spiritual detachment from obsession, relationship chaos resolution, karmic shadow completion, peace from letting go",
+        "timing_events": "Karmic shadow completion, spiritual initiations through chaos, past-life shadow memories, spiritual liberation from obsession, chaos resolution periods",
+        "remedies": "Rahu-Ketu puja, spiritual shadow work, karmic acceptance, detachment practice, chaos understanding"
+      }
+    },
+    "ketu_antardasha": {
+      "duration_days": 284,
+      "sun_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Warrior spirit without direction - spiritual detachment",
+        "intensity": "Medium-High",
+        "effects": "Spiritual warrior energy, detachment from material authority, past-life authority patterns surfacing, directional confusion in leadership, unconscious authority patterns, liberation through struggling",
+        "health": "Mysterious health fluctuations, past-life disease patterns, psychosomatic symptoms, infections without clear cause, spiritual healing opportunities, mysterious vitality fluctuations",
+        "career": "Spiritual teaching of leadership, research into past patterns, unconventional career shifts, liberation-focused work, detachment from success, karmic leadership work",
+        "relationships": "Karmic relationship endings with authority, spiritual detachment from power dynamics, past-life connection experiencing, isolation despite activity, karmic completion",
+        "timing_events": "Spiritual initiations, mysterious endings, karmic completion events, past-life memories surfacing, spiritual warrior experiences, leadership transformation",
+        "remedies": "Ketu-Sun puja, spiritual practices, past-life understanding, detachment development, karmic acceptance, spiritual surrender"
+      },
+      "moon_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Detached emotions - spiritual emotional wisdom",
+        "intensity": "Medium",
+        "effects": "Emotional detachment, spiritual emotions, past-life emotional patterns, liberation from emotional patterns, karmic family completion, spiritual motherhood, karmic emotions surfacing",
+        "health": "Emotional fluctuations, mysterious health patterns, psychosomatic symptoms, past-life health patterns resurfacing, spiritual healing possible, mysterious wellness states",
+        "career": "Spiritual emotional work, past-life healing careers, karmic completion in nurturing, unconventional emotional paths, spiritual teaching of emotions, emotional liberation work",
+        "relationships": "Karmic family relationships, spiritual emotional bonds, past-life family connections, emotional detachment bringing peace, relationship karmic completion, family karma resolution",
+        "timing_events": "Karmic family completions, past-life emotional memories, spiritual emotional initiations, relationship endings resolving past lives, family karma resolution",
+        "remedies": "Ketu-Moon puja, spiritual emotional practice, karmic acceptance, family karma understanding, emotional liberation"
+      },
+      "mars_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Detached warrior - spiritual combat energy",
+        "intensity": "Medium-High",
+        "effects": "Spiritual warrior activation, detachment from material battles, past-life warrior patterns surfacing, directional confusion in action, unconscious aggression patterns, liberation through struggle",
+        "health": "Mysterious fluctuations, past-life injury patterns, psychosomatic symptoms, spiritual healing opportunities, mysterious inflammation, infections without cause surfacing",
+        "career": "Spiritual martial arts teaching, research into past patterns, karmic warrior work, unconventional spiritual paths, liberation-focused aggression, detachment from victory",
+        "relationships": "Karmic relationship completions, spiritual warrior bonding, past-life aggression patterns, isolation despite activity, karmic sibling connections, past-life conflicts resolution",
+        "timing_events": "Spiritual initiations, mysterious endings, past-life memories, karmic warrior experiences, spiritual combat lessons, liberation events, karmic aggression release",
+        "remedies": "Ketu-Mars puja intensive, spiritual practice deepening, past-life work, detachment development, karmic aggression release, spiritual warrior training"
+      },
+      "mercury_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Spiritual knowledge - detached thinking",
+        "intensity": "Medium",
+        "effects": "Spiritual intelligence, detached thinking, past-life knowledge surfacing, directional confusion in learning, unconscious knowledge patterns, liberation through understanding",
+        "health": "Mysterious learning disabilities, past-life thought patterns, psychosomatic symptoms, spiritual healing through knowledge, mysterious mind states, mysterious mental clarity",
+        "career": "Spiritual teaching, research into past patterns, karmic knowledge work, meditation teaching, unconventional spiritual paths, detached learning, wisdom traditions study",
+        "relationships": "Karmic intellectual bonds, spiritual communication, past-life knowledge sharing, detached learning together, karmic learning partnerships, spiritual discussions, knowledge karma",
+        "timing_events": "Spiritual learning, past-life knowledge, karmic communications, intellectual liberation, mysterious understanding, spiritual teaching opportunities, knowledge karma completion",
+        "remedies": "Ketu-Mercury puja, spiritual knowledge practice, past-life understanding, learning detachment, intellectual karma understanding"
+      },
+      "jupiter_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Spiritual liberation - detached wisdom",
+        "intensity": "Medium",
+        "effects": "Spiritual wisdom, detachment from material expansion, past-life dharmic wisdom, liberation through understanding, karmic dharma understanding, spiritual detachment, wisdom traditions",
+        "health": "Mysterious health fluctuations, past-life wisdom patterns, spiritual healing, psychosomatic symptoms, healing through detachment, mystery in health outcomes",
+        "career": "Spiritual teaching, research into dharma, karmic wisdom work, detached spiritual expansion, unconventional spiritual paths, liberation-focused career, wisdom transmission",
+        "relationships": "Karmic spiritual partnerships, past-life dharmic bonds, detached spiritual wisdom, karmic completion through teaching, spiritual liberation relationships, dharma sharing",
+        "timing_events": "Spiritual initiations, karmic wisdom, past-life dharmic memories, liberation through understanding, spiritual growth peaks, karmic dharma completion events",
+        "remedies": "Ketu-Jupiter puja, spiritual practice deepening, karmic acceptance, dharmic understanding, liberation practice"
+      },
+      "venus_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Detached love - spiritual partnership",
+        "intensity": "Medium",
+        "effects": "Spiritual love, detachment from romantic illusions, past-life relationship patterns, liberation through love, karmic partnerships, platonic spiritual bonds, wisdom in love",
+        "health": "Mysterious health fluctuations, past-life beauty patterns, psychosomatic symptoms, spiritual healing through love, mysterious reproductive fluctuations, mysterious vitality",
+        "career": "Spiritual artistic work, research into love patterns, karmic relationship work, detached artistic expression, spiritual beauty teaching, unconventional creative paths",
+        "relationships": "Karmic spiritual partnerships, past-life love bonds, detached spiritual love, relationship karmic completion, platonic spiritual bonding, past-life reunion possible",
+        "timing_events": "Spiritual love initiations, karmic partnership completion, past-life love memories, spiritual love growth, relationship liberation events, karmic completion",
+        "remedies": "Ketu-Venus puja, spiritual love practice, karmic acceptance, relationship karma understanding"
+      },
+      "saturn_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Spiritual detachment - limitation as liberation",
+        "intensity": "Medium",
+        "effects": "Spiritual detachment from limitations, past-life karma working, liberation through restriction, karmic limitation acceptance, spiritual darkening leading to illumination, wisdom through hardship",
+        "health": "Mysterious chronic patterns, past-life karma health, psychosomatic symptoms, spiritual healing through restriction, mystery in limitations, pain with spiritual meaning",
+        "career": "Karmic limitation work, spiritual limitation teaching, research into limitation, detached from career outcomes, unconventional spiritual hardship paths, liberation through restriction",
+        "relationships": "Karmic limitation partnerships, past-life karma completion, spiritual detachment from relationships, isolation bringing peace, karmic relationship endings, spiritual solitude",
+        "timing_events": "Karmic limitation completion, spiritual initiations through hardship, past-life karma resolution, spiritual detachment, isolation periods with meaning, karmic acceptance",
+        "remedies": "Ketu-Saturn puja, spiritual acceptance deepening, karmic understanding, detachment practice deepening, limitation wisdom"
+      },
+      "rahu_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "Detached from chaos - spiritual liberation through shadow",
+        "intensity": "Medium",
+        "effects": "Spiritual detachment from shadow, past-life chaos patterns, liberation through understanding, karmic shadow completion, spiritual darkening then illumination, wisdom through chaos",
+        "health": "Mysterious fluctuations, past-life shadow health patterns, psychosomatic symptoms, spiritual healing through shadow, mystery in health, hidden injury healing",
+        "career": "Research into shadow patterns, karmic chaos work, spiritual shadow teaching, detached shadow research, unconventional spiritual work, liberation through chaos understanding",
+        "relationships": "Karmic chaos completion, past-life shadow relationships, spiritual detachment from obsession, relationship chaos resolution, karmic shadow completion, peace from letting go",
+        "timing_events": "Karmic shadow completion, spiritual initiations through chaos, past-life shadow memories, spiritual liberation from obsession, chaos resolution periods manifesting",
+        "remedies": "Rahu-Ketu puja, spiritual shadow work, karmic acceptance, detachment practice, chaos understanding deepening"
+      },
+      "ketu_pratyantardasha": {
+        "duration_days": 32,
+        "theme": "DOUBLE KETU LIBERATION - spiritual detachment peak",
+        "intensity": "Medium-High",
+        "effects": "Maximum spiritual detachment, past-life patterns completing, liberation peak, karmic release intense, directional confusion, unconscious patterns surfacing for release, enlightenment possible",
+        "health": "Mysterious health fluctuations maximum, past-life disease patterns peak, psychosomatic symptoms intense, spiritual healing opportunities maximum, mysterious resolution of chronic issues possible",
+        "career": "Spiritual liberation career peak, research completion, past-life work completion, karmic job completion, unexpected career endings resolving past lives, liberation in work",
+        "relationships": "Karmic relationship completions peak, past-life reunions and farewells, relationship detachment bringing peace, isolation with spiritual purpose, all karmic relationships resolving simultaneously",
+        "timing_events": "Major karmic completions, spiritual initiations peak, past-life memory resolution, relationship liberation events peak, mysterious life event completions, enlightenment opportunities",
+        "remedies": "INTENSIVE Ketu puja, spiritual practice deepening maximally, meditation practice, past-life regression work, karmic acceptance completion, spiritual surrender full, enlightenment preparation"
+      }
+    }
+  },
+  "interpretation_guide": {
+    "intensity_levels": {
+      "Extreme-Critical": "Life-threatening situations, major accidents, critical health, intensive intervention needed",
+      "Extreme": "Severe challenges, major life events, transformation required, extreme effort needed",
+      "High-Negative": "Significant obstacles, health concerns, serious challenges, professional help often beneficial",
+      "High-Unusual": "Unconventional situations, shadow patterns, boundary issues, clarity and ethics essential",
+      "High": "Strong effects, active period, significant growth or challenge, attention required",
+      "Medium-High": "Moderate effects, notable experiences, some challenge or benefit, awareness helpful",
+      "Medium": "Subtle effects, background currents, some notice with attention, spiritual focus helpful",
+      "Medium-Negative": "Some obstacles, minor challenges, manageable with care, learning opportunity"
+    },
+    "usage_notes": "Each pratyantardasha runs approximately 32 days within its 284-day antardasha parent. Duration can vary by minutes/hours based on exact lunar calculation at birth. Always consult trained astrologer for personalized analysis.",
+    "total_md_duration": "2555 days (7 years exactly)",
+    "Mars_MD_themes_active_throughout": [
+      "Energy and aggression colors all periods",
+      "Warrior/combat themes layer on all interactions",
+      "Accident/injury risk elevated throughout",
+      "Sibling themes prominent in all ADs/PDs",
+      "Property and land dealings feature prominently",
+      "Sports and physical activity encouraged",
+      "Sexual passion heightened across all periods",
+      "Courage and bravery tested continuously"
+    ]
+  }
+}

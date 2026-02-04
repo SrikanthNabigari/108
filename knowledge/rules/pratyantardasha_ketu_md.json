@@ -1,0 +1,1406 @@
+{
+  "mahadasha": "ketu",
+  "duration_years": 7,
+  "total_duration_days": 2555,
+  "description": "Ketu Mahadasha (7 years) - Themes: Moksha, spirituality, detachment, past life, occult, isolation, liberation, psychic abilities, loss leading to gain",
+  "antardasha_periods": [
+    {
+      "antardasha": "ketu",
+      "duration_days": 284,
+      "sequence": 1,
+      "pratyantardashas": [
+        {
+          "pratyantardasha": "ketu",
+          "duration_days": 32,
+          "theme": "Maximum spiritual detachment and liberation",
+          "intensity": "extreme",
+          "effects": {
+            "overall": "Peak spiritual experience or complete loss of identity. Intense withdrawal from material world. Sudden realizations about moksha and liberation.",
+            "spiritual": "Direct experience of void consciousness, ego dissolution, samadhi states possible",
+            "psychological": "Extreme detachment, possible dissociation, past life memories",
+            "physical": "Fatigue, strange physical sensations, astral experiences"
+          },
+          "health": "Nervous disorders, insomnia, psychosomatic conditions, sudden unexplained symptoms",
+          "career": "Renunciation of career, spiritual pursuits only, complete withdrawal",
+          "relationships": "Emotional detachment reaches peak, isolation from loved ones",
+          "timing_events": "Sudden spiritual breakthroughs, occult initiations, complete life changes"
+        },
+        {
+          "pratyantardasha": "venus",
+          "duration_days": 32,
+          "theme": "Spiritual love, detachment from relationships",
+          "intensity": "high",
+          "effects": {
+            "overall": "Conflict between material desires and spiritual path. Relationships tested severely.",
+            "spiritual": "Universal love replaces personal attachments",
+            "psychological": "Emotional confusion, detached heart, spiritual indifference",
+            "physical": "Heart palpitations, emotional stress manifesting physically"
+          },
+          "health": "Heart conditions, emotional fatigue, nervous strain",
+          "career": "Loss of motivation in glamorous fields, shift to spiritual work",
+          "relationships": "Coldness in relationships, detachment from spouse/partner, breakups likely",
+          "timing_events": "Relationship endings, loss of financial gains, spiritual awakening in love"
+        },
+        {
+          "pratyantardasha": "sun",
+          "duration_days": 32,
+          "theme": "Loss of ego, dissolution of self",
+          "intensity": "extreme",
+          "effects": {
+            "overall": "Ego death, authority losses, identity crisis. Meeting of shadow self.",
+            "spiritual": "Transcendence of individual will, surrender to divine",
+            "psychological": "Self-doubt, depression, loss of confidence, identity confusion",
+            "physical": "Low vitality, exhaustion, weak immune system"
+          },
+          "health": "General weakness, heart issues, vitality depletion, chronic fatigue",
+          "career": "Loss of position/authority, humiliation, career setbacks",
+          "relationships": "Loss of father figure, authority conflicts, self-sabotage in relationships",
+          "timing_events": "Career collapse, public humiliation, spiritual surrender moments"
+        },
+        {
+          "pratyantardasha": "moon",
+          "duration_days": 32,
+          "theme": "Emotional detachment, psychic sensitivity",
+          "intensity": "high",
+          "effects": {
+            "overall": "Deep emotional withdrawal, enhanced psychic abilities. Mother/family distancing.",
+            "spiritual": "Heightened intuition, past life memories, psychic phenomena",
+            "psychological": "Emotional numbness, depression, introversion, inner worlds",
+            "physical": "Mental disorders, sleep disturbances, psychosomatic illness"
+          },
+          "health": "Depression, anxiety disorders, sleep problems, emotional breakdowns",
+          "career": "Withdrawal from public work, preference for solitude, inner-focused roles",
+          "relationships": "Mother estrangement, family isolation, emotional coldness with family",
+          "timing_events": "Family separations, psychic awakenings, memory regression sessions"
+        },
+        {
+          "pratyantardasha": "mars",
+          "duration_days": 32,
+          "theme": "Spiritual warrior within, sudden aggressive actions",
+          "intensity": "very high",
+          "effects": {
+            "overall": "Sudden, impulsive spiritual actions. Destructive energy for transformation. Warrior mentality for liberation.",
+            "spiritual": "Fierce detachment, warrior against ego, sudden spiritual upheavals",
+            "psychological": "Aggression toward old beliefs, impulsive decisions, recklessness",
+            "physical": "Injuries, accidents, sudden pain, infections, high fever"
+          },
+          "health": "Accidents, wounds, infections, surgery, violent illness onset",
+          "career": "Sudden job changes, confrontations, aggressive moves, warfare energy",
+          "relationships": "Conflicts, aggression toward loved ones, separation through force",
+          "timing_events": "Sudden accidents, violent separations, aggressive spiritual awakening"
+        },
+        {
+          "pratyantardasha": "mercury",
+          "duration_days": 32,
+          "theme": "Confusion in communication, occult knowledge",
+          "intensity": "medium-high",
+          "effects": {
+            "overall": "Speech becomes mystical or confused. Interest in hidden knowledge. Disconnection from rational mind.",
+            "spiritual": "Interest in mantras, occult sciences, mystical languages",
+            "psychological": "Mental confusion, scattered thoughts, memory loss, speech difficulties",
+            "physical": "Nervous disorders, speech problems, respiratory issues"
+          },
+          "health": "Respiratory problems, nervous disorders, speech impediments, mental confusion",
+          "career": "Loss in commerce/communication fields, shift to mystical studies",
+          "relationships": "Communication breakdown, misunderstandings, isolation through lack of expression",
+          "timing_events": "Speech loss/problems, occult initiations, mystical writing periods"
+        },
+        {
+          "pratyantardasha": "jupiter",
+          "duration_days": 32,
+          "theme": "Spiritual wisdom, detached dharma",
+          "intensity": "high",
+          "effects": {
+            "overall": "Spiritual wisdom gained through loss. Guru connections activated. Dharmic detachment.",
+            "spiritual": "Meeting with gurus, spiritual knowledge, understanding of karma, liberation philosophy",
+            "psychological": "Wisdom from suffering, philosophical perspective, spiritual conviction",
+            "physical": "Relief from some ailments through spiritual practice"
+          },
+          "health": "Gradual improvement through spiritual practices, healing from higher knowledge",
+          "career": "Move toward spiritual/educational fields, loss of material prosperity",
+          "relationships": "Relationships based on shared spirituality, guru-disciple dynamics",
+          "timing_events": "Meeting spiritual teachers, initiation ceremonies, wisdom-bringing events"
+        },
+        {
+          "pratyantardasha": "saturn",
+          "duration_days": 32,
+          "theme": "Double sorrow and complete renunciation",
+          "intensity": "extreme",
+          "effects": {
+            "overall": "Maximum suffering for liberation. Complete detachment through loss. Renunciation period.",
+            "spiritual": "Forced renunciation, complete liberation from worldly desires",
+            "psychological": "Deep melancholy, acceptance of suffering, total surrender",
+            "physical": "Chronic illness, weakness, aging symptoms, hard physical labor"
+          },
+          "health": "Chronic diseases, long-term illness, physical decay, surgical interventions",
+          "career": "Complete career loss, forced retirement, lowest point professionally",
+          "relationships": "Total relationship loss, widow/widowerhood, lifelong separation",
+          "timing_events": "Death of loved ones, complete life restructuring, renunciation initiations"
+        },
+        {
+          "pratyantardasha": "rahu",
+          "duration_days": 32,
+          "theme": "Shadow confusion, karmic entanglements",
+          "intensity": "very high",
+          "effects": {
+            "overall": "Karmic shadows revealed. Rahu-Ketu axis confusion. Shadow self confrontation.",
+            "spiritual": "Past life karmas surfacing, shadow work, occult dangers, delusion battles",
+            "psychological": "Obsessions, compulsions, fear, paranoia, shadow integration needed",
+            "physical": "Mysterious illnesses, toxins, strange symptoms, occult afflictions"
+          },
+          "health": "Mysterious diseases, toxin exposure, occult illness, psychosomatic disorders",
+          "career": "Karmic entanglements in work, shadowy dealings, illusions in career",
+          "relationships": "Karmic relationships resurface, obsessive patterns, shadow projection",
+          "timing_events": "Karmic encounters, shadow revelations, occult dangers"
+        }
+      ]
+    },
+    {
+      "antardasha": "venus",
+      "duration_days": 284,
+      "sequence": 2,
+      "pratyantardashas": [
+        {
+          "pratyantardasha": "ketu",
+          "duration_days": 32,
+          "theme": "Detached beauty, loss of charm",
+          "intensity": "high",
+          "effects": {
+            "overall": "Loss of attraction, relationships end through detachment. Renunciation of pleasures.",
+            "spiritual": "Detachment from sensual experiences, spiritual asceticism",
+            "psychological": "Loss of self-esteem, indifference to appearance, emotional withdrawal",
+            "physical": "Loss of beauty, skin problems, loss of vitality"
+          },
+          "health": "Skin diseases, loss of vitality, reproductive issues, fatigue",
+          "career": "Loss in art/entertainment, beauty industries fail",
+          "relationships": "Spouse withdraws, relationships cool, loss of attraction",
+          "timing_events": "Relationship losses, beauty changes, financial losses in luxuries"
+        },
+        {
+          "pratyantardasha": "venus",
+          "duration_days": 32,
+          "theme": "Desire for liberation through love",
+          "intensity": "medium",
+          "effects": {
+            "overall": "Pleasure-seeking transforms into spiritual seeking. Detached enjoyment.",
+            "spiritual": "Bhakti yoga activated, devotional detachment, universal love",
+            "psychological": "Hedonism shifts to spirituality, pleasure loses appeal",
+            "physical": "Better health through moderate living"
+          },
+          "health": "Moderate improvement, better dietary practices, vitality stabilizes",
+          "career": "Artistic pursuits continue but with spiritual themes",
+          "relationships": "Relationships deepen spiritually, less physical focus",
+          "timing_events": "Spiritual relationship initiations, artistic breakthroughs with spiritual themes"
+        },
+        {
+          "pratyantardasha": "sun",
+          "duration_days": 32,
+          "theme": "Loss of attraction to authority, ego in relationships",
+          "intensity": "high",
+          "effects": {
+            "overall": "Romantic relationships with authority figures end. Ego conflicts in love.",
+            "spiritual": "Transcendence of personal power in relationships",
+            "psychological": "Power struggles in partnerships, loss of confidence",
+            "physical": "Heart stress, vitality loss, physical weakness"
+          },
+          "health": "Heart problems, low energy, romantic stress manifesting physically",
+          "career": "Loss of positions in beauty/luxury fields, authority undermined",
+          "relationships": "Conflict with powerful partners, breakups with authority figures",
+          "timing_events": "Relationship breakups with influential people, power struggles"
+        },
+        {
+          "pratyantardasha": "moon",
+          "duration_days": 32,
+          "theme": "Emotional indulgence to emotional detachment",
+          "intensity": "medium-high",
+          "effects": {
+            "overall": "Emotional relationships detach. Comfort-seeking replaced by independence.",
+            "spiritual": "Emotional maturity, detachment from mother complexes",
+            "psychological": "Emotional independence, less need for nurturing",
+            "physical": "Hormonal shifts, emotional stress releasing"
+          },
+          "health": "Hormonal imbalances, emotional stress, occasional relief periods",
+          "career": "Less interest in nurturing-focused work",
+          "relationships": "Mother relationship cools, emotional distance from family",
+          "timing_events": "Emotional separations, family relationships shift"
+        },
+        {
+          "pratyantardasha": "mars",
+          "duration_days": 32,
+          "theme": "Passionate detachment, sudden end of romance",
+          "intensity": "very high",
+          "effects": {
+            "overall": "Sudden end to passionate relationships. Warrior against attachment.",
+            "spiritual": "Passionate spirituality, intense detachment, warrior devotion",
+            "psychological": "Aggression in relationships, sudden indifference, passionate anger",
+            "physical": "Fever, inflammations, accidents during passion"
+          },
+          "health": "Fevers, inflammations, injuries, reproductive stress, infections",
+          "career": "Aggressive changes in pleasure-based fields",
+          "relationships": "Sudden breakups, passionate conflicts, infidelity revelations",
+          "timing_events": "Sudden romantic endings, passionate disputes, accidents in relationships"
+        },
+        {
+          "pratyantardasha": "mercury",
+          "duration_days": 32,
+          "theme": "Loss of charm in communication, intellectual detachment",
+          "intensity": "medium",
+          "effects": {
+            "overall": "Speech loses charm. Communication in relationships fails. Intellectual detachment.",
+            "spiritual": "Mystical speech, loss of worldly eloquence",
+            "psychological": "Difficulty expressing feelings, communication barriers",
+            "physical": "Nervous strain, speech issues"
+          },
+          "health": "Nervous disorders, speech problems, mental stress",
+          "career": "Loss in communication/art fields, focus shifts",
+          "relationships": "Communication failures, misunderstandings, lack of emotional expression",
+          "timing_events": "Communication breakdowns, relationship misunderstandings"
+        },
+        {
+          "pratyantardasha": "jupiter",
+          "duration_days": 32,
+          "theme": "Wisdom through love, detached expansion",
+          "intensity": "medium-high",
+          "effects": {
+            "overall": "Relationships deepen spiritually. Wisdom gained through love connections.",
+            "spiritual": "Dharmic relationships, spiritual partnerships, guru-disciple love",
+            "psychological": "Wisdom from relationships, expanded perspective",
+            "physical": "Generally good health with some stress"
+          },
+          "health": "Moderate health improvement through positive relationships",
+          "career": "Expansion in meaningful work, spiritual business growth",
+          "relationships": "Relationships turn spiritual, dharmic unions, mentoring relationships",
+          "timing_events": "Spiritual partnerships formed, dharmic relationship growth"
+        },
+        {
+          "pratyantardasha": "saturn",
+          "duration_days": 32,
+          "theme": "Loss through love, renunciation of relationships",
+          "intensity": "very high",
+          "effects": {
+            "overall": "Long-term relationships end. Loss through love and marriage. Complete detachment.",
+            "spiritual": "Renunciation of attachment through forced separation",
+            "psychological": "Deep grief, loneliness, acceptance of loss",
+            "physical": "Chronic stress, aging, weakness"
+          },
+          "health": "Long-term relationship stress, aging symptoms, chronic conditions",
+          "career": "Loss in partnership-based work, solo path emerges",
+          "relationships": "Divorce, widowerhood, lifetime partnership loss",
+          "timing_events": "Divorce, death of spouse, permanent relationship changes"
+        },
+        {
+          "pratyantardasha": "rahu",
+          "duration_days": 32,
+          "theme": "Obsessive attachments, shadowy relationships",
+          "intensity": "very high",
+          "effects": {
+            "overall": "Obsessive relationships, shadow attractions, karmic entanglements in love.",
+            "spiritual": "Karmic love connections, past life relationship resumptions",
+            "psychological": "Obsessions, compulsive attachments, shadow attractions",
+            "physical": "Stress from obsessive relationships, toxins"
+          },
+          "health": "Stress-related illness, reproductive issues, toxin exposure",
+          "career": "Shadowy dealings in partnership work, illusions",
+          "relationships": "Obsessive partners, shadow relationships, karmic entanglements",
+          "timing_events": "Obsessive relationship encounters, karmic love connections"
+        }
+      ]
+    },
+    {
+      "antardasha": "sun",
+      "duration_years": 1,
+      "sequence": 3,
+      "pratyantardashas": [
+        {
+          "pratyantardasha": "ketu",
+          "duration_days": 32,
+          "theme": "Ego dissolution, loss of identity",
+          "intensity": "extreme",
+          "effects": {
+            "overall": "Complete ego death, identity crisis, spiritual surrender of will.",
+            "spiritual": "Transcendence of ego, dissolution into void",
+            "psychological": "Identity loss, depression, existential crisis",
+            "physical": "Severe fatigue, weakness, vital energy loss"
+          },
+          "health": "Severe fatigue, heart weakness, immune collapse, critical illness possible",
+          "career": "Complete career loss, authority collapse, humiliation",
+          "relationships": "Father loss or alienation, self-sabotage of relationships",
+          "timing_events": "Death of father, career destruction, identity crisis"
+        },
+        {
+          "pratyantardasha": "venus",
+          "duration_days": 32,
+          "theme": "Authority and attraction conflict",
+          "intensity": "high",
+          "effects": {
+            "overall": "Conflict between power and pleasure. Loss of authority in relationships.",
+            "spiritual": "Pride in relationships dissolves",
+            "psychological": "Ego conflicts with partners, power struggles",
+            "physical": "Heart stress from pride/conflict"
+          },
+          "health": "Heart problems, stress-related issues, vitality loss",
+          "career": "Loss of prestigious positions, humiliation in authority",
+          "relationships": "Power struggles with loved ones, loss of attractive charm",
+          "timing_events": "Relationship conflicts, loss of status in love"
+        },
+        {
+          "pratyantardasha": "sun",
+          "duration_days": 32,
+          "theme": "Maximum ego manifestation",
+          "intensity": "extreme",
+          "effects": {
+            "overall": "Peak ego expression leading to downfall. Pride before fall.",
+            "spiritual": "Ego must be destroyed through consequences",
+            "psychological": "Arrogance, overconfidence, pride, entitlement",
+            "physical": "Vitality peak but leading to exhaustion"
+          },
+          "health": "Overactivity leading to exhaustion, heart stress, burnout",
+          "career": "Peak success followed by collapse, excessive pride",
+          "relationships": "Ego conflicts, dominance attempts, relationship breakdowns",
+          "timing_events": "Peak followed by fall, public humiliation, authority loss"
+        },
+        {
+          "pratyantardasha": "moon",
+          "duration_days": 32,
+          "theme": "Ego vs emotional security",
+          "intensity": "high",
+          "effects": {
+            "overall": "Conflict between authority needs and emotional security. Pride in family.",
+            "spiritual": "Loss of ego identity through family",
+            "psychological": "Emotional conflicts, insecurity masked by authority",
+            "physical": "Emotional stress affecting physical health"
+          },
+          "health": "Emotional stress disorders, heart-stomach issues, anxiety",
+          "career": "Conflict between authority and emotional needs",
+          "relationships": "Family pride conflicts, mother-father conflicts, emotional alienation",
+          "timing_events": "Family conflicts, emotional estrangement from parents"
+        },
+        {
+          "pratyantardasha": "mars",
+          "duration_days": 32,
+          "theme": "Warrior ego, aggressive pride",
+          "intensity": "very high",
+          "effects": {
+            "overall": "Warrior pride, aggressive ego, combat with enemies.",
+            "spiritual": "Warrior dharma, proud fight for principles",
+            "psychological": "Aggressiveness, dominance, warrior mentality",
+            "physical": "High energy, aggressive actions, injury risks"
+          },
+          "health": "Accidents, wounds, high fevers, injuries, surgeries",
+          "career": "Aggressive takeovers, wins against enemies, leadership through force",
+          "relationships": "Dominance, aggression, conflicts, passionate intensity",
+          "timing_events": "Victories, conflicts, aggressive achievements, accidents"
+        },
+        {
+          "pratyantardasha": "mercury",
+          "duration_days": 32,
+          "theme": "Intellectual pride, communication authority",
+          "intensity": "medium-high",
+          "effects": {
+            "overall": "Intellectual arrogance, pride in knowledge, communication authority.",
+            "spiritual": "Ego in spiritual knowledge, pride in wisdom",
+            "psychological": "Intellectual pride, overconfidence in ideas",
+            "physical": "Nervous strain from overactivity"
+          },
+          "health": "Nervous disorders, speech stress, mental overexertion",
+          "career": "Success in intellectual fields, but with pride issues",
+          "relationships": "Communication dominance, intellectual arrogance alienates",
+          "timing_events": "Intellectual successes, communication leadership, idea promotion"
+        },
+        {
+          "pratyantardasha": "jupiter",
+          "duration_days": 32,
+          "theme": "Proud expansion, ego in wisdom",
+          "intensity": "high",
+          "effects": {
+            "overall": "Proud expansion of influence, ego in spiritual authority.",
+            "spiritual": "Pride in spiritual knowledge, guru complex",
+            "psychological": "Expansive ego, overconfidence, wisdom pride",
+            "physical": "Good energy but overexerted"
+          },
+          "health": "Overexertion, liver stress, general good health",
+          "career": "Success and expansion, pride-based leadership",
+          "relationships": "Leadership in relationships, teaching roles, proud authority",
+          "timing_events": "Expansive successes, promotion, authority recognition"
+        },
+        {
+          "pratyantardasha": "saturn",
+          "duration_days": 32,
+          "theme": "Ego faces limitation, humbling tests",
+          "intensity": "very high",
+          "effects": {
+            "overall": "Ego faces hard reality. Tests of pride. Humbling circumstances.",
+            "spiritual": "Ego destroyed by time and limitation",
+            "psychological": "Humiliation, limitation, facing mortality",
+            "physical": "Chronic illness, aging, hardship"
+          },
+          "health": "Chronic illness, aging symptoms, limitations",
+          "career": "Career plateau or decline, limitation of growth",
+          "relationships": "Relationship hardships, separation, aging, widow status",
+          "timing_events": "Humiliation, losses, mortality awareness, life limitations"
+        },
+        {
+          "pratyantardasha": "rahu",
+          "duration_days": 32,
+          "theme": "Ego obsession, shadow authority",
+          "intensity": "very high",
+          "effects": {
+            "overall": "Obsessive ego, shadow authority, karmic confrontation.",
+            "spiritual": "Ego caught in karmic illusions",
+            "psychological": "Obsessive ego, shadow obsessions, paranoia",
+            "physical": "Stress, mysterious illnesses, toxins"
+          },
+          "health": "Mysterious illnesses, stress disorders, toxin exposure",
+          "career": "Shadowy authority, karmic work entanglements",
+          "relationships": "Obsessive power dynamics, shadow relationships",
+          "timing_events": "Karmic authority confrontations, ego humbling through obsession"
+        }
+      ]
+    },
+    {
+      "antardasha": "moon",
+      "duration_years": 1,
+      "sequence": 4,
+      "pratyantardashas": [
+        {
+          "pratyantardasha": "ketu",
+          "duration_days": 32,
+          "theme": "Emotional detachment, psychic awakening",
+          "intensity": "high",
+          "effects": {
+            "overall": "Emotional numbness, psychic sensitivity, past life memories.",
+            "spiritual": "Intuitive awakening, psychic abilities, astral travel",
+            "psychological": "Emotional detachment, depression, inner focus",
+            "physical": "Sleep disruptions, psychosomatic manifestations"
+          },
+          "health": "Sleep disorders, mental health issues, psychosomatic illness",
+          "career": "Withdrawal from public roles, inner-focused work",
+          "relationships": "Emotional distance from family, mother alienation",
+          "timing_events": "Psychic breakthroughs, family separations, memory regressions"
+        },
+        {
+          "pratyantardasha": "venus",
+          "duration_days": 32,
+          "theme": "Emotional pleasure vs detachment",
+          "intensity": "medium-high",
+          "effects": {
+            "overall": "Conflict between comfort-seeking and renunciation.",
+            "spiritual": "Detachment from sensual pleasures through emotions",
+            "psychological": "Emotional indulgence conflicts with detachment",
+            "physical": "Hormonal stress, reproductive sensitivity"
+          },
+          "health": "Hormonal imbalances, reproductive issues, comfort-seeking illness",
+          "career": "Comfort-focused work conflicts with spiritual needs",
+          "relationships": "Pleasure-seeking in relationships meets emotional detachment",
+          "timing_events": "Relationship pleasure-pain cycles"
+        },
+        {
+          "pratyantardasha": "sun",
+          "duration_days": 32,
+          "theme": "Emotional vulnerability, ego sensitivity",
+          "intensity": "high",
+          "effects": {
+            "overall": "Emotional sensitivity to ego wounds. Vulnerable authority.",
+            "spiritual": "Emotional opening beneath tough ego",
+            "psychological": "Sensitive to criticism, emotional defensiveness",
+            "physical": "Emotional stress, heart sensitivity"
+          },
+          "health": "Emotional stress, heart issues, anxiety, depression",
+          "career": "Emotional reactions to authority, sensitive to criticism",
+          "relationships": "Emotional vulnerability with authority figures",
+          "timing_events": "Emotional wounds from authority, father emotional conflicts"
+        },
+        {
+          "pratyantardasha": "moon",
+          "duration_days": 32,
+          "theme": "Peak emotional sensitivity and intuitition",
+          "intensity": "very high",
+          "effects": {
+            "overall": "Maximum emotional and psychic sensitivity. Mother connection peak.",
+            "spiritual": "Psychic abilities at peak, divine mother connection",
+            "psychological": "Emotional intensity, sensitivity to others' emotions",
+            "physical": "Hormonal peaks, menstrual sensitivity"
+          },
+          "health": "Emotional intensity, hormonal peaks, sensitivity manifestations",
+          "career": "Emotional intelligence valued, nurturing roles peak",
+          "relationships": "Deep emotional connections, mother bonding peak",
+          "timing_events": "Emotional breakthroughs, psychic phenomena, mother interactions"
+        },
+        {
+          "pratyantardasha": "mars",
+          "duration_days": 32,
+          "theme": "Emotional intensity and aggression",
+          "intensity": "very high",
+          "effects": {
+            "overall": "Emotional aggression, passionate outbursts, warrior emotions.",
+            "spiritual": "Emotional warrior, fighting for emotional needs",
+            "psychological": "Aggressive emotions, rage, passionate anger",
+            "physical": "Fever, inflammation from emotional stress"
+          },
+          "health": "Fevers, inflammations, emotional stress illnesses, injuries",
+          "career": "Aggressive emotional reactions at work",
+          "relationships": "Emotional conflicts, passionate aggression, family disputes",
+          "timing_events": "Family fights, emotional violence, passionate confrontations"
+        },
+        {
+          "pratyantardasha": "mercury",
+          "duration_days": 32,
+          "theme": "Emotional communication, mental sensitivity",
+          "intensity": "medium-high",
+          "effects": {
+            "overall": "Emotional expression through words, mental sensitivity.",
+            "spiritual": "Mystical communication, intuitive speech",
+            "psychological": "Sensitive mind, emotional thoughts, communication sensitivity",
+            "physical": "Nervous sensitivity, speech emotion"
+          },
+          "health": "Nervous disorders, speech emotional stress, anxiety",
+          "career": "Emotional communication excels, expressive roles",
+          "relationships": "Expressive emotions in communication, family talks",
+          "timing_events": "Emotional conversations, family communications"
+        },
+        {
+          "pratyantardasha": "jupiter",
+          "duration_days": 32,
+          "theme": "Emotional wisdom and expansion",
+          "intensity": "medium-high",
+          "effects": {
+            "overall": "Emotional intelligence expands, mother wisdom activated.",
+            "spiritual": "Guru connection through emotions, divine mother grace",
+            "psychological": "Wisdom from feelings, emotional intelligence",
+            "physical": "Good health, emotional healing"
+          },
+          "health": "Emotional healing, good health, wellness expansion",
+          "career": "Expansion through emotional intelligence, counseling roles",
+          "relationships": "Emotional wisdom in relationships, mother guidance",
+          "timing_events": "Emotional growth, mother blessings, wisdom expansion"
+        },
+        {
+          "pratyantardasha": "saturn",
+          "duration_days": 32,
+          "theme": "Emotional suffering and detachment",
+          "intensity": "very high",
+          "effects": {
+            "overall": "Long emotional suffering, grief, detachment from feeling.",
+            "spiritual": "Emotional renunciation, mother loss, grief liberation",
+            "psychological": "Depression, grief, emotional numbness, acceptance",
+            "physical": "Chronic illness, weakness, aging"
+          },
+          "health": "Depression, chronic illness, emotional disorders, aging",
+          "career": "Career suffers from emotional pain",
+          "relationships": "Mother loss, family separation, widow/widower status",
+          "timing_events": "Death of mother, grief periods, family separations"
+        },
+        {
+          "pratyantardasha": "rahu",
+          "duration_days": 32,
+          "theme": "Obsessive emotions, shadowy family",
+          "intensity": "very high",
+          "effects": {
+            "overall": "Obsessive emotions, family shadows, karmic emotional entanglement.",
+            "spiritual": "Past life emotional karma surfacing",
+            "psychological": "Obsessive feelings, family complexes, emotional obsessions",
+            "physical": "Stress, mysterious psychosomatic illness"
+          },
+          "health": "Obsessive illnesses, stress-related, mysterious symptoms",
+          "career": "Family business shadows, emotional work entanglements",
+          "relationships": "Obsessive family attachments, karmic family patterns",
+          "timing_events": "Family obsessions, emotional karmic encounters"
+        }
+      ]
+    },
+    {
+      "antardasha": "mars",
+      "duration_days": 284,
+      "sequence": 5,
+      "pratyantardashas": [
+        {
+          "pratyantardasha": "ketu",
+          "duration_days": 32,
+          "theme": "Spiritual warrior, sudden destructive actions",
+          "intensity": "very high",
+          "effects": {
+            "overall": "Warrior against attachment, sudden spiritual actions. Destruction for liberation.",
+            "spiritual": "Fierce spiritual practice, warrior detachment",
+            "psychological": "Aggressive spirituality, impulsive decisions, destructive energy",
+            "physical": "Accidents, injuries, sudden onset illnesses"
+          },
+          "health": "Accidents, injuries, sudden fevers, infections, surgery",
+          "career": "Sudden job terminations, aggressive career changes",
+          "relationships": "Sudden aggressive separations, violent endings",
+          "timing_events": "Accidents, sudden separations, spiritual combat experiences"
+        },
+        {
+          "pratyantardasha": "venus",
+          "duration_days": 32,
+          "theme": "Passionate confrontation, aggressive romance",
+          "intensity": "very high",
+          "effects": {
+            "overall": "Passionate conflict in relationships, aggressive pursuit of pleasure.",
+            "spiritual": "Warrior love, passionate detachment",
+            "psychological": "Aggressive passion, romance conflicts, infidelity",
+            "physical": "Fever, inflammations, reproductive stress"
+          },
+          "health": "Reproductive illnesses, fevers, infections, inflammations",
+          "career": "Aggressive changes in pleasure fields",
+          "relationships": "Passionate conflicts, infidelity, aggressive romance, sudden breaks",
+          "timing_events": "Passionate confrontations, infidelity revelations, aggressive breakups"
+        },
+        {
+          "pratyantardasha": "sun",
+          "duration_days": 32,
+          "theme": "Warrior pride, aggressive authority",
+          "intensity": "very high",
+          "effects": {
+            "overall": "Warrior leadership, aggressive ego, combat with authority.",
+            "spiritual": "Warrior dharma, proud fighting",
+            "psychological": "Aggressive pride, dominance, combative",
+            "physical": "High energy, injuries, high fever"
+          },
+          "health": "Accidents, wounds, fevers, surgeries, high vitality injuries",
+          "career": "Aggressive takeovers, leadership through combat, conflicts",
+          "relationships": "Aggressive dominance, conflicts with authority figures",
+          "timing_events": "Victories, defeats, aggressive achievements, authority conflicts"
+        },
+        {
+          "pratyantardasha": "moon",
+          "duration_days": 32,
+          "theme": "Aggressive emotions, emotional warrior",
+          "intensity": "very high",
+          "effects": {
+            "overall": "Emotional aggression, warrior feelings, aggressive mother conflicts.",
+            "spiritual": "Emotional warrior, fighting inner demons",
+            "psychological": "Aggressive emotions, rage, emotional violence",
+            "physical": "Fever from emotion, inflammation, injury risk"
+          },
+          "health": "Fevers, emotional stress illness, injuries, inflammations",
+          "career": "Aggressive emotional reactions at work",
+          "relationships": "Family fights, aggressive emotions, mother conflicts",
+          "timing_events": "Family violence, emotional aggression, domestic conflicts"
+        },
+        {
+          "pratyantardasha": "mars",
+          "duration_days": 32,
+          "theme": "Maximum warrior energy and aggression",
+          "intensity": "extreme",
+          "effects": {
+            "overall": "Peak warrior energy, maximum aggression, battle intensity.",
+            "spiritual": "Warrior enlightenment, fierce spiritual practice",
+            "psychological": "Extreme aggression, violence potential, warrior consciousness",
+            "physical": "Peak physical energy, injury potential, combat readiness"
+          },
+          "health": "Accidents likely, injuries, fevers, surgeries, high activity",
+          "career": "Aggressive dominance, leadership peaks, wins against enemies",
+          "relationships": "Intense conflicts, aggressive dominance, separations",
+          "timing_events": "Battles, victories, major accidents, aggressive achievements"
+        },
+        {
+          "pratyantardasha": "mercury",
+          "duration_days": 32,
+          "theme": "Aggressive communication, warrior speech",
+          "intensity": "high",
+          "effects": {
+            "overall": "Aggressive communication, warrior words, confrontational speech.",
+            "spiritual": "Mantric power in speech",
+            "psychological": "Aggressive speech, confrontation, sarcasm",
+            "physical": "Speech stress, nervous aggression"
+          },
+          "health": "Nervous disorders, speech stress, accident prone",
+          "career": "Aggressive communication, winning arguments, sales aggression",
+          "relationships": "Aggressive communication, arguments, verbal conflicts",
+          "timing_events": "Verbal battles, aggressive negotiations"
+        },
+        {
+          "pratyantardasha": "jupiter",
+          "duration_days": 32,
+          "theme": "Warrior expansion, aggressive wisdom",
+          "intensity": "high",
+          "effects": {
+            "overall": "Warrior guru emerges, aggressive expansion.",
+            "spiritual": "Warrior dharma, martial spirituality",
+            "psychological": "Expansive aggression, leadership through force",
+            "physical": "Good energy with injury risks"
+          },
+          "health": "Good health with injury risks, energy peaks",
+          "career": "Aggressive expansion, warrior leadership",
+          "relationships": "Leadership role, aggressive expansion of relationships",
+          "timing_events": "Expansion through combat, guru-warrior emergence"
+        },
+        {
+          "pratyantardasha": "saturn",
+          "duration_days": 32,
+          "theme": "Warrior discipline, harsh limitations",
+          "intensity": "very high",
+          "effects": {
+            "overall": "Warrior tested by limitations, harsh discipline, suffering combat.",
+            "spiritual": "Warrior renunciation, hard discipline",
+            "psychological": "Discipline through pain, limitation testing",
+            "physical": "Injuries, chronic pain, harsh physical conditions"
+          },
+          "health": "Injuries, chronic pain, hard physical work, aging",
+          "career": "Hard work, career difficulties, military/combat roles",
+          "relationships": "Relationship hardships, separation through conflict",
+          "timing_events": "Injuries, losses in combat, hard separations"
+        },
+        {
+          "pratyantardasha": "rahu",
+          "duration_days": 32,
+          "theme": "Obsessive aggression, shadowy conflicts",
+          "intensity": "very high",
+          "effects": {
+            "overall": "Obsessive aggression, karmic enemies, shadowy conflicts.",
+            "spiritual": "Karmic warrior battles, shadow combat",
+            "psychological": "Obsessive anger, karmic enemies, shadow aggression",
+            "physical": "Stress-related injuries, mysterious illnesses"
+          },
+          "health": "Stress illnesses, injuries, mysterious fevers, toxins",
+          "career": "Shadowy conflicts at work, karmic enemies",
+          "relationships": "Obsessive conflicts, karmic enemies, shadowy fights",
+          "timing_events": "Karmic enemy encounters, obsessive conflicts"
+        }
+      ]
+    },
+    {
+      "antardasha": "mercury",
+      "duration_days": 284,
+      "sequence": 6,
+      "pratyantardashas": [
+        {
+          "pratyantardasha": "ketu",
+          "duration_days": 32,
+          "theme": "Occult knowledge, mystical communication",
+          "intensity": "medium-high",
+          "effects": {
+            "overall": "Interest in hidden knowledge, mystical speech, communication confusion.",
+            "spiritual": "Mantras, occult sciences, mystical languages",
+            "psychological": "Mental confusion, scattered thoughts, mystical interests",
+            "physical": "Nervous disorders, speech issues"
+          },
+          "health": "Nervous disorders, speech problems, mental confusion",
+          "career": "Shift to occult/mystical fields",
+          "relationships": "Communication breakdown, isolation through silence",
+          "timing_events": "Occult initiations, mystical studies, speech loss periods"
+        },
+        {
+          "pratyantardasha": "venus",
+          "duration_days": 32,
+          "theme": "Charming communication, pleasant intellect",
+          "intensity": "medium",
+          "effects": {
+            "overall": "Pleasant communication, intellectual attraction, charm in speech.",
+            "spiritual": "Wisdom through love, dharmic intelligence",
+            "psychological": "Pleasant thoughts, intellectual pleasure",
+            "physical": "Good nervous health, pleasant energy"
+          },
+          "health": "Good health, nervous system balanced",
+          "career": "Success in communication/arts, charming speech",
+          "relationships": "Pleasant communication, intellectual connection",
+          "timing_events": "Pleasant communication, intellectual bonding"
+        },
+        {
+          "pratyantardasha": "sun",
+          "duration_days": 32,
+          "theme": "Intellectual authority, proud communication",
+          "intensity": "medium-high",
+          "effects": {
+            "overall": "Intellectual authority, proud speech, commanding communication.",
+            "spiritual": "Wise communication, authority in knowledge",
+            "psychological": "Intellectual pride, authoritative thinking",
+            "physical": "Good mental energy"
+          },
+          "health": "Good mental health, nervous energy",
+          "career": "Intellectual authority, leadership through knowledge",
+          "relationships": "Intellectual dominance, teaching roles",
+          "timing_events": "Intellectual achievements, authority recognition"
+        },
+        {
+          "pratyantardasha": "moon",
+          "duration_days": 32,
+          "theme": "Emotional communication, intuitive thinking",
+          "intensity": "medium-high",
+          "effects": {
+            "overall": "Emotional expression through words, intuitive mind.",
+            "spiritual": "Intuitive wisdom, psychic communication",
+            "psychological": "Emotional thinking, sensitive communication",
+            "physical": "Nervous sensitivity, emotional stress"
+          },
+          "health": "Nervous sensitivity, emotional stress, mental disorders",
+          "career": "Expressive communication, emotional fields",
+          "relationships": "Emotional conversation, family communication",
+          "timing_events": "Emotional talks, family communication events"
+        },
+        {
+          "pratyantardasha": "mars",
+          "duration_days": 32,
+          "theme": "Aggressive communication, sharp intellect",
+          "intensity": "high",
+          "effects": {
+            "overall": "Aggressive communication, sharp mind, confrontational intellect.",
+            "spiritual": "Warrior words, sharp discrimination",
+            "psychological": "Aggressive thinking, sharp criticism, argumentative",
+            "physical": "Nervous aggression, speech stress"
+          },
+          "health": "Nervous stress, speech problems, accident prone",
+          "career": "Aggressive communication, winning arguments",
+          "relationships": "Arguments, verbal conflicts, aggressive speech",
+          "timing_events": "Verbal battles, sharp disputes"
+        },
+        {
+          "pratyantardasha": "mercury",
+          "duration_days": 32,
+          "theme": "Peak intellectual and communication power",
+          "intensity": "high",
+          "effects": {
+            "overall": "Peak communication skills, intellectual clarity, mental brilliance.",
+            "spiritual": "Wisdom in speech, mantric power",
+            "psychological": "Mental clarity, intellectual sharpness, communication peak",
+            "physical": "Good nervous health, mental energy peaks"
+          },
+          "health": "Good mental health, nervous energy peak",
+          "career": "Communication/intellectual fields peak, success in trade/intellect",
+          "relationships": "Clear communication, intellectual bonding",
+          "timing_events": "Intellectual breakthroughs, successful communications"
+        },
+        {
+          "pratyantardasha": "jupiter",
+          "duration_days": 32,
+          "theme": "Wise communication, expanded intellect",
+          "intensity": "medium-high",
+          "effects": {
+            "overall": "Wise speech, intellectual expansion, knowledge sharing.",
+            "spiritual": "Teaching wisdom, guru in communication",
+            "psychological": "Wisdom in thinking, expanded perspective",
+            "physical": "Good overall health with learning energy"
+          },
+          "health": "Good health, intellectual vitality",
+          "career": "Teaching, knowledge sharing, intellectual expansion",
+          "relationships": "Wise communication, teaching partnerships",
+          "timing_events": "Knowledge expansion, teaching opportunities"
+        },
+        {
+          "pratyantardasha": "saturn",
+          "duration_days": 32,
+          "theme": "Communication limitation, mental discipline",
+          "intensity": "medium-high",
+          "effects": {
+            "overall": "Speech limitation, mental hardship, slow communication.",
+            "spiritual": "Silence discipline, mental simplicity",
+            "psychological": "Mental limitation, difficult thinking, slow communication",
+            "physical": "Nervous tension, speech impediments"
+          },
+          "health": "Nervous disorders, speech problems, mental strain",
+          "career": "Communication challenges, hardship in intellectual work",
+          "relationships": "Communication difficulty, isolation through speech",
+          "timing_events": "Speech loss periods, communication barriers"
+        },
+        {
+          "pratyantardasha": "rahu",
+          "duration_days": 32,
+          "theme": "Obsessive thinking, shadowy communication",
+          "intensity": "high",
+          "effects": {
+            "overall": "Obsessive thoughts, shadowy information, karmic communication.",
+            "spiritual": "Karmic knowledge, shadowy learning",
+            "psychological": "Obsessive thinking, paranoid thoughts, compulsive speech",
+            "physical": "Nervous stress, mysterious illnesses"
+          },
+          "health": "Nervous disorders, stress, mysterious symptoms",
+          "career": "Shadowy communication, espionage interests",
+          "relationships": "Obsessive communication, shadowy information exchange",
+          "timing_events": "Obsessive thinking periods, shadowy information encounters"
+        }
+      ]
+    },
+    {
+      "antardasha": "jupiter",
+      "duration_days": 284,
+      "sequence": 7,
+      "pratyantardashas": [
+        {
+          "pratyantardasha": "ketu",
+          "duration_days": 32,
+          "theme": "Spiritual wisdom, detached dharma",
+          "intensity": "high",
+          "effects": {
+            "overall": "Spiritual knowledge through loss, wisdom from suffering, guru wisdom.",
+            "spiritual": "Meeting gurus, spiritual initiations, dharmic understanding",
+            "psychological": "Wisdom perspective, philosophical detachment",
+            "physical": "Spiritual healing begins"
+          },
+          "health": "Healing through spiritual practice, gradual improvement",
+          "career": "Move to spiritual/teaching fields, wisdom-based work",
+          "relationships": "Dharmic relationships, spiritual partnerships",
+          "timing_events": "Guru meetings, spiritual initiations, wisdom events"
+        },
+        {
+          "pratyantardasha": "venus",
+          "duration_days": 32,
+          "theme": "Wisdom through relationships, dharmic love",
+          "intensity": "medium-high",
+          "effects": {
+            "overall": "Relationships become dharmic, wisdom through love.",
+            "spiritual": "Bhakti wisdom, devotional understanding",
+            "psychological": "Relationship wisdom, spiritual expansion through love",
+            "physical": "Good health, heart opening"
+          },
+          "health": "Heart health improves, relationship health good",
+          "career": "Successful partnerships, dharmic business",
+          "relationships": "Dharmic partnerships, spiritual love, mentor connections",
+          "timing_events": "Spiritual relationship formation, dharmic union"
+        },
+        {
+          "pratyantardasha": "sun",
+          "duration_days": 32,
+          "theme": "Wise authority, spiritual leadership",
+          "intensity": "high",
+          "effects": {
+            "overall": "Spiritual authority emerges, wisdom leadership, dharmic power.",
+            "spiritual": "Guru leadership, wise authority, spiritual teaching",
+            "psychological": "Wisdom in authority, confident leadership",
+            "physical": "Good vitality, strength in leadership"
+          },
+          "health": "Good health, vitality improves, strong constitution",
+          "career": "Leadership in spiritual/educational fields",
+          "relationships": "Respected authority, spiritual teaching roles",
+          "timing_events": "Spiritual leadership recognition, authority establishment"
+        },
+        {
+          "pratyantardasha": "moon",
+          "duration_days": 32,
+          "theme": "Emotional wisdom, heart opening",
+          "intensity": "medium-high",
+          "effects": {
+            "overall": "Emotional wisdom, heart expansion, mother wisdom.",
+            "spiritual": "Divine mother grace, emotional healing",
+            "psychological": "Emotional intelligence, heart wisdom",
+            "physical": "Good emotional health, healing"
+          },
+          "health": "Emotional healing, good health, mother's blessing",
+          "career": "Nurturing roles, emotional intelligence work",
+          "relationships": "Mother blessing, emotional wisdom in relationships",
+          "timing_events": "Emotional healing, mother grace events"
+        },
+        {
+          "pratyantardasha": "mars",
+          "duration_days": 32,
+          "theme": "Warrior dharma, righteous expansion",
+          "intensity": "high",
+          "effects": {
+            "overall": "Righteous warrior energy, dharmic expansion, justice pursuit.",
+            "spiritual": "Warrior dharma, righteous action",
+            "psychological": "Righteous aggression, dharmic confidence",
+            "physical": "Good energy, strength for righteous action"
+          },
+          "health": "Good health, strong vitality",
+          "career": "Expansion through righteous action, warrior leadership",
+          "relationships": "Righteous relationships, warrior expansion",
+          "timing_events": "Righteous victories, dharmic expansion"
+        },
+        {
+          "pratyantardasha": "mercury",
+          "duration_days": 32,
+          "theme": "Wise communication, expanded intellect",
+          "intensity": "medium-high",
+          "effects": {
+            "overall": "Teaching wisdom, intellectual expansion, knowledge sharing.",
+            "spiritual": "Guru communication, wisdom speech",
+            "psychological": "Intellectual wisdom, expanded thinking",
+            "physical": "Good mental health, clear thinking"
+          },
+          "health": "Good mental health, clarity improves",
+          "career": "Teaching, knowledge expansion, communication fields",
+          "relationships": "Wise communication, teaching relationships",
+          "timing_events": "Knowledge expansion, teaching opportunities"
+        },
+        {
+          "pratyantardasha": "jupiter",
+          "duration_days": 32,
+          "theme": "Maximum wisdom and expansion",
+          "intensity": "very high",
+          "effects": {
+            "overall": "Peak wisdom, maximum expansion, dharma at zenith.",
+            "spiritual": "Guru recognition, dharmic peak, enlightenment possible",
+            "psychological": "Peak wisdom, expanded consciousness",
+            "physical": "Excellent health, vitality peak"
+          },
+          "health": "Excellent health, vitality at peak, healing complete",
+          "career": "Success and expansion peak, recognition of wisdom",
+          "relationships": "Spiritual partnerships peak, guru status recognition",
+          "timing_events": "Wisdom peak, recognition, expansion culmination"
+        },
+        {
+          "pratyantardasha": "saturn",
+          "duration_days": 32,
+          "theme": "Wisdom through hardship, dharmic limitation",
+          "intensity": "high",
+          "effects": {
+            "overall": "Wisdom through discipline, dharmic tests, spiritual maturity.",
+            "spiritual": "Spiritual maturity through testing, renunciation phase",
+            "psychological": "Deep wisdom from limitation, acceptance",
+            "physical": "Health plateau or minor issues"
+          },
+          "health": "Health stable or minor issues, aging wisdom",
+          "career": "Career stability, teaching through experience",
+          "relationships": "Mature dharmic relationships, long-term commitments",
+          "timing_events": "Wisdom maturity, long-term teaching roles"
+        },
+        {
+          "pratyantardasha": "rahu",
+          "duration_days": 32,
+          "theme": "Wisdom vs illusion, karmic expansion",
+          "intensity": "high",
+          "effects": {
+            "overall": "Wisdom tested by illusions, karmic expansion, shadow wisdom.",
+            "spiritual": "Wisdom vs delusion testing, karmic guru encounters",
+            "psychological": "Wisdom discernment, illusion recognition",
+            "physical": "Health with mysterious factors"
+          },
+          "health": "Health generally good but with mysterious factors",
+          "career": "Expansion with karmic complications, wisdom tested",
+          "relationships": "Karmic guru encounters, wisdom through shadows",
+          "timing_events": "Wisdom testing through illusions, karmic expansion"
+        }
+      ]
+    },
+    {
+      "antardasha": "saturn",
+      "duration_days": 284,
+      "sequence": 8,
+      "pratyantardashas": [
+        {
+          "pratyantardasha": "ketu",
+          "duration_days": 32,
+          "theme": "Double sorrow, complete renunciation",
+          "intensity": "extreme",
+          "effects": {
+            "overall": "Maximum suffering for liberation, complete detachment.",
+            "spiritual": "Complete renunciation, moksha path",
+            "psychological": "Deep acceptance of suffering, spiritual surrender",
+            "physical": "Chronic illness, weakness, aging"
+          },
+          "health": "Chronic illness, weakness, suffering, spiritual healing possible",
+          "career": "Complete career loss, renunciation",
+          "relationships": "Total relationship loss, widow status",
+          "timing_events": "Death of loved ones, complete life change"
+        },
+        {
+          "pratyantardasha": "venus",
+          "duration_days": 32,
+          "theme": "Loss through love, relationship endings",
+          "intensity": "very high",
+          "effects": {
+            "overall": "Long-term relationships end, marriage loss, renunciation through love.",
+            "spiritual": "Detachment through relationship loss",
+            "psychological": "Grief, loneliness, acceptance",
+            "physical": "Chronic stress, aging"
+          },
+          "health": "Relationship stress, chronic illness, aging",
+          "career": "Partnership loss, solo path",
+          "relationships": "Divorce, widowerhood, permanent separation",
+          "timing_events": "Divorce, death of spouse"
+        },
+        {
+          "pratyantardasha": "sun",
+          "duration_days": 32,
+          "theme": "Ego limitation, humbling tests",
+          "intensity": "very high",
+          "effects": {
+            "overall": "Ego faces hard reality, humbling limitations.",
+            "spiritual": "Ego destroyed by time",
+            "psychological": "Humiliation, limitation, mortality awareness",
+            "physical": "Chronic illness, aging, weakness"
+          },
+          "health": "Chronic illness, aging symptoms, limitations",
+          "career": "Career decline, authority loss",
+          "relationships": "Relationship hardship, separation",
+          "timing_events": "Humiliation, career loss, mortality awareness"
+        },
+        {
+          "pratyantardasha": "moon",
+          "duration_days": 32,
+          "theme": "Emotional suffering, grief period",
+          "intensity": "very high",
+          "effects": {
+            "overall": "Long emotional suffering, grief, mother loss.",
+            "spiritual": "Emotional renunciation, mother separation",
+            "psychological": "Depression, grief, emotional numbness",
+            "physical": "Depression, chronic illness"
+          },
+          "health": "Depression, chronic illness, emotional disorders",
+          "career": "Career suffers from emotional pain",
+          "relationships": "Mother loss, family separation",
+          "timing_events": "Death of mother, grief periods"
+        },
+        {
+          "pratyantardasha": "mars",
+          "duration_days": 32,
+          "theme": "Warrior discipline, hard limitation",
+          "intensity": "very high",
+          "effects": {
+            "overall": "Warrior tested by limitations, discipline through suffering.",
+            "spiritual": "Warrior renunciation, hard discipline",
+            "psychological": "Discipline through pain, acceptance",
+            "physical": "Injuries, chronic pain, hard conditions"
+          },
+          "health": "Injuries, chronic pain, hard work, aging",
+          "career": "Hard work, military roles, difficult conditions",
+          "relationships": "Relationship hardship, separation",
+          "timing_events": "Injuries, hard separations"
+        },
+        {
+          "pratyantardasha": "mercury",
+          "duration_days": 32,
+          "theme": "Communication limitation, mental discipline",
+          "intensity": "medium-high",
+          "effects": {
+            "overall": "Speech limitation, slow communication, mental hardship.",
+            "spiritual": "Silence discipline, mental simplicity",
+            "psychological": "Mental limitation, difficult thinking",
+            "physical": "Nervous strain, speech impediments"
+          },
+          "health": "Nervous disorders, speech problems, strain",
+          "career": "Communication challenges, hardship",
+          "relationships": "Communication difficulty, isolation",
+          "timing_events": "Speech loss, communication barriers"
+        },
+        {
+          "pratyantardasha": "jupiter",
+          "duration_days": 32,
+          "theme": "Wisdom through hardship, testing dharma",
+          "intensity": "high",
+          "effects": {
+            "overall": "Wisdom through discipline, dharmic tests.",
+            "spiritual": "Spiritual maturity through testing",
+            "psychological": "Deep wisdom from limitation",
+            "physical": "Health plateau, minor issues"
+          },
+          "health": "Health stable or minor issues",
+          "career": "Career stability, mature roles",
+          "relationships": "Mature commitments, long-term",
+          "timing_events": "Wisdom maturity, teaching through experience"
+        },
+        {
+          "pratyantardasha": "saturn",
+          "duration_days": 32,
+          "theme": "Maximum limitation and sorrow",
+          "intensity": "extreme",
+          "effects": {
+            "overall": "Peak suffering period, complete limitation.",
+            "spiritual": "Complete liberation through suffering",
+            "psychological": "Deep acceptance, spiritual maturity",
+            "physical": "Peak chronic illness, hardship"
+          },
+          "health": "Peak suffering, chronic illness, worst health period",
+          "career": "Lowest career point, complete hardship",
+          "relationships": "Most difficult period, separations",
+          "timing_events": "Deaths, losses, complete transformation"
+        },
+        {
+          "pratyantardasha": "rahu",
+          "duration_days": 32,
+          "theme": "Karmic hardship, shadowy suffering",
+          "intensity": "very high",
+          "effects": {
+            "overall": "Karmic hardship, shadowy suffering, karma being burned.",
+            "spiritual": "Karma burning through suffering",
+            "psychological": "Hardship understanding, shadow acceptance",
+            "physical": "Mysterious chronic illness, suffering"
+          },
+          "health": "Mysterious chronic illness, suffering, toxins",
+          "career": "Karmic career hardship, shadows",
+          "relationships": "Karmic hardship in relationships",
+          "timing_events": "Karma burning events, shadowy sufferings"
+        }
+      ]
+    },
+    {
+      "antardasha": "rahu",
+      "duration_days": 284,
+      "sequence": 9,
+      "pratyantardashas": [
+        {
+          "pratyantardasha": "ketu",
+          "duration_days": 32,
+          "theme": "Shadow-void axis, karmic confrontation",
+          "intensity": "very high",
+          "effects": {
+            "overall": "Rahu-Ketu shadow axis activated, karmic encounters.",
+            "spiritual": "Past life karma confrontation, shadow work",
+            "psychological": "Shadow integration, karmic obsessions release",
+            "physical": "Mysterious symptoms, sudden changes"
+          },
+          "health": "Mysterious illnesses, sudden changes, shadow healing",
+          "career": "Karmic work changes, shadow clearing",
+          "relationships": "Karmic relationships end, obsessions release",
+          "timing_events": "Karmic encounter culminations, shadow clearings"
+        },
+        {
+          "pratyantardasha": "venus",
+          "duration_days": 32,
+          "theme": "Obsessive relationships, shadowy attractions",
+          "intensity": "very high",
+          "effects": {
+            "overall": "Obsessive relationships, shadow attractions, karmic love.",
+            "spiritual": "Karmic love, shadow attraction resolution",
+            "psychological": "Obsessive attachments, shadow relationship",
+            "physical": "Stress from obsession, toxins"
+          },
+          "health": "Obsessive stress, reproductive issues, toxin exposure",
+          "career": "Obsessive work relationships, shadows",
+          "relationships": "Obsessive partners, karmic love obsessions",
+          "timing_events": "Obsessive relationship encounters"
+        },
+        {
+          "pratyantardasha": "sun",
+          "duration_days": 32,
+          "theme": "Shadow authority, obsessive ego",
+          "intensity": "very high",
+          "effects": {
+            "overall": "Shadow authority, obsessive ego, karmic confrontation.",
+            "spiritual": "Ego shadow work, authority karma",
+            "psychological": "Obsessive ego, shadow authority issues",
+            "physical": "Stress, mysterious illnesses"
+          },
+          "health": "Mysterious illnesses, stress, shadow health issues",
+          "career": "Shadowy authority, karmic work",
+          "relationships": "Obsessive power dynamics, shadowy authority",
+          "timing_events": "Karmic authority confrontations"
+        },
+        {
+          "pratyantardasha": "moon",
+          "duration_days": 32,
+          "theme": "Obsessive emotions, family shadows",
+          "intensity": "very high",
+          "effects": {
+            "overall": "Obsessive emotions, family shadows, karmic family.",
+            "spiritual": "Family karma, emotional shadow work",
+            "psychological": "Obsessive feelings, family complexes",
+            "physical": "Stress-related, psychosomatic issues"
+          },
+          "health": "Stress illnesses, emotional disorders, mysterious symptoms",
+          "career": "Family business shadows, obsessive work",
+          "relationships": "Obsessive family patterns, karmic families",
+          "timing_events": "Family obsession encounters"
+        },
+        {
+          "pratyantardasha": "mars",
+          "duration_days": 32,
+          "theme": "Obsessive aggression, shadowy conflicts",
+          "intensity": "very high",
+          "effects": {
+            "overall": "Obsessive aggression, karmic enemies, shadowy conflicts.",
+            "spiritual": "Karmic warrior battles, shadow combat",
+            "psychological": "Obsessive anger, karmic enemies",
+            "physical": "Stress injuries, mysterious fevers"
+          },
+          "health": "Stress injuries, mysterious fevers, toxins",
+          "career": "Shadowy conflicts at work, karmic enemies",
+          "relationships": "Obsessive conflicts, karmic enemies",
+          "timing_events": "Karmic enemy encounters, obsessive conflicts"
+        },
+        {
+          "pratyantardasha": "mercury",
+          "duration_days": 32,
+          "theme": "Obsessive thinking, shadowy knowledge",
+          "intensity": "high",
+          "effects": {
+            "overall": "Obsessive thoughts, shadowy information, karmic knowledge.",
+            "spiritual": "Karmic knowledge, shadow learning",
+            "psychological": "Obsessive thinking, paranoid thoughts",
+            "physical": "Nervous stress, mysterious illnesses"
+          },
+          "health": "Nervous disorders, stress, mysterious symptoms",
+          "career": "Shadowy knowledge work, espionage interests",
+          "relationships": "Obsessive communication, shadowy exchange",
+          "timing_events": "Obsessive thinking, shadowy information"
+        },
+        {
+          "pratyantardasha": "jupiter",
+          "duration_days": 32,
+          "theme": "Wisdom vs illusion, karmic expansion",
+          "intensity": "high",
+          "effects": {
+            "overall": "Wisdom tested by illusions, karmic expansion.",
+            "spiritual": "Wisdom vs delusion, karmic guru encounters",
+            "psychological": "Wisdom discernment, illusion recognition",
+            "physical": "Health with mysterious factors"
+          },
+          "health": "Good health with mysterious complications",
+          "career": "Expansion with karmic complications",
+          "relationships": "Karmic guru encounters, wisdom through shadows",
+          "timing_events": "Wisdom testing through illusions"
+        },
+        {
+          "pratyantardasha": "saturn",
+          "duration_days": 32,
+          "theme": "Karmic hardship, shadowy suffering",
+          "intensity": "very high",
+          "effects": {
+            "overall": "Karmic hardship, shadowy suffering, karma burning.",
+            "spiritual": "Karma burning through suffering",
+            "psychological": "Hardship understanding, shadow acceptance",
+            "physical": "Mysterious chronic illness"
+          },
+          "health": "Mysterious chronic illness, suffering",
+          "career": "Karmic hardship, shadows clearing",
+          "relationships": "Karmic hardship in relationships",
+          "timing_events": "Karma burning, shadow suffering"
+        },
+        {
+          "pratyantardasha": "rahu",
+          "duration_days": 32,
+          "theme": "Maximum shadow and karmic entanglement",
+          "intensity": "extreme",
+          "effects": {
+            "overall": "Peak shadow manifestation, maximum karmic complexity.",
+            "spiritual": "Shadow peak, karmic culmination, obsession zenith",
+            "psychological": "Shadow at peak, obsessions maximum, delusion peak",
+            "physical": "Mysterious illnesses peak, toxin exposure maximum"
+          },
+          "health": "Mysterious illnesses peak, toxin exposure, stress extreme",
+          "career": "Maximum karmic entanglement in work",
+          "relationships": "Maximum obsession, shadow relationships peak",
+          "timing_events": "Karmic culmination, shadow manifestation peak"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_combinations": 81,
+    "antardasha_count": 9,
+    "pratyantardasha_per_antardasha": 9,
+    "key_themes": [
+      "Moksha (liberation) and spiritual detachment",
+      "Occult, mystical knowledge, and psychic abilities",
+      "Isolation and withdrawal from material world",
+      "Past life karma and shadow work",
+      "Loss leading to spiritual gain",
+      "Ego dissolution and surrender",
+      "Renunciation and asceticism"
+    ],
+    "intense_periods": {
+      "ketu_ketu": "Extreme - spiritual liberation or total loss",
+      "mars_mars": "Extreme - warrior energy at peak, accidents likely",
+      "saturn_saturn": "Extreme - maximum suffering, complete renunciation",
+      "moon_moon": "Very high - emotional and psychic sensitivity peak",
+      "rahu_rahu": "Extreme - shadow and obsession at peak"
+    },
+    "spiritual_growth_periods": [
+      "Ketu-Jupiter combinations",
+      "Venus-Jupiter combinations",
+      "Sun-Jupiter combinations",
+      "Mercury-Jupiter combinations"
+    ],
+    "challenging_periods": [
+      "Ketu-Saturn combinations",
+      "Mars-Saturn combinations",
+      "Saturn-Saturn combination",
+      "Rahu combinations generally"
+    ]
+  },
+  "remedies_for_ketu_mahadasha": {
+    "general": "Spiritual practices, meditation, surrender to divine will, renunciation activities",
+    "for_extreme_periods": "Intensive sadhana, guru connection, past life regression therapy, occult studies",
+    "for_losses": "Acceptance, spiritual counseling, guru guidance, ritual practices",
+    "herbal_support": "Gotu kola, brahmi for nervous system; Ashwagandha for grounding; Sankhpushpi for psychic clarity"
+  }
+}

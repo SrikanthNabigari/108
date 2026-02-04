@@ -1,0 +1,2560 @@
+{
+  "mahadasha": {
+    "lord": "mercury",
+    "duration_years": 17,
+    "duration_days": 6205,
+    "nature": "Intellect, communication, business, writing, friends, skin, nervous system",
+    "antardasha_count": 9,
+    "pratyantardasha_count": 81
+  },
+  "antardasha_order": [
+    "mercury",
+    "ketu",
+    "venus",
+    "sun",
+    "moon",
+    "mars",
+    "raahu",
+    "jupiter",
+    "saturn"
+  ],
+  "pratyantardasha": {
+    "mercury_mercury": {
+      "antardasha_lord": "mercury",
+      "pratyantardasha_lord": "mercury",
+      "sequence": "1.1",
+      "duration_days": 689,
+      "duration_months": 22.6,
+      "theme": "Peak intellect, communication mastery, business success",
+      "effects": {
+        "general": "Exceptional mental clarity and intellectual prowess. This is the strongest period for Mercury's positive expression. Communication becomes exceptionally clear and persuasive. Business ventures flourish through smart strategy and networking.",
+        "mind": "Sharp, analytical, curious mind. Excellent memory and learning capacity. Deep focus and concentration.",
+        "speech": "Eloquent communication, mastery of language. Excellent public speaking and writing abilities.",
+        "business": "Peak period for commerce, trading, and mercantile ventures. Success through wit and intelligence.",
+        "learning": "Ideal for studies, exams, research, and intellectual pursuits."
+      },
+      "health": {
+        "general": "Good nervous system health. Mental vitality high.",
+        "risks": "Overwork, mental stress from excessive thinking, insomnia from mental activity",
+        "remedies": "Regular meditation, breathing exercises, adequate rest"
+      },
+      "career": {
+        "favorable": "Writing, teaching, journalism, commerce, trading, technology, software development, consulting",
+        "opportunities": "Promotions, successful business launches, publishing deals, software success",
+        "challenges": "Excessive workload from success"
+      },
+      "relationships": {
+        "general": "Good communication with friends and colleagues. Intellectual connections flourish.",
+        "romantic": "Communication improves; witty exchanges bond couples",
+        "social": "Networking peak; making new intelligent friends"
+      },
+      "timing_events": {
+        "early_phase": "Mental clarity emerges, learning acceleration",
+        "peak_phase": "Business success, intellectual breakthroughs, publishing opportunities",
+        "late_phase": "Consolidation of intellectual achievements"
+      }
+    },
+    "mercury_ketu": {
+      "antardasha_lord": "mercury",
+      "pratyantardasha_lord": "ketu",
+      "sequence": "1.2",
+      "duration_days": 459,
+      "duration_months": 15.1,
+      "theme": "Detachment from materialism, spiritual insight through intellect",
+      "effects": {
+        "general": "Mercury's intellect meets Ketu's detachment. Mental focus turns inward. Interest in philosophy, spirituality, and abstract thinking increases. Some confusion or scattered thoughts possible.",
+        "mind": "Philosophical thinking, spiritual inquiry, tendency toward dissociation",
+        "intellect": "Interest shifts from material to spiritual knowledge",
+        "spirituality": "Meditation and spiritual practices benefit from sharp intellect"
+      },
+      "health": {
+        "general": "Variable health. Nervous tension may emerge.",
+        "risks": "Scattered thinking, anxiety, confusion, nervous system sensitivity",
+        "benefits": "Spiritual practices improve mental health"
+      },
+      "career": {
+        "favorable": "Philosophy, spirituality teaching, research, occult studies, psychology",
+        "challenges": "Loss of interest in mundane work, absentmindedness affecting productivity"
+      },
+      "relationships": {
+        "general": "Social withdrawal possible. Relationships may feel superficial.",
+        "romantic": "Need for space; partner may feel distant"
+      },
+      "timing_events": {
+        "early_phase": "Initial detachment from worldly pursuits",
+        "peak_phase": "Spiritual insights and philosophical breakthroughs",
+        "late_phase": "Integration of spiritual learning with daily life"
+      }
+    },
+    "mercury_venus": {
+      "antardasha_lord": "mercury",
+      "pratyantardasha_lord": "venus",
+      "sequence": "1.3",
+      "duration_days": 614,
+      "duration_months": 20.2,
+      "theme": "Arts and commerce combined, design, luxury trade, artistic communication",
+      "effects": {
+        "general": "Mercury's business acumen meets Venus's aesthetic sense. Excellent for creative businesses. Design, arts, entertainment, luxury goods flourish. Communication becomes charming and persuasive.",
+        "creativity": "Artistic talents bloom. Eye for design and beauty.",
+        "commerce": "Success in luxury, beauty, art-related businesses",
+        "charm": "Personality becomes more charming and attractive"
+      },
+      "health": {
+        "general": "Good health. Skin and throat benefit from Venus influence.",
+        "benefits": "Skin improves, voice becomes more pleasant",
+        "risks": "Throat issues possible, overindulgence in pleasures"
+      },
+      "career": {
+        "favorable": "Design, fashion, art, music, jewelry, luxury trade, cosmetics, entertainment, advertising",
+        "opportunities": "Successful launches in creative fields, appreciation for artistic work"
+      },
+      "relationships": {
+        "romantic": "Romantic peak. Charm attracts partners. Relationships deepen.",
+        "friendships": "Social circle expands pleasantly"
+      },
+      "timing_events": {
+        "early_phase": "Attraction and charm increase",
+        "peak_phase": "Creative success, romantic moments, business expansion in luxury sector",
+        "late_phase": "Consolidation of relationships and creative projects"
+      }
+    },
+    "mercury_sun": {
+      "antardasha_lord": "mercury",
+      "pratyantardasha_lord": "sun",
+      "sequence": "1.4",
+      "duration_days": 489,
+      "duration_months": 16.1,
+      "theme": "Authority through intellect, leadership in business, public recognition",
+      "effects": {
+        "general": "Mercury's intellect combined with Sun's authority. Communication becomes commanding. Leadership in intellectual fields. Public recognition for ideas and work.",
+        "authority": "Natural ability to lead and command respect",
+        "intellect": "Ideas carry weight and influence",
+        "visibility": "Public recognition increases"
+      },
+      "health": {
+        "general": "Good vitality and energy. Heart health supported by intellect-based exercises.",
+        "risks": "Ego-driven decisions, pride in communication",
+        "benefits": "Energy levels high, overall vigor"
+      },
+      "career": {
+        "favorable": "Leadership positions, management, public speaking, writing with authority, intellectual authority",
+        "opportunities": "Promotions, leadership roles, public recognition, speaking engagements"
+      },
+      "relationships": {
+        "general": "Communication assertive and commanding",
+        "romantic": "Confidence attracts partners"
+      },
+      "timing_events": {
+        "early_phase": "Authority and confidence grow",
+        "peak_phase": "Leadership success, public recognition, influential communication",
+        "late_phase": "Consolidation of authority and reputation"
+      }
+    },
+    "mercury_moon": {
+      "antardasha_lord": "mercury",
+      "pratyantardasha_lord": "moon",
+      "sequence": "1.5",
+      "duration_days": 590,
+      "duration_months": 19.4,
+      "theme": "Emotional communication, persuasion, nurturing through knowledge",
+      "effects": {
+        "general": "Mercury's intellect meets Moon's emotions. Communication becomes emotionally resonant and persuasive. Good for counseling, teaching with empathy. Writing and speaking touch hearts.",
+        "emotions": "Emotional intelligence sharpens. Intuitive understanding.",
+        "communication": "Words touch emotions; persuasion increases",
+        "nurturing": "Caring communication, teaching with compassion"
+      },
+      "health": {
+        "general": "Good mental-emotional health. Stomach/digestion may be affected by emotional stress.",
+        "risks": "Mood swings, emotional thinking affecting decisions",
+        "benefits": "Emotional healing through communication and writing"
+      },
+      "career": {
+        "favorable": "Counseling, psychology, emotional intelligence roles, empathetic teaching, writing that touches hearts",
+        "opportunities": "Success in caring professions, publishing heartfelt work"
+      },
+      "relationships": {
+        "romantic": "Emotional connection deepens. Partners feel understood.",
+        "family": "Better communication with family members",
+        "friendships": "Friendships deepen emotionally"
+      },
+      "timing_events": {
+        "early_phase": "Emotional sensitivity increases",
+        "peak_phase": "Deep connections, emotionally resonant communication, family harmony",
+        "late_phase": "Integration of emotional intelligence in daily interactions"
+      }
+    },
+    "mercury_mars": {
+      "antardasha_lord": "mercury",
+      "pratyantardasha_lord": "mars",
+      "sequence": "1.6",
+      "duration_days": 579,
+      "duration_months": 19.0,
+      "theme": "Aggressive communication, competitive business, sharp debates, military strategy",
+      "effects": {
+        "general": "Mercury's intellect meets Mars's aggression. Communication becomes sharp, competitive, sometimes aggressive. Excellent for competitive fields. Strategic thinking for competition.",
+        "intellect": "Strategic thinking, competitive analysis",
+        "communication": "Sharp, direct, sometimes biting communication",
+        "aggression": "Combative approach to business and debates"
+      },
+      "health": {
+        "general": "Good energy and vitality. Nervous system may become irritated.",
+        "risks": "Headaches, migraine, nervous stress, accidents from hasty action",
+        "benefits": "Energy for action and execution"
+      },
+      "career": {
+        "favorable": "Sales, marketing, competitive business, strategy, military/police positions, debate, aggressive negotiations",
+        "opportunities": "Competitive wins, successful aggressive expansion"
+      },
+      "relationships": {
+        "general": "Communication becomes argumentative. Conflicts possible.",
+        "romantic": "Arguments over communication; passion increases",
+        "conflicts": "Disputes in relationships from sharp words"
+      },
+      "timing_events": {
+        "early_phase": "Competitive drive awakens",
+        "peak_phase": "Competitive victories, aggressive business expansion, strategic wins",
+        "late_phase": "Consolidation of competitive gains; moderation needed"
+      }
+    },
+    "mercury_rahu": {
+      "antardasha_lord": "mercury",
+      "pratyantardasha_lord": "rahu",
+      "sequence": "1.7",
+      "duration_days": 732,
+      "duration_months": 24.1,
+      "theme": "Tech obsession, foreign business, unconventional thinking, over-communication",
+      "effects": {
+        "general": "Mercury's intellect meets Rahu's obsession and foreign inclination. Fascination with technology and unconventional ideas. Success in tech and international business. Communication becomes excessive and obsessive.",
+        "intellect": "Unconventional thinking, tech fascination, innovation",
+        "foreign": "International business success, foreign connections",
+        "obsession": "Obsessive thinking about ideas, overwork possible"
+      },
+      "health": {
+        "general": "Nervous system activation. Sleep disturbances possible.",
+        "risks": "Anxiety, obsessive thinking, insomnia, tech addiction",
+        "remedies": "Grounding practices, limit screen time"
+      },
+      "career": {
+        "favorable": "Technology, software, IT, international business, innovation, unconventional ventures, tech startups",
+        "opportunities": "Success in tech and international expansion, innovation recognition"
+      },
+      "relationships": {
+        "general": "Excessive communication; partner may feel overwhelmed",
+        "social": "Foreign friendships increase"
+      },
+      "timing_events": {
+        "early_phase": "Interest in tech and unconventional ideas emerges",
+        "peak_phase": "Tech success, international business breakthroughs, innovation recognition",
+        "late_phase": "Consolidation of tech ventures; potential obsession burnout"
+      }
+    },
+    "mercury_jupiter": {
+      "antardasha_lord": "mercury",
+      "pratyantardasha_lord": "jupiter",
+      "sequence": "1.8",
+      "duration_days": 651,
+      "duration_months": 21.4,
+      "theme": "Wisdom and intellect, teaching, publishing, spiritual commerce",
+      "effects": {
+        "general": "Mercury's intellect meets Jupiter's wisdom. Excellent for teaching, publishing, and spiritual knowledge. Communication becomes wise and inspiring. Success in higher learning and knowledge commerce.",
+        "intellect": "Wise, philosophical thinking",
+        "wisdom": "Deep understanding, spiritual knowledge",
+        "teaching": "Excellent teaching abilities, inspiring communication"
+      },
+      "health": {
+        "general": "Good health. Liver and fat metabolism may need attention.",
+        "benefits": "Overall wellness, mental clarity"
+      },
+      "career": {
+        "favorable": "Teaching, publishing, training, consulting, writing, education, spiritual counseling, knowledge-based business",
+        "opportunities": "Publishing success, teaching recognition, educational advancement"
+      },
+      "relationships": {
+        "general": "Communication becomes wise and inspiring",
+        "romantic": "Partner appreciates wisdom and guidance"
+      },
+      "timing_events": {
+        "early_phase": "Wisdom and learning desire increases",
+        "peak_phase": "Publishing success, teaching recognition, wisdom appreciation, educational advancement",
+        "late_phase": "Legacy of wisdom and knowledge"
+      }
+    },
+    "mercury_saturn": {
+      "antardasha_lord": "mercury",
+      "pratyantardasha_lord": "saturn",
+      "sequence": "1.9",
+      "duration_days": 752,
+      "duration_months": 24.7,
+      "theme": "Serious study, deep concentration, delays in communication, structured learning",
+      "effects": {
+        "general": "Mercury's intellect meets Saturn's discipline. Excellent for serious study and concentrated work. Communication becomes serious and formal. Delays and obstacles in communication possible.",
+        "intellect": "Serious, focused thinking. Deep concentration.",
+        "discipline": "Disciplined approach to learning and work",
+        "delays": "Communication delays, slow progress possible"
+      },
+      "health": {
+        "general": "Nervous system may become strained from concentration.",
+        "risks": "Headaches, fatigue from overwork, depression from delays",
+        "benefits": "Strength from discipline-based practices"
+      },
+      "career": {
+        "favorable": "Research, serious study, law, accounting, structured work, engineering, hard sciences",
+        "challenges": "Delays in projects, slow progress, difficult negotiations"
+      },
+      "relationships": {
+        "general": "Communication becomes formal and reserved",
+        "romantic": "Less spontaneity; serious discussions about future"
+      },
+      "timing_events": {
+        "early_phase": "Focus intensifies; serious work begins",
+        "peak_phase": "Deep learning achieved, structured success, delayed projects finally move forward",
+        "late_phase": "Long-term gains from disciplined work"
+      }
+    },
+    "ketu_mercury": {
+      "antardasha_lord": "ketu",
+      "pratyantardasha_lord": "mercury",
+      "sequence": "2.1",
+      "duration_days": 689,
+      "duration_months": 22.6,
+      "theme": "Detached intellect, analytical spirituality, philosophical communication",
+      "effects": {
+        "general": "Ketu's detachment meets Mercury's intellect. Sharp analytical mind focused on spiritual matters. Communication becomes contemplative. Excellent for philosophical and spiritual analysis.",
+        "intellect": "Analytical but detached thinking",
+        "spirituality": "Intellectual approach to spirituality",
+        "analysis": "Deep analysis of abstract concepts"
+      },
+      "health": {
+        "general": "Good mental health with detachment from physical concerns.",
+        "risks": "Dissociation, scattered thinking affecting daily tasks"
+      },
+      "career": {
+        "favorable": "Philosophy, spiritual writing, analytical research, psychology, occult studies",
+        "opportunities": "Publishing of philosophical works, recognition in abstract fields"
+      },
+      "relationships": {
+        "general": "Intellectual but emotionally distant communication",
+        "romantic": "Partner may feel emotionally neglected despite intellectual connection"
+      },
+      "timing_events": {
+        "early_phase": "Intellectual interest turns philosophical",
+        "peak_phase": "Philosophical breakthroughs, spiritual insights, abstract understanding",
+        "late_phase": "Integration of philosophical understanding"
+      }
+    },
+    "ketu_ketu": {
+      "antardasha_lord": "ketu",
+      "pratyantardasha_lord": "ketu",
+      "sequence": "2.2",
+      "duration_days": 459,
+      "duration_months": 15.1,
+      "theme": "Peak detachment, loss of worldly interest, spiritual liberation energy",
+      "effects": {
+        "general": "Peak detachment from material world. Strong spiritual liberation energy. Loss of interest in material pursuits. May experience unusual insights and spiritual experiences.",
+        "detachment": "Complete detachment from materialism",
+        "spirituality": "Strong spiritual inclination",
+        "loss": "Loss of interest in worldly pursuits, possible financial loss"
+      },
+      "health": {
+        "general": "Dissociation from body; health issues may be ignored.",
+        "risks": "Neglect of physical health, isolation, severe dissociation",
+        "benefits": "Spiritual healing through detachment"
+      },
+      "career": {
+        "challenges": "Loss of focus on career, possible sudden job loss or voluntary departure",
+        "opportunities": "Spiritual pursuits and renunciation possible"
+      },
+      "relationships": {
+        "general": "Withdrawal from relationships. Detachment from loved ones.",
+        "romantic": "Relationships may end or become very distant"
+      },
+      "timing_events": {
+        "early_phase": "Interest in worldly life diminishes",
+        "peak_phase": "Spiritual liberation energy peaks, possible spiritual experiences",
+        "late_phase": "Acceptance of detachment from material world"
+      }
+    },
+    "ketu_venus": {
+      "antardasha_lord": "ketu",
+      "pratyantardasha_lord": "venus",
+      "sequence": "2.3",
+      "duration_days": 614,
+      "duration_months": 20.2,
+      "theme": "Non-attachment to pleasures, artistic detachment, loss in relationships",
+      "effects": {
+        "general": "Ketu's detachment meets Venus's pleasures. Disinterest in material comforts and pleasures. May experience loss in relationships or possessions. Artistic expression becomes abstract.",
+        "attachment": "Detachment from pleasures and desires",
+        "relationships": "Difficulty in maintaining close relationships",
+        "loss": "Loss of wealth, relationships, or possessions possible"
+      },
+      "health": {
+        "general": "Detachment from physical health concerns.",
+        "risks": "Neglect of physical appearance, health issues from ignoring symptoms",
+        "benefits": "Release from attachment to body image"
+      },
+      "career": {
+        "favorable": "Abstract art, spiritual teaching, renunciation-based work",
+        "challenges": "Loss of interest in luxury or beauty-based careers"
+      },
+      "relationships": {
+        "romantic": "Romantic detachment; relationships may end",
+        "friendships": "Loss of friendships or friendship changes"
+      },
+      "timing_events": {
+        "early_phase": "Attraction to pleasures decreases",
+        "peak_phase": "Loss in relationships or possessions, acceptance of detachment",
+        "late_phase": "Acceptance of non-attachment to worldly pleasures"
+      }
+    },
+    "ketu_sun": {
+      "antardasha_lord": "ketu",
+      "pratyantardasha_lord": "sun",
+      "sequence": "2.4",
+      "duration_days": 489,
+      "duration_months": 16.1,
+      "theme": "Loss of authority, spiritual dissolution of ego, life direction questioning",
+      "effects": {
+        "general": "Ketu's detachment meets Sun's authority. Loss of authority and status possible. Questioning of identity and life purpose. Ego dissolution for spiritual growth.",
+        "ego": "Ego dissolution, loss of identity",
+        "authority": "Loss of power and authority",
+        "purpose": "Questioning of life direction and purpose"
+      },
+      "health": {
+        "general": "Loss of vitality possible. Heart and head may experience issues.",
+        "risks": "Weakness, loss of confidence, health deterioration",
+        "benefits": "Spiritual growth through ego loss"
+      },
+      "career": {
+        "challenges": "Loss of position, authority loss, career reversals",
+        "opportunities": "Spiritual career directions may emerge"
+      },
+      "relationships": {
+        "general": "Loss of authority in relationships",
+        "romantic": "Partner may lose respect; relationships may fail"
+      },
+      "timing_events": {
+        "early_phase": "Confidence and authority questioned",
+        "peak_phase": "Possible loss of position, ego dissolution, identity crisis",
+        "late_phase": "Emergence of new identity after ego loss"
+      }
+    },
+    "ketu_moon": {
+      "antardasha_lord": "ketu",
+      "pratyantardasha_lord": "moon",
+      "sequence": "2.5",
+      "duration_days": 590,
+      "duration_months": 19.4,
+      "theme": "Emotional detachment, loss of comfort, mental dissociation",
+      "effects": {
+        "general": "Ketu's detachment meets Moon's emotions. Emotional detachment and numbness possible. Loss of comfort and security feeling. Mental dissociation and confusion.",
+        "emotions": "Emotional detachment, numbness",
+        "comfort": "Loss of sense of security and comfort",
+        "mind": "Mental confusion, dissociation"
+      },
+      "health": {
+        "general": "Mental health challenged. Sleep and digestion affected.",
+        "risks": "Depression, anxiety, sleep disorders, digestive issues",
+        "remedies": "Grounding practices, family support"
+      },
+      "career": {
+        "challenges": "Loss of interest in work, emotional burnout"
+      },
+      "relationships": {
+        "romantic": "Emotional distance; partner feels abandoned",
+        "family": "Distance from family members"
+      },
+      "timing_events": {
+        "early_phase": "Emotional numbness begins",
+        "peak_phase": "Loss of comfort, emotional detachment, possible family challenges",
+        "late_phase": "Acceptance of emotional detachment"
+      }
+    },
+    "ketu_mars": {
+      "antardasha_lord": "ketu",
+      "pratyantardasha_lord": "mars",
+      "sequence": "2.6",
+      "duration_days": 579,
+      "duration_months": 19.0,
+      "theme": "Loss of energy, spiritual warrior, accidents and injuries",
+      "effects": {
+        "general": "Ketu's detachment meets Mars's aggression. Loss of energy and motivation. Accidents and injuries possible due to carelessness. May manifest as spiritual warrior or loss of physical power.",
+        "energy": "Loss of energy and motivation",
+        "accidents": "Accident and injury risk increases",
+        "aggression": "Confused or misdirected aggressive energy"
+      },
+      "health": {
+        "general": "Energy loss, weakness possible.",
+        "risks": "Accidents, injuries, surgery, fever, inflammation, blood issues",
+        "remedies": "Caution, protective practices, adequate rest"
+      },
+      "career": {
+        "challenges": "Loss of drive and motivation affecting work"
+      },
+      "relationships": {
+        "general": "Conflicts from carelessness; arguments possible"
+      },
+      "timing_events": {
+        "early_phase": "Energy begins to wane",
+        "peak_phase": "Possible accidents or injuries, loss of drive, need for caution",
+        "late_phase": "Recovery of energy and motivation"
+      }
+    },
+    "ketu_rahu": {
+      "antardasha_lord": "ketu",
+      "pratyantardasha_lord": "rahu",
+      "sequence": "2.7",
+      "duration_days": 732,
+      "duration_months": 24.1,
+      "theme": "Detachment from desires, confusion and obsession, spiritual rebellion",
+      "effects": {
+        "general": "Ketu's detachment meets Rahu's obsession. Confusion between detachment and craving. May experience obsessive spiritual pursuits. Unconventional spiritual path.",
+        "confusion": "Confusion about desires and detachment",
+        "obsession": "Obsessive spiritual or unconventional pursuits",
+        "rebellion": "Spiritual rebellion against social norms"
+      },
+      "health": {
+        "general": "Confusion and anxiety affecting health.",
+        "risks": "Anxiety disorders, obsessive behaviors, confusion, substance issues"
+      },
+      "career": {
+        "favorable": "Unconventional spiritual pursuits",
+        "challenges": "Confusion in career direction"
+      },
+      "relationships": {
+        "general": "Unpredictable behavior confuses partners"
+      },
+      "timing_events": {
+        "early_phase": "Confusion about desires begins",
+        "peak_phase": "Possible obsessive spiritual practices, unconventional choices",
+        "late_phase": "Clarification of spiritual path"
+      }
+    },
+    "ketu_jupiter": {
+      "antardasha_lord": "ketu",
+      "pratyantardasha_lord": "jupiter",
+      "sequence": "2.8",
+      "duration_days": 651,
+      "duration_months": 21.4,
+      "theme": "Spiritual wisdom, renunciation, loss of expansion, contemplative growth",
+      "effects": {
+        "general": "Ketu's detachment meets Jupiter's wisdom. Deep spiritual wisdom emerges. Loss of material expansion but spiritual growth. Contemplative philosophy and renunciation.",
+        "wisdom": "Deep spiritual wisdom",
+        "renunciation": "Inclination toward renunciation",
+        "growth": "Spiritual growth through loss of material expansion"
+      },
+      "health": {
+        "general": "Good health with spiritual practices.",
+        "benefits": "Spiritual healing, mental clarity"
+      },
+      "career": {
+        "favorable": "Spiritual teaching, renunciation, contemplative pursuits, philosophy",
+        "challenges": "Loss of material expansion and wealth"
+      },
+      "relationships": {
+        "general": "Spiritual understanding deepens; relationships transform spiritually"
+      },
+      "timing_events": {
+        "early_phase": "Spiritual wisdom begins to emerge",
+        "peak_phase": "Deep spiritual understanding, possible renunciation, wisdom recognition",
+        "late_phase": "Integration of spiritual wisdom in life"
+      }
+    },
+    "ketu_saturn": {
+      "antardasha_lord": "ketu",
+      "pratyantardasha_lord": "saturn",
+      "sequence": "2.9",
+      "duration_days": 752,
+      "duration_months": 24.7,
+      "theme": "Detached discipline, spiritual austerity, long-term loss, karmic lessons",
+      "effects": {
+        "general": "Ketu's detachment meets Saturn's discipline. Spiritual austerity and ascetic practices. Long-term losses and hardship. Karmic lessons through discipline and detachment.",
+        "austerity": "Inclination toward spiritual austerity",
+        "discipline": "Disciplined detachment practice",
+        "loss": "Long-term losses and hardship"
+      },
+      "health": {
+        "general": "Weakness from austerity practices.",
+        "risks": "Malnutrition from asceticism, depression from hardship, chronic weakness",
+        "remedies": "Balance austerity with nutrition"
+      },
+      "career": {
+        "favorable": "Monasticism, ascetic practices, serious spiritual work",
+        "challenges": "Long-term career difficulties and losses"
+      },
+      "relationships": {
+        "general": "Severe detachment from relationships",
+        "romantic": "Renunciation of relationships possible"
+      },
+      "timing_events": {
+        "early_phase": "Austerity inclination grows",
+        "peak_phase": "Significant losses, karmic lessons, possible renunciation",
+        "late_phase": "Acceptance of karmic lessons and spiritual growth"
+      }
+    },
+    "venus_mercury": {
+      "antardasha_lord": "venus",
+      "pratyantardasha_lord": "mercury",
+      "sequence": "3.1",
+      "duration_days": 689,
+      "duration_months": 22.6,
+      "theme": "Beautiful communication, romantic writing, art commerce, charm in business",
+      "effects": {
+        "general": "Venus's beauty meets Mercury's intellect. Excellent for artistic communication and writing. Charm attracts business success. Witty, pleasant communication. Beautiful ideas expressed clearly.",
+        "communication": "Beautiful, charming, artistic communication",
+        "writing": "Excellent writing with artistic flair",
+        "charm": "Charm facilitates business success",
+        "beauty": "Eye for beauty in ideas and presentation"
+      },
+      "health": {
+        "general": "Good health. Throat and voice quality improve.",
+        "benefits": "Skin improves, voice becomes melodious"
+      },
+      "career": {
+        "favorable": "Writing, poetry, art, copywriting, advertising, design communication, public relations",
+        "opportunities": "Publishing of artistic works, successful advertising campaigns, creative recognition"
+      },
+      "relationships": {
+        "romantic": "Romantic communication peaks. Words enchant partners.",
+        "friendships": "Attraction of friends through charm"
+      },
+      "timing_events": {
+        "early_phase": "Communication becomes more charming",
+        "peak_phase": "Romantic and artistic success, publishing breakthroughs, charm-based wins",
+        "late_phase": "Consolidation of relationships through beautiful communication"
+      }
+    },
+    "venus_ketu": {
+      "antardasha_lord": "venus",
+      "pratyantardasha_lord": "ketu",
+      "sequence": "3.2",
+      "duration_days": 459,
+      "duration_months": 15.1,
+      "theme": "Loss of attachment to beauty, detached love, artistic dissociation",
+      "effects": {
+        "general": "Venus's attachment meets Ketu's detachment. Loss of interest in beauty and pleasures. Detached approach to relationships. Artistic expression becomes abstract and disconnected.",
+        "attachment": "Detachment from beauty and luxuries",
+        "relationships": "Detachment from romantic relationships",
+        "loss": "Loss in wealth or relationships possible"
+      },
+      "health": {
+        "general": "Indifference to physical health.",
+        "risks": "Neglect of physical appearance and health"
+      },
+      "career": {
+        "favorable": "Abstract art, spiritual aesthetics",
+        "challenges": "Loss of interest in beauty-based work"
+      },
+      "relationships": {
+        "romantic": "Romantic detachment; relationships may end",
+        "loss": "Loss of romantic relationships or financial resources"
+      },
+      "timing_events": {
+        "early_phase": "Interest in pleasures decreases",
+        "peak_phase": "Loss in relationships or wealth, acceptance of detachment from beauty",
+        "late_phase": "New appreciation for non-material aesthetics"
+      }
+    },
+    "venus_venus": {
+      "antardasha_lord": "venus",
+      "pratyantardasha_lord": "venus",
+      "sequence": "3.3",
+      "duration_days": 614,
+      "duration_months": 20.2,
+      "theme": "Peak beauty, romance, luxury, artistic mastery, sensual pleasure",
+      "effects": {
+        "general": "Venus at maximum expression. Beauty and charm at peak. Romantic happiness. Luxury and pleasures manifest. Artistic talents flourish. Sensual and aesthetic experiences.",
+        "beauty": "Peak attractiveness and charm",
+        "romance": "Peak romantic happiness and attraction",
+        "luxury": "Access to luxury and pleasures",
+        "art": "Artistic talents at their peak"
+      },
+      "health": {
+        "general": "Excellent health and vitality.",
+        "benefits": "Skin radiant, voice melodious, overall beauty and attractiveness",
+        "risks": "Overindulgence in pleasures, excessive spending"
+      },
+      "career": {
+        "favorable": "All beauty, art, and luxury fields flourish",
+        "opportunities": "Major success in art, beauty, luxury, entertainment, relationships"
+      },
+      "relationships": {
+        "romantic": "Peak romantic happiness. Multiple romantic interests possible. Deepening of primary relationship.",
+        "friendships": "Friendships flourish, social circle expands pleasantly"
+      },
+      "timing_events": {
+        "early_phase": "Attraction and charm increase visibly",
+        "peak_phase": "Peak romance, beauty recognition, artistic success, luxury acquisition",
+        "late_phase": "Consolidation of romantic and artistic achievements"
+      }
+    },
+    "venus_sun": {
+      "antardasha_lord": "venus",
+      "pratyantardasha_lord": "sun",
+      "sequence": "3.4",
+      "duration_days": 489,
+      "duration_months": 16.1,
+      "theme": "Attractive authority, charisma, successful romance with powerful people",
+      "effects": {
+        "general": "Venus's charm meets Sun's authority. Attractive power and charisma. Success through beautiful authority. Romantic attraction to powerful people. Leadership with charm.",
+        "charisma": "Magnetic personal charisma",
+        "authority": "Authority combined with charm",
+        "romance": "Attraction to and from powerful/wealthy people",
+        "leadership": "Leadership with aesthetic appreciation"
+      },
+      "health": {
+        "general": "Excellent health and vitality.",
+        "benefits": "Overall vigor and attractiveness"
+      },
+      "career": {
+        "favorable": "Leadership in beauty/art fields, business with charm, entertainment leadership",
+        "opportunities": "Leadership recognition, successful artistic direction, influential positions"
+      },
+      "relationships": {
+        "romantic": "Strong romantic attraction, often to powerful or wealthy people",
+        "social": "Attraction to high-status social circles"
+      },
+      "timing_events": {
+        "early_phase": "Charisma and attractiveness increase",
+        "peak_phase": "Romantic success with powerful partners, leadership in luxury fields, public recognition",
+        "late_phase": "Consolidation of prestigious relationships and positions"
+      }
+    },
+    "venus_moon": {
+      "antardasha_lord": "venus",
+      "pratyantardasha_lord": "moon",
+      "sequence": "3.5",
+      "duration_days": 590,
+      "duration_months": 19.4,
+      "theme": "Emotional love, nurturing beauty, domestic happiness, maternal affection",
+      "effects": {
+        "general": "Venus's beauty meets Moon's emotions. Deep emotional love and nurturing. Domestic happiness and family comfort. Emotional attachment to beauty and pleasures. Maternal love.",
+        "emotions": "Deep emotional love",
+        "nurturing": "Nurturing and caring relationships",
+        "domestic": "Domestic happiness and family comfort",
+        "love": "Unconditional, emotional love"
+      },
+      "health": {
+        "general": "Good health. Stomach and digestion may improve with emotional comfort.",
+        "benefits": "Emotional health excellent, comfort-based healing"
+      },
+      "career": {
+        "favorable": "Caregiving roles, nurturing arts, hospitality, childcare, family business",
+        "opportunities": "Success in caring and nurturing fields"
+      },
+      "relationships": {
+        "romantic": "Deep emotional bonding with partners. Unconditional love.",
+        "family": "Strong family bonds and maternal love",
+        "children": "Excellent relationships with children"
+      },
+      "timing_events": {
+        "early_phase": "Emotional warmth increases",
+        "peak_phase": "Deep love and family bonding, domestic happiness, maternal joy",
+        "late_phase": "Lasting emotional connections and family happiness"
+      }
+    },
+    "venus_mars": {
+      "antardasha_lord": "venus",
+      "pratyantardasha_lord": "mars",
+      "sequence": "3.6",
+      "duration_days": 579,
+      "duration_months": 19.0,
+      "theme": "Passionate love, physical attraction, competitive romance, aggressive pleasure",
+      "effects": {
+        "general": "Venus's pleasure meets Mars's passion. Intense passionate romance. Physical attraction and sensuality increase. Competition in relationships. Aggressive pursuit of desires.",
+        "passion": "Intense passion and desire",
+        "physical": "Strong physical attraction and sexuality",
+        "competition": "Competitive romance, multiple romantic interests",
+        "aggression": "Passionate, sometimes aggressive pursuit of pleasures"
+      },
+      "health": {
+        "general": "Good energy and vitality. Reproductive health may be stressed.",
+        "risks": "Overindulgence in physical pleasures, reproductive issues, fever",
+        "benefits": "Physical energy and vitality"
+      },
+      "career": {
+        "favorable": "Luxury sales, passionate pursuits, adventure-based beauty fields, sports, adventure tourism",
+        "opportunities": "Success through passionate energy and risk-taking"
+      },
+      "relationships": {
+        "romantic": "Intense passionate romance. Multiple romantic interests. High physical attraction.",
+        "conflicts": "Passionate arguments and conflicts possible"
+      },
+      "timing_events": {
+        "early_phase": "Passion and desire intensify",
+        "peak_phase": "Intense romantic passion, physical pleasure peaks, competitive romance",
+        "late_phase": "Integration of passion; moderation needed to maintain relationships"
+      }
+    },
+    "venus_rahu": {
+      "antardasha_lord": "venus",
+      "pratyantardasha_lord": "rahu",
+      "sequence": "3.7",
+      "duration_days": 732,
+      "duration_months": 24.1,
+      "theme": "Obsessive desires, foreign romance, luxury obsession, unconventional beauty",
+      "effects": {
+        "general": "Venus's desire meets Rahu's obsession. Obsessive attachment to beauty and pleasures. Foreign romance and travel. Unconventional love interests. Insatiable desires.",
+        "obsession": "Obsessive desire for beauty and luxury",
+        "foreign": "Attraction to foreign lovers and travel",
+        "unconventional": "Unconventional beauty standards and choices",
+        "desires": "Insatiable and obsessive desires"
+      },
+      "health": {
+        "general": "Excess and indulgence affecting health.",
+        "risks": "Overindulgence, reproductive issues, STDs, obesity, diabetes from excess",
+        "remedies": "Moderation and self-control practices"
+      },
+      "career": {
+        "favorable": "International business in luxury, unconventional beauty ventures, foreign trade",
+        "challenges": "Obsession affecting work focus"
+      },
+      "relationships": {
+        "romantic": "Foreign romance possible. Obsessive love interests. Relationship complications from excess.",
+        "challenges": "Infidelity risk from obsessive desires"
+      },
+      "timing_events": {
+        "early_phase": "Interest in foreign romance and travel grows",
+        "peak_phase": "Obsessive desires peak, possible foreign romance, luxury obsession",
+        "late_phase": "Consequences of excess emerge; need for moderation"
+      }
+    },
+    "venus_jupiter": {
+      "antardasha_lord": "venus",
+      "pratyantardasha_lord": "jupiter",
+      "sequence": "3.8",
+      "duration_days": 651,
+      "duration_months": 21.4,
+      "theme": "Generous love, expansion of relationships, blessed wealth, philosophical beauty",
+      "effects": {
+        "general": "Venus's beauty meets Jupiter's expansion. Generous love and expansive relationships. Blessed wealth and abundance. Philosophical appreciation of beauty. Wisdom in romance.",
+        "generosity": "Generous love and gift-giving",
+        "expansion": "Expansion of social circle and relationships",
+        "wealth": "Blessed wealth and abundance",
+        "wisdom": "Philosophical understanding of love and beauty"
+      },
+      "health": {
+        "general": "Good health. Excess from pleasure may affect liver/weight.",
+        "benefits": "Healing through love and generosity"
+      },
+      "career": {
+        "favorable": "Wealth-building, luxury business, teaching in beauty/arts, generous ventures",
+        "opportunities": "Major financial success, recognition in luxury fields"
+      },
+      "relationships": {
+        "romantic": "Generous, expanding love relationships. Multiple loving connections.",
+        "friendships": "Expansive, generous friendships"
+      },
+      "timing_events": {
+        "early_phase": "Generosity and love expand",
+        "peak_phase": "Financial blessing, expansive relationships, generous love, wealth accumulation",
+        "late_phase": "Legacy of generous love and abundance"
+      }
+    },
+    "venus_saturn": {
+      "antardasha_lord": "venus",
+      "pratyantardasha_lord": "saturn",
+      "sequence": "3.9",
+      "duration_days": 752,
+      "duration_months": 24.7,
+      "theme": "Serious love, delayed romance, lasting relationships, karmic lovers",
+      "effects": {
+        "general": "Venus's pleasure meets Saturn's discipline. Serious, lasting love. Delayed romance. Karmic relationships. Love through responsibility and duty. Long-term commitment.",
+        "seriousness": "Serious, responsible approach to love",
+        "delay": "Delays in romantic relationships",
+        "karma": "Karmic romantic encounters",
+        "lasting": "Lasting, committed relationships"
+      },
+      "health": {
+        "general": "Health stable but slow to improve.",
+        "risks": "Reproductive issues, chronic conditions from stress, relationship-related depression"
+      },
+      "career": {
+        "favorable": "Serious business, long-term ventures, business partnerships",
+        "opportunities": "Long-term business success through partnership"
+      },
+      "relationships": {
+        "romantic": "Delays in romance. When love comes, it is serious and lasting. Karmic connections.",
+        "marriage": "Marriage after delays; lasting commitment"
+      },
+      "timing_events": {
+        "early_phase": "Serious approach to romance begins",
+        "peak_phase": "Delayed romance finally manifests or deepens, lasting commitment established",
+        "late_phase": "Long-term relationship stability and karmic resolution"
+      }
+    },
+    "sun_mercury": {
+      "antardasha_lord": "sun",
+      "pratyantardasha_lord": "mercury",
+      "sequence": "4.1",
+      "duration_days": 689,
+      "duration_months": 22.6,
+      "theme": "Authoritative intelligence, leadership in communication, powerful ideas",
+      "effects": {
+        "general": "Sun's authority meets Mercury's intelligence. Ideas carry power and influence. Leadership in intellectual fields. Commanding communication. Recognition for intellect and ideas.",
+        "intelligence": "Commanding intellectual presence",
+        "leadership": "Leadership in communication and ideas",
+        "authority": "Authority through intellectual contributions",
+        "recognition": "Public recognition for ideas and wisdom"
+      },
+      "health": {
+        "general": "Good vitality and energy.",
+        "benefits": "Overall vigor and mental clarity"
+      },
+      "career": {
+        "favorable": "Leadership in media, academia, science, government, management, intellectual authority",
+        "opportunities": "Leadership recognition, promotion to authority positions, intellectual acclaim"
+      },
+      "relationships": {
+        "general": "Authority respected; leadership appreciated",
+        "romantic": "Partners appreciate intellect and leadership"
+      },
+      "timing_events": {
+        "early_phase": "Authority in intellectual areas emerges",
+        "peak_phase": "Leadership in intellectual fields, public recognition, powerful communication",
+        "late_phase": "Consolidation of intellectual authority and legacy"
+      }
+    },
+    "sun_ketu": {
+      "antardasha_lord": "sun",
+      "pratyantardasha_lord": "ketu",
+      "sequence": "4.2",
+      "duration_days": 459,
+      "duration_months": 15.1,
+      "theme": "Loss of authority, ego dissolution, spiritual identity seeking, authority challenged",
+      "effects": {
+        "general": "Sun's authority meets Ketu's detachment. Loss of status and authority. Ego dissolution. Identity crisis. Questioning of power and purpose. Spiritual path emerges from loss.",
+        "authority": "Loss of authority and power",
+        "ego": "Ego dissolution and humbling experiences",
+        "identity": "Identity crisis and searching",
+        "spirituality": "Spiritual path may emerge from loss"
+      },
+      "health": {
+        "general": "Loss of vitality and weakness.",
+        "risks": "Heart issues, weakness, loss of confidence affecting health"
+      },
+      "career": {
+        "challenges": "Loss of position, authority loss, career reversals"
+      },
+      "relationships": {
+        "general": "Loss of respect and authority in relationships"
+      },
+      "timing_events": {
+        "early_phase": "Authority is questioned",
+        "peak_phase": "Possible loss of position and authority, ego dissolution, identity shift",
+        "late_phase": "New identity and purpose after ego loss"
+      }
+    },
+    "sun_venus": {
+      "antardasha_lord": "sun",
+      "pratyantardasha_lord": "venus",
+      "sequence": "4.3",
+      "duration_days": 614,
+      "duration_months": 20.2,
+      "theme": "Attractive authority, charismatic leadership, romantic success with powerful people",
+      "effects": {
+        "general": "Sun's authority meets Venus's beauty. Magnetic, attractive power. Charismatic leadership. Romantic success. Attraction to and from powerful/wealthy people. Status through beauty.",
+        "charisma": "Magnetic charisma and attractiveness",
+        "authority": "Attractive leadership position",
+        "romance": "Romantic success with high-status people",
+        "beauty": "Authority enhanced by beauty and charm"
+      },
+      "health": {
+        "general": "Excellent health and vitality.",
+        "benefits": "Overall attractiveness and vigor"
+      },
+      "career": {
+        "favorable": "Leadership in beauty/luxury fields, public-facing leadership, entertainment leadership",
+        "opportunities": "Leadership success with public appeal, prestigious positions"
+      },
+      "relationships": {
+        "romantic": "Strong romantic success, often with powerful or wealthy partners",
+        "social": "Access to prestigious social circles"
+      },
+      "timing_events": {
+        "early_phase": "Charisma and attractiveness increase",
+        "peak_phase": "Leadership and romantic success, prestigious relationships, public recognition",
+        "late_phase": "Consolidation of prestigious status and relationships"
+      }
+    },
+    "sun_sun": {
+      "antardasha_lord": "sun",
+      "pratyantardasha_lord": "sun",
+      "sequence": "4.4",
+      "duration_days": 489,
+      "duration_months": 16.1,
+      "theme": "Peak authority, leadership glory, recognition, powerful personality",
+      "effects": {
+        "general": "Sun at maximum power and expression. Peak authority and leadership. Public recognition and fame. Powerful personality and influence. Achievement of goals through willpower.",
+        "authority": "Peak authority and power",
+        "leadership": "Outstanding leadership and influence",
+        "recognition": "Major public recognition and reputation",
+        "power": "Powerful personality and willpower"
+      },
+      "health": {
+        "general": "Excellent vitality and energy.",
+        "benefits": "Overall vigor, heart health, confidence"
+      },
+      "career": {
+        "favorable": "Leadership positions in all fields, government, business, administration",
+        "opportunities": "Major promotions, leadership awards, significant achievements"
+      },
+      "relationships": {
+        "general": "Authority respected and appreciated",
+        "romantic": "Partners feel pride and respect"
+      },
+      "timing_events": {
+        "early_phase": "Power and influence grow noticeably",
+        "peak_phase": "Leadership glory, major recognition, significant achievements, power peak",
+        "late_phase": "Consolidation of authority and legacy"
+      }
+    },
+    "sun_moon": {
+      "antardasha_lord": "sun",
+      "pratyantardasha_lord": "moon",
+      "sequence": "4.5",
+      "duration_days": 590,
+      "duration_months": 19.4,
+      "theme": "Emotional leadership, nurturing authority, family prominence, emotional recognition",
+      "effects": {
+        "general": "Sun's authority meets Moon's emotions. Emotional and nurturing leadership. Family prominence and honor. Recognition through care and compassion. Popular and beloved leader.",
+        "leadership": "Nurturing, compassionate leadership",
+        "emotion": "Authority with emotional connection",
+        "family": "Family honor and prominence",
+        "popularity": "Beloved leader and public figure"
+      },
+      "health": {
+        "general": "Good health with emotional wellness.",
+        "benefits": "Emotional health and family support aiding overall wellbeing"
+      },
+      "career": {
+        "favorable": "Leadership in caring professions, family business, government service, teaching",
+        "opportunities": "Leadership recognized for compassion and care"
+      },
+      "relationships": {
+        "family": "Family honor increases, patriarch/matriarch role",
+        "romantic": "Emotional connection with partners deepens"
+      },
+      "timing_events": {
+        "early_phase": "Emotional authority and family prominence begin",
+        "peak_phase": "Family honor peaks, emotional leadership recognized, beloved status achieved",
+        "late_phase": "Legacy of nurturing leadership and family prominence"
+      }
+    },
+    "sun_mars": {
+      "antardasha_lord": "sun",
+      "pratyantardasha_lord": "mars",
+      "sequence": "4.6",
+      "duration_days": 579,
+      "duration_months": 19.0,
+      "theme": "Powerful warrior, aggressive leadership, competitive victories, military success",
+      "effects": {
+        "general": "Sun's authority meets Mars's aggression. Powerful warrior energy. Aggressive leadership and competition. Military or fighting success. Dominance and conquest.",
+        "power": "Powerful, dominant personality",
+        "aggression": "Assertive, aggressive leadership",
+        "victory": "Competitive victories and dominance",
+        "warrior": "Warrior energy and fighting spirit"
+      },
+      "health": {
+        "general": "Excellent energy and vigor.",
+        "risks": "Accidents, injuries, fever, inflammation from aggressive activities"
+      },
+      "career": {
+        "favorable": "Military, police, competitive business, sports, aggressive sales, conquest fields",
+        "opportunities": "Competitive victories, military advancement, aggressive business success"
+      },
+      "relationships": {
+        "general": "Dominant personality; conflicts from aggression"
+      },
+      "timing_events": {
+        "early_phase": "Aggressive power and dominance awaken",
+        "peak_phase": "Competitive victories, military success, powerful domination, aggressive leadership peaks",
+        "late_phase": "Consolidation of conquered positions; moderation needed"
+      }
+    },
+    "sun_rahu": {
+      "antardasha_lord": "sun",
+      "pratyantardasha_lord": "rahu",
+      "sequence": "4.7",
+      "duration_days": 732,
+      "duration_months": 24.1,
+      "theme": "Excessive power, foreign authority, obsessive ambition, power corruption",
+      "effects": {
+        "general": "Sun's authority meets Rahu's obsession. Excessive power and authority. Foreign connections and influence. Obsessive ambition. Risk of power corruption.",
+        "power": "Excessive power and influence",
+        "ambition": "Obsessive ambition and power-seeking",
+        "foreign": "International authority and recognition",
+        "excess": "Excess and immoderation in power use"
+      },
+      "health": {
+        "general": "High energy but risk of stress-related issues.",
+        "risks": "Stress, heart issues from excessive ambition, fever, inflammation"
+      },
+      "career": {
+        "favorable": "International business, foreign authority, multinational leadership, expansion",
+        "challenges": "Obsessive power-seeking affecting judgment"
+      },
+      "relationships": {
+        "general": "Excessive authority affecting relationships"
+      },
+      "timing_events": {
+        "early_phase": "Ambition and power-seeking increase",
+        "peak_phase": "Peak power and international authority, obsessive ambition, power excess",
+        "late_phase": "Consequences of excess power emerge"
+      }
+    },
+    "sun_jupiter": {
+      "antardasha_lord": "sun",
+      "pratyantardasha_lord": "jupiter",
+      "sequence": "4.8",
+      "duration_days": 651,
+      "duration_months": 21.4,
+      "theme": "Benevolent authority, wisdom leadership, blessed power, expansion of influence",
+      "effects": {
+        "general": "Sun's authority meets Jupiter's wisdom. Benevolent, wise leadership. Blessed authority and expansion. Philanthropic power. Leadership recognized for wisdom and goodness.",
+        "authority": "Wise, benevolent authority",
+        "wisdom": "Wisdom-based leadership",
+        "expansion": "Expansion of influence and power",
+        "benevolence": "Philanthropic and generous leadership"
+      },
+      "health": {
+        "general": "Excellent health and vitality.",
+        "benefits": "Overall wellness and protective energy"
+      },
+      "career": {
+        "favorable": "Leadership in education, government, spiritual authority, business expansion, mentoring",
+        "opportunities": "Major expansion, leadership recognition, philanthropic success"
+      },
+      "relationships": {
+        "general": "Authority appreciated for wisdom and goodness"
+      },
+      "timing_events": {
+        "early_phase": "Wise authority begins to manifest",
+        "peak_phase": "Blessed power and expanded influence, wisdom recognition, philanthropic success",
+        "late_phase": "Legacy of wise and benevolent leadership"
+      }
+    },
+    "sun_saturn": {
+      "antardasha_lord": "sun",
+      "pratyantardasha_lord": "saturn",
+      "sequence": "4.9",
+      "duration_days": 752,
+      "duration_months": 24.7,
+      "theme": "Serious authority, responsible leadership, structured power, karmic obligations",
+      "effects": {
+        "general": "Sun's authority meets Saturn's discipline. Serious, responsible authority. Structured leadership. Karmic duties and obligations. Long-term sustainable power.",
+        "authority": "Serious, responsible authority",
+        "discipline": "Disciplined, structured leadership",
+        "karma": "Karmic duties and obligations",
+        "lasting": "Long-term, sustainable power"
+      },
+      "health": {
+        "general": "Good health maintained through discipline.",
+        "risks": "Stress from responsibility, joint problems, slow recovery"
+      },
+      "career": {
+        "favorable": "Government service, serious administration, law, engineering, large corporations, long-term projects",
+        "opportunities": "Serious leadership recognition, long-term authority positions"
+      },
+      "relationships": {
+        "general": "Responsible leadership in relationships"
+      },
+      "timing_events": {
+        "early_phase": "Serious responsibility and authority begin",
+        "peak_phase": "Serious leadership established, karmic duties fulfilled, long-term authority recognized",
+        "late_phase": "Lasting legacy of responsible leadership"
+      }
+    },
+    "moon_mercury": {
+      "antardasha_lord": "moon",
+      "pratyantardasha_lord": "mercury",
+      "sequence": "5.1",
+      "duration_days": 689,
+      "duration_months": 22.6,
+      "theme": "Emotional communication, empathetic expression, intuitive writing, caring intellect",
+      "effects": {
+        "general": "Moon's emotions meet Mercury's intellect. Communication becomes emotionally resonant and intuitive. Empathetic expression of ideas. Excellent for psychology, counseling communication.",
+        "communication": "Emotionally resonant, intuitive communication",
+        "intellect": "Empathetic, caring intellect",
+        "intuition": "Intuitive understanding and expression",
+        "caring": "Caring approach to knowledge sharing"
+      },
+      "health": {
+        "general": "Good mental health. Stomach sensitive to emotions.",
+        "benefits": "Emotional healing through communication"
+      },
+      "career": {
+        "favorable": "Psychology, counseling, empathetic writing, teaching with compassion, social work",
+        "opportunities": "Success in caring professions, published emotional work"
+      },
+      "relationships": {
+        "romantic": "Emotional connection through communication deepens",
+        "family": "Better family communication and understanding"
+      },
+      "timing_events": {
+        "early_phase": "Emotional communication improves",
+        "peak_phase": "Empathetic success, touching writing, deep emotional understanding, counseling success",
+        "late_phase": "Integration of emotional intelligence in communication"
+      }
+    },
+    "moon_ketu": {
+      "antardasha_lord": "moon",
+      "pratyantardasha_lord": "ketu",
+      "sequence": "5.2",
+      "duration_days": 459,
+      "duration_months": 15.1,
+      "theme": "Emotional detachment, loss of comfort, mental confusion, spiritual surrender",
+      "effects": {
+        "general": "Moon's emotions meet Ketu's detachment. Emotional numbness and detachment. Loss of sense of security and comfort. Mental confusion possible.",
+        "emotions": "Emotional detachment and numbness",
+        "comfort": "Loss of comfort and security feeling",
+        "mind": "Mental confusion and dissociation",
+        "surrender": "Spiritual surrender through emotional loss"
+      },
+      "health": {
+        "general": "Mental health challenged.",
+        "risks": "Depression, anxiety, insomnia, emotional imbalance"
+      },
+      "career": {
+        "challenges": "Loss of emotional interest in work"
+      },
+      "relationships": {
+        "romantic": "Emotional distance from partners",
+        "family": "Distance from family members"
+      },
+      "timing_events": {
+        "early_phase": "Emotional numbness begins",
+        "peak_phase": "Loss of comfort, emotional detachment, possible mental health challenges",
+        "late_phase": "Acceptance of emotional detachment"
+      }
+    },
+    "moon_venus": {
+      "antardasha_lord": "moon",
+      "pratyantardasha_lord": "venus",
+      "sequence": "5.3",
+      "duration_days": 614,
+      "duration_months": 20.2,
+      "theme": "Emotional love, nurturing beauty, domestic happiness, maternal affection",
+      "effects": {
+        "general": "Moon and Venus together amplify love and nurturing. Deep emotional love. Domestic happiness. Family bonding. Maternal love and care. Beautiful emotional expressions.",
+        "love": "Deep, nurturing emotional love",
+        "domestic": "Peak domestic happiness",
+        "beauty": "Beauty in emotional expression",
+        "nurturing": "Nurturing and caring relationships"
+      },
+      "health": {
+        "general": "Excellent emotional health.",
+        "benefits": "Emotional healing, comfort-based wellness"
+      },
+      "career": {
+        "favorable": "Caregiving, family business, hospitality, childcare, nurturing arts",
+        "opportunities": "Success in caring and nurturing professions"
+      },
+      "relationships": {
+        "romantic": "Deep emotional and physical love",
+        "family": "Strong family bonds and maternal joy"
+      },
+      "timing_events": {
+        "early_phase": "Emotional warmth increases",
+        "peak_phase": "Deep love and family bonding, domestic happiness, maternal joy peaks",
+        "late_phase": "Lasting emotional connections"
+      }
+    },
+    "moon_sun": {
+      "antardasha_lord": "moon",
+      "pratyantardasha_lord": "sun",
+      "sequence": "5.4",
+      "duration_days": 489,
+      "duration_months": 16.1,
+      "theme": "Emotional authority, nurturing leadership, family prominence, beloved leader",
+      "effects": {
+        "general": "Moon's emotions meet Sun's authority. Emotional and nurturing leadership. Family prominence. Popular and beloved leader. Authority through care.",
+        "leadership": "Nurturing, caring leadership",
+        "emotion": "Authority with emotional warmth",
+        "family": "Family prominence and honor",
+        "popularity": "Beloved and popular leader"
+      },
+      "health": {
+        "general": "Good health with emotional wellness.",
+        "benefits": "Emotional support aiding overall health"
+      },
+      "career": {
+        "favorable": "Leadership in caring fields, government service, family business, teaching",
+        "opportunities": "Leadership recognized for compassion"
+      },
+      "relationships": {
+        "family": "Family honor and patriarch/matriarch role"
+      },
+      "timing_events": {
+        "early_phase": "Family prominence and emotional authority begin",
+        "peak_phase": "Family honor, beloved leadership, emotional authority recognized",
+        "late_phase": "Legacy of nurturing leadership"
+      }
+    },
+    "moon_moon": {
+      "antardasha_lord": "moon",
+      "pratyantardasha_lord": "moon",
+      "sequence": "5.5",
+      "duration_days": 590,
+      "duration_months": 19.4,
+      "theme": "Peak emotional connection, deep nurturing, family harmony, intuitive peak",
+      "effects": {
+        "general": "Moon at maximum expression. Peak emotional sensitivity and intuition. Deep nurturing and care. Family harmony. Emotional bonds strengthen. Intuitive understanding peaks.",
+        "emotions": "Peak emotional sensitivity",
+        "intuition": "Intuitive understanding at peak",
+        "nurturing": "Deep nurturing and care",
+        "family": "Peak family harmony and bonding"
+      },
+      "health": {
+        "general": "Good emotional health.",
+        "risks": "Mood swings, emotional reactivity affecting physical health"
+      },
+      "career": {
+        "favorable": "Nurturing professions, psychology, family business, counseling, caregiving",
+        "opportunities": "Success in emotional and caring fields"
+      },
+      "relationships": {
+        "romantic": "Peak emotional bonding with partners",
+        "family": "Excellent family relationships and bonding"
+      },
+      "timing_events": {
+        "early_phase": "Emotional sensitivity and intuition increase",
+        "peak_phase": "Peak family harmony, intuitive success, deep emotional connections, nurturing peaks",
+        "late_phase": "Consolidation of emotional bonds"
+      }
+    },
+    "moon_mars": {
+      "antardasha_lord": "moon",
+      "pratyantardasha_lord": "mars",
+      "sequence": "5.6",
+      "duration_days": 579,
+      "duration_months": 19.0,
+      "theme": "Passionate emotions, aggressive nurturing, emotional conflict, protective aggression",
+      "effects": {
+        "general": "Moon's emotions meet Mars's aggression. Passionate emotional expression. Emotional conflicts and arguments. Protective, aggressive nurturing. Emotional volatility.",
+        "passion": "Passionate emotional expression",
+        "aggression": "Aggressive emotional reactions",
+        "conflict": "Emotional conflict and arguments",
+        "protection": "Protective, aggressive caring"
+      },
+      "health": {
+        "general": "Good energy but emotional stress affects health.",
+        "risks": "Emotional stress, fever, inflammation, accidents from emotional reactivity"
+      },
+      "career": {
+        "favorable": "Protective professions, action-based nurturing, emotional intensity roles"
+      },
+      "relationships": {
+        "romantic": "Passionate but argumentative relationships",
+        "conflicts": "Emotional conflicts from aggressive reactions"
+      },
+      "timing_events": {
+        "early_phase": "Emotional passion intensifies",
+        "peak_phase": "Passionate emotions peak, emotional conflicts, protective aggression manifests",
+        "late_phase": "Integration of passion and care; moderation needed"
+      }
+    },
+    "moon_rahu": {
+      "antardasha_lord": "moon",
+      "pratyantardasha_lord": "rahu",
+      "sequence": "5.7",
+      "duration_days": 732,
+      "duration_months": 24.1,
+      "theme": "Obsessive emotions, foreign maternal influence, emotional obsession, comfort obsession",
+      "effects": {
+        "general": "Moon's emotions meet Rahu's obsession. Obsessive emotional attachments. Foreign maternal connections. Obsessive need for comfort and security. Emotional instability.",
+        "obsession": "Obsessive emotional attachments",
+        "foreign": "Foreign maternal or family connections",
+        "comfort": "Obsessive need for comfort",
+        "instability": "Emotional instability and mood swings"
+      },
+      "health": {
+        "general": "Emotional stress and obsession affecting health.",
+        "risks": "Anxiety, obsessive behaviors, emotional eating, sleep disorders"
+      },
+      "career": {
+        "favorable": "Foreign nurturing work, international family business"
+      },
+      "relationships": {
+        "romantic": "Obsessive emotional attachments; codependency risk"
+      },
+      "timing_events": {
+        "early_phase": "Obsessive emotional attachments begin",
+        "peak_phase": "Obsessive emotions peak, foreign maternal influence, emotional obsession",
+        "late_phase": "Consequences of obsession; need for detachment"
+      }
+    },
+    "moon_jupiter": {
+      "antardasha_lord": "moon",
+      "pratyantardasha_lord": "jupiter",
+      "sequence": "5.8",
+      "duration_days": 651,
+      "duration_months": 21.4,
+      "theme": "Generous love, emotional expansion, blessed family, spiritual nurturing",
+      "effects": {
+        "general": "Moon's emotions meet Jupiter's expansion. Generous, expansive love. Blessed family and relationships. Emotional abundance and joy. Spiritual nurturing.",
+        "love": "Generous, expansive love",
+        "expansion": "Expansion of family and relationships",
+        "blessing": "Blessed family and abundance",
+        "spirituality": "Spiritual nurturing and understanding"
+      },
+      "health": {
+        "general": "Excellent emotional health.",
+        "benefits": "Healing through love and family support"
+      },
+      "career": {
+        "favorable": "Family business expansion, teaching, spiritual nurturing, counseling",
+        "opportunities": "Success in family-based and nurturing businesses"
+      },
+      "relationships": {
+        "romantic": "Expansive, generous love relationships",
+        "family": "Blessed family expansion and happiness"
+      },
+      "timing_events": {
+        "early_phase": "Generous love and family expansion begin",
+        "peak_phase": "Family blessing and expansion, generous love peaks, spiritual nurturing",
+        "late_phase": "Legacy of generous family love"
+      }
+    },
+    "moon_saturn": {
+      "antardasha_lord": "moon",
+      "pratyantardasha_lord": "saturn",
+      "sequence": "5.9",
+      "duration_days": 752,
+      "duration_months": 24.7,
+      "theme": "Serious emotions, emotional maturity, karmic family lessons, emotional discipline",
+      "effects": {
+        "general": "Moon's emotions meet Saturn's discipline. Serious emotional maturity. Emotional discipline and control. Karmic family lessons. Long-term emotional stability.",
+        "emotions": "Serious, mature emotional approach",
+        "discipline": "Emotional discipline and control",
+        "karma": "Karmic family lessons",
+        "stability": "Long-term emotional stability"
+      },
+      "health": {
+        "general": "Emotional health stable with discipline.",
+        "risks": "Depression from responsibility, emotional suppression"
+      },
+      "career": {
+        "favorable": "Serious family business, long-term nurturing roles, disciplined counseling"
+      },
+      "relationships": {
+        "romantic": "Serious, committed long-term relationships"
+      },
+      "timing_events": {
+        "early_phase": "Emotional maturity and seriousness grow",
+        "peak_phase": "Karmic family lessons, emotional maturity recognized, disciplined love",
+        "late_phase": "Long-term emotional stability and lasting relationships"
+      }
+    },
+    "mars_mercury": {
+      "antardasha_lord": "mars",
+      "pratyantardasha_lord": "mercury",
+      "sequence": "6.1",
+      "duration_days": 689,
+      "duration_months": 22.6,
+      "theme": "Aggressive intellect, competitive communication, sharp debates, fighting strategy",
+      "effects": {
+        "general": "Mars's aggression meets Mercury's intellect. Sharp, aggressive thinking. Competitive communication and debates. Strategic intelligence. Argumentative style.",
+        "intellect": "Sharp, competitive thinking",
+        "communication": "Aggressive, argumentative communication",
+        "strategy": "Strategic, combative thinking",
+        "debate": "Excellent in competitive debates"
+      },
+      "health": {
+        "general": "Good energy but nervous tension possible.",
+        "risks": "Headaches, migraines, accidents from hasty decisions"
+      },
+      "career": {
+        "favorable": "Sales, marketing, competitive strategy, debate, litigation, aggressive business",
+        "opportunities": "Competitive business success, strategic wins"
+      },
+      "relationships": {
+        "general": "Arguments and competitive communication"
+      },
+      "timing_events": {
+        "early_phase": "Competitive intellect awakens",
+        "peak_phase": "Competitive communication success, strategic victories, debate wins",
+        "late_phase": "Consolidation of competitive gains"
+      }
+    },
+    "mars_ketu": {
+      "antardasha_lord": "mars",
+      "pratyantardasha_lord": "ketu",
+      "sequence": "6.2",
+      "duration_days": 459,
+      "duration_months": 15.1,
+      "theme": "Loss of energy, detached action, spiritual warrior, careless accidents",
+      "effects": {
+        "general": "Mars's aggression meets Ketu's detachment. Loss of energy and motivation. Detached action. Accidents and carelessness. Spiritual warrior energy.",
+        "energy": "Loss of energy and motivation",
+        "detachment": "Detached aggressive actions",
+        "accidents": "Accident and injury risk",
+        "spirituality": "Spiritual warrior inclination"
+      },
+      "health": {
+        "general": "Energy loss and potential injuries.",
+        "risks": "Accidents, injuries, surgery, fever, inflammation"
+      },
+      "career": {
+        "challenges": "Loss of drive and motivation"
+      },
+      "timing_events": {
+        "early_phase": "Energy and motivation begin to wane",
+        "peak_phase": "Possible accidents or injuries, loss of drive, caution needed",
+        "late_phase": "Recovery of energy and motivation"
+      }
+    },
+    "mars_venus": {
+      "antardasha_lord": "mars",
+      "pratyantardasha_lord": "venus",
+      "sequence": "6.3",
+      "duration_days": 614,
+      "duration_months": 20.2,
+      "theme": "Passionate love, aggressive attraction, sensual conflict, physical intensity",
+      "effects": {
+        "general": "Mars's passion meets Venus's pleasure. Intense passionate romance. Physical attraction peaks. Sensual and sexual intensity. Passionate conflicts possible.",
+        "passion": "Intense passion and desire",
+        "attraction": "Strong physical attraction",
+        "sensuality": "Peak sensuality and sexual desire",
+        "conflict": "Passionate conflicts in relationships"
+      },
+      "health": {
+        "general": "Good physical energy.",
+        "risks": "Reproductive issues, overindulgence, fever"
+      },
+      "career": {
+        "favorable": "Luxury sales, passionate ventures, adventure-based beauty"
+      },
+      "relationships": {
+        "romantic": "Intense passionate romance, peak physical attraction"
+      },
+      "timing_events": {
+        "early_phase": "Passion and attraction intensify",
+        "peak_phase": "Passionate romance peaks, physical attraction maximum, sensual pleasure peaks",
+        "late_phase": "Moderation needed to maintain relationship stability"
+      }
+    },
+    "mars_sun": {
+      "antardasha_lord": "mars",
+      "pratyantardasha_lord": "sun",
+      "sequence": "6.4",
+      "duration_days": 489,
+      "duration_months": 16.1,
+      "theme": "Powerful warrior, aggressive leadership, military success, dominance",
+      "effects": {
+        "general": "Mars's aggression meets Sun's authority. Powerful warrior energy. Dominant leadership. Military or competitive success. Conquest and dominance.",
+        "power": "Powerful, dominant authority",
+        "aggression": "Aggressive, assertive leadership",
+        "victory": "Competitive victories and conquest",
+        "warrior": "Warrior energy at peak"
+      },
+      "health": {
+        "general": "Excellent energy and vitality.",
+        "risks": "Accidents, injuries, fever, inflammation"
+      },
+      "career": {
+        "favorable": "Military, police, competitive business, sports, aggressive leadership",
+        "opportunities": "Competitive victories, military advancement, aggressive expansion"
+      },
+      "relationships": {
+        "general": "Dominant personality affects relationships"
+      },
+      "timing_events": {
+        "early_phase": "Aggressive power awakens",
+        "peak_phase": "Military/competitive success, powerful domination, warrior peak",
+        "late_phase": "Consolidation of conquered positions"
+      }
+    },
+    "mars_moon": {
+      "antardasha_lord": "mars",
+      "pratyantardasha_lord": "moon",
+      "sequence": "6.5",
+      "duration_days": 590,
+      "duration_months": 19.4,
+      "theme": "Passionate emotions, emotional conflicts, protective passion, emotional turbulence",
+      "effects": {
+        "general": "Mars's aggression meets Moon's emotions. Passionate emotional expression. Emotional turbulence and arguments. Protective aggression. Emotionally volatile behavior.",
+        "passion": "Passionate emotional expression",
+        "conflict": "Emotional conflicts and arguments",
+        "turbulence": "Emotional turbulence and volatility",
+        "protection": "Protective, aggressive caring"
+      },
+      "health": {
+        "general": "Energy good but emotional stress affects health.",
+        "risks": "Emotional stress, fever, accidents from emotional reactivity"
+      },
+      "career": {
+        "favorable": "Protective professions, emotional intensity roles"
+      },
+      "relationships": {
+        "romantic": "Passionate but argumentative relationships"
+      },
+      "timing_events": {
+        "early_phase": "Emotional passion intensifies",
+        "peak_phase": "Passionate emotions peak, emotional conflicts, protective aggression",
+        "late_phase": "Integration of passion and care"
+      }
+    },
+    "mars_mars": {
+      "antardasha_lord": "mars",
+      "pratyantardasha_lord": "mars",
+      "sequence": "6.6",
+      "duration_days": 579,
+      "duration_months": 19.0,
+      "theme": "Peak aggression, warrior glory, competitive dominance, conflict intensity",
+      "effects": {
+        "general": "Mars at maximum expression. Peak aggression and warrior energy. Intense competition and conflicts. Dominance and victory. Raw power and action.",
+        "aggression": "Peak aggressive energy",
+        "warrior": "Warrior energy at maximum",
+        "conflict": "Intense conflicts and competitions",
+        "dominance": "Dominance and conquest"
+      },
+      "health": {
+        "general": "Excellent physical energy.",
+        "risks": "Accidents, injuries, fights, fever, inflammation, surgery"
+      },
+      "career": {
+        "favorable": "Military, police, combat sports, aggressive sales, conquest fields",
+        "opportunities": "Competitive victories, dominance achieved"
+      },
+      "relationships": {
+        "general": "Intense conflicts, passionate but argumentative"
+      },
+      "timing_events": {
+        "early_phase": "Aggressive energy intensifies noticeably",
+        "peak_phase": "Warrior glory, competitive victories, dominance peak, conflict intensity maximum",
+        "late_phase": "Consolidation of victories; need to avoid overconfidence"
+      }
+    },
+    "mars_rahu": {
+      "antardasha_lord": "mars",
+      "pratyantardasha_lord": "rahu",
+      "sequence": "6.7",
+      "duration_days": 732,
+      "duration_months": 24.1,
+      "theme": "Obsessive aggression, reckless action, dangerous pursuits, unconventional warrior",
+      "effects": {
+        "general": "Mars's aggression meets Rahu's obsession. Obsessive aggressive behavior. Reckless and dangerous actions. Unconventional aggressive pursuits. Accident risk high.",
+        "obsession": "Obsessive aggressive behavior",
+        "recklessness": "Reckless, dangerous actions",
+        "risk": "High accident and injury risk",
+        "unconventional": "Unconventional aggressive pursuits"
+      },
+      "health": {
+        "general": "High accident and injury risk.",
+        "risks": "Accidents, injuries, violence, surgery, poisoning, dangerous activities"
+      },
+      "career": {
+        "favorable": "Unconventional aggressive ventures, dangerous pursuits",
+        "challenges": "Recklessness affecting career"
+      },
+      "relationships": {
+        "general": "Dangerous or reckless behavior affecting relationships"
+      },
+      "timing_events": {
+        "early_phase": "Obsessive aggression awakens",
+        "peak_phase": "Reckless actions peak, danger and accidents possible, obsessive aggression",
+        "late_phase": "Consequences of recklessness emerge"
+      }
+    },
+    "mars_jupiter": {
+      "antardasha_lord": "mars",
+      "pratyantardasha_lord": "jupiter",
+      "sequence": "6.8",
+      "duration_days": 651,
+      "duration_months": 21.4,
+      "theme": "Fortunate warrior, blessed victories, expansive aggression, noble fight",
+      "effects": {
+        "general": "Mars's aggression meets Jupiter's expansion. Fortunate warrior energy. Blessed victories and success. Expansive aggressive pursuits. Noble or righteous fighting.",
+        "fortune": "Fortunate warrior energy",
+        "victory": "Blessed victories and success",
+        "expansion": "Expansive aggressive pursuits",
+        "nobility": "Noble or righteous fighting"
+      },
+      "health": {
+        "general": "Good health and physical energy.",
+        "benefits": "Protective and lucky energy reducing injury risk"
+      },
+      "career": {
+        "favorable": "Fortunate competitive ventures, blessed military success, righteous fights",
+        "opportunities": "Fortunate victories and expansion"
+      },
+      "relationships": {
+        "general": "Blessed relationships with protective aggression"
+      },
+      "timing_events": {
+        "early_phase": "Fortunate warrior energy awakens",
+        "peak_phase": "Blessed victories, expansive aggressive success, fortunate warrior peak",
+        "late_phase": "Consolidation of fortunate victories"
+      }
+    },
+    "mars_saturn": {
+      "antardasha_lord": "mars",
+      "pratyantardasha_lord": "saturn",
+      "sequence": "6.9",
+      "duration_days": 752,
+      "duration_months": 24.7,
+      "theme": "Disciplined warrior, slow progress, karmic conflicts, structured aggression",
+      "effects": {
+        "general": "Mars's aggression meets Saturn's discipline. Disciplined warrior approach. Slow but structured progress. Karmic conflicts and lessons. Controlled aggression.",
+        "discipline": "Disciplined aggressive action",
+        "progress": "Slow but structured progress",
+        "karma": "Karmic conflicts and lessons",
+        "control": "Controlled, structured aggression"
+      },
+      "health": {
+        "general": "Strength from discipline but stress possible.",
+        "risks": "Injuries from overwork, fatigue, joint problems"
+      },
+      "career": {
+        "favorable": "Disciplined military, structured competitive work, long-term aggressive projects",
+        "challenges": "Slow progress from Saturn's delays"
+      },
+      "relationships": {
+        "general": "Serious conflicts and slow relationship progress"
+      },
+      "timing_events": {
+        "early_phase": "Disciplined approach to aggression develops",
+        "peak_phase": "Slow victories achieved through discipline, karmic lessons learned",
+        "late_phase": "Long-term structured aggressive success"
+      }
+    },
+    "rahu_mercury": {
+      "antardasha_lord": "rahu",
+      "pratyantardasha_lord": "mercury",
+      "sequence": "7.1",
+      "duration_days": 689,
+      "duration_months": 22.6,
+      "theme": "Tech obsession, unconventional ideas, foreign business, excessive communication",
+      "effects": {
+        "general": "Rahu's obsession meets Mercury's intellect. Fascination with technology and innovation. International business success. Unconventional thinking. Excessive communication.",
+        "obsession": "Obsessive focus on technology",
+        "innovation": "Unconventional and innovative thinking",
+        "foreign": "International business connections",
+        "excess": "Excessive communication and thinking"
+      },
+      "health": {
+        "general": "Nervous system activation, sleep issues.",
+        "risks": "Anxiety, insomnia, tech addiction, obsessive thinking"
+      },
+      "career": {
+        "favorable": "Technology, software, international business, innovation, tech startups",
+        "opportunities": "Tech success and international expansion"
+      },
+      "relationships": {
+        "general": "Excessive communication; partner may feel overwhelmed"
+      },
+      "timing_events": {
+        "early_phase": "Tech obsession begins",
+        "peak_phase": "Tech success, international business breakthroughs, innovation recognition",
+        "late_phase": "Obsession consequences emerge"
+      }
+    },
+    "rahu_ketu": {
+      "antardasha_lord": "rahu",
+      "pratyantardasha_lord": "ketu",
+      "sequence": "7.2",
+      "duration_days": 459,
+      "duration_months": 15.1,
+      "theme": "Confusion and obsession, detached desires, spiritual rebellion",
+      "effects": {
+        "general": "Rahu's obsession meets Ketu's detachment. Confusion between craving and detachment. Obsessive spiritual pursuits. Unconventional spiritual path. Spiritual rebellion.",
+        "confusion": "Confusion about desires and purpose",
+        "obsession": "Obsessive spiritual pursuits",
+        "rebellion": "Spiritual rebellion against norms",
+        "detachment": "Confused detachment from desires"
+      },
+      "health": {
+        "general": "Anxiety and confusion affecting health.",
+        "risks": "Anxiety disorders, obsessive behaviors, substance issues"
+      },
+      "career": {
+        "favorable": "Unconventional spiritual pursuits",
+        "challenges": "Career confusion and direction loss"
+      },
+      "timing_events": {
+        "early_phase": "Confusion and obsession begin",
+        "peak_phase": "Spiritual obsession peaks, unconventional choices manifested",
+        "late_phase": "Clarification of spiritual path"
+      }
+    },
+    "rahu_venus": {
+      "antardasha_lord": "rahu",
+      "pratyantardasha_lord": "venus",
+      "sequence": "7.3",
+      "duration_days": 614,
+      "duration_months": 20.2,
+      "theme": "Obsessive desires, foreign romance, luxury obsession, unconventional love",
+      "effects": {
+        "general": "Rahu's obsession meets Venus's desires. Obsessive attachment to beauty and pleasures. Foreign romance and travel. Unconventional love interests. Insatiable desires.",
+        "obsession": "Obsessive desire for beauty and luxury",
+        "romance": "Foreign romance and attractions",
+        "unconventional": "Unconventional beauty standards",
+        "excess": "Insatiable desires and spending"
+      },
+      "health": {
+        "general": "Excess and overindulgence affecting health.",
+        "risks": "Reproductive issues, STDs, obesity, diabetes, addiction"
+      },
+      "career": {
+        "favorable": "International luxury business, unconventional beauty ventures"
+      },
+      "relationships": {
+        "romantic": "Foreign romance, obsessive attractions, infidelity risk"
+      },
+      "timing_events": {
+        "early_phase": "Desire obsession begins",
+        "peak_phase": "Obsessive desires peak, foreign romance, luxury obsession",
+        "late_phase": "Consequences of excess emerge"
+      }
+    },
+    "rahu_sun": {
+      "antardasha_lord": "rahu",
+      "pratyantardasha_lord": "sun",
+      "sequence": "7.4",
+      "duration_days": 489,
+      "duration_months": 16.1,
+      "theme": "Excessive power, foreign authority, obsessive ambition, power corruption",
+      "effects": {
+        "general": "Rahu's obsession meets Sun's authority. Excessive power and authority. Foreign connections and influence. Obsessive ambition. Risk of power corruption.",
+        "power": "Excessive power and authority",
+        "ambition": "Obsessive ambition and power-seeking",
+        "foreign": "International authority",
+        "excess": "Excessive power use and corruption risk"
+      },
+      "health": {
+        "general": "Stress from excessive ambition.",
+        "risks": "Stress, heart issues from obsessive ambition"
+      },
+      "career": {
+        "favorable": "International business, foreign authority, multinational leadership"
+      },
+      "relationships": {
+        "general": "Excessive authority affecting relationships"
+      },
+      "timing_events": {
+        "early_phase": "Ambition and power-seeking intensify",
+        "peak_phase": "Excessive power and international authority, obsessive ambition peaks",
+        "late_phase": "Consequences of power excess emerge"
+      }
+    },
+    "rahu_moon": {
+      "antardasha_lord": "rahu",
+      "pratyantardasha_lord": "moon",
+      "sequence": "7.5",
+      "duration_days": 590,
+      "duration_months": 19.4,
+      "theme": "Obsessive emotions, foreign maternal, emotional obsession, comfort obsession",
+      "effects": {
+        "general": "Rahu's obsession meets Moon's emotions. Obsessive emotional attachments. Foreign maternal or family connections. Obsessive need for comfort. Emotional instability.",
+        "obsession": "Obsessive emotional attachments",
+        "foreign": "Foreign maternal connections",
+        "comfort": "Obsessive need for comfort and security",
+        "instability": "Emotional instability and mood swings"
+      },
+      "health": {
+        "general": "Emotional stress affecting health.",
+        "risks": "Anxiety, obsessive behaviors, emotional eating, sleep issues"
+      },
+      "career": {
+        "favorable": "Foreign nurturing work, international family business"
+      },
+      "relationships": {
+        "romantic": "Obsessive emotional attachments, codependency risk"
+      },
+      "timing_events": {
+        "early_phase": "Obsessive attachments begin",
+        "peak_phase": "Obsessive emotions peak, foreign maternal influence",
+        "late_phase": "Need for detachment from obsession"
+      }
+    },
+    "rahu_mars": {
+      "antardasha_lord": "rahu",
+      "pratyantardasha_lord": "mars",
+      "sequence": "7.6",
+      "duration_days": 579,
+      "duration_months": 19.0,
+      "theme": "Obsessive aggression, reckless action, dangerous pursuits, violent obsession",
+      "effects": {
+        "general": "Rahu's obsession meets Mars's aggression. Obsessive aggressive behavior. Reckless and dangerous actions. Unconventional aggressive pursuits. High accident risk.",
+        "obsession": "Obsessive aggression",
+        "recklessness": "Reckless, dangerous behavior",
+        "risk": "High accident and injury risk",
+        "violence": "Potential for violent actions"
+      },
+      "health": {
+        "general": "Very high accident and injury risk.",
+        "risks": "Accidents, injuries, violence, surgery, poisoning"
+      },
+      "career": {
+        "favorable": "Unconventional dangerous pursuits",
+        "challenges": "Recklessness destroying career"
+      },
+      "relationships": {
+        "general": "Dangerous behavior affecting relationships"
+      },
+      "timing_events": {
+        "early_phase": "Obsessive aggression awakens",
+        "peak_phase": "Reckless actions and danger peak, obsessive violence risk high",
+        "late_phase": "Consequences of recklessness severe"
+      }
+    },
+    "rahu_rahu": {
+      "antardasha_lord": "rahu",
+      "pratyantardasha_lord": "rahu",
+      "sequence": "7.7",
+      "duration_days": 732,
+      "duration_months": 24.1,
+      "theme": "Peak obsession, foreign immersion, unconventional extremism, unlimited desires",
+      "effects": {
+        "general": "Rahu at maximum obsessive expression. Peak foreign connections and immersion. Extreme unconventional behavior. Unlimited and obsessive desires. Potential for destructive obsessions.",
+        "obsession": "Peak obsessive behavior",
+        "foreign": "Complete immersion in foreign culture",
+        "extremism": "Extreme unconventional behavior",
+        "excess": "Unlimited and obsessive desires"
+      },
+      "health": {
+        "general": "Health severely stressed by obsession.",
+        "risks": "Addiction, extreme stress, dangerous behaviors, health neglect"
+      },
+      "career": {
+        "favorable": "Extreme unconventional ventures, foreign-based obsessions",
+        "challenges": "Career destroyed by obsessive behavior"
+      },
+      "relationships": {
+        "general": "Relationships destroyed by obsessive behavior"
+      },
+      "timing_events": {
+        "early_phase": "Obsessive behavior intensifies drastically",
+        "peak_phase": "Peak obsession and foreign immersion, extreme behavior manifested",
+        "late_phase": "Severe consequences of obsession"
+      }
+    },
+    "rahu_jupiter": {
+      "antardasha_lord": "rahu",
+      "pratyantardasha_lord": "jupiter",
+      "sequence": "7.8",
+      "duration_days": 651,
+      "duration_months": 21.4,
+      "theme": "Obsessive expansion, excessive optimism, foreign wealth obsession, spiritual excess",
+      "effects": {
+        "general": "Rahu's obsession meets Jupiter's expansion. Obsessive expansion and overextension. Excessive optimism leading to losses. Foreign wealth obsessions. Spiritual excesses.",
+        "obsession": "Obsessive expansion",
+        "optimism": "Excessive optimism leading to losses",
+        "foreign": "Foreign wealth obsessions",
+        "excess": "Excessive spiritual or material pursuits"
+      },
+      "health": {
+        "general": "Liver and fat issues from excess.",
+        "risks": "Obesity, diabetes, liver issues, overindulgence"
+      },
+      "career": {
+        "favorable": "Obsessive expansion ventures",
+        "challenges": "Overextension and losses from excess"
+      },
+      "relationships": {
+        "general": "Excessive expectations affecting relationships"
+      },
+      "timing_events": {
+        "early_phase": "Expansion obsession begins",
+        "peak_phase": "Obsessive expansion peaks, excessive losses, overextension manifested",
+        "late_phase": "Recovery from excessive overextension"
+      }
+    },
+    "rahu_saturn": {
+      "antardasha_lord": "rahu",
+      "pratyantardasha_lord": "saturn",
+      "sequence": "7.9",
+      "duration_days": 752,
+      "duration_months": 24.7,
+      "theme": "Obsessive limitations, obsessive delays, foreign hardship, unconventional karma",
+      "effects": {
+        "general": "Rahu's obsession meets Saturn's limitations. Obsessive focus on difficult tasks. Foreign hardship and delays. Unconventional karmic patterns. Extreme restrictions.",
+        "obsession": "Obsessive focus on limitations",
+        "delays": "Obsessive struggle with delays",
+        "foreign": "Foreign hardship and difficulties",
+        "karma": "Unconventional karmic patterns"
+      },
+      "health": {
+        "general": "Chronic issues from stress and obsession.",
+        "risks": "Chronic diseases, depression, extreme weakness"
+      },
+      "career": {
+        "favorable": "Obsessive work on difficult projects",
+        "challenges": "Extreme delays and obstacles"
+      },
+      "relationships": {
+        "general": "Obsessive control and limitation affecting relationships"
+      },
+      "timing_events": {
+        "early_phase": "Obsessive limitations emerge",
+        "peak_phase": "Obsessive delays peak, foreign hardship, karmic burden",
+        "late_phase": "Release from obsessive patterns"
+      }
+    },
+    "jupiter_mercury": {
+      "antardasha_lord": "jupiter",
+      "pratyantardasha_lord": "mercury",
+      "sequence": "8.1",
+      "duration_days": 689,
+      "duration_months": 22.6,
+      "theme": "Wisdom and intellect, teaching excellence, publishing success, spiritual commerce",
+      "effects": {
+        "general": "Jupiter's wisdom meets Mercury's intellect. Excellent teaching and communication. Publishing and writing success. Wisdom-based business. Spiritual knowledge sharing.",
+        "wisdom": "Wisdom-based intellectual expression",
+        "teaching": "Excellent teaching and guidance",
+        "publishing": "Publishing and writing success",
+        "commerce": "Wisdom-based business success"
+      },
+      "health": {
+        "general": "Good health with wisdom practices.",
+        "benefits": "Mental clarity and wellness"
+      },
+      "career": {
+        "favorable": "Teaching, publishing, wisdom business, consulting, education, spiritual commerce",
+        "opportunities": "Publishing success, teaching recognition, educational advancement"
+      },
+      "relationships": {
+        "general": "Communication becomes wise and inspiring"
+      },
+      "timing_events": {
+        "early_phase": "Teaching and wisdom increase",
+        "peak_phase": "Publishing success, teaching recognition, wisdom appreciation",
+        "late_phase": "Legacy of wisdom and knowledge"
+      }
+    },
+    "jupiter_ketu": {
+      "antardasha_lord": "jupiter",
+      "pratyantardasha_lord": "ketu",
+      "sequence": "8.2",
+      "duration_days": 459,
+      "duration_months": 15.1,
+      "theme": "Spiritual wisdom, renunciation, loss of expansion, contemplative philosophy",
+      "effects": {
+        "general": "Jupiter's expansion meets Ketu's detachment. Deep spiritual wisdom. Loss of material expansion. Contemplative philosophy. Inclination toward renunciation.",
+        "wisdom": "Deep spiritual wisdom",
+        "renunciation": "Inclination toward renunciation",
+        "loss": "Loss of material expansion",
+        "philosophy": "Contemplative philosophical pursuits"
+      },
+      "health": {
+        "general": "Good health with spiritual practices.",
+        "benefits": "Spiritual healing and mental clarity"
+      },
+      "career": {
+        "favorable": "Spiritual teaching, renunciation, philosophy, contemplative work",
+        "challenges": "Loss of material expansion and wealth"
+      },
+      "relationships": {
+        "general": "Spiritual understanding deepens relationships"
+      },
+      "timing_events": {
+        "early_phase": "Spiritual wisdom emerges",
+        "peak_phase": "Deep wisdom, renunciation inclination, spiritual recognition",
+        "late_phase": "Integration of spiritual wisdom"
+      }
+    },
+    "jupiter_venus": {
+      "antardasha_lord": "jupiter",
+      "pratyantardasha_lord": "venus",
+      "sequence": "8.3",
+      "duration_days": 614,
+      "duration_months": 20.2,
+      "theme": "Generous love, expansion of relationships, blessed wealth, philanthropic beauty",
+      "effects": {
+        "general": "Jupiter's expansion meets Venus's beauty. Generous, expansive love. Blessed wealth and luxury. Philanthropic beauty and generosity. Expansion of social circles.",
+        "generosity": "Generous love and giving",
+        "expansion": "Expansion of relationships and wealth",
+        "blessing": "Blessed wealth and abundance",
+        "beauty": "Philosophical appreciation of beauty"
+      },
+      "health": {
+        "general": "Good health but excess may affect liver.",
+        "benefits": "Healing through love and generosity"
+      },
+      "career": {
+        "favorable": "Wealth-building, luxury business, philanthropic ventures, beauty teaching",
+        "opportunities": "Major financial success, luxury recognition"
+      },
+      "relationships": {
+        "romantic": "Generous, expansive love relationships",
+        "friendships": "Expansive generous friendships"
+      },
+      "timing_events": {
+        "early_phase": "Generosity and expansion grow",
+        "peak_phase": "Financial blessing, expansive relationships, generous love peaks",
+        "late_phase": "Legacy of generous love"
+      }
+    },
+    "jupiter_sun": {
+      "antardasha_lord": "jupiter",
+      "pratyantardasha_lord": "sun",
+      "sequence": "8.4",
+      "duration_days": 489,
+      "duration_months": 16.1,
+      "theme": "Benevolent authority, wisdom leadership, blessed expansion, philanthropic power",
+      "effects": {
+        "general": "Jupiter's wisdom meets Sun's authority. Benevolent, wise leadership. Blessed authority and expansion. Philanthropic power. Leadership recognized for wisdom.",
+        "authority": "Wise, benevolent authority",
+        "wisdom": "Wisdom-based leadership",
+        "expansion": "Blessed expansion of power and influence",
+        "philanthropy": "Philanthropic leadership"
+      },
+      "health": {
+        "general": "Excellent health and vitality.",
+        "benefits": "Protective and healing energy"
+      },
+      "career": {
+        "favorable": "Leadership in education, government, spiritual authority, philanthropic ventures",
+        "opportunities": "Major expansion, leadership recognition, philanthropic success"
+      },
+      "relationships": {
+        "general": "Authority appreciated for wisdom and benevolence"
+      },
+      "timing_events": {
+        "early_phase": "Wise authority and expansion begin",
+        "peak_phase": "Blessed expansion, leadership recognition, wisdom and power peaks",
+        "late_phase": "Legacy of wise and benevolent leadership"
+      }
+    },
+    "jupiter_moon": {
+      "antardasha_lord": "jupiter",
+      "pratyantardasha_lord": "moon",
+      "sequence": "8.5",
+      "duration_days": 590,
+      "duration_months": 19.4,
+      "theme": "Generous love, emotional expansion, blessed family, spiritual nurturing",
+      "effects": {
+        "general": "Jupiter's expansion meets Moon's emotions. Generous, expansive love. Blessed family and relationships. Emotional abundance and joy. Spiritual nurturing.",
+        "love": "Generous, expansive emotional love",
+        "expansion": "Expansion of family and relationships",
+        "blessing": "Blessed family happiness",
+        "nurturing": "Spiritual and emotional nurturing"
+      },
+      "health": {
+        "general": "Excellent emotional health.",
+        "benefits": "Healing through love and family support"
+      },
+      "career": {
+        "favorable": "Family business expansion, emotional teaching, spiritual nurturing",
+        "opportunities": "Family business success, nurturing field recognition"
+      },
+      "relationships": {
+        "romantic": "Expansive, generous love relationships",
+        "family": "Blessed family expansion and happiness"
+      },
+      "timing_events": {
+        "early_phase": "Generous love and family expansion begin",
+        "peak_phase": "Family blessing and happiness, generous love peaks, spiritual nurturing",
+        "late_phase": "Legacy of generous love and family"
+      }
+    },
+    "jupiter_mars": {
+      "antardasha_lord": "jupiter",
+      "pratyantardasha_lord": "mars",
+      "sequence": "8.6",
+      "duration_days": 579,
+      "duration_months": 19.0,
+      "theme": "Fortunate warrior, blessed victories, expansive aggression, righteous victory",
+      "effects": {
+        "general": "Jupiter's blessing meets Mars's aggression. Fortunate warrior energy. Blessed victories and expansion. Expansive aggressive pursuits. Noble victories.",
+        "fortune": "Fortunate warrior energy",
+        "victory": "Blessed victories and success",
+        "expansion": "Expansive aggressive growth",
+        "nobility": "Righteous and blessed fighting"
+      },
+      "health": {
+        "general": "Good health and physical energy.",
+        "benefits": "Protective and lucky energy"
+      },
+      "career": {
+        "favorable": "Fortunate competitive ventures, blessed military advancement, righteous business",
+        "opportunities": "Blessed victories and expansion"
+      },
+      "relationships": {
+        "general": "Blessed relationships with protective aggression"
+      },
+      "timing_events": {
+        "early_phase": "Fortunate warrior energy awakens",
+        "peak_phase": "Blessed victories, expansive growth, fortunate warrior peak",
+        "late_phase": "Consolidation of fortunate victories"
+      }
+    },
+    "jupiter_rahu": {
+      "antardasha_lord": "jupiter",
+      "pratyantardasha_lord": "rahu",
+      "sequence": "8.7",
+      "duration_days": 732,
+      "duration_months": 24.1,
+      "theme": "Obsessive expansion, excessive optimism, foreign wealth, spiritual excess",
+      "effects": {
+        "general": "Jupiter's expansion meets Rahu's obsession. Obsessive expansion. Excessive optimism. Foreign wealth obsessions. Overextension and losses possible.",
+        "obsession": "Obsessive expansion",
+        "optimism": "Excessive optimism",
+        "foreign": "Foreign wealth pursuits",
+        "excess": "Excessive expansion"
+      },
+      "health": {
+        "general": "Liver and weight issues from excess.",
+        "risks": "Obesity, diabetes, liver issues, overindulgence"
+      },
+      "career": {
+        "favorable": "Obsessive expansion ventures",
+        "challenges": "Overextension and losses"
+      },
+      "relationships": {
+        "general": "Excessive expectations affecting relationships"
+      },
+      "timing_events": {
+        "early_phase": "Expansion obsession begins",
+        "peak_phase": "Obsessive expansion peaks, potential losses from overextension",
+        "late_phase": "Recovery from excesses"
+      }
+    },
+    "jupiter_jupiter": {
+      "antardasha_lord": "jupiter",
+      "pratyantardasha_lord": "jupiter",
+      "sequence": "8.8",
+      "duration_days": 651,
+      "duration_months": 21.4,
+      "theme": "Peak wisdom and blessing, expansion glory, beneficence, spiritual growth",
+      "effects": {
+        "general": "Jupiter at maximum expression. Peak wisdom and blessings. Major expansion and success. Spiritual growth and enlightenment. Beneficence and good fortune.",
+        "wisdom": "Peak wisdom and understanding",
+        "blessing": "Peak blessings and good fortune",
+        "expansion": "Major expansion and growth",
+        "spirituality": "Peak spiritual development"
+      },
+      "health": {
+        "general": "Excellent health and protective energy.",
+        "benefits": "Overall wellness and immunity"
+      },
+      "career": {
+        "favorable": "All expansion and prosperity fields flourish",
+        "opportunities": "Major success and expansion in all endeavors"
+      },
+      "relationships": {
+        "romantic": "Peak love and harmony",
+        "friendships": "Expansion of friendships and support"
+      },
+      "timing_events": {
+        "early_phase": "Blessings and expansion become obvious",
+        "peak_phase": "Peak wisdom and blessings, major expansion, spiritual enlightenment, fortune peak",
+        "late_phase": "Legacy of wisdom and beneficence"
+      }
+    },
+    "jupiter_saturn": {
+      "antardasha_lord": "jupiter",
+      "pratyantardasha_lord": "saturn",
+      "sequence": "8.9",
+      "duration_days": 752,
+      "duration_months": 24.7,
+      "theme": "Serious expansion, cautious growth, delayed blessing, structured wisdom",
+      "effects": {
+        "general": "Jupiter's expansion meets Saturn's discipline. Serious, cautious expansion. Delayed blessings. Structured wisdom. Sustainable long-term growth.",
+        "expansion": "Serious, cautious expansion",
+        "growth": "Delayed but sustainable growth",
+        "wisdom": "Wisdom gained through discipline",
+        "structure": "Structured, long-term approach"
+      },
+      "health": {
+        "general": "Good health maintained through discipline.",
+        "risks": "Stress from heavy responsibility"
+      },
+      "career": {
+        "favorable": "Serious expansion, long-term ventures, structured business growth",
+        "opportunities": "Delayed but significant expansion success"
+      },
+      "relationships": {
+        "general": "Serious, committed relationships"
+      },
+      "timing_events": {
+        "early_phase": "Cautious expansion begins",
+        "peak_phase": "Delayed blessings manifest, serious expansion achieved, wisdom through discipline",
+        "late_phase": "Long-term sustainable success"
+      }
+    },
+    "saturn_mercury": {
+      "antardasha_lord": "saturn",
+      "pratyantardasha_lord": "mercury",
+      "sequence": "9.1",
+      "duration_days": 689,
+      "duration_months": 22.6,
+      "theme": "Serious study, deep concentration, delayed communication, structured learning",
+      "effects": {
+        "general": "Saturn's discipline meets Mercury's intellect. Serious, focused study and learning. Deep concentration. Communication becomes formal and delayed. Structured thinking.",
+        "intellect": "Serious, focused thinking",
+        "discipline": "Disciplined learning approach",
+        "communication": "Formal, delayed communication",
+        "structure": "Structured knowledge"
+      },
+      "health": {
+        "general": "Nervous strain from concentration.",
+        "risks": "Headaches, fatigue from overwork"
+      },
+      "career": {
+        "favorable": "Research, serious study, law, accounting, engineering, structured work",
+        "challenges": "Delays in projects and communication"
+      },
+      "relationships": {
+        "general": "Communication formal and reserved"
+      },
+      "timing_events": {
+        "early_phase": "Focus and seriousness intensify",
+        "peak_phase": "Deep learning achieved, delayed projects move forward, structured success",
+        "late_phase": "Long-term gains from disciplined work"
+      }
+    },
+    "saturn_ketu": {
+      "antardasha_lord": "saturn",
+      "pratyantardasha_lord": "ketu",
+      "sequence": "9.2",
+      "duration_days": 459,
+      "duration_months": 15.1,
+      "theme": "Spiritual austerity, detached discipline, karmic losses, ascetic practice",
+      "effects": {
+        "general": "Saturn's discipline meets Ketu's detachment. Spiritual austerity and ascetic practice. Long-term losses and hardship. Karmic lessons through discipline and loss.",
+        "austerity": "Spiritual austerity and discipline",
+        "detachment": "Detached discipline practice",
+        "karma": "Karmic lessons through loss",
+        "loss": "Long-term losses and hardship"
+      },
+      "health": {
+        "general": "Weakness from austerity practices.",
+        "risks": "Malnutrition, depression, chronic weakness"
+      },
+      "career": {
+        "favorable": "Monasticism, serious spiritual work, ascetic practices",
+        "challenges": "Long-term career difficulties"
+      },
+      "relationships": {
+        "general": "Severe detachment from relationships"
+      },
+      "timing_events": {
+        "early_phase": "Austerity and detachment grow",
+        "peak_phase": "Significant losses, karmic lessons, possible renunciation",
+        "late_phase": "Acceptance of karmic lessons"
+      }
+    },
+    "saturn_venus": {
+      "antardasha_lord": "saturn",
+      "pratyantardasha_lord": "venus",
+      "sequence": "9.3",
+      "duration_days": 614,
+      "duration_months": 20.2,
+      "theme": "Serious love, delayed romance, lasting relationships, karmic lovers",
+      "effects": {
+        "general": "Saturn's discipline meets Venus's pleasure. Serious, lasting love. Delayed romance. Karmic relationships. Love through responsibility. Long-term commitment.",
+        "love": "Serious, responsible love",
+        "delay": "Delays in romance",
+        "karma": "Karmic romantic connections",
+        "lasting": "Lasting committed relationships"
+      },
+      "health": {
+        "general": "Health stable but slow improvement.",
+        "risks": "Reproductive issues, relationship stress"
+      },
+      "career": {
+        "favorable": "Long-term business partnerships, serious ventures"
+      },
+      "relationships": {
+        "romantic": "Delayed romance; when it comes, lasting and serious"
+      },
+      "timing_events": {
+        "early_phase": "Serious approach to romance begins",
+        "peak_phase": "Delayed romance manifests, lasting commitment established",
+        "late_phase": "Long-term relationship stability"
+      }
+    },
+    "saturn_sun": {
+      "antardasha_lord": "saturn",
+      "pratyantardasha_lord": "sun",
+      "sequence": "9.4",
+      "duration_days": 489,
+      "duration_months": 16.1,
+      "theme": "Serious authority, responsible leadership, structured power, karmic duty",
+      "effects": {
+        "general": "Saturn's discipline meets Sun's authority. Serious, responsible authority. Structured leadership. Karmic duties and obligations. Sustainable long-term power.",
+        "authority": "Serious, responsible authority",
+        "discipline": "Disciplined leadership",
+        "karma": "Karmic duties and obligations",
+        "structure": "Structured, long-term power"
+      },
+      "health": {
+        "general": "Good health maintained through discipline.",
+        "risks": "Stress from responsibility"
+      },
+      "career": {
+        "favorable": "Government, serious administration, law, engineering, long-term projects",
+        "opportunities": "Long-term authority recognition"
+      },
+      "relationships": {
+        "general": "Responsible leadership in relationships"
+      },
+      "timing_events": {
+        "early_phase": "Serious responsibility begins",
+        "peak_phase": "Karmic duties fulfilled, serious leadership established",
+        "late_phase": "Legacy of responsible leadership"
+      }
+    },
+    "saturn_moon": {
+      "antardasha_lord": "saturn",
+      "pratyantardasha_lord": "moon",
+      "sequence": "9.5",
+      "duration_days": 590,
+      "duration_months": 19.4,
+      "theme": "Emotional maturity, serious emotions, karmic family, long-term stability",
+      "effects": {
+        "general": "Saturn's discipline meets Moon's emotions. Emotional maturity and discipline. Serious emotional approach. Karmic family lessons. Long-term emotional stability.",
+        "emotions": "Serious, mature emotional approach",
+        "discipline": "Emotional discipline and control",
+        "karma": "Karmic family lessons",
+        "stability": "Long-term emotional stability"
+      },
+      "health": {
+        "general": "Emotional health stable with discipline.",
+        "risks": "Depression from responsibility"
+      },
+      "career": {
+        "favorable": "Serious family business, disciplined nurturing roles"
+      },
+      "relationships": {
+        "romantic": "Serious, committed long-term relationships"
+      },
+      "timing_events": {
+        "early_phase": "Emotional maturity and seriousness grow",
+        "peak_phase": "Karmic family lessons, emotional maturity recognized",
+        "late_phase": "Long-term emotional stability"
+      }
+    },
+    "saturn_mars": {
+      "antardasha_lord": "saturn",
+      "pratyantardasha_lord": "mars",
+      "sequence": "9.6",
+      "duration_days": 579,
+      "duration_months": 19.0,
+      "theme": "Disciplined warrior, slow progress, karmic conflicts, structured action",
+      "effects": {
+        "general": "Saturn's discipline meets Mars's aggression. Disciplined warrior approach. Slow but structured progress. Karmic conflicts and lessons. Controlled aggression.",
+        "discipline": "Disciplined aggressive action",
+        "progress": "Slow but structured progress",
+        "karma": "Karmic conflicts and lessons",
+        "control": "Controlled, structured aggression"
+      },
+      "health": {
+        "general": "Strength from discipline but stress possible.",
+        "risks": "Injuries from overwork, fatigue"
+      },
+      "career": {
+        "favorable": "Disciplined military, structured competitive work, long-term projects",
+        "challenges": "Slow progress from Saturn's delays"
+      },
+      "relationships": {
+        "general": "Serious conflicts and slow relationship progress"
+      },
+      "timing_events": {
+        "early_phase": "Disciplined aggression develops",
+        "peak_phase": "Slow victories achieved, karmic lessons learned",
+        "late_phase": "Long-term structured success"
+      }
+    },
+    "saturn_rahu": {
+      "antardasha_lord": "saturn",
+      "pratyantardasha_lord": "rahu",
+      "sequence": "9.7",
+      "duration_days": 732,
+      "duration_months": 24.1,
+      "theme": "Obsessive limitations, obsessive delays, foreign hardship, unconventional karma",
+      "effects": {
+        "general": "Saturn's limitation meets Rahu's obsession. Obsessive focus on difficult tasks. Foreign hardship. Unconventional karmic patterns. Extreme restrictions.",
+        "obsession": "Obsessive focus on limitations",
+        "delays": "Obsessive struggle with delays",
+        "foreign": "Foreign hardship and difficulties",
+        "karma": "Unconventional karmic patterns"
+      },
+      "health": {
+        "general": "Chronic issues from stress and obsession.",
+        "risks": "Chronic diseases, depression, extreme weakness"
+      },
+      "career": {
+        "favorable": "Obsessive work on difficult projects",
+        "challenges": "Extreme delays and obstacles"
+      },
+      "relationships": {
+        "general": "Obsessive control limiting relationships"
+      },
+      "timing_events": {
+        "early_phase": "Obsessive limitations emerge",
+        "peak_phase": "Obsessive delays peak, foreign hardship, karmic burden",
+        "late_phase": "Release from obsessive patterns"
+      }
+    },
+    "saturn_jupiter": {
+      "antardasha_lord": "saturn",
+      "pratyantardasha_lord": "jupiter",
+      "sequence": "9.8",
+      "duration_days": 651,
+      "duration_months": 21.4,
+      "theme": "Serious expansion, cautious growth, delayed blessing, structured wisdom",
+      "effects": {
+        "general": "Saturn's limitation meets Jupiter's expansion. Serious, cautious expansion. Delayed but eventual blessings. Structured wisdom. Sustainable growth.",
+        "expansion": "Serious, cautious expansion",
+        "growth": "Delayed but sustainable growth",
+        "wisdom": "Wisdom through discipline",
+        "structure": "Structured approach"
+      },
+      "health": {
+        "general": "Good health through discipline.",
+        "risks": "Stress from responsibility"
+      },
+      "career": {
+        "favorable": "Serious long-term ventures, structured business growth",
+        "opportunities": "Delayed but significant expansion"
+      },
+      "relationships": {
+        "general": "Serious, committed relationships"
+      },
+      "timing_events": {
+        "early_phase": "Cautious expansion begins",
+        "peak_phase": "Delayed blessings manifest, serious expansion achieved",
+        "late_phase": "Long-term sustainable success"
+      }
+    },
+    "saturn_saturn": {
+      "antardasha_lord": "saturn",
+      "pratyantardasha_lord": "saturn",
+      "sequence": "9.9",
+      "duration_days": 752,
+      "duration_months": 24.7,
+      "theme": "Peak discipline, karmic peak, maximum hardship, ultimate austerity",
+      "effects": {
+        "general": "Saturn at maximum expression. Peak discipline and austerity. Karmic lessons at intensity. Maximum hardship but ultimate growth. Extreme limitations and restrictions.",
+        "discipline": "Peak discipline and austerity",
+        "karma": "Peak karmic lessons and patterns",
+        "hardship": "Maximum hardship and challenge",
+        "growth": "Significant spiritual growth through hardship"
+      },
+      "health": {
+        "general": "Health severely challenged.",
+        "risks": "Chronic diseases, extreme weakness, depression, joint problems"
+      },
+      "career": {
+        "challenges": "Extreme difficulties and delays in all work"
+      },
+      "relationships": {
+        "general": "Maximum distance and separation possible"
+      },
+      "timing_events": {
+        "early_phase": "Hardship and restrictions intensify",
+        "peak_phase": "Peak karmic burden, maximum discipline and hardship tested",
+        "late_phase": "Release from karmic restrictions"
+      }
+    }
+  },
+  "metadata": {
+    "version": "1.0",
+    "created": "2026-02-04",
+    "system": "Mercury Mahadasha Pratyantardasha Complete System",
+    "total_combinations": 81,
+    "note": "All 81 pratyantardasha combinations within Mercury Mahadasha (17 years). Each includes specific psychological, health, career, and relationship insights. Mercury themes: Intellect, communication, business, writing, friends, skin, nervous system"
+  }
+}

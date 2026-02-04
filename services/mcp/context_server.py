@@ -5,66 +5,66 @@ Provides dasha calculations, transit analysis, and timing tools.
 Includes Vimshottari Dasha periods, Sade Sati tracking, and muhurta evaluation.
 """
 import sys
-from pathlib import Path
 from datetime import datetime
-from typing import Dict, List, Any, Optional
+from pathlib import Path
+from typing import Any
 
 # Add packages to path
 SERVICES_ROOT = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(SERVICES_ROOT))
 
-from mcp.server.fastmcp import FastMCP
+from mcp.server.fastmcp import FastMCP  # noqa: E402
 
 # Import context package functions
-from packages.context.src import (
-    get_dasha_balance_at_birth,
-    get_mahadasha_sequence,
-    get_current_dasha,
-    get_antardasha_sequence,
-    get_pratyantardasha_sequence,
-    check_sade_sati,
-    check_dhaiya,
-    get_gochara,
-    get_full_transit_analysis,
-    calculate_rahu_kaal,
-    calculate_yamaghanda,
-    calculate_gulika,
+from packages.context.src import (  # noqa: E402
     calculate_all_inauspicious,
-    calculate_choghadiya,
+    check_dhaiya,
+    check_sade_sati,
     evaluate_muhurta,
     find_next_good_muhurta,
-    DASHA_YEARS,
-    DASHA_SEQUENCE,
-    GOCHARA_FAVORABLE,
-    TRANSIT_EFFECTS,
-    ActivityType,
+    get_antardasha_effect,
+    get_antardasha_sequence,
+    get_current_dasha,
+    get_dasha_balance_at_birth,
+    get_gochara,
+    get_mahadasha_sequence,
+    get_pratyantardasha_effect,
 )
 
 # Import cosmos constants
-from packages.cosmos.src import (
-    RASHI_NAMES,
+from packages.cosmos.src import (  # noqa: E402
     get_all_planets,
     get_julian_day,
-    get_tithi,
-    get_yoga,
     get_karana,
+    get_tithi,
     get_vara,
+    get_yoga,
     longitude_to_nakshatra,
 )
 
 # Initialize MCP server
 mcp = FastMCP("108-context")
 
-SIGNS = ["aries", "taurus", "gemini", "cancer", "leo", "virgo",
-         "libra", "scorpio", "sagittarius", "capricorn", "aquarius", "pisces"]
+SIGNS = [
+    "aries",
+    "taurus",
+    "gemini",
+    "cancer",
+    "leo",
+    "virgo",
+    "libra",
+    "scorpio",
+    "sagittarius",
+    "capricorn",
+    "aquarius",
+    "pisces",
+]
 
 
 @mcp.tool()
 def current_dasha(
-    birth_datetime: str,
-    moon_longitude: float,
-    query_datetime: str = None
-) -> Dict[str, Any]:
+    birth_datetime: str, moon_longitude: float, query_datetime: str | None = None
+) -> dict[str, Any]:
     """
     Get current Mahadasha, Antardasha, and Pratyantardasha.
 
@@ -80,12 +80,12 @@ def current_dasha(
         current_dasha("1992-12-03T03:00:00+05:30", 324.11, "2026-02-04")
     """
     try:
-        birth_dt = datetime.fromisoformat(birth_datetime.replace('Z', '+00:00'))
+        birth_dt = datetime.fromisoformat(birth_datetime.replace("Z", "+00:00"))
         if birth_dt.tzinfo:
             birth_dt = birth_dt.replace(tzinfo=None)
 
         if query_datetime:
-            query_dt = datetime.fromisoformat(query_datetime.replace('Z', '+00:00'))
+            query_dt = datetime.fromisoformat(query_datetime.replace("Z", "+00:00"))
             if query_dt.tzinfo:
                 query_dt = query_dt.replace(tzinfo=None)
         else:
@@ -93,26 +93,40 @@ def current_dasha(
 
         result = get_current_dasha(birth_dt, moon_longitude, query_dt)
 
+        md_lord = result["mahadasha"]["lord"]
+        ad_lord = result["antardasha"]["lord"]
+        pd_info = result.get("pratyantardasha")
+        pd_lord = pd_info.get("lord") if pd_info else None
+
+        # Get effects data
+        ad_effects = get_antardasha_effect(md_lord, ad_lord)
+        pd_effects = None
+        if pd_lord:
+            pd_effects = get_pratyantardasha_effect(md_lord, ad_lord, pd_lord)
+
         return {
             "query_date": query_dt.isoformat(),
             "mahadasha": {
-                "lord": result["mahadasha"]["lord"],
+                "lord": md_lord,
                 "start_date": result["mahadasha"]["start_date"].isoformat(),
                 "end_date": result["mahadasha"]["end_date"].isoformat(),
                 "days_remaining": result["mahadasha"]["days_remaining"],
-                "years_total": result["mahadasha"].get("years", 0)
+                "years_total": result["mahadasha"].get("years", 0),
             },
             "antardasha": {
-                "lord": result["antardasha"]["lord"],
+                "lord": ad_lord,
                 "start_date": result["antardasha"]["start_date"].isoformat(),
                 "end_date": result["antardasha"]["end_date"].isoformat(),
-                "days_remaining": result["antardasha"]["days_remaining"]
+                "days_remaining": result["antardasha"]["days_remaining"],
+                "effects": ad_effects,
             },
-            "pratyantardasha": result.get("pratyantardasha"),
-            "interpretation": _get_dasha_interpretation(
-                result["mahadasha"]["lord"],
-                result["antardasha"]["lord"]
-            )
+            "pratyantardasha": {
+                **pd_info,
+                "effects": pd_effects,
+            }
+            if pd_info
+            else None,
+            "interpretation": _get_dasha_interpretation(md_lord, ad_lord),
         }
 
     except Exception as e:
@@ -123,8 +137,8 @@ def current_dasha(
 def dasha_periods(
     birth_datetime: str,
     moon_longitude: float,
-    years: int = 120
-) -> Dict[str, Any]:
+    years: int = 120,  # noqa: ARG001 - Reserved for future pagination
+) -> dict[str, Any]:
     """
     Get all Mahadasha periods for lifetime.
 
@@ -140,7 +154,7 @@ def dasha_periods(
         dasha_periods("1992-12-03T03:00:00+05:30", 324.11, 120)
     """
     try:
-        birth_dt = datetime.fromisoformat(birth_datetime.replace('Z', '+00:00'))
+        birth_dt = datetime.fromisoformat(birth_datetime.replace("Z", "+00:00"))
         if birth_dt.tzinfo:
             birth_dt = birth_dt.replace(tzinfo=None)
 
@@ -152,13 +166,15 @@ def dasha_periods(
 
         periods = []
         for m in mahadashas:
-            periods.append({
-                "lord": m["lord"],
-                "start_date": m["start_date"].isoformat(),
-                "end_date": m["end_date"].isoformat(),
-                "years": m["years"],
-                "is_current": m.get("is_current", False)
-            })
+            periods.append(
+                {
+                    "lord": m["lord"],
+                    "start_date": m["start_date"].isoformat(),
+                    "end_date": m["end_date"].isoformat(),
+                    "years": m["years"],
+                    "is_current": m.get("is_current", False),
+                }
+            )
 
         return {
             "birth_datetime": birth_datetime,
@@ -166,7 +182,7 @@ def dasha_periods(
             "birth_nakshatra_lord": balance["lord"],
             "initial_balance_years": balance["remaining_years"],
             "count": len(periods),
-            "mahadashas": periods
+            "mahadashas": periods,
         }
 
     except Exception as e:
@@ -174,10 +190,7 @@ def dasha_periods(
 
 
 @mcp.tool()
-def transit_analysis(
-    natal_moon_rashi: str,
-    transit_positions: Dict[str, str]
-) -> Dict[str, Any]:
+def transit_analysis(natal_moon_rashi: str, transit_positions: dict[str, str]) -> dict[str, Any]:
     """
     Analyze current transits from natal Moon (Gochara).
 
@@ -209,7 +222,7 @@ def transit_analysis(
                 "current_sign": SIGNS[rashi_idx],
                 "house_from_moon": gochara.get("house_from_moon", 0),
                 "is_favorable": gochara.get("is_favorable", False),
-                "effects": gochara.get("effects", [])
+                "effects": gochara.get("effects", []),
             }
 
         # Check Sade Sati
@@ -224,7 +237,7 @@ def transit_analysis(
             "planets": planet_analysis,
             "sade_sati": sade_sati,
             "dhaiya": dhaiya,
-            "overall_assessment": _assess_transits(planet_analysis, sade_sati, dhaiya)
+            "overall_assessment": _assess_transits(planet_analysis, sade_sati, dhaiya),
         }
 
     except Exception as e:
@@ -232,10 +245,7 @@ def transit_analysis(
 
 
 @mcp.tool()
-def sade_sati_status(
-    natal_moon_rashi: str,
-    saturn_rashi: str
-) -> Dict[str, Any]:
+def sade_sati_status(natal_moon_rashi: str, saturn_rashi: str) -> dict[str, Any]:
     """
     Check Sade Sati status and phase.
 
@@ -278,8 +288,8 @@ def sade_sati_status(
                     "Chant 'Om Sham Shanicharaya Namah' 108 times",
                     "Wear Blue Sapphire only after proper astrological analysis",
                     "Practice meditation and patience",
-                    "Engage in social service and charity"
-                ]
+                    "Engage in social service and charity",
+                ],
             }
         else:
             return {
@@ -288,7 +298,7 @@ def sade_sati_status(
                 "saturn_current": saturn_rashi,
                 "note": "Sade Sati is not currently active",
                 "distance": _calculate_house_distance(moon_idx, saturn_idx),
-                "years_until_sade_sati": _years_until_sade_sati(moon_idx, saturn_idx)
+                "years_until_sade_sati": _years_until_sade_sati(moon_idx, saturn_idx),
             }
 
     except Exception as e:
@@ -296,10 +306,7 @@ def sade_sati_status(
 
 
 @mcp.tool()
-def dhaiya_status(
-    natal_moon_rashi: str,
-    saturn_rashi: str
-) -> Dict[str, Any]:
+def dhaiya_status(natal_moon_rashi: str, saturn_rashi: str) -> dict[str, Any]:
     """
     Check Dhaiya (Small Panoti) or Kantaka Shani status.
 
@@ -323,7 +330,7 @@ def dhaiya_status(
         result = check_dhaiya(moon_idx, saturn_idx)
 
         if result["active"]:
-            phase = result.get("phase", "unknown")
+            result.get("phase", "unknown")
             return {
                 "is_active": True,
                 "type": "Dhaiya (Kantaka Shani)",
@@ -335,15 +342,15 @@ def dhaiya_status(
                     "Health concerns and immunity issues",
                     "Financial pressures and unexpected expenses",
                     "Mental stress and anxiety",
-                    "Relationship tensions"
+                    "Relationship tensions",
                 ],
                 "remedies": [
                     "Worship Lord Shani and Hanuman",
                     "Recite Shani Chalisa",
                     "Donate to the needy on Saturdays",
                     "Wear Iron ring on Saturn finger",
-                    "Practice patience and acceptance"
-                ]
+                    "Practice patience and acceptance",
+                ],
             }
         else:
             return {
@@ -351,7 +358,7 @@ def dhaiya_status(
                 "type": "Dhaiya (Kantaka Shani)",
                 "natal_moon": natal_moon_rashi,
                 "saturn_current": saturn_rashi,
-                "note": "Dhaiya is not currently active"
+                "note": "Dhaiya is not currently active",
             }
 
     except Exception as e:
@@ -362,9 +369,9 @@ def dhaiya_status(
 def muhurta_check(
     datetime_iso: str,
     activity: str,
-    latitude: float = 0,
-    longitude: float = 0
-) -> Dict[str, Any]:
+    latitude: float = 0,  # noqa: ARG001 - Reserved for location-based calculations
+    longitude: float = 0,  # noqa: ARG001 - Reserved for location-based calculations
+) -> dict[str, Any]:
     """
     Check muhurta quality for a specific activity.
 
@@ -385,7 +392,7 @@ def muhurta_check(
         muhurta_check("2026-02-14T18:00:00+05:30", "marriage", 12.97, 77.59)
     """
     try:
-        dt = datetime.fromisoformat(datetime_iso.replace('Z', '+00:00'))
+        dt = datetime.fromisoformat(datetime_iso.replace("Z", "+00:00"))
         if dt.tzinfo:
             dt = dt.replace(tzinfo=None)
 
@@ -409,18 +416,14 @@ def muhurta_check(
             "nakshatra_number": moon_nak["number"],
             "yoga": yoga_data["number"],
             "karana": karana_data["number"],
-            "vara": vara_data["weekday"]
+            "vara": vara_data["weekday"],
         }
 
         # Evaluate muhurta
         try:
             evaluation = evaluate_muhurta(activity, panchanga, dt)
         except (ValueError, TypeError):
-            evaluation = {
-                "quality": "unknown",
-                "score": 0,
-                "factors": []
-            }
+            evaluation = {"quality": "unknown", "score": 0, "factors": []}
 
         # Calculate inauspicious periods
         sunrise = dt.replace(hour=6, minute=0)
@@ -436,22 +439,34 @@ def muhurta_check(
             "evaluation": {
                 "quality": evaluation.get("quality", "unknown"),
                 "score": evaluation.get("score", 0),
-                "is_favorable": evaluation.get("score", 0) >= 6
+                "is_favorable": evaluation.get("score", 0) >= 6,
             },
             "inauspicious_periods": {
                 "rahu_kaal": {
-                    "start": inauspicious["rahu_kaal"]["start"].strftime("%H:%M") if inauspicious.get("rahu_kaal") else None,
-                    "end": inauspicious["rahu_kaal"]["end"].strftime("%H:%M") if inauspicious.get("rahu_kaal") else None
+                    "start": inauspicious["rahu_kaal"]["start"].strftime("%H:%M")
+                    if inauspicious.get("rahu_kaal")
+                    else None,
+                    "end": inauspicious["rahu_kaal"]["end"].strftime("%H:%M")
+                    if inauspicious.get("rahu_kaal")
+                    else None,
                 },
                 "yamaghanda": {
-                    "start": inauspicious["yamaghanda"]["start"].strftime("%H:%M") if inauspicious.get("yamaghanda") else None,
-                    "end": inauspicious["yamaghanda"]["end"].strftime("%H:%M") if inauspicious.get("yamaghanda") else None
+                    "start": inauspicious["yamaghanda"]["start"].strftime("%H:%M")
+                    if inauspicious.get("yamaghanda")
+                    else None,
+                    "end": inauspicious["yamaghanda"]["end"].strftime("%H:%M")
+                    if inauspicious.get("yamaghanda")
+                    else None,
                 },
                 "gulika": {
-                    "start": inauspicious["gulika"]["start"].strftime("%H:%M") if inauspicious.get("gulika") else None,
-                    "end": inauspicious["gulika"]["end"].strftime("%H:%M") if inauspicious.get("gulika") else None
-                }
-            }
+                    "start": inauspicious["gulika"]["start"].strftime("%H:%M")
+                    if inauspicious.get("gulika")
+                    else None,
+                    "end": inauspicious["gulika"]["end"].strftime("%H:%M")
+                    if inauspicious.get("gulika")
+                    else None,
+                },
+            },
         }
 
     except Exception as e:
@@ -460,11 +475,8 @@ def muhurta_check(
 
 @mcp.tool()
 def find_good_muhurta(
-    start_date: str,
-    end_date: str,
-    activity: str,
-    count: int = 5
-) -> Dict[str, Any]:
+    start_date: str, end_date: str, activity: str, count: int = 5
+) -> dict[str, Any]:
     """
     Find next good muhurta dates for an activity.
 
@@ -493,23 +505,22 @@ def find_good_muhurta(
 
         muhurtas = []
         for r in results:
-            muhurtas.append({
-                "datetime": r["datetime"].isoformat(),
-                "quality": r.get("quality", "good"),
-                "score": r.get("score", 0),
-                "tithi": r.get("tithi", 0),
-                "nakshatra": r.get("nakshatra", ""),
-                "vara": r.get("vara", "")
-            })
+            muhurtas.append(
+                {
+                    "datetime": r["datetime"].isoformat(),
+                    "quality": r.get("quality", "good"),
+                    "score": r.get("score", 0),
+                    "tithi": r.get("tithi", 0),
+                    "nakshatra": r.get("nakshatra", ""),
+                    "vara": r.get("vara", ""),
+                }
+            )
 
         return {
             "activity": activity,
-            "search_period": {
-                "start": start_date,
-                "end": end_date
-            },
+            "search_period": {"start": start_date, "end": end_date},
             "muhurtas_found": len(muhurtas),
-            "recommendations": muhurtas
+            "recommendations": muhurtas,
         }
 
     except Exception as e:
@@ -518,10 +529,8 @@ def find_good_muhurta(
 
 @mcp.tool()
 def antardasha_periods(
-    birth_datetime: str,
-    moon_longitude: float,
-    mahadasha_lord: str = None
-) -> Dict[str, Any]:
+    birth_datetime: str, moon_longitude: float, mahadasha_lord: str | None = None
+) -> dict[str, Any]:
     """
     Get Antardasha (sub-period) breakdown for a Mahadasha.
 
@@ -538,7 +547,7 @@ def antardasha_periods(
         antardasha_periods("1992-12-03T03:00:00+05:30", 324.11, "mercury")
     """
     try:
-        birth_dt = datetime.fromisoformat(birth_datetime.replace('Z', '+00:00'))
+        birth_dt = datetime.fromisoformat(birth_datetime.replace("Z", "+00:00"))
         if birth_dt.tzinfo:
             birth_dt = birth_dt.replace(tzinfo=None)
 
@@ -547,40 +556,164 @@ def antardasha_periods(
 
         periods = []
         for a in antardashas:
-            periods.append({
-                "mahadasha_lord": a["mahadasha_lord"],
-                "antardasha_lord": a["antardasha_lord"],
-                "start_date": a["start_date"].isoformat(),
-                "end_date": a["end_date"].isoformat(),
-                "months": a.get("months", 0)
-            })
+            periods.append(
+                {
+                    "mahadasha_lord": a["mahadasha_lord"],
+                    "antardasha_lord": a["antardasha_lord"],
+                    "start_date": a["start_date"].isoformat(),
+                    "end_date": a["end_date"].isoformat(),
+                    "months": a.get("months", 0),
+                }
+            )
 
         return {
             "birth_datetime": birth_datetime,
             "mahadasha_lord": mahadasha_lord,
             "antardasha_count": len(periods),
-            "antardashas": periods
+            "antardashas": periods,
         }
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__}
 
 
-def _get_dasha_interpretation(maha_lord: str, antar_lord: str) -> str:
-    """Get brief interpretation for dasha combination."""
-    interpretations = {
-        ("ketu", "ketu"): "Spiritual detachment and inner transformation. Karmic lessons in understanding the deeper self.",
-        ("venus", "mercury"): "Favorable for arts, business, and communication. Enhanced social connections and financial gains.",
-        ("mercury", "ketu"): "Period of spiritual insights and analytical thinking. May bring unexpected changes in communication.",
-        ("saturn", "saturn"): "Deep karmic period requiring patience and hard work. Growth through discipline and responsibility.",
-        ("jupiter", "venus"): "Expansion in relationships and finances. Favorable for marriage, legal matters, and prosperity.",
-        ("mars", "sun"): "Period of action, courage, and leadership. Favorable for military, politics, or competitive endeavors.",
-        ("rahu", "saturn"): "Karmic challenges mixed with ambition. Need for patience to navigate uncertainty and obstacles.",
+@mcp.tool()
+def antardasha_effects(mahadasha_lord: str, antardasha_lord: str) -> dict[str, Any]:
+    """
+    Get detailed Antardasha effects (81 combinations).
+
+    Retrieves comprehensive interpretation for any Mahadasha-Antardasha combination,
+    including effects on health, career, relationships, finances, and spiritual growth.
+
+    Args:
+        mahadasha_lord: Mahadasha planet (sun, moon, mars, mercury, jupiter, venus, saturn, rahu, ketu)
+        antardasha_lord: Antardasha planet
+
+    Returns:
+        Detailed effects dictionary including:
+        - general_effects: Overall themes of this period
+        - positive: Favorable outcomes
+        - negative: Challenges to watch
+        - health: Health-related effects
+        - career: Professional matters
+        - relationships: Relationship dynamics
+        - finances: Financial indications
+        - spiritual: Spiritual growth aspects
+
+    Example:
+        antardasha_effects("jupiter", "venus")
+    """
+    try:
+        effects = get_antardasha_effect(mahadasha_lord, antardasha_lord)
+
+        if effects:
+            return {
+                "mahadasha": mahadasha_lord.lower(),
+                "antardasha": antardasha_lord.lower(),
+                "found": True,
+                **effects,
+            }
+        else:
+            return {
+                "mahadasha": mahadasha_lord.lower(),
+                "antardasha": antardasha_lord.lower(),
+                "found": False,
+                "message": f"No effects data found for {mahadasha_lord}-{antardasha_lord} combination",
+            }
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__}
+
+
+@mcp.tool()
+def pratyantardasha_effects(
+    mahadasha_lord: str, antardasha_lord: str, pratyantardasha_lord: str
+) -> dict[str, Any]:
+    """
+    Get detailed Pratyantardasha effects (729 combinations).
+
+    Retrieves interpretation for the third level of Vimshottari Dasha system.
+    Pratyantardasha provides fine-grained timing for events within Antardasha.
+
+    Args:
+        mahadasha_lord: Mahadasha planet
+        antardasha_lord: Antardasha planet
+        pratyantardasha_lord: Pratyantardasha planet
+
+    Returns:
+        Detailed effects dictionary including:
+        - theme: Overall theme of this period
+        - duration_description: Human-readable duration
+        - effects: General effects
+        - health: Health indications
+        - career: Professional matters
+        - relationships: Relationship dynamics
+        - finances: Financial outlook
+        - timing: Auspicious timing within period
+        - recommendations: Suggested actions
+
+    Example:
+        pratyantardasha_effects("jupiter", "venus", "saturn")
+    """
+    try:
+        effects = get_pratyantardasha_effect(mahadasha_lord, antardasha_lord, pratyantardasha_lord)
+
+        if effects:
+            return {
+                "mahadasha": mahadasha_lord.lower(),
+                "antardasha": antardasha_lord.lower(),
+                "pratyantardasha": pratyantardasha_lord.lower(),
+                "found": True,
+                **effects,
+            }
+        else:
+            return {
+                "mahadasha": mahadasha_lord.lower(),
+                "antardasha": antardasha_lord.lower(),
+                "pratyantardasha": pratyantardasha_lord.lower(),
+                "found": False,
+                "message": (
+                    f"No effects data found for "
+                    f"{mahadasha_lord}-{antardasha_lord}-{pratyantardasha_lord} combination"
+                ),
+            }
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__}
+
+
+def _get_dasha_interpretation(maha_lord: str, antar_lord: str) -> dict[str, Any]:
+    """Get detailed interpretation for dasha combination from JSON knowledge base.
+
+    Returns structured effects data for all 81 MD-AD combinations.
+    """
+    effects = get_antardasha_effect(maha_lord, antar_lord)
+
+    if effects:
+        return {
+            "summary": effects.get("general_effects", [])[:2],  # Brief summary
+            "general": effects.get("general_effects", []),
+            "positive": effects.get("positive", []),
+            "negative": effects.get("negative", []),
+            "health": effects.get("health"),
+            "career": effects.get("career"),
+            "relationships": effects.get("relationships"),
+            "finances": effects.get("finances"),
+            "spiritual": effects.get("spiritual"),
+        }
+
+    # Fallback for missing data
+    return {
+        "summary": [f"{maha_lord.capitalize()}-{antar_lord.capitalize()} dasha period"],
+        "general": [f"Combined influences of {maha_lord} and {antar_lord}"],
+        "positive": [],
+        "negative": [],
+        "health": None,
+        "career": None,
+        "relationships": None,
+        "finances": None,
+        "spiritual": None,
     }
-    key = (maha_lord.lower(), antar_lord.lower())
-    if key in interpretations:
-        return interpretations[key]
-    return f"{maha_lord.capitalize()}-{antar_lord.capitalize()} dasha period with mixed influences"
 
 
 def _get_sade_sati_description(phase: str) -> str:
@@ -588,12 +721,12 @@ def _get_sade_sati_description(phase: str) -> str:
     descriptions = {
         "rising": "Saturn in 12th from Moon - Beginning phase, mental stress and sleep disturbances",
         "peak": "Saturn over Moon - Most intense phase, tests character and inner strength",
-        "setting": "Saturn in 2nd from Moon - Final phase, financial and family concerns"
+        "setting": "Saturn in 2nd from Moon - Final phase, financial and family concerns",
     }
     return descriptions.get(phase.lower(), "Unknown Sade Sati phase")
 
 
-def _get_sade_sati_effects(phase: str) -> List[str]:
+def _get_sade_sati_effects(phase: str) -> list[str]:
     """Get effects for Sade Sati phase."""
     effects = {
         "rising": [
@@ -601,7 +734,7 @@ def _get_sade_sati_effects(phase: str) -> List[str]:
             "Sleep disturbances and nightmares",
             "Hidden enemies become active",
             "Losses and setbacks",
-            "Spiritual awakening begins"
+            "Spiritual awakening begins",
         ],
         "peak": [
             "Health issues and immunity problems",
@@ -609,7 +742,7 @@ def _get_sade_sati_effects(phase: str) -> List[str]:
             "Relationship tests and separations",
             "Financial pressures",
             "Character building experiences",
-            "Inner strength development"
+            "Inner strength development",
         ],
         "setting": [
             "Financial burdens and expenses",
@@ -617,13 +750,13 @@ def _get_sade_sati_effects(phase: str) -> List[str]:
             "Speech problems and communication issues",
             "Losses continue but diminish",
             "Lessons consolidate",
-            "Transformation completes"
-        ]
+            "Transformation completes",
+        ],
     }
     return effects.get(phase.lower(), ["Sade Sati effects vary by individual karma"])
 
 
-def _assess_transits(planets: Dict, sade_sati: Dict, dhaiya: Dict) -> str:
+def _assess_transits(planets: dict, sade_sati: dict, dhaiya: dict) -> str:
     """Provide overall transit assessment."""
     if sade_sati.get("active"):
         if sade_sati.get("phase") == "peak":
@@ -648,7 +781,7 @@ def _calculate_house_distance(moon_idx: int, saturn_idx: int) -> int:
     return distance if distance > 0 else 12
 
 
-def _years_until_sade_sati(moon_idx: int, saturn_idx: int) -> Optional[float]:
+def _years_until_sade_sati(moon_idx: int, saturn_idx: int) -> float | None:
     """
     Estimate years until Sade Sati begins.
     Returns None if Sade Sati is already active or just ended.

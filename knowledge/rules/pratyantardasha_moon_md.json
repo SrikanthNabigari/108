@@ -1,0 +1,1183 @@
+{
+  "metadata": {
+    "mahadasha": "moon",
+    "md_years": 10,
+    "md_days": 3650,
+    "total_antardasha": 9,
+    "total_pratyantardasha_per_ad": 9,
+    "total_combinations": 81,
+    "notes": "Moon MD = 10 years, divided into 9 ADs. Each AD contains 9 PDs."
+  },
+  "moon_mahadasha": {
+    "sun_antardasha": {
+      "duration_days": 405,
+      "theme": "Mind Seeks Authority",
+      "sun_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Authority in Emotional Period",
+        "effects": [
+          "Emotional decision-making leading authority gains or losses",
+          "Public recognition influenced by mood and temperament",
+          "Leadership through emotional intelligence and mother's support",
+          "Risk of impulsive authority assertions"
+        ],
+        "health": "Emotional stress affecting heart and digestion; vitality fluctuations",
+        "career": "Leadership roles influenced by mood; public responsibility increases",
+        "relationships": "Authority conflicts with family members; mother's influence in decisions",
+        "timing_events": "Major public roles, emotional outbursts affecting status, family authority shifts"
+      },
+      "moon_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Mind's Emotional Depth",
+        "effects": [
+          "Introspection during authority-seeking period",
+          "Emotional connections enhance public presence",
+          "Mother becomes central to self-expression",
+          "Dual nature: seeking authority yet fearing responsibility"
+        ],
+        "health": "Emotional sensitivity increases; sleep and mood fluctuations",
+        "career": "Public work with emotional focus; counseling or caregiving prominence",
+        "relationships": "Emotional bonds strengthen; family becomes priority in public sphere",
+        "timing_events": "Emotional public events, mother's recognition, protective leadership"
+      },
+      "mars_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Aggressive Emotional Expression",
+        "effects": [
+          "Passion drives authority; quick decisions in public roles",
+          "Emotional outbursts affecting leadership credibility",
+          "Courageous emotional stands in public arena",
+          "Risk of impulsive conflicts during authority positions"
+        ],
+        "health": "Fever, inflammation, head pressures; emotional agitation affecting nerves",
+        "career": "Aggressive pursuit of leadership; conflict in public roles",
+        "relationships": "Emotional arguments with authority figures; family conflicts",
+        "timing_events": "Competitive public situations, conflicts with superiors, passionate leadership"
+      },
+      "mercury_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Rational Emotional Authority",
+        "effects": [
+          "Communication becomes vehicle for emotional authority",
+          "Intellectual expression of feelings in public domain",
+          "Verbal disputes over emotional matters in hierarchy",
+          "Mind dominates emotional responses"
+        ],
+        "health": "Nervous tension affecting speech; anxiety about communication",
+        "career": "Communication-based leadership; public speaking about emotions",
+        "relationships": "Verbal bonds; emotional expression through words with authority figures",
+        "timing_events": "Important speeches, negotiations, written communications of authority"
+      },
+      "jupiter_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Expansive Emotional Authority",
+        "effects": [
+          "Emotional wisdom guides public growth",
+          "Benevolent leadership through emotional connection",
+          "Expansion of family influence and public reputation",
+          "Optimism in emotional authority expression"
+        ],
+        "health": "Overall improvement; emotional clarity; weight gain possible",
+        "career": "Expansion in public roles; mentorship from emotional perspective",
+        "relationships": "Family expansion; beneficial public relationships; mother's support grows",
+        "timing_events": "Educational advancement, public recognition, family blessings"
+      },
+      "venus_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Elegant Emotional Authority",
+        "effects": [
+          "Charisma and charm in public leadership",
+          "Emotional beauty attracts public favor",
+          "Luxury and comfort increase during authority phase",
+          "Harmony in professional and personal realms"
+        ],
+        "health": "Improved vitality; skin and aesthetic improvements; sensuality rises",
+        "career": "Charming leadership; public favor in professional roles",
+        "relationships": "Romantic elements in public sphere; family harmony increases",
+        "timing_events": "Public admiration, professional partnerships, graceful authority"
+      },
+      "saturn_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Burdened Emotional Authority",
+        "effects": [
+          "Heavy responsibility in public roles; emotional weight",
+          "Delays and restrictions in authority gains",
+          "Discipline enforced through emotional trials",
+          "Tests of maternal support and emotional stability"
+        ],
+        "health": "Depression, chronic fatigue, joint pain; emotional heaviness",
+        "career": "Slow progress in leadership; challenging public responsibilities",
+        "relationships": "Family burdens increase; separation from mother possible; duty obligations",
+        "timing_events": "Difficult authority tests, family responsibilities, emotional restrictions"
+      },
+      "rahu_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Illusory Emotional Authority",
+        "effects": [
+          "Deceptive emotional appeals in public role",
+          "Unconventional path to public recognition",
+          "Confusion about authentic emotional authority",
+          "Foreign elements in emotional public expression"
+        ],
+        "health": "Anxiety, obsessive emotions; strange nervous conditions",
+        "career": "Unconventional path to leadership; foreign connections in public role",
+        "relationships": "Unusual emotional bonds; foreign or outsider relationships",
+        "timing_events": "Unexpected public opportunities, controversial emotional expressions"
+      },
+      "ketu_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Detached Emotional Authority",
+        "effects": [
+          "Emotional detachment from public role",
+          "Spiritual approach to authority and responsibility",
+          "Confusion in leadership direction",
+          "Karmic lessons through emotional authority"
+        ],
+        "health": "Low vitality, weak digestion; emotional numbness",
+        "career": "Loss of interest in public roles; spiritual shift in career",
+        "relationships": "Detachment from family; mother-child separation; isolated authority",
+        "timing_events": "Loss of public position, spiritual turning point, emotional clarity"
+      }
+    },
+    "moon_antardasha": {
+      "duration_days": 405,
+      "theme": "Triple Moon - Maximum Emotions and Mind",
+      "sun_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Emotional Self-Identity",
+        "effects": [
+          "Self-awareness through emotional lens",
+          "Personal identity strongly affected by feelings and moods",
+          "Shine through emotional authenticity and vulnerability",
+          "Public persona reflects inner emotional state"
+        ],
+        "health": "Emotional well-being affects overall health; vitality tied to mood",
+        "career": "Self-expression in career; personal brand based on authenticity",
+        "relationships": "Personal relationships deepen; emotional honesty emphasized",
+        "timing_events": "Self-discovery, personal recognition, emotional authenticity moments"
+      },
+      "moon_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Triple Moon - Extreme Emotional Sensitivity",
+        "effects": [
+          "Maximum emotional sensitivity and intuition",
+          "Public prominence through emotional work",
+          "Mother becomes central to entire life period",
+          "Extreme mood swings and psychological depth"
+        ],
+        "health": "Psychological sensitivity; possible depression or anxiety peaks; sleep issues",
+        "career": "Caregiving, counseling, nurturing professions flourish",
+        "relationships": "Deep emotional bonds; family-centric period; public emotional support role",
+        "timing_events": "Peak emotional episodes, major family events, public emotional recognition"
+      },
+      "mars_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Emotional Fire and Passion",
+        "effects": [
+          "Emotions fuel aggressive pursuits",
+          "Passionate emotional expression; intense feelings",
+          "Courage through emotional conviction",
+          "Risk of emotional conflicts and outbursts"
+        ],
+        "health": "Inflammation, fever, head pressure; emotional agitation; cuts/injuries possible",
+        "career": "Energetic pursuit of goals; conflict in emotionally-charged work",
+        "relationships": "Passionate emotional interactions; arguments with close family",
+        "timing_events": "Emotional confrontations, passionate pursuits, conflict resolution"
+      },
+      "mercury_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Emotional Communication",
+        "effects": [
+          "Heart speaks through words and communication",
+          "Emotional expression becomes articulate and public",
+          "Conversation deeply influenced by current mood",
+          "Writing and speech reflect inner feelings"
+        ],
+        "health": "Nervous tension from emotional overload; anxiety in communication",
+        "career": "Writing, speaking, teaching with emotional depth; public communication",
+        "relationships": "Deep conversations; emotional bonds through words and presence",
+        "timing_events": "Important communications, emotional speeches, writing projects"
+      },
+      "jupiter_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Emotional Expansion and Joy",
+        "effects": [
+          "Emotional optimism and expansion",
+          "Wisdom gained through emotional experiences",
+          "Family and home expansion",
+          "Benevolence and generosity through emotional connection"
+        ],
+        "health": "Overall well-being; emotional clarity; possible weight gain from comfort",
+        "career": "Growth through emotionally-connected work; mentoring becomes prominent",
+        "relationships": "Family expansion; beneficial new relationships; mother's blessings multiply",
+        "timing_events": "Family celebrations, educational growth, emotional wisdom gained"
+      },
+      "venus_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Emotional Beauty and Harmony",
+        "effects": [
+          "Charm and grace in emotional expression",
+          "Aesthetic appreciation heightens emotional response",
+          "Luxury and comfort support emotional well-being",
+          "Harmony in all emotional relationships"
+        ],
+        "health": "Improved vitality; beauty enhancement; sensuality; emotional pleasure",
+        "career": "Creative and artistic emotional work; public appeal increases",
+        "relationships": "Romance flourishes; family harmony at peak; aesthetic home environment",
+        "timing_events": "Beautiful moments, romantic developments, artistic creations"
+      },
+      "saturn_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Emotional Trials and Depression Risk",
+        "effects": [
+          "Heaviest emotional burdens during Moon-Moon-Saturn",
+          "Depression and melancholy risk peaks",
+          "Mother's health becomes concern",
+          "Discipline through emotional suffering"
+        ],
+        "health": "High depression risk; chronic fatigue; mother's health issues; poor sleep",
+        "career": "Slow progress; heavy emotional responsibilities in work",
+        "relationships": "Mother-child challenges; family separations possible; emotional isolation",
+        "timing_events": "Difficult family events, depression episodes, maternal health crisis"
+      },
+      "rahu_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Illusory Emotional Waves",
+        "effects": [
+          "Deceptive emotional states and false perceptions",
+          "Unconventional emotional expression attracts",
+          "Obsessive emotional patterns",
+          "Foreign or taboo emotional entanglements"
+        ],
+        "health": "Anxiety disorders, obsessive thoughts; strange emotional symptoms",
+        "career": "Unconventional emotional work; foreign connections; public fascination",
+        "relationships": "Unusual emotional attachments; foreign lovers; obsessive relationships",
+        "timing_events": "Unexpected emotional encounters, controversial actions, foreign travel"
+      },
+      "ketu_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Spiritual Emotional Release",
+        "effects": [
+          "Detachment from worldly emotional attachments",
+          "Spiritual growth through emotional losses",
+          "Isolation and spiritual introspection",
+          "Karmic emotional clearances occur"
+        ],
+        "health": "Low vitality; emotional detachment; spiritual healing begins",
+        "career": "Loss of emotional investment in career; spiritual calling emerges",
+        "relationships": "Separation from close ones; spiritual rather than emotional bonds",
+        "timing_events": "Emotional separations, spiritual breakthroughs, karmic completions"
+      }
+    },
+    "mars_antardasha": {
+      "duration_days": 405,
+      "theme": "Emotional Aggression and Passion",
+      "sun_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Courageous Emotional Authority",
+        "effects": [
+          "Aggressive pursuit of personal goals",
+          "Courageous emotional stands",
+          "Leadership through martial spirit",
+          "Risk of impulsive authority moves"
+        ],
+        "health": "High energy; fever risk; inflammation; head pressures",
+        "career": "Assertive leadership; competitive pursuits gain momentum",
+        "relationships": "Emotionally bold approaches; conflicts with authority figures",
+        "timing_events": "Competitive victories, bold life decisions, authority confrontations"
+      },
+      "moon_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Emotions Fuel Aggression",
+        "effects": [
+          "Passionate emotional expression",
+          "Anger and courage merge",
+          "Protective aggression for loved ones",
+          "Emotionally-driven conflict risk"
+        ],
+        "health": "Fever, inflammation, emotional agitation; cuts/burns possible",
+        "career": "Energetic pursuit of goals; protective work roles",
+        "relationships": "Passionate emotional bonds; family arguments; protective family member",
+        "timing_events": "Emotional fights, passionate declarations, protective actions"
+      },
+      "mars_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Double Mars - Maximum Aggression",
+        "effects": [
+          "Peak physical and emotional aggression",
+          "Extreme courage but also extreme anger",
+          "Accidents and injuries at highest risk",
+          "Conflict dominates all spheres"
+        ],
+        "health": "HIGH RISK - Accidents, injuries, fever, blood issues; surgery possible",
+        "career": "Military/police/competitive work at peak; conflicts with colleagues",
+        "relationships": "Relationship conflicts peak; domestic arguments; separations possible",
+        "timing_events": "Accidents, surgeries, major conflicts, aggressive confrontations"
+      },
+      "mercury_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Aggressive Communication",
+        "effects": [
+          "Sharp, cutting speech and words",
+          "Intellectual arguments become personal attacks",
+          "Quick wit used to wound or defend",
+          "Communication becomes weapon"
+        ],
+        "health": "Nervous tension; speech issues; anxiety from verbal conflicts",
+        "career": "Competitive communication; debates and arguments; sharp negotiations",
+        "relationships": "Verbal battles; arguments with siblings or close ones; cutting remarks",
+        "timing_events": "Verbal conflicts, sharp negotiations, argumentative situations"
+      },
+      "jupiter_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Righteous Warrior",
+        "effects": [
+          "Aggression channeled into righteous causes",
+          "Confidence and optimism fuel courageous action",
+          "Leadership in just wars or causes",
+          "Expansion of power and influence"
+        ],
+        "health": "Generally good despite aggression; injuries heal well",
+        "career": "Leadership in protective/righteous work; expansion of power",
+        "relationships": "Confident family protection; leadership in family matters",
+        "timing_events": "Righteous victories, confident pursuits, leadership gains"
+      },
+      "venus_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Passionate Lover",
+        "effects": [
+          "Aggression transforms into sexual passion",
+          "Romantic pursuits become aggressive",
+          "Beauty attracts despite martial nature",
+          "Sensual experiences dominate"
+        ],
+        "health": "Good vitality; sexual energy high; reproductive system active",
+        "career": "Work in art, beauty, sensuality alongside aggressive drive",
+        "relationships": "Passionate romance; sexual relations active; lover conflicts",
+        "timing_events": "Romantic passion, sexual activity, relationship intensity"
+      },
+      "saturn_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Restricted Aggression",
+        "effects": [
+          "Aggression blocked by restrictions and delays",
+          "Frustration from lack of action",
+          "Slow, grinding conflicts emerge",
+          "Authority suppresses impulses"
+        ],
+        "health": "Chronic conditions worsen; pain increases; injuries heal slowly",
+        "career": "Blocked progress despite effort; struggles with authority",
+        "relationships": "Difficult family relationships; suppressed feelings cause pain",
+        "timing_events": "Frustrating delays, blocked goals, painful restrictions"
+      },
+      "rahu_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Obsessive Aggression",
+        "effects": [
+          "Aggressive pursuits become obsessive",
+          "Unconventional or taboo aggressive acts",
+          "Foreign conflicts and unusual aggression",
+          "Deceptive aggressive plays"
+        ],
+        "health": "Obsessive behavior patterns; unusual injuries; anxiety-driven actions",
+        "career": "Unconventional aggressive work; foreign conflicts",
+        "relationships": "Obsessive relationship conflicts; unusual aggressive patterns",
+        "timing_events": "Obsessive pursuits, unconventional conflicts, sudden aggressive acts"
+      },
+      "ketu_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Spiritual Warrior",
+        "effects": [
+          "Aggression leads to spiritual battles",
+          "Detachment from worldly conflicts",
+          "Fighting inner demons rather than external",
+          "Karmic warrior path"
+        ],
+        "health": "Low physical energy; spiritual health improves",
+        "career": "Shift from aggressive to spiritual pursuits",
+        "relationships": "Detachment from conflict-ridden relationships",
+        "timing_events": "Spiritual awakening through aggression, inner battles, detachment"
+      }
+    },
+    "mercury_antardasha": {
+      "duration_days": 405,
+      "theme": "Emotional Intelligence and Communication",
+      "sun_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Intellectual Self-Expression",
+        "effects": [
+          "Mind dominates emotional intelligence",
+          "Self-expression through intellect",
+          "Public communication of personal philosophy",
+          "Logic applied to emotional situations"
+        ],
+        "health": "Nervous energy; mental clarity; anxiety possible",
+        "career": "Leadership through intellectual communication",
+        "relationships": "Intellectual bonds strengthen; ideas shared openly",
+        "timing_events": "Important speeches, intellectual achievements, communication success"
+      },
+      "moon_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Emotional Communication",
+        "effects": [
+          "Heart and mind unite in expression",
+          "Feelings articulated with clarity",
+          "Communication touches emotions deeply",
+          "Emotional intelligence peaks"
+        ],
+        "health": "Mental calm; emotional clarity; sleep quality good",
+        "career": "Counseling, teaching, emotional communication work",
+        "relationships": "Deep emotional conversations; bonds strengthen",
+        "timing_events": "Important communications, emotional conversations, writing projects"
+      },
+      "mars_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Aggressive Intellectual Expression",
+        "effects": [
+          "Sharp, cutting arguments and debates",
+          "Intellectual aggression in communications",
+          "Quick-witted but potentially wounding",
+          "Competitive intellectual pursuits"
+        ],
+        "health": "Nervous tension; speech issues; anxiety",
+        "career": "Competitive communication; journalism; critical analysis",
+        "relationships": "Verbal sparring; sibling conflicts; argumentative interactions",
+        "timing_events": "Important debates, critical communications, intellectual victories"
+      },
+      "mercury_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Double Mercury - Peak Intellect",
+        "effects": [
+          "Maximum intellectual and communication power",
+          "Genius-level thinking possible",
+          "Multiple projects and communications flourish",
+          "Restlessness and scattered focus risk"
+        ],
+        "health": "Nervous tension; insomnia possible; mental overactivity",
+        "career": "Peak performance in communication, writing, business, trading",
+        "relationships": "Intellectual bonding; multiple connections; communication focused",
+        "timing_events": "Major intellectual achievements, publications, business success"
+      },
+      "jupiter_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Wise Communication",
+        "effects": [
+          "Intellect combined with wisdom",
+          "Teaching and mentoring flourish",
+          "Benevolent communication",
+          "Knowledge expansion"
+        ],
+        "health": "Mental peace; intellectual well-being; clarity gained",
+        "career": "Teaching, writing, business expansion through communication",
+        "relationships": "Mentoring relationships develop; family communication improves",
+        "timing_events": "Educational achievements, teaching roles, knowledge publications"
+      },
+      "venus_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Charming Communication",
+        "effects": [
+          "Communication becomes charming and attractive",
+          "Artistic expression through intellect",
+          "Sensual appreciation of ideas",
+          "Social connections flourish"
+        ],
+        "health": "Good health; mental relaxation; pleasure in learning",
+        "career": "Arts, social communication, business partnerships succeed",
+        "relationships": "Romantic communication; social success; relationship harmony",
+        "timing_events": "Social successes, artistic achievements, romantic communications"
+      },
+      "saturn_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Burdened Communication",
+        "effects": [
+          "Heavy thoughts and dark thinking",
+          "Communication becomes serious and heavy",
+          "Intellectual struggles and delays",
+          "Discipline in mental pursuits"
+        ],
+        "health": "Mental depression; concentration difficulties; anxiety",
+        "career": "Slow progress in intellectual work; heavy responsibilities",
+        "relationships": "Serious communications; difficult family discussions",
+        "timing_events": "Difficult communications, intellectual challenges, heavy thinking"
+      },
+      "rahu_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Illusory Intellect",
+        "effects": [
+          "Intellectual deceptions and illusions",
+          "Obsessive thinking patterns",
+          "Unconventional ideas attract",
+          "Foreign languages or ideas fascinate"
+        ],
+        "health": "Obsessive thoughts; anxiety; restlessness",
+        "career": "Unconventional communication; foreign language skills; unusual ideas",
+        "relationships": "Obsessive communication patterns; unusual connections",
+        "timing_events": "Unexpected communications, unconventional ideas, foreign contacts"
+      },
+      "ketu_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Spiritual Intellect",
+        "effects": [
+          "Mind turns toward spiritual matters",
+          "Detachment from worldly communication",
+          "Higher knowledge begins to dawn",
+          "Wisdom through letting go"
+        ],
+        "health": "Mental quieting; reduced anxiety; spiritual clarity",
+        "career": "Shift toward spiritual or philosophical work",
+        "relationships": "Less communication; deeper spiritual connections",
+        "timing_events": "Spiritual insights, reduction in worldly communication, inner peace"
+      }
+    },
+    "jupiter_antardasha": {
+      "duration_days": 405,
+      "theme": "Emotional Expansion and Wisdom",
+      "sun_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Expansive Authority",
+        "effects": [
+          "Confident leadership and influence",
+          "Authority expands naturally",
+          "Benevolent personal power",
+          "Recognition and honor increase"
+        ],
+        "health": "Excellent health; vitality high; weight gain possible",
+        "career": "Leadership expansion; public recognition; promotion",
+        "relationships": "Personal authority respected; family leadership role",
+        "timing_events": "Major promotions, leadership gains, public recognition"
+      },
+      "moon_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Emotional Expansion and Joy",
+        "effects": [
+          "Emotional optimism and expansion",
+          "Joy and happiness increase",
+          "Family expansion and blessings",
+          "Public emotional work expands"
+        ],
+        "health": "Overall well-being; emotional happiness; health improves",
+        "career": "Expansion in caregiving/counseling work; public service grows",
+        "relationships": "Family expansion (births); mother's blessings; relationship growth",
+        "timing_events": "Family celebrations, births, educational growth, happiness"
+      },
+      "mars_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Righteous Warrior Energy",
+        "effects": [
+          "Courageous pursuits of goals",
+          "Optimism fuels aggressive action",
+          "Just causes gain momentum",
+          "Confidence in righteous battles"
+        ],
+        "health": "Good health; energy high; wounds heal well",
+        "career": "Expansion of protective/leadership work",
+        "relationships": "Confident family protection increases",
+        "timing_events": "Successful aggressive pursuits, confident victories"
+      },
+      "mercury_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Expansive Communication",
+        "effects": [
+          "Communication and intellect flourish",
+          "Teaching and writing expand",
+          "Business communications succeed",
+          "Knowledge sharing increases"
+        ],
+        "health": "Mental clarity; good communication skills",
+        "career": "Expansion in writing, teaching, communication fields",
+        "relationships": "Communication bonds deepen; mentoring relationships",
+        "timing_events": "Publications, teaching successes, business communications"
+      },
+      "jupiter_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Double Jupiter - Maximum Expansion",
+        "effects": [
+          "Extreme expansion and growth",
+          "Wisdom and benevolence peak",
+          "Wealth and fortune increase dramatically",
+          "Excess and indulgence risk"
+        ],
+        "health": "Excellent health; possible weight gain; overall prosperity",
+        "career": "Maximum career expansion; success in all ventures",
+        "relationships": "Blessed family life; expansion in all relationships",
+        "timing_events": "Major windfalls, family celebrations, educational honors"
+      },
+      "venus_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Generous Love and Luxury",
+        "effects": [
+          "Benevolent love and charm",
+          "Luxury and comfort increase",
+          "Beauty and grace enhance life",
+          "Generous giving and receiving"
+        ],
+        "health": "Excellent health; beauty improvements; sensuality high",
+        "career": "Success in creative and business partnerships",
+        "relationships": "Romantic happiness; family harmony; generous giving",
+        "timing_events": "Romantic successes, artistic achievements, luxury acquisitions"
+      },
+      "saturn_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Wisdom Through Discipline",
+        "effects": [
+          "Expansion grounded in responsibility",
+          "Long-term wisdom replaces quick gains",
+          "Slow but steady expansion",
+          "Karmic rewards accumulate"
+        ],
+        "health": "Steady improvement; chronic issues manageable",
+        "career": "Slow but sustained career expansion; long-term success",
+        "relationships": "Mature, responsibility-based relationships deepen",
+        "timing_events": "Long-term successes, responsibility-based achievements"
+      },
+      "rahu_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Illusory Expansion",
+        "effects": [
+          "Expansion seems larger than reality",
+          "Deceptive opportunities appear",
+          "Unconventional expansion paths",
+          "Foreign gains possible"
+        ],
+        "health": "Illusions about health; unusual gains",
+        "career": "Unconventional expansion; foreign opportunities",
+        "relationships": "Unusual relationship expansions; foreign connections",
+        "timing_events": "Unexpected gains, foreign successes, illusory opportunities"
+      },
+      "ketu_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Spiritual Wisdom",
+        "effects": [
+          "Expansion toward spiritual knowledge",
+          "Detachment from material expansion",
+          "Higher wisdom emerges",
+          "Karmic rewards in spiritual form"
+        ],
+        "health": "Spiritual healing; detachment helps health",
+        "career": "Shift toward spiritual teaching or work",
+        "relationships": "Spiritual rather than material bonds deepen",
+        "timing_events": "Spiritual insights, wisdom gained, spiritual pursuits"
+      }
+    },
+    "venus_antardasha": {
+      "duration_days": 405,
+      "theme": "Emotional Beauty and Pleasure",
+      "sun_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Charming Authority",
+        "effects": [
+          "Leadership through charm and grace",
+          "Personal magnetism increases",
+          "Aesthetic appreciation in authority",
+          "Social grace enhances public presence"
+        ],
+        "health": "Good vitality; beauty improvements; sensuality",
+        "career": "Leadership through charm; public appeal increases",
+        "relationships": "Personal charm attracts; authority respected",
+        "timing_events": "Charming leadership moments, public admiration"
+      },
+      "moon_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Emotional Beauty and Harmony",
+        "effects": [
+          "Charm and grace in emotional expression",
+          "Aesthetic appreciation heightens emotions",
+          "Luxury supports well-being",
+          "Harmony dominates emotional sphere"
+        ],
+        "health": "Good health; beauty at peak; sensuality high",
+        "career": "Creative and artistic emotional work",
+        "relationships": "Romance flourishes; family harmony; aesthetic home",
+        "timing_events": "Romantic moments, artistic creations, beautiful experiences"
+      },
+      "mars_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Passionate Lover",
+        "effects": [
+          "Aggression becomes sexual passion",
+          "Romantic pursuits aggressive",
+          "Beauty attracts despite martial nature",
+          "Sensual experiences dominate"
+        ],
+        "health": "Good vitality; sexual energy high; reproductive health active",
+        "career": "Work in art and beauty alongside action",
+        "relationships": "Passionate romance; sexual relations active",
+        "timing_events": "Romantic passion, sexual activity, relationship intensity"
+      },
+      "mercury_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Charming Communication",
+        "effects": [
+          "Communication becomes attractive",
+          "Artistic expression through intellect",
+          "Sensual appreciation of ideas",
+          "Social connections flourish"
+        ],
+        "health": "Good health; mental relaxation; pleasure in learning",
+        "career": "Arts, social communication, business partnerships succeed",
+        "relationships": "Romantic communication; social success",
+        "timing_events": "Social successes, artistic achievements, romantic communications"
+      },
+      "jupiter_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Generous Love",
+        "effects": [
+          "Benevolent love and generosity",
+          "Luxury and comfort increase",
+          "Beauty and grace enhance life",
+          "Generous giving and receiving"
+        ],
+        "health": "Excellent health; beauty peak; sensuality high",
+        "career": "Success in creative and business partnerships",
+        "relationships": "Romantic happiness; generous giving; family harmony",
+        "timing_events": "Romantic successes, artistic achievements, luxury gains"
+      },
+      "venus_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Double Venus - Peak Beauty and Pleasure",
+        "effects": [
+          "Maximum beauty, charm, and sensuality",
+          "Pleasure and luxury at peak",
+          "Artistic achievements flourish",
+          "Romantic relationships at height"
+        ],
+        "health": "Excellent health; beauty peak; reproductive health excellent",
+        "career": "Peak in arts, design, beauty, relationships work",
+        "relationships": "Romantic relationship peak; family harmony; sensual pleasures",
+        "timing_events": "Peak romance, artistic masterpieces, beauty and luxury"
+      },
+      "saturn_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Restricted Pleasure",
+        "effects": [
+          "Beauty and pleasure restricted",
+          "Relationships become serious and tested",
+          "Delays in romantic ventures",
+          "Age and maturity show"
+        ],
+        "health": "Declining vitality; aging shows; chronic conditions possible",
+        "career": "Business work more than creative; partnerships tested",
+        "relationships": "Relationship strains; separation possible; duty before pleasure",
+        "timing_events": "Relationship challenges, restricted pleasure, maturity shows"
+      },
+      "rahu_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Illusory Beauty",
+        "effects": [
+          "Beauty seems larger than reality",
+          "Obsessive romantic attachments",
+          "Unconventional aesthetic tastes",
+          "Foreign lovers or tastes"
+        ],
+        "health": "Obsessive health issues; unusual beauty pursuits",
+        "career": "Unconventional artistic work; foreign art connections",
+        "relationships": "Obsessive romantic attachments; unusual relationships",
+        "timing_events": "Unusual romantic situations, obsessive attractions"
+      },
+      "ketu_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Spiritual Love",
+        "effects": [
+          "Love becomes spiritual rather than sensual",
+          "Detachment from worldly pleasures",
+          "Higher beauty appreciation",
+          "Karmic relationship completions"
+        ],
+        "health": "Improved spiritual health; detachment helps",
+        "career": "Shift toward spiritual or service work",
+        "relationships": "Detachment from sensual relationships; spiritual bonds deepen",
+        "timing_events": "Spiritual love, relationship completions, detachment"
+      }
+    },
+    "saturn_antardasha": {
+      "duration_days": 405,
+      "theme": "Emotional Burdens and Discipline",
+      "sun_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Heavy Authority",
+        "effects": [
+          "Authority becomes burden and responsibility",
+          "Heavy leadership duties",
+          "Restrictions and limitations in public role",
+          "Slow progress despite effort"
+        ],
+        "health": "Declining vitality; chronic fatigue; joint problems",
+        "career": "Heavy responsibilities; slow career progress; authority challenges",
+        "relationships": "Authority conflicts with family; difficult decisions",
+        "timing_events": "Heavy authority tests, responsibilities increase, slow progress"
+      },
+      "moon_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Emotional Trials and Depression Risk",
+        "effects": [
+          "Heaviest emotional burdens",
+          "Depression and melancholy risk",
+          "Mother's health becomes concern",
+          "Discipline through emotional suffering"
+        ],
+        "health": "HIGH DEPRESSION RISK; chronic fatigue; mother's health issues",
+        "career": "Heavy emotional responsibilities in work",
+        "relationships": "Mother-child challenges; family separations; isolation",
+        "timing_events": "Depression episodes, family health crises, emotional restrictions"
+      },
+      "mars_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Frustrated Aggression",
+        "effects": [
+          "Aggression blocked by restrictions",
+          "Frustration from lack of action",
+          "Slow grinding conflicts",
+          "Authority suppresses impulses"
+        ],
+        "health": "Chronic conditions worsen; pain increases; slow healing",
+        "career": "Blocked progress despite effort; authority conflicts",
+        "relationships": "Difficult family relationships; suppressed feelings",
+        "timing_events": "Frustrating delays, blocked goals, painful restrictions"
+      },
+      "mercury_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Burdened Communication",
+        "effects": [
+          "Heavy thoughts and dark thinking",
+          "Communication becomes serious and heavy",
+          "Intellectual struggles and delays",
+          "Discipline in mental pursuits"
+        ],
+        "health": "Mental depression; concentration difficulties; anxiety",
+        "career": "Slow progress in intellectual work; heavy responsibilities",
+        "relationships": "Serious communications; difficult family discussions",
+        "timing_events": "Difficult communications, intellectual challenges"
+      },
+      "jupiter_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Wisdom Through Discipline",
+        "effects": [
+          "Expansion grounded in responsibility",
+          "Long-term wisdom replaces quick gains",
+          "Slow but steady expansion",
+          "Karmic rewards accumulate"
+        ],
+        "health": "Steady improvement; chronic issues manageable",
+        "career": "Slow but sustained career expansion; long-term success",
+        "relationships": "Mature responsibility-based relationships deepen",
+        "timing_events": "Long-term successes, responsibility-based achievements"
+      },
+      "venus_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Restricted Pleasure",
+        "effects": [
+          "Beauty and pleasure restricted",
+          "Relationships become serious and tested",
+          "Delays in romantic ventures",
+          "Age and maturity show"
+        ],
+        "health": "Declining vitality; aging shows; chronic conditions possible",
+        "career": "Business work more than creative; partnerships tested",
+        "relationships": "Relationship strains; separation possible; duty before pleasure",
+        "timing_events": "Relationship challenges, restricted pleasure, maturity shows"
+      },
+      "saturn_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Double Saturn - Maximum Burden",
+        "effects": [
+          "Heaviest period of entire dasha cycle",
+          "Maximum restrictions and limitations",
+          "Deep karmic lessons through suffering",
+          "Discipline and detachment forced"
+        ],
+        "health": "CRITICAL PERIOD - Chronic disease, depression, weakness possible",
+        "career": "Severe career setbacks; losses and restrictions",
+        "relationships": "Family separation possible; mother's critical health; isolation",
+        "timing_events": "Major life losses, health crises, separations, profound karmic lessons"
+      },
+      "rahu_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Illusory Restrictions",
+        "effects": [
+          "Restrictions seem harsher than reality",
+          "Confusion about true situation",
+          "Unconventional restrictions",
+          "Foreign delays and obstacles"
+        ],
+        "health": "Anxiety; unusual chronic conditions; obsessive health fears",
+        "career": "Unconventional obstacles; foreign restrictions",
+        "relationships": "Unusual separation patterns; foreign complications",
+        "timing_events": "Unusual obstacles, foreign complications, confused situations"
+      },
+      "ketu_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Spiritual Discipline",
+        "effects": [
+          "Restrictions lead to spiritual growth",
+          "Detachment deepens",
+          "Karmic lessons complete",
+          "Spiritual elevation through suffering"
+        ],
+        "health": "Spiritual healing despite physical challenges",
+        "career": "Shift toward spiritual pursuits despite worldly loss",
+        "relationships": "Spiritual bonds remain; worldly attachments dissolve",
+        "timing_events": "Spiritual breakthroughs, karmic completions, detachment deepens"
+      }
+    },
+    "rahu_antardasha": {
+      "duration_days": 405,
+      "theme": "Illusory and Obsessive Emotions",
+      "sun_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Deceptive Authority",
+        "effects": [
+          "Authority seems larger than reality",
+          "Deceptive public persona",
+          "Unconventional path to recognition",
+          "Foreign elements in authority"
+        ],
+        "health": "Unusual health claims; anxiety about status",
+        "career": "Unconventional leadership; foreign connections in authority",
+        "relationships": "Deceptive authority claims; foreign influence",
+        "timing_events": "Unexpected recognition, unconventional authority, illusions"
+      },
+      "moon_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Illusory Emotional Waves",
+        "effects": [
+          "Deceptive emotional states",
+          "Obsessive emotional patterns",
+          "Foreign emotional entanglements",
+          "Emotional confusion"
+        ],
+        "health": "Anxiety disorders; obsessive thoughts; strange emotional symptoms",
+        "career": "Unconventional emotional work; foreign connections; public fascination",
+        "relationships": "Unusual attachments; foreign lovers; obsessive patterns",
+        "timing_events": "Unexpected emotional encounters, obsessive patterns"
+      },
+      "mars_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Obsessive Aggression",
+        "effects": [
+          "Aggressive pursuits become obsessive",
+          "Unconventional or taboo aggressive acts",
+          "Foreign conflicts and aggression",
+          "Deceptive aggressive plays"
+        ],
+        "health": "Obsessive behavior patterns; unusual injuries; anxiety-driven actions",
+        "career": "Unconventional aggressive work; foreign conflicts",
+        "relationships": "Obsessive conflicts; unusual aggressive patterns",
+        "timing_events": "Obsessive pursuits, unconventional conflicts"
+      },
+      "mercury_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Illusory Intellect",
+        "effects": [
+          "Intellectual deceptions and illusions",
+          "Obsessive thinking patterns",
+          "Unconventional ideas attract",
+          "Foreign languages or ideas fascinate"
+        ],
+        "health": "Obsessive thoughts; anxiety; restlessness",
+        "career": "Unconventional communication; foreign language skills",
+        "relationships": "Obsessive communication; unusual connections",
+        "timing_events": "Unexpected communications, unconventional ideas"
+      },
+      "jupiter_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Illusory Expansion",
+        "effects": [
+          "Expansion seems larger than reality",
+          "Deceptive opportunities appear",
+          "Unconventional expansion paths",
+          "Foreign gains possible"
+        ],
+        "health": "Illusions about health; unusual gains",
+        "career": "Unconventional expansion; foreign opportunities gain",
+        "relationships": "Unusual relationship expansions; foreign connections",
+        "timing_events": "Unexpected gains, foreign successes"
+      },
+      "venus_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Illusory Beauty",
+        "effects": [
+          "Beauty seems larger than reality",
+          "Obsessive romantic attachments",
+          "Unconventional aesthetic tastes",
+          "Foreign lovers or tastes"
+        ],
+        "health": "Obsessive health issues; unusual beauty pursuits",
+        "career": "Unconventional artistic work; foreign art",
+        "relationships": "Obsessive romantic attachments; unusual relationships",
+        "timing_events": "Unusual romantic situations, obsessive attractions"
+      },
+      "saturn_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Illusory Restrictions",
+        "effects": [
+          "Restrictions seem harsher than reality",
+          "Confusion about true situation",
+          "Unconventional obstacles",
+          "Foreign delays and obstacles"
+        ],
+        "health": "Anxiety; unusual chronic conditions; obsessive health fears",
+        "career": "Unconventional obstacles; foreign restrictions",
+        "relationships": "Unusual separation patterns; foreign complications",
+        "timing_events": "Unusual obstacles, foreign complications"
+      },
+      "rahu_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Double Rahu - Maximum Obsession",
+        "effects": [
+          "Peak obsessive and deceptive patterns",
+          "Maximum foreign or taboo attraction",
+          "Extreme illusions and confusion",
+          "Unconventional behavior at height"
+        ],
+        "health": "ANXIETY PEAK; obsessive disorders; strange health conditions",
+        "career": "Extreme unconventional pursuits; foreign involvement",
+        "relationships": "Obsessive relationships; unusual liaisons; deception",
+        "timing_events": "Obsessive crises, deceptive situations, unusual encounters"
+      },
+      "ketu_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Spiritual Clarity Through Illusions",
+        "effects": [
+          "Illusions dissolve into spiritual truth",
+          "Detachment from obsessive patterns",
+          "Spiritual clarity emerges",
+          "Karmic illusions clear"
+        ],
+        "health": "Anxiety reduces; spiritual healing begins",
+        "career": "Shift from obsessive to spiritual pursuits",
+        "relationships": "Release from obsessive bonds; spiritual connections",
+        "timing_events": "Spiritual breakthroughs, release from delusions"
+      }
+    },
+    "ketu_antardasha": {
+      "duration_days": 405,
+      "theme": "Spiritual Release and Detachment",
+      "sun_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Detached Authority",
+        "effects": [
+          "Loss of interest in public role",
+          "Spiritual approach to authority",
+          "Detachment from power-seeking",
+          "Karmic lessons through authority"
+        ],
+        "health": "Low vitality; weak digestion; spiritual health improves",
+        "career": "Loss of interest in public roles; spiritual shift",
+        "relationships": "Detachment from authority-based relationships",
+        "timing_events": "Loss of public position, spiritual turning point"
+      },
+      "moon_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Spiritual Emotional Release",
+        "effects": [
+          "Detachment from worldly emotional attachments",
+          "Spiritual growth through emotional losses",
+          "Isolation and spiritual introspection",
+          "Karmic emotional clearances"
+        ],
+        "health": "Low vitality; emotional detachment; spiritual healing",
+        "career": "Loss of emotional investment; spiritual calling emerges",
+        "relationships": "Separation from close ones; spiritual rather than emotional bonds",
+        "timing_events": "Emotional separations, spiritual breakthroughs"
+      },
+      "mars_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Spiritual Warrior",
+        "effects": [
+          "Aggression leads to spiritual battles",
+          "Detachment from worldly conflicts",
+          "Fighting inner demons",
+          "Karmic warrior path"
+        ],
+        "health": "Low physical energy; spiritual health improves",
+        "career": "Shift from aggressive to spiritual pursuits",
+        "relationships": "Detachment from conflict-ridden relationships",
+        "timing_events": "Spiritual awakening through aggression, inner battles"
+      },
+      "mercury_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Spiritual Intellect",
+        "effects": [
+          "Mind turns toward spiritual matters",
+          "Detachment from worldly communication",
+          "Higher knowledge begins to dawn",
+          "Wisdom through letting go"
+        ],
+        "health": "Mental quieting; reduced anxiety; spiritual clarity",
+        "career": "Shift toward spiritual or philosophical work",
+        "relationships": "Less communication; deeper spiritual connections",
+        "timing_events": "Spiritual insights, reduction in worldly communication"
+      },
+      "jupiter_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Spiritual Wisdom",
+        "effects": [
+          "Expansion toward spiritual knowledge",
+          "Detachment from material expansion",
+          "Higher wisdom emerges",
+          "Karmic rewards in spiritual form"
+        ],
+        "health": "Spiritual healing; detachment helps health",
+        "career": "Shift toward spiritual teaching or work",
+        "relationships": "Spiritual rather than material bonds deepen",
+        "timing_events": "Spiritual insights, wisdom gained, spiritual pursuits"
+      },
+      "venus_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Spiritual Love",
+        "effects": [
+          "Love becomes spiritual rather than sensual",
+          "Detachment from worldly pleasures",
+          "Higher beauty appreciation",
+          "Karmic relationship completions"
+        ],
+        "health": "Improved spiritual health; detachment helps",
+        "career": "Shift toward spiritual or service work",
+        "relationships": "Detachment from sensual relationships; spiritual bonds deepen",
+        "timing_events": "Spiritual love, relationship completions, detachment"
+      },
+      "saturn_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Spiritual Discipline",
+        "effects": [
+          "Restrictions lead to spiritual growth",
+          "Detachment deepens",
+          "Karmic lessons complete",
+          "Spiritual elevation through suffering"
+        ],
+        "health": "Spiritual healing despite physical challenges",
+        "career": "Shift toward spiritual pursuits despite worldly loss",
+        "relationships": "Spiritual bonds remain; worldly attachments dissolve",
+        "timing_events": "Spiritual breakthroughs, karmic completions"
+      },
+      "rahu_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Spiritual Clarity Through Illusions",
+        "effects": [
+          "Illusions dissolve into spiritual truth",
+          "Detachment from obsessive patterns",
+          "Spiritual clarity emerges",
+          "Karmic illusions clear"
+        ],
+        "health": "Anxiety reduces; spiritual healing begins",
+        "career": "Shift from obsessive to spiritual pursuits",
+        "relationships": "Release from obsessive bonds; spiritual connections",
+        "timing_events": "Spiritual breakthroughs, release from delusions"
+      },
+      "ketu_pratyantardasha": {
+        "duration_days": 45,
+        "theme": "Double Ketu - Spiritual Completion",
+        "effects": [
+          "Peak spiritual detachment and release",
+          "Karmic cycle completions",
+          "Maximum spiritual growth",
+          "Worldly attachments fully dissolved"
+        ],
+        "health": "Spiritual transformation; worldly health becomes irrelevant",
+        "career": "Complete shift to spiritual pursuits; worldly career ends",
+        "relationships": "All worldly relationships dissolve or become spiritual",
+        "timing_events": "Major spiritual completion, liberation from worldly attachments"
+      }
+    }
+  }
+}
