@@ -67,9 +67,6 @@ uv sync
 # Run API server
 uv run uvicorn services.api.main:app --reload
 
-# Run MCP server
-uv run python -m services.mcp.ephemeris
-
 # Run tests
 uv run pytest
 
@@ -80,6 +77,34 @@ uv run ruff format .
 # Type check
 uv run mypy packages/
 ```
+
+## MCP Servers
+
+Four MCP servers provide tools for Claude Desktop:
+
+| Server | File | Tools |
+|--------|------|-------|
+| 108-ephemeris | `services/mcp/ephemeris_server.py` | planetary_positions, house_cusps, nakshatra_details, divisional_chart, panchanga |
+| 108-patterns | `services/mcp/patterns_server.py` | detect_yogas, detect_doshas, calculate_strength, ashtakavarga |
+| 108-context | `services/mcp/context_server.py` | current_dasha, dasha_periods, transit_analysis, sade_sati_status, muhurta_check |
+| 108-knowledge | `services/mcp/knowledge_server.py` | lookup_planet, lookup_rashi, lookup_nakshatra, lookup_yoga, search_knowledge |
+
+### Claude Desktop Configuration
+
+Config location: `~/Library/Application Support/Claude/claude_desktop_config.json`
+
+```json
+{
+  "mcpServers": {
+    "108-ephemeris": {
+      "command": "/path/to/108-core/.venv/bin/python",
+      "args": ["/path/to/108-core/services/mcp/ephemeris_server.py"]
+    }
+  }
+}
+```
+
+**Important**: Use the project's `.venv/bin/python` (not system python3) to ensure all dependencies are available.
 
 ## Code Style
 

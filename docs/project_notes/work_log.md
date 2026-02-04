@@ -53,6 +53,14 @@ Servers: 108-ephemeris, 108-yoga, 108-memory, 108-biorhythm
 | birth_charts | 16dace3b... |
 | detected_patterns | 9 yoga records |
 
+### Claude Desktop MCP Fix
+Fixed MCP server configuration issue:
+- **Problem**: Servers disconnecting immediately on startup
+- **Cause**: Config was using `python3` (system) which lacks mcp/fastmcp packages
+- **Solution**: Use venv Python: `.venv/bin/python`
+
+Config location: `~/Library/Application Support/Claude/claude_desktop_config.json`
+
 ### Next Steps
 - [ ] Push to GitHub: `git push origin main`
 - [ ] Start API server: `uv run uvicorn services.api.main:app --reload`
