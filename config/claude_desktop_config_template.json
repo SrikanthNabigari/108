@@ -1,0 +1,40 @@
+{
+  "mcpServers": {
+    "108-ephemeris": {
+      "command": "python3",
+      "args": [
+        "/REPLACE_WITH_YOUR_PATH/108-core/services/mcp/ephemeris_server.py"
+      ],
+      "env": {
+        "PYTHONPATH": "/REPLACE_WITH_YOUR_PATH/108-core"
+      }
+    },
+    "108-patterns": {
+      "command": "python3",
+      "args": [
+        "/REPLACE_WITH_YOUR_PATH/108-core/services/mcp/patterns_server.py"
+      ],
+      "env": {
+        "PYTHONPATH": "/REPLACE_WITH_YOUR_PATH/108-core"
+      }
+    },
+    "108-context": {
+      "command": "python3",
+      "args": [
+        "/REPLACE_WITH_YOUR_PATH/108-core/services/mcp/context_server.py"
+      ],
+      "env": {
+        "PYTHONPATH": "/REPLACE_WITH_YOUR_PATH/108-core"
+      }
+    },
+    "108-knowledge": {
+      "command": "python3",
+      "args": [
+        "/REPLACE_WITH_YOUR_PATH/108-core/services/mcp/knowledge_server.py"
+      ],
+      "env": {
+        "PYTHONPATH": "/REPLACE_WITH_YOUR_PATH/108-core"
+      }
+    }
+  }
+}
