@@ -1,5 +1,220 @@
 # 108 Work Log
 
+## 2026-02-05 (Session 10 - Claude Cowork)
+
+### Summary
+Completed full Pratyantardasha knowledge expansion - 729 combinations (9×9×9) for the complete 5-level Vimshottari Dasha system. Analyzed package architecture for integration.
+
+### Knowledge Files Created
+
+**Pratyantardasha Files (10 new files, ~1.5MB total):**
+| File | Size | Combinations | Status |
+|------|------|--------------|--------|
+| `pratyantardasha_sun_md.json` | 52KB | 81 | ✅ Complete |
+| `pratyantardasha_moon_md.json` | 55KB | 81 | ✅ Complete |
+| `pratyantardasha_mars_md.json` | 100KB | 81 | ✅ Complete |
+| `pratyantardasha_mercury_md.json` | 118KB | 81 | ✅ Complete |
+| `pratyantardasha_jupiter_md.json` | 120KB | 81 | ✅ Complete |
+| `pratyantardasha_venus_md.json` | 93KB | 81 | ✅ Complete |
+| `pratyantardasha_saturn_md.json` | 100KB | 81 | ✅ Complete |
+| `pratyantardasha_rahu_md.json` | 133KB | 81 | ✅ Complete |
+| `pratyantardasha_ketu_md.json` | 71KB | 81 | ✅ Complete |
+| **`pratyantardasha_master.json`** | **864KB** | **729** | ✅ **CONSOLIDATED** |
+
+**Consolidation Script Created:**
+| File | Purpose |
+|------|---------|
+| `scripts/consolidate_pratyantardasha.py` | Merges 9 MD files into master with multi-format handling |
+
+### Complete Dasha Knowledge Coverage
+
+| Level | Name | Combinations | File | Status |
+|-------|------|--------------|------|--------|
+| 1 | Mahadasha | 9 | `dasha_rules.json` | ✅ Complete |
+| 2 | Antardasha | 81 (9×9) | `antardasha_effects.json` | ✅ Complete |
+| 3 | Pratyantardasha | 729 (9×9×9) | `pratyantardasha_master.json` | ✅ **NEW** |
+| 4 | Sookshma | Formulas | `pratyantardasha_rules.json` | ✅ Timing rules |
+| 5 | Prana | Formulas | `pratyantardasha_rules.json` | ✅ Timing rules |
+
+### Updated Knowledge Base Stats
+
+| Category | Before | After | Growth |
+|----------|--------|-------|--------|
+| Yogas | 522 | 522 | - |
+| Doshas | 55 | 55 | - |
+| Antardasha Effects | 81 | 81 | - |
+| **Pratyantardasha Effects** | **0** | **729** | **∞** |
+| Definition Files | 7 | 7 | - |
+| Rule Files | 11 | 21 | +10 |
+| **Total Knowledge** | ~590KB | **~2.1MB** | **3.5x** |
+
+---
+
+### 🔧 TASKS FOR CLAUDE CODE ✅ ALL COMPLETED (Session 10 continued)
+
+**Priority 1: Add Knowledge Loader Accessors** ✅ DONE (`packages/core/src/knowledge_loader.py`)
+```python
+# Add these accessor functions:
+def get_antardasha_effects() -> dict[str, Any]:
+    """Get Antardasha effects (81 combinations)."""
+    return load_rules("antardasha_effects").get("antardasha_effects", {})
+
+def get_pratyantardasha_effects() -> dict[str, Any]:
+    """Get Pratyantardasha effects (729 combinations)."""
+    return load_rules("pratyantardasha_master").get("pratyantardasha_effects", {})
+```
+
+**Priority 2: Add Dasha Effect Retrieval Functions** ✅ DONE (`packages/context/src/dasha.py`)
+```python
+def get_antardasha_effects(
+    mahadasha_lord: str, antardasha_lord: str
+) -> dict[str, Any] | None:
+    """Get detailed effects for specific Antardasha combination."""
+    effects_data = get_antardasha_effects_rules()  # From knowledge_loader
+    return effects_data.get(mahadasha_lord.lower(), {}).get(antardasha_lord.lower())
+
+def get_pratyantardasha_effects(
+    mahadasha_lord: str, antardasha_lord: str, pratyantardasha_lord: str
+) -> dict[str, Any] | None:
+    """Get detailed effects for specific Pratyantardasha combination (729 total)."""
+    effects_data = get_pratyantardasha_effects_rules()  # From knowledge_loader
+    return (effects_data
+            .get(mahadasha_lord.lower(), {})
+            .get(antardasha_lord.lower(), {})
+            .get(pratyantardasha_lord.lower()))
+```
+
+**Priority 3: Replace Hardcoded Interpretations** ✅ DONE (`services/mcp/context_server.py`)
+```python
+# CURRENT (only 8 hardcoded):
+def _get_dasha_interpretation(maha_lord: str, antar_lord: str) -> str:
+    interpretations = {
+        ("ketu", "ketu"): "Spiritual detachment...",
+        # ... only 8 entries
+    }
+
+# REPLACE WITH (uses 81 combinations from JSON):
+def _get_dasha_interpretation(maha_lord: str, antar_lord: str) -> dict:
+    from packages.context.src.dasha import get_antardasha_effects
+    effects = get_antardasha_effects(maha_lord, antar_lord)
+    if effects:
+        return {
+            "general": effects.get("general_effects", []),
+            "positive": effects.get("positive", []),
+            "negative": effects.get("negative", []),
+            "health": effects.get("health"),
+            "career": effects.get("career"),
+            "relationships": effects.get("relationships"),
+        }
+    return {}
+```
+
+**Priority 4: Add New MCP Tools** ✅ DONE (`services/mcp/context_server.py`)
+```python
+@mcp.tool()
+def antardasha_effects(
+    mahadasha_lord: str,
+    antardasha_lord: str
+) -> dict[str, Any]:
+    """
+    Get detailed Antardasha effects (81 combinations).
+
+    Args:
+        mahadasha_lord: Mahadasha planet (sun, moon, mars, etc.)
+        antardasha_lord: Antardasha planet
+
+    Returns:
+        Effects including health, career, relationships, finances
+    """
+    from packages.context.src.dasha import get_antardasha_effects
+    return get_antardasha_effects(mahadasha_lord, antardasha_lord) or {}
+
+@mcp.tool()
+def pratyantardasha_effects(
+    mahadasha_lord: str,
+    antardasha_lord: str,
+    pratyantardasha_lord: str
+) -> dict[str, Any]:
+    """
+    Get detailed Pratyantardasha effects (729 combinations).
+
+    Args:
+        mahadasha_lord: Mahadasha planet
+        antardasha_lord: Antardasha planet
+        pratyantardasha_lord: Pratyantardasha planet
+
+    Returns:
+        Effects including theme, duration, health, career, relationships, timing
+    """
+    from packages.context.src.dasha import get_pratyantardasha_effects
+    return get_pratyantardasha_effects(
+        mahadasha_lord, antardasha_lord, pratyantardasha_lord
+    ) or {}
+```
+
+**Priority 5: Add Knowledge Server Lookups** ✅ DONE (`services/mcp/knowledge_server.py`)
+```python
+@mcp.tool()
+def lookup_antardasha_effects(mahadasha_lord: str, antardasha_lord: str) -> dict:
+    """Lookup Antardasha effects from knowledge base."""
+    data = _load_json(RULES_DIR / "antardasha_effects.json")
+    effects = data.get("antardasha_effects", {})
+    return effects.get(mahadasha_lord.lower(), {}).get(antardasha_lord.lower(), {})
+
+@mcp.tool()
+def lookup_pratyantardasha_effects(
+    mahadasha_lord: str, antardasha_lord: str, pratyantardasha_lord: str
+) -> dict:
+    """Lookup Pratyantardasha effects from knowledge base (729 combinations)."""
+    data = _load_json(RULES_DIR / "pratyantardasha_master.json")
+    effects = data.get("pratyantardasha_effects", {})
+    return (effects
+            .get(mahadasha_lord.lower(), {})
+            .get(antardasha_lord.lower(), {})
+            .get(pratyantardasha_lord.lower(), {}))
+```
+
+**Priority 6: Enhance current_dasha Tool Response** ✅ DONE
+Update the `current_dasha` tool to include effects data in its response:
+```python
+# In current_dasha() response, add:
+result["antardasha_effects"] = get_antardasha_effects(md_lord, ad_lord)
+result["pratyantardasha_effects"] = get_pratyantardasha_effects(md_lord, ad_lord, pd_lord)
+```
+
+### Files to Modify Summary
+
+| File | Change | Priority |
+|------|--------|----------|
+| `packages/core/src/knowledge_loader.py` | Add 2 accessor functions | HIGH |
+| `packages/context/src/dasha.py` | Add 2 effect retrieval functions | HIGH |
+| `services/mcp/context_server.py` | Replace hardcoded, add 2 tools | HIGH |
+| `services/mcp/knowledge_server.py` | Add 2 lookup tools | MEDIUM |
+| `packages/guide/src/tools.py` | Add wrapper methods | MEDIUM |
+
+### Verification Steps
+```bash
+# After changes, test:
+uv run pytest tests/ -v
+
+# Test MCP tools manually:
+python -c "
+from packages.context.src.dasha import get_antardasha_effects, get_pratyantardasha_effects
+print(get_antardasha_effects('jupiter', 'venus'))
+print(get_pratyantardasha_effects('jupiter', 'venus', 'saturn'))
+"
+```
+
+### Git Commits (by Claude Code)
+```
+82e199d feat(dasha): Add Antardasha/Pratyantardasha effect retrieval
+```
+- All 6 priorities completed
+- 17 files changed, 33,513 insertions
+- All 95 tests passing
+
+---
+
 ## 2026-02-05 (Session 9 - Claude Code)
 
 ### Summary
