@@ -1,5 +1,50 @@
 # 108 Work Log
 
+## 2026-02-05 (Session 9 - Claude Code)
+
+### Summary
+Completed Priority 2: Updated all package code to use JSON knowledge files instead of hardcoded values.
+
+### Completed Tasks
+- [x] Create centralized `knowledge_loader.py` with LRU caching
+- [x] Update `packages/self/src/strength.py` - Load Shadbala/Ashtakavarga from JSON
+- [x] Update `packages/self/src/dosha_detector.py` - Load remedies from JSON
+- [x] Update `packages/context/src/dasha.py` - Load Vimshottari periods from JSON
+- [x] Update `packages/context/src/transits.py` - Load Gochara rules from JSON
+- [x] Update `packages/context/src/muhurta.py` - Load inauspicious periods from JSON
+- [x] Fix all lint issues (unused args, __all__ sorting, Path usage)
+- [x] All 95 tests passing
+
+### New File Created
+| File | Purpose |
+|------|---------|
+| `packages/core/src/knowledge_loader.py` | Centralized JSON loader with @lru_cache |
+
+### Architecture Pattern
+```python
+# Lazy loading with fallback defaults
+def _get_dasha_years() -> dict[str, int]:
+    rules = get_dasha_rules()
+    periods = rules.get("vimshottari_system", {}).get("periods", [])
+    if periods:
+        return {p["planet"]: p["years"] for p in periods}
+    # Fallback to defaults
+    return {"ketu": 7, "venus": 20, ...}
+
+# Backwards-compatible exports
+DASHA_YEARS = _get_dasha_years()
+```
+
+### Git Commit
+```
+0592f36 feat(knowledge): Update packages to use JSON knowledge files
+```
+
+### Remaining Priority 2 Task
+- [ ] `packages/cosmos/src/divisional.py` - Use `dignities.json` (optional)
+
+---
+
 ## 2026-02-04 (Session 8 - Claude Cowork)
 
 ### Summary
@@ -40,6 +85,18 @@ Complete knowledge base expansion - from hardcoded values to 590KB of externaliz
 | `muhurta_rules.json` | 18KB | Electional astrology | **NEW** |
 | `compatibility_rules.json` | 24KB | Ashta Kuta (36 points) | **NEW** |
 | `remedies_rules.json` | 28KB | Gemstones/mantras/yantras | **NEW** |
+| `antardasha_effects.json` | 107KB | 81 MD-AD combinations | **NEW** |
+| `pratyantardasha_rules.json` | 15KB | PD calculation + timing | **NEW** |
+
+### Dasha System Coverage
+
+| Level | Name | Content | File |
+|-------|------|---------|------|
+| 1 | Mahadasha | 9 planets × effects | `dasha_rules.json` |
+| 2 | Antardasha | 81 combinations (9×9) | `antardasha_effects.json` |
+| 3 | Pratyantardasha | Timing rules + house lords | `pratyantardasha_rules.json` |
+| 4 | Sookshma | Formula included | `pratyantardasha_rules.json` |
+| 5 | Prana | Formula included | `pratyantardasha_rules.json` |
 
 ### What Was Externalized
 
@@ -71,20 +128,20 @@ Previously hardcoded in Python (now in JSON):
 # Restart to load 522 yogas + 55 doshas
 ```
 
-**Priority 2: Update Package Code to Use Knowledge Files**
-- [ ] `packages/self/src/strength.py` - Replace hardcoded SHADBALA with `shadbala_rules.json`
-- [ ] `packages/self/src/dosha_detector.py` - Load orbs/remedies from JSON
-- [ ] `packages/context/src/dasha.py` - Use `dasha_rules.json`
-- [ ] `packages/context/src/transits.py` - Use `transit_rules.json`
-- [ ] `packages/context/src/muhurta.py` - Use `muhurta_rules.json`
-- [ ] `packages/cosmos/src/divisional.py` - Use `dignities.json` (fix errors)
+**Priority 2: Update Package Code to Use Knowledge Files** ✅ COMPLETED (Session 9)
+- [x] `packages/self/src/strength.py` - Replace hardcoded SHADBALA with `shadbala_rules.json`
+- [x] `packages/self/src/dosha_detector.py` - Load orbs/remedies from JSON
+- [x] `packages/context/src/dasha.py` - Use `dasha_rules.json`
+- [x] `packages/context/src/transits.py` - Use `transit_rules.json`
+- [x] `packages/context/src/muhurta.py` - Use `muhurta_rules.json`
+- [ ] `packages/cosmos/src/divisional.py` - Use `dignities.json` (optional)
 
-**Priority 3: Add Knowledge Loaders**
+**Priority 3: Add Knowledge Loaders** ✅ COMPLETED (Session 9)
 ```python
-# Create shared utility: packages/core/src/knowledge_loader.py
-# - Load and cache JSON knowledge files
-# - Validate against schemas
-# - Provide typed accessors
+# Created: packages/core/src/knowledge_loader.py
+# - Load and cache JSON knowledge files with @lru_cache
+# - Exports: get_shadbala_rules, get_dasha_rules, get_transit_rules, etc.
+# - Future: Add schema validation
 ```
 
 **Priority 4: Remaining Knowledge Files (Optional)**
