@@ -1,0 +1,41 @@
+{
+  "mcpServers": {
+    "ephemeris": {
+      "command": "uv",
+      "args": ["run", "python", "-m", "services.mcp.ephemeris"],
+      "env": {
+        "PYTHONPATH": "packages"
+      }
+    },
+    "biorhythm": {
+      "command": "uv",
+      "args": ["run", "python", "-m", "services.mcp.biorhythm"],
+      "env": {
+        "PYTHONPATH": "packages"
+      }
+    },
+    "knowledge": {
+      "command": "uv",
+      "args": ["run", "python", "-m", "services.mcp.knowledge"],
+      "env": {
+        "PYTHONPATH": "packages",
+        "KNOWLEDGE_PATH": "knowledge"
+      }
+    },
+    "memory": {
+      "command": "uv",
+      "args": ["run", "python", "-m", "services.mcp.memory"],
+      "env": {
+        "PYTHONPATH": "packages",
+        "DATABASE_URL": "${DATABASE_URL}"
+      }
+    },
+    "patterns": {
+      "command": "uv",
+      "args": ["run", "python", "-m", "services.mcp.patterns"],
+      "env": {
+        "PYTHONPATH": "packages"
+      }
+    }
+  }
+}

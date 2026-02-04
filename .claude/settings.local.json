@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -LsSf https://astral.sh/uv/install.sh)",
+      "Bash(sh)",
+      "Bash(export PATH=\"$HOME/.local/bin:$PATH\")",
+      "Bash(docker exec 108-postgres psql -U postgres -d one_zero_eight -c \"\\\\dt\")",
+      "Bash(docker exec 108-redis redis-cli ping)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "ephemeris",
+    "biorhythm",
+    "knowledge",
+    "memory"
+  ]
+}
