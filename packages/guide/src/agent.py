@@ -26,18 +26,17 @@ Architecture:
     END → Return response
 """
 
-from typing import TypedDict, List, Dict, Any, Optional, Literal, Annotated
+import asyncio
+import logging
+import os
 from datetime import datetime
 from enum import Enum
-import json
-import logging
+from typing import Annotated, Any, Optional
 
-# LangGraph imports
-from langgraph.graph import StateGraph, END
-from langgraph.types import StreamWriter
 from langchain_anthropic import ChatAnthropic
-from langchain_core.messages import HumanMessage, AIMessage, SystemMessage, BaseMessage
-from langchain_core.tools import Tool
+from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, SystemMessage
+from langgraph.graph import END, StateGraph
+from typing_extensions import TypedDict
 
 # Configure logging
 logger = logging.getLogger(__name__)
@@ -47,40 +46,43 @@ logger = logging.getLogger(__name__)
 # Type Definitions
 # =====================
 
+
 class IntentType(str, Enum):
     """User intent types."""
-    CALCULATE = "calculate"      # User wants calculations (positions, charts)
-    ANALYZE = "analyze"          # User wants chart analysis (yogas, doshas)
-    PREDICT = "predict"          # User wants predictions
-    TIMING = "timing"            # User asks about muhurta/timing
-    DASHA = "dasha"              # User asks about dasha periods
-    TRANSIT = "transit"          # User asks about transits
-    REMEDY = "remedy"            # User asks for remedies
-    GENERAL = "general"          # General questions about astrology
-    PERSONAL = "personal"        # Personal questions about their chart
-    UNKNOWN = "unknown"          # Can't determine intent
+
+    CALCULATE = "calculate"  # User wants calculations (positions, charts)
+    ANALYZE = "analyze"  # User wants chart analysis (yogas, doshas)
+    PREDICT = "predict"  # User wants predictions
+    TIMING = "timing"  # User asks about muhurta/timing
+    DASHA = "dasha"  # User asks about dasha periods
+    TRANSIT = "transit"  # User asks about transits
+    REMEDY = "remedy"  # User asks for remedies
+    GENERAL = "general"  # General questions about astrology
+    PERSONAL = "personal"  # Personal questions about their chart
+    UNKNOWN = "unknown"  # Can't determine intent
 
 
 class AgentState(TypedDict):
     """State that flows through the agent graph."""
+
     # Conversation
-    messages: Annotated[List[BaseMessage], "Conversation history"]
+    messages: Annotated[list[BaseMessage], "Conversation history"]
     user_input: str
     response: Optional[str]
 
     # User context
     user_id: str
-    birth_chart: Optional[Dict[str, Any]]
-    current_dasha: Optional[Dict[str, Any]]
-    current_transits: Optional[Dict[str, Any]]
-    detected_yogas: List[Dict[str, Any]]
-    detected_doshas: List[Dict[str, Any]]
+    birth_chart: Optional[dict[str, Any]]
+    current_dasha: Optional[dict[str, Any]]
+    current_transits: Optional[dict[str, Any]]
+    detected_yogas: list[dict[str, Any]]
+    detected_doshas: list[dict[str, Any]]
 
     # Analysis results
-    analysis_results: Dict[str, Any]
+    analysis_results: dict[str, Any]
 
     # Memory
-    memories: List[Dict[str, Any]]
+    memories: list[dict[str, Any]]
 
     # Routing
     intent: Optional[IntentType]
@@ -188,12 +190,48 @@ PERSONALITY_STYLES = {
 # =====================
 
 INTENT_KEYWORDS = {
-    IntentType.CALCULATE: ["position", "where is", "degree", "longitude", "location", "chart", "calculate"],
-    IntentType.ANALYZE: ["yoga", "dosha", "strength", "weakness", "pattern", "combination", "aspect"],
-    IntentType.PREDICT: ["predict", "future", "will", "when will", "happen", "outcome", "result"],
+    IntentType.CALCULATE: [
+        "position",
+        "where is",
+        "degree",
+        "longitude",
+        "location",
+        "chart",
+        "calculate",
+    ],
+    IntentType.ANALYZE: [
+        "yoga",
+        "dosha",
+        "strength",
+        "weakness",
+        "pattern",
+        "combination",
+        "aspect",
+    ],
+    IntentType.PREDICT: [
+        "predict",
+        "future",
+        "will",
+        "when will",
+        "happen",
+        "outcome",
+        "result",
+    ],
     IntentType.DASHA: ["dasha", "mahadasha", "antardasha", "period", "timing"],
-    IntentType.TRANSIT: ["transit", "gochara", "sade sati", "saturn", "passing through"],
-    IntentType.TIMING: ["muhurta", "good time", "auspicious", "inauspicious", "when should"],
+    IntentType.TRANSIT: [
+        "transit",
+        "gochara",
+        "sade sati",
+        "saturn",
+        "passing through",
+    ],
+    IntentType.TIMING: [
+        "muhurta",
+        "good time",
+        "auspicious",
+        "inauspicious",
+        "when should",
+    ],
     IntentType.REMEDY: ["remedy", "solution", "what should", "help", "fix", "improve"],
     IntentType.PERSONAL: ["my chart", "my birth", "about me", "tell me about", "my future"],
     IntentType.GENERAL: ["tell me", "explain", "what is", "how does", "define", "mean"],
@@ -204,6 +242,7 @@ INTENT_KEYWORDS = {
 # Guide Agent
 # =====================
 
+
 class Guide:
     """
     The 108 Guide Agent.
@@ -211,46 +250,38 @@ class Guide:
     A LangGraph-powered agent that:
     - Understands user intent via multi-level classification
     - Loads personalized context (birth chart, dasha, transits)
-    - Recalls relevant memories from Mem0
+    - Recalls relevant memories from the memory store
     - Routes to appropriate handlers (calculate, analyze, predict, general)
     - Generates personality-adapted responses
     - Learns from every interaction via memory storage
-
-    The agent operates as a state machine with the following nodes:
-    - classify_intent: Determine what user is asking
-    - load_context: Fetch user's birth chart and current planetary positions
-    - check_memory: Retrieve relevant past facts
-    - route_by_intent: Conditional routing to specialist nodes
-    - calculate: Run ephemeris calculations via MCP
-    - analyze_patterns: Detect yogas and doshas
-    - predict: Generate predictions using dasha/transit analysis
-    - general: Answer general questions
-    - interpret: Build personalized response using LLM
-    - save_memory: Store important facts for future reference
     """
 
     def __init__(
         self,
-        model: str = "claude-opus-4-5-20251101",
+        model: str = "claude-sonnet-4-20250514",
         api_key: Optional[str] = None,
-        debug: bool = False
+        debug: bool = False,
     ):
         """
         Initialize the Guide agent.
 
         Args:
-            model: Claude model to use (default: latest Opus)
+            model: Claude model to use
             api_key: Anthropic API key (uses env var if not provided)
             debug: Enable debug logging
         """
         self.model = model
-        self.api_key = api_key
+        self.api_key = api_key or os.environ.get("ANTHROPIC_API_KEY")
         self.debug = debug
+
+        # Memory store (lazy initialized)
+        self._store = None
+        self._store_connected = False
 
         # Initialize LLM
         self.llm = ChatAnthropic(
             model=model,
-            api_key=api_key,
+            api_key=self.api_key,
             temperature=0.7,
         )
 
@@ -261,29 +292,23 @@ class Guide:
         if debug:
             logger.setLevel(logging.DEBUG)
 
-    def _build_graph(self) -> StateGraph:
-        """
-        Build the LangGraph state machine.
+    async def _get_store(self):
+        """Get or initialize memory store."""
+        if self._store is None:
+            from packages.memory.src.store import MemoryStore
 
-        Graph Structure:
-            START
-              ↓
-            classify_intent
-              ↓
-            load_context
-              ↓
-            check_memory
-              ↓
-            [route_by_intent]
-              ├─→ calculate ──┐
-              ├─→ analyze ────┤
-              ├─→ predict ────┼→ interpret
-              └─→ general ────┤
-              ↓
-            save_memory
-              ↓
-            END
-        """
+            self._store = MemoryStore()
+            try:
+                await self._store.connect()
+                self._store_connected = True
+                logger.info("Memory store connected")
+            except Exception as e:
+                logger.warning(f"Could not connect to memory store: {e}")
+                self._store_connected = False
+        return self._store
+
+    def _build_graph(self) -> StateGraph:
+        """Build the LangGraph state machine."""
         graph = StateGraph(AgentState)
 
         # Add all nodes
@@ -319,7 +344,7 @@ class Guide:
                 IntentType.PERSONAL.value: "general",
                 IntentType.GENERAL.value: "general",
                 IntentType.UNKNOWN.value: "general",
-            }
+            },
         )
 
         # Convergence paths
@@ -339,19 +364,7 @@ class Guide:
     # ===================
 
     def _classify_intent(self, state: AgentState) -> AgentState:
-        """
-        Classify user's intent from their message.
-
-        Uses multi-level classification:
-        1. Keyword matching for quick classification
-        2. LLM classification for ambiguous cases
-
-        Args:
-            state: Current agent state
-
-        Returns:
-            Updated state with intent classified
-        """
+        """Classify user's intent from their message."""
         user_input = state["user_input"].lower()
 
         # Try keyword-based classification first
@@ -364,7 +377,7 @@ class Guide:
                 max_matches = matches
                 intent = intent_type
 
-        # If low confidence or ambiguous, use LLM
+        # If low confidence, use LLM
         if max_matches < 2:
             classification_prompt = f"""Classify this user query into one of these intents:
 - calculate: User wants planetary positions, chart calculations, degrees
@@ -393,38 +406,43 @@ Respond with ONLY the intent name (e.g., "calculate")"""
         state["intent"] = intent
 
         if self.debug:
-            logger.debug(f"Classified intent: {intent.value} (confidence: {max_matches}/3)")
+            logger.debug(f"Classified intent: {intent.value}")
 
         return state
 
     def _load_context(self, state: AgentState) -> AgentState:
-        """
-        Load user context: birth chart, current dasha, current transits.
-
-        In production, this would:
-        - Query database for user's birth chart
-        - Calculate current dasha using ephemeris
-        - Get current planetary transits
-        - Detect current yogas and doshas
-
-        Args:
-            state: Current agent state
-
-        Returns:
-            Updated state with context loaded
-        """
+        """Load user context: birth chart, current dasha, current transits."""
         # If birth chart provided, extract lagna for personality
         if state.get("birth_chart"):
             lagna = state["birth_chart"].get("lagna_rashi", "").lower()
             if lagna and lagna in PERSONALITY_STYLES:
                 state["personality_style"] = lagna
 
-            if self.debug:
-                logger.debug(f"Loaded birth chart for user {state['user_id']}")
-                logger.debug(f"Personality style: {state.get('personality_style', 'unknown')}")
+            # Calculate current dasha if we have birth data
+            if not state.get("current_dasha") and state["birth_chart"].get("moon_longitude"):
+                try:
+                    from packages.context.src import get_current_dasha
 
-        # In production: Load current dasha, transits, etc.
-        # For now, initialize empty dicts
+                    birth_dt_str = state["birth_chart"].get("birth_datetime")
+                    moon_lon = state["birth_chart"].get("moon_longitude")
+                    if birth_dt_str and moon_lon:
+                        birth_dt = datetime.fromisoformat(birth_dt_str.replace("Z", "+00:00"))
+                        if birth_dt.tzinfo:
+                            birth_dt = birth_dt.replace(tzinfo=None)
+                        dasha = get_current_dasha(birth_dt, moon_lon, datetime.now())
+                        state["current_dasha"] = {
+                            "mahadasha_lord": dasha["mahadasha"]["lord"],
+                            "antardasha_lord": dasha["antardasha"]["lord"],
+                            "mahadasha_end": dasha["mahadasha"]["end_date"].isoformat(),
+                            "antardasha_end": dasha["antardasha"]["end_date"].isoformat(),
+                        }
+                except Exception as e:
+                    logger.warning(f"Could not calculate dasha: {e}")
+
+            if self.debug:
+                logger.debug(f"Loaded birth chart, personality: {state.get('personality_style')}")
+
+        # Initialize empty dicts if not provided
         if not state.get("current_dasha"):
             state["current_dasha"] = {}
         if not state.get("current_transits"):
@@ -435,30 +453,11 @@ Respond with ONLY the intent name (e.g., "calculate")"""
         return state
 
     def _check_memory(self, state: AgentState) -> AgentState:
-        """
-        Check memory for relevant facts about user.
-
-        In production, this would query Mem0 to retrieve:
-        - Previously mentioned facts about their life
-        - Past predictions and their accuracy
-        - Remedies recommended before
-        - Patterns the user has noticed
-
-        Args:
-            state: Current agent state
-
-        Returns:
-            Updated state with relevant memories
-        """
-        user_id = state["user_id"]
-        query = state["user_input"]
-
-        # In production:
-        # memories = await mem0.search(user_id, query, limit=5)
-        # state["memories"] = memories
-
-        # For now, initialize empty list
-        state["memories"] = []
+        """Check memory for relevant facts about user."""
+        # Memory retrieval is async, we'll do it in the async chat method
+        # For sync execution, memories should be passed in
+        if not state.get("memories"):
+            state["memories"] = []
 
         if self.debug and state["memories"]:
             logger.debug(f"Retrieved {len(state['memories'])} relevant memories")
@@ -466,18 +465,9 @@ Respond with ONLY the intent name (e.g., "calculate")"""
         return state
 
     def _route_by_intent(self, state: AgentState) -> str:
-        """
-        Route to appropriate handler based on classified intent.
-
-        Args:
-            state: Current agent state
-
-        Returns:
-            Node name to route to
-        """
+        """Route to appropriate handler based on classified intent."""
         intent = state.get("intent", IntentType.GENERAL)
 
-        # Consolidate intents to handler nodes
         if intent in [IntentType.CALCULATE, IntentType.DASHA, IntentType.TRANSIT]:
             return "calculate"
         elif intent == IntentType.ANALYZE:
@@ -488,143 +478,130 @@ Respond with ONLY the intent name (e.g., "calculate")"""
             return "general"
 
     def _calculate(self, state: AgentState) -> AgentState:
-        """
-        Run calculations via MCP ephemeris tools.
-
-        Handles requests for:
-        - Planetary positions
-        - Dasha calculations
-        - Transit analysis
-        - Chart calculations
-
-        In production, this would call MCP tools like:
-        - planetary_positions(datetime, lat, lon)
-        - current_dasha(birth_datetime, moon_longitude, query_datetime)
-        - houses(datetime, lat, lon, house_system)
-        - navamsha(longitude)
-        - etc.
-
-        Args:
-            state: Current agent state
-
-        Returns:
-            Updated state with calculation results
-        """
+        """Run calculations for positions, dasha, transits."""
         if self.debug:
             logger.debug(f"Executing calculation for intent: {state['intent'].value}")
 
-        # Store that calculations were performed
-        state["analysis_results"]["calculations_performed"] = True
-        state["analysis_results"]["calculation_type"] = state["intent"].value
+        intent = state.get("intent")
+        birth_chart = state.get("birth_chart")
 
-        # In production, actual MCP tool calls would happen here
-        # For now, mark as calculated
+        # Perform actual calculations based on intent
+        if intent == IntentType.DASHA and birth_chart:
+            try:
+                from packages.context.src import get_current_dasha, get_mahadasha_sequence
+
+                birth_dt_str = birth_chart.get("birth_datetime")
+                moon_lon = birth_chart.get("moon_longitude")
+                if birth_dt_str and moon_lon:
+                    birth_dt = datetime.fromisoformat(birth_dt_str.replace("Z", "+00:00"))
+                    if birth_dt.tzinfo:
+                        birth_dt = birth_dt.replace(tzinfo=None)
+
+                    # Get current dasha
+                    current = get_current_dasha(birth_dt, moon_lon, datetime.now())
+                    state["analysis_results"]["current_dasha"] = {
+                        "mahadasha": current["mahadasha"]["lord"],
+                        "antardasha": current["antardasha"]["lord"],
+                        "pratyantardasha": current.get("pratyantardasha", {}).get("lord"),
+                    }
+
+                    # Get full sequence
+                    sequence = get_mahadasha_sequence(birth_dt, moon_lon)
+                    state["analysis_results"]["dasha_sequence"] = [
+                        {"lord": p["lord"], "start": p["start_date"].isoformat(), "end": p["end_date"].isoformat()}
+                        for p in sequence[:5]  # Next 5 mahadashas
+                    ]
+            except Exception as e:
+                logger.warning(f"Dasha calculation error: {e}")
+
+        elif intent == IntentType.TRANSIT and birth_chart:
+            try:
+                from packages.context.src import get_full_transit_analysis
+
+                moon_sign = birth_chart.get("moon_rashi", "").lower()
+                if moon_sign:
+                    analysis = get_full_transit_analysis(moon_sign, datetime.now())
+                    state["analysis_results"]["transit_analysis"] = {
+                        "overall_trend": analysis.get("overall_trend"),
+                        "key_transits": analysis.get("key_transits", [])[:5],
+                        "sade_sati": analysis.get("sade_sati_active", False),
+                    }
+            except Exception as e:
+                logger.warning(f"Transit analysis error: {e}")
+
+        elif intent == IntentType.CALCULATE and birth_chart:
+            # Planetary positions are already in birth_chart
+            state["analysis_results"]["positions_available"] = True
+
+        state["analysis_results"]["calculations_performed"] = True
+        state["analysis_results"]["calculation_type"] = intent.value if intent else "general"
 
         return state
 
     def _analyze_patterns(self, state: AgentState) -> AgentState:
-        """
-        Analyze birth chart patterns: yogas, doshas, strengths.
-
-        In production, this would:
-        - Call yoga detection via MCP
-        - Call dosha checking via MCP
-        - Perform shadbala (planetary strength) analysis
-        - Identify key patterns
-
-        Args:
-            state: Current agent state
-
-        Returns:
-            Updated state with analysis results
-        """
+        """Analyze birth chart patterns: yogas, doshas, strengths."""
         if self.debug:
-            logger.debug("Analyzing chart patterns (yogas, doshas)")
+            logger.debug("Analyzing chart patterns")
 
-        # Mark that analysis was performed
+        birth_chart = state.get("birth_chart")
+
+        if birth_chart and birth_chart.get("planets"):
+            try:
+                from packages.self.src import DoshaDetector, YogaDetector
+
+                # Build minimal chart structure for detectors
+                planets = birth_chart.get("planets", {})
+                lagna = birth_chart.get("lagna_rashi", "aries").lower()
+
+                # Detect yogas
+                yoga_detector = YogaDetector()
+                # Note: This requires proper BirthChart object, simplified for now
+                state["analysis_results"]["yoga_detection_attempted"] = True
+
+                # Detect doshas
+                dosha_detector = DoshaDetector()
+                state["analysis_results"]["dosha_detection_attempted"] = True
+
+            except Exception as e:
+                logger.warning(f"Pattern analysis error: {e}")
+
         state["analysis_results"]["patterns_analyzed"] = True
-
-        # In production:
-        # yogas = await mcp.detect_yogas(birth_chart)
-        # doshas = await mcp.check_doshas(birth_chart)
-        # state["detected_yogas"] = yogas
-        # state["detected_doshas"] = doshas
-
         return state
 
     def _make_prediction(self, state: AgentState) -> AgentState:
-        """
-        Generate predictions based on dasha and transit analysis.
-
-        Combines:
-        - Current dasha period and its themes
-        - Transit analysis (gochara)
-        - Key upcoming transitions
-        - Timing advice
-
-        In production, this would:
-        - Use current_dasha to understand the lifecycle theme
-        - Analyze transit strength via ashtakavarga
-        - Check for special transits (Sade Sati, Dhaiya)
-        - Generate timing predictions
-
-        Args:
-            state: Current agent state
-
-        Returns:
-            Updated state with prediction results
-        """
+        """Generate predictions based on dasha and transit analysis."""
         if self.debug:
-            logger.debug("Generating predictions from dasha/transit analysis")
+            logger.debug("Generating predictions")
+
+        # Combine dasha and transit information for predictions
+        prediction_factors = []
+
+        if state.get("current_dasha"):
+            dasha = state["current_dasha"]
+            prediction_factors.append(f"Current Mahadasha: {dasha.get('mahadasha_lord', 'Unknown')}")
+            prediction_factors.append(f"Current Antardasha: {dasha.get('antardasha_lord', 'Unknown')}")
+
+        if state.get("analysis_results", {}).get("transit_analysis"):
+            transit = state["analysis_results"]["transit_analysis"]
+            prediction_factors.append(f"Overall transit trend: {transit.get('overall_trend', 'neutral')}")
+            if transit.get("sade_sati"):
+                prediction_factors.append("Sade Sati is active")
 
         state["analysis_results"]["predictions_generated"] = True
-
-        # In production:
-        # dasha_lord = state["current_dasha"].get("mahadasha_lord")
-        # predictions = await get_dasha_predictions(dasha_lord)
-        # state["analysis_results"]["dasha_predictions"] = predictions
+        state["analysis_results"]["prediction_factors"] = prediction_factors
 
         return state
 
     def _handle_general(self, state: AgentState) -> AgentState:
-        """
-        Handle general astrology questions.
-
-        For intents like:
-        - General astrology education
-        - Personal advice without heavy calculation
-        - Remedy suggestions
-
-        Args:
-            state: Current agent state
-
-        Returns:
-            Updated state
-        """
+        """Handle general astrology questions."""
         if self.debug:
-            logger.debug(f"Handling general query: {state['intent'].value}")
+            logger.debug(f"Handling general query: {state['intent'].value if state['intent'] else 'unknown'}")
 
         state["analysis_results"]["query_type"] = "general_knowledge"
-
         return state
 
     def _interpret(self, state: AgentState) -> AgentState:
-        """
-        Generate personalized interpretation using LLM.
-
-        This is where the magic happens:
-        1. Get user's personality style from lagna
-        2. Build context-aware system prompt
-        3. Include birth chart, dasha, transits, memories
-        4. Call Claude with personality-adapted instructions
-        5. Return personalized response
-
-        Args:
-            state: Current agent state
-
-        Returns:
-            Updated state with response
-        """
+        """Generate personalized interpretation using LLM."""
         # Get personality style
         personality = state.get("personality_style", "unknown")
         style = PERSONALITY_STYLES.get(personality, {})
@@ -640,9 +617,7 @@ Respond with ONLY the intent name (e.g., "calculate")"""
         if self.debug:
             logger.debug(f"Calling LLM with personality: {personality}")
 
-        response = self.llm.invoke(
-            [SystemMessage(content=system_prompt)] + messages
-        )
+        response = self.llm.invoke([SystemMessage(content=system_prompt)] + messages)
 
         state["response"] = response.content
         messages.append(AIMessage(content=response.content))
@@ -651,42 +626,10 @@ Respond with ONLY the intent name (e.g., "calculate")"""
         return state
 
     def _save_memory(self, state: AgentState) -> AgentState:
-        """
-        Save important facts from conversation to memory.
-
-        Extracts and stores:
-        - Key facts about user's life
-        - Patterns they've noticed
-        - Remedies suggested
-        - Predictions made
-
-        In production, this would call Mem0 API.
-
-        Args:
-            state: Current agent state
-
-        Returns:
-            Updated state
-        """
-        user_id = state["user_id"]
-
-        # Build memory entry
-        memory_content = {
-            "timestamp": state["timestamp"],
-            "user_input": state["user_input"],
-            "response": state["response"],
-            "intent": state["intent"].value if state["intent"] else "unknown",
-            "birth_chart": state.get("birth_chart"),
-        }
-
-        # In production: Save to Mem0
-        # await mem0.add_memory(
-        #     user_id=user_id,
-        #     memory=json.dumps(memory_content)
-        # )
-
+        """Save important facts from conversation to memory."""
+        # Memory saving is async, we'll do it in the async chat method
         if self.debug:
-            logger.debug(f"Memory saved for user {user_id}")
+            logger.debug(f"Memory would be saved for user {state['user_id']}")
 
         return state
 
@@ -694,17 +637,8 @@ Respond with ONLY the intent name (e.g., "calculate")"""
     # Helper Methods
     # ===================
 
-    def _build_system_prompt(self, state: AgentState, style: Dict[str, str]) -> str:
-        """
-        Build personality-adapted system prompt.
-
-        Args:
-            state: Current agent state
-            style: Personality style dict
-
-        Returns:
-            System prompt string
-        """
+    def _build_system_prompt(self, state: AgentState, style: dict[str, str]) -> str:
+        """Build personality-adapted system prompt."""
         context_str = self._format_context(state)
 
         prompt = f"""You are the 108 Guide, a wise and compassionate Vedic astrology companion.
@@ -739,27 +673,16 @@ Be the user's trusted guide on their life journey. Combine Vedic wisdom with com
         return prompt
 
     def _format_context(self, state: AgentState) -> str:
-        """
-        Format user context for inclusion in system prompt.
-
-        Args:
-            state: Current agent state
-
-        Returns:
-            Formatted context string
-        """
+        """Format user context for inclusion in system prompt."""
         parts = []
 
         # Birth chart info
         if state.get("birth_chart"):
             bc = state["birth_chart"]
-            parts.append(f"Birth Chart:")
+            parts.append("Birth Chart:")
             parts.append(f"  - Ascendant (Lagna): {bc.get('lagna_rashi', 'Unknown')}")
             parts.append(f"  - Moon Sign: {bc.get('moon_rashi', 'Unknown')}")
             parts.append(f"  - Moon Nakshatra: {bc.get('moon_nakshatra', 'Unknown')}")
-
-            if bc.get("lagna_degree"):
-                parts.append(f"  - Lagna Degree: {bc['lagna_degree']:.2f}°")
 
         # Current dasha
         if state.get("current_dasha") and state["current_dasha"]:
@@ -767,13 +690,28 @@ Be the user's trusted guide on their life journey. Combine Vedic wisdom with com
             dasha_str = f"Current Dasha: {d.get('mahadasha_lord', '?')}"
             if d.get("antardasha_lord"):
                 dasha_str += f" - {d.get('antardasha_lord')}"
-            if d.get("years_remaining"):
-                dasha_str += f" ({d.get('years_remaining', '?')} years remaining)"
             parts.append(dasha_str)
 
-        # Current transits
-        if state.get("current_transits") and state["current_transits"]:
-            parts.append(f"Notable Transits: {state['current_transits'].get('summary', 'Check transits for timing')}")
+        # Analysis results
+        if state.get("analysis_results"):
+            results = state["analysis_results"]
+
+            if results.get("current_dasha"):
+                cd = results["current_dasha"]
+                parts.append(
+                    f"Dasha Period: {cd.get('mahadasha')}-{cd.get('antardasha')}"
+                )
+
+            if results.get("transit_analysis"):
+                ta = results["transit_analysis"]
+                parts.append(f"Transit Trend: {ta.get('overall_trend', 'neutral')}")
+                if ta.get("sade_sati"):
+                    parts.append("Note: Sade Sati is currently active")
+
+            if results.get("prediction_factors"):
+                parts.append("Prediction factors:")
+                for factor in results["prediction_factors"]:
+                    parts.append(f"  - {factor}")
 
         # Detected yogas
         if state.get("detected_yogas"):
@@ -785,36 +723,16 @@ Be the user's trusted guide on their life journey. Combine Vedic wisdom with com
             doshas = [d.get("name", "Unknown") for d in state["detected_doshas"]]
             parts.append(f"Important Doshas: {', '.join(doshas)}")
 
-        # Analysis results summary
-        if state.get("analysis_results"):
-            results = state["analysis_results"]
-            if results.get("calculations_performed"):
-                parts.append(f"Calculations completed for: {results.get('calculation_type', 'various')}")
-            if results.get("patterns_analyzed"):
-                parts.append("Chart patterns have been analyzed")
-            if results.get("predictions_generated"):
-                parts.append("Predictions based on current dasha/transits are available")
-
         # Memories
         if state.get("memories"):
-            parts.append(f"Relevant memories retrieved: {len(state['memories'])} facts from past interactions")
+            parts.append(
+                f"Relevant memories: {len(state['memories'])} facts from past interactions"
+            )
 
         if not parts:
-            parts.append("No specific context loaded - this may be a new user or general question")
+            parts.append("No specific context loaded - this may be a new user")
 
         return "\n".join(parts)
-
-    def get_personality_description(self, lagna: str) -> Dict[str, str]:
-        """
-        Get personality description for a given lagna.
-
-        Args:
-            lagna: Lagna/Ascendant sign (e.g., "aries", "taurus")
-
-        Returns:
-            Personality style dictionary
-        """
-        return PERSONALITY_STYLES.get(lagna.lower(), {})
 
     # ===================
     # Public API
@@ -825,17 +743,15 @@ Be the user's trusted guide on their life journey. Combine Vedic wisdom with com
         user_input: str,
         user_id: str,
         session_id: Optional[str] = None,
-        birth_chart: Optional[Dict[str, Any]] = None,
-        current_dasha: Optional[Dict[str, Any]] = None,
-        current_transits: Optional[Dict[str, Any]] = None,
-        detected_yogas: Optional[List[Dict[str, Any]]] = None,
-        detected_doshas: Optional[List[Dict[str, Any]]] = None,
-        memories: Optional[List[Dict[str, Any]]] = None,
-    ) -> Dict[str, Any]:
+        birth_chart: Optional[dict[str, Any]] = None,
+        current_dasha: Optional[dict[str, Any]] = None,
+        current_transits: Optional[dict[str, Any]] = None,
+        detected_yogas: Optional[list[dict[str, Any]]] = None,
+        detected_doshas: Optional[list[dict[str, Any]]] = None,
+        memories: Optional[list[dict[str, Any]]] = None,
+    ) -> dict[str, Any]:
         """
-        Process a user message and return response.
-
-        This is the main entry point for interacting with the Guide agent.
+        Process a user message and return response (sync version).
 
         Args:
             user_input: User's message
@@ -846,7 +762,7 @@ Be the user's trusted guide on their life journey. Combine Vedic wisdom with com
             current_transits: Current transit info (optional)
             detected_yogas: List of detected yogas (optional)
             detected_doshas: List of detected doshas (optional)
-            memories: Retrieved memories from Mem0 (optional)
+            memories: Retrieved memories (optional)
 
         Returns:
             Dictionary with response and metadata
@@ -885,18 +801,108 @@ Be the user's trusted guide on their life journey. Combine Vedic wisdom with com
             "analysis_results": final_state.get("analysis_results", {}),
         }
 
-    def get_intent(self, user_input: str) -> IntentType:
+    async def chat_async(
+        self,
+        user_input: str,
+        user_id: str,
+        session_id: Optional[str] = None,
+        birth_chart: Optional[dict[str, Any]] = None,
+    ) -> dict[str, Any]:
         """
-        Get the intent of a user message without processing.
+        Process a user message with full async support.
 
-        Useful for routing without full agent execution.
+        This version:
+        - Loads birth chart from database if not provided
+        - Retrieves relevant memories
+        - Saves conversation to memory store
 
         Args:
-            user_input: User message
+            user_input: User's message
+            user_id: User identifier
+            session_id: Session identifier
+            birth_chart: Birth chart data (loads from DB if not provided)
 
         Returns:
-            Detected intent
+            Dictionary with response and metadata
         """
+        store = await self._get_store()
+
+        # Load birth chart from database if not provided
+        if not birth_chart and self._store_connected:
+            try:
+                db_chart = await store.get_birth_chart(user_id)
+                if db_chart:
+                    birth_chart = db_chart.get("chart_data", {})
+                    birth_chart["birth_datetime"] = db_chart.get("birth_datetime")
+                    if self.debug:
+                        logger.debug(f"Loaded birth chart from database for {user_id}")
+            except Exception as e:
+                logger.warning(f"Could not load birth chart: {e}")
+
+        # Load detected patterns from database
+        detected_yogas = []
+        detected_doshas = []
+        if self._store_connected:
+            try:
+                patterns = await store.get_user_patterns(user_id)
+                for p in patterns:
+                    if p["pattern_type"] == "yoga":
+                        detected_yogas.append(p)
+                    elif p["pattern_type"] == "dosha":
+                        detected_doshas.append(p)
+            except Exception as e:
+                logger.warning(f"Could not load patterns: {e}")
+
+        # Get relevant memories (would use embeddings in production)
+        memories = []
+        if self._store_connected:
+            try:
+                fact_memories = await store.get_memories_by_category(user_id, "fact", limit=10)
+                memories = [m.to_dict() for m in fact_memories]
+            except Exception as e:
+                logger.warning(f"Could not load memories: {e}")
+
+        # Run sync chat with loaded context
+        result = self.chat(
+            user_input=user_input,
+            user_id=user_id,
+            session_id=session_id,
+            birth_chart=birth_chart,
+            detected_yogas=detected_yogas,
+            detected_doshas=detected_doshas,
+            memories=memories,
+        )
+
+        # Save conversation to memory store
+        if self._store_connected and result.get("response"):
+            try:
+                await store.save_conversation(
+                    user_id=user_id,
+                    session_id=result["session_id"],
+                    messages=[
+                        {"role": "user", "content": user_input},
+                        {"role": "assistant", "content": result["response"]},
+                    ],
+                    summary=f"Intent: {result['intent']}",
+                    topics=[result["intent"]],
+                )
+
+                # Save as a memory fact if it contains important information
+                if result["intent"] in ["predict", "analyze", "remedy"]:
+                    await store.add_memory(
+                        user_id=user_id,
+                        content=f"User asked about {result['intent']}: {user_input[:100]}",
+                        category="event",
+                        importance=0.6,
+                        metadata={"intent": result["intent"], "timestamp": result["timestamp"]},
+                    )
+            except Exception as e:
+                logger.warning(f"Could not save to memory: {e}")
+
+        return result
+
+    def get_intent(self, user_input: str) -> IntentType:
+        """Get the intent of a user message without processing."""
         state: AgentState = {
             "messages": [],
             "user_input": user_input,
@@ -918,50 +924,6 @@ Be the user's trusted guide on their life journey. Combine Vedic wisdom with com
         state = self._classify_intent(state)
         return state["intent"]
 
-    def stream_response(
-        self,
-        user_input: str,
-        user_id: str,
-        session_id: Optional[str] = None,
-        birth_chart: Optional[Dict[str, Any]] = None,
-    ):
-        """
-        Stream response from the agent (for real-time UI updates).
-
-        Args:
-            user_input: User message
-            user_id: User identifier
-            session_id: Session identifier
-            birth_chart: Birth chart data
-
-        Yields:
-            Response chunks
-        """
-        state: AgentState = {
-            "messages": [],
-            "user_input": user_input,
-            "response": None,
-            "user_id": user_id,
-            "birth_chart": birth_chart,
-            "current_dasha": None,
-            "current_transits": None,
-            "detected_yogas": [],
-            "detected_doshas": [],
-            "analysis_results": {},
-            "memories": [],
-            "intent": None,
-            "personality_style": None,
-            "session_id": session_id or f"session_{datetime.now().timestamp()}",
-            "timestamp": datetime.now().isoformat(),
-        }
-
-        # Stream from compiled graph
-        for output in self._compiled_graph.stream(state):
-            # output is a dict with node name as key
-            for node_name, node_output in output.items():
-                if node_output.get("response"):
-                    yield node_output["response"]
-
 
 # =====================
 # Singleton & Utilities
@@ -971,9 +933,9 @@ _guide: Optional[Guide] = None
 
 
 def initialize_guide(
-    model: str = "claude-opus-4-5-20251101",
+    model: str = "claude-sonnet-4-20250514",
     api_key: Optional[str] = None,
-    debug: bool = False
+    debug: bool = False,
 ) -> Guide:
     """
     Initialize the global Guide agent.
@@ -1003,7 +965,31 @@ def get_guide() -> Guide:
     """
     global _guide
     if _guide is None:
-        raise RuntimeError(
-            "Guide not initialized. Call initialize_guide() first."
-        )
+        raise RuntimeError("Guide not initialized. Call initialize_guide() first.")
+    return _guide
+
+
+async def get_guide_async(
+    model: str = "claude-sonnet-4-20250514",
+    api_key: Optional[str] = None,
+    debug: bool = False,
+) -> Guide:
+    """
+    Get or initialize the Guide agent with async support.
+
+    Args:
+        model: Claude model to use
+        api_key: Anthropic API key
+        debug: Enable debug logging
+
+    Returns:
+        Guide instance with connected memory store
+    """
+    global _guide
+    if _guide is None:
+        _guide = Guide(model=model, api_key=api_key, debug=debug)
+
+    # Ensure store is connected
+    await _guide._get_store()
+
     return _guide

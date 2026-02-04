@@ -13,17 +13,16 @@ This module provides async operations for:
 - User preferences
 - Dasha timeline caching
 """
-import asyncio
-import logging
-import uuid
-from datetime import datetime
-from typing import Dict, List, Optional, Any, Tuple
-from dataclasses import dataclass, field, asdict
 import json
+import logging
+import os
+import uuid
+from dataclasses import asdict, dataclass, field
+from datetime import datetime
+from typing import Any, Optional
 
-# For actual production, uncomment these:
-# import asyncpg
-# from pgvector.asyncpg import register_vector
+import asyncpg
+from pgvector.asyncpg import register_vector
 
 logger = logging.getLogger(__name__)
 
@@ -35,13 +34,13 @@ class Memory:
     user_id: str = ""
     content: str = ""
     category: str = "fact"  # fact, preference, event, prediction, feedback
-    embedding: Optional[List[float]] = None
-    metadata: Dict[str, Any] = field(default_factory=dict)
+    embedding: Optional[list[float]] = None
+    metadata: dict[str, Any] = field(default_factory=dict)
     importance: float = 0.5
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Convert memory to dictionary."""
         data = asdict(self)
         if self.created_at:
@@ -57,7 +56,7 @@ class SearchResult:
     memory: Memory
     similarity: float
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         """Convert search result to dictionary."""
         return {
             "memory": self.memory.to_dict(),
@@ -83,7 +82,7 @@ class MemoryStore:
     All operations are async and designed for production use with asyncpg.
     """
 
-    def __init__(self, connection_string: str = None):
+    def __init__(self, connection_string: Optional[str] = None):
         """
         Initialize memory store.
 
@@ -93,32 +92,26 @@ class MemoryStore:
         """
         self.connection_string = (
             connection_string or
-            "postgresql://localhost/onezeroeight"
+            os.environ.get("DATABASE_URL") or
+            "postgresql://postgres:postgres@localhost:5432/one_zero_eight"
         )
-        self.pool = None
+        self.pool: Optional[asyncpg.Pool] = None
         self._embedding_dimension = 1536  # OpenAI ada-002 dimension
         self._initialized = False
-        logger.info(f"MemoryStore initialized with connection: {self.connection_string}")
+        logger.info(f"MemoryStore initialized")
 
     async def connect(self) -> None:
-        """
-        Establish database connection pool.
-
-        Production implementation:
-        ```python
-        self.pool = await asyncpg.create_pool(
-            self.connection_string,
-            min_size=5,
-            max_size=20,
-            command_timeout=60,
-        )
-        await register_vector(self.pool)
-        ```
-        """
+        """Establish database connection pool."""
         try:
-            # In production, uncomment the above and add logging
-            # self.pool = await asyncpg.create_pool(...)
-            # await register_vector(self.pool)
+            self.pool = await asyncpg.create_pool(
+                self.connection_string,
+                min_size=2,
+                max_size=10,
+                command_timeout=60,
+            )
+            # Register pgvector type with the pool
+            async with self.pool.acquire() as conn:
+                await register_vector(conn)
             self._initialized = True
             logger.info("MemoryStore connected successfully")
         except Exception as e:
@@ -138,13 +131,12 @@ class MemoryStore:
 
     async def health_check(self) -> bool:
         """Check if memory store is connected and healthy."""
-        if not self._initialized:
+        if not self._initialized or not self.pool:
             return False
 
         try:
-            # In production:
-            # async with self.pool.acquire() as conn:
-            #     await conn.fetchval("SELECT 1")
+            async with self.pool.acquire() as conn:
+                await conn.fetchval("SELECT 1")
             return True
         except Exception as e:
             logger.error(f"MemoryStore health check failed: {e}")
@@ -159,8 +151,8 @@ class MemoryStore:
         user_id: str,
         content: str,
         category: str = "fact",
-        embedding: Optional[List[float]] = None,
-        metadata: Optional[Dict[str, Any]] = None,
+        embedding: Optional[list[float]] = None,
+        metadata: Optional[dict[str, Any]] = None,
         importance: float = 0.5
     ) -> Memory:
         """
@@ -176,10 +168,6 @@ class MemoryStore:
 
         Returns:
             Created Memory object with assigned ID
-
-        Raises:
-            ValueError: If inputs are invalid
-            Exception: If database operation fails
         """
         if not user_id or not content:
             raise ValueError("user_id and content are required")
@@ -189,6 +177,26 @@ class MemoryStore:
 
         memory_id = str(uuid.uuid4())
         now = datetime.now()
+
+        async with self.pool.acquire() as conn:
+            await register_vector(conn)
+            await conn.execute(
+                """
+                INSERT INTO memories (
+                    id, user_id, content, category, embedding,
+                    metadata, importance, created_at, updated_at
+                ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+                """,
+                uuid.UUID(memory_id),
+                uuid.UUID(user_id),
+                content,
+                category,
+                embedding,
+                json.dumps(metadata or {}),
+                importance,
+                now,
+                now
+            )
 
         memory = Memory(
             id=memory_id,
@@ -202,26 +210,17 @@ class MemoryStore:
             updated_at=now
         )
 
-        # Production SQL:
-        # INSERT INTO memories (
-        #     id, user_id, content, category, embedding, metadata, importance, created_at, updated_at
-        # ) VALUES (
-        #     $1, $2, $3, $4, $5, $6, $7, $8, $9
-        # )
-        # ON CONFLICT (id) DO NOTHING
-        # RETURNING id, created_at, updated_at
-
         logger.debug(f"Added memory {memory_id} for user {user_id}")
         return memory
 
     async def search_memories(
         self,
         user_id: str,
-        query_embedding: List[float],
+        query_embedding: list[float],
         limit: int = 10,
         category: Optional[str] = None,
         min_similarity: float = 0.7
-    ) -> List[SearchResult]:
+    ) -> list[SearchResult]:
         """
         Semantic search for relevant memories using vector similarity.
 
@@ -237,10 +236,6 @@ class MemoryStore:
 
         Returns:
             List of SearchResult objects sorted by similarity (highest first)
-
-        Raises:
-            ValueError: If query_embedding dimension is incorrect
-            Exception: If database operation fails
         """
         if not query_embedding:
             raise ValueError("query_embedding is required")
@@ -257,23 +252,70 @@ class MemoryStore:
         if min_similarity < 0 or min_similarity > 1:
             raise ValueError("min_similarity must be between 0 and 1")
 
-        # Production SQL using pgvector:
-        # SELECT
-        #     id, user_id, content, category, embedding, metadata, importance,
-        #     created_at, updated_at,
-        #     1 - (embedding <=> $2::vector) as similarity
-        # FROM memories
-        # WHERE user_id = $1
-        #   AND ($3::text IS NULL OR category = $3)
-        #   AND 1 - (embedding <=> $2::vector) >= $4
-        # ORDER BY embedding <=> $2::vector
-        # LIMIT $5
+        async with self.pool.acquire() as conn:
+            await register_vector(conn)
+
+            if category:
+                rows = await conn.fetch(
+                    """
+                    SELECT
+                        id, user_id, content, category, embedding,
+                        metadata, importance, created_at, updated_at,
+                        1 - (embedding <=> $2::vector) as similarity
+                    FROM memories
+                    WHERE user_id = $1
+                      AND category = $3
+                      AND embedding IS NOT NULL
+                      AND 1 - (embedding <=> $2::vector) >= $4
+                    ORDER BY embedding <=> $2::vector
+                    LIMIT $5
+                    """,
+                    uuid.UUID(user_id),
+                    query_embedding,
+                    category,
+                    min_similarity,
+                    limit
+                )
+            else:
+                rows = await conn.fetch(
+                    """
+                    SELECT
+                        id, user_id, content, category, embedding,
+                        metadata, importance, created_at, updated_at,
+                        1 - (embedding <=> $2::vector) as similarity
+                    FROM memories
+                    WHERE user_id = $1
+                      AND embedding IS NOT NULL
+                      AND 1 - (embedding <=> $2::vector) >= $3
+                    ORDER BY embedding <=> $2::vector
+                    LIMIT $4
+                    """,
+                    uuid.UUID(user_id),
+                    query_embedding,
+                    min_similarity,
+                    limit
+                )
+
+        results = []
+        for row in rows:
+            memory = Memory(
+                id=str(row['id']),
+                user_id=str(row['user_id']),
+                content=row['content'],
+                category=row['category'],
+                embedding=list(row['embedding']) if row['embedding'] else None,
+                metadata=json.loads(row['metadata']) if row['metadata'] else {},
+                importance=float(row['importance']),
+                created_at=row['created_at'],
+                updated_at=row['updated_at']
+            )
+            results.append(SearchResult(memory=memory, similarity=float(row['similarity'])))
 
         logger.debug(
-            f"Searching memories for user {user_id} "
-            f"with {limit} limit and {min_similarity} threshold"
+            f"Found {len(results)} memories for user {user_id} "
+            f"with {min_similarity} threshold"
         )
-        return []
+        return results
 
     async def get_memories_by_category(
         self,
@@ -281,7 +323,7 @@ class MemoryStore:
         category: str,
         limit: int = 50,
         offset: int = 0
-    ) -> List[Memory]:
+    ) -> list[Memory]:
         """
         Get all memories of a specific category with pagination.
 
@@ -297,28 +339,72 @@ class MemoryStore:
         if category not in ["fact", "preference", "event", "prediction", "feedback"]:
             raise ValueError(f"Invalid category: {category}")
 
-        # Production SQL:
-        # SELECT * FROM memories
-        # WHERE user_id = $1 AND category = $2
-        # ORDER BY updated_at DESC
-        # LIMIT $3 OFFSET $4
+        async with self.pool.acquire() as conn:
+            rows = await conn.fetch(
+                """
+                SELECT id, user_id, content, category, embedding,
+                       metadata, importance, created_at, updated_at
+                FROM memories
+                WHERE user_id = $1 AND category = $2
+                ORDER BY updated_at DESC
+                LIMIT $3 OFFSET $4
+                """,
+                uuid.UUID(user_id),
+                category,
+                limit,
+                offset
+            )
 
-        logger.debug(f"Getting {category} memories for user {user_id}")
-        return []
+        memories = []
+        for row in rows:
+            memories.append(Memory(
+                id=str(row['id']),
+                user_id=str(row['user_id']),
+                content=row['content'],
+                category=row['category'],
+                embedding=list(row['embedding']) if row['embedding'] else None,
+                metadata=json.loads(row['metadata']) if row['metadata'] else {},
+                importance=float(row['importance']),
+                created_at=row['created_at'],
+                updated_at=row['updated_at']
+            ))
+
+        logger.debug(f"Got {len(memories)} {category} memories for user {user_id}")
+        return memories
 
     async def get_memory(self, memory_id: str) -> Optional[Memory]:
         """Get a specific memory by ID."""
-        # Production SQL:
-        # SELECT * FROM memories WHERE id = $1
+        async with self.pool.acquire() as conn:
+            row = await conn.fetchrow(
+                """
+                SELECT id, user_id, content, category, embedding,
+                       metadata, importance, created_at, updated_at
+                FROM memories WHERE id = $1
+                """,
+                uuid.UUID(memory_id)
+            )
 
-        return None
+        if not row:
+            return None
+
+        return Memory(
+            id=str(row['id']),
+            user_id=str(row['user_id']),
+            content=row['content'],
+            category=row['category'],
+            embedding=list(row['embedding']) if row['embedding'] else None,
+            metadata=json.loads(row['metadata']) if row['metadata'] else {},
+            importance=float(row['importance']),
+            created_at=row['created_at'],
+            updated_at=row['updated_at']
+        )
 
     async def update_memory(
         self,
         memory_id: str,
         content: Optional[str] = None,
-        embedding: Optional[List[float]] = None,
-        metadata: Optional[Dict[str, Any]] = None,
+        embedding: Optional[list[float]] = None,
+        metadata: Optional[dict[str, Any]] = None,
         importance: Optional[float] = None
     ) -> Optional[Memory]:
         """
@@ -337,19 +423,45 @@ class MemoryStore:
         if importance is not None and (importance < 0 or importance > 1):
             raise ValueError("importance must be between 0 and 1")
 
-        # Production SQL:
-        # UPDATE memories
-        # SET
-        #     content = COALESCE($2, content),
-        #     embedding = COALESCE($3, embedding),
-        #     metadata = metadata || $4,
-        #     importance = COALESCE($5, importance),
-        #     updated_at = NOW()
-        # WHERE id = $1
-        # RETURNING *
+        async with self.pool.acquire() as conn:
+            await register_vector(conn)
+            row = await conn.fetchrow(
+                """
+                UPDATE memories
+                SET
+                    content = COALESCE($2, content),
+                    embedding = COALESCE($3, embedding),
+                    metadata = CASE WHEN $4::jsonb IS NOT NULL
+                               THEN metadata || $4::jsonb
+                               ELSE metadata END,
+                    importance = COALESCE($5, importance),
+                    updated_at = NOW()
+                WHERE id = $1
+                RETURNING id, user_id, content, category, embedding,
+                          metadata, importance, created_at, updated_at
+                """,
+                uuid.UUID(memory_id),
+                content,
+                embedding,
+                json.dumps(metadata) if metadata else None,
+                importance
+            )
+
+        if not row:
+            return None
 
         logger.debug(f"Updated memory {memory_id}")
-        return None
+        return Memory(
+            id=str(row['id']),
+            user_id=str(row['user_id']),
+            content=row['content'],
+            category=row['category'],
+            embedding=list(row['embedding']) if row['embedding'] else None,
+            metadata=json.loads(row['metadata']) if row['metadata'] else {},
+            importance=float(row['importance']),
+            created_at=row['created_at'],
+            updated_at=row['updated_at']
+        )
 
     async def delete_memory(self, memory_id: str) -> bool:
         """
@@ -361,12 +473,16 @@ class MemoryStore:
         Returns:
             True if deleted, False if not found
         """
-        # Production SQL:
-        # DELETE FROM memories WHERE id = $1
-        # RETURNING TRUE
+        async with self.pool.acquire() as conn:
+            result = await conn.execute(
+                "DELETE FROM memories WHERE id = $1",
+                uuid.UUID(memory_id)
+            )
 
-        logger.debug(f"Deleted memory {memory_id}")
-        return False
+        deleted = result == "DELETE 1"
+        if deleted:
+            logger.debug(f"Deleted memory {memory_id}")
+        return deleted
 
     async def delete_memories_by_category(
         self,
@@ -383,12 +499,17 @@ class MemoryStore:
         Returns:
             Number of deleted memories
         """
-        # Production SQL:
-        # DELETE FROM memories
-        # WHERE user_id = $1 AND category = $2
-        # RETURNING COUNT(*)
+        async with self.pool.acquire() as conn:
+            result = await conn.execute(
+                "DELETE FROM memories WHERE user_id = $1 AND category = $2",
+                uuid.UUID(user_id),
+                category
+            )
 
-        return 0
+        # Parse "DELETE N" to get count
+        count = int(result.split()[-1]) if result else 0
+        logger.debug(f"Deleted {count} {category} memories for user {user_id}")
+        return count
 
     # ===================
     # User Operations
@@ -397,23 +518,17 @@ class MemoryStore:
     async def create_user(
         self,
         email: str,
-        name: Optional[str] = None,
-        metadata: Optional[Dict[str, Any]] = None
-    ) -> Dict[str, Any]:
+        name: Optional[str] = None
+    ) -> dict[str, Any]:
         """
         Create a new user.
 
         Args:
             email: User's email address (unique)
             name: User's display name (optional)
-            metadata: Additional user metadata
 
         Returns:
             Dictionary with user ID and details
-
-        Raises:
-            ValueError: If email is invalid
-            Exception: If user already exists or database error
         """
         if not email or "@" not in email:
             raise ValueError("Valid email is required")
@@ -421,17 +536,24 @@ class MemoryStore:
         user_id = str(uuid.uuid4())
         now = datetime.now()
 
-        # Production SQL:
-        # INSERT INTO users (id, email, name, metadata, created_at, updated_at)
-        # VALUES ($1, $2, $3, $4, $5, $6)
-        # ON CONFLICT (email) DO NOTHING
-        # RETURNING *
+        async with self.pool.acquire() as conn:
+            await conn.execute(
+                """
+                INSERT INTO users (id, email, name, created_at, updated_at)
+                VALUES ($1, $2, $3, $4, $5)
+                ON CONFLICT (email) DO NOTHING
+                """,
+                uuid.UUID(user_id),
+                email,
+                name,
+                now,
+                now
+            )
 
         user = {
             "id": user_id,
             "email": email,
             "name": name,
-            "metadata": metadata or {},
             "created_at": now.isoformat(),
             "updated_at": now.isoformat()
         }
@@ -439,7 +561,7 @@ class MemoryStore:
         logger.info(f"Created user {user_id} with email {email}")
         return user
 
-    async def get_user(self, user_id: str) -> Optional[Dict[str, Any]]:
+    async def get_user(self, user_id: str) -> Optional[dict[str, Any]]:
         """
         Get user by ID.
 
@@ -449,12 +571,24 @@ class MemoryStore:
         Returns:
             User dictionary or None if not found
         """
-        # Production SQL:
-        # SELECT * FROM users WHERE id = $1
+        async with self.pool.acquire() as conn:
+            row = await conn.fetchrow(
+                "SELECT * FROM users WHERE id = $1",
+                uuid.UUID(user_id)
+            )
 
-        return None
+        if not row:
+            return None
 
-    async def get_user_by_email(self, email: str) -> Optional[Dict[str, Any]]:
+        return {
+            "id": str(row['id']),
+            "email": row['email'],
+            "name": row['name'],
+            "created_at": row['created_at'].isoformat() if row['created_at'] else None,
+            "updated_at": row['updated_at'].isoformat() if row['updated_at'] else None
+        }
+
+    async def get_user_by_email(self, email: str) -> Optional[dict[str, Any]]:
         """
         Get user by email address.
 
@@ -464,28 +598,51 @@ class MemoryStore:
         Returns:
             User dictionary or None if not found
         """
-        # Production SQL:
-        # SELECT * FROM users WHERE email = $1
+        async with self.pool.acquire() as conn:
+            row = await conn.fetchrow(
+                "SELECT * FROM users WHERE email = $1",
+                email
+            )
 
-        return None
+        if not row:
+            return None
+
+        return {
+            "id": str(row['id']),
+            "email": row['email'],
+            "name": row['name'],
+            "created_at": row['created_at'].isoformat() if row['created_at'] else None,
+            "updated_at": row['updated_at'].isoformat() if row['updated_at'] else None
+        }
 
     async def update_user(
         self,
         user_id: str,
-        name: Optional[str] = None,
-        metadata: Optional[Dict[str, Any]] = None
-    ) -> Optional[Dict[str, Any]]:
+        name: Optional[str] = None
+    ) -> Optional[dict[str, Any]]:
         """Update user information."""
-        # Production SQL:
-        # UPDATE users
-        # SET
-        #     name = COALESCE($2, name),
-        #     metadata = metadata || $3,
-        #     updated_at = NOW()
-        # WHERE id = $1
-        # RETURNING *
+        async with self.pool.acquire() as conn:
+            row = await conn.fetchrow(
+                """
+                UPDATE users
+                SET name = COALESCE($2, name), updated_at = NOW()
+                WHERE id = $1
+                RETURNING *
+                """,
+                uuid.UUID(user_id),
+                name
+            )
 
-        return None
+        if not row:
+            return None
+
+        return {
+            "id": str(row['id']),
+            "email": row['email'],
+            "name": row['name'],
+            "created_at": row['created_at'].isoformat() if row['created_at'] else None,
+            "updated_at": row['updated_at'].isoformat() if row['updated_at'] else None
+        }
 
     # ===================
     # Birth Chart Operations
@@ -499,14 +656,9 @@ class MemoryStore:
         longitude: float,
         timezone: str,
         place_name: Optional[str] = None,
-        planets: Optional[Dict[str, Any]] = None,
-        houses: Optional[Dict[str, Any]] = None,
-        lagna_rashi: Optional[str] = None,
-        moon_rashi: Optional[str] = None,
-        moon_nakshatra: Optional[str] = None,
-        ayanamsa: Optional[float] = None,
-        house_system: str = "placidus"
-    ) -> Dict[str, Any]:
+        chart_data: Optional[dict[str, Any]] = None,
+        ayanamsa: str = "lahiri"
+    ) -> dict[str, Any]:
         """
         Save or update user's birth chart.
 
@@ -517,48 +669,59 @@ class MemoryStore:
             longitude: Birth location longitude
             timezone: Birth timezone (e.g., "Asia/Kolkata")
             place_name: Birth place name (optional)
-            planets: Dictionary of planetary positions
-            houses: Dictionary of house cusps
-            lagna_rashi: Ascendant rashi (sign)
-            moon_rashi: Moon sign
-            moon_nakshatra: Moon nakshatra (lunar mansion)
-            ayanamsa: Ayanamsa value used in calculation
-            house_system: House system used (default: placidus)
+            chart_data: Dictionary of calculated chart data (planets, houses, etc.)
+            ayanamsa: Ayanamsa used (default: lahiri)
 
         Returns:
             Dictionary with birth chart details
         """
-        birth_chart = {
-            "user_id": user_id,
-            "birth_datetime": birth_datetime.isoformat(),
-            "latitude": latitude,
-            "longitude": longitude,
-            "timezone": timezone,
-            "place_name": place_name,
-            "planets": planets or {},
-            "houses": houses or {},
-            "lagna_rashi": lagna_rashi,
-            "moon_rashi": moon_rashi,
-            "moon_nakshatra": moon_nakshatra,
-            "ayanamsa": ayanamsa,
-            "house_system": house_system,
-            "saved_at": datetime.now().isoformat()
-        }
+        now = datetime.now()
 
-        # Production SQL:
-        # INSERT INTO birth_charts (
-        #     user_id, birth_datetime, latitude, longitude, timezone,
-        #     place_name, planets, houses, lagna_rashi, moon_rashi,
-        #     moon_nakshatra, ayanamsa, house_system
-        # ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
-        # ON CONFLICT (user_id) DO UPDATE SET
-        #     birth_datetime = $2, planets = $7, houses = $8, updated_at = NOW()
-        # RETURNING *
+        async with self.pool.acquire() as conn:
+            row = await conn.fetchrow(
+                """
+                INSERT INTO birth_charts (
+                    user_id, birth_datetime, latitude, longitude, timezone,
+                    place_name, chart_data, ayanamsa, created_at
+                ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+                ON CONFLICT (user_id) DO UPDATE SET
+                    birth_datetime = $2,
+                    latitude = $3,
+                    longitude = $4,
+                    timezone = $5,
+                    place_name = $6,
+                    chart_data = $7,
+                    ayanamsa = $8
+                RETURNING *
+                """,
+                uuid.UUID(user_id),
+                birth_datetime,
+                latitude,
+                longitude,
+                timezone,
+                place_name,
+                json.dumps(chart_data) if chart_data else None,
+                ayanamsa,
+                now
+            )
+
+        birth_chart = {
+            "id": str(row['id']),
+            "user_id": str(row['user_id']),
+            "birth_datetime": row['birth_datetime'].isoformat(),
+            "latitude": float(row['latitude']),
+            "longitude": float(row['longitude']),
+            "timezone": row['timezone'],
+            "place_name": row['place_name'],
+            "chart_data": json.loads(row['chart_data']) if row['chart_data'] else {},
+            "ayanamsa": row['ayanamsa'],
+            "created_at": row['created_at'].isoformat()
+        }
 
         logger.info(f"Saved birth chart for user {user_id}")
         return birth_chart
 
-    async def get_birth_chart(self, user_id: str) -> Optional[Dict[str, Any]]:
+    async def get_birth_chart(self, user_id: str) -> Optional[dict[str, Any]]:
         """
         Get user's birth chart.
 
@@ -568,10 +731,27 @@ class MemoryStore:
         Returns:
             Birth chart dictionary or None if not found
         """
-        # Production SQL:
-        # SELECT * FROM birth_charts WHERE user_id = $1
+        async with self.pool.acquire() as conn:
+            row = await conn.fetchrow(
+                "SELECT * FROM birth_charts WHERE user_id = $1",
+                uuid.UUID(user_id)
+            )
 
-        return None
+        if not row:
+            return None
+
+        return {
+            "id": str(row['id']),
+            "user_id": str(row['user_id']),
+            "birth_datetime": row['birth_datetime'].isoformat(),
+            "latitude": float(row['latitude']),
+            "longitude": float(row['longitude']),
+            "timezone": row['timezone'],
+            "place_name": row['place_name'],
+            "chart_data": json.loads(row['chart_data']) if row['chart_data'] else {},
+            "ayanamsa": row['ayanamsa'],
+            "created_at": row['created_at'].isoformat()
+        }
 
     # ===================
     # Pattern Operations
@@ -580,7 +760,7 @@ class MemoryStore:
     async def save_detected_patterns(
         self,
         user_id: str,
-        patterns: List[Dict[str, Any]],
+        patterns: list[dict[str, Any]],
         pattern_type: str
     ) -> int:
         """
@@ -593,9 +773,6 @@ class MemoryStore:
 
         Returns:
             Number of patterns saved
-
-        Raises:
-            ValueError: If pattern_type is invalid
         """
         if pattern_type not in ["yoga", "dosha"]:
             raise ValueError("pattern_type must be 'yoga' or 'dosha'")
@@ -603,23 +780,37 @@ class MemoryStore:
         if not patterns:
             return 0
 
-        # Production SQL:
-        # INSERT INTO detected_patterns (
-        #     user_id, pattern_name, pattern_type, details, detected_at
-        # )
-        # SELECT $1, p->>'name', $2, p, NOW()
-        # FROM jsonb_array_elements($3::jsonb) as p
-        # ON CONFLICT DO NOTHING
-        # RETURNING COUNT(*)
+        count = 0
+        async with self.pool.acquire() as conn:
+            for pattern in patterns:
+                await conn.execute(
+                    """
+                    INSERT INTO detected_patterns (
+                        user_id, pattern_type, pattern_id, pattern_name,
+                        category, strength, severity, involved_planets, details
+                    ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+                    ON CONFLICT DO NOTHING
+                    """,
+                    uuid.UUID(user_id),
+                    pattern_type,
+                    pattern.get('id', pattern.get('name', '')),
+                    pattern.get('name', ''),
+                    pattern.get('category'),
+                    pattern.get('strength'),
+                    pattern.get('severity'),
+                    pattern.get('involved_planets'),
+                    json.dumps(pattern)
+                )
+                count += 1
 
-        logger.info(f"Saved {len(patterns)} {pattern_type} patterns for user {user_id}")
-        return len(patterns)
+        logger.info(f"Saved {count} {pattern_type} patterns for user {user_id}")
+        return count
 
     async def get_user_patterns(
         self,
         user_id: str,
         pattern_type: Optional[str] = None
-    ) -> List[Dict[str, Any]]:
+    ) -> list[dict[str, Any]]:
         """
         Get user's detected patterns.
 
@@ -630,12 +821,44 @@ class MemoryStore:
         Returns:
             List of pattern dictionaries
         """
-        # Production SQL:
-        # SELECT * FROM detected_patterns
-        # WHERE user_id = $1 AND ($2::text IS NULL OR pattern_type = $2)
-        # ORDER BY detected_at DESC
+        async with self.pool.acquire() as conn:
+            if pattern_type:
+                rows = await conn.fetch(
+                    """
+                    SELECT * FROM detected_patterns
+                    WHERE user_id = $1 AND pattern_type = $2
+                    ORDER BY detected_at DESC
+                    """,
+                    uuid.UUID(user_id),
+                    pattern_type
+                )
+            else:
+                rows = await conn.fetch(
+                    """
+                    SELECT * FROM detected_patterns
+                    WHERE user_id = $1
+                    ORDER BY detected_at DESC
+                    """,
+                    uuid.UUID(user_id)
+                )
 
-        return []
+        patterns = []
+        for row in rows:
+            patterns.append({
+                "id": str(row['id']),
+                "user_id": str(row['user_id']),
+                "pattern_type": row['pattern_type'],
+                "pattern_id": row['pattern_id'],
+                "pattern_name": row['pattern_name'],
+                "category": row['category'],
+                "strength": float(row['strength']) if row['strength'] else None,
+                "severity": row['severity'],
+                "involved_planets": row['involved_planets'],
+                "details": json.loads(row['details']) if row['details'] else {},
+                "detected_at": row['detected_at'].isoformat()
+            })
+
+        return patterns
 
     async def delete_pattern(
         self,
@@ -643,12 +866,17 @@ class MemoryStore:
         pattern_name: str
     ) -> bool:
         """Delete a detected pattern."""
-        # Production SQL:
-        # DELETE FROM detected_patterns
-        # WHERE user_id = $1 AND pattern_name = $2
-        # RETURNING TRUE
+        async with self.pool.acquire() as conn:
+            result = await conn.execute(
+                """
+                DELETE FROM detected_patterns
+                WHERE user_id = $1 AND pattern_name = $2
+                """,
+                uuid.UUID(user_id),
+                pattern_name
+            )
 
-        return False
+        return "DELETE" in result and int(result.split()[-1]) > 0
 
     # ===================
     # Prediction Operations
@@ -662,10 +890,10 @@ class MemoryStore:
         timeframe_start: datetime,
         timeframe_end: datetime,
         confidence: float,
-        factors: Optional[Dict[str, Any]] = None,
-        dasha_period: Optional[Dict[str, Any]] = None,
-        transit_positions: Optional[Dict[str, Any]] = None
-    ) -> Dict[str, Any]:
+        factors: Optional[dict[str, Any]] = None,
+        dasha_period: Optional[dict[str, Any]] = None,
+        transit_positions: Optional[dict[str, Any]] = None
+    ) -> dict[str, Any]:
         """
         Save a prediction for later validation.
 
@@ -689,6 +917,28 @@ class MemoryStore:
         prediction_id = str(uuid.uuid4())
         now = datetime.now()
 
+        async with self.pool.acquire() as conn:
+            await conn.execute(
+                """
+                INSERT INTO predictions (
+                    id, user_id, prediction_text, category, confidence,
+                    timeframe_start, timeframe_end, factors, dasha_period,
+                    transit_positions, created_at
+                ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+                """,
+                uuid.UUID(prediction_id),
+                uuid.UUID(user_id),
+                prediction_text,
+                category,
+                confidence,
+                timeframe_start.date(),
+                timeframe_end.date(),
+                json.dumps(factors) if factors else None,
+                json.dumps(dasha_period) if dasha_period else None,
+                json.dumps(transit_positions) if transit_positions else None,
+                now
+            )
+
         prediction = {
             "id": prediction_id,
             "user_id": user_id,
@@ -701,17 +951,8 @@ class MemoryStore:
             "dasha_period": dasha_period or {},
             "transit_positions": transit_positions or {},
             "created_at": now.isoformat(),
-            "updated_at": now.isoformat(),
             "status": "pending"
         }
-
-        # Production SQL:
-        # INSERT INTO predictions (
-        #     id, user_id, prediction_text, category, confidence,
-        #     timeframe_start, timeframe_end, factors, dasha_period,
-        #     transit_positions, created_at, status
-        # ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, 'pending')
-        # RETURNING *
 
         logger.info(f"Saved prediction {prediction_id} for user {user_id}")
         return prediction
@@ -721,7 +962,7 @@ class MemoryStore:
         prediction_id: str,
         outcome: str,
         accuracy: float
-    ) -> Optional[Dict[str, Any]]:
+    ) -> Optional[dict[str, Any]]:
         """
         Record outcome and accuracy for a prediction.
 
@@ -736,24 +977,41 @@ class MemoryStore:
         if accuracy < 0 or accuracy > 1:
             raise ValueError("accuracy must be between 0 and 1")
 
-        # Production SQL:
-        # UPDATE predictions
-        # SET
-        #     outcome = $2,
-        #     accuracy = $3,
-        #     status = 'validated',
-        #     updated_at = NOW()
-        # WHERE id = $1
-        # RETURNING *
+        async with self.pool.acquire() as conn:
+            row = await conn.fetchrow(
+                """
+                UPDATE predictions
+                SET outcome = $2, accuracy = $3, validated_at = NOW()
+                WHERE id = $1
+                RETURNING *
+                """,
+                uuid.UUID(prediction_id),
+                outcome,
+                accuracy
+            )
+
+        if not row:
+            return None
 
         logger.info(f"Validated prediction {prediction_id} with accuracy {accuracy}")
-        return None
+        return {
+            "id": str(row['id']),
+            "user_id": str(row['user_id']),
+            "prediction_text": row['prediction_text'],
+            "category": row['category'],
+            "confidence": float(row['confidence']) if row['confidence'] else None,
+            "timeframe_start": row['timeframe_start'].isoformat() if row['timeframe_start'] else None,
+            "timeframe_end": row['timeframe_end'].isoformat() if row['timeframe_end'] else None,
+            "outcome": row['outcome'],
+            "accuracy": float(row['accuracy']) if row['accuracy'] else None,
+            "validated_at": row['validated_at'].isoformat() if row['validated_at'] else None
+        }
 
     async def get_pending_predictions(
         self,
         user_id: str,
         before_date: Optional[datetime] = None
-    ) -> List[Dict[str, Any]]:
+    ) -> list[dict[str, Any]]:
         """
         Get predictions that need validation.
 
@@ -764,29 +1022,92 @@ class MemoryStore:
         Returns:
             List of pending prediction dictionaries
         """
-        # Production SQL:
-        # SELECT * FROM predictions
-        # WHERE user_id = $1
-        #   AND status = 'pending'
-        #   AND ($2::timestamp IS NULL OR timeframe_end <= $2)
-        # ORDER BY timeframe_end ASC
+        async with self.pool.acquire() as conn:
+            if before_date:
+                rows = await conn.fetch(
+                    """
+                    SELECT * FROM predictions
+                    WHERE user_id = $1
+                      AND outcome IS NULL
+                      AND timeframe_end <= $2
+                    ORDER BY timeframe_end ASC
+                    """,
+                    uuid.UUID(user_id),
+                    before_date.date()
+                )
+            else:
+                rows = await conn.fetch(
+                    """
+                    SELECT * FROM predictions
+                    WHERE user_id = $1 AND outcome IS NULL
+                    ORDER BY timeframe_end ASC
+                    """,
+                    uuid.UUID(user_id)
+                )
 
-        return []
+        predictions = []
+        for row in rows:
+            predictions.append({
+                "id": str(row['id']),
+                "user_id": str(row['user_id']),
+                "prediction_text": row['prediction_text'],
+                "category": row['category'],
+                "confidence": float(row['confidence']) if row['confidence'] else None,
+                "timeframe_start": row['timeframe_start'].isoformat() if row['timeframe_start'] else None,
+                "timeframe_end": row['timeframe_end'].isoformat() if row['timeframe_end'] else None,
+                "created_at": row['created_at'].isoformat() if row['created_at'] else None
+            })
+
+        return predictions
 
     async def get_user_predictions(
         self,
         user_id: str,
-        status: Optional[str] = None,
+        validated_only: bool = False,
         limit: int = 50
-    ) -> List[Dict[str, Any]]:
-        """Get all predictions for a user with optional status filter."""
-        # Production SQL:
-        # SELECT * FROM predictions
-        # WHERE user_id = $1 AND ($2::text IS NULL OR status = $2)
-        # ORDER BY created_at DESC
-        # LIMIT $3
+    ) -> list[dict[str, Any]]:
+        """Get all predictions for a user."""
+        async with self.pool.acquire() as conn:
+            if validated_only:
+                rows = await conn.fetch(
+                    """
+                    SELECT * FROM predictions
+                    WHERE user_id = $1 AND validated_at IS NOT NULL
+                    ORDER BY created_at DESC
+                    LIMIT $2
+                    """,
+                    uuid.UUID(user_id),
+                    limit
+                )
+            else:
+                rows = await conn.fetch(
+                    """
+                    SELECT * FROM predictions
+                    WHERE user_id = $1
+                    ORDER BY created_at DESC
+                    LIMIT $2
+                    """,
+                    uuid.UUID(user_id),
+                    limit
+                )
 
-        return []
+        predictions = []
+        for row in rows:
+            predictions.append({
+                "id": str(row['id']),
+                "user_id": str(row['user_id']),
+                "prediction_text": row['prediction_text'],
+                "category": row['category'],
+                "confidence": float(row['confidence']) if row['confidence'] else None,
+                "timeframe_start": row['timeframe_start'].isoformat() if row['timeframe_start'] else None,
+                "timeframe_end": row['timeframe_end'].isoformat() if row['timeframe_end'] else None,
+                "outcome": row['outcome'],
+                "accuracy": float(row['accuracy']) if row['accuracy'] else None,
+                "validated_at": row['validated_at'].isoformat() if row['validated_at'] else None,
+                "created_at": row['created_at'].isoformat() if row['created_at'] else None
+            })
+
+        return predictions
 
     # ===================
     # Conversation Operations
@@ -796,11 +1117,11 @@ class MemoryStore:
         self,
         user_id: str,
         session_id: str,
-        messages: List[Dict[str, Any]],
+        messages: list[dict[str, Any]],
         summary: Optional[str] = None,
-        topics: Optional[List[str]] = None,
-        embedding: Optional[List[float]] = None
-    ) -> Dict[str, Any]:
+        topics: Optional[list[str]] = None,
+        embedding: Optional[list[float]] = None
+    ) -> dict[str, Any]:
         """
         Save conversation history.
 
@@ -818,6 +1139,27 @@ class MemoryStore:
         conversation_id = str(uuid.uuid4())
         now = datetime.now()
 
+        async with self.pool.acquire() as conn:
+            await register_vector(conn)
+            await conn.execute(
+                """
+                INSERT INTO conversations (
+                    id, user_id, session_id, messages, message_count,
+                    summary, topics, embedding, created_at, updated_at
+                ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+                """,
+                uuid.UUID(conversation_id),
+                uuid.UUID(user_id),
+                session_id,
+                json.dumps(messages),
+                len(messages),
+                summary,
+                topics,
+                embedding,
+                now,
+                now
+            )
+
         conversation = {
             "id": conversation_id,
             "user_id": user_id,
@@ -829,23 +1171,16 @@ class MemoryStore:
             "updated_at": now.isoformat()
         }
 
-        # Production SQL:
-        # INSERT INTO conversations (
-        #     id, user_id, session_id, messages, message_count, summary,
-        #     topics, embedding, created_at
-        # ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
-        # RETURNING *
-
         logger.debug(f"Saved conversation {conversation_id} with {len(messages)} messages")
         return conversation
 
     async def search_conversations(
         self,
         user_id: str,
-        query_embedding: List[float],
+        query_embedding: list[float],
         limit: int = 5,
         min_similarity: float = 0.6
-    ) -> List[Dict[str, Any]]:
+    ) -> list[dict[str, Any]]:
         """
         Search past conversations by semantic similarity.
 
@@ -858,24 +1193,62 @@ class MemoryStore:
         Returns:
             List of conversation dictionaries with similarity scores
         """
-        # Production SQL:
-        # SELECT *,
-        #     1 - (embedding <=> $2::vector) as similarity
-        # FROM conversations
-        # WHERE user_id = $1
-        #   AND embedding IS NOT NULL
-        #   AND 1 - (embedding <=> $2::vector) >= $4
-        # ORDER BY embedding <=> $2::vector
-        # LIMIT $3
+        async with self.pool.acquire() as conn:
+            await register_vector(conn)
+            rows = await conn.fetch(
+                """
+                SELECT *,
+                    1 - (embedding <=> $2::vector) as similarity
+                FROM conversations
+                WHERE user_id = $1
+                  AND embedding IS NOT NULL
+                  AND 1 - (embedding <=> $2::vector) >= $4
+                ORDER BY embedding <=> $2::vector
+                LIMIT $3
+                """,
+                uuid.UUID(user_id),
+                query_embedding,
+                limit,
+                min_similarity
+            )
 
-        return []
+        conversations = []
+        for row in rows:
+            conversations.append({
+                "id": str(row['id']),
+                "user_id": str(row['user_id']),
+                "session_id": row['session_id'],
+                "message_count": row['message_count'],
+                "summary": row['summary'],
+                "topics": row['topics'],
+                "similarity": float(row['similarity']),
+                "created_at": row['created_at'].isoformat() if row['created_at'] else None
+            })
 
-    async def get_conversation(self, conversation_id: str) -> Optional[Dict[str, Any]]:
+        return conversations
+
+    async def get_conversation(self, conversation_id: str) -> Optional[dict[str, Any]]:
         """Get a specific conversation by ID."""
-        # Production SQL:
-        # SELECT * FROM conversations WHERE id = $1
+        async with self.pool.acquire() as conn:
+            row = await conn.fetchrow(
+                "SELECT * FROM conversations WHERE id = $1",
+                uuid.UUID(conversation_id)
+            )
 
-        return None
+        if not row:
+            return None
+
+        return {
+            "id": str(row['id']),
+            "user_id": str(row['user_id']),
+            "session_id": row['session_id'],
+            "messages": json.loads(row['messages']) if row['messages'] else [],
+            "message_count": row['message_count'],
+            "summary": row['summary'],
+            "topics": row['topics'],
+            "created_at": row['created_at'].isoformat() if row['created_at'] else None,
+            "updated_at": row['updated_at'].isoformat() if row['updated_at'] else None
+        }
 
     # ===================
     # Preference Operations
@@ -895,12 +1268,19 @@ class MemoryStore:
             key: Preference key
             value: Preference value (will be JSON serialized)
         """
-        # Production SQL:
-        # INSERT INTO preferences (user_id, key, value, updated_at)
-        # VALUES ($1, $2, jsonb_build_object($2, $3), NOW())
-        # ON CONFLICT (user_id, key) DO UPDATE SET
-        #     value = excluded.value,
-        #     updated_at = NOW()
+        async with self.pool.acquire() as conn:
+            await conn.execute(
+                """
+                INSERT INTO user_preferences (user_id, preference_key, preference_value)
+                VALUES ($1, $2, $3)
+                ON CONFLICT (user_id, preference_key) DO UPDATE SET
+                    preference_value = $3,
+                    updated_at = NOW()
+                """,
+                uuid.UUID(user_id),
+                key,
+                json.dumps(value)
+            )
 
         logger.debug(f"Set preference {key} for user {user_id}")
 
@@ -921,13 +1301,22 @@ class MemoryStore:
         Returns:
             Preference value or default
         """
-        # Production SQL:
-        # SELECT value FROM preferences
-        # WHERE user_id = $1 AND key = $2
+        async with self.pool.acquire() as conn:
+            row = await conn.fetchrow(
+                """
+                SELECT preference_value FROM user_preferences
+                WHERE user_id = $1 AND preference_key = $2
+                """,
+                uuid.UUID(user_id),
+                key
+            )
 
-        return default
+        if not row:
+            return default
 
-    async def get_all_preferences(self, user_id: str) -> Dict[str, Any]:
+        return json.loads(row['preference_value'])
+
+    async def get_all_preferences(self, user_id: str) -> dict[str, Any]:
         """
         Get all preferences for a user.
 
@@ -937,18 +1326,34 @@ class MemoryStore:
         Returns:
             Dictionary of all preferences
         """
-        # Production SQL:
-        # SELECT key, value FROM preferences WHERE user_id = $1
+        async with self.pool.acquire() as conn:
+            rows = await conn.fetch(
+                """
+                SELECT preference_key, preference_value FROM user_preferences
+                WHERE user_id = $1
+                """,
+                uuid.UUID(user_id)
+            )
 
-        return {}
+        preferences = {}
+        for row in rows:
+            preferences[row['preference_key']] = json.loads(row['preference_value'])
+
+        return preferences
 
     async def delete_preference(self, user_id: str, key: str) -> bool:
         """Delete a user preference."""
-        # Production SQL:
-        # DELETE FROM preferences WHERE user_id = $1 AND key = $2
-        # RETURNING TRUE
+        async with self.pool.acquire() as conn:
+            result = await conn.execute(
+                """
+                DELETE FROM user_preferences
+                WHERE user_id = $1 AND preference_key = $2
+                """,
+                uuid.UUID(user_id),
+                key
+            )
 
-        return False
+        return "DELETE" in result and int(result.split()[-1]) > 0
 
     # ===================
     # Dasha Timeline Operations
@@ -957,18 +1362,14 @@ class MemoryStore:
     async def save_dasha_timeline(
         self,
         user_id: str,
-        timeline: List[Dict[str, Any]]
+        timeline: list[dict[str, Any]]
     ) -> int:
         """
         Save precomputed dasha timeline.
 
         Args:
             user_id: User's UUID
-            timeline: List of dasha period dictionaries with:
-                    - lord: Planet name
-                    - start_date: Period start
-                    - end_date: Period end
-                    - level: 'maha', 'antar', or 'pratyantar'
+            timeline: List of dasha period dictionaries
 
         Returns:
             Number of periods saved
@@ -976,25 +1377,33 @@ class MemoryStore:
         if not timeline:
             return 0
 
-        # Production SQL:
-        # INSERT INTO dasha_timelines (
-        #     user_id, lord, start_date, end_date, level, period_data
-        # )
-        # SELECT $1, p->>'lord', (p->>'start_date')::timestamp,
-        #        (p->>'end_date')::timestamp, p->>'level', p
-        # FROM jsonb_array_elements($2::jsonb) as p
-        # ON CONFLICT DO NOTHING
-        # RETURNING COUNT(*)
+        count = 0
+        async with self.pool.acquire() as conn:
+            for period in timeline:
+                await conn.execute(
+                    """
+                    INSERT INTO dasha_timeline (
+                        user_id, level, lord, start_date, end_date, parent_id
+                    ) VALUES ($1, $2, $3, $4, $5, $6)
+                    """,
+                    uuid.UUID(user_id),
+                    period.get('level', 'maha'),
+                    period['lord'],
+                    period['start_date'],
+                    period['end_date'],
+                    uuid.UUID(period['parent_id']) if period.get('parent_id') else None
+                )
+                count += 1
 
-        logger.info(f"Saved {len(timeline)} dasha periods for user {user_id}")
-        return len(timeline)
+        logger.info(f"Saved {count} dasha periods for user {user_id}")
+        return count
 
     async def get_dasha_at_date(
         self,
         user_id: str,
         date: datetime,
         level: str = "antar"
-    ) -> Optional[Dict[str, Any]]:
+    ) -> Optional[dict[str, Any]]:
         """
         Get the dasha period for a specific date.
 
@@ -1009,28 +1418,64 @@ class MemoryStore:
         if level not in ["maha", "antar", "pratyantar"]:
             raise ValueError("level must be 'maha', 'antar', or 'pratyantar'")
 
-        # Production SQL:
-        # SELECT * FROM dasha_timelines
-        # WHERE user_id = $1
-        #   AND level = $2
-        #   AND start_date <= $3
-        #   AND end_date > $3
-        # LIMIT 1
+        async with self.pool.acquire() as conn:
+            row = await conn.fetchrow(
+                """
+                SELECT * FROM dasha_timeline
+                WHERE user_id = $1
+                  AND level = $2
+                  AND start_date <= $3
+                  AND end_date > $3
+                LIMIT 1
+                """,
+                uuid.UUID(user_id),
+                level,
+                date
+            )
 
-        return None
+        if not row:
+            return None
+
+        return {
+            "id": str(row['id']),
+            "user_id": str(row['user_id']),
+            "level": row['level'],
+            "lord": row['lord'],
+            "start_date": row['start_date'].isoformat(),
+            "end_date": row['end_date'].isoformat(),
+            "parent_id": str(row['parent_id']) if row['parent_id'] else None
+        }
 
     async def get_dasha_timeline(
         self,
         user_id: str,
         level: str = "antar"
-    ) -> List[Dict[str, Any]]:
+    ) -> list[dict[str, Any]]:
         """Get entire dasha timeline for a user."""
-        # Production SQL:
-        # SELECT * FROM dasha_timelines
-        # WHERE user_id = $1 AND level = $2
-        # ORDER BY start_date ASC
+        async with self.pool.acquire() as conn:
+            rows = await conn.fetch(
+                """
+                SELECT * FROM dasha_timeline
+                WHERE user_id = $1 AND level = $2
+                ORDER BY start_date ASC
+                """,
+                uuid.UUID(user_id),
+                level
+            )
 
-        return []
+        timeline = []
+        for row in rows:
+            timeline.append({
+                "id": str(row['id']),
+                "user_id": str(row['user_id']),
+                "level": row['level'],
+                "lord": row['lord'],
+                "start_date": row['start_date'].isoformat(),
+                "end_date": row['end_date'].isoformat(),
+                "parent_id": str(row['parent_id']) if row['parent_id'] else None
+            })
+
+        return timeline
 
     # ===================
     # Bulk Operations
@@ -1039,7 +1484,7 @@ class MemoryStore:
     async def bulk_save_memories(
         self,
         user_id: str,
-        memories: List[Dict[str, Any]]
+        memories: list[dict[str, Any]]
     ) -> int:
         """
         Save multiple memories in a single transaction.
@@ -1054,15 +1499,30 @@ class MemoryStore:
         if not memories:
             return 0
 
-        # Production SQL with batching:
-        # BEGIN;
-        # INSERT INTO memories (user_id, content, category, ...)
-        # VALUES (unnest($1), unnest($2), ...)
-        # ON CONFLICT DO NOTHING;
-        # COMMIT;
+        count = 0
+        async with self.pool.acquire() as conn:
+            await register_vector(conn)
+            async with conn.transaction():
+                for mem in memories:
+                    await conn.execute(
+                        """
+                        INSERT INTO memories (
+                            id, user_id, content, category, embedding,
+                            metadata, importance, created_at, updated_at
+                        ) VALUES ($1, $2, $3, $4, $5, $6, $7, NOW(), NOW())
+                        """,
+                        uuid.UUID(str(uuid.uuid4())),
+                        uuid.UUID(user_id),
+                        mem['content'],
+                        mem.get('category', 'fact'),
+                        mem.get('embedding'),
+                        json.dumps(mem.get('metadata', {})),
+                        mem.get('importance', 0.5)
+                    )
+                    count += 1
 
-        logger.info(f"Bulk saved {len(memories)} memories for user {user_id}")
-        return len(memories)
+        logger.info(f"Bulk saved {count} memories for user {user_id}")
+        return count
 
     async def clear_user_data(self, user_id: str) -> bool:
         """
@@ -1074,19 +1534,20 @@ class MemoryStore:
         Returns:
             True if successful
         """
-        # Production SQL:
-        # BEGIN;
-        # DELETE FROM memories WHERE user_id = $1;
-        # DELETE FROM predictions WHERE user_id = $1;
-        # DELETE FROM conversations WHERE user_id = $1;
-        # DELETE FROM preferences WHERE user_id = $1;
-        # DELETE FROM detected_patterns WHERE user_id = $1;
-        # DELETE FROM dasha_timelines WHERE user_id = $1;
-        # DELETE FROM birth_charts WHERE user_id = $1;
-        # COMMIT;
+        user_uuid = uuid.UUID(user_id)
+
+        async with self.pool.acquire() as conn:
+            async with conn.transaction():
+                await conn.execute("DELETE FROM memories WHERE user_id = $1", user_uuid)
+                await conn.execute("DELETE FROM predictions WHERE user_id = $1", user_uuid)
+                await conn.execute("DELETE FROM conversations WHERE user_id = $1", user_uuid)
+                await conn.execute("DELETE FROM user_preferences WHERE user_id = $1", user_uuid)
+                await conn.execute("DELETE FROM detected_patterns WHERE user_id = $1", user_uuid)
+                await conn.execute("DELETE FROM dasha_timeline WHERE user_id = $1", user_uuid)
+                await conn.execute("DELETE FROM birth_charts WHERE user_id = $1", user_uuid)
 
         logger.warning(f"Cleared all data for user {user_id}")
-        return False
+        return True
 
 
 # ===================

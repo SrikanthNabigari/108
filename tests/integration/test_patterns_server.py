@@ -7,9 +7,9 @@ This validates that all tools are properly defined and importable.
 import sys
 from pathlib import Path
 
-# Add packages to path
-SERVICES_ROOT = Path(__file__).parent
-sys.path.insert(0, str(SERVICES_ROOT))
+# Add project root to path
+PROJECT_ROOT = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
 
 from services.mcp.patterns_server import (  # noqa: E402
     ashtakavarga,
