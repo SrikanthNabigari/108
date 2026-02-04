@@ -1,10 +1,12 @@
 """
 Unit tests for the CONTEXT package (timing systems).
 """
-import pytest
-from datetime import datetime, timedelta
 import sys
-sys.path.insert(0, '/sessions/eloquent-zen-gauss/mnt/108-core')
+from datetime import datetime
+
+import pytest
+
+sys.path.insert(0, "/sessions/eloquent-zen-gauss/mnt/108-core")
 
 
 class TestVimshottariDasha:
@@ -21,10 +23,9 @@ class TestVimshottariDasha:
         """Test correct dasha sequence."""
         from packages.context.src import DASHA_SEQUENCE
 
-        expected = ['Ketu', 'Venus', 'Sun', 'Moon', 'Mars',
-                   'Rahu', 'Jupiter', 'Saturn', 'Mercury']
+        expected = ["ketu", "venus", "sun", "moon", "mars", "rahu", "jupiter", "saturn", "mercury"]
 
-        assert DASHA_SEQUENCE == expected, f"Wrong sequence: {DASHA_SEQUENCE}"
+        assert expected == DASHA_SEQUENCE, f"Wrong sequence: {DASHA_SEQUENCE}"
 
     def test_dasha_from_nakshatra(self):
         """Test dasha lord determination from nakshatra."""
@@ -32,15 +33,15 @@ class TestVimshottariDasha:
 
         # Ashwini (nakshatra 1) is ruled by Ketu
         lord = NAKSHATRA_LORDS[1]
-        assert lord == 'Ketu', f"Ashwini lord should be Ketu, got {lord}"
+        assert lord == "ketu", f"Ashwini lord should be ketu, got {lord}"
 
         # Rohini (nakshatra 4) is ruled by Moon
         lord = NAKSHATRA_LORDS[4]
-        assert lord == 'Moon', f"Rohini lord should be Moon, got {lord}"
+        assert lord == "moon", f"Rohini lord should be moon, got {lord}"
 
         # Pushya (nakshatra 8) is ruled by Saturn
         lord = NAKSHATRA_LORDS[8]
-        assert lord == 'Saturn', f"Pushya lord should be Saturn, got {lord}"
+        assert lord == "saturn", f"Pushya lord should be saturn, got {lord}"
 
     def test_mahadasha_calculation(self):
         """Test Mahadasha sequence calculation."""
@@ -54,9 +55,9 @@ class TestVimshottariDasha:
 
         # Should return a list of periods
         assert len(sequence) > 0, "Should have dasha periods"
-        assert 'lord' in sequence[0], "Each period should have a lord"
-        assert 'start_date' in sequence[0], "Each period should have start_date"
-        assert 'end_date' in sequence[0], "Each period should have end_date"
+        assert "lord" in sequence[0], "Each period should have a lord"
+        assert "start_date" in sequence[0], "Each period should have start_date"
+        assert "end_date" in sequence[0], "Each period should have end_date"
 
     def test_current_dasha(self):
         """Test getting current dasha period."""
@@ -68,11 +69,18 @@ class TestVimshottariDasha:
 
         current = get_current_dasha(birth_dt, moon_lon, query_dt)
 
-        assert 'mahadasha' in current, "Should have mahadasha"
-        assert 'antardasha' in current, "Should have antardasha"
-        assert current['mahadasha']['lord'] in [
-            'Ketu', 'Venus', 'Sun', 'Moon', 'Mars',
-            'Rahu', 'Jupiter', 'Saturn', 'Mercury'
+        assert "mahadasha" in current, "Should have mahadasha"
+        assert "antardasha" in current, "Should have antardasha"
+        assert current["mahadasha"]["lord"] in [
+            "ketu",
+            "venus",
+            "sun",
+            "moon",
+            "mars",
+            "rahu",
+            "jupiter",
+            "saturn",
+            "mercury",
         ]
 
     def test_antardasha_within_mahadasha(self):
@@ -80,19 +88,20 @@ class TestVimshottariDasha:
         from packages.context.src import DASHA_YEARS
 
         # Venus mahadasha is 20 years (lowercase key)
-        venus_years = DASHA_YEARS['venus']
+        venus_years = DASHA_YEARS["venus"]
 
         # Calculate total antardasha duration
         # Each antardasha is proportional to mahadasha lord's period
         total_ad_years = 0
-        for ad_lord, ad_years in DASHA_YEARS.items():
-            # Antardasha duration = (MD years × AD years) / 120
+        for _ad_lord, ad_years in DASHA_YEARS.items():
+            # Antardasha duration = (MD years * AD years) / 120
             ad_duration = (venus_years * ad_years) / 120
             total_ad_years += ad_duration
 
         # Should equal mahadasha duration
-        assert abs(total_ad_years - venus_years) < 0.01, \
-            f"Antardashas should sum to mahadasha: {total_ad_years} vs {venus_years}"
+        assert (
+            abs(total_ad_years - venus_years) < 0.01
+        ), f"Antardashas should sum to mahadasha: {total_ad_years} vs {venus_years}"
 
 
 class TestTransits:
@@ -109,8 +118,7 @@ class TestTransits:
         positions = get_transit_positions(jd)
 
         # Should have all planets
-        expected = ['sun', 'moon', 'mars', 'mercury', 'jupiter',
-                   'venus', 'saturn', 'rahu', 'ketu']
+        expected = ["sun", "moon", "mars", "mercury", "jupiter", "venus", "saturn", "rahu", "ketu"]
 
         for planet in expected:
             assert planet in positions, f"Missing transit for {planet}"
@@ -132,7 +140,7 @@ class TestSadeSati:
 
     def test_sade_sati_phases(self):
         """Test Sade Sati has 3 phases."""
-        phases = ['rising', 'peak', 'setting']
+        phases = ["rising", "peak", "setting"]
         assert len(phases) == 3
 
     def test_sade_sati_detection(self):
@@ -146,22 +154,22 @@ class TestSadeSati:
 
         # Saturn in Leo = peak phase
         result = check_sade_sati(moon_rashi, 4)  # Saturn in Leo
-        assert result['active'], "Saturn in Moon sign = Sade Sati active"
-        assert result['phase'] == 'peak', "Same sign = peak phase"
+        assert result["active"], "Saturn in Moon sign = Sade Sati active"
+        assert result["phase"] == "peak", "Same sign = peak phase"
 
         # Saturn in Cancer = rising phase
         result = check_sade_sati(moon_rashi, 3)  # Saturn in Cancer
-        assert result['active'], "Saturn in 12th from Moon = Sade Sati"
-        assert result['phase'] == 'rising'
+        assert result["active"], "Saturn in 12th from Moon = Sade Sati"
+        assert result["phase"] == "rising"
 
         # Saturn in Virgo = setting phase
         result = check_sade_sati(moon_rashi, 5)  # Saturn in Virgo
-        assert result['active'], "Saturn in 2nd from Moon = Sade Sati"
-        assert result['phase'] == 'setting'
+        assert result["active"], "Saturn in 2nd from Moon = Sade Sati"
+        assert result["phase"] == "setting"
 
         # Saturn in Aries = no Sade Sati
         result = check_sade_sati(moon_rashi, 0)  # Saturn in Aries
-        assert not result['active'], "Saturn far from Moon = no Sade Sati"
+        assert not result["active"], "Saturn far from Moon = no Sade Sati"
 
 
 class TestMuhurta:
@@ -174,7 +182,7 @@ class TestMuhurta:
         minutes_per_muhurta = 48
         total_minutes = muhurtas_per_day * minutes_per_muhurta
 
-        assert total_minutes == 1440, "30 muhurtas × 48 min = 1440 min (24 hours)"
+        assert total_minutes == 1440, "30 muhurtas x 48 min = 1440 min (24 hours)"
 
     def test_rahu_kaal_structure(self):
         """Test Rahu Kaal time periods per day."""
@@ -193,7 +201,7 @@ class TestMuhurta:
 
         # Should have excellent, good, neutral, and poor qualities
         qualities = set(CHOGHADIYA_QUALITY.values())
-        expected_qualities = {'excellent', 'good', 'neutral', 'poor'}
+        expected_qualities = {"excellent", "good", "neutral", "poor"}
 
         for q in expected_qualities:
             assert q in qualities, f"Missing quality: {q}"
@@ -203,19 +211,19 @@ class TestMuhurta:
         from packages.context.src import CHOGHADIYA_ORDER
 
         # Should have 'day' and 'night' sequences
-        assert 'day' in CHOGHADIYA_ORDER or len(CHOGHADIYA_ORDER) > 0
+        assert "day" in CHOGHADIYA_ORDER or len(CHOGHADIYA_ORDER) > 0
 
     def test_evaluate_muhurta(self):
         """Test muhurta evaluation function exists and is callable."""
-        from packages.context.src import evaluate_muhurta, ActivityType
+        from packages.context.src import ActivityType, evaluate_muhurta
 
         # Verify function is importable
         assert callable(evaluate_muhurta), "evaluate_muhurta should be callable"
 
         # Verify ActivityType enum has expected values
         activity_types = [at.value for at in ActivityType]
-        assert 'travel' in activity_types, "Should have travel activity type"
-        assert 'marriage' in activity_types, "Should have marriage activity type"
+        assert "travel" in activity_types, "Should have travel activity type"
+        assert "marriage" in activity_types, "Should have marriage activity type"
 
 
 class TestYearlyPredictions:
@@ -226,10 +234,9 @@ class TestYearlyPredictions:
         # Solar return = when Sun returns to natal position
 
         natal_sun_lon = 45.0  # Sun in Taurus
-        birth_year = 1990
 
-        # The solar return for 2024 would be when
-        # transiting Sun reaches 45° in 2024
+        # The solar return for any year would be when
+        # transiting Sun reaches natal degree (45 in this case)
         # This typically happens around the same date each year
 
         # Just verify the concept
@@ -239,5 +246,5 @@ class TestYearlyPredictions:
         assert is_return, "Solar return when Sun at natal degree"
 
 
-if __name__ == '__main__':
-    pytest.main([__file__, '-v'])
+if __name__ == "__main__":
+    pytest.main([__file__, "-v"])
