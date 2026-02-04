@@ -1,0 +1,229 @@
+{
+  "yoga_rules": {
+    "gaj_kesari_yoga": {
+      "id": "gaj_kesari_yoga",
+      "name": "Gaj Kesari Yoga",
+      "category": "raja",
+      "description": "Jupiter in kendra (1, 4, 7, 10) from Moon creates prosperity, intelligence, and strong presence. One of the most auspicious combinations.",
+      "detection": {
+        "planet": "jupiter",
+        "reference": "moon",
+        "conditions": [
+          {
+            "type": "in_kendra",
+            "reference": "moon"
+          }
+        ],
+        "all_conditions_required": true
+      },
+      "strength_factors": [
+        {
+          "type": "planet_in_own_sign",
+          "planet": "jupiter",
+          "strength_boost": 0.2
+        },
+        {
+          "type": "planet_in_exalted_sign",
+          "planet": "jupiter",
+          "strength_boost": 0.15
+        }
+      ],
+      "cancellation": [
+        {
+          "type": "planet_combust",
+          "planet": "jupiter"
+        }
+      ]
+    },
+    "pancha_mahapurusha_ruchak": {
+      "id": "pancha_mahapurusha_ruchak",
+      "name": "Ruchak Yoga (Mars)",
+      "category": "pancha_mahapurusha",
+      "description": "Mars in kendra (1, 4, 7, 10) in own or exalted sign. Indicates courage, strength, leadership, and executive ability.",
+      "detection": {
+        "planet": "mars",
+        "conditions": [
+          {
+            "type": "in_kendra"
+          },
+          {
+            "type": "in_own_or_exalted_sign",
+            "planet": "mars"
+          }
+        ],
+        "all_conditions_required": true
+      },
+      "strength_factors": [
+        {
+          "type": "planet_in_own_sign",
+          "planet": "mars",
+          "strength_boost": 0.25
+        },
+        {
+          "type": "planet_in_exalted_sign",
+          "planet": "mars",
+          "strength_boost": 0.25
+        }
+      ]
+    },
+    "pancha_mahapurusha_bhaskara": {
+      "id": "pancha_mahapurusha_bhaskara",
+      "name": "Bhaskar Yoga (Sun)",
+      "category": "pancha_mahapurusha",
+      "description": "Sun in kendra (1, 4, 7, 10) in own or exalted sign. Indicates royal qualities, authority, leadership, and prominence.",
+      "detection": {
+        "planet": "sun",
+        "conditions": [
+          {
+            "type": "in_kendra"
+          },
+          {
+            "type": "in_own_or_exalted_sign",
+            "planet": "sun"
+          }
+        ],
+        "all_conditions_required": true
+      },
+      "strength_factors": [
+        {
+          "type": "planet_in_own_sign",
+          "planet": "sun",
+          "strength_boost": 0.25
+        }
+      ]
+    },
+    "pancha_mahapurusha_malavya": {
+      "id": "pancha_mahapurusha_malavya",
+      "name": "Malavya Yoga (Venus)",
+      "category": "pancha_mahapurusha",
+      "description": "Venus in kendra (1, 4, 7, 10) in own or exalted sign. Indicates beauty, charm, luxury, artistic talents, and romantic success.",
+      "detection": {
+        "planet": "venus",
+        "conditions": [
+          {
+            "type": "in_kendra"
+          },
+          {
+            "type": "in_own_or_exalted_sign",
+            "planet": "venus"
+          }
+        ],
+        "all_conditions_required": true
+      },
+      "strength_factors": [
+        {
+          "type": "planet_in_own_sign",
+          "planet": "venus",
+          "strength_boost": 0.25
+        }
+      ]
+    },
+    "pancha_mahapurusha_hamsa": {
+      "id": "pancha_mahapurusha_hamsa",
+      "name": "Hamsa Yoga (Jupiter)",
+      "category": "pancha_mahapurusha",
+      "description": "Jupiter in kendra (1, 4, 7, 10) in own or exalted sign. Indicates spiritual wisdom, discrimination, grace, and divine favor.",
+      "detection": {
+        "planet": "jupiter",
+        "conditions": [
+          {
+            "type": "in_kendra"
+          },
+          {
+            "type": "in_own_or_exalted_sign",
+            "planet": "jupiter"
+          }
+        ],
+        "all_conditions_required": true
+      },
+      "strength_factors": [
+        {
+          "type": "planet_in_own_sign",
+          "planet": "jupiter",
+          "strength_boost": 0.25
+        },
+        {
+          "type": "planet_in_exalted_sign",
+          "planet": "jupiter",
+          "strength_boost": 0.25
+        }
+      ]
+    },
+    "pancha_mahapurusha_sasa": {
+      "id": "pancha_mahapurusha_sasa",
+      "name": "Sasa Yoga (Saturn)",
+      "category": "pancha_mahapurusha",
+      "description": "Saturn in kendra (1, 4, 7, 10) in own or exalted sign. Indicates discipline, responsibility, longevity, and material success through hard work.",
+      "detection": {
+        "planet": "saturn",
+        "conditions": [
+          {
+            "type": "in_kendra"
+          },
+          {
+            "type": "in_own_or_exalted_sign",
+            "planet": "saturn"
+          }
+        ],
+        "all_conditions_required": true
+      },
+      "strength_factors": [
+        {
+          "type": "planet_in_own_sign",
+          "planet": "saturn",
+          "strength_boost": 0.25
+        },
+        {
+          "type": "planet_in_exalted_sign",
+          "planet": "saturn",
+          "strength_boost": 0.25
+        }
+      ]
+    },
+    "amala_yoga": {
+      "id": "amala_yoga",
+      "name": "Amala Yoga",
+      "category": "raja",
+      "description": "Jupiter, Venus, Mercury, or Moon in 10th house (house of karma). Indicates spotless reputation, professional success, and recognition.",
+      "detection": {
+        "planets": ["jupiter", "venus", "mercury", "moon"],
+        "conditions": [
+          {
+            "type": "in_house",
+            "houses": [10],
+            "any_planet": true
+          }
+        ],
+        "all_conditions_required": true
+      }
+    },
+    "buddha_yoga": {
+      "id": "buddha_yoga",
+      "name": "Budha Yoga",
+      "category": "raja",
+      "description": "Mercury in 2nd, 4th, 5th, 9th, or 10th house. Indicates intelligence, eloquence, business acumen, and communication skills.",
+      "detection": {
+        "planet": "mercury",
+        "conditions": [
+          {
+            "type": "in_house",
+            "houses": [2, 4, 5, 9, 10]
+          }
+        ],
+        "all_conditions_required": true
+      },
+      "strength_factors": [
+        {
+          "type": "planet_in_own_sign",
+          "planet": "mercury",
+          "strength_boost": 0.15
+        },
+        {
+          "type": "planet_in_exalted_sign",
+          "planet": "mercury",
+          "strength_boost": 0.15
+        }
+      ]
+    }
+  }
+}

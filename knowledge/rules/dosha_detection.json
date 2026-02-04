@@ -1,0 +1,673 @@
+{
+  "dosha_rules": {
+    "mangal_dosha": {
+      "id": "mangal_dosha",
+      "name": "Mangal Dosha",
+      "sanskrit": "मंगल दोष",
+      "description": "Mars placed in houses 1, 2, 4, 7, 8, or 12 from Lagna, Moon, or Venus, causing marital difficulties and discord in relationships.",
+      "detection": {
+        "conditions": [
+          {
+            "type": "planet_in_house",
+            "planet": "mars",
+            "houses": [1, 2, 4, 7, 8, 12],
+            "from": "lagna"
+          },
+          {
+            "type": "planet_in_house",
+            "planet": "mars",
+            "houses": [1, 2, 4, 7, 8, 12],
+            "from": "moon"
+          },
+          {
+            "type": "planet_in_house",
+            "planet": "mars",
+            "houses": [1, 2, 4, 7, 8, 12],
+            "from": "venus"
+          }
+        ],
+        "all_conditions_required": false,
+        "any_condition_sufficient": true
+      },
+      "severity": "moderate",
+      "severity_levels": {
+        "mild": {
+          "houses": [1, 2],
+          "description": "Mars in 1st or 2nd house - lesser impact"
+        },
+        "moderate": {
+          "houses": [4, 12],
+          "description": "Mars in 4th or 12th house - moderate impact"
+        },
+        "severe": {
+          "houses": [7, 8],
+          "description": "Mars in 7th or 8th house - severe impact on marriage"
+        }
+      },
+      "effects": [
+        "Delay in marriage and conjugal happiness",
+        "Marital discord and frequent quarrels",
+        "Separation or divorce",
+        "Death of spouse or early widowhood (in severe cases)",
+        "Aggressive and quarrelsome temperament in relationships",
+        "Sexual incompatibility",
+        "Financial disputes in marriage",
+        "Misunderstanding between partners"
+      ],
+      "remedies": [
+        "Marry after 28 years of age (for males) or 25 years (for females)",
+        "Marry a Manglik person (mutual cancellation)",
+        "Perform Kumbh Vivah (marriage to a pot or tree before actual marriage)",
+        "Wear red coral (Moonga) gemstone after astrological consultation",
+        "Recite Hanuman Chalisa regularly",
+        "Visit Mangal Nath temple or Mars temples on Tuesdays",
+        "Fast on Tuesdays (Mangal Vrat)",
+        "Donate red items (red clothes, red lentils) on Tuesdays",
+        "Perform Mangal Puja before marriage",
+        "Chant Mars mantras (Om Angarakaya Namaha)",
+        "Practice meditation and anger management techniques"
+      ],
+      "cancellation": [
+        {
+          "condition": "mars_in_own_sign",
+          "description": "Mars in its own signs Aries or Scorpio cancels the dosha completely"
+        },
+        {
+          "condition": "mars_in_exalted_sign",
+          "description": "Mars in its exalted sign Capricorn cancels the dosha"
+        },
+        {
+          "condition": "jupiter_aspect_mars",
+          "description": "Jupiter's aspect on Mars cancels the dosha"
+        },
+        {
+          "condition": "mars_jupiter_conjunction",
+          "description": "Mars conjunct Jupiter cancels the dosha"
+        },
+        {
+          "condition": "both_partners_manglik",
+          "description": "If both marriage partners have Mangal Dosha, it is mutually neutralized"
+        },
+        {
+          "condition": "mars_in_aries_leo_sagittarius_aquarius_capricorn_1st_4th_7th_8th",
+          "description": "Mars in 1st, 4th, 7th, or 8th house of fire signs (Aries, Leo, Sagittarius) or air signs (Aquarius) or earth sign (Capricorn)"
+        },
+        {
+          "condition": "mars_in_gemini_virgo_2nd",
+          "description": "Mars in 2nd house of Gemini or Virgo (air/earth signs)"
+        },
+        {
+          "condition": "mars_in_taurus_libra_12th",
+          "description": "Mars in 12th house of Taurus or Libra (earth/air signs)"
+        }
+      ]
+    },
+    "kaal_sarp_dosha": {
+      "id": "kaal_sarp_dosha",
+      "name": "Kaal Sarp Dosha",
+      "sanskrit": "काल सर्प दोष",
+      "description": "All seven planets (Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn) are hemmed between Rahu and Ketu nodes along the zodiac axis, creating a serpentine entrapment.",
+      "detection": {
+        "conditions": [
+          {
+            "type": "all_planets_between",
+            "between": ["rahu", "ketu"],
+            "planets": ["sun", "moon", "mars", "mercury", "jupiter", "venus", "saturn"]
+          }
+        ],
+        "all_conditions_required": true
+      },
+      "severity": "severe",
+      "types": [
+        {
+          "id": "anant_kaal_sarp",
+          "name": "Anant Kaal Sarp",
+          "rahu_house": 1,
+          "effects": ["Troubles from enemies", "Physical ailments", "Lack of peace"]
+        },
+        {
+          "id": "kulik_kaal_sarp",
+          "name": "Kulik Kaal Sarp",
+          "rahu_house": 2,
+          "effects": ["Financial losses", "Family disputes", "Throat and food-related issues"]
+        },
+        {
+          "id": "vasuki_kaal_sarp",
+          "name": "Vasuki Kaal Sarp",
+          "rahu_house": 3,
+          "effects": ["Sibling conflicts", "Communication problems", "Relationship discord"]
+        },
+        {
+          "id": "shankpal_kaal_sarp",
+          "name": "Shankpal Kaal Sarp",
+          "rahu_house": 4,
+          "effects": ["Property issues", "Mother's health problems", "Domestic unhappiness", "Real estate losses"]
+        },
+        {
+          "id": "padma_kaal_sarp",
+          "name": "Padma Kaal Sarp",
+          "rahu_house": 5,
+          "effects": ["Children issues", "Lack of progeny", "Love relationship problems", "Creativity blockage"]
+        },
+        {
+          "id": "mahapadma_kaal_sarp",
+          "name": "Mahapadma Kaal Sarp",
+          "rahu_house": 6,
+          "effects": ["Health problems", "Enemies and litigations", "Chronic diseases", "Work-related stress"]
+        },
+        {
+          "id": "takshak_kaal_sarp",
+          "name": "Takshak Kaal Sarp",
+          "rahu_house": 7,
+          "effects": ["Marital discord", "Partnership failures", "Spouse health issues", "Business disputes"]
+        },
+        {
+          "id": "karkotak_kaal_sarp",
+          "name": "Karkotak Kaal Sarp",
+          "rahu_house": 8,
+          "effects": ["Accident-prone", "Sudden calamities", "Inheritance issues", "Longevity concerns"]
+        },
+        {
+          "id": "shankhchud_kaal_sarp",
+          "name": "Shankhchud Kaal Sarp",
+          "rahu_house": 9,
+          "effects": ["Spiritual blockage", "Father's problems", "Pilgrimage obstruction", "Lack of fortune"]
+        },
+        {
+          "id": "ghatak_kaal_sarp",
+          "name": "Ghatak Kaal Sarp",
+          "rahu_house": 10,
+          "effects": ["Career obstacles", "Professional failures", "Authority conflicts", "Bad reputation"]
+        },
+        {
+          "id": "vishdhar_kaal_sarp",
+          "name": "Vishdhar Kaal Sarp",
+          "rahu_house": 11,
+          "effects": ["Loss of friendships", "Gains becoming losses", "Failure of plans", "Network betrayal"]
+        },
+        {
+          "id": "sheshnag_kaal_sarp",
+          "name": "Sheshnag Kaal Sarp",
+          "rahu_house": 12,
+          "effects": ["Expenditure and losses", "Sleep disturbances", "Confinement issues", "Spiritual confusion"]
+        }
+      ],
+      "partial_kaal_sarp": {
+        "condition": "one_planet_outside_axis",
+        "description": "When one planet is outside the Rahu-Ketu axis, called Partial Kaal Sarp Dosha"
+      },
+      "effects": [
+        "Karmic entrapment and cyclical suffering",
+        "Delays and obstacles in all endeavors",
+        "Continuous struggle and hardship",
+        "Lack of peace and mental stability",
+        "Relationship conflicts",
+        "Financial losses and setbacks",
+        "Health problems and accidents",
+        "Spiritual stagnation",
+        "Sense of helplessness and despair"
+      ],
+      "remedies": [
+        "Perform Rahu-Ketu Puja and worship",
+        "Chant Rahu and Ketu mantras regularly",
+        "Offer milk and mustard oil to Rahu and Ketu",
+        "Wear hessonite (Gomed) for Rahu and cat's eye (Lehsunia) for Ketu",
+        "Visit Kaal Sarp temples, especially the Kalahasti temple in Andhra Pradesh",
+        "Fast on Mondays and Saturdays",
+        "Perform Nag Puja (serpent worship) on Nag Panchami",
+        "Chant Hanuman Chalisa for spiritual protection",
+        "Meditation and yoga practices",
+        "Donate to charities on Saturdays",
+        "Keep fasting on auspicious days",
+        "Perform Lakshmi Puja to attract positive energies"
+      ],
+      "cancellation": [
+        {
+          "condition": "jupiter_strong_placement",
+          "description": "Strong Jupiter placement can reduce the severity of Kaal Sarp Dosha"
+        },
+        {
+          "condition": "sun_aspected_by_benefics",
+          "description": "Sun aspected by benefics can provide relief"
+        },
+        {
+          "condition": "lord_of_9th_strong",
+          "description": "Strong 9th house lord provides spiritual protection"
+        }
+      ]
+    },
+    "pitra_dosha": {
+      "id": "pitra_dosha",
+      "name": "Pitra Dosha",
+      "sanskrit": "पित्र दोष",
+      "description": "Ancestral karma dosha caused by affliction of Sun, 9th house, or 9th house lord by malefics, particularly Rahu, indicating unresolved ancestral debts or karmic imbalances.",
+      "detection": {
+        "conditions": [
+          {
+            "type": "planet_in_house",
+            "planet": "sun",
+            "houses": [1, 5, 9],
+            "with_malefic": ["rahu", "ketu", "saturn", "mars"]
+          },
+          {
+            "type": "planet_conjunction",
+            "planet": "sun",
+            "conjunct_with": "rahu"
+          },
+          {
+            "type": "house_afflicted",
+            "house": 9,
+            "afflicted_by": ["rahu", "ketu", "saturn", "mars"]
+          },
+          {
+            "type": "lord_afflicted",
+            "lord_of_house": 9,
+            "afflicted_by": ["rahu", "ketu", "saturn", "mars"]
+          }
+        ],
+        "all_conditions_required": false
+      },
+      "severity": "moderate",
+      "types": {
+        "mild": "Sun or 9th house afflicted by Rahu only",
+        "moderate": "Sun conjunct Rahu or 9th lord afflicted",
+        "severe": "Multiple afflictions with complete blockage of 9th house"
+      },
+      "effects": [
+        "Family problems and conflicts",
+        "Lack of success despite hard work",
+        "Children's health issues and obstacles",
+        "Guilt and psychological problems",
+        "Difficulty in spiritual pursuits",
+        "Delays in marriage and progeny",
+        "Financial instability and losses",
+        "Disrespect to parents and elders",
+        "Legal troubles and court cases",
+        "Sense of incompleteness in life"
+      ],
+      "remedies": [
+        "Perform Shraddha (ritual for ancestors) regularly",
+        "Offer water and food to crows and birds",
+        "Respect and serve parents and elders",
+        "Perform Pitra Yagna or ancestral rituals",
+        "Recite Aditya Hridayam (Sun hymn) daily",
+        "Wear ruby (Mani) or red gemstone",
+        "Chant Rahu and Ketu mantras for appeasement",
+        "Visit sacred temples and perform charity",
+        "Fast on Sundays and offer to Sun God",
+        "Perform Tarpan (water oblation) for ancestors",
+        "Donate grains and food on Sundays",
+        "Seek blessings through spiritual guidance"
+      ],
+      "cancellation": [
+        {
+          "condition": "sun_in_own_sign",
+          "description": "Sun in Leo (own sign) mitigates the dosha"
+        },
+        {
+          "condition": "sun_in_exalted",
+          "description": "Sun in Aries (exalted sign) cancels the dosha"
+        },
+        {
+          "condition": "sun_aspected_by_jupiter",
+          "description": "Jupiter's aspect on Sun provides relief"
+        },
+        {
+          "condition": "strong_9th_house",
+          "description": "Strong 9th house lord without affliction cancels the dosha"
+        },
+        {
+          "condition": "ancestral_rituals_performed",
+          "description": "Regular performance of Shraddha and ancestor worship reduces effects"
+        }
+      ]
+    },
+    "grahan_dosha": {
+      "id": "grahan_dosha",
+      "name": "Grahan Dosha",
+      "sanskrit": "ग्रहण दोष",
+      "description": "Eclipse affliction dosha caused by Sun or Moon conjunct with shadow planets Rahu or Ketu, causing eclipse-like affliction of luminaries.",
+      "detection": {
+        "conditions": [
+          {
+            "type": "planet_conjunction",
+            "planet": "sun",
+            "conjunct_with": ["rahu", "ketu"]
+          },
+          {
+            "type": "planet_conjunction",
+            "planet": "moon",
+            "conjunct_with": ["rahu", "ketu"]
+          }
+        ],
+        "all_conditions_required": false
+      },
+      "severity": "moderate",
+      "types": {
+        "sun_rahu": {
+          "name": "Sun-Rahu Conjunction",
+          "effects": ["Loss of vitality", "Authority issues", "Father-related problems", "Life confusion"]
+        },
+        "sun_ketu": {
+          "name": "Sun-Ketu Conjunction",
+          "effects": ["Spiritual confusion", "Identity crisis", "Loss of willpower", "Social awkwardness"]
+        },
+        "moon_rahu": {
+          "name": "Moon-Rahu Conjunction",
+          "effects": ["Mental instability", "Emotional turmoil", "Addiction tendencies", "Mother's health issues"]
+        },
+        "moon_ketu": {
+          "name": "Moon-Ketu Conjunction",
+          "effects": ["Psychological issues", "Detachment", "Spiritual inclination", "Family estrangement"]
+        }
+      },
+      "effects": [
+        "Mental confusion and anxiety",
+        "Loss of vital energy and confidence",
+        "Relationship disturbances",
+        "Health issues related to lungs and heart",
+        "Career instability",
+        "Spiritual disconnection",
+        "Recurring obstacles in life",
+        "Addiction and behavioral issues",
+        "Loss of inheritance or property"
+      ],
+      "remedies": [
+        "Perform eclipse remedies during solar and lunar eclipses",
+        "Chant Sun mantras (Om Suryaya Namaha) for Sun affliction",
+        "Chant Moon mantras (Om Chandaya Namaha) for Moon affliction",
+        "Chant Rahu and Ketu mantras for appeasement",
+        "Wear gemstones: Ruby for Sun, Pearl for Moon",
+        "Wear hessonite (Gomed) for Rahu and cat's eye (Lehsunia) for Ketu",
+        "Perform Rahu-Ketu Puja",
+        "Offer milk and honey to Moon, and milk and mustard oil to Rahu",
+        "Fast on eclipse days",
+        "Meditate during eclipse periods",
+        "Donate white items on Mondays",
+        "Seek spiritual guidance and counseling"
+      ],
+      "cancellation": [
+        {
+          "condition": "sun_in_own_sign",
+          "description": "Sun in Leo reduces the impact"
+        },
+        {
+          "condition": "moon_in_own_sign",
+          "description": "Moon in Cancer reduces the impact"
+        },
+        {
+          "condition": "conjunction_in_friendly_sign",
+          "description": "Conjunction in a sign where both planets are friendly"
+        },
+        {
+          "condition": "benefic_aspect",
+          "description": "Aspect of benefic planets (Jupiter, Venus) on the conjunction"
+        }
+      ]
+    },
+    "guru_chandal_dosha": {
+      "id": "guru_chandal_dosha",
+      "name": "Guru Chandal Dosha",
+      "sanskrit": "गुरु चंडाल दोष",
+      "description": "Malefic combination where Jupiter (Guru) is conjunct with or aspected by Rahu (Chandal), causing confusion in wisdom and judgment.",
+      "detection": {
+        "conditions": [
+          {
+            "type": "planet_conjunction",
+            "planet": "jupiter",
+            "conjunct_with": "rahu"
+          },
+          {
+            "type": "planet_aspected",
+            "planet": "jupiter",
+            "aspected_by": "rahu"
+          }
+        ],
+        "all_conditions_required": false
+      },
+      "severity": "moderate",
+      "effects": [
+        "Loss of wisdom and poor judgment",
+        "Spiritual confusion and misguided beliefs",
+        "Educational obstacles and learning difficulties",
+        "Religious hypocrisy and spiritual degradation",
+        "Relationship with gurus or mentors becomes problematic",
+        "Business losses and bad partnerships",
+        "Children-related problems",
+        "Loss of wealth and fortune",
+        "Addiction to intoxicants or unhealthy habits",
+        "Fraud and deception in business"
+      ],
+      "remedies": [
+        "Worship Jupiter (Guru) and appease Rahu",
+        "Chant Jupiter mantras (Om Guruve Namaha)",
+        "Chant Rahu mantras and seek appeasement",
+        "Wear yellow sapphire (Pukhraj) for Jupiter",
+        "Wear hessonite (Gomed) for Rahu",
+        "Perform Guru Puja regularly",
+        "Seek guidance from a spiritual mentor",
+        "Donate yellow items and food on Thursdays",
+        "Fast on Thursdays",
+        "Respect teachers and elders",
+        "Perform charity and help others",
+        "Meditate and practice mindfulness",
+        "Visit temples and offer flowers to deity"
+      ],
+      "cancellation": [
+        {
+          "condition": "jupiter_in_own_sign",
+          "description": "Jupiter in Sagittarius or Pisces mitigates the dosha"
+        },
+        {
+          "condition": "jupiter_in_exalted",
+          "description": "Jupiter in Cancer (exalted sign) cancels the dosha"
+        },
+        {
+          "condition": "jupiter_aspects_rahu",
+          "description": "Jupiter aspecting Rahu from a distance can reduce impact"
+        },
+        {
+          "condition": "sun_mercury_benefic_aspect",
+          "description": "Aspect of Sun or Mercury on Jupiter provides relief"
+        }
+      ]
+    },
+    "shani_dosha": {
+      "id": "shani_dosha",
+      "name": "Shani Dosha",
+      "sanskrit": "शनि दोष",
+      "description": "Saturn affliction or difficult Saturn placement causing obstruction, limitation, and hardship. Includes Sade Sati (7.5-year Saturn transit over Moon) and other Saturn-related afflictions.",
+      "detection": {
+        "conditions": [
+          {
+            "type": "planet_in_house",
+            "planet": "saturn",
+            "houses": [1, 4, 7, 10],
+            "from": "moon"
+          },
+          {
+            "type": "planet_in_house",
+            "planet": "saturn",
+            "houses": [1, 2, 3],
+            "from": "lagna"
+          },
+          {
+            "type": "sade_sati",
+            "description": "Saturn transit in Moon's sign or adjacent signs for 7.5 years"
+          },
+          {
+            "type": "dhaiya",
+            "description": "Saturn in 4th or 8th house from Moon (2.5 years each)"
+          }
+        ],
+        "all_conditions_required": false
+      },
+      "severity": "moderate",
+      "types": {
+        "sade_sati": {
+          "name": "Sade Sati",
+          "duration": "7.5 years",
+          "phases": [
+            {
+              "phase": "first",
+              "duration": "2.5 years",
+              "description": "Saturn in 12th from Moon - loss and expenditure"
+            },
+            {
+              "phase": "second",
+              "duration": "2.5 years",
+              "description": "Saturn in Moon's sign - peak difficulty and obstruction"
+            },
+            {
+              "phase": "third",
+              "duration": "2.5 years",
+              "description": "Saturn in 2nd from Moon - pressure and challenges"
+            }
+          ]
+        },
+        "dhaiya": {
+          "name": "Dhaiya (Small Panoti)",
+          "duration": "2.5 years",
+          "description": "Saturn in 4th or 8th house from Moon"
+        },
+        "kantaka_shani": {
+          "name": "Kantaka Shani",
+          "description": "Saturn in 1st, 4th, 7th, 10th house from lagna"
+        }
+      },
+      "effects": [
+        "Obstruction and delays in all endeavors",
+        "Financial difficulties and losses",
+        "Health problems and chronic diseases",
+        "Relationship strain and family conflicts",
+        "Career stagnation and setbacks",
+        "Loss of property and inheritance",
+        "Accidents and injuries",
+        "Mental stress and depression",
+        "Reduced energy and vitality",
+        "Social disgrace and public humiliation",
+        "Enemies and litigations",
+        "Loss of loved ones"
+      ],
+      "remedies": [
+        "Worship Saturn (Shani) and appease",
+        "Chant Saturn mantras (Om Shanicharaya Namaha) daily",
+        "Wear blue sapphire (Neelam) gemstone",
+        "Perform Shani Puja on Saturdays",
+        "Fast on Saturdays (preferably complete or partial)",
+        "Offer oil and sesame to Saturn",
+        "Donate black items, iron, or oil on Saturdays",
+        "Recite Shani Stotra or Shani Chalisa",
+        "Visit Shani temples",
+        "Serve the poor and disadvantaged",
+        "Practice patience and acceptance",
+        "Perform charity and help others",
+        "Maintain ethical behavior"
+      ],
+      "cancellation": [
+        {
+          "condition": "saturn_in_own_sign",
+          "description": "Saturn in Capricorn or Aquarius reduces severity"
+        },
+        {
+          "condition": "saturn_in_exalted",
+          "description": "Saturn in Libra (exalted sign) mitigates the dosha"
+        },
+        {
+          "condition": "saturn_aspected_by_jupiter",
+          "description": "Jupiter's aspect on Saturn provides relief"
+        },
+        {
+          "condition": "strong_9th_house",
+          "description": "Strong 9th house provides spiritual protection"
+        },
+        {
+          "condition": "saturn_yogakaraka",
+          "description": "Saturn as Yogakaraka planet may reduce negative effects"
+        }
+      ]
+    },
+    "kemdrum_dosha": {
+      "id": "kemdrum_dosha",
+      "name": "Kemdrum Dosha",
+      "sanskrit": "केंद्रुम दोष",
+      "description": "Moon without planetary support in 2nd and 12th houses, causing isolation, lack of confidence, and mental instability without proper guidance.",
+      "detection": {
+        "conditions": [
+          {
+            "type": "no_planets_in_houses",
+            "houses": [2, 12],
+            "from": "moon"
+          },
+          {
+            "type": "moon_isolated",
+            "description": "Moon without any planet in adjacent houses"
+          }
+        ],
+        "all_conditions_required": true
+      },
+      "severity": "mild",
+      "effects": [
+        "Lack of confidence and self-esteem",
+        "Isolation and loneliness",
+        "Difficulty in decision-making",
+        "Lack of mental peace and tranquility",
+        "No proper guidance or support",
+        "Difficult relationships and social isolation",
+        "Lack of wealth and prosperity",
+        "Health issues and weakness",
+        "Emotional instability and mood swings",
+        "Inability to face challenges independently"
+      ],
+      "remedies": [
+        "Strengthen Moon through gemstones (Pearl)",
+        "Recite Moon mantras (Om Chandraya Namaha)",
+        "Perform Moon worship and rituals",
+        "Offer milk and rice to Moon",
+        "Fast on Mondays",
+        "Seek support from family and friends",
+        "Meditate and practice mindfulness",
+        "Perform charitable acts",
+        "Visit temples and holy places",
+        "Develop inner confidence through spiritual practice",
+        "Keep company with positive and supportive people",
+        "Engage in artistic and creative pursuits"
+      ],
+      "cancellation": [
+        {
+          "condition": "moon_in_own_sign",
+          "description": "Moon in Cancer mitigates the dosha"
+        },
+        {
+          "condition": "moon_in_exalted",
+          "description": "Moon in Taurus (exalted sign) cancels the dosha"
+        },
+        {
+          "condition": "strong_benefic_aspect",
+          "description": "Aspect of Jupiter or Venus on Moon provides support"
+        },
+        {
+          "condition": "planet_in_lagna",
+          "description": "Strong planet in Lagna provides support to Moon"
+        },
+        {
+          "condition": "mercury_conjunction",
+          "description": "Mercury in 2nd or 12th house provides mental support"
+        }
+      ]
+    }
+  },
+  "detection_engine": {
+    "version": "1.0",
+    "rule_evaluation": {
+      "single_condition": "Dosha is present if condition is met",
+      "multiple_conditions": "All must be true if all_conditions_required is true, otherwise any condition is sufficient",
+      "cancellation": "Apply after main condition detection to mitigate or cancel the dosha"
+    },
+    "severity_scale": {
+      "mild": "Minor obstacles, manageable with remedies",
+      "moderate": "Significant challenges requiring dedicated remedies",
+      "severe": "Major life disruptions, professional guidance strongly recommended"
+    }
+  }
+}

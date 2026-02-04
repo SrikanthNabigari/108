@@ -1,0 +1,23 @@
+[project]
+name = "one-zero-eight-guide"
+version = "2.0.0"
+description = "LangGraph agent for 108"
+requires-python = ">=3.11"
+license = "MIT"
+dependencies = [
+    "one-zero-eight-core",
+    "one-zero-eight-cosmos",
+    "one-zero-eight-self",
+    "one-zero-eight-context",
+    "one-zero-eight-memory",
+    "langgraph>=0.0.30",
+    "langchain-anthropic>=0.1.0",
+    "anthropic>=0.18.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]

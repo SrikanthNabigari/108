@@ -1,0 +1,1381 @@
+{
+  "nakshatras": [
+    {
+      "number": 1,
+      "id": "ashwini",
+      "name": "Ashwini",
+      "sanskrit": "अश्विनी",
+      "ruler": "ketu",
+      "deity": "Ashwini Kumaras",
+      "symbol": "Horse head",
+      "shakti": "Rava Shakti (Power to reach/arrive)",
+      "gana": "deva",
+      "animal": "Horse",
+      "sounds": ["Chu", "Che", "Cho", "Cha"],
+      "degrees": {
+        "start": 0,
+        "end": 13.333
+      },
+      "padas": [
+        {
+          "number": 1,
+          "navamsha_sign": "aries",
+          "degrees": {
+            "start": 0,
+            "end": 3.333
+          }
+        },
+        {
+          "number": 2,
+          "navamsha_sign": "taurus",
+          "degrees": {
+            "start": 3.333,
+            "end": 6.667
+          }
+        },
+        {
+          "number": 3,
+          "navamsha_sign": "gemini",
+          "degrees": {
+            "start": 6.667,
+            "end": 10
+          }
+        },
+        {
+          "number": 4,
+          "navamsha_sign": "cancer",
+          "degrees": {
+            "start": 10,
+            "end": 13.333
+          }
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "id": "bharani",
+      "name": "Bharani",
+      "sanskrit": "भरणी",
+      "ruler": "venus",
+      "deity": "Yama",
+      "symbol": "Yoni",
+      "shakti": "Apabharani Shakti (Power to nourish)",
+      "gana": "manushya",
+      "animal": "Elephant",
+      "sounds": ["Lee", "Loo", "Lay", "Lo"],
+      "degrees": {
+        "start": 13.333,
+        "end": 26.667
+      },
+      "padas": [
+        {
+          "number": 1,
+          "navamsha_sign": "cancer",
+          "degrees": {
+            "start": 13.333,
+            "end": 16.667
+          }
+        },
+        {
+          "number": 2,
+          "navamsha_sign": "leo",
+          "degrees": {
+            "start": 16.667,
+            "end": 20
+          }
+        },
+        {
+          "number": 3,
+          "navamsha_sign": "virgo",
+          "degrees": {
+            "start": 20,
+            "end": 23.333
+          }
+        },
+        {
+          "number": 4,
+          "navamsha_sign": "libra",
+          "degrees": {
+            "start": 23.333,
+            "end": 26.667
+          }
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "id": "krittika",
+      "name": "Krittika",
+      "sanskrit": "कृत्तिका",
+      "ruler": "sun",
+      "deity": "Agni",
+      "symbol": "Knife/Flame",
+      "shakti": "Dahana Shakti (Power to burn)",
+      "gana": "rakshasa",
+      "animal": "Sheep",
+      "sounds": ["A", "Ee", "U", "Ay"],
+      "degrees": {
+        "start": 26.667,
+        "end": 40
+      },
+      "padas": [
+        {
+          "number": 1,
+          "navamsha_sign": "libra",
+          "degrees": {
+            "start": 26.667,
+            "end": 30
+          }
+        },
+        {
+          "number": 2,
+          "navamsha_sign": "scorpio",
+          "degrees": {
+            "start": 30,
+            "end": 33.333
+          }
+        },
+        {
+          "number": 3,
+          "navamsha_sign": "sagittarius",
+          "degrees": {
+            "start": 33.333,
+            "end": 36.667
+          }
+        },
+        {
+          "number": 4,
+          "navamsha_sign": "capricorn",
+          "degrees": {
+            "start": 36.667,
+            "end": 40
+          }
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "id": "rohini",
+      "name": "Rohini",
+      "sanskrit": "रोहिणी",
+      "ruler": "moon",
+      "deity": "Prajapati/Brahma",
+      "symbol": "Chariot/Cart",
+      "shakti": "Pushti Shakti (Power to nourish growth)",
+      "gana": "manushya",
+      "animal": "Serpent",
+      "sounds": ["O", "Va", "Vi", "Vu"],
+      "degrees": {
+        "start": 40,
+        "end": 53.333
+      },
+      "padas": [
+        {
+          "number": 1,
+          "navamsha_sign": "capricorn",
+          "degrees": {
+            "start": 40,
+            "end": 43.333
+          }
+        },
+        {
+          "number": 2,
+          "navamsha_sign": "aquarius",
+          "degrees": {
+            "start": 43.333,
+            "end": 46.667
+          }
+        },
+        {
+          "number": 3,
+          "navamsha_sign": "pisces",
+          "degrees": {
+            "start": 46.667,
+            "end": 50
+          }
+        },
+        {
+          "number": 4,
+          "navamsha_sign": "aries",
+          "degrees": {
+            "start": 50,
+            "end": 53.333
+          }
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "id": "mrigashira",
+      "name": "Mrigashira",
+      "sanskrit": "मृगशिरा",
+      "ruler": "mars",
+      "deity": "Soma",
+      "symbol": "Deer head",
+      "shakti": "Eshana Shakti (Power to search/seek)",
+      "gana": "deva",
+      "animal": "Deer",
+      "sounds": ["Ve", "Vo", "Ka", "Ki"],
+      "degrees": {
+        "start": 53.333,
+        "end": 66.667
+      },
+      "padas": [
+        {
+          "number": 1,
+          "navamsha_sign": "aries",
+          "degrees": {
+            "start": 53.333,
+            "end": 56.667
+          }
+        },
+        {
+          "number": 2,
+          "navamsha_sign": "taurus",
+          "degrees": {
+            "start": 56.667,
+            "end": 60
+          }
+        },
+        {
+          "number": 3,
+          "navamsha_sign": "gemini",
+          "degrees": {
+            "start": 60,
+            "end": 63.333
+          }
+        },
+        {
+          "number": 4,
+          "navamsha_sign": "cancer",
+          "degrees": {
+            "start": 63.333,
+            "end": 66.667
+          }
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "id": "ardra",
+      "name": "Ardra",
+      "sanskrit": "आर्द्रा",
+      "ruler": "rahu",
+      "deity": "Rudra",
+      "symbol": "Teardrop",
+      "shakti": "Veeryatva Shakti (Power to purify)",
+      "gana": "rakshasa",
+      "animal": "Dog",
+      "sounds": ["Ku", "Gha", "Ng", "Cho"],
+      "degrees": {
+        "start": 66.667,
+        "end": 80
+      },
+      "padas": [
+        {
+          "number": 1,
+          "navamsha_sign": "cancer",
+          "degrees": {
+            "start": 66.667,
+            "end": 70
+          }
+        },
+        {
+          "number": 2,
+          "navamsha_sign": "leo",
+          "degrees": {
+            "start": 70,
+            "end": 73.333
+          }
+        },
+        {
+          "number": 3,
+          "navamsha_sign": "virgo",
+          "degrees": {
+            "start": 73.333,
+            "end": 76.667
+          }
+        },
+        {
+          "number": 4,
+          "navamsha_sign": "libra",
+          "degrees": {
+            "start": 76.667,
+            "end": 80
+          }
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "id": "punarvasu",
+      "name": "Punarvasu",
+      "sanskrit": "पुनर्वसु",
+      "ruler": "jupiter",
+      "deity": "Aditi",
+      "symbol": "Bow/Arrow",
+      "shakti": "Diti Shakti (Power to give/create)",
+      "gana": "deva",
+      "animal": "Cat",
+      "sounds": ["Ke", "Ko", "Ha", "Hi"],
+      "degrees": {
+        "start": 80,
+        "end": 93.333
+      },
+      "padas": [
+        {
+          "number": 1,
+          "navamsha_sign": "libra",
+          "degrees": {
+            "start": 80,
+            "end": 83.333
+          }
+        },
+        {
+          "number": 2,
+          "navamsha_sign": "scorpio",
+          "degrees": {
+            "start": 83.333,
+            "end": 86.667
+          }
+        },
+        {
+          "number": 3,
+          "navamsha_sign": "sagittarius",
+          "degrees": {
+            "start": 86.667,
+            "end": 90
+          }
+        },
+        {
+          "number": 4,
+          "navamsha_sign": "capricorn",
+          "degrees": {
+            "start": 90,
+            "end": 93.333
+          }
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "id": "pushya",
+      "name": "Pushya",
+      "sanskrit": "पुष्य",
+      "ruler": "saturn",
+      "deity": "Brihaspati",
+      "symbol": "Arrow/Udder",
+      "shakti": "Pushti Shakti (Power to nourish)",
+      "gana": "deva",
+      "animal": "Goat",
+      "sounds": ["Hu", "He", "Ho", "Da"],
+      "degrees": {
+        "start": 93.333,
+        "end": 106.667
+      },
+      "padas": [
+        {
+          "number": 1,
+          "navamsha_sign": "capricorn",
+          "degrees": {
+            "start": 93.333,
+            "end": 96.667
+          }
+        },
+        {
+          "number": 2,
+          "navamsha_sign": "aquarius",
+          "degrees": {
+            "start": 96.667,
+            "end": 100
+          }
+        },
+        {
+          "number": 3,
+          "navamsha_sign": "pisces",
+          "degrees": {
+            "start": 100,
+            "end": 103.333
+          }
+        },
+        {
+          "number": 4,
+          "navamsha_sign": "aries",
+          "degrees": {
+            "start": 103.333,
+            "end": 106.667
+          }
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "id": "ashlesha",
+      "name": "Ashlesha",
+      "sanskrit": "आश्लेषा",
+      "ruler": "mercury",
+      "deity": "Nagas/Serpent deities",
+      "symbol": "Serpent coil",
+      "shakti": "Vishalyaharana Shakti (Power to remove toxins)",
+      "gana": "rakshasa",
+      "animal": "Serpent",
+      "sounds": ["Di", "Du", "De", "Do"],
+      "degrees": {
+        "start": 106.667,
+        "end": 120
+      },
+      "padas": [
+        {
+          "number": 1,
+          "navamsha_sign": "aries",
+          "degrees": {
+            "start": 106.667,
+            "end": 110
+          }
+        },
+        {
+          "number": 2,
+          "navamsha_sign": "taurus",
+          "degrees": {
+            "start": 110,
+            "end": 113.333
+          }
+        },
+        {
+          "number": 3,
+          "navamsha_sign": "gemini",
+          "degrees": {
+            "start": 113.333,
+            "end": 116.667
+          }
+        },
+        {
+          "number": 4,
+          "navamsha_sign": "cancer",
+          "degrees": {
+            "start": 116.667,
+            "end": 120
+          }
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "id": "magha",
+      "name": "Magha",
+      "sanskrit": "मघा",
+      "ruler": "ketu",
+      "deity": "Pitris/Ancestors",
+      "symbol": "Throne/Palace",
+      "shakti": "Ava Shakti (Power to protect)",
+      "gana": "rakshasa",
+      "animal": "Rat",
+      "sounds": ["Ma", "Mi", "Mu", "Me"],
+      "degrees": {
+        "start": 120,
+        "end": 133.333
+      },
+      "padas": [
+        {
+          "number": 1,
+          "navamsha_sign": "cancer",
+          "degrees": {
+            "start": 120,
+            "end": 123.333
+          }
+        },
+        {
+          "number": 2,
+          "navamsha_sign": "leo",
+          "degrees": {
+            "start": 123.333,
+            "end": 126.667
+          }
+        },
+        {
+          "number": 3,
+          "navamsha_sign": "virgo",
+          "degrees": {
+            "start": 126.667,
+            "end": 130
+          }
+        },
+        {
+          "number": 4,
+          "navamsha_sign": "libra",
+          "degrees": {
+            "start": 130,
+            "end": 133.333
+          }
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "id": "purva_phalguni",
+      "name": "Purva Phalguni",
+      "sanskrit": "पूर्व फाल्गुनी",
+      "ruler": "venus",
+      "deity": "Aryaman",
+      "symbol": "Bed/Four-poster bed",
+      "shakti": "Vyapana Shakti (Power to pervade)",
+      "gana": "manushya",
+      "animal": "Rat",
+      "sounds": ["Mo", "Ta", "Ti", "Tu"],
+      "degrees": {
+        "start": 133.333,
+        "end": 146.667
+      },
+      "padas": [
+        {
+          "number": 1,
+          "navamsha_sign": "libra",
+          "degrees": {
+            "start": 133.333,
+            "end": 136.667
+          }
+        },
+        {
+          "number": 2,
+          "navamsha_sign": "scorpio",
+          "degrees": {
+            "start": 136.667,
+            "end": 140
+          }
+        },
+        {
+          "number": 3,
+          "navamsha_sign": "sagittarius",
+          "degrees": {
+            "start": 140,
+            "end": 143.333
+          }
+        },
+        {
+          "number": 4,
+          "navamsha_sign": "capricorn",
+          "degrees": {
+            "start": 143.333,
+            "end": 146.667
+          }
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "id": "uttara_phalguni",
+      "name": "Uttara Phalguni",
+      "sanskrit": "उत्तर फाल्गुनी",
+      "ruler": "sun",
+      "deity": "Bhaga",
+      "symbol": "Bed/Four-poster bed",
+      "shakti": "Ushita Shakti (Power to rage/blaze)",
+      "gana": "manushya",
+      "animal": "Cow",
+      "sounds": ["Te", "To", "Pa", "Pi"],
+      "degrees": {
+        "start": 146.667,
+        "end": 160
+      },
+      "padas": [
+        {
+          "number": 1,
+          "navamsha_sign": "capricorn",
+          "degrees": {
+            "start": 146.667,
+            "end": 150
+          }
+        },
+        {
+          "number": 2,
+          "navamsha_sign": "aquarius",
+          "degrees": {
+            "start": 150,
+            "end": 153.333
+          }
+        },
+        {
+          "number": 3,
+          "navamsha_sign": "pisces",
+          "degrees": {
+            "start": 153.333,
+            "end": 156.667
+          }
+        },
+        {
+          "number": 4,
+          "navamsha_sign": "aries",
+          "degrees": {
+            "start": 156.667,
+            "end": 160
+          }
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "id": "hasta",
+      "name": "Hasta",
+      "sanskrit": "हस्त",
+      "ruler": "moon",
+      "deity": "Savitar",
+      "symbol": "Hand",
+      "shakti": "Hasana Shakti (Power to grasp/seize)",
+      "gana": "deva",
+      "animal": "Buffalo",
+      "sounds": ["Pu", "Sha", "Na", "Tha"],
+      "degrees": {
+        "start": 160,
+        "end": 173.333
+      },
+      "padas": [
+        {
+          "number": 1,
+          "navamsha_sign": "aries",
+          "degrees": {
+            "start": 160,
+            "end": 163.333
+          }
+        },
+        {
+          "number": 2,
+          "navamsha_sign": "taurus",
+          "degrees": {
+            "start": 163.333,
+            "end": 166.667
+          }
+        },
+        {
+          "number": 3,
+          "navamsha_sign": "gemini",
+          "degrees": {
+            "start": 166.667,
+            "end": 170
+          }
+        },
+        {
+          "number": 4,
+          "navamsha_sign": "cancer",
+          "degrees": {
+            "start": 170,
+            "end": 173.333
+          }
+        }
+      ]
+    },
+    {
+      "number": 14,
+      "id": "chitra",
+      "name": "Chitra",
+      "sanskrit": "चित्रा",
+      "ruler": "mars",
+      "deity": "Twashtar/Vishwakarma",
+      "symbol": "Jewel/Pearl",
+      "shakti": "Janana Shakti (Power to create)",
+      "gana": "rakshasa",
+      "animal": "Tiger",
+      "sounds": ["Pe", "Po", "Ra", "Ri"],
+      "degrees": {
+        "start": 173.333,
+        "end": 186.667
+      },
+      "padas": [
+        {
+          "number": 1,
+          "navamsha_sign": "cancer",
+          "degrees": {
+            "start": 173.333,
+            "end": 176.667
+          }
+        },
+        {
+          "number": 2,
+          "navamsha_sign": "leo",
+          "degrees": {
+            "start": 176.667,
+            "end": 180
+          }
+        },
+        {
+          "number": 3,
+          "navamsha_sign": "virgo",
+          "degrees": {
+            "start": 180,
+            "end": 183.333
+          }
+        },
+        {
+          "number": 4,
+          "navamsha_sign": "libra",
+          "degrees": {
+            "start": 183.333,
+            "end": 186.667
+          }
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "id": "swati",
+      "name": "Swati",
+      "sanskrit": "स्वाती",
+      "ruler": "rahu",
+      "deity": "Vayu",
+      "symbol": "Sword/Sickle",
+      "shakti": "Pravana Shakti (Power to move/scatter)",
+      "gana": "deva",
+      "animal": "Buffalo",
+      "sounds": ["Ru", "Re", "Ro", "Ta"],
+      "degrees": {
+        "start": 186.667,
+        "end": 200
+      },
+      "padas": [
+        {
+          "number": 1,
+          "navamsha_sign": "libra",
+          "degrees": {
+            "start": 186.667,
+            "end": 190
+          }
+        },
+        {
+          "number": 2,
+          "navamsha_sign": "scorpio",
+          "degrees": {
+            "start": 190,
+            "end": 193.333
+          }
+        },
+        {
+          "number": 3,
+          "navamsha_sign": "sagittarius",
+          "degrees": {
+            "start": 193.333,
+            "end": 196.667
+          }
+        },
+        {
+          "number": 4,
+          "navamsha_sign": "capricorn",
+          "degrees": {
+            "start": 196.667,
+            "end": 200
+          }
+        }
+      ]
+    },
+    {
+      "number": 16,
+      "id": "vishakha",
+      "name": "Vishakha",
+      "sanskrit": "विशाखा",
+      "ruler": "jupiter",
+      "deity": "Indra and Agni",
+      "symbol": "Triumphal arch/Decorated gateway",
+      "shakti": "Vyapana Shakti (Power to pervade)",
+      "gana": "rakshasa",
+      "animal": "Tiger",
+      "sounds": ["Ti", "Tu", "Te", "To"],
+      "degrees": {
+        "start": 200,
+        "end": 213.333
+      },
+      "padas": [
+        {
+          "number": 1,
+          "navamsha_sign": "capricorn",
+          "degrees": {
+            "start": 200,
+            "end": 203.333
+          }
+        },
+        {
+          "number": 2,
+          "navamsha_sign": "aquarius",
+          "degrees": {
+            "start": 203.333,
+            "end": 206.667
+          }
+        },
+        {
+          "number": 3,
+          "navamsha_sign": "pisces",
+          "degrees": {
+            "start": 206.667,
+            "end": 210
+          }
+        },
+        {
+          "number": 4,
+          "navamsha_sign": "aries",
+          "degrees": {
+            "start": 210,
+            "end": 213.333
+          }
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "id": "anuradha",
+      "name": "Anuradha",
+      "sanskrit": "अनुराधा",
+      "ruler": "saturn",
+      "deity": "Mitra",
+      "symbol": "Lotus",
+      "shakti": "Sambhrama Shakti (Power to hurry/rush)",
+      "gana": "manushya",
+      "animal": "Deer",
+      "sounds": ["Na", "Ni", "Nu", "Ne"],
+      "degrees": {
+        "start": 213.333,
+        "end": 226.667
+      },
+      "padas": [
+        {
+          "number": 1,
+          "navamsha_sign": "aries",
+          "degrees": {
+            "start": 213.333,
+            "end": 216.667
+          }
+        },
+        {
+          "number": 2,
+          "navamsha_sign": "taurus",
+          "degrees": {
+            "start": 216.667,
+            "end": 220
+          }
+        },
+        {
+          "number": 3,
+          "navamsha_sign": "gemini",
+          "degrees": {
+            "start": 220,
+            "end": 223.333
+          }
+        },
+        {
+          "number": 4,
+          "navamsha_sign": "cancer",
+          "degrees": {
+            "start": 223.333,
+            "end": 226.667
+          }
+        }
+      ]
+    },
+    {
+      "number": 18,
+      "id": "jyeshtha",
+      "name": "Jyeshtha",
+      "sanskrit": "ज्येष्ठा",
+      "ruler": "mercury",
+      "deity": "Indra",
+      "symbol": "Earring/Umbrella",
+      "shakti": "Nischaya Shakti (Power to determine)",
+      "gana": "rakshasa",
+      "animal": "Serpent",
+      "sounds": ["No", "Ya", "Yi", "Yu"],
+      "degrees": {
+        "start": 226.667,
+        "end": 240
+      },
+      "padas": [
+        {
+          "number": 1,
+          "navamsha_sign": "cancer",
+          "degrees": {
+            "start": 226.667,
+            "end": 230
+          }
+        },
+        {
+          "number": 2,
+          "navamsha_sign": "leo",
+          "degrees": {
+            "start": 230,
+            "end": 233.333
+          }
+        },
+        {
+          "number": 3,
+          "navamsha_sign": "virgo",
+          "degrees": {
+            "start": 233.333,
+            "end": 236.667
+          }
+        },
+        {
+          "number": 4,
+          "navamsha_sign": "libra",
+          "degrees": {
+            "start": 236.667,
+            "end": 240
+          }
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "id": "mula",
+      "name": "Mula",
+      "sanskrit": "मूल",
+      "ruler": "ketu",
+      "deity": "Nirriti/Nirrti",
+      "symbol": "Root/Whip",
+      "shakti": "Nirvana Shakti (Power to dissolve)",
+      "gana": "rakshasa",
+      "animal": "Dog",
+      "sounds": ["Ye", "Yo", "Ya", "Yi"],
+      "degrees": {
+        "start": 240,
+        "end": 253.333
+      },
+      "padas": [
+        {
+          "number": 1,
+          "navamsha_sign": "libra",
+          "degrees": {
+            "start": 240,
+            "end": 243.333
+          }
+        },
+        {
+          "number": 2,
+          "navamsha_sign": "scorpio",
+          "degrees": {
+            "start": 243.333,
+            "end": 246.667
+          }
+        },
+        {
+          "number": 3,
+          "navamsha_sign": "sagittarius",
+          "degrees": {
+            "start": 246.667,
+            "end": 250
+          }
+        },
+        {
+          "number": 4,
+          "navamsha_sign": "capricorn",
+          "degrees": {
+            "start": 250,
+            "end": 253.333
+          }
+        }
+      ]
+    },
+    {
+      "number": 20,
+      "id": "purva_ashadha",
+      "name": "Purva Ashadha",
+      "sanskrit": "पूर्व आषाढा",
+      "ruler": "venus",
+      "deity": "Apas/Water deity",
+      "symbol": "Fan/Elephant tusk",
+      "shakti": "Charana Shakti (Power to purify)",
+      "gana": "manushya",
+      "animal": "Elephant",
+      "sounds": ["Bu", "Be", "Bo", "Ba"],
+      "degrees": {
+        "start": 253.333,
+        "end": 266.667
+      },
+      "padas": [
+        {
+          "number": 1,
+          "navamsha_sign": "capricorn",
+          "degrees": {
+            "start": 253.333,
+            "end": 256.667
+          }
+        },
+        {
+          "number": 2,
+          "navamsha_sign": "aquarius",
+          "degrees": {
+            "start": 256.667,
+            "end": 260
+          }
+        },
+        {
+          "number": 3,
+          "navamsha_sign": "pisces",
+          "degrees": {
+            "start": 260,
+            "end": 263.333
+          }
+        },
+        {
+          "number": 4,
+          "navamsha_sign": "aries",
+          "degrees": {
+            "start": 263.333,
+            "end": 266.667
+          }
+        }
+      ]
+    },
+    {
+      "number": 21,
+      "id": "uttara_ashadha",
+      "name": "Uttara Ashadha",
+      "sanskrit": "उत्तर आषाढा",
+      "ruler": "sun",
+      "deity": "Vishvadevas/Universal gods",
+      "symbol": "Elephant tusk/Bed",
+      "shakti": "Pratistha Shakti (Power to establish)",
+      "gana": "deva",
+      "animal": "Mongoose",
+      "sounds": ["Be", "Bo", "Ba", "Bi"],
+      "degrees": {
+        "start": 266.667,
+        "end": 280
+      },
+      "padas": [
+        {
+          "number": 1,
+          "navamsha_sign": "aries",
+          "degrees": {
+            "start": 266.667,
+            "end": 270
+          }
+        },
+        {
+          "number": 2,
+          "navamsha_sign": "taurus",
+          "degrees": {
+            "start": 270,
+            "end": 273.333
+          }
+        },
+        {
+          "number": 3,
+          "navamsha_sign": "gemini",
+          "degrees": {
+            "start": 273.333,
+            "end": 276.667
+          }
+        },
+        {
+          "number": 4,
+          "navamsha_sign": "cancer",
+          "degrees": {
+            "start": 276.667,
+            "end": 280
+          }
+        }
+      ]
+    },
+    {
+      "number": 22,
+      "id": "shravana",
+      "name": "Shravana",
+      "sanskrit": "श्रवण",
+      "ruler": "moon",
+      "deity": "Vishnu",
+      "symbol": "Ear/Three footprints",
+      "shakti": "Shreya Shakti (Power to hear/lead to prosperity)",
+      "gana": "deva",
+      "animal": "Antelope",
+      "sounds": ["Khu", "Gha", "Ng", "Khi"],
+      "degrees": {
+        "start": 280,
+        "end": 293.333
+      },
+      "padas": [
+        {
+          "number": 1,
+          "navamsha_sign": "cancer",
+          "degrees": {
+            "start": 280,
+            "end": 283.333
+          }
+        },
+        {
+          "number": 2,
+          "navamsha_sign": "leo",
+          "degrees": {
+            "start": 283.333,
+            "end": 286.667
+          }
+        },
+        {
+          "number": 3,
+          "navamsha_sign": "virgo",
+          "degrees": {
+            "start": 286.667,
+            "end": 290
+          }
+        },
+        {
+          "number": 4,
+          "navamsha_sign": "libra",
+          "degrees": {
+            "start": 290,
+            "end": 293.333
+          }
+        }
+      ]
+    },
+    {
+      "number": 23,
+      "id": "dhanishtha",
+      "name": "Dhanishtha",
+      "sanskrit": "धनिष्ठा",
+      "ruler": "mars",
+      "deity": "Vasus",
+      "symbol": "Drum/Flute",
+      "shakti": "Varchas Shakti (Power to shine)",
+      "gana": "rakshasa",
+      "animal": "Horse",
+      "sounds": ["Ga", "Gi", "Gu", "Ge"],
+      "degrees": {
+        "start": 293.333,
+        "end": 306.667
+      },
+      "padas": [
+        {
+          "number": 1,
+          "navamsha_sign": "libra",
+          "degrees": {
+            "start": 293.333,
+            "end": 296.667
+          }
+        },
+        {
+          "number": 2,
+          "navamsha_sign": "scorpio",
+          "degrees": {
+            "start": 296.667,
+            "end": 300
+          }
+        },
+        {
+          "number": 3,
+          "navamsha_sign": "sagittarius",
+          "degrees": {
+            "start": 300,
+            "end": 303.333
+          }
+        },
+        {
+          "number": 4,
+          "navamsha_sign": "capricorn",
+          "degrees": {
+            "start": 303.333,
+            "end": 306.667
+          }
+        }
+      ]
+    },
+    {
+      "number": 24,
+      "id": "shatabhisha",
+      "name": "Shatabhisha",
+      "sanskrit": "शतभिषज्",
+      "ruler": "rahu",
+      "deity": "Varuna",
+      "symbol": "Hundred physicians/Empty circle",
+      "shakti": "Arogya Shakti (Power to heal)",
+      "gana": "rakshasa",
+      "animal": "Horse",
+      "sounds": ["Go", "Sa", "Si", "Su"],
+      "degrees": {
+        "start": 306.667,
+        "end": 320
+      },
+      "padas": [
+        {
+          "number": 1,
+          "navamsha_sign": "capricorn",
+          "degrees": {
+            "start": 306.667,
+            "end": 310
+          }
+        },
+        {
+          "number": 2,
+          "navamsha_sign": "aquarius",
+          "degrees": {
+            "start": 310,
+            "end": 313.333
+          }
+        },
+        {
+          "number": 3,
+          "navamsha_sign": "pisces",
+          "degrees": {
+            "start": 313.333,
+            "end": 316.667
+          }
+        },
+        {
+          "number": 4,
+          "navamsha_sign": "aries",
+          "degrees": {
+            "start": 316.667,
+            "end": 320
+          }
+        }
+      ]
+    },
+    {
+      "number": 25,
+      "id": "purva_bhadrapada",
+      "name": "Purva Bhadrapada",
+      "sanskrit": "पूर्व भाद्रपदा",
+      "ruler": "jupiter",
+      "deity": "Aja Ekapad/Ajaikapad",
+      "symbol": "Sword/Two faces",
+      "shakti": "Veeryatva Shakti (Power to purify/make courageous)",
+      "gana": "manushya",
+      "animal": "Lion",
+      "sounds": ["Se", "So", "Sa", "Si"],
+      "degrees": {
+        "start": 320,
+        "end": 333.333
+      },
+      "padas": [
+        {
+          "number": 1,
+          "navamsha_sign": "aries",
+          "degrees": {
+            "start": 320,
+            "end": 323.333
+          }
+        },
+        {
+          "number": 2,
+          "navamsha_sign": "taurus",
+          "degrees": {
+            "start": 323.333,
+            "end": 326.667
+          }
+        },
+        {
+          "number": 3,
+          "navamsha_sign": "gemini",
+          "degrees": {
+            "start": 326.667,
+            "end": 330
+          }
+        },
+        {
+          "number": 4,
+          "navamsha_sign": "cancer",
+          "degrees": {
+            "start": 330,
+            "end": 333.333
+          }
+        }
+      ]
+    },
+    {
+      "number": 26,
+      "id": "uttara_bhadrapada",
+      "name": "Uttara Bhadrapada",
+      "sanskrit": "उत्तर भाद्रपदा",
+      "ruler": "saturn",
+      "deity": "Ahirbudhnya",
+      "symbol": "Back legs of a bed/Two-faced",
+      "shakti": "Yajamana Shakti (Power of protector)",
+      "gana": "manushya",
+      "animal": "Cow",
+      "sounds": ["Su", "Se", "So", "Sa"],
+      "degrees": {
+        "start": 333.333,
+        "end": 346.667
+      },
+      "padas": [
+        {
+          "number": 1,
+          "navamsha_sign": "cancer",
+          "degrees": {
+            "start": 333.333,
+            "end": 336.667
+          }
+        },
+        {
+          "number": 2,
+          "navamsha_sign": "leo",
+          "degrees": {
+            "start": 336.667,
+            "end": 340
+          }
+        },
+        {
+          "number": 3,
+          "navamsha_sign": "virgo",
+          "degrees": {
+            "start": 340,
+            "end": 343.333
+          }
+        },
+        {
+          "number": 4,
+          "navamsha_sign": "libra",
+          "degrees": {
+            "start": 343.333,
+            "end": 346.667
+          }
+        }
+      ]
+    },
+    {
+      "number": 27,
+      "id": "revati",
+      "name": "Revati",
+      "sanskrit": "रेवती",
+      "ruler": "mercury",
+      "deity": "Pushan",
+      "symbol": "Fish/Drum",
+      "shakti": "Anumati Shakti (Power to protect/nourish)",
+      "gana": "deva",
+      "animal": "Elephant",
+      "sounds": ["Se", "So", "Sa", "Si"],
+      "degrees": {
+        "start": 346.667,
+        "end": 360
+      },
+      "padas": [
+        {
+          "number": 1,
+          "navamsha_sign": "libra",
+          "degrees": {
+            "start": 346.667,
+            "end": 350
+          }
+        },
+        {
+          "number": 2,
+          "navamsha_sign": "scorpio",
+          "degrees": {
+            "start": 350,
+            "end": 353.333
+          }
+        },
+        {
+          "number": 3,
+          "navamsha_sign": "sagittarius",
+          "degrees": {
+            "start": 353.333,
+            "end": 356.667
+          }
+        },
+        {
+          "number": 4,
+          "navamsha_sign": "capricorn",
+          "degrees": {
+            "start": 356.667,
+            "end": 360
+          }
+        }
+      ]
+    }
+  ]
+}

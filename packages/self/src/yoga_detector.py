@@ -1,0 +1,933 @@
+"""Yoga detection engine for 108 Vedic Astrology application.
+
+This module provides comprehensive yoga detection capabilities, including:
+- Pancha Mahapurusha Yogas (5 great-person yogas)
+- Raja Yogas (royal yogas)
+- Dhana Yogas (wealth yogas)
+- Custom yoga detection from rules
+- Strength calculation for detected yogas
+"""
+
+from typing import Any, Dict, List, Optional, Set, Tuple
+from pathlib import Path
+import json
+import logging
+
+from packages.core.src import (
+    Planet,
+    Rashi,
+    BirthChart,
+    DetectedYoga,
+    YogaCategory,
+    PlanetPosition,
+    is_kendra,
+    is_trikona,
+    is_dusthana,
+    is_upachaya,
+    calculate_aspect_houses,
+)
+
+logger = logging.getLogger(__name__)
+
+
+class YogaDetector:
+    """Engine for detecting Vedic astrology yogas in birth charts.
+
+    This detector evaluates planetary combinations against predefined yoga rules
+    to identify auspicious and inauspicious yoga formations in a birth chart.
+    """
+
+    # Planet rulership: which signs each planet rules
+    PLANET_RULERSHIP = {
+        Planet.SUN: [Rashi.LEO],
+        Planet.MOON: [Rashi.CANCER],
+        Planet.MARS: [Rashi.ARIES, Rashi.SCORPIO],
+        Planet.MERCURY: [Rashi.GEMINI, Rashi.VIRGO],
+        Planet.JUPITER: [Rashi.SAGITTARIUS, Rashi.PISCES],
+        Planet.VENUS: [Rashi.TAURUS, Rashi.LIBRA],
+        Planet.SATURN: [Rashi.CAPRICORN, Rashi.AQUARIUS],
+        Planet.RAHU: [Rashi.TAURUS],
+        Planet.KETU: [Rashi.SCORPIO],
+    }
+
+    # Planet exaltation signs
+    PLANET_EXALTATION = {
+        Planet.SUN: Rashi.ARIES,
+        Planet.MOON: Rashi.TAURUS,
+        Planet.MARS: Rashi.CAPRICORN,
+        Planet.MERCURY: Rashi.VIRGO,
+        Planet.JUPITER: Rashi.CANCER,
+        Planet.VENUS: Rashi.PISCES,
+        Planet.SATURN: Rashi.LIBRA,
+        Planet.RAHU: Rashi.TAURUS,
+        Planet.KETU: Rashi.SCORPIO,
+    }
+
+    # Planet debilitation (opposite of exaltation)
+    PLANET_DEBILITATION = {
+        Planet.SUN: Rashi.LIBRA,
+        Planet.MOON: Rashi.SCORPIO,
+        Planet.MARS: Rashi.CANCER,
+        Planet.MERCURY: Rashi.PISCES,
+        Planet.JUPITER: Rashi.CAPRICORN,
+        Planet.VENUS: Rashi.VIRGO,
+        Planet.SATURN: Rashi.ARIES,
+        Planet.RAHU: Rashi.SCORPIO,
+        Planet.KETU: Rashi.TAURUS,
+    }
+
+    def __init__(self):
+        """Initialize the yoga detector with rules from JSON configuration."""
+        self.yoga_rules: Dict[str, Dict[str, Any]] = self._load_yoga_rules()
+        self.condition_evaluators = {
+            "in_kendra": self._eval_in_kendra,
+            "in_trikona": self._eval_in_trikona,
+            "in_dusthana": self._eval_in_dusthana,
+            "in_upachaya": self._eval_in_upachaya,
+            "in_own_sign": self._eval_in_own_sign,
+            "in_exalted_sign": self._eval_in_exalted_sign,
+            "in_own_or_exalted_sign": self._eval_in_own_or_exalted,
+            "in_sign": self._eval_in_sign,
+            "in_house": self._eval_in_house,
+            "in_houses": self._eval_in_houses,
+            "conjunct": self._eval_conjunct,
+            "aspected_by": self._eval_aspected_by,
+            "lord_in_house": self._eval_lord_in_house,
+            "exchange": self._eval_exchange,
+            "in_kendra_or_trikona": self._eval_in_kendra_or_trikona,
+            "all_in_beneficial_houses": self._eval_all_in_beneficial,
+        }
+
+    def _load_yoga_rules(self) -> Dict[str, Dict[str, Any]]:
+        """Load yoga detection rules from JSON configuration file.
+
+        Returns:
+            Dictionary of yoga rules keyed by yoga ID
+        """
+        rules_path = (
+            Path(__file__).parent.parent.parent.parent / "knowledge" / "rules" / "yoga_detection.json"
+        )
+
+        if not rules_path.exists():
+            logger.warning(f"Yoga rules file not found at {rules_path}")
+            return {}
+
+        try:
+            with open(rules_path, "r") as f:
+                data = json.load(f)
+            return data.get("yoga_rules", {})
+        except (json.JSONDecodeError, IOError) as e:
+            logger.error(f"Error loading yoga rules: {e}")
+            return {}
+
+    def detect_all_yogas(self, chart: BirthChart) -> List[DetectedYoga]:
+        """Detect all yogas present in a birth chart.
+
+        Args:
+            chart: The birth chart to analyze
+
+        Returns:
+            List of detected yogas present in the chart
+        """
+        detected = []
+
+        for yoga_id, rule in self.yoga_rules.items():
+            try:
+                result = self.detect_yoga(rule, chart)
+                if result and result.is_present:
+                    detected.append(result)
+            except Exception as e:
+                logger.error(f"Error detecting yoga {yoga_id}: {e}")
+                continue
+
+        return detected
+
+    def detect_yoga(
+        self, rule: Dict[str, Any], chart: BirthChart
+    ) -> Optional[DetectedYoga]:
+        """Detect a single yoga based on its detection rule.
+
+        Args:
+            rule: Yoga detection rule dictionary
+            chart: The birth chart to analyze
+
+        Returns:
+            DetectedYoga if yoga is present, None otherwise
+        """
+        detection = rule.get("detection", {})
+        conditions = detection.get("conditions", [])
+        all_required = detection.get("all_conditions_required", True)
+
+        if not conditions:
+            return None
+
+        # Get the main planet from the rule
+        rule_planet = detection.get("planet")
+
+        # Evaluate all conditions
+        results = []
+        for condition in conditions:
+            try:
+                # If condition doesn't specify a planet, use the rule's planet
+                if "planet" not in condition and rule_planet:
+                    condition = {**condition, "planet": rule_planet}
+                result = self._evaluate_condition(condition, chart)
+                results.append(result)
+            except Exception as e:
+                logger.warning(f"Error evaluating condition: {e}")
+                results.append(False)
+
+        # Determine if yoga is present based on condition logic
+        is_present = all(results) if all_required else any(results)
+
+        if not is_present:
+            return None
+
+        # Calculate strength
+        strength = self._calculate_strength(rule, chart)
+
+        # Check cancellation conditions
+        if self._is_yoga_cancelled(rule, chart):
+            strength *= 0.5  # Halve strength if cancelled
+
+        # Build involved planets list
+        involved = []
+        planet = detection.get("planet")
+        planets = detection.get("planets", [])
+
+        if planet:
+            try:
+                involved.append(Planet(planet))
+            except ValueError:
+                pass
+
+        for p in planets:
+            if p not in ["ninth_lord", "tenth_lord", "fifth_lord"]:
+                try:
+                    involved.append(Planet(p))
+                except ValueError:
+                    pass
+
+        return DetectedYoga(
+            yoga_id=rule.get("id", "unknown"),
+            name=rule.get("name", "Unknown Yoga"),
+            category=YogaCategory(rule.get("category", "other")),
+            is_present=True,
+            strength=max(0.0, min(1.0, strength)),
+            involved_planets=involved,
+            description=rule.get("description", ""),
+        )
+
+    def _evaluate_condition(self, condition: Dict[str, Any], chart: BirthChart) -> bool:
+        """Evaluate a single condition against the chart.
+
+        Args:
+            condition: Condition dictionary with type and parameters
+            chart: Birth chart to evaluate against
+
+        Returns:
+            True if condition is satisfied, False otherwise
+        """
+        cond_type = condition.get("type")
+        evaluator = self.condition_evaluators.get(cond_type)
+
+        if not evaluator:
+            logger.warning(f"Unknown condition type: {cond_type}")
+            return False
+
+        return evaluator(condition, chart)
+
+    def _calculate_strength(
+        self, rule: Dict[str, Any], chart: BirthChart
+    ) -> float:
+        """Calculate yoga strength based on strength factors.
+
+        Args:
+            rule: Yoga rule
+            chart: Birth chart
+
+        Returns:
+            Strength value between 0.0 and 1.0
+        """
+        strength = 0.7  # Base strength
+
+        factors = rule.get("strength_factors", [])
+        for factor in factors:
+            strength += self._evaluate_strength_factor(factor, chart)
+
+        return min(1.0, max(0.0, strength))
+
+    def _evaluate_strength_factor(
+        self, factor: Dict[str, Any], chart: BirthChart
+    ) -> float:
+        """Evaluate a strength factor and return boost value.
+
+        Args:
+            factor: Strength factor specification
+            chart: Birth chart
+
+        Returns:
+            Strength boost value (usually 0.0-0.25)
+        """
+        factor_type = factor.get("type")
+        boost = factor.get("strength_boost", 0.1)
+
+        if factor_type == "planet_in_own_sign":
+            planet_name = factor.get("planet")
+            try:
+                planet = Planet(planet_name)
+                if planet in chart.planets:
+                    pos = chart.planets[planet]
+                    if self._is_in_own_sign(planet, pos.rashi):
+                        return boost
+            except (ValueError, AttributeError):
+                pass
+
+        elif factor_type == "planet_in_exalted_sign":
+            planet_name = factor.get("planet")
+            try:
+                planet = Planet(planet_name)
+                if planet in chart.planets:
+                    pos = chart.planets[planet]
+                    if self._is_in_exalted_sign(planet, pos.rashi):
+                        return boost
+            except (ValueError, AttributeError):
+                pass
+
+        elif factor_type == "mutual_aspect":
+            planets = factor.get("planets", [])
+            if len(planets) >= 2 and self._have_mutual_aspect(planets[0], planets[1], chart):
+                return boost
+
+        elif factor_type == "multiple_planets_in_houses":
+            count = self._count_planets_in_houses(
+                factor.get("planets", []),
+                factor.get("houses", []),
+                chart,
+                factor.get("reference"),
+            )
+            if count >= 2:
+                return boost
+
+        return 0.0
+
+    def _is_yoga_cancelled(self, rule: Dict[str, Any], chart: BirthChart) -> bool:
+        """Check if yoga has cancellation conditions that negate its benefits.
+
+        Args:
+            rule: Yoga rule
+            chart: Birth chart
+
+        Returns:
+            True if yoga is cancelled, False otherwise
+        """
+        cancellations = rule.get("cancellation", [])
+
+        for cancellation in cancellations:
+            cancel_type = cancellation.get("type")
+            planet_name = cancellation.get("planet")
+
+            if not planet_name:
+                continue
+
+            try:
+                planet = Planet(planet_name)
+                if planet not in chart.planets:
+                    continue
+
+                pos = chart.planets[planet]
+
+                if cancel_type == "planet_combust":
+                    if self._is_combust(planet, chart):
+                        return True
+
+                elif cancel_type == "planet_retrograde":
+                    if pos.is_retrograde:
+                        return True
+
+            except ValueError:
+                continue
+
+        return False
+
+    # Condition Evaluators
+
+    def _eval_in_kendra(self, condition: Dict[str, Any], chart: BirthChart) -> bool:
+        """Check if planet is in kendra (1, 4, 7, 10) house."""
+        planet_name = condition.get("planet")
+        reference = condition.get("reference", "lagna")
+
+        if not planet_name:
+            return False
+
+        try:
+            planet = Planet(planet_name)
+            if planet not in chart.planets:
+                return False
+
+            pos = chart.planets[planet]
+
+            if reference == "moon":
+                # Calculate house from Moon instead of Lagna
+                house = self._get_house_from_reference(pos.rashi, chart.moon_rashi)
+            else:
+                house = pos.house
+
+            return is_kendra(house)
+
+        except ValueError:
+            return False
+
+    def _eval_in_trikona(self, condition: Dict[str, Any], chart: BirthChart) -> bool:
+        """Check if planet is in trikona (1, 5, 9) house."""
+        planet_name = condition.get("planet")
+        reference = condition.get("reference", "lagna")
+
+        if not planet_name:
+            return False
+
+        try:
+            planet = Planet(planet_name)
+            if planet not in chart.planets:
+                return False
+
+            pos = chart.planets[planet]
+
+            if reference == "moon":
+                house = self._get_house_from_reference(pos.rashi, chart.moon_rashi)
+            else:
+                house = pos.house
+
+            return is_trikona(house)
+
+        except ValueError:
+            return False
+
+    def _eval_in_dusthana(self, condition: Dict[str, Any], chart: BirthChart) -> bool:
+        """Check if planet is in dusthana (6, 8, 12) house."""
+        planet_name = condition.get("planet")
+
+        if not planet_name:
+            return False
+
+        try:
+            planet = Planet(planet_name)
+            if planet not in chart.planets:
+                return False
+
+            pos = chart.planets[planet]
+            return is_dusthana(pos.house)
+
+        except ValueError:
+            return False
+
+    def _eval_in_upachaya(self, condition: Dict[str, Any], chart: BirthChart) -> bool:
+        """Check if planet is in upachaya (3, 6, 10, 11) house."""
+        planet_name = condition.get("planet")
+
+        if not planet_name:
+            return False
+
+        try:
+            planet = Planet(planet_name)
+            if planet not in chart.planets:
+                return False
+
+            pos = chart.planets[planet]
+            return is_upachaya(pos.house)
+
+        except ValueError:
+            return False
+
+    def _eval_in_own_sign(self, condition: Dict[str, Any], chart: BirthChart) -> bool:
+        """Check if planet is in its own sign."""
+        planet_name = condition.get("planet")
+
+        if not planet_name:
+            return False
+
+        try:
+            planet = Planet(planet_name)
+            if planet not in chart.planets:
+                return False
+
+            pos = chart.planets[planet]
+            return self._is_in_own_sign(planet, pos.rashi)
+
+        except ValueError:
+            return False
+
+    def _eval_in_exalted_sign(self, condition: Dict[str, Any], chart: BirthChart) -> bool:
+        """Check if planet is in exalted sign."""
+        planet_name = condition.get("planet")
+
+        if not planet_name:
+            return False
+
+        try:
+            planet = Planet(planet_name)
+            if planet not in chart.planets:
+                return False
+
+            pos = chart.planets[planet]
+            return self._is_in_exalted_sign(planet, pos.rashi)
+
+        except ValueError:
+            return False
+
+    def _eval_in_own_or_exalted(self, condition: Dict[str, Any], chart: BirthChart) -> bool:
+        """Check if planet is in own or exalted sign."""
+        planet_name = condition.get("planet")
+
+        if not planet_name:
+            return False
+
+        try:
+            planet = Planet(planet_name)
+            if planet not in chart.planets:
+                return False
+
+            pos = chart.planets[planet]
+            return (
+                self._is_in_own_sign(planet, pos.rashi)
+                or self._is_in_exalted_sign(planet, pos.rashi)
+            )
+
+        except ValueError:
+            return False
+
+    def _eval_in_sign(self, condition: Dict[str, Any], chart: BirthChart) -> bool:
+        """Check if planet is in specified sign(s)."""
+        planet_name = condition.get("planet")
+        signs = condition.get("signs", [])
+
+        if not planet_name or not signs:
+            return False
+
+        try:
+            planet = Planet(planet_name)
+            if planet not in chart.planets:
+                return False
+
+            pos = chart.planets[planet]
+            return pos.rashi in [Rashi(s) for s in signs]
+
+        except ValueError:
+            return False
+
+    def _eval_in_house(self, condition: Dict[str, Any], chart: BirthChart) -> bool:
+        """Check if planet is in specified house(s)."""
+        planet_name = condition.get("planet")
+        houses = condition.get("houses", [])
+        any_planet = condition.get("any_planet", False)
+
+        if any_planet:
+            # Check if any of specified planets are in houses
+            planets = condition.get("planets", [])
+            for p in planets:
+                try:
+                    planet = Planet(p)
+                    if planet in chart.planets:
+                        pos = chart.planets[planet]
+                        if pos.house in houses:
+                            return True
+                except ValueError:
+                    continue
+            return False
+
+        if not planet_name or not houses:
+            return False
+
+        try:
+            planet = Planet(planet_name)
+            if planet not in chart.planets:
+                return False
+
+            pos = chart.planets[planet]
+            return pos.house in houses
+
+        except ValueError:
+            return False
+
+    def _eval_in_houses(self, condition: Dict[str, Any], chart: BirthChart) -> bool:
+        """Check if planets are in specified houses from reference point."""
+        planets = condition.get("planets", [])
+        houses = condition.get("houses", [])
+        reference = condition.get("reference", "lagna")
+        any_planet = condition.get("any_planet", False)
+
+        if not planets or not houses:
+            return False
+
+        ref_rashi = chart.moon_rashi if reference == "moon" else chart.lagna_rashi
+
+        for planet_name in planets:
+            try:
+                planet = Planet(planet_name)
+                if planet not in chart.planets:
+                    if not any_planet:
+                        return False
+                    continue
+
+                pos = chart.planets[planet]
+                house = self._get_house_from_reference(pos.rashi, ref_rashi)
+
+                if house in houses:
+                    if any_planet:
+                        return True
+                elif not any_planet:
+                    return False
+
+            except ValueError:
+                if not any_planet:
+                    return False
+                continue
+
+        return not any_planet
+
+    def _eval_conjunct(self, condition: Dict[str, Any], chart: BirthChart) -> bool:
+        """Check if planets are conjunct (in the same sign)."""
+        planets = condition.get("planets", [])
+
+        if len(planets) < 2:
+            return False
+
+        signs = []
+        for planet_name in planets:
+            try:
+                planet = Planet(planet_name)
+                if planet not in chart.planets:
+                    return False
+                pos = chart.planets[planet]
+                signs.append(pos.rashi)
+            except ValueError:
+                return False
+
+        return len(set(signs)) == 1  # All in same sign
+
+    def _eval_aspected_by(self, condition: Dict[str, Any], chart: BirthChart) -> bool:
+        """Check if planet is aspected by specified planets."""
+        target_planet = condition.get("planet")
+        aspecting_planets = condition.get("planets", [])
+
+        if not target_planet or not aspecting_planets:
+            return False
+
+        try:
+            target = Planet(target_planet)
+            if target not in chart.planets:
+                return False
+
+            target_pos = chart.planets[target]
+            target_house = target_pos.house
+
+            for aspecting_name in aspecting_planets:
+                try:
+                    aspecting = Planet(aspecting_name)
+                    if aspecting not in chart.planets:
+                        continue
+
+                    aspects = calculate_aspect_houses(aspecting, chart.planets[aspecting].house)
+                    if target_house in aspects:
+                        return True
+
+                except ValueError:
+                    continue
+
+            return False
+
+        except ValueError:
+            return False
+
+    def _eval_lord_in_house(self, condition: Dict[str, Any], chart: BirthChart) -> bool:
+        """Check if lord of a house is in specified house."""
+        from_house = condition.get("from_house")
+        in_house = condition.get("in_house")
+
+        if not from_house or not in_house:
+            return False
+
+        lord = self._get_house_lord(from_house, chart)
+        if not lord or lord not in chart.planets:
+            return False
+
+        return chart.planets[lord].house == in_house
+
+    def _eval_exchange(self, condition: Dict[str, Any], chart: BirthChart) -> bool:
+        """Check if two planets have exchange of lordship."""
+        planet1_name = condition.get("planet1")
+        planet2_name = condition.get("planet2")
+
+        if not planet1_name or not planet2_name:
+            return False
+
+        try:
+            planet1 = Planet(planet1_name)
+            planet2 = Planet(planet2_name)
+
+            if planet1 not in chart.planets or planet2 not in chart.planets:
+                return False
+
+            pos1 = chart.planets[planet1]
+            pos2 = chart.planets[planet2]
+
+            # Check if planet1 is in sign ruled by planet2 and vice versa
+            return (
+                pos1.rashi in self.PLANET_RULERSHIP.get(planet2, [])
+                and pos2.rashi in self.PLANET_RULERSHIP.get(planet1, [])
+            )
+
+        except ValueError:
+            return False
+
+    def _eval_in_kendra_or_trikona(
+        self, condition: Dict[str, Any], chart: BirthChart
+    ) -> bool:
+        """Check if planets form kendra or trikona relationship."""
+        planets = condition.get("planets", [])
+
+        if len(planets) < 2:
+            return False
+
+        try:
+            planet_objs = [Planet(p) for p in planets]
+            positions = [chart.planets.get(p) for p in planet_objs]
+
+            if any(p is None for p in positions):
+                return False
+
+            houses = [self._get_house_from_reference(p.rashi, chart.lagna_rashi) for p in positions]
+
+            # Check all pairs
+            for i in range(len(houses)):
+                for j in range(i + 1, len(houses)):
+                    h1, h2 = houses[i], houses[j]
+                    diff = abs(h1 - h2)
+
+                    # Kendra relationship: 0, 3, 6, 9 houses apart
+                    if diff in [3, 6, 9]:
+                        return True
+                    # Trikona relationship: 4, 8 houses apart (1-5, 1-9, etc.)
+                    if diff in [4, 8]:
+                        return True
+
+            return False
+
+        except ValueError:
+            return False
+
+    def _eval_all_in_beneficial(self, condition: Dict[str, Any], chart: BirthChart) -> bool:
+        """Check if all planets are in beneficial houses."""
+        planets = condition.get("planets", [])
+
+        if not planets:
+            return False
+
+        beneficial = [1, 4, 5, 7, 9, 10]  # Kendra and trikona houses
+
+        for planet_name in planets:
+            try:
+                planet = Planet(planet_name)
+                if planet not in chart.planets:
+                    return False
+
+                pos = chart.planets[planet]
+                if pos.house not in beneficial:
+                    return False
+
+            except ValueError:
+                return False
+
+        return True
+
+    # Helper methods
+
+    def _is_in_own_sign(self, planet: Planet, rashi: Rashi) -> bool:
+        """Check if planet is in its own sign."""
+        return rashi in self.PLANET_RULERSHIP.get(planet, [])
+
+    def _is_in_exalted_sign(self, planet: Planet, rashi: Rashi) -> bool:
+        """Check if planet is in its exalted sign."""
+        return rashi == self.PLANET_EXALTATION.get(planet)
+
+    def _is_in_debilitated_sign(self, planet: Planet, rashi: Rashi) -> bool:
+        """Check if planet is in its debilitated sign."""
+        return rashi == self.PLANET_DEBILITATION.get(planet)
+
+    def _is_combust(self, planet: Planet, chart: BirthChart) -> bool:
+        """Check if planet is combust (too close to Sun)."""
+        if planet == Planet.SUN or planet not in chart.planets:
+            return False
+
+        sun_pos = chart.planets.get(Planet.SUN)
+        planet_pos = chart.planets[planet]
+
+        if not sun_pos:
+            return False
+
+        # Combustion distance varies by planet (typically 8-12 degrees)
+        combustion_distances = {
+            Planet.MOON: 12,
+            Planet.MERCURY: 7,
+            Planet.VENUS: 8,
+            Planet.MARS: 17,
+            Planet.JUPITER: 11,
+            Planet.SATURN: 15,
+            Planet.RAHU: 10,
+            Planet.KETU: 10,
+        }
+
+        distance = combustion_distances.get(planet, 10)
+
+        # Calculate difference in longitude
+        diff = abs(sun_pos.longitude - planet_pos.longitude)
+        diff = min(diff, 360 - diff)  # Use shortest arc
+
+        return diff < distance
+
+    def _get_house_from_reference(self, planet_rashi: Rashi, reference_rashi: Rashi) -> int:
+        """Get house number from reference rashi (e.g., Moon, Lagna)."""
+        rashis = list(Rashi)
+        planet_idx = rashis.index(planet_rashi)
+        ref_idx = rashis.index(reference_rashi)
+        house = ((planet_idx - ref_idx) % 12) + 1
+        return house
+
+    def _get_house_lord(self, house: int, chart: BirthChart) -> Optional[Planet]:
+        """Get the lord (ruling planet) of a house."""
+        # Get the sign of the house cusp
+        house_cusp_longitude = chart.houses.cusps[house - 1]
+
+        # Determine which sign this cusp falls in
+        sign_num = int(house_cusp_longitude / 30)
+        rashi = list(Rashi)[sign_num % 12]
+
+        # Find which planet rules this sign
+        for planet, signs in self.PLANET_RULERSHIP.items():
+            if rashi in signs:
+                return planet
+
+        return None
+
+    def _have_mutual_aspect(
+        self, planet1_name: str, planet2_name: str, chart: BirthChart
+    ) -> bool:
+        """Check if two planets have mutual aspect."""
+        try:
+            p1 = Planet(planet1_name)
+            p2 = Planet(planet2_name)
+
+            if p1 not in chart.planets or p2 not in chart.planets:
+                return False
+
+            pos1 = chart.planets[p1]
+            pos2 = chart.planets[p2]
+
+            # Check if p1 aspects p2
+            aspects1 = calculate_aspect_houses(p1, pos1.house)
+            if pos2.house not in aspects1:
+                return False
+
+            # Check if p2 aspects p1
+            aspects2 = calculate_aspect_houses(p2, pos2.house)
+            return pos1.house in aspects2
+
+        except ValueError:
+            return False
+
+    def _count_planets_in_houses(
+        self,
+        planets: List[str],
+        houses: List[int],
+        chart: BirthChart,
+        reference: Optional[str] = None,
+    ) -> int:
+        """Count how many planets are in specified houses."""
+        count = 0
+        ref_rashi = chart.moon_rashi if reference == "moon" else chart.lagna_rashi
+
+        for planet_name in planets:
+            try:
+                planet = Planet(planet_name)
+                if planet not in chart.planets:
+                    continue
+
+                pos = chart.planets[planet]
+                house = self._get_house_from_reference(pos.rashi, ref_rashi)
+
+                if house in houses:
+                    count += 1
+
+            except ValueError:
+                continue
+
+        return count
+
+    def get_yoga_strength(self, yoga: DetectedYoga, chart: BirthChart) -> float:
+        """Get the current strength of a detected yoga.
+
+        Args:
+            yoga: The detected yoga
+            chart: The birth chart
+
+        Returns:
+            Strength value between 0.0 and 1.0
+        """
+        return yoga.strength
+
+
+def detect_all_yogas(chart: BirthChart) -> List[DetectedYoga]:
+    """Convenience function to detect all yogas in a birth chart.
+
+    Args:
+        chart: Birth chart to analyze
+
+    Returns:
+        List of detected yogas
+    """
+    detector = YogaDetector()
+    return detector.detect_all_yogas(chart)
+
+
+def detect_yoga(yoga_rule: Dict[str, Any], chart: BirthChart) -> Optional[DetectedYoga]:
+    """Convenience function to detect a single yoga.
+
+    Args:
+        yoga_rule: Yoga rule dictionary
+        chart: Birth chart to analyze
+
+    Returns:
+        DetectedYoga if yoga is present, None otherwise
+    """
+    detector = YogaDetector()
+    return detector.detect_yoga(yoga_rule, chart)
+
+
+def evaluate_condition(
+    condition: Dict[str, Any], chart: BirthChart
+) -> bool:
+    """Convenience function to evaluate a single condition.
+
+    Args:
+        condition: Condition specification
+        chart: Birth chart to evaluate
+
+    Returns:
+        True if condition is met, False otherwise
+    """
+    detector = YogaDetector()
+    return detector._evaluate_condition(condition, chart)
+
+
+def get_yoga_strength(yoga: DetectedYoga, chart: BirthChart) -> float:
+    """Convenience function to get yoga strength.
+
+    Args:
+        yoga: Detected yoga
+        chart: Birth chart
+
+    Returns:
+        Strength value (0.0-1.0)
+    """
+    detector = YogaDetector()
+    return detector.get_yoga_strength(yoga, chart)

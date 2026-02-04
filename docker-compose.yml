@@ -1,0 +1,124 @@
+version: '3.8'
+
+services:
+  # PostgreSQL with pgvector extension
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: 108-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: one_zero_eight
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init-db.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Redis for caching and sessions
+  redis:
+    image: redis:7-alpine
+    container_name: 108-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Temporal server for workflow orchestration
+  temporal:
+    image: temporalio/auto-setup:latest
+    container_name: 108-temporal
+    ports:
+      - "7233:7233"
+    environment:
+      - DB=postgresql
+      - DB_PORT=5432
+      - POSTGRES_USER=postgres
+      - POSTGRES_PWD=postgres
+      - POSTGRES_SEEDS=postgres
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # Temporal Web UI
+  temporal-ui:
+    image: temporalio/ui:latest
+    container_name: 108-temporal-ui
+    ports:
+      - "8080:8080"
+    environment:
+      - TEMPORAL_ADDRESS=temporal:7233
+    depends_on:
+      - temporal
+
+  # API Server (for production-like local dev)
+  api:
+    build:
+      context: .
+      dockerfile: services/api/Dockerfile
+    container_name: 108-api
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/one_zero_eight
+      - REDIS_URL=redis://redis:6379
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - TEMPORAL_HOST=temporal:7233
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    volumes:
+      - ./packages:/app/packages
+      - ./knowledge:/app/knowledge
+    profiles:
+      - full
+
+  # MCP Ephemeris Server
+  mcp-ephemeris:
+    build:
+      context: .
+      dockerfile: services/mcp/Dockerfile
+    container_name: 108-mcp-ephemeris
+    environment:
+      - PYTHONPATH=/app/packages
+    depends_on:
+      - postgres
+    profiles:
+      - full
+
+  # Temporal Worker
+  worker:
+    build:
+      context: .
+      dockerfile: services/workers/Dockerfile
+    container_name: 108-worker
+    environment:
+      - TEMPORAL_HOST=temporal:7233
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/one_zero_eight
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+    depends_on:
+      - temporal
+      - postgres
+    profiles:
+      - full
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  default:
+    name: 108-network

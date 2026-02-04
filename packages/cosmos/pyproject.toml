@@ -1,0 +1,17 @@
+[project]
+name = "one-zero-eight-cosmos"
+version = "2.0.0"
+description = "Ephemeris calculations for 108"
+requires-python = ">=3.11"
+license = "MIT"
+dependencies = [
+    "one-zero-eight-core",
+    "pyswisseph>=2.10.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
