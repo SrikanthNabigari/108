@@ -1,0 +1,1098 @@
+{
+  "vimshottari_system": {
+    "total_years": 120,
+    "description": "The Vimshottari Dasha system from Brihat Parashara Hora Shastra (BPHS), spanning 120 years with 9 planetary periods",
+    "periods": [
+      {
+        "planet": "ketu",
+        "years": 7,
+        "order": 1
+      },
+      {
+        "planet": "venus",
+        "years": 20,
+        "order": 2
+      },
+      {
+        "planet": "sun",
+        "years": 6,
+        "order": 3
+      },
+      {
+        "planet": "moon",
+        "years": 10,
+        "order": 4
+      },
+      {
+        "planet": "mars",
+        "years": 7,
+        "order": 5
+      },
+      {
+        "planet": "rahu",
+        "years": 18,
+        "order": 6
+      },
+      {
+        "planet": "jupiter",
+        "years": 16,
+        "order": 7
+      },
+      {
+        "planet": "saturn",
+        "years": 19,
+        "order": 8
+      },
+      {
+        "planet": "mercury",
+        "years": 17,
+        "order": 9
+      }
+    ]
+  },
+  "nakshatra_lords": {
+    "1": {
+      "nakshatra": "Ashwini",
+      "lord": "ketu",
+      "range_start": 0,
+      "range_end": 13.33
+    },
+    "2": {
+      "nakshatra": "Bharani",
+      "lord": "venus",
+      "range_start": 13.33,
+      "range_end": 26.67
+    },
+    "3": {
+      "nakshatra": "Krittika",
+      "lord": "sun",
+      "range_start": 26.67,
+      "range_end": 40
+    },
+    "4": {
+      "nakshatra": "Rohini",
+      "lord": "moon",
+      "range_start": 40,
+      "range_end": 53.33
+    },
+    "5": {
+      "nakshatra": "Mrigashira",
+      "lord": "mars",
+      "range_start": 53.33,
+      "range_end": 66.67
+    },
+    "6": {
+      "nakshatra": "Ardra",
+      "lord": "rahu",
+      "range_start": 66.67,
+      "range_end": 80
+    },
+    "7": {
+      "nakshatra": "Punarvasu",
+      "lord": "jupiter",
+      "range_start": 80,
+      "range_end": 93.33
+    },
+    "8": {
+      "nakshatra": "Pushya",
+      "lord": "saturn",
+      "range_start": 93.33,
+      "range_end": 106.67
+    },
+    "9": {
+      "nakshatra": "Ashlesha",
+      "lord": "mercury",
+      "range_start": 106.67,
+      "range_end": 120
+    },
+    "10": {
+      "nakshatra": "Magha",
+      "lord": "ketu",
+      "range_start": 120,
+      "range_end": 133.33
+    },
+    "11": {
+      "nakshatra": "Purva Phalguni",
+      "lord": "venus",
+      "range_start": 133.33,
+      "range_end": 146.67
+    },
+    "12": {
+      "nakshatra": "Uttara Phalguni",
+      "lord": "sun",
+      "range_start": 146.67,
+      "range_end": 160
+    },
+    "13": {
+      "nakshatra": "Hasta",
+      "lord": "moon",
+      "range_start": 160,
+      "range_end": 173.33
+    },
+    "14": {
+      "nakshatra": "Chitra",
+      "lord": "mars",
+      "range_start": 173.33,
+      "range_end": 186.67
+    },
+    "15": {
+      "nakshatra": "Swati",
+      "lord": "rahu",
+      "range_start": 186.67,
+      "range_end": 200
+    },
+    "16": {
+      "nakshatra": "Vishakha",
+      "lord": "jupiter",
+      "range_start": 200,
+      "range_end": 213.33
+    },
+    "17": {
+      "nakshatra": "Anuradha",
+      "lord": "saturn",
+      "range_start": 213.33,
+      "range_end": 226.67
+    },
+    "18": {
+      "nakshatra": "Jyeshtha",
+      "lord": "mercury",
+      "range_start": 226.67,
+      "range_end": 240
+    },
+    "19": {
+      "nakshatra": "Mula",
+      "lord": "ketu",
+      "range_start": 240,
+      "range_end": 253.33
+    },
+    "20": {
+      "nakshatra": "Purva Ashadha",
+      "lord": "venus",
+      "range_start": 253.33,
+      "range_end": 266.67
+    },
+    "21": {
+      "nakshatra": "Uttara Ashadha",
+      "lord": "sun",
+      "range_start": 266.67,
+      "range_end": 280
+    },
+    "22": {
+      "nakshatra": "Shravana",
+      "lord": "moon",
+      "range_start": 280,
+      "range_end": 293.33
+    },
+    "23": {
+      "nakshatra": "Dhanishta",
+      "lord": "mars",
+      "range_start": 293.33,
+      "range_end": 306.67
+    },
+    "24": {
+      "nakshatra": "Shatabhisha",
+      "lord": "rahu",
+      "range_start": 306.67,
+      "range_end": 320
+    },
+    "25": {
+      "nakshatra": "Purva Bhadrapada",
+      "lord": "jupiter",
+      "range_start": 320,
+      "range_end": 333.33
+    },
+    "26": {
+      "nakshatra": "Uttara Bhadrapada",
+      "lord": "saturn",
+      "range_start": 333.33,
+      "range_end": 346.67
+    },
+    "27": {
+      "nakshatra": "Revati",
+      "lord": "mercury",
+      "range_start": 346.67,
+      "range_end": 360
+    }
+  },
+  "mahadasha_effects": {
+    "ketu": {
+      "years": 7,
+      "order": 1,
+      "general_themes": [
+        "spirituality",
+        "detachment",
+        "liberation",
+        "mysticism",
+        "sudden changes",
+        "karmic completion",
+        "unconventional paths"
+      ],
+      "positive_effects": [
+        "Spiritual advancement and inner enlightenment",
+        "Detachment from worldly attachments",
+        "Completion of karmic cycles",
+        "Mystical experiences and intuitive insights",
+        "Liberation from past patterns",
+        "Interest in occult sciences and meditation"
+      ],
+      "negative_effects": [
+        "Confusion and lack of direction",
+        "Loss and deprivation in material matters",
+        "Health issues and physical weakness",
+        "Sudden misfortunes and accidents",
+        "Relationship instability",
+        "Financial losses and uncertainties",
+        "Restlessness and anxiety"
+      ],
+      "health_indications": [
+        "Nervous system disorders",
+        "Accidents and injuries",
+        "Chronic ailments",
+        "Mental disturbances",
+        "Weak immune system",
+        "Pain and discomfort"
+      ],
+      "career_indications": [
+        "Frequent job changes",
+        "Unpredictable work situations",
+        "Interest in spiritual professions",
+        "Difficulty in career progress",
+        "Work-related conflicts",
+        "Self-employment challenges"
+      ],
+      "relationship_indications": [
+        "Relationship instability",
+        "Emotional detachment",
+        "Separation or distance in relationships",
+        "Difficulty in maintaining connections",
+        "Misunderstandings with family"
+      ],
+      "spiritual_indications": [
+        "Spiritual awakening potential",
+        "Interest in mysticism and occult",
+        "Meditation and inner work",
+        "Karmic purification",
+        "Connection with past lives",
+        "Transcendental experiences"
+      ],
+      "by_house": {
+        "1": "Physical weakness, change of personality, spiritual inclinations",
+        "2": "Financial losses, speech difficulties, family disharmony",
+        "3": "Separation from siblings, communication problems, travel challenges",
+        "4": "Loss of property, domestic problems, emotional instability",
+        "5": "Children difficulties, creative blocks, relationship issues",
+        "6": "Health problems, conflicts with enemies, work challenges",
+        "7": "Marital stress, separation, partnership difficulties",
+        "8": "Occult interest, sudden changes, inheritance matters",
+        "9": "Spiritual journey, travel for spirituality, guru connection",
+        "10": "Career instability, professional setbacks, unexpected changes",
+        "11": "Loss of friends, financial uncertainty, group conflicts",
+        "12": "Losses, isolation, spiritual practices, foreign connections"
+      }
+    },
+    "venus": {
+      "years": 20,
+      "order": 2,
+      "general_themes": [
+        "love and relationships",
+        "luxury and pleasure",
+        "creativity and arts",
+        "sensuality",
+        "beauty",
+        "comfort and indulgence",
+        "material prosperity"
+      ],
+      "positive_effects": [
+        "Enhanced attractiveness and charisma",
+        "Success in romance and relationships",
+        "Artistic and creative expression",
+        "Wealth and material comfort",
+        "Social popularity and admiration",
+        "Luxury and pleasurable experiences",
+        "Business prosperity, especially in arts and beauty industries"
+      ],
+      "negative_effects": [
+        "Overindulgence and excessive pleasures",
+        "Relationship complications and love problems",
+        "Moral compromises and ethical issues",
+        "Financial indulgence leading to debt",
+        "Loss of discrimination and judgment",
+        "Health issues related to excess",
+        "Marital discord or infidelity"
+      ],
+      "health_indications": [
+        "Reproductive system issues",
+        "Venereal diseases",
+        "Throat and neck problems",
+        "Skin conditions",
+        "Obesity or weight gain",
+        "Eye problems",
+        "Diabetes risk"
+      ],
+      "career_indications": [
+        "Success in arts, entertainment, and creativity",
+        "Flourishing in beauty and fashion industries",
+        "Growth in business and commerce",
+        "Successful partnerships",
+        "Income from luxuries and leisure",
+        "Professional recognition and advancement"
+      ],
+      "relationship_indications": [
+        "Romantic relationships flourish",
+        "Marriage or significant partnerships",
+        "Social popularity and admiration",
+        "Family happiness and harmony",
+        "Attraction and charisma increase",
+        "Pleasure in relationships"
+      ],
+      "spiritual_indications": [
+        "Devotional practices",
+        "Bhakti yoga and emotional spirituality",
+        "Connection through love and compassion",
+        "Grace and divine protection",
+        "Purification through service and love"
+      ],
+      "by_house": {
+        "1": "Increased attractiveness, charm, confidence, pleasure-seeking",
+        "2": "Financial gains, wealth accumulation, food and comfort",
+        "3": "Communication skills improve, travel for pleasure, sibling harmony",
+        "4": "Real estate gains, home comforts, family happiness",
+        "5": "Creative success, romance, children born, entertainment benefits",
+        "6": "Overcoming enemies, health improvement, work satisfaction",
+        "7": "Marriage, partnership success, social popularity",
+        "8": "Sudden gains, inheritance, sexual matters, occult interest",
+        "9": "Spiritual journey, higher learning, guru blessings, travel",
+        "10": "Professional success, public recognition, career advancement",
+        "11": "Wealth gains, friendship expansion, desires fulfillment",
+        "12": "Spiritual pursuits, luxury abroad, isolation with comfort"
+      }
+    },
+    "sun": {
+      "years": 6,
+      "order": 3,
+      "general_themes": [
+        "power and authority",
+        "leadership",
+        "ego and identity",
+        "vitality",
+        "confidence",
+        "government and politics",
+        "excellence"
+      ],
+      "positive_effects": [
+        "Enhanced confidence and self-esteem",
+        "Leadership opportunities and authority",
+        "Government favors and official recognition",
+        "Improved health and vitality",
+        "Respect and honor in society",
+        "Success in positions of power",
+        "Clarity of purpose and direction"
+      ],
+      "negative_effects": [
+        "Excessive pride and arrogance",
+        "Health problems and fevers",
+        "Conflicts with authority figures",
+        "Eye diseases and vision problems",
+        "Relationship strains due to ego",
+        "Loss of position or status",
+        "Separation from father or father figures"
+      ],
+      "health_indications": [
+        "Fevers and acute illnesses",
+        "Eye diseases and vision problems",
+        "Heart conditions",
+        "Bone and joint issues",
+        "Vitality and energy fluctuations",
+        "Heat-related disorders",
+        "Baldness or hair loss"
+      ],
+      "career_indications": [
+        "Government positions and official roles",
+        "Leadership and management success",
+        "Political advancement",
+        "Executive positions",
+        "Increased authority and responsibility",
+        "Success in power-based professions",
+        "Recognition and promotions"
+      ],
+      "relationship_indications": [
+        "Strained paternal relationships",
+        "Ego conflicts in partnerships",
+        "Relationship pride and arrogance",
+        "Family authority and dominance",
+        "Difficulty in subordinate roles"
+      ],
+      "spiritual_indications": [
+        "Self-realization potential",
+        "Connection with divine will",
+        "Clarity and illumination",
+        "Development of willpower",
+        "Solar meditation practices",
+        "Atma consciousness expansion"
+      ],
+      "by_house": {
+        "1": "Increased confidence, commanding presence, proud nature",
+        "2": "Wealth gains, family leadership, generous spending",
+        "3": "Communication power, authoritative speech, travel",
+        "4": "Property gains, domestic authority, father relations",
+        "5": "Leadership in creativity, children success, authority in expression",
+        "6": "Overcoming enemies, job authority, health improvement",
+        "7": "Partnership respect, marital respect, public recognition",
+        "8": "Sudden changes, occult interest, transformation",
+        "9": "Spiritual authority, guru relations, higher learning success",
+        "10": "Career peak, public recognition, professional achievement",
+        "11": "Gains through government, powerful friendships, ambitions met",
+        "12": "Foreign authority positions, spiritual retreat, losses possible"
+      }
+    },
+    "moon": {
+      "years": 10,
+      "order": 4,
+      "general_themes": [
+        "emotions and feelings",
+        "mind and mental state",
+        "nurture and care",
+        "home and family",
+        "mother and maternal figures",
+        "intuition",
+        "cycles and changes"
+      ],
+      "positive_effects": [
+        "Emotional stability and peace of mind",
+        "Strong intuition and psychic abilities",
+        "Happiness in family and domestic life",
+        "Success in nurturing and care professions",
+        "Popular and beloved by people",
+        "Creative and artistic expression",
+        "Travel and short journeys"
+      ],
+      "negative_effects": [
+        "Mental instability and mood swings",
+        "Emotional sensitivity and vulnerability",
+        "Family problems and domestic discord",
+        "Difficulty in relationships",
+        "Depressive tendencies",
+        "Wandering mind and restlessness",
+        "Weak health and digestive issues"
+      ],
+      "health_indications": [
+        "Mental health issues and depression",
+        "Digestive disorders",
+        "Liver and spleen problems",
+        "Breast and chest issues",
+        "Fluid retention and edema",
+        "Sleep disturbances",
+        "Emotional stress-related illnesses"
+      ],
+      "career_indications": [
+        "Success in care-giving professions",
+        "Nursing, psychology, counseling",
+        "Teaching and mentoring roles",
+        "Travel and transport professions",
+        "Hospitality and service industries",
+        "Domestic and family businesses",
+        "Emotional intelligence careers"
+      ],
+      "relationship_indications": [
+        "Family harmony and closeness",
+        "Maternal relationships flourish",
+        "Nurturing partnerships",
+        "Emotional bonding deepens",
+        "Popular and socially connected",
+        "Caretaking roles in relationships"
+      ],
+      "spiritual_indications": [
+        "Bhakti yoga practice",
+        "Devotional spirituality",
+        "Emotional connection to divine",
+        "Mantra and chanting practice",
+        "Meditation on Moon",
+        "Healing and nurturing spirituality"
+      ],
+      "by_house": {
+        "1": "Emotional nature, sensitivity, popular personality",
+        "2": "Family wealth, nurturing speech, maternal care",
+        "3": "Emotionally expressive communication, travel, sibling care",
+        "4": "Home and property gains, domestic happiness, mother relations",
+        "5": "Children care, emotional creativity, nurturing expression",
+        "6": "Emotional healing, care work, nurturing service",
+        "7": "Emotional partnership, nurturing relationships, popularity",
+        "8": "Emotional transformation, occult interest, depth psychology",
+        "9": "Emotional spirituality, pilgrimages, mother's influence",
+        "10": "Public nurturing role, popular career, emotional leadership",
+        "11": "Emotional friendships, family gains, group nurturing",
+        "12": "Spiritual retreat, foreign travel, emotional isolation"
+      }
+    },
+    "mars": {
+      "years": 7,
+      "order": 5,
+      "general_themes": [
+        "energy and action",
+        "courage and bravery",
+        "aggression and conflict",
+        "passion and drive",
+        "competition",
+        "physical activity",
+        "war and struggle"
+      ],
+      "positive_effects": [
+        "Increased energy and motivation",
+        "Courage and bravery in challenges",
+        "Success in competitive fields",
+        "Physical strength and athleticism",
+        "Entrepreneurial drive and initiative",
+        "Victory over enemies",
+        "Success in military and aggressive professions"
+      ],
+      "negative_effects": [
+        "Aggression and conflict with others",
+        "Accidents and injuries",
+        "Impulsive and rash actions",
+        "Relationship conflicts and divorce",
+        "Financial losses through aggression",
+        "Legal issues and confrontations",
+        "Blood-related health problems"
+      ],
+      "health_indications": [
+        "Accidents and injuries",
+        "Blood disorders",
+        "Fever and acute illnesses",
+        "Inflammatory conditions",
+        "Muscle and bone injuries",
+        "Surgery or operations",
+        "Anger-related stress disorders"
+      ],
+      "career_indications": [
+        "Success in military and police",
+        "Engineering and construction",
+        "Sports and athletics",
+        "Competitive business",
+        "Entrepreneurship and startups",
+        "Surgical and medical professions",
+        "Leadership in action-oriented fields"
+      ],
+      "relationship_indications": [
+        "Marital conflict and friction",
+        "Separation or divorce",
+        "Aggressive communication",
+        "Passionate relationships",
+        "Arguments and confrontations",
+        "Sexual passion and drive",
+        "Family conflict"
+      ],
+      "spiritual_indications": [
+        "Warrior spirituality",
+        "Courage and willpower development",
+        "Action-oriented practice",
+        "Overcoming obstacles",
+        "Tantra and kundalini practice",
+        "Physical yoga and asanas"
+      ],
+      "by_house": {
+        "1": "Aggressive confidence, warrior nature, physical energy",
+        "2": "Financial losses, aggressive speech, family conflict",
+        "3": "Courageous communication, competitive siblings, travel energy",
+        "4": "Property disputes, family conflict, aggressive mother",
+        "5": "Conflict with children, passionate creativity, competitive expression",
+        "6": "Overcoming enemies, aggressive health recovery, conflict success",
+        "7": "Marital conflict, partnership friction, aggressive spouse relations",
+        "8": "Accidents, sudden conflict, occult interest, aggression",
+        "9": "Conflict in spirituality, aggressive pilgrimage, passionate learning",
+        "10": "Career conflicts, aggressive success, competitive advancement",
+        "11": "Conflict with friends, aggressive gains, competitive networks",
+        "12": "Aggression in isolation, accidents abroad, hidden conflict"
+      }
+    },
+    "rahu": {
+      "years": 18,
+      "order": 6,
+      "general_themes": [
+        "worldly desires",
+        "ambition and obsession",
+        "illusion and deception",
+        "foreign and unconventional",
+        "technology and innovation",
+        "material gains",
+        "shadow side"
+      ],
+      "positive_effects": [
+        "Worldly success and material gains",
+        "Obsessive focus leading to achievement",
+        "Success in foreign lands",
+        "Technology and innovation success",
+        "Rising in status and position",
+        "Unexpected opportunities and windfalls",
+        "Mastery of unconventional fields"
+      ],
+      "negative_effects": [
+        "Obsession and addictive behaviors",
+        "Deception and dishonesty",
+        "Illusions and false beliefs",
+        "Chronic health problems",
+        "Confusion and lack of clarity",
+        "Legal problems and scandals",
+        "Imprisonment or restriction"
+      ],
+      "health_indications": [
+        "Chronic and mysterious illnesses",
+        "Skin conditions and infections",
+        "Poisoning and toxicity",
+        "Addiction issues",
+        "Anxiety and neurosis",
+        "Insomnia and sleep disorders",
+        "Cancer and serious illnesses"
+      ],
+      "career_indications": [
+        "Success in foreign companies",
+        "Technology and IT success",
+        "Unconventional business success",
+        "Rising in status and position",
+        "Success through deception possible",
+        "Media and communication fields",
+        "Real estate and property dealings"
+      ],
+      "relationship_indications": [
+        "Obsessive relationships",
+        "Deceptive partnerships",
+        "Foreign or unconventional relationships",
+        "Relationship illusions",
+        "Marital deception possible",
+        "Intense attractions and obsessions"
+      ],
+      "spiritual_indications": [
+        "Interest in occult and forbidden knowledge",
+        "Shadow work and dark practices",
+        "Spiritual illusions possible",
+        "Tantric practices",
+        "Kundalini awakening experiences",
+        "Psychic abilities development"
+      ],
+      "by_house": {
+        "1": "Foreign appearance, obsessive personality, unconventional nature",
+        "2": "Foreign wealth, deceptive speech, obsessive accumulation",
+        "3": "Foreign travel, obsessive communication, unconventional siblings",
+        "4": "Foreign property, deceptive home matters, obsessive family",
+        "5": "Foreign children, obsessive creativity, deceptive romance",
+        "6": "Obsessive enemies, chronic illness, deceptive conflicts",
+        "7": "Foreign partnerships, deceptive marriage, obsessive relationships",
+        "8": "Sudden occult interest, mysterious transformation, hidden deception",
+        "9": "Foreign spirituality, obsessive guru seeking, deceptive learning",
+        "10": "Foreign career success, obsessive ambition, deceptive status",
+        "11": "Foreign friends, obsessive gains, deceptive networks",
+        "12": "Foreign isolation, obsessive spirituality, deceptive losses"
+      }
+    },
+    "jupiter": {
+      "years": 16,
+      "order": 7,
+      "general_themes": [
+        "expansion and growth",
+        "wisdom and knowledge",
+        "prosperity and luck",
+        "teaching and guidance",
+        "spirituality and faith",
+        "generosity",
+        "philosophy and higher learning"
+      ],
+      "positive_effects": [
+        "Expansion of wealth and prosperity",
+        "Educational success and higher learning",
+        "Spiritual growth and wisdom",
+        "Generous fortune and good luck",
+        "Success in teaching and guidance",
+        "Respect and honor in society",
+        "Long-distance travel and foreign success"
+      ],
+      "negative_effects": [
+        "Excessive expansion and wastefulness",
+        "Over-optimism and poor judgment",
+        "Weight gain and obesity",
+        "Overextension and debt",
+        "Arrogance in wisdom",
+        "Liver problems and disorders",
+        "Indulgence and excess"
+      ],
+      "health_indications": [
+        "Liver and gallbladder issues",
+        "Weight gain and obesity",
+        "Diabetes and metabolic disorders",
+        "High cholesterol",
+        "Excessive heat in body",
+        "Gout and joint problems",
+        "Overeating and digestive issues"
+      ],
+      "career_indications": [
+        "Success in teaching and education",
+        "Religious and spiritual professions",
+        "Law and legal professions",
+        "Banking and finance",
+        "Publishing and higher learning",
+        "Government positions",
+        "Foreign trade and business"
+      ],
+      "relationship_indications": [
+        "Family expansion and happiness",
+        "Respect in relationships",
+        "Harmonious partnerships",
+        "Children and progeny blessings",
+        "Generous and caring relationships",
+        "Marital happiness and expansion"
+      ],
+      "spiritual_indications": [
+        "Spiritual growth and expansion",
+        "Guru seeking and guidance",
+        "Religious faith and devotion",
+        "Philosophy and wisdom development",
+        "Meditative practices",
+        "Grace and divine protection"
+      ],
+      "by_house": {
+        "1": "Optimistic nature, expansion of personality, generous character",
+        "2": "Wealth expansion, generous speech, family prosperity",
+        "3": "Educational communication, expanded travel, fortunate siblings",
+        "4": "Property expansion, higher learning, family prosperity",
+        "5": "Children blessings, creative expansion, educational success",
+        "6": "Enemies defeated, health improvement, expanded service",
+        "7": "Marital happiness, generous partnerships, respected marriage",
+        "8": "Occult wisdom, spiritual transformation, inheritance gains",
+        "9": "Spiritual growth, pilgrimages, guru blessings, expanded learning",
+        "10": "Career expansion, professional success, respected position",
+        "11": "Expanded networks, fortunate gains, generous friendships",
+        "12": "Spiritual practices, foreign journeys, expanded isolation"
+      }
+    },
+    "saturn": {
+      "years": 19,
+      "order": 8,
+      "general_themes": [
+        "discipline and responsibility",
+        "limitations and obstacles",
+        "hard work and persistence",
+        "karma and delays",
+        "aging and time",
+        "structure and order",
+        "suffering and detachment"
+      ],
+      "positive_effects": [
+        "Discipline and self-control development",
+        "Long-term success through hard work",
+        "Karmic completion and resolution",
+        "Maturity and wisdom",
+        "Respect through perseverance",
+        "Real estate and property gains",
+        "Spiritual detachment and liberation"
+      ],
+      "negative_effects": [
+        "Delays and obstacles",
+        "Hardship and suffering",
+        "Chronic health problems",
+        "Job loss and career setbacks",
+        "Separation and loss",
+        "Depression and despair",
+        "Financial difficulties and poverty"
+      ],
+      "health_indications": [
+        "Chronic diseases and long-term illnesses",
+        "Joint and bone disorders",
+        "Dental problems",
+        "Nervous system disorders",
+        "Aging-related conditions",
+        "Accidents and injuries",
+        "Depression and mental issues"
+      ],
+      "career_indications": [
+        "Success through hard work and discipline",
+        "Government and administrative positions",
+        "Mining and agriculture",
+        "Real estate and property",
+        "Engineering and construction",
+        "Labour and manual work",
+        "Delayed but solid success"
+      ],
+      "relationship_indications": [
+        "Separation and distance from loved ones",
+        "Marital difficulties and delays",
+        "Relationship testing and trials",
+        "Loss of relationships",
+        "Disciplined and serious relationships",
+        "Karmic relationships"
+      ],
+      "spiritual_indications": [
+        "Spiritual discipline and practice",
+        "Ascetic spirituality",
+        "Meditation and inner work",
+        "Detachment from worldly matters",
+        "Karma yoga practice",
+        "Liberation through discipline"
+      ],
+      "by_house": {
+        "1": "Serious demeanor, disciplined nature, mature personality",
+        "2": "Financial delays, frugal speech, family hardship possible",
+        "3": "Difficult communication, travel obstacles, serious siblings",
+        "4": "Property delays, family hardship, septic home matters",
+        "5": "Children delays, creative blocks, delayed expression",
+        "6": "Chronic illness, enemies strength, extended conflict",
+        "7": "Marital delays, separated partnership, serious relationships",
+        "8": "Occult discipline, karmic transformation, hidden hardship",
+        "9": "Spiritual discipline, delayed learning, ascetic practices",
+        "10": "Career obstacles, delayed success, solid achievement eventually",
+        "11": "Delayed gains, loss of friends, serious networks",
+        "12": "Isolated hardship, foreign difficulties, spiritual discipline"
+      }
+    },
+    "mercury": {
+      "years": 17,
+      "order": 9,
+      "general_themes": [
+        "communication and intellect",
+        "commerce and trade",
+        "siblings and neighbors",
+        "mental activity",
+        "versatility",
+        "education and learning",
+        "short journeys"
+      ],
+      "positive_effects": [
+        "Intellectual advancement and learning",
+        "Success in commerce and business",
+        "Excellent communication skills",
+        "Literary and writing success",
+        "Sibling and neighbor harmony",
+        "Technical and analytical success",
+        "Witty and clever personality"
+      ],
+      "negative_effects": [
+        "Nervousness and anxiety",
+        "Speech-related problems",
+        "Deception and dishonesty",
+        "Skin and nerve disorders",
+        "Restlessness and wandering",
+        "Frequent changes and instability",
+        "Relationship superficiality"
+      ],
+      "health_indications": [
+        "Nervous disorders and anxiety",
+        "Skin conditions",
+        "Respiratory problems",
+        "Speech impediments",
+        "Digestive issues",
+        "Headaches and migraines",
+        "Stress-related illnesses"
+      ],
+      "career_indications": [
+        "Success in business and commerce",
+        "Writing, journalism, and media",
+        "Teaching and communication roles",
+        "Technical and IT professions",
+        "Sales and marketing success",
+        "Accountancy and mathematics",
+        "Versatile career paths"
+      ],
+      "relationship_indications": [
+        "Excellent communication in relationships",
+        "Intellectual partnerships",
+        "Sibling bonding and harmony",
+        "Social and friendly nature",
+        "Varied interests and relationships",
+        "Intellectual attraction in romance"
+      ],
+      "spiritual_indications": [
+        "Intellectual spirituality",
+        "Philosophy and study",
+        "Mantra and chanting",
+        "Writing and study of scriptures",
+        "Meditation on intellect",
+        "Logic and reasoning in spirituality"
+      ],
+      "by_house": {
+        "1": "Intelligent nature, excellent communication, clever personality",
+        "2": "Commerce success, communication income, sibling harmony",
+        "3": "Communication mastery, travel success, sibling bonds",
+        "4": "Intellectual property, mental peace in home, learning education",
+        "5": "Creative intellect, educational expression, student success",
+        "6": "Intellectual work, business success, enemies communication",
+        "7": "Communication partnerships, intellectual marriage, business partnership",
+        "8": "Intellectual secrets, mysterious communication, occult study",
+        "9": "Intellectual spirituality, teaching wisdom, philosophical learning",
+        "10": "Communication career, business success, intellectual profession",
+        "11": "Intellectual friendships, business networks, communication gains",
+        "12": "Intellectual isolation, foreign communication, study abroad"
+      }
+    }
+  },
+  "antardasha_modifications": {
+    "friendly_lord_modification": 0.25,
+    "enemy_lord_modification": -0.25,
+    "neutral_modification": 0.0,
+    "description": "Modifications applied to Antardasha (sub-period) effects based on planetary relationships",
+    "friendly_lord_note": "When Antardasha lord is friendly to Mahadasha lord, add 25% to positive effects",
+    "enemy_lord_note": "When Antardasha lord is enemy to Mahadasha lord, subtract 25% from positive effects",
+    "neutral_note": "When Antardasha lord is neutral to Mahadasha lord, no modification applied"
+  },
+  "planetary_relationships": {
+    "sun": {
+      "own_sign": ["leo"],
+      "exalted": "aries",
+      "debilitated": "libra",
+      "friends": ["moon", "mars", "jupiter"],
+      "enemies": ["venus", "saturn"],
+      "neutral": ["mercury"]
+    },
+    "moon": {
+      "own_sign": ["cancer"],
+      "exalted": "taurus",
+      "debilitated": "scorpio",
+      "friends": ["sun", "mercury"],
+      "enemies": [],
+      "neutral": ["mars", "jupiter", "venus", "saturn"]
+    },
+    "mars": {
+      "own_sign": ["aries", "scorpio"],
+      "exalted": "capricorn",
+      "debilitated": "cancer",
+      "friends": ["sun", "moon", "jupiter"],
+      "enemies": ["mercury", "venus"],
+      "neutral": ["saturn"]
+    },
+    "mercury": {
+      "own_sign": ["gemini", "virgo"],
+      "exalted": "virgo",
+      "debilitated": "pisces",
+      "friends": ["sun", "venus"],
+      "enemies": ["moon", "mars"],
+      "neutral": ["jupiter", "saturn"]
+    },
+    "jupiter": {
+      "own_sign": ["sagittarius", "pisces"],
+      "exalted": "cancer",
+      "debilitated": "capricorn",
+      "friends": ["sun", "moon", "mars"],
+      "enemies": [],
+      "neutral": ["mercury", "venus", "saturn"]
+    },
+    "venus": {
+      "own_sign": ["taurus", "libra"],
+      "exalted": "pisces",
+      "debilitated": "virgo",
+      "friends": ["mercury", "saturn"],
+      "enemies": ["sun", "mars"],
+      "neutral": ["moon", "jupiter"]
+    },
+    "saturn": {
+      "own_sign": ["capricorn", "aquarius"],
+      "exalted": "libra",
+      "debilitated": "aries",
+      "friends": ["mercury", "venus"],
+      "enemies": ["sun", "moon", "mars"],
+      "neutral": ["jupiter"]
+    },
+    "rahu": {
+      "friends": ["mercury", "venus", "saturn"],
+      "enemies": ["sun", "moon", "mars"],
+      "neutral": ["jupiter"]
+    },
+    "ketu": {
+      "friends": ["mars", "jupiter", "venus"],
+      "enemies": ["mercury", "saturn"],
+      "neutral": ["sun", "moon"]
+    }
+  },
+  "calculation_methods": {
+    "dasha_start_calculation": {
+      "method": "Nakshatra based",
+      "description": "Find natal Moon's nakshatra, identify its lord in Vimshottari order, calculate remaining years in that dasha",
+      "formula": "If born in (P/4) of nakshatra, remaining years = total_dasha_years * (1 - natal_position / 13.33)"
+    },
+    "antardasha_start_calculation": {
+      "method": "Proportional",
+      "description": "Each Mahadasha is divided into 9 Antardashas corresponding to all 9 planets in order",
+      "formula": "Antardasha_years = Mahadasha_years * (Antardasha_planet_years / 120)"
+    },
+    "pratyantardasha_calculation": {
+      "method": "Proportional",
+      "description": "Each Antardasha is further divided into 9 Pratyantardashas",
+      "formula": "Pratyantardasha_years = Antardasha_years * (Pratyantardasha_planet_years / 120)"
+    }
+  },
+  "interpretation_guidelines": {
+    "mahadasha_focus": "Overall life theme and major events for 6-20 year period",
+    "antardasha_focus": "Specific events and experiences within the Mahadasha period",
+    "combined_analysis": "Read Mahadasha effects modified by Antardasha and planetary positions",
+    "house_importance": "House placement of Mahadasha lord in natal chart significantly modifies effects",
+    "strength_consideration": "Strong planets give beneficial Dasha, weak planets give challenging Dasha",
+    "transit_overlay": "Current planetary transits significantly modify Dasha effects"
+  },
+  "remedies": {
+    "general": [
+      "Chanting of mantras for the dasha planet",
+      "Wearing gemstones for dasha planet",
+      "Fasting on days ruled by dasha planet",
+      "Charity and donations for dasha planet",
+      "Meditation on dasha planet"
+    ],
+    "ketu_remedies": [
+      "Chant Ketu mantras: Om Kem Ketave Namah",
+      "Wear cat's eye gemstone",
+      "Worship Ganesha for spiritual protection",
+      "Fast on Tuesdays",
+      "Meditate on detachment and spirituality"
+    ],
+    "venus_remedies": [
+      "Chant Venus mantras: Om Shum Shukraya Namah",
+      "Wear diamond or white sapphire",
+      "Worship Lakshmi for prosperity",
+      "Fast on Fridays",
+      "Practice gratitude and generosity"
+    ],
+    "sun_remedies": [
+      "Chant Sun mantras: Om Suryaya Namah",
+      "Wear ruby gemstone",
+      "Worship Surya (Sun God)",
+      "Fast on Sundays",
+      "Practice solar meditation at dawn"
+    ],
+    "moon_remedies": [
+      "Chant Moon mantras: Om Chandaya Namah",
+      "Wear pearl gemstone",
+      "Worship Mother Goddess or Parvati",
+      "Fast on Mondays",
+      "Practice moon meditation at night"
+    ],
+    "mars_remedies": [
+      "Chant Mars mantras: Om Mangalaya Namah",
+      "Wear red coral gemstone",
+      "Worship Hanuman for courage",
+      "Fast on Tuesdays",
+      "Practice warrior yoga and physical strength"
+    ],
+    "rahu_remedies": [
+      "Chant Rahu mantras: Om Rahave Namah",
+      "Wear hessonite garnet",
+      "Worship Durga or Kali",
+      "Fast on Saturdays",
+      "Practice shadow work meditation"
+    ],
+    "jupiter_remedies": [
+      "Chant Jupiter mantras: Om Guruve Namah",
+      "Wear yellow sapphire",
+      "Worship Brihaspati or Dhanvantari",
+      "Fast on Thursdays",
+      "Practice wisdom and teaching"
+    ],
+    "saturn_remedies": [
+      "Chant Saturn mantras: Om Shanaishcharaya Namah",
+      "Wear blue sapphire or amethyst",
+      "Worship Shani or Hanuman",
+      "Fast on Saturdays",
+      "Practice discipline and service"
+    ],
+    "mercury_remedies": [
+      "Chant Mercury mantras: Om Budhaya Namah",
+      "Wear emerald gemstone",
+      "Worship Saraswati for learning",
+      "Fast on Wednesdays",
+      "Practice communication and learning"
+    ]
+  }
+}

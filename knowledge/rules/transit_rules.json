@@ -1,0 +1,1873 @@
+{
+  "gochara_favorable": {
+    "sun": [3, 6, 10, 11],
+    "moon": [1, 3, 6, 7, 10, 11],
+    "mars": [3, 6, 11],
+    "mercury": [2, 4, 6, 8, 10, 11],
+    "jupiter": [2, 5, 7, 9, 11],
+    "venus": [1, 2, 3, 4, 5, 8, 9, 11, 12],
+    "saturn": [3, 6, 11],
+    "rahu": [3, 6, 10, 11],
+    "ketu": [3, 6, 10, 11]
+  },
+  "vedha_points": {
+    "sun": {
+      "3": 9,
+      "6": 12,
+      "10": 4,
+      "11": 5
+    },
+    "moon": {
+      "1": 5,
+      "3": 9,
+      "6": 12,
+      "7": 2,
+      "10": 4,
+      "11": 8
+    },
+    "mars": {
+      "3": 12,
+      "6": 9,
+      "11": 5
+    },
+    "mercury": {
+      "2": 5,
+      "4": 3,
+      "6": 9,
+      "8": 1,
+      "10": 8,
+      "11": 12
+    },
+    "jupiter": {
+      "2": 12,
+      "5": 4,
+      "7": 3,
+      "9": 10,
+      "11": 8
+    },
+    "venus": {
+      "1": 8,
+      "2": 7,
+      "3": 1,
+      "4": 10,
+      "5": 9,
+      "8": 5,
+      "9": 11,
+      "11": 6,
+      "12": 3
+    },
+    "saturn": {
+      "3": 12,
+      "6": 9,
+      "11": 5
+    },
+    "rahu_ketu": {
+      "3": 12,
+      "6": 9,
+      "10": 4,
+      "11": 5
+    }
+  },
+  "transit_effects": {
+    "sun": {
+      "1": {
+        "positive": [
+          "Good health and vitality",
+          "Increased confidence and leadership",
+          "Favorable for new beginnings",
+          "Recognition and achievements"
+        ],
+        "negative": [
+          "Excessive ego and pride",
+          "Health issues related to heart",
+          "Conflicts with father figure",
+          "Overindulgence"
+        ],
+        "duration": "1 month"
+      },
+      "2": {
+        "positive": [
+          "Financial gains",
+          "Family harmony",
+          "Good speech and communication"
+        ],
+        "negative": [
+          "Loss of wealth",
+          "Family disputes",
+          "Dental problems"
+        ],
+        "duration": "1 month"
+      },
+      "3": {
+        "positive": [
+          "Courage and determination",
+          "Short travels",
+          "Success in endeavors",
+          "Communication benefits"
+        ],
+        "negative": [
+          "Quarrels with siblings",
+          "Travel related issues",
+          "Minor injuries"
+        ],
+        "duration": "1 month"
+      },
+      "4": {
+        "positive": [
+          "Peace of mind",
+          "Property gains",
+          "Domestic harmony",
+          "Mother's welfare"
+        ],
+        "negative": [
+          "Loss of peace",
+          "Property disputes",
+          "Mother's health issues",
+          "Emotional turmoil"
+        ],
+        "duration": "1 month"
+      },
+      "5": {
+        "positive": [
+          "Intellectual pursuits",
+          "Romance and love",
+          "Children's welfare",
+          "Speculation success"
+        ],
+        "negative": [
+          "Loss in speculation",
+          "Romantic conflicts",
+          "Children's problems",
+          "Creative blocks"
+        ],
+        "duration": "1 month"
+      },
+      "6": {
+        "positive": [
+          "Good health",
+          "Victory over enemies",
+          "Debt clearance",
+          "Service excellence"
+        ],
+        "negative": [
+          "Health deterioration",
+          "Enemies gain strength",
+          "Debts increase",
+          "Job conflicts"
+        ],
+        "duration": "1 month"
+      },
+      "7": {
+        "positive": [
+          "Relationship success",
+          "Business partnerships",
+          "Marriage prospects",
+          "Public recognition"
+        ],
+        "negative": [
+          "Relationship conflicts",
+          "Partnership dissolution",
+          "Marital discord",
+          "Public criticism"
+        ],
+        "duration": "1 month"
+      },
+      "8": {
+        "positive": [
+          "Hidden gains",
+          "Longevity",
+          "Occult interests"
+        ],
+        "negative": [
+          "Chronic health issues",
+          "Accidents and injuries",
+          "Sudden losses",
+          "Obsessive behavior"
+        ],
+        "duration": "1 month"
+      },
+      "9": {
+        "positive": [
+          "Spiritual progress",
+          "Long-distance travels",
+          "Luck and fortune",
+          "Educational success"
+        ],
+        "negative": [
+          "Loss of fortune",
+          "Travel mishaps",
+          "Educational setbacks",
+          "Spiritual confusion"
+        ],
+        "duration": "1 month"
+      },
+      "10": {
+        "positive": [
+          "Career advancement",
+          "Authority and power",
+          "Professional recognition",
+          "Government favor"
+        ],
+        "negative": [
+          "Career obstacles",
+          "Loss of authority",
+          "Professional failures",
+          "Government problems"
+        ],
+        "duration": "1 month"
+      },
+      "11": {
+        "positive": [
+          "Gains and income",
+          "Friendship benefits",
+          "Wish fulfillment",
+          "Social recognition"
+        ],
+        "negative": [
+          "Loss of gains",
+          "Friends turn enemies",
+          "Unfulfilled wishes",
+          "Social shame"
+        ],
+        "duration": "1 month"
+      },
+      "12": {
+        "positive": [
+          "Spiritual retreat",
+          "Foreign travels",
+          "Secret success"
+        ],
+        "negative": [
+          "Losses and expenses",
+          "Sleep problems",
+          "Hospitalization",
+          "Isolation"
+        ],
+        "duration": "1 month"
+      }
+    },
+    "moon": {
+      "1": {
+        "positive": [
+          "Clarity of mind",
+          "Emotional balance",
+          "Good health",
+          "Popularity"
+        ],
+        "negative": [
+          "Emotional turbulence",
+          "Anxiety and depression",
+          "Sleep issues",
+          "Mood swings"
+        ],
+        "duration": "2.25 days"
+      },
+      "2": {
+        "positive": [
+          "Financial gains",
+          "Family happiness",
+          "Good food and comfort",
+          "Wealth increase"
+        ],
+        "negative": [
+          "Financial loss",
+          "Family conflicts",
+          "Loss of appetite",
+          "Oral problems"
+        ],
+        "duration": "2.25 days"
+      },
+      "3": {
+        "positive": [
+          "Courage and confidence",
+          "Successful communication",
+          "Sibling harmony",
+          "Short travels"
+        ],
+        "negative": [
+          "Mental weakness",
+          "Communication problems",
+          "Sibling quarrels",
+          "Travel difficulties"
+        ],
+        "duration": "2.25 days"
+      },
+      "4": {
+        "positive": [
+          "Domestic peace",
+          "Mother's welfare",
+          "Real estate gains",
+          "Emotional security"
+        ],
+        "negative": [
+          "Family troubles",
+          "Mother's illness",
+          "Property disputes",
+          "Emotional insecurity"
+        ],
+        "duration": "2.25 days"
+      },
+      "5": {
+        "positive": [
+          "Romance and pleasure",
+          "Children's welfare",
+          "Creative success",
+          "Speculative gains"
+        ],
+        "negative": [
+          "Relationship issues",
+          "Children's problems",
+          "Creative blocks",
+          "Speculative losses"
+        ],
+        "duration": "2.25 days"
+      },
+      "6": {
+        "positive": [
+          "Victory over enemies",
+          "Health improvement",
+          "Debt reduction",
+          "Job satisfaction"
+        ],
+        "negative": [
+          "Enemies strengthen",
+          "Health decline",
+          "Debt increase",
+          "Job dissatisfaction"
+        ],
+        "duration": "2.25 days"
+      },
+      "7": {
+        "positive": [
+          "Relationship harmony",
+          "Marriage success",
+          "Business growth",
+          "Partnership benefits"
+        ],
+        "negative": [
+          "Relationship conflicts",
+          "Marital discord",
+          "Business decline",
+          "Partnership problems"
+        ],
+        "duration": "2.25 days"
+      },
+      "8": {
+        "positive": [
+          "Hidden treasures",
+          "Longevity benefits",
+          "Occult gains"
+        ],
+        "negative": [
+          "Serious health issues",
+          "Accidents",
+          "Sudden losses",
+          "Deep emotional pain"
+        ],
+        "duration": "2.25 days"
+      },
+      "9": {
+        "positive": [
+          "Luck and fortune",
+          "Spiritual development",
+          "Long travels",
+          "Educational gains"
+        ],
+        "negative": [
+          "Loss of fortune",
+          "Spiritual confusion",
+          "Travel problems",
+          "Educational failure"
+        ],
+        "duration": "2.25 days"
+      },
+      "10": {
+        "positive": [
+          "Career success",
+          "Public recognition",
+          "Professional gains",
+          "Government support"
+        ],
+        "negative": [
+          "Career obstacles",
+          "Public criticism",
+          "Professional failures",
+          "Government opposition"
+        ],
+        "duration": "2.25 days"
+      },
+      "11": {
+        "positive": [
+          "Gains and profits",
+          "Friendship benefits",
+          "Wish fulfillment",
+          "Social success"
+        ],
+        "negative": [
+          "Loss of profits",
+          "Friendship problems",
+          "Unfulfilled wishes",
+          "Social difficulties"
+        ],
+        "duration": "2.25 days"
+      },
+      "12": {
+        "positive": [
+          "Spiritual retreat",
+          "Foreign travel",
+          "Rest and relaxation"
+        ],
+        "negative": [
+          "Expenses and losses",
+          "Sleep disturbances",
+          "Hospitalization",
+          "Isolation and loneliness"
+        ],
+        "duration": "2.25 days"
+      }
+    },
+    "mars": {
+      "1": {
+        "positive": [
+          "Courage and strength",
+          "Competitive success",
+          "Physical vitality",
+          "Leadership qualities"
+        ],
+        "negative": [
+          "Aggressive behavior",
+          "Accidents and injuries",
+          "Fever and infections",
+          "Conflicts"
+        ],
+        "duration": "45 days"
+      },
+      "2": {
+        "positive": [
+          "Financial growth",
+          "Property gains",
+          "Family strength"
+        ],
+        "negative": [
+          "Financial loss",
+          "Property disputes",
+          "Family conflicts",
+          "Speech problems"
+        ],
+        "duration": "45 days"
+      },
+      "3": {
+        "positive": [
+          "Success in endeavors",
+          "Courage and determination",
+          "Travel success",
+          "Sibling support"
+        ],
+        "negative": [
+          "Failures and setbacks",
+          "Accidents during travel",
+          "Sibling conflicts",
+          "Loss of courage"
+        ],
+        "duration": "45 days"
+      },
+      "4": {
+        "positive": [
+          "Construction and repairs",
+          "Property development",
+          "Land acquisitions"
+        ],
+        "negative": [
+          "Property damage",
+          "Domestic conflicts",
+          "Mother's health issues",
+          "Mental stress"
+        ],
+        "duration": "45 days"
+      },
+      "5": {
+        "positive": [
+          "Children's progress",
+          "Romance success",
+          "Creative achievements",
+          "Speculative gains"
+        ],
+        "negative": [
+          "Children's health issues",
+          "Romantic conflicts",
+          "Creative difficulties",
+          "Speculative losses"
+        ],
+        "duration": "45 days"
+      },
+      "6": {
+        "positive": [
+          "Victory over enemies",
+          "Health restoration",
+          "Debt clearance",
+          "Competition success"
+        ],
+        "negative": [
+          "Enemies gain advantage",
+          "Health deterioration",
+          "Debt increase",
+          "Competition failure"
+        ],
+        "duration": "45 days"
+      },
+      "7": {
+        "positive": [
+          "Relationship passion",
+          "Business growth",
+          "Partnership success"
+        ],
+        "negative": [
+          "Relationship conflicts",
+          "Marital discord",
+          "Business disputes",
+          "Partnership dissolution"
+        ],
+        "duration": "45 days"
+      },
+      "8": {
+        "positive": [
+          "Hidden gains",
+          "Occult progress",
+          "Longevity benefits"
+        ],
+        "negative": [
+          "Serious accidents",
+          "Chronic diseases",
+          "Sudden losses",
+          "Emotional pain"
+        ],
+        "duration": "45 days"
+      },
+      "9": {
+        "positive": [
+          "Fortune and luck",
+          "Successful travels",
+          "Educational progress",
+          "Spiritual growth"
+        ],
+        "negative": [
+          "Loss of fortune",
+          "Travel accidents",
+          "Educational failure",
+          "Spiritual obstacles"
+        ],
+        "duration": "45 days"
+      },
+      "10": {
+        "positive": [
+          "Career advancement",
+          "Professional success",
+          "Authority gains",
+          "Business expansion"
+        ],
+        "negative": [
+          "Career obstacles",
+          "Professional conflicts",
+          "Loss of authority",
+          "Business failure"
+        ],
+        "duration": "45 days"
+      },
+      "11": {
+        "positive": [
+          "Income increase",
+          "Profits and gains",
+          "Friendship benefits",
+          "Wish fulfillment"
+        ],
+        "negative": [
+          "Income loss",
+          "Profit reduction",
+          "Friend becomes enemy",
+          "Unfulfilled wishes"
+        ],
+        "duration": "45 days"
+      },
+      "12": {
+        "positive": [
+          "Expenses for spiritual purposes",
+          "Foreign travels"
+        ],
+        "negative": [
+          "Excessive expenses",
+          "Hidden enemies",
+          "Hospitalization",
+          "Isolation"
+        ],
+        "duration": "45 days"
+      }
+    },
+    "mercury": {
+      "1": {
+        "positive": [
+          "Intellectual clarity",
+          "Communication success",
+          "Business growth",
+          "Short travels"
+        ],
+        "negative": [
+          "Mental confusion",
+          "Speech problems",
+          "Nervousness",
+          "Travel delays"
+        ],
+        "duration": "1 month"
+      },
+      "2": {
+        "positive": [
+          "Financial gains",
+          "Commerce success",
+          "Good speech",
+          "Family happiness"
+        ],
+        "negative": [
+          "Financial loss",
+          "Business failure",
+          "Speech impediments",
+          "Family quarrels"
+        ],
+        "duration": "1 month"
+      },
+      "3": {
+        "positive": [
+          "Successful communication",
+          "Sibling harmony",
+          "Short travels",
+          "Courage"
+        ],
+        "negative": [
+          "Communication failure",
+          "Sibling conflicts",
+          "Travel difficulties",
+          "Loss of courage"
+        ],
+        "duration": "1 month"
+      },
+      "4": {
+        "positive": [
+          "Property transactions",
+          "Domestic harmony",
+          "Educational progress",
+          "Real estate gains"
+        ],
+        "negative": [
+          "Property disputes",
+          "Domestic conflicts",
+          "Educational setbacks",
+          "Real estate loss"
+        ],
+        "duration": "1 month"
+      },
+      "5": {
+        "positive": [
+          "Creative success",
+          "Intellectual pursuits",
+          "Romance",
+          "Speculative gains"
+        ],
+        "negative": [
+          "Creative blocks",
+          "Intellectual decline",
+          "Romantic problems",
+          "Speculative losses"
+        ],
+        "duration": "1 month"
+      },
+      "6": {
+        "positive": [
+          "Health improvement",
+          "Enemy victory",
+          "Debt reduction",
+          "Service success"
+        ],
+        "negative": [
+          "Health issues",
+          "Enemy strength",
+          "Debt increase",
+          "Service problems"
+        ],
+        "duration": "1 month"
+      },
+      "7": {
+        "positive": [
+          "Business partnerships",
+          "Marriage prospects",
+          "Relationship harmony",
+          "Public interaction"
+        ],
+        "negative": [
+          "Partnership conflicts",
+          "Marital discord",
+          "Relationship problems",
+          "Public criticism"
+        ],
+        "duration": "1 month"
+      },
+      "8": {
+        "positive": [
+          "Hidden knowledge",
+          "Occult studies",
+          "Longevity"
+        ],
+        "negative": [
+          "Mysterious ailments",
+          "Accidents",
+          "Sudden losses",
+          "Mental disorders"
+        ],
+        "duration": "1 month"
+      },
+      "9": {
+        "positive": [
+          "Intellectual success",
+          "Long travels",
+          "Educational gains",
+          "Luck increase"
+        ],
+        "negative": [
+          "Travel difficulties",
+          "Educational failure",
+          "Loss of luck",
+          "Philosophical confusion"
+        ],
+        "duration": "1 month"
+      },
+      "10": {
+        "positive": [
+          "Career success",
+          "Communication skills",
+          "Professional gains",
+          "Business expansion"
+        ],
+        "negative": [
+          "Career obstacles",
+          "Communication problems",
+          "Professional failure",
+          "Business contraction"
+        ],
+        "duration": "1 month"
+      },
+      "11": {
+        "positive": [
+          "Income and gains",
+          "Friendship benefits",
+          "Social success",
+          "Wish fulfillment"
+        ],
+        "negative": [
+          "Income loss",
+          "Friendship problems",
+          "Social difficulties",
+          "Wish unfulfilled"
+        ],
+        "duration": "1 month"
+      },
+      "12": {
+        "positive": [
+          "Foreign travels",
+          "Spiritual learning",
+          "Charitable works"
+        ],
+        "negative": [
+          "Unnecessary expenses",
+          "Travel obstacles",
+          "Sleep problems",
+          "Confusion and losses"
+        ],
+        "duration": "1 month"
+      }
+    },
+    "jupiter": {
+      "1": {
+        "positive": [
+          "Wisdom and knowledge",
+          "Spiritual growth",
+          "Health and vigor",
+          "Popularity"
+        ],
+        "negative": [
+          "Over-expansion",
+          "Overconfidence",
+          "Weight gain",
+          "Obesity-related issues"
+        ],
+        "duration": "13 months"
+      },
+      "2": {
+        "positive": [
+          "Wealth accumulation",
+          "Family prosperity",
+          "Good speech",
+          "Comfortable lifestyle"
+        ],
+        "negative": [
+          "Wealth loss",
+          "Family disputes",
+          "Speech problems",
+          "Financial extravagance"
+        ],
+        "duration": "13 months"
+      },
+      "3": {
+        "positive": [
+          "Courage and confidence",
+          "Successful communications",
+          "Sibling support",
+          "Short travels"
+        ],
+        "negative": [
+          "Loss of courage",
+          "Communication breakdown",
+          "Sibling conflicts",
+          "Travel obstacles"
+        ],
+        "duration": "13 months"
+      },
+      "4": {
+        "positive": [
+          "Domestic peace",
+          "Property gains",
+          "Mother's welfare",
+          "Educational gains"
+        ],
+        "negative": [
+          "Domestic conflicts",
+          "Property disputes",
+          "Mother's illness",
+          "Educational obstacles"
+        ],
+        "duration": "13 months"
+      },
+      "5": {
+        "positive": [
+          "Children's welfare",
+          "Romance success",
+          "Creative achievements",
+          "Speculative success"
+        ],
+        "negative": [
+          "Children's problems",
+          "Relationship issues",
+          "Creative failure",
+          "Speculative loss"
+        ],
+        "duration": "13 months"
+      },
+      "6": {
+        "positive": [
+          "Health improvement",
+          "Enemy victory",
+          "Debt reduction",
+          "Service success"
+        ],
+        "negative": [
+          "Health deterioration",
+          "Enemy strength",
+          "Debt increase",
+          "Service obstacles"
+        ],
+        "duration": "13 months"
+      },
+      "7": {
+        "positive": [
+          "Marriage happiness",
+          "Business growth",
+          "Partnership success",
+          "Relationship joy"
+        ],
+        "negative": [
+          "Marital discord",
+          "Business difficulties",
+          "Partnership problems",
+          "Relationship strain"
+        ],
+        "duration": "13 months"
+      },
+      "8": {
+        "positive": [
+          "Hidden gains",
+          "Occult knowledge",
+          "Longevity"
+        ],
+        "negative": [
+          "Health complications",
+          "Accidents",
+          "Sudden losses",
+          "Chronic ailments"
+        ],
+        "duration": "13 months"
+      },
+      "9": {
+        "positive": [
+          "Fortune and luck",
+          "Spiritual progress",
+          "Long travels",
+          "Educational success"
+        ],
+        "negative": [
+          "Loss of luck",
+          "Spiritual confusion",
+          "Travel accidents",
+          "Educational failure"
+        ],
+        "duration": "13 months"
+      },
+      "10": {
+        "positive": [
+          "Career success",
+          "Authority gains",
+          "Professional advancement",
+          "Government favor"
+        ],
+        "negative": [
+          "Career obstacles",
+          "Loss of authority",
+          "Professional failure",
+          "Government opposition"
+        ],
+        "duration": "13 months"
+      },
+      "11": {
+        "positive": [
+          "Gains and income",
+          "Friendship benefits",
+          "Wish fulfillment",
+          "Social recognition"
+        ],
+        "negative": [
+          "Loss of gains",
+          "Friendship disputes",
+          "Wish unfulfilled",
+          "Social shame"
+        ],
+        "duration": "13 months"
+      },
+      "12": {
+        "positive": [
+          "Spiritual retreat",
+          "Foreign travels",
+          "Charitable works",
+          "Ascetic benefits"
+        ],
+        "negative": [
+          "Unnecessary expenses",
+          "Travel obstacles",
+          "Hospitalization",
+          "Isolation"
+        ],
+        "duration": "13 months"
+      }
+    },
+    "venus": {
+      "1": {
+        "positive": [
+          "Beauty and charm",
+          "Romance success",
+          "Popularity",
+          "Luxury and comfort"
+        ],
+        "negative": [
+          "Over-indulgence",
+          "Obsession with pleasures",
+          "Vanity",
+          "Relationship confusion"
+        ],
+        "duration": "1.5 months"
+      },
+      "2": {
+        "positive": [
+          "Wealth gain",
+          "Family happiness",
+          "Comfortable living",
+          "Financial improvement"
+        ],
+        "negative": [
+          "Wealth loss",
+          "Family discord",
+          "Financial extravagance",
+          "Dental problems"
+        ],
+        "duration": "1.5 months"
+      },
+      "3": {
+        "positive": [
+          "Sibling harmony",
+          "Successful communication",
+          "Artistic success",
+          "Travel pleasure"
+        ],
+        "negative": [
+          "Sibling conflicts",
+          "Communication problems",
+          "Artistic failure",
+          "Travel obstacles"
+        ],
+        "duration": "1.5 months"
+      },
+      "4": {
+        "positive": [
+          "Domestic happiness",
+          "Property gains",
+          "Family peace",
+          "Mother's welfare"
+        ],
+        "negative": [
+          "Domestic conflicts",
+          "Property issues",
+          "Family discord",
+          "Mother's problems"
+        ],
+        "duration": "1.5 months"
+      },
+      "5": {
+        "positive": [
+          "Romance and passion",
+          "Children's welfare",
+          "Creative success",
+          "Speculative gains"
+        ],
+        "negative": [
+          "Relationship problems",
+          "Children's issues",
+          "Creative blocks",
+          "Speculative loss"
+        ],
+        "duration": "1.5 months"
+      },
+      "6": {
+        "positive": [
+          "Health improvement",
+          "Enemy peace",
+          "Debt reduction",
+          "Service satisfaction"
+        ],
+        "negative": [
+          "Health issues",
+          "Enemy problems",
+          "Debt increase",
+          "Service conflicts"
+        ],
+        "duration": "1.5 months"
+      },
+      "7": {
+        "positive": [
+          "Marriage success",
+          "Business growth",
+          "Partnership harmony",
+          "Relationship joy"
+        ],
+        "negative": [
+          "Marital discord",
+          "Business failure",
+          "Partnership dissolution",
+          "Relationship strain"
+        ],
+        "duration": "1.5 months"
+      },
+      "8": {
+        "positive": [
+          "Hidden attractions",
+          "Occult interests",
+          "Longevity benefits"
+        ],
+        "negative": [
+          "Health complications",
+          "Accidents",
+          "Sudden losses",
+          "Emotional turmoil"
+        ],
+        "duration": "1.5 months"
+      },
+      "9": {
+        "positive": [
+          "Luck increase",
+          "Spiritual growth",
+          "Long travels",
+          "Educational benefits"
+        ],
+        "negative": [
+          "Loss of luck",
+          "Spiritual confusion",
+          "Travel difficulties",
+          "Educational failure"
+        ],
+        "duration": "1.5 months"
+      },
+      "10": {
+        "positive": [
+          "Career success",
+          "Professional gain",
+          "Public recognition",
+          "Business improvement"
+        ],
+        "negative": [
+          "Career obstacles",
+          "Professional failure",
+          "Public criticism",
+          "Business loss"
+        ],
+        "duration": "1.5 months"
+      },
+      "11": {
+        "positive": [
+          "Income and gains",
+          "Friendship benefits",
+          "Wish fulfillment",
+          "Social success"
+        ],
+        "negative": [
+          "Income loss",
+          "Friendship problems",
+          "Wish unfulfilled",
+          "Social shame"
+        ],
+        "duration": "1.5 months"
+      },
+      "12": {
+        "positive": [
+          "Spiritual retreat",
+          "Foreign travels",
+          "Romantic escapades",
+          "Hidden pleasures"
+        ],
+        "negative": [
+          "Unnecessary expenses",
+          "Travel obstacles",
+          "Hospitalization",
+          "Secretive problems"
+        ],
+        "duration": "1.5 months"
+      }
+    },
+    "saturn": {
+      "1": {
+        "positive": [
+          "Discipline and focus",
+          "Karmic responsibility",
+          "Spiritual maturity",
+          "Longevity"
+        ],
+        "negative": [
+          "Depression and melancholy",
+          "Physical weakness",
+          "Delays and obstacles",
+          "Isolation"
+        ],
+        "duration": "2.5 years"
+      },
+      "2": {
+        "positive": [
+          "Financial prudence",
+          "Steady wealth building",
+          "Family stability",
+          "Savings increase"
+        ],
+        "negative": [
+          "Financial loss",
+          "Family poverty",
+          "Debt increase",
+          "Miserliness"
+        ],
+        "duration": "2.5 years"
+      },
+      "3": {
+        "positive": [
+          "Courage and persistence",
+          "Successful endeavors",
+          "Sibling responsibility",
+          "Short travel success"
+        ],
+        "negative": [
+          "Loss of courage",
+          "Delayed success",
+          "Sibling separation",
+          "Travel obstacles"
+        ],
+        "duration": "2.5 years"
+      },
+      "4": {
+        "positive": [
+          "Property foundation",
+          "Real estate gains",
+          "Family security",
+          "Mother's support"
+        ],
+        "negative": [
+          "Property loss",
+          "Domestic separation",
+          "Mother's illness",
+          "Emotional pain"
+        ],
+        "duration": "2.5 years"
+      },
+      "5": {
+        "positive": [
+          "Children's discipline",
+          "Educational foundation",
+          "Creative maturity",
+          "Responsible romance"
+        ],
+        "negative": [
+          "Children's separation",
+          "Educational delay",
+          "Creative stagnation",
+          "Relationship sorrow"
+        ],
+        "duration": "2.5 years"
+      },
+      "6": {
+        "positive": [
+          "Health improvement",
+          "Enemy victory",
+          "Debt clearance",
+          "Disciplined service"
+        ],
+        "negative": [
+          "Chronic health issues",
+          "Enemy strength",
+          "Debt burden",
+          "Service difficulties"
+        ],
+        "duration": "2.5 years"
+      },
+      "7": {
+        "positive": [
+          "Mature relationships",
+          "Stable marriage",
+          "Business stability",
+          "Long-term partnerships"
+        ],
+        "negative": [
+          "Relationship delays",
+          "Marital separation",
+          "Business stagnation",
+          "Partnership dissolution"
+        ],
+        "duration": "2.5 years"
+      },
+      "8": {
+        "positive": [
+          "Karmic transformation",
+          "Occult wisdom",
+          "Longevity extension",
+          "Hidden benefits"
+        ],
+        "negative": [
+          "Serious illness",
+          "Accidents and injuries",
+          "Financial ruin",
+          "Deep psychological pain"
+        ],
+        "duration": "2.5 years"
+      },
+      "9": {
+        "positive": [
+          "Spiritual wisdom",
+          "Long-distance travels",
+          "Educational success",
+          "Fortune through karma"
+        ],
+        "negative": [
+          "Loss of faith",
+          "Travel obstacles",
+          "Educational failure",
+          "Loss of fortune"
+        ],
+        "duration": "2.5 years"
+      },
+      "10": {
+        "positive": [
+          "Career foundation",
+          "Delayed but sure success",
+          "Authority through effort",
+          "Professional stability"
+        ],
+        "negative": [
+          "Career obstacles",
+          "Delayed promotions",
+          "Loss of position",
+          "Professional failures"
+        ],
+        "duration": "2.5 years"
+      },
+      "11": {
+        "positive": [
+          "Steady income gain",
+          "Friendship stability",
+          "Wish fulfillment through effort",
+          "Social recognition"
+        ],
+        "negative": [
+          "Income reduction",
+          "Friendship loss",
+          "Wish unfulfilled",
+          "Social shame"
+        ],
+        "duration": "2.5 years"
+      },
+      "12": {
+        "positive": [
+          "Spiritual liberation",
+          "Ascetic benefits",
+          "Foreign settlement",
+          "Karmic resolution"
+        ],
+        "negative": [
+          "Unnecessary expenses",
+          "Hospitalization",
+          "Exile or isolation",
+          "Losses and suffering"
+        ],
+        "duration": "2.5 years"
+      }
+    },
+    "rahu": {
+      "1": {
+        "positive": [
+          "Ambition and drive",
+          "Unconventional success",
+          "Material pursuits",
+          "Charisma increase"
+        ],
+        "negative": [
+          "Obsession and delusion",
+          "Health anxiety",
+          "Loss of direction",
+          "Negative influences"
+        ],
+        "duration": "18 months"
+      },
+      "2": {
+        "positive": [
+          "Wealth accumulation",
+          "Family expansion",
+          "Unconventional gains",
+          "Material comfort"
+        ],
+        "negative": [
+          "Unexpected losses",
+          "Family deception",
+          "Speech problems",
+          "Eating disorders"
+        ],
+        "duration": "18 months"
+      },
+      "3": {
+        "positive": [
+          "Courage and initiative",
+          "Successful ventures",
+          "Sibling harmony",
+          "Short travel gains"
+        ],
+        "negative": [
+          "Recklessness",
+          "Failed ventures",
+          "Sibling discord",
+          "Travel accidents"
+        ],
+        "duration": "18 months"
+      },
+      "4": {
+        "positive": [
+          "Property gains",
+          "Domestic changes",
+          "Vehicle acquisition",
+          "Mother's support"
+        ],
+        "negative": [
+          "Property loss",
+          "Domestic turbulence",
+          "Vehicle problems",
+          "Mother's illness"
+        ],
+        "duration": "18 months"
+      },
+      "5": {
+        "positive": [
+          "Unconventional romance",
+          "Children's opportunities",
+          "Creative breakthroughs",
+          "Speculative gains"
+        ],
+        "negative": [
+          "Relationship deception",
+          "Children's problems",
+          "Creative obsession",
+          "Speculative losses"
+        ],
+        "duration": "18 months"
+      },
+      "6": {
+        "positive": [
+          "Enemy defeat",
+          "Health improvement",
+          "Debt reduction",
+          "Competition success"
+        ],
+        "negative": [
+          "New enemies emerge",
+          "Chronic illness",
+          "Debt complications",
+          "Competition failure"
+        ],
+        "duration": "18 months"
+      },
+      "7": {
+        "positive": [
+          "Relationship growth",
+          "Marriage prospects",
+          "Business expansion",
+          "Public recognition"
+        ],
+        "negative": [
+          "Relationship turmoil",
+          "Marital deception",
+          "Business disputes",
+          "Public scandal"
+        ],
+        "duration": "18 months"
+      },
+      "8": {
+        "positive": [
+          "Hidden gains",
+          "Occult interests",
+          "Transformation benefits"
+        ],
+        "negative": [
+          "Serious health crises",
+          "Accidents and injuries",
+          "Sudden losses",
+          "Psychological distress"
+        ],
+        "duration": "18 months"
+      },
+      "9": {
+        "positive": [
+          "Luck and fortune",
+          "Long travels",
+          "Foreign opportunities",
+          "Educational breakthroughs"
+        ],
+        "negative": [
+          "Loss of fortune",
+          "Travel misadventures",
+          "Foreign problems",
+          "Educational failures"
+        ],
+        "duration": "18 months"
+      },
+      "10": {
+        "positive": [
+          "Career advancement",
+          "Unconventional success",
+          "Authority gains",
+          "Business expansion"
+        ],
+        "negative": [
+          "Career instability",
+          "Professional conflicts",
+          "Loss of authority",
+          "Business scandal"
+        ],
+        "duration": "18 months"
+      },
+      "11": {
+        "positive": [
+          "Income increase",
+          "Unexpected gains",
+          "Friendship benefits",
+          "Wish fulfillment"
+        ],
+        "negative": [
+          "Unstable income",
+          "Sudden losses",
+          "Friendship deception",
+          "Wish unfulfilled"
+        ],
+        "duration": "18 months"
+      },
+      "12": {
+        "positive": [
+          "Spiritual awakening",
+          "Foreign travels",
+          "Hidden benefits",
+          "Occult pursuits"
+        ],
+        "negative": [
+          "Excessive expenses",
+          "Travel misfortunes",
+          "Hospitalization",
+          "Negative entities"
+        ],
+        "duration": "18 months"
+      }
+    },
+    "ketu": {
+      "1": {
+        "positive": [
+          "Spiritual detachment",
+          "Wisdom and insight",
+          "Liberation tendencies",
+          "Introspection"
+        ],
+        "negative": [
+          "Confusion and delusion",
+          "Health problems",
+          "Loss of direction",
+          "Isolation"
+        ],
+        "duration": "18 months"
+      },
+      "2": {
+        "positive": [
+          "Non-material wisdom",
+          "Family spirituality",
+          "Inner contentment",
+          "Ascetic benefits"
+        ],
+        "negative": [
+          "Financial loss",
+          "Family separation",
+          "Poverty",
+          "Throat problems"
+        ],
+        "duration": "18 months"
+      },
+      "3": {
+        "positive": [
+          "Spiritual courage",
+          "Inner strength",
+          "Sibling spirituality",
+          "Detached actions"
+        ],
+        "negative": [
+          "Loss of courage",
+          "Failed efforts",
+          "Sibling separation",
+          "Travel obstacles"
+        ],
+        "duration": "18 months"
+      },
+      "4": {
+        "positive": [
+          "Spiritual home",
+          "Inner peace",
+          "Meditation benefits",
+          "Mother's spirituality"
+        ],
+        "negative": [
+          "Property loss",
+          "Homelessness",
+          "Emotional pain",
+          "Mother's separation"
+        ],
+        "duration": "18 months"
+      },
+      "5": {
+        "positive": [
+          "Spiritual romance",
+          "Children's spirituality",
+          "Creative wisdom",
+          "Detached pleasure"
+        ],
+        "negative": [
+          "Relationship loss",
+          "Children's separation",
+          "Creative failure",
+          "Loss of pleasure"
+        ],
+        "duration": "18 months"
+      },
+      "6": {
+        "positive": [
+          "Enemy avoidance",
+          "Health detachment",
+          "Debt spiritual resolve",
+          "Service wisdom"
+        ],
+        "negative": [
+          "Enemy activity",
+          "Chronic illness",
+          "Debt burden",
+          "Service failure"
+        ],
+        "duration": "18 months"
+      },
+      "7": {
+        "positive": [
+          "Spiritual partnership",
+          "Marriage spirituality",
+          "Business wisdom",
+          "Detached relationships"
+        ],
+        "negative": [
+          "Relationship loss",
+          "Marital separation",
+          "Business failure",
+          "Partnership dissolution"
+        ],
+        "duration": "18 months"
+      },
+      "8": {
+        "positive": [
+          "Spiritual transformation",
+          "Occult wisdom",
+          "Liberation path",
+          "Karmic resolution"
+        ],
+        "negative": [
+          "Serious illness",
+          "Accidents",
+          "Sudden losses",
+          "Psychological crisis"
+        ],
+        "duration": "18 months"
+      },
+      "9": {
+        "positive": [
+          "Spiritual growth",
+          "Foreign spirituality",
+          "Higher learning",
+          "Philosophical wisdom"
+        ],
+        "negative": [
+          "Loss of faith",
+          "Travel obstacles",
+          "Learning failure",
+          "Loss of fortune"
+        ],
+        "duration": "18 months"
+      },
+      "10": {
+        "positive": [
+          "Spiritual career",
+          "Renunciation path",
+          "Wisdom authority",
+          "Detached work"
+        ],
+        "negative": [
+          "Career loss",
+          "Authority loss",
+          "Work failure",
+          "Public shame"
+        ],
+        "duration": "18 months"
+      },
+      "11": {
+        "positive": [
+          "Spiritual gains",
+          "Higher friendship",
+          "Transcendent wishes",
+          "Detached happiness"
+        ],
+        "negative": [
+          "Income loss",
+          "Friendship loss",
+          "Wish unfulfilled",
+          "Social shame"
+        ],
+        "duration": "18 months"
+      },
+      "12": {
+        "positive": [
+          "Ultimate liberation",
+          "Spiritual retreat",
+          "Ascetic perfection",
+          "Karmic completion"
+        ],
+        "negative": [
+          "Expenses and losses",
+          "Hospitalization",
+          "Imprisonment",
+          "Isolation"
+        ],
+        "duration": "18 months"
+      }
+    }
+  },
+  "sade_sati": {
+    "description": "Sade Sati is the 7.5-year transit of Saturn through the 12th, 1st (natal Moon sign), and 2nd houses",
+    "duration_years": 7.5,
+    "phases": {
+      "rising": {
+        "description": "Saturn in 12th house from Moon",
+        "duration_years": 2.5,
+        "effects": [
+          "Expenses and losses",
+          "Sleep disturbances",
+          "Anxiety and fears",
+          "Hospitalization risk",
+          "Travel obstacles",
+          "Loss of peace",
+          "Separation from loved ones",
+          "Hidden enemies emerge"
+        ],
+        "remedies": [
+          "Chant Hanuman Chalisa daily",
+          "Wear Blue Sapphire (after consultation)",
+          "Donate black clothes and sesame seeds",
+          "Observe Saturn fasting on Saturdays",
+          "Meditate on Lord Hanuman",
+          "Perform Saturn Puja",
+          "Donate to poor and needy"
+        ]
+      },
+      "peak": {
+        "description": "Saturn transiting natal Moon sign (1st house)",
+        "duration_years": 2.5,
+        "effects": [
+          "Most challenging period",
+          "Serious health issues",
+          "Mental depression",
+          "Major losses and setbacks",
+          "Family conflicts",
+          "Career obstacles",
+          "Financial difficulties",
+          "Relationship strain",
+          "Loss of self-confidence",
+          "Karmic challenges intensify"
+        ],
+        "remedies": [
+          "Intensive spiritual practice",
+          "Strong Hanuman worship",
+          "Saturn mantras daily",
+          "Blue Sapphire gemstone",
+          "Charity and donation",
+          "Fasting and meditation",
+          "Seek professional astrology guidance",
+          "Perform Saturn Shanti Puja"
+        ]
+      },
+      "setting": {
+        "description": "Saturn in 2nd house from Moon",
+        "duration_years": 2.5,
+        "effects": [
+          "Gradual improvement begins",
+          "Financial recovery",
+          "Health restoration",
+          "Relationship healing",
+          "Slowly decreasing challenges",
+          "Increased discipline and maturity",
+          "Lessons and wisdom gained",
+          "New beginnings emerge"
+        ],
+        "remedies": [
+          "Continue Hanuman worship",
+          "Maintain discipline and patience",
+          "Complete pending remedies",
+          "Charity continuation",
+          "Meditation practice",
+          "Strengthen spiritual foundation",
+          "Plan for future with wisdom",
+          "Gratitude for lessons learned"
+        ]
+      }
+    },
+    "cancellation_factors": [
+      "Strong Saturn in natal chart",
+      "Saturn in own sign or exaltation",
+      "Beneficial planets aspecting Saturn",
+      "Strong Lagna lord",
+      "Yogas in favor"
+    ],
+    "predictions": {
+      "favorable_signs": [
+        "Aries, Taurus, Gemini, Cancer, Virgo, Libra, Sagittarius, Capricorn, Aquarius",
+        "Leo and Scorpio experience more difficulty"
+      ],
+      "best_timing": "Begin remedies before Sade Sati begins for prevention",
+      "consultation_note": "Consult a qualified astrologer for personalized guidance"
+    }
+  },
+  "dhaiya_kantaka_shani": {
+    "description": "Dhaiya (also called Kantaka Shani) is a 2.5-year transit of Saturn in the 4th or 8th house from Moon",
+    "positions": [4, 8],
+    "duration_years": 2.5,
+    "effects_4th_house": [
+      "Property and land disputes",
+      "Real estate losses",
+      "Domestic conflicts",
+      "Mother's health issues",
+      "Loss of comfort and peace",
+      "Vehicle problems",
+      "Educational obstacles",
+      "Mental stress and anxiety",
+      "Separation from family"
+    ],
+    "effects_8th_house": [
+      "Health complications",
+      "Accidents and injuries",
+      "Financial sudden loss",
+      "Inheritance complications",
+      "Deep emotional pain",
+      "Relationship secrets exposed",
+      "Chronic diseases",
+      "Occult negative forces",
+      "Loss of lifespan years"
+    ],
+    "severity_comparison": {
+      "dhaiya_vs_sade_sati": "Dhaiya is milder than Sade Sati but still challenging",
+      "duration_note": "2.5 years compared to 7.5 years of Sade Sati"
+    },
+    "remedies": [
+      "Saturn worship and mantras",
+      "Hanuman Chalisa recitation",
+      "Blue Sapphire gemstone (if advised)",
+      "Saturday fasting",
+      "Donate black clothes and oil",
+      "Charity to poor",
+      "Meditation and yoga",
+      "Avoid loans and investments",
+      "Spiritual practice",
+      "Professional astrology consultation"
+    ],
+    "favorable_periods": [
+      "When benefic planets transit favorable houses",
+      "During Antardasha of benefic planets",
+      "At sacred timing windows"
+    ],
+    "cancellation_factors": [
+      "Strong Saturn in natal chart",
+      "Beneficial house placement",
+      "Strong Lagna lord",
+      "Supportive Yogas"
+    ]
+  },
+  "general_gochara_principles": {
+    "calculation_method": "Measure transit planet's position from natal Moon",
+    "key_houses": {
+      "3": "Very favorable - courage, success, communication",
+      "6": "Very favorable - health, enemies defeated, debts cleared",
+      "10": "Favorable - career, authority, professional success",
+      "11": "Favorable - gains, income, wish fulfillment"
+    },
+    "challenging_houses": {
+      "1": "Moderate challenge - direct aspect on self",
+      "4": "Challenging - domestic issues, mother's health",
+      "7": "Challenging - relationships, partnerships",
+      "8": "Very challenging - health, accidents, losses"
+    },
+    "vedha_concept": "Obstruction planets block beneficial transit results",
+    "transit_duration": {
+      "sun_moon": "1 month each",
+      "mars_rahu_ketu": "1.5-1.75 years each",
+      "mercury_venus": "1-1.5 months each",
+      "jupiter": "13 months per sign",
+      "saturn": "2.5 years per sign"
+    },
+    "accurate_assessment_requires": [
+      "Accurate birth time",
+      "Correct birth location",
+      "Proper ayanamsa system",
+      "Consideration of natal chart strength",
+      "Analysis of supportive yogas",
+      "Study of other ongoing transits",
+      "House system accuracy"
+    ]
+  }
+}

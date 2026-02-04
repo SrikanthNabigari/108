@@ -1,0 +1,979 @@
+{
+  "ashta_kuta": {
+    "description": "Eight-fold marriage compatibility system in Vedic Astrology",
+    "total_points": 36,
+    "components": [
+      {
+        "id": "varna",
+        "name": "Varna",
+        "max_points": 1,
+        "description": "Spiritual and caste compatibility",
+        "importance": "Low"
+      },
+      {
+        "id": "vashya",
+        "name": "Vashya",
+        "max_points": 2,
+        "description": "Mutual attraction and dominance compatibility",
+        "importance": "Low"
+      },
+      {
+        "id": "tara",
+        "name": "Tara (Janma Tara)",
+        "max_points": 3,
+        "description": "Birth star compatibility and wellbeing",
+        "importance": "Medium"
+      },
+      {
+        "id": "yoni",
+        "name": "Yoni",
+        "max_points": 4,
+        "description": "Sexual compatibility and nature",
+        "importance": "High"
+      },
+      {
+        "id": "graha_maitri",
+        "name": "Graha Maitri",
+        "max_points": 5,
+        "description": "Mental compatibility and friendship",
+        "importance": "Very High"
+      },
+      {
+        "id": "gana",
+        "name": "Gana",
+        "max_points": 6,
+        "description": "Temperament and nature (Deva/Manushya/Rakshasa)",
+        "importance": "Very High"
+      },
+      {
+        "id": "bhakoot",
+        "name": "Bhakoot",
+        "max_points": 7,
+        "description": "Health, wealth, and progeny",
+        "importance": "High"
+      },
+      {
+        "id": "nadi",
+        "name": "Nadi",
+        "max_points": 8,
+        "description": "Health of progeny and genetic compatibility",
+        "importance": "Critical"
+      }
+    ]
+  },
+  "varna_compatibility": {
+    "description": "Spiritual and caste compatibility system",
+    "varnas": [
+      "Brahmin",
+      "Kshatriya",
+      "Vaishya",
+      "Shudra"
+    ],
+    "scoring_matrix": {
+      "Brahmin": {
+        "Brahmin": 1,
+        "Kshatriya": 0.75,
+        "Vaishya": 0.5,
+        "Shudra": 0.25
+      },
+      "Kshatriya": {
+        "Brahmin": 1,
+        "Kshatriya": 1,
+        "Vaishya": 0.75,
+        "Shudra": 0.5
+      },
+      "Vaishya": {
+        "Brahmin": 1,
+        "Kshatriya": 1,
+        "Vaishya": 1,
+        "Shudra": 0.75
+      },
+      "Shudra": {
+        "Brahmin": 1,
+        "Kshatriya": 1,
+        "Vaishya": 1,
+        "Shudra": 1
+      }
+    },
+    "interpretation": "Ideally, the man's varna should be higher or equal to the woman's varna for better compatibility"
+  },
+  "vashya_compatibility": {
+    "description": "Mutual attraction and dominance compatibility",
+    "categories": [
+      "Manava (Human)",
+      "Jalaja (Aquatic)",
+      "Vanaspatya (Tree/Plant)",
+      "Pashava (Animal)",
+      "Ketu (Fixed)"
+    ],
+    "dominance_order": {
+      "Manava": ["Jalaja", "Ketu"],
+      "Jalaja": ["Pashava", "Vanaspatya"],
+      "Vanaspatya": ["Pashava"],
+      "Pashava": ["Manava"],
+      "Ketu": ["Manava"]
+    },
+    "scoring": {
+      "compatible": 2,
+      "neutral": 1,
+      "incompatible": 0
+    },
+    "interpretation": "Indicates mutual attraction and who influences whom in the relationship"
+  },
+  "tara_compatibility": {
+    "description": "Birth star compatibility system (Janma Tara)",
+    "taras": [
+      {
+        "number": 1,
+        "name": "Janma",
+        "result": "Neutral",
+        "points": 0,
+        "description": "Same as the person - neutral compatibility"
+      },
+      {
+        "number": 2,
+        "name": "Sampat",
+        "result": "Good",
+        "points": 3,
+        "description": "Wealth and prosperity - very auspicious"
+      },
+      {
+        "number": 3,
+        "name": "Vipat",
+        "result": "Bad",
+        "points": 0,
+        "description": "Misfortune and loss - not recommended"
+      },
+      {
+        "number": 4,
+        "name": "Kshema",
+        "result": "Good",
+        "points": 3,
+        "description": "Safety and protection - auspicious"
+      },
+      {
+        "number": 5,
+        "name": "Pratyari",
+        "result": "Bad",
+        "points": 0,
+        "description": "Enmity - very inauspicious"
+      },
+      {
+        "number": 6,
+        "name": "Sadhaka",
+        "result": "Good",
+        "points": 3,
+        "description": "Accomplishment and success - auspicious"
+      },
+      {
+        "number": 7,
+        "name": "Vadha",
+        "result": "Worst",
+        "points": 0,
+        "description": "Destruction and death - most inauspicious"
+      },
+      {
+        "number": 8,
+        "name": "Mitra",
+        "result": "Good",
+        "points": 3,
+        "description": "Friendship and partnership - favorable"
+      },
+      {
+        "number": 9,
+        "name": "Ati-Mitra",
+        "result": "Good",
+        "points": 3,
+        "description": "Close friendship - very favorable"
+      }
+    ],
+    "calculation": "Count from husband's nakshatra to wife's nakshatra. If result is 3, 4, 6, 8, or 9 - compatible. If 1, 5, or 7 - not compatible. 2 is considered neutral."
+  },
+  "yoni_compatibility": {
+    "description": "Sexual compatibility and animal nature",
+    "nakshatra_yoni_mapping": {
+      "Ashwini": {
+        "yoni": "Horse",
+        "yoni_type": "Male",
+        "animal_number": 1
+      },
+      "Bharani": {
+        "yoni": "Elephant",
+        "yoni_type": "Female",
+        "animal_number": 2
+      },
+      "Krittika": {
+        "yoni": "Goat",
+        "yoni_type": "Female",
+        "animal_number": 3
+      },
+      "Rohini": {
+        "yoni": "Serpent",
+        "yoni_type": "Female",
+        "animal_number": 4
+      },
+      "Mrigashira": {
+        "yoni": "Serpent",
+        "yoni_type": "Male",
+        "animal_number": 4
+      },
+      "Ardra": {
+        "yoni": "Dog",
+        "yoni_type": "Female",
+        "animal_number": 5
+      },
+      "Punarvasu": {
+        "yoni": "Cat",
+        "yoni_type": "Female",
+        "animal_number": 6
+      },
+      "Pushya": {
+        "yoni": "Sheep/Goat",
+        "yoni_type": "Male",
+        "animal_number": 3
+      },
+      "Ashlesha": {
+        "yoni": "Serpent",
+        "yoni_type": "Male",
+        "animal_number": 4
+      },
+      "Magha": {
+        "yoni": "Rat",
+        "yoni_type": "Female",
+        "animal_number": 7
+      },
+      "P.Phalguni": {
+        "yoni": "Rat",
+        "yoni_type": "Male",
+        "animal_number": 7
+      },
+      "U.Phalguni": {
+        "yoni": "Bull/Cow",
+        "yoni_type": "Female",
+        "animal_number": 8
+      },
+      "Hasta": {
+        "yoni": "Buffalo",
+        "yoni_type": "Female",
+        "animal_number": 9
+      },
+      "Chitra": {
+        "yoni": "Tiger",
+        "yoni_type": "Female",
+        "animal_number": 10
+      },
+      "Swati": {
+        "yoni": "Buffalo",
+        "yoni_type": "Male",
+        "animal_number": 9
+      },
+      "Vishakha": {
+        "yoni": "Tiger",
+        "yoni_type": "Male",
+        "animal_number": 10
+      },
+      "Anuradha": {
+        "yoni": "Deer",
+        "yoni_type": "Female",
+        "animal_number": 11
+      },
+      "Jyeshtha": {
+        "yoni": "Deer",
+        "yoni_type": "Male",
+        "animal_number": 11
+      },
+      "Mula": {
+        "yoni": "Dog",
+        "yoni_type": "Male",
+        "animal_number": 5
+      },
+      "P.Ashadha": {
+        "yoni": "Monkey",
+        "yoni_type": "Female",
+        "animal_number": 12
+      },
+      "U.Ashadha": {
+        "yoni": "Monkey",
+        "yoni_type": "Male",
+        "animal_number": 12
+      },
+      "Abhijit": {
+        "yoni": "Cat",
+        "yoni_type": "Male",
+        "animal_number": 6
+      },
+      "Sravana": {
+        "yoni": "Monkey",
+        "yoni_type": "Male",
+        "animal_number": 12
+      },
+      "Dhanishtha": {
+        "yoni": "Lion",
+        "yoni_type": "Female",
+        "animal_number": 13
+      },
+      "Shatabhisha": {
+        "yoni": "Horse",
+        "yoni_type": "Female",
+        "animal_number": 1
+      },
+      "P.Bhadrapada": {
+        "yoni": "Lion",
+        "yoni_type": "Male",
+        "animal_number": 13
+      },
+      "U.Bhadrapada": {
+        "yoni": "Cow",
+        "yoni_type": "Female",
+        "animal_number": 8
+      },
+      "Revati": {
+        "yoni": "Elephant",
+        "yoni_type": "Male",
+        "animal_number": 2
+      }
+    },
+    "animal_compatibility_matrix": {
+      "1_Horse": {
+        "Horse": 4,
+        "Elephant": 3,
+        "Goat": 3,
+        "Serpent": 2,
+        "Dog": 2,
+        "Cat": 3,
+        "Rat": 2,
+        "Cow": 3,
+        "Buffalo": 2,
+        "Tiger": 2,
+        "Deer": 3,
+        "Monkey": 2,
+        "Lion": 1
+      },
+      "2_Elephant": {
+        "Horse": 3,
+        "Elephant": 4,
+        "Goat": 2,
+        "Serpent": 2,
+        "Dog": 3,
+        "Cat": 2,
+        "Rat": 3,
+        "Cow": 4,
+        "Buffalo": 4,
+        "Tiger": 1,
+        "Deer": 4,
+        "Monkey": 3,
+        "Lion": 2
+      },
+      "3_Goat": {
+        "Horse": 3,
+        "Elephant": 2,
+        "Goat": 4,
+        "Serpent": 3,
+        "Dog": 3,
+        "Cat": 2,
+        "Rat": 2,
+        "Cow": 3,
+        "Buffalo": 3,
+        "Tiger": 2,
+        "Deer": 3,
+        "Monkey": 2,
+        "Lion": 1
+      },
+      "4_Serpent": {
+        "Horse": 2,
+        "Elephant": 2,
+        "Goat": 3,
+        "Serpent": 4,
+        "Dog": 1,
+        "Cat": 3,
+        "Rat": 2,
+        "Cow": 2,
+        "Buffalo": 2,
+        "Tiger": 3,
+        "Deer": 2,
+        "Monkey": 3,
+        "Lion": 2
+      },
+      "5_Dog": {
+        "Horse": 2,
+        "Elephant": 3,
+        "Goat": 3,
+        "Serpent": 1,
+        "Dog": 4,
+        "Cat": 1,
+        "Rat": 1,
+        "Cow": 2,
+        "Buffalo": 2,
+        "Tiger": 3,
+        "Deer": 2,
+        "Monkey": 3,
+        "Lion": 3
+      },
+      "6_Cat": {
+        "Horse": 3,
+        "Elephant": 2,
+        "Goat": 2,
+        "Serpent": 3,
+        "Dog": 1,
+        "Cat": 4,
+        "Rat": 1,
+        "Cow": 3,
+        "Buffalo": 2,
+        "Tiger": 2,
+        "Deer": 3,
+        "Monkey": 2,
+        "Lion": 2
+      },
+      "7_Rat": {
+        "Horse": 2,
+        "Elephant": 3,
+        "Goat": 2,
+        "Serpent": 2,
+        "Dog": 1,
+        "Cat": 1,
+        "Rat": 4,
+        "Cow": 3,
+        "Buffalo": 3,
+        "Tiger": 2,
+        "Deer": 3,
+        "Monkey": 2,
+        "Lion": 1
+      },
+      "8_Cow": {
+        "Horse": 3,
+        "Elephant": 4,
+        "Goat": 3,
+        "Serpent": 2,
+        "Dog": 2,
+        "Cat": 3,
+        "Rat": 3,
+        "Cow": 4,
+        "Buffalo": 4,
+        "Tiger": 1,
+        "Deer": 4,
+        "Monkey": 3,
+        "Lion": 2
+      },
+      "9_Buffalo": {
+        "Horse": 2,
+        "Elephant": 4,
+        "Goat": 3,
+        "Serpent": 2,
+        "Dog": 2,
+        "Cat": 2,
+        "Rat": 3,
+        "Cow": 4,
+        "Buffalo": 4,
+        "Tiger": 1,
+        "Deer": 4,
+        "Monkey": 2,
+        "Lion": 1
+      },
+      "10_Tiger": {
+        "Horse": 2,
+        "Elephant": 1,
+        "Goat": 2,
+        "Serpent": 3,
+        "Dog": 3,
+        "Cat": 2,
+        "Rat": 2,
+        "Cow": 1,
+        "Buffalo": 1,
+        "Tiger": 4,
+        "Deer": 2,
+        "Monkey": 2,
+        "Lion": 3
+      },
+      "11_Deer": {
+        "Horse": 3,
+        "Elephant": 4,
+        "Goat": 3,
+        "Serpent": 2,
+        "Dog": 2,
+        "Cat": 3,
+        "Rat": 3,
+        "Cow": 4,
+        "Buffalo": 4,
+        "Tiger": 2,
+        "Deer": 4,
+        "Monkey": 3,
+        "Lion": 2
+      },
+      "12_Monkey": {
+        "Horse": 2,
+        "Elephant": 3,
+        "Goat": 2,
+        "Serpent": 3,
+        "Dog": 3,
+        "Cat": 2,
+        "Rat": 2,
+        "Cow": 3,
+        "Buffalo": 2,
+        "Tiger": 2,
+        "Deer": 3,
+        "Monkey": 4,
+        "Lion": 2
+      },
+      "13_Lion": {
+        "Horse": 1,
+        "Elephant": 2,
+        "Goat": 1,
+        "Serpent": 2,
+        "Dog": 3,
+        "Cat": 2,
+        "Rat": 1,
+        "Cow": 2,
+        "Buffalo": 1,
+        "Tiger": 3,
+        "Deer": 2,
+        "Monkey": 2,
+        "Lion": 4
+      }
+    },
+    "scoring": {
+      "4": 4,
+      "3": 3,
+      "2": 1,
+      "1": 0
+    },
+    "interpretation": "Same yoni or compatible yoni indicates sexual harmony and physical attraction"
+  },
+  "gana_compatibility": {
+    "description": "Temperament and nature compatibility",
+    "ganas": [
+      "Deva",
+      "Manushya",
+      "Rakshasa"
+    ],
+    "nakshatra_gana_mapping": {
+      "Deva": [
+        "Ashwini",
+        "Mrigashira",
+        "Punarvasu",
+        "Pushya",
+        "Hasta",
+        "Swati",
+        "Anuradha",
+        "Shravana",
+        "Revati"
+      ],
+      "Manushya": [
+        "Bharani",
+        "Rohini",
+        "Ardra",
+        "P.Phalguni",
+        "U.Phalguni",
+        "P.Ashadha",
+        "U.Ashadha",
+        "P.Bhadrapada",
+        "U.Bhadrapada"
+      ],
+      "Rakshasa": [
+        "Krittika",
+        "Ashlesha",
+        "Magha",
+        "Chitra",
+        "Vishakha",
+        "Jyeshtha",
+        "Mula",
+        "Dhanishtha",
+        "Shatabhisha"
+      ]
+    },
+    "compatibility_matrix": {
+      "Deva": {
+        "Deva": 6,
+        "Manushya": 6,
+        "Rakshasa": 1
+      },
+      "Manushya": {
+        "Deva": 6,
+        "Manushya": 6,
+        "Rakshasa": 3
+      },
+      "Rakshasa": {
+        "Deva": 1,
+        "Manushya": 3,
+        "Rakshasa": 6
+      }
+    },
+    "interpretation": {
+      "Deva_Deva": "Very harmonious - both are virtuous and peaceful",
+      "Deva_Manushya": "Good - divine nature uplifts human nature",
+      "Deva_Rakshasa": "Poor - virtuous cannot control demonic nature",
+      "Manushya_Manushya": "Good - balanced and stable",
+      "Manushya_Rakshasa": "Moderate - needs adjustment",
+      "Rakshasa_Rakshasa": "Good for their kind - understanding of nature"
+    }
+  },
+  "graha_maitri": {
+    "description": "Planetary friendships and mental compatibility",
+    "planets": [
+      "Sun",
+      "Moon",
+      "Mars",
+      "Mercury",
+      "Jupiter",
+      "Venus",
+      "Saturn"
+    ],
+    "friendship_matrix": {
+      "Sun": {
+        "Sun": 5,
+        "Moon": 5,
+        "Mars": 5,
+        "Mercury": 5,
+        "Jupiter": 5,
+        "Venus": 4,
+        "Saturn": 2
+      },
+      "Moon": {
+        "Sun": 5,
+        "Moon": 5,
+        "Mars": 3,
+        "Mercury": 5,
+        "Jupiter": 5,
+        "Venus": 5,
+        "Saturn": 3
+      },
+      "Mars": {
+        "Sun": 5,
+        "Moon": 3,
+        "Mars": 5,
+        "Mercury": 4,
+        "Jupiter": 5,
+        "Venus": 4,
+        "Saturn": 3
+      },
+      "Mercury": {
+        "Sun": 5,
+        "Moon": 5,
+        "Mars": 4,
+        "Mercury": 5,
+        "Jupiter": 5,
+        "Venus": 5,
+        "Saturn": 4
+      },
+      "Jupiter": {
+        "Sun": 5,
+        "Moon": 5,
+        "Mars": 5,
+        "Mercury": 5,
+        "Jupiter": 5,
+        "Venus": 5,
+        "Saturn": 4
+      },
+      "Venus": {
+        "Sun": 4,
+        "Moon": 5,
+        "Mars": 4,
+        "Mercury": 5,
+        "Jupiter": 5,
+        "Venus": 5,
+        "Saturn": 5
+      },
+      "Saturn": {
+        "Sun": 2,
+        "Moon": 3,
+        "Mars": 3,
+        "Mercury": 4,
+        "Jupiter": 4,
+        "Venus": 5,
+        "Saturn": 5
+      }
+    },
+    "lord_method": "Use the lord of the birth nakshatra for both male and female",
+    "scoring": {
+      "5": 5,
+      "4": 3,
+      "3": 1,
+      "2": 0
+    },
+    "interpretation": "Indicates mental compatibility, understanding, and shared interests"
+  },
+  "bhakoot_compatibility": {
+    "description": "Health, wealth, progeny, and family prosperity",
+    "rules": {
+      "dosha_positions": [
+        {
+          "husband_rashi": 1,
+          "wife_rashi": 5,
+          "severity": "Severe",
+          "points": 0,
+          "description": "Severe bhakoot dosha - can cause health issues"
+        },
+        {
+          "husband_rashi": 1,
+          "wife_rashi": 9,
+          "severity": "Severe",
+          "points": 0,
+          "description": "Severe bhakoot dosha - can cause health issues"
+        },
+        {
+          "husband_rashi": 2,
+          "wife_rashi": 6,
+          "severity": "Severe",
+          "points": 0,
+          "description": "Severe bhakoot dosha - can cause health issues"
+        },
+        {
+          "husband_rashi": 2,
+          "wife_rashi": 10,
+          "severity": "Severe",
+          "points": 0,
+          "description": "Severe bhakoot dosha - can cause health issues"
+        },
+        {
+          "husband_rashi": 3,
+          "wife_rashi": 7,
+          "severity": "Severe",
+          "points": 0,
+          "description": "Severe bhakoot dosha - can cause health issues"
+        },
+        {
+          "husband_rashi": 3,
+          "wife_rashi": 11,
+          "severity": "Severe",
+          "points": 0,
+          "description": "Severe bhakoot dosha - can cause health issues"
+        },
+        {
+          "husband_rashi": 4,
+          "wife_rashi": 8,
+          "severity": "Severe",
+          "points": 0,
+          "description": "Severe bhakoot dosha - can cause health issues"
+        },
+        {
+          "husband_rashi": 4,
+          "wife_rashi": 12,
+          "severity": "Severe",
+          "points": 0,
+          "description": "Severe bhakoot dosha - can cause health issues"
+        }
+      ],
+      "neutral_positions": [
+        {
+          "position": "Same rashi",
+          "severity": "None",
+          "points": 7,
+          "description": "No bhakoot dosha"
+        },
+        {
+          "position": "2nd house apart",
+          "severity": "None",
+          "points": 7,
+          "description": "No bhakoot dosha"
+        },
+        {
+          "position": "3rd house apart",
+          "severity": "None",
+          "points": 7,
+          "description": "No bhakoot dosha"
+        },
+        {
+          "position": "4th house apart",
+          "severity": "None",
+          "points": 7,
+          "description": "No bhakoot dosha"
+        }
+      ]
+    },
+    "exceptions": {
+      "Jupiter_benefic": "If Jupiter is beneficially placed in either chart, bhakoot dosha can be reduced",
+      "Venus_strong": "If Venus is strong and well-placed, it can mitigate bhakoot dosha",
+      "Moon_favorable": "Strong Moon placement can reduce severity of bhakoot dosha"
+    },
+    "interpretation": "Affects health, prosperity, and progeny of the couple"
+  },
+  "nadi_compatibility": {
+    "description": "Health of progeny and genetic compatibility - most important factor",
+    "nadis": [
+      "Adi",
+      "Madhya",
+      "Antya"
+    ],
+    "nakshatra_nadi_mapping": {
+      "Adi": [
+        "Ashwini",
+        "Ardra",
+        "Pushya",
+        "Rohini",
+        "Hasta",
+        "Sravana",
+        "Jyeshtha",
+        "Magha",
+        "Revati"
+      ],
+      "Madhya": [
+        "Bharani",
+        "Mrigashira",
+        "Aslesha",
+        "Purva Phalguni",
+        "Chitra",
+        "Swati",
+        "Vishakha",
+        "Anuradha",
+        "Purva Ashadha"
+      ],
+      "Antya": [
+        "Krittika",
+        "Punarvasu",
+        "P.Bhadrapada",
+        "Uttara Phalguni",
+        "U.Ashadha",
+        "Dhanishtha",
+        "Mula",
+        "Shatabhisha",
+        "U.Bhadrapada"
+      ]
+    },
+    "compatibility_matrix": {
+      "Adi": {
+        "Adi": 0,
+        "Madhya": 8,
+        "Antya": 8
+      },
+      "Madhya": {
+        "Adi": 8,
+        "Madhya": 0,
+        "Antya": 8
+      },
+      "Antya": {
+        "Adi": 8,
+        "Madhya": 8,
+        "Antya": 0
+      }
+    },
+    "interpretation": {
+      "same_nadi": "Critical dosha - health issues for children, not recommended",
+      "different_nadi": "Excellent - healthy progeny assured"
+    },
+    "exceptions": {
+      "same_nadi_same_nakshatra": "If both have same nakshatra despite same nadi - match is still not recommended",
+      "different_nadi": "Always favorable for progeny health"
+    }
+  },
+  "interpretation_guidelines": {
+    "total_points": 36,
+    "minimum_recommended": 18,
+    "score_ranges": [
+      {
+        "range": "Below 18",
+        "rating": "Not Recommended",
+        "description": "Marriage not advised without remedies"
+      },
+      {
+        "range": "18-24",
+        "rating": "Average",
+        "description": "Moderate compatibility with some challenges"
+      },
+      {
+        "range": "25-32",
+        "rating": "Good",
+        "description": "Good compatibility with minor issues"
+      },
+      {
+        "range": "33-36",
+        "rating": "Excellent",
+        "description": "Excellent compatibility with harmonious marriage"
+      }
+    ],
+    "critical_factors": [
+      {
+        "factor": "Nadi",
+        "importance": "Critical",
+        "description": "Same nadi (0 points) is almost a deal-breaker. Different nadi (8 points) is essential."
+      },
+      {
+        "factor": "Gana",
+        "importance": "Very High",
+        "description": "Deva-Deva (6) and Manushya-Manushya (6) are ideal. Deva-Rakshasa (1) creates tension."
+      },
+      {
+        "factor": "Bhakoot",
+        "importance": "High",
+        "description": "Dosha positions significantly reduce score. Can affect health and progeny."
+      },
+      {
+        "factor": "Yoni",
+        "importance": "High",
+        "description": "Affects physical and sexual compatibility."
+      },
+      {
+        "factor": "Graha Maitri",
+        "importance": "Very High",
+        "description": "Indicates mental compatibility and friendship."
+      },
+      {
+        "factor": "Tara",
+        "importance": "Medium",
+        "description": "Vadha (7) is most inauspicious, Pratyari (5) causes enmity."
+      },
+      {
+        "factor": "Vashya",
+        "importance": "Low",
+        "description": "Indicates dominance pattern in relationship."
+      },
+      {
+        "factor": "Varna",
+        "importance": "Low",
+        "description": "Social and spiritual compatibility."
+      }
+    ],
+    "remedies_recommendation": "If score is below 18 or if major doshas present (especially same Nadi), perform appropriate rituals and remedies before marriage"
+  },
+  "dosha_exceptions": {
+    "nadi_dosha": {
+      "name": "Nadi Dosha",
+      "severity": "Critical",
+      "cancellation": [
+        "Same nakshatra in both horoscopes - still not recommended",
+        "If Jupiter aspects the nadi position - can reduce dosha",
+        "Strong Venus placement - can mitigate effects"
+      ]
+    },
+    "bhakoot_dosha": {
+      "name": "Bhakoot Dosha",
+      "severity": "High",
+      "cancellation": [
+        "If either partner has Moon/Jupiter in own/exalted sign",
+        "If both have benefic planets in the dosha position",
+        "If Moon is in Kendra houses (1, 4, 7, 10) to one of the partners"
+      ]
+    },
+    "gana_dosha": {
+      "name": "Gana Mismatch (Deva-Rakshasa)",
+      "severity": "High",
+      "cancellation": [
+        "If Graha Maitri is excellent (5 points)",
+        "If other kushtas are exceptionally good",
+        "If Jupiter aspects both charts favorably"
+      ]
+    },
+    "tara_dosha": {
+      "name": "Tara Dosha (Vadha/Pratyari)",
+      "severity": "Medium",
+      "cancellation": [
+        "If Nadi matches (though rare with tara dosha)",
+        "If other kushas compensate significantly",
+        "If Moon is well-placed in both charts"
+      ]
+    }
+  },
+  "calculation_method": {
+    "step_1": "Identify the birth nakshatra of both male and female",
+    "step_2": "Calculate each kustha (component) point",
+    "step_3": "Sum all points",
+    "step_4": "Check for critical doshas, especially Nadi and Bhakoot",
+    "step_5": "Interpret total score with dosha considerations",
+    "step_6": "Recommend remedies if score is below 18 or critical doshas present"
+  },
+  "notes": {
+    "nadi_importance": "Nadi dosha with same nadi is considered the most important factor. Same nadi means potential health issues for children.",
+    "gana_importance": "Gana compatibility affects temperament matching. Deva-Rakshasa combination creates fundamental differences.",
+    "total_score": "Total 36 points is the maximum. Score of 18+ is considered acceptable. Below 18 is not recommended without remedies.",
+    "remedies": "For doshas, remedies include wearing specific gemstones, performing rituals, and prayers to particular deities.",
+    "consultation": "Detailed analysis should be done by experienced Vedic astrologers considering complete horoscope context."
+  }
+}

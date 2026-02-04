@@ -1,0 +1,705 @@
+{
+  "remedies": {
+    "gemstones": {
+      "sun": {
+        "primary": "ruby",
+        "secondary": ["garnet", "red_spinel"],
+        "minimum_carat": 3,
+        "finger": "ring",
+        "metal": "gold",
+        "day": "sunday",
+        "benefits": "strength, vitality, leadership, confidence",
+        "wearing_ritual": "wear on Sunday morning in gold after purification"
+      },
+      "moon": {
+        "primary": "pearl",
+        "secondary": ["moonstone"],
+        "minimum_carat": 4,
+        "finger": "little",
+        "metal": "silver",
+        "day": "monday",
+        "benefits": "peace, mental clarity, emotional stability, motherhood",
+        "wearing_ritual": "wear on Monday morning in silver after milk bath"
+      },
+      "mars": {
+        "primary": "red_coral",
+        "secondary": ["carnelian"],
+        "minimum_carat": 5,
+        "finger": "ring",
+        "metal": "gold/copper",
+        "day": "tuesday",
+        "benefits": "courage, energy, strength, protection",
+        "wearing_ritual": "wear on Tuesday morning in gold or copper"
+      },
+      "mercury": {
+        "primary": "emerald",
+        "secondary": ["peridot", "green_tourmaline"],
+        "minimum_carat": 3,
+        "finger": "little",
+        "metal": "gold",
+        "day": "wednesday",
+        "benefits": "intelligence, communication, business success, knowledge",
+        "wearing_ritual": "wear on Wednesday morning in gold after cleansing"
+      },
+      "jupiter": {
+        "primary": "yellow_sapphire",
+        "secondary": ["citrine", "yellow_topaz"],
+        "minimum_carat": 4,
+        "finger": "index",
+        "metal": "gold",
+        "day": "thursday",
+        "benefits": "wisdom, prosperity, fortune, spirituality, education",
+        "wearing_ritual": "wear on Thursday morning in gold"
+      },
+      "venus": {
+        "primary": "diamond",
+        "secondary": ["white_sapphire", "zircon"],
+        "minimum_carat": 1,
+        "finger": "little",
+        "metal": "platinum/gold",
+        "day": "friday",
+        "benefits": "love, beauty, comfort, luxury, relationship harmony",
+        "wearing_ritual": "wear on Friday morning in platinum or gold"
+      },
+      "saturn": {
+        "primary": "blue_sapphire",
+        "secondary": ["amethyst", "iolite"],
+        "minimum_carat": 4,
+        "finger": "middle",
+        "metal": "gold/iron",
+        "day": "saturday",
+        "benefits": "longevity, protection, discipline, justice, overcoming obstacles",
+        "wearing_ritual": "wear on Saturday after testing for compatibility, can be worn in gold or iron"
+      },
+      "rahu": {
+        "primary": "hessonite",
+        "secondary": ["orange_zircon"],
+        "minimum_carat": 5,
+        "finger": "middle",
+        "metal": "silver",
+        "day": "saturday",
+        "benefits": "stability, protection from illusions, overcoming confusion",
+        "wearing_ritual": "wear on Saturday in silver, testing period of 1-3 days recommended"
+      },
+      "ketu": {
+        "primary": "cats_eye",
+        "secondary": ["chrysoberyl"],
+        "minimum_carat": 5,
+        "finger": "little",
+        "metal": "gold",
+        "day": "tuesday",
+        "benefits": "spiritual progress, protection, intuition, liberation",
+        "wearing_ritual": "wear on Tuesday in gold after testing"
+      }
+    },
+    "mantras": {
+      "sun": {
+        "beej_mantra": "Om Hram Hreem Hroum Sah Suryaya Namaha",
+        "gayatri_mantra": "Om Bhur Bhuvah Svah, Tat Savitur Varenyam, Bhargo Devasya Dhimahi, Dhiyo Yo Nah Prachodayat",
+        "repetitions": {
+          "minimum": 108,
+          "standard": 1000,
+          "maximum": 11000
+        },
+        "best_time": "sunrise, Sunday morning",
+        "benefits": "health, vitality, leadership, spiritual growth"
+      },
+      "moon": {
+        "beej_mantra": "Om Shram Shreem Shroum Sah Chandramase Namaha",
+        "gayatri_mantra": "Om Somaya Vidmahe, Indu Mahan Dhimahi, Tanno Chandra Prachodayat",
+        "repetitions": {
+          "minimum": 108,
+          "standard": 1000,
+          "maximum": 11000
+        },
+        "best_time": "early morning, Monday",
+        "benefits": "mental peace, emotional stability, motherhood blessing"
+      },
+      "mars": {
+        "beej_mantra": "Om Kram Kreem Kroum Sah Bhaumaya Namaha",
+        "gayatri_mantra": "Om Kujavaya Vidmahe, Angarakaya Dhimahi, Tanno Bhaumah Prachodayat",
+        "repetitions": {
+          "minimum": 108,
+          "standard": 1000,
+          "maximum": 11000
+        },
+        "best_time": "sunrise, Tuesday",
+        "benefits": "courage, strength, overcome enemies, success in endeavors"
+      },
+      "mercury": {
+        "beej_mantra": "Om Bram Breem Broum Sah Budhaya Namaha",
+        "gayatri_mantra": "Om Budhaaya Vidmahe, Soumyaya Dhimahi, Tanno Budha Prachodayat",
+        "repetitions": {
+          "minimum": 108,
+          "standard": 1000,
+          "maximum": 11000
+        },
+        "best_time": "early morning, Wednesday",
+        "benefits": "intelligence, communication, business success, education"
+      },
+      "jupiter": {
+        "beej_mantra": "Om Gram Greem Graum Sah Gurave Namaha",
+        "gayatri_mantra": "Om Brihaspataye Vidmahe, Gurave Dhimahi, Tanno Guru Prachodayat",
+        "repetitions": {
+          "minimum": 108,
+          "standard": 1000,
+          "maximum": 11000
+        },
+        "best_time": "early morning, Thursday",
+        "benefits": "wisdom, prosperity, fortune, spiritual growth, success"
+      },
+      "venus": {
+        "beej_mantra": "Om Dram Dreem Draum Sah Shukraya Namaha",
+        "gayatri_mantra": "Om Shukraya Vidmahe, Ashvinaya Dhimahi, Tanno Shukra Prachodayat",
+        "repetitions": {
+          "minimum": 108,
+          "standard": 1000,
+          "maximum": 11000
+        },
+        "best_time": "early morning, Friday",
+        "benefits": "love, beauty, relationships, comfort, luxury"
+      },
+      "saturn": {
+        "beej_mantra": "Om Sham Shayim Shaum Sah Shanicharaya Namaha",
+        "gayatri_mantra": "Om Shanaye Vidmahe, Souvyaya Dhimahi, Tanno Shani Prachodayat",
+        "repetitions": {
+          "minimum": 108,
+          "standard": 1000,
+          "maximum": 11000
+        },
+        "best_time": "early morning, Saturday",
+        "benefits": "longevity, justice, discipline, overcoming obstacles"
+      },
+      "rahu": {
+        "beej_mantra": "Om Bhram Bhreem Bhroum Sah Rahave Namaha",
+        "gayatri_mantra": "Om Rahave Vidmahe, Mahagrhasaya Dhimahi, Tanno Rahu Prachodayat",
+        "repetitions": {
+          "minimum": 108,
+          "standard": 1000,
+          "maximum": 11000
+        },
+        "best_time": "early morning, Saturday or Wednesday",
+        "benefits": "stability, protection from illusions, overcoming confusion"
+      },
+      "ketu": {
+        "beej_mantra": "Om Sram Sreem Sroum Sah Ketave Namaha",
+        "gayatri_mantra": "Om Ketave Vidmahe, Sarpa-raja Dhimahi, Tanno Ketu Prachodayat",
+        "repetitions": {
+          "minimum": 108,
+          "standard": 1000,
+          "maximum": 11000
+        },
+        "best_time": "early morning, Tuesday",
+        "benefits": "spiritual progress, intuition, liberation, past life resolution"
+      }
+    },
+    "charities": {
+      "sun": {
+        "items": ["wheat", "jaggery", "copper", "red_cloth", "ruby"],
+        "day": "sunday",
+        "quantity": "1 handful per day or 100g",
+        "beneficiaries": "poor, brahmins, sick people",
+        "benefits": "health, strength, success, spiritual growth",
+        "timing": "before noon, preferably sunrise"
+      },
+      "moon": {
+        "items": ["rice", "milk", "silver", "white_cloth", "pearl"],
+        "day": "monday",
+        "quantity": "1 handful per day or 100g",
+        "beneficiaries": "poor, women, mothers",
+        "benefits": "mental peace, emotional stability, motherhood",
+        "timing": "early morning"
+      },
+      "mars": {
+        "items": ["red_lentils", "jaggery", "copper", "red_cloth", "red_coral"],
+        "day": "tuesday",
+        "quantity": "1 handful per day or 100g",
+        "beneficiaries": "poor, soldiers, athletes",
+        "benefits": "courage, strength, protection, success",
+        "timing": "morning"
+      },
+      "mercury": {
+        "items": ["green_moong_dal", "green_cloth", "emerald", "copper_coins"],
+        "day": "wednesday",
+        "quantity": "1 handful per day or 100g",
+        "beneficiaries": "poor, students, intellectuals",
+        "benefits": "intelligence, communication, education, business success",
+        "timing": "early morning"
+      },
+      "jupiter": {
+        "items": ["yellow_lentils", "gold", "turmeric", "chickpeas", "yellow_sapphire"],
+        "day": "thursday",
+        "quantity": "1 handful per day or 100g",
+        "beneficiaries": "brahmins, teachers, holy men",
+        "benefits": "wisdom, prosperity, fortune, education, children blessing",
+        "timing": "early morning"
+      },
+      "venus": {
+        "items": ["white_lentils", "rice", "silver", "ghee", "diamond"],
+        "day": "friday",
+        "quantity": "1 handful per day or 100g",
+        "beneficiaries": "poor, women, artists",
+        "benefits": "love, relationships, beauty, comfort, luxury",
+        "timing": "early morning"
+      },
+      "saturn": {
+        "items": ["black_sesame", "iron", "black_cloth", "mustard_oil", "blue_sapphire"],
+        "day": "saturday",
+        "quantity": "1 handful per day or 100ml oil",
+        "beneficiaries": "poor, servants, laborers",
+        "benefits": "longevity, protection, justice, overcoming obstacles",
+        "timing": "early morning or at noon"
+      },
+      "rahu": {
+        "items": ["coconut", "blue_cloth", "blanket", "iron", "hessonite"],
+        "day": "saturday",
+        "quantity": "1 whole coconut per week or 100g items",
+        "beneficiaries": "poor, tribal people",
+        "benefits": "stability, protection from illusions, overcoming confusion",
+        "timing": "early morning"
+      },
+      "ketu": {
+        "items": ["seven_grains_mix", "blanket", "dog_food", "gold"],
+        "day": "tuesday",
+        "quantity": "1 handful per day or feed dogs",
+        "beneficiaries": "poor, animals, spiritual seekers",
+        "benefits": "spiritual progress, intuition, past life karma resolution",
+        "timing": "early morning"
+      }
+    },
+    "fasting_days": {
+      "sun": {
+        "day": "sunday",
+        "duration": "sunrise to sunset",
+        "food_allowed": ["water", "fruits", "milk", "honey"],
+        "benefits": "health, vitality, strength",
+        "frequency": "once weekly or 12 Sundays"
+      },
+      "moon": {
+        "day": "monday",
+        "duration": "sunrise to sunset",
+        "food_allowed": ["white_foods", "milk", "rice", "sugar", "salt_free"],
+        "benefits": "mental peace, emotional stability",
+        "frequency": "once weekly or 21 Mondays"
+      },
+      "mars": {
+        "day": "tuesday",
+        "duration": "sunrise to sunset",
+        "food_allowed": ["water", "red_lentils", "ginger", "jaggery"],
+        "benefits": "courage, strength, protection",
+        "frequency": "once weekly or 9 Tuesdays"
+      },
+      "mercury": {
+        "day": "wednesday",
+        "duration": "sunrise to sunset",
+        "food_allowed": ["green_vegetables", "moong_dal", "light_foods"],
+        "benefits": "intelligence, communication, education",
+        "frequency": "once weekly or 5 Wednesdays"
+      },
+      "jupiter": {
+        "day": "thursday",
+        "duration": "sunrise to sunset",
+        "food_allowed": ["yellow_foods", "milk", "honey", "fruits"],
+        "benefits": "wisdom, prosperity, success",
+        "frequency": "once weekly or 16 Thursdays"
+      },
+      "venus": {
+        "day": "friday",
+        "duration": "sunrise to sunset",
+        "food_allowed": ["white_foods", "rice", "milk", "ghee"],
+        "benefits": "love, relationships, beauty",
+        "frequency": "once weekly or 6 Fridays"
+      },
+      "saturn": {
+        "day": "saturday",
+        "duration": "sunrise to sunset",
+        "food_allowed": ["black_lentils", "sesame", "salt_water", "oils"],
+        "benefits": "longevity, protection, justice",
+        "frequency": "once weekly or 19 Saturdays"
+      },
+      "rahu": {
+        "day": "saturday or full_moon_day",
+        "duration": "sunrise to sunset",
+        "food_allowed": ["coconut", "sesame", "water"],
+        "benefits": "stability, protection",
+        "frequency": "once weekly or 18 days"
+      },
+      "ketu": {
+        "day": "tuesday or new_moon_day",
+        "duration": "sunrise to sunset",
+        "food_allowed": ["mixed_grains", "water", "light_foods"],
+        "benefits": "spiritual progress, intuition",
+        "frequency": "once weekly or 11 days"
+      }
+    },
+    "worship_deities": {
+      "sun": {
+        "primary": "Surya Bhagwan",
+        "secondary": ["Vishnu", "Brahma"],
+        "temple": "Sun temples (Surya Mandir)",
+        "worship_method": "Surya Namaskar, meditation, offerings",
+        "mantra_chanting": "108 times daily",
+        "offerings": ["flowers", "water", "fruits", "jaggery"]
+      },
+      "moon": {
+        "primary": "Chandra Bhagwan",
+        "secondary": ["Shiva", "Parvati", "Brahma"],
+        "temple": "Moon temples, Shiva temples",
+        "worship_method": "meditation, moon gazing, chanting",
+        "mantra_chanting": "108 times daily",
+        "offerings": ["milk", "rice", "white_flowers", "honey"]
+      },
+      "mars": {
+        "primary": "Hanuman",
+        "secondary": ["Kartikeya", "Durga", "Bhairav"],
+        "temple": "Hanuman temples, Kartikeya temples",
+        "worship_method": "prayer, offering red flowers, meditation",
+        "mantra_chanting": "Hanuman Chalisa, 108 times",
+        "offerings": ["red_flowers", "jaggery", "sesame", "oil"]
+      },
+      "mercury": {
+        "primary": "Vishnu",
+        "secondary": ["Saraswati", "Buddha", "Brahma"],
+        "temple": "Vishnu temples, Saraswati temples",
+        "worship_method": "prayer, study, meditation",
+        "mantra_chanting": "108 times daily",
+        "offerings": ["green_flowers", "fruits", "grains", "copper_coins"]
+      },
+      "jupiter": {
+        "primary": "Brahma",
+        "secondary": ["Vishnu", "Guru Dattatreya", "Brihaspati"],
+        "temple": "Brahma temples, Guru temples",
+        "worship_method": "prayer, teaching, meditation, knowledge sharing",
+        "mantra_chanting": "108 times daily",
+        "offerings": ["yellow_flowers", "turmeric", "honey", "ghee"]
+      },
+      "venus": {
+        "primary": "Lakshmi",
+        "secondary": ["Indrani", "Parvati", "Saraswati"],
+        "temple": "Lakshmi temples, Devi temples",
+        "worship_method": "prayer, offerings, meditation",
+        "mantra_chanting": "Lakshmi Chalisa, 108 times",
+        "offerings": ["white_flowers", "rice", "ghee", "milk_sweets"]
+      },
+      "saturn": {
+        "primary": "Shani Bhagwan",
+        "secondary": ["Shiva", "Hanuman", "Kali"],
+        "temple": "Shani temples",
+        "worship_method": "prayer, offerings, meditation, service",
+        "mantra_chanting": "Shani Chalisa, 108 times",
+        "offerings": ["black_flowers", "sesame_oil", "black_cloth", "iron"]
+      },
+      "rahu": {
+        "primary": "Durga",
+        "secondary": ["Kali", "Shiva"],
+        "temple": "Durga temples, Devi temples",
+        "worship_method": "prayer, mantras, meditation, worship",
+        "mantra_chanting": "108 times on Saturdays",
+        "offerings": ["blue_cloth", "coconut", "sesame", "eggs"]
+      },
+      "ketu": {
+        "primary": "Ganesha",
+        "secondary": ["Shiva", "Skanda", "Hanuman"],
+        "temple": "Ganesha temples, Shiva temples",
+        "worship_method": "prayer, circumambulation, meditation",
+        "mantra_chanting": "Ganesha Chalisa, 108 times",
+        "offerings": ["modak", "jaggery", "fruits", "flowers"]
+      }
+    },
+    "yantras": {
+      "sun": {
+        "name": "Surya Yantra",
+        "shape": "square with circles",
+        "number_of_lines": "10 concentric circles",
+        "center_symbol": "Sun symbol (circle with dot)",
+        "benefits": "health, vitality, leadership, confidence",
+        "installation": "east or northeast corner, face east",
+        "meditation": "visualize golden light",
+        "size": "3x3 to 9x9 inches",
+        "material": "copper, brass, or paper/cloth"
+      },
+      "moon": {
+        "name": "Chandra Yantra",
+        "shape": "circle with crescent",
+        "number_of_lines": "concentric circles",
+        "center_symbol": "Moon crescent",
+        "benefits": "mental peace, emotional stability, motherhood",
+        "installation": "north or northeast, face north",
+        "meditation": "visualize white light",
+        "size": "3x3 to 9x9 inches",
+        "material": "silver, white cloth, or paper"
+      },
+      "mars": {
+        "name": "Mangal Yantra",
+        "shape": "square with triangles",
+        "number_of_lines": "8 triangles",
+        "center_symbol": "Mars symbol (circle with arrow)",
+        "benefits": "courage, strength, protection, success",
+        "installation": "south corner, face south",
+        "meditation": "visualize red light",
+        "size": "3x3 to 9x9 inches",
+        "material": "copper or brass"
+      },
+      "mercury": {
+        "name": "Budh Yantra",
+        "shape": "square with curves",
+        "number_of_lines": "green petals",
+        "center_symbol": "Mercury symbol",
+        "benefits": "intelligence, communication, education, business",
+        "installation": "north or northeast",
+        "meditation": "visualize green light",
+        "size": "3x3 to 9x9 inches",
+        "material": "brass, copper, or green cloth"
+      },
+      "jupiter": {
+        "name": "Guru Yantra or Brihaspati Yantra",
+        "shape": "square with curves",
+        "number_of_lines": "yellow petals",
+        "center_symbol": "Jupiter symbol",
+        "benefits": "wisdom, prosperity, fortune, education",
+        "installation": "northeast corner, face north",
+        "meditation": "visualize golden/yellow light",
+        "size": "3x3 to 9x9 inches",
+        "material": "gold, brass, or yellow cloth"
+      },
+      "venus": {
+        "name": "Shukra Yantra",
+        "shape": "square with curves",
+        "number_of_lines": "white petals",
+        "center_symbol": "Venus symbol",
+        "benefits": "love, relationships, beauty, comfort, luxury",
+        "installation": "southeast corner, face south",
+        "meditation": "visualize white light",
+        "size": "3x3 to 9x9 inches",
+        "material": "diamond, platinum, or white cloth"
+      },
+      "saturn": {
+        "name": "Shani Yantra",
+        "shape": "square with curves",
+        "number_of_lines": "dark blue/black petals",
+        "center_symbol": "Saturn symbol",
+        "benefits": "longevity, protection, justice, overcoming obstacles",
+        "installation": "south or southwest",
+        "meditation": "visualize blue/black light",
+        "size": "3x3 to 9x9 inches",
+        "material": "iron, steel, or black cloth"
+      },
+      "rahu": {
+        "name": "Rahu Yantra",
+        "shape": "octagon with serpent",
+        "number_of_lines": "8 directions",
+        "center_symbol": "Rahu serpent head",
+        "benefits": "stability, protection from illusions, overcoming confusion",
+        "installation": "southwest or northwest",
+        "meditation": "visualize blue/smoky light",
+        "size": "3x3 to 9x9 inches",
+        "material": "silver or blue cloth"
+      },
+      "ketu": {
+        "name": "Ketu Yantra",
+        "shape": "triangle with serpent tail",
+        "number_of_lines": "triangular patterns",
+        "center_symbol": "Ketu serpent tail",
+        "benefits": "spiritual progress, intuition, past life resolution",
+        "installation": "southeast or southwest",
+        "meditation": "visualize golden/orange light",
+        "size": "3x3 to 9x9 inches",
+        "material": "gold or saffron cloth"
+      }
+    },
+    "rudraksha": {
+      "sun": {
+        "mukhi": "12_mukhi",
+        "alternative": "1_mukhi",
+        "benefits": "courage, confidence, leadership, spiritual power",
+        "wearing": "around neck or on wrist",
+        "metal": "gold or copper",
+        "purification": "dip in milk and water daily"
+      },
+      "moon": {
+        "mukhi": "2_mukhi",
+        "alternative": "1_mukhi",
+        "benefits": "mental peace, harmony, emotional balance, relationships",
+        "wearing": "around neck or on wrist",
+        "metal": "silver",
+        "purification": "dip in milk and water daily"
+      },
+      "mars": {
+        "mukhi": "6_mukhi",
+        "alternative": "3_mukhi",
+        "benefits": "courage, strength, protection, confidence",
+        "wearing": "around neck or on wrist",
+        "metal": "gold or copper",
+        "purification": "dip in milk and water daily"
+      },
+      "mercury": {
+        "mukhi": "5_mukhi",
+        "alternative": "4_mukhi",
+        "benefits": "intelligence, communication, education, memory",
+        "wearing": "around neck or on wrist",
+        "metal": "gold or brass",
+        "purification": "dip in milk and water daily"
+      },
+      "jupiter": {
+        "mukhi": "8_mukhi",
+        "alternative": "5_mukhi",
+        "benefits": "wisdom, prosperity, success, spiritual growth",
+        "wearing": "around neck or on wrist",
+        "metal": "gold",
+        "purification": "dip in milk and water daily"
+      },
+      "venus": {
+        "mukhi": "13_mukhi",
+        "alternative": "6_mukhi",
+        "benefits": "love, relationships, beauty, luxury, prosperity",
+        "wearing": "around neck or on wrist",
+        "metal": "platinum or silver",
+        "purification": "dip in milk and water daily"
+      },
+      "saturn": {
+        "mukhi": "7_mukhi",
+        "alternative": "14_mukhi",
+        "benefits": "longevity, protection, justice, overcoming obstacles",
+        "wearing": "around neck or on wrist",
+        "metal": "iron or gold",
+        "purification": "dip in milk and water daily"
+      },
+      "rahu": {
+        "mukhi": "18_mukhi",
+        "alternative": "7_mukhi",
+        "benefits": "protection from illusions, stability, overcoming confusion",
+        "wearing": "around neck or on wrist",
+        "metal": "silver",
+        "purification": "dip in milk and water daily"
+      },
+      "ketu": {
+        "mukhi": "9_mukhi",
+        "alternative": "11_mukhi",
+        "benefits": "spiritual progress, intuition, liberation, past life resolution",
+        "wearing": "around neck or on wrist",
+        "metal": "gold",
+        "purification": "dip in milk and water daily"
+      }
+    },
+    "general_remedies": {
+      "yoga_asanas": {
+        "sun": ["Surya Namaskar (12 rounds)"],
+        "moon": ["Child pose (Balasana)", "Lotus (Padmasana)"],
+        "mars": ["Warrior poses (Virabhadrasana)", "Mountain pose (Tadasana)"],
+        "mercury": ["Cobra pose (Bhujangasana)", "Fish pose (Matsyasana)"],
+        "jupiter": ["Lotus (Padmasana)", "Meditation poses"],
+        "venus": ["Hip openers", "Goddess pose (Utkata Konasana)"],
+        "saturn": ["Forward bends (Uttanasana)", "Child pose"],
+        "rahu": ["Pranayama", "Meditation"],
+        "ketu": ["Headstand (Sirsasana)", "Deep meditation"]
+      },
+      "color_therapy": {
+        "sun": "golden yellow, orange, red",
+        "moon": "white, silver, pale blue",
+        "mars": "red, burgundy, copper",
+        "mercury": "green, yellow-green",
+        "jupiter": "yellow, gold, saffron",
+        "venus": "white, cream, light blue",
+        "saturn": "blue, black, dark grey",
+        "rahu": "blue, smoky grey",
+        "ketu": "golden, saffron, orange"
+      },
+      "aromatherapy": {
+        "sun": ["saffron", "rose", "amber"],
+        "moon": ["jasmine", "sandalwood", "lotus"],
+        "mars": ["ginger", "cumin", "cinnamon"],
+        "mercury": ["peppermint", "eucalyptus", "lemongrass"],
+        "jupiter": ["turmeric", "frankincense", "sage"],
+        "venus": ["rose", "jasmine", "sandalwood"],
+        "saturn": ["myrrh", "lavender", "vetiver"],
+        "rahu": ["camphor", "neem", "lavender"],
+        "ketu": ["saffron", "myrrh", "frankincense"]
+      },
+      "mudras": {
+        "sun": "Surya Mudra - touch ring finger to thumb",
+        "moon": "Varuna Mudra - touch little finger to thumb",
+        "mars": "Shakti Mudra - both hands with interlaced fingers",
+        "mercury": "Buddhi Mudra - touch little finger to thumb",
+        "jupiter": "Ganesh Mudra - interlace fingers on chest",
+        "venus": "Apana Mudra - touch middle and ring fingers to thumb",
+        "saturn": "Vayu Mudra - touch index finger to thumb",
+        "rahu": "Shuni Mudra - touch middle finger to thumb",
+        "ketu": "Gyan Mudra - touch index finger to thumb"
+      },
+      "breathing_exercises": {
+        "sun": "Bhastrika (40 rounds daily)",
+        "moon": "Chandrabhedana (cooling pranayama)",
+        "mars": "Kapalabhati (40-60 rounds)",
+        "mercury": "Anulom-Vilom (20 rounds)",
+        "jupiter": "Ujjayi Pranayama",
+        "venus": "Bhramari (humming breath)",
+        "saturn": "Nadi Shodhana (alternate nostril)",
+        "rahu": "Sitali (cooling breath)",
+        "ketu": "Kumbhaka (breath retention)"
+      },
+      "time_management": {
+        "sun": "best time: 6am-12pm (golden hours)",
+        "moon": "best time: 6pm-midnight",
+        "mars": "avoid: Tuesday afternoons",
+        "mercury": "best time: 5am-7am",
+        "jupiter": "best time: 6am-12pm",
+        "venus": "best time: 3pm-5pm",
+        "saturn": "avoid: Saturday mornings before 10am",
+        "rahu": "best time: 6pm-midnight",
+        "ketu": "best time: 12am-6am"
+      },
+      "dietary_remedies": {
+        "sun": "copper-rich foods, almonds, milk, ghee",
+        "moon": "cooling foods, milk, rice, coconut, white foods",
+        "mars": "protein-rich, red vegetables, ginger, honey",
+        "mercury": "green vegetables, leafy greens, nuts",
+        "jupiter": "turmeric, honey, yellow foods, ghee",
+        "venus": "white foods, milk, sugar, ghee, sweets",
+        "saturn": "black sesame, mustard oil, black lentils",
+        "rahu": "coconut, sesame, light foods",
+        "ketu": "mixed grains, legumes, vegetables"
+      }
+    },
+    "compatibility_testing": {
+      "gemstone_testing_period": "1-3 days for trial",
+      "positive_signs": [
+        "vivid dreams",
+        "sudden improvement in mood",
+        "increased energy",
+        "clarity in thinking",
+        "sense of peace",
+        "improvement in health"
+      ],
+      "negative_signs": [
+        "headaches",
+        "skin reactions",
+        "nightmares",
+        "anxiety",
+        "restlessness",
+        "physical discomfort"
+      ],
+      "wearing_protocol": {
+        "initial_period": "1-3 days testing",
+        "if_compatible": "wear continuously",
+        "if_incompatible": "stop immediately",
+        "removal_period": "if incompatible, wait 1 month before retesting"
+      }
+    },
+    "auspicious_timings": {
+      "shukla_paksha": "waxing moon fortnight (best for wearing gems, starting remedies)",
+      "full_moon": "best for mantra chanting and yantra worship",
+      "new_moon": "avoid starting new remedies",
+      "days_to_avoid": ["rahu_kalam", "yamaganda", "gulika_kalam"],
+      "nakshatra_selection": "choose favorable nakshatra for starting remedies",
+      "muhurta": "check auspicious timing before wearing gemstones"
+    }
+  },
+  "metadata": {
+    "version": "1.0",
+    "last_updated": "2026-02-04",
+    "source": "Traditional Vedic Astrology",
+    "systems_included": ["Parashari", "Jaimini"],
+    "author": "Vedic Knowledge Base",
+    "disclaimer": "These remedies are traditional recommendations and should be consulted with experienced Vedic astrologers for personalized guidance."
+  }
+}

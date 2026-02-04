@@ -1,0 +1,789 @@
+{
+  "muhurta_rules": {
+    "inauspicious_periods": {
+      "rahu_kaal": {
+        "description": "Rahu Kaal - period under influence of Rahu, inauspicious for all activities",
+        "duration_minutes": 90,
+        "slots_by_weekday": {
+          "sunday": 8,
+          "monday": 2,
+          "tuesday": 7,
+          "wednesday": 5,
+          "thursday": 6,
+          "friday": 4,
+          "saturday": 3
+        }
+      },
+      "yamaghanda": {
+        "description": "Yamaghanda - period under influence of Yama, avoid for important activities",
+        "duration_minutes": 90,
+        "slots_by_weekday": {
+          "sunday": 5,
+          "monday": 4,
+          "tuesday": 3,
+          "wednesday": 2,
+          "thursday": 1,
+          "friday": 7,
+          "saturday": 6
+        }
+      },
+      "gulika": {
+        "description": "Gulika - malefic period, avoid for auspicious work",
+        "duration_minutes": 90,
+        "slots_by_weekday": {
+          "sunday": 7,
+          "monday": 6,
+          "tuesday": 5,
+          "wednesday": 4,
+          "thursday": 3,
+          "friday": 2,
+          "saturday": 1
+        }
+      }
+    },
+    "choghadiya": {
+      "day_periods": {
+        "sunday": [
+          "Amrit",
+          "Shubh",
+          "Labh",
+          "Chal",
+          "Rog",
+          "Kaal",
+          "Udveg",
+          "Amrit"
+        ],
+        "monday": [
+          "Rog",
+          "Kaal",
+          "Udveg",
+          "Amrit",
+          "Shubh",
+          "Labh",
+          "Chal",
+          "Rog"
+        ],
+        "tuesday": [
+          "Chal",
+          "Rog",
+          "Kaal",
+          "Udveg",
+          "Amrit",
+          "Shubh",
+          "Labh",
+          "Chal"
+        ],
+        "wednesday": [
+          "Labh",
+          "Chal",
+          "Rog",
+          "Kaal",
+          "Udveg",
+          "Amrit",
+          "Shubh",
+          "Labh"
+        ],
+        "thursday": [
+          "Shubh",
+          "Labh",
+          "Chal",
+          "Rog",
+          "Kaal",
+          "Udveg",
+          "Amrit",
+          "Shubh"
+        ],
+        "friday": [
+          "Udveg",
+          "Amrit",
+          "Shubh",
+          "Labh",
+          "Chal",
+          "Rog",
+          "Kaal",
+          "Udveg"
+        ],
+        "saturday": [
+          "Kaal",
+          "Udveg",
+          "Amrit",
+          "Shubh",
+          "Labh",
+          "Chal",
+          "Rog",
+          "Kaal"
+        ]
+      },
+      "night_periods": {
+        "sunday": [
+          "Labh",
+          "Chal",
+          "Rog",
+          "Kaal",
+          "Udveg",
+          "Amrit",
+          "Shubh",
+          "Labh"
+        ],
+        "monday": [
+          "Shubh",
+          "Labh",
+          "Chal",
+          "Rog",
+          "Kaal",
+          "Udveg",
+          "Amrit",
+          "Shubh"
+        ],
+        "tuesday": [
+          "Udveg",
+          "Amrit",
+          "Shubh",
+          "Labh",
+          "Chal",
+          "Rog",
+          "Kaal",
+          "Udveg"
+        ],
+        "wednesday": [
+          "Kaal",
+          "Udveg",
+          "Amrit",
+          "Shubh",
+          "Labh",
+          "Chal",
+          "Rog",
+          "Kaal"
+        ],
+        "thursday": [
+          "Rog",
+          "Kaal",
+          "Udveg",
+          "Amrit",
+          "Shubh",
+          "Labh",
+          "Chal",
+          "Rog"
+        ],
+        "friday": [
+          "Chal",
+          "Rog",
+          "Kaal",
+          "Udveg",
+          "Amrit",
+          "Shubh",
+          "Labh",
+          "Chal"
+        ],
+        "saturday": [
+          "Amrit",
+          "Shubh",
+          "Labh",
+          "Chal",
+          "Rog",
+          "Kaal",
+          "Udveg",
+          "Amrit"
+        ]
+      },
+      "quality_mapping": {
+        "Amrit": {
+          "meaning": "Nectar",
+          "quality": "excellent",
+          "suitable_for": "all auspicious activities"
+        },
+        "Shubh": {
+          "meaning": "Auspicious",
+          "quality": "good",
+          "suitable_for": "most auspicious activities"
+        },
+        "Labh": {
+          "meaning": "Gain",
+          "quality": "good",
+          "suitable_for": "financial and business activities"
+        },
+        "Chal": {
+          "meaning": "Mobile",
+          "quality": "neutral",
+          "suitable_for": "travel and movement activities"
+        },
+        "Rog": {
+          "meaning": "Disease",
+          "quality": "poor",
+          "suitable_for": "medical treatments only"
+        },
+        "Kaal": {
+          "meaning": "Death/Time",
+          "quality": "poor",
+          "suitable_for": "avoid all auspicious work"
+        },
+        "Udveg": {
+          "meaning": "Agitation",
+          "quality": "poor",
+          "suitable_for": "avoid all auspicious work"
+        }
+      }
+    },
+    "activity_rules": {
+      "marriage": {
+        "good_tithis": [
+          2,
+          3,
+          5,
+          7,
+          10,
+          12,
+          13
+        ],
+        "avoid_tithis": [
+          4,
+          9,
+          14,
+          15,
+          29,
+          30
+        ],
+        "good_nakshatras": [
+          "Rohini",
+          "Mrigashira",
+          "Magha",
+          "Uttara Phalguni",
+          "Hasta",
+          "Swati",
+          "Anuradha",
+          "Uttara Ashadha",
+          "Uttara Bhadrapada",
+          "Revati"
+        ],
+        "avoid_nakshatras": [
+          "Ashwini",
+          "Bharani",
+          "Krittika",
+          "Jyeshtha",
+          "Moola",
+          "Purva Ashadha",
+          "Purva Bhadrapada"
+        ],
+        "good_varas": [
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "avoid_varas": [
+          "Tuesday",
+          "Saturday"
+        ],
+        "additional_rules": [
+          "Avoid if Mangal Dosha present without remedies",
+          "Avoid lunar eclipse windows",
+          "Check Rahu-Ketu positions",
+          "Verify Jupiter and Venus strength"
+        ]
+      },
+      "travel": {
+        "good_tithis": [
+          2,
+          3,
+          5,
+          6,
+          7,
+          10,
+          12,
+          13
+        ],
+        "avoid_tithis": [
+          4,
+          9,
+          14,
+          15,
+          30
+        ],
+        "good_nakshatras": [
+          "Mrigashira",
+          "Ashlesha",
+          "Magha",
+          "Uttara Phalguni",
+          "Hasta",
+          "Chitra",
+          "Swati",
+          "Vishakha",
+          "Anuradha",
+          "Jyeshtha",
+          "Purva Ashadha",
+          "Uttara Ashadha",
+          "Uttara Bhadrapada"
+        ],
+        "avoid_nakshatras": [
+          "Bharani",
+          "Krittika",
+          "Moola"
+        ],
+        "good_varas": [
+          "Monday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "avoid_varas": [
+          "Tuesday",
+          "Saturday"
+        ],
+        "additional_rules": [
+          "Avoid during Rahu Kaal",
+          "Mercury should be well-placed",
+          "Check Sun strength for day travel",
+          "Check Moon strength for night travel"
+        ]
+      },
+      "business_start": {
+        "good_tithis": [
+          1,
+          2,
+          3,
+          5,
+          7,
+          10,
+          12,
+          13
+        ],
+        "avoid_tithis": [
+          4,
+          8,
+          9,
+          14,
+          15,
+          29,
+          30
+        ],
+        "good_nakshatras": [
+          "Rohini",
+          "Mrigashira",
+          "Magha",
+          "Uttara Phalguni",
+          "Hasta",
+          "Chitra",
+          "Swati",
+          "Anuradha",
+          "Uttara Ashadha",
+          "Uttara Bhadrapada",
+          "Revati"
+        ],
+        "avoid_nakshatras": [
+          "Ashwini",
+          "Bharani",
+          "Krittika",
+          "Jyeshtha",
+          "Moola",
+          "Purva Ashadha"
+        ],
+        "good_varas": [
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "avoid_varas": [
+          "Saturday"
+        ],
+        "additional_rules": [
+          "Mercury should be strong for commerce",
+          "Jupiter should be well-placed for expansion",
+          "Avoid during Rahu Kaal and Yamaghanda",
+          "Check 10th house and Sun strength"
+        ]
+      },
+      "house_entry": {
+        "description": "Griha Pravesh - entry into new residence",
+        "good_tithis": [
+          1,
+          2,
+          3,
+          5,
+          7,
+          10,
+          12,
+          13
+        ],
+        "avoid_tithis": [
+          4,
+          9,
+          14,
+          15,
+          29,
+          30
+        ],
+        "good_nakshatras": [
+          "Rohini",
+          "Mrigashira",
+          "Magha",
+          "Uttara Phalguni",
+          "Hasta",
+          "Chitra",
+          "Swati",
+          "Anuradha",
+          "Uttara Ashadha",
+          "Uttara Bhadrapada",
+          "Revati"
+        ],
+        "avoid_nakshatras": [
+          "Ashwini",
+          "Bharani",
+          "Krittika",
+          "Jyeshtha",
+          "Moola",
+          "Purva Ashadha"
+        ],
+        "good_varas": [
+          "Monday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "avoid_varas": [
+          "Tuesday",
+          "Saturday"
+        ],
+        "additional_rules": [
+          "Avoid during lunar eclipse windows",
+          "Check 4th house strength",
+          "Moon should be in waxing phase",
+          "Avoid if Saturn is weak in chart"
+        ]
+      },
+      "surgery": {
+        "good_tithis": [
+          1,
+          2,
+          3,
+          5,
+          6,
+          7,
+          10,
+          12,
+          13
+        ],
+        "avoid_tithis": [
+          4,
+          8,
+          9,
+          14,
+          15,
+          29,
+          30
+        ],
+        "good_nakshatras": [
+          "Mrigashira",
+          "Ashlesha",
+          "Magha",
+          "Uttara Phalguni",
+          "Hasta",
+          "Chitra",
+          "Swati",
+          "Anuradha",
+          "Jyeshtha",
+          "Uttara Ashadha",
+          "Uttara Bhadrapada"
+        ],
+        "avoid_nakshatras": [
+          "Bharani",
+          "Krittika",
+          "Ashwini",
+          "Moola",
+          "Purva Ashadha"
+        ],
+        "good_varas": [
+          "Monday",
+          "Wednesday",
+          "Thursday"
+        ],
+        "avoid_varas": [
+          "Friday",
+          "Saturday"
+        ],
+        "additional_rules": [
+          "Avoid New Moon and Full Moon",
+          "Moon should not aspect the affected body part",
+          "Check planetary hours carefully",
+          "Mars should not be strong in medical context",
+          "Avoid Rahu and Ketu periods"
+        ]
+      },
+      "vehicle_purchase": {
+        "good_tithis": [
+          1,
+          2,
+          3,
+          5,
+          7,
+          10,
+          12,
+          13
+        ],
+        "avoid_tithis": [
+          4,
+          8,
+          9,
+          14,
+          15,
+          29,
+          30
+        ],
+        "good_nakshatras": [
+          "Mrigashira",
+          "Ashlesha",
+          "Magha",
+          "Uttara Phalguni",
+          "Hasta",
+          "Chitra",
+          "Swati",
+          "Anuradha",
+          "Jyeshtha",
+          "Uttara Ashadha",
+          "Uttara Bhadrapada",
+          "Revati"
+        ],
+        "avoid_nakshatras": [
+          "Bharani",
+          "Krittika",
+          "Moola",
+          "Purva Ashadha"
+        ],
+        "good_varas": [
+          "Monday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "avoid_varas": [
+          "Saturday"
+        ],
+        "additional_rules": [
+          "Mercury should be well-placed",
+          "Mars should be strong for vehicles",
+          "Avoid lunar eclipse windows",
+          "Check Rahu-Ketu positions"
+        ]
+      },
+      "education_start": {
+        "good_tithis": [
+          1,
+          2,
+          3,
+          5,
+          7,
+          10,
+          12,
+          13
+        ],
+        "avoid_tithis": [
+          4,
+          9,
+          14,
+          15,
+          29,
+          30
+        ],
+        "good_nakshatras": [
+          "Rohini",
+          "Mrigashira",
+          "Magha",
+          "Uttara Phalguni",
+          "Hasta",
+          "Chitra",
+          "Swati",
+          "Anuradha",
+          "Uttara Ashadha",
+          "Uttara Bhadrapada",
+          "Revati"
+        ],
+        "avoid_nakshatras": [
+          "Ashwini",
+          "Bharani",
+          "Krittika",
+          "Jyeshtha",
+          "Moola"
+        ],
+        "good_varas": [
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "avoid_varas": [
+          "Saturday"
+        ],
+        "additional_rules": [
+          "Mercury should be well-placed for studies",
+          "Jupiter should be strong for learning",
+          "5th house should be well-aspected",
+          "Avoid lunar eclipse windows"
+        ]
+      },
+      "job_joining": {
+        "good_tithis": [
+          1,
+          2,
+          3,
+          5,
+          7,
+          10,
+          12,
+          13
+        ],
+        "avoid_tithis": [
+          4,
+          8,
+          9,
+          14,
+          15,
+          29,
+          30
+        ],
+        "good_nakshatras": [
+          "Rohini",
+          "Mrigashira",
+          "Magha",
+          "Uttara Phalguni",
+          "Hasta",
+          "Chitra",
+          "Swati",
+          "Anuradha",
+          "Uttara Ashadha",
+          "Uttara Bhadrapada",
+          "Revati"
+        ],
+        "avoid_nakshatras": [
+          "Ashwini",
+          "Bharani",
+          "Krittika",
+          "Jyeshtha",
+          "Moola",
+          "Purva Ashadha"
+        ],
+        "good_varas": [
+          "Monday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "avoid_varas": [
+          "Saturday"
+        ],
+        "additional_rules": [
+          "Check 10th house and Sun strength",
+          "Mercury should be well-placed for communication",
+          "Avoid Rahu Kaal and Yamaghanda",
+          "Moon should be in waxing phase"
+        ]
+      }
+    },
+    "scoring_rules": {
+      "base_score": 50,
+      "tithi_scoring": {
+        "good_tithi": 15,
+        "avoid_tithi": -20,
+        "neutral_tithi": 0
+      },
+      "nakshatra_scoring": {
+        "good_nakshatra": 20,
+        "avoid_nakshatra": -25,
+        "neutral_nakshatra": 0
+      },
+      "vara_scoring": {
+        "good_vara": 15,
+        "avoid_vara": -15,
+        "neutral_vara": 0
+      },
+      "period_penalties": {
+        "rahu_kaal_penalty": -20,
+        "yamaghanda_penalty": -25,
+        "gulika_penalty": -10
+      },
+      "choghadiya_scoring": {
+        "Amrit": 25,
+        "Shubh": 20,
+        "Labh": 18,
+        "Chal": 5,
+        "Rog": -15,
+        "Kaal": -25,
+        "Udveg": -20
+      },
+      "eclipse_penalty": -40,
+      "planetary_hour_bonus": 10,
+      "waxing_moon_bonus": 5,
+      "strong_planet_bonus": 8
+    },
+    "quality_thresholds": {
+      "excellent": {
+        "range": "80-100",
+        "description": "Highly auspicious, ideal for the activity"
+      },
+      "good": {
+        "range": "65-79",
+        "description": "Favorable, suitable for the activity"
+      },
+      "fair": {
+        "range": "45-64",
+        "description": "Moderately auspicious, acceptable with precautions"
+      },
+      "poor": {
+        "range": "0-44",
+        "description": "Inauspicious, avoid if possible"
+      }
+    },
+    "calculation_rules": {
+      "muhurta_calculation_steps": [
+        "Start with base score of 50",
+        "Add/subtract tithi scoring",
+        "Add/subtract nakshatra scoring",
+        "Add/subtract vara scoring",
+        "Apply period penalties (Rahu Kaal, Yamaghanda, Gulika)",
+        "Add choghadiya quality bonus",
+        "Apply eclipse penalties if applicable",
+        "Add planetary hour bonuses",
+        "Add moon phase bonuses",
+        "Verify planetary strength for activity",
+        "Calculate final score and determine quality"
+      ],
+      "time_unit": "hours",
+      "default_activity_duration": 1,
+      "score_rounding": "round_to_nearest_integer"
+    },
+    "special_considerations": {
+      "lunar_eclipse": {
+        "description": "Avoid all auspicious activities",
+        "duration_before_hours": 12,
+        "duration_after_hours": 12,
+        "penalty": -40
+      },
+      "solar_eclipse": {
+        "description": "Avoid all auspicious activities",
+        "duration_before_hours": 12,
+        "duration_after_hours": 12,
+        "penalty": -40
+      },
+      "planetary_retrograde": {
+        "mercury_retrograde": "Avoid communication-heavy activities",
+        "venus_retrograde": "Avoid relationship activities",
+        "mars_retrograde": "Avoid conflict-prone activities",
+        "jupiter_retrograde": "Avoid expansion activities",
+        "saturn_retrograde": "Proceed with caution for major activities"
+      },
+      "dosha_considerations": {
+        "mangal_dosha": "Affects marriage timing, requires specific nakshatras",
+        "kaal_sarp_dosha": "Restricts auspicious timing, needs remedies",
+        "pitra_dosha": "Avoid certain activities affecting ancestry"
+      }
+    },
+    "metadata": {
+      "version": "1.0",
+      "last_updated": "2026-02-04",
+      "system": "Vedic Astrology - Electional Astrology",
+      "author": "108 Vedic Astrology System",
+      "references": [
+        "Classical Jyotish texts",
+        "Brihat Parashara Hora Shastra",
+        "Phaladipika",
+        "Uttara Kalamrita"
+      ]
+    }
+  }
+}
