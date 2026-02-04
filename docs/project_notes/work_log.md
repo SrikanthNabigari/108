@@ -1,5 +1,64 @@
 # 108 Work Log
 
+## 2026-02-04 (Session 5 - Claude Cowork)
+
+### Summary
+Added embedding service, unified memory interface, unit tests, and CI/CD workflow. Fixed test issues and created Claude Desktop MCP configuration.
+
+### Completed Tasks
+- [x] Create EmbeddingService with multiple providers:
+  - OpenAI (text-embedding-3-small)
+  - Voyage (voyage-3)
+  - Local (sentence-transformers)
+  - Mock (for testing)
+- [x] Create UnifiedMemoryClient bridging Mem0 Cloud and PostgreSQL
+- [x] Update Guide agent to use UnifiedMemoryClient
+- [x] Make LangGraph/LangChain imports optional (graceful degradation)
+- [x] Create unit tests:
+  - `tests/test_cosmos.py` - Ephemeris, nakshatra, rashi, panchanga
+  - `tests/test_self.py` - Yoga, dosha, strength detection
+  - `tests/test_context.py` - Dasha, transit, Sade Sati, muhurta
+- [x] Create GitHub Actions CI/CD workflow (`.github/workflows/ci.yml`)
+- [x] Create Claude Desktop MCP configuration
+
+### New Files
+| File | Purpose |
+|------|---------|
+| `packages/memory/src/embeddings.py` | Multi-provider embedding service |
+| `packages/memory/src/unified_memory.py` | Unified Mem0/PostgreSQL interface |
+| `.github/workflows/ci.yml` | CI/CD with lint, test, coverage |
+| `config/claude_desktop_config.json` | MCP server config for Claude Desktop |
+| `scripts/setup_claude_desktop.sh` | Auto-setup script |
+
+### Test Coverage
+| Test File | Tests | Status |
+|-----------|-------|--------|
+| test_cosmos.py | 10 tests | ✅ Logic validated |
+| test_self.py | 12 tests | ✅ Logic validated |
+| test_context.py | 14 tests | ✅ Logic validated |
+
+### Known Limitations
+1. Some tests are "logic tests" (verify data structures, not full integration)
+2. Memory system uses MockEmbeddings when API keys not configured
+3. Guide agent requires LangGraph (optional dep, fails gracefully)
+4. PostgreSQL store requires asyncpg (use `uv sync` to install)
+
+### Git Commits This Session
+```
+c7f7b6c fix(tests): Correct function signatures in context tests
+380a1de feat: Add unit tests and CI/CD workflow
+4dd9da2 feat(guide): Update agent to use UnifiedMemoryClient
+7753d19 feat(memory): Add unified memory system with embeddings
+```
+
+### Next Steps
+- [ ] Push to GitHub: `git push origin main`
+- [ ] Run full test suite with pytest: `uv run pytest tests/ -v`
+- [ ] Configure Claude Desktop with MCP servers
+- [ ] Add API keys for real embeddings (OPENAI_API_KEY or VOYAGE_API_KEY)
+
+---
+
 ## 2026-02-04 (Session 4 - Claude Code)
 
 ### Summary
