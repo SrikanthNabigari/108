@@ -33,10 +33,23 @@ from datetime import datetime
 from enum import Enum
 from typing import Annotated, Any, Optional
 
-from langchain_anthropic import ChatAnthropic
-from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, SystemMessage
-from langgraph.graph import END, StateGraph
 from typing_extensions import TypedDict
+
+# Optional dependencies - may not be installed
+try:
+    from langchain_anthropic import ChatAnthropic
+    from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, SystemMessage
+    from langgraph.graph import END, StateGraph
+    _HAS_LANGGRAPH = True
+except ImportError:
+    _HAS_LANGGRAPH = False
+    ChatAnthropic = None
+    AIMessage = None
+    BaseMessage = None
+    HumanMessage = None
+    SystemMessage = None
+    END = None
+    StateGraph = None
 
 # Configure logging
 logger = logging.getLogger(__name__)
@@ -270,6 +283,12 @@ class Guide:
             api_key: Anthropic API key (uses env var if not provided)
             debug: Enable debug logging
         """
+        if not _HAS_LANGGRAPH:
+            raise ImportError(
+                "Guide agent requires LangGraph and LangChain. "
+                "Install with: uv pip install langgraph langchain-anthropic langchain-core"
+            )
+
         self.model = model
         self.api_key = api_key or os.environ.get("ANTHROPIC_API_KEY")
         self.debug = debug
@@ -295,16 +314,27 @@ class Guide:
     async def _get_store(self):
         """Get or initialize memory store."""
         if self._store is None:
-            from packages.memory.src.store import MemoryStore
-
-            self._store = MemoryStore()
             try:
-                await self._store.connect()
+                from packages.memory.src import UnifiedMemoryClient, MemoryBackend
+
+                # Try PostgreSQL first, fall back to mock
+                self._store = UnifiedMemoryClient(
+                    user_id="system",  # Will be overridden per-request
+                    backend=None,  # Auto-detect
+                )
+                await self._store.initialize()
                 self._store_connected = True
-                logger.info("Memory store connected")
+                logger.info(f"Memory store connected: {self._store.backend.value}")
             except Exception as e:
                 logger.warning(f"Could not connect to memory store: {e}")
-                self._store_connected = False
+                # Fall back to mock
+                try:
+                    from packages.memory.src import UnifiedMemoryClient
+                    self._store = UnifiedMemoryClient(user_id="system", use_mock=True)
+                    self._store_connected = True
+                    logger.info("Using mock memory store")
+                except:
+                    self._store_connected = False
         return self._store
 
     def _build_graph(self) -> StateGraph:
@@ -825,40 +855,63 @@ Be the user's trusted guide on their life journey. Combine Vedic wisdom with com
         Returns:
             Dictionary with response and metadata
         """
-        store = await self._get_store()
+        memory_client = await self._get_store()
 
-        # Load birth chart from database if not provided
+        # Load birth chart from memory if not provided
         if not birth_chart and self._store_connected:
             try:
-                db_chart = await store.get_birth_chart(user_id)
-                if db_chart:
-                    birth_chart = db_chart.get("chart_data", {})
-                    birth_chart["birth_datetime"] = db_chart.get("birth_datetime")
+                # Search for birth data in memory
+                birth_results = await memory_client.search(
+                    query="birth data datetime location",
+                    category="birth_data",
+                    limit=1,
+                    user_id=user_id
+                )
+                if birth_results:
+                    birth_memory = birth_results[0].memory
+                    birth_chart = birth_memory.metadata
                     if self.debug:
-                        logger.debug(f"Loaded birth chart from database for {user_id}")
+                        logger.debug(f"Loaded birth data from memory for {user_id}")
             except Exception as e:
                 logger.warning(f"Could not load birth chart: {e}")
 
-        # Load detected patterns from database
+        # Load detected patterns from memory
         detected_yogas = []
         detected_doshas = []
         if self._store_connected:
             try:
-                patterns = await store.get_user_patterns(user_id)
-                for p in patterns:
-                    if p["pattern_type"] == "yoga":
-                        detected_yogas.append(p)
-                    elif p["pattern_type"] == "dosha":
-                        detected_doshas.append(p)
+                # Search for yogas
+                yoga_results = await memory_client.search(
+                    query="yoga detection pattern",
+                    category="yoga",
+                    limit=10,
+                    user_id=user_id
+                )
+                for r in yoga_results:
+                    detected_yogas.append(r.memory.metadata)
+
+                # Search for doshas
+                dosha_results = await memory_client.search(
+                    query="dosha detection mangal kaal sarp",
+                    category="dosha",
+                    limit=5,
+                    user_id=user_id
+                )
+                for r in dosha_results:
+                    detected_doshas.append(r.memory.metadata)
             except Exception as e:
                 logger.warning(f"Could not load patterns: {e}")
 
-        # Get relevant memories (would use embeddings in production)
+        # Get relevant context for the query
         memories = []
         if self._store_connected:
             try:
-                fact_memories = await store.get_memories_by_category(user_id, "fact", limit=10)
-                memories = [m.to_dict() for m in fact_memories]
+                context = await memory_client.get_context_for_query(
+                    query=user_input,
+                    limit=10,
+                    user_id=user_id
+                )
+                memories = context.get("memories", [])
             except Exception as e:
                 logger.warning(f"Could not load memories: {e}")
 
@@ -876,25 +929,34 @@ Be the user's trusted guide on their life journey. Combine Vedic wisdom with com
         # Save conversation to memory store
         if self._store_connected and result.get("response"):
             try:
-                await store.save_conversation(
+                # Save conversation as interaction memory
+                conversation_content = (
+                    f"User ({result['intent']}): {user_input[:200]}\n"
+                    f"Guide response: {result['response'][:200]}..."
+                )
+                await memory_client.add(
+                    content=conversation_content,
+                    category="interaction",
+                    metadata={
+                        "session_id": result["session_id"],
+                        "intent": result["intent"],
+                        "timestamp": result["timestamp"],
+                    },
+                    importance=0.4,
                     user_id=user_id,
-                    session_id=result["session_id"],
-                    messages=[
-                        {"role": "user", "content": user_input},
-                        {"role": "assistant", "content": result["response"]},
-                    ],
-                    summary=f"Intent: {result['intent']}",
-                    topics=[result["intent"]],
                 )
 
-                # Save as a memory fact if it contains important information
+                # Save as a higher-importance memory if it contains important information
                 if result["intent"] in ["predict", "analyze", "remedy"]:
-                    await store.add_memory(
-                        user_id=user_id,
+                    await memory_client.add(
                         content=f"User asked about {result['intent']}: {user_input[:100]}",
                         category="event",
+                        metadata={
+                            "intent": result["intent"],
+                            "timestamp": result["timestamp"],
+                        },
                         importance=0.6,
-                        metadata={"intent": result["intent"], "timestamp": result["timestamp"]},
+                        user_id=user_id,
                     )
             except Exception as e:
                 logger.warning(f"Could not save to memory: {e}")
