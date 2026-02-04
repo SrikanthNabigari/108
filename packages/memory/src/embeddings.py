@@ -4,9 +4,8 @@
 Generates vector embeddings for semantic memory search.
 Supports multiple providers: OpenAI, Anthropic Voyage, and local models.
 """
-import os
 import logging
-from typing import List, Optional
+import os
 from abc import ABC, abstractmethod
 
 logger = logging.getLogger(__name__)
@@ -22,12 +21,12 @@ class EmbeddingProvider(ABC):
         pass
 
     @abstractmethod
-    async def embed(self, text: str) -> List[float]:
+    async def embed(self, text: str) -> list[float]:
         """Generate embedding for a single text."""
         pass
 
     @abstractmethod
-    async def embed_batch(self, texts: List[str]) -> List[List[float]]:
+    async def embed_batch(self, texts: list[str]) -> list[list[float]]:
         """Generate embeddings for multiple texts."""
         pass
 
@@ -35,7 +34,7 @@ class EmbeddingProvider(ABC):
 class OpenAIEmbeddings(EmbeddingProvider):
     """OpenAI text-embedding-3-small embeddings."""
 
-    def __init__(self, api_key: Optional[str] = None, model: str = "text-embedding-3-small"):
+    def __init__(self, api_key: str | None = None, model: str = "text-embedding-3-small"):
         self.api_key = api_key or os.getenv("OPENAI_API_KEY")
         self.model = model
         self._dimension = 1536
@@ -49,34 +48,31 @@ class OpenAIEmbeddings(EmbeddingProvider):
         if self._client is None:
             try:
                 from openai import AsyncOpenAI
+
                 self._client = AsyncOpenAI(api_key=self.api_key)
-            except ImportError:
-                raise ImportError("openai package required. Install with: uv pip install openai")
+            except ImportError as err:
+                raise ImportError(
+                    "openai package required. Install with: uv pip install openai"
+                ) from err
         return self._client
 
-    async def embed(self, text: str) -> List[float]:
+    async def embed(self, text: str) -> list[float]:
         """Generate embedding for text using OpenAI."""
         client = self._get_client()
-        response = await client.embeddings.create(
-            model=self.model,
-            input=text
-        )
+        response = await client.embeddings.create(model=self.model, input=text)
         return response.data[0].embedding
 
-    async def embed_batch(self, texts: List[str]) -> List[List[float]]:
+    async def embed_batch(self, texts: list[str]) -> list[list[float]]:
         """Generate embeddings for multiple texts."""
         client = self._get_client()
-        response = await client.embeddings.create(
-            model=self.model,
-            input=texts
-        )
+        response = await client.embeddings.create(model=self.model, input=texts)
         return [item.embedding for item in response.data]
 
 
 class VoyageEmbeddings(EmbeddingProvider):
     """Anthropic Voyage embeddings (voyage-3)."""
 
-    def __init__(self, api_key: Optional[str] = None, model: str = "voyage-3"):
+    def __init__(self, api_key: str | None = None, model: str = "voyage-3"):
         self.api_key = api_key or os.getenv("VOYAGE_API_KEY")
         self.model = model
         self._dimension = 1024
@@ -90,18 +86,21 @@ class VoyageEmbeddings(EmbeddingProvider):
         if self._client is None:
             try:
                 import voyageai
+
                 self._client = voyageai.AsyncClient(api_key=self.api_key)
-            except ImportError:
-                raise ImportError("voyageai package required. Install with: uv pip install voyageai")
+            except ImportError as err:
+                raise ImportError(
+                    "voyageai package required. Install with: uv pip install voyageai"
+                ) from err
         return self._client
 
-    async def embed(self, text: str) -> List[float]:
+    async def embed(self, text: str) -> list[float]:
         """Generate embedding using Voyage."""
         client = self._get_client()
         result = await client.embed([text], model=self.model)
         return result.embeddings[0]
 
-    async def embed_batch(self, texts: List[str]) -> List[List[float]]:
+    async def embed_batch(self, texts: list[str]) -> list[list[float]]:
         """Generate embeddings for multiple texts."""
         client = self._get_client()
         result = await client.embed(texts, model=self.model)
@@ -127,22 +126,23 @@ class LocalEmbeddings(EmbeddingProvider):
         if self._model is None:
             try:
                 from sentence_transformers import SentenceTransformer
+
                 self._model = SentenceTransformer(self.model_name)
                 self._dimension = self._model.get_sentence_embedding_dimension()
-            except ImportError:
+            except ImportError as err:
                 raise ImportError(
                     "sentence-transformers required. Install with: "
                     "uv pip install sentence-transformers"
-                )
+                ) from err
         return self._model
 
-    async def embed(self, text: str) -> List[float]:
+    async def embed(self, text: str) -> list[float]:
         """Generate embedding locally."""
         model = self._get_model()
         embedding = model.encode(text)
         return embedding.tolist()
 
-    async def embed_batch(self, texts: List[str]) -> List[List[float]]:
+    async def embed_batch(self, texts: list[str]) -> list[list[float]]:
         """Generate embeddings for multiple texts."""
         model = self._get_model()
         embeddings = model.encode(texts)
@@ -152,25 +152,27 @@ class LocalEmbeddings(EmbeddingProvider):
 class MockEmbeddings(EmbeddingProvider):
     """Mock embeddings for testing (returns random vectors)."""
 
-    def __init__(self, dimension: int = 1536):
+    def __init__(self, dimension: int = 1024):
         self._dimension = dimension
 
     @property
     def dimension(self) -> int:
         return self._dimension
 
-    async def embed(self, text: str) -> List[float]:
+    async def embed(self, text: str) -> list[float]:
         """Generate deterministic mock embedding based on text hash."""
         import hashlib
+
         # Create deterministic embedding from text hash
         text_hash = hashlib.sha256(text.encode()).hexdigest()
         seed = int(text_hash[:8], 16)
 
         import random
+
         random.seed(seed)
         return [random.uniform(-1, 1) for _ in range(self._dimension)]
 
-    async def embed_batch(self, texts: List[str]) -> List[List[float]]:
+    async def embed_batch(self, texts: list[str]) -> list[list[float]]:
         """Generate mock embeddings for multiple texts."""
         return [await self.embed(text) for text in texts]
 
@@ -180,17 +182,14 @@ class EmbeddingService:
     Unified embedding service for 108.
 
     Auto-selects provider based on available API keys:
-    1. OpenAI (if OPENAI_API_KEY set)
-    2. Voyage (if VOYAGE_API_KEY set)
+    1. Voyage (if VOYAGE_API_KEY set) - preferred for 108 (1024 dimensions)
+    2. OpenAI (if OPENAI_API_KEY set)
     3. Local sentence-transformers (fallback)
     4. Mock embeddings (for testing)
     """
 
     def __init__(
-        self,
-        provider: Optional[str] = None,
-        api_key: Optional[str] = None,
-        use_mock: bool = False
+        self, provider: str | None = None, api_key: str | None = None, use_mock: bool = False
     ):
         """
         Initialize embedding service.
@@ -200,17 +199,17 @@ class EmbeddingService:
             api_key: API key for cloud providers
             use_mock: Use mock embeddings (for testing)
         """
-        self._provider: Optional[EmbeddingProvider] = None
+        self._provider: EmbeddingProvider | None = None
 
         if use_mock:
-            self._provider = MockEmbeddings()
+            self._provider = MockEmbeddings(dimension=1024)
             logger.info("Using mock embeddings")
-        elif provider == "openai" or (provider is None and os.getenv("OPENAI_API_KEY")):
-            self._provider = OpenAIEmbeddings(api_key=api_key)
-            logger.info("Using OpenAI embeddings")
         elif provider == "voyage" or (provider is None and os.getenv("VOYAGE_API_KEY")):
             self._provider = VoyageEmbeddings(api_key=api_key)
-            logger.info("Using Voyage embeddings")
+            logger.info("Using Voyage embeddings (1024d)")
+        elif provider == "openai" or (provider is None and os.getenv("OPENAI_API_KEY")):
+            self._provider = OpenAIEmbeddings(api_key=api_key)
+            logger.info("Using OpenAI embeddings (1536d)")
         elif provider == "local":
             self._provider = LocalEmbeddings()
             logger.info("Using local sentence-transformers embeddings")
@@ -229,15 +228,15 @@ class EmbeddingService:
         """Get provider name."""
         return self._provider.__class__.__name__
 
-    async def embed(self, text: str) -> List[float]:
+    async def embed(self, text: str) -> list[float]:
         """Generate embedding for text."""
         return await self._provider.embed(text)
 
-    async def embed_batch(self, texts: List[str]) -> List[List[float]]:
+    async def embed_batch(self, texts: list[str]) -> list[list[float]]:
         """Generate embeddings for multiple texts."""
         return await self._provider.embed_batch(texts)
 
-    async def embed_for_search(self, query: str) -> List[float]:
+    async def embed_for_search(self, query: str) -> list[float]:
         """
         Generate embedding optimized for search queries.
         Some providers have different modes for queries vs documents.
@@ -248,13 +247,10 @@ class EmbeddingService:
 
 
 # Singleton for easy access
-_embedding_service: Optional[EmbeddingService] = None
+_embedding_service: EmbeddingService | None = None
 
 
-def get_embedding_service(
-    provider: Optional[str] = None,
-    use_mock: bool = False
-) -> EmbeddingService:
+def get_embedding_service(provider: str | None = None, use_mock: bool = False) -> EmbeddingService:
     """
     Get or create the embedding service singleton.
 
