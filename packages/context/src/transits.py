@@ -15,7 +15,7 @@ and determines whether transits are favorable, unfavorable, or obstructed.
 
 from typing import Any
 
-from packages.core.src.knowledge_loader import get_transit_rules
+from packages.core.src.knowledge_loader import get_nakshatra_transit_rules, get_transit_rules
 
 # Module-level cache for transit rules
 _transit_rules_cache: dict[str, Any] | None = None
@@ -770,6 +770,149 @@ def get_transit_positions(julian_day: float, ayanamsa: str = "lahiri") -> dict[s
     return transit_positions
 
 
+# ============================================================================
+# Nakshatra Transit Effects
+# ============================================================================
+
+_nakshatra_transit_cache: dict[str, Any] | None = None
+
+
+def _get_nakshatra_transit_rules() -> dict[str, Any]:
+    """Get cached nakshatra transit rules from JSON."""
+    global _nakshatra_transit_cache
+    if _nakshatra_transit_cache is None:
+        _nakshatra_transit_cache = get_nakshatra_transit_rules()
+    return _nakshatra_transit_cache
+
+
+def get_nakshatra_transit_effect(planet: str, nakshatra: str) -> dict[str, Any]:
+    """Get transit effects for a planet in a specific nakshatra.
+
+    Args:
+        planet: Planet name (lowercase)
+        nakshatra: Nakshatra name (e.g., "ashwini", "bharani")
+
+    Returns:
+        Dictionary with theme, positive, negative, best_for, avoid.
+    """
+    rules = _get_nakshatra_transit_rules()
+    transits = rules.get("transits", {})
+    planet_data = transits.get(planet.lower(), {})
+    nak_data = planet_data.get(nakshatra.lower(), {})
+
+    if not nak_data:
+        return {"planet": planet.lower(), "nakshatra": nakshatra.lower(), "found": False}
+
+    return {
+        "planet": planet.lower(),
+        "nakshatra": nakshatra.lower(),
+        "found": True,
+        "theme": nak_data.get("theme", ""),
+        "positive": nak_data.get("positive", []),
+        "negative": nak_data.get("negative", []),
+        "best_for": nak_data.get("best_for", []),
+        "avoid": nak_data.get("avoid", []),
+    }
+
+
+def get_enriched_transit_analysis(
+    natal_moon_rashi: int,
+    transit_data: dict[str, dict[str, Any]],
+    chart: Any = None,
+) -> dict[str, Any]:
+    """Enriched transit analysis with nakshatra, combustion, retrograde, and ashtakavarga.
+
+    This wraps get_full_transit_analysis and adds extra layers of information per planet.
+
+    Args:
+        natal_moon_rashi: Natal Moon's rashi (0-11)
+        transit_data: Dict mapping planet name -> {rashi: int, nakshatra: str,
+                      longitude: float, is_retrograde: bool}
+        chart: Optional BirthChart for ashtakavarga scoring
+
+    Returns:
+        Enriched transit analysis dictionary.
+    """
+    # Build rashi-only dict for existing full transit analysis
+    rashi_only: dict[str, int] = {}
+    for planet, data in transit_data.items():
+        rashi_val = data.get("rashi")
+        if rashi_val is not None:
+            rashi_only[planet.lower()] = rashi_val
+
+    # Get base transit analysis
+    base = get_full_transit_analysis(natal_moon_rashi, rashi_only)
+
+    # Extract Sun longitude for combustion checks
+    sun_data = transit_data.get("sun", {})
+    sun_lon = sun_data.get("longitude", 0.0)
+
+    # Lazy imports to avoid circular dependency
+    from packages.self.src.combustion import check_combustion
+    from packages.self.src.retrograde import get_retrograde_effects
+
+    # Enrich each planet's transit
+    for planet, data in transit_data.items():
+        planet_lower = planet.lower()
+        planet_transit = base.get("planet_transits", {}).get(planet_lower, {})
+        if not planet_transit:
+            continue
+
+        # 1. Nakshatra transit effects
+        nakshatra = data.get("nakshatra", "")
+        if nakshatra:
+            nak_effect = get_nakshatra_transit_effect(planet_lower, nakshatra)
+            planet_transit["nakshatra_effects"] = nak_effect
+        else:
+            planet_transit["nakshatra_effects"] = {}
+
+        # 2. Combustion check
+        planet_lon = data.get("longitude", 0.0)
+        is_retro = data.get("is_retrograde", False)
+        if planet_lower != "sun":
+            comb = check_combustion(planet_lower, planet_lon, sun_lon, is_retro)
+            planet_transit["combustion"] = {
+                "is_combust": comb["is_combust"],
+                "is_deep_combust": comb["is_deep_combust"],
+                "angular_distance": comb["angular_distance"],
+            }
+        else:
+            planet_transit["combustion"] = {"is_combust": False, "is_deep_combust": False}
+
+        # 3. Retrograde effects
+        if is_retro and planet_lower in ("mars", "mercury", "jupiter", "venus", "saturn"):
+            retro = get_retrograde_effects(planet_lower, is_natal=False)
+            planet_transit["retrograde_effects"] = {
+                "general": retro.get("general", [])[:3],
+                "positive": retro.get("positive", [])[:2],
+                "negative": retro.get("negative", [])[:2],
+            }
+        else:
+            planet_transit["retrograde_effects"] = {}
+
+        # 4. Ashtakavarga (if chart provided)
+        if chart is not None and planet_lower not in ("rahu", "ketu"):
+            try:
+                from packages.core.src.constants import Planet
+                from packages.self.src.ashtakavarga import get_transit_ashtakavarga_analysis
+
+                planet_enum = Planet(planet_lower)
+                transit_sign = data.get("rashi", 0)
+                av_analysis = get_transit_ashtakavarga_analysis(planet_enum, transit_sign, chart)
+                planet_transit["ashtakavarga"] = {
+                    "bav_score": av_analysis["bav_score"],
+                    "sav_score": av_analysis["sav_score"],
+                    "strength_modifier": av_analysis["strength_modifier"],
+                    "interpretation": av_analysis["bav_interpretation"],
+                }
+            except Exception:
+                planet_transit["ashtakavarga"] = {}
+        else:
+            planet_transit["ashtakavarga"] = {}
+
+    return base
+
+
 # Define public API
 __all__ = [
     # Constants
@@ -778,9 +921,11 @@ __all__ = [
     "VEDHA_POINTS",
     "check_dhaiya",
     "check_sade_sati",
+    "get_enriched_transit_analysis",
     "get_full_transit_analysis",
     # Main analysis functions
     "get_gochara",
+    "get_nakshatra_transit_effect",
     "get_transit_positions",
     # Helper functions
     "get_transiting_planet_house",

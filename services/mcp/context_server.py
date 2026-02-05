@@ -31,6 +31,7 @@ from packages.context.src import (  # noqa: E402
     get_mahadasha_sequence,
     get_pratyantardasha_effect,
 )
+from packages.context.src.transits import get_enriched_transit_analysis  # noqa: E402
 
 # Import cosmos constants
 from packages.cosmos.src import (  # noqa: E402
@@ -678,6 +679,60 @@ def pratyantardasha_effects(
                     f"{mahadasha_lord}-{antardasha_lord}-{pratyantardasha_lord} combination"
                 ),
             }
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__}
+
+
+@mcp.tool()
+def enriched_transit(
+    natal_moon_rashi: str,
+    transit_positions: dict[str, dict[str, str]],
+) -> dict[str, Any]:
+    """
+    Enriched transit analysis with nakshatra effects, combustion, and retrograde data.
+
+    Extends basic Gochara analysis with:
+    - Nakshatra-specific transit effects (243 combinations)
+    - Combustion detection for each planet
+    - Retrograde effects for retrograde planets
+    - Sade Sati and Dhaiya status
+
+    Args:
+        natal_moon_rashi: Birth Moon sign (e.g., "aquarius")
+        transit_positions: Dict of planet transit data. Each value should have:
+            - sign: Current sign name (e.g., "aquarius")
+            - nakshatra: Current nakshatra (e.g., "shatabhisha")
+            - longitude: Current longitude (0-360)
+            - is_retrograde: Whether planet is retrograde ("true"/"false")
+
+    Returns:
+        Enriched transit analysis with per-planet nakshatra effects,
+        combustion status, retrograde effects, and overall assessment
+
+    Example:
+        enriched_transit("aquarius", {
+            "sun": {"sign": "aquarius", "nakshatra": "shatabhisha", "longitude": "310", "is_retrograde": "false"},
+            "saturn": {"sign": "aquarius", "nakshatra": "shatabhisha", "longitude": "315", "is_retrograde": "true"}
+        })
+    """
+    try:
+        moon_idx = SIGNS.index(natal_moon_rashi.lower())
+
+        # Convert string-based transit data to typed format
+        typed_data: dict[str, dict[str, Any]] = {}
+        for planet, data in transit_positions.items():
+            sign_name = data.get("sign", "").lower()
+            rashi_idx = SIGNS.index(sign_name) if sign_name in SIGNS else 0
+            typed_data[planet.lower()] = {
+                "rashi": rashi_idx,
+                "nakshatra": data.get("nakshatra", ""),
+                "longitude": float(data.get("longitude", 0)),
+                "is_retrograde": str(data.get("is_retrograde", "false")).lower() == "true",
+            }
+
+        result = get_enriched_transit_analysis(moon_idx, typed_data)
+        return result
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__}

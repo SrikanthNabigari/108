@@ -1,5 +1,106 @@
 # 108 Work Log
 
+## 2026-02-05 (Session 12 - Claude Code)
+
+### Summary
+Wired all 7 knowledge JSON files into working code modules, tests, and MCP tools. Created 5 new code modules, modified 4 existing files, added 107 new tests (273 total passing), and added 4 new MCP tools. Zero ruff lint errors.
+
+### Code Modules Created (5 new)
+
+**`packages/self/src/combustion.py`** - Planetary Combustion (Asta) Detection
+- `_angular_distance(lon1, lon2)` — min angular distance handling 360° wrap
+- `check_combustion(planet, planet_lon, sun_lon, is_retrograde)` — threshold-based combustion check with deep combustion, strength loss, effects, remedies
+- `get_combustion_analysis(planets)` — batch analysis for all planets against Sun
+- `get_combustion_house_effects(planet, house)` — house-specific combustion effects
+- Special handling: Mercury/Venus use different thresholds when retrograde
+
+**`packages/self/src/retrograde.py`** - Retrograde (Vakri) Effects Engine
+- `get_retrograde_effects(planet, is_natal, house)` — natal vs transit effects with house-specific lookup
+- `get_retrograde_analysis(planets, is_natal)` — batch analysis for all retrograde planets
+- Covers 5 planets: Mars, Mercury, Jupiter, Venus, Saturn
+
+**`packages/self/src/divisional_interpreter.py`** - D9/D10 Chart Interpretation
+- `interpret_d9_position(planet, rashi_name)` — Navamsha interpretation (marriage/dharma)
+- `interpret_d10_position(planet, rashi_name)` — Dashamsha interpretation (career)
+- `interpret_d9_chart(d9_chart)` / `interpret_d10_chart(d10_chart)` — full chart interpretation
+- `get_divisional_analysis(planet_longitudes)` — combined D9+D10 analysis
+
+**`packages/context/src/transits.py`** (MODIFIED) - Enriched Transit Analysis
+- `get_nakshatra_transit_effect(planet, nakshatra)` — lookup from 243 combinations
+- `get_enriched_transit_analysis(natal_moon_rashi, transit_data, chart)` — wraps existing transit analysis + adds nakshatra effects, combustion, retrograde, ashtakavarga per planet
+
+**`packages/context/src/varshaphal.py`** - Varshaphal (Solar Return) Engine
+- `calculate_muntha(birth_lagna_rashi, age)` — Muntha progression
+- `determine_varshesha(varshaphal_lagna_rashi)` — Year Lord determination
+- `detect_tajika_yogas(planet_positions)` — 16 Tajika yoga detection
+- `calculate_sahams(planet_longitudes, lagna_lon, is_day_chart)` — 10 sensitive points
+- `get_varshaphal_analysis(...)` — full annual prediction orchestrator
+
+### MCP Tools Added (4 new)
+
+| Server | Tool | Wraps |
+|--------|------|-------|
+| patterns_server | `kundali_matching()` | `calculate_ashta_kuta()` + `get_compatibility_verdict()` |
+| patterns_server | `combustion_check()` | `check_combustion()` |
+| patterns_server | `retrograde_effects()` | `get_retrograde_effects()` |
+| context_server | `enriched_transit()` | `get_enriched_transit_analysis()` |
+
+### Package Exports Updated
+- `packages/self/src/__init__.py` — +10 exports (combustion: 3, retrograde: 2, divisional: 5)
+- `packages/context/src/__init__.py` — +7 exports (transits: 2, varshaphal: 5)
+
+### Tests Added (107 new, total suite: 273 passing)
+
+| Test File | Tests | Coverage |
+|-----------|-------|----------|
+| `tests/unit/test_combustion.py` | 29 | Angular distance, threshold checks, Mercury retrograde, full analysis, house effects |
+| `tests/unit/test_retrograde.py` | 16 | Natal vs transit, house-specific, all 5 planets, full analysis |
+| `tests/unit/test_divisional_interpreter.py` | 15 | D9/D10 positions, full charts, combined analysis |
+| `tests/unit/test_nakshatra_transits.py` | 10 | Planet/nakshatra lookups, case insensitivity |
+| `tests/unit/test_enriched_transits.py` | 8 | Base analysis, nakshatra effects, combustion, retrograde, ashtakavarga |
+| `tests/unit/test_varshaphal.py` | 29 | Muntha, Varshesha, Tajika yogas, Sahams, full analysis |
+
+### Updated Feature Implementation Status
+
+**NEWLY WIRED (Knowledge → Code):**
+| Feature | Module | Knowledge File | Tests |
+|---------|--------|---------------|-------|
+| Combustion (Asta) detection | self/combustion.py | combustion_rules.json | 29 |
+| Retrograde (Vakri) effects | self/retrograde.py | retrograde_rules.json | 16 |
+| D9/D10 interpretation | self/divisional_interpreter.py | divisional_interpretation.json | 15 |
+| Nakshatra transit effects | context/transits.py | nakshatra_transit_rules.json | 10 |
+| Enriched transit analysis | context/transits.py | (integrates all above) | 8 |
+| Ashtakavarga in transits | context/transits.py | ashtakavarga_rules.json | (in enriched) |
+| Varshaphal engine | context/varshaphal.py | varshaphal_rules.json | 29 |
+| Kundali Matching MCP | mcp/patterns_server.py | compatibility_rules.json | - |
+
+### File Change Summary
+
+| Action | File |
+|--------|------|
+| CREATE | `packages/self/src/combustion.py` |
+| CREATE | `packages/self/src/retrograde.py` |
+| CREATE | `packages/self/src/divisional_interpreter.py` |
+| CREATE | `packages/context/src/varshaphal.py` |
+| CREATE | `tests/unit/test_combustion.py` |
+| CREATE | `tests/unit/test_retrograde.py` |
+| CREATE | `tests/unit/test_divisional_interpreter.py` |
+| CREATE | `tests/unit/test_nakshatra_transits.py` |
+| CREATE | `tests/unit/test_enriched_transits.py` |
+| CREATE | `tests/unit/test_varshaphal.py` |
+| MODIFY | `packages/context/src/transits.py` |
+| MODIFY | `packages/self/src/__init__.py` |
+| MODIFY | `packages/context/src/__init__.py` |
+| MODIFY | `services/mcp/patterns_server.py` |
+| MODIFY | `services/mcp/context_server.py` |
+
+### Verification
+- `uv run ruff check .` — 0 errors
+- `uv run ruff format .` — all files formatted
+- `uv run pytest` — 273 passed, 8 errors (pre-existing DB connection)
+
+---
+
 ## 2026-02-05 (Session 11 - Claude Code)
 
 ### Summary
@@ -118,16 +219,16 @@ fbcb86c feat(knowledge): Add 5 knowledge files + Kundali Matching & Ashtakavarga
 | FastAPI (22+ endpoints) | services/api/main.py | - | - |
 | 4 MCP servers (16 tools) | services/mcp/*.py | - | - |
 
-**KNOWLEDGE EXISTS, NOT YET WIRED INTO CODE:**
-| Feature | Knowledge File | Code Needed |
-|---------|---------------|-------------|
-| Combustion (Asta) detection | combustion_rules.json | Detection engine + transit integration |
-| Retrograde (Vakri) effects | retrograde_rules.json | Detection engine + transit integration |
-| Nakshatra transit effects | nakshatra_transit_rules.json | Wire into transit analysis |
-| Varshaphal (Solar Return) | varshaphal_rules.json | Full Tajika calculation engine |
-| D9/D10 interpretation | divisional_interpretation.json | Wire into divisional chart output |
-| Ashtakavarga in transits | ashtakavarga_rules.json | Wire ashtakavarga.py into transits.py |
-| Kundali Matching MCP tool | compatibility_rules.json | Add MCP endpoint |
+**ALL KNOWLEDGE NOW WIRED INTO CODE** (Session 12):
+| Feature | Knowledge File | Code Module | Status |
+|---------|---------------|-------------|--------|
+| Combustion (Asta) detection | combustion_rules.json | self/combustion.py | DONE |
+| Retrograde (Vakri) effects | retrograde_rules.json | self/retrograde.py | DONE |
+| D9/D10 interpretation | divisional_interpretation.json | self/divisional_interpreter.py | DONE |
+| Nakshatra transit effects | nakshatra_transit_rules.json | context/transits.py | DONE |
+| Ashtakavarga in transits | ashtakavarga_rules.json | context/transits.py | DONE |
+| Varshaphal (Solar Return) | varshaphal_rules.json | context/varshaphal.py | DONE |
+| Kundali Matching MCP tool | compatibility_rules.json | mcp/patterns_server.py | DONE |
 
 **NOT YET STARTED (Future roadmap):**
 | Feature | Priority | Knowledge Needed | Code Needed |

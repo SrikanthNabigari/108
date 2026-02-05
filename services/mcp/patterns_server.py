@@ -32,6 +32,12 @@ from packages.self.src import (  # noqa: E402
     DoshaDetector,
     StrengthCalculator,
     YogaDetector,
+    calculate_ashta_kuta,
+    get_compatibility_verdict,
+)
+from packages.self.src.combustion import check_combustion as _check_combustion  # noqa: E402
+from packages.self.src.retrograde import (  # noqa: E402
+    get_retrograde_effects as _get_retrograde_effects,
 )
 
 # Initialize MCP server
@@ -390,6 +396,113 @@ def ashtakavarga(planets: dict[str, dict[str, Any]], lagna_rashi: str) -> dict[s
 
         return result
 
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__, "success": False}
+
+
+@mcp.tool()
+def kundali_matching(
+    boy_nakshatra: str,
+    boy_rashi: str,
+    girl_nakshatra: str,
+    girl_rashi: str,
+) -> dict[str, Any]:
+    """
+    Calculate Ashta Kuta compatibility score for kundali matching.
+
+    Computes the traditional 8-fold compatibility analysis (36 points total)
+    between two birth charts based on Moon nakshatra and rashi.
+
+    Args:
+        boy_nakshatra: Boy's Moon nakshatra name (e.g., "ashwini", "bharani")
+        boy_rashi: Boy's Moon sign (e.g., "aries", "taurus")
+        girl_nakshatra: Girl's Moon nakshatra name
+        girl_rashi: Girl's Moon sign
+
+    Returns:
+        Dictionary containing total score (out of 36), individual kuta scores,
+        verdict, and compatibility assessment
+
+    Example:
+        kundali_matching("ashwini", "aries", "bharani", "aries")
+    """
+    try:
+        result = calculate_ashta_kuta(
+            boy_nakshatra=boy_nakshatra,
+            boy_rashi=boy_rashi,
+            girl_nakshatra=girl_nakshatra,
+            girl_rashi=girl_rashi,
+        )
+        verdict = get_compatibility_verdict(result["total_score"])
+        return {
+            **result,
+            "verdict": verdict,
+            "success": True,
+        }
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__, "success": False}
+
+
+@mcp.tool()
+def combustion_check(
+    planet: str,
+    planet_longitude: float,
+    sun_longitude: float,
+    is_retrograde: bool = False,
+) -> dict[str, Any]:
+    """
+    Check if a planet is combust (too close to the Sun).
+
+    Combustion weakens a planet's significations. Each planet has specific
+    degree thresholds. Mercury and Venus have different thresholds when retrograde.
+
+    Args:
+        planet: Planet name (moon, mars, mercury, jupiter, venus, saturn)
+        planet_longitude: Planet's sidereal longitude (0-360)
+        sun_longitude: Sun's sidereal longitude (0-360)
+        is_retrograde: Whether the planet is in retrograde motion
+
+    Returns:
+        Dictionary with combustion status, angular distance, strength loss,
+        effects, and remedies
+
+    Example:
+        combustion_check("mercury", 105.0, 100.0, is_retrograde=True)
+    """
+    try:
+        result = _check_combustion(planet, planet_longitude, sun_longitude, is_retrograde)
+        return {**result, "success": True}
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__, "success": False}
+
+
+@mcp.tool()
+def retrograde_effects(
+    planet: str,
+    is_natal: bool = True,
+    house: int | None = None,
+) -> dict[str, Any]:
+    """
+    Get retrograde effects for a planet.
+
+    Retrograde planets give internalized, delayed results representing
+    karmic patterns. Available for Mars, Mercury, Jupiter, Venus, Saturn.
+
+    Args:
+        planet: Planet name (mars, mercury, jupiter, venus, saturn)
+        is_natal: True for birth chart retrograde, False for transit retrograde
+        house: House number (1-12) for transit house-specific effects
+
+    Returns:
+        Dictionary with general, positive, negative effects, house effects,
+        karmic indication (natal only), and remedies
+
+    Example:
+        retrograde_effects("mercury", is_natal=False, house=7)
+    """
+    try:
+        result = _get_retrograde_effects(planet, is_natal=is_natal, house=house)
+        return {**result, "success": True}
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__, "success": False}
 
