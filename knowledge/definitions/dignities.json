@@ -1,6 +1,17 @@
 {
   "version": "1.0",
   "description": "Complete planetary dignities database for Vedic astrology (Jyotish). Single source of truth for dignity calculations.",
+  "friendship_table": {
+    "sun":     {"friends": ["moon","mars","jupiter"], "neutrals": ["mercury"], "enemies": ["venus","saturn"]},
+    "moon":    {"friends": ["sun","mercury"], "neutrals": ["mars","jupiter","venus","saturn"], "enemies": []},
+    "mars":    {"friends": ["sun","moon","jupiter"], "neutrals": ["venus","saturn"], "enemies": ["mercury"]},
+    "mercury": {"friends": ["sun","venus"], "neutrals": ["mars","jupiter","saturn"], "enemies": ["moon"]},
+    "jupiter": {"friends": ["sun","moon","mars"], "neutrals": ["saturn"], "enemies": ["mercury","venus"]},
+    "venus":   {"friends": ["mercury","saturn"], "neutrals": ["mars","jupiter"], "enemies": ["sun","moon"]},
+    "saturn":  {"friends": ["mercury","venus"], "neutrals": ["jupiter"], "enemies": ["sun","moon","mars"]},
+    "rahu":    {"friends": ["mercury","venus","saturn"], "neutrals": ["jupiter"], "enemies": ["sun","moon","mars"]},
+    "ketu":    {"friends": ["mars","venus","saturn"], "neutrals": ["mercury","jupiter"], "enemies": ["sun","moon"]}
+  },
   "planets": {
     "sun": {
       "name": "Sun",

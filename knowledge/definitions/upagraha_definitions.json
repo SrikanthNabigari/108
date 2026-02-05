@@ -1,0 +1,196 @@
+{
+  "version": "1.0",
+  "description": "Upagraha (sub-planet) definitions, calculation methods, and interpretations for Vedic astrology",
+  "upagrahas": {
+    "gulika": {
+      "name": "Gulika",
+      "also_known_as": "Gulikaa, Son of Saturn",
+      "nature": "malefic",
+      "lord": "saturn",
+      "calculation_method": "time_based",
+      "description": "Most important upagraha. Calculated from Saturn's portion of the day. Rising sign at start of Saturn's portion.",
+      "portion_by_weekday": {
+        "sunday": 7, "monday": 6, "tuesday": 5, "wednesday": 4,
+        "thursday": 3, "friday": 2, "saturday": 1
+      },
+      "house_effects": {
+        "1": "Health problems, thin body, fearful nature, obstacles in early life",
+        "2": "Financial difficulties, harsh speech, family disputes, poor eyesight",
+        "3": "Brave but quarrelsome siblings, good for courage, short travels troublesome",
+        "4": "Unhappy domestic life, mother's health issues, problems with property and vehicles",
+        "5": "Difficulty with children, poor investments, disturbed education, mental anxiety",
+        "6": "Can be good - destroys enemies, but health issues persist, debts manageable",
+        "7": "Marriage troubles, spouse health issues, partnership problems",
+        "8": "Chronic health issues, accidents, inheritance disputes, interest in occult",
+        "9": "Trouble with father/guru, obstacles in higher education, pilgrimage delays",
+        "10": "Career setbacks, loss of reputation, government problems",
+        "11": "Reduced gains, elder sibling troubles, unfulfilled desires",
+        "12": "Expenses, hospitalization, foreign travel with difficulties, spiritual inclination"
+      }
+    },
+    "mandi": {
+      "name": "Mandi",
+      "also_known_as": "Mandee",
+      "nature": "malefic",
+      "lord": "saturn",
+      "calculation_method": "time_based",
+      "description": "End point of Saturn's portion. Similar to Gulika but uses end of Saturn's portion instead of start.",
+      "portion_by_weekday": {
+        "sunday": 7, "monday": 6, "tuesday": 5, "wednesday": 4,
+        "thursday": 3, "friday": 2, "saturday": 1
+      },
+      "house_effects": {
+        "1": "Weak constitution, fear of poison, obstacles in life path",
+        "2": "Speech defects, family problems, poor food habits",
+        "3": "Courage issues, sibling problems, communication difficulties",
+        "4": "Property disputes, vehicle accidents, mother's troubles",
+        "5": "Children's problems, poor judgment, stomach issues",
+        "6": "Victory over enemies with effort, service-related problems",
+        "7": "Marital disharmony, business losses with partners",
+        "8": "Longevity concerns, hidden diseases, unexpected events",
+        "9": "Luck blocked, father's problems, religious conflicts",
+        "10": "Professional setbacks, authority issues, karmic debts in career",
+        "11": "Income fluctuations, social circle problems",
+        "12": "Exile, imprisonment risk, heavy expenditure"
+      }
+    },
+    "yamaghanda": {
+      "name": "Yamaghanda",
+      "also_known_as": "Yamaghantaka",
+      "nature": "malefic",
+      "lord": "jupiter",
+      "calculation_method": "time_based",
+      "description": "Jupiter's portion of the day. Associated with Yama (death). Less malefic than Gulika.",
+      "portion_by_weekday": {
+        "sunday": 5, "monday": 4, "tuesday": 3, "wednesday": 2,
+        "thursday": 1, "friday": 7, "saturday": 6
+      },
+      "house_effects": {
+        "1": "Obstacles but eventual recovery, interest in law/justice",
+        "2": "Family disputes about inheritance, speech issues",
+        "3": "Courageous but reckless, sibling rivalry",
+        "4": "Property litigation, vehicle troubles",
+        "5": "Education delays, children's health concerns",
+        "6": "Helps defeat enemies, legal matters favorable",
+        "7": "Partnership conflicts, delayed marriage",
+        "8": "Research ability, occult interest, transformation",
+        "9": "Spiritual tests, father's health, pilgrimage obstacles",
+        "10": "Career challenges leading to growth, government issues",
+        "11": "Gains through struggle, networking difficulties",
+        "12": "Spiritual liberation potential, foreign residence"
+      }
+    },
+    "kala": {
+      "name": "Kala",
+      "nature": "malefic",
+      "lord": "sun",
+      "calculation_method": "time_based",
+      "description": "Sun's portion of the day. Related to time and death.",
+      "portion_by_weekday": {
+        "sunday": 1, "monday": 7, "tuesday": 6, "wednesday": 5,
+        "thursday": 4, "friday": 3, "saturday": 2
+      }
+    },
+    "mrityu": {
+      "name": "Mrityu",
+      "nature": "malefic",
+      "lord": "mars",
+      "calculation_method": "time_based",
+      "description": "Mars-based death point. Associated with accidents and sudden events.",
+      "portion_by_weekday": {
+        "sunday": 2, "monday": 1, "tuesday": 7, "wednesday": 6,
+        "thursday": 5, "friday": 4, "saturday": 3
+      }
+    },
+    "ardhaprahara": {
+      "name": "Ardhaprahara",
+      "nature": "malefic",
+      "lord": "mercury",
+      "calculation_method": "time_based",
+      "description": "Half-prahar point. Mercury-based sub-planet.",
+      "portion_by_weekday": {
+        "sunday": 3, "monday": 2, "tuesday": 1, "wednesday": 7,
+        "thursday": 6, "friday": 5, "saturday": 4
+      }
+    },
+    "dhooma": {
+      "name": "Dhooma",
+      "also_known_as": "Smoke",
+      "nature": "malefic",
+      "lord": "sun",
+      "calculation_method": "mathematical",
+      "formula": "(sun_longitude + 133.3333) % 360",
+      "description": "Mathematical upagraha derived from Sun. Represents smoke/obscurity.",
+      "effects": "Creates confusion, lack of clarity, deception in the house it occupies"
+    },
+    "vyatipata": {
+      "name": "Vyatipata",
+      "also_known_as": "Calamity",
+      "nature": "malefic",
+      "calculation_method": "mathematical",
+      "formula": "(360 - dhooma_longitude) % 360",
+      "description": "Derived from Dhooma. Represents calamities and obstacles.",
+      "effects": "Sudden reversals, accidents, unexpected problems in its house"
+    },
+    "parivesha": {
+      "name": "Parivesha",
+      "also_known_as": "Halo",
+      "nature": "benefic",
+      "calculation_method": "mathematical",
+      "formula": "(vyatipata_longitude + 180) % 360",
+      "description": "Derived from Vyatipata. Represents a protective halo.",
+      "effects": "Protection, divine grace, spiritual advancement in its house"
+    },
+    "indrachapa": {
+      "name": "Indrachapa",
+      "also_known_as": "Rainbow, Indra's Bow",
+      "nature": "benefic",
+      "calculation_method": "mathematical",
+      "formula": "(360 - parivesha_longitude) % 360",
+      "description": "Derived from Parivesha. Represents Indra's rainbow/bow.",
+      "effects": "Creativity, artistic talent, divine protection in its house"
+    },
+    "upaketu": {
+      "name": "Upaketu",
+      "also_known_as": "Sub-Ketu",
+      "nature": "malefic",
+      "lord": "ketu",
+      "calculation_method": "mathematical",
+      "formula": "(sun_longitude - 30) % 360",
+      "description": "Mathematical upagraha derived from Sun. Similar to Ketu's effects.",
+      "effects": "Spiritual detachment, loss, liberation, past-life karmic effects"
+    }
+  },
+  "general_rules": {
+    "conjunction_with_planets": {
+      "description": "When an upagraha conjuncts a planet, it modifies the planet's results",
+      "benefic_conjunction": "Reduces malefic effect of upagraha, planet protects the house",
+      "malefic_conjunction": "Amplifies negative effects, both planet and house suffer",
+      "jupiter_conjunction": "Significantly reduces malefic effects of any upagraha",
+      "venus_conjunction": "Reduces negativity, especially in relationship matters"
+    },
+    "dusthana_placement": {
+      "description": "Malefic upagrahas in dusthana (6, 8, 12) can be less harmful",
+      "rule": "A malefic in a malefic house can give positive results (vipareet effect)",
+      "example": "Gulika in 6th: helps defeat enemies; in 8th: occult powers; in 12th: spiritual growth"
+    },
+    "aspect_rules": {
+      "description": "Upagrahas cast aspects like planets from their position",
+      "benefic_aspects": "Jupiter or Venus aspecting upagraha reduces its malefic effects",
+      "malefic_aspects": "Saturn or Mars aspecting upagraha intensifies negative effects"
+    }
+  },
+  "remedies": {
+    "gulika": ["Worship Lord Shiva on Saturdays", "Chant Maha Mrityunjaya Mantra", "Donate black sesame on Saturdays", "Feed crows on Saturdays"],
+    "mandi": ["Worship Lord Saturn", "Chant Shani Stotra", "Fast on Saturdays", "Donate iron items"],
+    "yamaghanda": ["Worship Lord Yama", "Chant Yama Gayatri", "Donate food on Tuesdays", "Light mustard oil lamp"],
+    "dhooma": ["Worship Surya (Sun God)", "Chant Surya Mantras", "Offer water to Sun at sunrise"],
+    "vyatipata": ["Worship Lord Vishnu", "Chant Vishnu Sahasranama", "Donate on Mondays"],
+    "general": ["Regular meditation and prayer", "Charitable activities", "Fasting on appropriate days", "Gemstone therapy after consultation"]
+  },
+  "sources": {
+    "primary": "Brihat Parashara Hora Shastra - Chapter on Upagrahas",
+    "secondary": "Saravali by Kalyana Varma",
+    "tertiary": "Jataka Parijata"
+  }
+}

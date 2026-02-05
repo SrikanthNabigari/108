@@ -1,5 +1,175 @@
 # 108 Work Log
 
+## 2026-02-06 (Session 15 - Claude Code)
+
+### Summary
+Ran the previously-skipped API key test (passes with `.env`), created a comprehensive 12-test integration suite exercising ALL 5 layers with real birth data, and generated a full system data-flow report tracing knowledge → calculations → AI agent.
+
+### Skipped Test — Now Passes
+- `test_chat_with_api_key` — loads `ANTHROPIC_API_KEY` from `.env`, sends "What is Vedic astrology?" to Guide agent
+- Agent responds with `agent_available: True`, `status: ok`, non-empty response with intent classification
+
+### New Integration Test: `tests/integration/test_full_system.py` (12 tests)
+
+| Layer | Test | What it validates |
+|-------|------|------------------|
+| COSMOS | `test_ephemeris_positions` | 9 planets, Moon at ~324° in Aquarius |
+| COSMOS | `test_house_cusps` | Ascendant in Libra (180-210°), 12 cusps |
+| COSMOS | `test_sunrise_sunset` | Sunrise/sunset reasonable for Dec in south India |
+| COSMOS | `test_upagrahas` | 11 upagrahas with valid positions (0-360°) |
+| SELF | `test_yoga_detection` | At least 1 yoga detected (Sasa Yoga found) |
+| SELF | `test_dosha_detection` | Dosha list returned (Mangal + Surya Grahan) |
+| SELF | `test_jaimini_system` | 7 Chara Karakas, 12 Arudha Padas, Karakamsha |
+| SELF | `test_prashna_chart` | Full Prashna analysis with judgment + timing |
+| CONTEXT | `test_vimshottari_dasha` | Mercury Mahadasha confirmed (2022-2039) |
+| CONTEXT | `test_yogini_dasha` | Current Bhadrika (Mercury) period valid |
+| CONTEXT | `test_narayana_dasha` | Starts from Libra (lagna), 12+ periods |
+| CONTEXT | `test_vimshopaka_strength` | All 9 planets scored with percentage |
+
+### Architecture: BirthChart Bridge Pattern
+The test replicates the agent's pattern (guide/agent.py:620-696) for converting raw ephemeris → pydantic `BirthChart`:
+```
+get_all_planets(jd) → dict[str, dict]
+get_house_cusps(jd, lat, lon) → dict
+       ↓
+  _build_birth_chart() → BirthChart pydantic model
+       ↓
+  Used by YogaDetector, DoshaDetector, Jaimini, Narayana Dasha
+```
+
+### Key Findings from Report
+- **Sade Sati actively running** (Setting phase): Saturn in Pisces, 2nd from natal Moon in Aquarius
+- All 3 dasha systems converge on Mercury: Vimshottari MD + Yogini Bhadrika + both lord Mercury
+- Venus is Atmakaraka (soul significator) — highest degree at 29.35° Sagittarius
+- Mars debilitated in Cancer AND retrograde — significant for marriage timing (Darakaraka)
+
+### File Changes
+
+| Action | File |
+|--------|------|
+| CREATE | `tests/integration/test_full_system.py` |
+| UPDATE | `docs/project_notes/work_log.md` |
+
+### Verification
+- `uv run pytest` — **510 passed, 1 skipped** (API key test passes with .env)
+- `uv run ruff check .` — 0 errors
+
+---
+
+## 2026-02-05 (Session 14 - Claude Code)
+
+### Summary
+Massive feature session: 6 new modules, 205 new tests, 5 new knowledge files, 12 new MCP tools, 13 new enums, 10 new models. Implemented Sunrise/Sunset, Jaimini system, Yogini Dasha, Narayana Dasha, Prashna (Horary), Upagrahas, and enhanced Vimshopaka.
+
+### New Modules (6)
+
+**`packages/cosmos/src/sunrise_sunset.py`** — Sunrise/Sunset via `swe.rise_trans()`
+- `get_sunrise_sunset(date, lat, lon)` → sunrise, sunset, day/night duration
+- `get_sunrise(date, lat, lon)` / `get_sunset(date, lat, lon)` — convenience wrappers
+- Uses Swiss Ephemeris CALC_RISE/CALC_SET with disc center
+
+**`packages/cosmos/src/upagrahas.py`** — 11 Upagraha (Sub-planet) Calculations
+- Time-based: Gulika, Mandi, Yamaghanda, Kala, Mrityu, Ardhaprahara
+- Mathematical: Dhooma, Vyatipata, Parivesha, Indrachapa, Upaketu
+- `calculate_all_upagrahas(birth_dt, lat, lon, lagna_lon, sun_lon)` → UpagrahaAnalysis
+
+**`packages/self/src/jaimini.py`** — Complete Jaimini Astrology System
+- `calculate_chara_karakas(chart)` → 7 movable significators (AK through DK)
+- `calculate_all_arudha_padas(chart)` → 12 house projections
+- `get_karakamsha(chart)` → AK's Navamsha position + interpretation
+- `calculate_chara_dasha(chart, birth_dt)` → sign-based dasha periods
+- `get_jaimini_aspects(rashi)` → Jaimini's special sign-based aspects
+
+**`packages/self/src/prashna.py`** — Prashna (Horary) Astrology
+- `create_prashna_chart(question, dt, lat, lon, category)` → PrashnaChart
+- `judge_prashna(chart)` → PrashnaResult with judgment + strength score
+- `analyze_prashna(...)` → Complete analysis (chart + judgment + timing)
+- Category-specific analyzers: career, marriage, health, legal, travel, lost objects
+- `predict_timing(chart)` → timing estimates based on sign mobility
+
+**`packages/context/src/yogini_dasha.py`** — Yogini Dasha (36-year cycle)
+- 8 Yoginis: Mangala(1yr), Pingala(2), Dhanya(3), Bhramari(4), Bhadrika(5), Ulka(6), Siddha(7), Sankata(8)
+- `get_starting_yogini(nak_num, pada)` → starting index from Moon
+- `calculate_yogini_sequence(birth_dt, nak, pada, deg)` → full period list
+- `get_current_yogini_dasha(...)` → active yogini with remaining days
+
+**`packages/context/src/narayana_dasha.py`** — Narayana Dasha (108-year cycle)
+- Sign-based Jaimini system, starts from Lagna
+- `calculate_period_duration(rashi, chart)` → 1-12 years based on lord position
+- `get_progression_direction(rashi)` → forward for odd signs, reverse for even
+- `calculate_narayana_sequence(birth_dt, chart)` → 12 sign periods
+- `get_current_narayana_dasha(birth_dt, chart)` → active period
+
+### Enhanced Module
+
+**`packages/cosmos/src/divisional.py`** — Vimshopaka Enhancement
+- `calculate_vimshopaka_bala(longitude, planet_name, scheme)` → dignity-weighted score
+- `get_all_vimshopaka(planets, scheme)` → all planets scored
+- `get_planet_dignity_in_sign(planet_name, rashi_idx)` → friendship table lookup
+- Loaded friendship/dignity tables from `knowledge/definitions/dignities.json`
+- 6 Varga schemes: shad_varga, sapta_varga, dasha_varga, shodasha_varga
+
+### New Knowledge Files (5)
+
+| File | Content |
+|------|---------|
+| `knowledge/definitions/jaimini_definitions.json` | Chara Karaka rules, Arudha formulas |
+| `knowledge/definitions/prashna_definitions.json` | Question categories, significators |
+| `knowledge/definitions/upagraha_definitions.json` | 11 upagraha calculation methods |
+| `knowledge/definitions/dignities.json` (updated) | Friendship table for Vimshopaka |
+| `knowledge/rules/alternative_dasha_rules.json` | Yogini + Narayana dasha specs |
+
+### New Enums (13) in `packages/core/src/constants.py`
+
+CharaKaraka, SignMobility, DashaSystem, PrashnaCategory, PrashnaJudgment, YoginiName, Upagraha, Gana, HouseCategory, YogaCategory + 3 more
+
+### New Pydantic Models (10) in `packages/core/src/models.py`
+
+CharaKarakaResult, ArudhaPada, CharaDashaPeriod, KarakamshaResult, YoginiDashaPeriod, NarayanaDashaPeriod, PrashnaChart, PrashnaResult, UpagrahaPosition, UpagrahaAnalysis
+
+### New MCP Tools (12)
+
+| Server | Tool | Wraps |
+|--------|------|-------|
+| ephemeris | `sunrise_sunset` | `get_sunrise_sunset()` |
+| ephemeris | `upagraha_positions` | `calculate_all_upagrahas()` |
+| patterns | `chara_karakas` | `calculate_chara_karakas()` |
+| patterns | `jaimini_aspects` | `get_jaimini_aspects()` |
+| patterns | `arudha_padas` | `calculate_all_arudha_padas()` |
+| patterns | `chara_dasha` | `calculate_chara_dasha()` |
+| patterns | `prashna_analysis` | `analyze_prashna()` |
+| patterns | `vimshopaka_strength` | `calculate_vimshopaka_bala()` |
+| patterns | `all_vimshopaka` | `get_all_vimshopaka()` |
+| context | `yogini_dasha` | `get_current_yogini_dasha()` |
+| context | `narayana_dasha` | `get_current_narayana_dasha()` |
+| context | `compare_dashas` | Vimshottari vs Yogini side-by-side |
+
+### Tests Added (205 new)
+
+| Test File | Tests | Coverage |
+|-----------|-------|----------|
+| `tests/unit/test_sunrise_sunset.py` | 15 | Rise/set times, day duration, edge cases |
+| `tests/unit/test_jaimini.py` | 22 | Karakas, Arudhas, Karakamsha, Chara Dasha |
+| `tests/unit/test_yogini_dasha.py` | 27 | Starting yogini, balance, sequence, current |
+| `tests/unit/test_narayana_dasha.py` | 35 | Duration, direction, sequence, current |
+| `tests/unit/test_prashna.py` | 37 | Chart creation, judgment, timing, categories |
+| `tests/unit/test_upagrahas.py` | 26 | All 11 upagrahas, time/math based |
+| `tests/unit/test_vimshopaka.py` | 43 | Dignity, friendship table, all schemes |
+
+### File Changes
+
+| Action | Files |
+|--------|-------|
+| CREATE | 6 new modules, 7 test files, 5 knowledge files |
+| MODIFY | 3 `__init__.py`, 3 MCP servers, `constants.py`, `models.py`, `divisional.py` |
+| MODIFY | `dignities.json`, existing test files (sys.path updates) |
+
+### Verification
+- `uv run pytest` — **498 passed, 1 skipped** (needs ANTHROPIC_API_KEY)
+- `uv run ruff check .` — 0 errors
+
+---
+
 ## 2026-02-05 (Session 13 - Claude Code)
 
 ### Summary

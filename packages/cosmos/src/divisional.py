@@ -34,6 +34,8 @@ Elements:
     Water: Cancer(3), Scorpio(7), Pisces(11)
 """
 
+import json
+from pathlib import Path
 from typing import TypedDict
 
 
@@ -1039,16 +1041,246 @@ def _get_exaltation_rashi(planet_name: str) -> int:
     return exaltations.get(planet_name.lower(), 0)
 
 
+# Sign lords mapping
+SIGN_LORDS = {
+    "aries": "mars",
+    "taurus": "venus",
+    "gemini": "mercury",
+    "cancer": "moon",
+    "leo": "sun",
+    "virgo": "mercury",
+    "libra": "venus",
+    "scorpio": "mars",
+    "sagittarius": "jupiter",
+    "capricorn": "saturn",
+    "aquarius": "saturn",
+    "pisces": "jupiter",
+}
+
+
+# Dignity scoring constants
+DIGNITY_SCORES = {
+    "exalted": 20,
+    "moolatrikona": 18,
+    "own": 15,
+    "friend": 10,
+    "neutral": 5,
+    "enemy": 2,
+    "debilitated": 0,
+}
+
+
+# Varga scheme definitions
+VARGA_SCHEMES = {
+    "shad_varga": [1, 2, 3, 9, 12, 30],
+    "sapta_varga": [1, 2, 3, 7, 9, 12, 30],
+    "dasha_varga": [1, 2, 3, 4, 7, 9, 10, 12, 16, 30],
+    "shodasha_varga": [1, 2, 3, 4, 7, 9, 10, 12, 16, 20, 24, 27, 30, 40, 45, 60],
+}
+
+
+def _load_dignities() -> dict:
+    """Load dignities data from knowledge file.
+
+    Returns:
+        dict: Complete dignities data including planets and friendship table
+    """
+    dignities_path = (
+        Path(__file__).parent.parent.parent.parent / "knowledge" / "definitions" / "dignities.json"
+    )
+    with dignities_path.open() as f:
+        return json.load(f)
+
+
+def _load_friendship_table() -> dict:
+    """Load friendship table from dignities.json.
+
+    Returns:
+        dict: Friendship relationships for all planets
+    """
+    data = _load_dignities()
+    return data.get("friendship_table", {})
+
+
+def get_planet_dignity_in_sign(planet: str, rashi_name: str) -> str:
+    """Determine a planet's dignity in a specific sign.
+
+    Uses dignities.json data and friendship table to determine the
+    relationship between a planet and the sign it occupies.
+
+    Args:
+        planet: Planet name (lowercase: sun, moon, mars, etc.)
+        rashi_name: Sign name (lowercase: aries, taurus, etc.)
+
+    Returns:
+        str: Dignity level ("exalted", "moolatrikona", "own", "friend", "neutral", "enemy", "debilitated")
+
+    Example:
+        >>> get_planet_dignity_in_sign("sun", "aries")
+        "exalted"
+        >>> get_planet_dignity_in_sign("sun", "libra")
+        "debilitated"
+    """
+    # Load dignities data
+    dignities_data = _load_dignities()
+    planet_lower = planet.lower()
+    rashi_lower = rashi_name.lower()
+
+    # Get planet data
+    if planet_lower not in dignities_data["planets"]:
+        return "neutral"
+
+    planet_data = dignities_data["planets"][planet_lower]
+
+    # Check exaltation
+    if planet_data.get("exaltation") and planet_data["exaltation"]["sign"] == rashi_lower:
+        return "exalted"
+
+    # Check debilitation
+    if planet_data.get("debilitation") and planet_data["debilitation"]["sign"] == rashi_lower:
+        return "debilitated"
+
+    # Check moolatrikona (just check sign match, not degree range)
+    if planet_data.get("moolatrikona") and planet_data["moolatrikona"]["sign"] == rashi_lower:
+        return "moolatrikona"
+
+    # Check own sign
+    if rashi_lower in planet_data.get("own_signs", []):
+        return "own"
+
+    # Check friendship with sign lord
+    friendship_table = _load_friendship_table()
+    sign_lord = SIGN_LORDS.get(rashi_lower)
+
+    if sign_lord and planet_lower in friendship_table:
+        planet_relationships = friendship_table[planet_lower]
+
+        if sign_lord in planet_relationships.get("friends", []):
+            return "friend"
+        elif sign_lord in planet_relationships.get("enemies", []):
+            return "enemy"
+        elif sign_lord in planet_relationships.get("neutrals", []):
+            return "neutral"
+
+    # Default to neutral
+    return "neutral"
+
+
+def calculate_vimshopaka_bala(planet: str, longitude: float, scheme: str = "shad_varga") -> dict:
+    """Calculate Vimshopaka Bala (divisional strength) for a planet.
+
+    Proper Vimshopaka calculation using dignity lookup per varga chart.
+    Evaluates a planet's strength across multiple divisional charts.
+
+    Args:
+        planet: Planet name (lowercase)
+        longitude: Planet's longitude in degrees (0-360)
+        scheme: Varga scheme to use ("shad_varga", "sapta_varga", "dasha_varga", "shodasha_varga")
+
+    Returns:
+        dict: Contains:
+            - total_points (int): Sum of dignity scores across all vargas
+            - max_points (int): Maximum possible points
+            - percentage (float): Strength percentage (0-100)
+            - category (str): Strength category
+            - varga_details (list): Details for each varga
+
+    Example:
+        >>> result = calculate_vimshopaka_bala("sun", 125.5, "shad_varga")
+        >>> result['percentage']  # 75.5
+        >>> result['category']  # "excellent"
+    """
+    # Get divisions for the scheme
+    if scheme not in VARGA_SCHEMES:
+        raise ValueError(f"Unknown scheme: {scheme}. Available: {list(VARGA_SCHEMES.keys())}")
+
+    divisions = VARGA_SCHEMES[scheme]
+    varga_details = []
+    total_points = 0
+
+    # Calculate dignity score for each varga
+    for division in divisions:
+        # Get planet's position in this divisional chart
+        position = get_divisional_position(longitude, division)
+        rashi_name = position["rashi_name"].lower()
+
+        # Get dignity in this sign
+        dignity = get_planet_dignity_in_sign(planet, rashi_name)
+
+        # Get score for this dignity
+        score = DIGNITY_SCORES.get(dignity, 5)
+
+        varga_details.append(
+            {
+                "division": division,
+                "rashi": position["rashi_name"],
+                "dignity": dignity,
+                "score": score,
+            }
+        )
+
+        total_points += score
+
+    # Calculate percentage and category
+    max_points = len(divisions) * 20
+    percentage = (total_points / max_points) * 100
+
+    if percentage > 75:
+        category = "excellent"
+    elif percentage > 60:
+        category = "good"
+    elif percentage > 40:
+        category = "moderate"
+    elif percentage > 25:
+        category = "weak"
+    else:
+        category = "very_weak"
+
+    return {
+        "total_points": total_points,
+        "max_points": max_points,
+        "percentage": round(percentage, 2),
+        "category": category,
+        "varga_details": varga_details,
+    }
+
+
+def get_all_vimshopaka(planets: dict[str, float], scheme: str = "shad_varga") -> dict[str, dict]:
+    """Calculate Vimshopaka Bala for all planets.
+
+    Args:
+        planets: Dictionary mapping planet names to longitudes
+        scheme: Varga scheme to use (default: "shad_varga")
+
+    Returns:
+        dict: Dictionary mapping planet names to their vimshopaka results
+
+    Example:
+        >>> planets = {"sun": 125.5, "moon": 215.3, "mars": 45.2}
+        >>> results = get_all_vimshopaka(planets, "shad_varga")
+        >>> results['sun']['percentage']
+    """
+    result = {}
+    for planet_name, longitude in planets.items():
+        result[planet_name] = calculate_vimshopaka_bala(planet_name, longitude, scheme)
+    return result
+
+
 __all__ = [
+    "DIGNITY_SCORES",
     "DIVISIONAL_NAMES",
     "ELEMENT_MAP",
     # Constants
     "RASHI_NAMES",
+    "SIGN_LORDS",
+    "VARGA_SCHEMES",
     "DivisionalChart",
     # Type definitions
     "DivisionalPosition",
     "VargaStrength",
+    "calculate_vimshopaka_bala",
     "get_akshavedamsha",
+    "get_all_vimshopaka",
     "get_bhamsha",
     "get_chaturthamsha",
     "get_chaturvimshamsha",
@@ -1063,6 +1295,7 @@ __all__ = [
     "get_hora",
     "get_khavedamsha",
     "get_navamsha",
+    "get_planet_dignity_in_sign",
     "get_saptamsha",
     "get_shashtiamsha",
     "get_shodashamsha",

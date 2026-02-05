@@ -1,0 +1,521 @@
+{
+  "system_overview": {
+    "name": "Jaimini Astrology",
+    "author": "Maharishi Jaimini",
+    "text_source": "Jaimini Sutras (Upadesa Sutras)",
+    "key_principles": [
+      "Sign-based interpretations (rashi drishti)",
+      "Chara Karakas determined by planetary degrees",
+      "Arudha Padas for perceived reality",
+      "Karakamsha for soul purpose",
+      "Special aspect rules different from Parashari"
+    ],
+    "primary_focus": "Soul evolution, destiny patterns, and karmic fulfillment"
+  },
+  "chara_karakas": {
+    "description": "Movable significators determined by degree within sign. The 7 planets (excluding Rahu/Ketu) are ranked by their degrees, with highest becoming Atmakaraka.",
+    "calculation_method": "Sort planets by rashi_degree (degree within sign) in descending order",
+    "atmakaraka": {
+      "abbreviation": "AK",
+      "rank": 1,
+      "meaning": "Soul Significator",
+      "significator_of": [
+        "Self",
+        "Soul's deepest desires",
+        "Life purpose",
+        "Inner consciousness",
+        "Spiritual evolution"
+      ],
+      "when_strong": [
+        "Clear sense of purpose",
+        "Strong willpower",
+        "Self-awareness",
+        "Leadership qualities",
+        "Ability to manifest desires"
+      ],
+      "when_weak": [
+        "Confusion about life direction",
+        "Weak sense of self",
+        "Difficulty making decisions",
+        "Identity crisis",
+        "Lack of self-confidence"
+      ],
+      "remedy": "Focus on the planet serving as AK - strengthen through mantras, gemstones, and conscious alignment with its qualities"
+    },
+    "amatyakaraka": {
+      "abbreviation": "AmK",
+      "rank": 2,
+      "meaning": "Minister/Advisor Significator",
+      "significator_of": [
+        "Career and profession",
+        "Worldly achievements",
+        "Advisors and mentors",
+        "Professional skills",
+        "Work relationships"
+      ],
+      "when_strong": [
+        "Successful career",
+        "Good professional guidance",
+        "Effective use of skills",
+        "Recognition at work",
+        "Strong support system"
+      ],
+      "when_weak": [
+        "Career difficulties",
+        "Poor professional choices",
+        "Lack of mentorship",
+        "Skill underutilization",
+        "Workplace conflicts"
+      ]
+    },
+    "bhratrikaraka": {
+      "abbreviation": "BK",
+      "rank": 3,
+      "meaning": "Sibling Significator",
+      "significator_of": [
+        "Siblings and cousins",
+        "Courage and valor",
+        "Communication skills",
+        "Short travels",
+        "Close friends"
+      ],
+      "when_strong": [
+        "Good sibling relationships",
+        "Courageous nature",
+        "Effective communication",
+        "Active social life",
+        "Short journey benefits"
+      ],
+      "when_weak": [
+        "Sibling conflicts",
+        "Lack of courage",
+        "Communication issues",
+        "Social isolation",
+        "Travel obstacles"
+      ]
+    },
+    "matrikaraka": {
+      "abbreviation": "MK",
+      "rank": 4,
+      "meaning": "Mother Significator",
+      "significator_of": [
+        "Mother and maternal figures",
+        "Emotions and feelings",
+        "Home and property",
+        "Comfort and security",
+        "Education"
+      ],
+      "when_strong": [
+        "Positive mother relationship",
+        "Emotional stability",
+        "Property ownership",
+        "Good education",
+        "Comfortable home life"
+      ],
+      "when_weak": [
+        "Mother-related challenges",
+        "Emotional instability",
+        "Property issues",
+        "Educational obstacles",
+        "Lack of comfort"
+      ]
+    },
+    "putrakaraka": {
+      "abbreviation": "PK",
+      "rank": 5,
+      "meaning": "Children Significator",
+      "significator_of": [
+        "Children and progeny",
+        "Creativity",
+        "Intelligence and wisdom",
+        "Students and disciples",
+        "Speculative gains"
+      ],
+      "when_strong": [
+        "Healthy children",
+        "Creative expression",
+        "Sharp intelligence",
+        "Good student-teacher bonds",
+        "Beneficial investments"
+      ],
+      "when_weak": [
+        "Child-related difficulties",
+        "Creative blocks",
+        "Mental confusion",
+        "Teaching challenges",
+        "Speculative losses"
+      ]
+    },
+    "gnatikaraka": {
+      "abbreviation": "GK",
+      "rank": 6,
+      "meaning": "Obstacles/Enemies Significator",
+      "significator_of": [
+        "Obstacles and challenges",
+        "Enemies and competitors",
+        "Diseases and health issues",
+        "Debts and litigation",
+        "Service and hard work"
+      ],
+      "when_strong": [
+        "Ability to overcome obstacles",
+        "Victory over enemies",
+        "Good health",
+        "Debt clearance",
+        "Service opportunities"
+      ],
+      "when_weak": [
+        "Persistent obstacles",
+        "Enemy troubles",
+        "Health problems",
+        "Debt accumulation",
+        "Exploitation"
+      ]
+    },
+    "darakaraka": {
+      "abbreviation": "DK",
+      "rank": 7,
+      "meaning": "Spouse Significator",
+      "significator_of": [
+        "Spouse and marriage",
+        "Partnerships",
+        "Business collaborations",
+        "Relationship harmony",
+        "Marital happiness"
+      ],
+      "when_strong": [
+        "Happy marriage",
+        "Good spouse qualities",
+        "Successful partnerships",
+        "Relationship satisfaction",
+        "Beneficial collaborations"
+      ],
+      "when_weak": [
+        "Marital difficulties",
+        "Spouse-related issues",
+        "Partnership conflicts",
+        "Relationship dissatisfaction",
+        "Collaboration failures"
+      ]
+    }
+  },
+  "jaimini_aspects": {
+    "description": "In Jaimini astrology, signs aspect other signs (not planets aspecting planets as in Parashari)",
+    "rule": "Every sign aspects the 5th, 8th, and 11th signs from itself",
+    "counting_method": "Count inclusively: from Aries (1st), 5th = Leo, 8th = Scorpio, 11th = Aquarius",
+    "examples": {
+      "aries": ["Leo", "Scorpio", "Aquarius"],
+      "taurus": ["Virgo", "Sagittarius", "Pisces"],
+      "gemini": ["Libra", "Capricorn", "Aries"],
+      "cancer": ["Scorpio", "Aquarius", "Taurus"],
+      "leo": ["Sagittarius", "Pisces", "Gemini"],
+      "virgo": ["Capricorn", "Aries", "Cancer"],
+      "libra": ["Aquarius", "Taurus", "Leo"],
+      "scorpio": ["Pisces", "Gemini", "Virgo"],
+      "sagittarius": ["Aries", "Cancer", "Libra"],
+      "capricorn": ["Taurus", "Leo", "Scorpio"],
+      "aquarius": ["Gemini", "Virgo", "Sagittarius"],
+      "pisces": ["Cancer", "Libra", "Capricorn"]
+    },
+    "interpretation": "When a sign aspects another, planets in the aspecting sign influence the house/planets in the aspected sign"
+  },
+  "arudha_padas": {
+    "description": "Arudha means 'reflection' or 'image'. Arudha Padas show the perceived reality or external manifestation of each house's significations.",
+    "calculation": "From house sign, count to its lord's position, then count same distance from lord's position",
+    "special_rules": [
+      "If lord is in the house itself, pada falls in 10th from house",
+      "If pada falls in same house or 7th from it, shift to 10th from house"
+    ],
+    "a1": {
+      "name": "Arudha Lagna (AL)",
+      "house": 1,
+      "signifies": [
+        "Public image and reputation",
+        "How others perceive you",
+        "External personality",
+        "Social standing",
+        "Fame and recognition"
+      ],
+      "importance": "Most important Arudha Pada - shows worldly success and perception"
+    },
+    "a2": {
+      "name": "Dhana Pada",
+      "house": 2,
+      "signifies": [
+        "Perceived wealth",
+        "Apparent financial status",
+        "Family reputation",
+        "Speech impact",
+        "Food and material comforts"
+      ]
+    },
+    "a3": {
+      "name": "Vikrama Pada",
+      "house": 3,
+      "signifies": [
+        "Courage as seen by others",
+        "Sibling relationships in public view",
+        "Communication style reputation",
+        "Short journey outcomes",
+        "Effort recognition"
+      ]
+    },
+    "a4": {
+      "name": "Sukha Pada",
+      "house": 4,
+      "signifies": [
+        "Perceived happiness",
+        "Property and vehicle status",
+        "Mother's reputation",
+        "Educational credentials",
+        "Home environment image"
+      ]
+    },
+    "a5": {
+      "name": "Mantra Pada/Putra Pada",
+      "house": 5,
+      "signifies": [
+        "Children's public image",
+        "Creative reputation",
+        "Intelligence perception",
+        "Speculative success image",
+        "Romantic affairs visibility"
+      ]
+    },
+    "a6": {
+      "name": "Roga Pada/Shatru Pada",
+      "house": 6,
+      "signifies": [
+        "Health issues visibility",
+        "Enemy relationships",
+        "Service reputation",
+        "Debt status perception",
+        "Competitive success image"
+      ]
+    },
+    "a7": {
+      "name": "Dara Pada",
+      "house": 7,
+      "signifies": [
+        "Spouse's public image",
+        "Marriage reputation",
+        "Business partnership perception",
+        "Relationship visibility",
+        "Trade and commerce image"
+      ],
+      "importance": "Very important - shows marital happiness and partnership success"
+    },
+    "a8": {
+      "name": "Marana Pada",
+      "house": 8,
+      "signifies": [
+        "Transformation visibility",
+        "Longevity perception",
+        "Hidden wealth image",
+        "Occult knowledge reputation",
+        "Crisis management capability"
+      ]
+    },
+    "a9": {
+      "name": "Dharma Pada",
+      "house": 9,
+      "signifies": [
+        "Spiritual reputation",
+        "Guru relationship perception",
+        "Fortune visibility",
+        "Religious image",
+        "Father's status",
+        "Higher learning credentials"
+      ]
+    },
+    "a10": {
+      "name": "Karma Pada/Rajya Pada",
+      "house": 10,
+      "signifies": [
+        "Career reputation",
+        "Professional status",
+        "Authority perception",
+        "Public achievements",
+        "Government connection image"
+      ],
+      "importance": "Shows professional success and public recognition"
+    },
+    "a11": {
+      "name": "Labha Pada",
+      "house": 11,
+      "signifies": [
+        "Income perception",
+        "Gains visibility",
+        "Friend circle reputation",
+        "Network strength image",
+        "Fulfillment of desires perception"
+      ]
+    },
+    "a12": {
+      "name": "Vyaya Pada",
+      "house": 12,
+      "signifies": [
+        "Expenses visibility",
+        "Spiritual liberation image",
+        "Foreign connection perception",
+        "Loss or expenditure reputation",
+        "Isolation or solitude visibility"
+      ]
+    }
+  },
+  "karakamsha_interpretations": {
+    "description": "Karakamsha is the Navamsha (D9) position of the Atmakaraka. It reveals the soul's ultimate purpose and karmic direction.",
+    "aries": {
+      "element": "Fire",
+      "nature": "Movable",
+      "interpretation": "Dynamic soul with leadership karma. Purpose involves initiating new ventures, pioneering work, and courageous action. May have military, sports, or entrepreneurial inclinations.",
+      "career_indications": ["Leadership", "Military", "Sports", "Entrepreneurship", "Engineering"],
+      "spiritual_path": "Karma Yoga through action and leadership"
+    },
+    "taurus": {
+      "element": "Earth",
+      "nature": "Fixed",
+      "interpretation": "Soul seeks stability and material security. Purpose involves creating lasting value, artistic expression, and financial acumen. Strong attachment to comfort and beauty.",
+      "career_indications": ["Finance", "Arts", "Agriculture", "Food industry", "Real estate"],
+      "spiritual_path": "Bhakti through devotion to beauty and harmony"
+    },
+    "gemini": {
+      "element": "Air",
+      "nature": "Dual",
+      "interpretation": "Communicative soul with intellectual karma. Purpose involves writing, teaching, commerce, and connecting people. Versatile but may scatter energy.",
+      "career_indications": ["Writing", "Teaching", "Sales", "Media", "Technology"],
+      "spiritual_path": "Jnana Yoga through knowledge and communication"
+    },
+    "cancer": {
+      "element": "Water",
+      "nature": "Movable",
+      "interpretation": "Nurturing soul with emotional karma. Purpose involves caring for others, home-making, and emotional intelligence. Strong family and ancestral connections.",
+      "career_indications": ["Healthcare", "Hospitality", "Psychology", "Food", "Real estate"],
+      "spiritual_path": "Bhakti through devotion to family and ancestors"
+    },
+    "leo": {
+      "element": "Fire",
+      "nature": "Fixed",
+      "interpretation": "Royal soul with authority karma. Purpose involves creative self-expression, leadership, and gaining recognition. Natural confidence and dignity.",
+      "career_indications": ["Politics", "Management", "Entertainment", "Government", "Authority roles"],
+      "spiritual_path": "Raja Yoga through self-mastery and nobility"
+    },
+    "virgo": {
+      "element": "Earth",
+      "nature": "Dual",
+      "interpretation": "Service-oriented soul with perfectionist karma. Purpose involves healing, analysis, and practical problem-solving. Attention to detail and refinement.",
+      "career_indications": ["Healthcare", "Accounting", "Analysis", "Research", "Service industries"],
+      "spiritual_path": "Karma Yoga through selfless service"
+    },
+    "libra": {
+      "element": "Air",
+      "nature": "Movable",
+      "interpretation": "Diplomatic soul with relationship karma. Purpose involves creating balance, harmony in partnerships, and aesthetic pursuits. Strong sense of justice.",
+      "career_indications": ["Law", "Counseling", "Arts", "Diplomacy", "HR"],
+      "spiritual_path": "Finding balance between self and others"
+    },
+    "scorpio": {
+      "element": "Water",
+      "nature": "Fixed",
+      "interpretation": "Transformative soul with intense karma. Purpose involves deep research, occult knowledge, transformation, and healing. Powerful but secretive nature.",
+      "career_indications": ["Research", "Investigation", "Occult sciences", "Surgery", "Psychology"],
+      "spiritual_path": "Kundalini Yoga through transformation"
+    },
+    "sagittarius": {
+      "element": "Fire",
+      "nature": "Dual",
+      "interpretation": "Philosophical soul with dharmic karma. Purpose involves higher learning, teaching, travel, and spiritual guidance. Natural optimism and wisdom-seeking.",
+      "career_indications": ["Teaching", "Philosophy", "Law", "Publishing", "Religious work"],
+      "spiritual_path": "Jnana Yoga through higher wisdom"
+    },
+    "capricorn": {
+      "element": "Earth",
+      "nature": "Movable",
+      "interpretation": "Disciplined soul with achievement karma. Purpose involves building structures, organizational mastery, and taking responsibility. Patient but ambitious.",
+      "career_indications": ["Administration", "Construction", "Government", "Large organizations", "Management"],
+      "spiritual_path": "Karma Yoga through disciplined action"
+    },
+    "aquarius": {
+      "element": "Air",
+      "nature": "Fixed",
+      "interpretation": "Humanitarian soul with innovative karma. Purpose involves serving humanity, scientific advancement, and collective welfare. Unconventional thinking.",
+      "career_indications": ["Science", "Technology", "Social work", "Astrology", "Innovation"],
+      "spiritual_path": "Seva (service) to humanity and universal consciousness"
+    },
+    "pisces": {
+      "element": "Water",
+      "nature": "Dual",
+      "interpretation": "Spiritual soul with moksha karma. Purpose involves compassion, spiritual liberation, artistic expression, and transcendence. Natural psychic and healing abilities.",
+      "career_indications": ["Spirituality", "Arts", "Healing", "Charity", "Meditation teaching"],
+      "spiritual_path": "Bhakti and meditation leading to moksha (liberation)"
+    }
+  },
+  "sign_mobility": {
+    "description": "Jaimini classifies signs into three categories based on their inherent nature",
+    "movable": {
+      "signs": ["Aries", "Cancer", "Libra", "Capricorn"],
+      "nature": "Active, initiating, cardinal",
+      "characteristics": [
+        "Quick to act",
+        "Initiating changes",
+        "Restless energy",
+        "Leadership qualities"
+      ],
+      "aspect_rule": "Movable signs aspect all fixed signs (except adjacent)",
+      "dasha_direction": "Forward (Aries→Taurus→...→Pisces)"
+    },
+    "fixed": {
+      "signs": ["Taurus", "Leo", "Scorpio", "Aquarius"],
+      "nature": "Stable, determined, persistent",
+      "characteristics": [
+        "Resistance to change",
+        "Steady and reliable",
+        "Stubborn tendencies",
+        "Long-lasting effects"
+      ],
+      "aspect_rule": "Fixed signs aspect all movable signs (except adjacent)",
+      "dasha_direction": "Backward (from starting sign)"
+    },
+    "dual": {
+      "signs": ["Gemini", "Virgo", "Sagittarius", "Pisces"],
+      "nature": "Adaptable, flexible, mutable",
+      "characteristics": [
+        "Versatile nature",
+        "Adaptation to circumstances",
+        "Communication skills",
+        "Intellectual focus"
+      ],
+      "aspect_rule": "Dual signs aspect other dual signs",
+      "dasha_direction": "Forward (Aries→Taurus→...→Pisces)"
+    }
+  },
+  "chara_dasha": {
+    "description": "Sign-based dasha system where each rashi rules for a period determined by the distance between the sign and its lord",
+    "sequence_determination": {
+      "odd_footed_lagna": {
+        "signs": ["Aries", "Gemini", "Leo", "Libra", "Sagittarius", "Aquarius"],
+        "direction": "Forward",
+        "order": "Lagna → next sign → ... → completing all 12 signs"
+      },
+      "even_footed_lagna": {
+        "signs": ["Taurus", "Cancer", "Virgo", "Scorpio", "Capricorn", "Pisces"],
+        "direction": "Backward",
+        "order": "Lagna → previous sign → ... → completing all 12 signs"
+      }
+    },
+    "duration_calculation": {
+      "method": "Count houses from the sign to its lord's position",
+      "odd_signs": "Count forward to lord",
+      "even_signs": "12 minus forward count to lord",
+      "range": "1 to 12 years per sign",
+      "special_case": "If lord is in the sign itself, duration = 12 years"
+    },
+    "interpretation_guidelines": [
+      "Sign and its lord give the overall theme",
+      "Planets in the sign activate their significations",
+      "Aspects to the dasha sign modify results",
+      "Arudha pada of the sign shows external manifestation",
+      "Timing of events follows sub-dasha (Antar dasha) within each sign period"
+    ]
+  }
+}

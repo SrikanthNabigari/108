@@ -1,0 +1,318 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "description": "Rules and interpretations for alternative dasha systems: Yogini, Narayana, and Chara",
+    "created": "2024-02-06",
+    "source": "Classical Jyotish texts"
+  },
+  "yogini_dasha": {
+    "description": "36-year cycle system based on 8 Yoginis (female deities), each associated with a planet",
+    "total_cycle_years": 36,
+    "calculation_method": "Based on Moon's nakshatra and pada at birth",
+    "starting_formula": "(nakshatra_pada_number + 3) % 8, where nakshatra_pada_number = (nakshatra_num - 1) * 4 + pada",
+    "yoginis": [
+      {
+        "name": "Mangala",
+        "order": 1,
+        "planet_lord": "moon",
+        "duration_years": 1,
+        "nature": "auspicious",
+        "themes": ["quick results", "mental peace", "emotional stability", "new beginnings"],
+        "favorable_for": ["spiritual practices", "meditation", "family matters", "short-term ventures"],
+        "unfavorable_for": ["long-term planning", "major investments"],
+        "color": "white",
+        "element": "water"
+      },
+      {
+        "name": "Pingala",
+        "order": 2,
+        "planet_lord": "sun",
+        "duration_years": 2,
+        "nature": "mixed",
+        "themes": ["authority", "recognition", "ego challenges", "health issues"],
+        "favorable_for": ["career advancement", "government work", "leadership roles"],
+        "unfavorable_for": ["partnership matters", "health (heat-related)"],
+        "color": "red",
+        "element": "fire"
+      },
+      {
+        "name": "Dhanya",
+        "order": 3,
+        "planet_lord": "jupiter",
+        "duration_years": 3,
+        "nature": "highly auspicious",
+        "themes": ["wisdom", "prosperity", "spiritual growth", "children", "education"],
+        "favorable_for": ["education", "marriage", "childbirth", "religious activities", "wealth accumulation"],
+        "unfavorable_for": ["quick material gains", "speculative activities"],
+        "color": "yellow",
+        "element": "ether"
+      },
+      {
+        "name": "Bhramari",
+        "order": 4,
+        "planet_lord": "mars",
+        "duration_years": 4,
+        "nature": "challenging",
+        "themes": ["aggression", "conflicts", "accidents", "surgery", "courage"],
+        "favorable_for": ["competitive activities", "sports", "military", "real estate"],
+        "unfavorable_for": ["marriage", "partnerships", "peace-seeking activities"],
+        "color": "red",
+        "element": "fire",
+        "remedies": ["Chant Mangala mantras", "Donate red items", "Wear red coral with caution"]
+      },
+      {
+        "name": "Bhadrika",
+        "order": 5,
+        "planet_lord": "mercury",
+        "duration_years": 5,
+        "nature": "auspicious",
+        "themes": ["communication", "business", "intellect", "networking", "travel"],
+        "favorable_for": ["business ventures", "writing", "education", "trade", "communication projects"],
+        "unfavorable_for": ["emotional decisions", "spiritual practices"],
+        "color": "green",
+        "element": "earth"
+      },
+      {
+        "name": "Ulka",
+        "order": 6,
+        "planet_lord": "saturn",
+        "duration_years": 6,
+        "nature": "difficult",
+        "themes": ["delays", "obstacles", "karma", "chronic issues", "discipline"],
+        "favorable_for": ["hard work paying off", "building foundations", "long-term projects"],
+        "unfavorable_for": ["quick results", "speculative gains", "new beginnings"],
+        "color": "black",
+        "element": "air",
+        "remedies": ["Shani mantras", "Service to poor", "Discipline and patience"]
+      },
+      {
+        "name": "Siddha",
+        "order": 7,
+        "planet_lord": "venus",
+        "duration_years": 7,
+        "nature": "highly auspicious",
+        "themes": ["luxury", "comfort", "relationships", "arts", "beauty", "success"],
+        "favorable_for": ["marriage", "arts", "entertainment", "luxury business", "comforts"],
+        "unfavorable_for": ["spiritual austerity", "disciplined practices"],
+        "color": "white",
+        "element": "water"
+      },
+      {
+        "name": "Sankata",
+        "order": 8,
+        "planet_lord": "rahu",
+        "duration_years": 8,
+        "nature": "very challenging",
+        "themes": ["sudden events", "confusion", "deception", "foreign connections", "obsessions"],
+        "favorable_for": ["foreign travels", "unconventional pursuits", "research", "technology"],
+        "unfavorable_for": ["traditional activities", "stable relationships", "peace of mind"],
+        "color": "smoke",
+        "element": "air",
+        "remedies": ["Rahu mantras", "Donate to outcasts", "Avoid impulsive decisions"]
+      }
+    ],
+    "antardasha_rules": {
+      "description": "Each maha-dasha is subdivided into 8 antardashas",
+      "sequence": "Starts from the maha-dasha yogini itself, then follows the 8-yogini cycle",
+      "duration_formula": "(antardasha_yogini_years / 36) * maha_duration_days",
+      "interpretation": "Antardasha modifies the maha-dasha results based on its lord's nature"
+    },
+    "general_rules": {
+      "favorable_yoginis": ["Mangala", "Dhanya", "Bhadrika", "Siddha"],
+      "unfavorable_yoginis": ["Bhramari", "Ulka", "Sankata"],
+      "mixed_yogini": ["Pingala"],
+      "strength_factors": [
+        "Lord's strength in birth chart",
+        "Lord's position in transit",
+        "Yogini's natural significations",
+        "House placement of lord"
+      ]
+    }
+  },
+  "narayana_dasha": {
+    "description": "108-year cycle sign-based dasha system from Jaimini astrology",
+    "total_cycle_years": 108,
+    "calculation_method": "Based on ascendant sign and sign lord positions",
+    "starting_point": "Ascendant (Lagna)",
+    "progression_rules": {
+      "odd_signs": {
+        "signs": ["Aries", "Gemini", "Leo", "Libra", "Sagittarius", "Aquarius"],
+        "direction": "forward",
+        "sequence": "Aries -> Taurus -> Gemini -> ... -> Pisces"
+      },
+      "even_signs": {
+        "signs": ["Taurus", "Cancer", "Virgo", "Scorpio", "Capricorn", "Pisces"],
+        "direction": "reverse",
+        "sequence": "Taurus -> Aries -> Pisces -> ... -> Gemini"
+      }
+    },
+    "duration_calculation": {
+      "description": "Duration varies from 1-12 years based on sign lord's position",
+      "algorithm": [
+        "1. Identify sign lord (for Scorpio/Aquarius, use stronger co-lord)",
+        "2. Count from sign to lord's position (forward, inclusive) = N",
+        "3. If sign is odd: duration = N years",
+        "4. If sign is even: duration = (12 - N) years, or 12 if N=0",
+        "5. If lord is in its own sign: duration = 12 years"
+      ],
+      "special_cases": {
+        "scorpio": {
+          "primary_lord": "mars",
+          "co_lord": "ketu",
+          "rule": "Use stronger lord based on kendra position or higher degree"
+        },
+        "aquarius": {
+          "primary_lord": "saturn",
+          "co_lord": "rahu",
+          "rule": "Use stronger lord based on kendra position or higher degree"
+        }
+      }
+    },
+    "sign_interpretations": {
+      "aries": {
+        "themes": ["initiatives", "courage", "conflicts", "head/brain matters"],
+        "favorable": "Action-oriented activities",
+        "unfavorable": "Diplomacy, partnerships"
+      },
+      "taurus": {
+        "themes": ["wealth", "stability", "food", "voice", "family"],
+        "favorable": "Financial growth, family expansion",
+        "unfavorable": "Quick changes, movements"
+      },
+      "gemini": {
+        "themes": ["communication", "siblings", "short travels", "skills"],
+        "favorable": "Learning, business, networking",
+        "unfavorable": "Stability, focus"
+      },
+      "cancer": {
+        "themes": ["emotions", "mother", "home", "public", "water"],
+        "favorable": "Emotional bonds, property, public work",
+        "unfavorable": "Rational decisions, foreign matters"
+      },
+      "leo": {
+        "themes": ["authority", "fame", "creativity", "children", "heart"],
+        "favorable": "Leadership, creative projects, children",
+        "unfavorable": "Subordination, team work"
+      },
+      "virgo": {
+        "themes": ["service", "health", "analysis", "debts", "employees"],
+        "favorable": "Health improvements, service, analysis",
+        "unfavorable": "Speculation, luxury"
+      },
+      "libra": {
+        "themes": ["partnerships", "balance", "trade", "spouse", "agreements"],
+        "favorable": "Marriage, partnerships, trade",
+        "unfavorable": "Solo ventures, aggression"
+      },
+      "scorpio": {
+        "themes": ["transformation", "secrets", "occult", "inheritance", "death"],
+        "favorable": "Research, occult, sudden gains",
+        "unfavorable": "Transparency, stability"
+      },
+      "sagittarius": {
+        "themes": ["wisdom", "spirituality", "fortune", "father", "long journeys"],
+        "favorable": "Education, spiritual growth, foreign affairs",
+        "unfavorable": "Material focus, routine work"
+      },
+      "capricorn": {
+        "themes": ["discipline", "career", "authority", "structure", "knees"],
+        "favorable": "Career growth, discipline, long-term goals",
+        "unfavorable": "Quick gains, emotional matters"
+      },
+      "aquarius": {
+        "themes": ["innovation", "friends", "social causes", "gains", "calves"],
+        "favorable": "Networking, gains, social work, technology",
+        "unfavorable": "Traditional approaches, isolation"
+      },
+      "pisces": {
+        "themes": ["spirituality", "liberation", "foreign", "losses", "feet"],
+        "favorable": "Spiritual pursuits, foreign connections, charity",
+        "unfavorable": "Material accumulation, worldly ambitions"
+      }
+    },
+    "antardasha_rules": {
+      "description": "Each maha-dasha is subdivided into 12 sub-periods",
+      "sequence": "Follows same direction as maha-dasha (forward or reverse)",
+      "duration_formula": "(sub_sign_duration / total_of_all_12_durations) * maha_duration",
+      "interpretation": "Sub-period brings themes of its sign while operating under maha sign's influence"
+    },
+    "general_rules": {
+      "strength_factors": [
+        "Sign lord's strength in birth chart",
+        "Planets occupying the sign",
+        "Aspects to the sign",
+        "Sign's karaka (significator) planets"
+      ],
+      "favorable_signs": "Signs containing benefics (Jupiter, Venus, Mercury, Moon)",
+      "unfavorable_signs": "Signs containing malefics (Saturn, Mars, Rahu, Ketu, Sun)",
+      "neutral_signs": "Empty signs or those with mixed influences"
+    }
+  },
+  "chara_dasha": {
+    "description": "Main Jaimini dasha system, also 108-year cycle but different calculation",
+    "note": "Not implemented in this module, but included for comparison",
+    "total_cycle_years": 108,
+    "calculation_method": "Based on sign's mobility (movable/fixed/dual) and special count",
+    "starting_point": "Ascendant for external matters, Atmakaraka for spiritual matters",
+    "key_difference": "Uses Jaimini aspects and special counting methods"
+  },
+  "comparison_table": {
+    "vimshottari": {
+      "cycle_years": 120,
+      "basis": "Moon's nakshatra",
+      "periods": 9,
+      "period_type": "planetary",
+      "variable_duration": false,
+      "suitability": "General use, most popular"
+    },
+    "yogini": {
+      "cycle_years": 36,
+      "basis": "Moon's nakshatra and pada",
+      "periods": 8,
+      "period_type": "deity-based (with planetary lords)",
+      "variable_duration": false,
+      "suitability": "Spiritual matters, female natives"
+    },
+    "narayana": {
+      "cycle_years": 108,
+      "basis": "Ascendant and sign lords",
+      "periods": 12,
+      "period_type": "sign-based",
+      "variable_duration": true,
+      "suitability": "General predictions, Jaimini system"
+    },
+    "chara": {
+      "cycle_years": 108,
+      "basis": "Ascendant mobility and complex count",
+      "periods": 12,
+      "period_type": "sign-based with special rules",
+      "variable_duration": true,
+      "suitability": "Advanced Jaimini predictions"
+    }
+  },
+  "usage_guidelines": {
+    "primary_system": "Vimshottari (default for most readings)",
+    "secondary_systems": ["Yogini for spiritual/female matters", "Narayana for Jaimini analysis"],
+    "cross_verification": "Use multiple systems to confirm important events",
+    "system_selection": {
+      "use_vimshottari": "For general life predictions, career, health, relationships",
+      "use_yogini": "For spiritual evolution, quick predictions, female-specific queries",
+      "use_narayana": "For longevity, major life events, Jaimini-style analysis",
+      "use_chara": "For advanced practitioners using full Jaimini system"
+    }
+  },
+  "interpretation_principles": {
+    "combine_with_transits": "Dasha sets the stage, transits trigger events",
+    "consider_natal_chart": "Dasha lord's natal strength modifies results",
+    "houses_matter": "Dasha lord's house ownership and placement crucial",
+    "aspects_count": "Aspects to dasha lord from other planets modify results",
+    "divisional_charts": "Check dasha lords in D9, D10 for specific area predictions"
+  },
+  "timing_events": {
+    "dasha_start": "Major life changes, new beginnings in dasha lord's significations",
+    "dasha_middle": "Peak of dasha effects, established patterns",
+    "dasha_end": "Completion, transition, preparing for next dasha",
+    "antardasha_changes": "Sub-events, monthly/quarterly developments",
+    "pratyantardasha": "Daily/weekly fluctuations, minor events"
+  }
+}

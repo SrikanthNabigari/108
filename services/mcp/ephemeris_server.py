@@ -38,6 +38,11 @@ from packages.cosmos.src.panchanga import (  # noqa: E402
     get_vara,
     get_yoga,
 )
+from packages.cosmos.src.sunrise_sunset import get_sunrise_sunset  # noqa: E402
+from packages.cosmos.src.upagrahas import (  # noqa: E402
+    calculate_all_upagrahas,
+    get_upagraha_effects,
+)
 
 # Initialize MCP server
 mcp = FastMCP("108-ephemeris")
@@ -333,6 +338,105 @@ def panchanga(datetime_iso: str, latitude: float, longitude: float) -> dict[str,
                 "name": vara_name,
                 "weekday": vara_data.get("weekday", "Unknown"),
             },
+        }
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__}
+
+
+@mcp.tool()
+def sunrise_sunset(datetime_iso: str, latitude: float, longitude: float) -> dict[str, Any]:
+    """
+    Calculate sunrise and sunset times for a given date and location.
+
+    Uses Swiss Ephemeris for accurate astronomical calculations.
+
+    Args:
+        datetime_iso: ISO format datetime (e.g., "2026-02-04T12:00:00+05:30")
+        latitude: Geographic latitude (-90 to 90)
+        longitude: Geographic longitude (-180 to 180)
+
+    Returns:
+        Dictionary with sunrise, sunset, day/night duration in hours
+
+    Example:
+        sunrise_sunset("2026-02-04T12:00:00+05:30", 16.726, 81.288)
+    """
+    try:
+        dt = datetime.fromisoformat(datetime_iso.replace("Z", "+00:00"))
+        result = get_sunrise_sunset(dt, latitude, longitude)
+
+        return {
+            "datetime": datetime_iso,
+            "location": {"latitude": latitude, "longitude": longitude},
+            "sunrise": result["sunrise"].isoformat(),
+            "sunset": result["sunset"].isoformat(),
+            "day_duration_hours": round(result["day_duration_hours"], 2),
+            "night_duration_hours": round(result["night_duration_hours"], 2),
+        }
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__}
+
+
+@mcp.tool()
+def upagraha_positions(
+    datetime_iso: str,
+    latitude: float,
+    longitude: float,
+    lagna_longitude: float,
+    sun_longitude: float,
+) -> dict[str, Any]:
+    """
+    Calculate all 11 upagraha (sub-planet) positions.
+
+    Includes time-based upagrahas (Gulika, Mandi, Yamaghanda, Kala, Mrityu,
+    Ardhaprahara) and mathematical upagrahas (Dhooma, Vyatipata, Parivesha,
+    Indrachapa, Upaketu).
+
+    Args:
+        datetime_iso: Birth/query datetime in ISO format
+        latitude: Geographic latitude
+        longitude: Geographic longitude
+        lagna_longitude: Ascendant longitude (0-360)
+        sun_longitude: Sun's sidereal longitude (0-360)
+
+    Returns:
+        All 11 upagraha positions with rashi, degree, house, and effects
+
+    Example:
+        upagraha_positions("1992-12-03T03:00:00+05:30", 16.726, 81.288, 180.0, 227.0)
+    """
+    try:
+        dt = datetime.fromisoformat(datetime_iso.replace("Z", "+00:00"))
+
+        result = calculate_all_upagrahas(dt, latitude, longitude, lagna_longitude, sun_longitude)
+
+        positions = {}
+        for name, pos in result.positions.items():
+            positions[name] = {
+                "longitude": round(pos.longitude, 4),
+                "rashi": pos.rashi.value,
+                "degree_in_sign": round(pos.degree_in_sign, 2),
+                "house": pos.house,
+                "calculation_method": pos.calculation_method,
+            }
+
+        effects = []
+        for pos in result.positions.values():
+            effect = get_upagraha_effects(pos)
+            effects.append(effect)
+
+        return {
+            "datetime": datetime_iso,
+            "location": {"latitude": latitude, "longitude": longitude},
+            "positions": positions,
+            "sunrise": result.sunrise.isoformat() if result.sunrise else None,
+            "sunset": result.sunset.isoformat() if result.sunset else None,
+            "day_duration_hours": round(result.day_duration_hours, 2)
+            if result.day_duration_hours
+            else None,
+            "effects": effects,
         }
 
     except Exception as e:

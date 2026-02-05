@@ -28,6 +28,10 @@ from packages.core.src import (  # noqa: E402
     PlanetPosition,
     Rashi,
 )
+from packages.cosmos.src.divisional import (  # noqa: E402
+    calculate_vimshopaka_bala,
+    get_all_vimshopaka,
+)
 from packages.self.src import (  # noqa: E402
     DoshaDetector,
     StrengthCalculator,
@@ -36,6 +40,15 @@ from packages.self.src import (  # noqa: E402
     get_compatibility_verdict,
 )
 from packages.self.src.combustion import check_combustion as _check_combustion  # noqa: E402
+from packages.self.src.jaimini import (  # noqa: E402
+    calculate_all_arudha_padas,
+    calculate_chara_dasha,
+    calculate_chara_karakas,
+    get_jaimini_aspects,
+)
+from packages.self.src.prashna import (  # noqa: E402
+    analyze_prashna as _analyze_prashna,
+)
 from packages.self.src.retrograde import (  # noqa: E402
     get_retrograde_effects as _get_retrograde_effects,
 )
@@ -503,6 +516,333 @@ def retrograde_effects(
     try:
         result = _get_retrograde_effects(planet, is_natal=is_natal, house=house)
         return {**result, "success": True}
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__, "success": False}
+
+
+@mcp.tool()
+def chara_karakas(
+    planets: dict[str, dict[str, Any]],
+    lagna_rashi: str,
+    moon_rashi: str | None = None,
+    houses: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """
+    Calculate Jaimini Chara Karakas (7 variable significators).
+
+    Ranks 7 planets (Sun through Saturn) by degree in sign to determine
+    Atmakaraka (soul), Amatyakaraka (career), etc.
+
+    Args:
+        planets: Planet positions {name: {longitude, sign, house, ...}}
+        lagna_rashi: Ascendant sign
+        moon_rashi: Moon sign (optional)
+        houses: House cusps data (optional)
+
+    Returns:
+        7 Chara Karakas ranked from Atmakaraka to Darakaraka
+
+    Example:
+        chara_karakas({"sun": {"longitude": 52.5, "sign": "taurus"}, ...}, "libra")
+    """
+    try:
+        chart = _build_chart_for_yoga(planets, lagna_rashi, moon_rashi, houses)
+        karakas = calculate_chara_karakas(chart)
+
+        return {
+            "karakas": [
+                {
+                    "karaka": k.karaka.value,
+                    "planet": k.planet.value,
+                    "degree_in_sign": round(k.degree_in_sign, 2),
+                    "rashi": k.rashi.value,
+                }
+                for k in karakas
+            ],
+            "atmakaraka": karakas[0].planet.value if karakas else None,
+            "success": True,
+        }
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__, "success": False}
+
+
+@mcp.tool()
+def jaimini_aspects(rashi: str) -> dict[str, Any]:
+    """
+    Get Jaimini sign-based aspects for a rashi.
+
+    Jaimini aspects are sign-based (not degree-based like Parashari):
+    - Movable signs aspect Fixed signs (skip adjacent)
+    - Fixed signs aspect Movable signs (skip adjacent)
+    - Dual signs aspect other Dual signs
+
+    Args:
+        rashi: Sign name (e.g., "aries", "taurus")
+
+    Returns:
+        List of signs aspected by the given rashi
+
+    Example:
+        jaimini_aspects("aries")
+    """
+    try:
+        rashi_enum = Rashi(rashi.lower())
+        aspected = get_jaimini_aspects(rashi_enum)
+
+        return {
+            "from_rashi": rashi.lower(),
+            "aspects": [r.value for r in aspected],
+            "count": len(aspected),
+            "success": True,
+        }
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__, "success": False}
+
+
+@mcp.tool()
+def arudha_padas(
+    planets: dict[str, dict[str, Any]],
+    lagna_rashi: str,
+    moon_rashi: str | None = None,
+    houses: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """
+    Calculate all 12 Arudha Padas (A1 through A12).
+
+    Arudha Pada is the image/perception of a house. Calculated by counting
+    from house to its lord, then same distance from lord.
+
+    Args:
+        planets: Planet positions {name: {longitude, sign, house, ...}}
+        lagna_rashi: Ascendant sign
+        moon_rashi: Moon sign (optional)
+        houses: House cusps data (optional)
+
+    Returns:
+        All 12 Arudha Padas with rashi placements
+
+    Example:
+        arudha_padas({"sun": {"longitude": 52.5, "sign": "taurus"}, ...}, "libra")
+    """
+    try:
+        chart = _build_chart_for_yoga(planets, lagna_rashi, moon_rashi, houses)
+        padas = calculate_all_arudha_padas(chart)
+
+        return {
+            "arudha_padas": [
+                {
+                    "house": p.house_number,
+                    "label": f"A{p.house_number}",
+                    "rashi": p.rashi.value,
+                    "house_lord": p.house_lord.value,
+                    "note": p.calculation_note,
+                }
+                for p in padas
+            ],
+            "success": True,
+        }
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__, "success": False}
+
+
+@mcp.tool()
+def chara_dasha(
+    birth_datetime: str,
+    planets: dict[str, dict[str, Any]],
+    lagna_rashi: str,
+    moon_rashi: str | None = None,
+    houses: dict[str, Any] | None = None,
+    years: int = 108,
+) -> dict[str, Any]:
+    """
+    Calculate Jaimini Chara Dasha periods (sign-based, 108-year cycle).
+
+    Direction depends on lagna parity: odd lagna = forward (Aries→Pisces),
+    even lagna = reverse (Pisces→Aries).
+
+    Args:
+        birth_datetime: Birth datetime in ISO format
+        planets: Planet positions
+        lagna_rashi: Ascendant sign
+        moon_rashi: Moon sign (optional)
+        houses: House cusps (optional)
+        years: Years to calculate (default 108)
+
+    Returns:
+        Chara Dasha periods with signs, dates, and durations
+
+    Example:
+        chara_dasha("1992-12-03T03:00:00+05:30",
+                    {"sun": {"longitude": 52.5, "sign": "taurus"}, ...}, "libra")
+    """
+    try:
+        from datetime import datetime as dt_class
+
+        birth_dt = dt_class.fromisoformat(birth_datetime.replace("Z", "+00:00"))
+        if birth_dt.tzinfo:
+            birth_dt = birth_dt.replace(tzinfo=None)
+
+        chart = _build_chart_for_yoga(planets, lagna_rashi, moon_rashi, houses)
+        periods = calculate_chara_dasha(birth_dt, chart, years)
+
+        return {
+            "system": "chara",
+            "birth_datetime": birth_datetime,
+            "lagna": lagna_rashi.lower(),
+            "periods": [
+                {
+                    "rashi": p.rashi.value,
+                    "start_date": p.start_date.isoformat(),
+                    "end_date": p.end_date.isoformat(),
+                    "duration_years": p.duration_years,
+                }
+                for p in periods
+            ],
+            "total_periods": len(periods),
+            "success": True,
+        }
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__, "success": False}
+
+
+@mcp.tool()
+def prashna_analysis(
+    question: str,
+    datetime_iso: str,
+    latitude: float,
+    longitude: float,
+    category: str,
+) -> dict[str, Any]:
+    """
+    Perform Prashna (Horary) astrology analysis for a question.
+
+    Creates a chart for the moment the question is asked and analyzes
+    lagna strength, Moon condition, and significator placement.
+
+    Args:
+        question: The question being asked
+        datetime_iso: Question datetime in ISO format
+        latitude: Location latitude
+        longitude: Location longitude
+        category: Question category (health, marriage, career, travel,
+                 lost_objects, legal, spiritual, children, wealth, education)
+
+    Returns:
+        Complete Prashna analysis with judgment, timing, and recommendations
+
+    Example:
+        prashna_analysis("Will I get the job?", "2026-02-04T10:00:00+05:30",
+                        16.726, 81.288, "career")
+    """
+    try:
+        from datetime import datetime as dt_cls
+
+        from packages.core.src import PrashnaCategory
+
+        dt = dt_cls.fromisoformat(datetime_iso.replace("Z", "+00:00"))
+        cat = PrashnaCategory(category.lower())
+
+        result = _analyze_prashna(question, dt, latitude, longitude, cat)
+
+        return {
+            "question": question,
+            "datetime": datetime_iso,
+            "category": category,
+            "judgment": result.judgment.value,
+            "strength_score": round(result.strength_score, 1),
+            "favorable_factors": result.favorable_factors,
+            "unfavorable_factors": result.unfavorable_factors,
+            "timing": result.timing,
+            "recommendation": result.recommendation,
+            "chart": {
+                "lagna_rashi": result.chart.lagna_rashi.value,
+                "lagna_degree": round(result.chart.lagna_degree, 2),
+                "significator": result.chart.significator.value,
+            },
+            "success": True,
+        }
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__, "success": False}
+
+
+@mcp.tool()
+def vimshopaka_strength(
+    planet: str,
+    longitude: float,
+    scheme: str = "shad_varga",
+) -> dict[str, Any]:
+    """
+    Calculate Vimshopaka Bala (strength across divisional charts).
+
+    Evaluates a planet's dignity across multiple divisional charts using
+    the proper friendship table and dignity scoring.
+
+    Args:
+        planet: Planet name (sun, moon, mars, mercury, jupiter, venus, saturn)
+        longitude: Planet's sidereal longitude (0-360)
+        scheme: Varga scheme (shad_varga, sapta_varga, dasha_varga, shodasha_varga)
+
+    Returns:
+        Vimshopaka score with category and per-varga breakdown
+
+    Example:
+        vimshopaka_strength("jupiter", 136.24, "shad_varga")
+    """
+    try:
+        result = calculate_vimshopaka_bala(planet.lower(), longitude, scheme)
+        return {**result, "planet": planet.lower(), "success": True}
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__, "success": False}
+
+
+@mcp.tool()
+def all_vimshopaka(
+    planets: dict[str, float],
+    scheme: str = "shad_varga",
+) -> dict[str, Any]:
+    """
+    Calculate Vimshopaka Bala for all planets in a chart.
+
+    Provides comparative strength analysis across the chosen varga scheme.
+
+    Args:
+        planets: Planet longitudes {planet_name: longitude}
+        scheme: Varga scheme (shad_varga, sapta_varga, dasha_varga, shodasha_varga)
+
+    Returns:
+        Vimshopaka scores for all planets with ranking
+
+    Example:
+        all_vimshopaka({"sun": 52.5, "moon": 102.5, "mars": 230.0}, "shad_varga")
+    """
+    try:
+        result = get_all_vimshopaka(
+            {k.lower(): v for k, v in planets.items()},
+            scheme,
+        )
+
+        # Sort by total_points descending for ranking
+        ranked = sorted(
+            result.items(),
+            key=lambda x: x[1].get("total_points", 0),
+            reverse=True,
+        )
+
+        return {
+            "scheme": scheme,
+            "planets": result,
+            "ranking": [
+                {"planet": name, "score": data.get("total_points", 0)} for name, data in ranked
+            ],
+            "success": True,
+        }
+
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__, "success": False}
 

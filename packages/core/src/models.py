@@ -5,7 +5,16 @@ from typing import Any
 
 from pydantic import BaseModel, Field
 
-from .constants import Planet, Rashi, YogaCategory
+from .constants import (
+    CharaKaraka,
+    Planet,
+    PrashnaCategory,
+    PrashnaJudgment,
+    Rashi,
+    Upagraha,
+    YogaCategory,
+    YoginiName,
+)
 
 
 class BirthData(BaseModel):
@@ -343,3 +352,138 @@ class UserProfile(BaseModel):
             }
         }
     }
+
+
+# ===================
+# Jaimini System Models
+# ===================
+
+
+class CharaKarakaResult(BaseModel):
+    """Result of Chara Karaka calculation for one planet."""
+
+    karaka: CharaKaraka = Field(description="Chara Karaka designation")
+    planet: Planet = Field(description="Planet assigned this karaka")
+    degree_in_sign: float = Field(ge=0, lt=30, description="Degree within sign")
+    rashi: Rashi = Field(description="Sign the planet occupies")
+
+
+class ArudhaPada(BaseModel):
+    """Arudha Pada position for a house."""
+
+    house_number: int = Field(ge=1, le=12, description="House number (1-12)")
+    rashi: Rashi = Field(description="Sign where the pada falls")
+    house_lord: Planet = Field(description="Lord of the house")
+    calculation_note: str = Field(default="", description="Note about calculation")
+
+
+class CharaDashaPeriod(BaseModel):
+    """One period in the Chara Dasha system."""
+
+    rashi: Rashi = Field(description="Dasha sign")
+    start_date: datetime = Field(description="Period start date")
+    end_date: datetime = Field(description="Period end date")
+    duration_years: int = Field(ge=1, le=12, description="Duration in years")
+
+
+class KarakamshaResult(BaseModel):
+    """Result of Karakamsha analysis."""
+
+    atmakaraka: Planet = Field(description="Atmakaraka planet")
+    navamsha_rashi: Rashi = Field(description="AK's Navamsha sign position")
+    planets_in_karakamsha: list[Planet] = Field(
+        default_factory=list, description="Planets in karakamsha sign"
+    )
+    interpretation: str = Field(default="", description="Karakamsha interpretation")
+
+
+# ===================
+# Alternative Dasha Models
+# ===================
+
+
+class YoginiDashaPeriod(BaseModel):
+    """One period in the Yogini Dasha system."""
+
+    yogini: YoginiName = Field(description="Yogini name")
+    planet_lord: Planet = Field(description="Planet lord of this yogini")
+    start_date: datetime = Field(description="Period start date")
+    end_date: datetime = Field(description="Period end date")
+    duration_years: int = Field(ge=1, le=8, description="Duration in years")
+
+
+class NarayanaDashaPeriod(BaseModel):
+    """One period in the Narayana Dasha system."""
+
+    rashi: Rashi = Field(description="Dasha sign")
+    start_date: datetime = Field(description="Period start date")
+    end_date: datetime = Field(description="Period end date")
+    duration_years: int = Field(ge=1, le=12, description="Duration in years")
+    is_forward: bool = Field(description="Whether progression is forward")
+
+
+# ===================
+# Prashna (Horary) Models
+# ===================
+
+
+class PrashnaChart(BaseModel):
+    """Chart erected for a Prashna (horary) question."""
+
+    question: str = Field(description="The question asked")
+    question_datetime: datetime = Field(description="Time the question was asked")
+    category: PrashnaCategory = Field(description="Question category")
+    latitude: float = Field(ge=-90, le=90, description="Location latitude")
+    longitude: float = Field(ge=-180, le=180, description="Location longitude")
+    lagna_rashi: Rashi = Field(description="Ascendant sign at question time")
+    lagna_degree: float = Field(ge=0, lt=360, description="Ascendant longitude")
+    moon_position: PlanetPosition = Field(description="Moon position at question time")
+    significator: Planet = Field(description="Primary significator for this category")
+    planets: dict[Planet, PlanetPosition] = Field(description="All planet positions")
+    houses: HouseCusps = Field(description="House cusps")
+
+
+class PrashnaResult(BaseModel):
+    """Complete result of a Prashna analysis."""
+
+    chart: PrashnaChart = Field(description="The Prashna chart")
+    judgment: PrashnaJudgment = Field(description="Overall judgment")
+    strength_score: float = Field(ge=0, le=100, description="Strength score 0-100")
+    favorable_factors: list[str] = Field(
+        default_factory=list, description="Favorable factors found"
+    )
+    unfavorable_factors: list[str] = Field(
+        default_factory=list, description="Unfavorable factors found"
+    )
+    timing: dict[str, Any] = Field(default_factory=dict, description="Timing predictions")
+    recommendation: str = Field(default="", description="Overall recommendation")
+
+
+# ===================
+# Upagraha Models
+# ===================
+
+
+class UpagrahaPosition(BaseModel):
+    """Position of an Upagraha (sub-planet)."""
+
+    upagraha: Upagraha = Field(description="Upagraha identifier")
+    longitude: float = Field(ge=0, lt=360, description="Ecliptic longitude")
+    rashi: Rashi = Field(description="Zodiac sign")
+    degree_in_sign: float = Field(ge=0, lt=30, description="Degree within sign")
+    house: int = Field(ge=1, le=12, description="House placement")
+    calculation_method: str = Field(
+        default="", description="Method used (time-based or mathematical)"
+    )
+
+
+class UpagrahaAnalysis(BaseModel):
+    """Complete upagraha analysis for a chart."""
+
+    positions: dict[str, UpagrahaPosition] = Field(description="Upagraha positions keyed by name")
+    sunrise: datetime = Field(description="Sunrise time used")
+    sunset: datetime = Field(description="Sunset time used")
+    day_duration_hours: float = Field(description="Day duration in hours")
+    effects: list[dict[str, Any]] = Field(
+        default_factory=list, description="Effects for each upagraha"
+    )

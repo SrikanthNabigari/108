@@ -31,13 +31,23 @@ from packages.context.src import (  # noqa: E402
     get_mahadasha_sequence,
     get_pratyantardasha_effect,
 )
+from packages.context.src.narayana_dasha import (  # noqa: E402
+    calculate_narayana_sequence,
+    get_current_narayana_dasha,
+)
 from packages.context.src.transits import get_enriched_transit_analysis  # noqa: E402
+from packages.context.src.yogini_dasha import (  # noqa: E402
+    calculate_yogini_sequence,
+    get_current_yogini_dasha,
+    get_yogini_antardasha,
+)
 
 # Import cosmos constants
 from packages.cosmos.src import (  # noqa: E402
     get_all_planets,
     get_julian_day,
     get_karana,
+    get_sunrise_sunset,
     get_tithi,
     get_vara,
     get_yoga,
@@ -371,8 +381,8 @@ def dhaiya_status(natal_moon_rashi: str, saturn_rashi: str) -> dict[str, Any]:
 def muhurta_check(
     datetime_iso: str,
     activity: str,
-    latitude: float = 0,  # noqa: ARG001 - Reserved for location-based calculations
-    longitude: float = 0,  # noqa: ARG001 - Reserved for location-based calculations
+    latitude: float = 0,
+    longitude: float = 0,
 ) -> dict[str, Any]:
     """
     Check muhurta quality for a specific activity.
@@ -427,9 +437,14 @@ def muhurta_check(
         except (ValueError, TypeError):
             evaluation = {"quality": "unknown", "score": 0, "factors": []}
 
-        # Calculate inauspicious periods
-        sunrise = dt.replace(hour=6, minute=0)
-        sunset = dt.replace(hour=18, minute=0)
+        # Calculate actual sunrise/sunset (use location if provided, else defaults)
+        if latitude != 0 or longitude != 0:
+            sr_data = get_sunrise_sunset(dt, latitude, longitude)
+            sunrise = sr_data["sunrise"].replace(tzinfo=None)
+            sunset = sr_data["sunset"].replace(tzinfo=None)
+        else:
+            sunrise = dt.replace(hour=6, minute=0, second=0)
+            sunset = dt.replace(hour=18, minute=0, second=0)
         weekday = dt.strftime("%A").lower()
 
         inauspicious = calculate_all_inauspicious(sunrise, sunset, weekday)
@@ -733,6 +748,299 @@ def enriched_transit(
 
         result = get_enriched_transit_analysis(moon_idx, typed_data)
         return result
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__}
+
+
+@mcp.tool()
+def yogini_dasha(
+    birth_datetime: str,
+    moon_nakshatra: int,
+    moon_pada: int,
+    degree_in_nakshatra: float,
+    query_datetime: str | None = None,
+) -> dict[str, Any]:
+    """
+    Calculate Yogini Dasha periods (36-year cycle with 8 Yoginis).
+
+    The Yogini Dasha system uses 8 Yoginis (Mangala, Pingala, Dhanya,
+    Bhramari, Bhadrika, Ulka, Siddha, Sankata) totaling 36 years per cycle.
+
+    Args:
+        birth_datetime: Birth datetime in ISO format
+        moon_nakshatra: Moon's nakshatra number (1-27)
+        moon_pada: Moon's pada (1-4)
+        degree_in_nakshatra: Degrees traversed in nakshatra (0-13.333)
+        query_datetime: Query datetime (ISO format, defaults to now)
+
+    Returns:
+        Current Yogini Dasha, full sequence, and antardasha breakdown
+
+    Example:
+        yogini_dasha("1992-12-03T03:00:00+05:30", 25, 3, 10.0, "2026-02-04")
+    """
+    try:
+        birth_dt = datetime.fromisoformat(birth_datetime.replace("Z", "+00:00"))
+        if birth_dt.tzinfo:
+            birth_dt = birth_dt.replace(tzinfo=None)
+
+        query_dt = None
+        if query_datetime:
+            query_dt = datetime.fromisoformat(query_datetime.replace("Z", "+00:00"))
+            if query_dt.tzinfo:
+                query_dt = query_dt.replace(tzinfo=None)
+
+        # Get current dasha
+        current = get_current_yogini_dasha(
+            birth_dt, moon_nakshatra, moon_pada, degree_in_nakshatra, query_dt
+        )
+
+        # Get full sequence (3 cycles = 108 years)
+        periods = calculate_yogini_sequence(
+            birth_dt, moon_nakshatra, moon_pada, degree_in_nakshatra, cycles=3
+        )
+
+        # Get antardashas for current maha-dasha
+        current_maha = None
+        for p in periods:
+            start = p.start_date.replace(tzinfo=None) if p.start_date.tzinfo else p.start_date
+            end = p.end_date.replace(tzinfo=None) if p.end_date.tzinfo else p.end_date
+            check_dt = query_dt or datetime.now()
+            if start <= check_dt < end:
+                current_maha = p
+                break
+
+        antardashas = []
+        if current_maha:
+            antardashas = get_yogini_antardasha(current_maha)
+
+        return {
+            "system": "yogini",
+            "birth_datetime": birth_datetime,
+            "current": {
+                "yogini": current["yogini"].value
+                if hasattr(current["yogini"], "value")
+                else str(current["yogini"]),
+                "lord": current["lord"].value
+                if hasattr(current["lord"], "value")
+                else str(current["lord"]),
+                "start_date": current["start_date"].isoformat(),
+                "end_date": current["end_date"].isoformat(),
+                "remaining_days": current["remaining_days"],
+            },
+            "antardashas": [
+                {
+                    "yogini": ad["yogini"].value
+                    if hasattr(ad["yogini"], "value")
+                    else str(ad["yogini"]),
+                    "lord": ad["lord"].value if hasattr(ad["lord"], "value") else str(ad["lord"]),
+                    "start_date": ad["start_date"].isoformat(),
+                    "end_date": ad["end_date"].isoformat(),
+                }
+                for ad in antardashas
+            ],
+            "full_sequence": [
+                {
+                    "yogini": p.yogini.value if hasattr(p.yogini, "value") else str(p.yogini),
+                    "lord": p.planet_lord.value
+                    if hasattr(p.planet_lord, "value")
+                    else str(p.planet_lord),
+                    "start_date": p.start_date.isoformat(),
+                    "end_date": p.end_date.isoformat(),
+                    "duration_years": p.duration_years,
+                }
+                for p in periods
+            ],
+        }
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__}
+
+
+@mcp.tool()
+def narayana_dasha(
+    birth_datetime: str,
+    chart_data: dict[str, Any],
+    query_datetime: str | None = None,
+) -> dict[str, Any]:
+    """
+    Calculate Narayana Dasha periods (sign-based 108-year cycle).
+
+    Narayana Dasha is a Jaimini sign-based dasha system. Direction of
+    progression depends on lagna parity (odd=forward, even=reverse).
+
+    Args:
+        birth_datetime: Birth datetime in ISO format
+        chart_data: Chart data including planets and lagna_rashi
+        query_datetime: Query datetime (ISO format, defaults to now)
+
+    Returns:
+        Current Narayana Dasha, full sequence, and antardasha breakdown
+
+    Example:
+        narayana_dasha("1992-12-03T03:00:00+05:30",
+                       {"lagna_rashi": "libra", "planets": {...}})
+    """
+    try:
+        from packages.core.src import (
+            BirthChart,
+            BirthData,
+            HouseCusps,
+            Planet,
+            PlanetPosition,
+            Rashi,
+        )
+
+        birth_dt = datetime.fromisoformat(birth_datetime.replace("Z", "+00:00"))
+        if birth_dt.tzinfo:
+            birth_dt = birth_dt.replace(tzinfo=None)
+
+        # Build BirthChart from chart_data
+        lagna_str = chart_data.get("lagna_rashi", "aries").lower()
+        lagna_enum = Rashi(lagna_str)
+
+        planet_positions = {}
+        planets_data = chart_data.get("planets", {})
+        for pname, pdata in planets_data.items():
+            try:
+                p_enum = Planet(pname.lower())
+                r_enum = Rashi(pdata.get("sign", "aries").lower())
+                planet_positions[p_enum] = PlanetPosition(
+                    planet=p_enum,
+                    longitude=pdata.get("longitude", 0.0),
+                    latitude=0.0,
+                    speed=0.0,
+                    rashi=r_enum,
+                    rashi_degree=pdata.get("longitude", 0.0) % 30,
+                    nakshatra=pdata.get("nakshatra", "ashwini"),
+                    nakshatra_pada=pdata.get("nakshatra_pada", 1),
+                    nakshatra_lord=Planet.KETU,
+                    is_retrograde=pdata.get("is_retrograde", False),
+                    house=pdata.get("house", 1),
+                )
+            except (ValueError, KeyError):
+                continue
+
+        chart = BirthChart(
+            user_id="mcp_query",
+            birth_data=BirthData(
+                datetime_utc=birth_dt, latitude=0.0, longitude=0.0, timezone="UTC"
+            ),
+            planets=planet_positions,
+            houses=HouseCusps(ascendant=0.0, mc=270.0, cusps=[i * 30 for i in range(12)]),
+            lagna_rashi=lagna_enum,
+            moon_rashi=Rashi(chart_data.get("moon_rashi", "aries").lower()),
+            moon_nakshatra=chart_data.get("moon_nakshatra", "ashwini"),
+            ayanamsa=23.45,
+            calculated_at=datetime.now(),
+        )
+
+        # Calculate
+        periods = calculate_narayana_sequence(birth_dt, chart, cycles=1)
+
+        query_dt = None
+        if query_datetime:
+            query_dt = datetime.fromisoformat(query_datetime.replace("Z", "+00:00"))
+            if query_dt.tzinfo:
+                query_dt = query_dt.replace(tzinfo=None)
+
+        current = get_current_narayana_dasha(birth_dt, chart, query_dt)
+
+        return {
+            "system": "narayana",
+            "birth_datetime": birth_datetime,
+            "current": {
+                "rashi": current["rashi"].value
+                if hasattr(current["rashi"], "value")
+                else str(current["rashi"]),
+                "start_date": current["start_date"].isoformat(),
+                "end_date": current["end_date"].isoformat(),
+                "remaining_days": current["remaining_days"],
+            },
+            "full_sequence": [
+                {
+                    "rashi": p.rashi.value if hasattr(p.rashi, "value") else str(p.rashi),
+                    "start_date": p.start_date.isoformat(),
+                    "end_date": p.end_date.isoformat(),
+                    "duration_years": p.duration_years,
+                    "is_forward": p.is_forward,
+                }
+                for p in periods
+            ],
+        }
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__}
+
+
+@mcp.tool()
+def compare_dashas(
+    birth_datetime: str,
+    moon_longitude: float,
+    moon_nakshatra: int,
+    moon_pada: int,
+    degree_in_nakshatra: float,
+    query_datetime: str | None = None,
+) -> dict[str, Any]:
+    """
+    Compare current Vimshottari and Yogini Dasha periods.
+
+    Provides side-by-side comparison of both major dasha systems
+    for a given moment.
+
+    Args:
+        birth_datetime: Birth datetime in ISO format
+        moon_longitude: Moon's sidereal longitude (0-360)
+        moon_nakshatra: Moon's nakshatra number (1-27)
+        moon_pada: Moon's pada (1-4)
+        degree_in_nakshatra: Degrees traversed in nakshatra (0-13.333)
+        query_datetime: Query datetime (ISO format, defaults to now)
+
+    Returns:
+        Side-by-side comparison of Vimshottari and Yogini dasha periods
+
+    Example:
+        compare_dashas("1992-12-03T03:00:00+05:30", 326.85, 25, 3, 10.0)
+    """
+    try:
+        birth_dt = datetime.fromisoformat(birth_datetime.replace("Z", "+00:00"))
+        if birth_dt.tzinfo:
+            birth_dt = birth_dt.replace(tzinfo=None)
+
+        query_dt = None
+        if query_datetime:
+            query_dt = datetime.fromisoformat(query_datetime.replace("Z", "+00:00"))
+            if query_dt.tzinfo:
+                query_dt = query_dt.replace(tzinfo=None)
+
+        # Vimshottari
+        vimshottari = get_current_dasha(birth_dt, moon_longitude, query_dt)
+
+        # Yogini
+        yogini_current = get_current_yogini_dasha(
+            birth_dt, moon_nakshatra, moon_pada, degree_in_nakshatra, query_dt
+        )
+
+        return {
+            "query_date": (query_dt or datetime.now()).isoformat(),
+            "vimshottari": {
+                "mahadasha_lord": vimshottari["mahadasha"]["lord"],
+                "antardasha_lord": vimshottari["antardasha"]["lord"],
+                "mahadasha_end": vimshottari["mahadasha"]["end_date"].isoformat(),
+                "days_remaining": vimshottari["mahadasha"]["days_remaining"],
+            },
+            "yogini": {
+                "yogini": yogini_current["yogini"].value
+                if hasattr(yogini_current["yogini"], "value")
+                else str(yogini_current["yogini"]),
+                "lord": yogini_current["lord"].value
+                if hasattr(yogini_current["lord"], "value")
+                else str(yogini_current["lord"]),
+                "end_date": yogini_current["end_date"].isoformat(),
+                "remaining_days": yogini_current["remaining_days"],
+            },
+        }
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__}

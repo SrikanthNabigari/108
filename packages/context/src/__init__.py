@@ -38,6 +38,14 @@ from .muhurta import (
     get_choghadiya_at_time,
     validate_muhurta_input,
 )
+from .narayana_dasha import (
+    calculate_narayana_sequence,
+    calculate_period_duration,
+    get_current_narayana_dasha,
+    get_narayana_antardasha,
+    get_progression_direction,
+    is_odd_sign,
+)
 from .transits import (
     GOCHARA_FAVORABLE,
     TRANSIT_EFFECTS,
@@ -60,6 +68,13 @@ from .varshaphal import (
     determine_varshesha,
     get_varshaphal_analysis,
 )
+from .yogini_dasha import (
+    calculate_yogini_sequence,
+    get_current_yogini_dasha,
+    get_starting_yogini,
+    get_yogini_antardasha,
+    get_yogini_balance_at_birth,
+)
 
 __all__ = [
     "ACTIVITY_RULES",
@@ -81,9 +96,14 @@ __all__ = [
     "calculate_choghadiya",
     "calculate_gulika",
     "calculate_muntha",
+    # Narayana Dasha
+    "calculate_narayana_sequence",
+    "calculate_period_duration",
     "calculate_rahu_kaal",
     "calculate_sahams",
     "calculate_yamaghanda",
+    # Yogini Dasha
+    "calculate_yogini_sequence",
     "check_dhaiya",
     "check_sade_sati",
     "detect_tajika_yogas",
@@ -95,6 +115,8 @@ __all__ = [
     "get_antardasha_sequence",
     "get_choghadiya_at_time",
     "get_current_dasha",
+    "get_current_narayana_dasha",
+    "get_current_yogini_dasha",
     "get_dasha_balance_at_birth",
     "get_dasha_periods_for_year",
     "get_enriched_transit_analysis",
@@ -102,11 +124,17 @@ __all__ = [
     "get_gochara",
     "get_mahadasha_sequence",
     "get_nakshatra_transit_effect",
+    "get_narayana_antardasha",
     "get_pratyantardasha_effect",
     "get_pratyantardasha_sequence",
+    "get_progression_direction",
+    "get_starting_yogini",
     "get_transit_positions",
     "get_transiting_planet_house",
     "get_varshaphal_analysis",
+    "get_yogini_antardasha",
+    "get_yogini_balance_at_birth",
+    "is_odd_sign",
     "is_planet_favorable_in_house",
     "validate_dasha_data",
     "validate_muhurta_input",

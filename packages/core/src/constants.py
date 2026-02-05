@@ -116,3 +116,85 @@ NAKSHATRA_SPAN = 13.333333333
 
 # Pada (quarter) span in degrees (3°20')
 PADA_SPAN = 3.333333333
+
+
+class CharaKaraka(StrEnum):
+    """Jaimini Chara (movable) Karakas - determined by degree in sign."""
+
+    ATMAKARAKA = "atmakaraka"  # AK - highest degree planet
+    AMATYAKARAKA = "amatyakaraka"  # AmK - 2nd highest
+    BHRATRIKARAKA = "bhratrikaraka"  # BK - 3rd highest
+    MATRIKARAKA = "matrikaraka"  # MK - 4th highest
+    PUTRAKARAKA = "putrakaraka"  # PK - 5th highest
+    GNATIKARAKA = "gnatikaraka"  # GK - 6th highest
+    DARAKARAKA = "darakaraka"  # DK - lowest degree
+
+
+class SignMobility(StrEnum):
+    """Jaimini sign classification by mobility."""
+
+    MOVABLE = "movable"  # Aries, Cancer, Libra, Capricorn
+    FIXED = "fixed"  # Taurus, Leo, Scorpio, Aquarius
+    DUAL = "dual"  # Gemini, Virgo, Sagittarius, Pisces
+
+
+class DashaSystem(StrEnum):
+    """Dasha calculation systems."""
+
+    VIMSHOTTARI = "vimshottari"
+    YOGINI = "yogini"
+    NARAYANA = "narayana"
+    CHARA = "chara"
+
+
+class YoginiName(StrEnum):
+    """Eight Yogini names for Yogini Dasha system."""
+
+    MANGALA = "mangala"  # 1yr, Moon
+    PINGALA = "pingala"  # 2yr, Sun
+    DHANYA = "dhanya"  # 3yr, Jupiter
+    BHRAMARI = "bhramari"  # 4yr, Mars
+    BHADRIKA = "bhadrika"  # 5yr, Mercury
+    ULKA = "ulka"  # 6yr, Saturn
+    SIDDHA = "siddha"  # 7yr, Venus
+    SANKATA = "sankata"  # 8yr, Rahu
+
+
+class PrashnaCategory(StrEnum):
+    """Question categories for Prashna (Horary) astrology."""
+
+    HEALTH = "health"
+    MARRIAGE = "marriage"
+    CAREER = "career"
+    TRAVEL = "travel"
+    LOST_OBJECTS = "lost_objects"
+    LEGAL = "legal"
+    SPIRITUAL = "spiritual"
+    CHILDREN = "children"
+    WEALTH = "wealth"
+    EDUCATION = "education"
+
+
+class PrashnaJudgment(StrEnum):
+    """Judgment outcomes for Prashna analysis."""
+
+    FAVORABLE = "favorable"
+    UNFAVORABLE = "unfavorable"
+    NEUTRAL = "neutral"
+    DELAYED = "delayed"
+
+
+class Upagraha(StrEnum):
+    """Sub-planets (Upagrahas) used in Vedic astrology."""
+
+    GULIKA = "gulika"  # Saturn's day portion
+    MANDI = "mandi"  # End of Saturn's portion
+    YAMAGHANDA = "yamaghanda"  # Jupiter's portion (some: Mars)
+    KALA = "kala"  # Sun's portion
+    MRITYU = "mrityu"  # Mars-based death point
+    ARDHAPRAHARA = "ardhaprahara"  # Half-prahar
+    DHOOMA = "dhooma"  # Sun + 133°20'
+    VYATIPATA = "vyatipata"  # 360 - Dhooma
+    PARIVESHA = "parivesha"  # 180 + Vyatipata
+    INDRACHAPA = "indrachapa"  # 360 - Parivesha
+    UPAKETU = "upaketu"  # Sun - 30°
