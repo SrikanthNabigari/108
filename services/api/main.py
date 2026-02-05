@@ -21,19 +21,28 @@ import os
 import sys
 from contextlib import asynccontextmanager
 from datetime import datetime as dt
+from pathlib import Path
 from typing import Any
 
-from fastapi import Depends, FastAPI, HTTPException, Request, status
+from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
 # Add packages to path for imports
-sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 # Import from our packages
+from packages.context.src import (
+    calculate_rahu_kaal,
+    check_dhaiya,
+    check_sade_sati,
+    evaluate_muhurta,
+    get_current_dasha,
+    get_mahadasha_sequence,
+    get_transit_positions,
+)
 from packages.core.src import (
-    BirthChart,
     BirthData,
     CurrentDasha,
     DetectedDosha,
@@ -42,39 +51,21 @@ from packages.core.src import (
     NakshatraInfo,
     Panchanga,
     PlanetPosition,
-    Planet,
-    Rashi,
 )
 from packages.cosmos.src import (
-    get_julian_day,
-    get_all_planets,
-    get_house_cusps,
-    get_ascendant,
-    longitude_to_nakshatra,
-    get_panchanga,
-    get_navamsha,
-    get_divisional_chart,
     RASHI_NAMES,
+    get_all_planets,
+    get_divisional_chart,
+    get_house_cusps,
+    get_julian_day,
+    get_panchanga,
+    longitude_to_nakshatra,
 )
-from packages.self.src import (
-    YogaDetector,
-    DoshaDetector,
-    StrengthCalculator,
-)
-from packages.context.src import (
-    get_current_dasha,
-    get_mahadasha_sequence,
-    get_transit_positions,
-    check_sade_sati,
-    check_dhaiya,
-    evaluate_muhurta,
-    calculate_rahu_kaal,
-)
-
 
 # ============================================================================
 # Helper Functions
 # ============================================================================
+
 
 def request_to_jd(request: "BirthDataRequest") -> float:
     """Convert BirthDataRequest to Julian Day Number.
@@ -83,6 +74,7 @@ def request_to_jd(request: "BirthDataRequest") -> float:
     before passing to get_julian_day.
     """
     from datetime import timedelta
+
     utc_dt = request.datetime - timedelta(hours=request.timezone_offset)
     return get_julian_day(utc_dt)
 
@@ -95,6 +87,7 @@ def datetime_to_jd_utc(dt_obj: dt) -> float:
 def get_ayanamsa_value(jd: float, ayanamsa_name: str) -> float:
     """Convert ayanamsa name to float value for a given Julian Day."""
     from packages.cosmos.src import get_ayanamsa
+
     return get_ayanamsa(jd, ayanamsa_name)
 
 
@@ -102,8 +95,10 @@ def get_ayanamsa_value(jd: float, ayanamsa_name: str) -> float:
 # Configuration
 # ============================================================================
 
+
 class Settings(BaseModel):
     """Application settings."""
+
     app_name: str = "108 Vedic Astrology API"
     app_version: str = "1.0.0"
     debug: bool = Field(default_factory=lambda: os.getenv("DEBUG", "false").lower() == "true")
@@ -121,8 +116,10 @@ settings = Settings()
 # Request/Response Models
 # ============================================================================
 
+
 class BirthDataRequest(BaseModel):
     """Request model for birth data input."""
+
     datetime: dt = Field(..., description="Birth date and time (ISO format)")
     latitude: float = Field(..., ge=-90, le=90, description="Birth location latitude")
     longitude: float = Field(..., ge=-180, le=180, description="Birth location longitude")
@@ -141,7 +138,7 @@ class BirthDataRequest(BaseModel):
                     "timezone_offset": 5.5,
                     "name": "Srikanth",
                     "ayanamsa": "lahiri",
-                    "house_system": "whole_sign"
+                    "house_system": "whole_sign",
                 }
             ]
         }
@@ -150,6 +147,7 @@ class BirthDataRequest(BaseModel):
 
 class ChartResponse(BaseModel):
     """Response model for birth chart."""
+
     birth_data: BirthData
     planets: dict[str, PlanetPosition]
     houses: HouseCusps
@@ -160,6 +158,7 @@ class ChartResponse(BaseModel):
 
 class AnalysisResponse(BaseModel):
     """Response model for chart analysis."""
+
     yogas: list[DetectedYoga]
     doshas: list[DetectedDosha]
     strengths: dict[str, Any]
@@ -168,6 +167,7 @@ class AnalysisResponse(BaseModel):
 
 class TimingResponse(BaseModel):
     """Response model for timing analysis."""
+
     current_dasha: CurrentDasha
     mahadasha_sequence: list[dict[str, Any]]
     sade_sati: dict[str, Any] | None
@@ -177,14 +177,18 @@ class TimingResponse(BaseModel):
 
 class MuhurtaRequest(BaseModel):
     """Request for muhurta analysis."""
+
     datetime: dt
     latitude: float
     longitude: float
-    activity: str = Field(..., description="Activity type: marriage, travel, business, education, etc.")
+    activity: str = Field(
+        ..., description="Activity type: marriage, travel, business, education, etc."
+    )
 
 
 class MuhurtaResponse(BaseModel):
     """Response for muhurta analysis."""
+
     datetime: dt
     activity: str
     is_auspicious: bool
@@ -196,6 +200,7 @@ class MuhurtaResponse(BaseModel):
 
 class ChatRequest(BaseModel):
     """Request for agent chat."""
+
     message: str
     user_id: str | None = None
     context: dict[str, Any] | None = None
@@ -203,6 +208,7 @@ class ChatRequest(BaseModel):
 
 class ChatResponse(BaseModel):
     """Response from agent chat."""
+
     response: str
     user_id: str | None
     metadata: dict[str, Any] | None = None
@@ -210,6 +216,7 @@ class ChatResponse(BaseModel):
 
 class HealthResponse(BaseModel):
     """Health check response."""
+
     status: str
     version: str
     timestamp: dt
@@ -217,6 +224,7 @@ class HealthResponse(BaseModel):
 
 class ErrorResponse(BaseModel):
     """Standard error response."""
+
     error: str
     detail: str | None = None
     status_code: int
@@ -226,8 +234,9 @@ class ErrorResponse(BaseModel):
 # Lifespan Management
 # ============================================================================
 
+
 @asynccontextmanager
-async def lifespan(app: FastAPI):
+async def lifespan(_app: FastAPI):
     """Manage application lifecycle."""
     # Startup
     print(f"🚀 Starting {settings.app_name} v{settings.app_version}")
@@ -280,33 +289,26 @@ app.add_middleware(
 # Exception Handlers
 # ============================================================================
 
+
 @app.exception_handler(HTTPException)
-async def http_exception_handler(request: Request, exc: HTTPException):
+async def http_exception_handler(_request: Request, exc: HTTPException):
     """Handle HTTP exceptions."""
     return JSONResponse(
         status_code=exc.status_code,
-        content=ErrorResponse(
-            error=exc.detail,
-            status_code=exc.status_code
-        ).model_dump()
+        content=ErrorResponse(error=exc.detail, status_code=exc.status_code).model_dump(),
     )
 
 
 @app.exception_handler(Exception)
-async def general_exception_handler(request: Request, exc: Exception):
+async def general_exception_handler(_request: Request, exc: Exception):
     """Handle unexpected exceptions."""
-    if settings.debug:
-        detail = str(exc)
-    else:
-        detail = "An unexpected error occurred"
+    detail = str(exc) if settings.debug else "An unexpected error occurred"
 
     return JSONResponse(
         status_code=500,
         content=ErrorResponse(
-            error="Internal Server Error",
-            detail=detail,
-            status_code=500
-        ).model_dump()
+            error="Internal Server Error", detail=detail, status_code=500
+        ).model_dump(),
     )
 
 
@@ -314,14 +316,11 @@ async def general_exception_handler(request: Request, exc: Exception):
 # Health Check Routes
 # ============================================================================
 
+
 @app.get("/health", response_model=HealthResponse, tags=["Health"])
 async def health_check():
     """Check API health status."""
-    return HealthResponse(
-        status="healthy",
-        version=settings.app_version,
-        timestamp=dt.utcnow()
-    )
+    return HealthResponse(status="healthy", version=settings.app_version, timestamp=dt.utcnow())
 
 
 @app.get("/", tags=["Health"])
@@ -331,13 +330,14 @@ async def root():
         "name": settings.app_name,
         "version": settings.app_version,
         "docs": "/docs",
-        "health": "/health"
+        "health": "/health",
     }
 
 
 # ============================================================================
 # Birth Chart Routes
 # ============================================================================
+
 
 @app.post("/api/v1/chart", tags=["Chart"])
 async def calculate_birth_chart(request: BirthDataRequest):
@@ -360,7 +360,7 @@ async def calculate_birth_chart(request: BirthDataRequest):
             request.latitude,
             request.longitude,
             house_system=request.house_system,
-            ayanamsa=request.ayanamsa
+            ayanamsa=request.ayanamsa,
         )
 
         # Get ascendant details
@@ -385,7 +385,7 @@ async def calculate_birth_chart(request: BirthDataRequest):
                 "degree_in_rashi": data["longitude"] % 30,
                 "is_retrograde": data.get("is_retrograde", False),
                 "nakshatra": nak.get("nakshatra_name", ""),
-                "nakshatra_pada": nak.get("pada", 0)
+                "nakshatra_pada": nak.get("pada", 0),
             }
 
         # Get lagna rashi
@@ -398,7 +398,7 @@ async def calculate_birth_chart(request: BirthDataRequest):
                 "latitude": request.latitude,
                 "longitude": request.longitude,
                 "timezone_offset": request.timezone_offset,
-                "name": request.name
+                "name": request.name,
             },
             "ascendant": {
                 "longitude": asc_longitude,
@@ -406,28 +406,27 @@ async def calculate_birth_chart(request: BirthDataRequest):
                 "name": asc_nakshatra.get("nakshatra_name", ""),
                 "pada": asc_nakshatra.get("pada", 0),
                 "lord": asc_nakshatra.get("lord", ""),
-                "degree_in_nakshatra": asc_nakshatra.get("degree_in_nakshatra", 0.0)
+                "degree_in_nakshatra": asc_nakshatra.get("degree_in_nakshatra", 0.0),
             },
             "moon_nakshatra": {
                 "longitude": moon_longitude,
                 "name": moon_nakshatra.get("nakshatra_name", ""),
                 "pada": moon_nakshatra.get("pada", 0),
                 "lord": moon_nakshatra.get("lord", ""),
-                "degree_in_nakshatra": moon_nakshatra.get("degree_in_nakshatra", 0.0)
+                "degree_in_nakshatra": moon_nakshatra.get("degree_in_nakshatra", 0.0),
             },
             "planets": planets,
             "houses": {
                 "ascendant": houses_raw["ascendant"],
                 "mc": houses_raw.get("mc", 0.0),
-                "cusps": houses_raw["cusps"]
-            }
+                "cusps": houses_raw["cusps"],
+            },
         }
 
     except Exception as e:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Error calculating chart: {str(e)}"
-        )
+            status_code=status.HTTP_400_BAD_REQUEST, detail=f"Error calculating chart: {e!s}"
+        ) from e
 
 
 @app.post("/api/v1/chart/divisional/{division}", tags=["Chart"])
@@ -455,8 +454,7 @@ async def calculate_divisional_chart(division: int, request: BirthDataRequest):
     """
     if division < 1 or division > 60:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Division must be between 1 and 60"
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Division must be between 1 and 60"
         )
 
     try:
@@ -472,19 +470,19 @@ async def calculate_divisional_chart(division: int, request: BirthDataRequest):
         return {
             "division": division,
             "chart": divisional_chart,
-            "description": f"D{division} divisional chart"
+            "description": f"D{division} divisional chart",
         }
 
     except Exception as e:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Error calculating D{division}: {str(e)}"
-        )
+            status_code=status.HTTP_400_BAD_REQUEST, detail=f"Error calculating D{division}: {e!s}"
+        ) from e
 
 
 # ============================================================================
 # Analysis Routes
 # ============================================================================
+
 
 @app.post("/api/v1/analysis", tags=["Analysis"])
 async def analyze_chart(request: BirthDataRequest):
@@ -502,7 +500,7 @@ async def analyze_chart(request: BirthDataRequest):
             request.latitude,
             request.longitude,
             house_system=request.house_system,
-            ayanamsa=request.ayanamsa
+            ayanamsa=request.ayanamsa,
         )
 
         # Build planets dict
@@ -514,7 +512,7 @@ async def analyze_chart(request: BirthDataRequest):
                 "rashi": RASHI_NAMES[rashi_idx],
                 "rashi_num": rashi_idx,
                 "degree": data["longitude"] % 30,
-                "is_retrograde": data.get("is_retrograde", False)
+                "is_retrograde": data.get("is_retrograde", False),
             }
 
         lagna_idx = int(houses_raw["ascendant"] // 30)
@@ -528,14 +526,13 @@ async def analyze_chart(request: BirthDataRequest):
             "lagna_rashi": lagna_rashi,
             "planets": planets_dict,
             "navamsha": navamsha,
-            "message": "Use /api/v1/analysis/yogas, /api/v1/analysis/doshas, or /api/v1/analysis/strength for detailed analysis"
+            "message": "Use /api/v1/analysis/yogas, /api/v1/analysis/doshas, or /api/v1/analysis/strength for detailed analysis",
         }
 
     except Exception as e:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Error analyzing chart: {str(e)}"
-        )
+            status_code=status.HTTP_400_BAD_REQUEST, detail=f"Error analyzing chart: {e!s}"
+        ) from e
 
 
 @app.post("/api/v1/analysis/yogas", tags=["Analysis"])
@@ -554,7 +551,7 @@ async def detect_yogas(request: BirthDataRequest):
             request.latitude,
             request.longitude,
             house_system=request.house_system,
-            ayanamsa=request.ayanamsa
+            ayanamsa=request.ayanamsa,
         )
 
         # Build planet positions dict
@@ -566,7 +563,7 @@ async def detect_yogas(request: BirthDataRequest):
                 "rashi": RASHI_NAMES[rashi_idx],
                 "rashi_num": rashi_idx,
                 "degree": data["longitude"] % 30,
-                "is_retrograde": data.get("is_retrograde", False)
+                "is_retrograde": data.get("is_retrograde", False),
             }
 
         lagna_idx = int(houses_raw["ascendant"] // 30)
@@ -594,28 +591,30 @@ async def detect_yogas(request: BirthDataRequest):
                 # Calculate house from lagna
                 house_from_lagna = ((planet_rashi_idx - lagna_rashi_idx) % 12) + 1
 
-                if house_from_lagna in kendras:
-                    if planet_rashi in data["own"] or planet_rashi == data["exalted"]:
-                        yogas.append({
+                if house_from_lagna in kendras and (
+                    planet_rashi in data["own"] or planet_rashi == data["exalted"]
+                ):
+                    yogas.append(
+                        {
                             "name": data["yoga"] + " Yoga",
                             "category": "Pancha Mahapurusha",
                             "planets_involved": [planet],
                             "description": f"{planet.title()} in {planet_rashi} (house {house_from_lagna})",
-                            "is_present": True
-                        })
+                            "is_present": True,
+                        }
+                    )
 
         return {
             "yogas": yogas,
             "count": len(yogas),
             "lagna_rashi": lagna_rashi,
-            "note": "Basic yoga detection. Full analysis requires complete BirthChart integration."
+            "note": "Basic yoga detection. Full analysis requires complete BirthChart integration.",
         }
 
     except Exception as e:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Error detecting yogas: {str(e)}"
-        )
+            status_code=status.HTTP_400_BAD_REQUEST, detail=f"Error detecting yogas: {e!s}"
+        ) from e
 
 
 @app.post("/api/v1/analysis/doshas", tags=["Analysis"])
@@ -634,7 +633,7 @@ async def detect_doshas(request: BirthDataRequest):
             request.latitude,
             request.longitude,
             house_system=request.house_system,
-            ayanamsa=request.ayanamsa
+            ayanamsa=request.ayanamsa,
         )
 
         # Build planet positions dict
@@ -646,7 +645,7 @@ async def detect_doshas(request: BirthDataRequest):
                 "rashi": RASHI_NAMES[rashi_idx],
                 "rashi_num": rashi_idx,
                 "degree": data["longitude"] % 30,
-                "is_retrograde": data.get("is_retrograde", False)
+                "is_retrograde": data.get("is_retrograde", False),
             }
 
         lagna_idx = int(houses_raw["ascendant"] // 30)
@@ -670,18 +669,24 @@ async def detect_doshas(request: BirthDataRequest):
                 # Jupiter aspect on Mars
                 if "jupiter" in planets_dict:
                     jupiter_house = ((planets_dict["jupiter"]["rashi_num"] - lagna_idx) % 12) + 1
-                    jupiter_aspects = [(jupiter_house + 4) % 12 + 1, (jupiter_house + 6) % 12 + 1, (jupiter_house + 8) % 12 + 1]
+                    jupiter_aspects = [
+                        (jupiter_house + 4) % 12 + 1,
+                        (jupiter_house + 6) % 12 + 1,
+                        (jupiter_house + 8) % 12 + 1,
+                    ]
                     if house_from_lagna in jupiter_aspects:
                         cancellation.append("Jupiter aspects Mars")
 
-                doshas.append({
-                    "name": "Mangal Dosha (Kuja Dosha)",
-                    "is_present": len(cancellation) == 0,
-                    "severity": "high" if len(cancellation) == 0 else "cancelled",
-                    "description": f"Mars in house {house_from_lagna} from Lagna",
-                    "cancellation": cancellation if cancellation else None,
-                    "remedies": ["Worship Hanuman on Tuesdays", "Recite Mangal mantra"]
-                })
+                doshas.append(
+                    {
+                        "name": "Mangal Dosha (Kuja Dosha)",
+                        "is_present": len(cancellation) == 0,
+                        "severity": "high" if len(cancellation) == 0 else "cancelled",
+                        "description": f"Mars in house {house_from_lagna} from Lagna",
+                        "cancellation": cancellation if cancellation else None,
+                        "remedies": ["Worship Hanuman on Tuesdays", "Recite Mangal mantra"],
+                    }
+                )
 
         # Check Kaal Sarp Dosha (all planets between Rahu-Ketu axis)
         if "rahu" in planets_dict and "ketu" in planets_dict:
@@ -702,26 +707,27 @@ async def detect_doshas(request: BirthDataRequest):
                             planets_between += 1
 
             if planets_between == 7 or planets_between == 0:
-                doshas.append({
-                    "name": "Kaal Sarp Dosha",
-                    "is_present": True,
-                    "severity": "high",
-                    "description": "All planets hemmed between Rahu-Ketu axis",
-                    "remedies": ["Rahu-Ketu shanti puja", "Worship Lord Shiva"]
-                })
+                doshas.append(
+                    {
+                        "name": "Kaal Sarp Dosha",
+                        "is_present": True,
+                        "severity": "high",
+                        "description": "All planets hemmed between Rahu-Ketu axis",
+                        "remedies": ["Rahu-Ketu shanti puja", "Worship Lord Shiva"],
+                    }
+                )
 
         return {
             "doshas": doshas,
             "count": len([d for d in doshas if d.get("is_present", True)]),
             "lagna_rashi": lagna_rashi,
-            "note": "Basic dosha detection. Full analysis requires complete BirthChart integration."
+            "note": "Basic dosha detection. Full analysis requires complete BirthChart integration.",
         }
 
     except Exception as e:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Error detecting doshas: {str(e)}"
-        )
+            status_code=status.HTTP_400_BAD_REQUEST, detail=f"Error detecting doshas: {e!s}"
+        ) from e
 
 
 @app.post("/api/v1/analysis/strength", tags=["Analysis"])
@@ -740,18 +746,48 @@ async def calculate_planetary_strengths(request: BirthDataRequest):
             request.latitude,
             request.longitude,
             house_system=request.house_system,
-            ayanamsa=request.ayanamsa
+            ayanamsa=request.ayanamsa,
         )
 
         # Planet dignity data
         PLANET_DIGNITY = {
             "sun": {"own": ["Leo"], "exalted": "Aries", "debilitated": "Libra", "moola": "Leo"},
-            "moon": {"own": ["Cancer"], "exalted": "Taurus", "debilitated": "Scorpio", "moola": "Taurus"},
-            "mars": {"own": ["Aries", "Scorpio"], "exalted": "Capricorn", "debilitated": "Cancer", "moola": "Aries"},
-            "mercury": {"own": ["Gemini", "Virgo"], "exalted": "Virgo", "debilitated": "Pisces", "moola": "Virgo"},
-            "jupiter": {"own": ["Sagittarius", "Pisces"], "exalted": "Cancer", "debilitated": "Capricorn", "moola": "Sagittarius"},
-            "venus": {"own": ["Taurus", "Libra"], "exalted": "Pisces", "debilitated": "Virgo", "moola": "Libra"},
-            "saturn": {"own": ["Capricorn", "Aquarius"], "exalted": "Libra", "debilitated": "Aries", "moola": "Aquarius"},
+            "moon": {
+                "own": ["Cancer"],
+                "exalted": "Taurus",
+                "debilitated": "Scorpio",
+                "moola": "Taurus",
+            },
+            "mars": {
+                "own": ["Aries", "Scorpio"],
+                "exalted": "Capricorn",
+                "debilitated": "Cancer",
+                "moola": "Aries",
+            },
+            "mercury": {
+                "own": ["Gemini", "Virgo"],
+                "exalted": "Virgo",
+                "debilitated": "Pisces",
+                "moola": "Virgo",
+            },
+            "jupiter": {
+                "own": ["Sagittarius", "Pisces"],
+                "exalted": "Cancer",
+                "debilitated": "Capricorn",
+                "moola": "Sagittarius",
+            },
+            "venus": {
+                "own": ["Taurus", "Libra"],
+                "exalted": "Pisces",
+                "debilitated": "Virgo",
+                "moola": "Libra",
+            },
+            "saturn": {
+                "own": ["Capricorn", "Aquarius"],
+                "exalted": "Libra",
+                "debilitated": "Aries",
+                "moola": "Aquarius",
+            },
         }
 
         lagna_idx = int(houses_raw["ascendant"] // 30)
@@ -801,25 +837,25 @@ async def calculate_planetary_strengths(request: BirthDataRequest):
                 "house_from_lagna": house_from_lagna,
                 "in_kendra": house_from_lagna in [1, 4, 7, 10],
                 "in_trikona": house_from_lagna in [1, 5, 9],
-                "in_dusthana": house_from_lagna in [6, 8, 12]
+                "in_dusthana": house_from_lagna in [6, 8, 12],
             }
 
         return {
             "strengths": strengths,
             "lagna_rashi": lagna_rashi,
-            "note": "Basic dignity analysis. Full Shadbala requires complete BirthChart integration."
+            "note": "Basic dignity analysis. Full Shadbala requires complete BirthChart integration.",
         }
 
     except Exception as e:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Error calculating strengths: {str(e)}"
-        )
+            status_code=status.HTTP_400_BAD_REQUEST, detail=f"Error calculating strengths: {e!s}"
+        ) from e
 
 
 # ============================================================================
 # Timing Routes
 # ============================================================================
+
 
 @app.post("/api/v1/timing", response_model=TimingResponse, tags=["Timing"])
 async def get_timing_analysis(request: BirthDataRequest):
@@ -835,17 +871,10 @@ async def get_timing_analysis(request: BirthDataRequest):
         moon_longitude = planets_raw["moon"]["longitude"]
 
         # Get current dasha
-        current_dasha = get_current_dasha(
-            request.datetime,
-            moon_longitude,
-            dt.now()
-        )
+        current_dasha = get_current_dasha(request.datetime, moon_longitude, dt.now())
 
         # Get mahadasha sequence
-        mahadasha_sequence = get_mahadasha_sequence(
-            request.datetime,
-            moon_longitude
-        )
+        mahadasha_sequence = get_mahadasha_sequence(request.datetime, moon_longitude)
 
         # Get current transits
         current_jd = datetime_to_jd_utc(dt.utcnow())
@@ -864,14 +893,13 @@ async def get_timing_analysis(request: BirthDataRequest):
             mahadasha_sequence=mahadasha_sequence,
             sade_sati=sade_sati if sade_sati.get("active") else None,
             dhaiya=dhaiya if dhaiya.get("active") else None,
-            current_transits=current_transits
+            current_transits=current_transits,
         )
 
     except Exception as e:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Error analyzing timing: {str(e)}"
-        )
+            status_code=status.HTTP_400_BAD_REQUEST, detail=f"Error analyzing timing: {e!s}"
+        ) from e
 
 
 @app.post("/api/v1/timing/dasha", tags=["Timing"])
@@ -883,27 +911,16 @@ async def get_dasha_periods(request: BirthDataRequest):
         planets_raw = get_all_planets(jd, ayanamsa=request.ayanamsa)
         moon_longitude = planets_raw["moon"]["longitude"]
 
-        current_dasha = get_current_dasha(
-            request.datetime,
-            moon_longitude,
-            dt.now()
-        )
+        current_dasha = get_current_dasha(request.datetime, moon_longitude, dt.now())
 
-        mahadasha_sequence = get_mahadasha_sequence(
-            request.datetime,
-            moon_longitude
-        )
+        mahadasha_sequence = get_mahadasha_sequence(request.datetime, moon_longitude)
 
-        return {
-            "current": current_dasha,
-            "mahadasha_sequence": mahadasha_sequence
-        }
+        return {"current": current_dasha, "mahadasha_sequence": mahadasha_sequence}
 
     except Exception as e:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Error calculating dasha: {str(e)}"
-        )
+            status_code=status.HTTP_400_BAD_REQUEST, detail=f"Error calculating dasha: {e!s}"
+        ) from e
 
 
 @app.get("/api/v1/timing/transits", tags=["Timing"])
@@ -915,16 +932,12 @@ async def get_current_transits(ayanamsa: str = "lahiri"):
 
         transits = get_transit_positions(jd, ayanamsa=ayanamsa)
 
-        return {
-            "datetime": now.isoformat(),
-            "transits": transits
-        }
+        return {"datetime": now.isoformat(), "transits": transits}
 
     except Exception as e:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Error getting transits: {str(e)}"
-        )
+            status_code=status.HTTP_400_BAD_REQUEST, detail=f"Error getting transits: {e!s}"
+        ) from e
 
 
 @app.post("/api/v1/timing/muhurta", response_model=MuhurtaResponse, tags=["Timing"])
@@ -941,18 +954,11 @@ async def check_muhurta(request: MuhurtaRequest):
         panchanga = get_panchanga(jd, request.latitude, request.longitude)
 
         # Evaluate muhurta
-        muhurta_result = evaluate_muhurta(
-            jd,
-            request.latitude,
-            request.longitude,
-            request.activity
-        )
+        muhurta_result = evaluate_muhurta(jd, request.latitude, request.longitude, request.activity)
 
         # Calculate Rahu Kaal
         rahu_kaal = calculate_rahu_kaal(
-            request.datetime.date(),
-            request.latitude,
-            request.longitude
+            request.datetime.date(), request.latitude, request.longitude
         )
 
         return MuhurtaResponse(
@@ -966,21 +972,21 @@ async def check_muhurta(request: MuhurtaRequest):
                 nakshatra=panchanga.get("nakshatra", {}),
                 yoga=panchanga.get("yoga", {}),
                 karana=panchanga.get("karana", {}),
-                vara=panchanga.get("vara", "")
+                vara=panchanga.get("vara", ""),
             ),
-            recommendations=muhurta_result.get("recommendations", [])
+            recommendations=muhurta_result.get("recommendations", []),
         )
 
     except Exception as e:
         raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail=f"Error evaluating muhurta: {str(e)}"
-        )
+            status_code=status.HTTP_400_BAD_REQUEST, detail=f"Error evaluating muhurta: {e!s}"
+        ) from e
 
 
 # ============================================================================
 # Chat/Agent Routes
 # ============================================================================
+
 
 @app.post("/api/v1/chat", response_model=ChatResponse, tags=["Chat"])
 async def chat_with_agent(request: ChatRequest):
@@ -998,40 +1004,39 @@ async def chat_with_agent(request: ChatRequest):
 
         return ChatResponse(
             response=f"I received your message: '{request.message}'. "
-                     "The full AI agent integration is coming soon. "
-                     "For now, you can use the chart and analysis endpoints.",
+            "The full AI agent integration is coming soon. "
+            "For now, you can use the chart and analysis endpoints.",
             user_id=request.user_id,
-            metadata={"status": "placeholder", "agent_available": False}
+            metadata={"status": "placeholder", "agent_available": False},
         )
 
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Error processing chat: {str(e)}"
-        )
+            detail=f"Error processing chat: {e!s}",
+        ) from e
 
 
 # ============================================================================
 # User Routes (placeholder for user management)
 # ============================================================================
 
+
 @app.get("/api/v1/users/{user_id}", tags=["Users"])
-async def get_user_profile(user_id: str):
+async def get_user_profile(_user_id: str):
     """Get user profile and birth chart."""
     # TODO: Implement with memory package
     raise HTTPException(
-        status_code=status.HTTP_501_NOT_IMPLEMENTED,
-        detail="User management coming soon"
+        status_code=status.HTTP_501_NOT_IMPLEMENTED, detail="User management coming soon"
     )
 
 
 @app.post("/api/v1/users", tags=["Users"])
-async def create_user_profile(birth_data: BirthDataRequest):
+async def create_user_profile(_birth_data: BirthDataRequest):
     """Create a new user profile with birth data."""
     # TODO: Implement with memory package
     raise HTTPException(
-        status_code=status.HTTP_501_NOT_IMPLEMENTED,
-        detail="User management coming soon"
+        status_code=status.HTTP_501_NOT_IMPLEMENTED, detail="User management coming soon"
     )
 
 
@@ -1039,34 +1044,32 @@ async def create_user_profile(birth_data: BirthDataRequest):
 # Knowledge Routes
 # ============================================================================
 
+
 @app.get("/api/v1/knowledge/planets/{planet_id}", tags=["Knowledge"])
 async def get_planet_info(planet_id: str):
     """Get detailed information about a planet."""
     import json
 
     try:
-        knowledge_path = os.path.join(
-            os.path.dirname(os.path.dirname(os.path.dirname(__file__))),
-            "knowledge", "definitions", "planets.json"
+        knowledge_path = (
+            Path(__file__).parent.parent.parent / "knowledge" / "definitions" / "planets.json"
         )
 
-        with open(knowledge_path, "r") as f:
+        with knowledge_path.open() as f:
             planets_data = json.load(f)
 
         planet_key = planet_id.lower()
         if planet_key not in planets_data.get("planets", {}):
             raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND,
-                detail=f"Planet '{planet_id}' not found"
+                status_code=status.HTTP_404_NOT_FOUND, detail=f"Planet '{planet_id}' not found"
             )
 
         return planets_data["planets"][planet_key]
 
-    except FileNotFoundError:
+    except FileNotFoundError as err:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Planets knowledge base not found"
-        )
+            status_code=status.HTTP_404_NOT_FOUND, detail="Planets knowledge base not found"
+        ) from err
 
 
 @app.get("/api/v1/knowledge/nakshatras/{nakshatra_name}", tags=["Knowledge"])
@@ -1075,28 +1078,26 @@ async def get_nakshatra_info(nakshatra_name: str):
     import json
 
     try:
-        knowledge_path = os.path.join(
-            os.path.dirname(os.path.dirname(os.path.dirname(__file__))),
-            "knowledge", "definitions", "nakshatras.json"
+        knowledge_path = (
+            Path(__file__).parent.parent.parent / "knowledge" / "definitions" / "nakshatras.json"
         )
 
-        with open(knowledge_path, "r") as f:
+        with knowledge_path.open() as f:
             nakshatras_data = json.load(f)
 
         nakshatra_key = nakshatra_name.lower()
         if nakshatra_key not in nakshatras_data.get("nakshatras", {}):
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
-                detail=f"Nakshatra '{nakshatra_name}' not found"
+                detail=f"Nakshatra '{nakshatra_name}' not found",
             )
 
         return nakshatras_data["nakshatras"][nakshatra_key]
 
-    except FileNotFoundError:
+    except FileNotFoundError as err:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Nakshatras knowledge base not found"
-        )
+            status_code=status.HTTP_404_NOT_FOUND, detail="Nakshatras knowledge base not found"
+        ) from err
 
 
 @app.get("/api/v1/knowledge/rashis/{rashi_name}", tags=["Knowledge"])
@@ -1105,28 +1106,25 @@ async def get_rashi_info(rashi_name: str):
     import json
 
     try:
-        knowledge_path = os.path.join(
-            os.path.dirname(os.path.dirname(os.path.dirname(__file__))),
-            "knowledge", "definitions", "rashis.json"
+        knowledge_path = (
+            Path(__file__).parent.parent.parent / "knowledge" / "definitions" / "rashis.json"
         )
 
-        with open(knowledge_path, "r") as f:
+        with knowledge_path.open() as f:
             rashis_data = json.load(f)
 
         rashi_key = rashi_name.lower()
         if rashi_key not in rashis_data.get("rashis", {}):
             raise HTTPException(
-                status_code=status.HTTP_404_NOT_FOUND,
-                detail=f"Rashi '{rashi_name}' not found"
+                status_code=status.HTTP_404_NOT_FOUND, detail=f"Rashi '{rashi_name}' not found"
             )
 
         return rashis_data["rashis"][rashi_key]
 
-    except FileNotFoundError:
+    except FileNotFoundError as err:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Rashis knowledge base not found"
-        )
+            status_code=status.HTTP_404_NOT_FOUND, detail="Rashis knowledge base not found"
+        ) from err
 
 
 # ============================================================================
@@ -1135,9 +1133,5 @@ async def get_rashi_info(rashi_name: str):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(
-        "main:app",
-        host="0.0.0.0",
-        port=8000,
-        reload=settings.debug
-    )
+
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=settings.debug)

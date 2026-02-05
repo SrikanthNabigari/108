@@ -565,7 +565,7 @@ def evaluate_muhurta(
     """
     if activity not in ACTIVITY_RULES:
         raise ValueError(
-            f"Unknown activity: {activity}. " f"Supported: {', '.join(ACTIVITY_RULES.keys())}"
+            f"Unknown activity: {activity}. Supported: {', '.join(ACTIVITY_RULES.keys())}"
         )
 
     rules = ACTIVITY_RULES[activity]

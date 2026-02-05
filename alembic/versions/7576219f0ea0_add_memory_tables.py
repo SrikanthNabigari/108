@@ -5,18 +5,19 @@ Revises: 4e4966e1a4ee
 Create Date: 2026-02-04 14:19:18.064602
 
 """
-from typing import Sequence, Union
 
-from alembic import op
+from collections.abc import Sequence
+
 import sqlalchemy as sa
 from sqlalchemy.dialects.postgresql import ARRAY, JSONB, UUID
 
+from alembic import op
 
 # revision identifiers, used by Alembic.
-revision: str = '7576219f0ea0'
-down_revision: Union[str, Sequence[str], None] = '4e4966e1a4ee'
-branch_labels: Union[str, Sequence[str], None] = None
-depends_on: Union[str, Sequence[str], None] = None
+revision: str = "7576219f0ea0"
+down_revision: str | Sequence[str] | None = "4e4966e1a4ee"
+branch_labels: str | Sequence[str] | None = None
+depends_on: str | Sequence[str] | None = None
 
 
 def upgrade() -> None:
@@ -48,7 +49,9 @@ def upgrade() -> None:
         sa.Column("id", UUID(), server_default=sa.text("uuid_generate_v4()"), nullable=False),
         sa.Column("user_id", UUID(), nullable=False),
         sa.Column("content", sa.Text(), nullable=False),
-        sa.Column("category", sa.String(50), nullable=False),  # fact, preference, event, prediction, feedback
+        sa.Column(
+            "category", sa.String(50), nullable=False
+        ),  # fact, preference, event, prediction, feedback
         sa.Column("metadata", JSONB, server_default=sa.text("'{}'::jsonb"), nullable=True),
         sa.Column("importance", sa.Numeric(3, 2), server_default=sa.text("0.5"), nullable=True),
         sa.Column("created_at", sa.DateTime(), server_default=sa.text("now()"), nullable=False),
@@ -89,7 +92,9 @@ def upgrade() -> None:
     )
     op.create_index("idx_predictions_user", "predictions", ["user_id"])
     op.create_index("idx_predictions_category", "predictions", ["user_id", "category"])
-    op.create_index("idx_predictions_timeframe", "predictions", ["user_id", "timeframe_start", "timeframe_end"])
+    op.create_index(
+        "idx_predictions_timeframe", "predictions", ["user_id", "timeframe_start", "timeframe_end"]
+    )
 
     # Conversations table
     op.create_table(
@@ -146,11 +151,14 @@ def upgrade() -> None:
         sa.ForeignKeyConstraint(["parent_id"], ["dasha_timeline.id"], ondelete="CASCADE"),
     )
     op.create_index("idx_dasha_timeline_user", "dasha_timeline", ["user_id"])
-    op.create_index("idx_dasha_timeline_dates", "dasha_timeline", ["user_id", "start_date", "end_date"])
+    op.create_index(
+        "idx_dasha_timeline_dates", "dasha_timeline", ["user_id", "start_date", "end_date"]
+    )
     op.create_index("idx_dasha_timeline_lord", "dasha_timeline", ["user_id", "lord"])
 
     # Add updated_at triggers
-    op.execute("""
+    op.execute(
+        """
         CREATE OR REPLACE FUNCTION update_updated_at_column()
         RETURNS TRIGGER AS $$
         BEGIN
@@ -158,14 +166,21 @@ def upgrade() -> None:
             RETURN NEW;
         END;
         $$ LANGUAGE 'plpgsql';
-    """)
+    """
+    )
 
-    op.execute("CREATE TRIGGER update_memories_updated_at BEFORE UPDATE ON memories "
-               "FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();")
-    op.execute("CREATE TRIGGER update_conversations_updated_at BEFORE UPDATE ON conversations "
-               "FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();")
-    op.execute("CREATE TRIGGER update_user_preferences_updated_at BEFORE UPDATE ON user_preferences "
-               "FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();")
+    op.execute(
+        "CREATE TRIGGER update_memories_updated_at BEFORE UPDATE ON memories "
+        "FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();"
+    )
+    op.execute(
+        "CREATE TRIGGER update_conversations_updated_at BEFORE UPDATE ON conversations "
+        "FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();"
+    )
+    op.execute(
+        "CREATE TRIGGER update_user_preferences_updated_at BEFORE UPDATE ON user_preferences "
+        "FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();"
+    )
 
 
 def downgrade() -> None:

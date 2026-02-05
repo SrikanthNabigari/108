@@ -5,12 +5,11 @@ for different scenarios and birth chart configurations.
 """
 
 from packages.context.src.transits import (
-    check_sade_sati,
     check_dhaiya,
-    get_gochara,
+    check_sade_sati,
     get_full_transit_analysis,
+    get_gochara,
     get_transiting_planet_house,
-    is_planet_favorable_in_house,
     validate_transit_data,
 )
 
@@ -22,7 +21,6 @@ def example_1_aquarius_moon_sade_sati():
     print("=" * 70)
 
     # Native with Aquarius Moon (index 10)
-    natal_moon = 10
 
     # Case 1: Saturn in Pisces (11) = 2nd from Moon = Setting Phase
     print("\nScenario: Saturn in Pisces (native's 2nd house from Moon)")
@@ -31,11 +29,11 @@ def example_1_aquarius_moon_sade_sati():
     print(f"Active: {result['active']}")
     print(f"Phase: {result['phase']}")
     print(f"Description: {result['description']}")
-    print(f"Effects:")
-    for effect in result['effects']:
+    print("Effects:")
+    for effect in result["effects"]:
         print(f"  - {effect}")
-    print(f"Remedies:")
-    for remedy in result['remedies']:
+    print("Remedies:")
+    for remedy in result["remedies"]:
         print(f"  - {remedy}")
 
     # Case 2: Saturn in Aquarius (10) = 1st from Moon = Peak Phase
@@ -44,8 +42,8 @@ def example_1_aquarius_moon_sade_sati():
 
     print(f"Phase: {result['phase']}")
     print(f"Description: {result['description']}")
-    print(f"Most critical effects:")
-    for effect in result['effects']:
+    print("Most critical effects:")
+    for effect in result["effects"]:
         print(f"  - {effect}")
 
 
@@ -56,7 +54,6 @@ def example_2_capricorn_moon_dhaiya():
     print("=" * 70)
 
     # Capricorn Moon (index 9)
-    natal_moon = 9
 
     # Case 1: Saturn in Aries (0) = 4th from Moon = Kantaka Shani
     print("\nScenario: Saturn in Aries (4th from Capricorn Moon)")
@@ -66,7 +63,7 @@ def example_2_capricorn_moon_dhaiya():
     print(f"Type: {result['type']}")
     print(f"Description: {result['description']}")
     print("Likely Experiences:")
-    for effect in result['effects']:
+    for effect in result["effects"]:
         print(f"  - {effect}")
 
     # Case 2: Saturn in Taurus (1) = 8th from Moon = Ashtama Shani
@@ -76,7 +73,7 @@ def example_2_capricorn_moon_dhaiya():
     print(f"Type: {result['type']}")
     print(f"Description: {result['description']}")
     print("Likely Experiences:")
-    for effect in result['effects']:
+    for effect in result["effects"]:
         print(f"  - {effect}")
 
 
@@ -86,13 +83,11 @@ def example_3_gochara_with_vedha():
     print("EXAMPLE 3: Gochara with Vedha - Jupiter Obstructed")
     print("=" * 70)
 
-    natal_moon = 3  # Cancer Moon
-
     # Jupiter favorable in 5th from Cancer
     # But Saturn in 4th acts as vedha
     transit_positions = {
         "jupiter": 8,  # Sagittarius = 5th from Cancer (3)
-        "saturn": 7,   # Scorpio = 4th from Cancer (vedha point)
+        "saturn": 7,  # Scorpio = 4th from Cancer (vedha point)
         "sun": 0,
         "moon": 1,
         "mars": 2,
@@ -114,7 +109,7 @@ def example_3_gochara_with_vedha():
         transit_rashi=8,
     )
 
-    print(f"\nWithout vedha consideration:")
+    print("\nWithout vedha consideration:")
     print(f"  Is Favorable: {result_without_vedha['is_favorable']}")
     print(f"  Net Effect: {result_without_vedha['net_effect']}")
 
@@ -126,12 +121,12 @@ def example_3_gochara_with_vedha():
         all_transit_rashis=transit_positions,
     )
 
-    print(f"\nWith vedha analysis:")
+    print("\nWith vedha analysis:")
     print(f"  Is Favorable: {result_with_vedha['is_favorable']}")
     print(f"  Has Vedha: {result_with_vedha['has_vedha']}")
     print(f"  Obstructed by: {result_with_vedha['vedha_by']}")
     print(f"  Net Effect: {result_with_vedha['net_effect']}")
-    print(f"  Jupiter's benefits are BLOCKED despite favorable position!")
+    print("  Jupiter's benefits are BLOCKED despite favorable position!")
 
 
 def example_4_complete_transit_analysis():
@@ -145,59 +140,69 @@ def example_4_complete_transit_analysis():
 
     # Simulated transit positions (as would come from ephemeris)
     transit_positions = {
-        "sun": 1,      # Taurus
-        "moon": 2,     # Gemini
-        "mars": 4,     # Leo (same as Moon)
+        "sun": 1,  # Taurus
+        "moon": 2,  # Gemini
+        "mars": 4,  # Leo (same as Moon)
         "mercury": 5,  # Virgo
         "jupiter": 7,  # Scorpio
-        "venus": 8,    # Sagittarius
+        "venus": 8,  # Sagittarius
         "saturn": 10,  # Aquarius
-        "rahu": 11,    # Pisces
-        "ketu": 5,     # Virgo
+        "rahu": 11,  # Pisces
+        "ketu": 5,  # Virgo
     }
 
-    print(f"\nNatal Moon: Leo (4)")
-    print(f"Current Transit Configuration:")
+    print("\nNatal Moon: Leo (4)")
+    print("Current Transit Configuration:")
     for planet, rashi in sorted(transit_positions.items()):
         rashi_names = [
-            "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
-            "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"
+            "Aries",
+            "Taurus",
+            "Gemini",
+            "Cancer",
+            "Leo",
+            "Virgo",
+            "Libra",
+            "Scorpio",
+            "Sagittarius",
+            "Capricorn",
+            "Aquarius",
+            "Pisces",
         ]
         print(f"  {planet.capitalize():10} in {rashi_names[rashi]}")
 
     # Get full analysis
     analysis = get_full_transit_analysis(natal_moon, transit_positions)
 
-    print(f"\n--- SATURN TRANSITS ---")
+    print("\n--- SATURN TRANSITS ---")
     print(f"Sade Sati Active: {analysis['sade_sati']['active']}")
-    if not analysis['sade_sati']['active']:
+    if not analysis["sade_sati"]["active"]:
         print(f"  Saturn is {analysis['sade_sati']['house_from_moon']} houses from Moon")
-        print(f"  Not in Sade Sati period")
+        print("  Not in Sade Sati period")
 
     print(f"\nDhaiya Active: {analysis['dhaiya']['active']}")
-    if not analysis['dhaiya']['active']:
-        print(f"  Saturn not in 4th or 8th from Moon")
+    if not analysis["dhaiya"]["active"]:
+        print("  Saturn not in 4th or 8th from Moon")
 
-    print(f"\n--- PLANETARY TRANSITS SUMMARY ---")
+    print("\n--- PLANETARY TRANSITS SUMMARY ---")
     print(f"Favorable: {analysis['summary']['favorable_count']}")
     print(f"Unfavorable: {analysis['summary']['unfavorable_count']}")
     print(f"Overall Trend: {analysis['summary']['overall_trend'].upper()}")
 
-    print(f"\n--- DETAILED PLANET ANALYSIS ---")
+    print("\n--- DETAILED PLANET ANALYSIS ---")
     for planet in ["sun", "mars", "jupiter", "venus", "saturn"]:
-        if planet in analysis['planet_transits']:
-            gochara = analysis['planet_transits'][planet]
-            house = gochara['house_from_moon']
-            effect = gochara['net_effect']
-            favorable = "✓" if gochara['is_favorable'] else "✗"
+        if planet in analysis["planet_transits"]:
+            gochara = analysis["planet_transits"][planet]
+            house = gochara["house_from_moon"]
+            effect = gochara["net_effect"]
+            favorable = "✓" if gochara["is_favorable"] else "✗"
 
             status = effect.upper()
-            if gochara['has_vedha']:
+            if gochara["has_vedha"]:
                 status += f" (Obstructed by {gochara['vedha_by']})"
 
             print(f"\n{planet.upper()} - House {house} [{favorable}]")
             print(f"  Status: {status}")
-            if gochara['effects']:
+            if gochara["effects"]:
                 print(f"  Effects: {gochara['effects'][0]}")
 
 
@@ -229,7 +234,7 @@ def example_5_house_by_house_analysis():
     for house, description in house_descriptions.items():
         print(f"House {house:2d}: {description}")
 
-    print(f"\n--- TESTING EACH POSITION ---")
+    print("\n--- TESTING EACH POSITION ---")
     for house in range(1, 13):
         # Calculate rashi that would be in this house
         test_rashi = (natal_moon + house - 1) % 12
@@ -247,33 +252,23 @@ def example_6_validation_and_error_handling():
     # Test case 1: Valid data
     print("\nTest 1: Valid transit data")
     is_valid, msg = validate_transit_data(
-        natal_moon_rashi=10,
-        transit_positions={"sun": 0, "moon": 1, "mars": 2}
+        natal_moon_rashi=10, transit_positions={"sun": 0, "moon": 1, "mars": 2}
     )
     print(f"  Valid: {is_valid} - {msg}")
 
     # Test case 2: Invalid Moon rashi
     print("\nTest 2: Invalid Moon rashi (> 11)")
-    is_valid, msg = validate_transit_data(
-        natal_moon_rashi=12,
-        transit_positions={"sun": 0}
-    )
+    is_valid, msg = validate_transit_data(natal_moon_rashi=12, transit_positions={"sun": 0})
     print(f"  Valid: {is_valid} - {msg}")
 
     # Test case 3: Invalid planet rashi
     print("\nTest 3: Invalid planet rashi (< 0)")
-    is_valid, msg = validate_transit_data(
-        natal_moon_rashi=10,
-        transit_positions={"sun": -1}
-    )
+    is_valid, msg = validate_transit_data(natal_moon_rashi=10, transit_positions={"sun": -1})
     print(f"  Valid: {is_valid} - {msg}")
 
     # Test case 4: Empty positions
     print("\nTest 4: Empty transit positions")
-    is_valid, msg = validate_transit_data(
-        natal_moon_rashi=10,
-        transit_positions={}
-    )
+    is_valid, msg = validate_transit_data(natal_moon_rashi=10, transit_positions={})
     print(f"  Valid: {is_valid} - {msg}")
 
 
@@ -283,23 +278,21 @@ def example_7_comparative_analysis():
     print("EXAMPLE 7: Comparative Analysis - Two Different Scenarios")
     print("=" * 70)
 
-    natal_moon = 6  # Libra
-
     print("\nSCENARIO A: Favorable transits")
     transit_a = {
-        "sun": 8,      # 3rd house - favorable
-        "jupiter": 10, # 5th house - favorable
-        "venus": 11,   # 6th house - favorable
-        "saturn": 0,   # 7th house - neutral
-        "mars": 1,     # 8th house - challenging
+        "sun": 8,  # 3rd house - favorable
+        "jupiter": 10,  # 5th house - favorable
+        "venus": 11,  # 6th house - favorable
+        "saturn": 0,  # 7th house - neutral
+        "mars": 1,  # 8th house - challenging
         "mercury": 2,  # 9th house
-        "moon": 3,     # 10th house - favorable
-        "rahu": 4,     # 11th house - challenging
-        "ketu": 5,     # 12th house - neutral
+        "moon": 3,  # 10th house - favorable
+        "rahu": 4,  # 11th house - challenging
+        "ketu": 5,  # 12th house - neutral
     }
 
     analysis_a = get_full_transit_analysis(6, transit_a)
-    print(f"\nResult:")
+    print("\nResult:")
     print(f"  Favorable planets: {analysis_a['summary']['favorable_count']}")
     print(f"  Unfavorable planets: {analysis_a['summary']['unfavorable_count']}")
     print(f"  Overall trend: {analysis_a['summary']['overall_trend']}")
@@ -307,19 +300,19 @@ def example_7_comparative_analysis():
     print("\n" + "-" * 70)
     print("\nSCENARIO B: Challenging transits")
     transit_b = {
-        "sun": 3,      # 10th house - unfavorable
+        "sun": 3,  # 10th house - unfavorable
         "jupiter": 1,  # 8th house - unfavorable
-        "venus": 2,    # 9th house - unfavorable
-        "saturn": 5,   # 12th house - challenging
-        "mars": 6,     # 1st house - unfavorable
+        "venus": 2,  # 9th house - unfavorable
+        "saturn": 5,  # 12th house - challenging
+        "mars": 6,  # 1st house - unfavorable
         "mercury": 7,  # 2nd house - challenging
-        "moon": 4,     # 11th house - favorable
-        "rahu": 8,     # 3rd house - favorable
-        "ketu": 9,     # 4th house - neutral
+        "moon": 4,  # 11th house - favorable
+        "rahu": 8,  # 3rd house - favorable
+        "ketu": 9,  # 4th house - neutral
     }
 
     analysis_b = get_full_transit_analysis(6, transit_b)
-    print(f"\nResult:")
+    print("\nResult:")
     print(f"  Favorable planets: {analysis_b['summary']['favorable_count']}")
     print(f"  Unfavorable planets: {analysis_b['summary']['unfavorable_count']}")
     print(f"  Overall trend: {analysis_b['summary']['overall_trend']}")
@@ -346,15 +339,21 @@ def example_8_planet_specific_analysis():
         # Calculate what rashi would be in this house
         rashi = (natal_moon + house - 1) % 12
         rashi_names = [
-            "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
-            "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"
+            "Aries",
+            "Taurus",
+            "Gemini",
+            "Cancer",
+            "Leo",
+            "Virgo",
+            "Libra",
+            "Scorpio",
+            "Sagittarius",
+            "Capricorn",
+            "Aquarius",
+            "Pisces",
         ]
 
-        result = get_gochara(
-            natal_moon_rashi=0,
-            transit_planet="venus",
-            transit_rashi=rashi
-        )
+        result = get_gochara(natal_moon_rashi=0, transit_planet="venus", transit_rashi=rashi)
 
         print(f"  House {house:2d} ({rashi_names[rashi]:11}) - {result['net_effect'].upper()}")
 
@@ -364,15 +363,21 @@ def example_8_planet_specific_analysis():
     for house in unfavorable_houses:
         rashi = (natal_moon + house - 1) % 12
         rashi_names = [
-            "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
-            "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"
+            "Aries",
+            "Taurus",
+            "Gemini",
+            "Cancer",
+            "Leo",
+            "Virgo",
+            "Libra",
+            "Scorpio",
+            "Sagittarius",
+            "Capricorn",
+            "Aquarius",
+            "Pisces",
         ]
 
-        result = get_gochara(
-            natal_moon_rashi=0,
-            transit_planet="venus",
-            transit_rashi=rashi
-        )
+        result = get_gochara(natal_moon_rashi=0, transit_planet="venus", transit_rashi=rashi)
 
         print(f"  House {house:2d} ({rashi_names[rashi]:11}) - {result['net_effect'].upper()}")
 

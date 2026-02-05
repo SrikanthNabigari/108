@@ -5,40 +5,38 @@ Provides planetary calculation tools for Claude via Model Context Protocol.
 Uses the cosmos package for Swiss Ephemeris-based calculations of planetary
 positions, house cusps, nakshatras, divisional charts, and panchanga data.
 """
+
 import sys
-from pathlib import Path
 from datetime import datetime
-from typing import Dict, Any, Optional
+from pathlib import Path
+from typing import Any
 
 # Add packages to path
 SERVICES_ROOT = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(SERVICES_ROOT))
 
-from mcp.server.fastmcp import FastMCP
-
-# Import cosmos functions
-from packages.cosmos.src import (
-    get_julian_day,
-    get_ayanamsa,
-    get_all_planets,
-    get_house_cusps as calc_house_cusps,
-    longitude_to_nakshatra,
-    get_nakshatra_lord,
-    get_divisional_chart,
+from mcp.server.fastmcp import FastMCP  # noqa: E402
+from packages.cosmos.src import (  # noqa: E402
+    DIVISIONAL_NAMES,
     RASHI_NAMES,
     TITHI_NAMES,
-    YOGA_NAMES,
-    KARANA_NAMES,
     VARA_NAMES,
-    DIVISIONAL_NAMES,
+    YOGA_NAMES,
+    get_all_planets,
+    get_ayanamsa,
+    get_divisional_chart,
+    get_julian_day,
+    get_nakshatra_lord,
+    longitude_to_nakshatra,
 )
-
-# Import panchanga functions for manual calculation
-from packages.cosmos.src.panchanga import (
-    get_tithi,
-    get_yoga,
+from packages.cosmos.src import (  # noqa: E402
+    get_house_cusps as calc_house_cusps,
+)
+from packages.cosmos.src.panchanga import (  # noqa: E402
     get_karana,
+    get_tithi,
     get_vara,
+    get_yoga,
 )
 
 # Initialize MCP server
@@ -47,11 +45,8 @@ mcp = FastMCP("108-ephemeris")
 
 @mcp.tool()
 def planetary_positions(
-    datetime_iso: str,
-    latitude: float,
-    longitude: float,
-    ayanamsa: str = "lahiri"
-) -> Dict[str, Any]:
+    datetime_iso: str, latitude: float, longitude: float, ayanamsa: str = "lahiri"
+) -> dict[str, Any]:
     """
     Calculate sidereal planetary positions for all 9 Vedic planets.
 
@@ -67,7 +62,7 @@ def planetary_positions(
     """
     try:
         # Parse datetime
-        dt = datetime.fromisoformat(datetime_iso.replace('Z', '+00:00'))
+        dt = datetime.fromisoformat(datetime_iso.replace("Z", "+00:00"))
 
         # Get Julian day (cosmos handles timezone)
         jd = get_julian_day(dt)
@@ -84,11 +79,8 @@ def planetary_positions(
             "julian_day": jd,
             "ayanamsa": ayanamsa,
             "ayanamsa_value": round(ayanamsa_val, 4),
-            "location": {
-                "latitude": latitude,
-                "longitude": longitude
-            },
-            "planets": {}
+            "location": {"latitude": latitude, "longitude": longitude},
+            "planets": {},
         }
 
         for planet_name, pos in planets.items():
@@ -111,25 +103,19 @@ def planetary_positions(
                 "nakshatra_number": nak_info["number"],
                 "nakshatra_pada": nak_info["pada"],
                 "nakshatra_lord": nakshatra_lord,
-                "degree_in_nakshatra": round(nak_info["degree_in_nakshatra"], 4)
+                "degree_in_nakshatra": round(nak_info["degree_in_nakshatra"], 4),
             }
 
         return result
 
     except Exception as e:
-        return {
-            "error": str(e),
-            "type": type(e).__name__
-        }
+        return {"error": str(e), "type": type(e).__name__}
 
 
 @mcp.tool()
 def house_cusps(
-    datetime_iso: str,
-    latitude: float,
-    longitude: float,
-    house_system: str = "placidus"
-) -> Dict[str, Any]:
+    datetime_iso: str, latitude: float, longitude: float, house_system: str = "placidus"
+) -> dict[str, Any]:
     """
     Calculate house cusps and ascendant.
 
@@ -143,7 +129,7 @@ def house_cusps(
         Dictionary with ascendant, MC, and 12 house cusps
     """
     try:
-        dt = datetime.fromisoformat(datetime_iso.replace('Z', '+00:00'))
+        dt = datetime.fromisoformat(datetime_iso.replace("Z", "+00:00"))
         if dt.tzinfo is not None:
             dt = dt.replace(tzinfo=None)
 
@@ -162,40 +148,34 @@ def house_cusps(
 
         return {
             "datetime": datetime_iso,
-            "location": {
-                "latitude": latitude,
-                "longitude": longitude
-            },
+            "location": {"latitude": latitude, "longitude": longitude},
             "house_system": house_system,
             "ascendant": {
                 "longitude": round(asc_longitude, 4),
                 "sign": RASHI_NAMES[asc_sign_idx] if asc_sign_idx < 12 else "Unknown",
-                "degree": round(asc_degree, 2)
+                "degree": round(asc_degree, 2),
             },
             "mc": {
                 "longitude": round(mc_longitude, 4),
                 "sign": RASHI_NAMES[mc_sign_idx] if mc_sign_idx < 12 else "Unknown",
-                "degree": round(mc_degree, 2)
+                "degree": round(mc_degree, 2),
             },
             "cusps": {
-                f"house_{i+1}": {
+                f"house_{i + 1}": {
                     "longitude": round(houses_data["cusps"][i], 4),
                     "sign": RASHI_NAMES[int(houses_data["cusps"][i] / 30)],
-                    "degree": round(houses_data["cusps"][i] % 30, 2)
+                    "degree": round(houses_data["cusps"][i] % 30, 2),
                 }
                 for i in range(12)
-            }
+            },
         }
 
     except Exception as e:
-        return {
-            "error": str(e),
-            "type": type(e).__name__
-        }
+        return {"error": str(e), "type": type(e).__name__}
 
 
 @mcp.tool()
-def nakshatra_details(longitude: float) -> Dict[str, Any]:
+def nakshatra_details(longitude: float) -> dict[str, Any]:
     """
     Get nakshatra, pada, and lord for a given longitude.
 
@@ -216,19 +196,16 @@ def nakshatra_details(longitude: float) -> Dict[str, Any]:
                 "name": info["name"],
                 "pada": info["pada"],
                 "lord": lord,
-                "degree_in_nakshatra": round(info["degree_in_nakshatra"], 4)
-            }
+                "degree_in_nakshatra": round(info["degree_in_nakshatra"], 4),
+            },
         }
 
     except Exception as e:
-        return {
-            "error": str(e),
-            "type": type(e).__name__
-        }
+        return {"error": str(e), "type": type(e).__name__}
 
 
 @mcp.tool()
-def divisional_chart(planets: Dict[str, float], division: int) -> Dict[str, Any]:
+def divisional_chart(planets: dict[str, float], division: int) -> dict[str, Any]:
     """
     Calculate divisional chart (D1-D60).
 
@@ -244,8 +221,10 @@ def divisional_chart(planets: Dict[str, float], division: int) -> Dict[str, Any]
 
         result = {
             "division": chart_data.get("division", division),
-            "name": chart_data.get("division_name", DIVISIONAL_NAMES.get(division, f"D-{division}")),
-            "positions": {}
+            "name": chart_data.get(
+                "division_name", DIVISIONAL_NAMES.get(division, f"D-{division}")
+            ),
+            "positions": {},
         }
 
         # Process positions from the chart
@@ -253,7 +232,9 @@ def divisional_chart(planets: Dict[str, float], division: int) -> Dict[str, Any]
         for planet_name, pos_info in positions.items():
             # Get rashi info from the returned data
             rashi_num = pos_info.get("rashi", 1)
-            rashi_name = pos_info.get("rashi_name", RASHI_NAMES[rashi_num - 1] if 1 <= rashi_num <= 12 else "Unknown")
+            rashi_name = pos_info.get(
+                "rashi_name", RASHI_NAMES[rashi_num - 1] if 1 <= rashi_num <= 12 else "Unknown"
+            )
             degree_in_sign = pos_info.get("degree_in_sign", 0)
 
             # Calculate longitude for consistency
@@ -263,24 +244,17 @@ def divisional_chart(planets: Dict[str, float], division: int) -> Dict[str, Any]
                 "longitude": round(longitude, 4),
                 "sign": rashi_name,
                 "degree": round(degree_in_sign, 2),
-                "rashi_number": rashi_num
+                "rashi_number": rashi_num,
             }
 
         return result
 
     except Exception as e:
-        return {
-            "error": str(e),
-            "type": type(e).__name__
-        }
+        return {"error": str(e), "type": type(e).__name__}
 
 
 @mcp.tool()
-def panchanga(
-    datetime_iso: str,
-    latitude: float,
-    longitude: float
-) -> Dict[str, Any]:
+def panchanga(datetime_iso: str, latitude: float, longitude: float) -> dict[str, Any]:
     """
     Calculate complete panchanga (5 limbs of Vedic calendar).
 
@@ -300,7 +274,7 @@ def panchanga(
         Complete panchanga with all 5 limbs
     """
     try:
-        dt = datetime.fromisoformat(datetime_iso.replace('Z', '+00:00'))
+        dt = datetime.fromisoformat(datetime_iso.replace("Z", "+00:00"))
 
         # Get Julian day and calculate planets
         jd = get_julian_day(dt)
@@ -335,43 +309,34 @@ def panchanga(
 
         return {
             "datetime": datetime_iso,
-            "location": {
-                "latitude": latitude,
-                "longitude": longitude
-            },
+            "location": {"latitude": latitude, "longitude": longitude},
             "tithi": {
                 "number": tithi_num,
                 "name": tithi_name,
-                "progress": round(tithi_data.get("progress", 0), 2)
+                "progress": round(tithi_data.get("progress", 0), 2),
             },
             "nakshatra": {
                 "number": moon_nak.get("number", 0),
                 "name": moon_nak.get("name", "Unknown"),
                 "pada": moon_nak.get("pada", 0),
                 "lord": get_nakshatra_lord(moon_nak.get("name", "Unknown")),
-                "degree_in_nakshatra": round(moon_nak.get("degree_in_nakshatra", 0), 4)
+                "degree_in_nakshatra": round(moon_nak.get("degree_in_nakshatra", 0), 4),
             },
             "yoga": {
                 "number": yoga_num,
                 "name": yoga_name,
-                "progress": round(yoga_data.get("progress", 0), 2)
+                "progress": round(yoga_data.get("progress", 0), 2),
             },
-            "karana": {
-                "number": karana_num,
-                "name": karana_name
-            },
+            "karana": {"number": karana_num, "name": karana_name},
             "vara": {
                 "number": vara_num,
                 "name": vara_name,
-                "weekday": vara_data.get("weekday", "Unknown")
-            }
+                "weekday": vara_data.get("weekday", "Unknown"),
+            },
         }
 
     except Exception as e:
-        return {
-            "error": str(e),
-            "type": type(e).__name__
-        }
+        return {"error": str(e), "type": type(e).__name__}
 
 
 # Main entry point for MCP server

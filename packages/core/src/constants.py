@@ -1,9 +1,11 @@
 """Constants, enums, and configuration for 108 core package."""
-from enum import Enum
+
+from enum import StrEnum
 
 
-class Planet(str, Enum):
+class Planet(StrEnum):
     """Vedic planets (Grahas)."""
+
     SUN = "sun"
     MOON = "moon"
     MARS = "mars"
@@ -15,8 +17,9 @@ class Planet(str, Enum):
     KETU = "ketu"
 
 
-class Rashi(str, Enum):
+class Rashi(StrEnum):
     """Zodiac signs (Rashis)."""
+
     ARIES = "aries"
     TAURUS = "taurus"
     GEMINI = "gemini"
@@ -31,8 +34,9 @@ class Rashi(str, Enum):
     PISCES = "pisces"
 
 
-class HouseCategory(str, Enum):
+class HouseCategory(StrEnum):
     """Categories of houses in Vedic astrology."""
+
     KENDRA = "kendra"  # 1, 4, 7, 10 - quadrants
     TRIKONA = "trikona"  # 1, 5, 9 - triangles
     DUSTHANA = "dusthana"  # 6, 8, 12 - evil houses
@@ -40,15 +44,17 @@ class HouseCategory(str, Enum):
     MARAKA = "maraka"  # 2, 7 - death-inflicting houses
 
 
-class Gana(str, Enum):
+class Gana(StrEnum):
     """Nakshatra Gana (nature/temperament)."""
+
     DEVA = "deva"  # Divine/benevolent
     MANUSHYA = "manushya"  # Human/balanced
     RAKSHASA = "rakshasa"  # Demonic/fierce
 
 
-class YogaCategory(str, Enum):
+class YogaCategory(StrEnum):
     """Categories of yogas (planetary combinations)."""
+
     PANCHA_MAHAPURUSHA = "pancha_mahapurusha"  # Five great-person yogas
     RAJA = "raja"  # Royal yogas
     DHANA = "dhana"  # Wealth yogas
@@ -59,15 +65,17 @@ class YogaCategory(str, Enum):
     OTHER = "other"
 
 
-class AyanamsaType(str, Enum):
+class AyanamsaType(StrEnum):
     """Ayanamsa (precession correction) systems."""
+
     LAHIRI = "lahiri"  # Most commonly used in Indian astrology
     RAMAN = "raman"
     KRISHNAMURTI = "krishnamurti"
 
 
-class HouseSystem(str, Enum):
+class HouseSystem(StrEnum):
     """House calculation systems."""
+
     PLACIDUS = "placidus"
     WHOLE_SIGN = "whole_sign"
     EQUAL = "equal"

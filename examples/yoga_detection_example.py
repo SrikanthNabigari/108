@@ -6,7 +6,6 @@ This file contains practical examples of how to use the yoga detection engine
 in the 108 Vedic Astrology application.
 """
 
-
 from packages.core.src import BirthChart
 from packages.self.src import YogaDetector, detect_all_yogas
 
@@ -314,9 +313,9 @@ def example_performance_testing():
     yogas = detect_all_yogas(chart)
     elapsed = time.time() - start
 
-    print(f"Detection Time: {elapsed*1000:.2f}ms")
+    print(f"Detection Time: {elapsed * 1000:.2f}ms")
     print(f"Yogas Detected: {len(yogas)}")
-    print(f"Average Time per Yoga: {(elapsed/len(yogas))*1000:.2f}ms")
+    print(f"Average Time per Yoga: {(elapsed / len(yogas)) * 1000:.2f}ms")
 
 
 # ==============================================================================

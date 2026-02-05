@@ -8,132 +8,61 @@ This module provides a unified interface to all astrological calculation and dat
 retrieval capabilities needed by the LangGraph-based Guide agent.
 """
 
-from typing import Dict, List, Any, Optional, Tuple
-from datetime import datetime, timedelta
-from enum import Enum
 import logging
-from pathlib import Path
 import sys
+from datetime import datetime, timedelta
+from enum import StrEnum
+from pathlib import Path
+from typing import Any
 
 # Setup package imports
 PACKAGES_ROOT = Path(__file__).parent.parent.parent.parent
 sys.path.insert(0, str(PACKAGES_ROOT))
 
-# Import cosmos package functions
-from packages.cosmos.src import (
-    get_julian_day,
-    get_planet_position,
-    get_all_planets,
-    get_house_cusps,
-    get_ascendant,
-    get_ayanamsa,
-    PLANET_MAP,
-    AYANAMSA_MAP,
-    HOUSE_SYSTEM_MAP,
-    # Nakshatra functions
-    longitude_to_nakshatra,
-    get_nakshatra_lord,
-    get_pada_navamsha,
-    get_tarabala,
-    get_all_nakshatras,
-    # Divisional chart functions
-    get_navamsha,
-    get_dashamsha,
-    get_divisional_position,
-    get_divisional_chart,
-    get_varga_vimshopaka,
-    RASHI_NAMES,
-    DIVISIONAL_NAMES,
-    # House functions
-    get_house_for_longitude,
-    get_house_lord,
-    get_planets_in_house,
-    get_house_analysis,
-    # Panchanga functions
-    get_tithi,
-    get_yoga,
-    get_karana,
-    get_vara,
-    get_panchanga,
-    TITHI_NAMES,
-    YOGA_NAMES,
-    VARA_NAMES,
-)
-
 # Import context package functions
-from packages.context.src import (
-    get_dasha_balance_at_birth,
-    get_mahadasha_sequence,
-    get_antardasha_sequence,
-    get_pratyantardasha_sequence,
-    get_current_dasha,
-    get_dasha_periods_for_year,
-    # Transit functions
-    get_gochara,
-    check_sade_sati,
-    check_dhaiya,
-    get_full_transit_analysis,
-    get_transiting_planet_house,
-    is_planet_favorable_in_house,
-    GOCHARA_FAVORABLE,
-    VEDHA_POINTS,
-    TRANSIT_EFFECTS,
-    # Muhurta functions
-    calculate_rahu_kaal,
-    calculate_yamaghanda,
-    calculate_gulika,
+from packages.context.src import (  # noqa: E402
     calculate_all_inauspicious,
     calculate_choghadiya,
+    calculate_rahu_kaal,
+    check_dhaiya,
+    check_sade_sati,
     evaluate_muhurta,
-    evaluate_with_inauspicious_check,
     find_next_good_muhurta,
-    get_choghadiya_at_time,
-    RAHU_KAAL,
-    YAMAGHANDA,
-    GULIKA,
-    ACTIVITY_RULES,
-    CHOGHADIYA_ORDER,
-    CHOGHADIYA_QUALITY,
-    DASHA_YEARS,
-    DASHA_SEQUENCE,
-    NAKSHATRA_LORDS,
+    get_current_dasha,
+    get_mahadasha_sequence,
+    is_planet_favorable_in_house,
 )
-
-# Import self package modules
-from packages.self.src import (
-    YogaDetector,
-    DoshaDetector,
-    StrengthCalculator,
-    detect_all_yogas,
-    detect_yoga,
-    get_yoga_strength,
-)
-
-# Import core package types and utilities
-from packages.core.src import (
-    BirthChart,
-    BirthData,
-    CurrentDasha,
-    DetectedYoga,
-    DetectedDosha,
+from packages.core.src import (  # noqa: E402
     Planet,
     Rashi,
-    HouseSystem,
-    AyanamsaType,
     longitude_to_rashi,
-    normalize_degrees,
-    is_kendra,
-    is_trikona,
-    is_dusthana,
-    is_upachaya,
-    get_opposite_sign,
+)
+from packages.cosmos.src import (  # noqa: E402
+    RASHI_NAMES,
+    get_all_planets,
+    get_ayanamsa,
+    get_divisional_chart,
+    get_house_cusps,
+    get_house_lord,
+    get_julian_day,
+    get_navamsha,
+    get_panchanga,
+    get_planets_in_house,
+    get_varga_vimshopaka,
+    longitude_to_nakshatra,
+)
+from packages.self.src import (  # noqa: E402
+    DoshaDetector,
+    StrengthCalculator,
+    YogaDetector,
 )
 
 logger = logging.getLogger(__name__)
 
 
-class ActivityType(str, Enum):
+class ActivityType(StrEnum):
     """Types of activities for muhurta evaluation."""
+
     MARRIAGE = "marriage"
     TRAVEL = "travel"
     BUSINESS_START = "business_start"
@@ -181,8 +110,8 @@ class AstrologyTools:
         latitude: float,
         longitude: float,
         ayanamsa: str = "lahiri",
-        house_system: str = "placidus"
-    ) -> Dict[str, Any]:
+        house_system: str = "placidus",
+    ) -> dict[str, Any]:
         """
         Calculate complete birth chart for a person.
 
@@ -283,13 +212,10 @@ class AstrologyTools:
                 "success": True,
             }
         except Exception as e:
-            logger.error(f"Error calculating birth chart: {str(e)}")
+            logger.error(f"Error calculating birth chart: {e!s}")
             return {"success": False, "error": str(e)}
 
-    def get_current_positions(
-        self,
-        ayanamsa: str = "lahiri"
-    ) -> Dict[str, Any]:
+    def get_current_positions(self, ayanamsa: str = "lahiri") -> dict[str, Any]:  # noqa: ARG002
         """
         Get current planetary positions.
 
@@ -322,17 +248,14 @@ class AstrologyTools:
                 "success": True,
             }
         except Exception as e:
-            logger.error(f"Error getting current positions: {str(e)}")
+            logger.error(f"Error getting current positions: {e!s}")
             return {"success": False, "error": str(e)}
 
     # ===================
     # DIVISIONAL CHART TOOLS
     # ===================
 
-    def get_navamsha_chart(
-        self,
-        planets: Dict[str, Dict]
-    ) -> Dict[str, Any]:
+    def get_navamsha_chart(self, planets: dict[str, dict]) -> dict[str, Any]:
         """
         Calculate Navamsha (D9) chart - most important divisional chart.
 
@@ -360,14 +283,12 @@ class AstrologyTools:
                 "success": True,
             }
         except Exception as e:
-            logger.error(f"Error calculating Navamsha: {str(e)}")
+            logger.error(f"Error calculating Navamsha: {e!s}")
             return {"success": False, "error": str(e)}
 
     def get_divisional_charts(
-        self,
-        planets: Dict[str, Dict],
-        charts: List[int] = None
-    ) -> Dict[str, Any]:
+        self, planets: dict[str, dict], charts: list[int] | None = None
+    ) -> dict[str, Any]:
         """
         Calculate multiple divisional charts (D2, D3, D9, D10, etc.).
 
@@ -392,15 +313,12 @@ class AstrologyTools:
                 "success": True,
             }
         except Exception as e:
-            logger.error(f"Error calculating divisional charts: {str(e)}")
+            logger.error(f"Error calculating divisional charts: {e!s}")
             return {"success": False, "error": str(e)}
 
     def get_varga_strength(
-        self,
-        planets: Dict[str, Dict],
-        planet_name: str,
-        charts: List[int] = None
-    ) -> Dict[str, Any]:
+        self, planets: dict[str, dict], planet_name: str, charts: list[int] | None = None
+    ) -> dict[str, Any]:
         """
         Calculate planetary strength across multiple divisional charts (Vimshopaka).
 
@@ -428,7 +346,7 @@ class AstrologyTools:
             else:
                 return {"success": False, "error": f"Planet {planet_name} not found"}
         except Exception as e:
-            logger.error(f"Error calculating Varga strength: {str(e)}")
+            logger.error(f"Error calculating Varga strength: {e!s}")
             return {"success": False, "error": str(e)}
 
     # ===================
@@ -436,11 +354,8 @@ class AstrologyTools:
     # ===================
 
     def get_dasha_info(
-        self,
-        birth_datetime: datetime,
-        moon_longitude: float,
-        query_date: Optional[datetime] = None
-    ) -> Dict[str, Any]:
+        self, birth_datetime: datetime, moon_longitude: float, query_date: datetime | None = None
+    ) -> dict[str, Any]:
         """
         Get current dasha information for a person.
 
@@ -510,15 +425,12 @@ class AstrologyTools:
                 "success": True,
             }
         except Exception as e:
-            logger.error(f"Error calculating dasha info: {str(e)}")
+            logger.error(f"Error calculating dasha info: {e!s}")
             return {"success": False, "error": str(e)}
 
     def get_dasha_timeline(
-        self,
-        birth_datetime: datetime,
-        moon_longitude: float,
-        years: int = 50
-    ) -> Dict[str, Any]:
+        self, birth_datetime: datetime, moon_longitude: float, years: int = 50
+    ) -> dict[str, Any]:
         """
         Get full dasha timeline for specified years ahead.
 
@@ -537,11 +449,10 @@ class AstrologyTools:
 
             # Filter to next N years
             start_date = datetime.utcnow()
-            cutoff_date = start_date + timedelta(days=365*years)
+            cutoff_date = start_date + timedelta(days=365 * years)
 
             filtered = [
-                period for period in timeline
-                if period.get("end_date", datetime.max) <= cutoff_date
+                period for period in timeline if period.get("end_date", datetime.max) <= cutoff_date
             ]
 
             return {
@@ -551,7 +462,7 @@ class AstrologyTools:
                 "success": True,
             }
         except Exception as e:
-            logger.error(f"Error calculating dasha timeline: {str(e)}")
+            logger.error(f"Error calculating dasha timeline: {e!s}")
             return {"success": False, "error": str(e)}
 
     # ===================
@@ -559,10 +470,8 @@ class AstrologyTools:
     # ===================
 
     def get_transit_analysis(
-        self,
-        natal_chart: Dict[str, Any],
-        transit_date: Optional[datetime] = None
-    ) -> Dict[str, Any]:
+        self, natal_chart: dict[str, Any], transit_date: datetime | None = None
+    ) -> dict[str, Any]:
         """
         Analyze current transits relative to natal chart.
 
@@ -595,9 +504,18 @@ class AstrologyTools:
 
             # Convert sign name to index
             sign_to_idx = {
-                "Aries": 0, "Taurus": 1, "Gemini": 2, "Cancer": 3,
-                "Leo": 4, "Virgo": 5, "Libra": 6, "Scorpio": 7,
-                "Sagittarius": 8, "Capricorn": 9, "Aquarius": 10, "Pisces": 11
+                "Aries": 0,
+                "Taurus": 1,
+                "Gemini": 2,
+                "Cancer": 3,
+                "Leo": 4,
+                "Virgo": 5,
+                "Libra": 6,
+                "Scorpio": 7,
+                "Sagittarius": 8,
+                "Capricorn": 9,
+                "Aquarius": 10,
+                "Pisces": 11,
             }
             natal_moon_idx = sign_to_idx.get(natal_moon_rashi, 0)
 
@@ -624,8 +542,7 @@ class AstrologyTools:
 
             # Check Sade Sati
             saturn_idx = sign_to_idx.get(
-                transit_analysis["transits"].get("saturn", {}).get("sign", ""),
-                0
+                transit_analysis["transits"].get("saturn", {}).get("sign", ""), 0
             )
             sade_sati = check_sade_sati(natal_moon_idx, saturn_idx)
             transit_analysis["sade_sati"] = sade_sati
@@ -637,17 +554,14 @@ class AstrologyTools:
             transit_analysis["success"] = True
             return transit_analysis
         except Exception as e:
-            logger.error(f"Error analyzing transits: {str(e)}")
+            logger.error(f"Error analyzing transits: {e!s}")
             return {"success": False, "error": str(e)}
 
     # ===================
     # YOGA (AUSPICIOUS COMBINATIONS) TOOLS
     # ===================
 
-    def detect_yogas(
-        self,
-        natal_chart: Dict[str, Any]
-    ) -> Dict[str, Any]:
+    def detect_yogas(self, natal_chart: dict[str, Any]) -> dict[str, Any]:
         """
         Detect all auspicious yogas (planetary combinations) in birth chart.
 
@@ -682,13 +596,10 @@ class AstrologyTools:
                 "success": True,
             }
         except Exception as e:
-            logger.error(f"Error detecting yogas: {str(e)}")
+            logger.error(f"Error detecting yogas: {e!s}")
             return {"success": False, "error": str(e)}
 
-    def get_yoga_details(
-        self,
-        yoga_name: str
-    ) -> Dict[str, Any]:
+    def get_yoga_details(self, yoga_name: str) -> dict[str, Any]:
         """
         Get detailed information about a specific yoga.
 
@@ -709,17 +620,14 @@ class AstrologyTools:
                 "success": True,
             }
         except Exception as e:
-            logger.error(f"Error getting yoga details: {str(e)}")
+            logger.error(f"Error getting yoga details: {e!s}")
             return {"success": False, "error": str(e)}
 
     # ===================
     # DOSHA (CHALLENGING COMBINATIONS) TOOLS
     # ===================
 
-    def detect_doshas(
-        self,
-        natal_chart: Dict[str, Any]
-    ) -> Dict[str, Any]:
+    def detect_doshas(self, natal_chart: dict[str, Any]) -> dict[str, Any]:
         """
         Detect challenging combinations (doshas) in birth chart.
 
@@ -758,7 +666,7 @@ class AstrologyTools:
                 "success": True,
             }
         except Exception as e:
-            logger.error(f"Error detecting doshas: {str(e)}")
+            logger.error(f"Error detecting doshas: {e!s}")
             return {"success": False, "error": str(e)}
 
     # ===================
@@ -766,12 +674,8 @@ class AstrologyTools:
     # ===================
 
     def get_planet_strength(
-        self,
-        planet: str,
-        position: Dict[str, Any],
-        house_num: int,
-        lagna_sign: str
-    ) -> Dict[str, Any]:
+        self, planet: str, position: dict[str, Any], house_num: int, lagna_sign: str
+    ) -> dict[str, Any]:
         """
         Calculate comprehensive planetary strength (Shadbala).
 
@@ -798,10 +702,7 @@ class AstrologyTools:
             longitude = position.get("longitude", 0)
 
             shadbala = self.strength_calc.calculate_shadbala(
-                planet=planet_enum,
-                longitude=longitude,
-                house=house_num,
-                rashi=rashi_enum
+                planet=planet_enum, longitude=longitude, house=house_num, rashi=rashi_enum
             )
 
             dignity = self.strength_calc.get_planet_dignity(planet_enum, rashi_enum)
@@ -815,7 +716,7 @@ class AstrologyTools:
                 "success": True,
             }
         except Exception as e:
-            logger.error(f"Error calculating planet strength: {str(e)}")
+            logger.error(f"Error calculating planet strength: {e!s}")
             return {"success": False, "error": str(e)}
 
     # ===================
@@ -823,12 +724,8 @@ class AstrologyTools:
     # ===================
 
     def check_muhurta(
-        self,
-        activity: str,
-        datetime_to_check: datetime,
-        latitude: float,
-        longitude: float
-    ) -> Dict[str, Any]:
+        self, activity: str, datetime_to_check: datetime, latitude: float, longitude: float
+    ) -> dict[str, Any]:
         """
         Evaluate muhurta (auspicious timing) for an activity.
 
@@ -864,17 +761,13 @@ class AstrologyTools:
             result = evaluate_muhurta(activity, panchanga, datetime_to_check)
 
             # Check inauspicious periods
-            inauspicious = calculate_all_inauspicious(
-                datetime_to_check,
-                latitude,
-                longitude
-            )
+            inauspicious = calculate_all_inauspicious(datetime_to_check, latitude, longitude)
 
             result["inauspicious_periods"] = inauspicious
             result["success"] = True
             return result
         except Exception as e:
-            logger.error(f"Error checking muhurta: {str(e)}")
+            logger.error(f"Error checking muhurta: {e!s}")
             return {"success": False, "error": str(e)}
 
     def find_good_muhurta(
@@ -884,8 +777,8 @@ class AstrologyTools:
         end_date: datetime,
         latitude: float,
         longitude: float,
-        max_results: int = 5
-    ) -> Dict[str, Any]:
+        max_results: int = 5,
+    ) -> dict[str, Any]:
         """
         Find good muhurta dates within a range for an activity.
 
@@ -901,13 +794,7 @@ class AstrologyTools:
             List of good muhurta times with scores
         """
         try:
-            good_dates = find_next_good_muhurta(
-                activity,
-                start_date,
-                end_date,
-                latitude,
-                longitude
-            )
+            good_dates = find_next_good_muhurta(activity, start_date, end_date, latitude, longitude)
 
             return {
                 "activity": activity,
@@ -919,7 +806,7 @@ class AstrologyTools:
                 "success": True,
             }
         except Exception as e:
-            logger.error(f"Error finding good muhurta: {str(e)}")
+            logger.error(f"Error finding good muhurta: {e!s}")
             return {"success": False, "error": str(e)}
 
     # ===================
@@ -927,11 +814,8 @@ class AstrologyTools:
     # ===================
 
     def get_today_panchanga(
-        self,
-        date: Optional[datetime] = None,
-        latitude: float = 28.6139,
-        longitude: float = 77.2090
-    ) -> Dict[str, Any]:
+        self, date: datetime | None = None, latitude: float = 28.6139, longitude: float = 77.2090
+    ) -> dict[str, Any]:
         """
         Get today's Panchanga (5-part day system).
 
@@ -964,6 +848,7 @@ class AstrologyTools:
 
             # Get sunrise/sunset
             from packages.cosmos.src import get_sunrise_sunset
+
             sunrise_sunset = get_sunrise_sunset(date.strftime("%Y-%m-%d"), latitude, longitude)
 
             return {
@@ -980,15 +865,12 @@ class AstrologyTools:
                 "success": True,
             }
         except Exception as e:
-            logger.error(f"Error getting panchanga: {str(e)}")
+            logger.error(f"Error getting panchanga: {e!s}")
             return {"success": False, "error": str(e)}
 
     def get_choghadiya_timings(
-        self,
-        date: Optional[datetime] = None,
-        latitude: float = 28.6139,
-        longitude: float = 77.2090
-    ) -> Dict[str, Any]:
+        self, date: datetime | None = None, latitude: float = 28.6139, longitude: float = 77.2090
+    ) -> dict[str, Any]:
         """
         Get Choghadiya timings (8 periods per day and night).
 
@@ -1008,23 +890,16 @@ class AstrologyTools:
 
             # Get sunrise/sunset
             from packages.cosmos.src import get_sunrise_sunset
+
             sunrise_sunset = get_sunrise_sunset(date.strftime("%Y-%m-%d"), latitude, longitude)
 
             sunrise = datetime.fromisoformat(sunrise_sunset["sunrise"])
             sunset = datetime.fromisoformat(sunrise_sunset["sunset"])
             next_sunrise = sunrise + timedelta(days=1)
 
-            daytime = calculate_choghadiya(
-                sunrise,
-                sunset,
-                is_night=False
-            )
+            daytime = calculate_choghadiya(sunrise, sunset, is_night=False)
 
-            nighttime = calculate_choghadiya(
-                sunset,
-                next_sunrise,
-                is_night=True
-            )
+            nighttime = calculate_choghadiya(sunset, next_sunrise, is_night=True)
 
             return {
                 "date": date.strftime("%Y-%m-%d"),
@@ -1035,15 +910,12 @@ class AstrologyTools:
                 "success": True,
             }
         except Exception as e:
-            logger.error(f"Error getting choghadiya: {str(e)}")
+            logger.error(f"Error getting choghadiya: {e!s}")
             return {"success": False, "error": str(e)}
 
     def get_rahu_kaal(
-        self,
-        date: Optional[datetime] = None,
-        latitude: float = 28.6139,
-        longitude: float = 77.2090
-    ) -> Dict[str, Any]:
+        self, date: datetime | None = None, latitude: float = 28.6139, longitude: float = 77.2090
+    ) -> dict[str, Any]:
         """
         Get Rahu Kaal timing (most inauspicious period of the day).
 
@@ -1063,6 +935,7 @@ class AstrologyTools:
 
             # Get sunrise/sunset
             from packages.cosmos.src import get_sunrise_sunset
+
             sunrise_sunset = get_sunrise_sunset(date.strftime("%Y-%m-%d"), latitude, longitude)
 
             sunrise = datetime.fromisoformat(sunrise_sunset["sunrise"])
@@ -1080,7 +953,7 @@ class AstrologyTools:
                 "success": True,
             }
         except Exception as e:
-            logger.error(f"Error getting Rahu Kaal: {str(e)}")
+            logger.error(f"Error getting Rahu Kaal: {e!s}")
             return {"success": False, "error": str(e)}
 
     # ===================
@@ -1091,7 +964,7 @@ class AstrologyTools:
         """Convert longitude to sign name."""
         return RASHI_NAMES[int(longitude / 30)]
 
-    def get_version(self) -> Dict[str, str]:
+    def get_version(self) -> dict[str, str]:
         """Get version information of tools."""
         return {
             "tools_version": "2.0.0",
@@ -1102,7 +975,7 @@ class AstrologyTools:
 
 
 # Global tools instance
-_tools_instance: Optional[AstrologyTools] = None
+_tools_instance: AstrologyTools | None = None
 
 
 def get_tools() -> AstrologyTools:
@@ -1119,70 +992,63 @@ def get_birth_chart(
     latitude: float,
     longitude: float,
     ayanamsa: str = "lahiri",
-    house_system: str = "placidus"
-) -> Dict[str, Any]:
+    house_system: str = "placidus",
+) -> dict[str, Any]:
     """Get birth chart."""
     return get_tools().get_birth_chart(birth_datetime, latitude, longitude, ayanamsa, house_system)
 
 
-def get_current_positions(ayanamsa: str = "lahiri") -> Dict[str, Any]:
+def get_current_positions(ayanamsa: str = "lahiri") -> dict[str, Any]:
     """Get current planetary positions."""
     return get_tools().get_current_positions(ayanamsa)
 
 
 def get_dasha_info(
-    birth_datetime: datetime,
-    moon_longitude: float,
-    query_date: Optional[datetime] = None
-) -> Dict[str, Any]:
+    birth_datetime: datetime, moon_longitude: float, query_date: datetime | None = None
+) -> dict[str, Any]:
     """Get dasha information."""
     return get_tools().get_dasha_info(birth_datetime, moon_longitude, query_date)
 
 
-def get_transit_analysis(natal_chart: Dict[str, Any]) -> Dict[str, Any]:
+def get_transit_analysis(natal_chart: dict[str, Any]) -> dict[str, Any]:
     """Get transit analysis."""
     return get_tools().get_transit_analysis(natal_chart)
 
 
-def detect_yogas(natal_chart: Dict[str, Any]) -> Dict[str, Any]:
+def detect_yogas(natal_chart: dict[str, Any]) -> dict[str, Any]:
     """Detect yogas in birth chart."""
     return get_tools().detect_yogas(natal_chart)
 
 
-def detect_doshas(natal_chart: Dict[str, Any]) -> Dict[str, Any]:
+def detect_doshas(natal_chart: dict[str, Any]) -> dict[str, Any]:
     """Detect doshas in birth chart."""
     return get_tools().detect_doshas(natal_chart)
 
 
 def check_muhurta(
-    activity: str,
-    datetime_to_check: datetime,
-    latitude: float,
-    longitude: float
-) -> Dict[str, Any]:
+    activity: str, datetime_to_check: datetime, latitude: float, longitude: float
+) -> dict[str, Any]:
     """Check muhurta for an activity."""
     return get_tools().check_muhurta(activity, datetime_to_check, latitude, longitude)
 
 
 def get_today_panchanga(
-    date: Optional[datetime] = None,
-    latitude: float = 28.6139,
-    longitude: float = 77.2090
-) -> Dict[str, Any]:
+    date: datetime | None = None, latitude: float = 28.6139, longitude: float = 77.2090
+) -> dict[str, Any]:
     """Get today's panchanga."""
     return get_tools().get_today_panchanga(date, latitude, longitude)
 
 
 __all__ = [
-    "AstrologyTools",
     "ActivityType",
-    "get_tools",
+    "AstrologyTools",
+    "check_muhurta",
+    "detect_doshas",
+    "detect_yogas",
     "get_birth_chart",
     "get_current_positions",
     "get_dasha_info",
-    "get_transit_analysis",
-    "detect_yogas",
-    "detect_doshas",
-    "check_muhurta",
     "get_today_panchanga",
+    "get_tools",
+    "get_transit_analysis",
 ]

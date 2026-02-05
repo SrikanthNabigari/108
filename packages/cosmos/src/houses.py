@@ -14,24 +14,22 @@ Key Concepts:
     - Natural significators (Karakas) show the planet naturally associated with each house
 """
 
-from typing import Dict, List, Optional, Tuple
 from enum import Enum
-
 
 # Sign rulership mapping - essential for house lordship calculations
 SIGN_RULERS = {
-    0: "mars",         # Aries (0-30°)
-    1: "venus",        # Taurus (30-60°)
-    2: "mercury",      # Gemini (60-90°)
-    3: "moon",         # Cancer (90-120°)
-    4: "sun",          # Leo (120-150°)
-    5: "mercury",      # Virgo (150-180°)
-    6: "venus",        # Libra (180-210°)
-    7: "mars",         # Scorpio (210-240°)
-    8: "jupiter",      # Sagittarius (240-270°)
-    9: "saturn",       # Capricorn (270-300°)
-    10: "saturn",      # Aquarius (300-330°)
-    11: "jupiter",     # Pisces (330-360°)
+    0: "mars",  # Aries (0-30°)
+    1: "venus",  # Taurus (30-60°)
+    2: "mercury",  # Gemini (60-90°)
+    3: "moon",  # Cancer (90-120°)
+    4: "sun",  # Leo (120-150°)
+    5: "mercury",  # Virgo (150-180°)
+    6: "venus",  # Libra (180-210°)
+    7: "mars",  # Scorpio (210-240°)
+    8: "jupiter",  # Sagittarius (240-270°)
+    9: "saturn",  # Capricorn (270-300°)
+    10: "saturn",  # Aquarius (300-330°)
+    11: "jupiter",  # Pisces (330-360°)
 }
 
 # Alternative mapping by sign name
@@ -52,8 +50,18 @@ SIGN_NAME_TO_RULER = {
 
 # Rashi names in order
 RASHI_NAMES = [
-    "aries", "taurus", "gemini", "cancer", "leo", "virgo",
-    "libra", "scorpio", "sagittarius", "capricorn", "aquarius", "pisces"
+    "aries",
+    "taurus",
+    "gemini",
+    "cancer",
+    "leo",
+    "virgo",
+    "libra",
+    "scorpio",
+    "sagittarius",
+    "capricorn",
+    "aquarius",
+    "pisces",
 ]
 
 # House significations
@@ -69,49 +77,47 @@ HOUSE_SIGNIFICATIONS = {
     9: ["father", "dharma", "fortune", "philosophy", "long journeys", "higher learning"],
     10: ["career", "status", "karma", "profession", "public image", "authority"],
     11: ["gains", "friends", "aspirations", "social networks", "fulfillment", "income"],
-    12: ["losses", "moksha", "foreign lands", "spirituality", "confinement", "isolation"]
+    12: ["losses", "moksha", "foreign lands", "spirituality", "confinement", "isolation"],
 }
 
 # Natural significators (Karakas) for each house
 HOUSE_KARAKAS = {
-    1: "sun",          # Self, personality
-    2: "jupiter",      # Wealth, family
-    3: "mars",         # Courage, siblings
-    4: "moon",         # Mother, home, happiness
-    5: "jupiter",      # Children, intelligence
-    6: "mars",         # Enemies, disease
-    7: "venus",        # Marriage, partnership
-    8: "mars",         # Longevity, transformation
-    9: "jupiter",      # Dharma, fortune
-    10: "sun",         # Career, status
-    11: "jupiter",     # Gains, aspirations
-    12: "saturn",      # Losses, moksha
+    1: "sun",  # Self, personality
+    2: "jupiter",  # Wealth, family
+    3: "mars",  # Courage, siblings
+    4: "moon",  # Mother, home, happiness
+    5: "jupiter",  # Children, intelligence
+    6: "mars",  # Enemies, disease
+    7: "venus",  # Marriage, partnership
+    8: "mars",  # Longevity, transformation
+    9: "jupiter",  # Dharma, fortune
+    10: "sun",  # Career, status
+    11: "jupiter",  # Gains, aspirations
+    12: "saturn",  # Losses, moksha
 }
 
 # House categories
 BENEFIC_HOUSES = {1, 4, 5, 7, 9, 10, 11}  # Generally auspicious
-MALEFIC_HOUSES = {6, 8, 12}                # Generally difficult (Dusthana)
-KENDRA_HOUSES = {1, 4, 7, 10}              # Angular houses
-TRIKONA_HOUSES = {1, 5, 9}                 # Trine houses (most auspicious)
-DUSTHANA_HOUSES = {6, 8, 12}               # Difficult/evil houses
-UPACHAYA_HOUSES = {3, 6, 10, 11}           # Houses of growth
-MARAKA_HOUSES = {2, 7}                     # Death-inflicting houses
+MALEFIC_HOUSES = {6, 8, 12}  # Generally difficult (Dusthana)
+KENDRA_HOUSES = {1, 4, 7, 10}  # Angular houses
+TRIKONA_HOUSES = {1, 5, 9}  # Trine houses (most auspicious)
+DUSTHANA_HOUSES = {6, 8, 12}  # Difficult/evil houses
+UPACHAYA_HOUSES = {3, 6, 10, 11}  # Houses of growth
+MARAKA_HOUSES = {2, 7}  # Death-inflicting houses
 
 
 class HouseCategory(Enum):
     """Enumeration of house categories."""
-    KENDRA = "kendra"              # Angular
-    TRIKONA = "trikona"            # Trine
-    DUSTHANA = "dusthana"          # Difficult
-    UPACHAYA = "upachaya"          # Growth
-    MARAKA = "maraka"              # Death-inflicting
+
+    KENDRA = "kendra"  # Angular
+    TRIKONA = "trikona"  # Trine
+    DUSTHANA = "dusthana"  # Difficult
+    UPACHAYA = "upachaya"  # Growth
+    MARAKA = "maraka"  # Death-inflicting
     OTHER = "other"
 
 
-def get_house_for_longitude(
-    longitude: float,
-    cusps: List[float]
-) -> int:
+def get_house_for_longitude(longitude: float, cusps: list[float]) -> int:
     """Determine which house a given longitude falls into.
 
     Given a planetary longitude (0-360°) and a list of house cusps,
@@ -138,7 +144,7 @@ def get_house_for_longitude(
         House placement accounts for house cusp order. If a degree is between
         cusp N and cusp N+1, it falls in house N. Wrapping is handled at house 12.
     """
-    if not isinstance(longitude, (int, float)):
+    if not isinstance(longitude, int | float):
         raise TypeError(f"longitude must be numeric, got {type(longitude)}")
 
     if len(cusps) != 12:
@@ -150,7 +156,7 @@ def get_house_for_longitude(
     # Find which house the longitude falls into
     for house in range(1, 13):
         cusp_idx = house - 1
-        next_cusp_idx = (house % 12)
+        next_cusp_idx = house % 12
 
         current_cusp = cusps[cusp_idx]
         next_cusp = cusps[next_cusp_idx]
@@ -220,18 +226,12 @@ def sign_name_to_rashi(sign_name: str) -> int:
     rashi = RASHI_NAMES.index(sign_lower) if sign_lower in RASHI_NAMES else -1
 
     if rashi == -1:
-        raise ValueError(
-            f"Unknown sign: {sign_name}. "
-            f"Valid signs: {', '.join(RASHI_NAMES)}"
-        )
+        raise ValueError(f"Unknown sign: {sign_name}. Valid signs: {', '.join(RASHI_NAMES)}")
 
     return rashi
 
 
-def get_house_lord(
-    house: int,
-    lagna_sign: int
-) -> str:
+def get_house_lord(house: int, lagna_sign: int) -> str:
     """Get the lord (ruler) of a house.
 
     The lord of a house is the planet that rules the sign occupying that house.
@@ -267,10 +267,7 @@ def get_house_lord(
     return SIGN_RULERS[house_sign_rashi]
 
 
-def get_house_lord_by_name(
-    house: int,
-    lagna_sign_name: str
-) -> str:
+def get_house_lord_by_name(house: int, lagna_sign_name: str) -> str:
     """Get the lord of a house using sign names.
 
     Convenience function that accepts sign names instead of rashi numbers.
@@ -289,11 +286,7 @@ def get_house_lord_by_name(
     return get_house_lord(house, lagna_rashi)
 
 
-def get_planets_in_house(
-    planets: Dict[str, float],
-    house: int,
-    cusps: List[float]
-) -> List[str]:
+def get_planets_in_house(planets: dict[str, float], house: int, cusps: list[float]) -> list[str]:
     """Get all planets in a specific house.
 
     Given a dictionary of planetary longitudes and a house number,
@@ -330,10 +323,7 @@ def get_planets_in_house(
     return planets_in_house
 
 
-def get_house_from_reference(
-    planet_sign: int,
-    reference_sign: int
-) -> int:
+def get_house_from_reference(planet_sign: int, reference_sign: int) -> int:
     """Calculate which house a planet is in relative to a reference sign.
 
     Given a planet's rashi and a reference rashi (typically the Ascendant),
@@ -368,7 +358,7 @@ def get_house_from_reference(
     return house
 
 
-def get_house_significations(house: int) -> List[str]:
+def get_house_significations(house: int) -> list[str]:
     """Get the natural significations (meanings) of a house.
 
     Returns a list of topics and life areas naturally represented by the house.
@@ -508,7 +498,7 @@ def get_house_category(house: int) -> str:
         return HouseCategory.OTHER.value
 
 
-def get_house_categories(house: int) -> List[str]:
+def get_house_categories(house: int) -> list[str]:
     """Get all applicable categories for a house.
 
     Unlike get_house_category(), this returns all categories a house belongs to,
@@ -545,7 +535,7 @@ def get_house_categories(house: int) -> List[str]:
     return categories if categories else [HouseCategory.OTHER.value]
 
 
-def get_trinal_houses(house: int) -> List[int]:
+def get_trinal_houses(house: int) -> list[int]:
     """Get trinal houses from a given house.
 
     Trinal houses are the 1st, 5th, and 9th from a given reference house.
@@ -568,13 +558,13 @@ def get_trinal_houses(house: int) -> List[int]:
         raise ValueError(f"House must be 1-12, got {house}")
 
     return [
-        ((house - 1 + 0) % 12) + 1,   # 1st from house
-        ((house - 1 + 4) % 12) + 1,   # 5th from house
-        ((house - 1 + 8) % 12) + 1,   # 9th from house
+        ((house - 1 + 0) % 12) + 1,  # 1st from house
+        ((house - 1 + 4) % 12) + 1,  # 5th from house
+        ((house - 1 + 8) % 12) + 1,  # 9th from house
     ]
 
 
-def get_kendras_from(house: int) -> List[int]:
+def get_kendras_from(house: int) -> list[int]:
     """Get all Kendra (angular) houses from a given house.
 
     Kendras are the 1st, 4th, 7th, and 10th houses from a given reference.
@@ -596,18 +586,18 @@ def get_kendras_from(house: int) -> List[int]:
         raise ValueError(f"House must be 1-12, got {house}")
 
     return [
-        ((house - 1 + 0) % 12) + 1,   # 1st from house
-        ((house - 1 + 3) % 12) + 1,   # 4th from house
-        ((house - 1 + 6) % 12) + 1,   # 7th from house
-        ((house - 1 + 9) % 12) + 1,   # 10th from house
+        ((house - 1 + 0) % 12) + 1,  # 1st from house
+        ((house - 1 + 3) % 12) + 1,  # 4th from house
+        ((house - 1 + 6) % 12) + 1,  # 7th from house
+        ((house - 1 + 9) % 12) + 1,  # 10th from house
     ]
 
 
 def get_house_lord_strength(
-    house_lord: str,
-    planet_positions: Dict[str, Dict[str, float]],
-    house: int
-) -> Optional[float]:
+    house_lord: str,  # noqa: ARG001
+    planet_positions: dict[str, dict[str, float]],  # noqa: ARG001
+    house: int,  # noqa: ARG001
+) -> float | None:
     """Calculate the strength of a house lord.
 
     Note: This is a placeholder for integration with planetary strength calculations.
@@ -626,10 +616,8 @@ def get_house_lord_strength(
 
 
 def get_house_lord_placement(
-    house_lord: str,
-    planet_positions: Dict[str, Dict[str, float]],
-    cusps: List[float]
-) -> Optional[int]:
+    house_lord: str, planet_positions: dict[str, dict[str, float]], cusps: list[float]
+) -> int | None:
     """Determine which house the lord of a specific house is placed in.
 
     This is useful for analyzing the strength and effectiveness of a house
@@ -661,10 +649,7 @@ def get_house_lord_placement(
     return get_house_for_longitude(lord_longitude, cusps)
 
 
-def get_all_planets_by_house(
-    planets: Dict[str, float],
-    cusps: List[float]
-) -> Dict[int, List[str]]:
+def get_all_planets_by_house(planets: dict[str, float], cusps: list[float]) -> dict[int, list[str]]:
     """Organize all planets by their houses.
 
     Args:
@@ -695,11 +680,8 @@ def get_all_planets_by_house(
 
 
 def get_house_analysis(
-    house: int,
-    lagna_sign: int,
-    planets: Dict[str, float],
-    cusps: List[float]
-) -> Dict[str, any]:
+    house: int, lagna_sign: int, planets: dict[str, float], cusps: list[float]
+) -> dict[str, any]:
     """Get comprehensive analysis of a specific house.
 
     Combines house lord, significations, categorization, and planetary placements.

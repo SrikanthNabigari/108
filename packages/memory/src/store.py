@@ -13,6 +13,7 @@ This module provides async operations for:
 - User preferences
 - Dasha timeline caching
 """
+
 import json
 import logging
 import os
@@ -311,7 +312,7 @@ class MemoryStore:
             results.append(SearchResult(memory=memory, similarity=float(row["similarity"])))
 
         logger.debug(
-            f"Found {len(results)} memories for user {user_id} " f"with {min_similarity} threshold"
+            f"Found {len(results)} memories for user {user_id} with {min_similarity} threshold"
         )
         return results
 

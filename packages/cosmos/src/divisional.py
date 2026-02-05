@@ -34,14 +34,13 @@ Elements:
     Water: Cancer(3), Scorpio(7), Pisces(11)
 """
 
-from typing import Dict, List, Optional, Tuple, TypedDict
-from dataclasses import dataclass
-import math
+from typing import TypedDict
 
 
 # Type definitions
 class DivisionalPosition(TypedDict):
     """Position of a planet in a divisional chart."""
+
     rashi: int  # 0-11 (zodiacal sign)
     rashi_name: str
     degree_in_sign: float
@@ -51,39 +50,51 @@ class DivisionalPosition(TypedDict):
 
 class DivisionalChart(TypedDict):
     """Complete divisional chart for all planets."""
+
     division: int
     division_name: str
-    positions: Dict[str, DivisionalPosition]
+    positions: dict[str, DivisionalPosition]
 
 
 class VargaStrength(TypedDict):
     """Strength of a planet across multiple vargas (divisional charts)."""
+
     planet: str
     total_strength: float
-    strength_per_varga: Dict[int, float]
-    well_placed_vargas: List[int]
-    badly_placed_vargas: List[int]
+    strength_per_varga: dict[int, float]
+    well_placed_vargas: list[int]
+    badly_placed_vargas: list[int]
 
 
 # Constants
 RASHI_NAMES = [
-    "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
-    "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"
+    "Aries",
+    "Taurus",
+    "Gemini",
+    "Cancer",
+    "Leo",
+    "Virgo",
+    "Libra",
+    "Scorpio",
+    "Sagittarius",
+    "Capricorn",
+    "Aquarius",
+    "Pisces",
 ]
 
 ELEMENT_MAP = {
-    0: "fire",      # Aries
-    1: "earth",     # Taurus
-    2: "air",       # Gemini
-    3: "water",     # Cancer
-    4: "fire",      # Leo
-    5: "earth",     # Virgo
-    6: "air",       # Libra
-    7: "water",     # Scorpio
-    8: "fire",      # Sagittarius
-    9: "earth",     # Capricorn
-    10: "air",      # Aquarius
-    11: "water",    # Pisces
+    0: "fire",  # Aries
+    1: "earth",  # Taurus
+    2: "air",  # Gemini
+    3: "water",  # Cancer
+    4: "fire",  # Leo
+    5: "earth",  # Virgo
+    6: "air",  # Libra
+    7: "water",  # Scorpio
+    8: "fire",  # Sagittarius
+    9: "earth",  # Capricorn
+    10: "air",  # Aquarius
+    11: "water",  # Pisces
 }
 
 DIVISIONAL_NAMES = {
@@ -142,7 +153,7 @@ def _get_degree_in_sign(longitude: float) -> float:
     Returns:
         float: Degree within sign (0-30°)
     """
-    return (longitude % 30)
+    return longitude % 30
 
 
 def _get_element(rashi: int) -> str:
@@ -211,11 +222,10 @@ def get_hora(longitude: float) -> DivisionalPosition:
     hora_half = 0 if degree < 15 else 1
 
     # Calculate resulting rashi
-    if (rashi % 2) == 0:  # Even sign
-        # Even signs: Leo (4) then Cancer (3)
+    # Even signs: Leo (4) then Cancer (3); Odd signs: Cancer (3) then Leo (4)
+    if rashi % 2 == 0:  # noqa: SIM108
         result_rashi = 4 if hora_half == 0 else 3
-    else:  # Odd sign
-        # Odd signs: Cancer (3) then Leo (4)
+    else:
         result_rashi = 3 if hora_half == 0 else 4
 
     # Degree within the resulting sign
@@ -673,20 +683,20 @@ def get_trimshamsha(longitude: float) -> DivisionalPosition:
     if (rashi % 2) == 0:  # Even sign
         # Even: Sun(5), Mercury(5), Venus(8), Mars(7), Moon(5)
         boundaries = [
-            (0, 5, 0),      # Sun
-            (5, 10, 1),     # Mercury
-            (10, 18, 2),    # Venus
-            (18, 25, 4),    # Mars
-            (25, 30, 3),    # Moon
+            (0, 5, 0),  # Sun
+            (5, 10, 1),  # Mercury
+            (10, 18, 2),  # Venus
+            (18, 25, 4),  # Mars
+            (25, 30, 3),  # Moon
         ]
     else:  # Odd sign
         # Odd: Mars(5), Venus(5), Mercury(8), Moon(7), Sun(5)
         boundaries = [
-            (0, 5, 4),      # Mars
-            (5, 10, 2),     # Venus
-            (10, 18, 1),    # Mercury
-            (18, 25, 3),    # Moon
-            (25, 30, 0),    # Sun
+            (0, 5, 4),  # Mars
+            (5, 10, 2),  # Venus
+            (10, 18, 1),  # Mercury
+            (18, 25, 3),  # Moon
+            (25, 30, 0),  # Sun
         ]
 
     # Find which section the degree falls in
@@ -853,17 +863,13 @@ def get_divisional_position(longitude: float, division: int) -> DivisionalPositi
 
     if division not in division_map:
         raise ValueError(
-            f"Unsupported division: {division}. "
-            f"Supported divisions: {sorted(division_map.keys())}"
+            f"Unsupported division: {division}. Supported divisions: {sorted(division_map.keys())}"
         )
 
     return division_map[division](longitude)
 
 
-def get_divisional_chart(
-    planets: Dict[str, float],
-    division: int
-) -> DivisionalChart:
+def get_divisional_chart(planets: dict[str, float], division: int) -> DivisionalChart:
     """Get complete divisional chart for all planets.
 
     Calculates divisional positions for all provided planets in a single
@@ -908,9 +914,8 @@ def get_divisional_chart(
 
 
 def get_varga_vimshopaka(
-    planets: Dict[str, float],
-    divisions: Optional[List[int]] = None
-) -> Dict[str, VargaStrength]:
+    planets: dict[str, float], divisions: list[int] | None = None
+) -> dict[str, VargaStrength]:
     """Calculate Varga Vimshopaka (strength from multiple vargas).
 
     Varga Vimshopaka measures how well-placed a planet is across multiple
@@ -959,7 +964,7 @@ def get_varga_vimshopaka(
 
             # Calculate strength (0-100)
             # Strong if in own sign or exaltation
-            if rashi == planet_index or rashi == exaltation_rashi:
+            if rashi in (planet_index, exaltation_rashi):
                 strength = 100
                 well_placed.append(division)
             # Weak if in detriment (7th from exaltation)
@@ -998,15 +1003,15 @@ def _get_planet_index(planet_name: str) -> int:
         int: Rashi number (0-11)
     """
     planet_rashis = {
-        "sun": 0,      # Leo (own sign) - actually rules Leo (4), but returning 0 for Aries
-        "moon": 3,     # Cancer
-        "mars": 0,     # Aries (own sign)
+        "sun": 0,  # Leo (own sign) - actually rules Leo (4), but returning 0 for Aries
+        "moon": 3,  # Cancer
+        "mars": 0,  # Aries (own sign)
         "mercury": 2,  # Gemini (own sign)
         "jupiter": 8,  # Sagittarius (own sign)
-        "venus": 2,    # Libra (own sign) - actually 6, but
-        "saturn": 7,   # Scorpio (actually Capricorn and Aquarius)
-        "rahu": 5,     # Virgo (exaltation)
-        "ketu": 11,    # Pisces (exaltation)
+        "venus": 2,  # Libra (own sign) - actually 6, but
+        "saturn": 7,  # Scorpio (actually Capricorn and Aquarius)
+        "rahu": 5,  # Virgo (exaltation)
+        "ketu": 11,  # Pisces (exaltation)
     }
     return planet_rashis.get(planet_name.lower(), 0)
 
@@ -1021,47 +1026,47 @@ def _get_exaltation_rashi(planet_name: str) -> int:
         int: Rashi number (0-11)
     """
     exaltations = {
-        "sun": 9,      # Libra - no, Aries actually. This is wrong. Sun exalts in Aries (0)
-        "moon": 1,     # Taurus
-        "mars": 10,    # Capricorn
+        "sun": 9,  # Libra - no, Aries actually. This is wrong. Sun exalts in Aries (0)
+        "moon": 1,  # Taurus
+        "mars": 10,  # Capricorn
         "mercury": 5,  # Virgo
         "jupiter": 3,  # Cancer
-        "venus": 11,   # Pisces
-        "saturn": 6,   # Libra
-        "rahu": 5,     # Virgo
-        "ketu": 11,    # Pisces
+        "venus": 11,  # Pisces
+        "saturn": 6,  # Libra
+        "rahu": 5,  # Virgo
+        "ketu": 11,  # Pisces
     }
     return exaltations.get(planet_name.lower(), 0)
 
 
 __all__ = [
-    # Core divisional position functions
-    "get_d1_position",
-    "get_hora",
-    "get_drekkana",
-    "get_chaturthamsha",
-    "get_saptamsha",
-    "get_navamsha",
-    "get_dashamsha",
-    "get_dwadashamsha",
-    "get_shodashamsha",
-    "get_vimshamsha",
-    "get_chaturvimshamsha",
-    "get_bhamsha",
-    "get_trimshamsha",
-    "get_khavedamsha",
-    "get_akshavedamsha",
-    "get_shashtiamsha",
-    # Dispatcher functions
-    "get_divisional_position",
-    "get_divisional_chart",
-    "get_varga_vimshopaka",
-    # Type definitions
-    "DivisionalPosition",
-    "DivisionalChart",
-    "VargaStrength",
+    "DIVISIONAL_NAMES",
+    "ELEMENT_MAP",
     # Constants
     "RASHI_NAMES",
-    "ELEMENT_MAP",
-    "DIVISIONAL_NAMES",
+    "DivisionalChart",
+    # Type definitions
+    "DivisionalPosition",
+    "VargaStrength",
+    "get_akshavedamsha",
+    "get_bhamsha",
+    "get_chaturthamsha",
+    "get_chaturvimshamsha",
+    # Core divisional position functions
+    "get_d1_position",
+    "get_dashamsha",
+    "get_divisional_chart",
+    # Dispatcher functions
+    "get_divisional_position",
+    "get_drekkana",
+    "get_dwadashamsha",
+    "get_hora",
+    "get_khavedamsha",
+    "get_navamsha",
+    "get_saptamsha",
+    "get_shashtiamsha",
+    "get_shodashamsha",
+    "get_trimshamsha",
+    "get_varga_vimshopaka",
+    "get_vimshamsha",
 ]

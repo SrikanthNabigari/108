@@ -1,5 +1,4 @@
 """Utility functions for 108 core package."""
-from typing import List, Tuple
 
 from .constants import NAKSHATRA_SPAN, PADA_SPAN, Planet, Rashi
 
@@ -18,7 +17,7 @@ def normalize_degrees(degrees: float) -> float:
     return degrees if degrees >= 0 else degrees + 360
 
 
-def longitude_to_rashi(longitude: float) -> Tuple[Rashi, float]:
+def longitude_to_rashi(longitude: float) -> tuple[Rashi, float]:
     """
     Convert ecliptic longitude to rashi and degree within rashi.
 
@@ -37,7 +36,7 @@ def longitude_to_rashi(longitude: float) -> Tuple[Rashi, float]:
     return rashis[rashi_num], rashi_degree
 
 
-def longitude_to_nakshatra(longitude: float) -> Tuple[int, int, float]:
+def longitude_to_nakshatra(longitude: float) -> tuple[int, int, float]:
     """
     Convert ecliptic longitude to nakshatra (lunar mansion).
 
@@ -154,7 +153,7 @@ def get_opposite_sign(rashi: Rashi) -> Rashi:
     return rashis[opposite_idx]
 
 
-def calculate_aspect_houses(planet: Planet, house: int) -> List[int]:
+def calculate_aspect_houses(planet: Planet, house: int) -> list[int]:
     """
     Get houses aspected by a planet from its position.
 
@@ -176,21 +175,27 @@ def calculate_aspect_houses(planet: Planet, house: int) -> List[int]:
     # Special aspects for specific planets
     if planet in [Planet.MARS]:
         # Mars aspects 4th and 8th from itself
-        aspects.extend([
-            (house + 3) % 12 + 1,  # 4th house aspect
-            (house + 7) % 12 + 1,  # 8th house aspect
-        ])
+        aspects.extend(
+            [
+                (house + 3) % 12 + 1,  # 4th house aspect
+                (house + 7) % 12 + 1,  # 8th house aspect
+            ]
+        )
     elif planet in [Planet.JUPITER, Planet.RAHU, Planet.KETU]:
         # Jupiter, Rahu, Ketu aspect 5th and 9th
-        aspects.extend([
-            (house + 4) % 12 + 1,  # 5th house aspect
-            (house + 8) % 12 + 1,  # 9th house aspect
-        ])
+        aspects.extend(
+            [
+                (house + 4) % 12 + 1,  # 5th house aspect
+                (house + 8) % 12 + 1,  # 9th house aspect
+            ]
+        )
     elif planet == Planet.SATURN:
         # Saturn aspects 3rd and 10th
-        aspects.extend([
-            (house + 2) % 12 + 1,  # 3rd house aspect
-            (house + 9) % 12 + 1,  # 10th house aspect
-        ])
+        aspects.extend(
+            [
+                (house + 2) % 12 + 1,  # 3rd house aspect
+                (house + 9) % 12 + 1,  # 10th house aspect
+            ]
+        )
 
     return sorted(set(aspects))

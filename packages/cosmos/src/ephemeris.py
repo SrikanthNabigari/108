@@ -5,9 +5,11 @@ Always uses Lahiri ayanamsa by default.
 
 All positions are calculated in sidereal/Vedic zodiac.
 """
+
+from datetime import UTC, datetime
+from typing import Any
+
 import swisseph as swe
-from datetime import datetime, timezone
-from typing import Dict, Optional, Any, Union
 
 # Swiss Ephemeris planet constants
 PLANET_MAP = {
@@ -32,11 +34,11 @@ AYANAMSA_MAP = {
 
 # House system constants
 HOUSE_SYSTEM_MAP = {
-    "placidus": b'P',
-    "koch": b'K',
-    "whole_sign": b'W',
-    "equal": b'E',
-    "campanus": b'C',
+    "placidus": b"P",
+    "koch": b"K",
+    "whole_sign": b"W",
+    "equal": b"E",
+    "campanus": b"C",
 }
 
 
@@ -66,10 +68,7 @@ def get_julian_day(dt: datetime) -> float:
         raise TypeError(f"Expected datetime object, got {type(dt)}")
 
     # Ensure UTC timezone
-    if dt.tzinfo is None:
-        dt = dt.replace(tzinfo=timezone.utc)
-    else:
-        dt = dt.astimezone(timezone.utc)
+    dt = dt.replace(tzinfo=UTC) if dt.tzinfo is None else dt.astimezone(UTC)
 
     # Calculate Julian Day with decimal hours
     hour_decimal = dt.hour + dt.minute / 60.0 + dt.second / 3600.0
@@ -109,8 +108,7 @@ def get_ayanamsa(jd: float, system: str = "lahiri") -> float:
 
     if sid_mode is None:
         raise ValueError(
-            f"Unknown ayanamsa system: {system}. "
-            f"Valid options: {', '.join(AYANAMSA_MAP.keys())}"
+            f"Unknown ayanamsa system: {system}. Valid options: {', '.join(AYANAMSA_MAP.keys())}"
         )
 
     swe.set_sid_mode(sid_mode)
@@ -119,11 +117,7 @@ def get_ayanamsa(jd: float, system: str = "lahiri") -> float:
     return float(ayan)
 
 
-def get_planet_position(
-    planet: str,
-    jd: float,
-    ayanamsa: Optional[float] = None
-) -> Dict[str, Any]:
+def get_planet_position(planet: str, jd: float, ayanamsa: float | None = None) -> dict[str, Any]:
     """Calculate sidereal (Vedic) position of a planet.
 
     Calculates the position of a planet in the sidereal zodiac, accounting for
@@ -171,13 +165,12 @@ def get_planet_position(
     swe_planet = PLANET_MAP.get(planet_lower)
     if swe_planet is None:
         raise ValueError(
-            f"Unknown planet: {planet}. "
-            f"Valid planets: {', '.join(sorted(PLANET_MAP.keys()))}, ketu"
+            f"Unknown planet: {planet}. Valid planets: {', '.join(sorted(PLANET_MAP.keys()))}, ketu"
         )
 
     # Calculate tropical position using Swiss Ephemeris
     flags = swe.FLG_SWIEPH | swe.FLG_SPEED
-    result, ret_flags = swe.calc_ut(jd, swe_planet, flags)
+    result, _ret_flags = swe.calc_ut(jd, swe_planet, flags)
 
     tropical_lon = result[0]
     latitude = result[1]
@@ -205,10 +198,7 @@ def get_planet_position(
     }
 
 
-def get_all_planets(
-    jd: float,
-    ayanamsa: Optional[Union[float, str]] = None
-) -> Dict[str, Dict[str, Any]]:
+def get_all_planets(jd: float, ayanamsa: float | str | None = None) -> dict[str, dict[str, Any]]:
     """Calculate sidereal positions of all 9 Vedic planets.
 
     Calculates positions for Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn,
@@ -242,10 +232,7 @@ def get_all_planets(
         ayanamsa = get_ayanamsa(jd, ayanamsa)
 
     # All 9 Vedic planets
-    planet_list = [
-        "sun", "moon", "mars", "mercury", "jupiter",
-        "venus", "saturn", "rahu", "ketu"
-    ]
+    planet_list = ["sun", "moon", "mars", "mercury", "jupiter", "venus", "saturn", "rahu", "ketu"]
 
     positions = {}
     for planet in planet_list:
@@ -259,8 +246,8 @@ def get_house_cusps(
     latitude: float,
     longitude: float,
     house_system: str = "placidus",
-    ayanamsa: Optional[Union[float, str]] = None
-) -> Dict[str, Any]:
+    ayanamsa: float | str | None = None,
+) -> dict[str, Any]:
     """Calculate house cusps and angles for a given location and time.
 
     Calculates the 12 house cusps and angles (Ascendant and Midheaven) in
@@ -352,12 +339,7 @@ def get_ascendant(jd: float, latitude: float, longitude: float) -> float:
 
 
 def datetime_to_jd(
-    year: int,
-    month: int,
-    day: int,
-    hour: int = 0,
-    minute: int = 0,
-    second: int = 0
+    year: int, month: int, day: int, hour: int = 0, minute: int = 0, second: int = 0
 ) -> float:
     """Convenience function to convert date/time components to Julian Day.
 

@@ -76,3 +76,4 @@ data/
 secrets/
 *.pem
 *.key
+.ignore/

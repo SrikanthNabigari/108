@@ -4,6 +4,7 @@
 Generates vector embeddings for semantic memory search.
 Supports multiple providers: OpenAI, Anthropic Voyage, and local models.
 """
+
 import logging
 import os
 from abc import ABC, abstractmethod

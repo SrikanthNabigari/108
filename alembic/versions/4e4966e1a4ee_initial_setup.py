@@ -1,28 +1,29 @@
 """initial_setup
 
 Revision ID: 4e4966e1a4ee
-Revises: 
+Revises:
 Create Date: 2026-02-04 10:56:27.096657
 
 """
-from typing import Sequence, Union
 
-from alembic import op
+from collections.abc import Sequence
+
 import sqlalchemy as sa
 
+from alembic import op
 
 # revision identifiers, used by Alembic.
-revision: str = '4e4966e1a4ee'
-down_revision: Union[str, Sequence[str], None] = None
-branch_labels: Union[str, Sequence[str], None] = None
-depends_on: Union[str, Sequence[str], None] = None
+revision: str = "4e4966e1a4ee"
+down_revision: str | Sequence[str] | None = None
+branch_labels: str | Sequence[str] | None = None
+depends_on: str | Sequence[str] | None = None
 
 
 def upgrade() -> None:
     """Upgrade schema."""
     # Enable pgvector extension
     op.execute("CREATE EXTENSION IF NOT EXISTS vector")
-    op.execute("CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\"")
+    op.execute('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"')
 
     # Users table
     op.create_table(

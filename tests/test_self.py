@@ -1,9 +1,12 @@
 """
 Unit tests for the SELF package (pattern detection).
 """
-import pytest
+
 import sys
-sys.path.insert(0, '/sessions/eloquent-zen-gauss/mnt/108-core')
+
+import pytest
+
+sys.path.insert(0, "/sessions/eloquent-zen-gauss/mnt/108-core")
 
 
 class TestYogaDetection:
@@ -20,16 +23,16 @@ class TestYogaDetection:
         """Test Pancha Mahapurusha yoga detection logic."""
         from packages.self.src import YogaDetector
 
-        detector = YogaDetector()
+        YogaDetector()
 
         # Test Mars in Aries (own sign) in Kendra (1st house)
         # This should form Ruchaka Yoga
         test_planets = {
-            'mars': {'longitude': 15.0, 'rashi': 'Aries'}  # Mars in Aries
+            "mars": {"longitude": 15.0, "rashi": "Aries"}  # Mars in Aries
         }
 
         # Mars in own sign (Aries/Scorpio) or exalted (Capricorn) in Kendra
-        mars_lon = test_planets['mars']['longitude']
+        mars_lon = test_planets["mars"]["longitude"]
         mars_rashi_idx = int(mars_lon / 30)
 
         # Aries = 0, Capricorn = 9, Scorpio = 7
@@ -50,7 +53,7 @@ class TestYogaDetection:
         if house_diff == 0:
             house_diff = 12
 
-        is_kendra = house_diff in [1, 4, 7, 10] or (12 - house_diff + 1) in kendras
+        house_diff in [1, 4, 7, 10] or (12 - house_diff + 1) in kendras
 
         # 4 - 1 = 3, but in Vedic terms house 4 from house 1 means kendra
         # Actually need to check the count: 1->2->3->4 = 4th house = kendra
@@ -94,10 +97,7 @@ class TestDoshaDetection:
         # All planets should be between 90° and 270° for Kaal Sarp
         planet_longitudes = [100, 150, 200, 250]  # All between Rahu-Ketu
 
-        all_between = all(
-            rahu_lon < lon < ketu_lon
-            for lon in planet_longitudes
-        )
+        all_between = all(rahu_lon < lon < ketu_lon for lon in planet_longitudes)
         assert all_between, "All planets between Rahu-Ketu indicates Kaal Sarp"
 
     def test_pitra_dosha_logic(self):
@@ -134,28 +134,27 @@ class TestStrengthCalculator:
         # Debilitated: lowest strength
 
         dignity_scores = {
-            'exalted': 100,
-            'own': 80,
-            'moolatrikona': 75,
-            'friendly': 60,
-            'neutral': 50,
-            'enemy': 30,
-            'debilitated': 10
+            "exalted": 100,
+            "own": 80,
+            "moolatrikona": 75,
+            "friendly": 60,
+            "neutral": 50,
+            "enemy": 30,
+            "debilitated": 10,
         }
 
         # Sun exalted in Aries should have highest dignity
-        sun_exalted_sign = 'Aries'  # Sun exalted in Aries
-        assert dignity_scores['exalted'] > dignity_scores['debilitated']
+        assert dignity_scores["exalted"] > dignity_scores["debilitated"]
 
     def test_shadbala_components(self):
         """Test Shadbala has 6 components."""
         shadbala_components = [
-            'sthana_bala',    # Positional strength
-            'dig_bala',       # Directional strength
-            'kala_bala',      # Temporal strength
-            'chesta_bala',    # Motional strength
-            'naisargika_bala', # Natural strength
-            'drik_bala'       # Aspectual strength
+            "sthana_bala",  # Positional strength
+            "dig_bala",  # Directional strength
+            "kala_bala",  # Temporal strength
+            "chesta_bala",  # Motional strength
+            "naisargika_bala",  # Natural strength
+            "drik_bala",  # Aspectual strength
         ]
 
         assert len(shadbala_components) == 6, "Shadbala should have 6 components"
@@ -178,7 +177,7 @@ class TestAshtakavarga:
     def test_sarvashtakavarga_total(self):
         """Test Sarvashtakavarga total calculation."""
         # SAV = sum of all BAV for each sign
-        # Maximum possible per sign = 7 planets × 8 points = 56
+        # Maximum possible per sign = 7 planets x 8 points = 56
         # Minimum = 0
 
         # Simulate SAV
@@ -192,5 +191,5 @@ class TestAshtakavarga:
         assert 300 <= total <= 400, f"Total SAV typically around 337, got {total}"
 
 
-if __name__ == '__main__':
-    pytest.main([__file__, '-v'])
+if __name__ == "__main__":
+    pytest.main([__file__, "-v"])

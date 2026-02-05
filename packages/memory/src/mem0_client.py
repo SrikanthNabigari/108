@@ -8,20 +8,22 @@ importance scoring, and cross-session persistence.
 Memory is core to the 108 experience - storing birth data, yogas,
 predictions, preferences, and feedback for personalized guidance.
 """
-from typing import Dict, List, Optional, Any
-from datetime import datetime
+
 import json
-import os
-from enum import Enum
 import logging
+import os
+from datetime import datetime
+from enum import Enum, StrEnum
+from typing import Any
 
 # In production: from mem0 import Memory
 
 logger = logging.getLogger(__name__)
 
 
-class MemoryCategory(str, Enum):
+class MemoryCategory(StrEnum):
     """Memory categories for 108."""
+
     BIRTH_DATA = "birth_data"
     CORE_FACTS = "core_facts"
     YOGAS = "yogas"
@@ -37,10 +39,11 @@ class MemoryCategory(str, Enum):
 
 class MemoryImportance(float, Enum):
     """Importance scores for memories."""
-    CRITICAL = 1.0      # Birth data, core facts
-    HIGH = 0.8          # Detected yogas, current dashas
-    MEDIUM = 0.5        # Predictions, analysis
-    LOW = 0.3            # Temporary notes
+
+    CRITICAL = 1.0  # Birth data, core facts
+    HIGH = 0.8  # Detected yogas, current dashas
+    MEDIUM = 0.5  # Predictions, analysis
+    LOW = 0.3  # Temporary notes
 
 
 class Mem0Client:
@@ -59,9 +62,9 @@ class Mem0Client:
 
     def __init__(
         self,
-        api_key: str = None,
-        user_id: str = None,
-        config: Dict[str, Any] = None
+        api_key: str | None = None,
+        user_id: str | None = None,
+        config: dict[str, Any] | None = None,
     ):
         """
         Initialize Mem0 client.
@@ -97,11 +100,11 @@ class Mem0Client:
     def add(
         self,
         content: str,
-        user_id: str = None,
-        metadata: Dict[str, Any] = None,
-        categories: List[str] = None,
-        importance: float = MemoryImportance.MEDIUM
-    ) -> Dict[str, Any]:
+        user_id: str | None = None,
+        metadata: dict[str, Any] | None = None,
+        categories: list[str] | None = None,
+        importance: float = MemoryImportance.MEDIUM,
+    ) -> dict[str, Any]:
         """
         Add a memory.
 
@@ -152,11 +155,11 @@ class Mem0Client:
 
     def add_conversation(
         self,
-        messages: List[Dict[str, str]],
-        user_id: str = None,
-        session_id: str = None,
-        categories: List[str] = None
-    ) -> Dict[str, Any]:
+        messages: list[dict[str, str]],
+        user_id: str | None = None,
+        session_id: str | None = None,
+        categories: list[str] | None = None,
+    ) -> dict[str, Any]:
         """
         Add memories from a conversation.
 
@@ -192,7 +195,7 @@ class Mem0Client:
             "session_id": session_id,
             "memories_added": len(extracted),
             "extracted_facts": extracted,
-            "categories": categories or []
+            "categories": categories or [],
         }
 
         logger.info(f"Conversation memory added: {len(extracted)} facts extracted")
@@ -202,11 +205,11 @@ class Mem0Client:
     def search(
         self,
         query: str,
-        user_id: str = None,
+        user_id: str | None = None,
         limit: int = 10,
-        categories: List[str] = None,
-        min_importance: float = 0.0
-    ) -> List[Dict[str, Any]]:
+        categories: list[str] | None = None,  # noqa: ARG002
+        min_importance: float = 0.0,  # noqa: ARG002
+    ) -> list[dict[str, Any]]:
         """
         Search memories semantically.
 
@@ -244,10 +247,10 @@ class Mem0Client:
 
     def get_all(
         self,
-        user_id: str = None,
-        limit: int = 100,
-        categories: List[str] = None
-    ) -> List[Dict[str, Any]]:
+        user_id: str | None = None,
+        limit: int = 100,  # noqa: ARG002
+        categories: list[str] | None = None,  # noqa: ARG002
+    ) -> list[dict[str, Any]]:
         """
         Get all memories for a user.
 
@@ -269,7 +272,7 @@ class Mem0Client:
 
         return []
 
-    def get(self, memory_id: str) -> Optional[Dict[str, Any]]:
+    def get(self, memory_id: str) -> dict[str, Any] | None:  # noqa: ARG002
         """
         Get a specific memory by ID.
 
@@ -286,10 +289,10 @@ class Mem0Client:
     def update(
         self,
         memory_id: str,
-        content: str = None,
-        metadata: Dict[str, Any] = None,
-        categories: List[str] = None
-    ) -> Dict[str, Any]:
+        content: str | None = None,  # noqa: ARG002
+        metadata: dict[str, Any] | None = None,  # noqa: ARG002
+        categories: list[str] | None = None,  # noqa: ARG002
+    ) -> dict[str, Any]:
         """
         Update a memory.
 
@@ -311,11 +314,7 @@ class Mem0Client:
         #     metadata={**metadata or {}, "updated_at": datetime.now().isoformat()}
         # )
 
-        return {
-            "id": memory_id,
-            "updated": True,
-            "updated_at": datetime.now().isoformat()
-        }
+        return {"id": memory_id, "updated": True, "updated_at": datetime.now().isoformat()}
 
     def delete(self, memory_id: str) -> bool:
         """
@@ -343,16 +342,16 @@ class Mem0Client:
         user_id: str,
         birth_datetime: str,
         place: str,
-        latitude: float = None,
-        longitude: float = None,
-        lagna: str = None,
-        lagna_degree: float = None,
-        moon_sign: str = None,
-        moon_degree: float = None,
-        nakshatra: str = None,
-        nakshatra_pada: int = None,
-        timezone: str = None
-    ) -> Dict[str, Any]:
+        latitude: float | None = None,
+        longitude: float | None = None,
+        lagna: str | None = None,
+        lagna_degree: float | None = None,
+        moon_sign: str | None = None,
+        moon_degree: float | None = None,
+        nakshatra: str | None = None,
+        nakshatra_pada: int | None = None,
+        timezone: str | None = None,
+    ) -> dict[str, Any]:
         """
         Store birth data as core memories.
 
@@ -423,15 +422,12 @@ Birth Chart Data for {place}:
             user_id=user_id,
             metadata=metadata,
             categories=[MemoryCategory.BIRTH_DATA, MemoryCategory.CORE_FACTS],
-            importance=MemoryImportance.CRITICAL
+            importance=MemoryImportance.CRITICAL,
         )
 
     def remember_planetary_positions(
-        self,
-        user_id: str,
-        planet_positions: Dict[str, Dict[str, Any]],
-        chart_type: str = "natal"
-    ) -> Dict[str, Any]:
+        self, user_id: str, planet_positions: dict[str, dict[str, Any]], chart_type: str = "natal"
+    ) -> dict[str, Any]:
         """
         Store planetary positions from a birth chart.
 
@@ -468,10 +464,10 @@ Planetary Positions ({chart_type.capitalize()} Chart):
             metadata={
                 "type": "planetary_positions",
                 "chart_type": chart_type,
-                "planet_count": len(planet_positions)
+                "planet_count": len(planet_positions),
             },
             categories=[MemoryCategory.CHART_ANALYSIS, MemoryCategory.CORE_FACTS],
-            importance=MemoryImportance.HIGH
+            importance=MemoryImportance.HIGH,
         )
 
     def remember_yoga(
@@ -480,10 +476,10 @@ Planetary Positions ({chart_type.capitalize()} Chart):
         yoga_name: str,
         yoga_type: str,
         description: str,
-        effects: List[str],
-        planets_involved: List[str],
-        strength: str = "medium"
-    ) -> Dict[str, Any]:
+        effects: list[str],
+        planets_involved: list[str],
+        strength: str = "medium",
+    ) -> dict[str, Any]:
         """
         Store a detected yoga as a memory.
 
@@ -503,16 +499,16 @@ Planetary Positions ({chart_type.capitalize()} Chart):
 Yoga Detected: {yoga_name}
 Type: {yoga_type}
 Description: {description}
-Planets Involved: {', '.join(planets_involved)}
+Planets Involved: {", ".join(planets_involved)}
 Expected Effects:
-{chr(10).join(f'- {effect}' for effect in effects)}
+{chr(10).join(f"- {effect}" for effect in effects)}
 Strength: {strength.upper()}
 """
 
         importance_map = {
             "weak": MemoryImportance.LOW,
             "medium": MemoryImportance.MEDIUM,
-            "strong": MemoryImportance.HIGH
+            "strong": MemoryImportance.HIGH,
         }
 
         return self.add(
@@ -526,7 +522,7 @@ Strength: {strength.upper()}
                 "planets_involved": planets_involved,
             },
             categories=[MemoryCategory.YOGAS, MemoryCategory.CHART_ANALYSIS],
-            importance=importance_map.get(strength, MemoryImportance.MEDIUM)
+            importance=importance_map.get(strength, MemoryImportance.MEDIUM),
         )
 
     def remember_dasha(
@@ -536,10 +532,10 @@ Strength: {strength.upper()}
         antardasha_lord: str,
         start_date: str,
         end_date: str,
-        characteristics: List[str],
-        challenges: List[str] = None,
-        opportunities: List[str] = None
-    ) -> Dict[str, Any]:
+        characteristics: list[str],
+        challenges: list[str] | None = None,
+        opportunities: list[str] | None = None,
+    ) -> dict[str, Any]:
         """
         Store current dasha period information.
 
@@ -562,17 +558,17 @@ Current Dasha Period:
 - Antardasha: {antardasha_lord}
 - Period: {start_date} to {end_date}
 - Characteristics:
-{chr(10).join(f'  - {char}' for char in characteristics)}
+{chr(10).join(f"  - {char}" for char in characteristics)}
 """
 
         if challenges:
             content += f"""- Challenges:
-{chr(10).join(f'  - {ch}' for ch in challenges)}
+{chr(10).join(f"  - {ch}" for ch in challenges)}
 """
 
         if opportunities:
             content += f"""- Opportunities:
-{chr(10).join(f'  - {opp}' for opp in opportunities)}
+{chr(10).join(f"  - {opp}" for opp in opportunities)}
 """
 
         return self.add(
@@ -586,7 +582,7 @@ Current Dasha Period:
                 "end_date": end_date,
             },
             categories=[MemoryCategory.DASHAS, MemoryCategory.CHART_ANALYSIS],
-            importance=MemoryImportance.HIGH
+            importance=MemoryImportance.HIGH,
         )
 
     def remember_transit(
@@ -596,9 +592,9 @@ Current Dasha Period:
         transit_date: str,
         from_sign: str,
         to_sign: str,
-        expected_effects: List[str],
-        duration: str = None
-    ) -> Dict[str, Any]:
+        expected_effects: list[str],
+        duration: str | None = None,
+    ) -> dict[str, Any]:
         """
         Store important transit information.
 
@@ -625,7 +621,7 @@ Transit Alert:
             content += f"- Duration: {duration}\n"
 
         content += f"""- Expected Effects:
-{chr(10).join(f'  - {effect}' for effect in expected_effects)}
+{chr(10).join(f"  - {effect}" for effect in expected_effects)}
 """
 
         return self.add(
@@ -639,7 +635,7 @@ Transit Alert:
                 "to_sign": to_sign,
             },
             categories=[MemoryCategory.TRANSITS, MemoryCategory.PREDICTIONS],
-            importance=MemoryImportance.MEDIUM
+            importance=MemoryImportance.MEDIUM,
         )
 
     def remember_prediction(
@@ -649,9 +645,9 @@ Transit Alert:
         area: str,
         timeframe: str,
         confidence: float,
-        factors: List[str],
-        reasoning: str = None
-    ) -> Dict[str, Any]:
+        factors: list[str],
+        reasoning: str | None = None,
+    ) -> dict[str, Any]:
         """
         Store a prediction for later validation.
 
@@ -674,7 +670,7 @@ Prediction:
 - Timeframe: {timeframe}
 - Confidence: {confidence * 100:.0f}%
 - Supporting Factors:
-{chr(10).join(f'  - {factor}' for factor in factors)}
+{chr(10).join(f"  - {factor}" for factor in factors)}
 """
 
         if reasoning:
@@ -697,16 +693,12 @@ Prediction:
                 "created_date": datetime.now().isoformat(),
             },
             categories=[MemoryCategory.PREDICTIONS],
-            importance=importance
+            importance=importance,
         )
 
     def remember_preference(
-        self,
-        user_id: str,
-        preference_type: str,
-        value: str,
-        category: str = None
-    ) -> Dict[str, Any]:
+        self, user_id: str, preference_type: str, value: str, category: str | None = None
+    ) -> dict[str, Any]:
         """
         Store a user preference.
 
@@ -728,10 +720,10 @@ Prediction:
                 "type": "preference",
                 "preference_type": preference_type,
                 "value": value,
-                "category": category
+                "category": category,
             },
             categories=[MemoryCategory.PREFERENCES],
-            importance=MemoryImportance.MEDIUM
+            importance=MemoryImportance.MEDIUM,
         )
 
     def remember_feedback(
@@ -741,8 +733,8 @@ Prediction:
         prediction_text: str,
         outcome: str,
         accuracy: float,
-        lessons: List[str] = None
-    ) -> Dict[str, Any]:
+        lessons: list[str] | None = None,
+    ) -> dict[str, Any]:
         """
         Store feedback on a prediction for learning and validation.
 
@@ -769,7 +761,7 @@ Prediction Validation:
 
         if lessons:
             content += f"""- Lessons Learned:
-{chr(10).join(f'  - {lesson}' for lesson in lessons)}
+{chr(10).join(f"  - {lesson}" for lesson in lessons)}
 """
 
         content += f"- Validated on: {datetime.now().isoformat()}\n"
@@ -784,7 +776,7 @@ Prediction Validation:
                 "validated_date": datetime.now().isoformat(),
             },
             categories=[MemoryCategory.FEEDBACK, MemoryCategory.LEARNING],
-            importance=accuracy  # Higher accuracy = higher importance
+            importance=accuracy,  # Higher accuracy = higher importance
         )
 
     def remember_interaction(
@@ -793,8 +785,8 @@ Prediction Validation:
         question: str,
         response: str,
         topic: str,
-        user_rating: float = None
-    ) -> Dict[str, Any]:
+        user_rating: float | None = None,
+    ) -> dict[str, Any]:
         """
         Store a conversation interaction.
 
@@ -833,7 +825,7 @@ Interaction History:
                 "user_rating": user_rating,
             },
             categories=[MemoryCategory.INTERACTIONS],
-            importance=importance
+            importance=importance,
         )
 
     # ===================
@@ -849,8 +841,8 @@ Interaction History:
         include_current_dasha: bool = True,
         include_recent_transits: bool = True,
         include_preferences: bool = True,
-        limit: int = 5
-    ) -> Dict[str, Any]:
+        limit: int = 5,
+    ) -> dict[str, Any]:
         """
         Get relevant context for answering a user query.
 
@@ -879,7 +871,7 @@ Interaction History:
             "recent_transits": [],
             "preferences": {},
             "relevant_memories": [],
-            "context_quality": 0.0  # Score of how much context found
+            "context_quality": 0.0,  # Score of how much context found
         }
 
         found_items = 0
@@ -893,7 +885,7 @@ Interaction History:
                 user_id=user_id,
                 limit=1,
                 categories=[MemoryCategory.BIRTH_DATA],
-                min_importance=MemoryImportance.CRITICAL
+                min_importance=MemoryImportance.CRITICAL,
             )
             if birth_memories:
                 context["birth_data"] = birth_memories[0]
@@ -907,7 +899,7 @@ Interaction History:
                 user_id=user_id,
                 limit=limit,
                 categories=[MemoryCategory.YOGAS],
-                min_importance=MemoryImportance.LOW
+                min_importance=MemoryImportance.LOW,
             )
             if yoga_memories:
                 context["yogas"] = yoga_memories
@@ -921,7 +913,7 @@ Interaction History:
                 user_id=user_id,
                 limit=1,
                 categories=[MemoryCategory.DASHAS],
-                min_importance=MemoryImportance.MEDIUM
+                min_importance=MemoryImportance.MEDIUM,
             )
             if dasha_memories:
                 context["current_dasha"] = dasha_memories[0]
@@ -935,7 +927,7 @@ Interaction History:
                 user_id=user_id,
                 limit=limit,
                 categories=[MemoryCategory.TRANSITS],
-                min_importance=MemoryImportance.LOW
+                min_importance=MemoryImportance.LOW,
             )
             if transit_memories:
                 context["recent_transits"] = transit_memories
@@ -948,18 +940,17 @@ Interaction History:
                 "preference style detail level",
                 user_id=user_id,
                 limit=10,
-                categories=[MemoryCategory.PREFERENCES]
+                categories=[MemoryCategory.PREFERENCES],
             )
             if pref_memories:
-                context["preferences"] = {m.get("metadata", {}).get("preference_type"): m.get("metadata", {}).get("value") for m in pref_memories}
+                context["preferences"] = {
+                    m.get("metadata", {}).get("preference_type"): m.get("metadata", {}).get("value")
+                    for m in pref_memories
+                }
                 found_items += 1
 
         # Search for query-relevant memories
-        context["relevant_memories"] = self.search(
-            query,
-            user_id=user_id,
-            limit=limit
-        )
+        context["relevant_memories"] = self.search(query, user_id=user_id, limit=limit)
 
         # Calculate context quality
         if total_expected > 0:
@@ -973,7 +964,7 @@ Interaction History:
     # Utility Methods
     # ===================
 
-    def _extract_facts_mock(self, content: str) -> List[str]:
+    def _extract_facts_mock(self, content: str) -> list[str]:
         """Mock fact extraction (Mem0 does this automatically in production)."""
         facts = []
 
@@ -998,7 +989,7 @@ Interaction History:
 
         return list(set(facts))  # Remove duplicates
 
-    def get_memory_stats(self, user_id: str = None) -> Dict[str, Any]:
+    def get_memory_stats(self, user_id: str | None = None) -> dict[str, Any]:
         """
         Get memory statistics for a user.
 
@@ -1037,10 +1028,10 @@ Interaction History:
 
     def cleanup_old_memories(
         self,
-        user_id: str = None,
+        user_id: str | None = None,
         days_old: int = 90,
-        categories_to_keep: List[str] = None
-    ) -> Dict[str, Any]:
+        categories_to_keep: list[str] | None = None,
+    ) -> dict[str, Any]:
         """
         Clean up old memories while preserving important ones.
 
@@ -1055,7 +1046,7 @@ Interaction History:
         user_id = user_id or self.default_user_id
         categories_to_keep = categories_to_keep or [
             MemoryCategory.BIRTH_DATA,
-            MemoryCategory.CORE_FACTS
+            MemoryCategory.CORE_FACTS,
         ]
 
         all_memories = self.get_all(user_id)
@@ -1073,7 +1064,11 @@ Interaction History:
             importance = mem.get("metadata", {}).get("importance", 0.0)
 
             # Keep if in protected categories, high importance, or recent
-            if any(cat in categories_to_keep for cat in categories) or importance >= MemoryImportance.HIGH or memory_timestamp > cutoff_date:
+            if (
+                any(cat in categories_to_keep for cat in categories)
+                or importance >= MemoryImportance.HIGH
+                or memory_timestamp > cutoff_date
+            ):
                 preserved_count += 1
             else:
                 self.delete(mem.get("id"))
@@ -1081,13 +1076,9 @@ Interaction History:
 
         logger.info(f"Cleanup completed: deleted={deleted_count}, preserved={preserved_count}")
 
-        return {
-            "deleted": deleted_count,
-            "preserved": preserved_count,
-            "user_id": user_id
-        }
+        return {"deleted": deleted_count, "preserved": preserved_count, "user_id": user_id}
 
-    def export_user_memories(self, user_id: str = None) -> str:
+    def export_user_memories(self, user_id: str | None = None) -> str:
         """
         Export all user memories as JSON.
 
@@ -1105,7 +1096,7 @@ Interaction History:
             "user_id": user_id,
             "exported_at": datetime.now().isoformat(),
             "memory_count": len(all_memories),
-            "memories": all_memories
+            "memories": all_memories,
         }
 
         return json.dumps(export_data, indent=2)
@@ -1115,12 +1106,11 @@ Interaction History:
 # Module-level API
 # ===================
 
-_client: Optional[Mem0Client] = None
+_client: Mem0Client | None = None
+
 
 def get_mem0_client(
-    api_key: str = None,
-    user_id: str = None,
-    force_new: bool = False
+    api_key: str | None = None, user_id: str | None = None, force_new: bool = False
 ) -> Mem0Client:
     """
     Get or create the global Mem0 client.

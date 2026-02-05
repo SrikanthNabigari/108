@@ -1,12 +1,14 @@
 """
 Tests for the MemoryStore with actual PostgreSQL connection.
 """
+
 import asyncio
-import pytest
 from datetime import datetime
 
+import pytest
+
 # Skip if no database available
-pytest_plugins = ['pytest_asyncio']
+pytest_plugins = ["pytest_asyncio"]
 
 
 @pytest.fixture(scope="module")
@@ -22,9 +24,7 @@ async def store():
     """Create and connect memory store."""
     from packages.memory.src.store import MemoryStore
 
-    store = MemoryStore(
-        "postgresql://postgres:postgres@localhost:5432/one_zero_eight"
-    )
+    store = MemoryStore("postgresql://postgres:postgres@localhost:5432/one_zero_eight")
     try:
         await store.connect()
         yield store
@@ -42,10 +42,7 @@ async def test_health_check(store):
 @pytest.mark.asyncio
 async def test_create_user(store):
     """Test user creation."""
-    user = await store.create_user(
-        email="test@example.com",
-        name="Test User"
-    )
+    user = await store.create_user(email="test@example.com", name="Test User")
 
     assert user["email"] == "test@example.com"
     assert user["name"] == "Test User"
@@ -56,10 +53,7 @@ async def test_create_user(store):
 async def test_get_user_by_email(store):
     """Test retrieving user by email."""
     # Create user first
-    created = await store.create_user(
-        email="lookup@example.com",
-        name="Lookup User"
-    )
+    await store.create_user(email="lookup@example.com", name="Lookup User")
 
     # Look up user
     user = await store.get_user_by_email("lookup@example.com")
@@ -73,8 +67,7 @@ async def test_add_memory(store):
     """Test adding a memory."""
     # Need a user first
     user = await store.create_user(
-        email=f"memory_test_{datetime.now().timestamp()}@example.com",
-        name="Memory Test User"
+        email=f"memory_test_{datetime.now().timestamp()}@example.com", name="Memory Test User"
     )
 
     memory = await store.add_memory(
@@ -82,7 +75,7 @@ async def test_add_memory(store):
         content="Test memory content",
         category="fact",
         importance=0.8,
-        metadata={"source": "test"}
+        metadata={"source": "test"},
     )
 
     assert memory.content == "Test memory content"
@@ -94,8 +87,7 @@ async def test_add_memory(store):
 async def test_save_birth_chart(store):
     """Test saving birth chart."""
     user = await store.create_user(
-        email=f"chart_test_{datetime.now().timestamp()}@example.com",
-        name="Chart Test User"
+        email=f"chart_test_{datetime.now().timestamp()}@example.com", name="Chart Test User"
     )
 
     chart = await store.save_birth_chart(
@@ -105,7 +97,7 @@ async def test_save_birth_chart(store):
         longitude=81.288428,
         timezone="Asia/Kolkata",
         place_name="Eluru, India",
-        chart_data={"lagna": "Libra", "moon_sign": "Aquarius"}
+        chart_data={"lagna": "Libra", "moon_sign": "Aquarius"},
     )
 
     assert chart["latitude"] == 16.726239
@@ -116,8 +108,7 @@ async def test_save_birth_chart(store):
 async def test_get_birth_chart(store):
     """Test retrieving birth chart."""
     user = await store.create_user(
-        email=f"get_chart_{datetime.now().timestamp()}@example.com",
-        name="Get Chart User"
+        email=f"get_chart_{datetime.now().timestamp()}@example.com", name="Get Chart User"
     )
 
     # Save chart
@@ -127,7 +118,7 @@ async def test_get_birth_chart(store):
         latitude=40.7128,
         longitude=-74.0060,
         timezone="America/New_York",
-        place_name="New York, USA"
+        place_name="New York, USA",
     )
 
     # Retrieve chart
@@ -141,8 +132,7 @@ async def test_get_birth_chart(store):
 async def test_save_detected_patterns(store):
     """Test saving yoga/dosha patterns."""
     user = await store.create_user(
-        email=f"pattern_test_{datetime.now().timestamp()}@example.com",
-        name="Pattern Test User"
+        email=f"pattern_test_{datetime.now().timestamp()}@example.com", name="Pattern Test User"
     )
 
     patterns = [
@@ -150,20 +140,18 @@ async def test_save_detected_patterns(store):
             "name": "Budha-Aditya Yoga",
             "category": "wealth",
             "strength": 0.85,
-            "involved_planets": ["Sun", "Mercury"]
+            "involved_planets": ["Sun", "Mercury"],
         },
         {
             "name": "Gajakesari Yoga",
             "category": "prosperity",
             "strength": 0.75,
-            "involved_planets": ["Moon", "Jupiter"]
-        }
+            "involved_planets": ["Moon", "Jupiter"],
+        },
     ]
 
     count = await store.save_detected_patterns(
-        user_id=user["id"],
-        patterns=patterns,
-        pattern_type="yoga"
+        user_id=user["id"], patterns=patterns, pattern_type="yoga"
     )
 
     assert count == 2
@@ -173,22 +161,14 @@ async def test_save_detected_patterns(store):
 async def test_set_and_get_preference(store):
     """Test user preferences."""
     user = await store.create_user(
-        email=f"pref_test_{datetime.now().timestamp()}@example.com",
-        name="Preference Test User"
+        email=f"pref_test_{datetime.now().timestamp()}@example.com", name="Preference Test User"
     )
 
     # Set preference
-    await store.set_preference(
-        user_id=user["id"],
-        key="language",
-        value="en"
-    )
+    await store.set_preference(user_id=user["id"], key="language", value="en")
 
     # Get preference
-    value = await store.get_preference(
-        user_id=user["id"],
-        key="language"
-    )
+    value = await store.get_preference(user_id=user["id"], key="language")
 
     assert value == "en"
 

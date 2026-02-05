@@ -14,24 +14,25 @@ The module uses sidereal zodiac positions and follows classical
 Vedic astrology standards.
 """
 
-from typing import Dict, Tuple, Optional, Any
 from datetime import datetime
 from enum import IntEnum
-import math
-
+from typing import Any
 
 # ============================================================================
 # CONSTANTS AND ENUMERATIONS
 # ============================================================================
 
+
 class Paksha(IntEnum):
     """Lunar fortnight (half lunar month)"""
+
     SHUKLA = 1  # Waxing moon
     KRISHNA = 2  # Waning moon
 
 
 class PakshaName(str):
     """Paksha names"""
+
     SHUKLA = "Shukla"
     KRISHNA = "Krishna"
 
@@ -39,51 +40,51 @@ class PakshaName(str):
 # Tithi names follow the same sequence for both Shukla and Krishna Paksha
 TITHI_NAMES = [
     "Pratipada",  # 1
-    "Dwitiya",    # 2
-    "Tritiya",    # 3
+    "Dwitiya",  # 2
+    "Tritiya",  # 3
     "Chaturthi",  # 4
-    "Panchami",   # 5
-    "Shashthi",   # 6
-    "Saptami",    # 7
-    "Ashtami",    # 8
-    "Navami",     # 9
-    "Dashami",    # 10
-    "Ekadashi",   # 11
-    "Dwadashi",   # 12
-    "Trayodashi", # 13
-    "Chaturdashi",# 14
-    "Purnima",    # 15 (Shukla) / Amavasya (Krishna)
+    "Panchami",  # 5
+    "Shashthi",  # 6
+    "Saptami",  # 7
+    "Ashtami",  # 8
+    "Navami",  # 9
+    "Dashami",  # 10
+    "Ekadashi",  # 11
+    "Dwadashi",  # 12
+    "Trayodashi",  # 13
+    "Chaturdashi",  # 14
+    "Purnima",  # 15 (Shukla) / Amavasya (Krishna)
 ]
 
 # Yoga names (27 total)
 YOGA_NAMES = [
     "Vishkumbha",  # 1
-    "Priti",       # 2
-    "Ayushman",    # 3
-    "Saubhagya",   # 4
-    "Shobhana",    # 5
-    "Atiganda",    # 6
-    "Sukarma",     # 7
-    "Dhriti",      # 8
-    "Shoola",      # 9
-    "Ganda",       # 10
-    "Vriddhi",     # 11
-    "Dhruva",      # 12
-    "Vyaghata",    # 13
-    "Harshana",    # 14
-    "Vajra",       # 15
-    "Siddhi",      # 16
-    "Vyatipata",   # 17
-    "Variyan",     # 18
-    "Parigha",     # 19
-    "Shiva",       # 20
-    "Siddha",      # 21
-    "Sadhya",      # 22
-    "Shubha",      # 23
-    "Shukla",      # 24
-    "Brahma",      # 25
-    "Indra",       # 26
-    "Vaidhriti",   # 27
+    "Priti",  # 2
+    "Ayushman",  # 3
+    "Saubhagya",  # 4
+    "Shobhana",  # 5
+    "Atiganda",  # 6
+    "Sukarma",  # 7
+    "Dhriti",  # 8
+    "Shoola",  # 9
+    "Ganda",  # 10
+    "Vriddhi",  # 11
+    "Dhruva",  # 12
+    "Vyaghata",  # 13
+    "Harshana",  # 14
+    "Vajra",  # 15
+    "Siddhi",  # 16
+    "Vyatipata",  # 17
+    "Variyan",  # 18
+    "Parigha",  # 19
+    "Shiva",  # 20
+    "Siddha",  # 21
+    "Sadhya",  # 22
+    "Shubha",  # 23
+    "Shukla",  # 24
+    "Brahma",  # 25
+    "Indra",  # 26
+    "Vaidhriti",  # 27
 ]
 
 # Karana names
@@ -107,23 +108,23 @@ REPEATING_KARANAS = ["Bava", "Balava", "Kaulava", "Taitila", "Gara", "Vanija", "
 
 # Vara (Weekday) information
 VARA_NAMES = [
-    "Ravivara",      # 0 - Sunday (Sun)
-    "Somavara",      # 1 - Monday (Moon)
-    "Mangalvara",    # 2 - Tuesday (Mars)
-    "Budhavara",     # 3 - Wednesday (Mercury)
-    "Guruvara",      # 4 - Thursday (Jupiter)
-    "Shukravara",    # 5 - Friday (Venus)
-    "Shanivara",     # 6 - Saturday (Saturn)
+    "Ravivara",  # 0 - Sunday (Sun)
+    "Somavara",  # 1 - Monday (Moon)
+    "Mangalvara",  # 2 - Tuesday (Mars)
+    "Budhavara",  # 3 - Wednesday (Mercury)
+    "Guruvara",  # 4 - Thursday (Jupiter)
+    "Shukravara",  # 5 - Friday (Venus)
+    "Shanivara",  # 6 - Saturday (Saturn)
 ]
 
 VARA_LORDS = [
-    "Sun",           # 0
-    "Moon",          # 1
-    "Mars",          # 2
-    "Mercury",       # 3
-    "Jupiter",       # 4
-    "Venus",         # 5
-    "Saturn",        # 6
+    "Sun",  # 0
+    "Moon",  # 1
+    "Mars",  # 2
+    "Mercury",  # 3
+    "Jupiter",  # 4
+    "Venus",  # 5
+    "Saturn",  # 6
 ]
 
 
@@ -131,7 +132,8 @@ VARA_LORDS = [
 # TITHI CALCULATIONS
 # ============================================================================
 
-def get_tithi(sun_longitude: float, moon_longitude: float) -> Dict[str, Any]:
+
+def get_tithi(sun_longitude: float, moon_longitude: float) -> dict[str, Any]:
     """
     Calculate the Tithi (lunar day) based on Sun and Moon longitudes.
 
@@ -167,7 +169,7 @@ def get_tithi(sun_longitude: float, moon_longitude: float) -> Dict[str, Any]:
 
     # Each tithi spans 12 degrees
     tithi_float = distance / 12.0
-    tithi_number = int(tithi_float) + 1
+    int(tithi_float) + 1
 
     # Determine paksha (waxing or waning)
     if tithi_float < 15:
@@ -185,10 +187,7 @@ def get_tithi(sun_longitude: float, moon_longitude: float) -> Dict[str, Any]:
 
     # Get tithi name, with special case for last tithi
     if tithi_idx == 14:
-        if paksha == Paksha.SHUKLA:
-            name = "Purnima"
-        else:
-            name = "Amavasya"
+        name = "Purnima" if paksha == Paksha.SHUKLA else "Amavasya"
     else:
         name = TITHI_NAMES[tithi_idx]
 
@@ -209,7 +208,8 @@ def get_tithi(sun_longitude: float, moon_longitude: float) -> Dict[str, Any]:
 # YOGA CALCULATIONS
 # ============================================================================
 
-def get_yoga(sun_longitude: float, moon_longitude: float) -> Dict[str, Any]:
+
+def get_yoga(sun_longitude: float, moon_longitude: float) -> dict[str, Any]:
     """
     Calculate the Yoga (auspicious combination) based on Sun and Moon positions.
 
@@ -263,7 +263,8 @@ def get_yoga(sun_longitude: float, moon_longitude: float) -> Dict[str, Any]:
 # KARANA CALCULATIONS
 # ============================================================================
 
-def get_karana(tithi_number: int) -> Dict[str, Any]:
+
+def get_karana(tithi_number: int) -> dict[str, Any]:
     """
     Calculate the Karana (half tithi) based on the tithi number.
 
@@ -296,7 +297,7 @@ def get_karana(tithi_number: int) -> Dict[str, Any]:
     # Each tithi = 2 half-tithis
     half_tithi_idx = (tithi_number - 1) * 2
 
-    karana_info: Dict[str, Any] = {
+    karana_info: dict[str, Any] = {
         "half": ((tithi_number - 1) % 2) + 1,
     }
 
@@ -346,12 +347,7 @@ def get_karana(tithi_number: int) -> Dict[str, Any]:
     else:
         # For half-tithis in the repeating section
         # Skip the fixed ones: positions 0 (Kimstughna), 28 (Chatushpada), 29 (Nagava)
-        cycle_idx = half_tithi_idx - 1  # Start from position 1
-        if half_tithi_idx > 28:
-            # Adjust for fixed karanas at end
-            cycle_idx = (half_tithi_idx - 1) % 7
-        else:
-            cycle_idx = (half_tithi_idx - 1) % 7
+        cycle_idx = (half_tithi_idx - 1) % 7
 
         karana_name = REPEATING_KARANAS[cycle_idx]
         karana_info["name"] = karana_name
@@ -361,7 +357,7 @@ def get_karana(tithi_number: int) -> Dict[str, Any]:
     return karana_info
 
 
-def get_karana_advanced(tithi_number: int, paksha: int) -> Dict[str, Any]:
+def get_karana_advanced(tithi_number: int, paksha: int) -> dict[str, Any]:
     """
     Calculate Karana with awareness of Paksha (lunar fortnight).
 
@@ -376,22 +372,19 @@ def get_karana_advanced(tithi_number: int, paksha: int) -> Dict[str, Any]:
         Dictionary with karana information including both halves
     """
     # Convert to absolute tithi position in lunar month
-    if paksha == 1:  # Shukla
-        abs_tithi = tithi_number
-    else:  # Krishna
-        abs_tithi = tithi_number + 15
+    abs_tithi = tithi_number if paksha == 1 else tithi_number + 15
 
     # Convert to half-tithi index (0-29)
     half_tithi_idx = (abs_tithi - 1) * 2
 
-    karana_info: Dict[str, Any] = {}
+    karana_info: dict[str, Any] = {}
 
     # Fixed karana positions
     fixed_karanas = {
-        0: ("Kimstughna", 11),       # 1st half of Shukla Pratipada
-        27: ("Shakuni", 8),          # 2nd half of Krishna Chaturdashi
-        28: ("Chatushpada", 9),      # 1st half of Krishna Amavasya
-        29: ("Nagava", 10),          # 2nd half of Krishna Amavasya
+        0: ("Kimstughna", 11),  # 1st half of Shukla Pratipada
+        27: ("Shakuni", 8),  # 2nd half of Krishna Chaturdashi
+        28: ("Chatushpada", 9),  # 1st half of Krishna Amavasya
+        29: ("Nagava", 10),  # 2nd half of Krishna Amavasya
     }
 
     if half_tithi_idx in fixed_karanas:
@@ -421,7 +414,8 @@ def get_karana_advanced(tithi_number: int, paksha: int) -> Dict[str, Any]:
 # VARA CALCULATIONS
 # ============================================================================
 
-def get_vara(dt: datetime) -> Dict[str, Any]:
+
+def get_vara(dt: datetime) -> dict[str, Any]:
     """
     Calculate the Vara (weekday) based on the given datetime.
 
@@ -467,12 +461,13 @@ def get_vara(dt: datetime) -> Dict[str, Any]:
 # COMPLETE PANCHANGA CALCULATION
 # ============================================================================
 
+
 def get_panchanga(
     dt: datetime,
     latitude: float,
     longitude: float,
-    ephemeris_module: Optional[Any] = None,
-) -> Dict[str, Any]:
+    ephemeris_module: Any | None = None,
+) -> dict[str, Any]:
     """
     Calculate the complete Panchanga (five limbs of Vedic calendar).
 
@@ -518,12 +513,13 @@ def get_panchanga(
     if ephemeris_module is None:
         try:
             from . import ephemeris
+
             ephemeris_module = ephemeris
-        except ImportError:
+        except ImportError as err:
             raise ImportError(
                 "Ephemeris module not provided and cannot be auto-imported. "
                 "Pass ephemeris_module parameter or ensure cosmos.ephemeris is available."
-            )
+            ) from err
 
     # Get planetary positions
     try:
@@ -534,7 +530,7 @@ def get_panchanga(
             ayanamsa="lahiri",
         )
     except Exception as e:
-        raise ValueError(f"Failed to calculate planetary positions: {e}")
+        raise ValueError(f"Failed to calculate planetary positions: {e}") from e
 
     # Extract Sun and Moon longitudes
     sun_lon = planets["Sun"]["longitude"]
@@ -608,6 +604,7 @@ def get_panchanga(
 # UTILITY FUNCTIONS
 # ============================================================================
 
+
 def normalize_longitude(longitude: float) -> float:
     """
     Normalize a longitude value to 0-360 degree range.
@@ -659,15 +656,9 @@ def tithi_to_lunar_day_string(tithi_number: int, paksha: str) -> str:
         Formatted string like "Shukla Pratipada" or "Krishna Amavasya"
     """
     if paksha == "Shukla":
-        if tithi_number == 15:
-            tithi_name = "Purnima"
-        else:
-            tithi_name = TITHI_NAMES[tithi_number - 1]
+        tithi_name = "Purnima" if tithi_number == 15 else TITHI_NAMES[tithi_number - 1]
     elif paksha == "Krishna":
-        if tithi_number == 15:
-            tithi_name = "Amavasya"
-        else:
-            tithi_name = TITHI_NAMES[tithi_number - 1]
+        tithi_name = "Amavasya" if tithi_number == 15 else TITHI_NAMES[tithi_number - 1]
     else:
         tithi_name = "Unknown"
 
@@ -678,7 +669,8 @@ def tithi_to_lunar_day_string(tithi_number: int, paksha: str) -> str:
 # VALIDATION FUNCTIONS
 # ============================================================================
 
-def validate_tithi(tithi_data: Dict[str, Any]) -> bool:
+
+def validate_tithi(tithi_data: dict[str, Any]) -> bool:
     """
     Validate tithi calculation result.
 
@@ -698,7 +690,7 @@ def validate_tithi(tithi_data: Dict[str, Any]) -> bool:
     )
 
 
-def validate_yoga(yoga_data: Dict[str, Any]) -> bool:
+def validate_yoga(yoga_data: dict[str, Any]) -> bool:
     """
     Validate yoga calculation result.
 
@@ -716,7 +708,7 @@ def validate_yoga(yoga_data: Dict[str, Any]) -> bool:
     )
 
 
-def validate_karana(karana_data: Dict[str, Any]) -> bool:
+def validate_karana(karana_data: dict[str, Any]) -> bool:
     """
     Validate karana calculation result.
 
@@ -734,7 +726,7 @@ def validate_karana(karana_data: Dict[str, Any]) -> bool:
     )
 
 
-def validate_vara(vara_data: Dict[str, Any]) -> bool:
+def validate_vara(vara_data: dict[str, Any]) -> bool:
     """
     Validate vara calculation result.
 

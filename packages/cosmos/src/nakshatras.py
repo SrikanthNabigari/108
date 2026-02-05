@@ -14,14 +14,15 @@ All planetary lords follow the Vimshottari Dasha sequence.
 """
 
 import json
+from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, Optional, TypedDict, Literal
-from dataclasses import dataclass, asdict
+from typing import TypedDict
 
 
 # Type definitions
 class NakshatraResult(TypedDict):
     """Result from longitude_to_nakshatra function."""
+
     name: str
     number: int
     pada: int
@@ -31,12 +32,14 @@ class NakshatraResult(TypedDict):
 
 class PadaNavamshaResult(TypedDict):
     """Result from get_pada_navamsha function."""
+
     rashi: str
     rashi_number: int
 
 
 class TarabalaResult(TypedDict):
     """Result from get_tarabala function."""
+
     tara: str
     tara_number: int
     effect: str
@@ -45,11 +48,12 @@ class TarabalaResult(TypedDict):
 @dataclass
 class NakshatraData:
     """Internal data structure for a single nakshatra."""
+
     number: int
     id: str
     name: str
     ruler: str
-    padas: Dict[int, Dict[str, any]]
+    padas: dict[int, dict[str, any]]
 
 
 # Vimshottari Dasha sequence - planetary lords of nakshatras
@@ -99,23 +103,23 @@ TARABALA_NAMES = [
 
 TARABALA_EFFECTS = [
     "",  # 0 is unused
-    "Moderate",      # Janma (Birth)
-    "Good",          # Sampat (Wealth)
-    "Bad",           # Vipat (Danger)
-    "Good",          # Kshema (Prosperity)
-    "Bad",           # Pratyak (Obstacles)
-    "Good",          # Sadhana (Achievement)
-    "Bad",           # Naidhana (Death)
-    "Good",          # Mitra (Friend)
-    "Excellent",     # Parama Mitra (Best Friend)
+    "Moderate",  # Janma (Birth)
+    "Good",  # Sampat (Wealth)
+    "Bad",  # Vipat (Danger)
+    "Good",  # Kshema (Prosperity)
+    "Bad",  # Pratyak (Obstacles)
+    "Good",  # Sadhana (Achievement)
+    "Bad",  # Naidhana (Death)
+    "Good",  # Mitra (Friend)
+    "Excellent",  # Parama Mitra (Best Friend)
 ]
 
 # Global cache for nakshatra data
-_NAKSHATRA_DATA_CACHE: Optional[Dict[str, any]] = None
-_NAKSHATRA_BY_NUMBER: Optional[Dict[int, Dict[str, any]]] = None
+_NAKSHATRA_DATA_CACHE: dict[str, any] | None = None
+_NAKSHATRA_BY_NUMBER: dict[int, dict[str, any]] | None = None
 
 
-def _load_nakshatra_data() -> Dict[str, any]:
+def _load_nakshatra_data() -> dict[str, any]:
     """Load nakshatra definitions from JSON file.
 
     Returns:
@@ -140,7 +144,7 @@ def _load_nakshatra_data() -> Dict[str, any]:
             "Ensure knowledge/definitions/nakshatras.json exists."
         )
 
-    with open(json_path, 'r', encoding='utf-8') as f:
+    with json_path.open(encoding="utf-8") as f:
         _NAKSHATRA_DATA_CACHE = json.load(f)
 
     # Build index by number for fast lookup
@@ -151,7 +155,7 @@ def _load_nakshatra_data() -> Dict[str, any]:
     return _NAKSHATRA_DATA_CACHE
 
 
-def _get_nakshatra_by_number(number: int) -> Optional[Dict[str, any]]:
+def _get_nakshatra_by_number(number: int) -> dict[str, any] | None:
     """Get nakshatra data by number (1-27).
 
     Args:
@@ -325,9 +329,18 @@ def get_pada_navamsha(nakshatra: str, pada: int) -> PadaNavamshaResult:
     # Map rashi names to numbers
     rashi_name = pada_data["navamsha_sign"].lower()
     rashi_map = {
-        "aries": 0, "taurus": 1, "gemini": 2, "cancer": 3,
-        "leo": 4, "virgo": 5, "libra": 6, "scorpio": 7,
-        "sagittarius": 8, "capricorn": 9, "aquarius": 10, "pisces": 11,
+        "aries": 0,
+        "taurus": 1,
+        "gemini": 2,
+        "cancer": 3,
+        "leo": 4,
+        "virgo": 5,
+        "libra": 6,
+        "scorpio": 7,
+        "sagittarius": 8,
+        "capricorn": 9,
+        "aquarius": 10,
+        "pisces": 11,
     }
 
     rashi_number = rashi_map.get(rashi_name, -1)
@@ -454,7 +467,7 @@ def get_nakshatra_number_by_name(name: str) -> int:
     )
 
 
-def get_all_nakshatras() -> list[Dict[str, any]]:
+def get_all_nakshatras() -> list[dict[str, any]]:
     """Get list of all 27 nakshatras with their data.
 
     Returns:

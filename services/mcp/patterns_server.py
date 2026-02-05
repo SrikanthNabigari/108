@@ -13,31 +13,25 @@ Includes:
 
 import sys
 from pathlib import Path
-from typing import Dict, List, Any, Optional
+from typing import Any
 
 # Add packages to path
 SERVICES_ROOT = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(SERVICES_ROOT))
 
-from mcp.server.fastmcp import FastMCP
-
-# Import from core package
-from packages.core.src import (
-    Planet,
-    Rashi,
+from mcp.server.fastmcp import FastMCP  # noqa: E402
+from packages.core.src import (  # noqa: E402
     BirthChart,
-    PlanetPosition,
-    HouseCusps,
     BirthData,
-    DetectedYoga,
-    DetectedDosha,
+    HouseCusps,
+    Planet,
+    PlanetPosition,
+    Rashi,
 )
-
-# Import pattern detection modules
-from packages.self.src import (
-    YogaDetector,
+from packages.self.src import (  # noqa: E402
     DoshaDetector,
     StrengthCalculator,
+    YogaDetector,
 )
 
 # Initialize MCP server
@@ -51,11 +45,11 @@ strength_calc = StrengthCalculator()
 
 @mcp.tool()
 def detect_yogas(
-    planets: Dict[str, Dict[str, Any]],
+    planets: dict[str, dict[str, Any]],
     lagna_rashi: str,
-    moon_rashi: Optional[str] = None,
-    houses: Optional[Dict[str, Any]] = None
-) -> Dict[str, Any]:
+    moon_rashi: str | None = None,
+    houses: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     """
     Detect all yogas present in the birth chart.
 
@@ -97,42 +91,42 @@ def detect_yogas(
         # Format results
         yogas = []
         for yoga in detected:
-            yogas.append({
-                "id": yoga.id if hasattr(yoga, 'id') else "",
-                "name": yoga.name if hasattr(yoga, 'name') else "",
-                "category": yoga.category if hasattr(yoga, 'category') else "other",
-                "is_present": yoga.is_present if hasattr(yoga, 'is_present') else True,
-                "strength": yoga.strength if hasattr(yoga, 'strength') else 1.0,
-                "involved_planets": yoga.involved_planets if hasattr(yoga, 'involved_planets') else [],
-                "description": yoga.description if hasattr(yoga, 'description') else "",
-                "effects": yoga.effects if hasattr(yoga, 'effects') else [],
-                "cancellation": yoga.cancellation if hasattr(yoga, 'cancellation') else None
-            })
+            yogas.append(
+                {
+                    "id": yoga.id if hasattr(yoga, "id") else "",
+                    "name": yoga.name if hasattr(yoga, "name") else "",
+                    "category": yoga.category if hasattr(yoga, "category") else "other",
+                    "is_present": yoga.is_present if hasattr(yoga, "is_present") else True,
+                    "strength": yoga.strength if hasattr(yoga, "strength") else 1.0,
+                    "involved_planets": yoga.involved_planets
+                    if hasattr(yoga, "involved_planets")
+                    else [],
+                    "description": yoga.description if hasattr(yoga, "description") else "",
+                    "effects": yoga.effects if hasattr(yoga, "effects") else [],
+                    "cancellation": yoga.cancellation if hasattr(yoga, "cancellation") else None,
+                }
+            )
 
         return {
             "lagna": lagna_rashi.lower(),
             "total_yogas_found": len(yogas),
             "yogas": yogas,
             "categories": _group_by_category(yogas),
-            "success": True
+            "success": True,
         }
 
     except Exception as e:
-        return {
-            "error": str(e),
-            "type": type(e).__name__,
-            "success": False
-        }
+        return {"error": str(e), "type": type(e).__name__, "success": False}
 
 
 @mcp.tool()
 def detect_doshas(
-    planets: Dict[str, Dict[str, Any]],
+    planets: dict[str, dict[str, Any]],
     lagna_rashi: str,
-    moon_rashi: Optional[str] = None,
-    venus_rashi: Optional[str] = None,
-    houses: Optional[Dict[str, Any]] = None
-) -> Dict[str, Any]:
+    moon_rashi: str | None = None,
+    venus_rashi: str | None = None,  # noqa: ARG001
+    houses: dict[str, Any] | None = None,
+) -> dict[str, Any]:
     """
     Detect all doshas (afflictions) present in the birth chart.
 
@@ -169,17 +163,21 @@ def detect_doshas(
         # Format results
         doshas = []
         for dosha in detected:
-            doshas.append({
-                "id": dosha.id if hasattr(dosha, 'id') else "",
-                "name": dosha.name if hasattr(dosha, 'name') else "",
-                "is_present": dosha.is_present if hasattr(dosha, 'is_present') else True,
-                "severity": dosha.severity if hasattr(dosha, 'severity') else "moderate",
-                "involved_planets": dosha.involved_planets if hasattr(dosha, 'involved_planets') else [],
-                "description": dosha.description if hasattr(dosha, 'description') else "",
-                "effects": dosha.effects if hasattr(dosha, 'effects') else [],
-                "remedies": dosha.remedies if hasattr(dosha, 'remedies') else [],
-                "cancellation": dosha.cancellation if hasattr(dosha, 'cancellation') else None
-            })
+            doshas.append(
+                {
+                    "id": dosha.id if hasattr(dosha, "id") else "",
+                    "name": dosha.name if hasattr(dosha, "name") else "",
+                    "is_present": dosha.is_present if hasattr(dosha, "is_present") else True,
+                    "severity": dosha.severity if hasattr(dosha, "severity") else "moderate",
+                    "involved_planets": dosha.involved_planets
+                    if hasattr(dosha, "involved_planets")
+                    else [],
+                    "description": dosha.description if hasattr(dosha, "description") else "",
+                    "effects": dosha.effects if hasattr(dosha, "effects") else [],
+                    "remedies": dosha.remedies if hasattr(dosha, "remedies") else [],
+                    "cancellation": dosha.cancellation if hasattr(dosha, "cancellation") else None,
+                }
+            )
 
         return {
             "lagna": lagna_rashi.lower(),
@@ -187,25 +185,17 @@ def detect_doshas(
             "doshas": doshas,
             "has_mangal_dosha": any(d["id"] == "mangal_dosha" for d in doshas),
             "has_kaal_sarp": any(d["id"] == "kaal_sarp_dosha" for d in doshas),
-            "success": True
+            "success": True,
         }
 
     except Exception as e:
-        return {
-            "error": str(e),
-            "type": type(e).__name__,
-            "success": False
-        }
+        return {"error": str(e), "type": type(e).__name__, "success": False}
 
 
 @mcp.tool()
 def calculate_strength(
-    planet: str,
-    longitude: float,
-    house: int,
-    sign: str,
-    is_retrograde: bool = False
-) -> Dict[str, Any]:
+    planet: str, longitude: float, house: int, sign: str, is_retrograde: bool = False
+) -> dict[str, Any]:
     """
     Calculate Shadbala (six-fold strength) for a planet.
 
@@ -243,7 +233,7 @@ def calculate_strength(
         if planet_lower not in ["sun", "moon", "mars", "mercury", "jupiter", "venus", "saturn"]:
             return {
                 "error": f"Invalid planet: {planet}. Must be one of: sun, moon, mars, mercury, jupiter, venus, saturn",
-                "success": False
+                "success": False,
             }
 
         planet_enum = Planet(planet_lower)
@@ -257,18 +247,26 @@ def calculate_strength(
 
         # Convert to regular dict if it's a dataclass
         shadbala_data = {}
-        if hasattr(shadbala_dict, '__dict__'):
+        if hasattr(shadbala_dict, "__dict__"):
             for key, value in shadbala_dict.__dict__.items():
-                shadbala_data[key] = float(value) if isinstance(value, (int, float)) else value
+                shadbala_data[key] = float(value) if isinstance(value, int | float) else value
         else:
             shadbala_data = shadbala_dict
 
-        total_strength = shadbala_data.get("total", sum(
-            float(shadbala_data.get(k, 0)) for k in [
-                "sthana_bala", "dig_bala", "kala_bala",
-                "chesta_bala", "naisargika_bala", "drik_bala"
-            ]
-        ))
+        total_strength = shadbala_data.get(
+            "total",
+            sum(
+                float(shadbala_data.get(k, 0))
+                for k in [
+                    "sthana_bala",
+                    "dig_bala",
+                    "kala_bala",
+                    "chesta_bala",
+                    "naisargika_bala",
+                    "drik_bala",
+                ]
+            ),
+        )
 
         # Get dignity status
         dignity = strength_calc.get_planet_dignity(planet_enum, rashi_enum)
@@ -284,28 +282,17 @@ def calculate_strength(
             "total_strength": round(total_strength, 2),
             "is_strong": total_strength > 300,
             "strength_rating": _get_strength_rating(total_strength),
-            "success": True
+            "success": True,
         }
 
     except ValueError as e:
-        return {
-            "error": str(e),
-            "type": "ValueError",
-            "success": False
-        }
+        return {"error": str(e), "type": "ValueError", "success": False}
     except Exception as e:
-        return {
-            "error": str(e),
-            "type": type(e).__name__,
-            "success": False
-        }
+        return {"error": str(e), "type": type(e).__name__, "success": False}
 
 
 @mcp.tool()
-def ashtakavarga(
-    planets: Dict[str, Dict[str, Any]],
-    lagna_rashi: str
-) -> Dict[str, Any]:
+def ashtakavarga(planets: dict[str, dict[str, Any]], lagna_rashi: str) -> dict[str, Any]:
     """
     Calculate Ashtakavarga for all planets.
 
@@ -342,8 +329,18 @@ def ashtakavarga(
     try:
         # Sign to number mapping
         signs = [
-            "aries", "taurus", "gemini", "cancer", "leo", "virgo",
-            "libra", "scorpio", "sagittarius", "capricorn", "aquarius", "pisces"
+            "aries",
+            "taurus",
+            "gemini",
+            "cancer",
+            "leo",
+            "virgo",
+            "libra",
+            "scorpio",
+            "sagittarius",
+            "capricorn",
+            "aquarius",
+            "pisces",
         ]
 
         # Convert planet positions to rashi numbers
@@ -360,29 +357,21 @@ def ashtakavarga(
         lagna_num = signs.index(lagna_lower) if lagna_lower in signs else 0
 
         # Calculate individual ashtakavarga
-        result = {
-            "planets": {},
-            "sarvashtakavarga": [0] * 12,
-            "success": True
-        }
+        result = {"planets": {}, "sarvashtakavarga": [0] * 12, "success": True}
 
         for planet_name in ["sun", "moon", "mars", "mercury", "jupiter", "venus", "saturn"]:
             if planet_name in planets_rashi:
                 try:
                     planet_enum = Planet(planet_name)
-                    av = strength_calc.calculate_ashtakavarga(
-                        planet_enum,
-                        planets_rashi,
-                        lagna_num
-                    )
+                    av = strength_calc.calculate_ashtakavarga(planet_enum, planets_rashi, lagna_num)
 
                     # Ensure av is a list
                     if not isinstance(av, list):
-                        av = [av] if isinstance(av, (int, float)) else [0] * 12
+                        av = [av] if isinstance(av, int | float) else [0] * 12
 
                     result["planets"][planet_name] = {
                         "bindus_by_sign": [float(v) for v in av],
-                        "total_bindus": float(sum(av))
+                        "total_bindus": float(sum(av)),
                     }
 
                     # Add to SAV
@@ -396,28 +385,20 @@ def ashtakavarga(
         # Convert SAV to float and create sign mapping
         result["sarvashtakavarga"] = [float(v) for v in result["sarvashtakavarga"]]
         result["sarvashtakavarga_with_signs"] = {
-            signs[i].capitalize(): result["sarvashtakavarga"][i]
-            for i in range(12)
+            signs[i].capitalize(): result["sarvashtakavarga"][i] for i in range(12)
         }
 
         return result
 
     except Exception as e:
-        return {
-            "error": str(e),
-            "type": type(e).__name__,
-            "success": False
-        }
+        return {"error": str(e), "type": type(e).__name__, "success": False}
 
 
 # Helper functions
 
+
 def _build_chart_for_strength(
-    planet_enum: Planet,
-    longitude: float,
-    house: int,
-    rashi_enum: Rashi,
-    is_retrograde: bool
+    planet_enum: Planet, longitude: float, house: int, rashi_enum: Rashi, is_retrograde: bool
 ) -> BirthChart:
     """Build a minimal BirthChart object for strength calculations."""
     from datetime import datetime
@@ -435,25 +416,18 @@ def _build_chart_for_strength(
             nakshatra_pada=1,
             nakshatra_lord=Planet.KETU,
             is_retrograde=is_retrograde,
-            house=house
+            house=house,
         )
     }
 
     # Create house cusps
-    house_cusps = HouseCusps(
-        ascendant=0.0,
-        mc=270.0,
-        cusps=[i * 30 for i in range(12)]
-    )
+    house_cusps = HouseCusps(ascendant=0.0, mc=270.0, cusps=[i * 30 for i in range(12)])
 
     # Create minimal BirthChart
     chart = BirthChart(
         user_id="temporary",
         birth_data=BirthData(
-            datetime_utc=datetime.utcnow(),
-            latitude=0.0,
-            longitude=0.0,
-            timezone="UTC"
+            datetime_utc=datetime.utcnow(), latitude=0.0, longitude=0.0, timezone="UTC"
         ),
         planets=planet_positions,
         houses=house_cusps,
@@ -461,17 +435,17 @@ def _build_chart_for_strength(
         moon_rashi=Rashi.CANCER,
         moon_nakshatra="pushya",
         ayanamsa=23.45,
-        calculated_at=datetime.utcnow()
+        calculated_at=datetime.utcnow(),
     )
 
     return chart
 
 
 def _build_chart_for_yoga(
-    planets: Dict[str, Dict[str, Any]],
+    planets: dict[str, dict[str, Any]],
     lagna_rashi: str,
-    moon_rashi: Optional[str] = None,
-    houses: Optional[Dict[str, Any]] = None
+    moon_rashi: str | None = None,
+    houses: dict[str, Any] | None = None,
 ) -> BirthChart:
     """Build a minimal BirthChart object for yoga/dosha detection."""
     from datetime import datetime
@@ -496,7 +470,17 @@ def _build_chart_for_yoga(
     planet_positions = {}
     for planet_name, data in planets.items():
         planet_lower = planet_name.lower()
-        if planet_lower in ["sun", "moon", "mars", "mercury", "jupiter", "venus", "saturn", "rahu", "ketu"]:
+        if planet_lower in [
+            "sun",
+            "moon",
+            "mars",
+            "mercury",
+            "jupiter",
+            "venus",
+            "saturn",
+            "rahu",
+            "ketu",
+        ]:
             try:
                 planet_enum = Planet(planet_lower)
                 sign_str = data.get("sign", "aries").lower()
@@ -513,7 +497,7 @@ def _build_chart_for_yoga(
                     nakshatra_pada=data.get("nakshatra_pada", 1),
                     nakshatra_lord=Planet(data.get("nakshatra_lord", "ketu").lower()),
                     is_retrograde=data.get("is_retrograde", False),
-                    house=data.get("house", 1)
+                    house=data.get("house", 1),
                 )
             except (KeyError, ValueError):
                 continue
@@ -531,7 +515,7 @@ def _build_chart_for_yoga(
             nakshatra_pada=1,
             nakshatra_lord=Planet.JUPITER,
             is_retrograde=False,
-            house=7
+            house=7,
         )
 
     if Planet.KETU not in planet_positions:
@@ -546,7 +530,7 @@ def _build_chart_for_yoga(
             nakshatra_pada=1,
             nakshatra_lord=Planet.KETU,
             is_retrograde=False,
-            house=1
+            house=1,
         )
 
     # Build house cusps
@@ -555,15 +539,11 @@ def _build_chart_for_yoga(
         house_cusps = HouseCusps(
             ascendant=houses.get("ascendant", 0.0),
             mc=houses.get("mc", 270.0),
-            cusps=houses.get("cusps", [i * 30 for i in range(12)])
+            cusps=houses.get("cusps", [i * 30 for i in range(12)]),
         )
     else:
         # Create default cusps
-        house_cusps = HouseCusps(
-            ascendant=0.0,
-            mc=270.0,
-            cusps=[i * 30 for i in range(12)]
-        )
+        house_cusps = HouseCusps(ascendant=0.0, mc=270.0, cusps=[i * 30 for i in range(12)])
 
     # Create minimal BirthChart
     moon_enum = sign_map.get((moon_rashi or "cancer").lower(), Rashi.CANCER)
@@ -571,10 +551,7 @@ def _build_chart_for_yoga(
     chart = BirthChart(
         user_id="temporary",
         birth_data=BirthData(
-            datetime_utc=datetime.utcnow(),
-            latitude=0.0,
-            longitude=0.0,
-            timezone="UTC"
+            datetime_utc=datetime.utcnow(), latitude=0.0, longitude=0.0, timezone="UTC"
         ),
         planets=planet_positions,
         houses=house_cusps,
@@ -582,13 +559,13 @@ def _build_chart_for_yoga(
         moon_rashi=moon_enum,
         moon_nakshatra="pushya",
         ayanamsa=23.45,
-        calculated_at=datetime.utcnow()
+        calculated_at=datetime.utcnow(),
     )
 
     return chart
 
 
-def _group_by_category(yogas: List[Dict]) -> Dict[str, int]:
+def _group_by_category(yogas: list[dict]) -> dict[str, int]:
     """Group yogas by category and count."""
     categories = {}
     for yoga in yogas:

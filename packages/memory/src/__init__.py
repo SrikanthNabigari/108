@@ -4,35 +4,34 @@
 Provides semantic memory storage and retrieval for personalized
 Vedic astrology guidance. Supports both Mem0 Cloud and local PostgreSQL.
 """
+
 import logging
 
-logger = logging.getLogger(__name__)
-
-# Always available (no external deps)
 from .embeddings import (
-    EmbeddingService,
     EmbeddingProvider,
-    OpenAIEmbeddings,
-    VoyageEmbeddings,
+    EmbeddingService,
     LocalEmbeddings,
     MockEmbeddings,
+    OpenAIEmbeddings,
+    VoyageEmbeddings,
     get_embedding_service,
     reset_embedding_service,
 )
-
+from .mem0_client import Mem0Client, MemoryCategory, MemoryImportance
 from .unified_memory import (
-    UnifiedMemoryClient,
-    UnifiedMemory,
-    UnifiedSearchResult,
     MemoryBackend,
+    UnifiedMemory,
+    UnifiedMemoryClient,
+    UnifiedSearchResult,
     create_memory_client,
 )
 
-from .mem0_client import Mem0Client, MemoryCategory, MemoryImportance
+logger = logging.getLogger(__name__)
 
 # PostgreSQL store (requires asyncpg)
 try:
     from .store import Memory, MemoryStore, SearchResult
+
     _HAS_POSTGRES = True
 except ImportError as e:
     logger.debug(f"PostgreSQL store not available: {e}")
@@ -48,28 +47,28 @@ def has_postgres_support() -> bool:
 
 
 __all__ = [
+    "EmbeddingProvider",
     # Embeddings (always available)
     "EmbeddingService",
-    "EmbeddingProvider",
-    "OpenAIEmbeddings",
-    "VoyageEmbeddings",
     "LocalEmbeddings",
-    "MockEmbeddings",
-    "get_embedding_service",
-    "reset_embedding_service",
-    # Unified Memory (always available)
-    "UnifiedMemoryClient",
-    "UnifiedMemory",
-    "UnifiedSearchResult",
-    "MemoryBackend",
-    "create_memory_client",
     # Mem0 Client
     "Mem0Client",
-    "MemoryCategory",
-    "MemoryImportance",
     # PostgreSQL Store (optional)
     "Memory",
+    "MemoryBackend",
+    "MemoryCategory",
+    "MemoryImportance",
     "MemoryStore",
+    "MockEmbeddings",
+    "OpenAIEmbeddings",
     "SearchResult",
+    "UnifiedMemory",
+    # Unified Memory (always available)
+    "UnifiedMemoryClient",
+    "UnifiedSearchResult",
+    "VoyageEmbeddings",
+    "create_memory_client",
+    "get_embedding_service",
     "has_postgres_support",
+    "reset_embedding_service",
 ]

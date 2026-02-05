@@ -333,16 +333,16 @@ def main():
     # Update actual count
     master["metadata"]["actual_combinations"] = total_count
     master["metadata"]["combinations_by_md"] = md_counts
-    master["metadata"]["completeness"] = f"{total_count}/729 ({100*total_count/729:.1f}%)"
+    master["metadata"]["completeness"] = f"{total_count}/729 ({100 * total_count / 729:.1f}%)"
 
     # Write master file
     output_path = RULES_DIR / "pratyantardasha_master.json"
     with output_path.open("w") as f:
         json.dump(master, f, indent=2)
 
-    print(f"\n{'='*50}")
+    print(f"\n{'=' * 50}")
     print("PRATYANTARDASHA MASTER FILE CREATED")
-    print(f"{'='*50}")
+    print(f"{'=' * 50}")
     print(f"Total combinations: {total_count}/729")
     print(f"Output: {output_path}")
     print(f"Size: {output_path.stat().st_size:,} bytes")

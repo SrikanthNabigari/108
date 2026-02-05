@@ -1,6 +1,7 @@
 """
 Unit tests for the COSMOS package (ephemeris calculations).
 """
+
 import sys
 from datetime import datetime
 
@@ -80,7 +81,7 @@ class TestEphemeris:
 
         # Each house should have valid longitude
         for i, cusp in enumerate(houses["cusps"]):
-            assert 0 <= cusp < 360, f"Invalid cusp for house {i+1}: {cusp}"
+            assert 0 <= cusp < 360, f"Invalid cusp for house {i + 1}: {cusp}"
 
         # Should also have ascendant and mc
         assert "ascendant" in houses, "Should have ascendant"

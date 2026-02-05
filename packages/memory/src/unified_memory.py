@@ -7,12 +7,13 @@ Provides a single interface for memory operations that works with:
 
 This ensures 108 works in both cloud and self-hosted deployments.
 """
-import os
+
 import logging
-from typing import Dict, List, Optional, Any
-from datetime import datetime
+import os
 from dataclasses import dataclass
-from enum import Enum
+from datetime import datetime
+from enum import StrEnum
+from typing import Any
 
 from .embeddings import EmbeddingService, get_embedding_service
 
@@ -21,14 +22,16 @@ MemoryStore = None
 Memory = None
 SearchResult = None
 
+
 def _import_postgres_store():
     """Lazy import PostgreSQL store."""
     global MemoryStore, Memory, SearchResult
     if MemoryStore is None:
         try:
-            from .store import MemoryStore as _MemoryStore
             from .store import Memory as _Memory
+            from .store import MemoryStore as _MemoryStore
             from .store import SearchResult as _SearchResult
+
             MemoryStore = _MemoryStore
             Memory = _Memory
             SearchResult = _SearchResult
@@ -36,11 +39,13 @@ def _import_postgres_store():
             pass
     return MemoryStore is not None
 
+
 logger = logging.getLogger(__name__)
 
 
-class MemoryBackend(str, Enum):
+class MemoryBackend(StrEnum):
     """Available memory backends."""
+
     MEM0_CLOUD = "mem0_cloud"
     POSTGRES = "postgres"
     MOCK = "mock"
@@ -49,16 +54,17 @@ class MemoryBackend(str, Enum):
 @dataclass
 class UnifiedMemory:
     """Standardized memory representation."""
+
     id: str
     user_id: str
     content: str
     category: str
-    metadata: Dict[str, Any]
+    metadata: dict[str, Any]
     importance: float
     created_at: datetime
     source: MemoryBackend
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         return {
             "id": self.id,
             "user_id": self.user_id,
@@ -67,21 +73,19 @@ class UnifiedMemory:
             "metadata": self.metadata,
             "importance": self.importance,
             "created_at": self.created_at.isoformat() if self.created_at else None,
-            "source": self.source.value
+            "source": self.source.value,
         }
 
 
 @dataclass
 class UnifiedSearchResult:
     """Standardized search result."""
+
     memory: UnifiedMemory
     similarity: float
 
-    def to_dict(self) -> Dict[str, Any]:
-        return {
-            "memory": self.memory.to_dict(),
-            "similarity": self.similarity
-        }
+    def to_dict(self) -> dict[str, Any]:
+        return {"memory": self.memory.to_dict(), "similarity": self.similarity}
 
 
 class UnifiedMemoryClient:
@@ -98,10 +102,10 @@ class UnifiedMemoryClient:
     def __init__(
         self,
         user_id: str,
-        backend: Optional[MemoryBackend] = None,
-        mem0_api_key: Optional[str] = None,
-        postgres_url: Optional[str] = None,
-        use_mock: bool = False
+        backend: MemoryBackend | None = None,
+        mem0_api_key: str | None = None,
+        postgres_url: str | None = None,
+        use_mock: bool = False,
     ):
         """
         Initialize unified memory client.
@@ -115,8 +119,8 @@ class UnifiedMemoryClient:
         """
         self.user_id = user_id
         self._mem0_client = None
-        self._postgres_store: Optional[MemoryStore] = None
-        self._embedding_service: Optional[EmbeddingService] = None
+        self._postgres_store: MemoryStore | None = None
+        self._embedding_service: EmbeddingService | None = None
         self._initialized = False
 
         # Determine backend
@@ -152,6 +156,7 @@ class UnifiedMemoryClient:
         """Initialize Mem0 cloud client."""
         try:
             from mem0 import Memory
+
             self._mem0_client = Memory(api_key=self._mem0_api_key)
             logger.info("Mem0 cloud client initialized")
         except ImportError:
@@ -167,8 +172,7 @@ class UnifiedMemoryClient:
         """Initialize PostgreSQL store."""
         if not _import_postgres_store():
             raise ImportError(
-                "PostgreSQL store requires asyncpg. "
-                "Install with: uv pip install asyncpg pgvector"
+                "PostgreSQL store requires asyncpg. Install with: uv pip install asyncpg pgvector"
             )
         self._postgres_store = MemoryStore(connection_string=self._postgres_url)
         await self._postgres_store.connect()
@@ -181,13 +185,9 @@ class UnifiedMemoryClient:
             await self._postgres_store.close()
         self._initialized = False
 
-    async def health_check(self) -> Dict[str, Any]:
+    async def health_check(self) -> dict[str, Any]:
         """Check memory system health."""
-        result = {
-            "backend": self.backend.value,
-            "initialized": self._initialized,
-            "healthy": False
-        }
+        result = {"backend": self.backend.value, "initialized": self._initialized, "healthy": False}
 
         if self.backend == MemoryBackend.MEM0_CLOUD:
             result["healthy"] = self._mem0_client is not None
@@ -207,9 +207,9 @@ class UnifiedMemoryClient:
         self,
         content: str,
         category: str = "fact",
-        metadata: Optional[Dict[str, Any]] = None,
+        metadata: dict[str, Any] | None = None,
         importance: float = 0.5,
-        user_id: Optional[str] = None
+        user_id: str | None = None,
     ) -> UnifiedMemory:
         """
         Add a memory.
@@ -236,15 +236,14 @@ class UnifiedMemoryClient:
             return await self._add_mock(uid, content, category, meta, importance)
 
     async def _add_mem0(
-        self, user_id: str, content: str, category: str,
-        metadata: Dict, importance: float
+        self, user_id: str, content: str, category: str, metadata: dict, importance: float
     ) -> UnifiedMemory:
         """Add memory via Mem0."""
         # Mem0 auto-extracts memories from content
         result = self._mem0_client.add(
             content,
             user_id=user_id,
-            metadata={**metadata, "category": category, "importance": importance}
+            metadata={**metadata, "category": category, "importance": importance},
         )
 
         # Extract the created memory ID
@@ -258,12 +257,11 @@ class UnifiedMemoryClient:
             metadata=metadata,
             importance=importance,
             created_at=datetime.now(),
-            source=MemoryBackend.MEM0_CLOUD
+            source=MemoryBackend.MEM0_CLOUD,
         )
 
     async def _add_postgres(
-        self, user_id: str, content: str, category: str,
-        metadata: Dict, importance: float
+        self, user_id: str, content: str, category: str, metadata: dict, importance: float
     ) -> UnifiedMemory:
         """Add memory via PostgreSQL."""
         # Generate embedding
@@ -275,7 +273,7 @@ class UnifiedMemoryClient:
             category=category,
             embedding=embedding,
             metadata=metadata,
-            importance=importance
+            importance=importance,
         )
 
         return UnifiedMemory(
@@ -286,15 +284,15 @@ class UnifiedMemoryClient:
             metadata=metadata,
             importance=importance,
             created_at=memory.created_at,
-            source=MemoryBackend.POSTGRES
+            source=MemoryBackend.POSTGRES,
         )
 
     async def _add_mock(
-        self, user_id: str, content: str, category: str,
-        metadata: Dict, importance: float
+        self, user_id: str, content: str, category: str, metadata: dict, importance: float
     ) -> UnifiedMemory:
         """Add memory to mock store."""
         import uuid
+
         return UnifiedMemory(
             id=str(uuid.uuid4()),
             user_id=user_id,
@@ -303,17 +301,17 @@ class UnifiedMemoryClient:
             metadata=metadata,
             importance=importance,
             created_at=datetime.now(),
-            source=MemoryBackend.MOCK
+            source=MemoryBackend.MOCK,
         )
 
     async def search(
         self,
         query: str,
         limit: int = 10,
-        category: Optional[str] = None,
+        category: str | None = None,
         min_similarity: float = 0.7,
-        user_id: Optional[str] = None
-    ) -> List[UnifiedSearchResult]:
+        user_id: str | None = None,
+    ) -> list[UnifiedSearchResult]:
         """
         Search memories semantically.
 
@@ -338,14 +336,10 @@ class UnifiedMemoryClient:
             return []  # Mock returns empty
 
     async def _search_mem0(
-        self, user_id: str, query: str, limit: int, category: Optional[str]
-    ) -> List[UnifiedSearchResult]:
+        self, user_id: str, query: str, limit: int, category: str | None
+    ) -> list[UnifiedSearchResult]:
         """Search via Mem0."""
-        results = self._mem0_client.search(
-            query,
-            user_id=user_id,
-            limit=limit
-        )
+        results = self._mem0_client.search(query, user_id=user_id, limit=limit)
 
         unified_results = []
         for item in results.get("results", []):
@@ -354,26 +348,29 @@ class UnifiedMemoryClient:
             if category and item_category != category:
                 continue
 
-            unified_results.append(UnifiedSearchResult(
-                memory=UnifiedMemory(
-                    id=item.get("id", ""),
-                    user_id=user_id,
-                    content=item.get("memory", ""),
-                    category=item_category,
-                    metadata=item.get("metadata", {}),
-                    importance=item.get("metadata", {}).get("importance", 0.5),
-                    created_at=datetime.fromisoformat(item["created_at"]) if item.get("created_at") else datetime.now(),
-                    source=MemoryBackend.MEM0_CLOUD
-                ),
-                similarity=item.get("score", 0.0)
-            ))
+            unified_results.append(
+                UnifiedSearchResult(
+                    memory=UnifiedMemory(
+                        id=item.get("id", ""),
+                        user_id=user_id,
+                        content=item.get("memory", ""),
+                        category=item_category,
+                        metadata=item.get("metadata", {}),
+                        importance=item.get("metadata", {}).get("importance", 0.5),
+                        created_at=datetime.fromisoformat(item["created_at"])
+                        if item.get("created_at")
+                        else datetime.now(),
+                        source=MemoryBackend.MEM0_CLOUD,
+                    ),
+                    similarity=item.get("score", 0.0),
+                )
+            )
 
         return unified_results
 
     async def _search_postgres(
-        self, user_id: str, query: str, limit: int,
-        category: Optional[str], min_similarity: float
-    ) -> List[UnifiedSearchResult]:
+        self, user_id: str, query: str, limit: int, category: str | None, min_similarity: float
+    ) -> list[UnifiedSearchResult]:
         """Search via PostgreSQL."""
         # Generate query embedding
         query_embedding = await self._embedding_service.embed_for_search(query)
@@ -383,7 +380,7 @@ class UnifiedMemoryClient:
             query_embedding=query_embedding,
             limit=limit,
             category=category,
-            min_similarity=min_similarity
+            min_similarity=min_similarity,
         )
 
         return [
@@ -396,19 +393,16 @@ class UnifiedMemoryClient:
                     metadata=r.memory.metadata,
                     importance=r.memory.importance,
                     created_at=r.memory.created_at,
-                    source=MemoryBackend.POSTGRES
+                    source=MemoryBackend.POSTGRES,
                 ),
-                similarity=r.similarity
+                similarity=r.similarity,
             )
             for r in results
         ]
 
     async def get_all(
-        self,
-        category: Optional[str] = None,
-        limit: int = 100,
-        user_id: Optional[str] = None
-    ) -> List[UnifiedMemory]:
+        self, category: str | None = None, limit: int = 100, user_id: str | None = None
+    ) -> list[UnifiedMemory]:
         """
         Get all memories for a user.
 
@@ -430,26 +424,29 @@ class UnifiedMemoryClient:
                 item_category = item.get("metadata", {}).get("category", "fact")
                 if category and item_category != category:
                     continue
-                memories.append(UnifiedMemory(
-                    id=item.get("id", ""),
-                    user_id=uid,
-                    content=item.get("memory", ""),
-                    category=item_category,
-                    metadata=item.get("metadata", {}),
-                    importance=item.get("metadata", {}).get("importance", 0.5),
-                    created_at=datetime.fromisoformat(item["created_at"]) if item.get("created_at") else datetime.now(),
-                    source=MemoryBackend.MEM0_CLOUD
-                ))
+                memories.append(
+                    UnifiedMemory(
+                        id=item.get("id", ""),
+                        user_id=uid,
+                        content=item.get("memory", ""),
+                        category=item_category,
+                        metadata=item.get("metadata", {}),
+                        importance=item.get("metadata", {}).get("importance", 0.5),
+                        created_at=datetime.fromisoformat(item["created_at"])
+                        if item.get("created_at")
+                        else datetime.now(),
+                        source=MemoryBackend.MEM0_CLOUD,
+                    )
+                )
             return memories
 
         elif self.backend == MemoryBackend.POSTGRES:
-            memories = await self._postgres_store.get_memories_by_category(
-                user_id=uid,
-                category=category,
-                limit=limit
-            ) if category else await self._postgres_store.get_all_memories(
-                user_id=uid,
-                limit=limit
+            memories = (
+                await self._postgres_store.get_memories_by_category(
+                    user_id=uid, category=category, limit=limit
+                )
+                if category
+                else await self._postgres_store.get_all_memories(user_id=uid, limit=limit)
             )
             return [
                 UnifiedMemory(
@@ -460,14 +457,14 @@ class UnifiedMemoryClient:
                     metadata=m.metadata,
                     importance=m.importance,
                     created_at=m.created_at,
-                    source=MemoryBackend.POSTGRES
+                    source=MemoryBackend.POSTGRES,
                 )
                 for m in memories
             ]
 
         return []  # Mock
 
-    async def delete(self, memory_id: str, user_id: Optional[str] = None) -> bool:
+    async def delete(self, memory_id: str, user_id: str | None = None) -> bool:
         """
         Delete a memory by ID.
 
@@ -500,7 +497,7 @@ class UnifiedMemoryClient:
         longitude: float,
         timezone: str,
         place_name: str,
-        user_id: Optional[str] = None
+        user_id: str | None = None,
     ) -> UnifiedMemory:
         """Store birth data as a high-importance memory."""
         content = (
@@ -515,20 +512,20 @@ class UnifiedMemoryClient:
                 "latitude": latitude,
                 "longitude": longitude,
                 "timezone": timezone,
-                "place_name": place_name
+                "place_name": place_name,
             },
             importance=1.0,  # Critical importance
-            user_id=user_id
+            user_id=user_id,
         )
 
     async def remember_yoga(
         self,
         yoga_name: str,
         yoga_type: str,
-        planets_involved: List[str],
+        planets_involved: list[str],
         strength: float,
         interpretation: str,
-        user_id: Optional[str] = None
+        user_id: str | None = None,
     ) -> UnifiedMemory:
         """Store detected yoga."""
         content = f"{yoga_name} ({yoga_type}): {interpretation}"
@@ -539,10 +536,10 @@ class UnifiedMemoryClient:
                 "yoga_name": yoga_name,
                 "yoga_type": yoga_type,
                 "planets_involved": planets_involved,
-                "strength": strength
+                "strength": strength,
             },
             importance=0.8,
-            user_id=user_id
+            user_id=user_id,
         )
 
     async def remember_dasha(
@@ -551,8 +548,8 @@ class UnifiedMemoryClient:
         antardasha_lord: str,
         start_date: datetime,
         end_date: datetime,
-        themes: List[str],
-        user_id: Optional[str] = None
+        themes: list[str],
+        user_id: str | None = None,
     ) -> UnifiedMemory:
         """Store dasha period information."""
         content = (
@@ -568,10 +565,10 @@ class UnifiedMemoryClient:
                 "antardasha_lord": antardasha_lord,
                 "start_date": start_date.isoformat(),
                 "end_date": end_date.isoformat(),
-                "themes": themes
+                "themes": themes,
             },
             importance=0.8,
-            user_id=user_id
+            user_id=user_id,
         )
 
     async def remember_prediction(
@@ -581,7 +578,7 @@ class UnifiedMemoryClient:
         confidence: float,
         valid_from: datetime,
         valid_until: datetime,
-        user_id: Optional[str] = None
+        user_id: str | None = None,
     ) -> UnifiedMemory:
         """Store a prediction for later validation."""
         content = f"Prediction ({category}): {prediction}"
@@ -593,38 +590,32 @@ class UnifiedMemoryClient:
                 "confidence": confidence,
                 "valid_from": valid_from.isoformat(),
                 "valid_until": valid_until.isoformat(),
-                "validated": False
+                "validated": False,
             },
             importance=0.6,
-            user_id=user_id
+            user_id=user_id,
         )
 
     async def remember_preference(
-        self,
-        preference_type: str,
-        value: Any,
-        user_id: Optional[str] = None
+        self, preference_type: str, value: Any, user_id: str | None = None
     ) -> UnifiedMemory:
         """Store user preference."""
         content = f"User prefers {preference_type}: {value}"
         return await self.add(
             content=content,
             category="preference",
-            metadata={
-                "preference_type": preference_type,
-                "value": value
-            },
+            metadata={"preference_type": preference_type, "value": value},
             importance=0.7,
-            user_id=user_id
+            user_id=user_id,
         )
 
     async def get_context_for_query(
         self,
         query: str,
-        include_categories: Optional[List[str]] = None,
+        include_categories: list[str] | None = None,  # noqa: ARG002
         limit: int = 10,
-        user_id: Optional[str] = None
-    ) -> Dict[str, Any]:
+        user_id: str | None = None,
+    ) -> dict[str, Any]:
         """
         Get relevant context for a user query.
 
@@ -644,23 +635,21 @@ class UnifiedMemoryClient:
             "birth_data": None,
             "current_dasha": None,
             "active_yogas": [],
-            "preferences": []
+            "preferences": [],
         }
 
         # Search for relevant memories
-        results = await self.search(
-            query=query,
-            limit=limit,
-            user_id=uid
-        )
+        results = await self.search(query=query, limit=limit, user_id=uid)
 
         for result in results:
             memory = result.memory
-            context["memories"].append({
-                "content": memory.content,
-                "category": memory.category,
-                "similarity": result.similarity
-            })
+            context["memories"].append(
+                {
+                    "content": memory.content,
+                    "category": memory.category,
+                    "similarity": result.similarity,
+                }
+            )
 
             # Extract specific categories
             if memory.category == "birth_data" and not context["birth_data"]:
@@ -677,9 +666,7 @@ class UnifiedMemoryClient:
 
 # Factory function
 def create_memory_client(
-    user_id: str,
-    backend: Optional[str] = None,
-    use_mock: bool = False
+    user_id: str, backend: str | None = None, use_mock: bool = False
 ) -> UnifiedMemoryClient:
     """
     Create a unified memory client.
@@ -700,8 +687,4 @@ def create_memory_client(
     elif backend == "mock":
         backend_enum = MemoryBackend.MOCK
 
-    return UnifiedMemoryClient(
-        user_id=user_id,
-        backend=backend_enum,
-        use_mock=use_mock
-    )
+    return UnifiedMemoryClient(user_id=user_id, backend=backend_enum, use_mock=use_mock)

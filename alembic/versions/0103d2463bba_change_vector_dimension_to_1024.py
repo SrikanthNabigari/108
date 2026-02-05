@@ -6,6 +6,7 @@ Create Date: 2026-02-04
 
 Changes vector columns from 1536 (OpenAI) to 1024 (Voyage) dimensions.
 """
+
 from collections.abc import Sequence
 
 from alembic import op

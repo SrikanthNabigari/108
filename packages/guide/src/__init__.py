@@ -3,17 +3,17 @@
 
 LangGraph-powered conversational agent with personality adaptation.
 """
+
 import logging
 
-logger = logging.getLogger(__name__)
-
-# These are always available (basic types)
 from .agent import (
-    IntentType,
+    _HAS_LANGGRAPH,
     INTENT_KEYWORDS,
     PERSONALITY_STYLES,
-    _HAS_LANGGRAPH,
+    IntentType,
 )
+
+logger = logging.getLogger(__name__)
 
 # These require LangGraph
 Guide = None
@@ -24,11 +24,11 @@ get_guide_async = None
 
 if _HAS_LANGGRAPH:
     from .agent import (
-        Guide,
         AgentState,
-        initialize_guide,
+        Guide,
         get_guide,
         get_guide_async,
+        initialize_guide,
     )
 else:
     logger.debug("LangGraph not installed - Guide agent not available")
@@ -40,15 +40,15 @@ def has_langgraph() -> bool:
 
 
 __all__ = [
-    # Always available
-    "IntentType",
     "INTENT_KEYWORDS",
     "PERSONALITY_STYLES",
-    "has_langgraph",
+    "AgentState",
     # Requires LangGraph
     "Guide",
-    "AgentState",
-    "initialize_guide",
+    # Always available
+    "IntentType",
     "get_guide",
     "get_guide_async",
+    "has_langgraph",
+    "initialize_guide",
 ]

@@ -1,7 +1,13 @@
 """
 Tests for the Guide agent.
 """
+
+from typing import TYPE_CHECKING
+
 import pytest
+
+if TYPE_CHECKING:
+    from packages.guide.src.agent import AgentState
 
 
 def test_intent_keywords():
@@ -16,7 +22,7 @@ def test_intent_keywords():
     assert IntentType.PREDICT in INTENT_KEYWORDS
 
     # Check keywords are non-empty lists
-    for intent, keywords in INTENT_KEYWORDS.items():
+    for _intent, keywords in INTENT_KEYWORDS.items():
         assert isinstance(keywords, list)
         assert len(keywords) > 0
 
@@ -26,9 +32,18 @@ def test_personality_styles():
     from packages.guide.src.agent import PERSONALITY_STYLES
 
     signs = [
-        "aries", "taurus", "gemini", "cancer",
-        "leo", "virgo", "libra", "scorpio",
-        "sagittarius", "capricorn", "aquarius", "pisces"
+        "aries",
+        "taurus",
+        "gemini",
+        "cancer",
+        "leo",
+        "virgo",
+        "libra",
+        "scorpio",
+        "sagittarius",
+        "capricorn",
+        "aquarius",
+        "pisces",
     ]
 
     for sign in signs:
@@ -53,7 +68,6 @@ def test_intent_type_enum():
 
 def test_agent_state_structure():
     """Test AgentState TypedDict has required fields."""
-    from packages.guide.src.agent import AgentState
 
     # Check that AgentState can be used as type hint
     state: AgentState = {
@@ -104,7 +118,9 @@ def test_keyword_based_classification():
                 max_matches = matches
                 best_intent = intent_type
 
-        assert best_intent == expected_intent, f"Expected {expected_intent} for '{user_input}', got {best_intent}"
+        assert (
+            best_intent == expected_intent
+        ), f"Expected {expected_intent} for '{user_input}', got {best_intent}"
 
 
 def test_format_context_empty():

@@ -26,12 +26,11 @@ Architecture:
     END → Return response
 """
 
-import asyncio
 import logging
 import os
 from datetime import datetime
-from enum import Enum
-from typing import Annotated, Any, Optional
+from enum import StrEnum
+from typing import Annotated, Any
 
 from typing_extensions import TypedDict
 
@@ -40,6 +39,7 @@ try:
     from langchain_anthropic import ChatAnthropic
     from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, SystemMessage
     from langgraph.graph import END, StateGraph
+
     _HAS_LANGGRAPH = True
 except ImportError:
     _HAS_LANGGRAPH = False
@@ -60,7 +60,7 @@ logger = logging.getLogger(__name__)
 # =====================
 
 
-class IntentType(str, Enum):
+class IntentType(StrEnum):
     """User intent types."""
 
     CALCULATE = "calculate"  # User wants calculations (positions, charts)
@@ -81,13 +81,13 @@ class AgentState(TypedDict):
     # Conversation
     messages: Annotated[list[BaseMessage], "Conversation history"]
     user_input: str
-    response: Optional[str]
+    response: str | None
 
     # User context
     user_id: str
-    birth_chart: Optional[dict[str, Any]]
-    current_dasha: Optional[dict[str, Any]]
-    current_transits: Optional[dict[str, Any]]
+    birth_chart: dict[str, Any] | None
+    current_dasha: dict[str, Any] | None
+    current_transits: dict[str, Any] | None
     detected_yogas: list[dict[str, Any]]
     detected_doshas: list[dict[str, Any]]
 
@@ -98,8 +98,8 @@ class AgentState(TypedDict):
     memories: list[dict[str, Any]]
 
     # Routing
-    intent: Optional[IntentType]
-    personality_style: Optional[str]
+    intent: IntentType | None
+    personality_style: str | None
 
     # Metadata
     session_id: str
@@ -272,7 +272,7 @@ class Guide:
     def __init__(
         self,
         model: str = "claude-sonnet-4-20250514",
-        api_key: Optional[str] = None,
+        api_key: str | None = None,
         debug: bool = False,
     ):
         """
@@ -315,7 +315,7 @@ class Guide:
         """Get or initialize memory store."""
         if self._store is None:
             try:
-                from packages.memory.src import UnifiedMemoryClient, MemoryBackend
+                from packages.memory.src import UnifiedMemoryClient
 
                 # Try PostgreSQL first, fall back to mock
                 self._store = UnifiedMemoryClient(
@@ -330,10 +330,11 @@ class Guide:
                 # Fall back to mock
                 try:
                     from packages.memory.src import UnifiedMemoryClient
+
                     self._store = UnifiedMemoryClient(user_id="system", use_mock=True)
                     self._store_connected = True
                     logger.info("Using mock memory store")
-                except:
+                except Exception:
                     self._store_connected = False
         return self._store
 
@@ -421,7 +422,7 @@ class Guide:
 - general: General astrology questions
 - unknown: Cannot determine
 
-Query: "{state['user_input']}"
+Query: "{state["user_input"]}"
 
 Respond with ONLY the intent name (e.g., "calculate")"""
 
@@ -538,7 +539,11 @@ Respond with ONLY the intent name (e.g., "calculate")"""
                     # Get full sequence
                     sequence = get_mahadasha_sequence(birth_dt, moon_lon)
                     state["analysis_results"]["dasha_sequence"] = [
-                        {"lord": p["lord"], "start": p["start_date"].isoformat(), "end": p["end_date"].isoformat()}
+                        {
+                            "lord": p["lord"],
+                            "start": p["start_date"].isoformat(),
+                            "end": p["end_date"].isoformat(),
+                        }
                         for p in sequence[:5]  # Next 5 mahadashas
                     ]
             except Exception as e:
@@ -580,16 +585,16 @@ Respond with ONLY the intent name (e.g., "calculate")"""
                 from packages.self.src import DoshaDetector, YogaDetector
 
                 # Build minimal chart structure for detectors
-                planets = birth_chart.get("planets", {})
-                lagna = birth_chart.get("lagna_rashi", "aries").lower()
+                birth_chart.get("planets", {})
+                birth_chart.get("lagna_rashi", "aries").lower()
 
                 # Detect yogas
-                yoga_detector = YogaDetector()
+                YogaDetector()
                 # Note: This requires proper BirthChart object, simplified for now
                 state["analysis_results"]["yoga_detection_attempted"] = True
 
                 # Detect doshas
-                dosha_detector = DoshaDetector()
+                DoshaDetector()
                 state["analysis_results"]["dosha_detection_attempted"] = True
 
             except Exception as e:
@@ -608,12 +613,18 @@ Respond with ONLY the intent name (e.g., "calculate")"""
 
         if state.get("current_dasha"):
             dasha = state["current_dasha"]
-            prediction_factors.append(f"Current Mahadasha: {dasha.get('mahadasha_lord', 'Unknown')}")
-            prediction_factors.append(f"Current Antardasha: {dasha.get('antardasha_lord', 'Unknown')}")
+            prediction_factors.append(
+                f"Current Mahadasha: {dasha.get('mahadasha_lord', 'Unknown')}"
+            )
+            prediction_factors.append(
+                f"Current Antardasha: {dasha.get('antardasha_lord', 'Unknown')}"
+            )
 
         if state.get("analysis_results", {}).get("transit_analysis"):
             transit = state["analysis_results"]["transit_analysis"]
-            prediction_factors.append(f"Overall transit trend: {transit.get('overall_trend', 'neutral')}")
+            prediction_factors.append(
+                f"Overall transit trend: {transit.get('overall_trend', 'neutral')}"
+            )
             if transit.get("sade_sati"):
                 prediction_factors.append("Sade Sati is active")
 
@@ -625,7 +636,9 @@ Respond with ONLY the intent name (e.g., "calculate")"""
     def _handle_general(self, state: AgentState) -> AgentState:
         """Handle general astrology questions."""
         if self.debug:
-            logger.debug(f"Handling general query: {state['intent'].value if state['intent'] else 'unknown'}")
+            logger.debug(
+                f"Handling general query: {state['intent'].value if state['intent'] else 'unknown'}"
+            )
 
         state["analysis_results"]["query_type"] = "general_knowledge"
         return state
@@ -647,7 +660,7 @@ Respond with ONLY the intent name (e.g., "calculate")"""
         if self.debug:
             logger.debug(f"Calling LLM with personality: {personality}")
 
-        response = self.llm.invoke([SystemMessage(content=system_prompt)] + messages)
+        response = self.llm.invoke([SystemMessage(content=system_prompt), *messages])
 
         state["response"] = response.content
         messages.append(AIMessage(content=response.content))
@@ -676,14 +689,14 @@ Respond with ONLY the intent name (e.g., "calculate")"""
 Your role is to help users understand their birth chart, navigate dasha periods, and plan for their future using Vedic astrology wisdom.
 
 === PERSONALITY ADAPTATION ===
-The user has a {style.get('name', 'Unknown')} Lagna.
+The user has a {style.get("name", "Unknown")} Lagna.
 
 Communication Style:
-- Tone: {style.get('tone', 'balanced and helpful')}
-- Approach: {style.get('approach', 'Be supportive and informative')}
-- Avoid: {style.get('avoid', 'Nothing specific')}
+- Tone: {style.get("tone", "balanced and helpful")}
+- Approach: {style.get("approach", "Be supportive and informative")}
+- Avoid: {style.get("avoid", "Nothing specific")}
 
-Emphasize these themes in your response: {', '.join(style.get('keywords', ['wisdom', 'insight']))}
+Emphasize these themes in your response: {", ".join(style.get("keywords", ["wisdom", "insight"]))}
 
 === USER CONTEXT ===
 {context_str}
@@ -728,9 +741,7 @@ Be the user's trusted guide on their life journey. Combine Vedic wisdom with com
 
             if results.get("current_dasha"):
                 cd = results["current_dasha"]
-                parts.append(
-                    f"Dasha Period: {cd.get('mahadasha')}-{cd.get('antardasha')}"
-                )
+                parts.append(f"Dasha Period: {cd.get('mahadasha')}-{cd.get('antardasha')}")
 
             if results.get("transit_analysis"):
                 ta = results["transit_analysis"]
@@ -772,13 +783,13 @@ Be the user's trusted guide on their life journey. Combine Vedic wisdom with com
         self,
         user_input: str,
         user_id: str,
-        session_id: Optional[str] = None,
-        birth_chart: Optional[dict[str, Any]] = None,
-        current_dasha: Optional[dict[str, Any]] = None,
-        current_transits: Optional[dict[str, Any]] = None,
-        detected_yogas: Optional[list[dict[str, Any]]] = None,
-        detected_doshas: Optional[list[dict[str, Any]]] = None,
-        memories: Optional[list[dict[str, Any]]] = None,
+        session_id: str | None = None,
+        birth_chart: dict[str, Any] | None = None,
+        current_dasha: dict[str, Any] | None = None,
+        current_transits: dict[str, Any] | None = None,
+        detected_yogas: list[dict[str, Any]] | None = None,
+        detected_doshas: list[dict[str, Any]] | None = None,
+        memories: list[dict[str, Any]] | None = None,
     ) -> dict[str, Any]:
         """
         Process a user message and return response (sync version).
@@ -835,8 +846,8 @@ Be the user's trusted guide on their life journey. Combine Vedic wisdom with com
         self,
         user_input: str,
         user_id: str,
-        session_id: Optional[str] = None,
-        birth_chart: Optional[dict[str, Any]] = None,
+        session_id: str | None = None,
+        birth_chart: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
         """
         Process a user message with full async support.
@@ -865,7 +876,7 @@ Be the user's trusted guide on their life journey. Combine Vedic wisdom with com
                     query="birth data datetime location",
                     category="birth_data",
                     limit=1,
-                    user_id=user_id
+                    user_id=user_id,
                 )
                 if birth_results:
                     birth_memory = birth_results[0].memory
@@ -882,10 +893,7 @@ Be the user's trusted guide on their life journey. Combine Vedic wisdom with com
             try:
                 # Search for yogas
                 yoga_results = await memory_client.search(
-                    query="yoga detection pattern",
-                    category="yoga",
-                    limit=10,
-                    user_id=user_id
+                    query="yoga detection pattern", category="yoga", limit=10, user_id=user_id
                 )
                 for r in yoga_results:
                     detected_yogas.append(r.memory.metadata)
@@ -895,7 +903,7 @@ Be the user's trusted guide on their life journey. Combine Vedic wisdom with com
                     query="dosha detection mangal kaal sarp",
                     category="dosha",
                     limit=5,
-                    user_id=user_id
+                    user_id=user_id,
                 )
                 for r in dosha_results:
                     detected_doshas.append(r.memory.metadata)
@@ -907,9 +915,7 @@ Be the user's trusted guide on their life journey. Combine Vedic wisdom with com
         if self._store_connected:
             try:
                 context = await memory_client.get_context_for_query(
-                    query=user_input,
-                    limit=10,
-                    user_id=user_id
+                    query=user_input, limit=10, user_id=user_id
                 )
                 memories = context.get("memories", [])
             except Exception as e:
@@ -991,12 +997,12 @@ Be the user's trusted guide on their life journey. Combine Vedic wisdom with com
 # Singleton & Utilities
 # =====================
 
-_guide: Optional[Guide] = None
+_guide: Guide | None = None
 
 
 def initialize_guide(
     model: str = "claude-sonnet-4-20250514",
-    api_key: Optional[str] = None,
+    api_key: str | None = None,
     debug: bool = False,
 ) -> Guide:
     """
@@ -1033,7 +1039,7 @@ def get_guide() -> Guide:
 
 async def get_guide_async(
     model: str = "claude-sonnet-4-20250514",
-    api_key: Optional[str] = None,
+    api_key: str | None = None,
     debug: bool = False,
 ) -> Guide:
     """
