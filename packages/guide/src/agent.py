@@ -551,15 +551,38 @@ Respond with ONLY the intent name (e.g., "calculate")"""
 
         elif intent == IntentType.TRANSIT and birth_chart:
             try:
-                from packages.context.src import get_full_transit_analysis
+                from packages.context.src import get_full_transit_analysis, get_transit_positions
+                from packages.cosmos.src import RASHI_NAMES, get_julian_day
 
                 moon_sign = birth_chart.get("moon_rashi", "").lower()
                 if moon_sign:
-                    analysis = get_full_transit_analysis(moon_sign, datetime.now())
+                    # Convert moon sign name to rashi index (0-11)
+                    rashi_names_lower = [r.lower() for r in RASHI_NAMES]
+                    natal_moon_rashi = (
+                        rashi_names_lower.index(moon_sign) if moon_sign in rashi_names_lower else 0
+                    )
+
+                    # Get current transit positions as {planet: rashi_int}
+                    current_jd = get_julian_day(datetime.now())
+                    raw_transits = get_transit_positions(current_jd)
+                    transit_rashis = {
+                        planet: data["rashi_num"] for planet, data in raw_transits.items()
+                    }
+
+                    analysis = get_full_transit_analysis(natal_moon_rashi, transit_rashis)
+                    summary = analysis.get("summary", {})
                     state["analysis_results"]["transit_analysis"] = {
-                        "overall_trend": analysis.get("overall_trend"),
-                        "key_transits": analysis.get("key_transits", [])[:5],
-                        "sade_sati": analysis.get("sade_sati_active", False),
+                        "overall_trend": summary.get("overall_trend", "neutral"),
+                        "key_transits": [
+                            {
+                                "planet": p,
+                                "from_moon": t.get("house_from_moon"),
+                                "favorable": t.get("is_favorable"),
+                            }
+                            for p, t in analysis.get("planet_transits", {}).items()
+                        ][:5],
+                        "sade_sati": analysis.get("sade_sati", {}).get("active", False),
+                        "dhaiya": analysis.get("dhaiya", {}).get("active", False),
                     }
             except Exception as e:
                 logger.warning(f"Transit analysis error: {e}")
@@ -582,20 +605,131 @@ Respond with ONLY the intent name (e.g., "calculate")"""
 
         if birth_chart and birth_chart.get("planets"):
             try:
+                from packages.core.src.constants import Planet, Rashi
+                from packages.core.src.models import (
+                    BirthChart,
+                    BirthData,
+                    HouseCusps,
+                    PlanetPosition,
+                )
                 from packages.self.src import DoshaDetector, YogaDetector
 
-                # Build minimal chart structure for detectors
-                birth_chart.get("planets", {})
-                birth_chart.get("lagna_rashi", "aries").lower()
+                planets_raw = birth_chart.get("planets", {})
+                lagna_str = birth_chart.get("lagna_rashi", "aries").lower()
 
-                # Detect yogas
-                YogaDetector()
-                # Note: This requires proper BirthChart object, simplified for now
-                state["analysis_results"]["yoga_detection_attempted"] = True
+                # Build PlanetPosition dict for BirthChart model
+                planet_positions: dict[Planet, PlanetPosition] = {}
+                lagna_rashi_idx = (
+                    list(Rashi).index(Rashi(lagna_str))
+                    if lagna_str in [r.value for r in Rashi]
+                    else 0
+                )
 
-                # Detect doshas
-                DoshaDetector()
-                state["analysis_results"]["dosha_detection_attempted"] = True
+                for name, data in planets_raw.items():
+                    try:
+                        planet_enum = Planet(name.lower())
+                        rashi_idx = data.get("rashi_num", int(data.get("longitude", 0) // 30))
+                        rashi_enum = list(Rashi)[rashi_idx]
+                        lon = data.get("longitude", 0.0)
+                        nak_info = data.get("nakshatra", "")
+                        nak_pada = data.get("nakshatra_pada", 1)
+                        nak_lord_str = data.get("nakshatra_lord", name)
+                        house = data.get("house", ((rashi_idx - lagna_rashi_idx) % 12) + 1)
+
+                        try:
+                            nak_lord = Planet(nak_lord_str.lower())
+                        except (ValueError, AttributeError):
+                            nak_lord = planet_enum
+
+                        planet_positions[planet_enum] = PlanetPosition(
+                            planet=planet_enum,
+                            longitude=lon,
+                            latitude=data.get("latitude", 0.0),
+                            speed=data.get("speed", 0.0),
+                            rashi=rashi_enum,
+                            rashi_degree=lon % 30,
+                            nakshatra=nak_info if isinstance(nak_info, str) else str(nak_info),
+                            nakshatra_pada=max(1, min(4, nak_pada)),
+                            nakshatra_lord=nak_lord,
+                            is_retrograde=data.get("is_retrograde", False),
+                            house=house,
+                        )
+                    except (ValueError, KeyError, IndexError) as e:
+                        logger.debug(f"Skipping planet {name}: {e}")
+                        continue
+
+                if planet_positions:
+                    # Build BirthChart model
+                    moon_pos = planet_positions.get(Planet.MOON)
+                    moon_rashi = moon_pos.rashi if moon_pos else Rashi(lagna_str)
+                    moon_nak = moon_pos.nakshatra if moon_pos else ""
+
+                    houses_data = birth_chart.get("houses", {})
+                    cusps = houses_data.get(
+                        "cusps", [(lagna_rashi_idx * 30 + i * 30) % 360 for i in range(12)]
+                    )
+
+                    chart = BirthChart(
+                        user_id=state.get("user_id", "unknown"),
+                        birth_data=BirthData(
+                            datetime_utc=datetime.fromisoformat(
+                                birth_chart.get(
+                                    "birth_datetime", datetime.now().isoformat()
+                                ).replace("Z", "+00:00")
+                            ).replace(tzinfo=None),
+                            latitude=birth_chart.get("latitude", 0.0),
+                            longitude=birth_chart.get("longitude", 0.0),
+                            timezone=birth_chart.get("timezone", "UTC"),
+                            place_name=birth_chart.get("place_name"),
+                        ),
+                        planets=planet_positions,
+                        houses=HouseCusps(
+                            ascendant=houses_data.get("ascendant", lagna_rashi_idx * 30.0),
+                            mc=houses_data.get("mc", 0.0),
+                            cusps=cusps,
+                        ),
+                        lagna_rashi=Rashi(lagna_str),
+                        moon_rashi=moon_rashi,
+                        moon_nakshatra=moon_nak,
+                        ayanamsa=birth_chart.get("ayanamsa", 23.85),
+                        calculated_at=datetime.now(),
+                    )
+
+                    # Detect yogas
+                    yoga_detector = YogaDetector()
+                    detected_yogas = yoga_detector.detect_all_yogas(chart)
+                    yoga_dicts = [
+                        {
+                            "name": y.name,
+                            "category": y.category,
+                            "strength": y.strength,
+                            "involved_planets": y.involved_planets,
+                            "description": y.description,
+                        }
+                        for y in detected_yogas
+                    ]
+                    state["detected_yogas"] = yoga_dicts
+                    state["analysis_results"]["detected_yogas"] = yoga_dicts
+
+                    # Detect doshas
+                    dosha_detector = DoshaDetector()
+                    detected_doshas = dosha_detector.detect_all(chart)
+                    dosha_dicts = [
+                        {
+                            "name": d.name,
+                            "severity": d.severity,
+                            "involved_planets": d.involved_planets,
+                            "description": d.description,
+                            "remedies": d.remedies if hasattr(d, "remedies") else [],
+                        }
+                        for d in detected_doshas
+                    ]
+                    state["detected_doshas"] = dosha_dicts
+                    state["analysis_results"]["detected_doshas"] = dosha_dicts
+
+                    logger.info(
+                        f"Detected {len(detected_yogas)} yogas, {len(detected_doshas)} doshas"
+                    )
 
             except Exception as e:
                 logger.warning(f"Pattern analysis error: {e}")

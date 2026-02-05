@@ -1,5 +1,89 @@
 # 108 Work Log
 
+## 2026-02-05 (Session 13 - Claude Code)
+
+### Summary
+Wired all 5 layers end-to-end: COSMOS → SELF → CONTEXT → GUIDE → MEMORY. Fixed memory store bug, fixed Guide agent's broken `_calculate()` and `_analyze_patterns()` nodes, wired FastAPI endpoints to Guide agent and MemoryStore, and wrote 12 integration tests. 293 tests passing (1 skipped), 0 lint errors.
+
+### Bug Fixes
+
+**`packages/memory/src/store.py`** — Added missing `get_all_memories()` method
+- `unified_memory.py:449` called `self._postgres_store.get_all_memories(user_id, limit)` which didn't exist
+- Added method that queries memories table without category filter, ordered by `created_at DESC`
+
+**`packages/guide/src/agent.py`** — Fixed `_calculate()` transit path
+- Was calling `get_full_transit_analysis(moon_sign, datetime.now())` — wrong signature
+- Real signature: `get_full_transit_analysis(natal_moon_rashi: int, transit_positions: dict[str, int])`
+- Fix: Convert moon sign name → rashi index (0-11), build transit dict from `get_transit_positions()`
+- Now returns sade_sati, dhaiya, key_transits, overall_trend
+
+**`packages/guide/src/agent.py`** — Fixed `_analyze_patterns()` node
+- Was creating `YogaDetector()` and `DoshaDetector()` but never calling their methods
+- Fix: Build full `BirthChart` pydantic model from raw planet dicts
+- Calls `yoga_detector.detect_all_yogas(chart)` and `dosha_detector.detect_all(chart)`
+- Stores results in `state["detected_yogas"]`, `state["detected_doshas"]`, and `state["analysis_results"]`
+
+### API Wiring
+
+**`services/api/main.py`** — Lifespan
+- Initializes `MemoryStore` on startup if `DATABASE_URL` is set
+- Closes connection pool on shutdown
+- Lazy-inits Guide agent (only when `ANTHROPIC_API_KEY` present)
+
+**`POST /api/v1/chat`** — Wired to Guide agent
+- Lazy-inits Guide agent with ANTHROPIC_API_KEY
+- Loads birth chart from MemoryStore if user_id provided
+- Calls `guide.chat_async(user_input, user_id, birth_chart=chart_data)`
+- Returns response with intent, personality, analysis_results
+- Graceful fallback if no API key or missing LangGraph deps
+
+**`POST /api/v1/users`** — Create user with birth chart
+- Creates user via `store.create_user(email, name)`
+- Calculates full birth chart (planets, houses, nakshatras)
+- Saves via `store.save_birth_chart(user_id, chart_data)`
+- Returns user_id + chart summary (lagna, moon, nakshatra)
+
+**`GET /api/v1/users/{user_id}`** — Get user profile
+- Returns user + birth_chart + detected_patterns from MemoryStore
+- 404 if user not found, 503 if no database configured
+
+**New model**: `CreateUserRequest` — email, name, birth_datetime, lat/lon, timezone
+
+### Tests Added (12 new)
+
+| Test | What it verifies |
+|------|-----------------|
+| `TestLifecycle::test_health_check` | GET /health returns 200 |
+| `TestLifecycle::test_root_endpoint` | GET / returns API info |
+| `TestChatEndpoint::test_chat_without_api_key` | Returns helpful message |
+| `TestChatEndpoint::test_chat_without_user_id` | Works without user_id |
+| `TestChatEndpoint::test_chat_with_user_id` | Passes user_id through |
+| `TestChatEndpoint::test_chat_with_api_key` | Full agent response (needs key) |
+| `TestUserEndpoints::test_get_user_no_db` | 503 without database |
+| `TestUserEndpoints::test_create_user_no_db` | 503 without database |
+| `TestUserEndpoints::test_get_user_not_found` | 404 for unknown user |
+| `TestUserEndpoints::test_get_user_with_profile` | Returns user+chart+patterns |
+| `TestUserEndpoints::test_create_user_returns_chart` | Calculates chart on create |
+| `TestChartEndpointsIntact::test_chart_calculation` | Existing endpoint still works |
+| `TestChartEndpointsIntact::test_timing_dasha` | Existing endpoint still works |
+
+### File Changes
+
+| Action | File | What |
+|--------|------|------|
+| MODIFY | `packages/memory/src/store.py` | Added `get_all_memories()` method |
+| MODIFY | `packages/guide/src/agent.py` | Fixed `_calculate()` + `_analyze_patterns()` |
+| MODIFY | `services/api/main.py` | Wired lifespan, chat, users endpoints |
+| CREATE | `tests/integration/test_api_wiring.py` | 12 integration tests |
+
+### Verification
+- `uv run ruff check .` — 0 errors
+- `uv run ruff format .` — all files formatted
+- `uv run pytest` — 293 passed, 1 skipped (needs ANTHROPIC_API_KEY in env)
+- With `.env` loaded: 294 passed, 0 skipped
+
+---
+
 ## 2026-02-05 (Session 12 - Claude Code)
 
 ### Summary

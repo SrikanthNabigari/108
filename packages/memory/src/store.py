@@ -369,6 +369,50 @@ class MemoryStore:
         logger.debug(f"Got {len(memories)} {category} memories for user {user_id}")
         return memories
 
+    async def get_all_memories(self, user_id: str, limit: int = 100) -> list[Memory]:
+        """
+        Get all memories for a user regardless of category.
+
+        Args:
+            user_id: User's UUID
+            limit: Maximum results (default 100)
+
+        Returns:
+            List of Memory objects ordered by recency
+        """
+        async with self.pool.acquire() as conn:
+            rows = await conn.fetch(
+                """
+                SELECT id, user_id, content, category, embedding,
+                       metadata, importance, created_at, updated_at
+                FROM memories
+                WHERE user_id = $1
+                ORDER BY created_at DESC
+                LIMIT $2
+                """,
+                uuid.UUID(user_id),
+                limit,
+            )
+
+        memories = []
+        for row in rows:
+            memories.append(
+                Memory(
+                    id=str(row["id"]),
+                    user_id=str(row["user_id"]),
+                    content=row["content"],
+                    category=row["category"],
+                    embedding=list(row["embedding"]) if row["embedding"] is not None else None,
+                    metadata=json.loads(row["metadata"]) if row["metadata"] else {},
+                    importance=float(row["importance"]),
+                    created_at=row["created_at"],
+                    updated_at=row["updated_at"],
+                )
+            )
+
+        logger.debug(f"Got {len(memories)} total memories for user {user_id}")
+        return memories
+
     async def get_memory(self, memory_id: str) -> Memory | None:
         """Get a specific memory by ID."""
         async with self.pool.acquire() as conn:

@@ -198,6 +198,20 @@ class MuhurtaResponse(BaseModel):
     recommendations: list[str]
 
 
+class CreateUserRequest(BaseModel):
+    """Request model for creating a user with birth data."""
+
+    email: str = Field(..., description="User email address")
+    name: str | None = Field(default=None, description="User display name")
+    birth_datetime: dt = Field(..., description="Birth date and time (ISO format)")
+    latitude: float = Field(..., ge=-90, le=90, description="Birth location latitude")
+    longitude: float = Field(..., ge=-180, le=180, description="Birth location longitude")
+    timezone_offset: float = Field(default=0, description="Timezone offset in hours from UTC")
+    timezone: str = Field(default="UTC", description="Timezone name (e.g. Asia/Kolkata)")
+    place_name: str | None = Field(default=None, description="Birth place name")
+    ayanamsa: str = Field(default="lahiri", description="Ayanamsa system")
+
+
 class ChatRequest(BaseModel):
     """Request for agent chat."""
 
@@ -238,18 +252,36 @@ class ErrorResponse(BaseModel):
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
     """Manage application lifecycle."""
-    # Startup
-    print(f"🚀 Starting {settings.app_name} v{settings.app_version}")
-    print(f"   Debug mode: {settings.debug}")
+    import logging
 
-    # Initialize database connection pool if needed
-    # (would use asyncpg pool here in production)
+    logger = logging.getLogger(__name__)
+
+    # Startup
+    logger.info(f"Starting {settings.app_name} v{settings.app_version}")
+    logger.info(f"Debug mode: {settings.debug}")
+
+    # Initialize memory store if DATABASE_URL is configured
+    _app.state.memory_store = None
+    if settings.database_url:
+        try:
+            from packages.memory.src.store import MemoryStore
+
+            store = MemoryStore(settings.database_url)
+            await store.connect()
+            _app.state.memory_store = store
+            logger.info("MemoryStore connected")
+        except Exception as e:
+            logger.warning(f"Could not connect MemoryStore: {e}")
+
+    # Guide agent — lazy init (requires ANTHROPIC_API_KEY)
+    _app.state.guide = None
 
     yield
 
     # Shutdown
-    print("🛑 Shutting down 108 API...")
-    # Close database connections, cleanup resources
+    logger.info("Shutting down 108 API...")
+    if _app.state.memory_store:
+        await _app.state.memory_store.close()
 
 
 # ============================================================================
@@ -989,27 +1021,68 @@ async def check_muhurta(request: MuhurtaRequest):
 
 
 @app.post("/api/v1/chat", response_model=ChatResponse, tags=["Chat"])
-async def chat_with_agent(request: ChatRequest):
+async def chat_with_agent(request: ChatRequest, req: Request):
     """
     Chat with the 108 AI assistant.
 
     The agent uses your birth chart context (if available) to provide
     personalized astrological guidance.
+
+    Requires ANTHROPIC_API_KEY to be set for full agent responses.
     """
-    try:
-        # For now, return a placeholder response
-        # In production, this would invoke the LangGraph agent
-
-        # TODO: Integrate with packages/guide/agent.py when langgraph is available
-
+    # Check for API key
+    if not settings.anthropic_api_key:
         return ChatResponse(
-            response=f"I received your message: '{request.message}'. "
-            "The full AI agent integration is coming soon. "
-            "For now, you can use the chart and analysis endpoints.",
+            response="The AI assistant requires an ANTHROPIC_API_KEY to be configured. "
+            "Please set the ANTHROPIC_API_KEY environment variable. "
+            "In the meantime, you can use the chart, analysis, and timing endpoints.",
             user_id=request.user_id,
-            metadata={"status": "placeholder", "agent_available": False},
+            metadata={"status": "no_api_key", "agent_available": False},
         )
 
+    try:
+        # Lazy-init Guide agent
+        if req.app.state.guide is None:
+            from packages.guide.src.agent import Guide
+
+            req.app.state.guide = Guide(api_key=settings.anthropic_api_key)
+
+        guide = req.app.state.guide
+
+        # Load birth chart from memory store if user_id provided
+        birth_chart = None
+        if request.user_id and req.app.state.memory_store:
+            store = req.app.state.memory_store
+            chart_record = await store.get_birth_chart(request.user_id)
+            if chart_record:
+                birth_chart = chart_record.get("chart_data", {})
+
+        # Call the async guide agent
+        result = await guide.chat_async(
+            user_input=request.message,
+            user_id=request.user_id or "anonymous",
+            birth_chart=birth_chart,
+        )
+
+        return ChatResponse(
+            response=result.get("response", ""),
+            user_id=request.user_id,
+            metadata={
+                "status": "ok",
+                "agent_available": True,
+                "intent": result.get("intent"),
+                "personality_style": result.get("personality_style"),
+                "analysis_results": result.get("analysis_results", {}),
+            },
+        )
+
+    except ImportError:
+        return ChatResponse(
+            response="The AI agent requires LangGraph and LangChain dependencies. "
+            "Install with: uv pip install langgraph langchain-anthropic langchain-core",
+            user_id=request.user_id,
+            metadata={"status": "missing_dependencies", "agent_available": False},
+        )
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -1023,21 +1096,155 @@ async def chat_with_agent(request: ChatRequest):
 
 
 @app.get("/api/v1/users/{user_id}", tags=["Users"])
-async def get_user_profile(_user_id: str):
-    """Get user profile and birth chart."""
-    # TODO: Implement with memory package
-    raise HTTPException(
-        status_code=status.HTTP_501_NOT_IMPLEMENTED, detail="User management coming soon"
-    )
+async def get_user_profile(user_id: str, req: Request):
+    """Get user profile including birth chart and detected patterns."""
+    store = req.app.state.memory_store
+    if not store:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Database not configured. Set DATABASE_URL environment variable.",
+        )
+
+    try:
+        # Get user
+        user = await store.get_user(user_id)
+        if not user:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND, detail=f"User {user_id} not found"
+            )
+
+        # Get birth chart
+        birth_chart = await store.get_birth_chart(user_id)
+
+        # Get detected patterns
+        patterns = await store.get_user_patterns(user_id)
+
+        return {
+            "user": user,
+            "birth_chart": birth_chart,
+            "patterns": patterns,
+        }
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error fetching user profile: {e!s}",
+        ) from e
 
 
 @app.post("/api/v1/users", tags=["Users"])
-async def create_user_profile(_birth_data: BirthDataRequest):
-    """Create a new user profile with birth data."""
-    # TODO: Implement with memory package
-    raise HTTPException(
-        status_code=status.HTTP_501_NOT_IMPLEMENTED, detail="User management coming soon"
-    )
+async def create_user_profile(request: CreateUserRequest, req: Request):
+    """
+    Create a new user profile with birth data.
+
+    Calculates the birth chart, detects yogas/doshas, and stores everything.
+    """
+    store = req.app.state.memory_store
+    if not store:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Database not configured. Set DATABASE_URL environment variable.",
+        )
+
+    try:
+        from datetime import timedelta
+
+        # Create user
+        user = await store.create_user(email=request.email, name=request.name)
+        user_id = user["id"]
+
+        # Calculate birth chart
+        utc_dt = request.birth_datetime - timedelta(hours=request.timezone_offset)
+        jd = get_julian_day(utc_dt)
+
+        planets_raw = get_all_planets(jd, ayanamsa=request.ayanamsa)
+        houses_raw = get_house_cusps(
+            jd,
+            request.latitude,
+            request.longitude,
+            house_system="whole_sign",
+            ayanamsa=request.ayanamsa,
+        )
+
+        # Build chart data dict
+        asc_longitude = houses_raw["ascendant"]
+        lagna_rashi_idx = int(asc_longitude // 30)
+        lagna_rashi = RASHI_NAMES[lagna_rashi_idx]
+
+        moon_longitude = planets_raw["moon"]["longitude"]
+        moon_rashi_idx = int(moon_longitude // 30)
+        moon_rashi = RASHI_NAMES[moon_rashi_idx]
+        moon_nak = longitude_to_nakshatra(moon_longitude)
+
+        planets_dict = {}
+        for planet_id, data in planets_raw.items():
+            rashi_idx = int(data["longitude"] // 30)
+            nak = longitude_to_nakshatra(data["longitude"])
+            house = ((rashi_idx - lagna_rashi_idx) % 12) + 1
+            planets_dict[planet_id] = {
+                "longitude": data["longitude"],
+                "latitude": data.get("latitude", 0.0),
+                "speed": data.get("speed", 0.0),
+                "rashi": RASHI_NAMES[rashi_idx],
+                "rashi_num": rashi_idx,
+                "degree_in_rashi": data["longitude"] % 30,
+                "is_retrograde": data.get("is_retrograde", False),
+                "nakshatra": nak.get("nakshatra_name", ""),
+                "nakshatra_pada": nak.get("pada", 0),
+                "nakshatra_lord": nak.get("lord", ""),
+                "house": house,
+            }
+
+        chart_data = {
+            "planets": planets_dict,
+            "houses": {
+                "ascendant": asc_longitude,
+                "mc": houses_raw.get("mc", 0.0),
+                "cusps": houses_raw["cusps"],
+            },
+            "lagna_rashi": lagna_rashi,
+            "moon_rashi": moon_rashi,
+            "moon_longitude": moon_longitude,
+            "moon_nakshatra": moon_nak.get("nakshatra_name", ""),
+            "birth_datetime": request.birth_datetime.isoformat(),
+            "latitude": request.latitude,
+            "longitude": request.longitude,
+            "timezone": request.timezone,
+            "ayanamsa": request.ayanamsa,
+        }
+
+        # Save birth chart
+        await store.save_birth_chart(
+            user_id=user_id,
+            birth_datetime=request.birth_datetime,
+            latitude=request.latitude,
+            longitude=request.longitude,
+            timezone=request.timezone,
+            place_name=request.place_name,
+            chart_data=chart_data,
+            ayanamsa=request.ayanamsa,
+        )
+
+        return {
+            "user_id": user_id,
+            "user": user,
+            "chart_summary": {
+                "lagna_rashi": lagna_rashi,
+                "moon_rashi": moon_rashi,
+                "moon_nakshatra": moon_nak.get("nakshatra_name", ""),
+                "planet_count": len(planets_dict),
+            },
+        }
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Error creating user: {e!s}",
+        ) from e
 
 
 # ============================================================================
