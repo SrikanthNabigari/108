@@ -1,0 +1,474 @@
+{
+  "combustion_rules": {
+    "description": "Planetary combustion (Asta) occurs when a planet comes too close to the Sun, causing it to lose its strength and become unable to deliver its full results. The Sun's intense rays overpower the planet's significations.",
+    "general_principles": {
+      "definition": "A planet is combust when it is within specific degrees of the Sun, measured by celestial longitude",
+      "measurement": "Distance is measured in absolute degrees between Sun and planet",
+      "direction": "Combustion applies whether planet is ahead or behind the Sun",
+      "sun_immune": "The Sun cannot be combust. Moon's nodes (Rahu/Ketu) are also not subject to combustion",
+      "strength_loss": "Combust planets lose 50-75% of their natural strength",
+      "deep_combustion": "When a planet is within deep combustion degrees, effects are more severe (75-90% strength loss)",
+      "visibility": "Combustion relates to the planet's inability to be seen when too close to the Sun",
+      "recovery": "Planet recovers strength gradually as it moves away from combustion degree"
+    },
+    "planets": {
+      "moon": {
+        "combustion_degree": 12,
+        "deep_combustion_degree": 6,
+        "effects": {
+          "general": "Mental confusion, emotional instability, weakened intuition, mother's health concerns, disturbance in domestic peace, difficulty in connecting with emotions",
+          "positive_blocked": "Reduced emotional intelligence, diminished nurturing ability, weakened popularity, loss of public connection, impaired memory",
+          "negative_amplified": "Anxiety, depression, mood swings, insomnia, digestive issues, strained maternal relationships, difficulty with women in general",
+          "affected_significations": [
+            "Mind and emotions",
+            "Mother",
+            "Home and domestic happiness",
+            "Public image and popularity",
+            "Intuition and psychic abilities",
+            "Memory and mental peace",
+            "Breasts and stomach (physical)",
+            "Liquid substances and water"
+          ]
+        },
+        "remedies": [
+          "Wear pearl (minimum 5 carats) in silver on Monday during waxing moon",
+          "Chant 'Om Som Somaya Namah' 108 times daily",
+          "Donate white items (rice, milk, white clothes) on Mondays",
+          "Worship Goddess Parvati or Durga",
+          "Offer water to Moon on Monday evenings",
+          "Maintain good relationship with mother",
+          "Keep silver vessel with water near bed",
+          "Fast on Mondays",
+          "Donate to old-age homes or single mothers"
+        ],
+        "cancellation": [
+          "Moon in own sign (Cancer) reduces combustion by 50%",
+          "Moon in exaltation (Taurus) reduces combustion by 40%",
+          "Aspect of Jupiter on combust Moon provides 30% protection",
+          "Moon in 4th house from Sun gets some relief through digbala",
+          "Moon in bright fortnight (Shukla Paksha) better than dark fortnight"
+        ]
+      },
+      "mars": {
+        "combustion_degree": 17,
+        "deep_combustion_degree": 10,
+        "effects": {
+          "general": "Reduced courage and initiative, impulsive anger, rash decisions, conflicts with siblings and authority, accidents and injuries, property disputes, surgical complications",
+          "positive_blocked": "Diminished leadership ability, reduced physical strength and stamina, lack of assertiveness, poor competitive spirit, weakened technical skills",
+          "negative_amplified": "Aggression without direction, violence, accidents especially fire/weapons, blood disorders, fevers, conflicts with brothers, property loss, litigation",
+          "affected_significations": [
+            "Courage and bravery",
+            "Siblings (especially brothers)",
+            "Property and land",
+            "Physical strength and energy",
+            "Technical and mechanical skills",
+            "Military and police matters",
+            "Blood and bone marrow (physical)",
+            "Surgery and sharp instruments",
+            "Sports and competition"
+          ]
+        },
+        "remedies": [
+          "Wear red coral (minimum 7 carats) in gold/copper on Tuesday",
+          "Chant 'Om Angarakaya Namah' or Hanuman Chalisa daily",
+          "Donate red items (red lentils, red clothes, jaggery) on Tuesdays",
+          "Worship Lord Hanuman",
+          "Recite Kartikeya mantras",
+          "Practice controlled physical exercise",
+          "Donate blood regularly",
+          "Help brothers and soldiers",
+          "Avoid conflicts and aggressive behavior",
+          "Fast on Tuesdays"
+        ],
+        "cancellation": [
+          "Mars in own signs (Aries/Scorpio) reduces combustion by 50%",
+          "Mars in exaltation (Capricorn) reduces combustion by 40%",
+          "Mars in 10th house from Sun gains digbala protection",
+          "Jupiter's aspect provides 25% protection",
+          "Mars in own nakshatra (Mrigashira, Chitra, Dhanishtha) gives some relief"
+        ]
+      },
+      "mercury": {
+        "combustion_degree": 14,
+        "combustion_degree_retrograde": 12,
+        "deep_combustion_degree": 8,
+        "deep_combustion_degree_retrograde": 7,
+        "effects": {
+          "general": "Communication problems, poor decision-making, nervous disorders, business losses, educational difficulties, speech impediments, documentation errors, technology failures",
+          "positive_blocked": "Reduced intelligence and analytical ability, poor communication skills, diminished business acumen, learning difficulties, lack of wit and humor",
+          "negative_amplified": "Nervous breakdowns, anxiety, stuttering, miscommunication, fraud, forgery, business disputes, contract problems, skin diseases, respiratory issues",
+          "affected_significations": [
+            "Intelligence and intellect",
+            "Communication and speech",
+            "Business and trade",
+            "Education and learning",
+            "Mathematics and logic",
+            "Writing and documentation",
+            "Nervous system and skin (physical)",
+            "Younger siblings",
+            "Technology and computers",
+            "Short travels"
+          ]
+        },
+        "remedies": [
+          "Wear emerald (minimum 5 carats) in gold on Wednesday",
+          "Chant 'Om Budhaya Namah' 108 times daily",
+          "Donate green items (green moong dal, green clothes, emerald) on Wednesdays",
+          "Worship Lord Vishnu or Ganesha",
+          "Feed green grass to cows",
+          "Donate books and educational materials",
+          "Practice clear communication",
+          "Study Vedic scriptures",
+          "Help students and teachers",
+          "Fast on Wednesdays"
+        ],
+        "cancellation": [
+          "Mercury in own signs (Gemini/Virgo) reduces combustion by 50%",
+          "Mercury in exaltation (Virgo) reduces combustion by 40%",
+          "Mercury within 3 degrees of Sun (Budhaditya Yoga) can give brilliance in specific areas despite combustion",
+          "Venus conjunction or aspect provides 20% protection",
+          "Mercury retrograde and combust can give unique analytical abilities"
+        ]
+      },
+      "jupiter": {
+        "combustion_degree": 11,
+        "deep_combustion_degree": 6,
+        "effects": {
+          "general": "Loss of wisdom and judgment, financial losses, health issues, strained relationships with teachers and father, lack of faith, difficulty in higher learning, problems with children",
+          "positive_blocked": "Reduced wisdom and philosophical understanding, diminished wealth and prosperity, poor judgment, lack of optimism, weakened dharmic orientation",
+          "negative_amplified": "Financial disasters, liver problems, obesity or weight issues, problems with children (especially sons), loss of faith, legal troubles, issues with gurus and mentors",
+          "affected_significations": [
+            "Wisdom and knowledge",
+            "Wealth and prosperity",
+            "Children (especially sons)",
+            "Teachers and gurus",
+            "Father and father figures",
+            "Higher education and philosophy",
+            "Liver and fat tissues (physical)",
+            "Religion and spirituality",
+            "Fortune and grace",
+            "Legal matters"
+          ]
+        },
+        "remedies": [
+          "Wear yellow sapphire (minimum 5 carats) in gold on Thursday",
+          "Chant 'Om Gurave Namah' or Guru Gayatri 108 times daily",
+          "Donate yellow items (turmeric, yellow clothes, gold, yellow lentils) on Thursdays",
+          "Worship Lord Vishnu or Brihaspati",
+          "Respect teachers and elders",
+          "Donate to educational institutions and temples",
+          "Study spiritual texts",
+          "Feed Brahmins and scholars",
+          "Plant banana or peepal trees",
+          "Fast on Thursdays"
+        ],
+        "cancellation": [
+          "Jupiter in own signs (Sagittarius/Pisces) reduces combustion by 50%",
+          "Jupiter in exaltation (Cancer) reduces combustion by 40%",
+          "Jupiter in angles (1,4,7,10) from Sun gets some protection",
+          "Jupiter combust but with Moon reduces negative effects by 30%",
+          "Jupiter in own nakshatra (Punarvasu, Vishakha, Purva Bhadrapada) gives relief"
+        ]
+      },
+      "venus": {
+        "combustion_degree": 10,
+        "combustion_degree_retrograde": 8,
+        "deep_combustion_degree": 6,
+        "deep_combustion_degree_retrograde": 5,
+        "effects": {
+          "general": "Relationship problems, marital discord, loss of comforts and luxuries, artistic blocks, reproductive issues, kidney problems, difficulty with women, loss of beauty and charm",
+          "positive_blocked": "Reduced artistic abilities, loss of charm and attraction, diminished luxury and comfort, poor relationship skills, lack of refinement",
+          "negative_amplified": "Broken relationships, infidelity, divorce, sexual problems, diseases of reproductive organs, kidney stones, diabetes, problems with wife/women, artistic failures",
+          "affected_significations": [
+            "Love and romance",
+            "Marriage and partnerships",
+            "Wife and women in general",
+            "Beauty and aesthetics",
+            "Art, music, and creativity",
+            "Luxury and comfort",
+            "Vehicles and conveyances",
+            "Reproductive organs and kidneys (physical)",
+            "Wealth and material pleasures",
+            "Semen and procreation"
+          ]
+        },
+        "remedies": [
+          "Wear diamond or white sapphire (minimum 1 carat diamond / 5 carats white sapphire) in gold/silver on Friday",
+          "Chant 'Om Shukraya Namah' 108 times daily",
+          "Donate white items (white clothes, rice, sugar, curd) on Fridays",
+          "Worship Goddess Lakshmi or Durga",
+          "Maintain harmonious relationships",
+          "Donate to causes supporting women",
+          "Offer white flowers to Goddess",
+          "Keep household clean and beautiful",
+          "Feed cows with white food items",
+          "Fast on Fridays"
+        ],
+        "cancellation": [
+          "Venus in own signs (Taurus/Libra) reduces combustion by 50%",
+          "Venus in exaltation (Pisces) reduces combustion by 40%",
+          "Mercury conjunction provides some protection (20%)",
+          "Venus in angles from Sun (especially 7th) gets relief",
+          "Venus in own nakshatra (Bharani, Purva Phalguni, Purva Ashadha) reduces effects"
+        ]
+      },
+      "saturn": {
+        "combustion_degree": 15,
+        "deep_combustion_degree": 9,
+        "effects": {
+          "general": "Increased delays and obstacles, chronic health issues, depression and isolation, career stagnation, problems with servants/subordinates, fears and anxieties, karmic difficulties",
+          "positive_blocked": "Reduced discipline and patience, lack of perseverance, poor organizational skills, diminished sense of duty, weakened detachment",
+          "negative_amplified": "Severe depression, chronic diseases (especially bones/joints), extreme poverty, complete isolation, career failures, accidents, falls, problems with elderly, paralysis",
+          "affected_significations": [
+            "Longevity and old age",
+            "Career and profession",
+            "Discipline and patience",
+            "Servants and subordinates",
+            "Elderly people",
+            "Bones, joints, and teeth (physical)",
+            "Sorrows and hardships",
+            "Justice and karma",
+            "Property and real estate",
+            "Iron and blue sapphire"
+          ]
+        },
+        "remedies": [
+          "Wear blue sapphire (minimum 5 carats) in silver/gold on Saturday - ONLY after careful trial",
+          "Chant 'Om Shanaye Namah' or Shani Stotra 108 times daily",
+          "Donate black items (black sesame, black clothes, iron, mustard oil) on Saturdays",
+          "Worship Lord Shiva or Hanuman",
+          "Serve the poor, elderly, and disabled",
+          "Light sesame oil lamp under peepal tree on Saturdays",
+          "Feed crows and black dogs",
+          "Respect elderly and servants",
+          "Practice patience and discipline",
+          "Fast on Saturdays"
+        ],
+        "cancellation": [
+          "Saturn in own signs (Capricorn/Aquarius) reduces combustion by 50%",
+          "Saturn in exaltation (Libra) reduces combustion by 40%",
+          "Saturn in 10th from Sun gets digbala protection",
+          "Jupiter's aspect provides significant relief (35%)",
+          "Saturn in own nakshatra (Pushya, Anuradha, Uttara Bhadrapada) reduces effects",
+          "Saturn combust in dusthana (6,8,12) may give better results through enemies destruction"
+        ]
+      }
+    },
+    "house_wise_effects": {
+      "1": {
+        "description": "Combust planet in 1st house (Ascendant)",
+        "general_effects": "Affects personality, physical body, self-confidence, and overall life direction. Person may lack self-esteem and struggle with identity",
+        "moon": "Weak constitution, emotional instability, poor self-image, mother's influence diminished, mental health issues",
+        "mars": "Lack of courage, weak body, anger issues, poor leadership, head injuries, skin problems on face",
+        "mercury": "Poor communication, nervous disposition, skin problems, lack of intelligence expression, speech impediments",
+        "jupiter": "Lack of wisdom in personal conduct, weight issues, poor judgment, loss of optimism, weak constitution",
+        "venus": "Loss of charm and beauty, relationship issues affecting identity, lack of comfort in own skin, facial problems",
+        "saturn": "Chronic health issues, depression, pessimism, delays in life, dark complexion, weak bones"
+      },
+      "2": {
+        "description": "Combust planet in 2nd house",
+        "general_effects": "Affects wealth, family, speech, food, face/eyes, and accumulated resources. Financial instability and family conflicts common",
+        "moon": "Family unhappiness, poor eating habits, eye problems, weak memory, speech lacks emotion, reduced savings",
+        "mars": "Harsh speech, family conflicts, blood-related facial issues, accident to face/eyes, losses through siblings",
+        "mercury": "Poor business acumen, losses in trade, stammering, poor education foundation, disputes over money",
+        "jupiter": "Financial losses, lack of family values, poor diet leading to health issues, loss of ancestral wealth",
+        "venus": "Losses through women, poor family relationships with spouse, lack of savings, problems with right eye",
+        "saturn": "Poverty, miserly nature, dental problems, harsh speech, chronic family problems, difficulties accumulating wealth"
+      },
+      "3": {
+        "description": "Combust planet in 3rd house",
+        "general_effects": "Affects siblings, courage, communication, short travels, skills, and efforts. Problems with younger siblings and lack of initiative",
+        "moon": "Weak mind affecting efforts, problems with younger sister, poor short-term memory, lack of emotional courage",
+        "mars": "Excessive but misdirected courage, conflicts with brothers, accident-prone during travels, sports injuries",
+        "mercury": "Poor writing skills, communication breakdowns, losses in business ventures, problems with co-borns",
+        "jupiter": "Lack of wisdom in efforts, poor relationship with younger siblings, unsuccessful short journeys",
+        "venus": "Artistic skills blocked, poor relationships with younger sisters, uncomfortable short travels, lack of creative efforts",
+        "saturn": "Extreme delays in initiatives, very poor sibling relationships, chronic problems with hands/shoulders, fears preventing action"
+      },
+      "4": {
+        "description": "Combust planet in 4th house",
+        "general_effects": "Affects mother, home, property, vehicles, education, and emotional foundation. Mother's health and domestic peace suffer",
+        "moon": "Severe effects on mother's health and relationship, mental instability, loss of property, unhappy home life",
+        "mars": "Conflicts at home, property disputes, vehicle accidents, problems with mother, fire hazard at home",
+        "mercury": "Educational obstacles, problems in early schooling, vehicle troubles, poor relationship with maternal relatives",
+        "jupiter": "Loss of family wealth, father-son conflicts affecting home, problems acquiring property, liver issues",
+        "venus": "Marital discord affecting home peace, loss of comforts and vehicles, problems with mother, diabetes",
+        "saturn": "Extreme unhappiness at home, chronic problems with mother, loss of property, severe depression, joint problems"
+      },
+      "5": {
+        "description": "Combust planet in 5th house",
+        "general_effects": "Affects children, intelligence, creativity, romance, speculation, and past-life merit. Problems with children and creative blocks",
+        "moon": "Emotional problems affecting children, difficult pregnancies, poor intuitive intelligence, speculative losses",
+        "mars": "Problems with sons, accidents to children, miscarriages, impulsive speculation leading to losses",
+        "mercury": "Children's educational problems, poor decision-making in speculation, creative writing blocks, nervous children",
+        "jupiter": "Serious problems with children (especially sons), loss of wisdom, bad luck, spiritual confusion, liver problems in children",
+        "venus": "Problems in romance, love affairs causing trouble, daughters' problems, artistic blocks, reproductive issues",
+        "saturn": "Severe delays in childbirth, chronic problems with children, depression, loss of joy, children with health issues"
+      },
+      "6": {
+        "description": "Combust planet in 6th house",
+        "general_effects": "Affects enemies, diseases, debts, litigation, service, and obstacles. Can give mixed results as combust planet in dusthana",
+        "moon": "Digestive disorders, mental health issues from enemies, stress from litigation, maternal uncle's problems",
+        "mars": "Victory over enemies but at cost, blood disorders, accidents during service, conflicts with subordinates",
+        "mercury": "Skin diseases, nervous disorders from work stress, disputes in business, success through overcoming obstacles",
+        "jupiter": "Liver problems, children's health issues, legal victories but at cost, recovery from diseases difficult",
+        "venus": "Kidney problems, reproductive system diseases, conflicts with women, diabetes, marital problems from enemies",
+        "saturn": "Chronic diseases, victory over enemies through patience, success in service despite delays, bone problems"
+      },
+      "7": {
+        "description": "Combust planet in 7th house",
+        "general_effects": "Affects marriage, partnerships, business relationships, and spouse. Marital problems and partnership conflicts common",
+        "moon": "Emotionally distant marriage, mental problems in spouse, unhappy partnerships, public relationship problems",
+        "mars": "Marital conflicts, aggressive spouse, business partnership disputes, accidents to spouse, surgeries in marriage life",
+        "mercury": "Communication breakdown in marriage, business partnership problems, spouse with nervous issues, contractual disputes",
+        "jupiter": "Spouse's ill health, lack of fortune through marriage, problems with partner's family, business losses through partners",
+        "venus": "Severe marital discord, multiple relationships causing problems, spouse's health issues, luxury/comfort through marriage blocked",
+        "saturn": "Delayed marriage, older spouse, chronic marital problems, separation, business partnership failures, spouse's longevity concerns"
+      },
+      "8": {
+        "description": "Combust planet in 8th house",
+        "general_effects": "Affects longevity, transformation, occult, inheritance, and sudden events. Can give occult powers but health problems",
+        "moon": "Mental instability, psychic disturbances, inheritance problems from mother, sudden emotional upheavals",
+        "mars": "Accidents, sudden injuries, violent transformations, sexual problems, conflicts over inheritance",
+        "mercury": "Nervous breakdowns, occult knowledge but misused, sudden losses in business, problems with in-laws",
+        "jupiter": "Chronic health issues, loss through inheritance, children's accidents, weak longevity indicators, spiritual crisis",
+        "venus": "Sexual problems, diseases of reproductive organs, loss through spouse's family, sudden relationship endings",
+        "saturn": "Can give occult powers and longevity, chronic diseases, inheritance delays, slow but deep transformations"
+      },
+      "9": {
+        "description": "Combust planet in 9th house",
+        "general_effects": "Affects father, fortune, dharma, higher learning, long travels, and spirituality. Father's health and fortune suffer",
+        "moon": "Problems with father, foreign travels uncomfortable, weak fortune, mother-father conflicts, loss of faith",
+        "mars": "Conflicts with father and teachers, aggressive religious views, accidents during long travels, brothers affecting fortune",
+        "mercury": "Higher education obstacles, problems in foreign lands, poor relationship with gurus, philosophical confusion",
+        "jupiter": "Father's serious health problems, loss of fortune and grace, spiritual confusion, problems with teachers, financial losses",
+        "venus": "Marriage affecting relationship with father, loss of comforts during travels, artistic pursuits unrewarded, father-wife conflicts",
+        "saturn": "Father's longevity concerns, chronic problems with fortune, extreme delays in spiritual progress, pessimistic philosophy"
+      },
+      "10": {
+        "description": "Combust planet in 10th house",
+        "general_effects": "Affects career, reputation, authority, public life, and achievements. Career obstacles and public image problems",
+        "moon": "Unstable career, public image problems, difficulty in professions requiring emotional connection, mother affecting career",
+        "mars": "Career conflicts, problems with authority, aggressive professional reputation, technical career blocks, litigation affecting status",
+        "mercury": "Business and communication career problems, reputation for unreliability, intellectual work unrewarded, nervous in public life",
+        "jupiter": "Career in teaching/counseling blocked, bad professional reputation, father's career affecting yours, loss of status",
+        "venus": "Career in arts/luxury blocked, problems with women affecting career, marital issues affecting reputation, public charm reduced",
+        "saturn": "Career delays and failures, chronic professional problems, bad reputation, problems with government, late success if any"
+      },
+      "11": {
+        "description": "Combust planet in 11th house",
+        "general_effects": "Affects gains, income, elder siblings, friends, aspirations, and social networks. Income problems and friendship issues",
+        "moon": "Unstable income, problems with elder sister, lack of emotional fulfillment in friendships, aspirations unrealized",
+        "mars": "Conflicts with friends and elder brothers, aggressive in social circles, losses through speculation, income through conflicts",
+        "mercury": "Business income unstable, problems with networking, friends causing communication issues, elder siblings with health problems",
+        "jupiter": "Major income losses, problems with elder children, unfulfilled aspirations, friends betraying, lack of support from network",
+        "venus": "Losses through women friends, income from arts/luxury blocked, social life uncomfortable, elder sister's problems",
+        "saturn": "Very limited income, chronic problems with elder siblings, isolation from social networks, delayed fulfillment of desires"
+      },
+      "12": {
+        "description": "Combust planet in 12th house",
+        "general_effects": "Affects losses, expenses, foreign lands, spirituality, isolation, and moksha. Can give spiritual benefits but material losses",
+        "moon": "Emotional isolation, sleep problems, excessive expenses, problems in foreign lands, need for solitude",
+        "mars": "Expenses through accidents/surgeries, hospital stays, losses through brothers, sexual problems, anger causing isolation",
+        "mercury": "Mental isolation, nervous expenses on health, communication blocks leading to losses, problems abroad",
+        "jupiter": "Major expenses on children, spiritual confusion, loss of wealth, problems in foreign settlements, weak moksha indicators",
+        "venus": "Marital expenses and losses, problems with spouse in foreign lands, hospitalization for reproductive issues, artistic solitude",
+        "saturn": "Can give spiritual depth and moksha, chronic health expenses, comfortable in isolation, foreign settlement delays but eventual success"
+      }
+    },
+    "special_rules": {
+      "retrograde_combustion": {
+        "description": "When a retrograde planet is combust, effects are more complex",
+        "mercury": "Mercury retrograde and combust within 3° can give unique analytical abilities but communication problems",
+        "venus": "Venus retrograde combust gives relationship karmas from past lives manifesting",
+        "mars": "Mars retrograde combust can give suppressed anger leading to explosions",
+        "jupiter": "Jupiter retrograde combust creates philosophical confusion but eventual wisdom",
+        "saturn": "Saturn retrograde combust intensifies karmic lessons and delays"
+      },
+      "own_sign_reduction": {
+        "description": "Planet combust in its own sign loses 50% less strength",
+        "examples": [
+          "Moon combust in Cancer",
+          "Mars combust in Aries or Scorpio",
+          "Mercury combust in Gemini or Virgo",
+          "Jupiter combust in Sagittarius or Pisces",
+          "Venus combust in Taurus or Libra",
+          "Saturn combust in Capricorn or Aquarius"
+        ],
+        "note": "Still counts as combustion but effects are significantly milder"
+      },
+      "exaltation_reduction": {
+        "description": "Planet combust in exaltation sign loses 60% less strength",
+        "examples": [
+          "Moon combust in Taurus",
+          "Mars combust in Capricorn",
+          "Mercury combust in Virgo (also own sign)",
+          "Jupiter combust in Cancer",
+          "Venus combust in Pisces",
+          "Saturn combust in Libra"
+        ],
+        "note": "Exaltation dignity provides strong protection against combustion"
+      },
+      "debilitation_amplification": {
+        "description": "Planet combust in debilitation is extremely weak (Neecha Bhanga possible only if very strong cancellations present)",
+        "examples": [
+          "Moon combust in Scorpio - severe mental disturbance",
+          "Mars combust in Cancer - complete lack of courage",
+          "Mercury combust in Pisces - extreme confusion",
+          "Jupiter combust in Capricorn - total loss of wisdom",
+          "Venus combust in Virgo - relationship disasters",
+          "Saturn combust in Aries - extreme delays and frustrations"
+        ],
+        "note": "This is one of the worst planetary conditions in a chart"
+      },
+      "budhaditya_yoga": {
+        "description": "Mercury within 3° of Sun creates Budhaditya Yoga - combustion but with benefits",
+        "positive_effects": "Sharp intellect, good communication with authority, success in government, analytical brilliance",
+        "negative_effects": "Nervous tension, communication under pressure, tendency to be critical",
+        "note": "This is an exception where combustion can give positive results in specific domains"
+      },
+      "combust_with_retrograde": {
+        "description": "Retrograde planets require less degree to combust",
+        "mercury_retrograde": "12° instead of 14°",
+        "venus_retrograde": "8° instead of 10°",
+        "others": "Mars, Jupiter, Saturn use same combustion degrees whether retrograde or not"
+      },
+      "nakshatra_consideration": {
+        "description": "Planet combust in its own nakshatra gets some relief (10-15% strength)",
+        "examples": [
+          "Moon in Rohini, Hasta, or Shravana",
+          "Mars in Mrigashira, Chitra, or Dhanishtha",
+          "Mercury in Ashlesha, Jyeshtha, or Revati",
+          "Jupiter in Punarvasu, Vishakha, or Purva Bhadrapada",
+          "Venus in Bharani, Purva Phalguni, or Purva Ashadha",
+          "Saturn in Pushya, Anuradha, or Uttara Bhadrapada"
+        ]
+      },
+      "aspect_protection": {
+        "description": "Benefic aspects can reduce combustion effects",
+        "jupiter_aspect": "Reduces combustion effects by 25-35%",
+        "venus_aspect": "Reduces combustion effects by 15-20%",
+        "mercury_aspect": "Reduces combustion effects by 10-15%",
+        "malefic_aspects": "Mars and Saturn aspects do not help, may worsen conditions"
+      },
+      "conjunction_effects": {
+        "description": "Other planets conjunct with combust planet",
+        "benefic_conjunction": "Jupiter or Venus with combust planet provides some protection",
+        "malefic_conjunction": "Mars or Saturn with combust planet worsens effects",
+        "multiple_combustion": "Multiple planets combust together significantly weakens chart"
+      },
+      "house_lord_combustion": {
+        "description": "When house lord is combust, that house's significations suffer",
+        "example": "If 5th lord is combust anywhere in chart, children and intelligence suffer",
+        "importance": "Functional lordship matters more than natural significations sometimes"
+      },
+      "timing_of_effects": {
+        "description": "Combustion effects manifest most strongly during",
+        "dasha_periods": "During combust planet's dasha or bhukti",
+        "transits": "When Sun transits over natal combust planet position",
+        "solar_return": "Year when Sun returns to exact combustion degree",
+        "progressed_combustion": "When progressed Sun combusts natal planet"
+      }
+    }
+  }
+}

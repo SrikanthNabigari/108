@@ -1,0 +1,461 @@
+{
+  "varshaphal_rules": {
+    "description": "Varshaphal (Solar Return / Annual Chart) rules from Tajika system",
+    "version": "1.0.0",
+    "general_principles": {
+      "overview": "Varshaphal is the annual horoscope cast when Sun returns to exact natal position",
+      "key_features": [
+        "Cast for exact moment Sun returns to natal longitude",
+        "Valid for one solar year from return date",
+        "Uses Tajika aspects and yogas (different from Parashari)",
+        "Muntha progresses one sign per year from ascendant",
+        "Year Lord (Varshesha) determined by specific criteria",
+        "Pancha Vargiya Bala used for planetary strength"
+      ],
+      "tajika_aspects": {
+        "conjunction": {"degrees": 0, "orb": 15, "strength": "full"},
+        "sextile": {"degrees": 60, "orb": 7, "strength": "moderate"},
+        "square": {"degrees": 90, "orb": 9, "strength": "full"},
+        "trine": {"degrees": 120, "orb": 9, "strength": "full"},
+        "opposition": {"degrees": 180, "orb": 15, "strength": "full"}
+      }
+    },
+    "muntha": {
+      "description": "Progressed point that advances one sign per year from birth ascendant",
+      "calculation": "Birth ascendant sign + completed age (modulo 12)",
+      "house_effects": {
+        "1": {
+          "theme": "Self, health, vitality, new beginnings",
+          "effects": ["Personal growth and confidence", "Good health year", "New ventures succeed", "Positive personality changes", "Leadership opportunities"],
+          "overall": "favorable"
+        },
+        "2": {
+          "theme": "Wealth, family, speech, food",
+          "effects": ["Financial gains and savings", "Family harmony", "Improved communication skills", "Good food and comforts", "Accumulation of resources"],
+          "overall": "favorable"
+        },
+        "3": {
+          "theme": "Courage, siblings, short travel, communication",
+          "effects": ["Increased courage and initiative", "Favorable for writing and media", "Short journeys bring benefits", "Sibling relationships improve", "Success through effort"],
+          "overall": "favorable"
+        },
+        "4": {
+          "theme": "Home, mother, property, emotional peace",
+          "effects": ["Property gains or improvements", "Domestic happiness", "Mother's welfare", "Emotional stability", "Vehicle acquisition possible"],
+          "overall": "favorable"
+        },
+        "5": {
+          "theme": "Children, education, romance, creativity",
+          "effects": ["Academic success", "Children's welfare", "Romantic opportunities", "Creative achievements", "Speculative gains possible"],
+          "overall": "favorable"
+        },
+        "6": {
+          "theme": "Enemies, health issues, debts, service",
+          "effects": ["Health concerns need attention", "Enemies may cause trouble", "Debt management required", "Service-related challenges", "Legal disputes possible"],
+          "overall": "challenging"
+        },
+        "7": {
+          "theme": "Marriage, partnerships, business, public life",
+          "effects": ["Relationship developments", "Marriage prospects if single", "Business partnerships", "Public interactions increase", "Travel likely"],
+          "overall": "mixed"
+        },
+        "8": {
+          "theme": "Obstacles, transformation, hidden matters",
+          "effects": ["Unexpected challenges", "Health concerns possible", "Financial obstacles", "Transformation through crisis", "Hidden enemies active"],
+          "overall": "challenging"
+        },
+        "9": {
+          "theme": "Luck, father, higher learning, spirituality",
+          "effects": ["Fortune favors endeavors", "Spiritual growth", "Long-distance travel", "Educational success", "Father's support"],
+          "overall": "favorable"
+        },
+        "10": {
+          "theme": "Career, status, authority, achievements",
+          "effects": ["Career advancement", "Professional recognition", "Authority increases", "Business success", "Public honors possible"],
+          "overall": "favorable"
+        },
+        "11": {
+          "theme": "Gains, income, friends, wish fulfillment",
+          "effects": ["Financial gains increase", "Income from multiple sources", "Friendship benefits", "Wishes fulfilled", "Social circle expands"],
+          "overall": "favorable"
+        },
+        "12": {
+          "theme": "Expenses, losses, foreign lands, spirituality",
+          "effects": ["Increased expenditure", "Foreign travel possible", "Spiritual inclinations", "Losses or hidden expenses", "Need for rest and retreat"],
+          "overall": "challenging"
+        }
+      }
+    },
+    "varshesha": {
+      "description": "Year Lord - the strongest planet determining the annual chart's primary influence",
+      "determination_criteria": [
+        "Lord of the annual chart ascendant",
+        "Lord of the Moon sign in annual chart",
+        "Lord of the Muntha sign",
+        "Lord of the Tri-rashi pati (season lord)",
+        "Birth day lord (day of the week planet)"
+      ],
+      "selection_method": "Planet appearing most frequently in above roles AND having highest Pancha Vargiya Bala",
+      "year_lord_by_planet": {
+        "sun": {
+          "theme": "Authority, government, health, father",
+          "favorable": ["Government favor", "Career recognition", "Health vitality", "Father's support", "Leadership roles"],
+          "unfavorable": ["Ego conflicts", "Government issues", "Father's health", "Eye problems", "Excessive pride"],
+          "best_placement": "10th or 1st house in annual chart",
+          "difficult_placement": "6th, 8th, or 12th house"
+        },
+        "moon": {
+          "theme": "Mind, emotions, mother, public life",
+          "favorable": ["Mental peace", "Public popularity", "Mother's welfare", "Emotional fulfillment", "Travel opportunities"],
+          "unfavorable": ["Mental anxiety", "Mood instability", "Mother's health", "Fluid-related ailments", "Emotional turmoil"],
+          "best_placement": "4th or 7th house",
+          "difficult_placement": "8th or 12th house"
+        },
+        "mars": {
+          "theme": "Energy, courage, property, siblings",
+          "favorable": ["Victory in competition", "Property gains", "Courage increases", "Athletic success", "Technical achievements"],
+          "unfavorable": ["Accidents", "Conflicts and anger", "Blood-related issues", "Property disputes", "Sibling conflicts"],
+          "best_placement": "3rd, 6th, or 10th house",
+          "difficult_placement": "7th or 8th house"
+        },
+        "mercury": {
+          "theme": "Intellect, communication, business, education",
+          "favorable": ["Business success", "Communication skills", "Educational gains", "Writing and publishing", "Trading profits"],
+          "unfavorable": ["Nervous disorders", "Communication mishaps", "Business losses", "Skin problems", "Mental restlessness"],
+          "best_placement": "1st, 4th, or 10th house",
+          "difficult_placement": "8th or 12th house"
+        },
+        "jupiter": {
+          "theme": "Wisdom, wealth, children, dharma",
+          "favorable": ["Wealth increase", "Spiritual growth", "Children's welfare", "Educational success", "Guru's blessings"],
+          "unfavorable": ["Over-expansion", "Liver issues", "False promises", "Religious conflicts", "Weight gain"],
+          "best_placement": "1st, 5th, or 9th house",
+          "difficult_placement": "6th or 8th house"
+        },
+        "venus": {
+          "theme": "Love, marriage, luxury, arts, finances",
+          "favorable": ["Marriage prospects", "Romantic success", "Financial gains", "Artistic achievements", "Luxury acquisitions"],
+          "unfavorable": ["Relationship complications", "Excessive indulgence", "Financial extravagance", "Reproductive issues", "Scandal risk"],
+          "best_placement": "4th or 7th house",
+          "difficult_placement": "6th or 8th house"
+        },
+        "saturn": {
+          "theme": "Discipline, karma, delays, longevity",
+          "favorable": ["Steady progress", "Disciplined approach pays off", "Property gains through patience", "Old debts cleared", "Spiritual maturity"],
+          "unfavorable": ["Delays in all matters", "Health issues (chronic)", "Depression", "Career obstacles", "Isolation"],
+          "best_placement": "3rd, 6th, or 11th house",
+          "difficult_placement": "1st, 4th, or 8th house"
+        },
+        "rahu": {
+          "theme": "Unconventional, foreign, technology, obsession",
+          "favorable": ["Foreign opportunities", "Technology success", "Unconventional gains", "Political success", "Research breakthroughs"],
+          "unfavorable": ["Deception", "Obsessive behavior", "Mysterious ailments", "Scandal", "Confusion"],
+          "best_placement": "3rd, 6th, or 11th house",
+          "difficult_placement": "1st, 7th, or 8th house"
+        },
+        "ketu": {
+          "theme": "Spirituality, detachment, past karma, liberation",
+          "favorable": ["Spiritual progress", "Occult knowledge", "Liberation from bondage", "Sudden gains", "Intuitive abilities"],
+          "unfavorable": ["Confusion and aimlessness", "Sudden losses", "Accidents", "Isolation", "Ancestral issues"],
+          "best_placement": "9th or 12th house",
+          "difficult_placement": "1st, 2nd, or 7th house"
+        }
+      }
+    },
+    "tajika_yogas": {
+      "description": "16 special yogas used exclusively in Tajika/Varshaphal system",
+      "yogas": {
+        "ikkabal": {
+          "name": "Ikkabal Yoga",
+          "type": "favorable",
+          "condition": "Year lord placed in kendra (1,4,7,10) or trikona (1,5,9) from ascendant",
+          "effect": "General success, prosperity, and well-being throughout the year",
+          "strength": "Most favorable when year lord is also strong in Pancha Vargiya Bala"
+        },
+        "induvara": {
+          "name": "Induvara Yoga",
+          "type": "favorable",
+          "condition": "All planets occupy only kendra houses (1,4,7,10)",
+          "effect": "Excellent year with success in all undertakings, comfort and luxury",
+          "strength": "Rare but very powerful when formed"
+        },
+        "ithasala": {
+          "name": "Ithasala Yoga",
+          "type": "favorable",
+          "condition": "Faster planet applying to (approaching) slower planet within orb of aspect",
+          "effect": "Success and fulfillment of the matters ruled by both planets",
+          "subtypes": {
+            "vartamana": "Application within 1 degree - immediate results",
+            "poorna": "Exact aspect achieved - complete fulfillment",
+            "bhavishya": "Application beyond 1 degree - delayed but certain results"
+          },
+          "strength": "Strongest when between year lord and ascendant lord"
+        },
+        "ishrafa": {
+          "name": "Ishrafa Yoga",
+          "type": "unfavorable",
+          "condition": "Faster planet separating from slower planet (past aspect)",
+          "effect": "Loss, separation, denial of expected results",
+          "strength": "More harmful when involving year lord or ascendant lord"
+        },
+        "nakta": {
+          "name": "Nakta Yoga",
+          "type": "mixed",
+          "condition": "No direct Ithasala between two significators but a third planet transfers light between them",
+          "effect": "Success through intermediary or middleman",
+          "strength": "Depends on strength of the transferring planet"
+        },
+        "yamaya": {
+          "name": "Yamaya Yoga",
+          "type": "mixed",
+          "condition": "Two planets in mutual aspect but separating, with another planet transferring light",
+          "effect": "Results come through indirect means, exchange of benefits",
+          "strength": "Moderate - results not straightforward"
+        },
+        "manau": {
+          "name": "Manau Yoga",
+          "type": "unfavorable",
+          "condition": "No Ithasala between significators and no transfer of light possible",
+          "effect": "Complete denial of results, failure and disappointment",
+          "strength": "Very unfavorable - matter will not fructify"
+        },
+        "kamboola": {
+          "name": "Kamboola Yoga",
+          "type": "favorable",
+          "condition": "Moon in Ithasala with year lord while year lord is in kendra",
+          "effect": "Success through personal effort and mental determination",
+          "strength": "Strong when Moon is well-placed and waxing"
+        },
+        "gairi_kamboola": {
+          "name": "Gairi Kamboola Yoga",
+          "type": "mixed",
+          "condition": "Moon in Ithasala with year lord but year lord not in kendra",
+          "effect": "Partial success, results with effort but incomplete",
+          "strength": "Moderate - effort may not yield proportionate results"
+        },
+        "khallasara": {
+          "name": "Khallasara Yoga",
+          "type": "unfavorable",
+          "condition": "Moon separating from both year lord and ascendant lord",
+          "effect": "Abandonment of plans, giving up on endeavors, discouragement",
+          "strength": "Unfavorable for initiating new ventures"
+        },
+        "radda": {
+          "name": "Radda Yoga",
+          "type": "mixed",
+          "condition": "Planet in retrograde motion forming Ithasala",
+          "effect": "Results come but through reversal or unusual circumstances",
+          "strength": "Depends on whether retrograde planet is benefic or malefic"
+        },
+        "duhphali_kuttha": {
+          "name": "Duhphali Kuttha Yoga",
+          "type": "unfavorable",
+          "condition": "Significator planets in 6-8 or 2-12 positions from each other without aspect",
+          "effect": "Conflict, opposition, and hostile circumstances",
+          "strength": "Very challenging when involving year lord"
+        },
+        "dutthotthi_davira": {
+          "name": "Dutthotthi Davira Yoga",
+          "type": "favorable",
+          "condition": "A planet in its exaltation or own sign aspecting the ascendant",
+          "effect": "Help from influential person, unexpected support and success",
+          "strength": "Stronger when the supporting planet is a natural benefic"
+        },
+        "tambira": {
+          "name": "Tambira Yoga",
+          "type": "favorable",
+          "condition": "Year lord and ascendant lord in mutual kendra or trikona positions",
+          "effect": "Cooperation between personal destiny and year's potential",
+          "strength": "Very favorable for overall year quality"
+        },
+        "kuttha": {
+          "name": "Kuttha Yoga",
+          "type": "unfavorable",
+          "condition": "Year lord combust (too close to Sun)",
+          "effect": "Year lord's significations severely weakened, blocked results",
+          "strength": "Highly unfavorable - remedies strongly recommended"
+        },
+        "durphali": {
+          "name": "Durphali Yoga",
+          "type": "unfavorable",
+          "condition": "Year lord in debilitation or enemy sign without cancellation",
+          "effect": "Weakness in year's primary theme, struggle and hardship",
+          "strength": "Somewhat mitigated if year lord receives benefic aspects"
+        }
+      }
+    },
+    "pancha_vargiya_bala": {
+      "description": "Five-fold strength assessment specific to Varshaphal",
+      "total_max": 80,
+      "components": {
+        "kshetra_bala": {
+          "name": "Positional Strength",
+          "max_points": 30,
+          "description": "Strength from sign placement",
+          "scoring": {
+            "own_sign": 30,
+            "moolatrikona": 27,
+            "exalted": 25,
+            "friendly_sign": 20,
+            "neutral_sign": 15,
+            "enemy_sign": 10,
+            "debilitated": 5
+          }
+        },
+        "uccha_bala": {
+          "name": "Exaltation Strength",
+          "max_points": 20,
+          "description": "Strength from proximity to exaltation point",
+          "scoring": {
+            "within_10_degrees": 20,
+            "within_30_degrees": 15,
+            "within_60_degrees": 10,
+            "within_90_degrees": 5,
+            "beyond_90_degrees": 2
+          }
+        },
+        "hadda_bala": {
+          "name": "Term Strength",
+          "max_points": 15,
+          "description": "Strength from term (hadda) placement",
+          "scoring": {
+            "own_hadda": 15,
+            "friendly_hadda": 10,
+            "neutral_hadda": 7,
+            "enemy_hadda": 3
+          }
+        },
+        "drekkana_bala": {
+          "name": "Decanate Strength",
+          "max_points": 10,
+          "description": "Strength from decanate (drekkana) placement",
+          "scoring": {
+            "own_drekkana": 10,
+            "friendly_drekkana": 7,
+            "neutral_drekkana": 5,
+            "enemy_drekkana": 2
+          }
+        },
+        "navamsa_bala": {
+          "name": "Navamsa Strength",
+          "max_points": 5,
+          "description": "Strength from D9 placement",
+          "scoring": {
+            "own_navamsa": 5,
+            "friendly_navamsa": 3,
+            "neutral_navamsa": 2,
+            "enemy_navamsa": 1
+          }
+        }
+      },
+      "interpretation": {
+        "60_plus": {"label": "Very Strong", "meaning": "Dominates the year, gives powerful results"},
+        "45_60": {"label": "Strong", "meaning": "Significant influence, mostly favorable"},
+        "30_45": {"label": "Moderate", "meaning": "Average influence, mixed results"},
+        "15_30": {"label": "Weak", "meaning": "Limited influence, struggles to deliver"},
+        "below_15": {"label": "Very Weak", "meaning": "Cannot give meaningful results"}
+      }
+    },
+    "sahams": {
+      "description": "Sensitive points (similar to Arabic Parts) used in Varshaphal",
+      "calculation_note": "Formulas use: Asc = Ascendant longitude, Planet = planet's longitude. All modulo 360.",
+      "points": {
+        "punya_saham": {
+          "name": "Punya Saham (Fortune Point)",
+          "formula": "Asc + Moon - Sun",
+          "formula_night": "Asc + Sun - Moon",
+          "signifies": "Overall fortune, luck, and divine grace",
+          "strong_sign": "Good fortune throughout the year",
+          "weak_sign": "Obstacles to fortune and luck"
+        },
+        "vidya_saham": {
+          "name": "Vidya Saham (Education Point)",
+          "formula": "Asc + Jupiter - Mercury",
+          "signifies": "Education, learning, intellectual pursuits",
+          "strong_sign": "Academic success and learning",
+          "weak_sign": "Educational obstacles and confusion"
+        },
+        "yashas_saham": {
+          "name": "Yashas Saham (Fame Point)",
+          "formula": "Asc + Jupiter - Sun",
+          "signifies": "Fame, reputation, public recognition",
+          "strong_sign": "Public recognition and honors",
+          "weak_sign": "Loss of reputation, public criticism"
+        },
+        "mrityu_saham": {
+          "name": "Mrityu Saham (Danger Point)",
+          "formula": "Asc + Saturn - Moon",
+          "signifies": "Danger, health crises, potential accidents",
+          "interpretation": "Planets aspecting this point or its lord indicate timing of danger"
+        },
+        "vivaha_saham": {
+          "name": "Vivaha Saham (Marriage Point)",
+          "formula": "Asc + Venus - Saturn",
+          "signifies": "Marriage prospects, romantic relationships",
+          "strong_sign": "Marriage or relationship development likely",
+          "weak_sign": "Delays or obstacles in marriage"
+        },
+        "santana_saham": {
+          "name": "Santana Saham (Children Point)",
+          "formula": "Asc + Jupiter - Saturn",
+          "signifies": "Children, progeny, creative offspring",
+          "strong_sign": "Childbirth or children's prosperity",
+          "weak_sign": "Concerns about children or fertility"
+        },
+        "karma_saham": {
+          "name": "Karma Saham (Profession Point)",
+          "formula": "Asc + Saturn - Sun",
+          "signifies": "Career, profession, life's work",
+          "strong_sign": "Professional advancement and success",
+          "weak_sign": "Career obstacles and setbacks"
+        },
+        "rajya_saham": {
+          "name": "Rajya Saham (Authority Point)",
+          "formula": "Asc + Saturn - Moon",
+          "signifies": "Authority, power, government connection",
+          "strong_sign": "Gain of authority and power",
+          "weak_sign": "Loss of authority, government problems"
+        },
+        "roga_saham": {
+          "name": "Roga Saham (Disease Point)",
+          "formula": "Asc + Mars - Saturn",
+          "signifies": "Health vulnerabilities and disease potential",
+          "interpretation": "Malefics aspecting this point trigger health issues during their periods"
+        },
+        "bandhu_saham": {
+          "name": "Bandhu Saham (Relations Point)",
+          "formula": "Asc + Mercury - Moon",
+          "signifies": "Relationships, relatives, social connections",
+          "strong_sign": "Harmonious relationships and social success",
+          "weak_sign": "Relationship conflicts and social isolation"
+        }
+      }
+    },
+    "annual_house_effects": {
+      "1": {"themes": ["Health", "Personal identity", "New ventures"], "strong": "Excellent personal year", "weak": "Health and identity challenges"},
+      "2": {"themes": ["Wealth", "Family", "Speech"], "strong": "Financial prosperity", "weak": "Financial difficulties"},
+      "3": {"themes": ["Courage", "Siblings", "Communication"], "strong": "Success through effort", "weak": "Communication and effort blocked"},
+      "4": {"themes": ["Home", "Mother", "Property"], "strong": "Domestic happiness", "weak": "Home and property issues"},
+      "5": {"themes": ["Children", "Education", "Romance"], "strong": "Creative and romantic success", "weak": "Children and romance challenges"},
+      "6": {"themes": ["Enemies", "Health", "Service"], "strong": "Victory over challenges", "weak": "Health and enemy problems"},
+      "7": {"themes": ["Marriage", "Partnership", "Business"], "strong": "Relationship and business success", "weak": "Partnership conflicts"},
+      "8": {"themes": ["Transformation", "Occult", "Longevity"], "strong": "Beneficial transformations", "weak": "Crises and losses"},
+      "9": {"themes": ["Fortune", "Dharma", "Travel"], "strong": "Lucky and fortunate year", "weak": "Loss of fortune and faith"},
+      "10": {"themes": ["Career", "Authority", "Status"], "strong": "Career peak year", "weak": "Professional setbacks"},
+      "11": {"themes": ["Gains", "Income", "Wishes"], "strong": "Maximum gains year", "weak": "Income reduction"},
+      "12": {"themes": ["Expenses", "Foreign", "Spirituality"], "strong": "Spiritual growth", "weak": "Losses and expenses"}
+    },
+    "interpretation_method": {
+      "steps": [
+        "Cast annual chart for exact Sun return moment",
+        "Determine Muntha position and its lord",
+        "Identify Year Lord (Varshesha) using Pancha Vargiya Bala",
+        "Analyze Tajika yogas formed",
+        "Calculate important Sahams",
+        "Assess house-wise strength of planets",
+        "Combine with natal chart promises (D1 must support)",
+        "Time events using monthly and daily progressions"
+      ]
+    }
+  }
+}

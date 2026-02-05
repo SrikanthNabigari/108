@@ -1,0 +1,1746 @@
+{
+  "divisional_interpretation": {
+    "description": "Interpretation rules for D9 (Navamsha) and D10 (Dashamsha) divisional charts in Vedic Astrology",
+    "version": "1.0",
+    "d9_navamsha": {
+      "description": "D9 Navamsha chart reveals marriage, spouse nature, dharma, spiritual path, and the hidden potential of planets",
+      "significance": "Shows the soul's journey, marital harmony, dharmic purpose, and true strength of planets",
+      "planet_in_signs": {
+        "sun": {
+          "aries": {
+            "theme": "Dynamic spiritual leadership",
+            "marriage": "Confident, assertive partner; leadership in relationship",
+            "dharma": "Path of courage, pioneering spiritual initiatives",
+            "strength": "exalted",
+            "characteristics": "Strong ego in marriage, independent spouse, fiery partnership"
+          },
+          "taurus": {
+            "theme": "Stable material dharma",
+            "marriage": "Stable, sensual partner; values security in relationship",
+            "dharma": "Path of building lasting value, material-spiritual balance",
+            "strength": "neutral",
+            "characteristics": "Patient approach to dharma, spouse values comfort"
+          },
+          "gemini": {
+            "theme": "Intellectual spiritual expression",
+            "marriage": "Communicative, versatile partner; mental connection important",
+            "dharma": "Path of learning and teaching dharma through communication",
+            "strength": "friendly",
+            "characteristics": "Youthful energy in marriage, intellectual spouse"
+          },
+          "cancer": {
+            "theme": "Emotional spiritual nurturing",
+            "marriage": "Nurturing, emotional partner; home-centered relationship",
+            "dharma": "Path of caring for others, emotional service",
+            "strength": "neutral",
+            "characteristics": "Sensitive ego in partnership, protective spouse"
+          },
+          "leo": {
+            "theme": "Royal dharmic authority",
+            "marriage": "Regal, generous partner; desire for admiration in marriage",
+            "dharma": "Path of noble leadership, creative self-expression",
+            "strength": "own_sign",
+            "characteristics": "Strong confidence in dharma, dignified spouse"
+          },
+          "virgo": {
+            "theme": "Analytical service dharma",
+            "marriage": "Practical, health-conscious partner; service-oriented relationship",
+            "dharma": "Path of perfection through detailed service",
+            "strength": "neutral",
+            "characteristics": "Critical approach to dharma, perfectionist spouse"
+          },
+          "libra": {
+            "theme": "Harmonious partnership dharma",
+            "marriage": "Diplomatic, balanced partner; harmony essential in marriage",
+            "dharma": "Path of balance, justice, and partnership",
+            "strength": "debilitated",
+            "characteristics": "Compromising ego, relationship-focused spouse"
+          },
+          "scorpio": {
+            "theme": "Transformative spiritual intensity",
+            "marriage": "Intense, passionate partner; deep transformational relationship",
+            "dharma": "Path of occult knowledge, deep transformation",
+            "strength": "neutral",
+            "characteristics": "Powerful dharmic purpose, secretive spouse"
+          },
+          "sagittarius": {
+            "theme": "Philosophical spiritual expansion",
+            "marriage": "Philosophical, adventurous partner; freedom in relationship",
+            "dharma": "Path of higher wisdom, spiritual teaching",
+            "strength": "friendly",
+            "characteristics": "Optimistic dharma, truth-seeking spouse"
+          },
+          "capricorn": {
+            "theme": "Disciplined dharmic achievement",
+            "marriage": "Mature, responsible partner; structured relationship",
+            "dharma": "Path of discipline, long-term spiritual goals",
+            "strength": "neutral",
+            "characteristics": "Patient dharmic progress, serious spouse"
+          },
+          "aquarius": {
+            "theme": "Humanitarian universal dharma",
+            "marriage": "Unconventional, humanitarian partner; unique relationship",
+            "dharma": "Path of serving humanity, innovative spirituality",
+            "strength": "neutral",
+            "characteristics": "Detached approach to dharma, independent spouse"
+          },
+          "pisces": {
+            "theme": "Mystical dissolution dharma",
+            "marriage": "Compassionate, spiritual partner; transcendent relationship",
+            "dharma": "Path of surrender, mystical union",
+            "strength": "friendly",
+            "characteristics": "Selfless dharma, dreamy spouse"
+          }
+        },
+        "moon": {
+          "aries": {
+            "theme": "Emotionally assertive partnership",
+            "marriage": "Emotionally direct spouse; impulsive feelings in marriage",
+            "dharma": "Emotional courage, pioneering feelings",
+            "strength": "neutral",
+            "characteristics": "Quick emotional responses, passionate spouse"
+          },
+          "taurus": {
+            "theme": "Emotionally stable partnership",
+            "marriage": "Loyal, sensual spouse; emotional security vital",
+            "dharma": "Path of emotional stability, material comfort",
+            "strength": "exalted",
+            "characteristics": "Deep emotional satisfaction, devoted spouse"
+          },
+          "gemini": {
+            "theme": "Mentally emotional connection",
+            "marriage": "Intellectually engaging spouse; changeable emotions",
+            "dharma": "Emotional learning, mental-emotional integration",
+            "strength": "neutral",
+            "characteristics": "Varied emotional needs, talkative spouse"
+          },
+          "cancer": {
+            "theme": "Deeply nurturing emotions",
+            "marriage": "Extremely nurturing spouse; strong emotional bond",
+            "dharma": "Path of emotional healing, mothering energy",
+            "strength": "own_sign",
+            "characteristics": "Intense emotional depth, caring spouse"
+          },
+          "leo": {
+            "theme": "Emotionally generous partnership",
+            "marriage": "Warm, generous spouse; need for emotional recognition",
+            "dharma": "Emotional creativity, heart-centered dharma",
+            "strength": "friendly",
+            "characteristics": "Dramatic emotions, proud spouse"
+          },
+          "virgo": {
+            "theme": "Analytical emotional expression",
+            "marriage": "Practical, health-focused spouse; emotions analyzed",
+            "dharma": "Path of emotional service, healing work",
+            "strength": "neutral",
+            "characteristics": "Controlled emotions, helpful spouse"
+          },
+          "libra": {
+            "theme": "Harmonious emotional balance",
+            "marriage": "Charming, balanced spouse; peace in relationships",
+            "dharma": "Emotional diplomacy, aesthetic sensitivity",
+            "strength": "neutral",
+            "characteristics": "Pleasant emotions, refined spouse"
+          },
+          "scorpio": {
+            "theme": "Intensely transformative emotions",
+            "marriage": "Deeply intense spouse; emotional extremes in marriage",
+            "dharma": "Path of emotional transformation, depth psychology",
+            "strength": "debilitated",
+            "characteristics": "Powerful feelings, secretive spouse"
+          },
+          "sagittarius": {
+            "theme": "Optimistic emotional expansion",
+            "marriage": "Adventurous, philosophical spouse; freedom needed",
+            "dharma": "Emotional wisdom, teaching through feeling",
+            "strength": "friendly",
+            "characteristics": "Positive emotions, enthusiastic spouse"
+          },
+          "capricorn": {
+            "theme": "Emotionally reserved maturity",
+            "marriage": "Serious, responsible spouse; controlled emotions",
+            "dharma": "Path of emotional discipline, duty over feeling",
+            "strength": "neutral",
+            "characteristics": "Restricted emotions, practical spouse"
+          },
+          "aquarius": {
+            "theme": "Detached emotional idealism",
+            "marriage": "Unconventional, friendly spouse; emotional independence",
+            "dharma": "Universal love, humanitarian feelings",
+            "strength": "neutral",
+            "characteristics": "Detached emotions, unique spouse"
+          },
+          "pisces": {
+            "theme": "Mystical emotional union",
+            "marriage": "Compassionate, spiritual spouse; boundary dissolution",
+            "dharma": "Path of emotional transcendence, universal compassion",
+            "strength": "friendly",
+            "characteristics": "Boundless emotions, empathetic spouse"
+          }
+        },
+        "mars": {
+          "aries": {
+            "theme": "Fierce dharmic warrior",
+            "marriage": "Assertive, independent spouse; competitive relationship",
+            "dharma": "Path of courage, direct action",
+            "strength": "own_sign",
+            "characteristics": "Strong will in marriage, dynamic spouse"
+          },
+          "taurus": {
+            "theme": "Persistent material drive",
+            "marriage": "Stubborn, sensual spouse; possessive in relationship",
+            "dharma": "Determined material dharma, building slowly",
+            "strength": "neutral",
+            "characteristics": "Fixed passions, enduring spouse"
+          },
+          "gemini": {
+            "theme": "Mentally combative energy",
+            "marriage": "Argumentative, clever spouse; debates in relationship",
+            "dharma": "Intellectual battles, sharp communication",
+            "strength": "neutral",
+            "characteristics": "Restless energy, witty spouse"
+          },
+          "cancer": {
+            "theme": "Protective emotional warrior",
+            "marriage": "Protective, moody spouse; emotional volatility",
+            "dharma": "Fighting for family, emotional courage",
+            "strength": "debilitated",
+            "characteristics": "Defensive in marriage, sensitive spouse"
+          },
+          "leo": {
+            "theme": "Noble combative spirit",
+            "marriage": "Proud, passionate spouse; need for respect",
+            "dharma": "Courageous leadership, heroic dharma",
+            "strength": "friendly",
+            "characteristics": "Dignified aggression, generous spouse"
+          },
+          "virgo": {
+            "theme": "Precise strategic action",
+            "marriage": "Critical, health-focused spouse; analytical approach",
+            "dharma": "Detailed action, service through effort",
+            "strength": "neutral",
+            "characteristics": "Controlled energy, perfectionist spouse"
+          },
+          "libra": {
+            "theme": "Balanced assertive energy",
+            "marriage": "Diplomatic yet passionate spouse; harmony in conflict",
+            "dharma": "Fighting for justice, balanced action",
+            "strength": "neutral",
+            "characteristics": "Refined aggression, fair spouse"
+          },
+          "scorpio": {
+            "theme": "Intensely powerful transformation",
+            "marriage": "Intensely passionate spouse; extreme sexual energy",
+            "dharma": "Path of complete transformation, occult power",
+            "strength": "own_sign",
+            "characteristics": "Magnetic attraction, secretive spouse"
+          },
+          "sagittarius": {
+            "theme": "Righteous warrior energy",
+            "marriage": "Adventurous, idealistic spouse; freedom in passion",
+            "dharma": "Fighting for truth, philosophical action",
+            "strength": "friendly",
+            "characteristics": "Enthusiastic energy, optimistic spouse"
+          },
+          "capricorn": {
+            "theme": "Disciplined strategic power",
+            "marriage": "Ambitious, mature spouse; controlled passion",
+            "dharma": "Patient action, achieving through discipline",
+            "strength": "exalted",
+            "characteristics": "Directed energy, responsible spouse"
+          },
+          "aquarius": {
+            "theme": "Revolutionary collective action",
+            "marriage": "Unconventional, detached spouse; unique passions",
+            "dharma": "Fighting for humanity, innovative action",
+            "strength": "neutral",
+            "characteristics": "Erratic energy, independent spouse"
+          },
+          "pisces": {
+            "theme": "Compassionate spiritual warrior",
+            "marriage": "Gentle, spiritual spouse; confused passion",
+            "dharma": "Fighting for the helpless, spiritual courage",
+            "strength": "neutral",
+            "characteristics": "Diffused energy, empathetic spouse"
+          }
+        },
+        "mercury": {
+          "aries": {
+            "theme": "Quick decisive communication",
+            "marriage": "Sharp, direct communicating spouse; impulsive speech",
+            "dharma": "Pioneering ideas, bold expression",
+            "strength": "neutral",
+            "characteristics": "Fast thinking in marriage, argumentative spouse"
+          },
+          "taurus": {
+            "theme": "Practical steady thinking",
+            "marriage": "Practical, slow-speaking spouse; common sense",
+            "dharma": "Material intelligence, grounded communication",
+            "strength": "neutral",
+            "characteristics": "Deliberate speech, sensible spouse"
+          },
+          "gemini": {
+            "theme": "Brilliant versatile intellect",
+            "marriage": "Witty, talkative spouse; mental stimulation vital",
+            "dharma": "Path of learning, teaching, communication mastery",
+            "strength": "own_sign",
+            "characteristics": "Quick-witted marriage, clever spouse"
+          },
+          "cancer": {
+            "theme": "Intuitive emotional intelligence",
+            "marriage": "Emotionally intelligent spouse; feelings influence thoughts",
+            "dharma": "Nurturing communication, intuitive knowledge",
+            "strength": "neutral",
+            "characteristics": "Moody thinking, caring communicator spouse"
+          },
+          "leo": {
+            "theme": "Creative authoritative speech",
+            "marriage": "Dramatic, confident communicating spouse; proud intellect",
+            "dharma": "Creative expression, leadership communication",
+            "strength": "friendly",
+            "characteristics": "Commanding speech, generous intellect spouse"
+          },
+          "virgo": {
+            "theme": "Analytical perfectionist mind",
+            "marriage": "Detail-oriented, analytical spouse; critical speech",
+            "dharma": "Perfect discrimination, analytical service",
+            "strength": "exalted_and_own_sign",
+            "characteristics": "Precise communication, helpful spouse"
+          },
+          "libra": {
+            "theme": "Diplomatic balanced intellect",
+            "marriage": "Charming, diplomatic spouse; pleasant communication",
+            "dharma": "Harmonious speech, aesthetic intelligence",
+            "strength": "friendly",
+            "characteristics": "Balanced thinking, refined spouse"
+          },
+          "scorpio": {
+            "theme": "Deep investigative mind",
+            "marriage": "Secretive, intense communicating spouse; hidden thoughts",
+            "dharma": "Occult knowledge, research, deep understanding",
+            "strength": "neutral",
+            "characteristics": "Probing intellect, mysterious spouse"
+          },
+          "sagittarius": {
+            "theme": "Philosophical expanded thinking",
+            "marriage": "Philosophical, honest spouse; blunt communication",
+            "dharma": "Higher knowledge, teaching wisdom",
+            "strength": "neutral",
+            "characteristics": "Broad thinking, truthful spouse"
+          },
+          "capricorn": {
+            "theme": "Structured practical intelligence",
+            "marriage": "Serious, organized spouse; practical communication",
+            "dharma": "Structured learning, disciplined intellect",
+            "strength": "neutral",
+            "characteristics": "Methodical thinking, responsible spouse"
+          },
+          "aquarius": {
+            "theme": "Innovative unconventional mind",
+            "marriage": "Unique, humanitarian spouse; original thinking",
+            "dharma": "Scientific dharma, innovative ideas",
+            "strength": "neutral",
+            "characteristics": "Eccentric intellect, progressive spouse"
+          },
+          "pisces": {
+            "theme": "Intuitive mystical intelligence",
+            "marriage": "Intuitive, artistic spouse; confused communication",
+            "dharma": "Mystical knowledge, artistic expression",
+            "strength": "debilitated",
+            "characteristics": "Vague thinking, spiritual spouse"
+          }
+        },
+        "jupiter": {
+          "aries": {
+            "theme": "Dynamic spiritual growth",
+            "marriage": "Optimistic, independent spouse; philosophical leadership",
+            "dharma": "Bold dharma, pioneering wisdom",
+            "strength": "neutral",
+            "characteristics": "Enthusiastic growth, adventurous spouse"
+          },
+          "taurus": {
+            "theme": "Stable material wisdom",
+            "marriage": "Generous, stable spouse; values family wealth",
+            "dharma": "Grounded spirituality, material dharma balance",
+            "strength": "neutral",
+            "characteristics": "Patient expansion, prosperous spouse"
+          },
+          "gemini": {
+            "theme": "Intellectual spiritual learning",
+            "marriage": "Learned, communicative spouse; multiple interests",
+            "dharma": "Teaching through communication, varied knowledge",
+            "strength": "neutral",
+            "characteristics": "Scattered wisdom, talkative spouse"
+          },
+          "cancer": {
+            "theme": "Nurturing emotional wisdom",
+            "marriage": "Caring, traditional spouse; family-oriented",
+            "dharma": "Emotional dharma, nurturing spirituality",
+            "strength": "exalted",
+            "characteristics": "Protective expansion, devoted spouse"
+          },
+          "leo": {
+            "theme": "Noble generous leadership",
+            "marriage": "Dignified, generous spouse; royal partnership",
+            "dharma": "Leadership dharma, creative wisdom",
+            "strength": "friendly",
+            "characteristics": "Magnanimous growth, proud spouse"
+          },
+          "virgo": {
+            "theme": "Analytical service wisdom",
+            "marriage": "Practical, helpful spouse; discriminating nature",
+            "dharma": "Service dharma, analytical spirituality",
+            "strength": "debilitated",
+            "characteristics": "Critical expansion, perfectionist spouse"
+          },
+          "libra": {
+            "theme": "Harmonious partnership wisdom",
+            "marriage": "Charming, balanced spouse; relationship-focused",
+            "dharma": "Partnership dharma, aesthetic spirituality",
+            "strength": "neutral",
+            "characteristics": "Diplomatic growth, refined spouse"
+          },
+          "scorpio": {
+            "theme": "Transformative occult wisdom",
+            "marriage": "Intense, mysterious spouse; deep spirituality",
+            "dharma": "Occult dharma, transformation through wisdom",
+            "strength": "neutral",
+            "characteristics": "Deep expansion, secretive spouse"
+          },
+          "sagittarius": {
+            "theme": "Pure philosophical wisdom",
+            "marriage": "Philosophical, freedom-loving spouse; spiritual guide",
+            "dharma": "Natural dharma, higher teaching",
+            "strength": "own_sign",
+            "characteristics": "Expansive growth, optimistic spouse"
+          },
+          "capricorn": {
+            "theme": "Disciplined practical wisdom",
+            "marriage": "Mature, responsible spouse; traditional values",
+            "dharma": "Structured dharma, practical spirituality",
+            "strength": "debilitated",
+            "characteristics": "Limited expansion, serious spouse"
+          },
+          "aquarius": {
+            "theme": "Humanitarian universal wisdom",
+            "marriage": "Unconventional, friendly spouse; unique philosophy",
+            "dharma": "Universal dharma, serving humanity",
+            "strength": "neutral",
+            "characteristics": "Innovative growth, independent spouse"
+          },
+          "pisces": {
+            "theme": "Mystical compassionate wisdom",
+            "marriage": "Spiritual, compassionate spouse; ideal partnership",
+            "dharma": "Transcendent dharma, mystical union",
+            "strength": "own_sign",
+            "characteristics": "Boundless expansion, saintly spouse"
+          }
+        },
+        "venus": {
+          "aries": {
+            "theme": "Passionate independent love",
+            "marriage": "Assertive, passionate spouse; quick attractions",
+            "dharma": "Bold creativity, pioneering love",
+            "strength": "neutral",
+            "characteristics": "Impulsive romance, dynamic spouse"
+          },
+          "taurus": {
+            "theme": "Stable sensual love",
+            "marriage": "Loyal, sensual spouse; material comfort important",
+            "dharma": "Material beauty, grounded love",
+            "strength": "own_sign",
+            "characteristics": "Steady romance, devoted spouse"
+          },
+          "gemini": {
+            "theme": "Intellectual versatile love",
+            "marriage": "Witty, communicative spouse; mental connection vital",
+            "dharma": "Artistic communication, varied interests",
+            "strength": "neutral",
+            "characteristics": "Playful romance, talkative spouse"
+          },
+          "cancer": {
+            "theme": "Nurturing emotional love",
+            "marriage": "Caring, emotional spouse; family-centered love",
+            "dharma": "Emotional creativity, nurturing beauty",
+            "strength": "neutral",
+            "characteristics": "Sensitive romance, protective spouse"
+          },
+          "leo": {
+            "theme": "Dramatic generous love",
+            "marriage": "Proud, generous spouse; grand romance",
+            "dharma": "Creative leadership, royal love",
+            "strength": "friendly",
+            "characteristics": "Dramatic romance, loyal spouse"
+          },
+          "virgo": {
+            "theme": "Practical discriminating love",
+            "marriage": "Practical, health-conscious spouse; critical nature",
+            "dharma": "Service through beauty, analytical art",
+            "strength": "debilitated",
+            "characteristics": "Reserved romance, helpful spouse"
+          },
+          "libra": {
+            "theme": "Harmonious balanced love",
+            "marriage": "Charming, balanced spouse; ideal partnership",
+            "dharma": "Perfect harmony, aesthetic dharma",
+            "strength": "own_sign",
+            "characteristics": "Romantic idealism, diplomatic spouse"
+          },
+          "scorpio": {
+            "theme": "Intense transformative love",
+            "marriage": "Passionate, possessive spouse; deep intimacy",
+            "dharma": "Transformative art, occult beauty",
+            "strength": "neutral",
+            "characteristics": "Magnetic romance, jealous spouse"
+          },
+          "sagittarius": {
+            "theme": "Adventurous philosophical love",
+            "marriage": "Optimistic, freedom-loving spouse; spiritual love",
+            "dharma": "Philosophical beauty, expansive creativity",
+            "strength": "neutral",
+            "characteristics": "Enthusiastic romance, adventurous spouse"
+          },
+          "capricorn": {
+            "theme": "Mature practical love",
+            "marriage": "Serious, traditional spouse; age difference possible",
+            "dharma": "Structured beauty, disciplined art",
+            "strength": "neutral",
+            "characteristics": "Cautious romance, responsible spouse"
+          },
+          "aquarius": {
+            "theme": "Unconventional friendship-love",
+            "marriage": "Unique, detached spouse; friendship in love",
+            "dharma": "Universal beauty, innovative art",
+            "strength": "neutral",
+            "characteristics": "Unusual romance, independent spouse"
+          },
+          "pisces": {
+            "theme": "Mystical transcendent love",
+            "marriage": "Spiritual, romantic spouse; idealistic love",
+            "dharma": "Divine beauty, mystical art",
+            "strength": "exalted",
+            "characteristics": "Boundless romance, empathetic spouse"
+          }
+        },
+        "saturn": {
+          "aries": {
+            "theme": "Frustrated ambition",
+            "marriage": "Mature, independent spouse; delayed marriage possible",
+            "dharma": "Learning patience, disciplined courage",
+            "strength": "debilitated",
+            "characteristics": "Restricted action, serious spouse"
+          },
+          "taurus": {
+            "theme": "Persistent material dharma",
+            "marriage": "Stable, practical spouse; age difference common",
+            "dharma": "Slow material growth, enduring dharma",
+            "strength": "neutral",
+            "characteristics": "Patient partnership, reliable spouse"
+          },
+          "gemini": {
+            "theme": "Serious intellectual discipline",
+            "marriage": "Mature, intellectual spouse; formal communication",
+            "dharma": "Structured learning, serious communication",
+            "strength": "neutral",
+            "characteristics": "Cautious thinking, reserved spouse"
+          },
+          "cancer": {
+            "theme": "Emotionally restricted nurturing",
+            "marriage": "Reserved, dutiful spouse; emotional coldness possible",
+            "dharma": "Duty over emotion, karmic family bonds",
+            "strength": "neutral",
+            "characteristics": "Limited emotions, responsible spouse"
+          },
+          "leo": {
+            "theme": "Humbled authority",
+            "marriage": "Serious, dignified spouse; ego lessons in marriage",
+            "dharma": "Humble leadership, earned respect",
+            "strength": "enemy",
+            "characteristics": "Restricted confidence, mature spouse"
+          },
+          "virgo": {
+            "theme": "Perfected discipline",
+            "marriage": "Practical, health-focused spouse; service-oriented",
+            "dharma": "Perfect service, analytical discipline",
+            "strength": "friendly",
+            "characteristics": "Detailed dharma, helpful spouse"
+          },
+          "libra": {
+            "theme": "Balanced responsibility",
+            "marriage": "Mature, balanced spouse; dutiful partnership",
+            "dharma": "Just dharma, fair responsibilities",
+            "strength": "exalted",
+            "characteristics": "Harmonious duty, diplomatic spouse"
+          },
+          "scorpio": {
+            "theme": "Deep transformative karma",
+            "marriage": "Intense, secretive spouse; karmic relationship",
+            "dharma": "Occult discipline, deep transformation",
+            "strength": "neutral",
+            "characteristics": "Karmic bonds, mysterious spouse"
+          },
+          "sagittarius": {
+            "theme": "Philosophical discipline",
+            "marriage": "Mature, philosophical spouse; spiritual dharma",
+            "dharma": "Disciplined wisdom, structured spirituality",
+            "strength": "neutral",
+            "characteristics": "Patient growth, serious spouse"
+          },
+          "capricorn": {
+            "theme": "Pure disciplined ambition",
+            "marriage": "Mature, ambitious spouse; traditional marriage",
+            "dharma": "Natural dharma, patient achievement",
+            "strength": "own_sign",
+            "characteristics": "Structured partnership, responsible spouse"
+          },
+          "aquarius": {
+            "theme": "Humanitarian service dharma",
+            "marriage": "Unconventional, detached spouse; unique partnership",
+            "dharma": "Serving humanity, innovative discipline",
+            "strength": "own_sign",
+            "characteristics": "Detached duty, independent spouse"
+          },
+          "pisces": {
+            "theme": "Compassionate karmic service",
+            "marriage": "Spiritual, compassionate spouse; sacrificial love",
+            "dharma": "Selfless service, spiritual discipline",
+            "strength": "neutral",
+            "characteristics": "Boundless duty, empathetic spouse"
+          }
+        },
+        "rahu": {
+          "aries": {
+            "theme": "Obsessive pioneering",
+            "marriage": "Unconventional, assertive spouse; sudden attractions",
+            "dharma": "Breaking new ground, obsessive courage",
+            "strength": "neutral",
+            "characteristics": "Impulsive desires, foreign spouse possible"
+          },
+          "taurus": {
+            "theme": "Material obsession",
+            "marriage": "Materialistic, sensual spouse; unusual wealth patterns",
+            "dharma": "Extreme material desires, foreign wealth",
+            "strength": "neutral",
+            "characteristics": "Possessive love, unconventional values spouse"
+          },
+          "gemini": {
+            "theme": "Obsessive communication",
+            "marriage": "Talkative, clever spouse; unconventional thinking",
+            "dharma": "Foreign knowledge, unusual communication",
+            "strength": "exalted",
+            "characteristics": "Mental intensity, foreign-minded spouse"
+          },
+          "cancer": {
+            "theme": "Obsessive nurturing",
+            "marriage": "Unusual, emotional spouse; foreign family connections",
+            "dharma": "Breaking family patterns, unusual emotions",
+            "strength": "neutral",
+            "characteristics": "Intense emotions, non-traditional spouse"
+          },
+          "leo": {
+            "theme": "Ego amplification",
+            "marriage": "Dramatic, unusual spouse; sudden fame possible",
+            "dharma": "Unconventional leadership, inflated ego dharma",
+            "strength": "neutral",
+            "characteristics": "Amplified pride, showy spouse"
+          },
+          "virgo": {
+            "theme": "Obsessive perfectionism",
+            "marriage": "Analytical, unusual spouse; health obsessions",
+            "dharma": "Extreme service, foreign healing methods",
+            "strength": "neutral",
+            "characteristics": "Critical intensity, unconventional service spouse"
+          },
+          "libra": {
+            "theme": "Obsessive relationships",
+            "marriage": "Charming, foreign spouse; unusual partnerships",
+            "dharma": "Breaking relationship norms, foreign culture partner",
+            "strength": "neutral",
+            "characteristics": "Relationship intensity, cross-cultural spouse"
+          },
+          "scorpio": {
+            "theme": "Extreme transformation",
+            "marriage": "Intensely passionate, mysterious spouse; occult connections",
+            "dharma": "Obsessive occult pursuit, extreme transformation",
+            "strength": "neutral",
+            "characteristics": "Magnetic attraction, secretive foreign spouse"
+          },
+          "sagittarius": {
+            "theme": "Obsessive philosophy",
+            "marriage": "Foreign, philosophical spouse; unusual beliefs",
+            "dharma": "Breaking religious norms, foreign spirituality",
+            "strength": "debilitated",
+            "characteristics": "Extreme optimism, foreign guru-like spouse"
+          },
+          "capricorn": {
+            "theme": "Obsessive ambition",
+            "marriage": "Ambitious, unconventional spouse; unusual career focus",
+            "dharma": "Breaking tradition, foreign authority",
+            "strength": "neutral",
+            "characteristics": "Extreme discipline, unconventional success spouse"
+          },
+          "aquarius": {
+            "theme": "Revolutionary obsession",
+            "marriage": "Highly unusual, detached spouse; eccentric partnership",
+            "dharma": "Extreme innovation, foreign technology",
+            "strength": "neutral",
+            "characteristics": "Radical thinking, very unique spouse"
+          },
+          "pisces": {
+            "theme": "Spiritual illusion",
+            "marriage": "Spiritual, confused spouse; unrealistic expectations",
+            "dharma": "Breaking spiritual boundaries, foreign mysticism",
+            "strength": "neutral",
+            "characteristics": "Idealistic confusion, mystical spouse"
+          }
+        },
+        "ketu": {
+          "aries": {
+            "theme": "Spiritual warrior detachment",
+            "marriage": "Detached, spiritual spouse; indifferent to partnership",
+            "dharma": "Renouncing ego, spiritual courage",
+            "strength": "neutral",
+            "characteristics": "Lack of passion, ascetic tendencies spouse"
+          },
+          "taurus": {
+            "theme": "Material detachment",
+            "marriage": "Spiritually inclined spouse; indifferent to comfort",
+            "dharma": "Renouncing materialism, detached from wealth",
+            "strength": "neutral",
+            "characteristics": "Lack of attachment, simple spouse"
+          },
+          "gemini": {
+            "theme": "Communication detachment",
+            "marriage": "Intuitive, non-verbal spouse; disinterest in talk",
+            "dharma": "Renouncing intellect, intuitive knowledge",
+            "strength": "debilitated",
+            "characteristics": "Silent wisdom, uncommunicative spouse"
+          },
+          "cancer": {
+            "theme": "Emotional detachment",
+            "marriage": "Emotionally distant spouse; indifferent to family",
+            "dharma": "Renouncing emotional bonds, spiritual family",
+            "strength": "neutral",
+            "characteristics": "Emotional coldness, detached spouse"
+          },
+          "leo": {
+            "theme": "Ego dissolution",
+            "marriage": "Humble, spiritual spouse; no desire for recognition",
+            "dharma": "Renouncing pride, spiritual humility",
+            "strength": "neutral",
+            "characteristics": "Lack of confidence, egoless spouse"
+          },
+          "virgo": {
+            "theme": "Service detachment",
+            "marriage": "Spiritual, less critical spouse; health disinterest",
+            "dharma": "Renouncing perfectionism, intuitive service",
+            "strength": "neutral",
+            "characteristics": "Non-analytical approach, uncritical spouse"
+          },
+          "libra": {
+            "theme": "Relationship detachment",
+            "marriage": "Spiritually inclined spouse; indifferent to partnership",
+            "dharma": "Renouncing relationships, spiritual independence",
+            "strength": "neutral",
+            "characteristics": "Lack of diplomacy, solitary spouse"
+          },
+          "scorpio": {
+            "theme": "Transformation completion",
+            "marriage": "Mystical, detached spouse; occult knowledge",
+            "dharma": "Renouncing transformation desires, spiritual power",
+            "strength": "exalted",
+            "characteristics": "Deep wisdom, spiritually powerful spouse"
+          },
+          "sagittarius": {
+            "theme": "Philosophical completion",
+            "marriage": "Spiritually wise spouse; detached from dogma",
+            "dharma": "Renouncing philosophy, direct realization",
+            "strength": "neutral",
+            "characteristics": "Natural wisdom, guru-like spouse"
+          },
+          "capricorn": {
+            "theme": "Ambition detachment",
+            "marriage": "Spiritual, humble spouse; indifferent to success",
+            "dharma": "Renouncing worldly achievement, spiritual discipline",
+            "strength": "neutral",
+            "characteristics": "Lack of ambition, simple spouse"
+          },
+          "aquarius": {
+            "theme": "Humanitarian detachment",
+            "marriage": "Spiritually humanitarian spouse; detached service",
+            "dharma": "Renouncing individuality, universal consciousness",
+            "strength": "neutral",
+            "characteristics": "Universal compassion, selfless spouse"
+          },
+          "pisces": {
+            "theme": "Complete spiritual liberation",
+            "marriage": "Highly spiritual spouse; worldly detachment",
+            "dharma": "Renouncing illusion, final liberation",
+            "strength": "neutral",
+            "characteristics": "Total detachment, enlightened spouse"
+          }
+        }
+      },
+      "house_meanings": {
+        "1": {
+          "significance": "Navamsha ascendant, overall dharma direction",
+          "description": "Shows true self, spiritual path, how dharma manifests"
+        },
+        "2": {
+          "significance": "Family wealth in marriage, speech dharma",
+          "description": "Material resources through partnership, family values"
+        },
+        "3": {
+          "significance": "Spouse's siblings, courage in dharma",
+          "description": "Communication in marriage, efforts for dharma"
+        },
+        "4": {
+          "significance": "Marital home, emotional security",
+          "description": "Happiness in marriage, mother's influence on partnership"
+        },
+        "5": {
+          "significance": "Children from marriage, creative dharma",
+          "description": "Romance, past life merit affecting partnership"
+        },
+        "6": {
+          "significance": "Conflicts in marriage, service dharma",
+          "description": "Daily duties in relationship, health issues"
+        },
+        "7": {
+          "significance": "Primary house of spouse and marriage",
+          "description": "Direct indicator of partner nature, marital happiness"
+        },
+        "8": {
+          "significance": "Transformation through marriage, longevity",
+          "description": "Deep intimacy, occult interests, marital longevity"
+        },
+        "9": {
+          "significance": "Dharma fulfillment, higher purpose",
+          "description": "Spiritual compatibility, father's role, higher learning"
+        },
+        "10": {
+          "significance": "Marital duties, public image",
+          "description": "Career through spouse, social standing"
+        },
+        "11": {
+          "significance": "Gains from marriage, friend circles",
+          "description": "Financial gains through partnership, social networks"
+        },
+        "12": {
+          "significance": "Spiritual liberation, foreign connections",
+          "description": "Bedroom matters, spiritual pursuits, foreign spouse"
+        }
+      },
+      "special_rules": {
+        "vargottama": {
+          "description": "Planet in same sign in D1 and D9",
+          "effect": "Exceptional strength, promises fulfilled, destiny-bound results",
+          "interpretation": "Planet delivers pure results, strong enough to overcome afflictions"
+        },
+        "pushkara_navamsha": {
+          "description": "Special navamshas that amplify good results",
+          "signs": {
+            "aries": "Cancer (21° Aries), Scorpio (25° Aries)",
+            "taurus": "Leo (21° Taurus), Sagittarius (25° Taurus)",
+            "gemini": "Virgo (21° Gemini), Capricorn (25° Gemini)",
+            "cancer": "Libra (21° Cancer), Aquarius (25° Cancer)",
+            "leo": "Scorpio (21° Leo), Pisces (25° Leo)",
+            "virgo": "Sagittarius (21° Virgo), Aries (25° Virgo)",
+            "libra": "Capricorn (21° Libra), Taurus (25° Libra)",
+            "scorpio": "Aquarius (21° Scorpio), Gemini (25° Scorpio)",
+            "sagittarius": "Pisces (21° Sagittarius), Cancer (25° Sagittarius)",
+            "capricorn": "Aries (21° Capricorn), Leo (25° Capricorn)",
+            "aquarius": "Taurus (21° Aquarius), Virgo (25° Aquarius)",
+            "pisces": "Gemini (21° Pisces), Libra (25° Pisces)"
+          },
+          "effect": "Amplifies auspicious results, protection from harm"
+        },
+        "d1_d9_comparison": {
+          "description": "Comparing D1 and D9 reveals hidden potential",
+          "strong_in_both": "Guaranteed results, strong manifestation",
+          "strong_in_d9_only": "Hidden potential, late bloomer, results after marriage",
+          "strong_in_d1_only": "Early show, fading results, doesn't fulfill promise",
+          "weak_in_both": "Difficult to manifest, requires conscious effort"
+        },
+        "planets_aspecting_7th": {
+          "description": "Aspects to 7th house in D9 reveal spouse traits",
+          "jupiter_aspect": "Wise, spiritual, generous spouse",
+          "saturn_aspect": "Mature, serious, possibly older spouse",
+          "mars_aspect": "Assertive, energetic, possibly aggressive spouse",
+          "venus_aspect": "Beautiful, charming, romantic spouse",
+          "mercury_aspect": "Intelligent, communicative, youthful spouse",
+          "sun_aspect": "Confident, authoritative, possibly egoistic spouse",
+          "moon_aspect": "Emotional, nurturing, caring spouse",
+          "rahu_aspect": "Unconventional, foreign, unusual spouse",
+          "ketu_aspect": "Spiritual, detached, indifferent spouse"
+        }
+      }
+    },
+    "d10_dashamsha": {
+      "description": "D10 Dashamsha chart reveals career, profession, achievements, public reputation, and karmic work",
+      "significance": "Shows professional destiny, work environment, career success, and how one serves society",
+      "planet_in_signs": {
+        "sun": {
+          "aries": {
+            "theme": "Leadership in pioneering fields",
+            "career": "Military, sports, entrepreneurship, surgery",
+            "achievements": "Recognition for courage and initiative",
+            "strength": "exalted",
+            "characteristics": "Natural authority, independent work, leadership roles"
+          },
+          "taurus": {
+            "theme": "Stable authoritative work",
+            "career": "Banking, luxury goods, agriculture, arts",
+            "achievements": "Building lasting material value",
+            "strength": "neutral",
+            "characteristics": "Patient career growth, financial sectors"
+          },
+          "gemini": {
+            "theme": "Intellectual leadership",
+            "career": "Media, communication, writing, teaching",
+            "achievements": "Recognition for versatile skills",
+            "strength": "friendly",
+            "characteristics": "Multiple career interests, communication-based work"
+          },
+          "cancer": {
+            "theme": "Nurturing leadership",
+            "career": "Healthcare, hospitality, real estate, psychology",
+            "achievements": "Public service, caring professions",
+            "strength": "neutral",
+            "characteristics": "Emotional intelligence in work, public-facing roles"
+          },
+          "leo": {
+            "theme": "Royal authoritative career",
+            "career": "Government, politics, management, entertainment",
+            "achievements": "High status, public recognition",
+            "strength": "own_sign",
+            "characteristics": "Natural command, prestigious positions"
+          },
+          "virgo": {
+            "theme": "Service-oriented leadership",
+            "career": "Healthcare, analysis, editing, accounting",
+            "achievements": "Recognition for detailed work",
+            "strength": "neutral",
+            "characteristics": "Perfectionist approach, service professions"
+          },
+          "libra": {
+            "theme": "Diplomatic career work",
+            "career": "Law, diplomacy, arts, public relations",
+            "achievements": "Recognition for fairness and balance",
+            "strength": "debilitated",
+            "characteristics": "Partnership-based career, compromising authority"
+          },
+          "scorpio": {
+            "theme": "Transformative powerful work",
+            "career": "Research, occult, surgery, investigation",
+            "achievements": "Deep impact, transformational work",
+            "strength": "neutral",
+            "characteristics": "Intense career focus, hidden/secretive work"
+          },
+          "sagittarius": {
+            "theme": "Philosophical teaching career",
+            "career": "Education, law, publishing, travel",
+            "achievements": "Recognition for wisdom and guidance",
+            "strength": "friendly",
+            "characteristics": "Teaching roles, international work"
+          },
+          "capricorn": {
+            "theme": "Disciplined career achievement",
+            "career": "Administration, engineering, construction",
+            "achievements": "Long-term success, earned authority",
+            "strength": "neutral",
+            "characteristics": "Slow steady rise, traditional professions"
+          },
+          "aquarius": {
+            "theme": "Humanitarian innovative work",
+            "career": "Technology, social work, science, astrology",
+            "achievements": "Recognition for unique contributions",
+            "strength": "neutral",
+            "characteristics": "Unconventional career, serving masses"
+          },
+          "pisces": {
+            "theme": "Spiritual compassionate career",
+            "career": "Spirituality, arts, healing, charity",
+            "achievements": "Recognition for selfless service",
+            "strength": "friendly",
+            "characteristics": "Intuitive work, behind-the-scenes roles"
+          }
+        },
+        "moon": {
+          "aries": {
+            "theme": "Dynamic public work",
+            "career": "Emergency services, sports, quick-response fields",
+            "achievements": "Recognition for fast action",
+            "strength": "neutral",
+            "characteristics": "Changing career interests, pioneering fields"
+          },
+          "taurus": {
+            "theme": "Stable nurturing career",
+            "career": "Food industry, agriculture, hospitality",
+            "achievements": "Public comfort and security",
+            "strength": "exalted",
+            "characteristics": "Consistent career, public popularity"
+          },
+          "gemini": {
+            "theme": "Versatile public work",
+            "career": "Journalism, sales, communication, teaching",
+            "achievements": "Recognition for adaptability",
+            "strength": "neutral",
+            "characteristics": "Multiple careers, communication focus"
+          },
+          "cancer": {
+            "theme": "Caring public profession",
+            "career": "Nursing, counseling, childcare, hospitality",
+            "achievements": "Public love and appreciation",
+            "strength": "own_sign",
+            "characteristics": "Natural public connection, nurturing work"
+          },
+          "leo": {
+            "theme": "Popular creative career",
+            "career": "Entertainment, politics, public speaking",
+            "achievements": "Fame and public recognition",
+            "strength": "friendly",
+            "characteristics": "Dramatic career, public attention"
+          },
+          "virgo": {
+            "theme": "Analytical service career",
+            "career": "Healthcare, analysis, editing, nutrition",
+            "achievements": "Recognition for precise work",
+            "strength": "neutral",
+            "characteristics": "Detail-oriented professions, health focus"
+          },
+          "libra": {
+            "theme": "Harmonious public relations",
+            "career": "Counseling, mediation, arts, fashion",
+            "achievements": "Public appreciation for balance",
+            "strength": "neutral",
+            "characteristics": "Partnership careers, aesthetic work"
+          },
+          "scorpio": {
+            "theme": "Intense research career",
+            "career": "Psychology, research, occult, investigation",
+            "achievements": "Deep impact on public",
+            "strength": "debilitated",
+            "characteristics": "Emotional intensity in work, hidden professions"
+          },
+          "sagittarius": {
+            "theme": "Teaching expansive career",
+            "career": "Education, travel, publishing, law",
+            "achievements": "Recognition for wisdom sharing",
+            "strength": "friendly",
+            "characteristics": "Philosophical work, international scope"
+          },
+          "capricorn": {
+            "theme": "Disciplined public service",
+            "career": "Administration, management, government",
+            "achievements": "Respected authority over time",
+            "strength": "neutral",
+            "characteristics": "Serious career approach, public responsibility"
+          },
+          "aquarius": {
+            "theme": "Innovative mass service",
+            "career": "Technology, social work, humanitarian fields",
+            "achievements": "Recognition for serving masses",
+            "strength": "neutral",
+            "characteristics": "Unconventional career, large-scale impact"
+          },
+          "pisces": {
+            "theme": "Intuitive compassionate work",
+            "career": "Healing, arts, spirituality, charity",
+            "achievements": "Public compassion and understanding",
+            "strength": "friendly",
+            "characteristics": "Intuitive professions, creative work"
+          }
+        },
+        "mars": {
+          "aries": {
+            "theme": "Warrior professional drive",
+            "career": "Military, police, sports, surgery",
+            "achievements": "Victories through courage",
+            "strength": "own_sign",
+            "characteristics": "Aggressive career pursuit, competitive fields"
+          },
+          "taurus": {
+            "theme": "Persistent professional effort",
+            "career": "Real estate, construction, mechanical work",
+            "achievements": "Building material success",
+            "strength": "neutral",
+            "characteristics": "Steady work drive, financial focus"
+          },
+          "gemini": {
+            "theme": "Sharp professional communication",
+            "career": "Debate, sales, engineering, technology",
+            "achievements": "Recognition for quick thinking",
+            "strength": "neutral",
+            "characteristics": "Mental energy in work, technical skills"
+          },
+          "cancer": {
+            "theme": "Protective professional action",
+            "career": "Security, defense, food industry",
+            "achievements": "Recognition for protection",
+            "strength": "debilitated",
+            "characteristics": "Defensive career approach, emotional drive"
+          },
+          "leo": {
+            "theme": "Noble professional courage",
+            "career": "Leadership, politics, military, management",
+            "achievements": "Heroic professional status",
+            "strength": "friendly",
+            "characteristics": "Dignified action, authoritative work"
+          },
+          "virgo": {
+            "theme": "Precise professional execution",
+            "career": "Surgery, engineering, crafts, analysis",
+            "achievements": "Recognition for skill",
+            "strength": "neutral",
+            "characteristics": "Detailed work, perfectionist drive"
+          },
+          "libra": {
+            "theme": "Balanced professional action",
+            "career": "Law, mediation, design, partnerships",
+            "achievements": "Recognition for fairness",
+            "strength": "neutral",
+            "characteristics": "Diplomatic energy, collaborative work"
+          },
+          "scorpio": {
+            "theme": "Intense professional power",
+            "career": "Research, occult, surgery, investigation",
+            "achievements": "Deep transformational impact",
+            "strength": "own_sign",
+            "characteristics": "Powerful career drive, secretive work"
+          },
+          "sagittarius": {
+            "theme": "Righteous professional action",
+            "career": "Law, teaching, sports, military",
+            "achievements": "Recognition for principles",
+            "strength": "friendly",
+            "characteristics": "Ethical drive, international work"
+          },
+          "capricorn": {
+            "theme": "Disciplined professional ambition",
+            "career": "Engineering, construction, military",
+            "achievements": "Earned professional status",
+            "strength": "exalted",
+            "characteristics": "Strategic career moves, long-term success"
+          },
+          "aquarius": {
+            "theme": "Innovative professional energy",
+            "career": "Technology, social activism, science",
+            "achievements": "Recognition for reform",
+            "strength": "neutral",
+            "characteristics": "Revolutionary work, serving humanity"
+          },
+          "pisces": {
+            "theme": "Compassionate professional action",
+            "career": "Healing, spirituality, charity, arts",
+            "achievements": "Recognition for selfless work",
+            "strength": "neutral",
+            "characteristics": "Confused career direction, spiritual work"
+          }
+        },
+        "mercury": {
+          "aries": {
+            "theme": "Quick decisive professional thinking",
+            "career": "Entrepreneurship, sales, quick communication",
+            "achievements": "Recognition for fast decisions",
+            "strength": "neutral",
+            "characteristics": "Impulsive career choices, pioneer thinking"
+          },
+          "taurus": {
+            "theme": "Practical professional intelligence",
+            "career": "Accounting, banking, agriculture business",
+            "achievements": "Recognition for practical solutions",
+            "strength": "neutral",
+            "characteristics": "Steady professional thinking, financial acumen"
+          },
+          "gemini": {
+            "theme": "Brilliant professional communication",
+            "career": "Writing, journalism, teaching, sales",
+            "achievements": "Recognition for versatility",
+            "strength": "own_sign",
+            "characteristics": "Multiple professional skills, communication mastery"
+          },
+          "cancer": {
+            "theme": "Intuitive professional intelligence",
+            "career": "Counseling, psychology, teaching",
+            "achievements": "Recognition for emotional intelligence",
+            "strength": "neutral",
+            "characteristics": "Feeling-based decisions, nurturing communication"
+          },
+          "leo": {
+            "theme": "Authoritative professional communication",
+            "career": "Management, teaching, entertainment",
+            "achievements": "Recognition for confident expression",
+            "strength": "friendly",
+            "characteristics": "Commanding professional presence"
+          },
+          "virgo": {
+            "theme": "Analytical professional mastery",
+            "career": "Accounting, analysis, editing, healthcare",
+            "achievements": "Recognition for precision",
+            "strength": "exalted_and_own_sign",
+            "characteristics": "Perfect professional skills, detail focus"
+          },
+          "libra": {
+            "theme": "Diplomatic professional intelligence",
+            "career": "Law, mediation, public relations",
+            "achievements": "Recognition for balanced thinking",
+            "strength": "friendly",
+            "characteristics": "Harmonious professional communication"
+          },
+          "scorpio": {
+            "theme": "Deep investigative professional mind",
+            "career": "Research, investigation, occult studies",
+            "achievements": "Recognition for depth",
+            "strength": "neutral",
+            "characteristics": "Secretive professional knowledge"
+          },
+          "sagittarius": {
+            "theme": "Philosophical professional wisdom",
+            "career": "Teaching, law, publishing, education",
+            "achievements": "Recognition for higher knowledge",
+            "strength": "neutral",
+            "characteristics": "Broad professional thinking"
+          },
+          "capricorn": {
+            "theme": "Structured professional intelligence",
+            "career": "Management, engineering, government",
+            "achievements": "Recognition for organization",
+            "strength": "neutral",
+            "characteristics": "Systematic professional approach"
+          },
+          "aquarius": {
+            "theme": "Innovative professional thinking",
+            "career": "Technology, science, research",
+            "achievements": "Recognition for originality",
+            "strength": "neutral",
+            "characteristics": "Unconventional professional ideas"
+          },
+          "pisces": {
+            "theme": "Intuitive professional mind",
+            "career": "Arts, healing, spirituality",
+            "achievements": "Recognition for creativity",
+            "strength": "debilitated",
+            "characteristics": "Confused career direction, intuitive work"
+          }
+        },
+        "jupiter": {
+          "aries": {
+            "theme": "Bold professional wisdom",
+            "career": "Teaching, entrepreneurship, consulting",
+            "achievements": "Recognition for bold guidance",
+            "strength": "neutral",
+            "characteristics": "Pioneering professional philosophy"
+          },
+          "taurus": {
+            "theme": "Grounded professional wisdom",
+            "career": "Finance, education, counseling",
+            "achievements": "Recognition for practical guidance",
+            "strength": "neutral",
+            "characteristics": "Material wisdom in career"
+          },
+          "gemini": {
+            "theme": "Versatile professional teaching",
+            "career": "Education, writing, consulting",
+            "achievements": "Recognition for communication skills",
+            "strength": "neutral",
+            "characteristics": "Multiple professional interests"
+          },
+          "cancer": {
+            "theme": "Nurturing professional wisdom",
+            "career": "Teaching, counseling, ministry",
+            "achievements": "Recognition for caring guidance",
+            "strength": "exalted",
+            "characteristics": "Emotional wisdom in profession"
+          },
+          "leo": {
+            "theme": "Noble professional guidance",
+            "career": "Leadership, teaching, government",
+            "achievements": "High professional status",
+            "strength": "friendly",
+            "characteristics": "Authoritative professional wisdom"
+          },
+          "virgo": {
+            "theme": "Analytical professional teaching",
+            "career": "Education, consulting, analysis",
+            "achievements": "Recognition for detailed knowledge",
+            "strength": "debilitated",
+            "characteristics": "Critical professional approach"
+          },
+          "libra": {
+            "theme": "Balanced professional wisdom",
+            "career": "Law, consulting, mediation",
+            "achievements": "Recognition for fair judgment",
+            "strength": "neutral",
+            "characteristics": "Diplomatic professional guidance"
+          },
+          "scorpio": {
+            "theme": "Transformative professional wisdom",
+            "career": "Research, occult, psychology",
+            "achievements": "Recognition for depth",
+            "strength": "neutral",
+            "characteristics": "Deep professional knowledge"
+          },
+          "sagittarius": {
+            "theme": "Pure professional wisdom",
+            "career": "Teaching, law, philosophy, ministry",
+            "achievements": "Recognition as expert guide",
+            "strength": "own_sign",
+            "characteristics": "Natural professional authority"
+          },
+          "capricorn": {
+            "theme": "Disciplined professional wisdom",
+            "career": "Management, government, traditional fields",
+            "achievements": "Slow professional recognition",
+            "strength": "debilitated",
+            "characteristics": "Limited professional expansion"
+          },
+          "aquarius": {
+            "theme": "Humanitarian professional guidance",
+            "career": "Social work, teaching, science",
+            "achievements": "Recognition for serving masses",
+            "strength": "neutral",
+            "characteristics": "Universal professional wisdom"
+          },
+          "pisces": {
+            "theme": "Mystical professional wisdom",
+            "career": "Spirituality, healing, teaching, arts",
+            "achievements": "Recognition for spiritual guidance",
+            "strength": "own_sign",
+            "characteristics": "Intuitive professional authority"
+          }
+        },
+        "venus": {
+          "aries": {
+            "theme": "Dynamic creative profession",
+            "career": "Design, fashion, sales, arts",
+            "achievements": "Recognition for bold creativity",
+            "strength": "neutral",
+            "characteristics": "Passionate professional approach"
+          },
+          "taurus": {
+            "theme": "Stable artistic profession",
+            "career": "Arts, luxury goods, hospitality, finance",
+            "achievements": "Recognition for taste and quality",
+            "strength": "own_sign",
+            "characteristics": "Natural artistic profession"
+          },
+          "gemini": {
+            "theme": "Versatile creative profession",
+            "career": "Media, writing, design, communication",
+            "achievements": "Recognition for clever creativity",
+            "strength": "neutral",
+            "characteristics": "Multiple creative interests"
+          },
+          "cancer": {
+            "theme": "Nurturing creative profession",
+            "career": "Hospitality, interior design, counseling",
+            "achievements": "Recognition for caring aesthetics",
+            "strength": "neutral",
+            "characteristics": "Emotional creativity in work"
+          },
+          "leo": {
+            "theme": "Dramatic creative profession",
+            "career": "Entertainment, luxury, fashion, arts",
+            "achievements": "Recognition for grand creativity",
+            "strength": "friendly",
+            "characteristics": "Regal professional aesthetics"
+          },
+          "virgo": {
+            "theme": "Precise artistic profession",
+            "career": "Design, crafts, health, beauty",
+            "achievements": "Recognition for perfection",
+            "strength": "debilitated",
+            "characteristics": "Critical creative approach"
+          },
+          "libra": {
+            "theme": "Harmonious artistic profession",
+            "career": "Arts, law, fashion, diplomacy",
+            "achievements": "Recognition for beauty and balance",
+            "strength": "own_sign",
+            "characteristics": "Natural aesthetic profession"
+          },
+          "scorpio": {
+            "theme": "Intense creative profession",
+            "career": "Psychology, arts, luxury, occult",
+            "achievements": "Recognition for deep beauty",
+            "strength": "neutral",
+            "characteristics": "Transformative artistic work"
+          },
+          "sagittarius": {
+            "theme": "Expansive creative profession",
+            "career": "Education, travel, arts, publishing",
+            "achievements": "Recognition for philosophical beauty",
+            "strength": "neutral",
+            "characteristics": "Optimistic creative work"
+          },
+          "capricorn": {
+            "theme": "Disciplined artistic profession",
+            "career": "Architecture, classic arts, management",
+            "achievements": "Recognition for structured beauty",
+            "strength": "neutral",
+            "characteristics": "Traditional creative work"
+          },
+          "aquarius": {
+            "theme": "Innovative creative profession",
+            "career": "Technology design, social arts, media",
+            "achievements": "Recognition for unique creativity",
+            "strength": "neutral",
+            "characteristics": "Unconventional artistic work"
+          },
+          "pisces": {
+            "theme": "Mystical creative profession",
+            "career": "Arts, music, healing, spirituality",
+            "achievements": "Recognition for divine beauty",
+            "strength": "exalted",
+            "characteristics": "Transcendent artistic work"
+          }
+        },
+        "saturn": {
+          "aries": {
+            "theme": "Frustrated professional ambition",
+            "career": "Delayed success, obstacles in action fields",
+            "achievements": "Recognition after struggle",
+            "strength": "debilitated",
+            "characteristics": "Restricted professional action"
+          },
+          "taurus": {
+            "theme": "Persistent professional discipline",
+            "career": "Real estate, construction, agriculture",
+            "achievements": "Slow material success",
+            "strength": "neutral",
+            "characteristics": "Patient professional building"
+          },
+          "gemini": {
+            "theme": "Serious professional communication",
+            "career": "Technical writing, research, teaching",
+            "achievements": "Recognition for depth",
+            "strength": "neutral",
+            "characteristics": "Disciplined professional learning"
+          },
+          "cancer": {
+            "theme": "Restricted professional emotions",
+            "career": "Social work, government service",
+            "achievements": "Recognition for duty",
+            "strength": "neutral",
+            "characteristics": "Dutiful professional approach"
+          },
+          "leo": {
+            "theme": "Humbled professional authority",
+            "career": "Management after obstacles, earned leadership",
+            "achievements": "Recognition through patience",
+            "strength": "enemy",
+            "characteristics": "Restricted professional confidence"
+          },
+          "virgo": {
+            "theme": "Perfect professional discipline",
+            "career": "Healthcare, analysis, service professions",
+            "achievements": "Recognition for meticulous work",
+            "strength": "friendly",
+            "characteristics": "Detailed professional discipline"
+          },
+          "libra": {
+            "theme": "Balanced professional responsibility",
+            "career": "Law, mediation, government",
+            "achievements": "Recognition for justice",
+            "strength": "exalted",
+            "characteristics": "Fair professional authority"
+          },
+          "scorpio": {
+            "theme": "Deep professional karma",
+            "career": "Research, mining, occult, investigation",
+            "achievements": "Recognition for depth",
+            "strength": "neutral",
+            "characteristics": "Intense professional focus"
+          },
+          "sagittarius": {
+            "theme": "Philosophical professional discipline",
+            "career": "Education, law, structured teaching",
+            "achievements": "Recognition for wisdom",
+            "strength": "neutral",
+            "characteristics": "Patient professional growth"
+          },
+          "capricorn": {
+            "theme": "Pure professional ambition",
+            "career": "Management, government, engineering",
+            "achievements": "High professional status over time",
+            "strength": "own_sign",
+            "characteristics": "Natural professional discipline"
+          },
+          "aquarius": {
+            "theme": "Humanitarian professional service",
+            "career": "Social work, technology, mass service",
+            "achievements": "Recognition for serving masses",
+            "strength": "own_sign",
+            "characteristics": "Detached professional duty"
+          },
+          "pisces": {
+            "theme": "Compassionate professional karma",
+            "career": "Charity, healing, spiritual service",
+            "achievements": "Recognition for selfless work",
+            "strength": "neutral",
+            "characteristics": "Spiritual professional discipline"
+          }
+        },
+        "rahu": {
+          "aries": {
+            "theme": "Obsessive professional pioneering",
+            "career": "Unconventional leadership, foreign ventures",
+            "achievements": "Sudden recognition in new fields",
+            "strength": "neutral",
+            "characteristics": "Aggressive career ambition"
+          },
+          "taurus": {
+            "theme": "Obsessive material career",
+            "career": "Foreign trade, unusual wealth creation",
+            "achievements": "Recognition for unconventional success",
+            "strength": "neutral",
+            "characteristics": "Extreme material focus"
+          },
+          "gemini": {
+            "theme": "Obsessive professional communication",
+            "career": "Media, technology, foreign communication",
+            "achievements": "Recognition for innovative thinking",
+            "strength": "exalted",
+            "characteristics": "Amplified professional skills"
+          },
+          "cancer": {
+            "theme": "Obsessive professional nurturing",
+            "career": "Foreign hospitality, unusual caring professions",
+            "achievements": "Recognition for unique service",
+            "strength": "neutral",
+            "characteristics": "Unconventional professional emotions"
+          },
+          "leo": {
+            "theme": "Amplified professional ego",
+            "career": "Entertainment, politics, sudden fame",
+            "achievements": "Dramatic professional recognition",
+            "strength": "neutral",
+            "characteristics": "Inflated professional confidence"
+          },
+          "virgo": {
+            "theme": "Obsessive professional perfection",
+            "career": "Technology, foreign healthcare, analysis",
+            "achievements": "Recognition for unusual methods",
+            "strength": "neutral",
+            "characteristics": "Extreme professional detail"
+          },
+          "libra": {
+            "theme": "Obsessive professional relationships",
+            "career": "Foreign partnerships, unusual diplomacy",
+            "achievements": "Recognition in foreign lands",
+            "strength": "neutral",
+            "characteristics": "Cross-cultural professional work"
+          },
+          "scorpio": {
+            "theme": "Extreme professional transformation",
+            "career": "Occult, foreign research, unusual fields",
+            "achievements": "Recognition for mysterious work",
+            "strength": "neutral",
+            "characteristics": "Intense career obsession"
+          },
+          "sagittarius": {
+            "theme": "Obsessive professional philosophy",
+            "career": "Foreign teaching, unusual beliefs",
+            "achievements": "Recognition for breaking norms",
+            "strength": "debilitated",
+            "characteristics": "Extreme professional optimism"
+          },
+          "capricorn": {
+            "theme": "Obsessive professional ambition",
+            "career": "Foreign business, unconventional authority",
+            "achievements": "Sudden professional rise",
+            "strength": "neutral",
+            "characteristics": "Extreme career drive"
+          },
+          "aquarius": {
+            "theme": "Revolutionary professional innovation",
+            "career": "Technology, foreign social work, science",
+            "achievements": "Recognition for radical ideas",
+            "strength": "neutral",
+            "characteristics": "Extremely unconventional career"
+          },
+          "pisces": {
+            "theme": "Obsessive spiritual profession",
+            "career": "Foreign spirituality, unusual healing",
+            "achievements": "Recognition for mystical work",
+            "strength": "neutral",
+            "characteristics": "Confused professional direction"
+          }
+        },
+        "ketu": {
+          "aries": {
+            "theme": "Detached professional action",
+            "career": "Spiritual work, disinterest in career",
+            "achievements": "Recognition without seeking",
+            "strength": "neutral",
+            "characteristics": "Lack of professional ambition"
+          },
+          "taurus": {
+            "theme": "Detached material profession",
+            "career": "Simple work, spiritual over material",
+            "achievements": "Recognition for renunciation",
+            "strength": "neutral",
+            "characteristics": "Indifferent to wealth"
+          },
+          "gemini": {
+            "theme": "Detached professional communication",
+            "career": "Intuitive work, silent professions",
+            "achievements": "Recognition for wisdom",
+            "strength": "debilitated",
+            "characteristics": "Non-verbal professional work"
+          },
+          "cancer": {
+            "theme": "Detached professional emotions",
+            "career": "Spiritual service, detached caring",
+            "achievements": "Recognition for selfless work",
+            "strength": "neutral",
+            "characteristics": "Emotionally detached work"
+          },
+          "leo": {
+            "theme": "Ego-less professional work",
+            "career": "Humble service, no recognition sought",
+            "achievements": "Recognition despite humility",
+            "strength": "neutral",
+            "characteristics": "No professional ego"
+          },
+          "virgo": {
+            "theme": "Detached professional service",
+            "career": "Spiritual healing, intuitive service",
+            "achievements": "Recognition for selfless work",
+            "strength": "neutral",
+            "characteristics": "Non-analytical professional approach"
+          },
+          "libra": {
+            "theme": "Detached professional relationships",
+            "career": "Spiritual work, solitary professions",
+            "achievements": "Recognition for independence",
+            "strength": "neutral",
+            "characteristics": "Indifferent to partnerships"
+          },
+          "scorpio": {
+            "theme": "Complete professional transformation",
+            "career": "Occult, spirituality, mysticism",
+            "achievements": "Recognition for deep wisdom",
+            "strength": "exalted",
+            "characteristics": "Profound professional insight"
+          },
+          "sagittarius": {
+            "theme": "Detached professional wisdom",
+            "career": "Spiritual teaching, natural wisdom",
+            "achievements": "Recognition as natural guru",
+            "strength": "neutral",
+            "characteristics": "Effortless professional knowledge"
+          },
+          "capricorn": {
+            "theme": "Detached professional ambition",
+            "career": "Spiritual discipline, simple work",
+            "achievements": "Recognition for humility",
+            "strength": "neutral",
+            "characteristics": "No worldly career desires"
+          },
+          "aquarius": {
+            "theme": "Detached humanitarian profession",
+            "career": "Selfless social work, spiritual service",
+            "achievements": "Recognition for universal service",
+            "strength": "neutral",
+            "characteristics": "Egoless mass service"
+          },
+          "pisces": {
+            "theme": "Complete professional liberation",
+            "career": "Spiritual work, mystical professions",
+            "achievements": "Recognition for enlightenment",
+            "strength": "neutral",
+            "characteristics": "Total professional detachment"
+          }
+        }
+      },
+      "house_meanings": {
+        "1": {
+          "significance": "Overall career direction and professional identity",
+          "description": "Shows how one approaches work, professional personality"
+        },
+        "2": {
+          "significance": "Professional earnings and wealth",
+          "description": "Income from career, financial success from profession"
+        },
+        "3": {
+          "significance": "Professional efforts and communication",
+          "description": "Skills, courage in career, co-workers"
+        },
+        "4": {
+          "significance": "Work environment and professional foundation",
+          "description": "Office setting, mother's influence on career"
+        },
+        "5": {
+          "significance": "Creative professional expression",
+          "description": "Past life professional merit, creative work"
+        },
+        "6": {
+          "significance": "Daily work and service",
+          "description": "Competition, obstacles in career, service professions"
+        },
+        "7": {
+          "significance": "Professional partnerships and business",
+          "description": "Business partners, public dealings"
+        },
+        "8": {
+          "significance": "Career transformation and longevity",
+          "description": "Career changes, hidden aspects of work"
+        },
+        "9": {
+          "significance": "Professional dharma and fortune",
+          "description": "Higher purpose in career, father's influence"
+        },
+        "10": {
+          "significance": "Primary career house - profession itself",
+          "description": "Main career indicator, public reputation, authority"
+        },
+        "11": {
+          "significance": "Professional gains and achievements",
+          "description": "Income from career, recognition, professional network"
+        },
+        "12": {
+          "significance": "Professional losses and foreign work",
+          "description": "Working abroad, expenses, hidden professional work"
+        }
+      },
+      "special_rules": {
+        "d1_d10_comparison": {
+          "description": "Comparing D1 and D10 reveals career potential",
+          "strong_in_both": "Guaranteed career success, natural profession",
+          "strong_in_d10_only": "Hidden professional talent, late career bloom",
+          "strong_in_d1_only": "Early promise, career doesn't fulfill potential",
+          "weak_in_both": "Struggle in career, requires conscious effort"
+        },
+        "10th_lord_analysis": {
+          "description": "10th lord in D10 reveals career nature",
+          "own_sign": "Strong career, natural authority",
+          "exalted": "Exceptional career success",
+          "debilitated": "Career struggles, obstacles",
+          "friendly_sign": "Favorable career development",
+          "enemy_sign": "Career challenges, opposition"
+        },
+        "career_timing": {
+          "description": "Dasha of D10 10th lord or planets in D10 10th brings career events",
+          "principle": "Career breakthroughs occur during periods of strong D10 planets"
+        },
+        "benefic_aspects_to_10th": {
+          "description": "Benefic aspects to 10th house in D10 ensure career success",
+          "jupiter_aspect": "Recognition, wisdom-based career",
+          "venus_aspect": "Creative career, luxury profession",
+          "mercury_aspect": "Communication-based career success",
+          "moon_aspect": "Public popularity in career"
+        },
+        "malefic_in_d10": {
+          "description": "Malefics in D10 show challenges and strength",
+          "mars": "Career requiring courage, competition",
+          "saturn": "Delayed success, disciplined career",
+          "rahu": "Unconventional career, foreign work",
+          "ketu": "Spiritual profession, detached work",
+          "principle": "Well-placed malefics give career strength through challenges"
+        }
+      }
+    }
+  }
+}

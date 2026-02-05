@@ -1,0 +1,1995 @@
+{
+  "nakshatra_transit_rules": {
+    "description": "Effects of planetary transits through 27 Nakshatras - 243 combinations covering all planetary movements through lunar mansions",
+    "version": "1.0.0",
+    "general_principles": {
+      "transit_duration": {
+        "sun": "Approximately 1 day per nakshatra",
+        "moon": "Approximately 1 day per nakshatra",
+        "mars": "2-3 days per nakshatra",
+        "mercury": "1-2 days per nakshatra",
+        "jupiter": "12-13 days per nakshatra",
+        "venus": "2-3 days per nakshatra",
+        "saturn": "30-40 days per nakshatra",
+        "rahu": "Retrograde - 6-7 months per nakshatra",
+        "ketu": "Retrograde - 6-7 months per nakshatra"
+      },
+      "nakshatra_lords": {
+        "ketu": ["Ashwini", "Magha", "Mula"],
+        "venus": ["Bharani", "Purva_Phalguni", "Purva_Ashadha"],
+        "sun": ["Krittika", "Uttara_Phalguni", "Uttara_Ashadha"],
+        "moon": ["Rohini", "Hasta", "Shravana"],
+        "mars": ["Mrigashira", "Chitra", "Dhanishta"],
+        "rahu": ["Ardra", "Swati", "Shatabhisha"],
+        "jupiter": ["Punarvasu", "Vishakha", "Purva_Bhadrapada"],
+        "saturn": ["Pushya", "Anuradha", "Uttara_Bhadrapada"],
+        "mercury": ["Ashlesha", "Jyeshtha", "Revati"]
+      },
+      "interpretation_notes": "Transit effects combine planet nature with nakshatra energy. Nakshatra lord's relationship with transiting planet modifies results."
+    },
+    "transits": {
+      "sun": {
+        "ashwini": {
+          "nakshatra_lord": "ketu",
+          "theme": "New beginnings, healing initiative",
+          "positive": ["Leadership in healing", "Quick starts", "Pioneering spirit"],
+          "negative": ["Impulsive ego", "Headstrong actions"],
+          "best_for": ["Starting health programs", "Leadership roles"],
+          "avoid": ["Rash decisions"]
+        },
+        "bharani": {
+          "nakshatra_lord": "venus",
+          "theme": "Creative power, transformation",
+          "positive": ["Creative authority", "Transformative leadership", "Nurturing power"],
+          "negative": ["Controlling behavior", "Excessive pride"],
+          "best_for": ["Creative projects", "Birth/transformation work"],
+          "avoid": ["Power struggles"]
+        },
+        "krittika": {
+          "nakshatra_lord": "sun",
+          "theme": "Intense focus, cutting through",
+          "positive": ["Strong willpower", "Clarity of purpose", "Decisive action"],
+          "negative": ["Harsh criticism", "Burning bridges"],
+          "best_for": ["Important decisions", "Clearing obstacles"],
+          "avoid": ["Aggressive confrontations"]
+        },
+        "rohini": {
+          "nakshatra_lord": "moon",
+          "theme": "Material growth, creativity",
+          "positive": ["Creative confidence", "Material success", "Charm"],
+          "negative": ["Materialism", "Vanity"],
+          "best_for": ["Business growth", "Creative expression"],
+          "avoid": ["Overindulgence"]
+        },
+        "mrigashira": {
+          "nakshatra_lord": "mars",
+          "theme": "Seeking knowledge, exploration",
+          "positive": ["Intellectual curiosity", "Adventurous spirit", "Research ability"],
+          "negative": ["Restlessness", "Scattered focus"],
+          "best_for": ["Learning", "Travel planning"],
+          "avoid": ["Commitment decisions"]
+        },
+        "ardra": {
+          "nakshatra_lord": "rahu",
+          "theme": "Storms of change, breakthroughs",
+          "positive": ["Breakthrough insights", "Transformative power", "Innovation"],
+          "negative": ["Emotional turmoil", "Destructive ego"],
+          "best_for": ["Major changes", "Research"],
+          "avoid": ["Important commitments"]
+        },
+        "punarvasu": {
+          "nakshatra_lord": "jupiter",
+          "theme": "Return to light, renewal",
+          "positive": ["Wisdom", "Optimism", "Recovery of status"],
+          "negative": ["Over-expansion", "Repetition"],
+          "best_for": ["New starts after setbacks", "Teaching"],
+          "avoid": ["Overconfidence"]
+        },
+        "pushya": {
+          "nakshatra_lord": "saturn",
+          "theme": "Nourishment through discipline",
+          "positive": ["Responsible leadership", "Sustained growth", "Spiritual authority"],
+          "negative": ["Rigid ego", "Cold demeanor"],
+          "best_for": ["Long-term planning", "Spiritual practices"],
+          "avoid": ["Inflexibility"]
+        },
+        "ashlesha": {
+          "nakshatra_lord": "mercury",
+          "theme": "Strategic power, kundalini",
+          "positive": ["Strategic thinking", "Penetrating insight", "Persuasive power"],
+          "negative": ["Manipulative ego", "Suspicion"],
+          "best_for": ["Strategy", "Research"],
+          "avoid": ["Deceptive actions"]
+        },
+        "magha": {
+          "nakshatra_lord": "ketu",
+          "theme": "Ancestral power, throne",
+          "positive": ["Royal authority", "Ancestral blessings", "Dignity"],
+          "negative": ["Arrogance", "Living in past glory"],
+          "best_for": ["Ceremonies", "Leadership roles"],
+          "avoid": ["Pride-based decisions"]
+        },
+        "purva_phalguni": {
+          "nakshatra_lord": "venus",
+          "theme": "Enjoyment, creativity, relationships",
+          "positive": ["Charisma", "Creative joy", "Social success"],
+          "negative": ["Excessive pleasure-seeking", "Vanity"],
+          "best_for": ["Social events", "Creative work"],
+          "avoid": ["Serious commitments"]
+        },
+        "uttara_phalguni": {
+          "nakshatra_lord": "sun",
+          "theme": "Patronage, partnerships, service",
+          "positive": ["Generous leadership", "Reliable authority", "Helpful power"],
+          "negative": ["Demanding ego", "Need for recognition"],
+          "best_for": ["Partnerships", "Contracts"],
+          "avoid": ["Selfish actions"]
+        },
+        "hasta": {
+          "nakshatra_lord": "moon",
+          "theme": "Skill, craftsmanship, manifestation",
+          "positive": ["Skillful expression", "Practical creativity", "Dexterity"],
+          "negative": ["Cunning", "Trickery"],
+          "best_for": ["Crafts", "Practical work"],
+          "avoid": ["Manipulation"]
+        },
+        "chitra": {
+          "nakshatra_lord": "mars",
+          "theme": "Brilliance, beauty, craftsmanship",
+          "positive": ["Creative brilliance", "Aesthetic power", "Dynamic expression"],
+          "negative": ["Ego in appearance", "Superficiality"],
+          "best_for": ["Design", "Architecture"],
+          "avoid": ["Vanity projects"]
+        },
+        "swati": {
+          "nakshatra_lord": "rahu",
+          "theme": "Independence, movement, trade",
+          "positive": ["Independent authority", "Flexibility", "Business acumen"],
+          "negative": ["Restless ego", "Inconsistency"],
+          "best_for": ["Business", "Negotiations"],
+          "avoid": ["Impulsive moves"]
+        },
+        "vishakha": {
+          "nakshatra_lord": "jupiter",
+          "theme": "Goal-oriented power, transformation",
+          "positive": ["Determined leadership", "Ambitious goals", "Purposeful action"],
+          "negative": ["Ruthless ambition", "Jealousy"],
+          "best_for": ["Goal setting", "Ambitious projects"],
+          "avoid": ["Unethical shortcuts"]
+        },
+        "anuradha": {
+          "nakshatra_lord": "saturn",
+          "theme": "Friendship, devotion, success",
+          "positive": ["Loyal leadership", "Diplomatic power", "Devotional strength"],
+          "negative": ["Martyr complex", "Rigid devotion"],
+          "best_for": ["Team building", "Spiritual work"],
+          "avoid": ["Blind loyalty"]
+        },
+        "jyeshtha": {
+          "nakshatra_lord": "mercury",
+          "theme": "Seniority, protection, power",
+          "positive": ["Protective authority", "Elder wisdom", "Strategic power"],
+          "negative": ["Jealous ego", "Controlling nature"],
+          "best_for": ["Leadership", "Protection roles"],
+          "avoid": ["Power games"]
+        },
+        "mula": {
+          "nakshatra_lord": "ketu",
+          "theme": "Root transformation, investigation",
+          "positive": ["Deep insight", "Transformative power", "Root solutions"],
+          "negative": ["Destructive ego", "Excessive questioning"],
+          "best_for": ["Research", "Deep change"],
+          "avoid": ["Hasty conclusions"]
+        },
+        "purva_ashadha": {
+          "nakshatra_lord": "venus",
+          "theme": "Invincibility, purification",
+          "positive": ["Invincible spirit", "Purifying power", "Victory"],
+          "negative": ["Overconfidence", "Combative ego"],
+          "best_for": ["Competitions", "Purification"],
+          "avoid": ["Overestimating self"]
+        },
+        "uttara_ashadha": {
+          "nakshatra_lord": "sun",
+          "theme": "Final victory, universal goals",
+          "positive": ["Ultimate authority", "Righteous power", "Universal vision"],
+          "negative": ["Rigid principles", "Harsh judgment"],
+          "best_for": ["Major achievements", "Leadership"],
+          "avoid": ["Inflexible stands"]
+        },
+        "shravana": {
+          "nakshatra_lord": "moon",
+          "theme": "Listening, learning, connection",
+          "positive": ["Wise authority", "Good listening", "Connected leadership"],
+          "negative": ["Gossip", "Eavesdropping"],
+          "best_for": ["Communication", "Learning"],
+          "avoid": ["Spreading rumors"]
+        },
+        "dhanishta": {
+          "nakshatra_lord": "mars",
+          "theme": "Wealth, music, fame",
+          "positive": ["Dynamic success", "Rhythmic power", "Fame"],
+          "negative": ["Show-off ego", "Material focus"],
+          "best_for": ["Performances", "Wealth building"],
+          "avoid": ["Ostentation"]
+        },
+        "shatabhisha": {
+          "nakshatra_lord": "rahu",
+          "theme": "Healing, secrets, isolation",
+          "positive": ["Healing authority", "Research power", "Innovation"],
+          "negative": ["Isolated ego", "Secretive nature"],
+          "best_for": ["Healing work", "Research"],
+          "avoid": ["Excessive secrecy"]
+        },
+        "purva_bhadrapada": {
+          "nakshatra_lord": "jupiter",
+          "theme": "Transformation, idealism, intensity",
+          "positive": ["Idealistic leadership", "Transformative vision", "Intensity"],
+          "negative": ["Cynical ego", "Extreme views"],
+          "best_for": ["Spiritual work", "Transformation"],
+          "avoid": ["Extremism"]
+        },
+        "uttara_bhadrapada": {
+          "nakshatra_lord": "saturn",
+          "theme": "Depth, wisdom, kundalini",
+          "positive": ["Deep wisdom", "Cosmic authority", "Sustained power"],
+          "negative": ["Cold detachment", "Delay"],
+          "best_for": ["Spiritual practices", "Deep work"],
+          "avoid": ["Harsh isolation"]
+        },
+        "revati": {
+          "nakshatra_lord": "mercury",
+          "theme": "Nourishment, completion, transcendence",
+          "positive": ["Compassionate leadership", "Completion power", "Grace"],
+          "negative": ["Lost in dreams", "Escapism"],
+          "best_for": ["Endings", "Spiritual work"],
+          "avoid": ["Avoiding reality"]
+        }
+      },
+      "moon": {
+        "ashwini": {
+          "nakshatra_lord": "ketu",
+          "theme": "Emotional healing, quick responses",
+          "positive": ["Healing emotions", "Quick emotional recovery", "Initiative"],
+          "negative": ["Emotional impulsiveness", "Restlessness"],
+          "best_for": ["Starting therapy", "Quick decisions"],
+          "avoid": ["Emotional reactions"]
+        },
+        "bharani": {
+          "nakshatra_lord": "venus",
+          "theme": "Emotional transformation, nurturing",
+          "positive": ["Deep feelings", "Nurturing capacity", "Emotional creativity"],
+          "negative": ["Emotional extremes", "Possessiveness"],
+          "best_for": ["Creative work", "Family bonding"],
+          "avoid": ["Control issues"]
+        },
+        "krittika": {
+          "nakshatra_lord": "sun",
+          "theme": "Emotional clarity, cutting through",
+          "positive": ["Clear emotions", "Sharp intuition", "Nurturing care"],
+          "negative": ["Critical feelings", "Sharp words"],
+          "best_for": ["Clarity seeking", "Problem solving"],
+          "avoid": ["Harsh criticism"]
+        },
+        "rohini": {
+          "nakshatra_lord": "moon",
+          "theme": "Peak emotional fulfillment, beauty",
+          "positive": ["Emotional abundance", "Beauty appreciation", "Comfort"],
+          "negative": ["Attachment", "Jealousy"],
+          "best_for": ["Romance", "Creative arts"],
+          "avoid": ["Overattachment"]
+        },
+        "mrigashira": {
+          "nakshatra_lord": "mars",
+          "theme": "Emotional seeking, curiosity",
+          "positive": ["Emotional exploration", "Gentle pursuit", "Adaptability"],
+          "negative": ["Emotional restlessness", "Elusive feelings"],
+          "best_for": ["Exploration", "Learning"],
+          "avoid": ["Commitment"]
+        },
+        "ardra": {
+          "nakshatra_lord": "rahu",
+          "theme": "Emotional storms, transformation",
+          "positive": ["Deep emotional release", "Breakthrough feelings", "Renewal"],
+          "negative": ["Emotional chaos", "Destructive feelings"],
+          "best_for": ["Emotional clearing", "Therapy"],
+          "avoid": ["Major decisions"]
+        },
+        "punarvasu": {
+          "nakshatra_lord": "jupiter",
+          "theme": "Emotional return, renewal",
+          "positive": ["Emotional recovery", "Optimism", "Nurturing wisdom"],
+          "negative": ["Repetitive patterns", "Over-optimism"],
+          "best_for": ["Reconciliation", "New starts"],
+          "avoid": ["Repeating mistakes"]
+        },
+        "pushya": {
+          "nakshatra_lord": "saturn",
+          "theme": "Emotional nourishment, discipline",
+          "positive": ["Stable emotions", "Caring structure", "Spiritual nourishment"],
+          "negative": ["Emotional coldness", "Rigidity"],
+          "best_for": ["Long-term bonds", "Spiritual practice"],
+          "avoid": ["Emotional suppression"]
+        },
+        "ashlesha": {
+          "nakshatra_lord": "mercury",
+          "theme": "Deep emotional bonds, intensity",
+          "positive": ["Deep understanding", "Emotional insight", "Hypnotic care"],
+          "negative": ["Emotional manipulation", "Clinging"],
+          "best_for": ["Intimate bonding", "Psychology"],
+          "avoid": ["Manipulation"]
+        },
+        "magha": {
+          "nakshatra_lord": "ketu",
+          "theme": "Ancestral emotions, dignity",
+          "positive": ["Emotional dignity", "Family pride", "Respect for tradition"],
+          "negative": ["Emotional aloofness", "Pride"],
+          "best_for": ["Family ceremonies", "Honoring ancestors"],
+          "avoid": ["Arrogance"]
+        },
+        "purva_phalguni": {
+          "nakshatra_lord": "venus",
+          "theme": "Emotional enjoyment, love",
+          "positive": ["Joyful emotions", "Romantic feelings", "Creative comfort"],
+          "negative": ["Emotional indulgence", "Laziness"],
+          "best_for": ["Romance", "Relaxation"],
+          "avoid": ["Overindulgence"]
+        },
+        "uttara_phalguni": {
+          "nakshatra_lord": "sun",
+          "theme": "Emotional generosity, partnerships",
+          "positive": ["Generous feelings", "Partnership harmony", "Helpful nature"],
+          "negative": ["Emotional demands", "Need for recognition"],
+          "best_for": ["Relationships", "Contracts"],
+          "avoid": ["Demanding behavior"]
+        },
+        "hasta": {
+          "nakshatra_lord": "moon",
+          "theme": "Emotional dexterity, practical care",
+          "positive": ["Skillful emotions", "Practical nurturing", "Helpful hands"],
+          "negative": ["Emotional trickery", "Restless feelings"],
+          "best_for": ["Crafts", "Service"],
+          "avoid": ["Deception"]
+        },
+        "chitra": {
+          "nakshatra_lord": "mars",
+          "theme": "Emotional beauty, creativity",
+          "positive": ["Beautiful feelings", "Creative emotions", "Aesthetic sense"],
+          "negative": ["Emotional drama", "Vanity"],
+          "best_for": ["Art", "Design"],
+          "avoid": ["Superficiality"]
+        },
+        "swati": {
+          "nakshatra_lord": "rahu",
+          "theme": "Emotional independence, flexibility",
+          "positive": ["Independent feelings", "Adaptable emotions", "Freedom"],
+          "negative": ["Emotional instability", "Detachment"],
+          "best_for": ["Personal space", "Trade"],
+          "avoid": ["Emotional avoidance"]
+        },
+        "vishakha": {
+          "nakshatra_lord": "jupiter",
+          "theme": "Emotional goals, determination",
+          "positive": ["Determined feelings", "Goal-focused emotions", "Ambition"],
+          "negative": ["Emotional jealousy", "Obsession"],
+          "best_for": ["Goal setting", "Focus"],
+          "avoid": ["Jealous feelings"]
+        },
+        "anuradha": {
+          "nakshatra_lord": "saturn",
+          "theme": "Emotional devotion, friendship",
+          "positive": ["Loyal feelings", "Deep friendship", "Devotional emotions"],
+          "negative": ["Emotional suffering", "Martyrdom"],
+          "best_for": ["Friendships", "Devotion"],
+          "avoid": ["Self-sacrifice"]
+        },
+        "jyeshtha": {
+          "nakshatra_lord": "mercury",
+          "theme": "Emotional protection, intensity",
+          "positive": ["Protective feelings", "Elder care", "Deep emotions"],
+          "negative": ["Emotional jealousy", "Control"],
+          "best_for": ["Protection", "Leadership"],
+          "avoid": ["Possessiveness"]
+        },
+        "mula": {
+          "nakshatra_lord": "ketu",
+          "theme": "Emotional roots, transformation",
+          "positive": ["Deep emotional insight", "Root healing", "Transformation"],
+          "negative": ["Emotional upheaval", "Destruction"],
+          "best_for": ["Deep therapy", "Root work"],
+          "avoid": ["Hasty emotional decisions"]
+        },
+        "purva_ashadha": {
+          "nakshatra_lord": "venus",
+          "theme": "Emotional invincibility, purification",
+          "positive": ["Strong emotions", "Purifying feelings", "Victory"],
+          "negative": ["Emotional pride", "Stubbornness"],
+          "best_for": ["Emotional cleansing", "Confidence building"],
+          "avoid": ["Overconfidence"]
+        },
+        "uttara_ashadha": {
+          "nakshatra_lord": "sun",
+          "theme": "Emotional victory, principles",
+          "positive": ["Principled emotions", "Final resolution", "Righteous feelings"],
+          "negative": ["Emotional rigidity", "Harsh feelings"],
+          "best_for": ["Resolution", "Principles"],
+          "avoid": ["Inflexibility"]
+        },
+        "shravana": {
+          "nakshatra_lord": "moon",
+          "theme": "Emotional listening, connection",
+          "positive": ["Empathetic listening", "Emotional wisdom", "Connection"],
+          "negative": ["Emotional gossip", "Overlistening"],
+          "best_for": ["Counseling", "Communication"],
+          "avoid": ["Gossip"]
+        },
+        "dhanishta": {
+          "nakshatra_lord": "mars",
+          "theme": "Emotional rhythm, wealth feelings",
+          "positive": ["Rhythmic emotions", "Abundant feelings", "Musical heart"],
+          "negative": ["Emotional show-off", "Restlessness"],
+          "best_for": ["Music", "Celebrations"],
+          "avoid": ["Emotional display"]
+        },
+        "shatabhisha": {
+          "nakshatra_lord": "rahu",
+          "theme": "Emotional healing, secrets",
+          "positive": ["Healing emotions", "Deep secrets", "Innovation"],
+          "negative": ["Emotional isolation", "Secretive feelings"],
+          "best_for": ["Healing work", "Privacy"],
+          "avoid": ["Isolation"]
+        },
+        "purva_bhadrapada": {
+          "nakshatra_lord": "jupiter",
+          "theme": "Emotional intensity, idealism",
+          "positive": ["Intense feelings", "Idealistic emotions", "Transformative"],
+          "negative": ["Emotional extremes", "Cynicism"],
+          "best_for": ["Spiritual work", "Intensity"],
+          "avoid": ["Extreme reactions"]
+        },
+        "uttara_bhadrapada": {
+          "nakshatra_lord": "saturn",
+          "theme": "Emotional depth, cosmic feelings",
+          "positive": ["Deep emotions", "Cosmic connection", "Wisdom"],
+          "negative": ["Emotional coldness", "Delay"],
+          "best_for": ["Meditation", "Deep work"],
+          "avoid": ["Emotional withdrawal"]
+        },
+        "revati": {
+          "nakshatra_lord": "mercury",
+          "theme": "Emotional nourishment, completion",
+          "positive": ["Nurturing emotions", "Compassion", "Completion"],
+          "negative": ["Emotional escapism", "Over-sensitivity"],
+          "best_for": ["Caring work", "Endings"],
+          "avoid": ["Avoiding reality"]
+        }
+      },
+      "mars": {
+        "ashwini": {
+          "nakshatra_lord": "ketu",
+          "theme": "Warrior healer, swift action",
+          "positive": ["Swift action", "Healing courage", "Pioneering energy"],
+          "negative": ["Rash actions", "Head injuries", "Accidents"],
+          "best_for": ["Emergency response", "Surgery"],
+          "avoid": ["Impulsive fighting"]
+        },
+        "bharani": {
+          "nakshatra_lord": "venus",
+          "theme": "Controlled power, creative force",
+          "positive": ["Creative energy", "Controlled passion", "Transformative action"],
+          "negative": ["Sexual aggression", "Destructive passion"],
+          "best_for": ["Creative projects", "Controlled efforts"],
+          "avoid": ["Uncontrolled passion"]
+        },
+        "krittika": {
+          "nakshatra_lord": "sun",
+          "theme": "Cutting energy, fierce action",
+          "positive": ["Sharp actions", "Decisive courage", "Burning obstacles"],
+          "negative": ["Aggression", "Harsh words", "Anger"],
+          "best_for": ["Cutting through problems", "Decisive action"],
+          "avoid": ["Violence"]
+        },
+        "rohini": {
+          "nakshatra_lord": "moon",
+          "theme": "Material drive, creative passion",
+          "positive": ["Creative action", "Material success", "Attractive energy"],
+          "negative": ["Material aggression", "Jealous passion"],
+          "best_for": ["Business drive", "Creative work"],
+          "avoid": ["Jealous reactions"]
+        },
+        "mrigashira": {
+          "nakshatra_lord": "mars",
+          "theme": "Searching energy, exploration",
+          "positive": ["Adventurous spirit", "Seeking action", "Quick mind"],
+          "negative": ["Scattered energy", "Restless actions"],
+          "best_for": ["Exploration", "Research"],
+          "avoid": ["Scattered efforts"]
+        },
+        "ardra": {
+          "nakshatra_lord": "rahu",
+          "theme": "Storm energy, destructive force",
+          "positive": ["Breakthrough action", "Transformative courage", "Innovation"],
+          "negative": ["Destructive anger", "Emotional outbursts"],
+          "best_for": ["Major changes", "Breakthroughs"],
+          "avoid": ["Destructive actions"]
+        },
+        "punarvasu": {
+          "nakshatra_lord": "jupiter",
+          "theme": "Renewed energy, hopeful action",
+          "positive": ["Renewed courage", "Optimistic action", "Recovery"],
+          "negative": ["Repetitive actions", "Over-expansion"],
+          "best_for": ["New starts", "Recovery efforts"],
+          "avoid": ["Repeating mistakes"]
+        },
+        "pushya": {
+          "nakshatra_lord": "saturn",
+          "theme": "Disciplined energy, sustained action",
+          "positive": ["Disciplined courage", "Sustained effort", "Spiritual warrior"],
+          "negative": ["Rigid actions", "Cold aggression"],
+          "best_for": ["Long-term efforts", "Discipline"],
+          "avoid": ["Harsh discipline"]
+        },
+        "ashlesha": {
+          "nakshatra_lord": "mercury",
+          "theme": "Strategic energy, coiled power",
+          "positive": ["Strategic action", "Penetrating energy", "Kundalini power"],
+          "negative": ["Manipulative actions", "Hidden aggression"],
+          "best_for": ["Strategy", "Tactical moves"],
+          "avoid": ["Deceptive actions"]
+        },
+        "magha": {
+          "nakshatra_lord": "ketu",
+          "theme": "Ancestral power, royal courage",
+          "positive": ["Royal courage", "Ancestral strength", "Dignified action"],
+          "negative": ["Arrogant actions", "Pride-based fights"],
+          "best_for": ["Leadership", "Ceremonies"],
+          "avoid": ["Ego battles"]
+        },
+        "purva_phalguni": {
+          "nakshatra_lord": "venus",
+          "theme": "Passionate energy, creative drive",
+          "positive": ["Passionate action", "Creative energy", "Charisma"],
+          "negative": ["Excessive passion", "Lazy periods"],
+          "best_for": ["Creative pursuits", "Romance"],
+          "avoid": ["Overindulgence"]
+        },
+        "uttara_phalguni": {
+          "nakshatra_lord": "sun",
+          "theme": "Generous energy, helpful action",
+          "positive": ["Generous action", "Helpful courage", "Partnership energy"],
+          "negative": ["Demanding actions", "Ego in service"],
+          "best_for": ["Helping others", "Partnerships"],
+          "avoid": ["Selfish service"]
+        },
+        "hasta": {
+          "nakshatra_lord": "moon",
+          "theme": "Skillful energy, dexterous action",
+          "positive": ["Skillful actions", "Quick hands", "Practical energy"],
+          "negative": ["Cunning actions", "Tricky moves"],
+          "best_for": ["Crafts", "Skillful work"],
+          "avoid": ["Manipulation"]
+        },
+        "chitra": {
+          "nakshatra_lord": "mars",
+          "theme": "Brilliant energy, aesthetic force",
+          "positive": ["Creative power", "Brilliant action", "Dynamic energy"],
+          "negative": ["Aggressive beauty", "Ego in art"],
+          "best_for": ["Design", "Construction"],
+          "avoid": ["Vanity projects"]
+        },
+        "swati": {
+          "nakshatra_lord": "rahu",
+          "theme": "Independent energy, flexible action",
+          "positive": ["Independent action", "Flexible energy", "Business drive"],
+          "negative": ["Restless energy", "Inconsistent actions"],
+          "best_for": ["Business", "Trade"],
+          "avoid": ["Impulsive changes"]
+        },
+        "vishakha": {
+          "nakshatra_lord": "jupiter",
+          "theme": "Goal-focused energy, determined action",
+          "positive": ["Determined courage", "Goal-focused drive", "Ambitious energy"],
+          "negative": ["Ruthless actions", "Jealous competition"],
+          "best_for": ["Achieving goals", "Competition"],
+          "avoid": ["Unethical means"]
+        },
+        "anuradha": {
+          "nakshatra_lord": "saturn",
+          "theme": "Devoted energy, friendship action",
+          "positive": ["Loyal courage", "Devotional action", "Team energy"],
+          "negative": ["Martyr actions", "Suffering for others"],
+          "best_for": ["Team efforts", "Devotional work"],
+          "avoid": ["Self-sacrifice"]
+        },
+        "jyeshtha": {
+          "nakshatra_lord": "mercury",
+          "theme": "Protective energy, senior power",
+          "positive": ["Protective action", "Elder courage", "Strategic power"],
+          "negative": ["Jealous aggression", "Controlling actions"],
+          "best_for": ["Protection", "Leadership"],
+          "avoid": ["Power struggles"]
+        },
+        "mula": {
+          "nakshatra_lord": "ketu",
+          "theme": "Root energy, destructive force",
+          "positive": ["Root transformation", "Deep action", "Investigative energy"],
+          "negative": ["Destructive actions", "Rash destruction"],
+          "best_for": ["Deep change", "Investigation"],
+          "avoid": ["Hasty destruction"]
+        },
+        "purva_ashadha": {
+          "nakshatra_lord": "venus",
+          "theme": "Invincible energy, purifying force",
+          "positive": ["Invincible courage", "Purifying action", "Victory energy"],
+          "negative": ["Overconfident actions", "Combative nature"],
+          "best_for": ["Competitions", "Purification"],
+          "avoid": ["Overestimating power"]
+        },
+        "uttara_ashadha": {
+          "nakshatra_lord": "sun",
+          "theme": "Final victory energy, righteous action",
+          "positive": ["Righteous courage", "Universal goals", "Ultimate victory"],
+          "negative": ["Rigid actions", "Harsh judgment"],
+          "best_for": ["Final efforts", "Righteous causes"],
+          "avoid": ["Inflexible fighting"]
+        },
+        "shravana": {
+          "nakshatra_lord": "moon",
+          "theme": "Connected energy, listening action",
+          "positive": ["Strategic listening", "Connected action", "Wise moves"],
+          "negative": ["Gossip-based actions", "Reactive energy"],
+          "best_for": ["Strategic communication", "Intelligence"],
+          "avoid": ["Rumor-based actions"]
+        },
+        "dhanishta": {
+          "nakshatra_lord": "mars",
+          "theme": "Rhythmic energy, dynamic action",
+          "positive": ["Rhythmic power", "Dynamic success", "Fame energy"],
+          "negative": ["Show-off aggression", "Competitive display"],
+          "best_for": ["Performances", "Competition"],
+          "avoid": ["Ego display"]
+        },
+        "shatabhisha": {
+          "nakshatra_lord": "rahu",
+          "theme": "Healing energy, secret action",
+          "positive": ["Healing power", "Secret operations", "Research energy"],
+          "negative": ["Isolated aggression", "Secret violence"],
+          "best_for": ["Healing work", "Secret operations"],
+          "avoid": ["Hidden aggression"]
+        },
+        "purva_bhadrapada": {
+          "nakshatra_lord": "jupiter",
+          "theme": "Intense energy, idealistic action",
+          "positive": ["Intense courage", "Idealistic action", "Transformative power"],
+          "negative": ["Extreme actions", "Cynical aggression"],
+          "best_for": ["Spiritual warrior", "Transformation"],
+          "avoid": ["Extremism"]
+        },
+        "uttara_bhadrapada": {
+          "nakshatra_lord": "saturn",
+          "theme": "Deep energy, cosmic action",
+          "positive": ["Deep courage", "Sustained power", "Kundalini energy"],
+          "negative": ["Cold aggression", "Delayed action"],
+          "best_for": ["Deep work", "Sustained efforts"],
+          "avoid": ["Cold violence"]
+        },
+        "revati": {
+          "nakshatra_lord": "mercury",
+          "theme": "Nourishing energy, gentle action",
+          "positive": ["Compassionate courage", "Gentle strength", "Completion energy"],
+          "negative": ["Weak action", "Escapist energy"],
+          "best_for": ["Caring actions", "Endings"],
+          "avoid": ["Avoiding action"]
+        }
+      },
+      "mercury": {
+        "ashwini": {
+          "nakshatra_lord": "ketu",
+          "theme": "Quick thinking, healing communication",
+          "positive": ["Swift communication", "Healing words", "Quick learning"],
+          "negative": ["Scattered thoughts", "Impulsive speech"],
+          "best_for": ["Quick decisions", "Communication"],
+          "avoid": ["Hasty speech"]
+        },
+        "bharani": {
+          "nakshatra_lord": "venus",
+          "theme": "Creative communication, transformation",
+          "positive": ["Creative expression", "Transformative words", "Artistic thinking"],
+          "negative": ["Controlling speech", "Secretive communication"],
+          "best_for": ["Creative writing", "Art communication"],
+          "avoid": ["Manipulative words"]
+        },
+        "krittika": {
+          "nakshatra_lord": "sun",
+          "theme": "Sharp communication, clear thinking",
+          "positive": ["Sharp intellect", "Clear speech", "Cutting analysis"],
+          "negative": ["Harsh criticism", "Burning words"],
+          "best_for": ["Analysis", "Critical thinking"],
+          "avoid": ["Harsh speech"]
+        },
+        "rohini": {
+          "nakshatra_lord": "moon",
+          "theme": "Charming communication, material thinking",
+          "positive": ["Charming speech", "Creative thinking", "Business mind"],
+          "negative": ["Manipulative charm", "Material focus"],
+          "best_for": ["Business communication", "Creative work"],
+          "avoid": ["Deceptive charm"]
+        },
+        "mrigashira": {
+          "nakshatra_lord": "mars",
+          "theme": "Seeking communication, curious mind",
+          "positive": ["Curious intellect", "Exploratory thinking", "Research ability"],
+          "negative": ["Scattered mind", "Restless thoughts"],
+          "best_for": ["Research", "Learning"],
+          "avoid": ["Scattered focus"]
+        },
+        "ardra": {
+          "nakshatra_lord": "rahu",
+          "theme": "Breakthrough thinking, storm communication",
+          "positive": ["Breakthrough ideas", "Transformative thinking", "Innovation"],
+          "negative": ["Mental chaos", "Harsh speech"],
+          "best_for": ["Innovation", "Problem solving"],
+          "avoid": ["Harsh communication"]
+        },
+        "punarvasu": {
+          "nakshatra_lord": "jupiter",
+          "theme": "Renewed thinking, optimistic communication",
+          "positive": ["Optimistic speech", "Renewed ideas", "Wise communication"],
+          "negative": ["Repetitive thinking", "Over-optimism"],
+          "best_for": ["Teaching", "Positive communication"],
+          "avoid": ["Repeating patterns"]
+        },
+        "pushya": {
+          "nakshatra_lord": "saturn",
+          "theme": "Disciplined thinking, nourishing communication",
+          "positive": ["Structured thinking", "Disciplined speech", "Spiritual communication"],
+          "negative": ["Rigid thinking", "Cold communication"],
+          "best_for": ["Planning", "Structured work"],
+          "avoid": ["Rigid views"]
+        },
+        "ashlesha": {
+          "nakshatra_lord": "mercury",
+          "theme": "Strategic thinking, hypnotic communication",
+          "positive": ["Strategic intellect", "Persuasive speech", "Deep insight"],
+          "negative": ["Manipulative communication", "Suspicious thinking"],
+          "best_for": ["Strategy", "Negotiations"],
+          "avoid": ["Manipulation"]
+        },
+        "magha": {
+          "nakshatra_lord": "ketu",
+          "theme": "Ancestral thinking, royal communication",
+          "positive": ["Dignified speech", "Ancestral wisdom", "Traditional thinking"],
+          "negative": ["Arrogant communication", "Living in past"],
+          "best_for": ["Traditional knowledge", "Ceremonies"],
+          "avoid": ["Pride in speech"]
+        },
+        "purva_phalguni": {
+          "nakshatra_lord": "venus",
+          "theme": "Enjoyable communication, creative thinking",
+          "positive": ["Charming speech", "Creative ideas", "Joyful communication"],
+          "negative": ["Frivolous thinking", "Lazy communication"],
+          "best_for": ["Entertainment", "Creative work"],
+          "avoid": ["Superficial communication"]
+        },
+        "uttara_phalguni": {
+          "nakshatra_lord": "sun",
+          "theme": "Generous communication, helpful thinking",
+          "positive": ["Helpful speech", "Generous ideas", "Partnership communication"],
+          "negative": ["Demanding communication", "Ego in speech"],
+          "best_for": ["Contracts", "Partnerships"],
+          "avoid": ["Selfish communication"]
+        },
+        "hasta": {
+          "nakshatra_lord": "moon",
+          "theme": "Skillful communication, dexterous thinking",
+          "positive": ["Skillful speech", "Practical thinking", "Quick wit"],
+          "negative": ["Cunning communication", "Trickery"],
+          "best_for": ["Crafts", "Practical work"],
+          "avoid": ["Deceptive speech"]
+        },
+        "chitra": {
+          "nakshatra_lord": "mars",
+          "theme": "Brilliant communication, aesthetic thinking",
+          "positive": ["Brilliant ideas", "Aesthetic thinking", "Creative speech"],
+          "negative": ["Showy communication", "Superficial thinking"],
+          "best_for": ["Design", "Art"],
+          "avoid": ["Vanity in speech"]
+        },
+        "swati": {
+          "nakshatra_lord": "rahu",
+          "theme": "Independent thinking, flexible communication",
+          "positive": ["Independent thought", "Flexible speech", "Business intellect"],
+          "negative": ["Inconsistent thinking", "Unstable communication"],
+          "best_for": ["Business", "Trade"],
+          "avoid": ["Inconsistent messages"]
+        },
+        "vishakha": {
+          "nakshatra_lord": "jupiter",
+          "theme": "Goal-focused thinking, determined communication",
+          "positive": ["Determined speech", "Goal-focused mind", "Ambitious ideas"],
+          "negative": ["Jealous communication", "Obsessive thinking"],
+          "best_for": ["Goal setting", "Focused work"],
+          "avoid": ["Jealous speech"]
+        },
+        "anuradha": {
+          "nakshatra_lord": "saturn",
+          "theme": "Devoted thinking, friendly communication",
+          "positive": ["Loyal communication", "Friendly speech", "Devotional thinking"],
+          "negative": ["Martyr communication", "Suffering speech"],
+          "best_for": ["Friendship", "Team work"],
+          "avoid": ["Self-sacrificing speech"]
+        },
+        "jyeshtha": {
+          "nakshatra_lord": "mercury",
+          "theme": "Senior thinking, protective communication",
+          "positive": ["Elder wisdom", "Protective speech", "Strategic intellect"],
+          "negative": ["Jealous communication", "Controlling speech"],
+          "best_for": ["Leadership communication", "Strategy"],
+          "avoid": ["Power games in speech"]
+        },
+        "mula": {
+          "nakshatra_lord": "ketu",
+          "theme": "Root thinking, investigative communication",
+          "positive": ["Deep investigation", "Root analysis", "Transformative thinking"],
+          "negative": ["Destructive speech", "Excessive questioning"],
+          "best_for": ["Research", "Investigation"],
+          "avoid": ["Destructive communication"]
+        },
+        "purva_ashadha": {
+          "nakshatra_lord": "venus",
+          "theme": "Invincible thinking, purifying communication",
+          "positive": ["Confident speech", "Purifying words", "Victory thinking"],
+          "negative": ["Overconfident communication", "Combative speech"],
+          "best_for": ["Confident presentation", "Debates"],
+          "avoid": ["Overconfident speech"]
+        },
+        "uttara_ashadha": {
+          "nakshatra_lord": "sun",
+          "theme": "Universal thinking, righteous communication",
+          "positive": ["Principled speech", "Universal ideas", "Righteous thinking"],
+          "negative": ["Rigid communication", "Harsh judgment"],
+          "best_for": ["Principles", "Ethics"],
+          "avoid": ["Inflexible speech"]
+        },
+        "shravana": {
+          "nakshatra_lord": "moon",
+          "theme": "Listening communication, connected thinking",
+          "positive": ["Good listening", "Connected speech", "Wise communication"],
+          "negative": ["Gossip", "Eavesdropping"],
+          "best_for": ["Communication", "Learning"],
+          "avoid": ["Gossip"]
+        },
+        "dhanishta": {
+          "nakshatra_lord": "mars",
+          "theme": "Rhythmic thinking, dynamic communication",
+          "positive": ["Rhythmic speech", "Musical thinking", "Dynamic ideas"],
+          "negative": ["Show-off communication", "Restless mind"],
+          "best_for": ["Music", "Performances"],
+          "avoid": ["Ostentatious speech"]
+        },
+        "shatabhisha": {
+          "nakshatra_lord": "rahu",
+          "theme": "Healing thinking, secret communication",
+          "positive": ["Healing words", "Research intellect", "Innovative thinking"],
+          "negative": ["Isolated thinking", "Secretive communication"],
+          "best_for": ["Research", "Healing"],
+          "avoid": ["Excessive secrecy"]
+        },
+        "purva_bhadrapada": {
+          "nakshatra_lord": "jupiter",
+          "theme": "Intense thinking, idealistic communication",
+          "positive": ["Intense ideas", "Idealistic speech", "Transformative thinking"],
+          "negative": ["Cynical communication", "Extreme thinking"],
+          "best_for": ["Spiritual communication", "Intensity"],
+          "avoid": ["Extreme speech"]
+        },
+        "uttara_bhadrapada": {
+          "nakshatra_lord": "saturn",
+          "theme": "Deep thinking, cosmic communication",
+          "positive": ["Deep wisdom", "Cosmic thinking", "Profound speech"],
+          "negative": ["Cold communication", "Delayed speech"],
+          "best_for": ["Deep subjects", "Spiritual work"],
+          "avoid": ["Cold speech"]
+        },
+        "revati": {
+          "nakshatra_lord": "mercury",
+          "theme": "Nourishing communication, completion thinking",
+          "positive": ["Compassionate speech", "Completion thinking", "Graceful communication"],
+          "negative": ["Escapist thinking", "Avoiding speech"],
+          "best_for": ["Caring communication", "Endings"],
+          "avoid": ["Avoiding reality"]
+        }
+      },
+      "jupiter": {
+        "ashwini": {
+          "nakshatra_lord": "ketu",
+          "theme": "Quick wisdom, healing expansion",
+          "positive": ["Swift wisdom", "Healing knowledge", "Optimistic starts"],
+          "negative": ["Hasty expansion", "Impulsive teaching"],
+          "best_for": ["Learning healing", "New teachings"],
+          "avoid": ["Hasty decisions"]
+        },
+        "bharani": {
+          "nakshatra_lord": "venus",
+          "theme": "Creative wisdom, transformative expansion",
+          "positive": ["Creative teaching", "Transformative wisdom", "Nurturing knowledge"],
+          "negative": ["Controlling teaching", "Excessive indulgence"],
+          "best_for": ["Creative education", "Transformation teaching"],
+          "avoid": ["Control in teaching"]
+        },
+        "krittika": {
+          "nakshatra_lord": "sun",
+          "theme": "Sharp wisdom, cutting through ignorance",
+          "positive": ["Clear teaching", "Sharp wisdom", "Decisive knowledge"],
+          "negative": ["Harsh teaching", "Critical wisdom"],
+          "best_for": ["Clear instruction", "Analysis"],
+          "avoid": ["Harsh criticism"]
+        },
+        "rohini": {
+          "nakshatra_lord": "moon",
+          "theme": "Material wisdom, creative expansion",
+          "positive": ["Material prosperity", "Creative wisdom", "Abundant knowledge"],
+          "negative": ["Material attachment", "Over-indulgence"],
+          "best_for": ["Business growth", "Creative teaching"],
+          "avoid": ["Excessive materialism"]
+        },
+        "mrigashira": {
+          "nakshatra_lord": "mars",
+          "theme": "Seeking wisdom, exploratory expansion",
+          "positive": ["Curious learning", "Exploratory teaching", "Research wisdom"],
+          "negative": ["Scattered learning", "Restless teaching"],
+          "best_for": ["Research", "Exploration"],
+          "avoid": ["Scattered efforts"]
+        },
+        "ardra": {
+          "nakshatra_lord": "rahu",
+          "theme": "Breakthrough wisdom, storm expansion",
+          "positive": ["Breakthrough teaching", "Transformative wisdom", "Innovation"],
+          "negative": ["Chaotic teaching", "Destructive expansion"],
+          "best_for": ["Innovation", "Major changes"],
+          "avoid": ["Chaotic expansion"]
+        },
+        "punarvasu": {
+          "nakshatra_lord": "jupiter",
+          "theme": "Renewed wisdom, return expansion",
+          "positive": ["Excellent teaching", "Renewed wisdom", "Optimistic growth"],
+          "negative": ["Over-expansion", "Repetitive teaching"],
+          "best_for": ["Teaching", "Spiritual growth"],
+          "avoid": ["Over-optimism"]
+        },
+        "pushya": {
+          "nakshatra_lord": "saturn",
+          "theme": "Disciplined wisdom, nourishing expansion",
+          "positive": ["Structured teaching", "Spiritual wisdom", "Sustained growth"],
+          "negative": ["Rigid teaching", "Conservative wisdom"],
+          "best_for": ["Spiritual practices", "Long-term learning"],
+          "avoid": ["Rigid beliefs"]
+        },
+        "ashlesha": {
+          "nakshatra_lord": "mercury",
+          "theme": "Strategic wisdom, deep expansion",
+          "positive": ["Strategic teaching", "Deep wisdom", "Insightful knowledge"],
+          "negative": ["Manipulative teaching", "Hidden agendas"],
+          "best_for": ["Strategy", "Deep knowledge"],
+          "avoid": ["Manipulation"]
+        },
+        "magha": {
+          "nakshatra_lord": "ketu",
+          "theme": "Ancestral wisdom, royal expansion",
+          "positive": ["Traditional wisdom", "Dignified teaching", "Ancestral knowledge"],
+          "negative": ["Arrogant teaching", "Pride in knowledge"],
+          "best_for": ["Traditional teaching", "Ceremonies"],
+          "avoid": ["Arrogance"]
+        },
+        "purva_phalguni": {
+          "nakshatra_lord": "venus",
+          "theme": "Joyful wisdom, creative expansion",
+          "positive": ["Joyful teaching", "Creative wisdom", "Pleasurable learning"],
+          "negative": ["Lazy teaching", "Excessive pleasure"],
+          "best_for": ["Creative education", "Entertainment"],
+          "avoid": ["Laziness"]
+        },
+        "uttara_phalguni": {
+          "nakshatra_lord": "sun",
+          "theme": "Generous wisdom, helpful expansion",
+          "positive": ["Generous teaching", "Helpful wisdom", "Partnership growth"],
+          "negative": ["Demanding teaching", "Ego in wisdom"],
+          "best_for": ["Partnerships", "Generous service"],
+          "avoid": ["Demanding nature"]
+        },
+        "hasta": {
+          "nakshatra_lord": "moon",
+          "theme": "Skillful wisdom, practical expansion",
+          "positive": ["Skillful teaching", "Practical wisdom", "Dexterous knowledge"],
+          "negative": ["Cunning teaching", "Tricky wisdom"],
+          "best_for": ["Practical education", "Skills"],
+          "avoid": ["Deception"]
+        },
+        "chitra": {
+          "nakshatra_lord": "mars",
+          "theme": "Brilliant wisdom, aesthetic expansion",
+          "positive": ["Brilliant teaching", "Aesthetic wisdom", "Creative knowledge"],
+          "negative": ["Showy teaching", "Ego in knowledge"],
+          "best_for": ["Design education", "Arts"],
+          "avoid": ["Vanity"]
+        },
+        "swati": {
+          "nakshatra_lord": "rahu",
+          "theme": "Independent wisdom, flexible expansion",
+          "positive": ["Independent teaching", "Flexible wisdom", "Business knowledge"],
+          "negative": ["Inconsistent teaching", "Unstable growth"],
+          "best_for": ["Business education", "Trade"],
+          "avoid": ["Inconsistency"]
+        },
+        "vishakha": {
+          "nakshatra_lord": "jupiter",
+          "theme": "Goal-focused wisdom, determined expansion",
+          "positive": ["Excellent teaching", "Determined growth", "Ambitious wisdom"],
+          "negative": ["Jealous teaching", "Obsessive growth"],
+          "best_for": ["Goal achievement", "Focused learning"],
+          "avoid": ["Jealousy"]
+        },
+        "anuradha": {
+          "nakshatra_lord": "saturn",
+          "theme": "Devoted wisdom, friendly expansion",
+          "positive": ["Devoted teaching", "Loyal wisdom", "Friendship growth"],
+          "negative": ["Martyr teaching", "Suffering for beliefs"],
+          "best_for": ["Devotional teaching", "Teams"],
+          "avoid": ["Self-sacrifice"]
+        },
+        "jyeshtha": {
+          "nakshatra_lord": "mercury",
+          "theme": "Senior wisdom, protective expansion",
+          "positive": ["Elder teaching", "Protective wisdom", "Strategic knowledge"],
+          "negative": ["Jealous teaching", "Controlling wisdom"],
+          "best_for": ["Leadership teaching", "Protection"],
+          "avoid": ["Power in teaching"]
+        },
+        "mula": {
+          "nakshatra_lord": "ketu",
+          "theme": "Root wisdom, investigative expansion",
+          "positive": ["Deep teaching", "Root wisdom", "Transformative knowledge"],
+          "negative": ["Destructive teaching", "Excessive questioning"],
+          "best_for": ["Deep research", "Root causes"],
+          "avoid": ["Hasty conclusions"]
+        },
+        "purva_ashadha": {
+          "nakshatra_lord": "venus",
+          "theme": "Invincible wisdom, purifying expansion",
+          "positive": ["Confident teaching", "Purifying wisdom", "Victory knowledge"],
+          "negative": ["Overconfident teaching", "Combative wisdom"],
+          "best_for": ["Confident teaching", "Purification"],
+          "avoid": ["Overconfidence"]
+        },
+        "uttara_ashadha": {
+          "nakshatra_lord": "sun",
+          "theme": "Universal wisdom, righteous expansion",
+          "positive": ["Universal teaching", "Righteous wisdom", "Principled growth"],
+          "negative": ["Rigid teaching", "Harsh judgment"],
+          "best_for": ["Ethics", "Universal principles"],
+          "avoid": ["Rigidity"]
+        },
+        "shravana": {
+          "nakshatra_lord": "moon",
+          "theme": "Listening wisdom, connected expansion",
+          "positive": ["Good listening", "Connected teaching", "Wise communication"],
+          "negative": ["Gossip wisdom", "Overlistening"],
+          "best_for": ["Communication teaching", "Learning"],
+          "avoid": ["Gossip"]
+        },
+        "dhanishta": {
+          "nakshatra_lord": "mars",
+          "theme": "Rhythmic wisdom, dynamic expansion",
+          "positive": ["Rhythmic teaching", "Dynamic wisdom", "Musical knowledge"],
+          "negative": ["Show-off teaching", "Material focus"],
+          "best_for": ["Music education", "Wealth wisdom"],
+          "avoid": ["Ostentation"]
+        },
+        "shatabhisha": {
+          "nakshatra_lord": "rahu",
+          "theme": "Healing wisdom, secret expansion",
+          "positive": ["Healing teaching", "Research wisdom", "Innovative knowledge"],
+          "negative": ["Isolated teaching", "Secret wisdom"],
+          "best_for": ["Healing education", "Research"],
+          "avoid": ["Excessive secrecy"]
+        },
+        "purva_bhadrapada": {
+          "nakshatra_lord": "jupiter",
+          "theme": "Intense wisdom, idealistic expansion",
+          "positive": ["Intense teaching", "Idealistic wisdom", "Transformative knowledge"],
+          "negative": ["Cynical teaching", "Extreme beliefs"],
+          "best_for": ["Spiritual teaching", "Transformation"],
+          "avoid": ["Extremism"]
+        },
+        "uttara_bhadrapada": {
+          "nakshatra_lord": "saturn",
+          "theme": "Deep wisdom, cosmic expansion",
+          "positive": ["Deep teaching", "Cosmic wisdom", "Profound knowledge"],
+          "negative": ["Cold teaching", "Delayed growth"],
+          "best_for": ["Deep spirituality", "Meditation"],
+          "avoid": ["Cold detachment"]
+        },
+        "revati": {
+          "nakshatra_lord": "mercury",
+          "theme": "Nourishing wisdom, completion expansion",
+          "positive": ["Compassionate teaching", "Completion wisdom", "Graceful knowledge"],
+          "negative": ["Escapist teaching", "Avoiding wisdom"],
+          "best_for": ["Caring education", "Endings"],
+          "avoid": ["Escapism"]
+        }
+      },
+      "venus": {
+        "ashwini": {
+          "nakshatra_lord": "ketu",
+          "theme": "Quick love, healing beauty",
+          "positive": ["Swift attraction", "Healing relationships", "Fresh romance"],
+          "negative": ["Impulsive love", "Unstable attraction"],
+          "best_for": ["New relationships", "Quick connections"],
+          "avoid": ["Hasty commitments"]
+        },
+        "bharani": {
+          "nakshatra_lord": "venus",
+          "theme": "Deep love, creative passion",
+          "positive": ["Deep relationships", "Creative expression", "Passionate love"],
+          "negative": ["Possessive love", "Sexual obsession"],
+          "best_for": ["Deep bonding", "Creative arts"],
+          "avoid": ["Control in love"]
+        },
+        "krittika": {
+          "nakshatra_lord": "sun",
+          "theme": "Intense love, refining beauty",
+          "positive": ["Refined taste", "Intense attraction", "Purifying love"],
+          "negative": ["Harsh criticism", "Burning relationships"],
+          "best_for": ["Refinement", "Beauty work"],
+          "avoid": ["Critical behavior"]
+        },
+        "rohini": {
+          "nakshatra_lord": "moon",
+          "theme": "Peak love, material beauty",
+          "positive": ["Peak romance", "Material comfort", "Creative abundance"],
+          "negative": ["Attachment", "Jealousy", "Possessiveness"],
+          "best_for": ["Romance", "Creative work", "Material gains"],
+          "avoid": ["Excessive attachment"]
+        },
+        "mrigashira": {
+          "nakshatra_lord": "mars",
+          "theme": "Seeking love, gentle beauty",
+          "positive": ["Romantic pursuit", "Gentle attraction", "Artistic exploration"],
+          "negative": ["Elusive love", "Restless relationships"],
+          "best_for": ["Dating", "Exploration"],
+          "avoid": ["Commitment"]
+        },
+        "ardra": {
+          "nakshatra_lord": "rahu",
+          "theme": "Transformative love, storm beauty",
+          "positive": ["Deep transformation", "Breakthrough love", "Intense passion"],
+          "negative": ["Chaotic relationships", "Destructive love"],
+          "best_for": ["Transformation", "Deep healing"],
+          "avoid": ["Major commitments"]
+        },
+        "punarvasu": {
+          "nakshatra_lord": "jupiter",
+          "theme": "Renewed love, hopeful beauty",
+          "positive": ["Reconciliation", "Renewed romance", "Optimistic love"],
+          "negative": ["Repetitive patterns", "Over-idealization"],
+          "best_for": ["Reconciliation", "Second chances"],
+          "avoid": ["Repeating mistakes"]
+        },
+        "pushya": {
+          "nakshatra_lord": "saturn",
+          "theme": "Nourishing love, disciplined beauty",
+          "positive": ["Stable relationships", "Nurturing love", "Committed affection"],
+          "negative": ["Cold affection", "Rigid love"],
+          "best_for": ["Long-term relationships", "Marriage"],
+          "avoid": ["Emotional coldness"]
+        },
+        "ashlesha": {
+          "nakshatra_lord": "mercury",
+          "theme": "Hypnotic love, mysterious beauty",
+          "positive": ["Deep bonding", "Hypnotic attraction", "Intimate connection"],
+          "negative": ["Manipulative love", "Clinging attachment"],
+          "best_for": ["Intimate bonding", "Deep connection"],
+          "avoid": ["Manipulation"]
+        },
+        "magha": {
+          "nakshatra_lord": "ketu",
+          "theme": "Royal love, dignified beauty",
+          "positive": ["Dignified romance", "Traditional love", "Respectful relationships"],
+          "negative": ["Aloof affection", "Pride in love"],
+          "best_for": ["Traditional relationships", "Ceremonies"],
+          "avoid": ["Arrogance"]
+        },
+        "purva_phalguni": {
+          "nakshatra_lord": "venus",
+          "theme": "Joyful love, creative beauty",
+          "positive": ["Peak romance", "Joyful relationships", "Creative passion"],
+          "negative": ["Excessive pleasure", "Lazy love"],
+          "best_for": ["Romance", "Enjoyment", "Creative arts"],
+          "avoid": ["Overindulgence"]
+        },
+        "uttara_phalguni": {
+          "nakshatra_lord": "sun",
+          "theme": "Partnership love, generous beauty",
+          "positive": ["Strong partnerships", "Generous love", "Helpful affection"],
+          "negative": ["Demanding love", "Ego in relationships"],
+          "best_for": ["Marriage", "Partnerships"],
+          "avoid": ["Demanding behavior"]
+        },
+        "hasta": {
+          "nakshatra_lord": "moon",
+          "theme": "Skillful love, practical beauty",
+          "positive": ["Skillful romance", "Practical affection", "Dexterous love"],
+          "negative": ["Cunning love", "Tricky relationships"],
+          "best_for": ["Practical partnerships", "Crafts"],
+          "avoid": ["Manipulation"]
+        },
+        "chitra": {
+          "nakshatra_lord": "mars",
+          "theme": "Brilliant love, aesthetic beauty",
+          "positive": ["Beautiful romance", "Aesthetic passion", "Creative relationships"],
+          "negative": ["Ego in beauty", "Superficial love"],
+          "best_for": ["Design", "Art", "Beauty"],
+          "avoid": ["Vanity"]
+        },
+        "swati": {
+          "nakshatra_lord": "rahu",
+          "theme": "Independent love, flexible beauty",
+          "positive": ["Independent relationships", "Flexible love", "Business partnerships"],
+          "negative": ["Unstable affection", "Detached love"],
+          "best_for": ["Business partnerships", "Freedom"],
+          "avoid": ["Commitment issues"]
+        },
+        "vishakha": {
+          "nakshatra_lord": "jupiter",
+          "theme": "Goal-focused love, ambitious beauty",
+          "positive": ["Determined love", "Goal partnerships", "Passionate pursuit"],
+          "negative": ["Jealous love", "Obsessive relationships"],
+          "best_for": ["Committed goals", "Partnership projects"],
+          "avoid": ["Jealousy"]
+        },
+        "anuradha": {
+          "nakshatra_lord": "saturn",
+          "theme": "Devoted love, friendship beauty",
+          "positive": ["Devoted relationships", "Loyal love", "Deep friendship"],
+          "negative": ["Martyr love", "Suffering in relationships"],
+          "best_for": ["Deep commitment", "Friendship love"],
+          "avoid": ["Self-sacrifice"]
+        },
+        "jyeshtha": {
+          "nakshatra_lord": "mercury",
+          "theme": "Protective love, intense beauty",
+          "positive": ["Protective affection", "Intense passion", "Elder love"],
+          "negative": ["Jealous love", "Controlling relationships"],
+          "best_for": ["Protective partnerships", "Mature love"],
+          "avoid": ["Possessiveness"]
+        },
+        "mula": {
+          "nakshatra_lord": "ketu",
+          "theme": "Root love, transformative beauty",
+          "positive": ["Root connection", "Deep transformation", "Core bonding"],
+          "negative": ["Destructive love", "Uprooting relationships"],
+          "best_for": ["Deep transformation", "Root healing"],
+          "avoid": ["Hasty breakups"]
+        },
+        "purva_ashadha": {
+          "nakshatra_lord": "venus",
+          "theme": "Invincible love, purifying beauty",
+          "positive": ["Confident love", "Purifying relationships", "Victory in romance"],
+          "negative": ["Overconfident love", "Combative affection"],
+          "best_for": ["Confident relationships", "Purification"],
+          "avoid": ["Overconfidence"]
+        },
+        "uttara_ashadha": {
+          "nakshatra_lord": "sun",
+          "theme": "Universal love, righteous beauty",
+          "positive": ["Principled love", "Universal affection", "Righteous relationships"],
+          "negative": ["Rigid love", "Harsh judgment"],
+          "best_for": ["Principled partnerships", "Ethics"],
+          "avoid": ["Inflexibility"]
+        },
+        "shravana": {
+          "nakshatra_lord": "moon",
+          "theme": "Listening love, connected beauty",
+          "positive": ["Empathetic love", "Good listening", "Connected affection"],
+          "negative": ["Gossip in love", "Overlistening"],
+          "best_for": ["Communication", "Understanding"],
+          "avoid": ["Gossip"]
+        },
+        "dhanishta": {
+          "nakshatra_lord": "mars",
+          "theme": "Rhythmic love, dynamic beauty",
+          "positive": ["Rhythmic romance", "Musical love", "Dynamic relationships"],
+          "negative": ["Show-off love", "Material focus"],
+          "best_for": ["Music", "Performances", "Celebrations"],
+          "avoid": ["Ostentation"]
+        },
+        "shatabhisha": {
+          "nakshatra_lord": "rahu",
+          "theme": "Healing love, secret beauty",
+          "positive": ["Healing relationships", "Unconventional love", "Research partnerships"],
+          "negative": ["Isolated love", "Secret affairs"],
+          "best_for": ["Healing work", "Unconventional relationships"],
+          "avoid": ["Excessive secrecy"]
+        },
+        "purva_bhadrapada": {
+          "nakshatra_lord": "jupiter",
+          "theme": "Intense love, idealistic beauty",
+          "positive": ["Intense passion", "Idealistic love", "Transformative relationships"],
+          "negative": ["Cynical love", "Extreme passion"],
+          "best_for": ["Spiritual partnerships", "Transformation"],
+          "avoid": ["Extremism"]
+        },
+        "uttara_bhadrapada": {
+          "nakshatra_lord": "saturn",
+          "theme": "Deep love, cosmic beauty",
+          "positive": ["Deep affection", "Cosmic connection", "Profound love"],
+          "negative": ["Cold love", "Delayed affection"],
+          "best_for": ["Deep spirituality", "Meditation partnerships"],
+          "avoid": ["Cold detachment"]
+        },
+        "revati": {
+          "nakshatra_lord": "mercury",
+          "theme": "Nourishing love, completion beauty",
+          "positive": ["Compassionate love", "Nurturing affection", "Graceful relationships"],
+          "negative": ["Escapist love", "Over-sensitivity"],
+          "best_for": ["Caring relationships", "Completion"],
+          "avoid": ["Escapism"]
+        }
+      },
+      "saturn": {
+        "ashwini": {
+          "nakshatra_lord": "ketu",
+          "theme": "Disciplined healing, structured beginnings",
+          "positive": ["Disciplined initiative", "Structured healing", "Patient starts"],
+          "negative": ["Delayed beginnings", "Restricted healing", "Slow starts"],
+          "best_for": ["Long-term health plans", "Patient work"],
+          "avoid": ["Impatient actions"]
+        },
+        "bharani": {
+          "nakshatra_lord": "venus",
+          "theme": "Disciplined creativity, structured transformation",
+          "positive": ["Patient creativity", "Structured transformation", "Mature responsibility"],
+          "negative": ["Restricted creativity", "Heavy burdens", "Control issues"],
+          "best_for": ["Long-term creative projects", "Mature responsibility"],
+          "avoid": ["Controlling behavior"]
+        },
+        "krittika": {
+          "nakshatra_lord": "sun",
+          "theme": "Disciplined cutting, structured clarity",
+          "positive": ["Patient refinement", "Structured decisions", "Mature judgment"],
+          "negative": ["Harsh discipline", "Cold criticism", "Rigid cutting"],
+          "best_for": ["Patient refinement", "Long-term clarity"],
+          "avoid": ["Harsh discipline"]
+        },
+        "rohini": {
+          "nakshatra_lord": "moon",
+          "theme": "Disciplined growth, structured creativity",
+          "positive": ["Patient growth", "Structured creativity", "Stable prosperity"],
+          "negative": ["Material restrictions", "Delayed comfort", "Limited resources"],
+          "best_for": ["Long-term growth", "Patient building"],
+          "avoid": ["Impatient expectations"]
+        },
+        "mrigashira": {
+          "nakshatra_lord": "mars",
+          "theme": "Disciplined seeking, structured exploration",
+          "positive": ["Patient research", "Structured learning", "Focused exploration"],
+          "negative": ["Restricted exploration", "Slow learning", "Limited curiosity"],
+          "best_for": ["Long-term research", "Patient study"],
+          "avoid": ["Scattered efforts"]
+        },
+        "ardra": {
+          "nakshatra_lord": "rahu",
+          "theme": "Disciplined transformation, structured storms",
+          "positive": ["Patient transformation", "Structured change", "Mature breakthroughs"],
+          "negative": ["Harsh changes", "Restricted transformation", "Cold turmoil"],
+          "best_for": ["Long-term transformation", "Patient change"],
+          "avoid": ["Hasty changes"]
+        },
+        "punarvasu": {
+          "nakshatra_lord": "jupiter",
+          "theme": "Disciplined renewal, structured return",
+          "positive": ["Patient recovery", "Structured renewal", "Mature optimism"],
+          "negative": ["Delayed recovery", "Restricted renewal", "Heavy karma"],
+          "best_for": ["Long-term recovery", "Patient rebuilding"],
+          "avoid": ["Impatient renewal"]
+        },
+        "pushya": {
+          "nakshatra_lord": "saturn",
+          "theme": "Peak discipline, structured nourishment",
+          "positive": ["Excellent discipline", "Structured growth", "Spiritual maturity"],
+          "negative": ["Excessive restriction", "Cold nourishment", "Harsh discipline"],
+          "best_for": ["Spiritual practices", "Long-term planning", "Structure"],
+          "avoid": ["Excessive rigidity"]
+        },
+        "ashlesha": {
+          "nakshatra_lord": "mercury",
+          "theme": "Disciplined strategy, structured intensity",
+          "positive": ["Patient strategy", "Structured depth", "Mature insight"],
+          "negative": ["Manipulative discipline", "Restricted emotions", "Cold strategy"],
+          "best_for": ["Long-term strategy", "Patient planning"],
+          "avoid": ["Manipulation"]
+        },
+        "magha": {
+          "nakshatra_lord": "ketu",
+          "theme": "Disciplined ancestry, structured dignity",
+          "positive": ["Mature dignity", "Structured tradition", "Patient honor"],
+          "negative": ["Rigid tradition", "Cold pride", "Heavy ancestral karma"],
+          "best_for": ["Ancestral work", "Traditional structure"],
+          "avoid": ["Rigid pride"]
+        },
+        "purva_phalguni": {
+          "nakshatra_lord": "venus",
+          "theme": "Disciplined enjoyment, structured creativity",
+          "positive": ["Mature creativity", "Patient enjoyment", "Structured pleasure"],
+          "negative": ["Restricted pleasure", "Delayed enjoyment", "Cold relationships"],
+          "best_for": ["Long-term creative work", "Patient art"],
+          "avoid": ["Expecting immediate pleasure"]
+        },
+        "uttara_phalguni": {
+          "nakshatra_lord": "sun",
+          "theme": "Disciplined partnerships, structured service",
+          "positive": ["Stable partnerships", "Mature service", "Patient generosity"],
+          "negative": ["Rigid partnerships", "Cold service", "Heavy responsibilities"],
+          "best_for": ["Long-term partnerships", "Committed service"],
+          "avoid": ["Rigid expectations"]
+        },
+        "hasta": {
+          "nakshatra_lord": "moon",
+          "theme": "Disciplined skill, structured dexterity",
+          "positive": ["Patient craftsmanship", "Structured skills", "Mature dexterity"],
+          "negative": ["Restricted skills", "Slow hands", "Limited abilities"],
+          "best_for": ["Long-term skill building", "Patient crafts"],
+          "avoid": ["Impatient expectations"]
+        },
+        "chitra": {
+          "nakshatra_lord": "mars",
+          "theme": "Disciplined beauty, structured brilliance",
+          "positive": ["Patient design", "Structured beauty", "Mature aesthetics"],
+          "negative": ["Restricted creativity", "Delayed projects", "Cold beauty"],
+          "best_for": ["Long-term design", "Patient architecture"],
+          "avoid": ["Impatient creation"]
+        },
+        "swati": {
+          "nakshatra_lord": "rahu",
+          "theme": "Disciplined independence, structured flexibility",
+          "positive": ["Mature independence", "Patient flexibility", "Structured business"],
+          "negative": ["Restricted freedom", "Delayed success", "Limited flexibility"],
+          "best_for": ["Long-term business", "Patient trade"],
+          "avoid": ["Impatient independence"]
+        },
+        "vishakha": {
+          "nakshatra_lord": "jupiter",
+          "theme": "Disciplined goals, structured ambition",
+          "positive": ["Patient goal pursuit", "Structured ambition", "Mature determination"],
+          "negative": ["Delayed goals", "Restricted ambition", "Heavy responsibilities"],
+          "best_for": ["Long-term goals", "Patient achievement"],
+          "avoid": ["Impatient ambition"]
+        },
+        "anuradha": {
+          "nakshatra_lord": "saturn",
+          "theme": "Peak devotion, structured friendship",
+          "positive": ["Excellent discipline", "Deep devotion", "Loyal friendship"],
+          "negative": ["Excessive suffering", "Rigid devotion", "Cold friendship"],
+          "best_for": ["Spiritual devotion", "Long-term loyalty"],
+          "avoid": ["Self-punishment"]
+        },
+        "jyeshtha": {
+          "nakshatra_lord": "mercury",
+          "theme": "Disciplined seniority, structured protection",
+          "positive": ["Mature leadership", "Patient protection", "Structured authority"],
+          "negative": ["Controlling leadership", "Rigid authority", "Cold protection"],
+          "best_for": ["Long-term leadership", "Patient authority"],
+          "avoid": ["Harsh control"]
+        },
+        "mula": {
+          "nakshatra_lord": "ketu",
+          "theme": "Disciplined roots, structured transformation",
+          "positive": ["Patient investigation", "Structured root work", "Mature transformation"],
+          "negative": ["Harsh uprooting", "Delayed transformation", "Cold destruction"],
+          "best_for": ["Long-term research", "Patient root work"],
+          "avoid": ["Hasty destruction"]
+        },
+        "purva_ashadha": {
+          "nakshatra_lord": "venus",
+          "theme": "Disciplined victory, structured purification",
+          "positive": ["Patient victory", "Structured purification", "Mature confidence"],
+          "negative": ["Delayed victory", "Restricted purification", "Heavy burdens"],
+          "best_for": ["Long-term victory", "Patient purification"],
+          "avoid": ["Impatient expectations"]
+        },
+        "uttara_ashadha": {
+          "nakshatra_lord": "sun",
+          "theme": "Disciplined universality, structured righteousness",
+          "positive": ["Mature principles", "Patient righteousness", "Structured authority"],
+          "negative": ["Rigid principles", "Cold righteousness", "Harsh judgment"],
+          "best_for": ["Long-term ethics", "Patient principles"],
+          "avoid": ["Harsh rigidity"]
+        },
+        "shravana": {
+          "nakshatra_lord": "moon",
+          "theme": "Disciplined listening, structured connection",
+          "positive": ["Patient listening", "Structured communication", "Mature wisdom"],
+          "negative": ["Restricted communication", "Cold listening", "Heavy silence"],
+          "best_for": ["Long-term learning", "Patient understanding"],
+          "avoid": ["Cold silence"]
+        },
+        "dhanishta": {
+          "nakshatra_lord": "mars",
+          "theme": "Disciplined rhythm, structured wealth",
+          "positive": ["Patient wealth building", "Structured success", "Mature fame"],
+          "negative": ["Delayed wealth", "Restricted success", "Cold fame"],
+          "best_for": ["Long-term wealth", "Patient success"],
+          "avoid": ["Impatient wealth seeking"]
+        },
+        "shatabhisha": {
+          "nakshatra_lord": "rahu",
+          "theme": "Disciplined healing, structured secrets",
+          "positive": ["Patient healing", "Structured research", "Mature innovation"],
+          "negative": ["Isolated discipline", "Restricted healing", "Cold research"],
+          "best_for": ["Long-term healing", "Patient research"],
+          "avoid": ["Excessive isolation"]
+        },
+        "purva_bhadrapada": {
+          "nakshatra_lord": "jupiter",
+          "theme": "Disciplined intensity, structured idealism",
+          "positive": ["Patient transformation", "Structured intensity", "Mature idealism"],
+          "negative": ["Harsh transformation", "Rigid idealism", "Cold intensity"],
+          "best_for": ["Long-term spiritual work", "Patient transformation"],
+          "avoid": ["Extreme discipline"]
+        },
+        "uttara_bhadrapada": {
+          "nakshatra_lord": "saturn",
+          "theme": "Peak discipline, cosmic structure",
+          "positive": ["Excellent discipline", "Deep wisdom", "Cosmic maturity"],
+          "negative": ["Excessive coldness", "Harsh detachment", "Heavy karma"],
+          "best_for": ["Deep meditation", "Long-term spiritual work"],
+          "avoid": ["Cold isolation"]
+        },
+        "revati": {
+          "nakshatra_lord": "mercury",
+          "theme": "Disciplined nourishment, structured completion",
+          "positive": ["Patient completion", "Structured compassion", "Mature grace"],
+          "negative": ["Delayed completion", "Restricted compassion", "Cold care"],
+          "best_for": ["Long-term endings", "Patient completion"],
+          "avoid": ["Cold endings"]
+        }
+      },
+      "rahu": {
+        "ashwini": {
+          "nakshatra_lord": "ketu",
+          "theme": "Obsessive healing, unconventional beginnings",
+          "positive": ["Innovative healing", "Breakthrough medicine", "Quick manifestation"],
+          "negative": ["Addictive healing", "Rash innovation", "Deceptive starts"],
+          "best_for": ["Alternative healing", "Innovation"],
+          "avoid": ["Shortcuts", "Addiction"]
+        },
+        "bharani": {
+          "nakshatra_lord": "venus",
+          "theme": "Obsessive creativity, intense transformation",
+          "positive": ["Breakthrough creativity", "Intense transformation", "Unconventional art"],
+          "negative": ["Addictive pleasure", "Destructive transformation", "Deceptive relationships"],
+          "best_for": ["Unconventional art", "Deep transformation"],
+          "avoid": ["Addictions", "Manipulation"]
+        },
+        "krittika": {
+          "nakshatra_lord": "sun",
+          "theme": "Obsessive clarity, cutting illusions",
+          "positive": ["Breakthrough clarity", "Cutting through Maya", "Innovative decisions"],
+          "negative": ["Harsh obsession", "Deceptive clarity", "False confidence"],
+          "best_for": ["Breaking illusions", "Innovation"],
+          "avoid": ["Harsh methods", "Deception"]
+        },
+        "rohini": {
+          "nakshatra_lord": "moon",
+          "theme": "Obsessive materialism, unconventional creativity",
+          "positive": ["Breakthrough prosperity", "Unconventional beauty", "Material innovation"],
+          "negative": ["Material addiction", "Deceptive beauty", "Jealous obsession"],
+          "best_for": ["Unconventional business", "Innovation"],
+          "avoid": ["Material obsession", "Deception"]
+        },
+        "mrigashira": {
+          "nakshatra_lord": "mars",
+          "theme": "Obsessive seeking, restless exploration",
+          "positive": ["Breakthrough research", "Innovative exploration", "Quick learning"],
+          "negative": ["Restless obsession", "Deceptive seeking", "Scattered focus"],
+          "best_for": ["Innovative research", "Unconventional learning"],
+          "avoid": ["Scattered obsession", "Deception"]
+        },
+        "ardra": {
+          "nakshatra_lord": "rahu",
+          "theme": "Peak obsession, storm transformation",
+          "positive": ["Major breakthroughs", "Deep transformation", "Revolutionary innovation"],
+          "negative": ["Destructive obsession", "Chaotic addiction", "Deceptive transformation"],
+          "best_for": ["Major innovation", "Breakthroughs"],
+          "avoid": ["Destructive obsession", "Chaos"]
+        },
+        "punarvasu": {
+          "nakshatra_lord": "jupiter",
+          "theme": "Obsessive renewal, unconventional wisdom",
+          "positive": ["Breakthrough recovery", "Innovative wisdom", "Unconventional teaching"],
+          "negative": ["Repetitive obsession", "Deceptive wisdom", "False hope"],
+          "best_for": ["Unconventional teaching", "Innovation"],
+          "avoid": ["False promises", "Deception"]
+        },
+        "pushya": {
+          "nakshatra_lord": "saturn",
+          "theme": "Obsessive nourishment, unconventional discipline",
+          "positive": ["Breakthrough structure", "Innovative tradition", "Unconventional spirituality"],
+          "negative": ["Rigid obsession", "Deceptive discipline", "False spirituality"],
+          "best_for": ["Unconventional spirituality", "Innovation"],
+          "avoid": ["False gurus", "Deception"]
+        },
+        "ashlesha": {
+          "nakshatra_lord": "mercury",
+          "theme": "Obsessive strategy, intense manipulation",
+          "positive": ["Breakthrough strategy", "Deep insight", "Innovative tactics"],
+          "negative": ["Manipulative obsession", "Deceptive strategy", "Addictive intensity"],
+          "best_for": ["Strategic innovation", "Deep research"],
+          "avoid": ["Manipulation", "Deception"]
+        },
+        "magha": {
+          "nakshatra_lord": "ketu",
+          "theme": "Obsessive ancestry, unconventional tradition",
+          "positive": ["Breakthrough tradition", "Innovative heritage", "Unconventional royalty"],
+          "negative": ["Arrogant obsession", "Deceptive ancestry", "False pride"],
+          "best_for": ["Innovative tradition", "Unconventional leadership"],
+          "avoid": ["False claims", "Arrogance"]
+        },
+        "purva_phalguni": {
+          "nakshatra_lord": "venus",
+          "theme": "Obsessive pleasure, unconventional creativity",
+          "positive": ["Breakthrough creativity", "Innovative art", "Unconventional romance"],
+          "negative": ["Pleasure addiction", "Deceptive romance", "Sexual obsession"],
+          "best_for": ["Unconventional art", "Innovation"],
+          "avoid": ["Addictions", "Deception"]
+        },
+        "uttara_phalguni": {
+          "nakshatra_lord": "sun",
+          "theme": "Obsessive partnerships, unconventional service",
+          "positive": ["Breakthrough partnerships", "Innovative service", "Unconventional contracts"],
+          "negative": ["Deceptive partnerships", "Obsessive service", "False generosity"],
+          "best_for": ["Unconventional partnerships", "Innovation"],
+          "avoid": ["Deceptive contracts", "False promises"]
+        },
+        "hasta": {
+          "nakshatra_lord": "moon",
+          "theme": "Obsessive skill, unconventional crafts",
+          "positive": ["Breakthrough skills", "Innovative crafts", "Quick manifestation"],
+          "negative": ["Manipulative skills", "Deceptive crafts", "Tricky obsession"],
+          "best_for": ["Unconventional skills", "Innovation"],
+          "avoid": ["Manipulation", "Deception"]
+        },
+        "chitra": {
+          "nakshatra_lord": "mars",
+          "theme": "Obsessive beauty, unconventional design",
+          "positive": ["Breakthrough design", "Innovative beauty", "Revolutionary art"],
+          "negative": ["Deceptive beauty", "Obsessive aesthetics", "False appearance"],
+          "best_for": ["Unconventional design", "Innovation"],
+          "avoid": ["Deceptive appearance", "Vanity"]
+        },
+        "swati": {
+          "nakshatra_lord": "rahu",
+          "theme": "Peak independence, revolutionary business",
+          "positive": ["Major breakthroughs", "Revolutionary trade", "Innovative business"],
+          "negative": ["Unstable obsession", "Deceptive business", "Risky ventures"],
+          "best_for": ["Revolutionary business", "Major innovation"],
+          "avoid": ["Risky schemes", "Deception"]
+        },
+        "vishakha": {
+          "nakshatra_lord": "jupiter",
+          "theme": "Obsessive goals, unconventional ambition",
+          "positive": ["Breakthrough achievement", "Innovative goals", "Revolutionary success"],
+          "negative": ["Jealous obsession", "Deceptive ambition", "Ruthless pursuit"],
+          "best_for": ["Unconventional goals", "Innovation"],
+          "avoid": ["Unethical means", "Jealousy"]
+        },
+        "anuradha": {
+          "nakshatra_lord": "saturn",
+          "theme": "Obsessive devotion, unconventional friendship",
+          "positive": ["Breakthrough devotion", "Innovative loyalty", "Unconventional spirituality"],
+          "negative": ["Cult obsession", "Deceptive friendship", "False devotion"],
+          "best_for": ["Unconventional spirituality", "Innovation"],
+          "avoid": ["Cults", "False gurus"]
+        },
+        "jyeshtha": {
+          "nakshatra_lord": "mercury",
+          "theme": "Obsessive power, unconventional leadership",
+          "positive": ["Breakthrough leadership", "Innovative protection", "Revolutionary authority"],
+          "negative": ["Power obsession", "Deceptive leadership", "Jealous control"],
+          "best_for": ["Unconventional leadership", "Innovation"],
+          "avoid": ["Power games", "Manipulation"]
+        },
+        "mula": {
+          "nakshatra_lord": "ketu",
+          "theme": "Obsessive investigation, destructive transformation",
+          "positive": ["Breakthrough research", "Root transformation", "Revolutionary insight"],
+          "negative": ["Destructive obsession", "Chaotic uprooting", "Deceptive investigation"],
+          "best_for": ["Deep research", "Root transformation"],
+          "avoid": ["Hasty destruction", "Chaos"]
+        },
+        "purva_ashadha": {
+          "nakshatra_lord": "venus",
+          "theme": "Obsessive victory, unconventional purification",
+          "positive": ["Breakthrough victory", "Innovative purification", "Revolutionary success"],
+          "negative": ["Overconfident obsession", "Deceptive victory", "False invincibility"],
+          "best_for": ["Unconventional methods", "Innovation"],
+          "avoid": ["Overconfidence", "Deception"]
+        },
+        "uttara_ashadha": {
+          "nakshatra_lord": "sun",
+          "theme": "Obsessive righteousness, unconventional principles",
+          "positive": ["Breakthrough ethics", "Innovative principles", "Revolutionary righteousness"],
+          "negative": ["Rigid obsession", "Deceptive righteousness", "False principles"],
+          "best_for": ["Unconventional ethics", "Innovation"],
+          "avoid": ["False righteousness", "Extremism"]
+        },
+        "shravana": {
+          "nakshatra_lord": "moon",
+          "theme": "Obsessive listening, unconventional communication",
+          "positive": ["Breakthrough communication", "Innovative learning", "Revolutionary wisdom"],
+          "negative": ["Gossip obsession", "Deceptive communication", "False knowledge"],
+          "best_for": ["Unconventional communication", "Innovation"],
+          "avoid": ["Gossip", "Deception"]
+        },
+        "dhanishta": {
+          "nakshatra_lord": "mars",
+          "theme": "Obsessive wealth, unconventional rhythm",
+          "positive": ["Breakthrough success", "Innovative rhythm", "Revolutionary fame"],
+          "negative": ["Material obsession", "Deceptive wealth", "False fame"],
+          "best_for": ["Unconventional success", "Innovation"],
+          "avoid": ["Material obsession", "Deception"]
+        },
+        "shatabhisha": {
+          "nakshatra_lord": "rahu",
+          "theme": "Peak healing, revolutionary medicine",
+          "positive": ["Major breakthroughs", "Revolutionary healing", "Innovative research"],
+          "negative": ["Addictive healing", "Deceptive medicine", "Isolated obsession"],
+          "best_for": ["Revolutionary healing", "Major innovation"],
+          "avoid": ["Addiction", "Deception"]
+        },
+        "purva_bhadrapada": {
+          "nakshatra_lord": "jupiter",
+          "theme": "Obsessive intensity, unconventional idealism",
+          "positive": ["Breakthrough transformation", "Innovative idealism", "Revolutionary spirituality"],
+          "negative": ["Extreme obsession", "Deceptive idealism", "Cynical addiction"],
+          "best_for": ["Unconventional spirituality", "Innovation"],
+          "avoid": ["Extremism", "Cults"]
+        },
+        "uttara_bhadrapada": {
+          "nakshatra_lord": "saturn",
+          "theme": "Obsessive depth, unconventional wisdom",
+          "positive": ["Breakthrough depth", "Innovative wisdom", "Revolutionary kundalini"],
+          "negative": ["Cold obsession", "Deceptive depth", "Isolated addiction"],
+          "best_for": ["Deep meditation", "Innovation"],
+          "avoid": ["Isolation", "Deception"]
+        },
+        "revati": {
+          "nakshatra_lord": "mercury",
+          "theme": "Obsessive completion, unconventional nourishment",
+          "positive": ["Breakthrough completion", "Innovative compassion", "Revolutionary endings"],
+          "negative": ["Escapist obsession", "Deceptive compassion", "False transcendence"],
+          "best_for": ["Unconventional endings", "Innovation"],
+          "avoid": ["Escapism", "Deception"]
+        }
+      },
+      "ketu": {
+        "ashwini": {
+          "nakshatra_lord": "ketu",
+          "theme": "Peak detachment, spiritual healing",
+          "positive": ["Spiritual healing", "Instant insight", "Liberation energy"],
+          "negative": ["Confusion", "Loss of direction", "Sudden health issues"],
+          "best_for": ["Spiritual practices", "Meditation", "Letting go"],
+          "avoid": ["New beginnings", "Material ventures"]
+        },
+        "bharani": {
+          "nakshatra_lord": "venus",
+          "theme": "Detached creativity, spiritual transformation",
+          "positive": ["Spiritual creativity", "Deep transformation", "Liberation from attachments"],
+          "negative": ["Loss of creativity", "Relationship detachment", "Sudden endings"],
+          "best_for": ["Spiritual transformation", "Letting go"],
+          "avoid": ["Material attachments", "New relationships"]
+        },
+        "krittika": {
+          "nakshatra_lord": "sun",
+          "theme": "Detached clarity, spiritual purification",
+          "positive": ["Spiritual insight", "Purification", "Liberation from ego"],
+          "negative": ["Loss of confidence", "Confusion", "Harsh detachment"],
+          "best_for": ["Spiritual purification", "Ego dissolution"],
+          "avoid": ["Ego projects", "Material clarity"]
+        },
+        "rohini": {
+          "nakshatra_lord": "moon",
+          "theme": "Detached comfort, spiritual materialism",
+          "positive": ["Spiritual prosperity", "Inner beauty", "Liberation from attachment"],
+          "negative": ["Material loss", "Relationship confusion", "Sudden detachment"],
+          "best_for": ["Spiritual practices", "Detachment"],
+          "avoid": ["Material ventures", "New attachments"]
+        },
+        "mrigashira": {
+          "nakshatra_lord": "mars",
+          "theme": "Detached seeking, spiritual exploration",
+          "positive": ["Spiritual seeking", "Inner exploration", "Liberation from restlessness"],
+          "negative": ["Confusion", "Lost direction", "Scattered energy"],
+          "best_for": ["Spiritual exploration", "Meditation"],
+          "avoid": ["Material seeking", "New ventures"]
+        },
+        "ardra": {
+          "nakshatra_lord": "rahu",
+          "theme": "Detached transformation, spiritual storms",
+          "positive": ["Deep spiritual transformation", "Liberation", "Inner breakthroughs"],
+          "negative": ["Confusion", "Chaos", "Sudden upheavals"],
+          "best_for": ["Deep meditation", "Spiritual transformation"],
+          "avoid": ["Material changes", "New commitments"]
+        },
+        "punarvasu": {
+          "nakshatra_lord": "jupiter",
+          "theme": "Detached renewal, spiritual return",
+          "positive": ["Spiritual renewal", "Inner wisdom", "Liberation from patterns"],
+          "negative": ["Loss of optimism", "Confusion", "Repeated detachment"],
+          "best_for": ["Spiritual renewal", "Inner work"],
+          "avoid": ["Material renewal", "New beginnings"]
+        },
+        "pushya": {
+          "nakshatra_lord": "saturn",
+          "theme": "Detached nourishment, spiritual discipline",
+          "positive": ["Spiritual nourishment", "Inner discipline", "Liberation from structure"],
+          "negative": ["Loss of structure", "Confusion", "Cold detachment"],
+          "best_for": ["Spiritual practices", "Meditation"],
+          "avoid": ["Material structure", "New disciplines"]
+        },
+        "ashlesha": {
+          "nakshatra_lord": "mercury",
+          "theme": "Detached strategy, spiritual kundalini",
+          "positive": ["Spiritual insight", "Kundalini awakening", "Liberation from manipulation"],
+          "negative": ["Confusion", "Loss of control", "Sudden detachment"],
+          "best_for": ["Spiritual practices", "Inner work"],
+          "avoid": ["Manipulation", "Material strategy"]
+        },
+        "magha": {
+          "nakshatra_lord": "ketu",
+          "theme": "Peak ancestral detachment, spiritual royalty",
+          "positive": ["Ancestral liberation", "Spiritual dignity", "Deep detachment"],
+          "negative": ["Loss of status", "Confusion", "Sudden endings"],
+          "best_for": ["Ancestral healing", "Spiritual practices"],
+          "avoid": ["Ego projects", "Material status"]
+        },
+        "purva_phalguni": {
+          "nakshatra_lord": "venus",
+          "theme": "Detached pleasure, spiritual creativity",
+          "positive": ["Spiritual joy", "Inner creativity", "Liberation from pleasure"],
+          "negative": ["Loss of enjoyment", "Relationship confusion", "Sudden detachment"],
+          "best_for": ["Spiritual practices", "Detachment"],
+          "avoid": ["Material pleasure", "New relationships"]
+        },
+        "uttara_phalguni": {
+          "nakshatra_lord": "sun",
+          "theme": "Detached service, spiritual partnerships",
+          "positive": ["Spiritual service", "Inner generosity", "Liberation from ego"],
+          "negative": ["Loss of partnerships", "Confusion", "Sudden separations"],
+          "best_for": ["Spiritual service", "Selfless work"],
+          "avoid": ["Material partnerships", "Ego service"]
+        },
+        "hasta": {
+          "nakshatra_lord": "moon",
+          "theme": "Detached skill, spiritual dexterity",
+          "positive": ["Spiritual skills", "Inner dexterity", "Liberation from tricks"],
+          "negative": ["Loss of skills", "Confusion", "Sudden clumsiness"],
+          "best_for": ["Spiritual practices", "Inner work"],
+          "avoid": ["Material skills", "Manipulation"]
+        },
+        "chitra": {
+          "nakshatra_lord": "mars",
+          "theme": "Detached beauty, spiritual brilliance",
+          "positive": ["Spiritual beauty", "Inner brilliance", "Liberation from appearance"],
+          "negative": ["Loss of beauty", "Confusion", "Sudden detachment"],
+          "best_for": ["Spiritual practices", "Inner beauty"],
+          "avoid": ["Material beauty", "Vanity"]
+        },
+        "swati": {
+          "nakshatra_lord": "rahu",
+          "theme": "Detached independence, spiritual freedom",
+          "positive": ["True freedom", "Spiritual independence", "Liberation"],
+          "negative": ["Confusion", "Loss of direction", "Sudden instability"],
+          "best_for": ["Spiritual freedom", "Meditation"],
+          "avoid": ["Material independence", "Business"]
+        },
+        "vishakha": {
+          "nakshatra_lord": "jupiter",
+          "theme": "Detached goals, spiritual ambition",
+          "positive": ["Spiritual goals", "Inner transformation", "Liberation from ambition"],
+          "negative": ["Loss of goals", "Confusion", "Sudden changes"],
+          "best_for": ["Spiritual goals", "Inner work"],
+          "avoid": ["Material goals", "Worldly ambition"]
+        },
+        "anuradha": {
+          "nakshatra_lord": "saturn",
+          "theme": "Detached devotion, spiritual friendship",
+          "positive": ["Spiritual devotion", "Inner friendship", "Liberation from attachment"],
+          "negative": ["Loss of friends", "Confusion", "Sudden isolation"],
+          "best_for": ["Spiritual devotion", "Meditation"],
+          "avoid": ["Material friendships", "Attachments"]
+        },
+        "jyeshtha": {
+          "nakshatra_lord": "mercury",
+          "theme": "Detached power, spiritual seniority",
+          "positive": ["Spiritual power", "Inner authority", "Liberation from control"],
+          "negative": ["Loss of power", "Confusion", "Sudden detachment"],
+          "best_for": ["Spiritual leadership", "Inner work"],
+          "avoid": ["Material power", "Control"]
+        },
+        "mula": {
+          "nakshatra_lord": "ketu",
+          "theme": "Peak root detachment, spiritual investigation",
+          "positive": ["Deep liberation", "Root transformation", "Spiritual insight"],
+          "negative": ["Total confusion", "Major upheaval", "Sudden destruction"],
+          "best_for": ["Deep meditation", "Spiritual transformation"],
+          "avoid": ["Material ventures", "New beginnings"]
+        },
+        "purva_ashadha": {
+          "nakshatra_lord": "venus",
+          "theme": "Detached victory, spiritual purification",
+          "positive": ["Spiritual victory", "Inner purification", "Liberation from ego"],
+          "negative": ["Loss of confidence", "Confusion", "Sudden defeats"],
+          "best_for": ["Spiritual purification", "Inner work"],
+          "avoid": ["Material victory", "Competitions"]
+        },
+        "uttara_ashadha": {
+          "nakshatra_lord": "sun",
+          "theme": "Detached righteousness, spiritual universality",
+          "positive": ["Spiritual principles", "Inner righteousness", "Liberation from judgment"],
+          "negative": ["Loss of principles", "Confusion", "Sudden changes"],
+          "best_for": ["Spiritual practices", "Universal wisdom"],
+          "avoid": ["Material principles", "Rigid righteousness"]
+        },
+        "shravana": {
+          "nakshatra_lord": "moon",
+          "theme": "Detached listening, spiritual connection",
+          "positive": ["Spiritual listening", "Inner wisdom", "Liberation from noise"],
+          "negative": ["Confusion", "Loss of connection", "Sudden isolation"],
+          "best_for": ["Spiritual practices", "Meditation"],
+          "avoid": ["Material communication", "Gossip"]
+        },
+        "dhanishta": {
+          "nakshatra_lord": "mars",
+          "theme": "Detached wealth, spiritual rhythm",
+          "positive": ["Spiritual rhythm", "Inner wealth", "Liberation from materialism"],
+          "negative": ["Material loss", "Confusion", "Sudden changes"],
+          "best_for": ["Spiritual practices", "Inner wealth"],
+          "avoid": ["Material wealth", "Fame"]
+        },
+        "shatabhisha": {
+          "nakshatra_lord": "rahu",
+          "theme": "Detached healing, spiritual secrets",
+          "positive": ["Spiritual healing", "Inner secrets", "Liberation"],
+          "negative": ["Confusion", "Isolation", "Sudden changes"],
+          "best_for": ["Spiritual healing", "Meditation"],
+          "avoid": ["Material healing", "Secrets"]
+        },
+        "purva_bhadrapada": {
+          "nakshatra_lord": "jupiter",
+          "theme": "Detached intensity, spiritual idealism",
+          "positive": ["Spiritual intensity", "Inner transformation", "Liberation"],
+          "negative": ["Confusion", "Cynicism", "Sudden changes"],
+          "best_for": ["Spiritual transformation", "Meditation"],
+          "avoid": ["Material intensity", "Extremism"]
+        },
+        "uttara_bhadrapada": {
+          "nakshatra_lord": "saturn",
+          "theme": "Detached depth, spiritual cosmos",
+          "positive": ["Deep spirituality", "Cosmic wisdom", "Liberation"],
+          "negative": ["Confusion", "Cold detachment", "Sudden isolation"],
+          "best_for": ["Deep meditation", "Spiritual practices"],
+          "avoid": ["Material depth", "Worldly work"]
+        },
+        "revati": {
+          "nakshatra_lord": "mercury",
+          "theme": "Detached completion, spiritual nourishment",
+          "positive": ["Spiritual completion", "Inner nourishment", "Final liberation"],
+          "negative": ["Confusion", "Loss", "Sudden endings"],
+          "best_for": ["Spiritual completion", "Meditation", "Liberation"],
+          "avoid": ["Material completion", "New beginnings"]
+        }
+      }
+    }
+  }
+}

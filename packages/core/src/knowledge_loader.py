@@ -111,8 +111,8 @@ def get_muhurta_rules() -> dict[str, Any]:
 
 
 def get_compatibility_rules() -> dict[str, Any]:
-    """Get compatibility/matching rules."""
-    return load_rules("compatibility_rules").get("compatibility_rules", {})
+    """Get compatibility/matching rules (no wrapper key in JSON)."""
+    return load_rules("compatibility_rules")
 
 
 def get_remedies() -> dict[str, Any]:
@@ -169,6 +169,31 @@ def get_pratyantardasha_effects() -> dict[str, Any]:
     Structure: effects[mahadasha_lord][antardasha_lord][pratyantardasha_lord] -> effect details
     """
     return load_rules("pratyantardasha_master").get("pratyantardasha_effects", {})
+
+
+def get_combustion_rules() -> dict[str, Any]:
+    """Get combustion (Asta) rules for 6 planets."""
+    return load_rules("combustion_rules").get("combustion_rules", {})
+
+
+def get_retrograde_rules() -> dict[str, Any]:
+    """Get retrograde (Vakri) effects for 5 planets."""
+    return load_rules("retrograde_rules").get("retrograde_rules", {})
+
+
+def get_nakshatra_transit_rules() -> dict[str, Any]:
+    """Get nakshatra transit effects (243 combinations: 9 planets x 27 nakshatras)."""
+    return load_rules("nakshatra_transit_rules").get("nakshatra_transit_rules", {})
+
+
+def get_varshaphal_rules() -> dict[str, Any]:
+    """Get Varshaphal (Solar Return / Tajika) rules."""
+    return load_rules("varshaphal_rules").get("varshaphal_rules", {})
+
+
+def get_divisional_interpretation() -> dict[str, Any]:
+    """Get D9/D10 divisional chart interpretation rules."""
+    return load_rules("divisional_interpretation").get("divisional_interpretation", {})
 
 
 def clear_cache() -> None:

@@ -1,0 +1,1446 @@
+{
+  "retrograde_rules": {
+    "description": "Planetary retrograde (Vakri) effects in Vedic astrology - when planets appear to move backward from Earth's perspective",
+    "version": "1.0",
+    "last_updated": "2026-02-05",
+
+    "general_principles": {
+      "description": "Retrograde planets give internalized, intensified, delayed results. They represent karmic patterns and unfinished business from past lives.",
+      "key_concepts": [
+        "Retrograde motion is apparent backward movement from Earth's perspective",
+        "Inner planets (Mercury, Venus) retrograde more frequently, outer planets less so",
+        "Retrograde planets gain strength but deliver results differently",
+        "Effects are internalized - more psychological than external",
+        "Delays and revisions are common themes",
+        "Past life karma and unfinished matters resurface",
+        "Native may need to revisit, revise, re-do matters of that planet",
+        "Retrograde in birth chart shows inherent tendency to internalize that planet's energy",
+        "Retrograde in transit brings temporary revision period for all"
+      ],
+      "strength_considerations": [
+        "Retrograde planets are considered stronger in brightness and impact",
+        "They move closer to Earth during retrograde, increasing gravitational influence",
+        "May act like exalted planet in some interpretations",
+        "But delivery of results is non-traditional, delayed, or internalized"
+      ]
+    },
+
+    "planets": {
+      "mars": {
+        "name": "Mars Retrograde",
+        "sanskrit": "Vakri Mangal",
+        "frequency": "Every 2 years and 2 months for approximately 58-81 days",
+        "average_duration": "72 days",
+
+        "natal_effects": {
+          "general": [
+            "Internalized anger and aggression - may not express directly",
+            "Energy directed inward, leading to frustration if not channeled properly",
+            "Tendency to revisit past conflicts and unresolved battles",
+            "Unconventional approach to action, courage, and competition",
+            "May second-guess decisions related to action and initiative",
+            "Strong internal drive but difficulty in external expression",
+            "Delays in property matters, surgery, or bold ventures",
+            "Past life warrior karma - unfinished battles or conflicts"
+          ],
+          "positive": [
+            "Strategic thinking - plans before acting",
+            "Controlled aggression can lead to mastery in martial arts or surgery",
+            "Strong inner willpower and determination",
+            "Ability to introspect on one's anger and refine it",
+            "Patience in long-term goals requiring sustained effort",
+            "Unconventional courage that surprises others"
+          ],
+          "negative": [
+            "Suppressed anger leading to sudden outbursts",
+            "Passive-aggressive tendencies",
+            "Difficulty initiating projects or taking decisive action",
+            "Accidents or injuries from impulsive internal pressure release",
+            "Conflicts with siblings or authority figures",
+            "Sexual energy may be repressed or expressed unconventionally",
+            "Property disputes or delays in real estate matters"
+          ],
+          "karmic_indication": "Past life unresolved conflicts, warrior karma, or misuse of power. Need to learn proper expression of courage, anger, and initiative."
+        },
+
+        "transit_effects": {
+          "general": [
+            "Time to review and revise action plans and strategies",
+            "Not ideal for starting new ventures or aggressive pursuits",
+            "Old conflicts may resurface for resolution",
+            "Energy levels may feel erratic or internally directed",
+            "Good time for strategic planning rather than execution",
+            "Machinery, vehicles, and equipment may malfunction",
+            "Surgery should be avoided if possible during this period"
+          ],
+
+          "house_effects": {
+            "1": {
+              "theme": "Self, personality, physical body, vitality",
+              "positive": [
+                "Deep introspection on personal goals and direction",
+                "Refining one's approach to challenges",
+                "Building inner strength and resilience"
+              ],
+              "negative": [
+                "Lack of initiative or confidence in self-expression",
+                "Physical energy feels blocked or misdirected",
+                "Headaches, fevers, or inflammatory conditions",
+                "Accidents prone period - be cautious"
+              ],
+              "advice": "Avoid impulsive decisions about appearance or major life direction. Good time for strategic planning of personal goals."
+            },
+            "2": {
+              "theme": "Wealth, family, speech, food",
+              "positive": [
+                "Reviewing financial strategies and investments",
+                "Resolving old family conflicts through dialogue",
+                "Refining communication style within family"
+              ],
+              "negative": [
+                "Harsh speech or arguments with family members",
+                "Financial disputes or delays in income",
+                "Overspending on impulse purchases",
+                "Dental or facial issues, throat inflammations"
+              ],
+              "advice": "Watch your words carefully. Avoid major financial commitments. Revisit budget and savings plans."
+            },
+            "3": {
+              "theme": "Courage, siblings, short journeys, skills",
+              "positive": [
+                "Reconnecting with siblings and resolving past issues",
+                "Mastering skills through repeated practice",
+                "Building courage through internal reflection"
+              ],
+              "negative": [
+                "Conflicts with siblings, neighbors, or colleagues",
+                "Communication mishaps and misunderstandings",
+                "Delays or cancellations in short trips",
+                "Accidents during travel - drive carefully"
+              ],
+              "advice": "Good time to refine skills and techniques. Avoid starting new courses or initiating sibling partnerships."
+            },
+            "4": {
+              "theme": "Home, mother, emotions, property, vehicles",
+              "positive": [
+                "Renovating or repairing home and property",
+                "Resolving emotional conflicts with mother",
+                "Deep emotional healing and inner peace work"
+              ],
+              "negative": [
+                "Property disputes or delays in real estate transactions",
+                "Conflicts with mother or at home",
+                "Vehicle breakdowns or accidents",
+                "Emotional turmoil and restlessness at home",
+                "Issues with tenants or landlords"
+              ],
+              "advice": "Not ideal for buying property or vehicles. Good for repairs and resolving old property matters."
+            },
+            "5": {
+              "theme": "Children, creativity, intelligence, romance",
+              "positive": [
+                "Refining creative projects and artistic expressions",
+                "Deep study and mastery of intellectual subjects",
+                "Reconnecting with past romantic interests for closure"
+              ],
+              "negative": [
+                "Conflicts with children or issues in their health",
+                "Romantic relationships face challenges or breakups",
+                "Speculation and gambling losses",
+                "Creative blocks or frustration in projects",
+                "Educational delays for children"
+              ],
+              "advice": "Not favorable for speculation, romance initiation, or childbirth. Good for reworking creative projects."
+            },
+            "6": {
+              "theme": "Enemies, diseases, debts, service, competition",
+              "positive": [
+                "Resolving old conflicts with enemies or competitors",
+                "Overcoming chronic health issues through new approaches",
+                "Paying off old debts and clearing obligations",
+                "Winning legal battles through strategic review"
+              ],
+              "negative": [
+                "New enemies or revival of old enmities",
+                "Inflammatory diseases, fevers, infections, surgeries",
+                "Increased debts or disputes over money owed",
+                "Conflicts with employees or coworkers",
+                "Accidents or injuries requiring medical attention"
+              ],
+              "advice": "Good house for Mars retrograde - enemies weaken, diseases can be overcome. But avoid surgery if possible."
+            },
+            "7": {
+              "theme": "Marriage, partnerships, spouse, business",
+              "positive": [
+                "Resolving marital conflicts through honest dialogue",
+                "Reviewing business partnerships for fairness",
+                "Renegotiating contracts and agreements"
+              ],
+              "negative": [
+                "Marital conflicts, arguments, separation threats",
+                "Business partnership disputes and breakups",
+                "Legal issues in marriage or contracts",
+                "Sexual incompatibility or frustration in relationships",
+                "Aggressive behavior from spouse or partner"
+              ],
+              "advice": "Not favorable for marriage or new partnerships. Good time to review and heal existing relationships."
+            },
+            "8": {
+              "theme": "Transformation, longevity, occult, sudden events",
+              "positive": [
+                "Deep psychological transformation and healing",
+                "Uncovering hidden truths and secrets",
+                "Interest in occult sciences and tantra",
+                "Resolving inheritance or insurance matters"
+              ],
+              "negative": [
+                "Sudden accidents, injuries, or surgeries",
+                "Chronic health issues or vitality depletion",
+                "Disputes over inheritance or shared assets",
+                "Obsessive or destructive behaviors",
+                "Hidden enemies and betrayals revealed"
+              ],
+              "advice": "Challenging placement. Avoid risky activities. Good for deep inner work and transformation."
+            },
+            "9": {
+              "theme": "Dharma, fortune, father, higher learning, long journeys",
+              "positive": [
+                "Revisiting spiritual beliefs and philosophical views",
+                "Reconnecting with teachers or mentors",
+                "Deep study of scriptures and ancient wisdom"
+              ],
+              "negative": [
+                "Conflicts with father or authority figures",
+                "Delays or cancellations in long-distance travel",
+                "Loss of faith or questioning of beliefs",
+                "Legal issues or disputes with institutions",
+                "Educational setbacks or guru conflicts"
+              ],
+              "advice": "Not ideal for foreign travel or starting higher education. Good for reviewing beliefs and spiritual practices."
+            },
+            "10": {
+              "theme": "Career, status, reputation, authority",
+              "positive": [
+                "Reviewing career strategies and long-term goals",
+                "Refining professional skills and expertise",
+                "Resolving workplace conflicts diplomatically"
+              ],
+              "negative": [
+                "Career setbacks, job losses, or demotion",
+                "Conflicts with bosses and authority figures",
+                "Reputation damage through aggressive actions",
+                "Delays in promotions or recognition",
+                "Legal issues affecting professional standing"
+              ],
+              "advice": "Not favorable for job changes or aggressive career moves. Good time for strategic career planning."
+            },
+            "11": {
+              "theme": "Gains, friends, aspirations, social networks",
+              "positive": [
+                "Reconnecting with old friends and networks",
+                "Reviewing financial goals and income streams",
+                "Strategic planning for future aspirations"
+              ],
+              "negative": [
+                "Conflicts with friends or in social groups",
+                "Delays in gains and income expectations",
+                "Elder sibling issues or disputes",
+                "Disappointment in aspirations and hopes",
+                "Financial losses through speculative ventures"
+              ],
+              "advice": "Social conflicts likely. Avoid lending money. Good time to review financial goals and revise plans."
+            },
+            "12": {
+              "theme": "Loss, expenses, spirituality, foreign lands, liberation",
+              "positive": [
+                "Deep spiritual practices and meditation",
+                "Resolving subconscious patterns and past traumas",
+                "Successful expenditure on charitable causes",
+                "Isolation for inner work and self-discovery"
+              ],
+              "negative": [
+                "Unexpected expenses and financial losses",
+                "Hospitalization or confinement issues",
+                "Conflicts in foreign lands or with foreigners",
+                "Sleep disturbances and subconscious fears",
+                "Sexual difficulties or secret affairs causing problems"
+              ],
+              "advice": "Good house for introspection and spiritual work. Control expenses. Avoid unnecessary conflicts."
+            }
+          }
+        },
+
+        "sign_modifications": {
+          "own_sign": "In Aries or Scorpio - strength increases but impulsiveness must be controlled. Good for strategic military or surgical work.",
+          "exalted": "In Capricorn - retrograde may reduce some exaltation benefits but increases strategic patience and organizational skills.",
+          "debilitated": "In Cancer - retrograde provides Neecha Bhanga relief, emotional control improves, but domestic conflicts still possible.",
+          "friendly_signs": "In Leo, Sagittarius, Pisces - supportive environment helps channel retrograde energy constructively.",
+          "enemy_signs": "In Gemini, Virgo - communication of anger and action becomes even more difficult, frustration increases."
+        },
+
+        "remedies": [
+          "Recite Mangal (Mars) mantras: 'Om Angarakaya Namaha' or Hanuman Chalisa",
+          "Donate red lentils, red clothes, copper items on Tuesdays",
+          "Wear red coral gemstone after astrological consultation",
+          "Practice yoga and physical exercise to channel Mars energy constructively",
+          "Observe fast on Tuesdays",
+          "Feed dogs and birds regularly",
+          "Avoid unnecessary conflicts and practice anger management",
+          "Visit Hanuman temple on Tuesdays and Saturdays"
+        ]
+      },
+
+      "mercury": {
+        "name": "Mercury Retrograde",
+        "sanskrit": "Vakri Budha",
+        "frequency": "3-4 times per year for approximately 20-24 days each",
+        "average_duration": "23 days",
+
+        "natal_effects": {
+          "general": [
+            "Internalized thinking process - deep thinkers",
+            "Unconventional intelligence and learning style",
+            "Communication may be misunderstood by others",
+            "Tendency to overthink and analyze repeatedly",
+            "Past life intellectual karma - unfinished learning",
+            "Non-linear thought patterns and unique perspectives",
+            "May excel in research, editing, or revision work",
+            "Difficulty in straightforward communication"
+          ],
+          "positive": [
+            "Deep analytical abilities and research skills",
+            "Excellent at editing, proofreading, revision work",
+            "Unique problem-solving approaches",
+            "Strong intuitive understanding beyond logic",
+            "Ability to see patterns others miss",
+            "Success in technical, coding, or writing fields",
+            "Introspective and self-aware about communication"
+          ],
+          "negative": [
+            "Communication mishaps and misunderstandings",
+            "Difficulty expressing thoughts clearly",
+            "Nervous system issues, anxiety, overthinking",
+            "Learning difficulties or unconventional learning needs",
+            "Speech impediments or communication delays",
+            "Technology and gadget malfunctions",
+            "Contracts and agreements go wrong",
+            "Sibling relationships complex or strained"
+          ],
+          "karmic_indication": "Past life issues with communication, business dealings, or intellectual pursuits. Need to learn clear expression and honest communication."
+        },
+
+        "transit_effects": {
+          "general": [
+            "Most well-known retrograde - affects communication, technology, travel",
+            "Time to review, revise, re-do rather than start new projects",
+            "Avoid signing contracts or making major purchases",
+            "Backup data and expect technology glitches",
+            "Old friends, ex-partners, or past issues resurface",
+            "Miscommunication and misunderstandings increase",
+            "Travel delays, cancellations, and lost luggage common",
+            "Good period for editing, research, and introspection"
+          ],
+
+          "house_effects": {
+            "1": {
+              "theme": "Self, personality, physical body, vitality",
+              "positive": [
+                "Deep introspection on personal identity and expression",
+                "Refining communication style and self-presentation",
+                "Reviewing personal goals and life direction"
+              ],
+              "negative": [
+                "Confusion about personal identity and direction",
+                "Miscommunication of personal needs and desires",
+                "Nervous anxiety and mental restlessness",
+                "Skin issues or nervous system problems"
+              ],
+              "advice": "Not ideal for major image changes or new beginnings. Good for journaling and self-reflection."
+            },
+            "2": {
+              "theme": "Wealth, family, speech, food",
+              "positive": [
+                "Reviewing financial plans and budgets",
+                "Revisiting family conversations for clarity",
+                "Researching investment opportunities thoroughly"
+              ],
+              "negative": [
+                "Arguments with family due to miscommunication",
+                "Financial errors, wrong transactions, lost money",
+                "Speech problems or saying wrong things",
+                "Confusion about values and self-worth"
+              ],
+              "advice": "Double-check all financial transactions. Avoid major purchases. Watch what you say to family."
+            },
+            "3": {
+              "theme": "Courage, siblings, short journeys, skills",
+              "positive": [
+                "Reconnecting with siblings and neighbors",
+                "Refining skills through repeated practice",
+                "Editing and improving writing projects"
+              ],
+              "negative": [
+                "Miscommunication with siblings causing conflicts",
+                "Short travel delays, wrong directions, lost items",
+                "Learning challenges and comprehension issues",
+                "Technology and communication device failures"
+              ],
+              "advice": "Excellent for editing and revision work. Avoid starting new courses. Confirm all travel plans twice."
+            },
+            "4": {
+              "theme": "Home, mother, emotions, property, vehicles",
+              "positive": [
+                "Reviewing home and property matters carefully",
+                "Resolving emotional misunderstandings with mother",
+                "Researching real estate thoroughly before decisions"
+              ],
+              "negative": [
+                "Miscommunication with mother or family at home",
+                "Vehicle breakdowns and mechanical issues",
+                "Property paperwork errors and contract confusion",
+                "Emotional confusion and unclear feelings",
+                "Home appliances malfunction"
+              ],
+              "advice": "Not good for buying property or vehicles. Get second opinions. Service vehicles before travel."
+            },
+            "5": {
+              "theme": "Children, creativity, intelligence, romance",
+              "positive": [
+                "Revising creative projects and improving them",
+                "Deep study and research in areas of interest",
+                "Reconnecting with past romantic interests for closure"
+              ],
+              "negative": [
+                "Miscommunication in romance - mixed signals",
+                "Children's educational issues or communication problems",
+                "Creative blocks and mental confusion",
+                "Speculation losses due to wrong information",
+                "Intellectual self-doubt and confusion"
+              ],
+              "advice": "Not ideal for starting romance or speculation. Excellent for editing creative work and research."
+            },
+            "6": {
+              "theme": "Enemies, diseases, debts, service, competition",
+              "positive": [
+                "Resolving workplace miscommunication issues",
+                "Researching health problems for better understanding",
+                "Reviewing debt repayment strategies",
+                "Analyzing competition and improving strategies"
+              ],
+              "negative": [
+                "Miscommunication causing workplace conflicts",
+                "Nervous system disorders and anxiety issues",
+                "Errors in health diagnosis or treatment plans",
+                "Contract disputes with employees or service providers",
+                "Small mistakes causing big problems at work"
+              ],
+              "advice": "Double-check all work communications. Get second medical opinions. Review service contracts carefully."
+            },
+            "7": {
+              "theme": "Marriage, partnerships, spouse, business",
+              "positive": [
+                "Reviewing relationship communication patterns",
+                "Renegotiating business partnership terms",
+                "Resolving past misunderstandings with spouse"
+              ],
+              "negative": [
+                "Major miscommunication with spouse or partner",
+                "Business contract errors and disputes",
+                "Legal document mistakes in partnerships",
+                "Ex-partners may resurface causing confusion",
+                "Trust issues due to unclear communication"
+              ],
+              "advice": "Not favorable for marriage or new partnerships. Review existing contracts. Communicate clearly with partner."
+            },
+            "8": {
+              "theme": "Transformation, longevity, occult, sudden events",
+              "positive": [
+                "Deep research into occult and hidden knowledge",
+                "Reviewing insurance and inheritance documents",
+                "Understanding psychological patterns through introspection",
+                "Uncovering hidden information and secrets"
+              ],
+              "negative": [
+                "Confusion about shared finances and assets",
+                "Insurance or tax paperwork errors",
+                "Miscommunication about intimate matters",
+                "Technology failures with important data",
+                "Hidden information causing anxiety"
+              ],
+              "advice": "Excellent for research and investigation. Backup important data. Review all financial documents carefully."
+            },
+            "9": {
+              "theme": "Dharma, fortune, higher learning, long journeys",
+              "positive": [
+                "Revisiting spiritual beliefs and philosophies",
+                "Deep study of sacred texts and ancient wisdom",
+                "Reconnecting with teachers and mentors",
+                "Researching higher education opportunities"
+              ],
+              "negative": [
+                "Long-distance travel delays and cancellations",
+                "Miscommunication with father or teachers",
+                "Educational setbacks or admission errors",
+                "Legal document mistakes and contract issues",
+                "Confusion about beliefs and life philosophy"
+              ],
+              "advice": "Not ideal for foreign travel or starting higher education. Excellent for research and study."
+            },
+            "10": {
+              "theme": "Career, status, reputation, authority",
+              "positive": [
+                "Reviewing career path and professional goals",
+                "Refining professional skills and expertise",
+                "Reconnecting with professional networks"
+              ],
+              "negative": [
+                "Miscommunication with bosses and authority figures",
+                "Career contract errors and job offer confusion",
+                "Reputation damage due to miscommunication",
+                "Technology failures affecting work presentation",
+                "Wrong decisions about career moves"
+              ],
+              "advice": "Not good for job changes or important presentations. Review career plans. Confirm all work communications."
+            },
+            "11": {
+              "theme": "Gains, friends, aspirations, social networks",
+              "positive": [
+                "Reconnecting with old friends and networks",
+                "Reviewing financial goals and income streams",
+                "Researching new opportunities thoroughly"
+              ],
+              "negative": [
+                "Miscommunication with friends causing conflicts",
+                "Social media mishaps and online misunderstandings",
+                "Income delays due to paperwork errors",
+                "Wrong information about opportunities",
+                "Technology group project failures"
+              ],
+              "advice": "Be careful with social media posts. Avoid major financial commitments. Verify all information from friends."
+            },
+            "12": {
+              "theme": "Loss, expenses, spirituality, foreign lands, liberation",
+              "positive": [
+                "Deep meditation and spiritual introspection",
+                "Researching subconscious patterns and dreams",
+                "Planning spiritual retreats and isolation",
+                "Understanding hidden aspects of self"
+              ],
+              "negative": [
+                "Foreign travel confusion and lost items abroad",
+                "Miscommunication in isolated settings",
+                "Subconscious fears and mental confusion",
+                "Expenses due to communication errors",
+                "Technology failures in foreign places"
+              ],
+              "advice": "Excellent house for spiritual work and introspection. Confirm all foreign travel plans multiple times."
+            }
+          }
+        },
+
+        "sign_modifications": {
+          "own_sign": "In Gemini or Virgo - intelligence increases but communication may still be misunderstood. Excellent for research and analysis.",
+          "exalted": "In Virgo (also own sign) - analytical abilities peak but perfectionism and overthinking may cause delays.",
+          "debilitated": "In Pisces - retrograde provides some relief but communication remains confusing. Intuition increases but logic decreases.",
+          "friendly_signs": "In Taurus, Libra, Capricorn, Aquarius - supportive environment for intellectual work despite retrograde challenges.",
+          "enemy_signs": "In Sagittarius - philosophical communication becomes especially difficult, facts vs beliefs conflict increases."
+        },
+
+        "remedies": [
+          "Recite Mercury mantras: 'Om Budhaya Namaha' or 'Om Braam Breem Braum Sah Budhaya Namaha'",
+          "Donate green clothes, green vegetables, books on Wednesdays",
+          "Wear emerald gemstone after astrological consultation",
+          "Practice clear and mindful communication",
+          "Observe fast on Wednesdays",
+          "Feed birds, especially crows and parrots",
+          "Read and donate books to students",
+          "Visit Vishnu temples on Wednesdays",
+          "Keep communication devices and vehicles well-maintained"
+        ]
+      },
+
+      "jupiter": {
+        "name": "Jupiter Retrograde",
+        "sanskrit": "Vakri Guru",
+        "frequency": "Every 13 months for approximately 120 days",
+        "average_duration": "120 days (about 4 months)",
+
+        "natal_effects": {
+          "general": [
+            "Internalized wisdom and spiritual seeking",
+            "Unconventional philosophy and belief systems",
+            "Teaching style may be non-traditional but profound",
+            "Questions established religions and seeks personal truth",
+            "Past life karma related to guru, dharma, or knowledge",
+            "May have conflicts with traditional teachers or father figures",
+            "Deep inner wisdom that emerges over time",
+            "Blessings come through unconventional means"
+          ],
+          "positive": [
+            "Deep spiritual wisdom and philosophical insight",
+            "Strong inner moral compass and ethics",
+            "Ability to learn from within rather than external teachers",
+            "Unique teaching methods that inspire others",
+            "Past life accumulated wisdom accessible through introspection",
+            "Non-judgmental approach to different belief systems",
+            "Success through self-education and inner guidance"
+          ],
+          "negative": [
+            "Conflicts with father, teachers, or authority figures",
+            "Questioning or loss of faith at times",
+            "Delays in marriage, children, or higher education",
+            "Financial growth may be slow or come in unusual ways",
+            "May reject traditional wisdom and later regret it",
+            "Legal issues or difficulties with institutions",
+            "Over-optimism followed by disappointment cycles"
+          ],
+          "karmic_indication": "Past life misuse of knowledge, conflict with teachers, or incomplete spiritual path. Need to develop authentic wisdom and proper guidance."
+        },
+
+        "transit_effects": {
+          "general": [
+            "Time to review beliefs, philosophies, and spiritual path",
+            "Internal spiritual growth rather than external expansion",
+            "Not ideal for starting higher education or long journeys",
+            "Marriage and childbirth may be delayed during this period",
+            "Financial growth slows - time to consolidate not expand",
+            "Good period for introspection, meditation, spiritual study",
+            "Re-evaluation of life goals and dharmic path",
+            "Old teachers or mentors may reappear in life"
+          ],
+
+          "house_effects": {
+            "1": {
+              "theme": "Self, personality, physical body, vitality",
+              "positive": [
+                "Deep introspection on life purpose and dharma",
+                "Developing inner wisdom and philosophical understanding",
+                "Spiritual growth through self-reflection"
+              ],
+              "negative": [
+                "Confusion about life direction and purpose",
+                "Lack of optimism and faith in self",
+                "Physical weight gain or health issues related to excess",
+                "Delays in personal goals and recognition"
+              ],
+              "advice": "Not ideal for major life changes. Good for spiritual study and self-improvement. Practice moderation."
+            },
+            "2": {
+              "theme": "Wealth, family, speech, food",
+              "positive": [
+                "Reviewing family values and belief systems",
+                "Developing wise speech and thoughtful communication",
+                "Consolidating wealth rather than expanding"
+              ],
+              "negative": [
+                "Financial growth slows or stagnates",
+                "Family conflicts over beliefs or values",
+                "Overspending or poor financial judgment",
+                "Harsh or preachy speech causing family issues"
+              ],
+              "advice": "Not favorable for major investments or expansions. Save and consolidate. Speak less, listen more."
+            },
+            "3": {
+              "theme": "Courage, siblings, short journeys, skills",
+              "positive": [
+                "Developing wisdom in communication and teaching",
+                "Improving relationship with siblings through understanding",
+                "Refining skills through philosophical approach"
+              ],
+              "negative": [
+                "Conflicts with siblings over beliefs or values",
+                "Over-confidence in skills leading to mistakes",
+                "Short travel delays or philosophical disagreements during travel",
+                "Teaching or writing projects face obstacles"
+              ],
+              "advice": "Good for improving teaching skills. Avoid being preachy with siblings. Study rather than teach."
+            },
+            "4": {
+              "theme": "Home, mother, emotions, property, vehicles",
+              "positive": [
+                "Creating sacred space at home for spiritual practice",
+                "Resolving emotional issues through wisdom and understanding",
+                "Reviewing property investments carefully"
+              ],
+              "negative": [
+                "Conflicts with mother over beliefs or lifestyle choices",
+                "Delays in property purchase or relocation",
+                "Emotional restlessness and spiritual seeking",
+                "Over-investment in home leading to financial strain",
+                "Vehicle problems or issues with luxury items"
+              ],
+              "advice": "Not ideal for buying property. Good for spiritual practices at home. Reconcile with mother."
+            },
+            "5": {
+              "theme": "Children, creativity, intelligence, romance",
+              "positive": [
+                "Developing philosophical and creative expression",
+                "Teaching children important life values",
+                "Deep study of spiritual or philosophical subjects"
+              ],
+              "negative": [
+                "Delays or issues in childbirth or children's matters",
+                "Romantic relationships lack growth or commitment",
+                "Over-speculation leading to financial losses",
+                "Creative projects lack expansion or recognition",
+                "Education delays or changing of courses"
+              ],
+              "advice": "Not favorable for speculation or starting romance. Good for studying philosophy and ethics."
+            },
+            "6": {
+              "theme": "Enemies, diseases, debts, service, competition",
+              "positive": [
+                "Overcoming enemies through wisdom and diplomacy",
+                "Healing diseases through holistic and spiritual approaches",
+                "Paying off debts and improving service quality",
+                "Gaining wisdom from challenges and competition"
+              ],
+              "negative": [
+                "Conflicts with coworkers or employees over ethics",
+                "Health issues related to liver, diabetes, or weight gain",
+                "Accumulation of debts due to over-optimism",
+                "Legal issues or disputes with institutions",
+                "Service quality decreases or work dissatisfaction"
+              ],
+              "advice": "Good house for Jupiter retrograde if managed well. Maintain ethical standards at work. Monitor health."
+            },
+            "7": {
+              "theme": "Marriage, partnerships, spouse, business",
+              "positive": [
+                "Deepening spiritual connection with spouse",
+                "Reviewing partnership agreements with wisdom",
+                "Developing patience and understanding in relationships"
+              ],
+              "negative": [
+                "Marriage delays or postponements",
+                "Conflicts with spouse over beliefs, values, or lifestyle",
+                "Business partnership disagreements or dissolution",
+                "Over-optimism in partnerships leading to disappointment",
+                "Legal issues in marriage or contracts"
+              ],
+              "advice": "Not favorable for marriage or new partnerships. Work on existing relationships with patience."
+            },
+            "8": {
+              "theme": "Transformation, longevity, occult, sudden events",
+              "positive": [
+                "Deep spiritual transformation and occult knowledge",
+                "Wisdom gained through crisis and challenges",
+                "Understanding of karmic patterns and past lives",
+                "Inheritance or insurance matters resolved wisely"
+              ],
+              "negative": [
+                "Sudden financial losses or unexpected expenses",
+                "Health crises or hospitalization",
+                "Conflicts over inheritance or shared resources",
+                "Loss of faith due to sudden events",
+                "Over-optimism in risky ventures leading to losses"
+              ],
+              "advice": "Challenging placement. Avoid risky investments. Good for spiritual transformation and occult study."
+            },
+            "9": {
+              "theme": "Dharma, fortune, higher learning, long journeys",
+              "positive": [
+                "Deep philosophical and spiritual inquiry",
+                "Revisiting and refining belief systems",
+                "Developing authentic relationship with dharma",
+                "Past life wisdom accessible through meditation"
+              ],
+              "negative": [
+                "Conflicts with father, teachers, or spiritual guides",
+                "Loss of faith or questioning of beliefs",
+                "Delays in higher education or foreign travel",
+                "Legal issues or problems with institutions",
+                "Fortune and luck seem diminished"
+              ],
+              "advice": "Own house retrograde - introspection needed. Not good for travel or starting education. Deep spiritual study favored."
+            },
+            "10": {
+              "theme": "Career, status, reputation, authority",
+              "positive": [
+                "Developing ethical leadership and wise decision-making",
+                "Reviewing career path alignment with dharma",
+                "Building reputation through integrity"
+              ],
+              "negative": [
+                "Career growth slows or stagnates",
+                "Conflicts with authority figures or bosses",
+                "Reputation damage through ethical misjudgments",
+                "Delays in promotions or recognition",
+                "Over-promising and under-delivering at work"
+              ],
+              "advice": "Not favorable for job changes or promotions. Maintain ethical standards. Consolidate rather than expand."
+            },
+            "11": {
+              "theme": "Gains, friends, aspirations, social networks",
+              "positive": [
+                "Reviewing life goals and aspirations with wisdom",
+                "Developing meaningful friendships over superficial ones",
+                "Consolidating income sources"
+              ],
+              "negative": [
+                "Income growth slows or fluctuates",
+                "Conflicts with friends over beliefs or values",
+                "Elder siblings face challenges",
+                "Social network changes - some friends leave",
+                "Aspirations feel blocked or unrealistic"
+              ],
+              "advice": "Financial gains delayed but not denied. Quality over quantity in friendships. Revise goals realistically."
+            },
+            "12": {
+              "theme": "Loss, expenses, spirituality, foreign lands, liberation",
+              "positive": [
+                "Excellent for spiritual practices and meditation",
+                "Wisdom gained through solitude and introspection",
+                "Liberation from material attachments",
+                "Charitable giving brings inner peace"
+              ],
+              "negative": [
+                "Excessive expenses or financial losses",
+                "Foreign travel brings challenges or delays",
+                "Hospitalization or isolation issues",
+                "Loss of faith or spiritual confusion",
+                "Wasteful expenditure on religious activities"
+              ],
+              "advice": "Best house for Jupiter retrograde. Excellent for spirituality and moksha. Control expenses wisely."
+            }
+          }
+        },
+
+        "sign_modifications": {
+          "own_sign": "In Sagittarius or Pisces - spiritual depth increases dramatically. Time for authentic dharma seeking and teaching from inner wisdom.",
+          "exalted": "In Cancer - retrograde may reduce some material blessings but increases emotional and spiritual wisdom significantly.",
+          "debilitated": "In Capricorn - retrograde provides Neecha Bhanga relief. Practical wisdom develops, material focus shifts to spiritual.",
+          "friendly_signs": "In Aries, Leo, Scorpio - supportive for developing inner wisdom and philosophical understanding.",
+          "enemy_signs": "In Gemini, Virgo - intellectual approach to wisdom may become confused, over-analysis of beliefs."
+        },
+
+        "remedies": [
+          "Recite Jupiter mantras: 'Om Gurave Namaha' or 'Om Graam Greem Graum Sah Gurave Namaha'",
+          "Donate yellow clothes, turmeric, gold, books on Thursdays",
+          "Wear yellow sapphire gemstone after astrological consultation",
+          "Study sacred scriptures and philosophical texts",
+          "Observe fast on Thursdays",
+          "Respect teachers, elders, and spiritual guides",
+          "Feed Brahmins and donate to educational institutions",
+          "Visit Vishnu or Shiva temples on Thursdays",
+          "Practice gratitude and ethical living",
+          "Teach or share knowledge with those seeking wisdom"
+        ]
+      },
+
+      "venus": {
+        "name": "Venus Retrograde",
+        "sanskrit": "Vakri Shukra",
+        "frequency": "Every 18 months for approximately 40-43 days",
+        "average_duration": "42 days",
+
+        "natal_effects": {
+          "general": [
+            "Internalized sense of beauty, love, and values",
+            "Unconventional approach to relationships and aesthetics",
+            "May attract unusual or karmic relationships",
+            "Past life karma related to love, art, or material pleasures",
+            "Delayed marriage or unconventional partnerships",
+            "Unique artistic sensibilities that develop over time",
+            "Self-worth issues that need inner work",
+            "Difficulty expressing affection in conventional ways"
+          ],
+          "positive": [
+            "Deep capacity for authentic love and beauty",
+            "Unique artistic vision and creative expression",
+            "Ability to see beauty where others don't",
+            "Strong values developed through inner reflection",
+            "Non-materialistic approach to relationships",
+            "Wisdom in matters of love gained through experience",
+            "Success in design, restoration, or revision of art"
+          ],
+          "negative": [
+            "Relationship challenges and unconventional partnerships",
+            "Delayed marriage or multiple relationship endings",
+            "Self-worth and self-esteem issues",
+            "Financial difficulties or unusual spending patterns",
+            "Difficulty receiving love or pleasure",
+            "Artistic blocks or criticism of own creative work",
+            "Conflicts with women or feminine energy",
+            "Reproductive health issues in women"
+          ],
+          "karmic_indication": "Past life issues with love, relationships, or misuse of beauty and pleasure. Need to develop authentic self-love and healthy relationships."
+        },
+
+        "transit_effects": {
+          "general": [
+            "Time to review relationships and values",
+            "Not ideal for marriage, engagements, or starting romance",
+            "Old lovers or past relationship issues resurface",
+            "Artistic projects need revision rather than new starts",
+            "Financial decisions should be reconsidered carefully",
+            "Good period for relationship counseling and healing",
+            "Self-worth issues come up for healing",
+            "Beauty standards and aesthetics questioned"
+          ],
+
+          "house_effects": {
+            "1": {
+              "theme": "Self, personality, physical body, vitality",
+              "positive": [
+                "Deep introspection on self-worth and personal values",
+                "Refining personal style and aesthetic expression",
+                "Developing authentic self-love and confidence"
+              ],
+              "negative": [
+                "Self-esteem issues and body image concerns",
+                "Confusion about personal values and desires",
+                "Relationship with self needs healing",
+                "Physical appearance dissatisfaction or changes regretted",
+                "Lack of charm or social appeal temporarily"
+              ],
+              "advice": "Not ideal for major appearance changes or cosmetic procedures. Good for inner beauty work and self-love practices."
+            },
+            "2": {
+              "theme": "Wealth, family, speech, food",
+              "positive": [
+                "Reviewing financial values and spending habits",
+                "Reconnecting with family to resolve old issues",
+                "Developing appreciation for simple pleasures"
+              ],
+              "negative": [
+                "Financial instability or poor spending decisions",
+                "Family conflicts especially with women members",
+                "Sweet speech becomes harsh or ineffective",
+                "Issues with food, diet, or eating habits",
+                "Questioning self-worth related to money"
+              ],
+              "advice": "Avoid major purchases or investments. Review budget carefully. Sweet communication with family needed."
+            },
+            "3": {
+              "theme": "Courage, siblings, short journeys, skills",
+              "positive": [
+                "Refining artistic skills and creative communication",
+                "Improving relationships with siblings through understanding",
+                "Developing diplomatic communication style"
+              ],
+              "negative": [
+                "Conflicts with sisters or female siblings",
+                "Creative blocks in writing or artistic expression",
+                "Short travel brings relationship challenges",
+                "Miscommunication in romantic or artistic collaborations",
+                "Skills feel inadequate or need improvement"
+              ],
+              "advice": "Good for improving artistic skills. Avoid starting new creative projects. Reconnect with siblings gently."
+            },
+            "4": {
+              "theme": "Home, mother, emotions, property, vehicles",
+              "positive": [
+                "Creating beauty and harmony at home",
+                "Resolving emotional issues with mother",
+                "Reviewing property investments for aesthetic value"
+              ],
+              "negative": [
+                "Conflicts with mother or female figures at home",
+                "Emotional dissatisfaction and restlessness",
+                "Property or vehicle purchase regrets",
+                "Home renovations delayed or disappointing",
+                "Lack of comfort or peace at home"
+              ],
+              "advice": "Not good for buying property or vehicles. Focus on emotional healing at home. Appreciate mother."
+            },
+            "5": {
+              "theme": "Children, creativity, intelligence, romance",
+              "positive": [
+                "Deepening existing romantic relationships through honesty",
+                "Refining creative projects and artistic expressions",
+                "Developing authentic creative voice"
+              ],
+              "negative": [
+                "Romantic relationships face tests or breakups",
+                "Old lovers resurface causing confusion",
+                "Creative blocks and artistic dissatisfaction",
+                "Issues with daughters or female children",
+                "Delays in childbirth or conception challenges",
+                "Speculation in art or beauty products loses money"
+              ],
+              "advice": "Not favorable for starting romance or major creative projects. Good for editing artistic work and relationship healing."
+            },
+            "6": {
+              "theme": "Enemies, diseases, debts, service, competition",
+              "positive": [
+                "Improving work environment and relationships",
+                "Healing reproductive or hormonal health issues",
+                "Resolving conflicts through diplomacy",
+                "Developing service attitude with grace"
+              ],
+              "negative": [
+                "Workplace conflicts especially with female colleagues",
+                "Reproductive health issues, hormonal imbalances",
+                "Debts accumulate through luxury spending",
+                "Service quality or work satisfaction decreases",
+                "Enemies among women or related to relationships"
+              ],
+              "advice": "Monitor health especially reproductive system. Avoid workplace romances. Maintain professional boundaries."
+            },
+            "7": {
+              "theme": "Marriage, partnerships, spouse, business",
+              "positive": [
+                "Deepening commitment through addressing real issues",
+                "Renegotiating partnership terms honestly",
+                "Healing old relationship wounds"
+              ],
+              "negative": [
+                "Major relationship challenges or separation threats",
+                "Marriage delays or engagement breakups",
+                "Business partnership conflicts or dissolution",
+                "Old partners resurface causing complications",
+                "Trust issues and jealousy in relationships",
+                "Legal issues in marriage or contracts"
+              ],
+              "advice": "Own house retrograde - most challenging. Not favorable for marriage or new partnerships. Focus on healing existing relationships."
+            },
+            "8": {
+              "theme": "Transformation, longevity, occult, sudden events",
+              "positive": [
+                "Deep transformation in values and relationships",
+                "Tantric practices and deep intimacy exploration",
+                "Understanding karmic relationship patterns",
+                "Inheritance matters involving art or luxury items"
+              ],
+              "negative": [
+                "Sudden relationship endings or transformations",
+                "Sexual issues or intimacy problems",
+                "Conflicts over shared finances or inheritance",
+                "Hidden affairs revealed causing crisis",
+                "Financial losses through partner or investments",
+                "Reproductive health emergencies"
+              ],
+              "advice": "Challenging placement. Avoid risky financial ventures. Good for deep relationship healing and transformation."
+            },
+            "9": {
+              "theme": "Dharma, fortune, higher learning, long journeys",
+              "positive": [
+                "Revisiting values and beliefs about relationships",
+                "Studying philosophy of love and beauty",
+                "Reconnecting with spiritual teachers"
+              ],
+              "negative": [
+                "Conflicts with father or male authority figures",
+                "Long-distance relationships face challenges",
+                "Foreign travel brings romantic disappointments",
+                "Higher education in arts delayed or reconsidered",
+                "Loss of faith in love or relationships",
+                "Legal issues affecting relationships"
+              ],
+              "advice": "Not ideal for destination weddings or foreign romance. Good for studying relationship dynamics."
+            },
+            "10": {
+              "theme": "Career, status, reputation, authority",
+              "positive": [
+                "Reviewing career alignment with personal values",
+                "Refining professional image and presentation",
+                "Building reputation through integrity"
+              ],
+              "negative": [
+                "Career in arts, beauty, or fashion faces challenges",
+                "Reputation damage through relationship scandals",
+                "Conflicts with female bosses or authority figures",
+                "Creative work projects delayed or rejected",
+                "Professional relationships need reassessment"
+              ],
+              "advice": "Not favorable for launching beauty or art businesses. Review career values. Maintain professional ethics."
+            },
+            "11": {
+              "theme": "Gains, friends, aspirations, social networks",
+              "positive": [
+                "Reviewing friendships for authenticity and value",
+                "Reconnecting with old friends for closure",
+                "Refining aspirations related to relationships"
+              ],
+              "negative": [
+                "Income from creative or luxury fields decreases",
+                "Conflicts with female friends or social circle",
+                "Elder sisters face challenges",
+                "Social life feels empty or unfulfilling",
+                "Romantic aspirations feel blocked",
+                "Financial losses through friends"
+              ],
+              "advice": "Social relationships need honest reassessment. Avoid mixing money with friendship. Revise financial goals."
+            },
+            "12": {
+              "theme": "Loss, expenses, spirituality, foreign lands, liberation",
+              "positive": [
+                "Spiritual approach to love and relationships",
+                "Finding beauty in solitude and meditation",
+                "Liberation from unhealthy relationship patterns",
+                "Charitable giving related to women or arts"
+              ],
+              "negative": [
+                "Excessive expenses on luxury or pleasure",
+                "Foreign romance brings complications",
+                "Isolation from relationships or social life",
+                "Loss through artistic ventures or investments",
+                "Secret affairs causing problems",
+                "Hospitalization related to reproductive health"
+              ],
+              "advice": "Good for spiritual practices and releasing attachments. Control luxury spending. Avoid secret relationships."
+            }
+          }
+        },
+
+        "sign_modifications": {
+          "own_sign": "In Taurus or Libra - artistic and relational depth increases but conventional expression difficult. Time for authentic beauty and love.",
+          "exalted": "In Pisces - spiritual love and universal beauty emphasized. Material relationships may suffer but spiritual growth occurs.",
+          "debilitated": "In Virgo - retrograde provides some relief through analysis of relationships. Practical approach to love develops.",
+          "friendly_signs": "In Gemini, Capricorn, Aquarius - supportive for developing unique values and relationship wisdom.",
+          "enemy_signs": "In None (Venus has no enemy signs except the Sun to some extent) - generally manageable across signs."
+        },
+
+        "remedies": [
+          "Recite Venus mantras: 'Om Shukraya Namaha' or 'Om Draam Dreem Draum Sah Shukraya Namaha'",
+          "Donate white clothes, rice, sugar, perfumes on Fridays",
+          "Wear diamond or white sapphire gemstone after astrological consultation",
+          "Practice self-love and work on self-worth issues",
+          "Observe fast on Fridays",
+          "Respect women and honor feminine energy",
+          "Feed cows and care for animals",
+          "Visit Lakshmi temples on Fridays",
+          "Create or appreciate art and beauty",
+          "Work on relationship healing and communication"
+        ]
+      },
+
+      "saturn": {
+        "name": "Saturn Retrograde",
+        "sanskrit": "Vakri Shani",
+        "frequency": "Every 12-13 months for approximately 140 days",
+        "average_duration": "140 days (about 4.5 months)",
+
+        "natal_effects": {
+          "general": [
+            "Internalized discipline and responsibility",
+            "Unconventional approach to duty and karma",
+            "Past life karmic debts more pronounced",
+            "Self-discipline issues or excessive self-criticism",
+            "Delays and obstacles in life path",
+            "Deep introspection on life lessons and limitations",
+            "May feel burdened by responsibilities from young age",
+            "Wisdom through suffering and hardship"
+          ],
+          "positive": [
+            "Deep karmic wisdom and spiritual maturity",
+            "Strong inner discipline and self-control",
+            "Ability to learn from past mistakes profoundly",
+            "Patient and methodical approach to goals",
+            "Success comes through persistent effort over time",
+            "Understanding of cosmic justice and karma",
+            "Excellent for research, archaeology, or historical work"
+          ],
+          "negative": [
+            "Chronic delays and obstacles in life",
+            "Depression, pessimism, or fear-based thinking",
+            "Relationship with father or authority problematic",
+            "Health issues related to bones, joints, chronic conditions",
+            "Social isolation or difficulty forming relationships",
+            "Excessive burden of responsibility or guilt",
+            "Career progress extremely slow or blocked",
+            "Fear of change or taking risks"
+          ],
+          "karmic_indication": "Heavy past life karmic debts requiring repayment. Lessons around responsibility, discipline, and serving others. Liberation through accepting limitations."
+        },
+
+        "transit_effects": {
+          "general": [
+            "Time to review responsibilities and karmic lessons",
+            "Not ideal for starting new ventures or major changes",
+            "Past karmic issues resurface for resolution",
+            "Delays and obstacles increase in all matters",
+            "Good period for finishing old projects and clearing debts",
+            "Health issues, especially chronic conditions, need attention",
+            "Relationship with authority figures needs examination",
+            "Excellent time for spiritual practices and karma yoga"
+          ],
+
+          "house_effects": {
+            "1": {
+              "theme": "Self, personality, physical body, vitality",
+              "positive": [
+                "Deep introspection on life purpose and karma",
+                "Developing inner strength and resilience",
+                "Maturing perspective on personal responsibilities"
+              ],
+              "negative": [
+                "Physical health issues, chronic conditions worsen",
+                "Depression, pessimism, low vitality and energy",
+                "Feeling burdened by life and responsibilities",
+                "Joint pain, bone issues, dental problems",
+                "Isolation and loneliness increase"
+              ],
+              "advice": "Focus on health maintenance. Practice meditation and acceptance. Avoid major life changes. Be patient with self."
+            },
+            "2": {
+              "theme": "Wealth, family, speech, food",
+              "positive": [
+                "Reviewing financial discipline and saving habits",
+                "Learning to value what truly matters",
+                "Developing mature relationship with family"
+              ],
+              "negative": [
+                "Financial losses or income reduction",
+                "Family conflicts and responsibilities increase",
+                "Harsh speech or communication problems",
+                "Dental or throat issues",
+                "Difficulty accumulating wealth or savings"
+              ],
+              "advice": "Practice strict financial discipline. Speak carefully with family. Focus on clearing old debts."
+            },
+            "3": {
+              "theme": "Courage, siblings, short journeys, skills",
+              "positive": [
+                "Developing persistent effort in skill development",
+                "Resolving old conflicts with siblings maturely",
+                "Building patient communication style"
+              ],
+              "negative": [
+                "Conflicts or karmic issues with siblings",
+                "Travel delays and obstacles",
+                "Lack of confidence and courage",
+                "Skills development feels slow and frustrating",
+                "Shoulder, arm, respiratory issues"
+              ],
+              "advice": "Be patient with learning. Support siblings if they face difficulties. Avoid unnecessary travel."
+            },
+            "4": {
+              "theme": "Home, mother, emotions, property, vehicles",
+              "positive": [
+                "Developing emotional maturity and stability",
+                "Taking responsibility for home and mother",
+                "Building lasting foundations at home"
+              ],
+              "negative": [
+                "Conflicts with or health issues for mother",
+                "Property losses or disputes",
+                "Vehicle breakdowns and mechanical issues",
+                "Emotional depression and lack of peace at home",
+                "Burden of family responsibilities increases"
+              ],
+              "advice": "Support mother and elders. Maintain property and vehicles. Seek emotional support. Avoid property transactions."
+            },
+            "5": {
+              "theme": "Children, creativity, intelligence, romance",
+              "positive": [
+                "Developing mature approach to creativity",
+                "Learning patience in matters of children and romance",
+                "Deepening intellectual pursuits through discipline"
+              ],
+              "negative": [
+                "Issues with children or delays in childbirth",
+                "Romantic relationships face serious challenges",
+                "Creative blocks and lack of inspiration",
+                "Educational setbacks or exam failures",
+                "Speculation losses and poor judgment",
+                "Mental stress and anxiety"
+              ],
+              "advice": "Not favorable for romance or speculation. Focus on children's discipline and education. Be patient with creative process."
+            },
+            "6": {
+              "theme": "Enemies, diseases, debts, service, competition",
+              "positive": [
+                "Overcoming enemies and obstacles through persistence",
+                "Developing strong work ethic and service attitude",
+                "Clearing old debts and karmic obligations",
+                "Defeating diseases through disciplined treatment"
+              ],
+              "negative": [
+                "Chronic health issues worsen",
+                "Workplace conflicts and job dissatisfaction",
+                "Debts accumulate or become overwhelming",
+                "Legal issues and disputes increase",
+                "Enemies become more active or powerful"
+              ],
+              "advice": "Good house for Saturn retrograde if approached with discipline. Clear debts. Serve others. Maintain health rigorously."
+            },
+            "7": {
+              "theme": "Marriage, partnerships, spouse, business",
+              "positive": [
+                "Deepening commitment through working on issues",
+                "Maturing understanding of partnership responsibilities",
+                "Building lasting business relationships"
+              ],
+              "negative": [
+                "Marriage faces serious challenges or separation",
+                "Delays in marriage or partnership formation",
+                "Business partnerships dissolve or face obstacles",
+                "Spouse faces health or career problems",
+                "Legal issues in relationships or contracts",
+                "Feeling burdened by partnership responsibilities"
+              ],
+              "advice": "Challenging placement. Marriage requires work and patience. Not good for new partnerships. Fulfill duties faithfully."
+            },
+            "8": {
+              "theme": "Transformation, longevity, occult, sudden events",
+              "positive": [
+                "Deep karmic transformation and spiritual growth",
+                "Understanding of death, rebirth, and transformation",
+                "Occult knowledge and mystical experiences",
+                "Resolving inheritance or insurance matters"
+              ],
+              "negative": [
+                "Chronic health crises or longevity concerns",
+                "Sudden losses, accidents, or catastrophic events",
+                "Inheritance disputes or losses",
+                "Depression, suicidal thoughts, existential crisis",
+                "Sexual problems or lack of intimacy",
+                "Hidden enemies and betrayals"
+              ],
+              "advice": "Most challenging house. Seek professional help for mental health. Avoid risky ventures. Focus on spiritual practices."
+            },
+            "9": {
+              "theme": "Dharma, fortune, higher learning, long journeys",
+              "positive": [
+                "Developing mature understanding of dharma and duty",
+                "Deep study of philosophy and spirituality",
+                "Karmic lessons from father or teachers",
+                "Building lasting principles and values"
+              ],
+              "negative": [
+                "Conflicts with or health issues for father",
+                "Loss of faith or spiritual crisis",
+                "Higher education delays or obstacles",
+                "Long-distance travel problems or cancellations",
+                "Legal issues or court cases",
+                "Fortune and luck seem absent"
+              ],
+              "advice": "Fulfill duties to father and teachers. Avoid foreign travel if possible. Focus on spiritual discipline rather than rituals."
+            },
+            "10": {
+              "theme": "Career, status, reputation, authority",
+              "positive": [
+                "Reviewing career path and professional responsibilities",
+                "Developing mature leadership and work ethic",
+                "Building lasting reputation through integrity"
+              ],
+              "negative": [
+                "Career obstacles, job losses, or demotion",
+                "Conflicts with bosses and authority figures",
+                "Reputation damage or public criticism",
+                "Increased responsibilities without recognition",
+                "Slow or blocked career progress",
+                "Feeling overwhelmed by professional duties"
+              ],
+              "advice": "Own house retrograde - karmic reckoning in career. Work hard without expecting immediate results. Integrity crucial."
+            },
+            "11": {
+              "theme": "Gains, friends, aspirations, social networks",
+              "positive": [
+                "Developing realistic goals and aspirations",
+                "Building lasting friendships based on mutual support",
+                "Consolidating income and gains"
+              ],
+              "negative": [
+                "Income delays or reduction in earnings",
+                "Loss of friends or social isolation",
+                "Elder siblings face serious challenges",
+                "Aspirations feel blocked or unachievable",
+                "Social network provides no support",
+                "Gains come only through extreme hard work"
+              ],
+              "advice": "Own house retrograde. Lower expectations. Focus on quality over quantity in friendships. Be realistic about goals."
+            },
+            "12": {
+              "theme": "Loss, expenses, spirituality, foreign lands, liberation",
+              "positive": [
+                "Excellent for spiritual practices and moksha",
+                "Developing detachment from material world",
+                "Serving others selflessly and anonymously",
+                "Understanding karma and liberation"
+              ],
+              "negative": [
+                "Excessive unexpected expenses and losses",
+                "Hospitalization or confinement issues",
+                "Foreign travel or relocation problems",
+                "Depression, isolation, and loneliness",
+                "Chronic sleep disorders",
+                "Feeling imprisoned by circumstances"
+              ],
+              "advice": "Best house for Saturn retrograde spiritually. Accept losses as karmic clearing. Focus on meditation and service."
+            }
+          }
+        },
+
+        "sign_modifications": {
+          "own_sign": "In Capricorn or Aquarius - karmic lessons intensify but ability to handle them increases. Spiritual maturity develops significantly.",
+          "exalted": "In Libra - retrograde balances justice and karma. Relationships face karmic tests but fairness prevails with patience.",
+          "debilitated": "In Aries - retrograde provides some relief but impulsiveness still causes problems. Learn to balance action with patience.",
+          "friendly_signs": "In Taurus, Gemini, Virgo - supportive for developing discipline and handling karmic lessons constructively.",
+          "enemy_signs": "In Leo, Cancer, Sagittarius - karmic lessons in ego, emotions, and beliefs. Humility and acceptance required."
+        },
+
+        "remedies": [
+          "Recite Saturn mantras: 'Om Shanaischaraya Namaha' or 'Om Praam Preem Praum Sah Shanaischaraya Namaha'",
+          "Donate black clothes, sesame oil, iron items, black lentils on Saturdays",
+          "Wear blue sapphire gemstone only after careful astrological consultation (test period recommended)",
+          "Serve the poor, elderly, disabled, and suffering beings",
+          "Observe fast on Saturdays",
+          "Light sesame oil lamp under Peepal tree on Saturdays",
+          "Visit Shani temples and Hanuman temples on Saturdays",
+          "Practice patience, discipline, and acceptance of karma",
+          "Show respect to workers, servants, and those in lower social positions",
+          "Regular oil massage on Saturdays for body and joints"
+        ]
+      }
+    },
+
+    "special_rules": {
+      "retrograde_in_debilitation": {
+        "description": "When a planet is both retrograde and debilitated, it gains strength (Neecha Bhanga condition)",
+        "effect": "The retrograde motion cancels some negative effects of debilitation, and the planet acts with more strength than expected",
+        "planets": {
+          "mars_in_cancer": "Emotional control improves, domestic aggression reduces, but still needs careful handling",
+          "mercury_in_pisces": "Intuitive communication develops, logical confusion reduces, creative intelligence emerges",
+          "jupiter_in_capricorn": "Practical wisdom grows, material spirituality balances, realistic philosophy develops",
+          "venus_in_virgo": "Analytical love approach works better, perfectionism in relationships reduces, practical beauty sense",
+          "saturn_in_aries": "Patient action develops, impulsiveness controlled, disciplined courage emerges"
+        }
+      },
+
+      "retrograde_in_exaltation": {
+        "description": "When a planet is both retrograde and exalted, some benefits of exaltation may be reduced or internalized",
+        "effect": "The planet remains strong but delivers results in non-traditional ways or with delays",
+        "planets": {
+          "mars_in_capricorn": "Strategic action over direct aggression, planned success over immediate victory",
+          "mercury_in_virgo": "Perfect analysis through revision, intellectual mastery through repeated study",
+          "jupiter_in_cancer": "Emotional wisdom through introspection, spiritual growth through family karma",
+          "venus_in_pisces": "Universal love through understanding pain, spiritual beauty over material",
+          "saturn_in_libra": "Justice through karmic balance, fairness through understanding both sides deeply"
+        }
+      },
+
+      "multiple_retrogrades": {
+        "description": "Effects when multiple planets are retrograde simultaneously in birth chart or transit",
+        "two_retrogrades": "Intensifies karmic lessons and internalization. Life path requires more introspection and revision.",
+        "three_retrogrades": "Significant karmic chart. Native may feel like an old soul. Much of life is about completing past karma.",
+        "four_or_more_retrogrades": "Very rare. Highly karmic incarnation. Native often feels out of sync with world but has deep wisdom.",
+        "note": "Multiple retrograde charts indicate souls who chose to complete many karmic lessons in one lifetime. Spiritual growth accelerated but material life often challenging."
+      },
+
+      "retrograde_turning_direct": {
+        "description": "Effects when retrograde planet stations and turns direct (or vice versa)",
+        "stationary_retrograde": "Moment planet appears to stop before going retrograde. Most intense retrograde effects. Major karmic turning point.",
+        "stationary_direct": "Moment planet appears to stop before going direct. Shift from internal to external. Insights can now be applied.",
+        "shadow_period": "Period before and after retrograde where planet retraces its path. Total retrograde cycle including shadows can be much longer."
+      },
+
+      "combust_and_retrograde": {
+        "description": "When a retrograde planet is also combust (very close to Sun)",
+        "effect": "Double challenge - planet is both retrograde and weakened by Sun's rays. Results highly internalized and delayed.",
+        "note": "Particularly challenging for Mercury and Venus which can be combust more frequently due to orbital mechanics."
+      }
+    },
+
+    "interpretation_guidelines": {
+      "natal_vs_transit": "Natal retrograde is permanent personality trait requiring lifelong work. Transit retrograde is temporary period for review and revision.",
+      "house_lordship": "If retrograde planet rules important houses (1st, 10th, 7th, etc.), its retrograde effects spread to those life areas significantly.",
+      "aspects": "Retrograde planets aspect other planets and houses with more intense, internalized energy. Recipients of aspects feel karmic pressure.",
+      "dasha_period": "Retrograde planet's dasha period brings major karmic events and life revisions in matters it rules and houses it occupies.",
+      "timing": "Retrograde delays timing of events. What should happen at 25 may happen at 30. Patience and persistence crucial.",
+      "spiritual_purpose": "All retrogrades ultimately serve spiritual growth by forcing internalization, reflection, and karmic completion."
+    }
+  }
+}
