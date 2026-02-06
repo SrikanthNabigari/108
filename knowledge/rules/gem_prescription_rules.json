@@ -1,0 +1,893 @@
+{
+  "gem_prescription_rules": {
+    "description": "Lagna-wise gemstone prescription rules based on BPHS, Phaladeepika, and traditional Jyotish gem therapy principles. Gems strengthen the planet they represent — only wear gems of benefic lords for your Lagna.",
+    "version": "1.0",
+    "lagna_wise": {
+      "aries": {
+        "yoga_karaka": null,
+        "primary_benefic_planets": ["sun", "jupiter", "mars"],
+        "functional_malefic_planets": ["saturn", "mercury", "venus"],
+        "neutral_planets": ["moon"],
+        "best_gem": {
+          "planet": "sun",
+          "gem": "ruby",
+          "reason": "Sun is the 5th lord (Purva Punya, children, intelligence) for Aries Lagna. The 5th house is a trikona, making Sun a strong benefic. Ruby strengthens creativity, authority, and spiritual merit.",
+          "finger": "ring",
+          "metal": "gold",
+          "day": "sunday"
+        },
+        "secondary_gems": [
+          {
+            "planet": "jupiter",
+            "gem": "yellow_sapphire",
+            "reason": "Jupiter rules the 9th house (Dharma, fortune, guru) and 12th house. As 9th lord, Jupiter is a strong benefic for Aries Lagna. Yellow Sapphire brings wisdom, fortune, and spiritual growth.",
+            "condition": "Wear when Jupiter Mahadasha or Antardasha is running, or when 9th house matters need strengthening."
+          },
+          {
+            "planet": "mars",
+            "gem": "red_coral",
+            "reason": "Mars is the Lagna lord (1st house) and 8th lord. As ascendant lord, Mars gem strengthens overall vitality and confidence. The 8th lordship is neutralized by Lagna lordship.",
+            "condition": "Wear when Mars is weak in the chart or during Mars Dasha. Strengthens physical health and courage."
+          }
+        ],
+        "avoid_gems": [
+          {
+            "planet": "saturn",
+            "gem": "blue_sapphire",
+            "reason": "Saturn rules the 10th (neutral) and 11th (labha, but also badhaka for movable signs) houses. As 11th lord, Saturn is a functional malefic. Blue Sapphire can increase obstacles and delays."
+          },
+          {
+            "planet": "mercury",
+            "gem": "emerald",
+            "reason": "Mercury rules the 3rd (upachaya) and 6th (dusthana) houses. As 6th lord, Mercury is a clear functional malefic. Emerald can increase enemies, debts, and health issues."
+          },
+          {
+            "planet": "venus",
+            "gem": "diamond",
+            "reason": "Venus rules the 2nd (maraka) and 7th (maraka) houses. As dual maraka lord, Venus can cause health crises when strengthened. Diamond should be avoided unless Venus is extremely well-placed."
+          }
+        ],
+        "conditional_gems": [
+          {
+            "planet": "moon",
+            "gem": "pearl",
+            "reason": "Moon rules the 4th house (home, mother, happiness). Pearl can strengthen domestic peace and emotional stability.",
+            "condition": "Wear only if Moon is weak (waning, afflicted, in dusthana) and 4th house matters need support."
+          }
+        ]
+      },
+      "taurus": {
+        "yoga_karaka": "saturn",
+        "primary_benefic_planets": ["saturn", "mercury", "venus"],
+        "functional_malefic_planets": ["jupiter", "mars", "moon"],
+        "neutral_planets": ["sun"],
+        "best_gem": {
+          "planet": "saturn",
+          "gem": "blue_sapphire",
+          "reason": "Saturn is the Yoga Karaka for Taurus Lagna, ruling both 9th (Dharma trikona) and 10th (Karma kendra). This is the most powerful benefic combination. Blue Sapphire brings fortune, career success, and dharmic growth simultaneously.",
+          "finger": "middle",
+          "metal": "gold",
+          "day": "saturday"
+        },
+        "secondary_gems": [
+          {
+            "planet": "mercury",
+            "gem": "emerald",
+            "reason": "Mercury rules the 2nd (wealth, speech) and 5th (intelligence, children) houses. The 5th lordship makes Mercury a trikona lord and strong benefic. Emerald enhances wealth, intellect, and communication.",
+            "condition": "Excellent during Mercury Dasha or when education and financial matters need boosting."
+          },
+          {
+            "planet": "venus",
+            "gem": "diamond",
+            "reason": "Venus is the Lagna lord for Taurus, also ruling the 6th house. As ascendant lord, Venus gem strengthens overall vitality. The 6th lordship is neutralized by Lagna lordship.",
+            "condition": "Wear when Venus is weak or afflicted. Strengthens personality, health, and overall life direction."
+          }
+        ],
+        "avoid_gems": [
+          {
+            "planet": "jupiter",
+            "gem": "yellow_sapphire",
+            "reason": "Jupiter rules the 8th (dusthana) and 11th (badhaka for fixed signs) houses. As 8th lord, Jupiter is a functional malefic. Yellow Sapphire can trigger sudden upheavals and hidden enemies."
+          },
+          {
+            "planet": "mars",
+            "gem": "red_coral",
+            "reason": "Mars rules the 7th (maraka) and 12th (loss) houses. As dual malefic house lord, Mars gem can increase expenses, separations, and health risks from partner."
+          }
+        ],
+        "conditional_gems": [
+          {
+            "planet": "sun",
+            "gem": "ruby",
+            "reason": "Sun rules the 4th house (home, vehicles, education). Ruby can strengthen domestic happiness and property matters.",
+            "condition": "Debatable — Sun is a kendra lord without trikona lordship. Wear only if Sun is very weak and 4th house matters suffer."
+          },
+          {
+            "planet": "moon",
+            "gem": "pearl",
+            "reason": "Moon rules the 3rd house (siblings, courage, communication). Pearl may increase courage and communication.",
+            "condition": "Generally not recommended as 3rd lord is a mild malefic. Only if Moon is severely afflicted and mental peace is needed."
+          }
+        ]
+      },
+      "gemini": {
+        "yoga_karaka": null,
+        "primary_benefic_planets": ["mercury", "venus", "saturn"],
+        "functional_malefic_planets": ["jupiter", "mars", "sun"],
+        "neutral_planets": ["moon"],
+        "best_gem": {
+          "planet": "mercury",
+          "gem": "emerald",
+          "reason": "Mercury is the Lagna lord and 4th lord for Gemini. As ascendant lord, Mercury is the primary benefic. Emerald strengthens intelligence, communication, domestic happiness, and overall vitality.",
+          "finger": "little",
+          "metal": "gold",
+          "day": "wednesday"
+        },
+        "secondary_gems": [
+          {
+            "planet": "venus",
+            "gem": "diamond",
+            "reason": "Venus rules the 5th (trikona — intelligence, romance) and 12th houses. The 5th lordship makes Venus a strong benefic. Diamond enhances creativity, romance, and spiritual liberation.",
+            "condition": "Wear during Venus Dasha or when 5th house matters (children, creativity, education) need strengthening."
+          },
+          {
+            "planet": "saturn",
+            "gem": "blue_sapphire",
+            "reason": "Saturn rules the 8th and 9th houses. Despite 8th lordship, the 9th lordship (Dharma trikona) makes Saturn a benefic for Gemini Lagna. Blue Sapphire can bring fortune and longevity.",
+            "condition": "Wear with caution during Saturn Dasha. Test the gem first due to 8th house connection."
+          }
+        ],
+        "avoid_gems": [
+          {
+            "planet": "jupiter",
+            "gem": "yellow_sapphire",
+            "reason": "Jupiter rules the 7th (maraka) and 10th (kendra) houses. As 7th lord without trikona lordship, and being a natural benefic owning a kendra, Jupiter suffers Kendradhipati Dosha. Yellow Sapphire should be avoided."
+          },
+          {
+            "planet": "mars",
+            "gem": "red_coral",
+            "reason": "Mars rules the 6th (dusthana — enemies, debts) and 11th (badhaka for common signs) houses. As dual malefic house lord, Red Coral increases conflict, enemies, and health issues."
+          }
+        ],
+        "conditional_gems": [
+          {
+            "planet": "moon",
+            "gem": "pearl",
+            "reason": "Moon rules the 2nd house (wealth, speech, family). Pearl can strengthen financial stability and family harmony.",
+            "condition": "Wear if Moon is weak and financial matters or speech issues need addressing."
+          },
+          {
+            "planet": "sun",
+            "gem": "ruby",
+            "reason": "Sun rules the 3rd house (courage, effort, siblings). Ruby may strengthen initiative and courage.",
+            "condition": "Generally not recommended as 3rd lord. Only if Sun is severely debilitated and courage is lacking."
+          }
+        ]
+      },
+      "cancer": {
+        "yoga_karaka": "mars",
+        "primary_benefic_planets": ["mars", "jupiter", "moon"],
+        "functional_malefic_planets": ["saturn", "venus", "mercury"],
+        "neutral_planets": ["sun"],
+        "best_gem": {
+          "planet": "mars",
+          "gem": "red_coral",
+          "reason": "Mars is the Yoga Karaka for Cancer Lagna, ruling both 5th (Purva Punya trikona) and 10th (Karma kendra). This is the most powerful benefic combination. Red Coral brings career success, children's welfare, intelligence, and spiritual merit.",
+          "finger": "ring",
+          "metal": "gold",
+          "day": "tuesday"
+        },
+        "secondary_gems": [
+          {
+            "planet": "jupiter",
+            "gem": "yellow_sapphire",
+            "reason": "Jupiter rules the 6th and 9th houses. Despite 6th lordship, the 9th lordship (Bhagyasthana) makes Jupiter a strong benefic. Yellow Sapphire brings fortune, guru blessings, and spiritual advancement.",
+            "condition": "Wear during Jupiter Dasha or when fortune and dharmic matters need activation."
+          },
+          {
+            "planet": "moon",
+            "gem": "pearl",
+            "reason": "Moon is the Lagna lord for Cancer. As ascendant lord, Moon gem strengthens overall vitality, emotional stability, and mental peace. Pearl is always beneficial for Cancer natives.",
+            "condition": "Wear always, especially when Moon is waning or afflicted. Strengthens health and emotional well-being."
+          }
+        ],
+        "avoid_gems": [
+          {
+            "planet": "saturn",
+            "gem": "blue_sapphire",
+            "reason": "Saturn rules the 7th (maraka) and 8th (dusthana) houses. As dual malefic house lord, Saturn is the most dangerous functional malefic. Blue Sapphire can trigger serious health crises, relationship breakdown, and sudden losses."
+          },
+          {
+            "planet": "venus",
+            "gem": "diamond",
+            "reason": "Venus rules the 4th (kendra) and 11th houses. As a natural benefic owning kendra and 11th (trishadaya), Venus suffers Kendradhipati Dosha. Diamond can increase materialism and dissatisfaction."
+          }
+        ],
+        "conditional_gems": [
+          {
+            "planet": "sun",
+            "gem": "ruby",
+            "reason": "Sun rules the 2nd house (wealth, speech, family). Ruby can strengthen family finances and authoritative speech.",
+            "condition": "Wear if Sun is weak and financial or family matters need support. Sun is friendly to Lagna lord Moon."
+          },
+          {
+            "planet": "mercury",
+            "gem": "emerald",
+            "reason": "Mercury rules the 3rd and 12th houses. As dual malefic house lord, Emerald is generally not recommended.",
+            "condition": "Avoid unless Mercury is extremely well-placed and you specifically need 3rd house courage for a temporary period."
+          }
+        ]
+      },
+      "leo": {
+        "yoga_karaka": "mars",
+        "primary_benefic_planets": ["sun", "mars", "jupiter"],
+        "functional_malefic_planets": ["saturn", "venus", "mercury"],
+        "neutral_planets": ["moon"],
+        "best_gem": {
+          "planet": "sun",
+          "gem": "ruby",
+          "reason": "Sun is the Lagna lord for Leo. As ascendant lord, Sun gem strengthens overall vitality, confidence, leadership, and health. Ruby is always the primary recommendation for Leo Lagna natives.",
+          "finger": "ring",
+          "metal": "gold",
+          "day": "sunday"
+        },
+        "secondary_gems": [
+          {
+            "planet": "mars",
+            "gem": "red_coral",
+            "reason": "Mars rules the 4th (kendra — home, happiness) and 9th (Dharma trikona) houses. Mars is a Yoga Karaka for Leo, combining kendra and trikona lordship. Red Coral brings fortune, property, and domestic bliss.",
+            "condition": "Highly recommended during Mars Dasha or when property and fortune matters need strengthening."
+          },
+          {
+            "planet": "jupiter",
+            "gem": "yellow_sapphire",
+            "reason": "Jupiter rules the 5th (trikona — children, intellect) and 8th houses. Despite 8th lordship, the 5th lordship makes Jupiter a benefic. Yellow Sapphire enhances wisdom, children, and spiritual growth.",
+            "condition": "Wear during Jupiter Dasha. The 8th lordship adds longevity benefits along with 5th house blessings."
+          }
+        ],
+        "avoid_gems": [
+          {
+            "planet": "saturn",
+            "gem": "blue_sapphire",
+            "reason": "Saturn rules the 6th (dusthana) and 7th (maraka) houses. As the most inimical planet to the Lagna lord Sun, Saturn gem is dangerous. Blue Sapphire can trigger enemies, health issues, and marital strife."
+          },
+          {
+            "planet": "venus",
+            "gem": "diamond",
+            "reason": "Venus rules the 3rd and 10th houses. Without trikona lordship, and being enemy of the Lagna lord Sun, Venus gem can increase struggles and career friction."
+          },
+          {
+            "planet": "mercury",
+            "gem": "emerald",
+            "reason": "Mercury rules the 2nd (maraka) and 11th houses. As maraka lord without trikona lordship, Emerald is not recommended. Can increase financial volatility."
+          }
+        ],
+        "conditional_gems": [
+          {
+            "planet": "moon",
+            "gem": "pearl",
+            "reason": "Moon rules the 12th house (losses, foreign lands, liberation). Pearl is generally not recommended for Leo due to 12th lordship.",
+            "condition": "Only if Moon is severely afflicted and mental peace is desperately needed. Short-term use only."
+          }
+        ]
+      },
+      "virgo": {
+        "yoga_karaka": null,
+        "primary_benefic_planets": ["mercury", "venus", "saturn"],
+        "functional_malefic_planets": ["jupiter", "mars", "sun", "moon"],
+        "neutral_planets": [],
+        "best_gem": {
+          "planet": "mercury",
+          "gem": "emerald",
+          "reason": "Mercury is the Lagna lord and 10th lord for Virgo. As ascendant lord combined with the most powerful kendra lordship, Mercury is the supreme benefic. Emerald strengthens career, health, intelligence, and communication.",
+          "finger": "little",
+          "metal": "gold",
+          "day": "wednesday"
+        },
+        "secondary_gems": [
+          {
+            "planet": "venus",
+            "gem": "diamond",
+            "reason": "Venus rules the 2nd (wealth, speech) and 9th (Dharma, fortune) houses. The 9th lordship makes Venus a powerful benefic. Diamond brings financial prosperity, eloquent speech, and divine grace.",
+            "condition": "Highly recommended during Venus Dasha or when wealth and fortune need activation."
+          },
+          {
+            "planet": "saturn",
+            "gem": "blue_sapphire",
+            "reason": "Saturn rules the 5th (trikona — children, intelligence) and 6th houses. Despite 6th lordship, the 5th trikona lordship makes Saturn a benefic. Blue Sapphire enhances intellectual power and competitive advantage.",
+            "condition": "Wear during Saturn Dasha. The 6th lordship adds ability to overcome enemies along with 5th house creativity."
+          }
+        ],
+        "avoid_gems": [
+          {
+            "planet": "jupiter",
+            "gem": "yellow_sapphire",
+            "reason": "Jupiter rules the 4th (kendra) and 7th (maraka) houses. As a natural benefic owning two kendras, Jupiter suffers severe Kendradhipati Dosha. Yellow Sapphire can cause marital problems and domestic disturbance."
+          },
+          {
+            "planet": "mars",
+            "gem": "red_coral",
+            "reason": "Mars rules the 3rd and 8th (dusthana) houses. As dual malefic house lord, Red Coral can trigger accidents, surgeries, and sudden upheavals."
+          }
+        ],
+        "conditional_gems": [
+          {
+            "planet": "sun",
+            "gem": "ruby",
+            "reason": "Sun rules the 12th house (loss, foreign lands). Ruby is generally avoided for Virgo Lagna.",
+            "condition": "Only if Sun is extremely well-placed and foreign settlement or spiritual liberation is desired."
+          },
+          {
+            "planet": "moon",
+            "gem": "pearl",
+            "reason": "Moon rules the 11th house (gains). As an upachaya lord, Pearl may increase material gains.",
+            "condition": "Generally neutral. Wear only if Moon is severely weak and gains are blocked."
+          }
+        ]
+      },
+      "libra": {
+        "yoga_karaka": "saturn",
+        "primary_benefic_planets": ["saturn", "mercury", "venus"],
+        "functional_malefic_planets": ["jupiter", "sun", "mars"],
+        "neutral_planets": ["moon"],
+        "best_gem": {
+          "planet": "saturn",
+          "gem": "blue_sapphire",
+          "reason": "Saturn is the Yoga Karaka for Libra Lagna, ruling both 4th (Sukha kendra — happiness, home) and 5th (Purva Punya trikona — merit, children). Blue Sapphire brings domestic happiness, intelligence, children's welfare, and property.",
+          "finger": "middle",
+          "metal": "gold",
+          "day": "saturday"
+        },
+        "secondary_gems": [
+          {
+            "planet": "mercury",
+            "gem": "emerald",
+            "reason": "Mercury rules the 9th (Dharma trikona) and 12th houses. Despite 12th lordship, the 9th house lordship makes Mercury a strong benefic. Emerald brings fortune, wisdom, and spiritual growth.",
+            "condition": "Wear during Mercury Dasha or when fortune and higher education matter."
+          },
+          {
+            "planet": "venus",
+            "gem": "diamond",
+            "reason": "Venus is the Lagna lord and 8th lord for Libra. As ascendant lord, Venus gem strengthens overall vitality. The 8th lordship is neutralized by Lagna lordship. Diamond strengthens personality and longevity.",
+            "condition": "Wear when Venus is weak or during Venus Dasha. Always beneficial as Lagna lord gem."
+          }
+        ],
+        "avoid_gems": [
+          {
+            "planet": "jupiter",
+            "gem": "yellow_sapphire",
+            "reason": "Jupiter rules the 3rd and 6th (dusthana) houses. As dual malefic house lord, Yellow Sapphire increases enemies, debts, and unnecessary risk-taking."
+          },
+          {
+            "planet": "sun",
+            "gem": "ruby",
+            "reason": "Sun rules the 11th house and is a natural enemy of the Lagna lord Venus. Ruby can increase ego conflicts and create discord."
+          },
+          {
+            "planet": "mars",
+            "gem": "red_coral",
+            "reason": "Mars rules the 2nd (maraka) and 7th (maraka) houses. As dual maraka lord, Red Coral is highly dangerous and can trigger serious health crises and relationship breakdown."
+          }
+        ],
+        "conditional_gems": [
+          {
+            "planet": "moon",
+            "gem": "pearl",
+            "reason": "Moon rules the 10th house (career, public standing). Pearl can strengthen career and public reputation.",
+            "condition": "Wear if Moon is weak and career advancement is stalled. Moon is neutral for Libra Lagna."
+          }
+        ]
+      },
+      "scorpio": {
+        "yoga_karaka": null,
+        "primary_benefic_planets": ["mars", "jupiter", "moon", "sun"],
+        "functional_malefic_planets": ["venus", "mercury", "saturn"],
+        "neutral_planets": [],
+        "best_gem": {
+          "planet": "mars",
+          "gem": "red_coral",
+          "reason": "Mars is the Lagna lord and 6th lord for Scorpio. As ascendant lord, Mars is the primary benefic. The 6th lordship adds ability to overcome enemies and competition. Red Coral strengthens vitality, courage, and competitive edge.",
+          "finger": "ring",
+          "metal": "gold",
+          "day": "tuesday"
+        },
+        "secondary_gems": [
+          {
+            "planet": "jupiter",
+            "gem": "yellow_sapphire",
+            "reason": "Jupiter rules the 2nd (wealth, speech) and 5th (trikona — children, intelligence). The 5th lordship makes Jupiter a strong benefic. Yellow Sapphire enhances wisdom, wealth, children's welfare, and spiritual merit.",
+            "condition": "Highly recommended during Jupiter Dasha or when education, children, and wealth need strengthening."
+          },
+          {
+            "planet": "moon",
+            "gem": "pearl",
+            "reason": "Moon rules the 9th house (Dharma, fortune, guru). As 9th lord, Moon is a powerful benefic for Scorpio Lagna. Pearl brings divine fortune, guru blessings, and spiritual growth.",
+            "condition": "Wear during Moon Dasha or when fortune and dharmic matters need activation."
+          },
+          {
+            "planet": "sun",
+            "gem": "ruby",
+            "reason": "Sun rules the 10th house (career, public standing). As kendra lord and friend of Lagna lord Mars, Sun is beneficial. Ruby enhances career success and authority.",
+            "condition": "Wear during Sun Dasha or when career advancement is the priority."
+          }
+        ],
+        "avoid_gems": [
+          {
+            "planet": "venus",
+            "gem": "diamond",
+            "reason": "Venus rules the 7th (maraka) and 12th (loss) houses. As dual malefic house lord and enemy of Lagna lord Mars, Diamond is dangerous. Can trigger relationship breakdown, financial losses, and health issues."
+          },
+          {
+            "planet": "mercury",
+            "gem": "emerald",
+            "reason": "Mercury rules the 8th (dusthana) and 11th houses. As 8th lord, Mercury is a functional malefic. Emerald can trigger sudden upheavals, hidden losses, and instability."
+          }
+        ],
+        "conditional_gems": [
+          {
+            "planet": "saturn",
+            "gem": "blue_sapphire",
+            "reason": "Saturn rules the 3rd and 4th houses. Mixed results — 4th lordship is kendra but 3rd is upachaya.",
+            "condition": "Only if Saturn is very strong and well-placed, and property matters specifically need strengthening. Use with caution."
+          }
+        ]
+      },
+      "sagittarius": {
+        "yoga_karaka": null,
+        "primary_benefic_planets": ["jupiter", "sun", "mars"],
+        "functional_malefic_planets": ["venus", "saturn", "mercury"],
+        "neutral_planets": ["moon"],
+        "best_gem": {
+          "planet": "jupiter",
+          "gem": "yellow_sapphire",
+          "reason": "Jupiter is the Lagna lord and 4th lord for Sagittarius. As ascendant lord combined with Sukha kendra lordship, Jupiter is the supreme benefic. Yellow Sapphire strengthens health, education, property, happiness, and spiritual growth.",
+          "finger": "index",
+          "metal": "gold",
+          "day": "thursday"
+        },
+        "secondary_gems": [
+          {
+            "planet": "sun",
+            "gem": "ruby",
+            "reason": "Sun rules the 9th house (Dharma, fortune, father). As 9th lord, Sun is a powerful benefic and friend of Lagna lord Jupiter. Ruby brings divine fortune, authority, and dharmic achievement.",
+            "condition": "Highly recommended during Sun Dasha or when fortune and career prestige need boosting."
+          },
+          {
+            "planet": "mars",
+            "gem": "red_coral",
+            "reason": "Mars rules the 5th (trikona — children, merit) and 12th houses. The 5th lordship makes Mars a benefic. Red Coral enhances intelligence, children's welfare, and spiritual liberation.",
+            "condition": "Wear during Mars Dasha or when education, children, and creative expression need strengthening."
+          }
+        ],
+        "avoid_gems": [
+          {
+            "planet": "venus",
+            "gem": "diamond",
+            "reason": "Venus rules the 6th (dusthana — enemies, debts) and 11th houses. As dual malefic house lord and enemy of Lagna lord Jupiter, Diamond increases enemies, health issues, and material obsession."
+          },
+          {
+            "planet": "saturn",
+            "gem": "blue_sapphire",
+            "reason": "Saturn rules the 2nd (maraka) and 3rd houses. As maraka lord without trikona lordship, Blue Sapphire can trigger financial and health crises."
+          }
+        ],
+        "conditional_gems": [
+          {
+            "planet": "mercury",
+            "gem": "emerald",
+            "reason": "Mercury rules the 7th (maraka) and 10th (kendra) houses. Kendradhipati Dosha applies as Mercury is a natural benefic owning kendra.",
+            "condition": "Only during Mercury Dasha when career specifically needs boosting. Test first and use short term."
+          },
+          {
+            "planet": "moon",
+            "gem": "pearl",
+            "reason": "Moon rules the 8th house (longevity, transformation). Pearl is generally not recommended due to 8th lordship.",
+            "condition": "Only if Moon is severely afflicted and longevity or emotional stability is at serious risk."
+          }
+        ]
+      },
+      "capricorn": {
+        "yoga_karaka": "venus",
+        "primary_benefic_planets": ["venus", "mercury", "saturn"],
+        "functional_malefic_planets": ["jupiter", "mars", "moon"],
+        "neutral_planets": ["sun"],
+        "best_gem": {
+          "planet": "venus",
+          "gem": "diamond",
+          "reason": "Venus is the Yoga Karaka for Capricorn Lagna, ruling both 5th (Purva Punya trikona) and 10th (Karma kendra). This is the most powerful benefic combination. Diamond brings career success, creativity, romance, children's welfare, and material prosperity.",
+          "finger": "little",
+          "metal": "platinum",
+          "day": "friday"
+        },
+        "secondary_gems": [
+          {
+            "planet": "mercury",
+            "gem": "emerald",
+            "reason": "Mercury rules the 6th and 9th houses. Despite 6th lordship, the 9th lordship (Dharma trikona) makes Mercury a benefic. Emerald brings fortune, wisdom, and competitive advantage.",
+            "condition": "Wear during Mercury Dasha or when higher education, fortune, and overcoming competition matter."
+          },
+          {
+            "planet": "saturn",
+            "gem": "blue_sapphire",
+            "reason": "Saturn is the Lagna lord and 2nd lord for Capricorn. As ascendant lord, Saturn gem strengthens overall vitality and financial stability. Blue Sapphire enhances discipline, health, and wealth.",
+            "condition": "Wear when Saturn is weak or during Saturn Dasha. Always beneficial as Lagna lord gem."
+          }
+        ],
+        "avoid_gems": [
+          {
+            "planet": "jupiter",
+            "gem": "yellow_sapphire",
+            "reason": "Jupiter rules the 3rd and 12th houses. As dual malefic house lord, Yellow Sapphire increases losses, unnecessary expenses, and scattered efforts."
+          },
+          {
+            "planet": "mars",
+            "gem": "red_coral",
+            "reason": "Mars rules the 4th (kendra) and 11th houses. Without trikona lordship, Mars is not a clear benefic. Red Coral may increase domestic conflicts."
+          },
+          {
+            "planet": "sun",
+            "gem": "ruby",
+            "reason": "Sun rules the 8th house (dusthana — sudden changes, longevity). As 8th lord, Sun is a functional malefic. Ruby can trigger sudden upheavals, accidents, and health crises."
+          }
+        ],
+        "conditional_gems": [
+          {
+            "planet": "moon",
+            "gem": "pearl",
+            "reason": "Moon rules the 7th house (maraka — marriage, partnerships). Pearl can strengthen marriage matters.",
+            "condition": "Only if Moon is very weak and marriage is suffering. Moon as 7th lord is a maraka — use with care."
+          }
+        ]
+      },
+      "aquarius": {
+        "yoga_karaka": "venus",
+        "primary_benefic_planets": ["venus", "saturn", "mercury"],
+        "functional_malefic_planets": ["jupiter", "mars", "moon"],
+        "neutral_planets": ["sun"],
+        "best_gem": {
+          "planet": "venus",
+          "gem": "diamond",
+          "reason": "Venus is the Yoga Karaka for Aquarius Lagna, ruling both 4th (Sukha kendra — happiness, home) and 9th (Dharma trikona — fortune). This combines kendra and trikona perfectly. Diamond brings domestic happiness, fortune, property, and dharmic growth.",
+          "finger": "little",
+          "metal": "platinum",
+          "day": "friday"
+        },
+        "secondary_gems": [
+          {
+            "planet": "saturn",
+            "gem": "blue_sapphire",
+            "reason": "Saturn is the Lagna lord and 12th lord for Aquarius. As ascendant lord, Saturn gem strengthens vitality and spiritual liberation. Blue Sapphire enhances discipline, health, and foreign connections.",
+            "condition": "Wear when Saturn is weak or during Saturn Dasha. Lagna lord gem is always beneficial."
+          },
+          {
+            "planet": "mercury",
+            "gem": "emerald",
+            "reason": "Mercury rules the 5th (trikona — intelligence, children) and 8th houses. Despite 8th lordship, the 5th trikona lordship makes Mercury a benefic. Emerald enhances intellect and creative expression.",
+            "condition": "Wear during Mercury Dasha or when education and intellectual matters need strengthening."
+          }
+        ],
+        "avoid_gems": [
+          {
+            "planet": "jupiter",
+            "gem": "yellow_sapphire",
+            "reason": "Jupiter rules the 2nd (maraka) and 11th (badhaka for fixed signs) houses. As both maraka and badhaka lord, Jupiter is highly dangerous. Yellow Sapphire can trigger serious crises."
+          },
+          {
+            "planet": "mars",
+            "gem": "red_coral",
+            "reason": "Mars rules the 3rd and 10th houses. Without trikona lordship, Mars is not a clear benefic. Red Coral may increase aggression and unnecessary conflicts."
+          },
+          {
+            "planet": "sun",
+            "gem": "ruby",
+            "reason": "Sun rules the 7th house (maraka). As maraka lord and enemy of Lagna lord Saturn, Ruby is dangerous. Can trigger relationship crises and health issues."
+          }
+        ],
+        "conditional_gems": [
+          {
+            "planet": "moon",
+            "gem": "pearl",
+            "reason": "Moon rules the 6th house (enemies, debts, health). Pearl is generally avoided due to dusthana lordship.",
+            "condition": "Only if Moon is severely afflicted and mental health requires urgent support. Short-term use only."
+          }
+        ]
+      },
+      "pisces": {
+        "yoga_karaka": null,
+        "primary_benefic_planets": ["jupiter", "mars", "moon"],
+        "functional_malefic_planets": ["venus", "saturn", "sun", "mercury"],
+        "neutral_planets": [],
+        "best_gem": {
+          "planet": "jupiter",
+          "gem": "yellow_sapphire",
+          "reason": "Jupiter is the Lagna lord and 10th lord for Pisces. As ascendant lord combined with the most powerful kendra lordship, Jupiter is the supreme benefic. Yellow Sapphire strengthens health, career, wisdom, and spiritual growth.",
+          "finger": "index",
+          "metal": "gold",
+          "day": "thursday"
+        },
+        "secondary_gems": [
+          {
+            "planet": "mars",
+            "gem": "red_coral",
+            "reason": "Mars rules the 2nd (wealth, speech) and 9th (Dharma, fortune) houses. The 9th lordship makes Mars a powerful benefic. Red Coral brings divine fortune, family prosperity, and courageous speech.",
+            "condition": "Highly recommended during Mars Dasha or when fortune, finances, and dharmic growth need activation."
+          },
+          {
+            "planet": "moon",
+            "gem": "pearl",
+            "reason": "Moon rules the 5th house (trikona — children, intelligence, merit). As 5th lord, Moon is a strong benefic. Pearl enhances creativity, children's welfare, and emotional intelligence.",
+            "condition": "Wear during Moon Dasha or when education, children, and creative matters need support."
+          }
+        ],
+        "avoid_gems": [
+          {
+            "planet": "venus",
+            "gem": "diamond",
+            "reason": "Venus rules the 3rd and 8th (dusthana) houses. As dual malefic house lord, Diamond triggers unexpected losses, accidents, and scattered efforts. Highly dangerous for Pisces Lagna."
+          },
+          {
+            "planet": "saturn",
+            "gem": "blue_sapphire",
+            "reason": "Saturn rules the 11th and 12th houses. Without trikona or beneficial kendra lordship, Blue Sapphire increases expenses and can block income."
+          },
+          {
+            "planet": "mercury",
+            "gem": "emerald",
+            "reason": "Mercury rules the 4th (kendra) and 7th (maraka) houses. As natural benefic owning two kendras, Mercury suffers Kendradhipati Dosha. Emerald can disrupt domestic peace and marriage."
+          }
+        ],
+        "conditional_gems": [
+          {
+            "planet": "sun",
+            "gem": "ruby",
+            "reason": "Sun rules the 6th house (enemies, debts, health issues). Ruby is generally avoided for Pisces Lagna.",
+            "condition": "Only if Sun is extremely well-placed and competitive advantage in specific career situations is needed. Short-term use."
+          }
+        ]
+      }
+    },
+    "general_rules": [
+      {
+        "rule": "Always wear gems of benefic planets for your Lagna, never malefic planets. Gems strengthen the planet — strengthening a malefic amplifies its harmful effects.",
+        "priority": 1
+      },
+      {
+        "rule": "The Lagna lord's gem is almost always safe to wear. The ascendant lord represents the native's vitality and overall well-being.",
+        "priority": 2
+      },
+      {
+        "rule": "The Yoga Karaka planet's gem is the most powerful single gem for a Lagna. Taurus/Libra: Saturn. Cancer/Leo: Mars. Capricorn/Aquarius: Venus.",
+        "priority": 3
+      },
+      {
+        "rule": "Never wear gems of planets that are maraka (death-inflicting) lords — 2nd and 7th house lords — unless they also own a trikona (1st, 5th, 9th).",
+        "priority": 4
+      },
+      {
+        "rule": "Test Blue Sapphire (Neelam) and Hessonite (Gomed) for 3 days before permanent wearing. Tie the gem in a blue/orange cloth to the arm and observe effects.",
+        "priority": 5
+      },
+      {
+        "rule": "Gems should be natural, untreated, and of good clarity. Minimum weight recommendations vary by gem — generally 2-5 carats for primary gems.",
+        "priority": 6
+      },
+      {
+        "rule": "Wear gems on the correct finger and metal as prescribed. Gold amplifies Sun, Mars, Jupiter gems. Silver amplifies Moon, Mercury gems. Platinum for Venus.",
+        "priority": 7
+      },
+      {
+        "rule": "The best time to first wear a gem is during the Hora of its ruling planet on the prescribed day, ideally during a Shukla Paksha (waxing Moon) period.",
+        "priority": 8
+      },
+      {
+        "rule": "Gems of enemy planets should never be worn together on the same hand. For example, Ruby (Sun) and Blue Sapphire (Saturn) are antagonistic.",
+        "priority": 9
+      },
+      {
+        "rule": "During a planet's Mahadasha or Antardasha, wearing that planet's gem amplifies the period's effects — beneficial if the planet is well-placed, harmful otherwise.",
+        "priority": 10
+      },
+      {
+        "rule": "If in doubt, always start with the Lagna lord's gem. It is the safest recommendation and benefits the native's overall health and vitality.",
+        "priority": 11
+      },
+      {
+        "rule": "Consult a qualified Jyotishi before wearing Blue Sapphire, Hessonite, or Cat's Eye, as these gems of Saturn, Rahu, and Ketu can produce sudden and dramatic results.",
+        "priority": 12
+      }
+    ],
+    "enemy_gem_pairs": [
+      {
+        "gem1": "ruby",
+        "gem2": "blue_sapphire",
+        "planets": ["sun", "saturn"],
+        "reason": "Sun and Saturn are natural bitter enemies. Wearing both creates contradictory energies — Sun expands while Saturn restricts. Can cause internal conflict and health disturbances."
+      },
+      {
+        "gem1": "ruby",
+        "gem2": "diamond",
+        "planets": ["sun", "venus"],
+        "reason": "Sun and Venus are natural enemies. Ruby's fire and Diamond's water-like refinement clash. Can create ego versus relationship conflicts."
+      },
+      {
+        "gem1": "ruby",
+        "gem2": "hessonite",
+        "planets": ["sun", "rahu"],
+        "reason": "Sun and Rahu are intense enemies per Vedic mythology (eclipse). Wearing both amplifies confusion between authentic self-expression and illusory desires."
+      },
+      {
+        "gem1": "pearl",
+        "gem2": "hessonite",
+        "planets": ["moon", "rahu"],
+        "reason": "Moon and Rahu are natural enemies (Rahu eclipses Moon). Wearing both disturbs mental peace, amplifies anxiety, and can trigger psychosomatic disorders."
+      },
+      {
+        "gem1": "pearl",
+        "gem2": "cats_eye",
+        "planets": ["moon", "ketu"],
+        "reason": "Moon and Ketu are conflicting energies — Moon attaches while Ketu detaches. Wearing both creates emotional confusion and instability."
+      },
+      {
+        "gem1": "red_coral",
+        "gem2": "emerald",
+        "planets": ["mars", "mercury"],
+        "reason": "Mars and Mercury are natural enemies. Red Coral's aggressive energy conflicts with Emerald's intellectual refinement. Can cause impulsive decisions and communication breakdowns."
+      },
+      {
+        "gem1": "red_coral",
+        "gem2": "diamond",
+        "planets": ["mars", "venus"],
+        "reason": "Mars and Venus represent contrasting forces — aggression versus refinement. Wearing both can create relationship conflicts and misdirected passion."
+      },
+      {
+        "gem1": "yellow_sapphire",
+        "gem2": "diamond",
+        "planets": ["jupiter", "venus"],
+        "reason": "Jupiter and Venus are natural enemies in Vedic astrology (guru of devas vs guru of asuras). Wearing both can create indulgence versus wisdom conflicts."
+      },
+      {
+        "gem1": "blue_sapphire",
+        "gem2": "red_coral",
+        "planets": ["saturn", "mars"],
+        "reason": "Saturn and Mars are natural enemies — patience versus impulsiveness. Wearing both creates contradictory impulses and can trigger accidents or sudden obstacles."
+      }
+    ],
+    "gem_properties": {
+      "ruby": {
+        "planet": "sun",
+        "sanskrit": "Manikya",
+        "color": "pigeon blood red",
+        "hardness": 9.0,
+        "chemical": "Al2O3 (Corundum)",
+        "source": "Myanmar, Sri Lanka, Mozambique, Thailand",
+        "minimum_carat": 3.0,
+        "finger": "ring",
+        "metal": "gold",
+        "day": "sunday",
+        "hora": "sun",
+        "nakshatra": "Krittika, Uttara Phalguni, Uttara Ashadha",
+        "substitute": ["garnet", "red_spinel", "red_tourmaline"]
+      },
+      "pearl": {
+        "planet": "moon",
+        "sanskrit": "Moti",
+        "color": "white with luster",
+        "hardness": 3.5,
+        "chemical": "CaCO3 (Calcium Carbonate)",
+        "source": "Persian Gulf, South India, Japan, Australia",
+        "minimum_carat": 4.0,
+        "finger": "little",
+        "metal": "silver",
+        "day": "monday",
+        "hora": "moon",
+        "nakshatra": "Rohini, Hasta, Shravana",
+        "substitute": ["moonstone", "white_coral"]
+      },
+      "red_coral": {
+        "planet": "mars",
+        "sanskrit": "Moonga",
+        "color": "ox blood red to orange red",
+        "hardness": 3.5,
+        "chemical": "CaCO3 (Organic)",
+        "source": "Italy, Japan, India, Taiwan",
+        "minimum_carat": 5.0,
+        "finger": "ring",
+        "metal": "gold",
+        "day": "tuesday",
+        "hora": "mars",
+        "nakshatra": "Mrigashira, Chitra, Dhanishtha",
+        "substitute": ["carnelian", "red_agate"]
+      },
+      "emerald": {
+        "planet": "mercury",
+        "sanskrit": "Panna",
+        "color": "vivid green",
+        "hardness": 7.5,
+        "chemical": "Be3Al2Si6O18 (Beryl)",
+        "source": "Colombia, Zambia, Brazil, India",
+        "minimum_carat": 3.0,
+        "finger": "little",
+        "metal": "gold",
+        "day": "wednesday",
+        "hora": "mercury",
+        "nakshatra": "Ashlesha, Jyeshtha, Revati",
+        "substitute": ["peridot", "green_tourmaline", "tsavorite"]
+      },
+      "yellow_sapphire": {
+        "planet": "jupiter",
+        "sanskrit": "Pukhraj",
+        "color": "golden yellow",
+        "hardness": 9.0,
+        "chemical": "Al2O3 (Corundum)",
+        "source": "Sri Lanka, Thailand, Myanmar, Madagascar",
+        "minimum_carat": 4.0,
+        "finger": "index",
+        "metal": "gold",
+        "day": "thursday",
+        "hora": "jupiter",
+        "nakshatra": "Punarvasu, Vishakha, Purva Bhadrapada",
+        "substitute": ["citrine", "yellow_topaz", "golden_beryl"]
+      },
+      "diamond": {
+        "planet": "venus",
+        "sanskrit": "Heera",
+        "color": "colorless with fire",
+        "hardness": 10.0,
+        "chemical": "C (Carbon)",
+        "source": "South Africa, Russia, Australia, Botswana",
+        "minimum_carat": 1.0,
+        "finger": "little",
+        "metal": "platinum",
+        "day": "friday",
+        "hora": "venus",
+        "nakshatra": "Bharani, Purva Phalguni, Purva Ashadha",
+        "substitute": ["white_sapphire", "zircon", "white_topaz"]
+      },
+      "blue_sapphire": {
+        "planet": "saturn",
+        "sanskrit": "Neelam",
+        "color": "cornflower blue",
+        "hardness": 9.0,
+        "chemical": "Al2O3 (Corundum)",
+        "source": "Sri Lanka, Kashmir, Myanmar, Thailand",
+        "minimum_carat": 4.0,
+        "finger": "middle",
+        "metal": "gold",
+        "day": "saturday",
+        "hora": "saturn",
+        "nakshatra": "Pushya, Anuradha, Uttara Bhadrapada",
+        "substitute": ["amethyst", "iolite", "blue_spinel"]
+      },
+      "hessonite": {
+        "planet": "rahu",
+        "sanskrit": "Gomed",
+        "color": "honey brown to orange",
+        "hardness": 7.0,
+        "chemical": "Ca3Al2(SiO4)3 (Grossular Garnet)",
+        "source": "Sri Lanka, India, Brazil, Tanzania",
+        "minimum_carat": 5.0,
+        "finger": "middle",
+        "metal": "silver",
+        "day": "saturday",
+        "hora": "rahu",
+        "nakshatra": "Ardra, Swati, Shatabhisha",
+        "substitute": ["orange_zircon", "spessartite_garnet"]
+      },
+      "cats_eye": {
+        "planet": "ketu",
+        "sanskrit": "Lehsunia",
+        "color": "honey with cat's eye effect",
+        "hardness": 8.5,
+        "chemical": "BeAl2O4 (Chrysoberyl)",
+        "source": "Sri Lanka, Brazil, India, Madagascar",
+        "minimum_carat": 5.0,
+        "finger": "little",
+        "metal": "gold",
+        "day": "tuesday",
+        "hora": "ketu",
+        "nakshatra": "Ashwini, Magha, Mula",
+        "substitute": ["chrysoberyl", "tigers_eye"]
+      }
+    }
+  }
+}

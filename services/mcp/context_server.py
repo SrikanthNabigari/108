@@ -1720,5 +1720,180 @@ def _years_until_sade_sati(moon_idx: int, saturn_idx: int) -> float | None:
     return None
 
 
+@mcp.tool()
+def daily_forecast(
+    birth_datetime: str,
+    birth_lat: float,
+    birth_lon: float,
+    natal_planets: dict[str, dict[str, Any]],
+    moon_longitude: float,
+    lagna_rashi: str,
+    query_date: str | None = None,
+    location_lat: float | None = None,
+    location_lon: float | None = None,
+) -> dict[str, Any]:
+    """
+    Generate a comprehensive daily forecast combining all timing tools.
+
+    Integrates panchanga, transit Moon, choghadiya, Rahu Kaal, ashtakavarga,
+    current dasha, and transit-natal aspects into a single day rating (1-10)
+    with actionable recommendations.
+
+    Args:
+        birth_datetime: Birth datetime ISO string (e.g., "1992-12-03T03:00:00+05:30")
+        birth_lat: Birth latitude
+        birth_lon: Birth longitude
+        natal_planets: Birth chart planets {name: {longitude, rashi, house, ...}}
+        moon_longitude: Natal Moon longitude in degrees
+        lagna_rashi: Ascendant sign (lowercase, e.g., "libra")
+        query_date: Date to forecast (ISO string, defaults to today)
+        location_lat: Current location latitude (defaults to birth_lat)
+        location_lon: Current location longitude (defaults to birth_lon)
+
+    Returns:
+        Dictionary with day_rating, panchanga, transit_moon, choghadiya,
+        inauspicious_periods, dasha_info, transit_aspects, and recommendations
+
+    Example:
+        daily_forecast("1992-12-03T03:00:00+05:30", 16.73, 81.29,
+            {"sun": {"longitude": 240.5}}, 326.85, "libra")
+    """
+    try:
+        from packages.context.src.daily_forecast import get_daily_forecast
+
+        result = get_daily_forecast(
+            birth_datetime=birth_datetime,
+            birth_lat=birth_lat,
+            birth_lon=birth_lon,
+            natal_planets=natal_planets,
+            moon_longitude=moon_longitude,
+            lagna_rashi=lagna_rashi,
+            query_date=query_date,
+            location_lat=location_lat,
+            location_lon=location_lon,
+        )
+        return {"success": True, **result}
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__, "success": False}
+
+
+@mcp.tool()
+def weekly_forecast(
+    birth_datetime: str,
+    birth_lat: float,
+    birth_lon: float,
+    natal_planets: dict[str, dict[str, Any]],
+    moon_longitude: float,
+    lagna_rashi: str,
+    start_date: str | None = None,
+    location_lat: float | None = None,
+    location_lon: float | None = None,
+) -> dict[str, Any]:
+    """
+    Generate a 7-day forecast with area-wise analysis.
+
+    Composes daily forecasts, identifies peak and challenging days,
+    aggregates transit events, and computes ratings for career, finance,
+    relationships, health, and spiritual areas.
+
+    Args:
+        birth_datetime: Birth datetime ISO string
+        birth_lat: Birth latitude
+        birth_lon: Birth longitude
+        natal_planets: Birth chart planets {name: {longitude, rashi, house, ...}}
+        moon_longitude: Natal Moon longitude in degrees
+        lagna_rashi: Ascendant sign (lowercase)
+        start_date: Week start date (ISO string, defaults to today)
+        location_lat: Current location latitude (defaults to birth_lat)
+        location_lon: Current location longitude (defaults to birth_lon)
+
+    Returns:
+        Dictionary with weekly_rating, daily_forecasts, area_ratings,
+        key_transits, peak_days, challenging_days, and theme
+
+    Example:
+        weekly_forecast("1992-12-03T03:00:00+05:30", 16.73, 81.29,
+            {"sun": {"longitude": 240.5}}, 326.85, "libra")
+    """
+    try:
+        from packages.context.src.weekly_forecast import get_weekly_forecast
+
+        result = get_weekly_forecast(
+            birth_datetime=birth_datetime,
+            birth_lat=birth_lat,
+            birth_lon=birth_lon,
+            natal_planets=natal_planets,
+            moon_longitude=moon_longitude,
+            lagna_rashi=lagna_rashi,
+            start_date=start_date,
+            location_lat=location_lat,
+            location_lon=location_lon,
+        )
+        return {"success": True, **result}
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__, "success": False}
+
+
+@mcp.tool()
+def monthly_forecast(
+    birth_datetime: str,
+    birth_lat: float,
+    birth_lon: float,
+    natal_planets: dict[str, dict[str, Any]],
+    moon_longitude: float,
+    lagna_rashi: str,
+    month: int | None = None,
+    year: int | None = None,
+    location_lat: float | None = None,
+    location_lon: float | None = None,
+) -> dict[str, Any]:
+    """
+    Generate a month-long forecast with major transits and area analysis.
+
+    Includes major transit events (ingresses, aspects, stations), dasha
+    transitions, retrograde tracking, area-wise ratings, weekly summaries,
+    and best/worst dates for various activities.
+
+    Args:
+        birth_datetime: Birth datetime ISO string
+        birth_lat: Birth latitude
+        birth_lon: Birth longitude
+        natal_planets: Birth chart planets {name: {longitude, rashi, house, ...}}
+        moon_longitude: Natal Moon longitude in degrees
+        lagna_rashi: Ascendant sign (lowercase)
+        month: Month number (1-12, defaults to current month)
+        year: Year (defaults to current year)
+        location_lat: Current location latitude (defaults to birth_lat)
+        location_lon: Current location longitude (defaults to birth_lon)
+
+    Returns:
+        Dictionary with month_rating, major_transits, retrogrades,
+        dasha_transitions, area_ratings, weekly_summaries, best_dates,
+        and monthly_theme
+
+    Example:
+        monthly_forecast("1992-12-03T03:00:00+05:30", 16.73, 81.29,
+            {"sun": {"longitude": 240.5}}, 326.85, "libra", month=2, year=2026)
+    """
+    try:
+        from packages.context.src.monthly_forecast import get_monthly_forecast
+
+        result = get_monthly_forecast(
+            birth_datetime=birth_datetime,
+            birth_lat=birth_lat,
+            birth_lon=birth_lon,
+            natal_planets=natal_planets,
+            moon_longitude=moon_longitude,
+            lagna_rashi=lagna_rashi,
+            month=month,
+            year=year,
+            location_lat=location_lat,
+            location_lon=location_lon,
+        )
+        return {"success": True, **result}
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__, "success": False}
+
+
 if __name__ == "__main__":
     mcp.run()

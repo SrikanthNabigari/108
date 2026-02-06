@@ -220,6 +220,18 @@ INTENT_KEYWORDS = {
         "pattern",
         "combination",
         "aspect",
+        "atmakaraka",
+        "soul purpose",
+        "karakamsha",
+        "ishta devata",
+        "synastry",
+        "compatibility",
+        "relationship",
+        "partner",
+        "gemstone",
+        "gem",
+        "ratna",
+        "stone",
     ],
     IntentType.PREDICT: [
         "predict",
@@ -229,6 +241,14 @@ INTENT_KEYWORDS = {
         "happen",
         "outcome",
         "result",
+        "forecast",
+        "today",
+        "this week",
+        "this month",
+        "daily",
+        "weekly",
+        "monthly",
+        "outlook",
     ],
     IntentType.DASHA: [
         "dasha",
@@ -1043,6 +1063,42 @@ Respond with ONLY the intent name (e.g., "calculate")"""
                     except Exception as e:
                         logger.debug(f"Bhava Bala calculation skipped: {e}")
 
+                    # Atmakaraka Analysis
+                    try:
+                        from packages.self.src.jaimini import get_atmakaraka_analysis
+
+                        ak_result = get_atmakaraka_analysis(chart)
+                        state["analysis_results"]["atmakaraka"] = ak_result
+                    except Exception as e:
+                        logger.debug(f"Atmakaraka analysis skipped: {e}")
+
+                    # Synastry check — only when user_input mentions compatibility keywords
+                    user_input = state.get("user_input", "").lower()
+                    if any(
+                        kw in user_input
+                        for kw in ("synastry", "compatibility", "partner", "relationship")
+                    ):
+                        try:
+                            # Note: synastry requires partner data.
+                            # If partner birth data is stored in memory, we could use it.
+                            # For now, just flag that synastry was requested.
+                            state["analysis_results"]["synastry_requested"] = True
+                        except Exception as e:
+                            logger.debug(f"Synastry flag skipped: {e}")
+
+                    # Gem recommendation when user asks about gems
+                    if any(kw in user_input for kw in ("gem", "stone", "ratna", "gemstone")):
+                        try:
+                            from packages.self.src.gem_recommender import recommend_gems
+
+                            gem_result = recommend_gems(
+                                lagna_rashi=lagna_str,
+                                planets=planets_raw,
+                            )
+                            state["analysis_results"]["gem_recommendation"] = gem_result
+                        except Exception as e:
+                            logger.debug(f"Gem recommendation skipped: {e}")
+
             except Exception as e:
                 logger.warning(f"Pattern analysis error: {e}")
 
@@ -1185,6 +1241,81 @@ Respond with ONLY the intent name (e.g., "calculate")"""
             except Exception as e:
                 logger.debug(f"Progressions check skipped: {e}")
 
+            # Daily / Weekly / Monthly Forecast
+            user_input = state.get("user_input", "").lower()
+            forecast_type = None
+            if any(kw in user_input for kw in ("today", "daily", "day")):
+                forecast_type = "daily"
+            elif any(kw in user_input for kw in ("this week", "weekly", "week")):
+                forecast_type = "weekly"
+            elif any(kw in user_input for kw in ("this month", "monthly", "month")):
+                forecast_type = "monthly"
+
+            if forecast_type:
+                try:
+                    bc = state["birth_chart"]
+                    birth_dt_str = bc.get("birth_datetime")
+                    lat = bc.get("latitude")
+                    lon = bc.get("longitude")
+                    planets_raw = bc.get("planets", {})
+                    lagna_str = bc.get("lagna_rashi", "aries").lower()
+                    moon_lon = 0.0
+                    if "moon" in planets_raw:
+                        moon_data = planets_raw["moon"]
+                        if isinstance(moon_data, dict):
+                            moon_lon = moon_data.get("longitude", 0.0)
+
+                    if birth_dt_str and lat and lon:
+                        birth_dt = datetime.fromisoformat(birth_dt_str.replace("Z", "+00:00"))
+
+                        if forecast_type == "daily":
+                            from packages.context.src.daily_forecast import get_daily_forecast
+
+                            fc = get_daily_forecast(
+                                birth_datetime=birth_dt,
+                                birth_lat=lat,
+                                birth_lon=lon,
+                                natal_planets=planets_raw,
+                                moon_longitude=moon_lon,
+                                lagna_rashi=lagna_str,
+                            )
+                            state["analysis_results"]["daily_forecast"] = fc
+                            prediction_factors.append(
+                                f"Daily rating: {fc.get('day_rating', 'N/A')}/10"
+                            )
+                        elif forecast_type == "weekly":
+                            from packages.context.src.weekly_forecast import get_weekly_forecast
+
+                            fc = get_weekly_forecast(
+                                birth_datetime=birth_dt,
+                                birth_lat=lat,
+                                birth_lon=lon,
+                                natal_planets=planets_raw,
+                                moon_longitude=moon_lon,
+                                lagna_rashi=lagna_str,
+                            )
+                            state["analysis_results"]["weekly_forecast"] = fc
+                            prediction_factors.append(
+                                f"Weekly rating: {fc.get('weekly_rating', 'N/A')}/10"
+                            )
+                        elif forecast_type == "monthly":
+                            from packages.context.src.monthly_forecast import get_monthly_forecast
+
+                            fc = get_monthly_forecast(
+                                birth_datetime=birth_dt,
+                                birth_lat=lat,
+                                birth_lon=lon,
+                                natal_planets=planets_raw,
+                                moon_longitude=moon_lon,
+                                lagna_rashi=lagna_str,
+                            )
+                            state["analysis_results"]["monthly_forecast"] = fc
+                            prediction_factors.append(
+                                f"Monthly rating: {fc.get('month_rating', 'N/A')}/10"
+                            )
+                except Exception as e:
+                    logger.debug(f"Forecast generation skipped: {e}")
+
         state["analysis_results"]["predictions_generated"] = True
         state["analysis_results"]["prediction_factors"] = prediction_factors
 
@@ -1226,6 +1357,17 @@ Respond with ONLY the intent name (e.g., "calculate")"""
                 state["analysis_results"]["remedies"] = result
             except Exception as e:
                 logger.warning(f"Remedy generation error: {e}")
+
+            # Add gem recommendation to remedies
+            try:
+                from packages.self.src.gem_recommender import recommend_gems
+
+                lagna_str = birth_chart.get("lagna_rashi", "aries").lower()
+                planets_raw = birth_chart.get("planets", {})
+                gem_result = recommend_gems(lagna_rashi=lagna_str, planets=planets_raw)
+                state["analysis_results"]["gem_recommendation"] = gem_result
+            except Exception as e:
+                logger.debug(f"Gem recommendation in remedy skipped: {e}")
 
         state["analysis_results"]["query_type"] = "remedy"
         return state

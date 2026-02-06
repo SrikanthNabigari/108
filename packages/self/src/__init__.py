@@ -51,13 +51,21 @@ from .divisional_interpreter import (
     interpret_d60_position,
 )
 from .dosha_detector import DoshaDetector
+from .gem_recommender import (
+    check_gem_compatibility,
+    get_lagna_gem_map,
+    recommend_gems,
+)
 from .jaimini import (
     calculate_all_arudha_padas,
     calculate_argala,
     calculate_arudha_pada,
     calculate_chara_dasha,
     calculate_chara_karakas,
+    get_all_chara_karaka_analysis,
     get_atmakaraka,
+    get_atmakaraka_analysis,
+    get_ishta_devata,
     get_jaimini_aspects,
     get_karakamsha,
     get_sign_mobility,
@@ -90,6 +98,12 @@ from .retrograde import (
     get_retrograde_effects,
 )
 from .strength import StrengthCalculator
+from .synastry import (
+    calculate_composite_chart,
+    calculate_cross_aspects,
+    calculate_house_overlay,
+    get_synastry_report,
+)
 from .yoga_cancellation import (
     apply_cancellations_to_chart,
     check_yoga_cancellation,
@@ -123,8 +137,11 @@ __all__ = [
     "calculate_bhinnashtakavarga",
     "calculate_chara_dasha",
     "calculate_chara_karakas",
+    "calculate_composite_chart",
+    "calculate_cross_aspects",
     "calculate_gana_score",
     "calculate_graha_maitri_score",
+    "calculate_house_overlay",
     "calculate_nadi_score",
     "calculate_sarvashtakavarga",
     "calculate_tara_score",
@@ -133,6 +150,7 @@ __all__ = [
     "calculate_yoni_score",
     "check_combustion",
     "check_combustion_cancellation",
+    "check_gem_compatibility",
     "check_yoga_cancellation",
     "create_prashna_chart",
     "detect_all_yogas",
@@ -140,20 +158,25 @@ __all__ = [
     "detect_planetary_wars",
     "detect_yoga",
     "evaluate_condition",
+    "get_all_chara_karaka_analysis",
     "get_atmakaraka",
+    "get_atmakaraka_analysis",
     "get_cancellation_rules",
     "get_combustion_analysis",
     "get_combustion_house_effects",
     "get_compatibility_verdict",
     "get_divisional_analysis",
+    "get_ishta_devata",
     "get_jaimini_aspects",
     "get_karakamsha",
+    "get_lagna_gem_map",
     "get_planet_remedies",
     "get_prashna_divisional_analysis",
     "get_retrograde_analysis",
     "get_retrograde_effects",
     "get_sign_mobility",
     "get_significator",
+    "get_synastry_report",
     "get_transit_ashtakavarga_analysis",
     "get_transit_ashtakavarga_score",
     "get_transit_strength_modifier",
@@ -179,5 +202,6 @@ __all__ = [
     "judge_prashna",
     "predict_timing",
     "prioritize_remedies",
+    "recommend_gems",
     "recommend_remedies",
 ]

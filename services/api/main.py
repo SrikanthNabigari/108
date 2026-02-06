@@ -2456,6 +2456,416 @@ async def get_varshaphal(request: BirthDataRequest):
 
 
 # ============================================================================
+# Session 22 - Synastry, Gem Recommendation, Atmakaraka, Forecasts
+# ============================================================================
+
+
+class SynastryRequest(BaseModel):
+    """Request model for synastry (relationship) analysis."""
+
+    native_datetime: dt = Field(..., description="First person birth datetime")
+    native_latitude: float = Field(..., ge=-90, le=90)
+    native_longitude: float = Field(..., ge=-180, le=180)
+    partner_datetime: dt = Field(..., description="Second person birth datetime")
+    partner_latitude: float = Field(..., ge=-90, le=90)
+    partner_longitude: float = Field(..., ge=-180, le=180)
+    timezone_offset: float = Field(default=5.5, description="Timezone offset (hours)")
+    partner_timezone_offset: float = Field(default=5.5, description="Partner timezone offset")
+    ayanamsa: str = Field(default="lahiri")
+    house_system: str = Field(default="whole_sign")
+
+
+class GemRequest(BaseModel):
+    """Request model for gemstone recommendation."""
+
+    datetime: dt = Field(..., description="Birth datetime")
+    latitude: float = Field(..., ge=-90, le=90)
+    longitude: float = Field(..., ge=-180, le=180)
+    timezone_offset: float = Field(default=5.5)
+    ayanamsa: str = Field(default="lahiri")
+    house_system: str = Field(default="whole_sign")
+    gem_planet: str | None = Field(
+        default=None,
+        description="Specific planet gem to check (omit for full recommendation)",
+    )
+
+
+class ForecastRequest(BaseModel):
+    """Request model for daily/weekly/monthly forecast."""
+
+    datetime: dt = Field(..., description="Birth datetime")
+    latitude: float = Field(..., ge=-90, le=90)
+    longitude: float = Field(..., ge=-180, le=180)
+    timezone_offset: float = Field(default=5.5)
+    ayanamsa: str = Field(default="lahiri")
+    house_system: str = Field(default="whole_sign")
+    query_date: str | None = Field(default=None, description="Target date (ISO format)")
+    location_lat: float | None = Field(default=None, description="Current location latitude")
+    location_lon: float | None = Field(default=None, description="Current location longitude")
+    month: int | None = Field(default=None, ge=1, le=12, description="Month (for monthly)")
+    year: int | None = Field(default=None, description="Year (for monthly)")
+
+
+def _build_planets_dict(planets_raw: dict, lagna_idx: int) -> dict[str, Any]:
+    """Build a standard planets dict from raw ephemeris output."""
+    planets_dict: dict[str, Any] = {}
+    for planet_id, data in planets_raw.items():
+        rashi_idx = int(data["longitude"] // 30)
+        house = ((rashi_idx - lagna_idx) % 12) + 1
+        planets_dict[planet_id] = {
+            "longitude": data["longitude"],
+            "rashi": RASHI_NAMES[rashi_idx].lower(),
+            "house": house,
+            "is_retrograde": data.get("is_retrograde", False),
+        }
+    return planets_dict
+
+
+@app.post("/api/v1/analysis/synastry", tags=["Analysis"])
+async def get_synastry(request: SynastryRequest):
+    """Analyze relationship compatibility through synastry chart overlay."""
+    try:
+        from datetime import timedelta
+
+        from packages.self.src.synastry import get_synastry_report
+
+        # Calculate native chart
+        native_utc = request.native_datetime - timedelta(hours=request.timezone_offset)
+        native_jd = get_julian_day(native_utc)
+        native_planets_raw = get_all_planets(native_jd, ayanamsa=request.ayanamsa)
+        native_houses_raw = get_house_cusps(
+            native_jd,
+            request.native_latitude,
+            request.native_longitude,
+            house_system=request.house_system,
+            ayanamsa=request.ayanamsa,
+        )
+        native_lagna_idx = int(native_houses_raw["ascendant"] // 30)
+        native_planets = _build_planets_dict(native_planets_raw, native_lagna_idx)
+        native_cusps = native_houses_raw["cusps"]
+        native_moon_nak = int((native_planets_raw["moon"]["longitude"] * 27) / 360) + 1
+
+        # Calculate partner chart
+        partner_utc = request.partner_datetime - timedelta(hours=request.partner_timezone_offset)
+        partner_jd = get_julian_day(partner_utc)
+        partner_planets_raw = get_all_planets(partner_jd, ayanamsa=request.ayanamsa)
+        partner_houses_raw = get_house_cusps(
+            partner_jd,
+            request.partner_latitude,
+            request.partner_longitude,
+            house_system=request.house_system,
+            ayanamsa=request.ayanamsa,
+        )
+        partner_lagna_idx = int(partner_houses_raw["ascendant"] // 30)
+        partner_planets = _build_planets_dict(partner_planets_raw, partner_lagna_idx)
+        partner_cusps = partner_houses_raw["cusps"]
+        partner_moon_nak = int((partner_planets_raw["moon"]["longitude"] * 27) / 360) + 1
+
+        result = get_synastry_report(
+            native_planets=native_planets,
+            native_cusps=native_cusps,
+            partner_planets=partner_planets,
+            partner_cusps=partner_cusps,
+            native_ascendant=native_houses_raw["ascendant"],
+            partner_ascendant=partner_houses_raw["ascendant"],
+            native_moon_nakshatra=native_moon_nak,
+            partner_moon_nakshatra=partner_moon_nak,
+        )
+
+        return result
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Error calculating synastry: {e!s}",
+        ) from e
+
+
+@app.post("/api/v1/analysis/gem-recommendation", tags=["Analysis"])
+async def get_gem_recommendation(request: GemRequest):
+    """Get personalized gemstone recommendations based on birth chart."""
+    try:
+        from datetime import timedelta
+
+        from packages.self.src.gem_recommender import (
+            check_gem_compatibility,
+            recommend_gems,
+        )
+
+        utc_dt = request.datetime - timedelta(hours=request.timezone_offset)
+        jd = get_julian_day(utc_dt)
+        planets_raw = get_all_planets(jd, ayanamsa=request.ayanamsa)
+        houses_raw = get_house_cusps(
+            jd,
+            request.latitude,
+            request.longitude,
+            house_system=request.house_system,
+            ayanamsa=request.ayanamsa,
+        )
+
+        lagna_idx = int(houses_raw["ascendant"] // 30)
+        lagna_rashi = RASHI_NAMES[lagna_idx].lower()
+        planets_dict = _build_planets_dict(planets_raw, lagna_idx)
+
+        if request.gem_planet:
+            result = check_gem_compatibility(
+                gem_planet=request.gem_planet,
+                lagna_rashi=lagna_rashi,
+                planets=planets_dict,
+            )
+        else:
+            result = recommend_gems(
+                lagna_rashi=lagna_rashi,
+                planets=planets_dict,
+            )
+
+        return result
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Error generating gem recommendation: {e!s}",
+        ) from e
+
+
+@app.post("/api/v1/analysis/atmakaraka", tags=["Analysis"])
+async def get_atmakaraka_details(request: BirthDataRequest):
+    """Get comprehensive Atmakaraka (soul indicator) analysis."""
+    try:
+        from packages.core.src import BirthChart, Planet, Rashi
+        from packages.self.src.jaimini import get_atmakaraka_analysis
+
+        jd = request_to_jd(request)
+        planets_raw = get_all_planets(jd, ayanamsa=request.ayanamsa)
+        houses_raw = get_house_cusps(
+            jd,
+            request.latitude,
+            request.longitude,
+            house_system=request.house_system,
+            ayanamsa=request.ayanamsa,
+        )
+
+        lagna_idx = int(houses_raw["ascendant"] // 30)
+        lagna_rashi = RASHI_NAMES[lagna_idx].lower()
+
+        sign_map = {
+            "aries": Rashi.ARIES,
+            "taurus": Rashi.TAURUS,
+            "gemini": Rashi.GEMINI,
+            "cancer": Rashi.CANCER,
+            "leo": Rashi.LEO,
+            "virgo": Rashi.VIRGO,
+            "libra": Rashi.LIBRA,
+            "scorpio": Rashi.SCORPIO,
+            "sagittarius": Rashi.SAGITTARIUS,
+            "capricorn": Rashi.CAPRICORN,
+            "aquarius": Rashi.AQUARIUS,
+            "pisces": Rashi.PISCES,
+        }
+        planet_map = {
+            "sun": Planet.SUN,
+            "moon": Planet.MOON,
+            "mars": Planet.MARS,
+            "mercury": Planet.MERCURY,
+            "jupiter": Planet.JUPITER,
+            "venus": Planet.VENUS,
+            "saturn": Planet.SATURN,
+            "rahu": Planet.RAHU,
+            "ketu": Planet.KETU,
+        }
+
+        planet_positions = {}
+        for pname, data in planets_raw.items():
+            pname_lower = pname.lower()
+            if pname_lower not in planet_map:
+                continue
+            rashi_idx = int(data["longitude"] // 30)
+            house = ((rashi_idx - lagna_idx) % 12) + 1
+            planet_positions[planet_map[pname_lower]] = PlanetPosition(
+                planet=planet_map[pname_lower],
+                longitude=data["longitude"],
+                latitude=data.get("latitude", 0.0),
+                speed=data.get("speed", 0.0),
+                rashi=sign_map.get(RASHI_NAMES[rashi_idx].lower(), Rashi.ARIES),
+                rashi_degree=data["longitude"] % 30,
+                nakshatra="ashwini",
+                nakshatra_pada=1,
+                nakshatra_lord=Planet.KETU,
+                is_retrograde=data.get("is_retrograde", False),
+                house=house,
+            )
+
+        house_cusps = HouseCusps(
+            ascendant=houses_raw["ascendant"],
+            mc=houses_raw.get("mc", 0.0),
+            cusps=houses_raw["cusps"],
+        )
+
+        moon_rashi_idx = int(planets_raw["moon"]["longitude"] // 30)
+        chart = BirthChart(
+            user_id="api_request",
+            birth_data=BirthData(
+                datetime_utc=request.datetime,
+                latitude=request.latitude,
+                longitude=request.longitude,
+                timezone="UTC",
+            ),
+            planets=planet_positions,
+            houses=house_cusps,
+            lagna_rashi=sign_map.get(lagna_rashi, Rashi.ARIES),
+            moon_rashi=sign_map.get(RASHI_NAMES[moon_rashi_idx].lower(), Rashi.ARIES),
+            moon_nakshatra="ashwini",
+            ayanamsa=23.85,
+            calculated_at=request.datetime,
+        )
+
+        result = get_atmakaraka_analysis(chart)
+        return result
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Error calculating atmakaraka analysis: {e!s}",
+        ) from e
+
+
+@app.post("/api/v1/forecast/daily", tags=["Forecast"])
+async def get_daily_forecast_endpoint(request: ForecastRequest):
+    """Generate a comprehensive daily forecast with day rating and recommendations."""
+    try:
+        from datetime import timedelta
+
+        from packages.context.src.daily_forecast import get_daily_forecast
+
+        utc_dt = request.datetime - timedelta(hours=request.timezone_offset)
+        jd = get_julian_day(utc_dt)
+        planets_raw = get_all_planets(jd, ayanamsa=request.ayanamsa)
+        houses_raw = get_house_cusps(
+            jd,
+            request.latitude,
+            request.longitude,
+            house_system=request.house_system,
+            ayanamsa=request.ayanamsa,
+        )
+
+        lagna_idx = int(houses_raw["ascendant"] // 30)
+        lagna_rashi = RASHI_NAMES[lagna_idx].lower()
+        planets_dict = _build_planets_dict(planets_raw, lagna_idx)
+        moon_longitude = planets_raw["moon"]["longitude"]
+
+        result = get_daily_forecast(
+            birth_datetime=request.datetime.isoformat(),
+            birth_lat=request.latitude,
+            birth_lon=request.longitude,
+            natal_planets=planets_dict,
+            moon_longitude=moon_longitude,
+            lagna_rashi=lagna_rashi,
+            query_date=request.query_date,
+            location_lat=request.location_lat,
+            location_lon=request.location_lon,
+        )
+
+        return result
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Error generating daily forecast: {e!s}",
+        ) from e
+
+
+@app.post("/api/v1/forecast/weekly", tags=["Forecast"])
+async def get_weekly_forecast_endpoint(request: ForecastRequest):
+    """Generate a 7-day forecast with area-wise ratings."""
+    try:
+        from datetime import timedelta
+
+        from packages.context.src.weekly_forecast import get_weekly_forecast
+
+        utc_dt = request.datetime - timedelta(hours=request.timezone_offset)
+        jd = get_julian_day(utc_dt)
+        planets_raw = get_all_planets(jd, ayanamsa=request.ayanamsa)
+        houses_raw = get_house_cusps(
+            jd,
+            request.latitude,
+            request.longitude,
+            house_system=request.house_system,
+            ayanamsa=request.ayanamsa,
+        )
+
+        lagna_idx = int(houses_raw["ascendant"] // 30)
+        lagna_rashi = RASHI_NAMES[lagna_idx].lower()
+        planets_dict = _build_planets_dict(planets_raw, lagna_idx)
+        moon_longitude = planets_raw["moon"]["longitude"]
+
+        result = get_weekly_forecast(
+            birth_datetime=request.datetime.isoformat(),
+            birth_lat=request.latitude,
+            birth_lon=request.longitude,
+            natal_planets=planets_dict,
+            moon_longitude=moon_longitude,
+            lagna_rashi=lagna_rashi,
+            start_date=request.query_date,
+            location_lat=request.location_lat,
+            location_lon=request.location_lon,
+        )
+
+        return result
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Error generating weekly forecast: {e!s}",
+        ) from e
+
+
+@app.post("/api/v1/forecast/monthly", tags=["Forecast"])
+async def get_monthly_forecast_endpoint(request: ForecastRequest):
+    """Generate a month-long forecast with major transits and area analysis."""
+    try:
+        from datetime import timedelta
+
+        from packages.context.src.monthly_forecast import get_monthly_forecast
+
+        utc_dt = request.datetime - timedelta(hours=request.timezone_offset)
+        jd = get_julian_day(utc_dt)
+        planets_raw = get_all_planets(jd, ayanamsa=request.ayanamsa)
+        houses_raw = get_house_cusps(
+            jd,
+            request.latitude,
+            request.longitude,
+            house_system=request.house_system,
+            ayanamsa=request.ayanamsa,
+        )
+
+        lagna_idx = int(houses_raw["ascendant"] // 30)
+        lagna_rashi = RASHI_NAMES[lagna_idx].lower()
+        planets_dict = _build_planets_dict(planets_raw, lagna_idx)
+        moon_longitude = planets_raw["moon"]["longitude"]
+
+        result = get_monthly_forecast(
+            birth_datetime=request.datetime.isoformat(),
+            birth_lat=request.latitude,
+            birth_lon=request.longitude,
+            natal_planets=planets_dict,
+            moon_longitude=moon_longitude,
+            lagna_rashi=lagna_rashi,
+            month=request.month,
+            year=request.year,
+            location_lat=request.location_lat,
+            location_lon=request.location_lon,
+        )
+
+        return result
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Error generating monthly forecast: {e!s}",
+        ) from e
+
+
+# ============================================================================
 # Main Entry Point
 # ============================================================================
 

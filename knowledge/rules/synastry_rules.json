@@ -1,0 +1,414 @@
+{
+  "synastry_rules": {
+    "description": "Synastry (relationship compatibility) interpretation rules for cross-chart analysis. Based on Vedic and Western synastry principles adapted for Jyotish framework.",
+    "version": "1.0",
+    "cross_aspects": {
+      "sun_moon": {
+        "conjunction": {
+          "quality": "very_harmonious",
+          "interpretation": "The Sun person's identity and Moon person's emotional nature merge beautifully. This is one of the most significant synastry contacts indicating deep mutual understanding, where the Sun person provides direction and the Moon person offers emotional support and receptivity."
+        },
+        "sextile": {
+          "quality": "harmonious",
+          "interpretation": "Easy flow between identity and emotions. The Sun person inspires the Moon person's emotional growth, while the Moon person intuitively supports the Sun person's goals. A comfortable, naturally cooperative connection."
+        },
+        "square": {
+          "quality": "challenging",
+          "interpretation": "Friction between ego and emotions creates dynamic tension. The Sun person may inadvertently hurt the Moon person's feelings, while the Moon person's emotional reactions can frustrate the Sun person. Growth comes through learning to honor both logic and feeling."
+        },
+        "trine": {
+          "quality": "very_harmonious",
+          "interpretation": "Effortless harmony between will and emotion. The Sun person naturally understands the Moon person's needs, and the Moon person instinctively supports the Sun person's direction. A deeply comfortable and supportive bond."
+        },
+        "opposition": {
+          "quality": "complex",
+          "interpretation": "Magnetic attraction with complementary tensions. The Sun and Moon persons mirror each other's strengths and weaknesses. Strong mutual awareness that can be both deeply fulfilling and occasionally polarizing. Classic marriage aspect."
+        }
+      },
+      "sun_venus": {
+        "conjunction": {
+          "quality": "very_harmonious",
+          "interpretation": "The Sun person is magnetically drawn to the Venus person's charm and beauty. Venus person finds the Sun person admirable and attractive. Mutual appreciation, affection, and shared aesthetic values create a loving, warm connection."
+        },
+        "sextile": {
+          "quality": "harmonious",
+          "interpretation": "Natural affection and appreciation flow between the partners. The Sun person encourages Venus person's creative expression, while Venus person adds grace and diplomacy to the Sun person's endeavors. Pleasant social harmony."
+        },
+        "square": {
+          "quality": "challenging",
+          "interpretation": "Attraction exists but values may clash. The Sun person's ego needs may conflict with Venus person's desire for harmony. Differences in spending, aesthetics, or social preferences require conscious compromise and mutual respect."
+        },
+        "trine": {
+          "quality": "very_harmonious",
+          "interpretation": "Love flows naturally and generously. The Sun person uplifts Venus person's self-worth, while Venus person adores and harmonizes with the Sun person's nature. Shared creative interests and genuine mutual affection."
+        },
+        "opposition": {
+          "quality": "complex",
+          "interpretation": "Strong romantic and aesthetic attraction with periodic value conflicts. The Sun person may dominate while Venus person tries to please. Learning to balance individual needs with relationship harmony is the key lesson."
+        }
+      },
+      "sun_mars": {
+        "conjunction": {
+          "quality": "dynamic",
+          "interpretation": "Powerful, energizing contact that creates a competitive and passionate dynamic. The Sun person and Mars person stimulate each other's ambitions and physical energy. Can be both sexually magnetic and prone to ego clashes."
+        },
+        "sextile": {
+          "quality": "harmonious",
+          "interpretation": "Constructive collaboration and mutual encouragement. The Sun person guides Mars person's energy productively, while Mars person actively supports the Sun person's goals. Good for business partnerships and active relationships."
+        },
+        "square": {
+          "quality": "challenging",
+          "interpretation": "Intense friction that generates both passion and conflict. Power struggles are common as both partners want to lead. Mars person's aggression may challenge Sun person's authority. Requires mutual respect and conflict resolution skills."
+        },
+        "trine": {
+          "quality": "very_harmonious",
+          "interpretation": "Energizing and mutually empowering. The Sun person inspires Mars person's courage, while Mars person actively champions the Sun person's vision. Strong physical compatibility and shared enthusiasm for action."
+        },
+        "opposition": {
+          "quality": "challenging",
+          "interpretation": "Polarized wills creating alternating attraction and antagonism. Competitive dynamics can become adversarial if unchecked. The challenge is channeling this powerful energy into shared goals rather than mutual opposition."
+        }
+      },
+      "sun_jupiter": {
+        "conjunction": {
+          "quality": "very_harmonious",
+          "interpretation": "One of the most beneficial synastry contacts. Jupiter person expands and blesses the Sun person's life path. The Sun person gives Jupiter person a focal point for their generosity. Mutual optimism, growth, and spiritual support."
+        },
+        "sextile": {
+          "quality": "harmonious",
+          "interpretation": "Natural goodwill and mutual philosophical interest. Jupiter person supports Sun person's ambitions with wisdom, while Sun person respects and implements Jupiter person's counsel. Educational and spiritual growth together."
+        },
+        "square": {
+          "quality": "mildly_challenging",
+          "interpretation": "Exaggeration and overconfidence can arise. Jupiter person may overpromise or encourage Sun person's grandiose tendencies. Philosophical or religious differences may surface. Generally still positive due to Jupiter's benefic nature."
+        },
+        "trine": {
+          "quality": "very_harmonious",
+          "interpretation": "Expansive, generous, and deeply supportive connection. Jupiter person naturally elevates the Sun person's confidence and opportunities. Shared faith, philosophical alignment, and mutual encouragement toward growth."
+        },
+        "opposition": {
+          "quality": "complex",
+          "interpretation": "Mutual admiration tempered by philosophical differences. Jupiter person's beliefs may challenge Sun person's identity. Both tend toward excess when together. Learning moderation while maintaining optimism is key."
+        }
+      },
+      "sun_saturn": {
+        "conjunction": {
+          "quality": "challenging",
+          "interpretation": "A karmic, binding contact with heavy responsibility. Saturn person may restrict or criticize the Sun person's self-expression. The Sun person feels tested and sometimes diminished. Growth comes through maturity, patience, and mutual commitment to duty."
+        },
+        "sextile": {
+          "quality": "harmonious",
+          "interpretation": "Saturn person provides constructive structure to the Sun person's goals. The Sun person warms Saturn person's reserve. A stabilizing influence that supports long-term achievement and mutual respect through shared responsibility."
+        },
+        "square": {
+          "quality": "very_challenging",
+          "interpretation": "One of the most difficult synastry aspects. Saturn person's criticism and restriction can crush Sun person's confidence. Sun person may rebel against Saturn person's control. Requires deep maturity and willingness to work through karmic patterns."
+        },
+        "trine": {
+          "quality": "harmonious",
+          "interpretation": "Saturn person offers stability and wise counsel that the Sun person values and implements. A mature, enduring bond built on mutual respect and shared goals. The Sun person helps Saturn person express warmth and confidence."
+        },
+        "opposition": {
+          "quality": "very_challenging",
+          "interpretation": "Karmic confrontation between self-expression and limitation. Saturn person may project authority issues onto the Sun person, who feels suppressed. Can create deep loyalty through shared struggle, but requires conscious effort to avoid resentment."
+        }
+      },
+      "moon_venus": {
+        "conjunction": {
+          "quality": "very_harmonious",
+          "interpretation": "Exquisitely tender and affectionate. The Moon person's emotional needs perfectly align with Venus person's loving expression. Deep emotional comfort, shared aesthetic sensibilities, and natural domestic harmony. One of the best aspects for romantic love."
+        },
+        "sextile": {
+          "quality": "harmonious",
+          "interpretation": "Sweet, supportive emotional rapport. Venus person brings beauty and pleasure to the Moon person's emotional world. The Moon person offers Venus person emotional depth and security. Gentle, affectionate, and mutually nurturing."
+        },
+        "square": {
+          "quality": "mildly_challenging",
+          "interpretation": "Attraction exists but emotional rhythms may clash with social or aesthetic preferences. The Moon person may feel Venus person is superficial, while Venus person may find Moon person overly sensitive. Adjustments in showing love are needed."
+        },
+        "trine": {
+          "quality": "very_harmonious",
+          "interpretation": "Deeply loving and emotionally fulfilling. The Moon person feels genuinely cherished by Venus person, who finds emotional satisfaction in nurturing the bond. Shared love of beauty, comfort, and domestic harmony."
+        },
+        "opposition": {
+          "quality": "complex",
+          "interpretation": "Strong romantic magnetism with occasional emotional-value disconnects. Venus person's social nature may conflict with Moon person's need for private emotional security. Balancing social life with intimate emotional needs is the lesson."
+        }
+      },
+      "moon_mars": {
+        "conjunction": {
+          "quality": "dynamic",
+          "interpretation": "Intensely passionate and emotionally charged. Mars person stimulates and sometimes agitates the Moon person's emotions. Strong physical attraction and protective instincts, but Mars person's directness can wound Moon person's sensitivity. Powerful chemistry."
+        },
+        "sextile": {
+          "quality": "harmonious",
+          "interpretation": "Mars person's energy constructively supports the Moon person's emotional needs. The Moon person softens and intuits Mars person's motivations. Good balance of action and feeling that supports shared domestic and creative goals."
+        },
+        "square": {
+          "quality": "challenging",
+          "interpretation": "Volatile emotional dynamics where Mars person's aggression triggers Moon person's emotional wounds. Arguments can be heated and deeply felt. Strong sexual attraction coexists with emotional friction. Requires emotional intelligence from both partners."
+        },
+        "trine": {
+          "quality": "harmonious",
+          "interpretation": "Mars person naturally protects and energizes the Moon person's emotional life. The Moon person provides emotional grounding for Mars person's actions. Strong physical compatibility with emotional warmth and mutual courage."
+        },
+        "opposition": {
+          "quality": "challenging",
+          "interpretation": "Magnetic but turbulent. Mars person's directness can feel like emotional assault to the Moon person, while Moon person's emotional reactions may frustrate Mars person. Passionate makeup-breakup cycles unless emotional maturity prevails."
+        }
+      },
+      "moon_jupiter": {
+        "conjunction": {
+          "quality": "very_harmonious",
+          "interpretation": "Jupiter person expands and uplifts the Moon person's emotional world. The Moon person feels genuinely cared for and emotionally supported. Jupiter's wisdom soothes Moon's anxieties. A deeply nurturing, generous, and faith-inspiring connection."
+        },
+        "sextile": {
+          "quality": "harmonious",
+          "interpretation": "Natural emotional generosity and mutual philosophical interest. Jupiter person offers wisdom that calms Moon person's emotions. The Moon person provides Jupiter person with emotional depth and intuitive insight. Supportive and growth-oriented."
+        },
+        "square": {
+          "quality": "mildly_challenging",
+          "interpretation": "Jupiter person may overpromise emotional support or encourage the Moon person's indulgence. Emotional excesses and unrealistic expectations can develop. Generally still positive but requires grounding and realistic emotional boundaries."
+        },
+        "trine": {
+          "quality": "very_harmonious",
+          "interpretation": "One of the most emotionally nurturing aspects. Jupiter person's optimism and faith naturally heal the Moon person's emotional wounds. Deep trust, shared spiritual values, and mutual emotional generosity create a profoundly supportive bond."
+        },
+        "opposition": {
+          "quality": "complex",
+          "interpretation": "Jupiter person's philosophical approach may sometimes dismiss Moon person's emotional concerns. Mutual goodwill exists but emotional and intellectual needs may pull in different directions. Finding balance between feeling and faith."
+        }
+      },
+      "venus_mars": {
+        "conjunction": {
+          "quality": "very_harmonious",
+          "interpretation": "The quintessential romantic and sexual chemistry aspect. Mars person's desire perfectly matches Venus person's receptivity. Intense physical attraction with complementary masculine-feminine energy exchange. Passionate, magnetic, and romantically compelling."
+        },
+        "sextile": {
+          "quality": "harmonious",
+          "interpretation": "Easy-flowing attraction with balanced give-and-take. Mars person's initiative complements Venus person's grace. Shared enjoyment of romance, physical activity, and creative collaboration. A naturally flirtatious and affectionate dynamic."
+        },
+        "square": {
+          "quality": "dynamic",
+          "interpretation": "Intense sexual tension that can be both exciting and frustrating. Mars person may pursue aggressively while Venus person sends mixed signals. Desire and dissatisfaction coexist, creating a push-pull dynamic that can be addictive but destabilizing."
+        },
+        "trine": {
+          "quality": "very_harmonious",
+          "interpretation": "Effortless romantic and physical harmony. Mars person's passion beautifully matches Venus person's desire for love. Natural rhythm in giving and receiving affection. The couple inspires each other's creative and romantic expression."
+        },
+        "opposition": {
+          "quality": "complex",
+          "interpretation": "Maximum romantic and sexual magnetism across the zodiac. The attraction is undeniable but the expression of desire may be polarized. Mars person wants action while Venus person wants romance. Learning to meet in the middle creates powerful intimacy."
+        }
+      },
+      "venus_jupiter": {
+        "conjunction": {
+          "quality": "very_harmonious",
+          "interpretation": "A profoundly generous and loving combination. Jupiter person expands Venus person's capacity for love and beauty. Venus person adds grace and charm to Jupiter person's wisdom. Shared love of culture, travel, and the finer things in life."
+        },
+        "sextile": {
+          "quality": "harmonious",
+          "interpretation": "Mutual appreciation for beauty, philosophy, and social engagement. Jupiter person's wisdom enhances Venus person's aesthetic sensibilities. Venus person brings charm and diplomacy to Jupiter person's expansive visions. A gracious, pleasant bond."
+        },
+        "square": {
+          "quality": "mildly_challenging",
+          "interpretation": "Excess and indulgence are the main risks. Together the partners may overspend, overeat, or overlook practical concerns in favor of pleasure. Jupiter person may encourage Venus person's extravagance. Enjoyable but requires moderation."
+        },
+        "trine": {
+          "quality": "very_harmonious",
+          "interpretation": "Abundant love, generosity, and mutual upliftment. Jupiter person naturally supports and expands Venus person's happiness. Venus person adds beauty and pleasure to Jupiter person's philosophical pursuits. A deeply fortunate and joyful connection."
+        },
+        "opposition": {
+          "quality": "complex",
+          "interpretation": "Strong mutual attraction and shared love of pleasure, but value systems may differ on fundamental levels. Jupiter person's beliefs may clash with Venus person's aesthetic or relationship values. Still generally positive due to both being benefics."
+        }
+      }
+    },
+    "house_overlay": {
+      "sun": {
+        "1": "Partner's Sun illuminates your self-expression and physical vitality. You feel seen and energized in their presence. They inspire you to be more confident and assertive in your identity.",
+        "2": "Partner's Sun activates your house of wealth, speech, and family values. They may influence your financial decisions and boost your earning potential. Shared focus on building material security.",
+        "3": "Partner's Sun energizes your communication sector. Stimulating conversations, shared short trips, and collaborative creative projects. They encourage your courage and self-expression through writing or media.",
+        "4": "Partner's Sun shines in your domestic sphere, bringing warmth to your home life. They may take a leading role in household matters. Questions of authority within the home may arise.",
+        "5": "Partner's Sun in your house of romance, creativity, and children is highly favorable. They spark your creative expression, romantic feelings, and joy. Natural playfulness and mutual admiration.",
+        "6": "Partner's Sun in your house of service and health may create a dynamic where they feel you should serve their needs. Health awareness increases together. Best when channeled into shared service or work projects.",
+        "7": "Partner's Sun directly in your marriage house creates strong attraction and partnership orientation. They represent your ideal of a confident, authoritative partner. A defining relationship that shapes your identity.",
+        "8": "Partner's Sun penetrates your house of transformation and intimacy. Deep, intense connection that transforms both parties. Shared interest in occult, psychology, or joint finances. Power dynamics require careful navigation.",
+        "9": "Partner's Sun illuminates your house of wisdom, dharma, and long journeys. They expand your philosophical horizons and may introduce you to new spiritual traditions. Shared love of higher learning and travel.",
+        "10": "Partner's Sun in your career house boosts your public standing and professional ambitions. They may open doors to authority figures or career advancement. You admire their leadership qualities.",
+        "11": "Partner's Sun energizes your house of gains, community, and aspirations. They connect you with influential networks and support your long-term goals. Friendship is the foundation of this connection.",
+        "12": "Partner's Sun in your 12th house creates a karmic, spiritual, and sometimes hidden connection. You may feel they see your deepest secrets. Spiritual growth through the relationship, but boundaries can dissolve."
+      },
+      "moon": {
+        "1": "Partner's Moon touching your ascendant creates immediate emotional rapport. You feel intuitively understood and emotionally safe in their presence. They mirror your emotional nature and bring out your nurturing side.",
+        "2": "Partner's Moon in your wealth house brings emotional attachment to shared finances and family matters. They nurture your sense of security and may influence spending through emotional needs. Comfort-seeking together.",
+        "3": "Partner's Moon in your communication house creates emotionally rich conversations and intuitive understanding. Shared emotional processing through talking, writing, or artistic expression. Sibling-like emotional bond.",
+        "4": "Partner's Moon in your home house is one of the most nurturing placements. Deep emotional comfort, shared domestic instincts, and feeling truly at home together. Strong maternal energy in the connection.",
+        "5": "Partner's Moon in your romance house creates emotional playfulness and creative inspiration. Children and romance are emotionally charged topics. They touch your heart and awaken your inner child's joy.",
+        "6": "Partner's Moon in your service house may create a caretaker dynamic. Emotional concern about health and daily routines. They may worry about you excessively. Best channeled into mutual health awareness.",
+        "7": "Partner's Moon directly in your marriage house indicates strong emotional bonding and partnership potential. They fulfill your emotional needs in relationship. Powerful domestic and marital compatibility.",
+        "8": "Partner's Moon in your transformation house creates deep emotional intensity and psychic connection. Shared vulnerability and emotional exposure. They touch your deepest wounds and catalyze emotional transformation.",
+        "9": "Partner's Moon in your dharma house creates emotional connection through shared beliefs and spiritual practices. They nurture your philosophical growth. Emotional fulfillment through travel and higher learning together.",
+        "10": "Partner's Moon in your career house means they emotionally support your professional ambitions. Your public image benefits from their nurturing presence. They may also have strong opinions about your career direction.",
+        "11": "Partner's Moon in your house of gains brings emotional fulfillment through shared social circles and community involvement. They nurture your hopes and dreams. Friendship and emotional support in group settings.",
+        "12": "Partner's Moon in your 12th house creates a deeply psychic, spiritual, and sometimes karmic emotional bond. You may share dreams or intuitive experiences. Private emotional world that others cannot see."
+      },
+      "venus": {
+        "1": "Partner's Venus gracing your ascendant brings beauty, charm, and affection to your self-expression. You feel more attractive and socially confident in their presence. Strong romantic attraction and mutual admiration.",
+        "2": "Partner's Venus in your wealth house enhances financial harmony and shared material pleasures. They appreciate your values and may bring financial luck. Sweet speech, shared meals, and sensual enjoyment.",
+        "3": "Partner's Venus in your communication house creates charming, diplomatic interactions. Love letters, sweet messages, and artistic collaboration. Siblings and neighbors may be positively influenced by your partnership.",
+        "4": "Partner's Venus in your home house beautifies your domestic environment. They bring harmony, art, and comfort to your personal space. A peaceful, aesthetically pleasing home life together.",
+        "5": "Partner's Venus in your romance house is one of the most romantic placements. Strong love attraction, creative inspiration, and joy in each other's company. Ideal for lasting romantic connection and artistic collaboration.",
+        "6": "Partner's Venus in your service house may soften daily routines with pleasant interactions. They bring grace to mundane tasks. However, Venus is not comfortable in the 6th house, so minor irritations may arise.",
+        "7": "Partner's Venus directly in your marriage house is a classic indicator of romantic partnership. Strong mutual attraction, shared values, and desire for commitment. They embody your ideal of beauty and love.",
+        "8": "Partner's Venus in your transformation house creates intense romantic and sexual chemistry. Shared resources are handled with grace. Deep emotional and physical intimacy that transforms both partners' experience of love.",
+        "9": "Partner's Venus in your dharma house creates love of shared philosophical and spiritual exploration. Beautiful travel experiences together. They appreciate your wisdom and you are charmed by their beliefs.",
+        "10": "Partner's Venus in your career house enhances your public image through their charm and social grace. They support your career with diplomatic skill. Your partnership may have a public, admired quality.",
+        "11": "Partner's Venus in your gains house brings pleasant social connections and shared enjoyment of community events. They help you achieve goals through charm and networking. Friendship, affection, and shared aspirations.",
+        "12": "Partner's Venus in your 12th house creates a secret, spiritual, or fantasy-based romantic connection. Deep compassion and unconditional love potential. The relationship may have a private, hidden quality."
+      },
+      "mars": {
+        "1": "Partner's Mars energizes your physical vitality and assertiveness. You feel more courageous and motivated in their presence. Strong physical attraction, but potential for ego clashes and competitive dynamics.",
+        "2": "Partner's Mars in your wealth house stimulates financial ambition and potentially aggressive spending or earning. They may push you to take financial risks. Passionate speech and strong opinions about money matters.",
+        "3": "Partner's Mars in your communication house creates direct, sometimes blunt exchanges. They stimulate your courage in self-expression. Vigorous debates that can be intellectually stimulating or argumentative.",
+        "4": "Partner's Mars in your home house brings energy and sometimes conflict to domestic life. They may take charge of property matters. Passionate home environment that can alternate between exciting and contentious.",
+        "5": "Partner's Mars in your romance house creates passionate attraction, competitive fun, and physical chemistry. Romance is exciting and spontaneous. Creative inspiration through shared adventures and physical activities.",
+        "6": "Partner's Mars in your service house energizes your work ethic and health routines. They may push you toward physical fitness. Competitive work dynamics that can be productive or contentious.",
+        "7": "Partner's Mars directly in your marriage house creates a passionate, assertive partnership dynamic. Strong sexual attraction and desire for action together. Must manage competitive tendencies and anger in the relationship.",
+        "8": "Partner's Mars in your transformation house creates intense sexual chemistry and deep transformative experiences. Joint finances may involve risk-taking. Powerful, sometimes overwhelming intimate connection.",
+        "9": "Partner's Mars in your dharma house creates passionate philosophical discussions and adventurous travel. They challenge your beliefs and push your spiritual boundaries. Active pursuit of truth together.",
+        "10": "Partner's Mars in your career house drives your professional ambitions. They actively support or push your career forward. Their energy can open doors or create competitive dynamics in your professional sphere.",
+        "11": "Partner's Mars in your gains house energizes your network and goal pursuit. They actively help you achieve aspirations. Competitive but productive dynamics in group settings and social circles.",
+        "12": "Partner's Mars in your 12th house may create hidden tensions, repressed anger, or spiritual warrior energy. Intense private dynamics. The relationship pushes both toward confronting unconscious patterns."
+      },
+      "jupiter": {
+        "1": "Partner's Jupiter expanding your ascendant brings optimism, growth, and philosophical enrichment to your identity. You feel wiser, luckier, and more confident in their presence. They see the best in you.",
+        "2": "Partner's Jupiter in your wealth house is excellent for financial growth and shared prosperity. They expand your earning potential and enrich family life. Generous, abundant, and values-aligned financial partnership.",
+        "3": "Partner's Jupiter in your communication house expands your intellectual horizons through stimulating dialogue. They encourage your writing, teaching, and learning. Philosophical conversations and shared wisdom.",
+        "4": "Partner's Jupiter in your home house brings expansion, prosperity, and spiritual warmth to your domestic life. They may encourage a larger home or more generous household. A blessed, nurturing home environment.",
+        "5": "Partner's Jupiter in your romance house is exceptionally fortunate for love, children, and creative expression. They bring joy, expansion, and good fortune to romance. Blessings in speculative matters and progeny.",
+        "6": "Partner's Jupiter in your service house helps you overcome obstacles and improve health routines. They bring optimism to daily challenges. Jupiter's benefic nature mitigates the difficult 6th house themes.",
+        "7": "Partner's Jupiter directly in your marriage house is one of the best synastry placements for committed partnership. They bring wisdom, generosity, and good fortune to the marriage. A truly blessed union.",
+        "8": "Partner's Jupiter in your transformation house brings protection and growth through crisis. They expand your understanding of life's mysteries. Beneficial for insurance, inheritance, and shared resources.",
+        "9": "Partner's Jupiter in your dharma house creates a powerfully philosophical and spiritual bond. Shared pilgrimages, higher education, and dharmic pursuits. They are your guru-friend who elevates your worldview.",
+        "10": "Partner's Jupiter in your career house significantly boosts professional success and public reputation. They bring wisdom and ethical guidance to your career. Lucky breaks and expanded professional horizons.",
+        "11": "Partner's Jupiter in your gains house multiplies your network, income, and goal fulfillment. They connect you with generous, influential people. Shared humanitarian interests and abundant social life.",
+        "12": "Partner's Jupiter in your 12th house creates spiritual depth, charitable inclinations, and divine protection. They support your inner journey and meditation practice. Blessings that operate behind the scenes."
+      },
+      "saturn": {
+        "1": "Partner's Saturn on your ascendant creates a serious, responsibility-laden dynamic. You may feel restricted or matured by their presence. Karmic bond that teaches discipline but may suppress spontaneity.",
+        "2": "Partner's Saturn in your wealth house creates cautious financial dynamics. They may restrict spending or encourage disciplined saving. Conservative approach to shared resources that builds long-term security.",
+        "3": "Partner's Saturn in your communication house may inhibit free expression. Conversations tend to be serious and purposeful. They encourage disciplined thinking but may suppress playful communication.",
+        "4": "Partner's Saturn in your home house creates a structured but potentially cold domestic environment. They bring discipline to household matters. May feel like a burden or a stabilizing anchor depending on maturity.",
+        "5": "Partner's Saturn in your romance house may dampen spontaneous romantic expression. Love feels serious and duty-bound. Delayed but potentially deep and lasting romantic commitment. Children matters require patience.",
+        "6": "Partner's Saturn in your service house creates a disciplined approach to health and daily routines. They hold you accountable to your duties. A constructive placement that supports hard work and health discipline.",
+        "7": "Partner's Saturn directly in your marriage house indicates a karmic, fated partnership with heavy responsibilities. Long-term commitment is likely but requires patience and maturity. Marriage as a spiritual practice.",
+        "8": "Partner's Saturn in your transformation house creates fear, restriction, or profound discipline around intimacy and shared resources. Deep karmic patterns surface. Transformation through enduring challenges together.",
+        "9": "Partner's Saturn in your dharma house may create rigidity in beliefs or structured spiritual practice. They encourage disciplined study and traditional approaches. Philosophical differences can be a source of friction.",
+        "10": "Partner's Saturn in your career house can either support disciplined career growth or create professional restrictions. Their expectations push you toward achievement. Authority dynamics in the professional sphere.",
+        "11": "Partner's Saturn in your gains house may limit social connections but deepen a few key friendships. Realistic approach to goals and aspirations. They help you focus on achievable, practical long-term plans.",
+        "12": "Partner's Saturn in your 12th house creates karmic debts, spiritual discipline, or hidden burdens in the relationship. Isolation themes may surface. Deep spiritual work through confronting fears together."
+      }
+    },
+    "composite_planets_in_signs": {
+      "sun": {
+        "aries": "A dynamic, pioneering relationship that thrives on action and independence. The couple is competitive, energetic, and eager to start new ventures together. Leadership in the partnership must be negotiated.",
+        "taurus": "A stable, comfort-oriented relationship built on shared material values and sensual pleasure. The couple seeks financial security and domestic harmony. Slow to start but deeply loyal and enduring.",
+        "gemini": "A communicative, intellectually stimulating relationship with constant exchange of ideas. The couple thrives on variety, social interaction, and mental engagement. Must guard against superficiality and restlessness.",
+        "cancer": "A nurturing, emotionally protective relationship centered on home, family, and emotional security. The couple creates a private sanctuary together. Deep emotional bonding but potential for clinginess.",
+        "leo": "A dramatic, creative, and romantically expressive relationship. The couple seeks recognition and enjoys being admired as a pair. Generous, warm, and playful, but ego conflicts can arise.",
+        "virgo": "A practical, service-oriented relationship focused on mutual improvement and health. The couple supports each other's growth through constructive feedback. Must guard against excessive criticism.",
+        "libra": "A harmonious, aesthetically refined relationship built on partnership and diplomacy. The couple values fairness, beauty, and social grace. Natural ease in relating but may avoid necessary confrontations.",
+        "scorpio": "An intense, transformative relationship with deep emotional and physical bonds. The couple experiences life at full intensity together. Powerful loyalty and passion, but jealousy and power struggles are risks.",
+        "sagittarius": "An adventurous, expansive relationship oriented toward growth, travel, and philosophy. The couple inspires each other toward higher understanding. Freedom and exploration are essential to the partnership.",
+        "capricorn": "A mature, achievement-oriented relationship built on shared ambitions and mutual responsibility. The couple is publicly respected and works hard together. Must balance duty with emotional warmth.",
+        "aquarius": "An unconventional, friendship-based relationship that values individuality and shared ideals. The couple is progressive, humanitarian, and intellectually independent. Must cultivate emotional intimacy alongside mental connection.",
+        "pisces": "A deeply spiritual, compassionate relationship transcending ordinary boundaries. The couple shares an intuitive, almost psychic bond. Idealistic and devotional, but must maintain practical grounding."
+      },
+      "moon": {
+        "aries": "The emotional core of this relationship is fiery, reactive, and direct. Feelings are expressed immediately and passionately. The couple processes emotions through action rather than reflection. Exciting but potentially volatile.",
+        "taurus": "The emotional foundation is stable, comforting, and deeply rooted. The couple finds security in routine, shared meals, and physical affection. Emotionally steady and loyal, resistant to change.",
+        "gemini": "Emotions are processed through conversation and intellectual analysis. The couple talks through feelings and needs constant mental stimulation. Emotionally adaptable but may struggle with depth.",
+        "cancer": "The most natural placement for the composite Moon. Profound emotional bonding, nurturing instincts, and home-centered intimacy. The couple creates a deeply protective emotional sanctuary together.",
+        "leo": "Emotions are expressed dramatically, generously, and with creative flair. The couple needs to feel special and admired. Warm, affectionate emotional climate with a tendency toward emotional drama.",
+        "virgo": "Emotions are managed practically and expressed through acts of service. The couple cares for each other through practical support. Emotionally modest but deeply attentive to detail.",
+        "libra": "Emotional harmony and balance are paramount. The couple strives for fairness in emotional exchange. Diplomatically expressed feelings with a tendency to avoid emotional conflict.",
+        "scorpio": "The emotional bond is intense, transformative, and all-consuming. The couple shares deep psychological intimacy. Profound emotional investment with potential for jealousy and control.",
+        "sagittarius": "The emotional climate is optimistic, adventurous, and freedom-loving. The couple processes emotions through philosophical frameworks. Emotionally buoyant but may avoid heavy emotional processing.",
+        "capricorn": "Emotions are contained, mature, and expressed through commitment. The couple values emotional stability over excitement. Responsible emotional connection that deepens with time.",
+        "aquarius": "The emotional dynamic is detached, progressive, and friendship-oriented. The couple connects through shared ideals rather than deep emotional fusion. Innovative emotional expression that values independence.",
+        "pisces": "The emotional bond is deeply intuitive, compassionate, and spiritually attuned. The couple shares an almost telepathic emotional connection. Boundary dissolution and emotional absorption are both gifts and risks."
+      },
+      "mercury": {
+        "aries": "Communication is direct, quick, and sometimes argumentative. The couple makes fast decisions and speaks honestly. Debates are frequent and stimulating but can turn into verbal battles.",
+        "taurus": "Communication is deliberate, practical, and focused on concrete matters. The couple discusses finances, comfort, and values. Slow but thorough decision-making that prioritizes security.",
+        "gemini": "Communication is the lifeblood of this relationship. Constant texting, talking, and exchanging ideas. The couple is socially vibrant and intellectually curious. Must guard against information overload.",
+        "cancer": "Communication is emotionally colored, intuitive, and focused on family matters. The couple discusses feelings, memories, and domestic concerns. Emotionally sensitive dialogue that requires gentleness.",
+        "leo": "Communication is confident, creative, and sometimes dramatic. The couple enjoys storytelling, entertainment discussions, and creative planning. Must ensure both partners get equal airtime.",
+        "virgo": "Communication is precise, analytical, and detail-oriented. The couple excels at problem-solving and practical planning. Constructive criticism flows freely but must not become habitual fault-finding.",
+        "libra": "Communication is diplomatic, balanced, and aesthetically oriented. The couple discusses art, relationships, and fairness. Pleasant conversations with a tendency to avoid difficult topics.",
+        "scorpio": "Communication goes deep, probing beneath surface appearances. The couple discusses taboo topics, psychology, and hidden truths. Powerful verbal intimacy but potential for verbal manipulation.",
+        "sagittarius": "Communication is expansive, philosophical, and future-oriented. The couple discusses travel plans, beliefs, and big ideas. Inspiring dialogue that can become preachy or overblown.",
+        "capricorn": "Communication is structured, purposeful, and career-focused. The couple discusses goals, responsibilities, and long-term plans. Efficient dialogue that may lack emotional warmth.",
+        "aquarius": "Communication is innovative, unconventional, and ideas-driven. The couple discusses technology, social issues, and progressive concepts. Stimulating mental exchange that values originality over tradition.",
+        "pisces": "Communication is intuitive, imaginative, and sometimes vague. The couple understands each other without words. Creative, spiritual dialogue that may lack practical clarity."
+      },
+      "venus": {
+        "aries": "The relationship's love expression is passionate, impulsive, and conquest-oriented. The couple falls in love quickly and expresses affection boldly. Exciting romantic dynamic that needs sustained effort.",
+        "taurus": "Love is expressed through loyalty, sensuality, and material generosity. The couple enjoys fine dining, physical affection, and building wealth together. Deeply devoted and resistant to breakup.",
+        "gemini": "Love is expressed through communication, wit, and variety. The couple flirts, exchanges gifts of words, and keeps romance mentally stimulating. Needs constant novelty to maintain interest.",
+        "cancer": "Love is expressed through nurturing, cooking together, and creating a cozy home. The couple shows affection through emotional care and protection. Deeply tender and family-oriented romantic bond.",
+        "leo": "Love is expressed grandly, generously, and publicly. The couple enjoys romantic gestures, celebrations, and being admired as lovers. Warm, creative, and passionately loyal romantic expression.",
+        "virgo": "Love is expressed through practical service, health care, and thoughtful attention to detail. The couple shows affection by helping each other improve. Modest but deeply considerate romantic bond.",
+        "libra": "Love is expressed through partnership, beauty, and social grace. The couple is aesthetically refined and values fairness in romance. Classic romantic partnership with emphasis on harmony.",
+        "scorpio": "Love is expressed with intense passion, deep commitment, and transformative intimacy. The couple bonds through emotional and physical depth. All-or-nothing approach to love with powerful loyalty.",
+        "sagittarius": "Love is expressed through shared adventures, philosophical exploration, and mutual freedom. The couple falls in love through travel and learning. Optimistic, generous romantic bond that needs space.",
+        "capricorn": "Love is expressed through commitment, responsibility, and long-term dedication. The couple shows affection through providing and building together. Mature, enduring romantic bond that deepens over decades.",
+        "aquarius": "Love is expressed through friendship, shared ideals, and respecting individuality. The couple values intellectual connection and progressive values. Unconventional romance that prioritizes freedom and equality.",
+        "pisces": "Love is expressed through compassion, sacrifice, and spiritual devotion. The couple shares a dream-like, idealistic romantic bond. Deeply spiritual love connection that must maintain healthy boundaries."
+      },
+      "mars": {
+        "aries": "The relationship's drive is fiercely independent, competitive, and action-oriented. The couple achieves goals through bold initiative. High energy and passion, but conflict is ever-present.",
+        "taurus": "The relationship's energy is persistent, steady, and focused on building material security. The couple works methodically toward shared goals. Sensual chemistry combined with stubborn determination.",
+        "gemini": "The relationship's action style is versatile, mentally driven, and scattered. The couple pursues multiple interests simultaneously. Stimulating debates and intellectual competition mark the dynamic.",
+        "cancer": "The relationship's protective instincts are powerful. The couple fights fiercely for family and home. Emotional reactions drive action. Passive-aggressive tendencies need conscious management.",
+        "leo": "The relationship's energy is confident, creative, and dramatically expressed. The couple takes bold action in creative and romantic pursuits. Leadership disputes resolved through mutual admiration.",
+        "virgo": "The relationship's energy is directed toward improvement, health, and practical service. The couple works efficiently on shared projects. Critical tendencies must be channeled constructively.",
+        "libra": "The relationship's action style seeks balance and avoids direct confrontation. The couple prefers diplomatic solutions. Passive-aggressive patterns may emerge from conflict avoidance.",
+        "scorpio": "The relationship's drive is intensely focused, strategic, and transformative. The couple pursues goals with relentless determination. Powerful sexual chemistry and shared resilience through crisis.",
+        "sagittarius": "The relationship's energy is adventurous, optimistic, and freedom-seeking. The couple pursues grand plans and philosophical crusades. Impulsive action driven by shared enthusiasm and wanderlust.",
+        "capricorn": "The relationship's ambition is strong, disciplined, and achievement-oriented. The couple builds career success and social standing together. Controlled, strategic energy directed toward long-term goals.",
+        "aquarius": "The relationship's energy is directed toward reform, innovation, and humanitarian causes. The couple acts on shared ideals. Rebellious streak with unpredictable bursts of activist energy.",
+        "pisces": "The relationship's drive is subtle, spiritually motivated, and compassionate. The couple channels energy into creative, healing, or charitable pursuits. Actions guided by intuition and idealism."
+      },
+      "jupiter": {
+        "aries": "Growth in this relationship comes through bold initiative and pioneering experiences. The couple expands through courageous action and competitive achievement. Enthusiasm and optimism drive the partnership forward.",
+        "taurus": "Growth comes through building material abundance and enjoying life's pleasures together. The couple expands through steady accumulation, sensory experiences, and grounded faith. Generous and stable prosperity.",
+        "gemini": "Growth comes through learning, communication, and intellectual exploration. The couple expands through education, travel, and sharing diverse ideas. Teaching each other is central to the bond.",
+        "cancer": "Growth comes through family expansion, emotional deepening, and creating a nurturing home. The couple finds wisdom through emotional experiences and caregiving. Faith rooted in family bonds.",
+        "leo": "Growth comes through creative expression, generous leadership, and romantic celebration. The couple expands through joyful self-expression and mutual admiration. A blessed, large-hearted partnership.",
+        "virgo": "Growth comes through service, health improvement, and practical wisdom. The couple expands through helping others and refining their shared skills. Humble, detail-oriented spiritual growth.",
+        "libra": "Growth comes through partnership itself, legal matters, and aesthetic refinement. The couple expands through social connections and diplomatic wisdom. Justice and beauty are shared values.",
+        "scorpio": "Growth comes through deep transformation, shared resources, and psychological insight. The couple expands through crisis and rebirth experiences. Profound spiritual growth through intimacy.",
+        "sagittarius": "The most natural placement for composite Jupiter. Growth through travel, philosophy, and higher education. The couple is adventurous, optimistic, and spiritually expanding. A truly fortunate partnership.",
+        "capricorn": "Growth comes through disciplined effort, professional achievement, and mature responsibility. The couple expands through structural accomplishment. Wisdom gained through patience and hard work.",
+        "aquarius": "Growth comes through humanitarian involvement, technological innovation, and unconventional wisdom. The couple expands through community engagement and progressive ideals. Growth through breaking conventions.",
+        "pisces": "Growth comes through spiritual surrender, compassion, and mystical experience. The couple expands through meditation, charity, and dissolving ego boundaries. Deeply blessed spiritual partnership."
+      },
+      "saturn": {
+        "aries": "The relationship faces tests around independence, leadership, and patience. Saturn's discipline clashes with Aries' impulsiveness. The couple must learn to balance urgency with strategic timing.",
+        "taurus": "The relationship builds lasting financial security through disciplined effort. Saturn stabilizes Taurus' material concerns. The couple creates enduring structures but must guard against rigidity and stagnation.",
+        "gemini": "The relationship faces communication challenges requiring disciplined, thoughtful dialogue. Saturn structures Gemini's scattered ideas. The couple learns depth over breadth in intellectual exchange.",
+        "cancer": "The relationship faces emotional restriction and family responsibilities. Saturn's discipline meets Cancer's sensitivity, creating tests around nurturing and emotional expression. Growth through emotional maturity.",
+        "leo": "The relationship faces tests around creative expression and recognition. Saturn dampens Leo's exuberance, requiring earned rather than assumed admiration. The couple matures through humility in love.",
+        "virgo": "The relationship develops through meticulous work, health discipline, and practical service. Saturn empowers Virgo's analytical strengths. The couple achieves through detailed, systematic effort.",
+        "libra": "Saturn is exalted in Libra, creating a relationship built on fair, balanced commitment. The couple takes partnership seriously and works through difficulties with maturity. A structurally sound union.",
+        "scorpio": "The relationship faces intense karmic tests around trust, intimacy, and shared power. Saturn deepens Scorpio's transformative experiences. The couple endures through profound commitment and psychological work.",
+        "sagittarius": "The relationship faces tests around faith, freedom, and philosophical differences. Saturn restricts Sagittarian expansion, requiring grounded optimism. The couple learns patience in spiritual growth.",
+        "capricorn": "Saturn in its own sign creates a deeply responsible, achievement-oriented relationship. The couple builds lasting social structures and professional success. Must intentionally cultivate warmth and spontaneity.",
+        "aquarius": "The relationship is tested around individuality, social ideals, and emotional detachment. Saturn structures Aquarian innovation. The couple builds lasting community impact through disciplined humanitarian work.",
+        "pisces": "The relationship faces tests around boundaries, spiritual discipline, and escapism. Saturn grounds Pisces' idealism. The couple must balance spiritual aspiration with practical responsibility."
+      }
+    }
+  }
+}

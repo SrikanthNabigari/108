@@ -12,6 +12,7 @@ and uses Chara Karakas (movable significators) determined by planetary degrees.
 """
 
 from datetime import datetime, timedelta
+from typing import Any
 
 from packages.core.src.constants import CharaKaraka, Planet, Rashi, SignMobility
 from packages.core.src.models import (
@@ -1253,13 +1254,511 @@ def interpret_upapada(chart: BirthChart) -> dict:
     }
 
 
+# =============================================================================
+# Atmakaraka Deep Analysis (Session 22 additions)
+# =============================================================================
+
+# Ishta Devata mapping: planet in/ruling 12th from Karakamsha -> deity
+_ISHTA_DEVATA_BY_PLANET: dict[Planet, dict[str, str]] = {
+    Planet.SUN: {"deity": "Lord Shiva / Surya", "worship": "Surya Namaskar, Aditya Hridayam"},
+    Planet.MOON: {"deity": "Goddess Parvati / Durga", "worship": "Chandi Path, Lalita Sahasranama"},
+    Planet.MARS: {"deity": "Lord Kartikeya / Hanuman", "worship": "Hanuman Chalisa, Mars mantras"},
+    Planet.MERCURY: {"deity": "Lord Vishnu", "worship": "Vishnu Sahasranama, Narayana mantras"},
+    Planet.JUPITER: {
+        "deity": "Lord Vishnu / Dakshinamurthy",
+        "worship": "Guru mantras, Brihaspati Stotra",
+    },
+    Planet.VENUS: {
+        "deity": "Goddess Lakshmi / Mahalakshmi",
+        "worship": "Sri Suktam, Lakshmi Stotra",
+    },
+    Planet.SATURN: {
+        "deity": "Lord Shani / Hanuman / Vishnu",
+        "worship": "Shani Stotra, Hanuman Chalisa",
+    },
+    Planet.RAHU: {
+        "deity": "Goddess Durga / Sarpa Devata",
+        "worship": "Durga Saptashati, Naga Puja",
+    },
+    Planet.KETU: {
+        "deity": "Lord Ganesha / Matsya Avatar",
+        "worship": "Ganesha Atharvashirsha, fish charity",
+    },
+}
+
+_ISHTA_DEVATA_BY_SIGN: dict[Rashi, dict[str, str]] = {
+    Rashi.ARIES: {"deity": "Lord Kartikeya", "element": "fire", "worship": "Skanda Shashthi"},
+    Rashi.TAURUS: {"deity": "Goddess Lakshmi", "element": "earth", "worship": "Sri Suktam"},
+    Rashi.GEMINI: {"deity": "Lord Vishnu", "element": "air", "worship": "Vishnu Sahasranama"},
+    Rashi.CANCER: {"deity": "Goddess Parvati", "element": "water", "worship": "Lalita Sahasranama"},
+    Rashi.LEO: {"deity": "Lord Shiva", "element": "fire", "worship": "Shiva Mahimna Stotra"},
+    Rashi.VIRGO: {"deity": "Lord Vishnu", "element": "earth", "worship": "Narayana Kavacham"},
+    Rashi.LIBRA: {"deity": "Goddess Lakshmi", "element": "air", "worship": "Kanaka Dhara Stotra"},
+    Rashi.SCORPIO: {
+        "deity": "Lord Kartikeya",
+        "element": "water",
+        "worship": "Subramanya Bhujangam",
+    },
+    Rashi.SAGITTARIUS: {
+        "deity": "Lord Dakshinamurthy",
+        "element": "fire",
+        "worship": "Dakshinamurthy Stotra",
+    },
+    Rashi.CAPRICORN: {"deity": "Lord Hanuman", "element": "earth", "worship": "Hanuman Chalisa"},
+    Rashi.AQUARIUS: {"deity": "Lord Shani / Narayana", "element": "air", "worship": "Shani Stotra"},
+    Rashi.PISCES: {"deity": "Lord Vishnu / Matsya", "element": "water", "worship": "Matsya Stotra"},
+}
+
+# AK by planet: soul lesson and karmic focus
+_AK_SOUL_LESSONS: dict[Planet, dict[str, str]] = {
+    Planet.SUN: {
+        "soul_lesson": "Ego dissolution, true leadership through humility",
+        "karmic_focus": "Authority, father, self-identity, government",
+        "spiritual_path": "Raja Yoga, leadership in service",
+    },
+    Planet.MOON: {
+        "soul_lesson": "Emotional mastery, nurturing without attachment",
+        "karmic_focus": "Mother, mind, emotions, public connection",
+        "spiritual_path": "Bhakti Yoga, devotional practice, emotional balance",
+    },
+    Planet.MARS: {
+        "soul_lesson": "Channeling energy constructively, non-violence",
+        "karmic_focus": "Siblings, courage, property, discipline",
+        "spiritual_path": "Karma Yoga, selfless action, martial arts",
+    },
+    Planet.MERCURY: {
+        "soul_lesson": "Right speech, truthful communication",
+        "karmic_focus": "Intelligence, commerce, learning, discrimination",
+        "spiritual_path": "Jnana Yoga, study of scriptures, intellectual pursuit",
+    },
+    Planet.JUPITER: {
+        "soul_lesson": "Wisdom without pride, true knowledge",
+        "karmic_focus": "Dharma, teaching, children, expansion",
+        "spiritual_path": "Guru Yoga, teaching, sharing wisdom selflessly",
+    },
+    Planet.VENUS: {
+        "soul_lesson": "Love without attachment, beauty as divine expression",
+        "karmic_focus": "Relationships, creativity, luxury, arts",
+        "spiritual_path": "Bhakti Yoga, devotion through beauty, sacred arts",
+    },
+    Planet.SATURN: {
+        "soul_lesson": "Patience, endurance, service to the less fortunate",
+        "karmic_focus": "Duty, suffering, longevity, renunciation",
+        "spiritual_path": "Karma Yoga, austere practice, service to elders",
+    },
+}
+
+# Karakamsha sign soul purpose descriptions
+_KM_SOUL_PURPOSE: dict[Rashi, dict[str, str]] = {
+    Rashi.ARIES: {
+        "soul_purpose": "Pioneer, warrior of dharma, initiative in spiritual life",
+        "career_direction": "Military, sports, engineering, surgery, leadership",
+        "spiritual_expression": "Tapas (austerity), active meditation, pilgrimage",
+    },
+    Rashi.TAURUS: {
+        "soul_purpose": "Material and spiritual stability, preservation of values",
+        "career_direction": "Finance, agriculture, arts, luxury goods, singing",
+        "spiritual_expression": "Devotional music, mantra practice, nature worship",
+    },
+    Rashi.GEMINI: {
+        "soul_purpose": "Communication of higher knowledge, intellectual bridge",
+        "career_direction": "Writing, journalism, teaching, commerce, translation",
+        "spiritual_expression": "Jnana Yoga, scriptural study, philosophical debate",
+    },
+    Rashi.CANCER: {
+        "soul_purpose": "Nurturing souls, emotional healing, family dharma",
+        "career_direction": "Healthcare, social work, hospitality, real estate",
+        "spiritual_expression": "Bhakti Yoga, shrine worship, feeding others",
+    },
+    Rashi.LEO: {
+        "soul_purpose": "Divine self-expression, creative authority",
+        "career_direction": "Government, politics, performing arts, entertainment",
+        "spiritual_expression": "Raja Yoga, temple leadership, spiritual authority",
+    },
+    Rashi.VIRGO: {
+        "soul_purpose": "Service-oriented perfection, healing through detail",
+        "career_direction": "Medicine, accounting, editing, craftsmanship, herbalism",
+        "spiritual_expression": "Seva (selfless service), health-based spiritual practice",
+    },
+    Rashi.LIBRA: {
+        "soul_purpose": "Establishing balance and justice in the world",
+        "career_direction": "Law, diplomacy, counseling, fashion, design",
+        "spiritual_expression": "Partnership-based practice, sacred relationships",
+    },
+    Rashi.SCORPIO: {
+        "soul_purpose": "Transformation, uncovering hidden truths",
+        "career_direction": "Research, psychology, occult sciences, surgery, detective",
+        "spiritual_expression": "Tantric practices, deep meditation, kundalini yoga",
+    },
+    Rashi.SAGITTARIUS: {
+        "soul_purpose": "Higher learning, philosophy, dharma propagation",
+        "career_direction": "Teaching, philosophy, law, religion, long-distance travel",
+        "spiritual_expression": "Guru Yoga, pilgrimage, scriptural teaching",
+    },
+    Rashi.CAPRICORN: {
+        "soul_purpose": "Disciplined achievement, structural foundation for dharma",
+        "career_direction": "Administration, engineering, mining, government, management",
+        "spiritual_expression": "Austere practice, slow steady sadhana, duty-based yoga",
+    },
+    Rashi.AQUARIUS: {
+        "soul_purpose": "Humanitarian service, collective welfare, innovation",
+        "career_direction": "Technology, social reform, science, NGO, humanitarian",
+        "spiritual_expression": "Community-based spiritual practice, group meditation",
+    },
+    Rashi.PISCES: {
+        "soul_purpose": "Spiritual liberation, compassion, dissolution of ego",
+        "career_direction": "Spiritual teaching, art, music, charity, hospital work",
+        "spiritual_expression": "Moksha-oriented practice, surrender, seclusion",
+    },
+}
+
+# Planet effects when placed in Karakamsha
+_PLANETS_IN_KM_EFFECTS: dict[Planet, str] = {
+    Planet.SUN: "Authority and power in soul's path, connection to government or father figures",
+    Planet.MOON: "Emotional fulfillment through soul purpose, public recognition and service",
+    Planet.MARS: "Driven, passionate pursuit of dharma, courage in spiritual life",
+    Planet.MERCURY: "Intellectual soul expression, writing, communication as dharma",
+    Planet.JUPITER: "Natural teacher and spiritual guide, wisdom as life purpose",
+    Planet.VENUS: "Artistic soul expression, beauty and love as spiritual path",
+    Planet.SATURN: "Duty and discipline define the soul path, slow but steady progress",
+    Planet.RAHU: "Unconventional soul path, foreign connections, obsessive spiritual pursuit",
+    Planet.KETU: "Past-life spiritual carry-over, natural mystic, detached from worldly goals",
+}
+
+# Planet effects when aspecting Karakamsha
+_PLANETS_ASPECTING_KM_EFFECTS: dict[Planet, str] = {
+    Planet.SUN: "Soul purpose backed by authority, confidence, and governmental support",
+    Planet.MOON: "Emotional support and public recognition for soul purpose",
+    Planet.MARS: "Energy and courage supporting the soul's mission, protective force",
+    Planet.MERCURY: "Intellectual support, communication skills aiding soul purpose",
+    Planet.JUPITER: "Divine grace and wisdom supporting the soul's path, guru's blessing",
+    Planet.VENUS: "Creative and romantic support for soul expression, artistic backing",
+    Planet.SATURN: "Discipline and endurance supporting soul mission, karmic support",
+    Planet.RAHU: "Worldly ambition and unconventional methods supporting soul path",
+    Planet.KETU: "Spiritual detachment and past-life wisdom supporting soul liberation",
+}
+
+# Chara Karaka descriptions for full analysis
+_CHARA_KARAKA_DESCRIPTIONS: dict[CharaKaraka, dict[str, str]] = {
+    CharaKaraka.ATMAKARAKA: {
+        "name": "Atmakaraka (AK)",
+        "signification": "Self, soul, overall life direction",
+        "house_relation": "1st house equivalent",
+        "description": "The king of the chart -- indicates the soul's deepest desires and karmic purpose",
+    },
+    CharaKaraka.AMATYAKARAKA: {
+        "name": "Amatyakaraka (AmK)",
+        "signification": "Career, profession, right-hand person",
+        "house_relation": "10th house equivalent",
+        "description": "The minister -- indicates career direction and professional life",
+    },
+    CharaKaraka.BHRATRIKARAKA: {
+        "name": "Bhratrikaraka (BK)",
+        "signification": "Siblings, courage, initiative",
+        "house_relation": "3rd house equivalent",
+        "description": "The sibling indicator -- shows relationships with siblings and personal courage",
+    },
+    CharaKaraka.MATRIKARAKA: {
+        "name": "Matrikaraka (MK)",
+        "signification": "Mother, nurturing, education",
+        "house_relation": "4th house equivalent",
+        "description": "The mother indicator -- shows relationship with mother and emotional foundation",
+    },
+    CharaKaraka.PUTRAKARAKA: {
+        "name": "Putrakaraka (PK)",
+        "signification": "Children, creativity, intelligence",
+        "house_relation": "5th house equivalent",
+        "description": "The child indicator -- shows children, creative expression, and past-life merit",
+    },
+    CharaKaraka.GNATIKARAKA: {
+        "name": "Gnatikaraka (GK)",
+        "signification": "Rivals, disease, obstacles",
+        "house_relation": "6th house equivalent",
+        "description": "The enemy indicator -- shows obstacles, diseases, and competitive environment",
+    },
+    CharaKaraka.DARAKARAKA: {
+        "name": "Darakaraka (DK)",
+        "signification": "Spouse, partnerships, marriage",
+        "house_relation": "7th house equivalent",
+        "description": "The spouse indicator -- shows nature of spouse and marriage destiny",
+    },
+}
+
+
+def _load_atmakaraka_rules() -> dict[str, Any]:
+    """Load atmakaraka interpretation rules from knowledge base.
+
+    Returns empty dict if the file doesn't exist yet.
+    """
+    from packages.core.src.knowledge_loader import load_rules as _load_rules
+
+    data = _load_rules("atmakaraka_rules")
+    return data.get("atmakaraka_rules", {})
+
+
+def _get_navamsha_rashi_for_planet(chart: BirthChart, planet: Planet) -> Rashi | None:
+    """Get the Navamsha rashi for a planet.
+
+    Args:
+        chart: Birth chart.
+        planet: Planet to check.
+
+    Returns:
+        Rashi in D9 or None if planet not found.
+    """
+    if planet not in chart.planets:
+        return None
+    pos = chart.planets[planet]
+    nav = get_navamsha(pos.longitude)
+    return INDEX_TO_RASHI.get(nav["rashi"])
+
+
+def get_ishta_devata(chart: BirthChart) -> dict[str, Any]:
+    """Determine the Ishta Devata (preferred deity) from the 12th sign from Karakamsha.
+
+    The planet ruling or occupying the 12th from the Karakamsha sign indicates
+    the deity that the native should worship for spiritual progress.
+
+    Args:
+        chart: Birth chart with planet positions.
+
+    Returns:
+        Dict with sign_12th_from_km, planet, deity, worship, and interpretation.
+    """
+    rules = _load_atmakaraka_rules()
+    km = get_karakamsha(chart)
+    km_index = RASHI_TO_INDEX[km.navamsha_rashi]
+    twelfth_index = (km_index + 11) % 12
+    twelfth_rashi = INDEX_TO_RASHI[twelfth_index]
+
+    # Find planets in the 12th from KM (in D9)
+    planet_in_12th: Planet | None = None
+    for planet, pos in chart.planets.items():
+        nav = get_navamsha(pos.longitude)
+        if nav["rashi"] == twelfth_index:
+            planet_in_12th = planet
+            break
+
+    # If no planet in 12th, use the lord of the 12th sign
+    if planet_in_12th is None:
+        planet_in_12th = _get_sign_lord(twelfth_rashi)
+
+    # Look up deity from rules or fallback
+    ishta_rules = rules.get("ishta_devata", {})
+    planet_key = planet_in_12th.value if planet_in_12th else ""
+
+    deity_info = ishta_rules.get(planet_key, {})
+    if not deity_info and planet_in_12th:
+        # Fallback to built-in
+        fb = _ISHTA_DEVATA_BY_PLANET.get(planet_in_12th, {})
+        deity_info = {"deity": fb.get("deity", "Unknown"), "worship": fb.get("worship", "")}
+
+    # Also check sign-based deity
+    sign_deity = _ISHTA_DEVATA_BY_SIGN.get(twelfth_rashi, {})
+
+    return {
+        "sign_12th_from_km": twelfth_rashi.value,
+        "planet_in_12th": planet_key,
+        "deity": deity_info.get("deity", "Requires deeper analysis"),
+        "worship": deity_info.get("worship", ""),
+        "sign_deity": sign_deity.get("deity", ""),
+        "interpretation": (
+            f"The 12th from Karakamsha ({twelfth_rashi.value.title()}) indicates "
+            f"devotion to {deity_info.get('deity', 'the divine')} for spiritual liberation. "
+            f"{deity_info.get('worship', '')}"
+        ),
+    }
+
+
+def get_atmakaraka_analysis(chart: BirthChart) -> dict[str, Any]:
+    """Comprehensive Atmakaraka-based life purpose analysis.
+
+    Combines the Atmakaraka planet, its Karakamsha (D9) position, planets
+    in and aspecting the Karakamsha, and the Ishta Devata into a unified
+    soul-purpose narrative.
+
+    Args:
+        chart: Birth chart with planet positions.
+
+    Returns:
+        Dict with atmakaraka details, karakamsha analysis, soul_purpose,
+        ishta_devata, planets in/aspecting karakamsha, career direction,
+        and spiritual path.
+    """
+    rules = _load_atmakaraka_rules()
+
+    # Core data
+    ak = get_atmakaraka(chart)
+    km = get_karakamsha(chart)
+    km_index = RASHI_TO_INDEX[km.navamsha_rashi]
+
+    # Lagna index for house-from-lagna calculation
+    lagna_index = RASHI_TO_INDEX[chart.lagna_rashi]
+    km_house_from_lagna = ((km_index - lagna_index) % 12) + 1
+
+    # AK soul lesson
+    ak_rules = rules.get("ak_by_planet", {})
+    ak_planet_key = ak.planet.value
+    ak_info = ak_rules.get(ak_planet_key, {})
+    if not ak_info:
+        ak_info = _AK_SOUL_LESSONS.get(
+            ak.planet,
+            {
+                "soul_lesson": "Deep karmic purpose requiring meditation to understand",
+                "karmic_focus": "Unique life pattern",
+                "spiritual_path": "Personal spiritual discovery",
+            },
+        )
+
+    # KM sign soul purpose
+    km_rules = rules.get("karakamsha_by_sign", {})
+    km_sign_key = km.navamsha_rashi.value
+    km_info = km_rules.get(km_sign_key, {})
+    if not km_info:
+        km_info = _KM_SOUL_PURPOSE.get(
+            km.navamsha_rashi,
+            {
+                "soul_purpose": "Unique soul direction requiring deeper analysis",
+                "career_direction": "Multiple possibilities based on chart strength",
+                "spiritual_expression": "Personal spiritual path",
+            },
+        )
+
+    # Planets in Karakamsha
+    planets_in_km: list[dict[str, str]] = []
+    km_planet_rules = rules.get("planets_in_karakamsha", {})
+    for planet in km.planets_in_karakamsha:
+        effect = km_planet_rules.get(planet.value, "")
+        if not effect:
+            effect = _PLANETS_IN_KM_EFFECTS.get(
+                planet, f"{planet.value.title()} influences the Karakamsha"
+            )
+        planets_in_km.append({"planet": planet.value, "effect": effect})
+
+    # Planets aspecting Karakamsha (Jaimini aspects)
+    aspecting_signs = get_jaimini_aspects(km.navamsha_rashi)
+    planets_aspecting_km: list[dict[str, str]] = []
+    km_aspect_rules = rules.get("planets_aspecting_karakamsha", {})
+    for planet, pos in chart.planets.items():
+        p_nav = get_navamsha(pos.longitude)
+        p_nav_rashi = INDEX_TO_RASHI.get(p_nav["rashi"])
+        if p_nav_rashi in aspecting_signs:
+            effect = km_aspect_rules.get(planet.value, "")
+            if not effect:
+                effect = _PLANETS_ASPECTING_KM_EFFECTS.get(
+                    planet, f"{planet.value.title()} aspects Karakamsha from D9"
+                )
+            planets_aspecting_km.append({"planet": planet.value, "effect": effect})
+
+    # Ishta Devata
+    ishta = get_ishta_devata(chart)
+
+    # Synthesize soul purpose narrative
+    soul_purpose = (
+        f"{ak.planet.value.title()} as Atmakaraka at {ak.degree_in_sign:.1f} degrees in "
+        f"{ak.rashi.value.title()} indicates: {ak_info.get('soul_lesson', '')}. "
+        f"Karakamsha in {km.navamsha_rashi.value.title()} (house {km_house_from_lagna} from Lagna) "
+        f"points to: {km_info.get('soul_purpose', '')}."
+    )
+
+    return {
+        "atmakaraka": {
+            "planet": ak.planet.value,
+            "degree": round(ak.degree_in_sign, 2),
+            "sign": ak.rashi.value,
+            "soul_lesson": ak_info.get("soul_lesson", ""),
+            "karmic_focus": ak_info.get("karmic_focus", ""),
+        },
+        "karakamsha": {
+            "sign": km.navamsha_rashi.value,
+            "house_from_lagna": km_house_from_lagna,
+        },
+        "soul_purpose": soul_purpose,
+        "ishta_devata": ishta,
+        "planets_in_karakamsha": planets_in_km,
+        "planets_aspecting_karakamsha": planets_aspecting_km,
+        "career_from_karakamsha": km_info.get("career_direction", ""),
+        "spiritual_path": km_info.get("spiritual_expression", ak_info.get("spiritual_path", "")),
+    }
+
+
+def get_all_chara_karaka_analysis(chart: BirthChart) -> dict[str, Any]:
+    """Full 7-karaka analysis with house positions and interpretations.
+
+    Analyzes all seven Chara Karakas (AK through DK), providing each karaka's
+    planet, sign, degree, house position, and interpretation.
+
+    Args:
+        chart: Birth chart with planet positions.
+
+    Returns:
+        Dict with karakas list, summary, and dominant themes.
+    """
+    karakas = calculate_chara_karakas(chart)
+    lagna_index = RASHI_TO_INDEX[chart.lagna_rashi]
+
+    karaka_results: list[dict[str, Any]] = []
+    for ck in karakas:
+        karaka_desc = _CHARA_KARAKA_DESCRIPTIONS.get(ck.karaka, {})
+        planet_pos = chart.planets.get(ck.planet)
+        house = planet_pos.house if planet_pos else 0
+        sign_index = RASHI_TO_INDEX.get(ck.rashi, 0)
+        house_from_lagna = ((sign_index - lagna_index) % 12) + 1
+
+        karaka_results.append(
+            {
+                "karaka": ck.karaka.value,
+                "karaka_name": karaka_desc.get("name", ck.karaka.value),
+                "planet": ck.planet.value,
+                "sign": ck.rashi.value,
+                "degree": round(ck.degree_in_sign, 2),
+                "house": house,
+                "house_from_lagna": house_from_lagna,
+                "signification": karaka_desc.get("signification", ""),
+                "description": karaka_desc.get("description", ""),
+            }
+        )
+
+    # Identify dominant themes
+    themes: list[str] = []
+    if karakas:
+        ak = karakas[0]
+        ak_lesson = _AK_SOUL_LESSONS.get(ak.planet, {})
+        themes.append(
+            f"Soul direction: {ak_lesson.get('karmic_focus', ak.planet.value.title() + ' themes')}"
+        )
+
+        if len(karakas) >= 2:
+            amk = karakas[1]
+            themes.append(f"Career indicator: {amk.planet.value.title()} as Amatyakaraka")
+
+        if len(karakas) >= 7:
+            dk = karakas[6]
+            themes.append(f"Spouse indicator: {dk.planet.value.title()} as Darakaraka")
+
+    return {
+        "karakas": karaka_results,
+        "total_karakas": len(karaka_results),
+        "themes": themes,
+        "summary": (
+            f"Chart has {karakas[0].planet.value.title()} as Atmakaraka (soul significator) "
+            f"and {karakas[-1].planet.value.title()} as Darakaraka (spouse significator)"
+            if len(karakas) >= 7
+            else f"Chart has {karakas[0].planet.value.title()} as Atmakaraka"
+        ),
+    }
+
+
 __all__ = [
     "calculate_all_arudha_padas",
     "calculate_argala",
     "calculate_arudha_pada",
     "calculate_chara_dasha",
     "calculate_chara_karakas",
+    "get_all_chara_karaka_analysis",
     "get_atmakaraka",
+    "get_atmakaraka_analysis",
+    "get_ishta_devata",
     "get_jaimini_aspects",
     "get_karakamsha",
     "get_sign_mobility",

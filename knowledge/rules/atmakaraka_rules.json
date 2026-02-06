@@ -1,0 +1,336 @@
+{
+  "atmakaraka_rules": {
+    "description": "Atmakaraka (soul significator) interpretation rules based on Jaimini Sutras and BPHS. The Atmakaraka is the planet with the highest degree in any sign, representing the soul's deepest desires and karmic lessons.",
+    "version": "1.0",
+    "ak_by_planet": {
+      "sun": {
+        "soul_lesson": "The soul must learn humility and selfless service. The ego has been dominant in past lives, and now the native must balance personal power with surrender to a higher purpose.",
+        "karmic_focus": "Authority, father, government, self-identity, ego transcendence",
+        "spiritual_path": "Karma Yoga — path of righteous action and duty. Service to dharma without attachment to recognition or reward.",
+        "strengths": ["Natural leadership", "Strong willpower", "Clear sense of purpose", "Courage in adversity"],
+        "challenges": ["Ego inflation", "Domineering tendencies", "Difficulty accepting subordination", "Pride obstructing spiritual growth"]
+      },
+      "moon": {
+        "soul_lesson": "The soul must master emotional detachment and find inner peace regardless of external circumstances. Past lives involved emotional turbulence and attachment.",
+        "karmic_focus": "Mother, emotions, mind, public connection, nurturing, mental peace",
+        "spiritual_path": "Bhakti Yoga — path of devotion and emotional surrender to the divine. Transforming worldly attachment into divine love.",
+        "strengths": ["Deep empathy", "Intuitive wisdom", "Ability to nurture and heal", "Public appeal and charisma"],
+        "challenges": ["Emotional instability", "Over-attachment to people", "Mental restlessness", "Difficulty with boundaries"]
+      },
+      "mars": {
+        "soul_lesson": "The soul must learn to channel aggression into righteous protection and controlled energy. Past lives involved conflict and misuse of power.",
+        "karmic_focus": "Courage, siblings, property, competition, discipline, physical vitality",
+        "spiritual_path": "Tapas and Hatha Yoga — spiritual practice through physical discipline, austerity, and controlled willpower.",
+        "strengths": ["Fearless determination", "Physical vitality", "Protective instincts", "Capacity for hard work"],
+        "challenges": ["Anger management", "Impulsive actions", "Tendency toward conflict", "Difficulty with patience and compromise"]
+      },
+      "mercury": {
+        "soul_lesson": "The soul must develop truthful communication and use intelligence for higher purposes. Past lives involved deception or misuse of intellectual abilities.",
+        "karmic_focus": "Speech, intellect, commerce, communication, discrimination, learning",
+        "spiritual_path": "Jnana Yoga — path of knowledge and discrimination between real and unreal. Saraswati worship for wisdom.",
+        "strengths": ["Sharp intellect", "Versatile communication", "Business acumen", "Analytical ability"],
+        "challenges": ["Overthinking and anxiety", "Tendency toward cunning speech", "Scattered focus", "Difficulty with emotional expression"]
+      },
+      "jupiter": {
+        "soul_lesson": "The soul must develop genuine wisdom beyond mere knowledge, and practice what it preaches. Past lives may have involved spiritual hypocrisy or misuse of teaching authority.",
+        "karmic_focus": "Wisdom, children, dharma, teaching, expansion, divine grace, guru",
+        "spiritual_path": "Vedanta and Guru Seva — path of scriptural study, teaching dharma, and serving the guru lineage.",
+        "strengths": ["Natural wisdom", "Optimistic outlook", "Teaching ability", "Ethical foundation"],
+        "challenges": ["Spiritual pride", "Over-expansion", "Preachiness without practice", "Complacency in comfort"]
+      },
+      "venus": {
+        "soul_lesson": "The soul must transcend sensual desires and transform worldly love into divine appreciation. Past lives involved excessive indulgence or relationship karma.",
+        "karmic_focus": "Relationships, marriage, luxury, arts, beauty, sensual pleasure, compromise",
+        "spiritual_path": "Tantra and Bhakti — transforming desire into devotion, seeing the divine in beauty, and purifying relationship karma.",
+        "strengths": ["Aesthetic sensitivity", "Diplomatic nature", "Capacity for deep love", "Artistic expression"],
+        "challenges": ["Over-indulgence in luxury", "Attachment to sensual pleasures", "Relationship dependency", "Difficulty with austerity"]
+      },
+      "saturn": {
+        "soul_lesson": "The soul must embrace suffering as a teacher and develop patience, discipline, and service to the downtrodden. Past lives involved neglect of duty or causing suffering to others.",
+        "karmic_focus": "Duty, longevity, discipline, suffering, service, detachment, perseverance",
+        "spiritual_path": "Karma Yoga and Seva — path of selfless service, especially to the poor and suffering. Patience as spiritual practice.",
+        "strengths": ["Deep endurance", "Practical wisdom through experience", "Unshakable discipline", "Capacity for renunciation"],
+        "challenges": ["Depression and pessimism", "Excessive self-denial", "Delayed gratification causing frustration", "Isolation and loneliness"]
+      },
+      "rahu": {
+        "soul_lesson": "The soul is driven by intense worldly desires that must be experienced and ultimately transcended. This is a soul that has been denied material experience and now craves it intensely.",
+        "karmic_focus": "Worldly ambition, foreign lands, unconventional paths, obsessive desires, breaking taboos",
+        "spiritual_path": "Tantric or unconventional spiritual paths — the soul must go through worldly experience to realize its emptiness. Durga worship for protection.",
+        "strengths": ["Intense ambition", "Ability to break boundaries", "Innovation and unconventionality", "Resilience through chaos"],
+        "challenges": ["Insatiable desires", "Deception or being deceived", "Obsessive behavior", "Difficulty finding lasting satisfaction"]
+      },
+      "ketu": {
+        "soul_lesson": "The soul seeks liberation and must learn to function in the material world while maintaining spiritual detachment. Past lives involved high spiritual attainment but incomplete worldly engagement.",
+        "karmic_focus": "Moksha, spiritual liberation, occult knowledge, detachment, past-life skills, isolation",
+        "spiritual_path": "Moksha Marga — path of liberation through meditation, renunciation, and dissolution of ego. Ganesha worship for obstacle removal.",
+        "strengths": ["Innate spiritual wisdom", "Psychic abilities", "Detachment from material", "Capacity for deep meditation"],
+        "challenges": ["Difficulty with material success", "Feeling disconnected from worldly life", "Confusion about purpose", "Escapist tendencies"]
+      }
+    },
+    "karakamsha_by_sign": {
+      "aries": {
+        "soul_purpose": "The soul seeks independence, pioneering action, and the courage to stand alone. Karakamsha in Aries indicates a warrior soul that must lead through decisive action.",
+        "career_direction": "Military, surgery, sports, entrepreneurship, engineering, fire-related professions, leadership roles requiring initiative",
+        "spiritual_expression": "Active spiritual practice — pilgrimage, martial arts as meditation, fire rituals, Agnihotra. The native finds the divine through courageous action.",
+        "relationship_approach": "Seeks an independent, spirited partner. Relationships thrive when both partners maintain individuality. Must guard against domination."
+      },
+      "taurus": {
+        "soul_purpose": "The soul seeks stability, material mastery, and the ability to create lasting value. Karakamsha in Taurus indicates a soul learning to balance material enjoyment with spiritual contentment.",
+        "career_direction": "Finance, banking, agriculture, food industry, luxury goods, music, vocal arts, real estate",
+        "spiritual_expression": "Devotional music, temple rituals, nature worship, mantra chanting. The native finds the divine through beauty and sensory devotion.",
+        "relationship_approach": "Values loyalty, physical comfort, and sensual connection. Needs a stable, dependable partner. Must guard against possessiveness."
+      },
+      "gemini": {
+        "soul_purpose": "The soul seeks knowledge, communication, and intellectual versatility. Karakamsha in Gemini indicates a teaching soul that processes life through mental engagement.",
+        "career_direction": "Writing, journalism, teaching, commerce, technology, communication, translation, astrology, counseling",
+        "spiritual_expression": "Scriptural study, mantra recitation, intellectual discourse on dharma. The native finds the divine through sacred knowledge and communication.",
+        "relationship_approach": "Needs intellectual stimulation in partnership. Communication is the foundation of relationships. Must guard against superficiality and inconsistency."
+      },
+      "cancer": {
+        "soul_purpose": "The soul seeks emotional security, nurturing, and the creation of sacred home space. Karakamsha in Cancer indicates a protective soul learning to mother the world.",
+        "career_direction": "Healthcare, hospitality, real estate, psychology, social work, agriculture, water-related industries, teaching children",
+        "spiritual_expression": "Goddess worship, home altar practices, caring for others as seva. The native finds the divine through nurturing and emotional devotion.",
+        "relationship_approach": "Deeply attached to family and partner. Needs emotional safety and reciprocal care. Must guard against smothering and emotional manipulation."
+      },
+      "leo": {
+        "soul_purpose": "The soul seeks creative self-expression, recognition, and the development of a noble character. Karakamsha in Leo indicates a royal soul learning to rule with dharma.",
+        "career_direction": "Government, politics, entertainment, performing arts, management, gold trade, speculation, creative leadership",
+        "spiritual_expression": "Surya worship, fire ceremonies, leadership in spiritual organizations. The native finds the divine through creative expression and noble action.",
+        "relationship_approach": "Seeks admiration and loyalty from partner. Generous in love but expects devotion. Must guard against ego domination in relationships."
+      },
+      "virgo": {
+        "soul_purpose": "The soul seeks perfection through service, healing, and analytical discrimination. Karakamsha in Virgo indicates a healer soul refining itself through meticulous service.",
+        "career_direction": "Medicine, accounting, editing, quality control, herbalism, veterinary science, nutrition, data analysis, craft work",
+        "spiritual_expression": "Detailed ritual practice, health-based spirituality (Ayurveda), service at temples. The native finds the divine through perfecting small acts of devotion.",
+        "relationship_approach": "Seeks a practical, health-conscious partner. Shows love through acts of service. Must guard against excessive criticism and perfectionism."
+      },
+      "libra": {
+        "soul_purpose": "The soul seeks harmony, justice, and the art of balanced relationship. Karakamsha in Libra indicates a diplomatic soul learning fairness and partnership.",
+        "career_direction": "Law, diplomacy, fashion, interior design, art dealing, counseling, mediation, luxury goods, partnership businesses",
+        "spiritual_expression": "Devotional arts, temple aesthetics, bhajan singing, partner-based spiritual practice. The native finds the divine through beauty and balance.",
+        "relationship_approach": "Marriage is central to life purpose. Seeks a refined, diplomatic partner. Must guard against people-pleasing and loss of identity in relationships."
+      },
+      "scorpio": {
+        "soul_purpose": "The soul seeks transformation, occult knowledge, and mastery over life-death cycles. Karakamsha in Scorpio indicates a mystic soul drawn to the hidden dimensions of existence.",
+        "career_direction": "Research, surgery, occult sciences, psychology, insurance, inheritance management, investigation, mining, tantra",
+        "spiritual_expression": "Intense sadhana, Kundalini yoga, tantric practices, Kali or Bhairava worship. The native finds the divine through radical transformation and surrender.",
+        "relationship_approach": "Seeks an intense, loyal partner for deep soul connection. All-or-nothing in love. Must guard against jealousy, control, and emotional manipulation."
+      },
+      "sagittarius": {
+        "soul_purpose": "The soul seeks higher truth, philosophical expansion, and dharmic teaching. Karakamsha in Sagittarius indicates a guru soul pursuing universal wisdom.",
+        "career_direction": "Teaching, philosophy, law, religion, foreign travel, publishing, higher education, preaching, advisory roles",
+        "spiritual_expression": "Scriptural study, pilgrimage, teaching dharma, Jupiter worship. The native finds the divine through expansive knowledge and sharing wisdom.",
+        "relationship_approach": "Needs a partner who shares philosophical outlook and respects freedom. Teaching and learning together. Must guard against self-righteousness."
+      },
+      "capricorn": {
+        "soul_purpose": "The soul seeks worldly achievement, social responsibility, and disciplined manifestation. Karakamsha in Capricorn indicates an ambitious soul building lasting structures.",
+        "career_direction": "Administration, government, construction, manufacturing, mining, organizational leadership, traditional professions, land management",
+        "spiritual_expression": "Structured spiritual practice, discipline-based sadhana, Saturn worship, service to elders and the underprivileged. The native finds the divine through perseverance and duty.",
+        "relationship_approach": "Seeks a mature, responsible partner. Relationships are taken seriously with long-term commitment. Must guard against emotional coldness and overwork."
+      },
+      "aquarius": {
+        "soul_purpose": "The soul seeks humanitarian service, innovation, and transcendence of social boundaries. Karakamsha in Aquarius indicates a reformer soul working for collective betterment.",
+        "career_direction": "Technology, social reform, humanitarian organizations, scientific research, astrology, aviation, networking, group leadership",
+        "spiritual_expression": "Community-based spiritual practice, meditation groups, service to humanity as worship. The native finds the divine through universal love and scientific spirituality.",
+        "relationship_approach": "Values friendship and intellectual connection in partnership. Needs space for individual expression. Must guard against emotional detachment and unpredictability."
+      },
+      "pisces": {
+        "soul_purpose": "The soul seeks dissolution of ego, universal compassion, and spiritual liberation. Karakamsha in Pisces indicates a highly evolved soul nearing the end of its karmic journey.",
+        "career_direction": "Spiritual teaching, healthcare, art, music, film, foreign travel, charity work, psychic counseling, ashram management",
+        "spiritual_expression": "Deep meditation, Vishnu or Devi worship, dream work, intuitive practices. The native finds the divine through surrender, compassion, and mystical experience.",
+        "relationship_approach": "Seeks a spiritually compatible, compassionate partner. Love is idealized and devotional. Must guard against escapism, codependency, and boundary dissolution."
+      }
+    },
+    "planets_in_karakamsha": {
+      "sun": {
+        "interpretation": "Sun in the Karakamsha sign indicates the native will be involved in government service, politics, or positions of authority. The soul has a strong drive toward leadership and public recognition. Worship of Shiva or Surya is recommended for spiritual progress.",
+        "career_indication": "Government, administration, politics, medicine",
+        "spiritual_indication": "Surya upasana, Gayatri mantra, fire rituals"
+      },
+      "moon": {
+        "interpretation": "Moon in the Karakamsha sign makes the native compassionate, popular, and involved in public-facing roles. The soul seeks emotional fulfillment and service to the masses. Strong connection with mother and women in general.",
+        "career_indication": "Public service, healthcare, hospitality, shipping, textiles",
+        "spiritual_indication": "Devi worship, chanting, devotional music, water-based rituals"
+      },
+      "mars": {
+        "interpretation": "Mars in the Karakamsha sign creates a warrior soul with involvement in metallurgy, weapons, surgery, or law enforcement. The native has exceptional courage but must learn to control aggression. Kartikeya or Hanuman worship is indicated.",
+        "career_indication": "Military, surgery, engineering, sports, real estate, fire-related work",
+        "spiritual_indication": "Hanuman worship, physical austerities, martial arts as spiritual practice"
+      },
+      "mercury": {
+        "interpretation": "Mercury in the Karakamsha sign indicates a soul deeply involved in business, sculpture, arts, or intellectual pursuits. The native excels in communication and commerce. Knowledge of multiple subjects and skill in craftsmanship.",
+        "career_indication": "Business, writing, sculpting, accounting, astrology, trade",
+        "spiritual_indication": "Vishnu worship, mantra sadhana, scriptural study, intellectual discrimination"
+      },
+      "jupiter": {
+        "interpretation": "Jupiter in the Karakamsha sign is highly auspicious, indicating a soul devoted to Vedanta, philosophy, and spiritual teaching. The native becomes learned in scriptures, ethical, and respected as a guide. Strong dharmic orientation.",
+        "career_indication": "Teaching, priesthood, law, advisory roles, philosophy, publishing",
+        "spiritual_indication": "Vedantic study, guru lineage, Vishnu or Dakshinamurthy worship"
+      },
+      "venus": {
+        "interpretation": "Venus in the Karakamsha sign gives mastery in arts, music, poetry, and refined pleasures. The soul seeks beauty and sensual experience as a path to the divine. Political acumen and diplomatic skill are marked.",
+        "career_indication": "Arts, music, entertainment, fashion, luxury goods, diplomacy",
+        "spiritual_indication": "Lakshmi worship, devotional arts, mantra set to music, beauty as divine expression"
+      },
+      "saturn": {
+        "interpretation": "Saturn in the Karakamsha sign indicates a soul that must work through obstacles, delays, and hardship to achieve its purpose. Involvement in labor, mining, agriculture, or service to the underprivileged. Spiritual growth through discipline and suffering.",
+        "career_indication": "Mining, agriculture, labor management, iron work, oil, government service",
+        "spiritual_indication": "Shani worship, service to the poor, discipline-based sadhana, Saturday fasting"
+      },
+      "rahu": {
+        "interpretation": "Rahu in the Karakamsha sign indicates involvement with foreign cultures, unconventional professions, technology, or outcaste communities. The soul is drawn to break social norms and explore forbidden knowledge. Risk of snake-related fears or poison.",
+        "career_indication": "Foreign trade, technology, research, aviation, unconventional professions",
+        "spiritual_indication": "Durga worship, Sarpa Dosha remedies, Rahu-specific mantras, protection rituals"
+      },
+      "ketu": {
+        "interpretation": "Ketu in the Karakamsha sign gives strong spiritual inclinations, psychic abilities, and interest in moksha. The native may have connections with elephant symbolism (Ganesha) per Jaimini Sutras. Tendency toward renunciation and isolation.",
+        "career_indication": "Spiritual teaching, research, occult sciences, healing, charity work",
+        "spiritual_indication": "Ganesha worship, meditation, Vipassana, seeking moksha, pilgrimage"
+      }
+    },
+    "planets_aspecting_karakamsha": {
+      "sun": {
+        "interpretation": "Sun aspecting the Karakamsha gives government favor, noble character, and involvement with authority figures. The native gains recognition and may serve in administrative capacities. Father plays a significant role in soul development.",
+        "effect_area": "Authority, government connection, dharmic leadership"
+      },
+      "moon": {
+        "interpretation": "Moon aspecting the Karakamsha gives popular appeal, compassion, and success in public-facing roles. The native is emotionally attuned and gains through women, water-related ventures, and public service. Mother is karmically significant.",
+        "effect_area": "Public popularity, emotional intelligence, nurturing roles"
+      },
+      "mars": {
+        "interpretation": "Mars aspecting the Karakamsha gives courage, determination, and ability to overcome enemies. The native may work with metals, fire, or engineering. There can be a tendency toward disputes that must be channeled into righteous protection.",
+        "effect_area": "Courage, conflict resolution, technical skill, property matters"
+      },
+      "mercury": {
+        "interpretation": "Mercury aspecting the Karakamsha gives intellectual brilliance, commercial success, and skill in communication arts. The native excels in multiple disciplines and has natural talent for negotiation and writing. Good for astrology.",
+        "effect_area": "Intellect, communication, commerce, education"
+      },
+      "jupiter": {
+        "interpretation": "Jupiter aspecting the Karakamsha is the most beneficial aspect, conferring deep knowledge, dharmic orientation, and spiritual progress. The native is blessed with wisdom, good counsel ability, and the capacity to uplift others.",
+        "effect_area": "Wisdom, spiritual growth, dharmic protection, teaching"
+      },
+      "venus": {
+        "interpretation": "Venus aspecting the Karakamsha gives artistic talent, relationship harmony, and material comfort. The native has refined taste, diplomatic skill, and gains through luxury goods or entertainment. Strong marital indications.",
+        "effect_area": "Art, relationships, luxury, diplomacy, marital happiness"
+      },
+      "saturn": {
+        "interpretation": "Saturn aspecting the Karakamsha gives long-term discipline, structural achievements, and karmic lessons through hardship. The native builds slowly but solidly. Service orientation and association with the working class.",
+        "effect_area": "Discipline, longevity, service, structural achievement"
+      },
+      "rahu": {
+        "interpretation": "Rahu aspecting the Karakamsha creates fascination with foreign cultures, technology, and unconventional paths. The native may live abroad or work in cutting-edge fields. Potential for deception or illusion that must be navigated carefully.",
+        "effect_area": "Foreign connection, technology, unconventional success, illusion"
+      },
+      "ketu": {
+        "interpretation": "Ketu aspecting the Karakamsha gives spiritual detachment, psychic sensitivity, and interest in liberation. The native has past-life spiritual skills that surface in this life. May experience sudden insights or inexplicable knowledge.",
+        "effect_area": "Spiritual insight, psychic ability, detachment, moksha orientation"
+      }
+    },
+    "ishta_devata_by_planet": {
+      "sun": {
+        "deity": "Shiva or Surya",
+        "worship_practice": "Surya Namaskar at sunrise, offering water to Sun (Arghya), reciting Aditya Hridayam. Visit Surya temples on Sundays.",
+        "mantra": "Om Hram Hreem Hroum Sah Suryaya Namaha",
+        "significance": "The Sun as 12th lord from Karakamsha indicates Shiva or Surya as the Ishta Devata. The soul finds liberation through cultivating self-luminous awareness and surrendering ego to the cosmic Self."
+      },
+      "moon": {
+        "deity": "Parvati or Durga",
+        "worship_practice": "Monday fasting, offering milk and white flowers, chanting Lalita Sahasranama. Visit Devi temples during Navaratri.",
+        "mantra": "Om Aim Hreem Kleem Chamundaye Viche",
+        "significance": "The Moon as 12th lord from Karakamsha indicates the Divine Mother as Ishta Devata. The soul finds liberation through emotional devotion, compassion, and surrender to the nurturing cosmic mother principle."
+      },
+      "mars": {
+        "deity": "Kartikeya or Hanuman",
+        "worship_practice": "Tuesday fasting, Hanuman Chalisa recitation, offering red flowers and sindoor. Physical disciplines like martial arts as devotion.",
+        "mantra": "Om Kram Kreem Kroum Sah Bhaumaya Namaha",
+        "significance": "Mars as 12th lord from Karakamsha indicates warrior deities as Ishta Devata. The soul finds liberation through courage, righteous action, celibacy (brahmacharya), and protecting dharma."
+      },
+      "mercury": {
+        "deity": "Vishnu or Krishna",
+        "worship_practice": "Wednesday worship, Vishnu Sahasranama recitation, offering Tulsi leaves and yellow flowers. Scriptural study as devotion.",
+        "mantra": "Om Bram Breem Broum Sah Budhaya Namaha",
+        "significance": "Mercury as 12th lord from Karakamsha indicates Vishnu as Ishta Devata. The soul finds liberation through discriminative knowledge, understanding divine play (Leela), and seeing the divine in intellectual pursuit."
+      },
+      "jupiter": {
+        "deity": "Vishnu or Dakshinamurthy",
+        "worship_practice": "Thursday fasting, Guru Gita recitation, offering yellow flowers and turmeric. Serving one's guru and teaching others.",
+        "mantra": "Om Gram Greem Groum Sah Gurave Namaha",
+        "significance": "Jupiter as 12th lord from Karakamsha indicates the Guru principle as Ishta Devata. The soul finds liberation through wisdom, devotion to guru, and teaching dharma to uplift others."
+      },
+      "venus": {
+        "deity": "Lakshmi or Mahalakshmi",
+        "worship_practice": "Friday worship, Lakshmi Ashtottara, offering lotus flowers and sweets. Devotion through beauty, art, and gratitude.",
+        "mantra": "Om Dram Dreem Droum Sah Shukraya Namaha",
+        "significance": "Venus as 12th lord from Karakamsha indicates Lakshmi as Ishta Devata. The soul finds liberation through devotion expressed as beauty, sacred arts, and transforming sensual appreciation into divine love."
+      },
+      "saturn": {
+        "deity": "Shani Dev or Hanuman",
+        "worship_practice": "Saturday fasting, Shani Stotra recitation, offering sesame oil and black items. Service to the poor and elderly.",
+        "mantra": "Om Pram Preem Proum Sah Shanaischaraya Namaha",
+        "significance": "Saturn as 12th lord from Karakamsha indicates Shani or Hanuman as Ishta Devata. The soul finds liberation through discipline, endurance, service to suffering beings, and accepting karmic lessons with grace."
+      },
+      "rahu": {
+        "deity": "Durga or Saraswati",
+        "worship_practice": "Durga Saptashati recitation, offering blue flowers, Saturday evening worship. Protection rituals and Sarpa Dosha remedies.",
+        "mantra": "Om Bhram Bhreem Bhroum Sah Rahave Namaha",
+        "significance": "Rahu as 12th lord from Karakamsha indicates Durga as Ishta Devata. The soul finds liberation through confronting illusions, transcending worldly obsessions, and seeking divine protection through fierce devotion."
+      },
+      "ketu": {
+        "deity": "Ganesha or Matsya",
+        "worship_practice": "Ganesha worship on Tuesdays and Chaturthi, offering durva grass and modaka. Meditation and Vipassana practice.",
+        "mantra": "Om Stram Streem Stroum Sah Ketave Namaha",
+        "significance": "Ketu as 12th lord from Karakamsha indicates Ganesha as Ishta Devata per Jaimini Sutras. The soul finds liberation through removing obstacles to spiritual growth, deep meditation, and surrendering worldly attachments."
+      }
+    },
+    "ishta_devata_by_sign": {
+      "aries": {
+        "deity": "Rudra (Shiva in fierce form)",
+        "significance": "The 12th from Karakamsha in Aries indicates a fiery, transformative deity. Liberation through courage, austerity, and confronting fear directly."
+      },
+      "taurus": {
+        "deity": "Lakshmi-Narayana",
+        "significance": "The 12th from Karakamsha in Taurus indicates a benevolent, nurturing deity. Liberation through devotion to the divine couple, gratitude, and sacred beauty."
+      },
+      "gemini": {
+        "deity": "Saraswati or Vishnu",
+        "significance": "The 12th from Karakamsha in Gemini indicates a deity of knowledge. Liberation through sacred learning, mantra, and communication of divine truth."
+      },
+      "cancer": {
+        "deity": "Parvati or Chandi",
+        "significance": "The 12th from Karakamsha in Cancer indicates the cosmic mother. Liberation through emotional devotion, nurturing all beings, and surrender to the protective divine feminine."
+      },
+      "leo": {
+        "deity": "Surya-Narayana or Shiva",
+        "significance": "The 12th from Karakamsha in Leo indicates a solar, regal deity. Liberation through cultivating self-luminous awareness, noble conduct, and dharmic leadership."
+      },
+      "virgo": {
+        "deity": "Vishnu or Narasimha",
+        "significance": "The 12th from Karakamsha in Virgo indicates a detailed, protective deity. Liberation through meticulous devotion, service, and analytical spiritual practice."
+      },
+      "libra": {
+        "deity": "Radha-Krishna or Lakshmi",
+        "significance": "The 12th from Karakamsha in Libra indicates a deity of divine love and harmony. Liberation through balanced devotion, sacred relationships, and artistic worship."
+      },
+      "scorpio": {
+        "deity": "Kali or Bhairava",
+        "significance": "The 12th from Karakamsha in Scorpio indicates a fierce transformative deity. Liberation through intense sadhana, Kundalini awakening, and radical ego dissolution."
+      },
+      "sagittarius": {
+        "deity": "Dakshinamurthy or Brihaspati",
+        "significance": "The 12th from Karakamsha in Sagittarius indicates the cosmic teacher. Liberation through guru devotion, philosophical inquiry, and sharing dharmic wisdom."
+      },
+      "capricorn": {
+        "deity": "Hanuman or Shani Dev",
+        "significance": "The 12th from Karakamsha in Capricorn indicates a deity of discipline and service. Liberation through karma yoga, serving the underprivileged, and patient endurance."
+      },
+      "aquarius": {
+        "deity": "Shiva (Nataraja) or Varuna",
+        "significance": "The 12th from Karakamsha in Aquarius indicates an unconventional, cosmic deity. Liberation through meditation on the cosmic dance, humanitarian service, and transcending social conditioning."
+      },
+      "pisces": {
+        "deity": "Vishnu (Matsya/Narayana) or Devi",
+        "significance": "The 12th from Karakamsha in Pisces indicates the highest devotional deity. Liberation through complete surrender, mystical experience, and dissolving the self into the ocean of divine consciousness."
+      }
+    }
+  }
+}

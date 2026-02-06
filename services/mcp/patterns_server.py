@@ -1356,6 +1356,185 @@ def navamsha_spouse_analysis(
         return {"error": str(e), "type": type(e).__name__, "success": False}
 
 
+@mcp.tool()
+def synastry_analysis(
+    native_planets: dict[str, dict[str, Any]],
+    native_cusps: list[float],
+    partner_planets: dict[str, dict[str, Any]],
+    partner_cusps: list[float],
+    native_ascendant: float,
+    partner_ascendant: float,
+    native_moon_nakshatra: int = 1,
+    partner_moon_nakshatra: int = 1,
+) -> dict[str, Any]:
+    """
+    Analyze relationship compatibility through synastry (chart overlay).
+
+    Goes beyond Ashta Kuta by overlaying two charts, analyzing cross-chart
+    aspects, and computing a composite midpoint chart.
+
+    Args:
+        native_planets: First person's planets {name: {longitude, rashi, house, ...}}
+        native_cusps: First person's 12 house cusps as longitude list
+        partner_planets: Second person's planets (same format)
+        partner_cusps: Second person's 12 house cusps
+        native_ascendant: First person's ascendant longitude
+        partner_ascendant: Second person's ascendant longitude
+        native_moon_nakshatra: First person's Moon nakshatra index (1-27)
+        partner_moon_nakshatra: Second person's Moon nakshatra index (1-27)
+
+    Returns:
+        Full synastry report with house overlays, cross aspects,
+        composite chart, and compatibility summary
+
+    Example:
+        synastry_analysis(
+            {"sun": {"longitude": 240.5, "rashi": "scorpio", "house": 1}},
+            [210.0, 240.0, 270.0, 300.0, 330.0, 0.0, 30.0, 60.0, 90.0, 120.0, 150.0, 180.0],
+            {"sun": {"longitude": 60.0, "rashi": "gemini", "house": 7}},
+            [30.0, 60.0, 90.0, 120.0, 150.0, 180.0, 210.0, 240.0, 270.0, 300.0, 330.0, 0.0],
+            210.0, 30.0
+        )
+    """
+    try:
+        from packages.self.src.synastry import get_synastry_report
+
+        result = get_synastry_report(
+            native_planets=native_planets,
+            native_cusps=native_cusps,
+            partner_planets=partner_planets,
+            partner_cusps=partner_cusps,
+            native_ascendant=native_ascendant,
+            partner_ascendant=partner_ascendant,
+            native_moon_nakshatra=native_moon_nakshatra,
+            partner_moon_nakshatra=partner_moon_nakshatra,
+        )
+        return {"success": True, **result}
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__, "success": False}
+
+
+@mcp.tool()
+def gem_recommendation(
+    lagna_rashi: str,
+    planets: dict[str, dict[str, Any]],
+    shadbala: dict[str, Any] | None = None,
+    current_dasha: dict[str, Any] | None = None,
+    active_doshas: list[dict[str, Any]] | None = None,
+) -> dict[str, Any]:
+    """
+    Get personalized gemstone recommendations based on birth chart analysis.
+
+    Considers Lagna lord, functional benefics/malefics, current Dasha period,
+    active doshas, and Shadbala strength to prescribe safe gemstones.
+
+    Args:
+        lagna_rashi: Ascendant sign (lowercase, e.g., "libra")
+        planets: Birth chart planets with positions {name: {longitude, rashi, house, ...}}
+        shadbala: Optional Shadbala scores per planet
+        current_dasha: Optional current dasha info with mahadasha_lord, antardasha_lord keys
+        active_doshas: Optional list of active doshas, each with 'name' key
+
+    Returns:
+        Dictionary with primary_gem, supporting_gems, contraindicated gems,
+        and wearing instructions
+
+    Example:
+        gem_recommendation("libra", {"venus": {"longitude": 210.5, "rashi": "libra", "house": 1}})
+    """
+    try:
+        from packages.self.src.gem_recommender import recommend_gems
+
+        result = recommend_gems(
+            lagna_rashi=lagna_rashi,
+            planets=planets,
+            shadbala=shadbala,
+            current_dasha=current_dasha,
+            active_doshas=active_doshas,
+        )
+        return {"success": True, **result}
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__, "success": False}
+
+
+@mcp.tool()
+def atmakaraka_analysis(
+    planets: dict[str, dict[str, Any]],
+    lagna_rashi: str,
+    moon_rashi: str | None = None,
+    houses: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """
+    Comprehensive Atmakaraka (soul indicator) analysis using Jaimini system.
+
+    Identifies the Atmakaraka planet, analyzes its Karakamsha (D9 position),
+    determines the Ishta Devata (personal deity), and provides soul-purpose
+    guidance including career direction and spiritual path.
+
+    Args:
+        planets: Birth chart planets {name: {longitude, rashi, house, is_retrograde, ...}}
+        lagna_rashi: Ascendant sign (lowercase, e.g., "libra")
+        moon_rashi: Moon sign (optional, defaults to derived from planets)
+        houses: House cusps data (optional)
+
+    Returns:
+        Dictionary with atmakaraka planet, karakamsha analysis, soul_purpose,
+        ishta_devata, career direction, and spiritual path
+
+    Example:
+        atmakaraka_analysis(
+            {"saturn": {"longitude": 310.5, "rashi": "aquarius", "house": 5, "is_retrograde": True}},
+            "libra"
+        )
+    """
+    try:
+        from packages.self.src.jaimini import get_atmakaraka_analysis
+
+        chart = _build_chart_for_yoga(planets, lagna_rashi, moon_rashi, houses)
+        result = get_atmakaraka_analysis(chart)
+        return {"success": True, **result}
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__, "success": False}
+
+
+@mcp.tool()
+def check_gem_compatibility_tool(
+    gem_planet: str,
+    lagna_rashi: str,
+    planets: dict[str, dict[str, Any]],
+) -> dict[str, Any]:
+    """
+    Check if a specific gemstone is safe to wear for this birth chart.
+
+    Evaluates whether the planet's gem is a functional benefic or malefic
+    for the given ascendant, checks for contraindications, and returns
+    a safety assessment with warnings.
+
+    Args:
+        gem_planet: Planet whose gem to check (lowercase, e.g., "ruby" -> "sun")
+        lagna_rashi: Ascendant sign (lowercase, e.g., "libra")
+        planets: Birth chart planets with positions
+
+    Returns:
+        Dictionary with safe (bool), role, warnings, and recommendation
+
+    Example:
+        check_gem_compatibility_tool("saturn", "libra",
+            {"saturn": {"longitude": 310.5, "rashi": "aquarius", "house": 5}})
+    """
+    try:
+        from packages.self.src.gem_recommender import check_gem_compatibility
+
+        result = check_gem_compatibility(
+            gem_planet=gem_planet,
+            lagna_rashi=lagna_rashi,
+            planets=planets,
+        )
+        return {"success": True, **result}
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__, "success": False}
+
+
 # Helper functions
 
 

@@ -1371,6 +1371,348 @@ class AstrologyTools:
             return {"success": False, "error": str(e)}
 
     # ===================
+    # SESSION 22 METHODS
+    # ===================
+
+    def get_synastry_report(
+        self,
+        native_birth_dt: datetime,
+        native_lat: float,
+        native_lon: float,
+        partner_birth_dt: datetime,
+        partner_lat: float,
+        partner_lon: float,
+        ayanamsa: str = "lahiri",
+    ) -> dict[str, Any]:
+        """Generate a synastry (relationship compatibility) report.
+
+        Args:
+            native_birth_dt: First person's birth datetime
+            native_lat: First person's birth latitude
+            native_lon: First person's birth longitude
+            partner_birth_dt: Second person's birth datetime
+            partner_lat: Second person's birth latitude
+            partner_lon: Second person's birth longitude
+            ayanamsa: Ayanamsa system
+
+        Returns:
+            Full synastry report with house overlays, cross aspects, composite chart
+        """
+        try:
+            from packages.self.src.synastry import get_synastry_report as _synastry
+
+            native_chart = self.get_birth_chart(native_birth_dt, native_lat, native_lon, ayanamsa)
+            partner_chart = self.get_birth_chart(
+                partner_birth_dt, partner_lat, partner_lon, ayanamsa
+            )
+
+            native_planets = native_chart.get("planets", {})
+            partner_planets = partner_chart.get("planets", {})
+            native_cusps = native_chart.get("houses", {}).get("cusps", [i * 30 for i in range(12)])
+            partner_cusps = partner_chart.get("houses", {}).get(
+                "cusps", [i * 30 for i in range(12)]
+            )
+            native_asc = native_chart.get("houses", {}).get("ascendant", 0.0)
+            partner_asc = partner_chart.get("houses", {}).get("ascendant", 0.0)
+
+            native_moon_nak = 1
+            partner_moon_nak = 1
+            if "moon" in native_planets:
+                native_moon_nak = int((native_planets["moon"].get("longitude", 0) * 27) / 360) + 1
+            if "moon" in partner_planets:
+                partner_moon_nak = int((partner_planets["moon"].get("longitude", 0) * 27) / 360) + 1
+
+            result = _synastry(
+                native_planets=native_planets,
+                native_cusps=native_cusps,
+                partner_planets=partner_planets,
+                partner_cusps=partner_cusps,
+                native_ascendant=native_asc,
+                partner_ascendant=partner_asc,
+                native_moon_nakshatra=native_moon_nak,
+                partner_moon_nakshatra=partner_moon_nak,
+            )
+            return {"synastry": result, "success": True}
+        except Exception as e:
+            logger.error(f"Error getting synastry report: {e!s}")
+            return {"success": False, "error": str(e)}
+
+    def get_gem_recommendation(
+        self,
+        birth_datetime: datetime,
+        latitude: float,
+        longitude: float,
+        ayanamsa: str = "lahiri",
+        gem_planet: str | None = None,
+    ) -> dict[str, Any]:
+        """Get personalized gemstone recommendation.
+
+        Args:
+            birth_datetime: Birth datetime
+            latitude: Birth latitude
+            longitude: Birth longitude
+            ayanamsa: Ayanamsa system
+            gem_planet: Specific planet gem to check (None for full recommendation)
+
+        Returns:
+            Gem recommendation with primary gem, supporting gems, contraindications
+        """
+        try:
+            from packages.self.src.gem_recommender import (
+                check_gem_compatibility,
+                recommend_gems,
+            )
+
+            chart = self.get_birth_chart(birth_datetime, latitude, longitude, ayanamsa)
+            planets = chart.get("planets", {})
+            lagna_rashi = chart.get("lagna_rashi", "aries")
+
+            if gem_planet:
+                result = check_gem_compatibility(gem_planet, lagna_rashi, planets)
+            else:
+                result = recommend_gems(lagna_rashi, planets)
+
+            return {"gems": result, "success": True}
+        except Exception as e:
+            logger.error(f"Error getting gem recommendation: {e!s}")
+            return {"success": False, "error": str(e)}
+
+    def get_atmakaraka_analysis(
+        self,
+        birth_datetime: datetime,
+        latitude: float,
+        longitude: float,
+        ayanamsa: str = "lahiri",
+    ) -> dict[str, Any]:
+        """Get comprehensive Atmakaraka (soul indicator) analysis.
+
+        Args:
+            birth_datetime: Birth datetime
+            latitude: Birth latitude
+            longitude: Birth longitude
+            ayanamsa: Ayanamsa system
+
+        Returns:
+            Atmakaraka details, Karakamsha, Ishta Devata, soul purpose
+        """
+        try:
+            from packages.core.src import BirthChart, BirthData, HouseCusps, PlanetPosition
+            from packages.self.src.jaimini import get_atmakaraka_analysis as _ak_analysis
+
+            jd = get_julian_day(birth_datetime)
+            planets_raw = get_all_planets(jd, ayanamsa=ayanamsa)
+            houses_raw = get_house_cusps(jd, latitude, longitude, ayanamsa=ayanamsa)
+            lagna_idx = int(houses_raw["ascendant"] // 30)
+
+            sign_map = {
+                "aries": Rashi.ARIES,
+                "taurus": Rashi.TAURUS,
+                "gemini": Rashi.GEMINI,
+                "cancer": Rashi.CANCER,
+                "leo": Rashi.LEO,
+                "virgo": Rashi.VIRGO,
+                "libra": Rashi.LIBRA,
+                "scorpio": Rashi.SCORPIO,
+                "sagittarius": Rashi.SAGITTARIUS,
+                "capricorn": Rashi.CAPRICORN,
+                "aquarius": Rashi.AQUARIUS,
+                "pisces": Rashi.PISCES,
+            }
+            planet_map = {
+                "sun": Planet.SUN,
+                "moon": Planet.MOON,
+                "mars": Planet.MARS,
+                "mercury": Planet.MERCURY,
+                "jupiter": Planet.JUPITER,
+                "venus": Planet.VENUS,
+                "saturn": Planet.SATURN,
+                "rahu": Planet.RAHU,
+                "ketu": Planet.KETU,
+            }
+
+            planet_positions = {}
+            for pname, data in planets_raw.items():
+                pl = pname.lower()
+                if pl not in planet_map:
+                    continue
+                rashi_idx = int(data["longitude"] // 30)
+                house = ((rashi_idx - lagna_idx) % 12) + 1
+                planet_positions[planet_map[pl]] = PlanetPosition(
+                    planet=planet_map[pl],
+                    longitude=data["longitude"],
+                    latitude=data.get("latitude", 0.0),
+                    speed=data.get("speed", 0.0),
+                    rashi=sign_map.get(RASHI_NAMES[rashi_idx].lower(), Rashi.ARIES),
+                    rashi_degree=data["longitude"] % 30,
+                    nakshatra="ashwini",
+                    nakshatra_pada=1,
+                    nakshatra_lord=Planet.KETU,
+                    is_retrograde=data.get("is_retrograde", False),
+                    house=house,
+                )
+
+            house_cusps_obj = HouseCusps(
+                ascendant=houses_raw["ascendant"],
+                mc=houses_raw.get("mc", 0.0),
+                cusps=houses_raw["cusps"],
+            )
+            moon_rashi_idx = int(planets_raw["moon"]["longitude"] // 30)
+
+            chart = BirthChart(
+                user_id="guide_agent",
+                birth_data=BirthData(
+                    datetime_utc=birth_datetime,
+                    latitude=latitude,
+                    longitude=longitude,
+                    timezone="UTC",
+                ),
+                planets=planet_positions,
+                houses=house_cusps_obj,
+                lagna_rashi=sign_map.get(RASHI_NAMES[lagna_idx].lower(), Rashi.ARIES),
+                moon_rashi=sign_map.get(RASHI_NAMES[moon_rashi_idx].lower(), Rashi.ARIES),
+                moon_nakshatra="ashwini",
+                ayanamsa=23.85,
+                calculated_at=birth_datetime,
+            )
+
+            result = _ak_analysis(chart)
+            return {"atmakaraka": result, "success": True}
+        except Exception as e:
+            logger.error(f"Error getting atmakaraka analysis: {e!s}")
+            return {"success": False, "error": str(e)}
+
+    def get_daily_forecast(
+        self,
+        birth_datetime: datetime,
+        latitude: float,
+        longitude: float,
+        ayanamsa: str = "lahiri",
+        query_date: datetime | None = None,
+    ) -> dict[str, Any]:
+        """Generate a comprehensive daily forecast.
+
+        Args:
+            birth_datetime: Birth datetime
+            latitude: Birth latitude
+            longitude: Birth longitude
+            ayanamsa: Ayanamsa system
+            query_date: Date to forecast (defaults to today)
+
+        Returns:
+            Day rating, panchanga, transit aspects, recommendations
+        """
+        try:
+            from packages.context.src.daily_forecast import get_daily_forecast as _daily
+
+            chart = self.get_birth_chart(birth_datetime, latitude, longitude, ayanamsa)
+            planets = chart.get("planets", {})
+            moon_lon = planets.get("moon", {}).get("longitude", 0.0)
+            lagna_rashi = chart.get("lagna_rashi", "aries")
+
+            q_date_str = query_date.isoformat() if query_date else None
+            result = _daily(
+                birth_datetime=birth_datetime.isoformat(),
+                birth_lat=latitude,
+                birth_lon=longitude,
+                natal_planets=planets,
+                moon_longitude=moon_lon,
+                lagna_rashi=lagna_rashi,
+                query_date=q_date_str,
+            )
+            return {"forecast": result, "success": True}
+        except Exception as e:
+            logger.error(f"Error getting daily forecast: {e!s}")
+            return {"success": False, "error": str(e)}
+
+    def get_weekly_forecast(
+        self,
+        birth_datetime: datetime,
+        latitude: float,
+        longitude: float,
+        ayanamsa: str = "lahiri",
+        start_date: datetime | None = None,
+    ) -> dict[str, Any]:
+        """Generate a 7-day forecast with area-wise ratings.
+
+        Args:
+            birth_datetime: Birth datetime
+            latitude: Birth latitude
+            longitude: Birth longitude
+            ayanamsa: Ayanamsa system
+            start_date: Week start date (defaults to today)
+
+        Returns:
+            Weekly rating, daily forecasts, area ratings, key transits
+        """
+        try:
+            from packages.context.src.weekly_forecast import get_weekly_forecast as _weekly
+
+            chart = self.get_birth_chart(birth_datetime, latitude, longitude, ayanamsa)
+            planets = chart.get("planets", {})
+            moon_lon = planets.get("moon", {}).get("longitude", 0.0)
+            lagna_rashi = chart.get("lagna_rashi", "aries")
+
+            s_date_str = start_date.isoformat() if start_date else None
+            result = _weekly(
+                birth_datetime=birth_datetime.isoformat(),
+                birth_lat=latitude,
+                birth_lon=longitude,
+                natal_planets=planets,
+                moon_longitude=moon_lon,
+                lagna_rashi=lagna_rashi,
+                start_date=s_date_str,
+            )
+            return {"forecast": result, "success": True}
+        except Exception as e:
+            logger.error(f"Error getting weekly forecast: {e!s}")
+            return {"success": False, "error": str(e)}
+
+    def get_monthly_forecast(
+        self,
+        birth_datetime: datetime,
+        latitude: float,
+        longitude: float,
+        ayanamsa: str = "lahiri",
+        month: int | None = None,
+        year: int | None = None,
+    ) -> dict[str, Any]:
+        """Generate a month-long forecast with major transits and area analysis.
+
+        Args:
+            birth_datetime: Birth datetime
+            latitude: Birth latitude
+            longitude: Birth longitude
+            ayanamsa: Ayanamsa system
+            month: Month number (1-12, defaults to current)
+            year: Year (defaults to current)
+
+        Returns:
+            Monthly rating, major transits, area ratings, weekly summaries
+        """
+        try:
+            from packages.context.src.monthly_forecast import get_monthly_forecast as _monthly
+
+            chart = self.get_birth_chart(birth_datetime, latitude, longitude, ayanamsa)
+            planets = chart.get("planets", {})
+            moon_lon = planets.get("moon", {}).get("longitude", 0.0)
+            lagna_rashi = chart.get("lagna_rashi", "aries")
+
+            result = _monthly(
+                birth_datetime=birth_datetime.isoformat(),
+                birth_lat=latitude,
+                birth_lon=longitude,
+                natal_planets=planets,
+                moon_longitude=moon_lon,
+                lagna_rashi=lagna_rashi,
+                month=month,
+                year=year,
+            )
+            return {"forecast": result, "success": True}
+        except Exception as e:
+            logger.error(f"Error getting monthly forecast: {e!s}")
+            return {"success": False, "error": str(e)}
+
+    # ===================
     # UTILITY METHODS
     # ===================
 
@@ -1499,6 +1841,90 @@ def get_remedies(
     return get_tools().get_remedies(current_dasha, active_doshas, weak_planets, lagna_rashi)
 
 
+def get_synastry_report_fn(
+    native_birth_dt: datetime,
+    native_lat: float,
+    native_lon: float,
+    partner_birth_dt: datetime,
+    partner_lat: float,
+    partner_lon: float,
+    ayanamsa: str = "lahiri",
+) -> dict[str, Any]:
+    """Get synastry report."""
+    return get_tools().get_synastry_report(
+        native_birth_dt,
+        native_lat,
+        native_lon,
+        partner_birth_dt,
+        partner_lat,
+        partner_lon,
+        ayanamsa,
+    )
+
+
+def get_gem_recommendation(
+    birth_datetime: datetime,
+    latitude: float,
+    longitude: float,
+    ayanamsa: str = "lahiri",
+    gem_planet: str | None = None,
+) -> dict[str, Any]:
+    """Get gem recommendation."""
+    return get_tools().get_gem_recommendation(
+        birth_datetime, latitude, longitude, ayanamsa, gem_planet
+    )
+
+
+def get_atmakaraka_analysis(
+    birth_datetime: datetime, latitude: float, longitude: float, ayanamsa: str = "lahiri"
+) -> dict[str, Any]:
+    """Get atmakaraka analysis."""
+    return get_tools().get_atmakaraka_analysis(birth_datetime, latitude, longitude, ayanamsa)
+
+
+def get_daily_forecast(
+    birth_datetime: datetime,
+    latitude: float,
+    longitude: float,
+    ayanamsa: str = "lahiri",
+    query_date: datetime | None = None,
+) -> dict[str, Any]:
+    """Get daily forecast."""
+    return get_tools().get_daily_forecast(birth_datetime, latitude, longitude, ayanamsa, query_date)
+
+
+def get_weekly_forecast(
+    birth_datetime: datetime,
+    latitude: float,
+    longitude: float,
+    ayanamsa: str = "lahiri",
+    start_date: datetime | None = None,
+) -> dict[str, Any]:
+    """Get weekly forecast."""
+    return get_tools().get_weekly_forecast(
+        birth_datetime, latitude, longitude, ayanamsa, start_date
+    )
+
+
+def get_monthly_forecast(
+    birth_datetime: datetime,
+    latitude: float,
+    longitude: float,
+    ayanamsa: str = "lahiri",
+    month: int | None = None,
+    year: int | None = None,
+) -> dict[str, Any]:
+    """Get monthly forecast."""
+    return get_tools().get_monthly_forecast(
+        birth_datetime,
+        latitude,
+        longitude,
+        ayanamsa,
+        month,
+        year,
+    )
+
+
 __all__ = [
     "ActivityType",
     "AstrologyTools",
@@ -1507,13 +1933,19 @@ __all__ = [
     "check_yoga_cancellations",
     "detect_doshas",
     "detect_yogas",
+    "get_atmakaraka_analysis",
     "get_birth_chart",
     "get_current_positions",
+    "get_daily_forecast",
     "get_dasha_info",
     "get_dasha_transit_analysis",
+    "get_gem_recommendation",
+    "get_monthly_forecast",
     "get_remedies",
+    "get_synastry_report_fn",
     "get_today_panchanga",
     "get_tools",
     "get_transit_analysis",
     "get_upcoming_triggers",
+    "get_weekly_forecast",
 ]
