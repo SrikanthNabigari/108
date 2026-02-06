@@ -117,6 +117,42 @@ def get_ayanamsa(jd: float, system: str = "lahiri") -> float:
     return float(ayan)
 
 
+def _validate_jd(jd: float) -> None:
+    """Validate Julian Day number is in reasonable range.
+
+    Acceptable range corresponds to approximately 1000 CE to 3000 CE.
+    JD 2086302.5 ~ 1000-01-01, JD 2816788.5 ~ 3000-01-01.
+
+    Args:
+        jd: Julian Day number
+
+    Raises:
+        ValueError: If jd is outside the valid range
+    """
+    jd_min = 2086302.5  # ~1000 CE
+    jd_max = 2816788.5  # ~3000 CE
+    if not isinstance(jd, int | float) or jd < jd_min or jd > jd_max:
+        raise ValueError(
+            f"Julian Day must be between {jd_min} (~1000 CE) and {jd_max} (~3000 CE), got {jd}"
+        )
+
+
+def _validate_coordinates(latitude: float, longitude: float) -> None:
+    """Validate geographic coordinates.
+
+    Args:
+        latitude: Geographic latitude in degrees (-90 to 90)
+        longitude: Geographic longitude in degrees (-180 to 180)
+
+    Raises:
+        ValueError: If coordinates are out of range
+    """
+    if not isinstance(latitude, int | float) or latitude < -90 or latitude > 90:
+        raise ValueError(f"Latitude must be between -90 and 90, got {latitude}")
+    if not isinstance(longitude, int | float) or longitude < -180 or longitude > 180:
+        raise ValueError(f"Longitude must be between -180 and 180, got {longitude}")
+
+
 def get_planet_position(planet: str, jd: float, ayanamsa: float | None = None) -> dict[str, Any]:
     """Calculate sidereal (Vedic) position of a planet.
 
@@ -139,7 +175,7 @@ def get_planet_position(planet: str, jd: float, ayanamsa: float | None = None) -
             - "is_retrograde": Boolean indicating retrograde motion
 
     Raises:
-        ValueError: If planet name is not recognized
+        ValueError: If planet name is not recognized or jd is out of range
 
     Example:
         >>> pos = get_planet_position("sun", 2451545.0)
@@ -148,6 +184,7 @@ def get_planet_position(planet: str, jd: float, ayanamsa: float | None = None) -
         >>> pos["is_retrograde"]
         False
     """
+    _validate_jd(jd)
     planet_lower = planet.lower()
 
     # Handle Ketu specially (opposite to Rahu)
@@ -285,6 +322,9 @@ def get_house_cusps(
         >>> len(houses["cusps"])
         12
     """
+    _validate_jd(jd)
+    _validate_coordinates(latitude, longitude)
+
     # Validate and get house system code
     hsys_code = HOUSE_SYSTEM_MAP.get(house_system.lower())
     if hsys_code is None:

@@ -1,0 +1,869 @@
+{
+  "planet_in_house": {
+    "description": "Interpretations for each of 9 Vedic planets placed in each of 12 houses. 108 total combinations.",
+    "sun_in_house_1": {
+      "summary": "Strong personality, leadership, health vitality, self-confidence",
+      "positive": ["Natural authority and charisma", "Good health and constitution", "Strong self-confidence and identity", "Leadership abilities"],
+      "negative": ["Ego issues and domineering nature", "Can overshadow others", "Excessive pride", "Self-centered tendencies"],
+      "career": "Government, politics, leadership roles, administration",
+      "relationships": "Needs respect and admiration from partner; dominant in relationships",
+      "health": "Generally strong constitution, watch for heart and eyes"
+    },
+    "sun_in_house_2": {
+      "summary": "Wealth through authority, strong speech, family pride",
+      "positive": ["Wealth from government or authority", "Commanding speech", "Strong family values", "Good earning capacity"],
+      "negative": ["Harsh speech possible", "Family ego clashes", "Spending on status symbols", "Right eye issues"],
+      "career": "Banking, finance, government treasury, public speaking",
+      "relationships": "Values family status; partner should respect family traditions",
+      "health": "Watch for eye problems (especially right eye), dental issues"
+    },
+    "sun_in_house_3": {
+      "summary": "Courageous, strong communication, adventurous spirit",
+      "positive": ["Brave and courageous", "Good communication skills", "Success through self-effort", "Good relations with siblings"],
+      "negative": ["Overbearing with siblings", "Restless nature", "May dominate younger ones", "Ego in communication"],
+      "career": "Writing, media, communications, short-distance travel, sales",
+      "relationships": "Confident communicator in relationships; adventurous partner",
+      "health": "Strong arms and shoulders; watch for right ear issues"
+    },
+    "sun_in_house_4": {
+      "summary": "Interest in property, emotional depth, mother's influence",
+      "positive": ["Property and land ownership", "Emotional strength", "Government property benefits", "Love of homeland"],
+      "negative": ["Strained relation with mother", "Domestic ego clashes", "Heart feels restricted", "May not feel at home"],
+      "career": "Real estate, government land departments, interior design, politics",
+      "relationships": "Needs emotional security; home-centered relationship",
+      "health": "Heart health important; chest area sensitive"
+    },
+    "sun_in_house_5": {
+      "summary": "Creative intelligence, children, romance, spiritual inclination",
+      "positive": ["High intelligence and creativity", "Good with children", "Romantic nature", "Past-life merit", "Spiritual inclination"],
+      "negative": ["Ego in romance", "Fewer children possible", "Speculative losses if afflicted", "Pride in intellect"],
+      "career": "Education, entertainment, politics, creative arts, speculation",
+      "relationships": "Romantic and expressive; seeks admiration in love",
+      "health": "Stomach issues possible; generally good vitality"
+    },
+    "sun_in_house_6": {
+      "summary": "Victory over enemies, service orientation, health consciousness",
+      "positive": ["Defeats enemies and competitors", "Good in service roles", "Health-conscious", "Success in litigation"],
+      "negative": ["Health issues if afflicted", "Conflicts with subordinates", "Digestive problems", "Ego in workplace"],
+      "career": "Medical field, law, military, civil service, competitive fields",
+      "relationships": "May attract conflicts; needs to manage ego in daily interactions",
+      "health": "Digestive system sensitive; bones and joints need care"
+    },
+    "sun_in_house_7": {
+      "summary": "Strong partnerships, public life, dominant spouse",
+      "positive": ["Strong business partnerships", "Public recognition", "Spouse from good family", "Good negotiation skills"],
+      "negative": ["Ego clashes in marriage", "Dominating partner", "Late marriage possible", "Partnership conflicts"],
+      "career": "Business partnerships, law, diplomacy, public relations",
+      "relationships": "Seeks respect in marriage; partner may be authoritative; needs balance of power",
+      "health": "Lower abdomen issues; partner's health may need attention"
+    },
+    "sun_in_house_8": {
+      "summary": "Transformation, occult interest, longevity challenges",
+      "positive": ["Interest in occult and mysteries", "Inheritance possible", "Transformative experiences", "Research ability"],
+      "negative": ["Health challenges", "Ego death experiences", "Strained relation with father", "Eye problems"],
+      "career": "Research, insurance, occult sciences, surgery, investigation",
+      "relationships": "Intense and transformative relationships; deep bonding or deep conflicts",
+      "health": "Heart and eye issues; chronic conditions possible; watch vitality"
+    },
+    "sun_in_house_9": {
+      "summary": "Fortunate, spiritual, father's blessings, dharmic life",
+      "positive": ["Great fortune and luck", "Spiritual inclination", "Good father relationship", "Higher education success", "Travel abroad"],
+      "negative": ["Rigid religious views", "Father may be dominating", "Dogmatic thinking", "Preachiness"],
+      "career": "Teaching, law, religion, philosophy, international affairs",
+      "relationships": "Seeks a partner who shares spiritual and philosophical values",
+      "health": "Generally good; thigh area may need attention"
+    },
+    "sun_in_house_10": {
+      "summary": "Career success, authority, fame, government favor",
+      "positive": ["Powerful career", "Government favor", "Authority and status", "Fame and recognition", "Strong public image"],
+      "negative": ["Workaholic tendencies", "Ego in profession", "Pressure of expectations", "Burnout risk"],
+      "career": "Government, administration, politics, CEO, authority positions",
+      "relationships": "Career may dominate personal life; needs partner who supports ambition",
+      "health": "Knee issues possible; stress-related conditions"
+    },
+    "sun_in_house_11": {
+      "summary": "Gains through authority, influential friends, fulfilled desires",
+      "positive": ["Good income and gains", "Influential social circle", "Desires fulfilled", "Older sibling support"],
+      "negative": ["Ego with friends", "Materialistic desires", "Selective friendships", "Expectations from social circle"],
+      "career": "Networking, large organizations, government enterprises, social causes",
+      "relationships": "Social and influential partner; friendship is key in relationships",
+      "health": "Generally good; left ear and calves may need attention"
+    },
+    "sun_in_house_12": {
+      "summary": "Spiritual growth, foreign connections, expenditure on authority",
+      "positive": ["Spiritual awakening", "Foreign connections", "Government work abroad", "Liberation-oriented"],
+      "negative": ["Father may be distant", "Eye problems", "High expenditure", "Feeling of isolation"],
+      "career": "Foreign service, hospitals, ashrams, spiritual institutions, behind-the-scenes work",
+      "relationships": "Partner may be from foreign land; need for solitude in relationship",
+      "health": "Left eye issues; sleep problems; feet sensitivity"
+    },
+    "moon_in_house_1": {
+      "summary": "Emotional, attractive, popular, fluctuating mind",
+      "positive": ["Attractive appearance", "Popular and well-liked", "Emotionally intuitive", "Good public image"],
+      "negative": ["Fluctuating mind", "Overly emotional", "Mood swings", "Need for constant validation"],
+      "career": "Public-facing roles, hospitality, nursing, counseling, travel",
+      "relationships": "Deeply emotional in relationships; needs nurturing partner",
+      "health": "Generally good if Moon is strong; watch for fluid retention, mental health"
+    },
+    "moon_in_house_2": {
+      "summary": "Wealthy, sweet speech, family-oriented, food lover",
+      "positive": ["Good wealth accumulation", "Sweet and pleasant speech", "Strong family bonds", "Love of good food"],
+      "negative": ["Emotional spending", "Attachment to possessions", "Moody speech", "Weight gain tendency"],
+      "career": "Food industry, hotel management, banking, singing, family business",
+      "relationships": "Family is central; partner must fit into family dynamics",
+      "health": "Face and mouth area; left eye; tendency toward weight fluctuation"
+    },
+    "moon_in_house_3": {
+      "summary": "Imaginative communication, artistic siblings, short travel",
+      "positive": ["Creative communication", "Artistic talent", "Frequent short travels", "Good imagination"],
+      "negative": ["Emotional restlessness", "Changeable interests", "Moody communication", "Sibling emotional issues"],
+      "career": "Writing, blogging, journalism, acting, travel industry",
+      "relationships": "Communicative and expressive in love; needs mental stimulation",
+      "health": "Arms, hands, nervous system; breathing issues if afflicted"
+    },
+    "moon_in_house_4": {
+      "summary": "Happy home life, close to mother, property owner, emotional depth",
+      "positive": ["Excellent for domestic happiness", "Strong mother relationship", "Property acquisition", "Emotional contentment"],
+      "negative": ["Over-attachment to mother", "Emotional dependency", "Reluctance to leave home", "Mood-based decisions"],
+      "career": "Real estate, interior design, agriculture, hospitality, psychology",
+      "relationships": "Home-loving partner; emotional security is paramount",
+      "health": "Chest, lungs, breast area; emotional health tied to home environment"
+    },
+    "moon_in_house_5": {
+      "summary": "Creative, romantic, good with children, emotional intelligence",
+      "positive": ["High emotional intelligence", "Creative talents", "Romantic nature", "Love of children", "Good memory"],
+      "negative": ["Emotional attachments in romance", "Over-investment in children", "Speculative tendencies", "Heart on sleeve"],
+      "career": "Entertainment, childcare, education, arts, romance-related fields",
+      "relationships": "Deeply romantic; falls in love easily; seeks emotional depth",
+      "health": "Stomach, emotional eating; pregnancy-related (for women)"
+    },
+    "moon_in_house_6": {
+      "summary": "Service-minded, health fluctuations, emotional conflicts",
+      "positive": ["Service orientation", "Can handle public health roles", "Emotional resilience through challenges", "Maternal care in service"],
+      "negative": ["Health fluctuations", "Emotional enemies", "Digestive issues", "Workplace emotional stress"],
+      "career": "Healthcare, nursing, social work, food service, pet care",
+      "relationships": "May attract emotional conflicts; needs to manage stress in relationships",
+      "health": "Digestive issues, fluid imbalance, stress-related ailments"
+    },
+    "moon_in_house_7": {
+      "summary": "Strong partnerships, attractive spouse, public appeal",
+      "positive": ["Attractive and caring spouse", "Good public relations", "Business acumen", "Popular in society"],
+      "negative": ["Emotional dependency on partner", "Multiple relationships possible", "Partner may be moody", "Co-dependency"],
+      "career": "Partnership business, counseling, public relations, fashion",
+      "relationships": "Marriage is central to life; partner is nurturing; emotional bonding essential",
+      "health": "Reproductive system, lower abdomen, partner's health influences own"
+    },
+    "moon_in_house_8": {
+      "summary": "Emotional intensity, psychic abilities, transformation through feelings",
+      "positive": ["Psychic and intuitive abilities", "Research-oriented mind", "Deep emotional transformation", "Inheritance from mother's side"],
+      "negative": ["Emotional upheavals", "Anxiety and fear", "Hidden emotional trauma", "Obsessive tendencies"],
+      "career": "Psychology, occult, research, insurance, inheritance management",
+      "relationships": "Intense emotional bonds; fear of loss in relationships",
+      "health": "Reproductive health, chronic emotional conditions, anxiety"
+    },
+    "moon_in_house_9": {
+      "summary": "Spiritually inclined, fortunate, philosophical emotions",
+      "positive": ["Emotional wisdom", "Spiritual sensitivity", "Fortune from mother", "Love of travel and learning"],
+      "negative": ["Emotional attachment to beliefs", "Religious sentimentality", "Restless spiritual seeking", "Mother-guru conflicts"],
+      "career": "Teaching, travel, publishing, spiritual counseling, maritime",
+      "relationships": "Seeks philosophical partner; emotional connection to higher purpose",
+      "health": "Generally good; watch for liver and hip area"
+    },
+    "moon_in_house_10": {
+      "summary": "Public popularity, career fluctuations, emotional profession",
+      "positive": ["Public popularity", "Career in public domain", "Recognition from masses", "Nurturing leadership"],
+      "negative": ["Career mood swings", "Public emotional display", "Fluctuating professional reputation", "Work-life imbalance"],
+      "career": "Public service, politics, hospitality, nursing, social media",
+      "relationships": "Career visibility affects relationships; partner supports public image",
+      "health": "Knees, joints; stress from public life"
+    },
+    "moon_in_house_11": {
+      "summary": "Fulfilled desires, many friends, emotional gains",
+      "positive": ["Desires fulfilled", "Many friends and social connections", "Emotional support network", "Good income"],
+      "negative": ["Emotional expectations from friends", "Changeable social circle", "Desire-driven life", "Emotional spending"],
+      "career": "Social organizations, networking, large corporations, charity",
+      "relationships": "Friendship transforms into love; social circle influences relationship",
+      "health": "Left ear, calves; generally good emotional health"
+    },
+    "moon_in_house_12": {
+      "summary": "Spiritual, foreign connections, emotional seclusion, vivid dreams",
+      "positive": ["Strong spiritual inclination", "Vivid intuition and dreams", "Foreign travel", "Compassionate nature"],
+      "negative": ["Emotional isolation", "Sleep disturbances", "Hidden sorrows", "Expenditure on emotional needs"],
+      "career": "Spiritual work, hospitals, foreign countries, charity, behind-the-scenes",
+      "relationships": "Needs solitude; partner may be from foreign land; inner emotional world is rich",
+      "health": "Sleep disorders, feet problems, mental health needs attention"
+    },
+    "mars_in_house_1": {
+      "summary": "Courageous, athletic, aggressive, strong physical presence",
+      "positive": ["Physical strength and courage", "Athletic ability", "Leadership through action", "Pioneering spirit"],
+      "negative": ["Aggressive temperament", "Prone to accidents", "Scars on head/face", "Impulsive actions"],
+      "career": "Military, police, sports, surgery, engineering, entrepreneurship",
+      "relationships": "Mangal Dosha when in 1st house; passionate but potentially combative partner",
+      "health": "Head injuries, blood pressure, fevers, inflammation"
+    },
+    "mars_in_house_2": {
+      "summary": "Harsh speech, wealth through effort, family conflicts",
+      "positive": ["Wealth through hard work", "Strong earning ability", "Direct and honest speech", "Financial courage"],
+      "negative": ["Harsh and cutting speech", "Family quarrels", "Impulsive spending", "Food-related issues"],
+      "career": "Banking, military finance, real estate, food industry",
+      "relationships": "Mangal Dosha; speech can hurt partner; needs to control aggression in family",
+      "health": "Dental issues, face injuries, blood disorders"
+    },
+    "mars_in_house_3": {
+      "summary": "Extremely courageous, dynamic siblings, quick communicator",
+      "positive": ["Exceptional courage", "Strong willpower", "Energetic communication", "Good with hands and tools"],
+      "negative": ["Conflicts with siblings", "Aggressive communication", "Risk-taking behavior", "Accidents during travel"],
+      "career": "Military, sports, technical writing, mechanical engineering, martial arts",
+      "relationships": "Assertive communicator; passionate expression of love",
+      "health": "Arms, hands, shoulders; right ear; cuts and burns"
+    },
+    "mars_in_house_4": {
+      "summary": "Property through effort, domestic tensions, strong foundation",
+      "positive": ["Property acquisition", "Land and vehicle ownership", "Strong domestic foundation", "Protective of home"],
+      "negative": ["Domestic conflicts", "Strained mother relationship", "Property disputes", "Restless at home"],
+      "career": "Real estate, construction, mining, fire department, home renovation",
+      "relationships": "Mangal Dosha; home can be battlefield; needs peaceful domestic environment",
+      "health": "Chest, heart area, blood pressure"
+    },
+    "mars_in_house_5": {
+      "summary": "Sharp intellect, competitive children, speculative courage",
+      "positive": ["Sharp analytical mind", "Competitive intelligence", "Courageous children", "Strategic thinking"],
+      "negative": ["Impulsive decisions", "Speculative losses", "Conflicts with children", "Ego in romance"],
+      "career": "Sports coaching, military strategy, surgery, stock trading",
+      "relationships": "Passionate romance; intensity in love can overwhelm partners",
+      "health": "Stomach, upper back; accidents; surgical interventions"
+    },
+    "mars_in_house_6": {
+      "summary": "Victory over enemies, excellent health, competitive success",
+      "positive": ["Defeats all enemies", "Excellent physical health", "Success in competition", "Good in service"],
+      "negative": ["Workplace aggression", "Accident-prone with machinery", "Blood disorders if afflicted", "Combative with colleagues"],
+      "career": "Military, police, surgery, competitive sports, law enforcement",
+      "relationships": "Strong protector in relationships; can be overly controlling",
+      "health": "Generally robust; watch for injuries, inflammation, blood issues"
+    },
+    "mars_in_house_7": {
+      "summary": "Passionate partnerships, spouse with energy, business drive",
+      "positive": ["Dynamic business partnerships", "Passionate marriage", "Assertive spouse", "Good negotiator"],
+      "negative": ["Mangal Dosha - marital conflicts", "Aggressive spouse", "Partnership disputes", "Multiple relationships"],
+      "career": "Business partnerships, law, sports management, martial arts instruction",
+      "relationships": "Mangal Dosha primary placement; spouse is energetic but conflicts likely; remedies important",
+      "health": "Reproductive system, lower abdomen, UTI risk"
+    },
+    "mars_in_house_8": {
+      "summary": "Occult power, transformation, accident-prone, inheritance",
+      "positive": ["Occult and mystical abilities", "Research prowess", "Inheritance", "Transformation capacity"],
+      "negative": ["Mangal Dosha", "Accident-prone", "Surgical interventions", "Violent tendencies if afflicted"],
+      "career": "Surgery, forensics, occult, mining, insurance, military intelligence",
+      "relationships": "Mangal Dosha; intense physical passion; danger of violence in relationships",
+      "health": "Accidents, surgery, piles, reproductive issues, chronic inflammation"
+    },
+    "mars_in_house_9": {
+      "summary": "Righteous warrior, conflict with guru, adventurous travel",
+      "positive": ["Courageous in dharma", "Adventurous travel", "Fighting for principles", "Physical activity related to faith"],
+      "negative": ["Conflict with father/guru", "Aggressive religious views", "Legal battles", "Dogmatic fighting"],
+      "career": "Military, law, adventure travel, sports abroad, religious debate",
+      "relationships": "Seeks an independent and adventurous partner",
+      "health": "Thigh injuries, hip problems, liver heat"
+    },
+    "mars_in_house_10": {
+      "summary": "Powerful career, leadership, authority through action",
+      "positive": ["Powerful and dynamic career", "Leadership abilities", "Authority through competence", "Professional courage"],
+      "negative": ["Workplace conflicts", "Aggressive boss or employee", "Career through force", "Power struggles"],
+      "career": "Military leadership, police, surgery, engineering management, sports",
+      "relationships": "Career-dominant; partner must accept intense professional life",
+      "health": "Knee injuries, bone issues, work-related accidents"
+    },
+    "mars_in_house_11": {
+      "summary": "Gains through courage, influential network, ambitious desires",
+      "positive": ["Gains through competition", "Ambitious friend circle", "Desires fulfilled through effort", "Good income"],
+      "negative": ["Aggressive friends", "Conflicts in social groups", "Impulsive desires", "Elder sibling conflicts"],
+      "career": "Military organizations, sports clubs, engineering firms, technical groups",
+      "relationships": "Passionate friendships that lead to romance; competitive social life",
+      "health": "Left ear, calves; sports injuries"
+    },
+    "mars_in_house_12": {
+      "summary": "Hidden enemies, foreign lands, spiritual warrior, expenditure",
+      "positive": ["Spiritual warrior energy", "Success in foreign lands", "Hospital/medical work", "Occult abilities"],
+      "negative": ["Mangal Dosha", "Hidden enemies", "Wasteful expenditure", "Sleep disturbances", "Anger management issues"],
+      "career": "Foreign military, hospital surgery, spiritual institutions, detention facilities",
+      "relationships": "Mangal Dosha; bed pleasures or bed conflicts; sexual issues possible",
+      "health": "Feet injuries, sleep disorders, hidden infections"
+    },
+    "mercury_in_house_1": {
+      "summary": "Intelligent, youthful appearance, eloquent speaker",
+      "positive": ["High intelligence and wit", "Youthful and attractive", "Excellent communication", "Quick learner"],
+      "negative": ["Overthinking", "Nervous energy", "Indecisive at times", "Restless mind"],
+      "career": "Writing, teaching, communication, business, accountancy",
+      "relationships": "Seeks intellectual partner; communication is the foundation of love",
+      "health": "Nervous system, skin disorders, speech issues if afflicted"
+    },
+    "mercury_in_house_2": {
+      "summary": "Clever speech, wealth through intellect, family education",
+      "positive": ["Excellent speech and eloquence", "Wealth through intelligence", "Educated family", "Good memory"],
+      "negative": ["Cunning speech possible", "Lying tendency if afflicted", "Nervous eating", "Money worries"],
+      "career": "Finance, accounting, teaching, writing, family business",
+      "relationships": "Communication is key in family; partner values intelligence",
+      "health": "Mouth, teeth, throat; nervous digestive issues"
+    },
+    "mercury_in_house_3": {
+      "summary": "Brilliant communicator, talented hands, many short travels",
+      "positive": ["Exceptional communication skills", "Talented with hands", "Good siblings", "Writing ability"],
+      "negative": ["Too many interests", "Scattered focus", "Gossip tendency", "Nervous exhaustion from travel"],
+      "career": "Writing, journalism, media, IT, programming, sales",
+      "relationships": "Highly communicative in love; needs constant mental stimulation",
+      "health": "Arms, hands, nervous system; anxiety from overwork"
+    },
+    "mercury_in_house_4": {
+      "summary": "Educated home environment, property through deals, mental peace",
+      "positive": ["Educational home", "Property through clever dealings", "Good vehicles", "Mental adaptability"],
+      "negative": ["Restless at home", "Too many changes in residence", "Overthinking domestic issues", "Mother worries"],
+      "career": "Real estate dealing, education, home-based business, interior design",
+      "relationships": "Needs intellectual stimulation at home; communicative family life",
+      "health": "Chest, lungs (nervous breathing); skin allergies"
+    },
+    "mercury_in_house_5": {
+      "summary": "Brilliant mind, creative intelligence, good with children",
+      "positive": ["Exceptional intelligence", "Creative writing ability", "Good with children", "Strategic thinking"],
+      "negative": ["Over-analysis in romance", "Too cerebral for emotions", "Speculative miscalculations", "Anxiety about children"],
+      "career": "Education, entertainment, writing, astrology, stock analysis",
+      "relationships": "Intellectual romance; loves witty banter; needs mental compatibility",
+      "health": "Stomach, digestive nerves; skin issues"
+    },
+    "mercury_in_house_6": {
+      "summary": "Analytical service, health analysis, defeating enemies with wit",
+      "positive": ["Analytical problem-solving", "Good in service roles", "Defeats enemies through intelligence", "Health knowledge"],
+      "negative": ["Nervous health issues", "Workplace anxiety", "Over-analysis of problems", "Skin disorders"],
+      "career": "Healthcare administration, accounting, legal analysis, IT services",
+      "relationships": "Analytical in relationships; may over-critique partner",
+      "health": "Intestinal issues, nervous disorders, skin problems, allergies"
+    },
+    "mercury_in_house_7": {
+      "summary": "Business-minded, communicative spouse, partnership success",
+      "positive": ["Excellent business partnerships", "Communicative spouse", "Good negotiator", "Legal success"],
+      "negative": ["Multiple relationships", "Partner may be too talkative", "Business nervousness", "Commitment issues"],
+      "career": "Business, law, counseling, public relations, sales partnerships",
+      "relationships": "Spouse is intelligent and communicative; intellectual compatibility essential",
+      "health": "Reproductive system, nervous tension in partnerships"
+    },
+    "mercury_in_house_8": {
+      "summary": "Research mind, occult communication, mysterious intelligence",
+      "positive": ["Research and investigation skills", "Occult knowledge", "Interest in mysteries", "Long life"],
+      "negative": ["Nervous anxiety", "Speech about death/taboo", "Communication breakdowns", "Hidden mental issues"],
+      "career": "Research, forensic accounting, occult studies, psychology, espionage",
+      "relationships": "Deep psychological understanding of partner; communication about taboo topics",
+      "health": "Nervous disorders, chronic skin issues, reproductive health"
+    },
+    "mercury_in_house_9": {
+      "summary": "Philosophical thinker, educational travel, multi-lingual",
+      "positive": ["Higher education success", "Multi-lingual ability", "Philosophical writing", "Travel for education"],
+      "negative": ["Intellectual pride", "Too many philosophical interests", "Father may be scholarly but distant", "Academic restlessness"],
+      "career": "Teaching, publishing, translation, foreign trade, higher education",
+      "relationships": "Seeks learned partner; philosophical discussions strengthen bond",
+      "health": "Hips, thighs; generally good if well-placed"
+    },
+    "mercury_in_house_10": {
+      "summary": "Successful career in communication, public intellectual",
+      "positive": ["Career success through communication", "Public intellectual status", "Business acumen", "Adaptable career"],
+      "negative": ["Career nervousness", "Too many career changes", "Workplace gossip", "Anxiety about reputation"],
+      "career": "Media, IT, writing, accounting, public speaking, business management",
+      "relationships": "Career and intellect define relationship dynamics",
+      "health": "Knees, joints; work-related stress"
+    },
+    "mercury_in_house_11": {
+      "summary": "Gains through intelligence, large social network, fulfilled desires",
+      "positive": ["Income through intellect", "Large intelligent friend circle", "Desires fulfilled through wit", "Good elder siblings"],
+      "negative": ["Superficial friendships", "Too many social connections", "Unfulfilled intellectual desires", "Gossip in social circle"],
+      "career": "IT networks, social media, large corporations, intellectual groups",
+      "relationships": "Friendship leads to love; social intelligence in relationships",
+      "health": "Left ear, calves, nervous system"
+    },
+    "mercury_in_house_12": {
+      "summary": "Spiritual intellect, foreign education, expenditure on learning",
+      "positive": ["Spiritual understanding", "Foreign education", "Good in foreign communication", "Dream interpretation ability"],
+      "negative": ["Mental isolation", "Communication difficulties", "Expenditure on education", "Insomnia from overthinking"],
+      "career": "Foreign correspondence, translation, hospital administration, spiritual writing",
+      "relationships": "Communication may be limited; inner intellectual world is rich",
+      "health": "Feet problems, insomnia, nervous disorders"
+    },
+    "jupiter_in_house_1": {
+      "summary": "Wise, fortunate, generous personality, spiritual inclination",
+      "positive": ["Wisdom and good fortune", "Generous nature", "Spiritual inclination", "Good health", "Respected personality"],
+      "negative": ["Weight gain tendency", "Over-optimism", "Preachy nature", "Laziness from comfort"],
+      "career": "Teaching, counseling, law, religion, finance, administration",
+      "relationships": "Generous and wise partner; marriage is generally happy",
+      "health": "Generally good health; tendency toward weight gain and liver issues"
+    },
+    "jupiter_in_house_2": {
+      "summary": "Wealth and prosperity, sweet speech, educated family",
+      "positive": ["Excellent wealth accumulation", "Sweet and truthful speech", "Educated family", "Good food habits"],
+      "negative": ["Over-eating tendency", "Excessive spending on luxury", "Financial over-optimism", "Preaching to family"],
+      "career": "Banking, finance, education, food industry, precious metals",
+      "relationships": "Wealthy and cultured family life; partner values education and tradition",
+      "health": "Watch weight, blood sugar, throat and jaw issues"
+    },
+    "jupiter_in_house_3": {
+      "summary": "Wise communication, spiritual siblings, righteous efforts",
+      "positive": ["Wise and measured communication", "Spiritual interests through writing", "Good siblings", "Teaching ability"],
+      "negative": ["Not the strongest placement for Jupiter", "Lack of initiative", "Preaching in communication", "Sibling dependency"],
+      "career": "Spiritual writing, teaching, publishing, counseling",
+      "relationships": "Communication guided by wisdom; gentle and advisory in love",
+      "health": "Arms, shoulders; generally protective"
+    },
+    "jupiter_in_house_4": {
+      "summary": "Happy home, good mother, property, domestic bliss",
+      "positive": ["Excellent domestic happiness", "Good mother", "Property and vehicles", "Inner peace"],
+      "negative": ["Over-attachment to home", "Luxury living", "Complacency", "Mother may be overly religious"],
+      "career": "Real estate, education administration, agriculture, temple management",
+      "relationships": "Home-loving and nurturing; seeks comfortable domestic life",
+      "health": "Heart and chest area protected; watch for weight gain"
+    },
+    "jupiter_in_house_5": {
+      "summary": "Brilliant children, spiritual creativity, excellent education",
+      "positive": ["Excellent children", "High intelligence", "Spiritual creativity", "Past-life blessings", "Good education"],
+      "negative": ["Over-investment in children", "Academic pressure", "Too idealistic in romance", "Speculative losses from over-confidence"],
+      "career": "Education, children's welfare, creative arts, astrology, speculation",
+      "relationships": "Deeply romantic and idealistic; seeks soulmate connection",
+      "health": "Generally protected; stomach and liver care needed"
+    },
+    "jupiter_in_house_6": {
+      "summary": "Overcoming challenges with wisdom, health recovery, legal victory",
+      "positive": ["Overcomes enemies with wisdom", "Health recovery ability", "Legal victories", "Service with wisdom"],
+      "negative": ["Health issues from overindulgence", "Debt from spending on others", "Enemies disguised as friends", "Weight-related health"],
+      "career": "Healthcare, law, social service, veterinary, consulting",
+      "relationships": "Overcomes relationship challenges through wisdom and patience",
+      "health": "Liver, weight issues; generally recovers well from illness"
+    },
+    "jupiter_in_house_7": {
+      "summary": "Excellent marriage, wise spouse, successful partnerships",
+      "positive": ["Excellent marriage", "Wise and educated spouse", "Successful business partnerships", "Social respect"],
+      "negative": ["Multiple relationships possible", "Over-idealistic about partner", "Partner may be overweight", "Financial dependency on partner"],
+      "career": "Partnership business, counseling, law, diplomacy",
+      "relationships": "Spouse is wise, generous, and supportive; marriage brings fortune",
+      "health": "Reproductive health generally good; watch for diabetes"
+    },
+    "jupiter_in_house_8": {
+      "summary": "Long life, inheritance, spiritual transformation, occult wisdom",
+      "positive": ["Long life", "Spiritual transformation", "Inheritance and sudden gains", "Occult wisdom"],
+      "negative": ["Health issues in early life", "Spouse's family financial issues", "Over-reliance on luck", "Complacency about dangers"],
+      "career": "Insurance, occult, research, spiritual healing, estate management",
+      "relationships": "Deep spiritual bond with partner; inheritance through marriage",
+      "health": "Protected from serious harm; watch for liver and chronic conditions"
+    },
+    "jupiter_in_house_9": {
+      "summary": "Most fortunate placement, spiritual wisdom, guru blessings",
+      "positive": ["Extremely fortunate", "Deep wisdom and spirituality", "Father is prosperous", "International travel", "Divine blessings"],
+      "negative": ["Over-reliance on luck", "Spiritual pride", "Dogmatic views", "Preachy nature"],
+      "career": "Religion, law, education, international affairs, publishing",
+      "relationships": "Seeks spiritual partnership; marriage is blessed and dharmic",
+      "health": "Excellent health; thighs and liver need basic care"
+    },
+    "jupiter_in_house_10": {
+      "summary": "Career success, respected leader, ethical profession",
+      "positive": ["Great career success", "Respected professional", "Ethical leadership", "Government favor"],
+      "negative": ["Career may plateau", "Too trusting of colleagues", "Religious rigidity in workplace", "Over-commitment to work"],
+      "career": "Teaching, law, judiciary, administration, religious leadership, CEO",
+      "relationships": "Career brings social respect that enhances relationships",
+      "health": "Knees; generally protected from serious career-related stress"
+    },
+    "jupiter_in_house_11": {
+      "summary": "Excellent gains, influential friends, all desires fulfilled",
+      "positive": ["Excellent income and gains", "Influential and wise friends", "All desires fulfilled", "Eldest child prospers"],
+      "negative": ["Material desires may increase", "Over-spending on social obligations", "Dependence on social network", "Too many commitments"],
+      "career": "Large organizations, financial networks, charitable trusts, education groups",
+      "relationships": "Social circle enhances love life; partner comes through friends",
+      "health": "Generally excellent; watch for weight and blood sugar"
+    },
+    "jupiter_in_house_12": {
+      "summary": "Spiritual liberation, foreign fortune, charitable nature",
+      "positive": ["Spiritual liberation orientation", "Fortune abroad", "Charitable nature", "Bed comforts"],
+      "negative": ["Excessive spending", "Foreign travel expenses", "Isolation from society", "Over-idealistic spirituality"],
+      "career": "Spiritual institutions, foreign work, hospitals, charitable organizations",
+      "relationships": "Spiritual partner; relationship has a transcendent quality",
+      "health": "Feet issues; generally protected; foreign health treatments"
+    },
+    "venus_in_house_1": {
+      "summary": "Attractive, charming, artistic, love of beauty",
+      "positive": ["Attractive and charming personality", "Artistic abilities", "Love of beauty", "Charismatic presence"],
+      "negative": ["Vanity and self-indulgence", "Over-concern with appearance", "Lazy tendencies", "Too pleasure-seeking"],
+      "career": "Arts, fashion, beauty, entertainment, hospitality, design",
+      "relationships": "Highly attractive to others; love of romance; beautiful partner",
+      "health": "Reproductive system, kidneys; generally good appearance"
+    },
+    "venus_in_house_2": {
+      "summary": "Wealthy, sweet voice, beautiful family, food connoisseur",
+      "positive": ["Excellent wealth", "Beautiful singing voice", "Attractive family", "Good taste in food"],
+      "negative": ["Excessive luxury spending", "Over-eating fine foods", "Materialistic family", "Sweet but misleading speech"],
+      "career": "Music, finance, luxury goods, food industry, beauty products",
+      "relationships": "Wealthy and comfortable family life; partner values aesthetics",
+      "health": "Throat, face; tendency toward diabetes from sweet foods"
+    },
+    "venus_in_house_3": {
+      "summary": "Artistic communication, talented hands, creative siblings",
+      "positive": ["Artistic communication", "Musical or artistic talent", "Creative siblings", "Elegant writing"],
+      "negative": ["Superficial communication", "Flirtatious with neighbors", "Lazy about efforts", "Too many pleasurable distractions"],
+      "career": "Arts, music, creative writing, fashion design, beauty blogging",
+      "relationships": "Romantic communication style; love letters and poetic expression",
+      "health": "Arms, hands; sensitive skin"
+    },
+    "venus_in_house_4": {
+      "summary": "Luxurious home, beautiful vehicles, domestic happiness",
+      "positive": ["Beautiful and luxurious home", "Good vehicles", "Happy domestic life", "Mother is attractive"],
+      "negative": ["Over-spending on home luxury", "Comfort-seeking", "Lazy at home", "Attachment to possessions"],
+      "career": "Interior design, luxury real estate, hospitality, cosmetics",
+      "relationships": "Home is a love nest; domestic harmony is essential",
+      "health": "Chest, heart; generally well-protected in comforts"
+    },
+    "venus_in_house_5": {
+      "summary": "Romantic, creative, love of children, artistic talent",
+      "positive": ["Deeply romantic nature", "Artistic creativity", "Beautiful children", "Love of entertainment"],
+      "negative": ["Multiple love affairs", "Overindulgence in pleasure", "Speculative losses on luxury", "Emotional in romance"],
+      "career": "Entertainment, arts, fashion, children's education, romance industry",
+      "relationships": "Passionate romance; love is central to life; attractive to many",
+      "health": "Reproductive health, stomach; generally good"
+    },
+    "venus_in_house_6": {
+      "summary": "Service through beauty, health issues from luxury, competitive arts",
+      "positive": ["Service through beauty and art", "Defeating enemies with charm", "Health through beauty treatments"],
+      "negative": ["Health issues from overindulgence", "Relationship conflicts", "Workplace romance issues", "Debt from luxury"],
+      "career": "Beauty therapy, healthcare aesthetics, veterinary, fashion retail",
+      "relationships": "Challenges in love; enemies through romantic entanglements",
+      "health": "Reproductive issues, kidney problems, diabetes risk"
+    },
+    "venus_in_house_7": {
+      "summary": "Excellent marriage, beautiful spouse, partnership success",
+      "positive": ["Excellent marriage", "Beautiful and charming spouse", "Successful partnerships", "Social grace"],
+      "negative": ["Over-dependence on partner", "Multiple relationships", "Partner may be lazy", "Vanity in partnership"],
+      "career": "Partnership business, fashion, beauty, law, diplomacy",
+      "relationships": "Marriage is a blessing; spouse is beautiful, cultured, and loving",
+      "health": "Reproductive system; generally good marital health"
+    },
+    "venus_in_house_8": {
+      "summary": "Intense passion, inheritance, occult beauty, transformative love",
+      "positive": ["Intense romantic experiences", "Inheritance of wealth", "Interest in occult", "Long marriage"],
+      "negative": ["Sexual obsessions", "Secretive relationships", "Spouse's financial issues", "Jealousy and possessiveness"],
+      "career": "Insurance, beauty research, psychology, occult arts",
+      "relationships": "Deep physical passion; transformative through love; secretive romance",
+      "health": "Reproductive system, urinary tract, chronic conditions"
+    },
+    "venus_in_house_9": {
+      "summary": "Love of philosophy, beautiful travel, artistic spirituality",
+      "positive": ["Love of philosophy and travel", "Artistic spiritual expression", "Foreign connections in love", "Fortunate in arts"],
+      "negative": ["Pleasure-seeking in spirituality", "Foreign love affairs", "Over-indulgent travel", "Mixing pleasure with dharma"],
+      "career": "Travel, arts education, cultural exchange, international fashion",
+      "relationships": "Partner from different culture possible; love of philosophical beauty",
+      "health": "Thighs, hips; generally good"
+    },
+    "venus_in_house_10": {
+      "summary": "Career in arts, public charm, professional beauty",
+      "positive": ["Career success in arts", "Public charm and appeal", "Professional beauty", "Government artistic roles"],
+      "negative": ["Workplace romance complications", "Career based on appearance", "Lazy professional habits", "Using charm to manipulate"],
+      "career": "Fashion, entertainment, arts, diplomacy, luxury brands, hospitality",
+      "relationships": "Career and love intertwine; partner supports professional image",
+      "health": "Knees; generally good from professional comforts"
+    },
+    "venus_in_house_11": {
+      "summary": "Gains through beauty, wealthy friends, luxury desires fulfilled",
+      "positive": ["Gains through arts and beauty", "Wealthy social circle", "Luxury desires fulfilled", "Beautiful elder sibling"],
+      "negative": ["Excessive social spending", "Friendship with wrong people", "Desire for constant luxury", "Emotional spending"],
+      "career": "Fashion industry, luxury brands, entertainment groups, arts organizations",
+      "relationships": "Friendship evolves into love; social life enhances romance",
+      "health": "Left ear, calves; reproductive health"
+    },
+    "venus_in_house_12": {
+      "summary": "Bed pleasures, foreign love, spiritual beauty, luxurious solitude",
+      "positive": ["Excellent bed pleasures", "Foreign connections in love", "Spiritual beauty appreciation", "Luxurious private life"],
+      "negative": ["Excessive expenditure on pleasures", "Secret affairs", "Isolation from loved ones", "Addiction risk"],
+      "career": "Foreign luxury, hospitality abroad, spiritual arts, behind-the-scenes beauty",
+      "relationships": "Secret or foreign love affairs; bedroom life is rich and satisfying",
+      "health": "Feet, reproductive system; diseases from overindulgence"
+    },
+    "saturn_in_house_1": {
+      "summary": "Serious demeanor, disciplined, delayed success, hard worker",
+      "positive": ["Self-discipline and structure", "Hard-working nature", "Patient achiever", "Longevity"],
+      "negative": ["Serious and somber personality", "Delayed gratification", "Health issues in childhood", "Pessimistic outlook"],
+      "career": "Engineering, mining, labor, agriculture, government service",
+      "relationships": "Delayed marriage; serious and responsible partner; loyalty over romance",
+      "health": "Chronic health issues, bones and joints, delayed physical development"
+    },
+    "saturn_in_house_2": {
+      "summary": "Slow wealth accumulation, restricted speech, family hardship",
+      "positive": ["Disciplined saving habits", "Wealth through persistence", "Value for money", "Simple family values"],
+      "negative": ["Speech difficulties or harshness", "Family poverty or hardship", "Dental problems", "Restricted diet"],
+      "career": "Mining, labor, agriculture, government finance, traditional crafts",
+      "relationships": "Family life marked by duty; partner values frugality",
+      "health": "Dental issues, speech problems, face area, eye issues"
+    },
+    "saturn_in_house_3": {
+      "summary": "Serious communication, hard-working siblings, methodical effort",
+      "positive": ["Serious and structured communication", "Persistent efforts", "Disciplined writing", "Responsible siblings"],
+      "negative": ["Communication difficulties", "Sibling hardships", "Lack of courage", "Travel restrictions"],
+      "career": "Technical writing, research, traditional crafts, postal services",
+      "relationships": "Communication is formal and structured; loyalty in effort",
+      "health": "Arms, shoulders, right ear; chronic issues"
+    },
+    "saturn_in_house_4": {
+      "summary": "Domestic hardship early, property through effort, mother's struggles",
+      "positive": ["Property through hard work", "Old or traditional home", "Disciplined home life", "Land acquisition over time"],
+      "negative": ["Childhood hardship", "Mother's health issues", "Lack of domestic comfort", "Emotional coldness at home"],
+      "career": "Construction, mining, agriculture, traditional property, government housing",
+      "relationships": "Home life is structured; lacks warmth initially but improves with age",
+      "health": "Heart, chest, chronic conditions; improves after middle age"
+    },
+    "saturn_in_house_5": {
+      "summary": "Delayed children, serious intellect, structured creativity",
+      "positive": ["Deep structured thinking", "Disciplined creativity", "Children later in life", "Academic discipline"],
+      "negative": ["Delayed or denied children", "Lack of romance", "Intellectual depression", "No joy in speculation"],
+      "career": "Research, traditional education, mining, government education department",
+      "relationships": "Romance is delayed; seeks mature and serious partner",
+      "health": "Stomach issues, chronic digestive problems"
+    },
+    "saturn_in_house_6": {
+      "summary": "Overcoming enemies through persistence, chronic health management",
+      "positive": ["Defeats enemies through persistence", "Disciplined health management", "Good in service roles", "Wins legal battles over time"],
+      "negative": ["Chronic health issues", "Long-standing enemies", "Workplace drudgery", "Chronic debts"],
+      "career": "Healthcare, labor, social service, government service, law",
+      "relationships": "Overcomes relationship challenges through duty and persistence",
+      "health": "Chronic diseases, joint issues, intestinal problems, slow recovery"
+    },
+    "saturn_in_house_7": {
+      "summary": "Delayed marriage, older spouse, partnership through duty",
+      "positive": ["Loyal and dutiful marriage", "Mature spouse", "Long-lasting partnerships", "Business discipline"],
+      "negative": ["Delayed marriage", "Spouse may be older or serious", "Lack of romance", "Partnership restrictions"],
+      "career": "Traditional business, law, government partnerships, labor contracts",
+      "relationships": "Marriage delayed but lasting; spouse is mature, responsible, possibly older",
+      "health": "Lower abdomen, reproductive system; chronic conditions"
+    },
+    "saturn_in_house_8": {
+      "summary": "Long life, chronic transformations, occult discipline",
+      "positive": ["Long life", "Occult discipline", "Patience through crises", "Slow but deep transformation"],
+      "negative": ["Chronic diseases", "Longevity with suffering", "Slow painful transformations", "Depression and fear"],
+      "career": "Mining, insurance, occult research, mortuary, archaeology",
+      "relationships": "Deep karmic bonds; relationship transforms through suffering and patience",
+      "health": "Chronic conditions, piles, reproductive issues, bone disease"
+    },
+    "saturn_in_house_9": {
+      "summary": "Disciplined spirituality, father's hardship, slow luck",
+      "positive": ["Disciplined spiritual practice", "Traditional religious values", "Slow but sure fortune", "Karmic wisdom"],
+      "negative": ["Father's hardship", "Delayed fortune", "Rigid religious views", "Lack of guru blessings"],
+      "career": "Traditional religion, law, agriculture, government education",
+      "relationships": "Seeks a dutiful and traditional partner",
+      "health": "Hips, thighs, chronic conditions"
+    },
+    "saturn_in_house_10": {
+      "summary": "Career through hard work, authority earned, professional discipline",
+      "positive": ["Career success through persistent effort", "Authority earned by merit", "Professional discipline", "Government success"],
+      "negative": ["Career struggles and delays", "Heavy workload", "Professional setbacks", "Slow promotion"],
+      "career": "Government, engineering, construction, mining, agriculture management",
+      "relationships": "Career dominates life; partner must be patient with professional demands",
+      "health": "Knees, bones, joints; work-related chronic stress"
+    },
+    "saturn_in_house_11": {
+      "summary": "Gains through persistence, loyal friends, desires fulfilled late",
+      "positive": ["Steady gains over time", "Loyal and lasting friendships", "Desires fulfilled through patience", "Reliable elder siblings"],
+      "negative": ["Delayed gains", "Few but loyal friends", "Unfulfilled desires initially", "Social isolation"],
+      "career": "Large traditional organizations, government corporations, labor unions",
+      "relationships": "Friendship is the basis of love; social circle is small but loyal",
+      "health": "Left ear, calves, chronic conditions"
+    },
+    "saturn_in_house_12": {
+      "summary": "Spiritual discipline, foreign hardship, expenditure, isolation",
+      "positive": ["Spiritual discipline", "Moksha orientation", "Foreign work", "Patient isolation"],
+      "negative": ["Expenditure and losses", "Imprisonment or hospitalization", "Foreign hardship", "Sleep disturbances"],
+      "career": "Foreign labor, prisons, hospitals, spiritual retreats, mining abroad",
+      "relationships": "Partner may cause separation; solitude in relationships",
+      "health": "Feet problems, chronic conditions, hospitalization, sleep issues"
+    },
+    "rahu_in_house_1": {
+      "summary": "Unconventional personality, foreign appearance, obsessive self-image",
+      "positive": ["Unique and magnetic personality", "Foreign connections", "Unconventional success", "Ambitious drive"],
+      "negative": ["Identity confusion", "Deceptive appearance", "Obsessive self-image", "Health mysteries"],
+      "career": "Foreign companies, technology, unconventional fields, diplomacy",
+      "relationships": "Attracts unusual partners; foreign spouse possible",
+      "health": "Mysterious ailments, misdiagnosis, skin disorders"
+    },
+    "rahu_in_house_2": {
+      "summary": "Unusual wealth, harsh or foreign speech, family disruption",
+      "positive": ["Wealth through unconventional means", "Foreign income", "Unique speaking ability", "Breaks from tradition"],
+      "negative": ["Family disruption", "Deceptive speech", "Unusual dietary habits", "Financial instability"],
+      "career": "Foreign trade, technology, media, unconventional finance",
+      "relationships": "Family life is unconventional; partner may be from different background",
+      "health": "Mouth, dental anomalies, toxic food sensitivity"
+    },
+    "rahu_in_house_3": {
+      "summary": "Fearless communication, unconventional courage, media success",
+      "positive": ["Fearless courage", "Media and technology success", "Powerful communication", "Unconventional efforts"],
+      "negative": ["Reckless courage", "Sibling complications", "Deceptive communication", "Foreign-related conflicts"],
+      "career": "Media, technology, advertising, foreign communication, espionage",
+      "relationships": "Bold and unconventional in expressing love",
+      "health": "Arms, nervous system; unusual ailments"
+    },
+    "rahu_in_house_4": {
+      "summary": "Foreign home, disrupted domestic life, unusual property",
+      "positive": ["Property in foreign land", "Unusual home", "Breaks from family tradition", "Technological home"],
+      "negative": ["Domestic instability", "Mother's health issues", "Haunted or unusual property", "Emotional confusion"],
+      "career": "Foreign real estate, technology at home, unconventional agriculture",
+      "relationships": "Home life is unconventional; may live away from birthplace",
+      "health": "Heart, chest; emotional disturbances; mysterious domestic health issues"
+    },
+    "rahu_in_house_5": {
+      "summary": "Unconventional creativity, speculative gains, unusual children",
+      "positive": ["Unconventional creative genius", "Speculative gains", "Unique children", "Unusual romance"],
+      "negative": ["Risky speculation", "Problematic pregnancies", "Deceptive romance", "Over-attachment to pleasure"],
+      "career": "Entertainment, technology, gambling industry, foreign education",
+      "relationships": "Unconventional romance; foreign or unusual love interests",
+      "health": "Stomach, unusual conditions; pregnancy complications"
+    },
+    "rahu_in_house_6": {
+      "summary": "Victory over enemies, unusual health, foreign service",
+      "positive": ["Powerful victory over enemies", "Success through unconventional methods", "Foreign service success", "Overcoming diseases"],
+      "negative": ["Unusual diseases", "Foreign enemies", "Addiction risk", "Complicated health issues"],
+      "career": "Foreign healthcare, technology services, unconventional remedies",
+      "relationships": "Overcomes relationship challenges through unconventional methods",
+      "health": "Mysterious ailments, addiction, unusual diseases, foreign infections"
+    },
+    "rahu_in_house_7": {
+      "summary": "Foreign spouse, unconventional marriage, unusual partnerships",
+      "positive": ["Foreign or unconventional spouse", "Cross-cultural marriage", "Unique business partnerships", "Social ambition"],
+      "negative": ["Marriage instability", "Deceptive partner", "Multiple relationships", "Partnership betrayal"],
+      "career": "International business, foreign trade, unconventional partnerships",
+      "relationships": "Spouse may be from different culture, religion, or country; intense attraction",
+      "health": "Reproductive issues, mysterious lower abdomen conditions"
+    },
+    "rahu_in_house_8": {
+      "summary": "Sudden transformation, occult mastery, mysterious events",
+      "positive": ["Occult mastery", "Sudden gains", "Research ability", "Longevity through crisis survival"],
+      "negative": ["Sudden crises", "Mysterious accidents", "Fear and anxiety", "Hidden enemies"],
+      "career": "Occult, forensics, technology research, foreign insurance",
+      "relationships": "Intense and transformative; fear of loss in relationships",
+      "health": "Mysterious chronic conditions, poisoning risk, reproductive issues"
+    },
+    "rahu_in_house_9": {
+      "summary": "Foreign spirituality, unconventional beliefs, disrupted dharma",
+      "positive": ["Foreign spiritual traditions", "Unconventional wisdom", "Travel abroad", "Breaking religious barriers"],
+      "negative": ["Disrupted dharma", "Father's issues", "Questioning traditions", "Spiritual confusion"],
+      "career": "Foreign religion, international law, unconventional education",
+      "relationships": "Seeks partner from different cultural or spiritual background",
+      "health": "Hips, thighs; foreign diseases"
+    },
+    "rahu_in_house_10": {
+      "summary": "Powerful career, unconventional success, sudden fame",
+      "positive": ["Powerful and ambitious career", "Sudden fame", "Unconventional professional success", "Foreign career"],
+      "negative": ["Career scandals", "Professional deception", "Sudden falls from power", "Unethical means to success"],
+      "career": "Technology, foreign companies, politics, media, unconventional authority",
+      "relationships": "Career ambition may overshadow personal life",
+      "health": "Knees; stress from ambition; mysterious professional health issues"
+    },
+    "rahu_in_house_11": {
+      "summary": "Excellent gains, foreign friends, desires amplified",
+      "positive": ["Excellent gains through unconventional means", "Foreign friendships", "Technology-driven income", "Ambitious desires fulfilled"],
+      "negative": ["Wrong company", "Deceptive friends", "Insatiable desires", "Gains through questionable means"],
+      "career": "Technology, foreign organizations, large corporations, network marketing",
+      "relationships": "Unusual social circle; friends from foreign backgrounds",
+      "health": "Left ear, calves; mysterious conditions"
+    },
+    "rahu_in_house_12": {
+      "summary": "Foreign travel, spiritual illusion, heavy expenditure, isolation",
+      "positive": ["Foreign residence", "Spiritual experiences", "Foreign bed pleasures", "Liberation through confusion"],
+      "negative": ["Heavy expenditure", "Foreign imprisonment risk", "Sleep disorders", "Spiritual confusion", "Addiction"],
+      "career": "Foreign countries, hospitals, spiritual institutions, technology abroad",
+      "relationships": "Partner may cause separation; foreign bed pleasures; isolation in love",
+      "health": "Feet, sleep disorders, addiction, mysterious foreign diseases"
+    },
+    "ketu_in_house_1": {
+      "summary": "Spiritual personality, detachment, unusual appearance, past-life wisdom",
+      "positive": ["Spiritual nature", "Past-life wisdom", "Detached personality", "Intuitive abilities"],
+      "negative": ["Identity confusion", "Health issues", "Self-doubt", "Lack of direction"],
+      "career": "Spirituality, technology (back-end), research, healing",
+      "relationships": "Detached in relationships; needs spiritual connection with partner",
+      "health": "Mysterious ailments, headaches, skin conditions, misdiagnosis"
+    },
+    "ketu_in_house_2": {
+      "summary": "Detached from wealth, unusual speech, spiritual family",
+      "positive": ["Spiritual family values", "Non-attachment to money", "Intuitive speech", "Past-life wealth karma"],
+      "negative": ["Financial instability", "Speech difficulties", "Family detachment", "Dental issues"],
+      "career": "Spiritual counseling, technology, traditional healing",
+      "relationships": "Family life is spiritually oriented; may not value material wealth",
+      "health": "Dental, mouth, throat issues; unusual dietary needs"
+    },
+    "ketu_in_house_3": {
+      "summary": "Intuitive communication, fearless, spiritual courage",
+      "positive": ["Fearless and intuitive", "Spiritual courage", "Psychic communication", "Past-life writing skills"],
+      "negative": ["Communication breakdowns", "Sibling detachment", "Lack of effort", "Misunderstood communication"],
+      "career": "Spiritual writing, technology, research, alternative healing",
+      "relationships": "Intuitive understanding of partner; non-verbal communication",
+      "health": "Arms, ears; mysterious nerve conditions"
+    },
+    "ketu_in_house_4": {
+      "summary": "Detached from home, spiritual inner life, property dissolution",
+      "positive": ["Strong inner spiritual life", "Past-life property karma", "Detachment from materialism", "Meditation ability"],
+      "negative": ["Lack of domestic peace", "Mother's health issues", "Property losses", "Emotional emptiness"],
+      "career": "Spiritual institutions, ashrams, remote technology work",
+      "relationships": "May not value domestic comforts; partner needs to accept spiritual focus",
+      "health": "Heart, chest; emotional health; mysterious domestic ailments"
+    },
+    "ketu_in_house_5": {
+      "summary": "Past-life spiritual merit, unusual children, detached creativity",
+      "positive": ["Past-life spiritual merit", "Intuitive intelligence", "Unique creative gifts", "Spiritual children"],
+      "negative": ["Delayed or problematic children", "Detachment from romance", "Speculative losses", "Lack of joy"],
+      "career": "Spiritual education, technology research, alternative healing for children",
+      "relationships": "Detached from romance; seeks spiritual rather than physical connection",
+      "health": "Stomach issues, unusual conditions; pregnancy complications"
+    },
+    "ketu_in_house_6": {
+      "summary": "Natural healer, defeating enemies effortlessly, spiritual service",
+      "positive": ["Natural healing ability", "Defeats enemies without effort", "Spiritual service", "Freedom from disease"],
+      "negative": ["Mysterious health conditions", "Unusual enemies", "Ancestral curses", "Digestive mysteries"],
+      "career": "Alternative healing, spiritual service, veterinary, research",
+      "relationships": "Resolves conflicts through spiritual detachment",
+      "health": "Mysterious diseases that heal unexpectedly; ancestral health patterns"
+    },
+    "ketu_in_house_7": {
+      "summary": "Detached from partnerships, spiritual spouse, marriage challenges",
+      "positive": ["Spiritual spouse", "Past-life partner connection", "Non-attachment in marriage", "Intuitive understanding"],
+      "negative": ["Marriage difficulties", "Partner detachment", "Relationship dissolution", "Lack of partnership desire"],
+      "career": "Spiritual counseling, technology partnerships, alternative business",
+      "relationships": "Marriage has past-life karmic quality; spouse may be spiritual or detached",
+      "health": "Reproductive system; partner's mysterious health conditions"
+    },
+    "ketu_in_house_8": {
+      "summary": "Spiritual transformation, occult mastery, sudden liberation",
+      "positive": ["Deep occult knowledge", "Spiritual transformation", "Past-life occult skills", "Sudden liberation experiences"],
+      "negative": ["Sudden crises", "Mysterious accidents", "Near-death experiences", "Chronic hidden conditions"],
+      "career": "Occult, spiritual healing, research, technology (security)",
+      "relationships": "Deep karmic bonds; transformative and intense relationships",
+      "health": "Mysterious chronic conditions, sudden health events, reproductive issues"
+    },
+    "ketu_in_house_9": {
+      "summary": "Past-life spiritual wisdom, detached from dogma, natural guru",
+      "positive": ["Natural spiritual wisdom", "Past-life guru connection", "Detached from religious dogma", "Intuitive philosophy"],
+      "negative": ["Disconnected from father", "Lack of formal religion", "Fortune through unusual means", "Spiritual arrogance"],
+      "career": "Spiritual teaching, alternative philosophy, technology in education",
+      "relationships": "Seeks a partner who respects unconventional spiritual path",
+      "health": "Hips, thighs; ancestral health patterns"
+    },
+    "ketu_in_house_10": {
+      "summary": "Detached from career ambition, spiritual profession, past-life status",
+      "positive": ["Spiritual or unconventional career", "Past-life professional skills", "Detachment from fame", "Natural authority"],
+      "negative": ["Career instability", "Lack of worldly ambition", "Professional confusion", "Status fluctuations"],
+      "career": "Spiritual leadership, technology, alternative professions, research",
+      "relationships": "Career is not primary focus; partner must accept unconventional path",
+      "health": "Knees; mysterious professional health issues"
+    },
+    "ketu_in_house_11": {
+      "summary": "Detached from gains, spiritual friends, unconventional desires",
+      "positive": ["Spiritual friendships", "Non-material desires", "Past-life social connections", "Liberation from greed"],
+      "negative": ["Unstable income", "Friend dissolution", "Unfulfilled material desires", "Social isolation"],
+      "career": "Spiritual organizations, technology networks, alternative communities",
+      "relationships": "Unusual social circle; friendships based on spiritual connection",
+      "health": "Left ear, calves; mysterious conditions"
+    },
+    "ketu_in_house_12": {
+      "summary": "Excellent for moksha, spiritual liberation, past-life memories",
+      "positive": ["Excellent for spiritual liberation (moksha)", "Past-life memories", "Deep meditation ability", "Freedom from material world"],
+      "negative": ["Complete material detachment", "Isolation", "Foreign exile feeling", "Sleep disturbances"],
+      "career": "Monasteries, spiritual retreats, foreign ashrams, meditation centers",
+      "relationships": "Complete detachment from worldly relationships; seeks divine union",
+      "health": "Feet issues, mysterious conditions that resolve through spiritual practice"
+    }
+  }
+}

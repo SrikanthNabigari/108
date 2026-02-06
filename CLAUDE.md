@@ -143,18 +143,48 @@ Config location: `~/Library/Application Support/Claude/claude_desktop_config.jso
 
 ## Agents Available
 
+### User-Facing Agents
 - `/astro-guide` - Main conversational agent for users
 - `/chart-analyzer` - Deep chart analysis specialist
 - `/prediction-engine` - Future prediction with dasha/transit
 - `/code-reviewer` - Code review for this project
 
+### Development Agent Team (Claude Code Agent Teams)
+5 specialized agents for parallel development. Enable with:
+```bash
+export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
+# Or run: ./scripts/run_agent_team.sh
+```
+
+| Agent | Owns | Tasks |
+|-------|------|-------|
+| `cosmos-agent` | `packages/cosmos/` | Ephemeris bugs, aspects, panchanga fixes |
+| `self-agent` | `packages/self/` | Divisional charts, strength, yoga cancellation |
+| `context-agent` | `packages/context/` | Varshaphal, dasha effects, muhurta |
+| `guide-memory-agent` | `packages/guide/` + `packages/memory/` | Memory wiring, async fix, conversation history |
+| `knowledge-agent` | `knowledge/` | Missing JSON files, interpretations |
+
+**Boundary rule**: Each agent modifies ONLY its owned packages. No cross-boundary edits.
+
+See `docs/project_notes/work_log.md` Session 17 for full deliverables. Remaining: P2-P3 items only.
+
 ## When Starting a Task
 
 1. Check if there's a relevant **skill** to invoke
-2. Check `docs/project_notes/` for past decisions
-3. Run tests before and after changes
-4. Update memory if learning something new
+2. Check `docs/project_notes/work_log.md` for past decisions and current task backlog
+3. Run tests before and after changes: `uv run pytest tests/ -v`
+4. Run lint after changes: `uv run ruff check .`
+5. Update work_log.md after completing tasks
+6. If using Agent Teams, respect package ownership boundaries
+
+## Current Stats (Session 17)
+
+- **1,035 tests passing**, 0 lint errors
+- **522 yogas**, 55 doshas, 729 pratyantardasha combinations
+- **4 MCP servers**, ~45 tools
+- **~2.9MB** knowledge base (37 rule files, 15 definition files, 5 interpretation files)
+- **All P0 bugs fixed**, all P1 features done — remaining: P2/P3 enhancements only
 
 ## Contact
 
-Built with 💜 for decoding the cosmic operating system.
+Built with cosmic intention for decoding the operating system of life.

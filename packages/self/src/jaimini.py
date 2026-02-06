@@ -470,8 +470,179 @@ def calculate_chara_dasha(
     return periods
 
 
+def _get_planets_in_sign(chart: BirthChart, rashi: Rashi) -> list[Planet]:
+    """Get all planets placed in a given sign.
+
+    Args:
+        chart: Birth chart with planet positions
+        rashi: The sign to check
+
+    Returns:
+        List of planets in that sign
+    """
+    return [p for p, pos in chart.planets.items() if pos.rashi == rashi]
+
+
+def _count_argala_strength(planets: list[Planet]) -> float:
+    """Calculate argala strength from planets in a sign.
+
+    Benefics (Jupiter, Venus, Mercury, Moon) contribute +1 each.
+    Malefics (Sun, Mars, Saturn, Rahu, Ketu) contribute +0.5 each.
+    Empty sign = 0.
+
+    Args:
+        planets: List of planets in the sign
+
+    Returns:
+        Numerical strength of argala
+    """
+    if not planets:
+        return 0.0
+
+    benefics = {Planet.JUPITER, Planet.VENUS, Planet.MERCURY, Planet.MOON}
+    strength = 0.0
+    for p in planets:
+        if p in benefics:
+            strength += 1.0
+        else:
+            strength += 0.5
+    return strength
+
+
+def calculate_argala(chart: BirthChart) -> dict:
+    """Calculate Argala (planetary intervention) for all 12 houses.
+
+    Argala is a Jaimini concept where planets in certain houses from a sign
+    exert influence (intervention) on that sign. Argala can be obstructed
+    by planets in the corresponding obstruction houses.
+
+    Argala types:
+    - 2nd house = Dhana Argala (wealth intervention)
+    - 4th house = Sukha Argala (happiness intervention)
+    - 11th house = Labha Argala (gains intervention)
+    - 5th house = Putra Argala (children/merit intervention)
+
+    Obstruction (Virodhargala):
+    - 3rd house obstructs 2nd (Dhana)
+    - 10th house obstructs 4th (Sukha)
+    - 12th house obstructs 11th (Labha)
+    - 9th house obstructs 5th (Putra)
+
+    An argala is obstructed only if the obstruction house has MORE
+    planets/strength than the argala house.
+
+    Args:
+        chart: Birth chart with planet positions
+
+    Returns:
+        Dictionary with argala analysis for all 12 houses.
+        Each house entry contains the 4 argala types with their
+        source planets, strength, obstruction, and net effect.
+    """
+    argala_types = [
+        {
+            "name": "dhana",
+            "label": "Dhana Argala (Wealth)",
+            "house_offset": 1,
+            "obstruction_offset": 2,
+        },
+        {
+            "name": "sukha",
+            "label": "Sukha Argala (Happiness)",
+            "house_offset": 3,
+            "obstruction_offset": 9,
+        },
+        {
+            "name": "labha",
+            "label": "Labha Argala (Gains)",
+            "house_offset": 10,
+            "obstruction_offset": 11,
+        },
+        {
+            "name": "putra",
+            "label": "Putra Argala (Children/Merit)",
+            "house_offset": 4,
+            "obstruction_offset": 8,
+        },
+    ]
+
+    lagna_index = RASHI_TO_INDEX[chart.lagna_rashi]
+    result = {}
+
+    for house_num in range(1, 13):
+        house_sign_index = (lagna_index + house_num - 1) % 12
+        house_argalas = {}
+        active_count = 0
+
+        for atype in argala_types:
+            # Argala source sign
+            argala_sign_index = (house_sign_index + atype["house_offset"]) % 12
+            argala_rashi = INDEX_TO_RASHI[argala_sign_index]
+            argala_planets = _get_planets_in_sign(chart, argala_rashi)
+            argala_strength = _count_argala_strength(argala_planets)
+
+            # Obstruction sign
+            obstruction_sign_index = (house_sign_index + atype["obstruction_offset"]) % 12
+            obstruction_rashi = INDEX_TO_RASHI[obstruction_sign_index]
+            obstruction_planets = _get_planets_in_sign(chart, obstruction_rashi)
+            obstruction_strength = _count_argala_strength(obstruction_planets)
+
+            # Argala is active if source strength > obstruction strength
+            is_obstructed = obstruction_strength >= argala_strength and argala_strength > 0
+            is_active = argala_strength > 0 and not is_obstructed
+            net_strength = (
+                max(0.0, argala_strength - obstruction_strength) if argala_strength > 0 else 0.0
+            )
+
+            if is_active:
+                active_count += 1
+
+            house_argalas[atype["name"]] = {
+                "label": atype["label"],
+                "source_sign": argala_rashi.value,
+                "source_planets": [p.value for p in argala_planets],
+                "argala_strength": argala_strength,
+                "obstruction_sign": obstruction_rashi.value,
+                "obstruction_planets": [p.value for p in obstruction_planets],
+                "obstruction_strength": obstruction_strength,
+                "is_obstructed": is_obstructed,
+                "is_active": is_active,
+                "net_strength": round(net_strength, 2),
+            }
+
+        house_rashi = INDEX_TO_RASHI[house_sign_index]
+        result[house_num] = {
+            "house": house_num,
+            "sign": house_rashi.value,
+            "argalas": house_argalas,
+            "active_argala_count": active_count,
+            "summary": _get_argala_summary(active_count),
+        }
+
+    return result
+
+
+def _get_argala_summary(active_count: int) -> str:
+    """Get a summary description based on active argala count.
+
+    Args:
+        active_count: Number of active (unobstructed) argalas
+
+    Returns:
+        Summary string
+    """
+    summaries = {
+        0: "No active argala - house lacks planetary support",
+        1: "Mild argala - some planetary support for this house",
+        2: "Moderate argala - good planetary support",
+        3: "Strong argala - significant planetary intervention",
+    }
+    return summaries.get(active_count, "Very strong argala - all four types active")
+
+
 __all__ = [
     "calculate_all_arudha_padas",
+    "calculate_argala",
     "calculate_arudha_pada",
     "calculate_chara_dasha",
     "calculate_chara_karakas",

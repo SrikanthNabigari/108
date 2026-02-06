@@ -1,0 +1,289 @@
+{
+  "avasthas": {
+    "description": "Planetary states (Avasthas) describe how a planet feels and behaves based on its position in the chart. They determine the quality and timing of results.",
+    "baladi_avasthas": {
+      "description": "Age-based states. Determined by the planet's degree in its sign. Odd signs: divide 30 degrees into 5 equal parts (6 degrees each) in order. Even signs: reverse order.",
+      "states": [
+        {
+          "name": "Bala",
+          "sanskrit": "बाल",
+          "meaning": "Infant",
+          "age_range": "0-6 years",
+          "strength_percent": 25,
+          "odd_sign_degrees": "0-6",
+          "even_sign_degrees": "24-30",
+          "effect": "Immature results, delayed but eventually manifests. Like a child, the planet gives incomplete and delayed results.",
+          "characteristics": ["Delayed results", "Partial fulfillment", "Growing strength over time", "Needs support from other planets"]
+        },
+        {
+          "name": "Kumara",
+          "sanskrit": "कुमार",
+          "meaning": "Youth, adolescent",
+          "age_range": "6-18 years",
+          "strength_percent": 50,
+          "odd_sign_degrees": "6-12",
+          "even_sign_degrees": "18-24",
+          "effect": "Growing strength, partial results. Like a teenager, ambitious but not yet fully capable.",
+          "characteristics": ["Moderate results", "Energy present but not fully directed", "Enthusiasm without full competence", "Progressive improvement"]
+        },
+        {
+          "name": "Yuva",
+          "sanskrit": "युवा",
+          "meaning": "Young adult",
+          "age_range": "18-36 years",
+          "strength_percent": 100,
+          "odd_sign_degrees": "12-18",
+          "even_sign_degrees": "12-18",
+          "effect": "Full strength, complete results. Planet at peak performance, delivers maximum potential.",
+          "characteristics": ["Full results", "Complete manifestation", "Peak energy", "Best karakattva delivery", "Strong and decisive effects"]
+        },
+        {
+          "name": "Vriddha",
+          "sanskrit": "वृद्ध",
+          "meaning": "Old, mature",
+          "age_range": "36-54 years",
+          "strength_percent": 50,
+          "odd_sign_degrees": "18-24",
+          "even_sign_degrees": "6-12",
+          "effect": "Declining, delayed results. Wisdom but diminishing capacity to act.",
+          "characteristics": ["Delayed results", "Wisdom without energy", "Knowledge but diminishing action", "Results come with effort"]
+        },
+        {
+          "name": "Mrita",
+          "sanskrit": "मृत",
+          "meaning": "Dead",
+          "age_range": "54+ years",
+          "strength_percent": 0,
+          "odd_sign_degrees": "24-30",
+          "even_sign_degrees": "0-6",
+          "effect": "No results, planet effectively inactive. Like a dead person, the planet cannot deliver its significations.",
+          "characteristics": ["No results", "Planet completely ineffective", "Significations denied", "Requires strong benefic aspect for any results"]
+        }
+      ],
+      "calculation_rule": "For odd signs (Aries, Gemini, Leo, Libra, Sagittarius, Aquarius): Bala(0-6), Kumara(6-12), Yuva(12-18), Vriddha(18-24), Mrita(24-30). For even signs (Taurus, Cancer, Virgo, Scorpio, Capricorn, Pisces): Mrita(0-6), Vriddha(6-12), Yuva(12-18), Kumara(18-24), Bala(24-30)."
+    },
+    "shayanaadi_avasthas": {
+      "description": "Activity-based states based on complex positional calculations. Derived from Parashara's BPHS. Shows what the planet is 'doing' at the moment.",
+      "states": [
+        {
+          "name": "Shayana",
+          "sanskrit": "शयन",
+          "meaning": "Sleeping",
+          "number": 1,
+          "effect": "Planet is dormant, lazy, not giving results actively",
+          "result_quality": "very_weak",
+          "characteristics": ["Laziness", "Lethargy", "Dormant results", "Inactive significations"]
+        },
+        {
+          "name": "Upavesha",
+          "sanskrit": "उपवेश",
+          "meaning": "Sitting",
+          "number": 2,
+          "effect": "Planet is seated, passive but aware, minimal effort",
+          "result_quality": "weak",
+          "characteristics": ["Passivity", "Awareness without action", "Potential but not manifesting"]
+        },
+        {
+          "name": "Netrapani",
+          "sanskrit": "नेत्रपाणि",
+          "meaning": "Hands on eyes, covering eyes",
+          "number": 3,
+          "effect": "Planet cannot see, is confused or misguided",
+          "result_quality": "very_weak",
+          "characteristics": ["Confusion", "Lack of vision", "Misguided actions", "Blindness to reality"]
+        },
+        {
+          "name": "Prakasha",
+          "sanskrit": "प्रकाश",
+          "meaning": "Shining, illuminated",
+          "number": 4,
+          "effect": "Planet is bright and powerful, giving excellent results",
+          "result_quality": "excellent",
+          "characteristics": ["Radiance", "Full manifestation", "Clarity", "Powerful effects"]
+        },
+        {
+          "name": "Gamana",
+          "sanskrit": "गमन",
+          "meaning": "Moving, going",
+          "number": 5,
+          "effect": "Planet is actively moving toward its goals, good results",
+          "result_quality": "good",
+          "characteristics": ["Progress", "Movement", "Active pursuit", "Gradual results"]
+        },
+        {
+          "name": "Aagama",
+          "sanskrit": "आगम",
+          "meaning": "Returning, coming back",
+          "number": 6,
+          "effect": "Planet is returning, revisiting past themes, moderate results",
+          "result_quality": "moderate",
+          "characteristics": ["Return of old themes", "Revisiting past issues", "Cyclical patterns"]
+        },
+        {
+          "name": "Sabha",
+          "sanskrit": "सभा",
+          "meaning": "In assembly, in court",
+          "number": 7,
+          "effect": "Planet is in a position of social influence, good for public matters",
+          "result_quality": "good",
+          "characteristics": ["Social influence", "Public recognition", "Community involvement"]
+        },
+        {
+          "name": "Agama",
+          "sanskrit": "आगम",
+          "meaning": "Approaching, arriving",
+          "number": 8,
+          "effect": "Planet is approaching its destination, building results",
+          "result_quality": "moderate",
+          "characteristics": ["Anticipation", "Building toward results", "Approaching goals"]
+        },
+        {
+          "name": "Bhojana",
+          "sanskrit": "भोजन",
+          "meaning": "Eating, consuming",
+          "number": 9,
+          "effect": "Planet is nourished and satisfied, comfortable results",
+          "result_quality": "good",
+          "characteristics": ["Nourishment", "Satisfaction", "Comfort", "Enjoying results"]
+        },
+        {
+          "name": "Nritya",
+          "sanskrit": "नृत्य",
+          "meaning": "Dancing",
+          "number": 10,
+          "effect": "Planet is joyful and expressive, creative and artistic results",
+          "result_quality": "excellent",
+          "characteristics": ["Joy", "Creativity", "Expression", "Artistic success", "Celebration"]
+        },
+        {
+          "name": "Kautuka",
+          "sanskrit": "कौतुक",
+          "meaning": "Curious, eager",
+          "number": 11,
+          "effect": "Planet is curious and exploring, learning and discovery",
+          "result_quality": "moderate",
+          "characteristics": ["Curiosity", "Exploration", "Discovery", "Learning new things"]
+        },
+        {
+          "name": "Nidraa",
+          "sanskrit": "निद्रा",
+          "meaning": "Deep sleep",
+          "number": 12,
+          "effect": "Planet is in deep sleep, completely inactive",
+          "result_quality": "very_weak",
+          "characteristics": ["Complete inactivity", "No results", "Unconscious", "Requires strong trigger to activate"]
+        }
+      ],
+      "calculation_rule": "Complex calculation involving the planet's nakshatra position, sign, and specific divisional computations as described in BPHS chapters on avasthas."
+    },
+    "jagradaadi_avasthas": {
+      "description": "Consciousness-based states: Jagrat (waking), Swapna (dreaming), Sushupti (deep sleep). Based on planet's position in own/friendly/enemy signs.",
+      "states": [
+        {
+          "name": "Jagrat",
+          "sanskrit": "जागृत",
+          "meaning": "Waking, fully conscious",
+          "condition": "Planet in own sign or exaltation",
+          "strength_percent": 100,
+          "effect": "Planet fully awake and giving complete results",
+          "characteristics": ["Full awareness", "Active delivery of results", "Maximum karakattva"]
+        },
+        {
+          "name": "Swapna",
+          "sanskrit": "स्वप्न",
+          "meaning": "Dreaming",
+          "condition": "Planet in friendly sign or neutral sign",
+          "strength_percent": 50,
+          "effect": "Planet partially aware, moderate results",
+          "characteristics": ["Partial awareness", "Dream-like results", "Moderate delivery"]
+        },
+        {
+          "name": "Sushupti",
+          "sanskrit": "सुषुप्ति",
+          "meaning": "Deep sleep",
+          "condition": "Planet in enemy sign or debilitation",
+          "strength_percent": 25,
+          "effect": "Planet completely unaware, minimal or no results",
+          "characteristics": ["No awareness", "Ineffective", "Minimal delivery", "Significations denied"]
+        }
+      ]
+    },
+    "deeptaadi_avasthas": {
+      "description": "Brightness-based states derived from a planet's relationship with its sign lord and position. Nine states from Deepta (blazing) to Kshudita (hungry).",
+      "states": [
+        {
+          "name": "Deepta",
+          "sanskrit": "दीप्त",
+          "meaning": "Blazing, exalted",
+          "condition": "Planet in exaltation sign",
+          "effect": "Planet gives extraordinary results, fame, success, and glory",
+          "result_quality": "excellent"
+        },
+        {
+          "name": "Swastha",
+          "sanskrit": "स्वस्थ",
+          "meaning": "Comfortable, in own sign",
+          "condition": "Planet in own sign",
+          "effect": "Planet is happy and gives good, natural results",
+          "result_quality": "very_good"
+        },
+        {
+          "name": "Mudita",
+          "sanskrit": "मुदित",
+          "meaning": "Delighted, in friend's sign",
+          "condition": "Planet in friendly sign",
+          "effect": "Planet is pleased and gives favorable results",
+          "result_quality": "good"
+        },
+        {
+          "name": "Shanta",
+          "sanskrit": "शान्त",
+          "meaning": "Peaceful, in auspicious sub-division",
+          "condition": "Planet in auspicious shashtiamsha or varga",
+          "effect": "Planet gives peaceful, gentle, favorable results",
+          "result_quality": "good"
+        },
+        {
+          "name": "Dina",
+          "sanskrit": "दीन",
+          "meaning": "Depressed, in neutral sign",
+          "condition": "Planet in neutral sign",
+          "effect": "Planet gives mediocre, average results",
+          "result_quality": "moderate"
+        },
+        {
+          "name": "Dukhita",
+          "sanskrit": "दुःखित",
+          "meaning": "Suffering, in enemy sign",
+          "condition": "Planet in enemy sign",
+          "effect": "Planet suffers and gives troublesome results",
+          "result_quality": "poor"
+        },
+        {
+          "name": "Vikala",
+          "sanskrit": "विकल",
+          "meaning": "Crippled, combust",
+          "condition": "Planet combust (too close to Sun)",
+          "effect": "Planet loses power, significations harmed",
+          "result_quality": "poor"
+        },
+        {
+          "name": "Khala",
+          "sanskrit": "खल",
+          "meaning": "Wicked, in debilitation",
+          "condition": "Planet in debilitation sign",
+          "effect": "Planet gives adverse, harmful results",
+          "result_quality": "very_poor"
+        },
+        {
+          "name": "Bhita",
+          "sanskrit": "भीत",
+          "meaning": "Fearful, in inimical war",
+          "condition": "Planet defeated in planetary war (Graha Yuddha)",
+          "effect": "Planet is afraid and fails to deliver results",
+          "result_quality": "very_poor"
+        }
+      ]
+    }
+  }
+}

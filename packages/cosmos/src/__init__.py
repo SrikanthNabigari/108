@@ -55,6 +55,13 @@ Example:
     >>> print(f"Sun in Navamsha: {navamsha_sun['rashi_name']}")
 """
 
+from .aspects import (
+    SPECIAL_ASPECTS,
+    get_all_aspects,
+    get_aspect_strength,
+    get_houses_aspected_by,
+    get_planet_aspects,
+)
 from .divisional import (
     DIVISIONAL_NAMES,
     ELEMENT_MAP,
@@ -180,23 +187,18 @@ __all__ = [
     "ELEMENT_MAP",
     "HOUSE_SYSTEM_MAP",
     "KARANA_NAMES",
-    # Ephemeris constants
     "PLANET_MAP",
-    # Divisional chart constants
     "RASHI_NAMES",
-    # Panchanga constants
+    "SPECIAL_ASPECTS",
     "TITHI_NAMES",
     "VARA_NAMES",
     "YOGA_NAMES",
     "DivisionalChart",
-    # Divisional chart type definitions
     "DivisionalPosition",
-    # Nakshatra type definitions
     "NakshatraResult",
     "PadaNavamshaResult",
     "TarabalaResult",
     "VargaStrength",
-    # Upagraha functions
     "calculate_all_upagrahas",
     "calculate_ardhaprahara",
     "calculate_dhooma",
@@ -207,27 +209,26 @@ __all__ = [
     "calculate_mrityu",
     "calculate_parivesha",
     "calculate_upaketu",
-    # Vimshopaka functions
     "calculate_vimshopaka_bala",
     "calculate_vyatipata",
     "calculate_yamaghanda_upagraha",
     "close_ephemeris",
     "datetime_to_jd",
     "get_akshavedamsha",
+    "get_all_aspects",
     "get_all_nakshatras",
     "get_all_planets",
     "get_all_planets_by_house",
     "get_all_vimshopaka",
     "get_ascendant",
+    "get_aspect_strength",
     "get_ayanamsa",
     "get_bhamsha",
     "get_chaturthamsha",
     "get_chaturvimshamsha",
-    # Divisional chart functions (D1-D60)
     "get_d1_position",
     "get_dashamsha",
     "get_divisional_chart",
-    # Divisional chart dispatcher functions
     "get_divisional_position",
     "get_drekkana",
     "get_dwadashamsha",
@@ -236,37 +237,34 @@ __all__ = [
     "get_house_categories",
     "get_house_category",
     "get_house_cusps",
-    # House functions
     "get_house_for_longitude",
     "get_house_from_reference",
     "get_house_karaka",
     "get_house_lord",
     "get_house_significations",
-    # Ephemeris functions
+    "get_houses_aspected_by",
     "get_julian_day",
     "get_karana",
     "get_karana_advanced",
     "get_kendras_from",
     "get_khavedamsha",
     "get_nakshatra_lord",
-    # Nakshatra utility functions
     "get_nakshatra_name_by_number",
     "get_nakshatra_number_by_name",
     "get_navamsha",
     "get_pada_navamsha",
     "get_panchanga",
+    "get_planet_aspects",
     "get_planet_dignity_in_sign",
     "get_planet_position",
     "get_planets_in_house",
     "get_saptamsha",
     "get_shashtiamsha",
     "get_shodashamsha",
-    # Sunrise/sunset functions
     "get_sunrise",
     "get_sunrise_sunset",
     "get_sunset",
     "get_tarabala",
-    # Panchanga functions
     "get_tithi",
     "get_trimshamsha",
     "get_trinal_houses",
@@ -276,7 +274,6 @@ __all__ = [
     "get_vimshamsha",
     "get_yoga",
     "is_benefic_house",
-    # Nakshatra functions
     "longitude_to_nakshatra",
     "validate_nakshatra_name",
 ]

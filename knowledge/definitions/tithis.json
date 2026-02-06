@@ -1,0 +1,457 @@
+{
+  "tithis": [
+    {
+      "number": 1,
+      "name": "Pratipada",
+      "sanskrit": "प्रतिपदा",
+      "paksha": "shukla",
+      "lord": "sun",
+      "deity": "Agni",
+      "nature": "nanda",
+      "good_for": ["New beginnings", "Starting ventures", "Worship of fire deity", "Foundation laying"],
+      "avoid": ["Travel south", "Hair cutting", "Buying iron"],
+      "health_indication": "Head, brain vitality",
+      "lunar_day_angle": "0-12"
+    },
+    {
+      "number": 2,
+      "name": "Dwitiya",
+      "sanskrit": "द्वितीया",
+      "paksha": "shukla",
+      "lord": "moon",
+      "deity": "Brahma",
+      "nature": "bhadra",
+      "good_for": ["Foundation laying", "Naming ceremony", "Marriage", "Starting education"],
+      "avoid": ["Travel north", "Buying salt"],
+      "health_indication": "Face, right eye",
+      "lunar_day_angle": "12-24"
+    },
+    {
+      "number": 3,
+      "name": "Tritiya",
+      "sanskrit": "तृतीया",
+      "paksha": "shukla",
+      "lord": "mars",
+      "deity": "Gauri",
+      "nature": "jaya",
+      "good_for": ["Cutting hair", "Shaving", "Learning weapons", "Agriculture"],
+      "avoid": ["Travel east", "Medical treatment"],
+      "health_indication": "Ears, arms",
+      "lunar_day_angle": "24-36"
+    },
+    {
+      "number": 4,
+      "name": "Chaturthi",
+      "sanskrit": "चतुर्थी",
+      "paksha": "shukla",
+      "lord": "mercury",
+      "deity": "Ganesha",
+      "nature": "rikta",
+      "good_for": ["Destroying enemies", "Cruel deeds", "Overcoming obstacles", "Ganesha worship"],
+      "avoid": ["Travel in any direction", "Starting new ventures", "Auspicious work"],
+      "health_indication": "Stomach, digestive system",
+      "lunar_day_angle": "36-48"
+    },
+    {
+      "number": 5,
+      "name": "Panchami",
+      "sanskrit": "पंचमी",
+      "paksha": "shukla",
+      "lord": "jupiter",
+      "deity": "Nagas",
+      "nature": "purna",
+      "good_for": ["Starting education", "Medicine", "Artistic pursuits", "Festivities"],
+      "avoid": ["Travel south", "Surgery"],
+      "health_indication": "Heart, upper back",
+      "lunar_day_angle": "48-60"
+    },
+    {
+      "number": 6,
+      "name": "Shashthi",
+      "sanskrit": "षष्ठी",
+      "paksha": "shukla",
+      "lord": "venus",
+      "deity": "Kartikeya",
+      "nature": "nanda",
+      "good_for": ["Coronation", "Meeting friends", "Festivities", "Enjoyment"],
+      "avoid": ["Travel west"],
+      "health_indication": "Navel, kidney area",
+      "lunar_day_angle": "60-72"
+    },
+    {
+      "number": 7,
+      "name": "Saptami",
+      "sanskrit": "सप्तमी",
+      "paksha": "shukla",
+      "lord": "saturn",
+      "deity": "Surya",
+      "nature": "bhadra",
+      "good_for": ["Travel", "Buying vehicles", "Starting journeys", "Trade"],
+      "avoid": ["Medical treatment on eyes"],
+      "health_indication": "Lower back, reproductive organs",
+      "lunar_day_angle": "72-84"
+    },
+    {
+      "number": 8,
+      "name": "Ashtami",
+      "sanskrit": "अष्टमी",
+      "paksha": "shukla",
+      "lord": "rahu",
+      "deity": "Rudra",
+      "nature": "jaya",
+      "good_for": ["War", "Using weapons", "Debate", "Confrontation"],
+      "avoid": ["Auspicious ceremonies", "Marriage", "New ventures"],
+      "health_indication": "Bones, joints",
+      "lunar_day_angle": "84-96"
+    },
+    {
+      "number": 9,
+      "name": "Navami",
+      "sanskrit": "नवमी",
+      "paksha": "shukla",
+      "lord": "sun",
+      "deity": "Durga",
+      "nature": "rikta",
+      "good_for": ["Destroying enemies", "Cruel activities", "Durga worship"],
+      "avoid": ["Auspicious ceremonies", "Travel", "New beginnings"],
+      "health_indication": "Thighs",
+      "lunar_day_angle": "96-108"
+    },
+    {
+      "number": 10,
+      "name": "Dashami",
+      "sanskrit": "दशमी",
+      "paksha": "shukla",
+      "lord": "moon",
+      "deity": "Dharmaraja",
+      "nature": "purna",
+      "good_for": ["Auspicious ceremonies", "Religious rites", "Government work", "Virtuous deeds"],
+      "avoid": ["Travel south"],
+      "health_indication": "Knees",
+      "lunar_day_angle": "108-120"
+    },
+    {
+      "number": 11,
+      "name": "Ekadashi",
+      "sanskrit": "एकादशी",
+      "paksha": "shukla",
+      "lord": "mars",
+      "deity": "Vishnu",
+      "nature": "nanda",
+      "good_for": ["Fasting", "Vishnu worship", "Spiritual practices", "Charity"],
+      "avoid": ["Eating grains", "Starting material ventures"],
+      "health_indication": "Calves, shins",
+      "lunar_day_angle": "120-132"
+    },
+    {
+      "number": 12,
+      "name": "Dwadashi",
+      "sanskrit": "द्वादशी",
+      "paksha": "shukla",
+      "lord": "mercury",
+      "deity": "Vishnu",
+      "nature": "bhadra",
+      "good_for": ["Religious ceremonies", "Fire rituals", "Charity", "Breaking fast"],
+      "avoid": ["Cutting trees", "Starting quarrels"],
+      "health_indication": "Ankles, feet",
+      "lunar_day_angle": "132-144"
+    },
+    {
+      "number": 13,
+      "name": "Trayodashi",
+      "sanskrit": "त्रयोदशी",
+      "paksha": "shukla",
+      "lord": "jupiter",
+      "deity": "Kamadeva",
+      "nature": "jaya",
+      "good_for": ["Friendship", "Sensual pleasures", "Festivities", "Love matters"],
+      "avoid": ["Travel north"],
+      "health_indication": "Toes, feet extremities",
+      "lunar_day_angle": "144-156"
+    },
+    {
+      "number": 14,
+      "name": "Chaturdashi",
+      "sanskrit": "चतुर्दशी",
+      "paksha": "shukla",
+      "lord": "venus",
+      "deity": "Shiva",
+      "nature": "rikta",
+      "good_for": ["Using poison or medicine", "Tantra", "Shiva worship", "Destroying enemies"],
+      "avoid": ["Auspicious ceremonies", "Marriage", "Travel"],
+      "health_indication": "Spine, nervous system",
+      "lunar_day_angle": "156-168"
+    },
+    {
+      "number": 15,
+      "name": "Purnima",
+      "sanskrit": "पूर्णिमा",
+      "paksha": "shukla",
+      "lord": "saturn",
+      "deity": "Moon (Chandra)",
+      "nature": "purna",
+      "good_for": ["All auspicious ceremonies", "Worship", "Festivities", "Charity", "Satyanarayan Puja"],
+      "avoid": ["Surgery", "Harsh activities"],
+      "health_indication": "Overall vitality, mental health",
+      "lunar_day_angle": "168-180"
+    },
+    {
+      "number": 16,
+      "name": "Pratipada",
+      "sanskrit": "प्रतिपदा",
+      "paksha": "krishna",
+      "lord": "sun",
+      "deity": "Agni",
+      "nature": "nanda",
+      "good_for": ["New beginnings with caution", "Detachment practices", "Inner work"],
+      "avoid": ["Major ventures", "Travel south"],
+      "health_indication": "Head, brain",
+      "lunar_day_angle": "180-192"
+    },
+    {
+      "number": 17,
+      "name": "Dwitiya",
+      "sanskrit": "द्वितीया",
+      "paksha": "krishna",
+      "lord": "moon",
+      "deity": "Brahma",
+      "nature": "bhadra",
+      "good_for": ["Foundation work", "Naming ceremonies", "Routine work"],
+      "avoid": ["Travel north"],
+      "health_indication": "Face, right eye",
+      "lunar_day_angle": "192-204"
+    },
+    {
+      "number": 18,
+      "name": "Tritiya",
+      "sanskrit": "तृतीया",
+      "paksha": "krishna",
+      "lord": "mars",
+      "deity": "Gauri",
+      "nature": "jaya",
+      "good_for": ["Cutting hair", "Agriculture", "Learning martial arts"],
+      "avoid": ["Travel east"],
+      "health_indication": "Ears, arms",
+      "lunar_day_angle": "204-216"
+    },
+    {
+      "number": 19,
+      "name": "Chaturthi",
+      "sanskrit": "चतुर्थी",
+      "paksha": "krishna",
+      "lord": "mercury",
+      "deity": "Ganesha",
+      "nature": "rikta",
+      "good_for": ["Destroying enemies", "Overcoming obstacles", "Ganesha worship"],
+      "avoid": ["Auspicious work", "Starting new ventures"],
+      "health_indication": "Stomach, digestive system",
+      "lunar_day_angle": "216-228"
+    },
+    {
+      "number": 20,
+      "name": "Panchami",
+      "sanskrit": "पंचमी",
+      "paksha": "krishna",
+      "lord": "jupiter",
+      "deity": "Nagas",
+      "nature": "purna",
+      "good_for": ["Education", "Medicine", "Artistic work"],
+      "avoid": ["Travel south"],
+      "health_indication": "Heart, upper back",
+      "lunar_day_angle": "228-240"
+    },
+    {
+      "number": 21,
+      "name": "Shashthi",
+      "sanskrit": "षष्ठी",
+      "paksha": "krishna",
+      "lord": "venus",
+      "deity": "Kartikeya",
+      "nature": "nanda",
+      "good_for": ["Festivity", "Meeting friends", "Enjoyment"],
+      "avoid": ["Travel west"],
+      "health_indication": "Navel, kidney area",
+      "lunar_day_angle": "240-252"
+    },
+    {
+      "number": 22,
+      "name": "Saptami",
+      "sanskrit": "सप्तमी",
+      "paksha": "krishna",
+      "lord": "saturn",
+      "deity": "Surya",
+      "nature": "bhadra",
+      "good_for": ["Travel", "Trade", "Vehicle purchase"],
+      "avoid": ["Eye treatment"],
+      "health_indication": "Lower back, reproductive organs",
+      "lunar_day_angle": "252-264"
+    },
+    {
+      "number": 23,
+      "name": "Ashtami",
+      "sanskrit": "अष्टमी",
+      "paksha": "krishna",
+      "lord": "rahu",
+      "deity": "Rudra",
+      "nature": "jaya",
+      "good_for": ["War", "Weapons training", "Debate", "Krishna Janmashtami (special)"],
+      "avoid": ["Auspicious ceremonies", "Marriage"],
+      "health_indication": "Bones, joints",
+      "lunar_day_angle": "264-276"
+    },
+    {
+      "number": 24,
+      "name": "Navami",
+      "sanskrit": "नवमी",
+      "paksha": "krishna",
+      "lord": "sun",
+      "deity": "Durga",
+      "nature": "rikta",
+      "good_for": ["Destroying enemies", "Cruel activities", "Durga worship"],
+      "avoid": ["Auspicious ceremonies", "New beginnings"],
+      "health_indication": "Thighs",
+      "lunar_day_angle": "276-288"
+    },
+    {
+      "number": 25,
+      "name": "Dashami",
+      "sanskrit": "दशमी",
+      "paksha": "krishna",
+      "lord": "moon",
+      "deity": "Dharmaraja",
+      "nature": "purna",
+      "good_for": ["Religious rites", "Government work", "Virtuous deeds"],
+      "avoid": ["Travel south"],
+      "health_indication": "Knees",
+      "lunar_day_angle": "288-300"
+    },
+    {
+      "number": 26,
+      "name": "Ekadashi",
+      "sanskrit": "एकादशी",
+      "paksha": "krishna",
+      "lord": "mars",
+      "deity": "Vishnu",
+      "nature": "nanda",
+      "good_for": ["Fasting", "Vishnu worship", "Spiritual practices", "Meditation"],
+      "avoid": ["Eating grains", "Material ventures"],
+      "health_indication": "Calves, shins",
+      "lunar_day_angle": "300-312"
+    },
+    {
+      "number": 27,
+      "name": "Dwadashi",
+      "sanskrit": "द्वादशी",
+      "paksha": "krishna",
+      "lord": "mercury",
+      "deity": "Vishnu",
+      "nature": "bhadra",
+      "good_for": ["Religious ceremonies", "Charity", "Fire rituals"],
+      "avoid": ["Cutting trees"],
+      "health_indication": "Ankles, feet",
+      "lunar_day_angle": "312-324"
+    },
+    {
+      "number": 28,
+      "name": "Trayodashi",
+      "sanskrit": "त्रयोदशी",
+      "paksha": "krishna",
+      "lord": "jupiter",
+      "deity": "Kamadeva",
+      "nature": "jaya",
+      "good_for": ["Friendship", "Festivities", "Love matters", "Pradosh Vrat"],
+      "avoid": ["Travel north"],
+      "health_indication": "Toes, feet extremities",
+      "lunar_day_angle": "324-336"
+    },
+    {
+      "number": 29,
+      "name": "Chaturdashi",
+      "sanskrit": "चतुर्दशी",
+      "paksha": "krishna",
+      "lord": "venus",
+      "deity": "Shiva",
+      "nature": "rikta",
+      "good_for": ["Tantra", "Using medicines", "Shiva worship", "Shivaratri"],
+      "avoid": ["Auspicious ceremonies", "Marriage"],
+      "health_indication": "Spine, nervous system",
+      "lunar_day_angle": "336-348"
+    },
+    {
+      "number": 30,
+      "name": "Amavasya",
+      "sanskrit": "अमावस्या",
+      "paksha": "krishna",
+      "lord": "saturn",
+      "deity": "Pitru (Ancestors)",
+      "nature": "purna",
+      "good_for": ["Ancestor worship (Pitru Tarpan)", "Tantra", "Remedial measures", "Mahalaya Amavasya"],
+      "avoid": ["All auspicious ceremonies", "New beginnings", "Marriage", "Travel"],
+      "health_indication": "Overall depletion, mental vulnerability",
+      "lunar_day_angle": "348-360"
+    }
+  ],
+  "tithi_groups": {
+    "nanda": {
+      "tithis": [1, 6, 11],
+      "meaning": "Joy, happiness",
+      "nature": "auspicious",
+      "best_for": "Starting new things, celebrations"
+    },
+    "bhadra": {
+      "tithis": [2, 7, 12],
+      "meaning": "Welfare, auspiciousness",
+      "nature": "auspicious",
+      "best_for": "Ceremonies, foundation laying, travel"
+    },
+    "jaya": {
+      "tithis": [3, 8, 13],
+      "meaning": "Victory",
+      "nature": "mixed",
+      "best_for": "Competition, confrontation, defeating enemies"
+    },
+    "rikta": {
+      "tithis": [4, 9, 14],
+      "meaning": "Empty, depleted",
+      "nature": "inauspicious",
+      "best_for": "Destructive activities, tantra, removing obstacles"
+    },
+    "purna": {
+      "tithis": [5, 10, 15],
+      "meaning": "Complete, full",
+      "nature": "auspicious",
+      "best_for": "All auspicious ceremonies, religious rites, charity"
+    }
+  },
+  "special_tithis": {
+    "purnima": {
+      "tithi_number": 15,
+      "paksha": "shukla",
+      "significance": "Full Moon, peak of lunar energy, highly auspicious"
+    },
+    "amavasya": {
+      "tithi_number": 30,
+      "paksha": "krishna",
+      "significance": "New Moon, lowest lunar energy, ancestor worship"
+    },
+    "ekadashi": {
+      "tithi_numbers": [11, 26],
+      "significance": "Sacred fasting day, Vishnu worship, spiritual elevation"
+    },
+    "chaturthi": {
+      "tithi_numbers": [4, 19],
+      "significance": "Ganesha worship, Vinayaka Chaturthi, Sankashti Chaturthi"
+    },
+    "ashtami": {
+      "tithi_numbers": [8, 23],
+      "significance": "Rudra tithi, Krishna Janmashtami, powerful for worship"
+    }
+  },
+  "calculation": {
+    "formula": "Tithi = floor((Moon longitude - Sun longitude) / 12) + 1",
+    "angular_span": "12 degrees of Moon-Sun separation per tithi",
+    "total_tithis": 30,
+    "shukla_paksha": "Tithis 1-15 (waxing Moon)",
+    "krishna_paksha": "Tithis 16-30 (waning Moon)"
+  }
+}

@@ -1005,15 +1005,15 @@ def _get_planet_index(planet_name: str) -> int:
         int: Rashi number (0-11)
     """
     planet_rashis = {
-        "sun": 0,  # Leo (own sign) - actually rules Leo (4), but returning 0 for Aries
-        "moon": 3,  # Cancer
+        "sun": 4,  # Leo (own sign)
+        "moon": 3,  # Cancer (own sign)
         "mars": 0,  # Aries (own sign)
         "mercury": 2,  # Gemini (own sign)
         "jupiter": 8,  # Sagittarius (own sign)
-        "venus": 2,  # Libra (own sign) - actually 6, but
-        "saturn": 7,  # Scorpio (actually Capricorn and Aquarius)
-        "rahu": 5,  # Virgo (exaltation)
-        "ketu": 11,  # Pisces (exaltation)
+        "venus": 1,  # Taurus (own sign)
+        "saturn": 9,  # Capricorn (own sign)
+        "rahu": 10,  # Aquarius (co-ruler by tradition)
+        "ketu": 7,  # Scorpio (co-ruler by tradition)
     }
     return planet_rashis.get(planet_name.lower(), 0)
 
@@ -1028,15 +1028,15 @@ def _get_exaltation_rashi(planet_name: str) -> int:
         int: Rashi number (0-11)
     """
     exaltations = {
-        "sun": 9,  # Libra - no, Aries actually. This is wrong. Sun exalts in Aries (0)
+        "sun": 0,  # Aries
         "moon": 1,  # Taurus
-        "mars": 10,  # Capricorn
+        "mars": 9,  # Capricorn
         "mercury": 5,  # Virgo
         "jupiter": 3,  # Cancer
         "venus": 11,  # Pisces
         "saturn": 6,  # Libra
-        "rahu": 5,  # Virgo
-        "ketu": 11,  # Pisces
+        "rahu": 1,  # Taurus
+        "ketu": 7,  # Scorpio
     }
     return exaltations.get(planet_name.lower(), 0)
 

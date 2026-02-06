@@ -1,0 +1,147 @@
+{
+  "karanas": {
+    "description": "Karanas are half-tithis. Each tithi has 2 karanas. There are 11 karanas: 7 movable (repeat 8 times = 56) + 4 fixed (appear once each) = 60 karanas in a lunar month.",
+    "movable": [
+      {
+        "number": 1,
+        "name": "Bava",
+        "sanskrit": "बव",
+        "lord": "sun",
+        "nature": "good",
+        "element": "fire",
+        "good_for": ["Permanent work", "Government work", "Authority tasks", "Fire rituals"],
+        "avoid": ["Travelling east"],
+        "description": "Ruled by Sun, gives authority and leadership in actions undertaken"
+      },
+      {
+        "number": 2,
+        "name": "Balava",
+        "sanskrit": "बालव",
+        "lord": "moon",
+        "nature": "good",
+        "element": "water",
+        "good_for": ["Auspicious work", "Marriage", "Naming ceremony", "Travel"],
+        "avoid": ["Cruel deeds"],
+        "description": "Ruled by Moon, nurturing and auspicious for gentle activities"
+      },
+      {
+        "number": 3,
+        "name": "Kaulava",
+        "sanskrit": "कौलव",
+        "lord": "mars",
+        "nature": "good",
+        "element": "fire",
+        "good_for": ["Friendship", "Meeting people", "Socializing", "Alliances"],
+        "avoid": ["War", "Confrontation"],
+        "description": "Ruled by Mars, good for building relationships and alliances"
+      },
+      {
+        "number": 4,
+        "name": "Taitila",
+        "sanskrit": "तैतिल",
+        "lord": "mercury",
+        "nature": "good",
+        "element": "earth",
+        "good_for": ["Accumulation of wealth", "Business", "Trade", "Buying property"],
+        "avoid": ["Selling property"],
+        "description": "Ruled by Mercury, favors accumulation and material gains"
+      },
+      {
+        "number": 5,
+        "name": "Gara",
+        "sanskrit": "गर",
+        "lord": "jupiter",
+        "nature": "good",
+        "element": "water",
+        "good_for": ["Agriculture", "Farming", "Planting", "Earth-related work"],
+        "avoid": ["Travel by water"],
+        "description": "Ruled by Jupiter, auspicious for agriculture and earth work"
+      },
+      {
+        "number": 6,
+        "name": "Vanija",
+        "sanskrit": "वणिज",
+        "lord": "venus",
+        "nature": "good",
+        "element": "air",
+        "good_for": ["Trade", "Commerce", "Buying and selling", "Financial transactions"],
+        "avoid": ["Lending money"],
+        "description": "Ruled by Venus, excellent for commercial and financial activities"
+      },
+      {
+        "number": 7,
+        "name": "Vishti",
+        "sanskrit": "विष्टि",
+        "lord": "saturn",
+        "nature": "bad",
+        "element": "ether",
+        "also_called": "Bhadra",
+        "good_for": ["Destructive work only", "Demolition", "Breaking things", "Cruel acts"],
+        "avoid": ["All auspicious work", "Marriage", "Travel", "New ventures", "Business"],
+        "description": "Ruled by Saturn, inauspicious (Bhadra Karana). Only suitable for destructive or removal activities. Particularly harmful in daytime during Shukla Paksha and nighttime during Krishna Paksha.",
+        "bhadra_rules": {
+          "harmful_when": "Bhadra born on earth (Bhu-Bhadra)",
+          "neutral_when": "Bhadra in Patala (underground) or Swarga (heaven)",
+          "location_by_tithi": "Determined by the tithi in which Vishti falls"
+        }
+      }
+    ],
+    "fixed": [
+      {
+        "number": 8,
+        "name": "Shakuni",
+        "sanskrit": "शकुनि",
+        "lord": "ketu",
+        "nature": "mixed",
+        "position": "2nd_half_krishna_chaturdashi",
+        "tithi_position": "Second half of Krishna Chaturdashi (29th tithi)",
+        "good_for": ["Preparing medicines", "Using poison for healing", "Tantra"],
+        "avoid": ["Auspicious work", "Travel"],
+        "description": "Fixed karana appearing once per lunar month. Mixed nature, useful for medicines and tantra."
+      },
+      {
+        "number": 9,
+        "name": "Chatushpada",
+        "sanskrit": "चतुष्पद",
+        "lord": "mars",
+        "nature": "good",
+        "position": "1st_half_amavasya",
+        "tithi_position": "First half of Amavasya (30th tithi)",
+        "good_for": ["Animal husbandry", "Buying cattle", "Agriculture", "Construction"],
+        "avoid": ["Travel", "Starting journeys"],
+        "description": "Fixed karana appearing once per lunar month. Good for activities related to four-legged animals and land."
+      },
+      {
+        "number": 10,
+        "name": "Naga",
+        "sanskrit": "नाग",
+        "lord": "rahu",
+        "nature": "bad",
+        "position": "2nd_half_amavasya",
+        "tithi_position": "Second half of Amavasya (30th tithi)",
+        "good_for": ["Permanent work that should not be disturbed", "Fortification"],
+        "avoid": ["Travel", "Marriage", "Most auspicious work"],
+        "description": "Fixed karana appearing once per lunar month. Generally inauspicious, related to serpent energy."
+      },
+      {
+        "number": 11,
+        "name": "Kimstughna",
+        "sanskrit": "किंस्तुघ्न",
+        "lord": "jupiter",
+        "nature": "good",
+        "position": "1st_half_shukla_pratipada",
+        "tithi_position": "First half of Shukla Pratipada (1st tithi)",
+        "good_for": ["Auspicious ceremonies", "Worship", "Charity", "Initiations"],
+        "avoid": ["Harsh activities", "Confrontation"],
+        "description": "Fixed karana appearing once per lunar month. Highly auspicious, destroys evil and negativity."
+      }
+    ]
+  },
+  "calculation": {
+    "formula": "Karana number = floor((Moon longitude - Sun longitude) / 6) + 1",
+    "total_karanas_per_month": 60,
+    "angular_span": "6 degrees of Moon-Sun separation per karana",
+    "cycle": "7 movable karanas cycle 8 times (56) + 4 fixed karanas (4) = 60",
+    "sequence_in_month": "Kimstughna (fixed), then 8 cycles of [Bava, Balava, Kaulava, Taitila, Gara, Vanija, Vishti], then Shakuni (fixed), Chatushpada (fixed), Naga (fixed)"
+  }
+}

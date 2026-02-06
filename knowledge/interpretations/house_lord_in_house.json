@@ -1,0 +1,869 @@
+{
+  "house_lord_in_house": {
+    "description": "Interpretations for lord of each house placed in each of 12 houses. 144 combinations (12 lords x 12 houses). Lord numbering follows house number (lord_1 = ascendant lord, lord_2 = 2nd house lord, etc.)",
+    "lord_1_in_house_1": {
+      "summary": "Ascendant lord in own house - strong personality, good health, self-made success",
+      "positive": ["Strong self-identity", "Good health and vitality", "Self-made person", "Natural leadership"],
+      "negative": ["Self-centered tendencies", "May neglect others' needs"],
+      "specific_effects": "Person is self-reliant, physically strong, and projects a confident image. First impression is authentic."
+    },
+    "lord_1_in_house_2": {
+      "summary": "Ascendant lord in 2nd - wealth through personal efforts, family-oriented",
+      "positive": ["Earns through own abilities", "Family focused", "Good speech", "Accumulates wealth"],
+      "negative": ["Over-identified with possessions", "Self-worth tied to money"],
+      "specific_effects": "Personal identity is linked to wealth and family. Person focuses on building financial security through their own skills."
+    },
+    "lord_1_in_house_3": {
+      "summary": "Ascendant lord in 3rd - courageous, communicative, adventurous",
+      "positive": ["Brave and self-driven", "Good communicator", "Entrepreneurial", "Close to siblings"],
+      "negative": ["Restless personality", "May take unnecessary risks"],
+      "specific_effects": "Person channels personal energy into communication, short travel, and courageous pursuits. Siblings play important role."
+    },
+    "lord_1_in_house_4": {
+      "summary": "Ascendant lord in 4th - happy domestic life, property, mother's influence",
+      "positive": ["Domestic happiness", "Property ownership", "Strong mother bond", "Inner contentment"],
+      "negative": ["Too home-bound", "Difficulty leaving comfort zone"],
+      "specific_effects": "Personal happiness is tied to home, property, and mother. Person finds fulfillment in domestic environment."
+    },
+    "lord_1_in_house_5": {
+      "summary": "Ascendant lord in 5th - intelligent, creative, fortunate with children",
+      "positive": ["High intelligence", "Creative talents", "Good children", "Romantic nature"],
+      "negative": ["Speculative tendencies", "Over-investment in romance"],
+      "specific_effects": "Person channels identity into creativity, education, and children. Past-life merit supports current efforts."
+    },
+    "lord_1_in_house_6": {
+      "summary": "Ascendant lord in 6th - health challenges, service-oriented, defeats enemies",
+      "positive": ["Service-oriented", "Overcomes obstacles", "Good in competitive fields"],
+      "negative": ["Health issues", "Enemies and debt", "Life of struggle"],
+      "specific_effects": "Person faces early health or life challenges but develops resilience. Excellence in service, medicine, or competitive fields."
+    },
+    "lord_1_in_house_7": {
+      "summary": "Ascendant lord in 7th - partnership-focused, spouse-dependent, public life",
+      "positive": ["Strong marriage focus", "Business acumen", "Social recognition"],
+      "negative": ["Identity tied to partner", "May lose self in relationships"],
+      "specific_effects": "Personal identity expressed through partnerships. Marriage and business partnerships define life path."
+    },
+    "lord_1_in_house_8": {
+      "summary": "Ascendant lord in 8th - transformation, occult interest, health challenges",
+      "positive": ["Occult abilities", "Transformation capacity", "Research mind", "Longevity"],
+      "negative": ["Health crises", "Identity upheavals", "Secretive nature"],
+      "specific_effects": "Person undergoes significant life transformations. Interest in occult, research, and hidden matters. Health needs attention."
+    },
+    "lord_1_in_house_9": {
+      "summary": "Ascendant lord in 9th - fortunate, spiritual, father's blessings",
+      "positive": ["Very fortunate", "Spiritual nature", "Good father", "Higher education success"],
+      "negative": ["May be too philosophical", "Detached from practical matters"],
+      "specific_effects": "One of the best placements. Person is naturally fortunate, spiritual, and supported by dharma."
+    },
+    "lord_1_in_house_10": {
+      "summary": "Ascendant lord in 10th - career success, public recognition, authority",
+      "positive": ["Career-oriented success", "Public recognition", "Leadership", "Authority"],
+      "negative": ["May neglect personal life", "Identity tied to career"],
+      "specific_effects": "Excellent placement. Person achieves success through personal effort and is recognized publicly."
+    },
+    "lord_1_in_house_11": {
+      "summary": "Ascendant lord in 11th - gains, fulfilled desires, social connections",
+      "positive": ["Desires fulfilled", "Good income", "Many friends", "Successful networking"],
+      "negative": ["Materialistic", "Too many desires"],
+      "specific_effects": "Person achieves goals through personal effort. Gains come naturally. Strong social network supports ambitions."
+    },
+    "lord_1_in_house_12": {
+      "summary": "Ascendant lord in 12th - spiritual, foreign connections, expenditure",
+      "positive": ["Spiritual orientation", "Foreign success", "Moksha-inclined"],
+      "negative": ["Health issues", "Losses", "Isolation", "Self-undoing"],
+      "specific_effects": "Person may live abroad or in seclusion. Spiritual growth through loss and detachment."
+    },
+    "lord_2_in_house_1": {
+      "summary": "2nd lord in 1st - wealth through personality, good speech, family values",
+      "positive": ["Attracts wealth naturally", "Good speech", "Family-oriented personality"],
+      "negative": ["Materialistic identity", "Boastful speech"],
+      "specific_effects": "Person earns through personal charisma and presentation. Family wealth supports self-development."
+    },
+    "lord_2_in_house_2": {
+      "summary": "2nd lord in own house - strong finances, good speech, family prosperity",
+      "positive": ["Strong finances", "Excellent speech", "Family prosperity", "Good food"],
+      "negative": ["Over-attachment to money", "Material fixation"],
+      "specific_effects": "Excellent for wealth. Family finances are strong. Person has commanding speech and good taste."
+    },
+    "lord_2_in_house_3": {
+      "summary": "2nd lord in 3rd - earns through communication, sibling in business",
+      "positive": ["Income through writing/media", "Sibling business partnerships", "Courageous speech"],
+      "negative": ["Financial efforts required", "Speech may be harsh"],
+      "specific_effects": "Wealth comes through communication skills, media, or collaboration with siblings."
+    },
+    "lord_2_in_house_4": {
+      "summary": "2nd lord in 4th - family property, wealth from land, comfortable life",
+      "positive": ["Property wealth", "Family estate", "Comfortable living", "Mother contributes to wealth"],
+      "negative": ["Money tied up in property", "Family disputes over assets"],
+      "specific_effects": "Wealth accumulated through property, real estate, and family inheritance."
+    },
+    "lord_2_in_house_5": {
+      "summary": "2nd lord in 5th - wealth through intelligence, speculative gains, children prosper",
+      "positive": ["Intelligent wealth creation", "Speculative gains", "Children bring wealth"],
+      "negative": ["Speculative losses possible", "Over-spending on pleasures"],
+      "specific_effects": "Wealth comes through intelligence, creativity, and sometimes speculation."
+    },
+    "lord_2_in_house_6": {
+      "summary": "2nd lord in 6th - financial struggles, debt, enemies affect wealth",
+      "positive": ["Income through service or medical field", "Overcoming financial obstacles"],
+      "negative": ["Debt and financial difficulties", "Family health issues", "Enemies affect wealth"],
+      "specific_effects": "Financial challenges require persistence. Income through service, healthcare, or competitive fields."
+    },
+    "lord_2_in_house_7": {
+      "summary": "2nd lord in 7th - wealth through partner, business profits",
+      "positive": ["Partner brings wealth", "Business profits", "Good post-marital finances"],
+      "negative": ["Dependency on partner for money", "Financial disputes in marriage"],
+      "specific_effects": "Spouse and business partnerships contribute significantly to wealth."
+    },
+    "lord_2_in_house_8": {
+      "summary": "2nd lord in 8th - inheritance, financial ups and downs, sudden gains/losses",
+      "positive": ["Inheritance possible", "Insurance gains", "Research income"],
+      "negative": ["Financial instability", "Sudden losses", "Family wealth disruption"],
+      "specific_effects": "Wealth comes through inheritance, insurance, or sudden means. Financial life has dramatic ups and downs."
+    },
+    "lord_2_in_house_9": {
+      "summary": "2nd lord in 9th - fortunate wealth, father's support, religious income",
+      "positive": ["Fortunate wealth", "Father contributes to finances", "Income from teaching/religion"],
+      "negative": ["Spending on travel and education", "Over-generous"],
+      "specific_effects": "Wealth is supported by luck and father's blessings. Income from spiritual or educational pursuits."
+    },
+    "lord_2_in_house_10": {
+      "summary": "2nd lord in 10th - wealth through career, public income, professional speech",
+      "positive": ["Excellent career income", "Public speaking wealth", "Professional success"],
+      "negative": ["Over-focused on earning", "Money tied to reputation"],
+      "specific_effects": "Strong income from professional career. Public recognition contributes to wealth."
+    },
+    "lord_2_in_house_11": {
+      "summary": "2nd lord in 11th - excellent financial gains, profitable friends, desires met",
+      "positive": ["Excellent income", "Gains from network", "Financial desires fulfilled"],
+      "negative": ["Greed tendency", "Income expectations always rising"],
+      "specific_effects": "One of the best placements for wealth. Multiple income sources and gains from social connections."
+    },
+    "lord_2_in_house_12": {
+      "summary": "2nd lord in 12th - expenditure, foreign wealth, financial losses",
+      "positive": ["Foreign income", "Spiritual spending", "Bed comforts"],
+      "negative": ["Excessive expenditure", "Money drains", "Financial losses"],
+      "specific_effects": "Money tends to be spent quickly. Possible income from foreign sources or spiritual work."
+    },
+    "lord_3_in_house_1": {
+      "summary": "3rd lord in 1st - courageous, self-made, communication skills",
+      "positive": ["Self-driven courage", "Communication talents", "Entrepreneurial"],
+      "negative": ["Restless nature", "May take too many risks"],
+      "specific_effects": "Personal drive and communication define identity. Courage is a core character trait."
+    },
+    "lord_3_in_house_2": {
+      "summary": "3rd lord in 2nd - earns through communication, family courage, sibling wealth",
+      "positive": ["Income through communication", "Family business", "Sibling financial support"],
+      "negative": ["Spending on siblings", "Arguments in family"],
+      "specific_effects": "Wealth linked to communication skills and sibling connections."
+    },
+    "lord_3_in_house_3": {
+      "summary": "3rd lord in own house - strong communication, brave, good siblings",
+      "positive": ["Excellent communication", "Strong courage", "Good sibling bonds", "Writing talent"],
+      "negative": ["Overly aggressive communication", "Risk-taking"],
+      "specific_effects": "Communication and courage are natural strengths. Siblings are supportive."
+    },
+    "lord_3_in_house_4": {
+      "summary": "3rd lord in 4th - home-based communication, property through effort",
+      "positive": ["Home-based business", "Property through efforts", "Mother supports endeavors"],
+      "negative": ["Domestic restlessness", "Too many changes at home"],
+      "specific_effects": "Efforts and communication centered around home. Work-from-home or real estate communication."
+    },
+    "lord_3_in_house_5": {
+      "summary": "3rd lord in 5th - creative communication, intelligent efforts",
+      "positive": ["Creative writing", "Intelligent communication", "Children are courageous"],
+      "negative": ["Speculative communication", "Risky creative ventures"],
+      "specific_effects": "Communication talents channeled into creative pursuits. Intelligence supports courageous efforts."
+    },
+    "lord_3_in_house_6": {
+      "summary": "3rd lord in 6th - communication challenges, defeats competition",
+      "positive": ["Overcomes communication barriers", "Service through writing", "Competitive courage"],
+      "negative": ["Sibling health issues", "Enemies through communication"],
+      "specific_effects": "Must work hard at communication. Service-oriented writing. Competitive skills develop through challenges."
+    },
+    "lord_3_in_house_7": {
+      "summary": "3rd lord in 7th - partnership communication, business ventures",
+      "positive": ["Business partnerships", "Partner appreciates courage", "Travel for business"],
+      "negative": ["Communication conflicts in marriage", "Restless in partnerships"],
+      "specific_effects": "Communication and effort directed toward partnerships and business."
+    },
+    "lord_3_in_house_8": {
+      "summary": "3rd lord in 8th - secret communication, research writing, sibling challenges",
+      "positive": ["Research writing", "Occult communication", "Deep investigation skills"],
+      "negative": ["Sibling problems", "Hidden communication", "Effort blocked"],
+      "specific_effects": "Communication skills used in research, investigation, or occult areas."
+    },
+    "lord_3_in_house_9": {
+      "summary": "3rd lord in 9th - fortunate efforts, travel, teaching communication",
+      "positive": ["Fortunate travels", "Teaching through communication", "Publishing success"],
+      "negative": ["Scattered efforts", "Too much travel", "Preaching tendency"],
+      "specific_effects": "Efforts supported by luck. Communication used in teaching, publishing, and travel."
+    },
+    "lord_3_in_house_10": {
+      "summary": "3rd lord in 10th - career in communication, public speaking, media",
+      "positive": ["Career in communication", "Public recognition for efforts", "Media success"],
+      "negative": ["Career instability from restlessness", "Too many career directions"],
+      "specific_effects": "Professional life centered on communication, media, or writing."
+    },
+    "lord_3_in_house_11": {
+      "summary": "3rd lord in 11th - gains through communication, network building",
+      "positive": ["Gains through communication", "Large network", "Fulfilled through efforts"],
+      "negative": ["Too many social commitments", "Superficial connections"],
+      "specific_effects": "Communication skills bring financial gains and social connections."
+    },
+    "lord_3_in_house_12": {
+      "summary": "3rd lord in 12th - foreign communication, spiritual writing, effort losses",
+      "positive": ["Foreign communication success", "Spiritual writing", "Creative imagination"],
+      "negative": ["Wasted efforts", "Sibling separation", "Communication losses"],
+      "specific_effects": "Efforts directed toward foreign or spiritual areas. May work in isolation."
+    },
+    "lord_4_in_house_1": {
+      "summary": "4th lord in 1st - happy personality, property owner, mother's blessing",
+      "positive": ["Content and happy nature", "Property benefits personal image", "Mother supports identity"],
+      "negative": ["Too comfort-seeking", "Attachment to property"],
+      "specific_effects": "Personal happiness, property, and mother's influence shape identity strongly."
+    },
+    "lord_4_in_house_2": {
+      "summary": "4th lord in 2nd - family property, comfortable wealth, ancestral home",
+      "positive": ["Family property wealth", "Comfortable finances", "Good family environment"],
+      "negative": ["Over-attachment to ancestral property", "Family property disputes"],
+      "specific_effects": "Wealth comes through property and family estate."
+    },
+    "lord_4_in_house_3": {
+      "summary": "4th lord in 3rd - property through efforts, short travel from home",
+      "positive": ["Property through personal effort", "Home-based business", "Sibling property connections"],
+      "negative": ["Domestic restlessness", "Frequent moving"],
+      "specific_effects": "Home comfort requires effort. May move frequently for work."
+    },
+    "lord_4_in_house_4": {
+      "summary": "4th lord in own house - excellent domestic happiness, strong property, mother",
+      "positive": ["Maximum domestic happiness", "Strong property portfolio", "Loving mother", "Inner peace"],
+      "negative": ["Too attached to home", "Difficulty traveling"],
+      "specific_effects": "Best placement for domestic happiness, property, and mother's blessings."
+    },
+    "lord_4_in_house_5": {
+      "summary": "4th lord in 5th - educational property, children's comfort, creative home",
+      "positive": ["Property through intelligence", "Children's education at home", "Creative home environment"],
+      "negative": ["Spending on children's education", "Home becomes school"],
+      "specific_effects": "Home is a center of learning and creativity. Property connected to education."
+    },
+    "lord_4_in_house_6": {
+      "summary": "4th lord in 6th - domestic challenges, property disputes, mother's health",
+      "positive": ["Overcomes domestic challenges", "Service from home", "Medical property"],
+      "negative": ["Property disputes", "Mother's health issues", "Domestic discord"],
+      "specific_effects": "Home life faces challenges. Property may involve legal disputes."
+    },
+    "lord_4_in_house_7": {
+      "summary": "4th lord in 7th - spouse brings property, happy married home",
+      "positive": ["Spouse brings domestic happiness", "Property through marriage", "Happy home after marriage"],
+      "negative": ["Home happiness depends on marriage", "Partner controls property"],
+      "specific_effects": "Domestic happiness comes through marriage. Spouse contributes to property."
+    },
+    "lord_4_in_house_8": {
+      "summary": "4th lord in 8th - property transformation, domestic upheaval, hidden assets",
+      "positive": ["Hidden property", "Inheritance of land", "Deep emotional transformation"],
+      "negative": ["Domestic instability", "Property losses", "Mother's health challenges"],
+      "specific_effects": "Property may come through inheritance. Home life undergoes transformations."
+    },
+    "lord_4_in_house_9": {
+      "summary": "4th lord in 9th - fortunate property, spiritual home, father's land",
+      "positive": ["Fortunate property acquisition", "Spiritual home environment", "Father provides property"],
+      "negative": ["Home far from birthplace", "Too idealistic about domestic life"],
+      "specific_effects": "Property and home are blessed by fortune. May own property near spiritual places."
+    },
+    "lord_4_in_house_10": {
+      "summary": "4th lord in 10th - career from home, property business, public domestic image",
+      "positive": ["Career in real estate", "Work from home success", "Public domestic image"],
+      "negative": ["Career disrupts home life", "Property becomes business obligation"],
+      "specific_effects": "Career connected to property, real estate, or home-based business."
+    },
+    "lord_4_in_house_11": {
+      "summary": "4th lord in 11th - gains from property, fulfilled domestic desires",
+      "positive": ["Property gains", "Domestic desires fulfilled", "Friends at home"],
+      "negative": ["Property becomes investment only", "Social pressure on home"],
+      "specific_effects": "Property investments bring gains. Domestic desires are fulfilled over time."
+    },
+    "lord_4_in_house_12": {
+      "summary": "4th lord in 12th - foreign home, domestic losses, spiritual retreat",
+      "positive": ["Home abroad", "Spiritual home", "Moksha through domestic detachment"],
+      "negative": ["Loss of property", "Domestic unhappiness", "Mother separation"],
+      "specific_effects": "May live abroad or in retreat settings. Home life involves sacrifice."
+    },
+    "lord_5_in_house_1": {
+      "summary": "5th lord in 1st - intelligent personality, creative identity, past-life merit",
+      "positive": ["High intelligence shapes identity", "Creative personality", "Past-life blessings"],
+      "negative": ["Over-intellectual", "Pride in intelligence"],
+      "specific_effects": "Intelligence and creativity define the personality. Past-life merit supports life."
+    },
+    "lord_5_in_house_2": {
+      "summary": "5th lord in 2nd - wealth through intelligence, family education, creative speech",
+      "positive": ["Wealth from intellect", "Educated family", "Creative speech", "Children bring wealth"],
+      "negative": ["Spending on education", "Speculative financial risks"],
+      "specific_effects": "Intelligence and creativity contribute to wealth. Family values education."
+    },
+    "lord_5_in_house_3": {
+      "summary": "5th lord in 3rd - creative communication, intelligent siblings, writing talent",
+      "positive": ["Creative writing", "Intelligent communication", "Sibling collaboration on creative projects"],
+      "negative": ["Scattered creative energy", "Too many creative projects"],
+      "specific_effects": "Creativity channeled through communication and collaboration."
+    },
+    "lord_5_in_house_4": {
+      "summary": "5th lord in 4th - educated home, creative property, children's comfort",
+      "positive": ["Educational home environment", "Creative domestic life", "Property through intelligence"],
+      "negative": ["Children too attached to home", "Over-investment in children's comfort"],
+      "specific_effects": "Home is a center of education and creativity. Children thrive in domestic environment."
+    },
+    "lord_5_in_house_5": {
+      "summary": "5th lord in own house - exceptional intelligence, blessed children, creative mastery",
+      "positive": ["Exceptional intelligence", "Blessed children", "Creative mastery", "Spiritual merit"],
+      "negative": ["Pride in intellect", "Over-speculation"],
+      "specific_effects": "Excellent placement for intelligence, children, and creative success."
+    },
+    "lord_5_in_house_6": {
+      "summary": "5th lord in 6th - children's challenges, intelligence in service, competitive creativity",
+      "positive": ["Intelligence used in service", "Creative problem-solving", "Medical intelligence"],
+      "negative": ["Children's health issues", "Creative obstacles", "Speculative losses"],
+      "specific_effects": "Intelligence applied to overcoming challenges. Children may face health or other difficulties."
+    },
+    "lord_5_in_house_7": {
+      "summary": "5th lord in 7th - romantic marriage, creative partnerships, intelligent spouse",
+      "positive": ["Love marriage", "Creative business partnership", "Intelligent spouse"],
+      "negative": ["Romance complicates marriage", "Over-idealistic about partner"],
+      "specific_effects": "Romance leads to marriage. Spouse is intelligent and creative."
+    },
+    "lord_5_in_house_8": {
+      "summary": "5th lord in 8th - occult intelligence, children's transformation, deep creativity",
+      "positive": ["Occult knowledge", "Research intelligence", "Deep creative transformation"],
+      "negative": ["Children's challenges", "Speculative losses", "Creative blocks"],
+      "specific_effects": "Intelligence directed toward research, occult, and transformation."
+    },
+    "lord_5_in_house_9": {
+      "summary": "5th lord in 9th - exceptional fortune, spiritual children, higher education",
+      "positive": ["Exceptional fortune through merit", "Spiritual children", "Higher education success"],
+      "negative": ["Over-philosophical", "Detached from practical creativity"],
+      "specific_effects": "One of the best placements. Past-life merit brings fortune, education, and spiritual children."
+    },
+    "lord_5_in_house_10": {
+      "summary": "5th lord in 10th - career through creativity, public intelligence, authority through merit",
+      "positive": ["Creative career success", "Public recognition of intelligence", "Authority through knowledge"],
+      "negative": ["Career overshadows personal creativity", "Pressure of expectations"],
+      "specific_effects": "Intelligence and creativity drive career success. Public recognizes intellectual achievements."
+    },
+    "lord_5_in_house_11": {
+      "summary": "5th lord in 11th - gains through intelligence, friends through creativity",
+      "positive": ["Gains from intelligence", "Creative network", "Desires fulfilled through merit"],
+      "negative": ["Commercialized creativity", "Speculative gains and losses"],
+      "specific_effects": "Intelligence and creativity bring financial gains and social connections."
+    },
+    "lord_5_in_house_12": {
+      "summary": "5th lord in 12th - spiritual creativity, foreign education, children abroad",
+      "positive": ["Spiritual creativity", "Foreign education", "Moksha through intelligence"],
+      "negative": ["Children live abroad", "Creative losses", "Speculative failures"],
+      "specific_effects": "Creativity and intelligence directed toward spiritual or foreign pursuits."
+    },
+    "lord_6_in_house_1": {
+      "summary": "6th lord in 1st - health challenges, competitive personality, service identity",
+      "positive": ["Competitive nature", "Service-oriented identity", "Overcomes health challenges"],
+      "negative": ["Chronic health issues", "Enemy-prone", "Debt tendency"],
+      "specific_effects": "Person faces health and competitive challenges that define character."
+    },
+    "lord_6_in_house_2": {
+      "summary": "6th lord in 2nd - financial difficulties, health affects wealth, family disputes",
+      "positive": ["Income from medical/service field", "Overcoming financial obstacles"],
+      "negative": ["Financial difficulties", "Family health issues", "Debt problems"],
+      "specific_effects": "Finances impacted by health, debt, or service obligations."
+    },
+    "lord_6_in_house_3": {
+      "summary": "6th lord in 3rd - courageous opponent, competitive communication",
+      "positive": ["Defeats competition through courage", "Fighting spirit", "Service through communication"],
+      "negative": ["Conflicts with siblings", "Aggressive communication", "Travel problems"],
+      "specific_effects": "Communication used in competitive environments. Courage to face enemies."
+    },
+    "lord_6_in_house_4": {
+      "summary": "6th lord in 4th - domestic disturbance, property disputes, mother's health",
+      "positive": ["Medical/service work from home", "Overcoming domestic challenges"],
+      "negative": ["Domestic discord", "Property disputes", "Mother's health issues"],
+      "specific_effects": "Home environment faces challenges from disputes, health, or enemies."
+    },
+    "lord_6_in_house_5": {
+      "summary": "6th lord in 5th - children's health, competitive intelligence, obstacles to creativity",
+      "positive": ["Intelligence in overcoming obstacles", "Medical knowledge", "Competitive creativity"],
+      "negative": ["Children's health or behavioral issues", "Speculative losses", "Romance obstacles"],
+      "specific_effects": "Intelligence applied to solving problems. Children may face challenges."
+    },
+    "lord_6_in_house_6": {
+      "summary": "6th lord in own house - strong victory over enemies, service mastery",
+      "positive": ["Excellent victory over enemies", "Strong health recovery", "Service excellence"],
+      "negative": ["Persistent enemies and obstacles", "Chronic but manageable health"],
+      "specific_effects": "Excellent for defeating enemies and excelling in service. Viparita Raja Yoga possible."
+    },
+    "lord_6_in_house_7": {
+      "summary": "6th lord in 7th - marital conflicts, partnership challenges, litigation",
+      "positive": ["Partner in medical/service field", "Legal career", "Overcoming partnership obstacles"],
+      "negative": ["Marital discord", "Partnership disputes", "Spouse health issues"],
+      "specific_effects": "Marriage and partnerships face challenges from conflict, health, or litigation."
+    },
+    "lord_6_in_house_8": {
+      "summary": "6th lord in 8th - enemies destroyed, debts cleared, transformation through service",
+      "positive": ["Enemies are destroyed", "Debts get cleared", "Health transforms", "Viparita Raja Yoga"],
+      "negative": ["Chronic health conditions", "Hidden enemies"],
+      "specific_effects": "Viparita Raja Yoga possible - enemies and debts are transformed. Occult healing ability."
+    },
+    "lord_6_in_house_9": {
+      "summary": "6th lord in 9th - father's enemies, dharma through service, foreign litigation",
+      "positive": ["Service-oriented dharma", "Legal success abroad", "Father overcomes obstacles"],
+      "negative": ["Obstacles to fortune", "Father's enemies", "Religious conflicts"],
+      "specific_effects": "Service and overcoming challenges become part of dharmic path."
+    },
+    "lord_6_in_house_10": {
+      "summary": "6th lord in 10th - career in service/medical, competitive career",
+      "positive": ["Medical career", "Service profession", "Competitive professional success"],
+      "negative": ["Career obstacles", "Professional enemies", "Health from work stress"],
+      "specific_effects": "Career involves service, healthcare, law, or competitive fields."
+    },
+    "lord_6_in_house_11": {
+      "summary": "6th lord in 11th - gains through service, overcoming obstacles brings income",
+      "positive": ["Income from service", "Friends help overcome obstacles", "Desires fulfilled through effort"],
+      "negative": ["Enemies in social circle", "Health affects gains"],
+      "specific_effects": "Gains come through service and overcoming competitive challenges."
+    },
+    "lord_6_in_house_12": {
+      "summary": "6th lord in 12th - enemies defeated, debts cleared, expenses from health",
+      "positive": ["Enemies self-destruct", "Debts eventually clear", "Viparita Raja Yoga possible"],
+      "negative": ["Health expenses", "Foreign enemies", "Hidden debts"],
+      "specific_effects": "Viparita Raja Yoga possible. Enemies and debts dissolve through losses and foreign connections."
+    },
+    "lord_7_in_house_1": {
+      "summary": "7th lord in 1st - spouse influences identity, marriage-focused personality",
+      "positive": ["Strong marriage influence", "Attractive personality", "Business acumen"],
+      "negative": ["Identity tied to partner", "Over-dependent on marriage"],
+      "specific_effects": "Spouse strongly influences personality and life direction."
+    },
+    "lord_7_in_house_2": {
+      "summary": "7th lord in 2nd - spouse contributes to wealth, family through marriage",
+      "positive": ["Spouse brings wealth", "Good family after marriage", "Partner's financial support"],
+      "negative": ["Financial dependency on spouse", "Money disputes in marriage"],
+      "specific_effects": "Marriage improves financial situation. Partner contributes to family wealth."
+    },
+    "lord_7_in_house_3": {
+      "summary": "7th lord in 3rd - spouse is communicative, business through communication",
+      "positive": ["Communicative spouse", "Business partnerships", "Travel with partner"],
+      "negative": ["Spouse may be restless", "Partnership communication issues"],
+      "specific_effects": "Partnership involves communication and short travel. Spouse may be in media/writing."
+    },
+    "lord_7_in_house_4": {
+      "summary": "7th lord in 4th - happy marriage at home, spouse brings property",
+      "positive": ["Happy married home life", "Spouse brings property", "Domestic harmony through partnership"],
+      "negative": ["Partner too controlling of home", "Marriage tied to property"],
+      "specific_effects": "Marriage brings domestic happiness and potentially property."
+    },
+    "lord_7_in_house_5": {
+      "summary": "7th lord in 5th - love marriage, romantic spouse, children through marriage",
+      "positive": ["Love marriage", "Romantic and creative spouse", "Children bring marital happiness"],
+      "negative": ["Romance before marriage creates complications", "Spouse too idealistic"],
+      "specific_effects": "Marriage has romantic beginnings. Spouse is creative and intelligent."
+    },
+    "lord_7_in_house_6": {
+      "summary": "7th lord in 6th - marital discord, spouse health, partnership challenges",
+      "positive": ["Spouse in service/medical field", "Marriage through service", "Overcoming marital obstacles"],
+      "negative": ["Marital discord", "Spouse health issues", "Partnership enemies"],
+      "specific_effects": "Marriage faces challenges through health, enemies, or service obligations."
+    },
+    "lord_7_in_house_7": {
+      "summary": "7th lord in own house - excellent marriage, strong partnerships, social success",
+      "positive": ["Excellent marriage", "Strong partnerships", "Social success", "Business acumen"],
+      "negative": ["Over-dependent on partnerships", "Multiple relationships possible"],
+      "specific_effects": "Best placement for marriage and partnerships. Spouse is well-suited."
+    },
+    "lord_7_in_house_8": {
+      "summary": "7th lord in 8th - marital transformation, spouse's challenges, deep intimacy",
+      "positive": ["Deep intimate bond", "Spouse brings inheritance", "Transformative marriage"],
+      "negative": ["Marital crises", "Spouse's health issues", "Marriage transformation through difficulty"],
+      "specific_effects": "Marriage undergoes deep transformation. Intense intimate connection but also challenges."
+    },
+    "lord_7_in_house_9": {
+      "summary": "7th lord in 9th - fortunate marriage, spiritual spouse, foreign partner",
+      "positive": ["Fortunate and dharmic marriage", "Spiritual spouse", "Partner brings luck"],
+      "negative": ["Spouse may be too philosophical", "Partner away on travels"],
+      "specific_effects": "Marriage is blessed by fortune. Spouse may be spiritual, foreign, or philosophical."
+    },
+    "lord_7_in_house_10": {
+      "summary": "7th lord in 10th - spouse supports career, business partnership success",
+      "positive": ["Spouse supports career", "Professional partnerships", "Social recognition through marriage"],
+      "negative": ["Marriage becomes business-like", "Career overshadows marital intimacy"],
+      "specific_effects": "Marriage and career are interlinked. Spouse contributes to professional success."
+    },
+    "lord_7_in_house_11": {
+      "summary": "7th lord in 11th - gains through marriage, spouse in social circle",
+      "positive": ["Gains through marriage", "Social partner", "Desires fulfilled through partnership"],
+      "negative": ["Marriage too social", "Partner's friends interfere"],
+      "specific_effects": "Marriage brings financial gains and social connections."
+    },
+    "lord_7_in_house_12": {
+      "summary": "7th lord in 12th - foreign spouse, bed pleasures, marital expenses",
+      "positive": ["Foreign spouse possible", "Good bed pleasures", "Spiritual marriage"],
+      "negative": ["Marital separation", "Partner expenses", "Spouse may live abroad"],
+      "specific_effects": "Marriage may involve foreign connection, spiritual bond, or physical separation."
+    },
+    "lord_8_in_house_1": {
+      "summary": "8th lord in 1st - transformative personality, health challenges, occult interest",
+      "positive": ["Transformative life experiences", "Occult abilities", "Longevity through crisis"],
+      "negative": ["Health challenges", "Life crises", "Mysterious personality"],
+      "specific_effects": "Life involves significant transformations. Health needs constant attention."
+    },
+    "lord_8_in_house_2": {
+      "summary": "8th lord in 2nd - sudden financial changes, family secrets, inheritance",
+      "positive": ["Inheritance", "Hidden wealth", "Research income"],
+      "negative": ["Financial instability", "Family secrets", "Speech issues"],
+      "specific_effects": "Finances undergo sudden changes. Inheritance or hidden wealth possible."
+    },
+    "lord_8_in_house_3": {
+      "summary": "8th lord in 3rd - sibling challenges, research writing, occult communication",
+      "positive": ["Research and investigation skills", "Occult writing", "Deep courage"],
+      "negative": ["Sibling problems", "Communication crises", "Travel dangers"],
+      "specific_effects": "Communication involves depth, research, and potentially occult subjects."
+    },
+    "lord_8_in_house_4": {
+      "summary": "8th lord in 4th - domestic upheaval, property transformation, mother's challenges",
+      "positive": ["Property through inheritance", "Deep domestic transformation", "Occult home"],
+      "negative": ["Domestic crises", "Property disputes", "Mother's health challenges"],
+      "specific_effects": "Home life undergoes significant transformation. Property comes through unusual means."
+    },
+    "lord_8_in_house_5": {
+      "summary": "8th lord in 5th - children's challenges, occult intelligence, speculative losses",
+      "positive": ["Occult intelligence", "Research creativity", "Deep transformation through children"],
+      "negative": ["Children's health or behavioral issues", "Speculative losses", "Romance crises"],
+      "specific_effects": "Intelligence directed toward depth, research, and occult. Children bring transformative experiences."
+    },
+    "lord_8_in_house_6": {
+      "summary": "8th lord in 6th - victory through crises, health transformation, enemy destruction",
+      "positive": ["Enemies destroyed", "Health crises overcome", "Victory through transformation"],
+      "negative": ["Chronic health battles", "Hidden enemies"],
+      "specific_effects": "Viparita Raja Yoga possible. Crises lead to victory over enemies."
+    },
+    "lord_8_in_house_7": {
+      "summary": "8th lord in 7th - marital challenges, partner's transformation, deep intimacy",
+      "positive": ["Deep intimate connection", "Partner's hidden resources", "Transformative marriage"],
+      "negative": ["Marriage difficulties", "Partner's health issues", "Relationship crises"],
+      "specific_effects": "Marriage involves deep transformation and potential challenges."
+    },
+    "lord_8_in_house_8": {
+      "summary": "8th lord in own house - occult mastery, longevity, deep transformation",
+      "positive": ["Long life", "Occult mastery", "Deep transformation capacity", "Research excellence"],
+      "negative": ["Chronic conditions", "Life of intensity", "Secretive nature"],
+      "specific_effects": "Strong for longevity and occult abilities. Life involves continuous transformation."
+    },
+    "lord_8_in_house_9": {
+      "summary": "8th lord in 9th - dharma transformation, father's challenges, spiritual crisis",
+      "positive": ["Spiritual transformation", "Deep philosophical understanding", "Father's hidden resources"],
+      "negative": ["Father's difficulties", "Dharma disrupted", "Fortune through crises"],
+      "specific_effects": "Spiritual life involves deep crises and transformation."
+    },
+    "lord_8_in_house_10": {
+      "summary": "8th lord in 10th - career transformation, sudden professional changes",
+      "positive": ["Career in research or investigation", "Professional transformation", "Hidden career abilities"],
+      "negative": ["Career instability", "Professional crises", "Sudden career changes"],
+      "specific_effects": "Professional life undergoes significant changes. Career in research, occult, or transformation."
+    },
+    "lord_8_in_house_11": {
+      "summary": "8th lord in 11th - sudden gains, transformation through network, hidden income",
+      "positive": ["Sudden or unexpected gains", "Hidden income sources", "Research gains"],
+      "negative": ["Unstable income", "Friends involved in crises", "Desire for hidden wealth"],
+      "specific_effects": "Gains come through transformation, inheritance, or research."
+    },
+    "lord_8_in_house_12": {
+      "summary": "8th lord in 12th - spiritual liberation through transformation, foreign occult, Viparita Yoga",
+      "positive": ["Viparita Raja Yoga possible", "Spiritual transformation", "Foreign occult studies"],
+      "negative": ["Heavy expenditure on health", "Foreign crises", "Isolation"],
+      "specific_effects": "Viparita Raja Yoga possible. Transformation leads to spiritual liberation."
+    },
+    "lord_9_in_house_1": {
+      "summary": "9th lord in 1st - extremely fortunate, dharmic personality, father's blessings",
+      "positive": ["Extremely fortunate life", "Dharmic personality", "Father's strong influence", "Natural luck"],
+      "negative": ["May take fortune for granted", "Self-righteous tendencies"],
+      "specific_effects": "One of the most fortunate placements. Life blessed by dharma and luck."
+    },
+    "lord_9_in_house_2": {
+      "summary": "9th lord in 2nd - fortunate wealth, dharmic family, spiritual values",
+      "positive": ["Wealth through fortune", "Dharmic family", "Spiritual wealth values"],
+      "negative": ["Over-reliance on luck for money", "Religious spending"],
+      "specific_effects": "Wealth comes through fortune, dharma, and father's support."
+    },
+    "lord_9_in_house_3": {
+      "summary": "9th lord in 3rd - fortunate efforts, dharmic communication, lucky travels",
+      "positive": ["Efforts blessed by fortune", "Dharmic communication", "Lucky short travels"],
+      "negative": ["Fortune requires effort", "Scattered dharmic focus"],
+      "specific_effects": "Fortune supports courageous efforts and communication."
+    },
+    "lord_9_in_house_4": {
+      "summary": "9th lord in 4th - fortunate property, dharmic home, spiritual education",
+      "positive": ["Fortunate property", "Spiritual home", "Mother is dharmic", "Education blessed"],
+      "negative": ["Too attached to dharmic comfort", "Home becomes temple"],
+      "specific_effects": "Home is blessed. Property comes through fortune. Education is spiritual."
+    },
+    "lord_9_in_house_5": {
+      "summary": "9th lord in 5th - excellent fortune, past-life merit, blessed children",
+      "positive": ["Exceptional fortune through merit", "Blessed children", "Spiritual intelligence"],
+      "negative": ["Spiritual pride", "Fortune creates complacency"],
+      "specific_effects": "Among the most auspicious combinations. Past-life merit brings all good things."
+    },
+    "lord_9_in_house_6": {
+      "summary": "9th lord in 6th - dharma through service, father's difficulties, fortune challenges",
+      "positive": ["Dharma expressed through service", "Fortune in healthcare or law"],
+      "negative": ["Fortune blocked", "Father's health or legal issues", "Dharmic conflicts"],
+      "specific_effects": "Dharma is expressed through overcoming challenges and service."
+    },
+    "lord_9_in_house_7": {
+      "summary": "9th lord in 7th - fortunate marriage, dharmic spouse, foreign partner",
+      "positive": ["Fortunate marriage", "Dharmic spouse", "Foreign partner possible", "Business luck"],
+      "negative": ["Fortune depends on marriage", "Spouse too philosophical"],
+      "specific_effects": "Marriage is blessed by fortune. Spouse is dharmic and brings luck."
+    },
+    "lord_9_in_house_8": {
+      "summary": "9th lord in 8th - fortune through transformation, father's challenges, hidden dharma",
+      "positive": ["Hidden fortune", "Occult spiritual growth", "Fortune through crisis"],
+      "negative": ["Father's difficulties", "Fortune obscured", "Dharma tested through crises"],
+      "specific_effects": "Fortune comes through unusual means. Spiritual growth through transformation."
+    },
+    "lord_9_in_house_9": {
+      "summary": "9th lord in own house - maximum fortune, strongest dharma, blessed by guru",
+      "positive": ["Maximum fortune", "Strong dharma", "Guru blessings", "International success"],
+      "negative": ["Dharmic pride", "Over-reliance on luck"],
+      "specific_effects": "Best placement for fortune, dharma, and father's blessings."
+    },
+    "lord_9_in_house_10": {
+      "summary": "9th lord in 10th - fortunate career, dharmic profession, authority through merit",
+      "positive": ["Career blessed by fortune", "Professional dharma", "Authority through righteousness"],
+      "negative": ["Too much expected from career", "Dharma becomes career obligation"],
+      "specific_effects": "Raja Yoga forming combination. Career is blessed and dharmic."
+    },
+    "lord_9_in_house_11": {
+      "summary": "9th lord in 11th - excellent gains through fortune, desires fulfilled by dharma",
+      "positive": ["Excellent financial gains through fortune", "Dharmic desires fulfilled", "Lucky network"],
+      "negative": ["Materialistic dharma", "Fortune creates desire cycle"],
+      "specific_effects": "Fortune brings material gains and fulfilled desires."
+    },
+    "lord_9_in_house_12": {
+      "summary": "9th lord in 12th - fortune abroad, spiritual liberation, father abroad",
+      "positive": ["Fortune abroad", "Spiritual liberation path", "Foreign dharmic success"],
+      "negative": ["Fortune through loss", "Father abroad or distant", "Spiritual spending"],
+      "specific_effects": "Fortune manifests in foreign lands or through spiritual practice."
+    },
+    "lord_10_in_house_1": {
+      "summary": "10th lord in 1st - career-focused identity, public recognition, self-made success",
+      "positive": ["Career defines personality", "Self-made professional success", "Public recognition"],
+      "negative": ["Career obsession", "Identity tied to work"],
+      "specific_effects": "Person's identity is closely linked to professional achievement."
+    },
+    "lord_10_in_house_2": {
+      "summary": "10th lord in 2nd - career earnings, professional speech, family business",
+      "positive": ["Good career income", "Professional speech skills", "Family business success"],
+      "negative": ["Money-driven career", "Career affects family"],
+      "specific_effects": "Career contributes to wealth. Professional speech is an asset."
+    },
+    "lord_10_in_house_3": {
+      "summary": "10th lord in 3rd - career in communication, self-employed, entrepreneurial",
+      "positive": ["Entrepreneurial career", "Communication profession", "Self-employed success"],
+      "negative": ["Career instability", "Too many professional interests"],
+      "specific_effects": "Professional life involves communication, media, or entrepreneurship."
+    },
+    "lord_10_in_house_4": {
+      "summary": "10th lord in 4th - career from home, property business, domestic profession",
+      "positive": ["Work from home", "Property career", "Mother influences career"],
+      "negative": ["Career limited to home area", "Domestic obligations affect work"],
+      "specific_effects": "Career connected to home, property, or domestic industries."
+    },
+    "lord_10_in_house_5": {
+      "summary": "10th lord in 5th - creative career, political success, education profession",
+      "positive": ["Creative professional success", "Political career", "Educational profession"],
+      "negative": ["Career mixed with speculation", "Professional creativity undervalued"],
+      "specific_effects": "Career involves creativity, education, politics, or entertainment."
+    },
+    "lord_10_in_house_6": {
+      "summary": "10th lord in 6th - service career, competitive profession, healthcare",
+      "positive": ["Service-oriented career", "Competitive professional field", "Healthcare profession"],
+      "negative": ["Career challenges", "Professional enemies", "Work-related health issues"],
+      "specific_effects": "Career in service, healthcare, law, or competitive industries."
+    },
+    "lord_10_in_house_7": {
+      "summary": "10th lord in 7th - career through partnerships, spouse supports career",
+      "positive": ["Partnership career", "Spouse supports profession", "Business success"],
+      "negative": ["Career depends on partnerships", "Professional relationships complicate marriage"],
+      "specific_effects": "Professional success through partnerships and marriage support."
+    },
+    "lord_10_in_house_8": {
+      "summary": "10th lord in 8th - career transformation, research profession, hidden work",
+      "positive": ["Research career", "Occult profession", "Career transformation ability"],
+      "negative": ["Career instability", "Professional crises", "Hidden work"],
+      "specific_effects": "Career involves research, investigation, or hidden work. Professional transformation likely."
+    },
+    "lord_10_in_house_9": {
+      "summary": "10th lord in 9th - career in teaching/law, international profession, dharmic work",
+      "positive": ["Teaching/law career", "International profession", "Dharmic professional life"],
+      "negative": ["Career too idealistic", "Professional dharma conflicts"],
+      "specific_effects": "Raja Yoga forming. Career in education, law, religion, or international affairs."
+    },
+    "lord_10_in_house_10": {
+      "summary": "10th lord in own house - maximum career success, authority, professional mastery",
+      "positive": ["Maximum career success", "Natural authority", "Professional mastery"],
+      "negative": ["Workaholic", "Career defines entire life"],
+      "specific_effects": "Best placement for career. Professional mastery and authority are natural."
+    },
+    "lord_10_in_house_11": {
+      "summary": "10th lord in 11th - excellent career gains, professional network, fulfilled ambitions",
+      "positive": ["Excellent career gains", "Professional network success", "Career ambitions fulfilled"],
+      "negative": ["Gains become sole career motivation", "Professional social pressure"],
+      "specific_effects": "Career brings excellent income and professional connections."
+    },
+    "lord_10_in_house_12": {
+      "summary": "10th lord in 12th - career abroad, behind-the-scenes work, spiritual profession",
+      "positive": ["Foreign career", "Spiritual profession", "Behind-the-scenes professional success"],
+      "negative": ["Career losses", "Professional isolation", "Work abroad away from family"],
+      "specific_effects": "Career involves foreign work, spiritual institutions, or behind-the-scenes roles."
+    },
+    "lord_11_in_house_1": {
+      "summary": "11th lord in 1st - personal gains, fulfilled desires, popular personality",
+      "positive": ["Natural gains", "Popular personality", "Desires fulfilled through self-effort"],
+      "negative": ["Materialistic identity", "Self-focused desires"],
+      "specific_effects": "Person naturally attracts gains and fulfills desires."
+    },
+    "lord_11_in_house_2": {
+      "summary": "11th lord in 2nd - excellent wealth, gains through family, multiple income",
+      "positive": ["Excellent wealth accumulation", "Family supports gains", "Multiple income sources"],
+      "negative": ["Greed", "Over-accumulation"],
+      "specific_effects": "Strong wealth combination. Family and personal skills generate multiple income sources."
+    },
+    "lord_11_in_house_3": {
+      "summary": "11th lord in 3rd - gains through communication, sibling support, network efforts",
+      "positive": ["Gains through communication", "Sibling help in earning", "Network through efforts"],
+      "negative": ["Effort required for gains", "Communication-dependent income"],
+      "specific_effects": "Income comes through communication, siblings, and personal efforts."
+    },
+    "lord_11_in_house_4": {
+      "summary": "11th lord in 4th - gains from property, domestic fulfillment, mother's support",
+      "positive": ["Property gains", "Domestic comfort from income", "Mother supports gains"],
+      "negative": ["Property-dependent income", "Comfort creates complacency"],
+      "specific_effects": "Gains come through property, home-based work, or mother's support."
+    },
+    "lord_11_in_house_5": {
+      "summary": "11th lord in 5th - gains through intelligence, speculative profits, children prosper",
+      "positive": ["Gains through intelligence", "Speculative profits", "Children bring income"],
+      "negative": ["Speculative risks", "Over-intellectualized earning"],
+      "specific_effects": "Income from intelligence, creativity, and sometimes speculation."
+    },
+    "lord_11_in_house_6": {
+      "summary": "11th lord in 6th - gains through service, income from competition",
+      "positive": ["Income from service", "Gains through competition", "Overcoming obstacles brings income"],
+      "negative": ["Income challenges", "Health affects earning", "Debt from desires"],
+      "specific_effects": "Gains come through service, healthcare, or competitive fields."
+    },
+    "lord_11_in_house_7": {
+      "summary": "11th lord in 7th - gains through partnerships, spouse income, business profits",
+      "positive": ["Partnership profits", "Spouse contributes income", "Business gains"],
+      "negative": ["Income depends on partner", "Social pressure on earnings"],
+      "specific_effects": "Partnership and marriage contribute to income and gains."
+    },
+    "lord_11_in_house_8": {
+      "summary": "11th lord in 8th - sudden gains, inheritance income, hidden wealth",
+      "positive": ["Sudden unexpected gains", "Inheritance", "Research income"],
+      "negative": ["Unstable income", "Gains through crises", "Hidden financial sources"],
+      "specific_effects": "Income comes through unexpected means, inheritance, or transformation."
+    },
+    "lord_11_in_house_9": {
+      "summary": "11th lord in 9th - fortunate gains, income from teaching, international earning",
+      "positive": ["Fortunate income", "Gains from teaching or law", "International earnings"],
+      "negative": ["Fortune-dependent income", "Earnings from religious work"],
+      "specific_effects": "Fortune blesses income. Gains from education, law, or international work."
+    },
+    "lord_11_in_house_10": {
+      "summary": "11th lord in 10th - excellent career income, professional gains, fulfilled ambitions",
+      "positive": ["Excellent professional income", "Career gains", "Ambitions fulfilled through work"],
+      "negative": ["Income tied to career performance", "Professional pressure for gains"],
+      "specific_effects": "Career and professional achievements are the primary source of gains."
+    },
+    "lord_11_in_house_11": {
+      "summary": "11th lord in own house - maximum gains, all desires fulfilled, large network",
+      "positive": ["Maximum gains", "All desires fulfilled", "Largest social network", "Multiple income streams"],
+      "negative": ["Insatiable desires", "Too many social obligations"],
+      "specific_effects": "Best placement for gains, income, and fulfilled desires."
+    },
+    "lord_11_in_house_12": {
+      "summary": "11th lord in 12th - gains spent quickly, foreign income, spiritual gains",
+      "positive": ["Foreign income", "Spiritual gains", "Income for charitable purposes"],
+      "negative": ["Money spent as fast as earned", "Financial losses", "Unfulfilled desires"],
+      "specific_effects": "Gains tend to be spent. Foreign income or spiritual earnings possible."
+    },
+    "lord_12_in_house_1": {
+      "summary": "12th lord in 1st - spiritual personality, foreign connections, expenditure identity",
+      "positive": ["Spiritual nature", "Foreign connections", "Moksha-oriented personality"],
+      "negative": ["Health challenges", "Self-undoing tendency", "Excessive spending"],
+      "specific_effects": "Person has spiritual nature and may spend on foreign or spiritual matters."
+    },
+    "lord_12_in_house_2": {
+      "summary": "12th lord in 2nd - financial drains, foreign speech, family expenses",
+      "positive": ["Foreign language ability", "Spiritual family values", "Income spent on spiritual"],
+      "negative": ["Financial losses", "Family expenditure", "Speech problems"],
+      "specific_effects": "Wealth faces drains. May earn and lose simultaneously."
+    },
+    "lord_12_in_house_3": {
+      "summary": "12th lord in 3rd - foreign communication, sibling abroad, spiritual writing",
+      "positive": ["Spiritual communication", "Siblings abroad", "Foreign writing success"],
+      "negative": ["Communication losses", "Sibling separation", "Effort wasted"],
+      "specific_effects": "Communication directed toward foreign or spiritual subjects."
+    },
+    "lord_12_in_house_4": {
+      "summary": "12th lord in 4th - foreign home, domestic losses, spiritual retreat at home",
+      "positive": ["Home abroad", "Spiritual home environment", "Peaceful seclusion"],
+      "negative": ["Domestic losses", "Property expenses", "Mother's challenges"],
+      "specific_effects": "Home may be abroad or serve as spiritual retreat. Property involves expenses."
+    },
+    "lord_12_in_house_5": {
+      "summary": "12th lord in 5th - foreign education, spiritual children, creative losses",
+      "positive": ["Foreign education success", "Spiritual creativity", "Children abroad"],
+      "negative": ["Speculative losses", "Children's expenses", "Romance losses"],
+      "specific_effects": "Education or children connected to foreign lands. Spiritual creativity."
+    },
+    "lord_12_in_house_6": {
+      "summary": "12th lord in 6th - expenses destroyed, losses overcome, service abroad",
+      "positive": ["Losses and expenses diminish", "Victory over expenditure", "Viparita Raja Yoga"],
+      "negative": ["Foreign enemies", "Health expenses"],
+      "specific_effects": "Viparita Raja Yoga possible. Losses and expenses eventually overcome."
+    },
+    "lord_12_in_house_7": {
+      "summary": "12th lord in 7th - foreign spouse, marriage expenses, bed pleasures",
+      "positive": ["Foreign partner", "Good bed pleasures", "Spiritual marriage"],
+      "negative": ["Marriage expenses", "Partner causes losses", "Relationship to foreign land"],
+      "specific_effects": "Marriage may involve foreign connection or significant expenses."
+    },
+    "lord_12_in_house_8": {
+      "summary": "12th lord in 8th - spiritual transformation, losses through crises, Viparita Yoga",
+      "positive": ["Viparita Raja Yoga possible", "Spiritual transformation", "Losses transform into gains"],
+      "negative": ["Health expenses", "Crises cause losses", "Hidden expenditure"],
+      "specific_effects": "Viparita Raja Yoga possible. Losses and expenses transform into spiritual growth."
+    },
+    "lord_12_in_house_9": {
+      "summary": "12th lord in 9th - foreign dharma, spiritual pilgrimage, father abroad",
+      "positive": ["Spiritual pilgrimage", "Fortune abroad", "Foreign dharmic activities"],
+      "negative": ["Fortune spent on travel", "Father abroad", "Dharmic expenses"],
+      "specific_effects": "Dharma involves foreign travel or spiritual pilgrimage. Father may be abroad."
+    },
+    "lord_12_in_house_10": {
+      "summary": "12th lord in 10th - career abroad, professional losses, spiritual profession",
+      "positive": ["Career in foreign land", "Spiritual profession", "Behind-the-scenes work"],
+      "negative": ["Career losses", "Professional expenses", "Work away from home"],
+      "specific_effects": "Career involves foreign work, spiritual institutions, or isolation."
+    },
+    "lord_12_in_house_11": {
+      "summary": "12th lord in 11th - gains from foreign sources, expenditure on desires",
+      "positive": ["Foreign income", "Gains from spiritual work", "International network"],
+      "negative": ["Gains spent quickly", "Social expenses", "Friends cause losses"],
+      "specific_effects": "Income from foreign sources but tendency to spend on desires."
+    },
+    "lord_12_in_house_12": {
+      "summary": "12th lord in own house - strong moksha yoga, spiritual liberation, foreign settlement",
+      "positive": ["Strong spiritual liberation path", "Foreign settlement", "Peaceful isolation"],
+      "negative": ["Heavy expenditure", "Complete detachment", "Isolation from society"],
+      "specific_effects": "Strongest placement for spiritual liberation. May settle abroad or in retreat."
+    }
+  }
+}

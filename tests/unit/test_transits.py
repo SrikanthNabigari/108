@@ -17,6 +17,7 @@ from packages.context.src.transits import (
     check_sade_sati,
     get_full_transit_analysis,
     get_gochara,
+    get_transit_aspects,
     get_transiting_planet_house,
     is_planet_favorable_in_house,
     validate_transit_data,
@@ -499,6 +500,126 @@ class TestConstantsAndData:
             for favorable_house, vedha_house in vedha_map.items():
                 assert 1 <= favorable_house <= 12
                 assert 1 <= vedha_house <= 12
+
+
+class TestTransitAspects:
+    """Tests for get_transit_aspects (Parashari aspects).
+
+    house_dist = ((n_rashi - t_rashi) % 12) or 12
+    For 7th aspect: n_rashi = (t_rashi + 7) % 12
+    """
+
+    def test_7th_house_aspect(self):
+        # Saturn at 0, Moon at 7 -> ((7-0)%12) = 7 -> opposition
+        transit = {"saturn": {"rashi": 0}}
+        natal = {"moon": {"rashi": 7}}
+        aspects = get_transit_aspects(transit, natal)
+        assert len(aspects) == 1
+        assert aspects[0]["transit_planet"] == "saturn"
+        assert aspects[0]["natal_planet"] == "moon"
+        assert aspects[0]["aspect_type"] == "opposition"
+
+    def test_mars_4th_aspect(self):
+        # Mars at 0, Sun at 4 -> ((4-0)%12) = 4 -> Mars special 4th
+        transit = {"mars": {"rashi": 0}}
+        natal = {"sun": {"rashi": 4}}
+        aspects = get_transit_aspects(transit, natal)
+        types = [a["aspect_type"] for a in aspects]
+        assert "4th_aspect" in types
+
+    def test_mars_8th_aspect(self):
+        # Mars at 0, Sun at 8 -> ((8-0)%12) = 8 -> Mars special 8th
+        transit = {"mars": {"rashi": 0}}
+        natal = {"sun": {"rashi": 8}}
+        aspects = get_transit_aspects(transit, natal)
+        types = [a["aspect_type"] for a in aspects]
+        assert "8th_aspect" in types
+
+    def test_jupiter_5th_aspect(self):
+        # Jupiter at 0, Moon at 5 -> ((5-0)%12) = 5 -> Jupiter special 5th
+        transit = {"jupiter": {"rashi": 0}}
+        natal = {"moon": {"rashi": 5}}
+        aspects = get_transit_aspects(transit, natal)
+        types = [a["aspect_type"] for a in aspects]
+        assert "5th_aspect" in types
+
+    def test_jupiter_9th_aspect(self):
+        # Jupiter at 0, Moon at 9 -> ((9-0)%12) = 9 -> Jupiter special 9th
+        transit = {"jupiter": {"rashi": 0}}
+        natal = {"moon": {"rashi": 9}}
+        aspects = get_transit_aspects(transit, natal)
+        types = [a["aspect_type"] for a in aspects]
+        assert "9th_aspect" in types
+
+    def test_saturn_3rd_aspect(self):
+        # Saturn at 0, Sun at 3 -> ((3-0)%12) = 3 -> Saturn special 3rd
+        transit = {"saturn": {"rashi": 0}}
+        natal = {"sun": {"rashi": 3}}
+        aspects = get_transit_aspects(transit, natal)
+        types = [a["aspect_type"] for a in aspects]
+        assert "3rd_aspect" in types
+
+    def test_saturn_10th_aspect(self):
+        # Saturn at 0, Sun at 10 -> ((10-0)%12) = 10 -> Saturn special 10th
+        transit = {"saturn": {"rashi": 0}}
+        natal = {"sun": {"rashi": 10}}
+        aspects = get_transit_aspects(transit, natal)
+        types = [a["aspect_type"] for a in aspects]
+        assert "10th_aspect" in types
+
+    def test_no_aspect_when_not_aligned(self):
+        # Sun at 0, Moon at 3 -> house 3. Sun has no special 3rd aspect, only 7th.
+        transit = {"sun": {"rashi": 0}}
+        natal = {"moon": {"rashi": 3}}
+        aspects = get_transit_aspects(transit, natal)
+        assert len(aspects) == 0
+
+    def test_significance_high(self):
+        # Saturn at 0, Moon at 7 -> 7th aspect, slow on personal = high
+        transit = {"saturn": {"rashi": 0}}
+        natal = {"moon": {"rashi": 7}}
+        aspects = get_transit_aspects(transit, natal)
+        assert len(aspects) == 1
+        assert aspects[0]["significance"] == "high"
+
+    def test_significance_low(self):
+        # Sun at 0, Mercury at 7 -> 7th aspect, both personal = low
+        transit = {"sun": {"rashi": 0}}
+        natal = {"mercury": {"rashi": 7}}
+        aspects = get_transit_aspects(transit, natal)
+        assert len(aspects) == 1
+        assert aspects[0]["significance"] == "low"
+
+    def test_multiple_aspects(self):
+        # Saturn at 0 aspects 7th(7), 3rd(3), 10th(10)
+        # Jupiter at 3 aspects 7th(10), 5th(8), 9th(0)
+        # Moon at 7: Saturn 7th -> yes. Jupiter: ((7-3)%12) = 4 -> no.
+        transit = {
+            "saturn": {"rashi": 0},
+            "jupiter": {"rashi": 3},
+        }
+        natal = {"moon": {"rashi": 7}}
+        aspects = get_transit_aspects(transit, natal)
+        assert len(aspects) >= 1  # Saturn 7th at least
+
+    def test_skip_string_rashi(self):
+        transit = {"saturn": {"rashi": "Aries"}}
+        natal = {"moon": {"rashi": 7}}
+        aspects = get_transit_aspects(transit, natal)
+        assert len(aspects) == 0
+
+    def test_skip_none_rashi(self):
+        transit = {"saturn": {"longitude": 100.0}}  # no rashi key
+        natal = {"moon": {"rashi": 7}}
+        aspects = get_transit_aspects(transit, natal)
+        assert len(aspects) == 0
+
+    def test_wrap_around_houses(self):
+        # Saturn at 10, Moon at 4 -> ((4-10)%12) = 6 -> not a standard aspect
+        transit = {"saturn": {"rashi": 10}}
+        natal = {"moon": {"rashi": 4}}
+        aspects = get_transit_aspects(transit, natal)
+        assert len(aspects) == 0
 
 
 if __name__ == "__main__":

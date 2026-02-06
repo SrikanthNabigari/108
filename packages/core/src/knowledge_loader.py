@@ -16,6 +16,7 @@ logger = logging.getLogger(__name__)
 KNOWLEDGE_DIR = Path(__file__).parent.parent.parent.parent / "knowledge"
 DEFINITIONS_DIR = KNOWLEDGE_DIR / "definitions"
 RULES_DIR = KNOWLEDGE_DIR / "rules"
+INTERPRETATIONS_DIR = KNOWLEDGE_DIR / "interpretations"
 
 
 @lru_cache(maxsize=32)
@@ -194,6 +195,80 @@ def get_varshaphal_rules() -> dict[str, Any]:
 def get_divisional_interpretation() -> dict[str, Any]:
     """Get D9/D10 divisional chart interpretation rules."""
     return load_rules("divisional_interpretation").get("divisional_interpretation", {})
+
+
+def load_interpretation(name: str) -> dict[str, Any]:
+    """Load an interpretation file from knowledge/interpretations/.
+
+    Args:
+        name: Interpretation name (without .json extension)
+              e.g., "planet_in_house", "planet_in_sign", "dasha_guide"
+
+    Returns:
+        Interpretation data dictionary
+    """
+    filepath = INTERPRETATIONS_DIR / f"{name}.json"
+    return _load_json_file(str(filepath))
+
+
+# =============================================================================
+# Panchanga definition accessors
+# =============================================================================
+
+
+def get_tithi_definitions() -> dict[str, Any]:
+    """Get tithi (lunar day) definitions - 30 tithis."""
+    return load_definition("tithis")
+
+
+def get_karana_definitions() -> dict[str, Any]:
+    """Get karana (half-tithi) definitions - 11 karanas."""
+    return load_definition("karanas")
+
+
+def get_nitya_yoga_definitions() -> dict[str, Any]:
+    """Get nitya yoga definitions - 27 yogas."""
+    return load_definition("nitya_yogas")
+
+
+def get_vara_definitions() -> dict[str, Any]:
+    """Get vara (weekday) definitions - 7 days."""
+    return load_definition("varas")
+
+
+def get_avastha_definitions() -> dict[str, Any]:
+    """Get avastha (planetary state) definitions."""
+    return load_definition("avasthas")
+
+
+# =============================================================================
+# Interpretation accessors
+# =============================================================================
+
+
+def get_planet_in_house_interpretations() -> dict[str, Any]:
+    """Get planet-in-house interpretations (108 combinations: 9 planets x 12 houses)."""
+    return load_interpretation("planet_in_house")
+
+
+def get_planet_in_sign_interpretations() -> dict[str, Any]:
+    """Get planet-in-sign interpretations (108 combinations: 9 planets x 12 signs)."""
+    return load_interpretation("planet_in_sign")
+
+
+def get_planet_in_nakshatra_interpretations() -> dict[str, Any]:
+    """Get planet-in-nakshatra interpretations (243 combinations: 9 planets x 27 nakshatras)."""
+    return load_interpretation("planet_in_nakshatra")
+
+
+def get_house_lord_in_house_interpretations() -> dict[str, Any]:
+    """Get house-lord-in-house interpretations (144 combinations: 12 lords x 12 houses)."""
+    return load_interpretation("house_lord_in_house")
+
+
+def get_dasha_guide() -> dict[str, Any]:
+    """Get dasha practical guidance for each Mahadasha period."""
+    return load_interpretation("dasha_guide")
 
 
 def clear_cache() -> None:

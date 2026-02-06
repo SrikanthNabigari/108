@@ -121,12 +121,40 @@ def get_progression_direction(lagna: Rashi) -> bool:
     return is_odd_sign(lagna)
 
 
+# Own signs for planets (rashi enum values)
+_OWN_SIGNS: dict[Planet, set[Rashi]] = {
+    Planet.SUN: {Rashi.LEO},
+    Planet.MOON: {Rashi.CANCER},
+    Planet.MARS: {Rashi.ARIES, Rashi.SCORPIO},
+    Planet.MERCURY: {Rashi.GEMINI, Rashi.VIRGO},
+    Planet.JUPITER: {Rashi.SAGITTARIUS, Rashi.PISCES},
+    Planet.VENUS: {Rashi.TAURUS, Rashi.LIBRA},
+    Planet.SATURN: {Rashi.CAPRICORN, Rashi.AQUARIUS},
+    Planet.RAHU: set(),
+    Planet.KETU: set(),
+}
+
+# Exaltation signs
+_EXALTATION: dict[Planet, Rashi] = {
+    Planet.SUN: Rashi.ARIES,
+    Planet.MOON: Rashi.TAURUS,
+    Planet.MARS: Rashi.CAPRICORN,
+    Planet.MERCURY: Rashi.VIRGO,
+    Planet.JUPITER: Rashi.CANCER,
+    Planet.VENUS: Rashi.PISCES,
+    Planet.SATURN: Rashi.LIBRA,
+}
+
+
 def _get_stronger_lord(rashi: Rashi, chart: BirthChart) -> Planet:
     """For co-lorded signs (Scorpio, Aquarius), determine which lord is stronger.
 
-    Simple heuristic:
-    1. Prefer the planet in kendra (houses 1, 4, 7, 10)
-    2. If both or neither in kendra, prefer the one with higher rashi_degree
+    Uses proper Jaimini rules in priority order:
+    1. Planet in own sign > planet not in own sign
+    2. Planet in exaltation > planet not exalted
+    3. Planet with more aspects from other planets > fewer
+    4. Planet in kendra (1, 4, 7, 10) > planet not in kendra
+    5. Higher degree in sign > lower degree (last resort)
 
     Args:
         rashi: Rashi with co-lords
@@ -136,7 +164,7 @@ def _get_stronger_lord(rashi: Rashi, chart: BirthChart) -> Planet:
         The stronger lord planet
 
     Example:
-        >>> # If Mars is in kendra and Ketu is not, Mars is stronger
+        >>> # If Mars is in own sign and Ketu is not, Mars is stronger
         >>> _get_stronger_lord(Rashi.SCORPIO, chart)
         Planet.MARS
     """
@@ -151,26 +179,89 @@ def _get_stronger_lord(rashi: Rashi, chart: BirthChart) -> Planet:
     co_pos = chart.planets.get(co_lord)
 
     if not primary_pos or not co_pos:
-        # Fallback to primary if we can't find one
         return primary_lord
 
-    # Kendra houses (1, 4, 7, 10)
-    kendra_houses = {1, 4, 7, 10}
+    # Rule 1: Planet in own sign > not in own sign
+    primary_in_own = primary_pos.rashi in _OWN_SIGNS.get(primary_lord, set())
+    co_in_own = co_pos.rashi in _OWN_SIGNS.get(co_lord, set())
+    if primary_in_own and not co_in_own:
+        return primary_lord
+    if co_in_own and not primary_in_own:
+        return co_lord
 
+    # Rule 2: Planet in exaltation > not exalted
+    primary_exalted = _EXALTATION.get(primary_lord) == primary_pos.rashi
+    co_exalted = _EXALTATION.get(co_lord) == co_pos.rashi
+    if primary_exalted and not co_exalted:
+        return primary_lord
+    if co_exalted and not primary_exalted:
+        return co_lord
+
+    # Rule 3: Planet with more aspects from other planets
+    primary_aspects = _count_aspects_on(primary_pos.house, chart)
+    co_aspects = _count_aspects_on(co_pos.house, chart)
+    if primary_aspects > co_aspects:
+        return primary_lord
+    if co_aspects > primary_aspects:
+        return co_lord
+
+    # Rule 4: Planet in kendra > not in kendra
+    kendra_houses = {1, 4, 7, 10}
     primary_in_kendra = primary_pos.house in kendra_houses
     co_in_kendra = co_pos.house in kendra_houses
-
-    # Prefer planet in kendra
     if primary_in_kendra and not co_in_kendra:
         return primary_lord
     if co_in_kendra and not primary_in_kendra:
         return co_lord
 
-    # If both or neither in kendra, prefer higher degree
+    # Rule 5: Higher degree in sign (last resort)
     if primary_pos.rashi_degree > co_pos.rashi_degree:
         return primary_lord
-    else:
-        return co_lord
+    return co_lord
+
+
+def _count_aspects_on(house: int, chart: BirthChart) -> int:
+    """Count how many planets aspect a given house using Parashari aspects.
+
+    Standard aspects: all planets aspect 7th house.
+    Special: Mars aspects 4th and 8th. Jupiter aspects 5th and 9th. Saturn aspects 3rd and 10th.
+
+    Args:
+        house: Target house number (1-12)
+        chart: BirthChart with planet positions
+
+    Returns:
+        Number of planets aspecting the target house
+    """
+    count = 0
+    for planet, pos in chart.planets.items():
+        p_house = pos.house
+        if p_house == house:
+            continue  # Conjunction, not aspect
+
+        diff = ((house - p_house) % 12) or 12
+
+        # All planets aspect 7th from themselves
+        if diff == 7:
+            count += 1
+            continue
+
+        # Mars special aspects: 4th and 8th
+        if planet == Planet.MARS and diff in (4, 8):
+            count += 1
+            continue
+
+        # Jupiter special aspects: 5th and 9th
+        if planet == Planet.JUPITER and diff in (5, 9):
+            count += 1
+            continue
+
+        # Saturn special aspects: 3rd and 10th
+        if planet == Planet.SATURN and diff in (3, 10):
+            count += 1
+            continue
+
+    return count
 
 
 def calculate_period_duration(sign: Rashi, chart: BirthChart) -> int:

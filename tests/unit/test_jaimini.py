@@ -6,6 +6,7 @@ from packages.core.src.constants import CharaKaraka, Planet, Rashi, SignMobility
 from packages.core.src.models import BirthChart, BirthData, HouseCusps, PlanetPosition
 from packages.self.src.jaimini import (
     calculate_all_arudha_padas,
+    calculate_argala,
     calculate_arudha_pada,
     calculate_chara_dasha,
     calculate_chara_karakas,
@@ -461,3 +462,416 @@ class TestCharaDasha:
         total_years = sum(p.duration_years for p in periods)
         assert total_years >= 24  # Should cover at least the requested years
         assert total_years <= 36  # But not excessively more (allowing one extra cycle)
+
+
+class TestArgala:
+    """Tests for Jaimini Argala (planetary intervention) calculations."""
+
+    def _make_chart(
+        self,
+        planet_placements: dict[Planet, Rashi],
+        lagna: Rashi = Rashi.ARIES,
+    ) -> BirthChart:
+        """Helper to create chart with planets in specific signs."""
+        degrees = {}
+        for planet, rashi in planet_placements.items():
+            degrees[planet] = (rashi, 15.0)
+        return create_mock_chart(degrees, lagna)
+
+    def test_returns_all_12_houses(self):
+        """Argala result should contain entries for all 12 houses."""
+        chart = self._make_chart(
+            {
+                Planet.SUN: Rashi.ARIES,
+                Planet.MOON: Rashi.TAURUS,
+                Planet.MARS: Rashi.GEMINI,
+                Planet.MERCURY: Rashi.CANCER,
+                Planet.JUPITER: Rashi.LEO,
+                Planet.VENUS: Rashi.VIRGO,
+                Planet.SATURN: Rashi.LIBRA,
+            }
+        )
+        result = calculate_argala(chart)
+        assert len(result) == 12
+        for h in range(1, 13):
+            assert h in result
+            assert result[h]["house"] == h
+
+    def test_argala_has_four_types(self):
+        """Each house should have 4 argala types."""
+        chart = self._make_chart(
+            {
+                Planet.SUN: Rashi.ARIES,
+                Planet.MOON: Rashi.TAURUS,
+                Planet.MARS: Rashi.GEMINI,
+                Planet.MERCURY: Rashi.CANCER,
+                Planet.JUPITER: Rashi.LEO,
+                Planet.VENUS: Rashi.VIRGO,
+                Planet.SATURN: Rashi.LIBRA,
+            }
+        )
+        result = calculate_argala(chart)
+        for h in range(1, 13):
+            argalas = result[h]["argalas"]
+            assert "dhana" in argalas
+            assert "sukha" in argalas
+            assert "labha" in argalas
+            assert "putra" in argalas
+
+    def test_dhana_argala_from_2nd_house(self):
+        """Dhana argala comes from 2nd house (offset 1)."""
+        # Lagna = Aries. 2nd house = Taurus. Put Jupiter there (benefic).
+        chart = self._make_chart(
+            {
+                Planet.SUN: Rashi.LEO,
+                Planet.MOON: Rashi.CANCER,
+                Planet.MARS: Rashi.SCORPIO,
+                Planet.MERCURY: Rashi.GEMINI,
+                Planet.JUPITER: Rashi.TAURUS,  # 2nd from Aries
+                Planet.VENUS: Rashi.LIBRA,
+                Planet.SATURN: Rashi.CAPRICORN,
+            }
+        )
+        result = calculate_argala(chart)
+        dhana = result[1]["argalas"]["dhana"]
+        assert dhana["source_sign"] == "taurus"
+        assert "jupiter" in dhana["source_planets"]
+        assert dhana["argala_strength"] > 0
+
+    def test_sukha_argala_from_4th_house(self):
+        """Sukha argala comes from 4th house (offset 3)."""
+        # Lagna = Aries. 4th house = Cancer. Put Moon there (benefic).
+        chart = self._make_chart(
+            {
+                Planet.SUN: Rashi.LEO,
+                Planet.MOON: Rashi.CANCER,  # 4th from Aries
+                Planet.MARS: Rashi.SCORPIO,
+                Planet.MERCURY: Rashi.GEMINI,
+                Planet.JUPITER: Rashi.SAGITTARIUS,
+                Planet.VENUS: Rashi.LIBRA,
+                Planet.SATURN: Rashi.CAPRICORN,
+            }
+        )
+        result = calculate_argala(chart)
+        sukha = result[1]["argalas"]["sukha"]
+        assert sukha["source_sign"] == "cancer"
+        assert "moon" in sukha["source_planets"]
+        assert sukha["argala_strength"] > 0
+
+    def test_labha_argala_from_11th_house(self):
+        """Labha argala comes from 11th house (offset 10)."""
+        # Lagna = Aries. 11th house = Aquarius. Put Venus there.
+        chart = self._make_chart(
+            {
+                Planet.SUN: Rashi.LEO,
+                Planet.MOON: Rashi.CANCER,
+                Planet.MARS: Rashi.SCORPIO,
+                Planet.MERCURY: Rashi.GEMINI,
+                Planet.JUPITER: Rashi.SAGITTARIUS,
+                Planet.VENUS: Rashi.AQUARIUS,  # 11th from Aries
+                Planet.SATURN: Rashi.CAPRICORN,
+            }
+        )
+        result = calculate_argala(chart)
+        labha = result[1]["argalas"]["labha"]
+        assert labha["source_sign"] == "aquarius"
+        assert "venus" in labha["source_planets"]
+
+    def test_putra_argala_from_5th_house(self):
+        """Putra argala comes from 5th house (offset 4)."""
+        # Lagna = Aries. 5th house = Leo. Put Sun there.
+        chart = self._make_chart(
+            {
+                Planet.SUN: Rashi.LEO,  # 5th from Aries
+                Planet.MOON: Rashi.CANCER,
+                Planet.MARS: Rashi.SCORPIO,
+                Planet.MERCURY: Rashi.GEMINI,
+                Planet.JUPITER: Rashi.SAGITTARIUS,
+                Planet.VENUS: Rashi.LIBRA,
+                Planet.SATURN: Rashi.CAPRICORN,
+            }
+        )
+        result = calculate_argala(chart)
+        putra = result[1]["argalas"]["putra"]
+        assert putra["source_sign"] == "leo"
+        assert "sun" in putra["source_planets"]
+
+    def test_dhana_argala_obstructed_by_3rd(self):
+        """Dhana argala (2nd) is obstructed by planets in 3rd with >= strength."""
+        # Lagna = Aries. 2nd = Taurus (Mars=0.5), 3rd = Gemini (Jupiter=1.0)
+        # Obstruction >= argala => obstructed
+        chart = self._make_chart(
+            {
+                Planet.SUN: Rashi.LEO,
+                Planet.MOON: Rashi.CANCER,
+                Planet.MARS: Rashi.TAURUS,  # 2nd from Aries (malefic, 0.5)
+                Planet.MERCURY: Rashi.VIRGO,
+                Planet.JUPITER: Rashi.GEMINI,  # 3rd from Aries (benefic, 1.0)
+                Planet.VENUS: Rashi.LIBRA,
+                Planet.SATURN: Rashi.CAPRICORN,
+            }
+        )
+        result = calculate_argala(chart)
+        dhana = result[1]["argalas"]["dhana"]
+        assert dhana["is_obstructed"] is True
+        assert dhana["is_active"] is False
+
+    def test_sukha_argala_obstructed_by_10th(self):
+        """Sukha argala (4th) is obstructed by planets in 10th with >= strength."""
+        # Lagna = Aries. 4th = Cancer (Mars=0.5), 10th = Capricorn (Jupiter=1.0)
+        chart = self._make_chart(
+            {
+                Planet.SUN: Rashi.LEO,
+                Planet.MOON: Rashi.PISCES,
+                Planet.MARS: Rashi.CANCER,  # 4th from Aries (0.5)
+                Planet.MERCURY: Rashi.GEMINI,
+                Planet.JUPITER: Rashi.CAPRICORN,  # 10th from Aries (1.0)
+                Planet.VENUS: Rashi.LIBRA,
+                Planet.SATURN: Rashi.AQUARIUS,
+            }
+        )
+        result = calculate_argala(chart)
+        sukha = result[1]["argalas"]["sukha"]
+        assert sukha["is_obstructed"] is True
+
+    def test_labha_argala_obstructed_by_12th(self):
+        """Labha argala (11th) is obstructed by 12th house planets."""
+        # Lagna = Aries. 11th = Aquarius (Saturn=0.5), 12th = Pisces (Jupiter=1.0)
+        chart = self._make_chart(
+            {
+                Planet.SUN: Rashi.LEO,
+                Planet.MOON: Rashi.CANCER,
+                Planet.MARS: Rashi.SCORPIO,
+                Planet.MERCURY: Rashi.GEMINI,
+                Planet.JUPITER: Rashi.PISCES,  # 12th from Aries (1.0)
+                Planet.VENUS: Rashi.LIBRA,
+                Planet.SATURN: Rashi.AQUARIUS,  # 11th from Aries (0.5)
+            }
+        )
+        result = calculate_argala(chart)
+        labha = result[1]["argalas"]["labha"]
+        assert labha["is_obstructed"] is True
+
+    def test_putra_argala_obstructed_by_9th(self):
+        """Putra argala (5th) is obstructed by 9th house planets."""
+        # Lagna = Aries. 5th = Leo (Mars=0.5), 9th = Sagittarius (Jupiter=1.0)
+        chart = self._make_chart(
+            {
+                Planet.SUN: Rashi.CANCER,
+                Planet.MOON: Rashi.TAURUS,
+                Planet.MARS: Rashi.LEO,  # 5th from Aries (0.5)
+                Planet.MERCURY: Rashi.GEMINI,
+                Planet.JUPITER: Rashi.SAGITTARIUS,  # 9th from Aries (1.0)
+                Planet.VENUS: Rashi.LIBRA,
+                Planet.SATURN: Rashi.CAPRICORN,
+            }
+        )
+        result = calculate_argala(chart)
+        putra = result[1]["argalas"]["putra"]
+        assert putra["is_obstructed"] is True
+
+    def test_argala_not_obstructed_when_stronger(self):
+        """Argala survives when its strength exceeds obstruction strength."""
+        # Lagna = Aries. 2nd = Taurus (Jupiter=1.0 benefic), 3rd = Gemini (Mars=0.5 malefic)
+        chart = self._make_chart(
+            {
+                Planet.SUN: Rashi.LEO,
+                Planet.MOON: Rashi.CANCER,
+                Planet.MARS: Rashi.GEMINI,  # 3rd from Aries (obstruction, 0.5)
+                Planet.MERCURY: Rashi.VIRGO,
+                Planet.JUPITER: Rashi.TAURUS,  # 2nd from Aries (argala, 1.0)
+                Planet.VENUS: Rashi.LIBRA,
+                Planet.SATURN: Rashi.CAPRICORN,
+            }
+        )
+        result = calculate_argala(chart)
+        dhana = result[1]["argalas"]["dhana"]
+        assert dhana["is_active"] is True
+        assert dhana["is_obstructed"] is False
+        assert dhana["net_strength"] > 0
+
+    def test_empty_argala_house_no_argala(self):
+        """No argala when the source house is empty."""
+        # Put all planets far from 2nd house of Aries (Taurus)
+        chart = self._make_chart(
+            {
+                Planet.SUN: Rashi.LEO,
+                Planet.MOON: Rashi.CANCER,
+                Planet.MARS: Rashi.SCORPIO,
+                Planet.MERCURY: Rashi.VIRGO,
+                Planet.JUPITER: Rashi.SAGITTARIUS,
+                Planet.VENUS: Rashi.LIBRA,
+                Planet.SATURN: Rashi.CAPRICORN,
+            }
+        )
+        result = calculate_argala(chart)
+        dhana = result[1]["argalas"]["dhana"]
+        assert dhana["argala_strength"] == 0.0
+        assert dhana["is_active"] is False
+        assert dhana["source_planets"] == []
+
+    def test_benefic_counts_more_than_malefic(self):
+        """Benefics contribute 1.0 strength, malefics 0.5."""
+        # Jupiter (benefic, 1.0) in 2nd vs Mars (malefic, 0.5) in 2nd
+        chart_benefic = self._make_chart(
+            {
+                Planet.SUN: Rashi.LEO,
+                Planet.MOON: Rashi.CANCER,
+                Planet.MARS: Rashi.SCORPIO,
+                Planet.MERCURY: Rashi.GEMINI,
+                Planet.JUPITER: Rashi.TAURUS,  # 2nd from Aries
+                Planet.VENUS: Rashi.LIBRA,
+                Planet.SATURN: Rashi.CAPRICORN,
+            }
+        )
+        chart_malefic = self._make_chart(
+            {
+                Planet.SUN: Rashi.LEO,
+                Planet.MOON: Rashi.CANCER,
+                Planet.MARS: Rashi.TAURUS,  # 2nd from Aries
+                Planet.MERCURY: Rashi.GEMINI,
+                Planet.JUPITER: Rashi.SAGITTARIUS,
+                Planet.VENUS: Rashi.LIBRA,
+                Planet.SATURN: Rashi.CAPRICORN,
+            }
+        )
+        result_b = calculate_argala(chart_benefic)
+        result_m = calculate_argala(chart_malefic)
+        assert (
+            result_b[1]["argalas"]["dhana"]["argala_strength"]
+            > result_m[1]["argalas"]["dhana"]["argala_strength"]
+        )
+
+    def test_multiple_planets_in_argala_house(self):
+        """Multiple planets in argala house should sum their strengths."""
+        # Jupiter + Venus in 2nd from Aries (Taurus)
+        chart = self._make_chart(
+            {
+                Planet.SUN: Rashi.LEO,
+                Planet.MOON: Rashi.CANCER,
+                Planet.MARS: Rashi.SCORPIO,
+                Planet.MERCURY: Rashi.GEMINI,
+                Planet.JUPITER: Rashi.TAURUS,  # 2nd
+                Planet.VENUS: Rashi.TAURUS,  # 2nd (same sign)
+                Planet.SATURN: Rashi.CAPRICORN,
+            }
+        )
+        result = calculate_argala(chart)
+        dhana = result[1]["argalas"]["dhana"]
+        # Jupiter(1.0) + Venus(1.0) = 2.0
+        assert dhana["argala_strength"] == 2.0
+        assert len(dhana["source_planets"]) == 2
+
+    def test_active_argala_count(self):
+        """active_argala_count should correctly count unobstructed argalas."""
+        chart = self._make_chart(
+            {
+                Planet.SUN: Rashi.LEO,
+                Planet.MOON: Rashi.CANCER,
+                Planet.MARS: Rashi.SCORPIO,
+                Planet.MERCURY: Rashi.GEMINI,
+                Planet.JUPITER: Rashi.TAURUS,  # 2nd from Aries (dhana active)
+                Planet.VENUS: Rashi.AQUARIUS,  # 11th from Aries (labha active)
+                Planet.SATURN: Rashi.CAPRICORN,
+            }
+        )
+        result = calculate_argala(chart)
+        count = result[1]["active_argala_count"]
+        assert count >= 2  # At least dhana and labha
+
+    def test_summary_for_no_active(self):
+        """Summary should reflect no active argala."""
+        # Create a chart where house 8 likely has no active argalas
+        chart = self._make_chart(
+            {
+                Planet.SUN: Rashi.ARIES,
+                Planet.MOON: Rashi.ARIES,
+                Planet.MARS: Rashi.ARIES,
+                Planet.MERCURY: Rashi.ARIES,
+                Planet.JUPITER: Rashi.ARIES,
+                Planet.VENUS: Rashi.ARIES,
+                Planet.SATURN: Rashi.ARIES,
+            }
+        )
+        result = calculate_argala(chart)
+        # Find a house with 0 active
+        found_zero = False
+        for h in range(1, 13):
+            if result[h]["active_argala_count"] == 0:
+                assert "No active" in result[h]["summary"]
+                found_zero = True
+                break
+        # At least some houses with all planets in Aries should have 0
+        assert found_zero
+
+    def test_argala_result_keys(self):
+        """Each argala entry should have all expected keys."""
+        chart = self._make_chart(
+            {
+                Planet.SUN: Rashi.ARIES,
+                Planet.MOON: Rashi.TAURUS,
+                Planet.MARS: Rashi.GEMINI,
+                Planet.MERCURY: Rashi.CANCER,
+                Planet.JUPITER: Rashi.LEO,
+                Planet.VENUS: Rashi.VIRGO,
+                Planet.SATURN: Rashi.LIBRA,
+            }
+        )
+        result = calculate_argala(chart)
+        entry = result[1]
+        assert "house" in entry
+        assert "sign" in entry
+        assert "argalas" in entry
+        assert "active_argala_count" in entry
+        assert "summary" in entry
+
+        for atype in ["dhana", "sukha", "labha", "putra"]:
+            a = entry["argalas"][atype]
+            assert "label" in a
+            assert "source_sign" in a
+            assert "source_planets" in a
+            assert "argala_strength" in a
+            assert "obstruction_sign" in a
+            assert "obstruction_planets" in a
+            assert "obstruction_strength" in a
+            assert "is_obstructed" in a
+            assert "is_active" in a
+            assert "net_strength" in a
+
+    def test_different_lagna_shifts_signs(self):
+        """Argala houses should shift based on lagna."""
+        chart_aries = self._make_chart(
+            {
+                Planet.SUN: Rashi.ARIES,
+                Planet.MOON: Rashi.TAURUS,
+                Planet.MARS: Rashi.GEMINI,
+                Planet.MERCURY: Rashi.CANCER,
+                Planet.JUPITER: Rashi.LEO,
+                Planet.VENUS: Rashi.VIRGO,
+                Planet.SATURN: Rashi.LIBRA,
+            },
+            lagna=Rashi.ARIES,
+        )
+        chart_leo = self._make_chart(
+            {
+                Planet.SUN: Rashi.ARIES,
+                Planet.MOON: Rashi.TAURUS,
+                Planet.MARS: Rashi.GEMINI,
+                Planet.MERCURY: Rashi.CANCER,
+                Planet.JUPITER: Rashi.LEO,
+                Planet.VENUS: Rashi.VIRGO,
+                Planet.SATURN: Rashi.LIBRA,
+            },
+            lagna=Rashi.LEO,
+        )
+
+        result_aries = calculate_argala(chart_aries)
+        result_leo = calculate_argala(chart_leo)
+
+        # House 1 sign should differ
+        assert result_aries[1]["sign"] == "aries"
+        assert result_leo[1]["sign"] == "leo"
+
+        # Dhana source for house 1 should be 2nd sign from lagna
+        assert result_aries[1]["argalas"]["dhana"]["source_sign"] == "taurus"
+        assert result_leo[1]["argalas"]["dhana"]["source_sign"] == "virgo"

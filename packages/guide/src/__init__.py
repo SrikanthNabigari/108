@@ -10,6 +10,7 @@ from .agent import (
     _HAS_LANGGRAPH,
     INTENT_KEYWORDS,
     PERSONALITY_STYLES,
+    ConversationManager,
     IntentType,
 )
 
@@ -43,9 +44,10 @@ __all__ = [
     "INTENT_KEYWORDS",
     "PERSONALITY_STYLES",
     "AgentState",
+    # Always available
+    "ConversationManager",
     # Requires LangGraph
     "Guide",
-    # Always available
     "IntentType",
     "get_guide",
     "get_guide_async",

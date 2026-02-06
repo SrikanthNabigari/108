@@ -1,7 +1,7 @@
 {
   "divisional_interpretation": {
-    "description": "Interpretation rules for D9 (Navamsha) and D10 (Dashamsha) divisional charts in Vedic Astrology",
-    "version": "1.0",
+    "description": "Interpretation rules for divisional charts (D2 through D60) in Vedic Astrology",
+    "version": "2.0",
     "d9_navamsha": {
       "description": "D9 Navamsha chart reveals marriage, spouse nature, dharma, spiritual path, and the hidden potential of planets",
       "significance": "Shows the soul's journey, marital harmony, dharmic purpose, and true strength of planets",
@@ -1740,6 +1740,390 @@
           "ketu": "Spiritual profession, detached work",
           "principle": "Well-placed malefics give career strength through challenges"
         }
+      }
+    },
+    "d2_hora": {
+      "description": "D2 Hora chart reveals wealth, financial capacity, and material prosperity",
+      "significance": "Shows wealth potential, earning capacity, and financial destiny. Only two signs matter: Sun's hora (Leo) and Moon's hora (Cancer).",
+      "planet_in_signs": {
+        "sun": {
+          "cancer": {"theme": "Wealth through nurturing", "significance": "Earns through public, emotions, caregiving", "strength": "moderate"},
+          "leo": {"theme": "Wealth through authority", "significance": "Earns through government, leadership, self-effort", "strength": "strong"}
+        },
+        "moon": {
+          "cancer": {"theme": "Wealth through public appeal", "significance": "Earns through masses, hospitality, nursing", "strength": "strong"},
+          "leo": {"theme": "Wealth through creativity", "significance": "Earns through entertainment, politics, fame", "strength": "moderate"}
+        },
+        "mars": {
+          "cancer": {"theme": "Wealth through property", "significance": "Earns through real estate, food, agriculture", "strength": "weak"},
+          "leo": {"theme": "Wealth through courage", "significance": "Earns through military, sports, engineering", "strength": "strong"}
+        },
+        "mercury": {
+          "cancer": {"theme": "Wealth through emotional intelligence", "significance": "Earns through counseling, food business, writing", "strength": "moderate"},
+          "leo": {"theme": "Wealth through intellect", "significance": "Earns through communication, business, analysis", "strength": "strong"}
+        },
+        "jupiter": {
+          "cancer": {"theme": "Greatest wealth potential", "significance": "Earns through teaching, banking, family business", "strength": "exalted"},
+          "leo": {"theme": "Wealth through wisdom", "significance": "Earns through education, law, consulting", "strength": "strong"}
+        },
+        "venus": {
+          "cancer": {"theme": "Wealth through nurturing beauty", "significance": "Earns through hospitality, interior design, cooking", "strength": "moderate"},
+          "leo": {"theme": "Wealth through arts", "significance": "Earns through entertainment, luxury, fashion", "strength": "strong"}
+        },
+        "saturn": {
+          "cancer": {"theme": "Wealth through service", "significance": "Slow wealth through public service, social work", "strength": "weak"},
+          "leo": {"theme": "Wealth through discipline", "significance": "Slow wealth through government, engineering, labor", "strength": "moderate"}
+        },
+        "rahu": {
+          "cancer": {"theme": "Unconventional wealth", "significance": "Foreign income, unusual public wealth", "strength": "moderate"},
+          "leo": {"theme": "Sudden wealth", "significance": "Sudden gains through technology, foreign authority", "strength": "moderate"}
+        },
+        "ketu": {
+          "cancer": {"theme": "Detached from material wealth", "significance": "Spiritual income, past-life wealth karma", "strength": "weak"},
+          "leo": {"theme": "Past-life wealth", "significance": "Wealth from spiritual or occult sources", "strength": "weak"}
+        }
+      },
+      "special_rules": {
+        "all_planets_in_leo_hora": "Self-made wealth through personal effort",
+        "all_planets_in_cancer_hora": "Inherited or public-derived wealth",
+        "benefics_in_own_hora": "Strong and lasting wealth",
+        "malefics_in_own_hora": "Wealth through hard work and competition"
+      }
+    },
+    "d3_drekkana": {
+      "description": "D3 Drekkana chart reveals siblings, courage, vitality, and co-born relationships",
+      "significance": "Shows sibling relationships, personal courage, sexual vitality, and short journeys",
+      "planet_in_signs": {
+        "sun": {
+          "aries": {"theme": "Courageous sibling leader", "significance": "Elder sibling is authoritative", "strength": "exalted"},
+          "taurus": {"theme": "Stable sibling bonds", "significance": "Material support from siblings", "strength": "neutral"},
+          "gemini": {"theme": "Communicative sibling relations", "significance": "Intellectual bond with siblings", "strength": "friendly"},
+          "cancer": {"theme": "Nurturing sibling care", "significance": "Emotional sibling bonds", "strength": "neutral"},
+          "leo": {"theme": "Proud sibling authority", "significance": "Leadership among siblings", "strength": "own_sign"},
+          "virgo": {"theme": "Service to siblings", "significance": "Helpful sibling relations", "strength": "neutral"},
+          "libra": {"theme": "Diplomatic sibling balance", "significance": "Balanced sibling dynamics", "strength": "debilitated"},
+          "scorpio": {"theme": "Intense sibling bonds", "significance": "Transformative sibling relations", "strength": "neutral"},
+          "sagittarius": {"theme": "Philosophical sibling connection", "significance": "Teaching among siblings", "strength": "friendly"},
+          "capricorn": {"theme": "Dutiful sibling responsibility", "significance": "Senior sibling role", "strength": "neutral"},
+          "aquarius": {"theme": "Unconventional sibling ties", "significance": "Independent sibling bonds", "strength": "neutral"},
+          "pisces": {"theme": "Compassionate sibling care", "significance": "Spiritual sibling connection", "strength": "friendly"}
+        },
+        "moon": {
+          "aries": {"theme": "Emotional courage", "significance": "Quick emotional reactions", "strength": "neutral"},
+          "taurus": {"theme": "Stable emotional courage", "significance": "Patient and steady", "strength": "exalted"},
+          "gemini": {"theme": "Adaptable courage", "significance": "Mental agility in challenges", "strength": "neutral"},
+          "cancer": {"theme": "Nurturing courage", "significance": "Protective of siblings", "strength": "own_sign"},
+          "leo": {"theme": "Dramatic courage", "significance": "Emotional leadership", "strength": "friendly"},
+          "virgo": {"theme": "Analytical courage", "significance": "Methodical bravery", "strength": "neutral"},
+          "libra": {"theme": "Diplomatic courage", "significance": "Balanced in challenges", "strength": "neutral"},
+          "scorpio": {"theme": "Intense emotional courage", "significance": "Deep resilience", "strength": "debilitated"},
+          "sagittarius": {"theme": "Optimistic courage", "significance": "Faith-based bravery", "strength": "friendly"},
+          "capricorn": {"theme": "Disciplined courage", "significance": "Patient endurance", "strength": "neutral"},
+          "aquarius": {"theme": "Humanitarian courage", "significance": "Courage for social causes", "strength": "neutral"},
+          "pisces": {"theme": "Compassionate courage", "significance": "Spiritual bravery", "strength": "friendly"}
+        },
+        "mars": {
+          "aries": {"theme": "Maximum sibling courage", "significance": "Warrior among siblings", "strength": "own_sign"},
+          "taurus": {"theme": "Persistent sibling effort", "significance": "Steady courage", "strength": "neutral"},
+          "gemini": {"theme": "Intellectual sibling combat", "significance": "Communication-based courage", "strength": "neutral"},
+          "cancer": {"theme": "Emotional sibling protection", "significance": "Defensive courage", "strength": "debilitated"},
+          "leo": {"theme": "Noble sibling warrior", "significance": "Dignified courage", "strength": "friendly"},
+          "virgo": {"theme": "Precise sibling action", "significance": "Analytical courage", "strength": "neutral"},
+          "libra": {"theme": "Balanced sibling effort", "significance": "Diplomatic courage", "strength": "neutral"},
+          "scorpio": {"theme": "Intense sibling bond", "significance": "Transformative courage", "strength": "own_sign"},
+          "sagittarius": {"theme": "Righteous sibling warrior", "significance": "Principled courage", "strength": "friendly"},
+          "capricorn": {"theme": "Disciplined sibling strategy", "significance": "Strategic courage", "strength": "exalted"},
+          "aquarius": {"theme": "Revolutionary courage", "significance": "Innovative bravery", "strength": "neutral"},
+          "pisces": {"theme": "Compassionate courage", "significance": "Spiritual warrior", "strength": "neutral"}
+        },
+        "mercury": {
+          "aries": {"theme": "Quick sibling communication", "significance": "Fast-talking courage", "strength": "neutral"},
+          "taurus": {"theme": "Steady sibling speech", "significance": "Practical communication", "strength": "neutral"},
+          "gemini": {"theme": "Brilliant sibling communicator", "significance": "Best sibling communication", "strength": "own_sign"},
+          "cancer": {"theme": "Emotional sibling talk", "significance": "Intuitive communication", "strength": "neutral"},
+          "leo": {"theme": "Creative sibling expression", "significance": "Dramatic communication", "strength": "friendly"},
+          "virgo": {"theme": "Analytical sibling intellect", "significance": "Perfect communication", "strength": "exalted"},
+          "libra": {"theme": "Diplomatic sibling speech", "significance": "Balanced expression", "strength": "friendly"},
+          "scorpio": {"theme": "Deep sibling investigation", "significance": "Probing communication", "strength": "neutral"},
+          "sagittarius": {"theme": "Philosophical sibling teaching", "significance": "Broad communication", "strength": "neutral"},
+          "capricorn": {"theme": "Structured sibling planning", "significance": "Organized speech", "strength": "neutral"},
+          "aquarius": {"theme": "Innovative sibling thinking", "significance": "Original ideas", "strength": "neutral"},
+          "pisces": {"theme": "Intuitive sibling connection", "significance": "Psychic communication", "strength": "debilitated"}
+        },
+        "jupiter": {
+          "aries": {"theme": "Bold sibling guidance", "significance": "Courageous teaching", "strength": "neutral"},
+          "taurus": {"theme": "Material sibling wisdom", "significance": "Financial guidance", "strength": "neutral"},
+          "gemini": {"theme": "Intellectual sibling wisdom", "significance": "Communication wisdom", "strength": "neutral"},
+          "cancer": {"theme": "Nurturing sibling wisdom", "significance": "Emotional guidance", "strength": "exalted"},
+          "leo": {"theme": "Noble sibling philosophy", "significance": "Dignified teaching", "strength": "friendly"},
+          "virgo": {"theme": "Service-oriented wisdom", "significance": "Practical guidance", "strength": "debilitated"},
+          "libra": {"theme": "Balanced sibling philosophy", "significance": "Fair guidance", "strength": "neutral"},
+          "scorpio": {"theme": "Transformative wisdom", "significance": "Deep guidance", "strength": "neutral"},
+          "sagittarius": {"theme": "Pure sibling wisdom", "significance": "Natural teaching", "strength": "own_sign"},
+          "capricorn": {"theme": "Disciplined guidance", "significance": "Structured wisdom", "strength": "debilitated"},
+          "aquarius": {"theme": "Humanitarian wisdom", "significance": "Universal guidance", "strength": "neutral"},
+          "pisces": {"theme": "Spiritual sibling wisdom", "significance": "Mystical teaching", "strength": "own_sign"}
+        },
+        "venus": {
+          "aries": {"theme": "Passionate sibling love", "significance": "Dynamic sibling affection", "strength": "neutral"},
+          "taurus": {"theme": "Stable sibling bonds", "significance": "Material sibling support", "strength": "own_sign"},
+          "gemini": {"theme": "Communicative sibling charm", "significance": "Witty sibling relations", "strength": "neutral"},
+          "cancer": {"theme": "Nurturing sibling love", "significance": "Caring sibling bonds", "strength": "neutral"},
+          "leo": {"theme": "Generous sibling relations", "significance": "Warm sibling bonds", "strength": "friendly"},
+          "virgo": {"theme": "Service in sibling bonds", "significance": "Helpful relations", "strength": "debilitated"},
+          "libra": {"theme": "Harmonious sibling relations", "significance": "Beautiful sibling bonds", "strength": "own_sign"},
+          "scorpio": {"theme": "Intense sibling attachment", "significance": "Deep sibling love", "strength": "neutral"},
+          "sagittarius": {"theme": "Adventurous sibling bonds", "significance": "Travel with siblings", "strength": "neutral"},
+          "capricorn": {"theme": "Mature sibling relations", "significance": "Responsible bonds", "strength": "neutral"},
+          "aquarius": {"theme": "Unconventional sibling love", "significance": "Unique bonds", "strength": "neutral"},
+          "pisces": {"theme": "Compassionate sibling love", "significance": "Spiritual bonds", "strength": "exalted"}
+        },
+        "saturn": {
+          "aries": {"theme": "Frustrated sibling courage", "significance": "Delayed bravery", "strength": "debilitated"},
+          "taurus": {"theme": "Patient sibling building", "significance": "Slow material courage", "strength": "neutral"},
+          "gemini": {"theme": "Serious sibling communication", "significance": "Disciplined speech", "strength": "neutral"},
+          "cancer": {"theme": "Restricted sibling emotions", "significance": "Cold emotional courage", "strength": "neutral"},
+          "leo": {"theme": "Humbled sibling authority", "significance": "Restricted leadership", "strength": "enemy"},
+          "virgo": {"theme": "Disciplined sibling service", "significance": "Meticulous effort", "strength": "friendly"},
+          "libra": {"theme": "Balanced sibling justice", "significance": "Fair discipline", "strength": "exalted"},
+          "scorpio": {"theme": "Deep sibling karma", "significance": "Transformative duty", "strength": "neutral"},
+          "sagittarius": {"theme": "Disciplined sibling philosophy", "significance": "Structured wisdom", "strength": "neutral"},
+          "capricorn": {"theme": "Maximum sibling discipline", "significance": "Strongest duty", "strength": "own_sign"},
+          "aquarius": {"theme": "Humanitarian sibling service", "significance": "Social duty", "strength": "own_sign"},
+          "pisces": {"theme": "Compassionate sibling duty", "significance": "Karmic service", "strength": "neutral"}
+        },
+        "rahu": {
+          "aries": {"theme": "Obsessive courage", "significance": "Foreign sibling", "strength": "neutral"},
+          "taurus": {"theme": "Material sibling obsession", "significance": "Foreign material bonds", "strength": "neutral"},
+          "gemini": {"theme": "Communication obsession", "significance": "Foreign communication", "strength": "exalted"},
+          "cancer": {"theme": "Emotional obsession", "significance": "Foreign emotional bonds", "strength": "neutral"},
+          "leo": {"theme": "Authority obsession", "significance": "Foreign leadership", "strength": "neutral"},
+          "virgo": {"theme": "Perfectionist obsession", "significance": "Foreign service", "strength": "neutral"},
+          "libra": {"theme": "Relationship obsession", "significance": "Foreign partnerships", "strength": "neutral"},
+          "scorpio": {"theme": "Transformation obsession", "significance": "Foreign intensity", "strength": "neutral"},
+          "sagittarius": {"theme": "Philosophy obsession", "significance": "Foreign beliefs", "strength": "debilitated"},
+          "capricorn": {"theme": "Ambition obsession", "significance": "Foreign discipline", "strength": "neutral"},
+          "aquarius": {"theme": "Innovation obsession", "significance": "Foreign technology", "strength": "neutral"},
+          "pisces": {"theme": "Spiritual obsession", "significance": "Foreign mysticism", "strength": "neutral"}
+        },
+        "ketu": {
+          "aries": {"theme": "Detached courage", "significance": "Past-life warrior", "strength": "neutral"},
+          "taurus": {"theme": "Detached material", "significance": "Past-life wealth", "strength": "neutral"},
+          "gemini": {"theme": "Detached communication", "significance": "Past-life intellect", "strength": "debilitated"},
+          "cancer": {"theme": "Detached emotions", "significance": "Past-life nurturing", "strength": "neutral"},
+          "leo": {"theme": "Detached authority", "significance": "Past-life leadership", "strength": "neutral"},
+          "virgo": {"theme": "Detached service", "significance": "Past-life healing", "strength": "neutral"},
+          "libra": {"theme": "Detached partnership", "significance": "Past-life relationships", "strength": "neutral"},
+          "scorpio": {"theme": "Detached transformation", "significance": "Past-life occult mastery", "strength": "exalted"},
+          "sagittarius": {"theme": "Detached philosophy", "significance": "Past-life wisdom", "strength": "neutral"},
+          "capricorn": {"theme": "Detached ambition", "significance": "Past-life authority", "strength": "neutral"},
+          "aquarius": {"theme": "Detached humanity", "significance": "Past-life social service", "strength": "neutral"},
+          "pisces": {"theme": "Detached spirituality", "significance": "Past-life liberation", "strength": "neutral"}
+        }
+      },
+      "special_rules": {
+        "3rd_lord_analysis": "3rd lord in D3 shows sibling fortune and personal courage",
+        "mars_in_d3": "Mars placement in D3 directly indicates level of personal courage and vitality"
+      }
+    },
+    "d4_chaturthamsha": {
+      "description": "D4 Chaturthamsha chart reveals property, fixed assets, fortune, and destiny",
+      "significance": "Shows property ownership, fixed assets, vehicles, home environment, and overall fortune",
+      "key_principles": {
+        "4th_house": "Primary indicator of property and home in D4",
+        "4th_lord": "Its placement shows source and nature of property",
+        "benefics_in_4th": "Beautiful and comfortable property",
+        "malefics_in_4th": "Property through effort or disputes"
+      },
+      "planet_summary": {
+        "sun": "Property through government or authority",
+        "moon": "Property through mother or public",
+        "mars": "Property through effort, land, construction",
+        "mercury": "Property through business or communication",
+        "jupiter": "Fortunate property acquisition, large estates",
+        "venus": "Beautiful and luxurious property",
+        "saturn": "Old property, inherited land, property through hard work",
+        "rahu": "Foreign property, unusual real estate",
+        "ketu": "Detachment from property, spiritual retreats"
+      }
+    },
+    "d7_saptamsha": {
+      "description": "D7 Saptamsha chart reveals children, progeny, and creative potential",
+      "significance": "Shows children's nature, number of children, fertility, and creative output",
+      "key_principles": {
+        "5th_house": "Primary indicator of children in D7",
+        "5th_lord": "Its placement shows children's fortune and nature",
+        "jupiter_placement": "Natural significator of children, its D7 position is crucial",
+        "benefics_aspecting_5th": "Healthy and fortunate children"
+      },
+      "planet_summary": {
+        "sun": "Authoritative children, possible son, leadership qualities in children",
+        "moon": "Nurturing children, possible daughter, emotionally connected children",
+        "mars": "Energetic and courageous children, competitive children",
+        "mercury": "Intelligent and communicative children, educated children",
+        "jupiter": "Wise and fortunate children, spiritual children, many children",
+        "venus": "Beautiful and artistic children, loving children",
+        "saturn": "Delayed children, disciplined children, children through hardship",
+        "rahu": "Unconventional children, foreign-connected children",
+        "ketu": "Spiritual children, detachment from children, past-life child karma"
+      }
+    },
+    "d12_dwadashamsha": {
+      "description": "D12 Dwadashamsha chart reveals parents, lineage, and ancestral karma",
+      "significance": "Shows relationship with parents, parental fortune, lineage blessings, and ancestral patterns",
+      "key_principles": {
+        "9th_house": "Father indicator in D12",
+        "4th_house": "Mother indicator in D12",
+        "sun_placement": "Father's fortune and character",
+        "moon_placement": "Mother's fortune and character"
+      },
+      "planet_summary": {
+        "sun": "Father's nature and authority, parental ego, lineage pride",
+        "moon": "Mother's nature and nurturing, parental emotions, lineage feelings",
+        "mars": "Parental conflicts, courage from parents, property inheritance",
+        "mercury": "Parental education, family communication, intellectual lineage",
+        "jupiter": "Parental wisdom, family dharma, blessed lineage",
+        "venus": "Parental love, family beauty, artistic lineage",
+        "saturn": "Parental hardship, ancestral karma, duty to parents",
+        "rahu": "Foreign parental connections, unconventional lineage",
+        "ketu": "Spiritual lineage, past-life parental karma, detachment from parents"
+      }
+    },
+    "d16_shodashamsha": {
+      "description": "D16 Shodashamsha chart reveals vehicles, conveyances, comforts, and mental happiness",
+      "significance": "Shows vehicles, physical comforts, mental peace, and sukha (happiness)",
+      "key_principles": {
+        "4th_house": "Primary indicator of vehicles and comforts",
+        "venus_placement": "Natural significator of comforts and luxury vehicles",
+        "moon_placement": "Mental happiness and contentment"
+      },
+      "planet_summary": {
+        "sun": "Government vehicles, prestigious conveyances, authority-based comforts",
+        "moon": "Comfortable vehicles, mental peace, emotional happiness",
+        "mars": "Powerful vehicles, sports cars, mechanical comforts",
+        "mercury": "Communication devices, business vehicles, intellectual comforts",
+        "jupiter": "Luxurious vehicles, spiritual comforts, wisdom-based happiness",
+        "venus": "Beautiful vehicles, artistic comforts, luxury and pleasure",
+        "saturn": "Old vehicles, basic comforts, happiness through discipline",
+        "rahu": "Foreign vehicles, unconventional comforts, technology-based",
+        "ketu": "Detachment from vehicles, spiritual happiness, simple comforts"
+      }
+    },
+    "d20_vimshamsha": {
+      "description": "D20 Vimshamsha chart reveals spiritual life, upasana (worship), and religious inclination",
+      "significance": "Shows spiritual path, form of worship, religious practices, and spiritual progress",
+      "key_principles": {
+        "9th_house": "Primary spiritual indicator in D20",
+        "5th_house": "Mantra and spiritual practices",
+        "jupiter_placement": "Spiritual guru and wisdom",
+        "ketu_placement": "Moksha and liberation potential"
+      },
+      "planet_summary": {
+        "sun": "Worship of Surya, Gayatri sadhana, fire rituals, Vedic spirituality",
+        "moon": "Worship of Devi, bhakti path, devotional practices, water rituals",
+        "mars": "Worship of Hanuman/Kartikeya, tantric practices, kundalini yoga",
+        "mercury": "Worship of Vishnu, mantra meditation, scriptural study, japa yoga",
+        "jupiter": "Worship of Brihaspati/guru, Vedantic study, teaching dharma",
+        "venus": "Worship of Lakshmi, artistic devotion, temple arts, beautiful worship",
+        "saturn": "Worship of Shani/Kali, discipline-based spirituality, seva yoga",
+        "rahu": "Foreign spiritual traditions, unconventional worship, Buddhist/Jain paths",
+        "ketu": "Worship of Ganesha, moksha practices, past-life spiritual skills, liberation"
+      }
+    },
+    "d24_chaturvimshamsha": {
+      "description": "D24 Chaturvimshamsha chart reveals education, learning, academic achievements",
+      "significance": "Shows educational attainment, field of study, academic success, and knowledge acquisition",
+      "key_principles": {
+        "4th_house": "Primary education indicator",
+        "5th_house": "Intelligence and learning capacity",
+        "mercury_placement": "Natural significator of education",
+        "jupiter_placement": "Higher learning and wisdom"
+      },
+      "planet_summary": {
+        "sun": "Government education, political science, administration studies",
+        "moon": "Psychology, nursing education, hospitality training, emotional intelligence",
+        "mars": "Engineering, military training, sports education, surgery",
+        "mercury": "Commerce, communication, IT education, languages, mathematics",
+        "jupiter": "Philosophy, law, theology, higher education, teaching",
+        "venus": "Arts education, music, dance, fashion design, beauty studies",
+        "saturn": "Traditional education, engineering, mining studies, slow but deep learning",
+        "rahu": "Foreign education, technology, unconventional studies, online learning",
+        "ketu": "Spiritual education, occult studies, past-life knowledge, intuitive learning"
+      }
+    },
+    "d27_nakshatramsha": {
+      "description": "D27 Nakshatramsha (Bhamsha) chart reveals innate strengths, weaknesses, and character",
+      "significance": "Shows fundamental character strengths, natural abilities, and intrinsic personality",
+      "key_principles": {
+        "ascendant": "Core character strength",
+        "moon_placement": "Innate emotional strength",
+        "strong_planets": "Natural abilities and talents"
+      },
+      "planet_summary": {
+        "sun": "Leadership strength, authoritative character, self-confidence",
+        "moon": "Emotional strength, nurturing ability, intuitive power",
+        "mars": "Physical strength, courage, competitive ability",
+        "mercury": "Intellectual strength, communication ability, analytical power",
+        "jupiter": "Wisdom strength, teaching ability, philosophical depth",
+        "venus": "Artistic strength, beauty, romantic ability",
+        "saturn": "Endurance strength, discipline, patience",
+        "rahu": "Innovation strength, foreign abilities, unconventional talent",
+        "ketu": "Spiritual strength, intuitive abilities, past-life talents"
+      }
+    },
+    "d30_trimshamsha": {
+      "description": "D30 Trimshamsha chart reveals misfortunes, evils, dangers, and negative karma",
+      "significance": "Shows potential misfortunes, nature of suffering, health dangers, and karmic difficulties",
+      "key_principles": {
+        "6th_house": "Diseases and enemies",
+        "8th_house": "Dangers and transformations",
+        "12th_house": "Losses and imprisonment",
+        "malefics_placement": "Nature and timing of misfortunes"
+      },
+      "planet_summary": {
+        "sun": "Misfortune through authority, government problems, ego-related suffering",
+        "moon": "Mental suffering, emotional misfortune, mother-related difficulties",
+        "mars": "Accidents, injuries, violence, blood-related misfortune",
+        "mercury": "Nervous disorders, communication problems, business losses",
+        "jupiter": "Moral failures, dharmic violations, teacher-related misfortune",
+        "venus": "Relationship suffering, sexual problems, luxury-related misfortune",
+        "saturn": "Chronic suffering, karmic debts, loneliness, structural problems",
+        "rahu": "Foreign dangers, poison, deception, technology-related misfortune",
+        "ketu": "Spiritual confusion, mysterious ailments, past-life karmic misfortune"
+      },
+      "special_rules": {
+        "note": "D30 is primarily used for female charts to assess character and moral integrity",
+        "malefics_in_trikona": "Indicates specific types of suffering based on sign",
+        "benefics_in_trikona": "Protection from misfortune"
+      }
+    },
+    "d60_shashtiamsha": {
+      "description": "D60 Shashtiamsha chart reveals past-life karma, overall destiny, and deepest karmic patterns",
+      "significance": "Most important divisional chart after D9. Reveals past-life karma that shapes current life destiny. Each of 60 divisions has a specific deity and nature.",
+      "key_principles": {
+        "ascendant": "Past-life karmic theme",
+        "strong_planets": "Positive past-life karma bringing current blessings",
+        "weak_planets": "Negative past-life karma causing current challenges",
+        "benefics_in_good_shashtiamsha": "Extremely auspicious, divine protection",
+        "malefics_in_bad_shashtiamsha": "Past-life debts requiring current-life payment"
+      },
+      "planet_summary": {
+        "sun": "Past-life authority karma, soul-level leadership, father's karmic connection",
+        "moon": "Past-life emotional karma, mother's karmic connection, mental destiny",
+        "mars": "Past-life warrior karma, courage patterns, property destiny",
+        "mercury": "Past-life intellectual karma, communication destiny, business patterns",
+        "jupiter": "Past-life wisdom karma, dharmic destiny, children's karmic connection",
+        "venus": "Past-life love karma, relationship destiny, artistic patterns",
+        "saturn": "Past-life duty karma, service destiny, suffering patterns",
+        "rahu": "Past-life desire karma, material destiny, foreign patterns",
+        "ketu": "Past-life spiritual karma, liberation destiny, moksha patterns"
+      },
+      "shashtiamsha_types": {
+        "auspicious_examples": ["Deva (Divine)", "Kubera (Wealth)", "Indra (Power)", "Brahma (Creator)", "Vishnu (Preserver)"],
+        "inauspicious_examples": ["Rakshasa (Demon)", "Kala (Death)", "Sarpa (Serpent)", "Agni (Fire)", "Maya (Illusion)"],
+        "total_divisions": 60,
+        "each_span": "0.5 degrees (30 arc-minutes)",
+        "importance": "Even a slight birth time error changes D60, so accurate birth time is critical"
       }
     }
   }

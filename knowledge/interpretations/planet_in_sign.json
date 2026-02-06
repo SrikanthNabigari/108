@@ -1,0 +1,869 @@
+{
+  "planet_in_sign": {
+    "description": "Interpretations for each of 9 Vedic planets placed in each of 12 signs. 108 total combinations.",
+    "sun_in_aries": {
+      "summary": "Exalted Sun - powerful leadership, authority, confidence, pioneering spirit",
+      "positive": ["Natural leader", "Strong willpower", "Courageous and bold", "Government favor", "Excellent health"],
+      "negative": ["Aggressive ego", "Domineering nature", "Impulsive decisions", "Anger issues"],
+      "career": "Military, government, politics, entrepreneurship, surgery",
+      "relationships": "Dominant but protective partner; needs admiration",
+      "health": "Strong constitution; watch head injuries and high blood pressure"
+    },
+    "sun_in_taurus": {
+      "summary": "Stable authority, material focus, persistent leader, financial power",
+      "positive": ["Steady and reliable leader", "Financial acumen", "Artistic authority", "Persistent drive"],
+      "negative": ["Stubborn ego", "Material attachment", "Slow to change", "Possessive nature"],
+      "career": "Finance, banking, luxury goods, agriculture, arts management",
+      "relationships": "Loyal and stable; values material security in relationships",
+      "health": "Throat, neck area; tendency toward weight gain"
+    },
+    "sun_in_gemini": {
+      "summary": "Intellectual authority, communicative leader, versatile mind",
+      "positive": ["Excellent communicator", "Quick wit and intelligence", "Versatile leadership", "Teaching ability"],
+      "negative": ["Scattered energy", "Dual personality", "Inconsistent authority", "Nervous tension"],
+      "career": "Media, writing, education, sales, public speaking",
+      "relationships": "Intellectually stimulating but may lack emotional depth",
+      "health": "Arms, shoulders, nervous system; respiratory issues"
+    },
+    "sun_in_cancer": {
+      "summary": "Emotional authority, nurturing leader, patriotic, family-oriented",
+      "positive": ["Emotionally intelligent leader", "Patriotic nature", "Nurturing authority", "Public service"],
+      "negative": ["Moody leadership", "Over-protective", "Emotional ego", "Insecurity disguised as authority"],
+      "career": "Hospitality, nursing, public service, real estate, food industry",
+      "relationships": "Deeply protective and nurturing; seeks emotional security",
+      "health": "Chest, stomach; emotional eating; fluid retention"
+    },
+    "sun_in_leo": {
+      "summary": "Sun in own sign - regal authority, creative power, natural leader",
+      "positive": ["Natural born leader", "Creative genius", "Generous nature", "Magnetic personality", "Strong vitality"],
+      "negative": ["Excessive pride", "Need for adulation", "Dictatorial tendencies", "Dramatic ego"],
+      "career": "Politics, entertainment, government, management, performing arts",
+      "relationships": "Grand romantic; needs to be center of attention; generous partner",
+      "health": "Strong heart; watch for heart conditions in old age; spine issues"
+    },
+    "sun_in_virgo": {
+      "summary": "Analytical authority, service-oriented leader, detail-focused",
+      "positive": ["Meticulous and precise", "Service-oriented leadership", "Health-conscious", "Analytical mind"],
+      "negative": ["Over-critical", "Perfectionist anxiety", "Lack of warmth", "Ego in details"],
+      "career": "Healthcare, accounting, editing, analysis, quality control",
+      "relationships": "Helpful but critical partner; shows love through service",
+      "health": "Digestive system; nervous stomach; skin sensitivity"
+    },
+    "sun_in_libra": {
+      "summary": "Debilitated Sun - compromised authority, partnership-dependent, diplomatic",
+      "positive": ["Diplomatic and fair", "Partnership skills", "Aesthetic sense", "Balance-seeking"],
+      "negative": ["Weak self-confidence", "Dependency on others", "Indecisive leadership", "Compromised ego"],
+      "career": "Law, diplomacy, arts, public relations, mediation",
+      "relationships": "Seeks validation through partner; diplomatic but may lack backbone",
+      "health": "Kidneys, lower back; vitality issues; needs to build constitution"
+    },
+    "sun_in_scorpio": {
+      "summary": "Intense authority, transformative leader, occult power, deep investigation",
+      "positive": ["Powerful and intense", "Research ability", "Transformative leadership", "Occult knowledge"],
+      "negative": ["Controlling nature", "Secretive ego", "Power obsession", "Destructive when threatened"],
+      "career": "Research, surgery, investigation, occult, military intelligence",
+      "relationships": "Intense and passionate; possessive; deep loyalty or deep enmity",
+      "health": "Reproductive system; chronic conditions; transformation through health crises"
+    },
+    "sun_in_sagittarius": {
+      "summary": "Philosophical authority, teaching leader, righteous, expansive vision",
+      "positive": ["Wisdom-oriented leader", "Philosophical and righteous", "International vision", "Teaching ability"],
+      "negative": ["Dogmatic views", "Preachy nature", "Over-optimistic", "Neglect of details"],
+      "career": "Education, law, religion, international affairs, publishing",
+      "relationships": "Freedom-loving partner; philosophical compatibility essential",
+      "health": "Thighs, hips, liver; generally good vitality"
+    },
+    "sun_in_capricorn": {
+      "summary": "Disciplined authority, structured leader, ambitious achiever",
+      "positive": ["Disciplined and ambitious", "Structured leadership", "Long-term vision", "Administrative skill"],
+      "negative": ["Cold and distant", "Overly ambitious", "Status-obsessed", "Harsh authority"],
+      "career": "Government administration, engineering, management, traditional authority",
+      "relationships": "Serious and mature partner; relationship is structured and dutiful",
+      "health": "Knees, bones, skin; slow recovery; needs warmth"
+    },
+    "sun_in_aquarius": {
+      "summary": "Humanitarian authority, innovative leader, unconventional, detached",
+      "positive": ["Humanitarian vision", "Innovative thinking", "Detached leadership", "Democratic values"],
+      "negative": ["Detached ego", "Eccentric authority", "Unpredictable leadership", "Rebellious nature"],
+      "career": "Technology, social work, humanitarian organizations, science",
+      "relationships": "Friendship-based love; needs intellectual freedom; unconventional partner",
+      "health": "Calves, ankles; circulation issues; nervous conditions"
+    },
+    "sun_in_pisces": {
+      "summary": "Spiritual authority, compassionate leader, intuitive, sacrificial",
+      "positive": ["Compassionate leader", "Spiritual depth", "Intuitive wisdom", "Selfless service"],
+      "negative": ["Confused authority", "Ego dissolution difficulties", "Impractical leadership", "Martyr complex"],
+      "career": "Spirituality, healing, arts, charity, maritime, hospitals",
+      "relationships": "Deeply compassionate partner; may sacrifice self for others",
+      "health": "Feet, lymphatic system; susceptible to infections; psychosomatic conditions"
+    },
+    "moon_in_aries": {
+      "summary": "Quick emotions, impulsive feelings, courageous mind, pioneering instinct",
+      "positive": ["Quick emotional responses", "Courageous mind", "Pioneering instinct", "Action-oriented feelings"],
+      "negative": ["Impulsive emotions", "Anger and impatience", "Emotional aggression", "Short temper"],
+      "career": "Emergency services, sports, military, entrepreneurship",
+      "relationships": "Passionate and direct; needs excitement in relationships",
+      "health": "Headaches, blood pressure; inflammation from emotional stress"
+    },
+    "moon_in_taurus": {
+      "summary": "Exalted Moon - stable emotions, loyal mind, sensual, artistic appreciation",
+      "positive": ["Emotionally stable and loyal", "Artistic appreciation", "Sensual enjoyment", "Financial intuition", "Good memory"],
+      "negative": ["Emotional stubbornness", "Possessive feelings", "Resistance to change", "Material attachment"],
+      "career": "Arts, music, hospitality, agriculture, finance, food industry",
+      "relationships": "Deeply loyal and sensual partner; seeks comfort and stability",
+      "health": "Throat, neck; good overall health; weight gain from emotional eating"
+    },
+    "moon_in_gemini": {
+      "summary": "Quick-thinking mind, communicative emotions, intellectual feelings",
+      "positive": ["Quick and adaptable mind", "Communicative emotions", "Intellectual curiosity", "Witty and charming"],
+      "negative": ["Emotionally scattered", "Nervous mind", "Fickle feelings", "Gossip tendency"],
+      "career": "Writing, journalism, teaching, sales, media",
+      "relationships": "Needs mental stimulation in love; communicative but changeable",
+      "health": "Nervous system, arms, lungs; anxiety; insomnia from overactive mind"
+    },
+    "moon_in_cancer": {
+      "summary": "Moon in own sign - deeply emotional, nurturing, intuitive, family-oriented",
+      "positive": ["Deeply intuitive and nurturing", "Strong emotional intelligence", "Family devotion", "Psychic abilities"],
+      "negative": ["Over-emotional", "Mood swings", "Clingy nature", "Over-protective"],
+      "career": "Nursing, psychology, hospitality, cooking, real estate",
+      "relationships": "Deeply nurturing and protective; needs emotional security above all",
+      "health": "Chest, breasts, stomach; emotional health tied to family well-being"
+    },
+    "moon_in_leo": {
+      "summary": "Dramatic emotions, generous feelings, creative mind, noble heart",
+      "positive": ["Generous and warm-hearted", "Creative emotional expression", "Natural entertainer", "Noble feelings"],
+      "negative": ["Emotional drama", "Need for attention", "Prideful feelings", "Hurt easily by lack of appreciation"],
+      "career": "Entertainment, politics, teaching, creative arts, management",
+      "relationships": "Grand romantic gestures; needs admiration and loyalty",
+      "health": "Heart, spine, upper back; emotional heart conditions"
+    },
+    "moon_in_virgo": {
+      "summary": "Analytical emotions, practical mind, health-conscious, service-oriented",
+      "positive": ["Analytical and practical mind", "Health-conscious", "Detail-oriented", "Service through nurturing"],
+      "negative": ["Over-analytical emotions", "Worry and anxiety", "Critical of self and others", "Emotional perfectionism"],
+      "career": "Healthcare, nutrition, analysis, accounting, editing",
+      "relationships": "Practical and helpful partner; shows love through service and care",
+      "health": "Digestive system, intestines; nervous stomach; food sensitivities"
+    },
+    "moon_in_libra": {
+      "summary": "Balanced emotions, partnership-oriented mind, aesthetic sensitivity",
+      "positive": ["Balanced and harmonious mind", "Aesthetic sensitivity", "Diplomatic emotions", "Partnership-oriented"],
+      "negative": ["Indecisive emotions", "Dependent on others for peace", "Superficial charm", "Avoids emotional conflict"],
+      "career": "Arts, law, diplomacy, counseling, fashion, design",
+      "relationships": "Seeks harmony and balance in relationships; charming and diplomatic",
+      "health": "Kidneys, lower back; skin sensitivity; hormonal balance"
+    },
+    "moon_in_scorpio": {
+      "summary": "Debilitated Moon - intense emotions, deep psychology, transformative feelings",
+      "positive": ["Deep emotional insight", "Psychic ability", "Emotional resilience", "Investigative mind"],
+      "negative": ["Emotional intensity and extremes", "Jealousy and possessiveness", "Manipulative emotions", "Depression tendency"],
+      "career": "Psychology, research, occult, surgery, investigation",
+      "relationships": "Intense and possessive; all-or-nothing in love; deeply loyal if trusted",
+      "health": "Reproductive system, chronic conditions; mental health needs attention"
+    },
+    "moon_in_sagittarius": {
+      "summary": "Optimistic emotions, philosophical mind, adventurous feelings",
+      "positive": ["Optimistic and cheerful mind", "Philosophical outlook", "Love of adventure", "Broad emotional perspective"],
+      "negative": ["Emotionally restless", "Overconfident feelings", "Avoids emotional depth", "Commitment phobia"],
+      "career": "Teaching, travel, publishing, law, international work",
+      "relationships": "Freedom-loving; seeks philosophical and adventurous partner",
+      "health": "Hips, thighs, liver; generally good; watch for overindulgence"
+    },
+    "moon_in_capricorn": {
+      "summary": "Controlled emotions, mature mind, dutiful feelings, emotional reserve",
+      "positive": ["Emotionally mature and stable", "Disciplined mind", "Dutiful and responsible", "Long-term emotional planning"],
+      "negative": ["Emotionally cold and reserved", "Depression tendency", "Pessimistic outlook", "Suppressed emotions"],
+      "career": "Management, government, engineering, traditional professions",
+      "relationships": "Dutiful partner; shows love through responsibility; slow to open up",
+      "health": "Knees, bones, joints; chronic conditions; depression; dental issues"
+    },
+    "moon_in_aquarius": {
+      "summary": "Humanitarian emotions, detached mind, unconventional feelings",
+      "positive": ["Humanitarian and progressive mind", "Detached and objective emotions", "Innovative thinking", "Group-oriented"],
+      "negative": ["Emotionally detached", "Eccentric feelings", "Difficulty with intimacy", "Unpredictable moods"],
+      "career": "Technology, social work, science, humanitarian organizations",
+      "relationships": "Friendship-based love; values intellectual connection over emotional",
+      "health": "Ankles, calves; circulation; nervous conditions"
+    },
+    "moon_in_pisces": {
+      "summary": "Deeply intuitive emotions, compassionate mind, dreamy feelings, psychic",
+      "positive": ["Deeply compassionate and intuitive", "Artistic and creative", "Psychic abilities", "Universal love"],
+      "negative": ["Over-sensitive and impressionable", "Emotional escapism", "Confusion", "Boundary issues"],
+      "career": "Arts, healing, spirituality, charity, maritime, psychology",
+      "relationships": "Deeply romantic and compassionate; seeks spiritual connection in love",
+      "health": "Feet, lymphatic system; psychosomatic conditions; addiction vulnerability"
+    },
+    "mars_in_aries": {
+      "summary": "Mars in own sign - warrior energy, maximum courage, pioneering action",
+      "positive": ["Maximum courage and energy", "Natural warrior", "Leadership through action", "Physical prowess"],
+      "negative": ["Excessive aggression", "Reckless behavior", "Quick temper", "Accident-prone"],
+      "career": "Military, sports, surgery, entrepreneurship, emergency services",
+      "relationships": "Passionate and fiery; needs a partner who can match energy",
+      "health": "Head injuries, blood pressure, fevers; strong but needs injury prevention"
+    },
+    "mars_in_taurus": {
+      "summary": "Persistent energy, material drive, steady courage, property focus",
+      "positive": ["Persistent and determined", "Material success through effort", "Steady drive", "Property acquisition"],
+      "negative": ["Stubbornly aggressive", "Possessive", "Slow anger but dangerous", "Material obsession"],
+      "career": "Real estate, construction, agriculture, banking, mechanical work",
+      "relationships": "Possessive but loyal; sensual; slow to anger but explosive",
+      "health": "Throat, neck; blood sugar; dental issues from grinding"
+    },
+    "mars_in_gemini": {
+      "summary": "Sharp communication, mental energy, debate skills, technical mind",
+      "positive": ["Sharp and quick thinking", "Technical abilities", "Debate skills", "Writing with impact"],
+      "negative": ["Argumentative", "Scattered energy", "Nervous aggression", "Too many projects"],
+      "career": "Technology, engineering, technical writing, debate, martial arts instruction",
+      "relationships": "Intellectually combative; needs mental sparring partner",
+      "health": "Arms, hands; nervous energy; cuts on hands; respiratory stress"
+    },
+    "mars_in_cancer": {
+      "summary": "Debilitated Mars - emotional aggression, protective instinct, domestic tension",
+      "positive": ["Protective of family", "Emotional courage", "Fighting for loved ones", "Real estate instinct"],
+      "negative": ["Emotional aggression", "Domestic conflicts", "Mother relationship strain", "Passive-aggressive behavior"],
+      "career": "Real estate, food industry, security, nursing (surgical)",
+      "relationships": "Emotionally volatile; protective but moody; domestic conflicts",
+      "health": "Chest, stomach; acid reflux; emotional eating; blood pressure"
+    },
+    "mars_in_leo": {
+      "summary": "Noble warrior, creative courage, dramatic action, leadership energy",
+      "positive": ["Noble and dignified action", "Creative courage", "Natural leadership", "Generous energy"],
+      "negative": ["Dramatic aggression", "Ego-driven action", "Need to win at all costs", "Overbearing"],
+      "career": "Politics, military leadership, entertainment, sports management",
+      "relationships": "Grand and passionate; needs respect and admiration; loyal fighter",
+      "health": "Heart, spine, blood pressure; overheating"
+    },
+    "mars_in_virgo": {
+      "summary": "Precise action, technical skills, surgical precision, analytical energy",
+      "positive": ["Precise and methodical", "Surgical skills", "Technical expertise", "Service through action"],
+      "negative": ["Critical aggression", "Perfectionist anger", "Nitpicking", "Health anxiety"],
+      "career": "Surgery, engineering, technical analysis, crafts, military logistics",
+      "relationships": "Helpful but critical; shows love through practical action",
+      "health": "Intestines, abdomen; surgical interventions; stress-related digestive issues"
+    },
+    "mars_in_libra": {
+      "summary": "Balanced action, diplomatic energy, partnership drive, refined aggression",
+      "positive": ["Diplomatic warrior", "Balanced energy", "Partnership success", "Artistic drive"],
+      "negative": ["Indecisive action", "Passive aggression", "Relationship conflicts", "Energy drained by others"],
+      "career": "Law, diplomacy, design, martial arts (elegant forms), mediation",
+      "relationships": "Passionate about partnerships; fights for harmony; attractive energy",
+      "health": "Kidneys, lower back; reproductive system; inflammation"
+    },
+    "mars_in_scorpio": {
+      "summary": "Mars in own sign - intense power, occult energy, transformative action",
+      "positive": ["Extreme intensity and power", "Occult abilities", "Research prowess", "Transformative courage"],
+      "negative": ["Destructive intensity", "Vindictive nature", "Obsessive behavior", "Sexual excess"],
+      "career": "Surgery, research, military intelligence, occult, forensics",
+      "relationships": "Intensely passionate; magnetic but potentially destructive; all-or-nothing",
+      "health": "Reproductive system; chronic conditions; surgery likely; intense physical energy"
+    },
+    "mars_in_sagittarius": {
+      "summary": "Righteous warrior, adventurous energy, philosophical action",
+      "positive": ["Righteous and principled action", "Adventurous spirit", "International activities", "Sports excellence"],
+      "negative": ["Fanatical fighting", "Reckless adventure", "Preaching through force", "Legal battles"],
+      "career": "Law, military, adventure sports, international affairs, teaching martial arts",
+      "relationships": "Adventurous and freedom-loving; partner must share enthusiasm",
+      "health": "Hips, thighs; sports injuries; liver heat"
+    },
+    "mars_in_capricorn": {
+      "summary": "Exalted Mars - disciplined action, strategic energy, maximum achievement",
+      "positive": ["Strategic and disciplined", "Maximum professional achievement", "Patient and persistent", "Authority through competence"],
+      "negative": ["Cold and calculating", "Ruthless ambition", "Suppressed anger", "Workaholic tendencies"],
+      "career": "Engineering, military strategy, construction, government, management",
+      "relationships": "Controlled and responsible; shows love through achievement and protection",
+      "health": "Knees, bones; strong constitution; work-related injuries"
+    },
+    "mars_in_aquarius": {
+      "summary": "Revolutionary energy, innovative action, humanitarian drive",
+      "positive": ["Innovative and revolutionary", "Fighting for social causes", "Technical innovation", "Group leadership"],
+      "negative": ["Erratic energy", "Rebellious for its own sake", "Unpredictable aggression", "Detached from consequences"],
+      "career": "Technology, social activism, engineering, science, military technology",
+      "relationships": "Unconventional and freedom-loving; friend before lover",
+      "health": "Calves, ankles; circulation issues; sudden injuries"
+    },
+    "mars_in_pisces": {
+      "summary": "Spiritual warrior, compassionate action, confused energy, healing drive",
+      "positive": ["Spiritual courage", "Compassionate action", "Healing abilities", "Artistic energy"],
+      "negative": ["Confused energy", "Passive aggression", "Self-destructive tendencies", "Lack of direction"],
+      "career": "Healing, spiritual work, arts, maritime, charity work",
+      "relationships": "Compassionate but confused in love; sacrificial; needs clear boundaries",
+      "health": "Feet, immune system; infections; psychosomatic conditions"
+    },
+    "mercury_in_aries": {
+      "summary": "Quick thinking, impulsive speech, pioneering ideas, direct communication",
+      "positive": ["Quick decision maker", "Direct communicator", "Innovative ideas", "Fearless speech"],
+      "negative": ["Impulsive speech", "Hasty decisions", "Argumentative", "Doesn't think before speaking"],
+      "career": "Sales, marketing, entrepreneurship, technology startups",
+      "relationships": "Direct and honest communicator; may be too blunt for sensitive partners",
+      "health": "Headaches from mental overwork; nervous tension"
+    },
+    "mercury_in_taurus": {
+      "summary": "Practical intelligence, steady speech, financial acumen, artistic mind",
+      "positive": ["Practical and grounded thinking", "Financial intelligence", "Artistic appreciation", "Reliable communication"],
+      "negative": ["Slow to grasp new concepts", "Stubborn opinions", "Resistance to new ideas", "Materialistic thinking"],
+      "career": "Finance, agriculture business, art dealing, music, banking",
+      "relationships": "Reliable and practical communicator; values comfort in dialogue",
+      "health": "Throat, voice; stable nervous system"
+    },
+    "mercury_in_gemini": {
+      "summary": "Mercury in own sign - brilliant communication, versatile mind, quick learner",
+      "positive": ["Brilliant communicator", "Extremely versatile", "Quick learner", "Multiple talents", "Witty and charming"],
+      "negative": ["Scattered attention", "Superficial knowledge", "Gossip tendency", "Jack of all trades"],
+      "career": "Writing, journalism, teaching, IT, programming, sales, media",
+      "relationships": "Extremely communicative; needs constant mental stimulation",
+      "health": "Nervous system, arms; anxiety from mental overload"
+    },
+    "mercury_in_cancer": {
+      "summary": "Intuitive intelligence, emotional communication, nurturing mind",
+      "positive": ["Emotionally intelligent", "Intuitive thinking", "Good memory", "Nurturing communication"],
+      "negative": ["Thinking influenced by emotions", "Moody communication", "Over-sensitive mind", "Subjective analysis"],
+      "career": "Psychology, counseling, food industry, education, writing memoirs",
+      "relationships": "Communicates with emotional depth; memory of every conversation",
+      "health": "Stomach, digestive nerves; emotional eating habits"
+    },
+    "mercury_in_leo": {
+      "summary": "Creative intelligence, dramatic speech, confident communication",
+      "positive": ["Creative and confident communicator", "Natural teacher", "Dramatic expression", "Leadership through words"],
+      "negative": ["Prideful speech", "Exaggeration", "Intellectual ego", "Not listening to others"],
+      "career": "Public speaking, entertainment, teaching, creative writing, management",
+      "relationships": "Confident and expressive communicator; partner must appreciate eloquence",
+      "health": "Heart, spine; back pain from sedentary intellectual work"
+    },
+    "mercury_in_virgo": {
+      "summary": "Exalted Mercury - analytical mastery, precise speech, perfect discrimination",
+      "positive": ["Analytical genius", "Perfect discrimination", "Meticulous communication", "Health knowledge", "Detail mastery"],
+      "negative": ["Over-analysis", "Critical speech", "Perfectionist anxiety", "Missing big picture"],
+      "career": "Accounting, editing, healthcare, programming, analysis, quality control",
+      "relationships": "Precise and helpful communicator; may over-analyze relationship",
+      "health": "Digestive system; nervous conditions; skin allergies"
+    },
+    "mercury_in_libra": {
+      "summary": "Diplomatic communication, balanced thinking, aesthetic intelligence",
+      "positive": ["Diplomatic and balanced", "Aesthetic sense", "Fair-minded thinking", "Charming speech"],
+      "negative": ["Indecisive mind", "People-pleasing communication", "Superficial balance", "Avoids hard truths"],
+      "career": "Law, diplomacy, design, counseling, mediation, public relations",
+      "relationships": "Harmonious and pleasant communicator; seeks balance in all exchanges",
+      "health": "Kidneys; hormonal balance; skin sensitivity"
+    },
+    "mercury_in_scorpio": {
+      "summary": "Deep investigative mind, probing communication, secretive intelligence",
+      "positive": ["Deep investigative ability", "Strategic thinking", "Occult knowledge", "Psychological insight"],
+      "negative": ["Manipulative speech", "Secretive communication", "Suspicious mind", "Dark thinking"],
+      "career": "Research, investigation, psychology, forensics, occult studies",
+      "relationships": "Psychologically perceptive; may probe too deeply; trust issues",
+      "health": "Reproductive system; chronic nervous conditions; mental health"
+    },
+    "mercury_in_sagittarius": {
+      "summary": "Philosophical thinking, broad communication, teaching mind",
+      "positive": ["Philosophical wisdom", "Broad thinking", "Teaching ability", "Multi-cultural understanding"],
+      "negative": ["Scattered philosophy", "Preachy communication", "Overlooking details", "Over-promising"],
+      "career": "Teaching, publishing, law, international trade, translation",
+      "relationships": "Philosophical communicator; needs partner who shares big-picture vision",
+      "health": "Hips, thighs; liver; generally good"
+    },
+    "mercury_in_capricorn": {
+      "summary": "Structured intelligence, serious speech, business mind, methodical",
+      "positive": ["Structured and organized thinking", "Business acumen", "Serious and reliable", "Long-term planning"],
+      "negative": ["Rigid thinking", "Cold communication", "Lack of humor", "Over-structured mind"],
+      "career": "Management, administration, engineering, government, accounting",
+      "relationships": "Serious and structured communicator; practical in love expression",
+      "health": "Knees, bones; dental issues; dry skin"
+    },
+    "mercury_in_aquarius": {
+      "summary": "Innovative thinking, humanitarian communication, scientific mind",
+      "positive": ["Innovative and original", "Scientific thinking", "Humanitarian communication", "Future-oriented"],
+      "negative": ["Eccentric thinking", "Detached communication", "Rebellious mind", "Too abstract"],
+      "career": "Technology, science, social media, humanitarian work, research",
+      "relationships": "Intellectual and unconventional communicator; values freedom of thought",
+      "health": "Calves, ankles; nervous system; circulation"
+    },
+    "mercury_in_pisces": {
+      "summary": "Debilitated Mercury - intuitive but confused mind, artistic communication",
+      "positive": ["Intuitive and creative", "Artistic expression", "Compassionate communication", "Spiritual understanding"],
+      "negative": ["Confused thinking", "Difficulty with facts", "Vague communication", "Escapist mind"],
+      "career": "Arts, music, healing, spiritual counseling, creative writing",
+      "relationships": "Romantic and poetic communicator; may struggle with practical discussions",
+      "health": "Feet; lymphatic system; allergies; confusion about health"
+    },
+    "jupiter_in_aries": {
+      "summary": "Bold wisdom, pioneering philosophy, courageous expansion",
+      "positive": ["Bold and courageous wisdom", "Pioneering philosophy", "Quick to expand", "Optimistic leader"],
+      "negative": ["Impulsive generosity", "Preaching through force", "Over-confident expansion", "Rushed judgment"],
+      "career": "Entrepreneurship, teaching, military consulting, sports coaching",
+      "relationships": "Generous and enthusiastic; seeks independent and bold partner",
+      "health": "Head, blood; liver from excessive living; generally good"
+    },
+    "jupiter_in_taurus": {
+      "summary": "Material wisdom, financial growth, grounded philosophy, luxury",
+      "positive": ["Financial wisdom", "Material prosperity", "Grounded philosophy", "Generous with resources"],
+      "negative": ["Materialistic spirituality", "Over-indulgent", "Slow growth", "Complacent"],
+      "career": "Finance, banking, agriculture, education, food industry",
+      "relationships": "Generous and stable; values comfort and security in relationships",
+      "health": "Throat, weight gain, diabetes risk; liver; tendency to overeat"
+    },
+    "jupiter_in_gemini": {
+      "summary": "Intellectual wisdom, versatile teaching, communication-based expansion",
+      "positive": ["Versatile intellect", "Communication skills", "Multiple teachings", "Adaptable wisdom"],
+      "negative": ["Scattered wisdom", "Superficial philosophy", "Too many interests", "Inconsistent beliefs"],
+      "career": "Teaching, writing, media, publishing, communication consultancy",
+      "relationships": "Intellectually generous; needs variety and stimulation in partnerships",
+      "health": "Arms, shoulders; respiratory; nervous conditions from mental overwork"
+    },
+    "jupiter_in_cancer": {
+      "summary": "Exalted Jupiter - greatest fortune, nurturing wisdom, emotional prosperity",
+      "positive": ["Extremely fortunate", "Deep emotional wisdom", "Nurturing and generous", "Excellent for family", "Wealth and property"],
+      "negative": ["Over-emotional generosity", "Attachment to family", "Weight gain", "Smothering with care"],
+      "career": "Teaching, real estate, psychology, hospitality, banking",
+      "relationships": "Most nurturing and protective partner; family-centered love; marriage is blessed",
+      "health": "Chest, stomach; weight gain tendency; water retention"
+    },
+    "jupiter_in_leo": {
+      "summary": "Noble wisdom, creative expansion, generous leadership",
+      "positive": ["Noble and generous leader", "Creative wisdom", "Dignified expansion", "Natural authority"],
+      "negative": ["Spiritual pride", "Ego in teaching", "Over-dramatic generosity", "Expects recognition"],
+      "career": "Government, education administration, entertainment, politics",
+      "relationships": "Grand and generous partner; needs admiration for wisdom; royal love",
+      "health": "Heart, spine; weight gain; blood pressure"
+    },
+    "jupiter_in_virgo": {
+      "summary": "Debilitated Jupiter - analytical wisdom, service-focused, critical expansion",
+      "positive": ["Analytical and precise", "Service-oriented wisdom", "Detail-focused teaching", "Health knowledge"],
+      "negative": ["Critical of spiritual matters", "Over-analytical philosophy", "Narrowed expansion", "Penny-pinching"],
+      "career": "Healthcare, analysis, accounting, editing, nutrition, consulting",
+      "relationships": "Practical and helpful but may criticize partner's philosophy",
+      "health": "Digestive system; liver; skin; weight management challenges"
+    },
+    "jupiter_in_libra": {
+      "summary": "Diplomatic wisdom, partnership-focused expansion, aesthetic philosophy",
+      "positive": ["Diplomatic and balanced wisdom", "Partnership success", "Aesthetic philosophy", "Fair-minded"],
+      "negative": ["Indecisive philosophy", "Over-accommodating", "Justice becomes rigid", "Dependent on others"],
+      "career": "Law, counseling, arts education, diplomacy, mediation",
+      "relationships": "Seeks harmonious and balanced partnership; diplomatic and fair in love",
+      "health": "Kidneys, lower back; weight from social eating; hormonal balance"
+    },
+    "jupiter_in_scorpio": {
+      "summary": "Deep wisdom, occult knowledge, transformative expansion",
+      "positive": ["Deep and penetrating wisdom", "Occult knowledge", "Research ability", "Transformative teaching"],
+      "negative": ["Secretive philosophy", "Manipulative teaching", "Dark wisdom", "Excessive investigation"],
+      "career": "Research, psychology, occult, investigation, insurance, spiritual healing",
+      "relationships": "Deeply wise about relationships; intense philosophical bond",
+      "health": "Reproductive system; chronic conditions; deep healing ability"
+    },
+    "jupiter_in_sagittarius": {
+      "summary": "Jupiter in own sign - pure wisdom, natural teacher, greatest expansion",
+      "positive": ["Pure and natural wisdom", "Greatest teacher", "International vision", "Dharmic living", "Fortune and luck"],
+      "negative": ["Over-expansion", "Dogmatic beliefs", "Self-righteous", "Excessive optimism"],
+      "career": "Education, law, religion, publishing, international affairs",
+      "relationships": "Philosophical and adventurous partner; marriage is fortunate",
+      "health": "Hips, thighs, liver; weight gain from good living"
+    },
+    "jupiter_in_capricorn": {
+      "summary": "Debilitated Jupiter - restricted wisdom, practical philosophy, slow expansion",
+      "positive": ["Practical wisdom", "Disciplined growth", "Structured philosophy", "Patient expansion"],
+      "negative": ["Restricted fortune", "Pessimistic philosophy", "Limited expansion", "Karma-heavy period"],
+      "career": "Government, administration, traditional education, banking",
+      "relationships": "Serious and duty-bound partner; marriage may be delayed or restricted",
+      "health": "Knees, bones; weight issues; liver; slow recovery"
+    },
+    "jupiter_in_aquarius": {
+      "summary": "Humanitarian wisdom, universal philosophy, innovative expansion",
+      "positive": ["Humanitarian wisdom", "Universal philosophy", "Innovative teaching", "Democratic expansion"],
+      "negative": ["Detached from tradition", "Eccentric philosophy", "Unpredictable growth", "Too idealistic"],
+      "career": "Social work, technology education, humanitarian organizations, science",
+      "relationships": "Progressive and humanitarian partner; seeks intellectual equal",
+      "health": "Calves, ankles; circulation; liver"
+    },
+    "jupiter_in_pisces": {
+      "summary": "Jupiter in own sign - mystical wisdom, spiritual expansion, compassionate teaching",
+      "positive": ["Mystical and spiritual wisdom", "Compassionate expansion", "Intuitive teaching", "Divine connection"],
+      "negative": ["Unrealistic optimism", "Boundary issues in giving", "Spiritual escapism", "Over-trusting"],
+      "career": "Spirituality, healing, arts, charity, psychology, maritime",
+      "relationships": "Deeply spiritual and compassionate partner; marriage has transcendent quality",
+      "health": "Feet, lymphatic system; weight gain; psychosomatic conditions"
+    },
+    "venus_in_aries": {
+      "summary": "Passionate love, impulsive romance, bold creativity",
+      "positive": ["Passionate and bold in love", "Creative courage", "Attractive energy", "Quick romance"],
+      "negative": ["Impulsive in love", "Short-lived passions", "Aggressive romance", "Selfish in relationships"],
+      "career": "Fashion, sports aesthetics, design, entertainment, cosmetics",
+      "relationships": "Falls in love quickly; passionate but may burn out fast",
+      "health": "Reproductive system; face and skin; inflammation"
+    },
+    "venus_in_taurus": {
+      "summary": "Venus in own sign - sensual beauty, material wealth, artistic mastery",
+      "positive": ["Deep sensual enjoyment", "Material wealth", "Artistic mastery", "Loyal love", "Beautiful voice"],
+      "negative": ["Material attachment", "Possessive love", "Lazy comfort", "Over-indulgence"],
+      "career": "Music, arts, luxury goods, beauty, finance, agriculture",
+      "relationships": "Loyal, sensual, and devoted; seeks comfort and security in love",
+      "health": "Throat, weight gain, diabetes; reproductive health generally good"
+    },
+    "venus_in_gemini": {
+      "summary": "Intellectual romance, versatile creativity, communicative love",
+      "positive": ["Charming and witty in love", "Versatile creativity", "Social grace", "Multiple artistic talents"],
+      "negative": ["Fickle in love", "Superficial romance", "Too many interests", "Flirtatious"],
+      "career": "Writing, media, design, fashion communication, social media",
+      "relationships": "Needs mental stimulation; playful and communicative lover",
+      "health": "Arms, skin; nervous conditions; allergies"
+    },
+    "venus_in_cancer": {
+      "summary": "Nurturing love, emotional beauty, home-centered creativity",
+      "positive": ["Deeply nurturing love", "Home beauty", "Emotional creativity", "Family-centered romance"],
+      "negative": ["Clingy in love", "Over-emotional romance", "Moody beauty", "Smothering affection"],
+      "career": "Interior design, hospitality, cooking, nursing, family counseling",
+      "relationships": "Nurturing and protective lover; home is the center of romance",
+      "health": "Chest, stomach; emotional eating; reproductive health"
+    },
+    "venus_in_leo": {
+      "summary": "Grand romance, dramatic beauty, creative luxury, loyal love",
+      "positive": ["Grand and generous lover", "Creative expression", "Loyal and warm", "Attractive personality"],
+      "negative": ["Dramatic in love", "Needs constant adulation", "Expensive tastes", "Prideful in relationships"],
+      "career": "Entertainment, luxury brands, fashion, arts, creative management",
+      "relationships": "Grand romantic gestures; needs admiration; loyal and generous partner",
+      "health": "Heart, spine; blood pressure from rich lifestyle"
+    },
+    "venus_in_virgo": {
+      "summary": "Debilitated Venus - practical love, reserved beauty, critical romance",
+      "positive": ["Practical and helpful lover", "Service-oriented beauty", "Discriminating taste", "Health-conscious aesthetics"],
+      "negative": ["Critical in love", "Reserved romance", "Difficulty expressing affection", "Perfectionist partner"],
+      "career": "Healthcare aesthetics, nutrition, analysis, crafts, service industries",
+      "relationships": "Shows love through service and help; may criticize partner's appearance",
+      "health": "Digestive system; reproductive issues; skin sensitivity"
+    },
+    "venus_in_libra": {
+      "summary": "Venus in own sign - perfect harmony, diplomatic love, aesthetic mastery",
+      "positive": ["Perfect sense of harmony", "Diplomatic and charming", "Aesthetic mastery", "Ideal partnership"],
+      "negative": ["Co-dependent", "Avoids conflict in love", "Superficial charm", "Indecisive in relationships"],
+      "career": "Arts, law, fashion, design, diplomacy, beauty industry",
+      "relationships": "Seeks perfect partner; charming and diplomatic; values harmony above all",
+      "health": "Kidneys, lower back; hormonal balance; skin health"
+    },
+    "venus_in_scorpio": {
+      "summary": "Intense passion, magnetic beauty, transformative love, occult aesthetics",
+      "positive": ["Magnetic attraction", "Deep passionate love", "Transformative beauty", "Occult artistic talents"],
+      "negative": ["Jealous and possessive", "Obsessive love", "Manipulative charm", "Sexual excess"],
+      "career": "Psychology, occult arts, research aesthetics, luxury investigation",
+      "relationships": "Intensely passionate; all-or-nothing in love; magnetic but potentially destructive",
+      "health": "Reproductive system; chronic conditions; STDs if afflicted"
+    },
+    "venus_in_sagittarius": {
+      "summary": "Adventurous love, philosophical beauty, expansive creativity",
+      "positive": ["Adventurous and optimistic lover", "Philosophical beauty", "International romance", "Freedom-loving"],
+      "negative": ["Non-committal", "Blunt in love", "Restless romance", "Multiple affairs"],
+      "career": "Travel, international arts, education, publishing, culture exchange",
+      "relationships": "Freedom-loving; seeks adventure and philosophy in romance",
+      "health": "Hips, thighs; liver; reproductive health"
+    },
+    "venus_in_capricorn": {
+      "summary": "Mature love, structured beauty, traditional romance, lasting affection",
+      "positive": ["Mature and lasting love", "Structured beauty", "Traditional values", "Financial partnership"],
+      "negative": ["Cold in romance", "Status-focused love", "Age-gap relationships", "Duty over passion"],
+      "career": "Architecture, classic arts, management, luxury real estate",
+      "relationships": "Mature and responsible partner; love deepens with time; status matters",
+      "health": "Knees, bones, skin; reproductive health; dental aesthetics"
+    },
+    "venus_in_aquarius": {
+      "summary": "Unconventional love, humanitarian beauty, friendship-based romance",
+      "positive": ["Unconventional and unique lover", "Humanitarian beauty", "Friendship-based romance", "Progressive values"],
+      "negative": ["Emotionally detached", "Too unconventional", "Commitment issues", "Eccentric tastes"],
+      "career": "Technology design, social media, humanitarian arts, modern fashion",
+      "relationships": "Friendship first, then love; unconventional relationship structures",
+      "health": "Calves, ankles; circulation; reproductive health"
+    },
+    "venus_in_pisces": {
+      "summary": "Exalted Venus - divine love, transcendent beauty, artistic genius",
+      "positive": ["Divine and unconditional love", "Artistic genius", "Compassionate beauty", "Spiritual romance", "Musical talent"],
+      "negative": ["Idealistic to a fault", "Boundary issues in love", "Escapist romance", "Sacrificial love"],
+      "career": "Arts, music, healing, spirituality, charity, film, poetry",
+      "relationships": "Deepest love possible; spiritual connection; may sacrifice self for partner",
+      "health": "Feet, lymphatic system; psychosomatic beauty conditions"
+    },
+    "saturn_in_aries": {
+      "summary": "Debilitated Saturn - frustrated ambition, restricted action, delayed courage",
+      "positive": ["Learns patience through frustration", "Eventually gains courage", "Disciplined action over time"],
+      "negative": ["Frustrated energy", "Delayed initiative", "Headaches and bone issues", "Anger from restriction"],
+      "career": "Slow start in competitive fields; eventually earns respect through persistence",
+      "relationships": "Delayed relationships; partner teaches patience",
+      "health": "Head, bones, joints; chronic headaches; dental issues"
+    },
+    "saturn_in_taurus": {
+      "summary": "Patient wealth building, material discipline, persistent effort",
+      "positive": ["Patient wealth accumulation", "Disciplined material life", "Enduring values", "Persistent effort"],
+      "negative": ["Financial restrictions", "Slow material progress", "Fear of poverty", "Rigid values"],
+      "career": "Agriculture, mining, traditional crafts, real estate, banking",
+      "relationships": "Stable but restricted; partner values frugality and tradition",
+      "health": "Throat, dental, jaw; chronic conditions; slow healing"
+    },
+    "saturn_in_gemini": {
+      "summary": "Serious communication, disciplined mind, structured learning",
+      "positive": ["Structured thinking", "Disciplined communication", "Deep learning", "Scientific mind"],
+      "negative": ["Speech restrictions", "Learning difficulties early", "Communication anxiety", "Pessimistic thinking"],
+      "career": "Research, technical writing, engineering, mathematics, government communication",
+      "relationships": "Serious communicator; partner values depth over superficiality",
+      "health": "Arms, shoulders; nervous conditions; respiratory; hearing"
+    },
+    "saturn_in_cancer": {
+      "summary": "Emotional restriction, family duty, domestic hardship, inner discipline",
+      "positive": ["Emotional discipline", "Family duty", "Inner strength", "Domestic structure"],
+      "negative": ["Emotional coldness", "Mother's hardship", "Domestic deprivation", "Depression"],
+      "career": "Government housing, social work, traditional caregiving, real estate",
+      "relationships": "Emotionally reserved; duty-bound family life; slow to show feelings",
+      "health": "Chest, stomach; chronic digestive issues; depression"
+    },
+    "saturn_in_leo": {
+      "summary": "Humbled authority, restricted creativity, disciplined leadership",
+      "positive": ["Earned authority", "Disciplined creativity", "Humble leadership", "Persistent achievement"],
+      "negative": ["Restricted self-expression", "Creativity blocked", "Authority challenges", "Heart issues"],
+      "career": "Government, traditional arts, management through effort, administration",
+      "relationships": "Serious and reserved; partner challenges ego; mutual growth through humility",
+      "health": "Heart, spine, bones; chronic back issues; cardiac care needed"
+    },
+    "saturn_in_virgo": {
+      "summary": "Disciplined service, meticulous effort, health through structure",
+      "positive": ["Meticulous and disciplined", "Excellent service worker", "Health through routine", "Analytical depth"],
+      "negative": ["Over-critical", "Health anxiety", "Perfectionist paralysis", "Chronic worrying"],
+      "career": "Healthcare, accounting, analysis, government service, research",
+      "relationships": "Service-oriented partner; practical and reliable; may be too critical",
+      "health": "Digestive system; intestines; chronic conditions; skin"
+    },
+    "saturn_in_libra": {
+      "summary": "Exalted Saturn - balanced justice, disciplined harmony, earned authority",
+      "positive": ["Exceptional justice", "Balanced discipline", "Earned social authority", "Fair-minded leadership"],
+      "negative": ["Rigid justice", "Cold diplomacy", "Over-structured relationships", "Social duty over personal joy"],
+      "career": "Law, judiciary, government, diplomacy, mediation, social justice",
+      "relationships": "Balanced and just partner; marriage is karmic and duty-bound; lasting bonds",
+      "health": "Kidneys, lower back; bones; chronic conditions manageable"
+    },
+    "saturn_in_scorpio": {
+      "summary": "Deep karmic discipline, transformative suffering, occult structure",
+      "positive": ["Deep transformation", "Occult discipline", "Karmic resolution", "Psychological depth"],
+      "negative": ["Chronic suffering", "Dark depression", "Karmic debts", "Fear and paranoia"],
+      "career": "Mining, insurance, research, occult, forensics, mortuary",
+      "relationships": "Deep karmic bonds; intense and transformative; trust issues",
+      "health": "Reproductive system; chronic conditions; piles; deep-seated diseases"
+    },
+    "saturn_in_sagittarius": {
+      "summary": "Disciplined philosophy, structured spirituality, patient wisdom",
+      "positive": ["Disciplined spiritual practice", "Patient wisdom", "Structured philosophy", "Traditional teaching"],
+      "negative": ["Dogmatic beliefs", "Restricted expansion", "Faith tested", "Father hardship"],
+      "career": "Law, traditional education, government, religious institutions",
+      "relationships": "Serious and philosophical partner; seeks traditional values",
+      "health": "Hips, thighs; chronic conditions; bones"
+    },
+    "saturn_in_capricorn": {
+      "summary": "Saturn in own sign - pure discipline, maximum authority, karmic mastery",
+      "positive": ["Maximum discipline", "Natural authority", "Karmic mastery", "Long-lasting achievements"],
+      "negative": ["Cold and harsh", "Ruthless ambition", "Emotionally barren", "Extreme workaholic"],
+      "career": "Government, engineering, mining, administration, traditional authority",
+      "relationships": "Extremely serious and dutiful; partner must accept structured life",
+      "health": "Knees, bones, joints; chronic conditions; dental; slow but steady health"
+    },
+    "saturn_in_aquarius": {
+      "summary": "Saturn in own sign - humanitarian discipline, social justice, democratic service",
+      "positive": ["Humanitarian service", "Democratic discipline", "Social justice", "Scientific approach"],
+      "negative": ["Detached from personal needs", "Cold humanitarianism", "Eccentric discipline", "Social isolation"],
+      "career": "Social work, technology, government organizations, democratic institutions",
+      "relationships": "Friendship-based partnership; values social contribution over romance",
+      "health": "Calves, ankles; circulation; chronic nervous conditions"
+    },
+    "saturn_in_pisces": {
+      "summary": "Spiritual discipline, compassionate service, karmic completion",
+      "positive": ["Spiritual discipline", "Compassionate service", "Karmic completion", "Selfless work"],
+      "negative": ["Spiritual depression", "Loss and isolation", "Confusion about duty", "Feet and chronic conditions"],
+      "career": "Charity, hospitals, spiritual institutions, government welfare",
+      "relationships": "Sacrificial partner; karmic relationship; duty-based love",
+      "health": "Feet, lymphatic system; chronic conditions; psychosomatic ailments"
+    },
+    "rahu_in_aries": {
+      "summary": "Obsessive pioneering, foreign courage, amplified aggression",
+      "positive": ["Fearless innovation", "Foreign success through action", "Amplified courage", "Breaking new ground"],
+      "negative": ["Reckless ambition", "Obsessive aggression", "Identity confusion", "Impulsive foreign ventures"],
+      "career": "Technology, foreign military, unconventional entrepreneurship",
+      "relationships": "Attracts foreign or unconventional partners; intense but unstable attraction",
+      "health": "Head, mysterious headaches; blood disorders; misdiagnosis"
+    },
+    "rahu_in_taurus": {
+      "summary": "Material obsession, foreign wealth, unconventional luxury",
+      "positive": ["Wealth from foreign sources", "Unconventional material success", "Unique artistic taste"],
+      "negative": ["Insatiable material desire", "Deceptive wealth", "Toxic food habits", "Financial instability"],
+      "career": "Foreign trade, technology in finance, luxury imports, media",
+      "relationships": "Material expectations in love; foreign partner possible; possessive",
+      "health": "Throat, toxins; unusual food reactions; weight fluctuation"
+    },
+    "rahu_in_gemini": {
+      "summary": "Exalted Rahu - communication mastery, technology genius, foreign intellect",
+      "positive": ["Communication mastery", "Technology genius", "Foreign language skills", "Media success"],
+      "negative": ["Deceptive communication", "Information overload", "Gossip amplified", "Nervous breakdown risk"],
+      "career": "IT, media, foreign communication, technology, journalism",
+      "relationships": "Intellectually intense; foreign or unconventional communication in love",
+      "health": "Arms, nervous system; anxiety; mysterious nerve conditions"
+    },
+    "rahu_in_cancer": {
+      "summary": "Obsessive nurturing, foreign home, disrupted emotions",
+      "positive": ["Foreign home acquisition", "Unconventional nurturing", "Emotional breakthrough", "Property in foreign land"],
+      "negative": ["Emotional instability", "Mother's health issues", "Haunted feelings", "Domestic disruption"],
+      "career": "Foreign real estate, hospitality abroad, unconventional caregiving",
+      "relationships": "Emotionally intense; foreign family connections; domestic instability",
+      "health": "Chest, stomach; emotional disorders; mysterious maternal health link"
+    },
+    "rahu_in_leo": {
+      "summary": "Amplified ego, sudden fame, unconventional authority",
+      "positive": ["Sudden fame and recognition", "Unconventional leadership", "Creative amplification", "Political success"],
+      "negative": ["Inflated ego", "False prestige", "Dramatic downfalls", "Authority through deception"],
+      "career": "Politics, entertainment, technology leadership, foreign government",
+      "relationships": "Dramatic and intense; needs constant recognition; foreign authority figure partner",
+      "health": "Heart, spine; mysterious cardiac symptoms; blood disorders"
+    },
+    "rahu_in_virgo": {
+      "summary": "Obsessive perfectionism, foreign health methods, analytical intensity",
+      "positive": ["Foreign health techniques", "Analytical innovation", "Technology in healthcare", "Detailed mastery"],
+      "negative": ["Health obsession", "Extreme perfectionism", "Analytical paralysis", "Mysterious diseases"],
+      "career": "Foreign healthcare, technology in analysis, pharmaceutical innovation",
+      "relationships": "Critical and analytical in love; foreign partner with health focus",
+      "health": "Digestive system; mysterious ailments; skin conditions; allergies"
+    },
+    "rahu_in_libra": {
+      "summary": "Obsessive relationships, foreign partnership, unconventional diplomacy",
+      "positive": ["Cross-cultural partnerships", "Foreign diplomatic success", "Unconventional beauty", "Social ambition"],
+      "negative": ["Relationship obsession", "Foreign partner complications", "Social deception", "Partnership betrayal"],
+      "career": "International diplomacy, foreign law, cross-cultural arts, media",
+      "relationships": "Foreign or unconventional partner; cross-cultural marriage; intense social ambition",
+      "health": "Kidneys; mysterious lower back conditions; hormonal"
+    },
+    "rahu_in_scorpio": {
+      "summary": "Extreme transformation, occult obsession, intense mystery",
+      "positive": ["Deep occult mastery", "Extreme transformation", "Research genius", "Crisis management"],
+      "negative": ["Obsessive darkness", "Addictive tendencies", "Paranoia", "Destructive transformation"],
+      "career": "Occult research, foreign intelligence, technology security, forensics",
+      "relationships": "Extremely intense; obsessive passion; foreign mysterious partner",
+      "health": "Reproductive system; chronic mysterious conditions; poisoning risk"
+    },
+    "rahu_in_sagittarius": {
+      "summary": "Debilitated Rahu - disrupted dharma, foreign philosophy, confused beliefs",
+      "positive": ["Foreign spiritual traditions", "Unconventional wisdom", "Breaking religious barriers"],
+      "negative": ["Spiritual confusion", "Guru deception", "Disrupted dharma", "False philosophy"],
+      "career": "Foreign religion, unconventional law, international education",
+      "relationships": "Partner from different faith or culture; philosophical conflicts",
+      "health": "Hips, liver; mysterious foreign diseases"
+    },
+    "rahu_in_capricorn": {
+      "summary": "Obsessive ambition, foreign authority, unconventional discipline",
+      "positive": ["Foreign career success", "Unconventional authority", "Ambitious discipline", "Political power"],
+      "negative": ["Ruthless ambition", "Unethical means", "Authority through deception", "Sudden professional falls"],
+      "career": "Foreign government, technology management, corporate politics",
+      "relationships": "Ambitious partner; foreign authority figure; career-focused love",
+      "health": "Knees, bones; mysterious joint conditions; chronic"
+    },
+    "rahu_in_aquarius": {
+      "summary": "Revolutionary innovation, foreign technology, humanitarian obsession",
+      "positive": ["Technology mastery", "Revolutionary ideas", "Foreign humanitarian work", "Innovation genius"],
+      "negative": ["Eccentric to extreme", "Social confusion", "Technology addiction", "Radical behavior"],
+      "career": "Technology, foreign social work, innovation, digital media",
+      "relationships": "Highly unconventional; technology-mediated love; foreign progressive partner",
+      "health": "Calves, ankles; circulation; mysterious nervous conditions"
+    },
+    "rahu_in_pisces": {
+      "summary": "Spiritual illusion, foreign mysticism, confused compassion",
+      "positive": ["Foreign spiritual experiences", "Mystical abilities", "Compassionate innovation", "Artistic amplification"],
+      "negative": ["Spiritual illusion", "Addiction risk", "Confused compassion", "Escapist tendencies"],
+      "career": "Foreign spirituality, healing innovation, arts abroad, charity",
+      "relationships": "Idealistic and confused in love; foreign spiritual partner; boundary issues",
+      "health": "Feet; lymphatic system; addiction; psychosomatic mysterious conditions"
+    },
+    "ketu_in_aries": {
+      "summary": "Detached warrior, past-life courage, spiritual action",
+      "positive": ["Past-life warrior skills", "Spiritual courage", "Detached action", "Intuitive initiative"],
+      "negative": ["Aimless action", "Lack of motivation", "Head issues", "Identity dissolution"],
+      "career": "Spiritual warrior work, technology, healing, behind-the-scenes action",
+      "relationships": "Detached from physical passion; seeks spiritual connection",
+      "health": "Head, mysterious headaches; skin; misdiagnosed conditions"
+    },
+    "ketu_in_taurus": {
+      "summary": "Detached from material, past-life wealth, spiritual simplicity",
+      "positive": ["Non-attachment to wealth", "Past-life material skills", "Spiritual simplicity", "Intuitive taste"],
+      "negative": ["Financial instability", "Speech issues", "Food aversion", "Family detachment"],
+      "career": "Spiritual counseling, alternative value systems, technology",
+      "relationships": "Not focused on material comforts; simple living; partner confused by detachment",
+      "health": "Throat, dental; unusual dietary needs; toxin sensitivity"
+    },
+    "ketu_in_gemini": {
+      "summary": "Debilitated Ketu - communication detachment, past-life intellect, intuitive knowing",
+      "positive": ["Intuitive knowledge", "Past-life communication skills", "Non-verbal wisdom", "Psychic ability"],
+      "negative": ["Communication breakdown", "Learning difficulties", "Sibling detachment", "Mental confusion"],
+      "career": "Technology (silent/backend), research, spiritual communication, healing",
+      "relationships": "Silent lover; communicates through action rather than words",
+      "health": "Arms, nervous system; mysterious nerve conditions; hearing issues"
+    },
+    "ketu_in_cancer": {
+      "summary": "Emotional detachment, past-life nurturing, spiritual mothering",
+      "positive": ["Past-life emotional wisdom", "Spiritual nurturing", "Detached compassion", "Intuitive emotions"],
+      "negative": ["Emotional numbness", "Mother detachment", "Domestic instability", "Feeling homeless"],
+      "career": "Spiritual caregiving, alternative healing, technology at home",
+      "relationships": "Emotionally detached; may struggle with family bonds; past-life family karma",
+      "health": "Chest, stomach; emotional health; mysterious digestive issues"
+    },
+    "ketu_in_leo": {
+      "summary": "Ego dissolution, past-life authority, humble leadership",
+      "positive": ["Past-life leadership skills", "Humble authority", "Spiritual creativity", "Ego transcendence"],
+      "negative": ["Lack of confidence", "Creative blocks", "Authority dissolution", "Self-doubt"],
+      "career": "Spiritual leadership, behind-the-scenes creative work, technology",
+      "relationships": "Humble and spiritual partner; lacks ego in relationships; may be overlooked",
+      "health": "Heart, spine; mysterious cardiac symptoms; low vitality"
+    },
+    "ketu_in_virgo": {
+      "summary": "Detached service, past-life healing, intuitive analysis",
+      "positive": ["Natural healing ability", "Past-life service skills", "Intuitive analysis", "Spiritual discrimination"],
+      "negative": ["Health detachment", "Non-analytical approach", "Service confusion", "Work disconnection"],
+      "career": "Alternative healing, spiritual service, technology, research",
+      "relationships": "Service-oriented but detached; intuitive understanding of partner's needs",
+      "health": "Digestive system; mysterious ailments that heal through spiritual practice"
+    },
+    "ketu_in_libra": {
+      "summary": "Partnership detachment, past-life relationships, spiritual independence",
+      "positive": ["Past-life partnership wisdom", "Spiritual independence", "Detached harmony", "Intuitive justice"],
+      "negative": ["Relationship dissolution", "Partnership avoidance", "Social detachment", "Unfair to self"],
+      "career": "Spiritual mediation, alternative law, technology partnerships",
+      "relationships": "Detached from partnerships; past-life karmic relationships; seeks liberation from bonds",
+      "health": "Kidneys; mysterious lower back; hormonal mysteries"
+    },
+    "ketu_in_scorpio": {
+      "summary": "Exalted Ketu - occult mastery, past-life transformation, spiritual liberation",
+      "positive": ["Deep occult mastery", "Past-life transformation complete", "Spiritual power", "Intuitive depth"],
+      "negative": ["Crisis-prone", "Mysterious accidents", "Hidden fears surfacing", "Intense karmic clearing"],
+      "career": "Occult, spiritual healing, research, technology security, meditation",
+      "relationships": "Profoundly deep karmic bonds; past-life connections; intense spiritual partnership",
+      "health": "Reproductive system; chronic conditions clearing; mysterious healing"
+    },
+    "ketu_in_sagittarius": {
+      "summary": "Past-life wisdom, natural guru, philosophical detachment",
+      "positive": ["Natural wisdom without study", "Past-life guru status", "Effortless philosophy", "Spiritual detachment"],
+      "negative": ["Lack of formal education desire", "Guru complex", "Religious indifference", "Father disconnection"],
+      "career": "Natural teaching, spiritual guidance, technology in education, research",
+      "relationships": "Wise and philosophical partner; detached from dogma; natural counselor",
+      "health": "Hips, thighs; ancestral health patterns; mysterious conditions"
+    },
+    "ketu_in_capricorn": {
+      "summary": "Ambition detachment, past-life authority, spiritual discipline",
+      "positive": ["Past-life professional skills", "Spiritual discipline", "Detached ambition", "Karmic career completion"],
+      "negative": ["Career confusion", "Lack of worldly drive", "Authority detachment", "Professional dissolution"],
+      "career": "Spiritual discipline, technology, alternative professions, monastic life",
+      "relationships": "Not focused on worldly achievement; partner must accept spiritual priorities",
+      "health": "Knees, bones; chronic conditions; mysterious joint issues"
+    },
+    "ketu_in_aquarius": {
+      "summary": "Humanitarian detachment, past-life social service, universal consciousness",
+      "positive": ["Universal compassion", "Past-life humanitarian work", "Technology intuition", "Selfless service"],
+      "negative": ["Social disconnection", "Group avoidance", "Income instability", "Eccentric isolation"],
+      "career": "Spiritual technology, alternative social work, meditation communities",
+      "relationships": "Universal love rather than personal; detached from social expectations",
+      "health": "Calves, ankles; mysterious circulation; nervous conditions"
+    },
+    "ketu_in_pisces": {
+      "summary": "Complete spiritual liberation, past-life enlightenment, transcendence",
+      "positive": ["Highest spiritual attainment", "Past-life enlightenment", "Complete transcendence", "Mystical mastery"],
+      "negative": ["Total worldly detachment", "Confusion", "Loss of direction", "Dissolution of everything"],
+      "career": "Monastic life, deep meditation, spiritual mastery, complete service",
+      "relationships": "Beyond worldly relationships; seeks divine union; moksha-oriented",
+      "health": "Feet; mysterious conditions; psychic sensitivity; immune system"
+    }
+  }
+}

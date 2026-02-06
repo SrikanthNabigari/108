@@ -913,6 +913,124 @@ def get_enriched_transit_analysis(
     return base
 
 
+# Standard Parashari aspects: all planets aspect 7th house from themselves.
+# Mars also aspects 4th and 8th. Jupiter also aspects 5th and 9th. Saturn also aspects 3rd and 10th.
+_SPECIAL_ASPECTS: dict[str, list[int]] = {
+    "mars": [4, 8],
+    "jupiter": [5, 9],
+    "saturn": [3, 10],
+}
+
+
+def get_transit_aspects(
+    transit_positions: dict[str, dict[str, Any]],
+    natal_positions: dict[str, dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """Check if transiting planets aspect natal planets.
+
+    Uses standard Parashari aspects:
+    - All planets: 7th house aspect
+    - Mars: additional 4th and 8th aspects
+    - Jupiter: additional 5th and 9th aspects
+    - Saturn: additional 3rd and 10th aspects
+
+    Args:
+        transit_positions: Dict mapping planet name -> {rashi: int, longitude: float, ...}
+        natal_positions: Dict mapping planet name -> {rashi: int, longitude: float, ...}
+
+    Returns:
+        List of dicts with transit_planet, natal_planet, aspect_type, house_distance,
+        and significance rating.
+
+    Example:
+        >>> aspects = get_transit_aspects(
+        ...     {"saturn": {"rashi": 10}},
+        ...     {"moon": {"rashi": 3}}
+        ... )
+        >>> len(aspects) > 0
+        True
+    """
+    aspects: list[dict[str, Any]] = []
+
+    for t_planet, t_data in transit_positions.items():
+        t_rashi = t_data.get("rashi")
+        if t_rashi is None:
+            continue
+        if isinstance(t_rashi, str):
+            continue
+        t_lower = t_planet.lower()
+
+        # Build list of houses this planet aspects
+        aspect_houses = [7]  # All planets aspect 7th
+        if t_lower in _SPECIAL_ASPECTS:
+            aspect_houses.extend(_SPECIAL_ASPECTS[t_lower])
+
+        for n_planet, n_data in natal_positions.items():
+            n_rashi = n_data.get("rashi")
+            if n_rashi is None:
+                continue
+            if isinstance(n_rashi, str):
+                continue
+
+            # House distance from transit planet to natal planet
+            house_dist = ((n_rashi - t_rashi) % 12) or 12
+
+            if house_dist in aspect_houses:
+                # Determine aspect type name
+                aspect_type = {
+                    7: "opposition",
+                    4: "4th_aspect",
+                    8: "8th_aspect",
+                    5: "5th_aspect",
+                    9: "9th_aspect",
+                    3: "3rd_aspect",
+                    10: "10th_aspect",
+                }.get(house_dist, f"{house_dist}th")
+
+                # Significance based on planets involved
+                significance = _rate_aspect_significance(t_lower, n_planet.lower())
+
+                aspects.append(
+                    {
+                        "transit_planet": t_lower,
+                        "natal_planet": n_planet.lower(),
+                        "aspect_type": aspect_type,
+                        "house_distance": house_dist,
+                        "transit_rashi": t_rashi,
+                        "natal_rashi": n_rashi,
+                        "significance": significance,
+                    }
+                )
+
+    return aspects
+
+
+def _rate_aspect_significance(transit_planet: str, natal_planet: str) -> str:
+    """Rate the significance of a transit aspect.
+
+    Args:
+        transit_planet: Transiting planet name
+        natal_planet: Natal planet name
+
+    Returns:
+        Significance string: "high", "medium", or "low"
+    """
+    # High significance: slow planets (Saturn, Jupiter, Rahu) aspecting personal planets
+    slow_planets = {"saturn", "jupiter", "rahu", "ketu"}
+    personal_planets = {"sun", "moon", "mars", "mercury", "venus"}
+
+    if transit_planet in slow_planets and natal_planet in personal_planets:
+        # Saturn/Jupiter on Moon/Sun is especially significant
+        if transit_planet in ("saturn", "jupiter") and natal_planet in ("sun", "moon"):
+            return "high"
+        return "medium"
+
+    if transit_planet in slow_planets and natal_planet in slow_planets:
+        return "medium"
+
+    return "low"
+
+
 # Define public API
 __all__ = [
     # Constants
@@ -926,6 +1044,7 @@ __all__ = [
     # Main analysis functions
     "get_gochara",
     "get_nakshatra_transit_effect",
+    "get_transit_aspects",
     "get_transit_positions",
     # Helper functions
     "get_transiting_planet_house",

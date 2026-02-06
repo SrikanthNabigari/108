@@ -335,7 +335,151 @@ class YogaDetector:
             except ValueError:
                 continue
 
+        # Also run general cancellation checks on involved planets
+        detection = rule.get("detection", {})
+        planet_name = detection.get("planet")
+        planets_list = detection.get("planets", [])
+
+        all_planets = []
+        if planet_name:
+            all_planets.append(planet_name)
+        all_planets.extend(planets_list)
+
+        for pname in all_planets:
+            if pname in ["ninth_lord", "tenth_lord", "fifth_lord"]:
+                continue
+            try:
+                planet = Planet(pname)
+                if planet in chart.planets and self._check_yoga_cancellation(chart, planet):
+                    return True
+            except ValueError:
+                continue
+
         return False
+
+    def _check_yoga_cancellation(self, chart: BirthChart, planet: Planet) -> bool:
+        """Check if a yoga-forming planet's contribution is cancelled.
+
+        A yoga is cancelled (Yoga Bhanga) when the forming planet is:
+        1. Combust (too close to Sun) - fully cancels
+        2. Debilitated WITHOUT Neecha Bhanga Raja Yoga - fully cancels
+        3. Heavily afflicted by malefics (Saturn, Mars, Rahu conjunct) - cancels
+        4. Retrograde - weakens but does not fully cancel (handled via strength)
+
+        Args:
+            chart: Birth chart
+            planet: The yoga-forming planet to check
+
+        Returns:
+            True if the yoga is cancelled, False otherwise
+        """
+        if planet not in chart.planets:
+            return False
+
+        pos = chart.planets[planet]
+
+        # 1. Combustion cancels yoga
+        if self._is_combust(planet, chart):
+            return True
+
+        # 2. Debilitation without Neecha Bhanga cancels yoga
+        if self._is_in_debilitated_sign(planet, pos.rashi) and not self._has_neecha_bhanga(
+            planet, chart
+        ):
+            return True
+
+        # 3. Severe malefic affliction (conjunction with 2+ malefics)
+        malefics = [Planet.SATURN, Planet.MARS, Planet.RAHU, Planet.KETU]
+        malefic_conjunctions = 0
+        for malefic in malefics:
+            if malefic == planet:
+                continue
+            if malefic in chart.planets:
+                malefic_pos = chart.planets[malefic]
+                if malefic_pos.rashi == pos.rashi:
+                    malefic_conjunctions += 1
+
+        return malefic_conjunctions >= 2
+
+    def _has_neecha_bhanga(self, planet: Planet, chart: BirthChart) -> bool:
+        """Check if a debilitated planet has Neecha Bhanga (cancellation of debilitation).
+
+        Neecha Bhanga Raja Yoga conditions (any one suffices):
+        1. The lord of the sign where the planet is debilitated is in kendra from lagna or moon
+        2. The lord of the sign where the planet is exalted is in kendra from lagna or moon
+        3. The planet is aspected by the lord of its debilitation sign
+        4. The debilitated planet is conjunct an exalted planet
+        5. The debilitated planet is in a kendra house
+
+        Args:
+            planet: The debilitated planet
+            chart: Birth chart
+
+        Returns:
+            True if Neecha Bhanga conditions are met
+        """
+        if planet not in chart.planets:
+            return False
+
+        pos = chart.planets[planet]
+        debil_sign = self.PLANET_DEBILITATION.get(planet)
+        if not debil_sign or pos.rashi != debil_sign:
+            return False
+
+        # Sign lordship mapping
+        sign_lords = {
+            Rashi.ARIES: Planet.MARS,
+            Rashi.TAURUS: Planet.VENUS,
+            Rashi.GEMINI: Planet.MERCURY,
+            Rashi.CANCER: Planet.MOON,
+            Rashi.LEO: Planet.SUN,
+            Rashi.VIRGO: Planet.MERCURY,
+            Rashi.LIBRA: Planet.VENUS,
+            Rashi.SCORPIO: Planet.MARS,
+            Rashi.SAGITTARIUS: Planet.JUPITER,
+            Rashi.CAPRICORN: Planet.SATURN,
+            Rashi.AQUARIUS: Planet.SATURN,
+            Rashi.PISCES: Planet.JUPITER,
+        }
+
+        # Condition 1: Lord of debilitation sign in kendra from lagna or Moon
+        debil_lord = sign_lords.get(debil_sign)
+        if debil_lord and debil_lord in chart.planets:
+            debil_lord_pos = chart.planets[debil_lord]
+            # Check kendra from lagna
+            house_from_lagna = self._get_house_from_reference(
+                debil_lord_pos.rashi, chart.lagna_rashi
+            )
+            if is_kendra(house_from_lagna):
+                return True
+            # Check kendra from Moon
+            house_from_moon = self._get_house_from_reference(debil_lord_pos.rashi, chart.moon_rashi)
+            if is_kendra(house_from_moon):
+                return True
+
+        # Condition 2: Lord of exaltation sign in kendra
+        exalt_sign = self.PLANET_EXALTATION.get(planet)
+        if exalt_sign:
+            exalt_lord = sign_lords.get(exalt_sign)
+            if exalt_lord and exalt_lord in chart.planets:
+                exalt_lord_pos = chart.planets[exalt_lord]
+                house_from_lagna = self._get_house_from_reference(
+                    exalt_lord_pos.rashi, chart.lagna_rashi
+                )
+                if is_kendra(house_from_lagna):
+                    return True
+
+        # Condition 3: Debilitated planet conjunct an exalted planet
+        for other_planet, other_pos in chart.planets.items():
+            if other_planet == planet:
+                continue
+            if other_pos.rashi == pos.rashi and self._is_in_exalted_sign(
+                other_planet, other_pos.rashi
+            ):
+                return True
+
+        # Condition 4: Debilitated planet in a kendra house
+        return bool(is_kendra(pos.house))
 
     # Condition Evaluators
 

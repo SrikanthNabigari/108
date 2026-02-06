@@ -1,0 +1,206 @@
+{
+  "dasha_guide": {
+    "description": "Practical guidance for each of 9 Mahadasha (major planetary period) in the Vimshottari system. Covers themes, focus areas, career, health, relationships, spiritual guidance, and practical advice.",
+    "sun": {
+      "duration_years": 6,
+      "theme": "Authority, self-expression, leadership, father, government, vitality",
+      "focus_areas": ["Building self-confidence", "Government connections", "Father's influence", "Health vitality", "Public recognition"],
+      "career": "Peak period for government jobs, politics, administration, leadership roles. Authority and recognition come naturally. Good time to seek promotions and take on leadership responsibilities.",
+      "health": "Focus on heart health, bone strength, and eye care. Sun-related ailments may surface. Pitta (fire) constitution heightened. Regular exercise and sun exposure beneficial.",
+      "relationships": "Father figure becomes important. Marriage needs ego balance. Relationships marked by need for respect and admiration. Partner should be supportive of career ambitions.",
+      "spiritual": "Self-realization journey begins. Atma-jnana (soul knowledge) develops. Good period for Gayatri mantra and Surya Namaskar. Connection with one's true purpose strengthens.",
+      "practical_advice": [
+        "Build connections with authority figures and government",
+        "Focus on personal health, especially heart and eyes",
+        "Maintain humility despite rising status",
+        "Offer water to Sun at sunrise (Surya Arghya)",
+        "Wear Ruby or red garnet if Sun is well-placed",
+        "Avoid ego conflicts with authority figures",
+        "Strengthen relationship with father or father figures"
+      ],
+      "challenges": "Ego inflation, authority conflicts, eye or heart problems, strained father relationship",
+      "opportunities": "Government favor, leadership positions, public recognition, health improvement"
+    },
+    "moon": {
+      "duration_years": 10,
+      "theme": "Emotions, mind, mother, public, travel, nurturing, intuition",
+      "focus_areas": ["Emotional well-being", "Mother's role", "Public image", "Travel and movement", "Mental peace"],
+      "career": "Good for public-facing careers, hospitality, nursing, counseling, travel industry. Public popularity increases. Career benefits from emotional intelligence and people skills.",
+      "health": "Watch for fluid retention, blood pressure fluctuations, mental health, and hormonal balance. Moon governs the mind, so meditation is essential. Cold and wet conditions may aggravate health.",
+      "relationships": "Mother's influence is paramount. Emotional bonds deepen. Marriage is nurturing but may involve mood swings. Partner's emotional needs must be attended to.",
+      "spiritual": "Excellent for meditation, bhakti (devotion), and mantra japa. Moon's period favors worship of Divine Mother (Devi). Dreams become prophetic. Intuition heightens.",
+      "practical_advice": [
+        "Prioritize mental health and emotional stability",
+        "Strengthen relationship with mother",
+        "Practice meditation regularly, especially on full moon nights",
+        "Wear Pearl or Moonstone if Moon is well-placed",
+        "Avoid stagnant water and damp environments",
+        "Engage in nurturing activities — cooking, gardening, caregiving",
+        "Travel, especially near water bodies, is favorable",
+        "Drink plenty of water and eat cooling foods"
+      ],
+      "challenges": "Emotional volatility, mental stress, mother's health concerns, public fickleness",
+      "opportunities": "Public popularity, emotional maturity, travel, nurturing relationships, creative expression"
+    },
+    "mars": {
+      "duration_years": 7,
+      "theme": "Courage, action, property, siblings, competition, energy, surgery",
+      "focus_areas": ["Physical fitness", "Property acquisition", "Sibling relations", "Competitive success", "Taking decisive action"],
+      "career": "Excellent for military, police, surgery, sports, engineering, real estate. Competitive fields favor you. Property deals and land acquisition are highlighted. Entrepreneurship thrives.",
+      "health": "Watch for inflammation, fevers, blood pressure, accidents, cuts, and burns. Pitta aggravation likely. Surgery may be needed for pre-existing conditions. Physical exercise is essential but avoid overexertion.",
+      "relationships": "Mangal Dosha effects are activated. Passion increases but so does conflict. Sibling relationships come into focus. Marriage needs patience and anger management.",
+      "spiritual": "Hanuman worship is powerful. Kundalini energy may activate. Good for intense tapas (austerity) and physical yoga practices. Mars period tests courage and willpower.",
+      "practical_advice": [
+        "Channel energy into physical exercise and sports",
+        "Pursue property and land acquisition",
+        "Be cautious with fire, machinery, and sharp objects",
+        "Wear Red Coral if Mars is well-placed",
+        "Worship Hanuman on Tuesdays",
+        "Avoid unnecessary confrontation and aggression",
+        "Focus on sibling relationships and mutual support",
+        "Consider surgery for pending health issues"
+      ],
+      "challenges": "Accidents, injuries, anger, conflicts, property disputes, sibling fights",
+      "opportunities": "Property acquisition, competitive victories, physical strength, courageous action"
+    },
+    "mercury": {
+      "duration_years": 17,
+      "theme": "Intelligence, communication, business, education, skills, adaptability",
+      "focus_areas": ["Education and learning", "Business development", "Communication skills", "Writing and media", "Financial acumen"],
+      "career": "Best period for business, writing, IT, education, accounting, media, and communication. Intellectual pursuits thrive. Multiple income sources develop. Networking and social skills bring opportunities.",
+      "health": "Watch for nervous disorders, skin diseases, speech problems, and allergies. Mental overwork can cause burnout. Nervous system needs care. Good period for alternative and Ayurvedic treatments.",
+      "relationships": "Communication becomes the foundation of relationships. Intellectual compatibility matters. Partner appreciates wit and intelligence. Business partnerships thrive.",
+      "spiritual": "Good for mantra meditation, especially Vishnu mantras. Study of scriptures and sacred texts. Mercury period favors intellectual spiritual pursuit — astrology, Jyotish study, Vedanta.",
+      "practical_advice": [
+        "Invest in education and skill development",
+        "Start or expand a business",
+        "Develop writing, speaking, and communication skills",
+        "Wear Emerald if Mercury is well-placed",
+        "Worship Vishnu on Wednesdays",
+        "Network actively and build professional connections",
+        "Learn a new language or technical skill",
+        "Be cautious with contracts and written agreements",
+        "Manage nervous energy through pranayama",
+        "Avoid overthinking and analysis paralysis"
+      ],
+      "challenges": "Nervous exhaustion, skin issues, speech problems, business risks, scattered focus",
+      "opportunities": "Business success, education, communication mastery, financial growth, intellectual achievement"
+    },
+    "jupiter": {
+      "duration_years": 16,
+      "theme": "Wisdom, expansion, spirituality, children, teaching, fortune, dharma",
+      "focus_areas": ["Spiritual growth", "Children and family", "Higher education", "Teaching and mentoring", "Wealth expansion"],
+      "career": "Excellent for teaching, law, consulting, banking, religious work, and philosophical pursuits. Career expansion and promotions likely. Guru-like roles emerge. International opportunities increase.",
+      "health": "Watch for weight gain, diabetes, liver issues, and cholesterol. Kapha aggravation likely. Moderate exercise and dietary discipline needed. Avoid overindulgence in rich foods.",
+      "relationships": "Marriage improves with wisdom and understanding. Children may be born during this period. Family bonds strengthen. Guru-disciple relationships form.",
+      "spiritual": "Most auspicious period for spiritual growth. Guru appears in life. Initiation (diksha) may occur. Temple visits, pilgrimage, and religious study flourish. Worship of Brihaspati (Jupiter).",
+      "practical_advice": [
+        "Pursue higher education and certifications",
+        "Expand business and financial portfolio",
+        "Focus on family and children's education",
+        "Wear Yellow Sapphire if Jupiter is well-placed",
+        "Worship Brihaspati on Thursdays",
+        "Teach and mentor others",
+        "Make charitable donations regularly",
+        "Pursue pilgrimage and spiritual travel",
+        "Avoid overindulgence in food and luxury",
+        "Seek a guru or spiritual teacher"
+      ],
+      "challenges": "Weight gain, diabetes, liver issues, over-expansion, financial overcommitment",
+      "opportunities": "Wisdom, children, teaching, wealth expansion, spiritual awakening, international travel"
+    },
+    "venus": {
+      "duration_years": 20,
+      "theme": "Love, beauty, luxury, arts, marriage, pleasure, creativity, wealth",
+      "focus_areas": ["Romantic relationships", "Artistic expression", "Material comfort", "Beauty and aesthetics", "Financial prosperity"],
+      "career": "Best period for arts, entertainment, fashion, beauty, luxury goods, hospitality, and creative fields. Financial prosperity increases. Career benefits from charm, aesthetics, and diplomacy.",
+      "health": "Watch for reproductive issues, kidney problems, diabetes, and conditions from overindulgence. Kapha-Pitta aggravation. Moderate lifestyle is key. Beautification and self-care are beneficial.",
+      "relationships": "Marriage and romance flourish. Love deepens. Spouse becomes more important. New relationships may form. Social life enhances. Wedding may occur during this period.",
+      "spiritual": "Bhakti (devotion) deepens through beauty and love. Worship of Lakshmi and feminine deities. Art as spiritual practice. Venus period teaches that beauty is a doorway to the divine.",
+      "practical_advice": [
+        "Invest in relationships and marriage",
+        "Pursue artistic and creative passions",
+        "Acquire luxury items and comfortable lifestyle",
+        "Wear Diamond or White Sapphire if Venus is well-placed",
+        "Worship Lakshmi on Fridays",
+        "Build financial security through beauty and luxury industries",
+        "Focus on grooming and appearance",
+        "Travel for pleasure and culture",
+        "Avoid excessive indulgence in food, drink, and pleasure",
+        "Develop diplomacy and social skills"
+      ],
+      "challenges": "Over-indulgence, relationship complications, financial extravagance, reproductive issues",
+      "opportunities": "Marriage, wealth, artistic success, luxury, beauty, romance, creative fulfillment"
+    },
+    "saturn": {
+      "duration_years": 19,
+      "theme": "Discipline, karma, hard work, service, longevity, structure, justice",
+      "focus_areas": ["Career building through effort", "Karmic lessons", "Health management", "Service to others", "Discipline and structure"],
+      "career": "Rewards come through persistent hard work only. Government service, engineering, mining, agriculture, and labor-intensive fields. Slow but lasting career growth. Authority earned through merit.",
+      "health": "Most challenging period for health. Watch for bones, joints, chronic diseases, depression, and teeth. Vata aggravation. Regular exercise, warm oil massage, and disciplined lifestyle essential.",
+      "relationships": "Relationships tested through duty and responsibility. Marriage requires patience. Partner may face health or career difficulties. Loneliness may be felt but character is built.",
+      "spiritual": "Deep karmic lessons unfold. Saturn period is the greatest spiritual teacher. Meditation, seva (selfless service), and discipline are the paths. Worship of Hanuman and Shani Dev.",
+      "practical_advice": [
+        "Embrace hard work and discipline",
+        "Build structure and routine in daily life",
+        "Focus on long-term career and financial goals",
+        "Wear Blue Sapphire (with caution) if Saturn is well-placed",
+        "Worship Hanuman and Shani on Saturdays",
+        "Practice seva (selfless service) regularly",
+        "Take care of bones, joints, and teeth",
+        "Avoid shortcuts and unethical practices",
+        "Be patient — results come slowly but permanently",
+        "Oil massage (sesame oil) and warm foods help",
+        "Donate to the poor, especially on Saturdays"
+      ],
+      "challenges": "Chronic health, depression, career delays, relationship strain, loneliness, karmic debts",
+      "opportunities": "Character building, lasting success, karmic clearance, spiritual depth, longevity, authority"
+    },
+    "rahu": {
+      "duration_years": 18,
+      "theme": "Ambition, obsession, foreign connections, technology, unconventional paths, illusion",
+      "focus_areas": ["Foreign opportunities", "Technology and innovation", "Breaking from tradition", "Ambitious pursuits", "Material desires"],
+      "career": "Excellent for technology, foreign trade, media, politics, and unconventional careers. Sudden rises and falls possible. Foreign opportunities are highlighted. Career in large corporations or government.",
+      "health": "Watch for mysterious ailments, addictions, poisoning, skin diseases, and mental confusion. Diseases are hard to diagnose. Alternative medicine may help. Avoid intoxicants strictly.",
+      "relationships": "Unconventional relationships form. Foreign partner possible. Attraction to unusual people. Marriage may be tested by external influences. Maintain transparency.",
+      "spiritual": "Rahu period creates spiritual confusion initially but can lead to deep awakening. Worship of Durga and Saraswati. Mantra meditation is essential. Avoid occult without proper guidance.",
+      "practical_advice": [
+        "Explore foreign and unconventional opportunities",
+        "Embrace technology and digital skills",
+        "Be cautious with new relationships and partnerships",
+        "Wear Hessonite Garnet (Gomed) if Rahu is well-placed",
+        "Worship Durga and chant Rahu mantras",
+        "Avoid alcohol, drugs, and intoxicants strictly",
+        "Be transparent in all dealings",
+        "Do not trust blindly — verify everything",
+        "Donate to outcasts and marginalized communities",
+        "Practice grounding meditation and pranayama"
+      ],
+      "challenges": "Addiction, deception, sudden falls, health mysteries, relationship confusion, illusion",
+      "opportunities": "Foreign success, technology mastery, sudden wealth, breaking barriers, unconventional achievement"
+    },
+    "ketu": {
+      "duration_years": 7,
+      "theme": "Spirituality, detachment, past-life karma, liberation, healing, dissolution",
+      "focus_areas": ["Spiritual liberation", "Past-life resolution", "Healing and alternative medicine", "Letting go of attachments", "Inner transformation"],
+      "career": "Career may feel directionless or undergo dissolution. Good for spiritual professions, healing, research, and technology (back-end/unseen). Material success is not the primary theme.",
+      "health": "Watch for mysterious and hard-to-diagnose ailments, skin conditions, infections, and surgical needs. Alternative and spiritual healing methods work well. Ancestral health patterns may manifest.",
+      "relationships": "Detachment from worldly relationships. Spiritual bonds strengthen while material bonds weaken. Past-life connections may appear. Partner may undergo spiritual transformation.",
+      "spiritual": "Most powerful period for spiritual liberation (moksha). Past-life karmas resolve. Meditation deepens significantly. Worship of Ganesha. Liberation from material attachments accelerates.",
+      "practical_advice": [
+        "Focus on spiritual practices and meditation",
+        "Let go of attachments that no longer serve",
+        "Explore past-life healing and regression",
+        "Wear Cat's Eye (Lehsunia) if Ketu is well-placed",
+        "Worship Ganesha and chant Ketu mantras",
+        "Serve animals, especially dogs",
+        "Practice mindfulness and present-moment awareness",
+        "Avoid clinging to worldly possessions and relationships",
+        "Study scriptures and pursue self-inquiry",
+        "Donate blankets and donate to spiritual institutions"
+      ],
+      "challenges": "Confusion, directionlessness, health mysteries, relationship dissolution, material losses",
+      "opportunities": "Spiritual liberation, past-life healing, deep meditation, intuitive awakening, moksha"
+    }
+  }
+}

@@ -252,6 +252,80 @@ INTENT_KEYWORDS = {
 
 
 # =====================
+# Conversation History Manager
+# =====================
+
+
+class ConversationManager:
+    """Manage multi-turn conversation history with automatic pruning."""
+
+    def __init__(self, max_turns: int = 20):
+        """
+        Initialize conversation manager.
+
+        Args:
+            max_turns: Maximum number of turns to retain (each turn = user + assistant)
+        """
+        self.max_turns = max_turns
+        self.history: list[dict[str, Any]] = []
+
+    def add_turn(self, role: str, content: str, metadata: dict[str, Any] | None = None) -> None:
+        """Add a conversation turn.
+
+        Args:
+            role: Speaker role ('user' or 'assistant')
+            content: Message content
+            metadata: Optional metadata (intent, timestamp, etc.)
+        """
+        self.history.append(
+            {
+                "role": role,
+                "content": content,
+                "metadata": metadata or {},
+                "timestamp": datetime.now().isoformat(),
+            }
+        )
+        # Auto-prune if exceeding limit (keep last max_turns * 2 messages)
+        max_messages = self.max_turns * 2
+        if len(self.history) > max_messages:
+            self.history = self.history[-max_messages:]
+
+    def get_context_window(self, last_n: int = 5) -> list[dict[str, Any]]:
+        """Get recent conversation turns for context.
+
+        Args:
+            last_n: Number of recent turn pairs to return
+
+        Returns:
+            List of recent conversation messages
+        """
+        return self.history[-(last_n * 2) :]
+
+    def get_summary(self) -> str:
+        """Summarize conversation history for context compression.
+
+        Returns:
+            Text summary of the conversation topics
+        """
+        if not self.history:
+            return "No conversation history."
+
+        topics = set()
+        for msg in self.history:
+            intent = msg.get("metadata", {}).get("intent")
+            if intent:
+                topics.add(intent)
+
+        turn_count = len(self.history) // 2
+        topic_str = ", ".join(topics) if topics else "general discussion"
+        return f"Conversation with {turn_count} turns covering: {topic_str}"
+
+    def clear(self) -> None:
+        """Clear conversation history."""
+        self.history = []
+
+
+# =====================
 # Guide Agent
 # =====================
 
@@ -296,6 +370,9 @@ class Guide:
         # Memory store (lazy initialized)
         self._store = None
         self._store_connected = False
+
+        # Conversation history manager
+        self.conversation_manager = ConversationManager()
 
         # Initialize LLM
         self.llm = ChatAnthropic(
@@ -408,9 +485,10 @@ class Guide:
                 max_matches = matches
                 intent = intent_type
 
-        # If low confidence, use LLM
+        # If low confidence, try LLM classification with error handling
         if max_matches < 2:
-            classification_prompt = f"""Classify this user query into one of these intents:
+            try:
+                classification_prompt = f"""Classify this user query into one of these intents:
 - calculate: User wants planetary positions, chart calculations, degrees
 - analyze: User wants chart analysis (yogas, doshas, patterns)
 - predict: User wants predictions or future events
@@ -426,13 +504,18 @@ Query: "{state["user_input"]}"
 
 Respond with ONLY the intent name (e.g., "calculate")"""
 
-            response = self.llm.invoke([HumanMessage(content=classification_prompt)])
-            intent_text = response.content.strip().lower()
+                response = self.llm.invoke([HumanMessage(content=classification_prompt)])
+                intent_text = response.content.strip().lower()
 
-            try:
-                intent = IntentType(intent_text)
-            except ValueError:
-                intent = IntentType.GENERAL
+                try:
+                    intent = IntentType(intent_text)
+                except ValueError:
+                    intent = IntentType.GENERAL
+            except Exception as e:
+                logger.warning(f"LLM classification failed, using keyword result: {e}")
+                # Fall back to keyword-based result (already set above)
+                if intent == IntentType.UNKNOWN:
+                    intent = IntentType.GENERAL
 
         state["intent"] = intent
 
@@ -484,9 +567,102 @@ Respond with ONLY the intent name (e.g., "calculate")"""
         return state
 
     def _check_memory(self, state: AgentState) -> AgentState:
-        """Check memory for relevant facts about user."""
-        # Memory retrieval is async, we'll do it in the async chat method
-        # For sync execution, memories should be passed in
+        """Check memory for relevant facts about user.
+
+        Loads user context from memory store if connected.
+        For sync execution, memories should be pre-populated via chat() args.
+        For async execution via chat_async(), the store is queried directly.
+        """
+        user_id = state.get("user_id")
+        if not user_id:
+            if not state.get("memories"):
+                state["memories"] = []
+            return state
+
+        # Try to load from memory store if connected
+        if self._store_connected and self._store:
+            try:
+                import asyncio
+
+                loop = asyncio.get_event_loop()
+                if loop.is_running():
+                    # Already in async context - data should be pre-loaded
+                    # via chat_async() before entering graph
+                    pass
+                else:
+                    # Sync context - load from store
+                    store = self._store
+
+                    # Load birth chart if not already provided
+                    if not state.get("birth_chart"):
+                        chart = loop.run_until_complete(
+                            store.search(
+                                query="birth data datetime location",
+                                category="birth_data",
+                                limit=1,
+                                user_id=user_id,
+                            )
+                        )
+                        if chart:
+                            state["birth_chart"] = chart[0].memory.metadata
+
+                    # Load recent memories
+                    if not state.get("memories"):
+                        memories = loop.run_until_complete(store.get_all(limit=10, user_id=user_id))
+                        state["memories"] = [
+                            {
+                                "content": m.content,
+                                "category": m.category,
+                                "importance": m.importance,
+                            }
+                            for m in memories
+                        ]
+
+                    # Load user preferences
+                    if not state.get("user_preferences"):
+                        prefs = loop.run_until_complete(
+                            store.search(
+                                query="communication style preference",
+                                category="preference",
+                                limit=5,
+                                user_id=user_id,
+                            )
+                        )
+                        if prefs:
+                            state["user_preferences"] = {
+                                r.memory.metadata.get(
+                                    "preference_type", "unknown"
+                                ): r.memory.metadata.get("value")
+                                for r in prefs
+                            }
+
+                    # Load detected patterns (yogas, doshas)
+                    if not state.get("detected_yogas"):
+                        yoga_results = loop.run_until_complete(
+                            store.search(
+                                query="yoga detection pattern",
+                                category="yoga",
+                                limit=10,
+                                user_id=user_id,
+                            )
+                        )
+                        state["detected_yogas"] = [r.memory.metadata for r in yoga_results]
+
+                    if not state.get("detected_doshas"):
+                        dosha_results = loop.run_until_complete(
+                            store.search(
+                                query="dosha detection",
+                                category="dosha",
+                                limit=5,
+                                user_id=user_id,
+                            )
+                        )
+                        state["detected_doshas"] = [r.memory.metadata for r in dosha_results]
+
+            except Exception as e:
+                logger.warning(f"Could not load from memory store: {e}")
+
+        # Ensure memories is initialized
         if not state.get("memories"):
             state["memories"] = []
 
@@ -778,7 +954,7 @@ Respond with ONLY the intent name (e.g., "calculate")"""
         return state
 
     def _interpret(self, state: AgentState) -> AgentState:
-        """Generate personalized interpretation using LLM."""
+        """Generate personalized interpretation using LLM with error handling."""
         # Get personality style
         personality = state.get("personality_style", "unknown")
         style = PERSONALITY_STYLES.get(personality, {})
@@ -790,23 +966,159 @@ Respond with ONLY the intent name (e.g., "calculate")"""
         messages = state.get("messages", [])
         messages.append(HumanMessage(content=state["user_input"]))
 
-        # Call LLM
+        # Call LLM with error handling
         if self.debug:
             logger.debug(f"Calling LLM with personality: {personality}")
 
-        response = self.llm.invoke([SystemMessage(content=system_prompt), *messages])
+        try:
+            response = self.llm.invoke([SystemMessage(content=system_prompt), *messages])
+            state["response"] = response.content
+            messages.append(AIMessage(content=response.content))
+        except Exception as e:
+            error_type = type(e).__name__
+            logger.error(f"LLM error ({error_type}): {e}")
 
-        state["response"] = response.content
-        messages.append(AIMessage(content=response.content))
+            # Check for specific error types
+            if "rate" in str(e).lower() or "429" in str(e):
+                state[
+                    "response"
+                ] = "I need a moment to gather my thoughts. Please try again shortly."
+            elif "connection" in str(e).lower() or "timeout" in str(e).lower():
+                state["response"] = (
+                    "I'm having trouble connecting right now. " "Let me try a simpler analysis."
+                )
+            else:
+                state["response"] = self._generate_fallback_response(state)
+
+            messages.append(AIMessage(content=state["response"]))
+
         state["messages"] = messages
+
+        # Track in conversation manager
+        self.conversation_manager.add_turn(
+            "user",
+            state["user_input"],
+            metadata={
+                "intent": state.get("intent", "unknown").value
+                if hasattr(state.get("intent", ""), "value")
+                else str(state.get("intent", "unknown"))
+            },
+        )
+        self.conversation_manager.add_turn("assistant", state["response"])
 
         return state
 
+    def _generate_fallback_response(self, state: AgentState) -> str:
+        """Generate a fallback response when LLM is unavailable."""
+        intent = state.get("intent")
+        context_parts = []
+
+        if state.get("birth_chart"):
+            bc = state["birth_chart"]
+            context_parts.append(f"Your chart has {bc.get('lagna_rashi', 'an')} Lagna")
+
+        if state.get("detected_yogas"):
+            yoga_names = [y.get("name", "Unknown") for y in state["detected_yogas"][:3]]
+            context_parts.append(f"Key yogas: {', '.join(yoga_names)}")
+
+        if state.get("current_dasha"):
+            d = state["current_dasha"]
+            context_parts.append(
+                f"Current dasha: {d.get('mahadasha_lord', '?')}-{d.get('antardasha_lord', '?')}"
+            )
+
+        context_str = ". ".join(context_parts) if context_parts else ""
+
+        if intent and intent.value in ("calculate", "dasha", "transit"):
+            base = "I have your chart data ready for analysis"
+        elif intent and intent.value == "analyze":
+            base = "Your chart patterns have been detected"
+        elif intent and intent.value == "predict":
+            base = "I have the dasha and transit data for your prediction"
+        else:
+            base = "Thank you for your question"
+
+        if context_str:
+            return f"{base}. {context_str}. I'll provide a detailed interpretation once my connection is restored."
+        return f"{base}. I'll provide a detailed interpretation once my connection is restored."
+
     def _save_memory(self, state: AgentState) -> AgentState:
-        """Save important facts from conversation to memory."""
-        # Memory saving is async, we'll do it in the async chat method
+        """Save important facts from conversation to memory.
+
+        Saves conversation turns and extracted memories to the store.
+        For async execution via chat_async(), saving happens after graph completes.
+        For sync execution with a connected store, saves directly.
+        """
+        user_id = state.get("user_id")
+        if not user_id:
+            return state
+
+        if self._store_connected and self._store:
+            try:
+                import asyncio
+
+                loop = asyncio.get_event_loop()
+                if loop.is_running():
+                    # Async context - saving handled in chat_async() after graph
+                    pass
+                else:
+                    store = self._store
+
+                    # Save user message
+                    user_input = state.get("user_input", "")
+                    if user_input:
+                        loop.run_until_complete(
+                            store.add(
+                                content=f"User query: {user_input[:500]}",
+                                category="interaction",
+                                metadata={
+                                    "role": "user",
+                                    "session_id": state.get("session_id", ""),
+                                    "intent": state.get("intent", "unknown")
+                                    if isinstance(state.get("intent"), str)
+                                    else state.get("intent", "unknown").value
+                                    if state.get("intent")
+                                    else "unknown",
+                                },
+                                importance=0.3,
+                                user_id=user_id,
+                            )
+                        )
+
+                    # Save assistant response
+                    response = state.get("response", "")
+                    if response:
+                        loop.run_until_complete(
+                            store.add(
+                                content=f"Guide response: {response[:500]}",
+                                category="interaction",
+                                metadata={
+                                    "role": "assistant",
+                                    "session_id": state.get("session_id", ""),
+                                },
+                                importance=0.3,
+                                user_id=user_id,
+                            )
+                        )
+
+                    # Save any extracted memories
+                    extracted = state.get("extracted_memories", [])
+                    for memory in extracted:
+                        loop.run_until_complete(
+                            store.add(
+                                content=memory.get("content", ""),
+                                category=memory.get("category", "fact"),
+                                metadata=memory.get("metadata", {}),
+                                importance=memory.get("importance", 0.5),
+                                user_id=user_id,
+                            )
+                        )
+
+            except Exception as e:
+                logger.warning(f"Could not save to memory store: {e}")
+
         if self.debug:
-            logger.debug(f"Memory would be saved for user {state['user_id']}")
+            logger.debug(f"Memory save completed for user {state['user_id']}")
 
         return state
 
@@ -984,11 +1296,12 @@ Be the user's trusted guide on their life journey. Combine Vedic wisdom with com
         birth_chart: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
         """
-        Process a user message with full async support.
+        Process a user message with full async support (primary async method).
 
         This version:
         - Loads birth chart from database if not provided
         - Retrieves relevant memories
+        - Runs the LangGraph state machine via ainvoke (non-blocking)
         - Saves conversation to memory store
 
         Args:
@@ -1005,7 +1318,6 @@ Be the user's trusted guide on their life journey. Combine Vedic wisdom with com
         # Load birth chart from memory if not provided
         if not birth_chart and self._store_connected:
             try:
-                # Search for birth data in memory
                 birth_results = await memory_client.search(
                     query="birth data datetime location",
                     category="birth_data",
@@ -1013,8 +1325,7 @@ Be the user's trusted guide on their life journey. Combine Vedic wisdom with com
                     user_id=user_id,
                 )
                 if birth_results:
-                    birth_memory = birth_results[0].memory
-                    birth_chart = birth_memory.metadata
+                    birth_chart = birth_results[0].memory.metadata
                     if self.debug:
                         logger.debug(f"Loaded birth data from memory for {user_id}")
             except Exception as e:
@@ -1025,14 +1336,12 @@ Be the user's trusted guide on their life journey. Combine Vedic wisdom with com
         detected_doshas = []
         if self._store_connected:
             try:
-                # Search for yogas
                 yoga_results = await memory_client.search(
                     query="yoga detection pattern", category="yoga", limit=10, user_id=user_id
                 )
                 for r in yoga_results:
                     detected_yogas.append(r.memory.metadata)
 
-                # Search for doshas
                 dosha_results = await memory_client.search(
                     query="dosha detection mangal kaal sarp",
                     category="dosha",
@@ -1055,21 +1364,44 @@ Be the user's trusted guide on their life journey. Combine Vedic wisdom with com
             except Exception as e:
                 logger.warning(f"Could not load memories: {e}")
 
-        # Run sync chat with loaded context
-        result = self.chat(
-            user_input=user_input,
-            user_id=user_id,
-            session_id=session_id,
-            birth_chart=birth_chart,
-            detected_yogas=detected_yogas,
-            detected_doshas=detected_doshas,
-            memories=memories,
-        )
+        # Build initial state with pre-loaded memory data
+        session = session_id or f"session_{datetime.now().timestamp()}"
+        state: AgentState = {
+            "messages": [],
+            "user_input": user_input,
+            "response": None,
+            "user_id": user_id,
+            "birth_chart": birth_chart,
+            "current_dasha": None,
+            "current_transits": None,
+            "detected_yogas": detected_yogas,
+            "detected_doshas": detected_doshas,
+            "analysis_results": {},
+            "memories": memories,
+            "intent": None,
+            "personality_style": None,
+            "session_id": session,
+            "timestamp": datetime.now().isoformat(),
+        }
 
-        # Save conversation to memory store
+        # Run through graph asynchronously (non-blocking)
+        if self.debug:
+            logger.debug(f"Processing async query from user {user_id}: {user_input[:50]}...")
+
+        final_state = await self._compiled_graph.ainvoke(state)
+
+        result = {
+            "response": final_state["response"],
+            "intent": final_state["intent"].value if final_state["intent"] else "unknown",
+            "personality_style": final_state["personality_style"],
+            "session_id": final_state["session_id"],
+            "timestamp": final_state["timestamp"],
+            "analysis_results": final_state.get("analysis_results", {}),
+        }
+
+        # Save conversation to memory store (post-graph)
         if self._store_connected and result.get("response"):
             try:
-                # Save conversation as interaction memory
                 conversation_content = (
                     f"User ({result['intent']}): {user_input[:200]}\n"
                     f"Guide response: {result['response'][:200]}..."
@@ -1086,7 +1418,7 @@ Be the user's trusted guide on their life journey. Combine Vedic wisdom with com
                     user_id=user_id,
                 )
 
-                # Save as a higher-importance memory if it contains important information
+                # Save higher-importance memory for analytical queries
                 if result["intent"] in ["predict", "analyze", "remedy"]:
                     await memory_client.add(
                         content=f"User asked about {result['intent']}: {user_input[:100]}",

@@ -3,6 +3,7 @@
 from packages.self.src.combustion import (
     _angular_distance,
     check_combustion,
+    check_combustion_cancellation,
     get_combustion_analysis,
     get_combustion_house_effects,
 )
@@ -182,3 +183,124 @@ class TestGetCombustionHouseEffects:
         for house in range(1, 13):
             result = get_combustion_house_effects("jupiter", house)
             assert result["house"] == house
+
+
+class TestCombustionCancellation:
+    """Tests for check_combustion_cancellation."""
+
+    def test_retrograde_cancels_combustion(self):
+        """Retrograde planet has combustion fully cancelled."""
+        result = check_combustion_cancellation("mars", 100.0, is_retrograde=True)
+        assert result["is_cancelled"] is True
+        assert result["mitigation_factor"] == 0.0
+        assert any("Retrograde" in r for r in result["reasons"])
+
+    def test_own_sign_reduces_by_50_percent(self):
+        """Planet in own sign reduces combustion by 50%."""
+        # Mars at 15 Aries (own sign) => longitude = 15.0
+        result = check_combustion_cancellation("mars", 15.0, is_retrograde=False)
+        assert result["mitigation_factor"] == 0.5
+        assert result["is_cancelled"] is False
+        assert result["rashi"] == "aries"
+        assert any("own sign" in r for r in result["reasons"])
+
+    def test_exaltation_reduces_by_75_percent(self):
+        """Planet in exaltation reduces combustion by 75%."""
+        # Mars exalted in Capricorn => longitude ~= 270 + degree
+        result = check_combustion_cancellation("mars", 275.0, is_retrograde=False)
+        assert result["mitigation_factor"] == 0.25
+        assert result["is_cancelled"] is False
+        assert result["rashi"] == "capricorn"
+        assert any("exaltation" in r for r in result["reasons"])
+
+    def test_jupiter_aspect_reduces_by_25_percent(self):
+        """Jupiter aspecting a combust planet reduces combustion by 25%."""
+        # Planet at 100, Jupiter at 220 (trine - 120 degrees apart)
+        result = check_combustion_cancellation(
+            "mars", 100.0, is_retrograde=False, jupiter_lon=220.0
+        )
+        assert result["mitigation_factor"] == 0.75
+        assert any("Jupiter" in r for r in result["reasons"])
+
+    def test_jupiter_conjunction_aspect(self):
+        """Jupiter in conjunction (within 12 degrees) reduces combustion."""
+        result = check_combustion_cancellation(
+            "venus", 100.0, is_retrograde=False, jupiter_lon=105.0
+        )
+        assert result["mitigation_factor"] == 0.75
+        assert any("Jupiter" in r for r in result["reasons"])
+
+    def test_jupiter_opposition_aspect(self):
+        """Jupiter in opposition (7th aspect, ~180 degrees) reduces combustion."""
+        result = check_combustion_cancellation(
+            "mercury", 100.0, is_retrograde=False, jupiter_lon=280.0
+        )
+        assert result["mitigation_factor"] == 0.75
+        assert any("Jupiter" in r for r in result["reasons"])
+
+    def test_no_mitigation_for_normal_planet(self):
+        """Planet with no special conditions has full combustion."""
+        # Mars at 50 degrees = Taurus (not own, not exalted), no retrograde, no Jupiter
+        result = check_combustion_cancellation("mars", 50.0, is_retrograde=False)
+        assert result["mitigation_factor"] == 1.0
+        assert result["is_cancelled"] is False
+        assert result["reasons"] == []
+
+    def test_combined_own_sign_and_jupiter(self):
+        """Own sign + Jupiter aspect stack multiplicatively."""
+        # Venus in Taurus (own sign, lon ~= 30 + degree) + Jupiter aspecting
+        # Venus at 40 = Taurus, Jupiter at 160 (trine)
+        result = check_combustion_cancellation(
+            "venus", 40.0, is_retrograde=False, jupiter_lon=160.0
+        )
+        # 0.5 (own sign) * 0.75 (Jupiter) = 0.375
+        assert result["mitigation_factor"] == 0.375
+        assert len(result["reasons"]) == 2
+
+    def test_retrograde_plus_own_sign(self):
+        """Retrograde cancellation overrides everything (factor = 0)."""
+        # Mars in Aries (own sign) + retrograde
+        result = check_combustion_cancellation("mars", 15.0, is_retrograde=True)
+        assert result["is_cancelled"] is True
+        assert result["mitigation_factor"] == 0.0
+
+    def test_mercury_in_virgo_own_and_exalted(self):
+        """Mercury in Virgo is both own sign and exaltation."""
+        # Mercury in Virgo: lon ~= 150 + degree
+        result = check_combustion_cancellation("mercury", 155.0, is_retrograde=False)
+        # 0.5 (own sign) * 0.25 (exaltation) = 0.125
+        assert result["mitigation_factor"] == 0.125
+        assert result["is_cancelled"] is False
+        assert len(result["reasons"]) == 2
+
+    def test_case_insensitive_planet_name(self):
+        """Planet name should be case insensitive."""
+        result = check_combustion_cancellation("Mars", 15.0, is_retrograde=False)
+        assert result["planet"] == "mars"
+        assert result["rashi"] == "aries"
+
+    def test_jupiter_far_away_no_aspect(self):
+        """Jupiter too far from any aspect angle has no effect."""
+        # Planet at 100, Jupiter at 150 (50 degrees - not near any aspect)
+        result = check_combustion_cancellation(
+            "mars", 100.0, is_retrograde=False, jupiter_lon=150.0
+        )
+        assert result["mitigation_factor"] == 1.0
+        assert result["reasons"] == []
+
+    def test_saturn_in_libra_exalted(self):
+        """Saturn exalted in Libra gets 75% reduction."""
+        # Libra starts at 180
+        result = check_combustion_cancellation("saturn", 190.0, is_retrograde=False)
+        assert result["mitigation_factor"] == 0.25
+        assert result["rashi"] == "libra"
+
+    def test_result_keys(self):
+        """Result should have all expected keys."""
+        result = check_combustion_cancellation("mars", 100.0)
+        assert "planet" in result
+        assert "is_cancelled" in result
+        assert "mitigation_factor" in result
+        assert "adjusted_strength_loss_multiplier" in result
+        assert "reasons" in result
+        assert "rashi" in result

@@ -13,7 +13,7 @@ import sys
 from datetime import datetime, timedelta
 from enum import StrEnum
 from pathlib import Path
-from typing import Any
+from typing import Any, ClassVar
 
 # Setup package imports
 PACKAGES_ROOT = Path(__file__).parent.parent.parent.parent
@@ -58,6 +58,65 @@ from packages.self.src import (  # noqa: E402
 )
 
 logger = logging.getLogger(__name__)
+
+
+class ChartCache:
+    """Cache birth chart calculations to avoid expensive recalculation.
+
+    Uses user_id + birth datetime as cache key. Thread-safe via dict operations.
+    """
+
+    _cache: ClassVar[dict[str, dict[str, Any]]] = {}
+
+    @classmethod
+    def get_or_calculate(
+        cls,
+        user_id: str,
+        birth_datetime: datetime,
+        latitude: float,
+        longitude: float,
+        ayanamsa: str = "lahiri",
+        house_system: str = "placidus",
+    ) -> dict[str, Any]:
+        """Get cached chart or calculate and cache it.
+
+        Args:
+            user_id: User identifier
+            birth_datetime: Birth date and time
+            latitude: Birth location latitude
+            longitude: Birth location longitude
+            ayanamsa: Ayanamsa system
+            house_system: House system
+
+        Returns:
+            Birth chart dictionary
+        """
+        cache_key = f"{user_id}:{birth_datetime.isoformat()}:{latitude}:{longitude}"
+        if cache_key in cls._cache:
+            logger.debug(f"Chart cache hit for {user_id}")
+            return cls._cache[cache_key]
+
+        # Calculate chart
+        tools = get_tools()
+        chart = tools.get_birth_chart(birth_datetime, latitude, longitude, ayanamsa, house_system)
+
+        if chart.get("success"):
+            cls._cache[cache_key] = chart
+            logger.debug(f"Chart cached for {user_id}")
+
+        return chart
+
+    @classmethod
+    def invalidate(cls, user_id: str) -> None:
+        """Remove cached charts for a user."""
+        keys_to_remove = [k for k in cls._cache if k.startswith(f"{user_id}:")]
+        for key in keys_to_remove:
+            del cls._cache[key]
+
+    @classmethod
+    def clear(cls) -> None:
+        """Clear entire cache."""
+        cls._cache.clear()
 
 
 class ActivityType(StrEnum):
@@ -601,7 +660,7 @@ class AstrologyTools:
 
     def get_yoga_details(self, yoga_name: str) -> dict[str, Any]:
         """
-        Get detailed information about a specific yoga.
+        Get detailed information about a specific yoga from the knowledge base.
 
         Args:
             yoga_name: Name of yoga (e.g., "Gajakesari", "Rajayoga")
@@ -610,14 +669,39 @@ class AstrologyTools:
             Details about the yoga, its benefits, and conditions
         """
         try:
-            # This would lookup yoga information from a knowledge base
-            # For now, return structure for future implementation
+            from packages.core.src.knowledge_loader import get_yoga_rules
+
+            yoga_rules = get_yoga_rules()
+            yoga_name_lower = yoga_name.lower().strip()
+
+            # Search through yoga categories for matching name
+            for category, yoga_list in yoga_rules.items():
+                if not isinstance(yoga_list, list):
+                    continue
+                for yoga in yoga_list:
+                    if not isinstance(yoga, dict):
+                        continue
+                    name = yoga.get("name", "")
+                    if name.lower() == yoga_name_lower:
+                        return {
+                            "yoga": name,
+                            "category": category,
+                            "description": yoga.get("description", ""),
+                            "conditions": yoga.get("conditions", yoga.get("rules", [])),
+                            "effects": yoga.get("effects", []),
+                            "planets_involved": yoga.get("planets_involved", []),
+                            "strength": yoga.get("strength", "medium"),
+                            "success": True,
+                        }
+
+            # Not found in structured data - return basic info
             return {
                 "yoga": yoga_name,
-                "description": f"Details for {yoga_name} yoga",
-                "benefits": [],
+                "description": f"Yoga '{yoga_name}' not found in knowledge base",
                 "conditions": [],
+                "effects": [],
                 "success": True,
+                "found": False,
             }
         except Exception as e:
             logger.error(f"Error getting yoga details: {e!s}")
@@ -1042,6 +1126,7 @@ def get_today_panchanga(
 __all__ = [
     "ActivityType",
     "AstrologyTools",
+    "ChartCache",
     "check_muhurta",
     "detect_doshas",
     "detect_yogas",

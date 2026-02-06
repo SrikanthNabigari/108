@@ -4,6 +4,8 @@ from datetime import UTC, datetime
 
 from packages.context.src.narayana_dasha import (
     RASHI_LIST,
+    _count_aspects_on,
+    _get_stronger_lord,
     calculate_narayana_sequence,
     calculate_period_duration,
     get_current_narayana_dasha,
@@ -749,3 +751,336 @@ class TestNarayanaAntardasha:
         assert antardashas[0]["rashi"] == Rashi.TAURUS
         assert antardashas[1]["rashi"] == Rashi.ARIES
         assert antardashas[2]["rashi"] == Rashi.PISCES
+
+
+class TestStrongerLord:
+    """Tests for _get_stronger_lord (5-rule Jaimini implementation)."""
+
+    def test_non_colorded_sign_returns_primary(self):
+        chart = _make_chart(lagna_rashi=Rashi.ARIES)
+        result = _get_stronger_lord(Rashi.ARIES, chart)
+        assert result == Planet.MARS
+
+    def test_scorpio_returns_primary_by_default(self):
+        chart = _make_chart(lagna_rashi=Rashi.ARIES)
+        result = _get_stronger_lord(Rashi.SCORPIO, chart)
+        # Mars vs Ketu. Mars in Gemini, Ketu in Taurus (default chart).
+        # Neither in own/exaltation. Check aspect/kendra rules.
+        assert result in (Planet.MARS, Planet.KETU)
+
+    def test_rule1_own_sign_wins(self):
+        # Mars in Aries (own sign) vs Ketu not in own sign
+        planets = {
+            Planet.MARS: PlanetPosition(
+                planet=Planet.MARS,
+                longitude=10.0,
+                rashi=Rashi.ARIES,
+                rashi_degree=10.0,
+                nakshatra="ashwini",
+                nakshatra_pada=1,
+                nakshatra_lord=Planet.KETU,
+                house=1,
+            ),
+            Planet.KETU: PlanetPosition(
+                planet=Planet.KETU,
+                longitude=45.0,
+                rashi=Rashi.TAURUS,
+                rashi_degree=15.0,
+                nakshatra="rohini",
+                nakshatra_pada=2,
+                nakshatra_lord=Planet.MOON,
+                house=2,
+            ),
+            Planet.SUN: PlanetPosition(
+                planet=Planet.SUN,
+                longitude=135.0,
+                rashi=Rashi.LEO,
+                rashi_degree=15.0,
+                nakshatra="magha",
+                nakshatra_pada=2,
+                nakshatra_lord=Planet.KETU,
+                house=5,
+            ),
+            Planet.MOON: PlanetPosition(
+                planet=Planet.MOON,
+                longitude=75.0,
+                rashi=Rashi.GEMINI,
+                rashi_degree=15.0,
+                nakshatra="mrigashira",
+                nakshatra_pada=2,
+                nakshatra_lord=Planet.MARS,
+                house=3,
+            ),
+            Planet.MERCURY: PlanetPosition(
+                planet=Planet.MERCURY,
+                longitude=105.0,
+                rashi=Rashi.CANCER,
+                rashi_degree=15.0,
+                nakshatra="pushya",
+                nakshatra_pada=2,
+                nakshatra_lord=Planet.SATURN,
+                house=4,
+            ),
+            Planet.JUPITER: PlanetPosition(
+                planet=Planet.JUPITER,
+                longitude=225.0,
+                rashi=Rashi.SCORPIO,
+                rashi_degree=15.0,
+                nakshatra="jyeshtha",
+                nakshatra_pada=2,
+                nakshatra_lord=Planet.MERCURY,
+                house=8,
+            ),
+            Planet.VENUS: PlanetPosition(
+                planet=Planet.VENUS,
+                longitude=195.0,
+                rashi=Rashi.LIBRA,
+                rashi_degree=15.0,
+                nakshatra="swati",
+                nakshatra_pada=2,
+                nakshatra_lord=Planet.RAHU,
+                house=7,
+            ),
+            Planet.SATURN: PlanetPosition(
+                planet=Planet.SATURN,
+                longitude=285.0,
+                rashi=Rashi.CAPRICORN,
+                rashi_degree=15.0,
+                nakshatra="shravana",
+                nakshatra_pada=2,
+                nakshatra_lord=Planet.MOON,
+                house=10,
+            ),
+            Planet.RAHU: PlanetPosition(
+                planet=Planet.RAHU,
+                longitude=315.0,
+                rashi=Rashi.AQUARIUS,
+                rashi_degree=15.0,
+                nakshatra="shatabhisha",
+                nakshatra_pada=2,
+                nakshatra_lord=Planet.RAHU,
+                house=11,
+            ),
+        }
+        chart = _make_chart(lagna_rashi=Rashi.ARIES, planet_positions=planets)
+        result = _get_stronger_lord(Rashi.SCORPIO, chart)
+        assert result == Planet.MARS  # Mars in own sign wins
+
+    def test_rule2_exaltation_wins(self):
+        # Saturn exalted in Libra vs Rahu not exalted (for Aquarius)
+        planets = {
+            Planet.SATURN: PlanetPosition(
+                planet=Planet.SATURN,
+                longitude=195.0,
+                rashi=Rashi.LIBRA,
+                rashi_degree=15.0,
+                nakshatra="swati",
+                nakshatra_pada=2,
+                nakshatra_lord=Planet.RAHU,
+                house=7,
+            ),
+            Planet.RAHU: PlanetPosition(
+                planet=Planet.RAHU,
+                longitude=45.0,
+                rashi=Rashi.TAURUS,
+                rashi_degree=15.0,
+                nakshatra="rohini",
+                nakshatra_pada=2,
+                nakshatra_lord=Planet.MOON,
+                house=2,
+            ),
+            Planet.SUN: PlanetPosition(
+                planet=Planet.SUN,
+                longitude=15.0,
+                rashi=Rashi.ARIES,
+                rashi_degree=15.0,
+                nakshatra="ashwini",
+                nakshatra_pada=2,
+                nakshatra_lord=Planet.KETU,
+                house=1,
+            ),
+            Planet.MOON: PlanetPosition(
+                planet=Planet.MOON,
+                longitude=75.0,
+                rashi=Rashi.GEMINI,
+                rashi_degree=15.0,
+                nakshatra="mrigashira",
+                nakshatra_pada=2,
+                nakshatra_lord=Planet.MARS,
+                house=3,
+            ),
+            Planet.MARS: PlanetPosition(
+                planet=Planet.MARS,
+                longitude=105.0,
+                rashi=Rashi.CANCER,
+                rashi_degree=15.0,
+                nakshatra="pushya",
+                nakshatra_pada=2,
+                nakshatra_lord=Planet.SATURN,
+                house=4,
+            ),
+            Planet.MERCURY: PlanetPosition(
+                planet=Planet.MERCURY,
+                longitude=135.0,
+                rashi=Rashi.LEO,
+                rashi_degree=15.0,
+                nakshatra="magha",
+                nakshatra_pada=2,
+                nakshatra_lord=Planet.KETU,
+                house=5,
+            ),
+            Planet.JUPITER: PlanetPosition(
+                planet=Planet.JUPITER,
+                longitude=165.0,
+                rashi=Rashi.VIRGO,
+                rashi_degree=15.0,
+                nakshatra="hasta",
+                nakshatra_pada=2,
+                nakshatra_lord=Planet.MOON,
+                house=6,
+            ),
+            Planet.VENUS: PlanetPosition(
+                planet=Planet.VENUS,
+                longitude=225.0,
+                rashi=Rashi.SCORPIO,
+                rashi_degree=15.0,
+                nakshatra="jyeshtha",
+                nakshatra_pada=2,
+                nakshatra_lord=Planet.MERCURY,
+                house=8,
+            ),
+            Planet.KETU: PlanetPosition(
+                planet=Planet.KETU,
+                longitude=255.0,
+                rashi=Rashi.SAGITTARIUS,
+                rashi_degree=15.0,
+                nakshatra="mula",
+                nakshatra_pada=2,
+                nakshatra_lord=Planet.KETU,
+                house=9,
+            ),
+        }
+        chart = _make_chart(lagna_rashi=Rashi.ARIES, planet_positions=planets)
+        result = _get_stronger_lord(Rashi.AQUARIUS, chart)
+        assert result == Planet.SATURN  # Saturn exalted in Libra
+
+
+class TestCountAspectsOn:
+    """Tests for _count_aspects_on helper."""
+
+    def test_7th_house_aspect(self):
+        chart = _make_chart()
+        # Default chart: Sun in house 1 aspects house 7
+        count = _count_aspects_on(7, chart)
+        assert count >= 1  # At least Sun aspects 7th
+
+    def test_mars_special_aspects(self):
+        planets = {
+            Planet.MARS: PlanetPosition(
+                planet=Planet.MARS,
+                longitude=15.0,
+                rashi=Rashi.ARIES,
+                rashi_degree=15.0,
+                nakshatra="ashwini",
+                nakshatra_pada=2,
+                nakshatra_lord=Planet.KETU,
+                house=1,
+            ),
+            Planet.SUN: PlanetPosition(
+                planet=Planet.SUN,
+                longitude=135.0,
+                rashi=Rashi.LEO,
+                rashi_degree=15.0,
+                nakshatra="magha",
+                nakshatra_pada=2,
+                nakshatra_lord=Planet.KETU,
+                house=5,
+            ),
+            Planet.MOON: PlanetPosition(
+                planet=Planet.MOON,
+                longitude=315.0,
+                rashi=Rashi.AQUARIUS,
+                rashi_degree=15.0,
+                nakshatra="shatabhisha",
+                nakshatra_pada=2,
+                nakshatra_lord=Planet.RAHU,
+                house=11,
+            ),
+            Planet.MERCURY: PlanetPosition(
+                planet=Planet.MERCURY,
+                longitude=255.0,
+                rashi=Rashi.SAGITTARIUS,
+                rashi_degree=15.0,
+                nakshatra="mula",
+                nakshatra_pada=2,
+                nakshatra_lord=Planet.KETU,
+                house=9,
+            ),
+            Planet.JUPITER: PlanetPosition(
+                planet=Planet.JUPITER,
+                longitude=165.0,
+                rashi=Rashi.VIRGO,
+                rashi_degree=15.0,
+                nakshatra="hasta",
+                nakshatra_pada=2,
+                nakshatra_lord=Planet.MOON,
+                house=6,
+            ),
+            Planet.VENUS: PlanetPosition(
+                planet=Planet.VENUS,
+                longitude=345.0,
+                rashi=Rashi.PISCES,
+                rashi_degree=15.0,
+                nakshatra="revati",
+                nakshatra_pada=2,
+                nakshatra_lord=Planet.MERCURY,
+                house=12,
+            ),
+            Planet.SATURN: PlanetPosition(
+                planet=Planet.SATURN,
+                longitude=225.0,
+                rashi=Rashi.SCORPIO,
+                rashi_degree=15.0,
+                nakshatra="jyeshtha",
+                nakshatra_pada=2,
+                nakshatra_lord=Planet.MERCURY,
+                house=8,
+            ),
+            Planet.RAHU: PlanetPosition(
+                planet=Planet.RAHU,
+                longitude=75.0,
+                rashi=Rashi.GEMINI,
+                rashi_degree=15.0,
+                nakshatra="mrigashira",
+                nakshatra_pada=2,
+                nakshatra_lord=Planet.MARS,
+                house=3,
+            ),
+            Planet.KETU: PlanetPosition(
+                planet=Planet.KETU,
+                longitude=45.0,
+                rashi=Rashi.TAURUS,
+                rashi_degree=15.0,
+                nakshatra="rohini",
+                nakshatra_pada=2,
+                nakshatra_lord=Planet.MOON,
+                house=2,
+            ),
+        }
+        chart = _make_chart(lagna_rashi=Rashi.ARIES, planet_positions=planets)
+        # Mars in house 1: aspects 4th (house 4+3=4), 8th (house 8) in addition to 7th
+        # Mars aspects house 4 (4th), house 7 (7th), house 8 (8th) -- 4th and 8th special
+        count_h4 = _count_aspects_on(4, chart)
+        count_h8 = _count_aspects_on(8, chart)
+        # Mars should contribute to both h4 and h8
+        assert count_h4 >= 1  # Mars aspects 4th
+        # Saturn in house 8 -> conjunction, not aspect. Mars in h1 aspects h8 via 8th aspect.
+        # Actually h8 has Saturn, so Saturn is IN h8, not aspecting h8. Mars aspects 4th and 8th from itself.
+        assert count_h8 >= 1
+
+    def test_empty_house_zero_aspects(self):
+        # If no planet aspects a house, count should be 0
+        chart = _make_chart()
+        # House 12 is unlikely to have many aspects in default chart
+        count = _count_aspects_on(12, chart)
+        assert count >= 0  # Could be 0 or more

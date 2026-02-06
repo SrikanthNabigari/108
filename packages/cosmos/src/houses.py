@@ -594,25 +594,116 @@ def get_kendras_from(house: int) -> list[int]:
 
 
 def get_house_lord_strength(
-    house_lord: str,  # noqa: ARG001
-    planet_positions: dict[str, dict[str, float]],  # noqa: ARG001
-    house: int,  # noqa: ARG001
+    house_lord: str,
+    planet_positions: dict[str, dict[str, float]],
+    house: int,
 ) -> float | None:
-    """Calculate the strength of a house lord.
+    """Calculate the strength of a house lord based on dignity.
 
-    Note: This is a placeholder for integration with planetary strength calculations.
-    Full implementation requires Shadbala and other strength metrics from the ephemeris module.
+    Evaluates the house lord's dignity in its current sign using the
+    dignities.json knowledge file. Scoring is based on:
+    - Exalted: 100
+    - Moolatrikona: 90
+    - Own sign: 80
+    - Friend's sign: 60
+    - Neutral sign: 40
+    - Enemy sign: 20
+    - Debilitated: 0
+
+    A bonus is applied if the lord is in a Kendra or Trikona house.
 
     Args:
         house_lord: Planet name (e.g., "mars", "venus")
-        planet_positions: Dict of planet positions from get_all_planets()
-        house: House number for context
+        planet_positions: Dict of planet positions from get_all_planets(),
+                          each value has at least a "longitude" key.
+        house: House number for context (1-12)
 
     Returns:
-        Optional[float]: Strength value (0-100) or None if not available
+        float: Strength value (0-100), or None if planet data is unavailable
     """
-    # This would integrate with shadbala calculations
-    return None
+    if not isinstance(house, int) or house < 1 or house > 12:
+        raise ValueError(f"House must be 1-12, got {house}")
+
+    lord_lower = house_lord.lower()
+    if lord_lower not in planet_positions:
+        return None
+
+    lord_data = planet_positions[lord_lower]
+    lord_lon = lord_data.get("longitude") if isinstance(lord_data, dict) else lord_data
+    if lord_lon is None:
+        return None
+
+    # Get rashi from longitude
+    rashi_idx = int(float(lord_lon) % 360.0 / 30)
+    rashi_name = RASHI_NAMES[rashi_idx]
+
+    # Dignity scoring
+    dignity_scores = {
+        "exalted": 100,
+        "moolatrikona": 90,
+        "own": 80,
+        "friend": 60,
+        "neutral": 40,
+        "enemy": 20,
+        "debilitated": 0,
+    }
+
+    # Determine dignity using knowledge data
+    import json
+    from pathlib import Path
+
+    dignities_path = (
+        Path(__file__).parent.parent.parent.parent / "knowledge" / "definitions" / "dignities.json"
+    )
+    try:
+        with dignities_path.open() as f:
+            dignities_data = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        return None
+
+    dignity = "neutral"  # default
+
+    if lord_lower in dignities_data.get("planets", {}):
+        planet_info = dignities_data["planets"][lord_lower]
+
+        # Check exaltation
+        if planet_info.get("exaltation") and planet_info["exaltation"].get("sign") == rashi_name:
+            dignity = "exalted"
+        # Check debilitation
+        elif (
+            planet_info.get("debilitation")
+            and planet_info["debilitation"].get("sign") == rashi_name
+        ):
+            dignity = "debilitated"
+        # Check moolatrikona
+        elif (
+            planet_info.get("moolatrikona")
+            and planet_info["moolatrikona"].get("sign") == rashi_name
+        ):
+            dignity = "moolatrikona"
+        # Check own sign
+        elif rashi_name in planet_info.get("own_signs", []):
+            dignity = "own"
+        else:
+            # Check friendship with sign lord
+            sign_lord = SIGN_NAME_TO_RULER.get(rashi_name)
+            friendship_table = dignities_data.get("friendship_table", {})
+            if sign_lord and lord_lower in friendship_table:
+                relationships = friendship_table[lord_lower]
+                if sign_lord in relationships.get("friends", []):
+                    dignity = "friend"
+                elif sign_lord in relationships.get("enemies", []):
+                    dignity = "enemy"
+
+    score = float(dignity_scores.get(dignity, 40))
+
+    # Bonus for lord in Kendra or Trikona houses
+    if house in KENDRA_HOUSES:
+        score = min(100.0, score + 5)
+    if house in TRIKONA_HOUSES:
+        score = min(100.0, score + 5)
+
+    return score
 
 
 def get_house_lord_placement(

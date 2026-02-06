@@ -36,6 +36,178 @@ YOGINI_DATA = [
 
 TOTAL_CYCLE = 36  # years
 
+# Full interpretation data for each Yogini dasha period
+YOGINI_EFFECTS: dict[str, dict] = {
+    "mangala": {
+        "planet": "moon",
+        "years": 1,
+        "general": "New beginnings, emotional changes, short travels, fresh starts",
+        "positive": [
+            "Fresh starts and new opportunities",
+            "Emotional clarity and intuition heightened",
+            "Good for Moon-related activities (travel, public interaction)",
+            "Quick results from efforts",
+        ],
+        "negative": [
+            "Restlessness and emotional turbulence",
+            "Short-lived results, lack of permanence",
+            "Mood swings and mental instability",
+            "Difficulty in long-term planning",
+        ],
+        "health": "Watch mental health, hydration, sleep patterns, cold-related ailments",
+        "career": "Quick changes, new connections, not ideal for long-term planning",
+        "relationships": "New emotional bonds, nurturing energy, mother figures prominent",
+        "spiritual": "Good for meditation, developing intuition, connecting with inner self",
+    },
+    "pingala": {
+        "planet": "sun",
+        "years": 2,
+        "general": "Authority, recognition, vitality, leadership opportunities arise",
+        "positive": [
+            "Government and authority figure favor",
+            "Career recognition and promotion",
+            "Health vitality increases",
+            "Father's support and guidance",
+        ],
+        "negative": [
+            "Ego conflicts with superiors",
+            "Eye-related health issues",
+            "Excessive pride leading to downfall",
+            "Burnout from overwork",
+        ],
+        "health": "Heart health, eyes, bones, vitality; avoid excessive heat exposure",
+        "career": "Leadership roles, government work, authority positions favored",
+        "relationships": "Dominant energy in relationships, need for respect and recognition",
+        "spiritual": "Self-realization work, connecting with inner light, solar meditations",
+    },
+    "dhanya": {
+        "planet": "jupiter",
+        "years": 3,
+        "general": "Wisdom, prosperity, children's welfare, spiritual growth, expansion",
+        "positive": [
+            "Wealth increase and financial stability",
+            "Children's welfare and educational success",
+            "Spiritual growth and guru's blessings",
+            "Marriage prospects improve for eligible",
+        ],
+        "negative": [
+            "Over-expansion and overcommitment",
+            "Liver and weight-related health issues",
+            "False promises from others",
+            "Religious or philosophical conflicts",
+        ],
+        "health": "Liver, fat metabolism, obesity; maintain moderate diet and exercise",
+        "career": "Teaching, counseling, law, finance, religious work favored",
+        "relationships": "Harmonious family life, wisdom in partnerships, guru-disciple bonds",
+        "spiritual": "Peak period for spiritual practices, pilgrimage, mantra initiation",
+    },
+    "bhramari": {
+        "planet": "mars",
+        "years": 4,
+        "general": "Energy, courage, competition, property matters, siblings",
+        "positive": [
+            "Victory in competition and legal matters",
+            "Property acquisition or improvement",
+            "Courage and initiative increase",
+            "Athletic and technical achievements",
+        ],
+        "negative": [
+            "Accident risk and injury potential",
+            "Anger management challenges",
+            "Blood-related health issues",
+            "Conflicts with siblings or neighbors",
+        ],
+        "health": "Blood pressure, accidents, surgery risk, inflammation; stay active safely",
+        "career": "Military, engineering, sports, surgery, real estate favored",
+        "relationships": "Passionate but potentially combative; channel energy constructively",
+        "spiritual": "Kundalini practices, Hanuman worship, building spiritual discipline",
+    },
+    "bhadrika": {
+        "planet": "mercury",
+        "years": 5,
+        "general": "Intelligence, communication, business, education, writing",
+        "positive": [
+            "Business success and trade profits",
+            "Communication skills at peak",
+            "Educational achievements and certificates",
+            "Writing, publishing, media success",
+        ],
+        "negative": [
+            "Nervous disorders and anxiety",
+            "Communication mishaps and misunderstandings",
+            "Skin problems and allergies",
+            "Mental restlessness and overthinking",
+        ],
+        "health": "Nervous system, skin, respiratory; manage stress and anxiety",
+        "career": "Commerce, writing, teaching, IT, accounting, communication roles",
+        "relationships": "Intellectual connections, friendships, networking opportunities",
+        "spiritual": "Study of scriptures, mantra recitation, intellectual spiritual inquiry",
+    },
+    "ulka": {
+        "planet": "saturn",
+        "years": 6,
+        "general": "Discipline, karma, delays, hard work, longevity, structure",
+        "positive": [
+            "Steady progress through discipline",
+            "Property gains through patience",
+            "Old debts cleared, karma resolved",
+            "Mastery through persistent effort",
+        ],
+        "negative": [
+            "Delays in all matters",
+            "Chronic health issues surface",
+            "Depression and isolation",
+            "Career obstacles and slow promotions",
+        ],
+        "health": "Bones, joints, chronic conditions, teeth; regular health maintenance",
+        "career": "Agriculture, mining, labor, judiciary, administration, oil industry",
+        "relationships": "Karmic relationships, older partners, duty-bound connections",
+        "spiritual": "Deep meditation, austerity, service to elderly, karma yoga",
+    },
+    "siddha": {
+        "planet": "venus",
+        "years": 7,
+        "general": "Love, marriage, luxury, arts, finances, sensual pleasures",
+        "positive": [
+            "Marriage and romantic fulfillment",
+            "Financial gains and luxury acquisitions",
+            "Artistic and creative achievements",
+            "Beauty, fashion, entertainment success",
+        ],
+        "negative": [
+            "Excessive indulgence and extravagance",
+            "Relationship complications and affairs",
+            "Reproductive health issues",
+            "Scandal risk from pleasure-seeking",
+        ],
+        "health": "Reproductive system, kidneys, diabetes; maintain balanced lifestyle",
+        "career": "Arts, entertainment, fashion, hospitality, finance, jewellery",
+        "relationships": "Peak romance period, marriage, partnerships, social harmony",
+        "spiritual": "Bhakti yoga, devotional practices, beauty as spiritual path",
+    },
+    "sankata": {
+        "planet": "rahu",
+        "years": 8,
+        "general": "Unconventional paths, foreign connections, technology, obsession",
+        "positive": [
+            "Foreign opportunities and travel",
+            "Technology and innovation success",
+            "Unconventional gains and breakthroughs",
+            "Political and social climbing",
+        ],
+        "negative": [
+            "Deception and betrayal risk",
+            "Obsessive behavior and addiction",
+            "Mysterious ailments and misdiagnosis",
+            "Confusion, scandal, and reputation risk",
+        ],
+        "health": "Mysterious ailments, poison risk, mental health; seek proper diagnosis",
+        "career": "Technology, foreign trade, diplomacy, research, occult sciences",
+        "relationships": "Unusual connections, cross-cultural relationships, deception risk",
+        "spiritual": "Tantric practices, past-life healing, breaking karmic patterns",
+    },
+}
+
 
 def get_starting_yogini(nakshatra_num: int, pada: int) -> int:
     """Calculate the starting Yogini index based on Moon's nakshatra and pada.
@@ -348,3 +520,84 @@ def get_yogini_antardasha(maha: YoginiDashaPeriod) -> list[dict]:
             break
 
     return antardashas
+
+
+def get_yogini_pratyantardasha(antardasha: dict) -> list[dict]:
+    """Subdivide an antardasha into 8 pratyantardashas (3rd level).
+
+    The pratyantardasha sequence starts from the antardasha yogini itself.
+    Duration formula: (pratyantardasha_years / TOTAL_CYCLE) * antardasha_days
+
+    Args:
+        antardasha: Dict with yogini, lord, start_date, end_date (from get_yogini_antardasha)
+
+    Returns:
+        List of 8 dicts with yogini, lord, start_date, end_date
+
+    Example:
+        >>> ad = {"yogini": YoginiName.BHADRIKA, "lord": Planet.MERCURY,
+        ...       "start_date": datetime(2020,1,1), "end_date": datetime(2020,7,1)}
+        >>> pads = get_yogini_pratyantardasha(ad)
+        >>> len(pads)
+        8
+    """
+    ad_yogini = antardasha["yogini"]
+    ad_start = antardasha["start_date"]
+    ad_end = antardasha["end_date"]
+
+    # Find starting index
+    starting_index = None
+    for i, (yogini_name, _, _) in enumerate(YOGINI_DATA):
+        if yogini_name == ad_yogini:
+            starting_index = i
+            break
+
+    if starting_index is None:
+        raise ValueError(f"Invalid yogini name: {ad_yogini}")
+
+    ad_duration_days = (ad_end - ad_start).days
+
+    pratyantardashas = []
+    current_date = ad_start
+
+    for i in range(8):
+        yogini_index = (starting_index + i) % 8
+        yogini_name, planet_lord, yogini_years = YOGINI_DATA[yogini_index]
+
+        pad_days = int((yogini_years / TOTAL_CYCLE) * ad_duration_days)
+        end_date = current_date + timedelta(days=pad_days)
+        if end_date > ad_end:
+            end_date = ad_end
+
+        pratyantardashas.append(
+            {
+                "yogini": yogini_name,
+                "lord": planet_lord,
+                "start_date": current_date,
+                "end_date": end_date,
+            }
+        )
+
+        current_date = end_date
+        if current_date >= ad_end:
+            break
+
+    return pratyantardashas
+
+
+def get_yogini_effects(yogini_name: str) -> dict:
+    """Get interpretation effects for a given Yogini dasha period.
+
+    Args:
+        yogini_name: Yogini name (e.g., "mangala", "pingala")
+
+    Returns:
+        Dictionary with general, positive, negative, health, career, relationships,
+        spiritual fields. Returns empty dict if yogini not found.
+
+    Example:
+        >>> effects = get_yogini_effects("mangala")
+        >>> effects["planet"]
+        'moon'
+    """
+    return YOGINI_EFFECTS.get(yogini_name.lower(), {})

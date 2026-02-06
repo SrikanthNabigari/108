@@ -17,6 +17,44 @@ from packages.core.src.constants import Planet, Rashi
 from packages.core.src.knowledge_loader import get_ashtakavarga_rules, get_shadbala_rules
 from packages.core.src.models import BirthChart, PlanetPosition
 
+# Sign rulers for house strength calculations
+_SIGN_RULERS: dict[Rashi, Planet] = {
+    Rashi.ARIES: Planet.MARS,
+    Rashi.TAURUS: Planet.VENUS,
+    Rashi.GEMINI: Planet.MERCURY,
+    Rashi.CANCER: Planet.MOON,
+    Rashi.LEO: Planet.SUN,
+    Rashi.VIRGO: Planet.MERCURY,
+    Rashi.LIBRA: Planet.VENUS,
+    Rashi.SCORPIO: Planet.MARS,
+    Rashi.SAGITTARIUS: Planet.JUPITER,
+    Rashi.CAPRICORN: Planet.SATURN,
+    Rashi.AQUARIUS: Planet.SATURN,
+    Rashi.PISCES: Planet.JUPITER,
+}
+
+# Weekday planet lords (0=Monday through 6=Sunday)
+_WEEKDAY_LORDS = {
+    0: Planet.MOON,  # Monday
+    1: Planet.MARS,  # Tuesday
+    2: Planet.MERCURY,  # Wednesday
+    3: Planet.JUPITER,  # Thursday
+    4: Planet.VENUS,  # Friday
+    5: Planet.SATURN,  # Saturday
+    6: Planet.SUN,  # Sunday
+}
+
+# Hora lords cycle (starting from Sun's hora at sunrise on Sunday)
+_HORA_SEQUENCE = [
+    Planet.SUN,
+    Planet.VENUS,
+    Planet.MERCURY,
+    Planet.MOON,
+    Planet.SATURN,
+    Planet.JUPITER,
+    Planet.MARS,
+]
+
 
 @dataclass
 class ShadbalaComponents:
@@ -420,12 +458,13 @@ class StrengthCalculator:
         - Ayana Bala: Declination strength
         - Yuddha Bala: Planetary war strength
         """
-        # Simplified implementation of main temporal factors
         nathonnatha = self._calc_nathonnatha_bala(planet, chart)
         paksha = self._calc_paksha_bala(planet, chart)
         ayana = self._calc_ayana_bala(pos.latitude)
+        tribhaga = self._calculate_tribhaga_bala(planet, chart)
+        vmdhb = self._calculate_varsha_masa_dina_hora_bala(planet, chart)
 
-        return nathonnatha + paksha + ayana
+        return nathonnatha + paksha + ayana + tribhaga + vmdhb
 
     def _calc_nathonnatha_bala(self, planet: Planet, chart: BirthChart) -> float:
         """Day/night strength (Nathonnatha Bala).
@@ -470,6 +509,160 @@ class StrengthCalculator:
         """
         # Simplified: latitude provides indirect declination measure
         return 5.0
+
+    def _calculate_tribhaga_bala(self, planet: Planet, chart: BirthChart) -> float:
+        """Calculate Tribhaga Bala - strength from time of day/night.
+
+        Each day and night is divided into 3 equal parts (tribhagas).
+        Certain planets gain strength in certain thirds:
+        - Mercury: 1st third of day AND 1st third of night
+        - Sun: 2nd third of day
+        - Saturn: 2nd third of night (last third of day = 3rd)
+        - Moon: always gets Tribhaga Bala during day
+        - Mars: always gets Tribhaga Bala during night
+        - Jupiter: always has Tribhaga Bala
+
+        Args:
+            planet: The planet to evaluate
+            chart: Birth chart (for birth time)
+
+        Returns:
+            Tribhaga Bala in virupas (0 or 60)
+        """
+        # Jupiter always has Tribhaga Bala
+        if planet == Planet.JUPITER:
+            return 60.0
+
+        birth_hour = chart.birth_data.datetime_utc.hour
+        is_day = 6 <= birth_hour < 18
+
+        if is_day:
+            # Day: 6-10 = 1st third, 10-14 = 2nd third, 14-18 = 3rd third
+            if planet == Planet.MOON:
+                return 60.0  # Moon always strong during day
+
+            day_third = (birth_hour - 6) // 4 + 1 if birth_hour >= 6 else 1
+            day_third = min(day_third, 3)
+
+            if planet == Planet.MERCURY and day_third == 1:
+                return 60.0
+            if planet == Planet.SUN and day_third == 2:
+                return 60.0
+            if planet == Planet.SATURN and day_third == 3:
+                return 60.0
+        else:
+            # Night: 18-22 = 1st third, 22-02 = 2nd third, 02-06 = 3rd third
+            if planet == Planet.MARS:
+                return 60.0  # Mars always strong during night
+
+            if birth_hour >= 18:
+                night_third = (birth_hour - 18) // 4 + 1
+            else:
+                night_third = (birth_hour + 6) // 4 + 1
+            night_third = min(night_third, 3)
+
+            if planet == Planet.MERCURY and night_third == 1:
+                return 60.0
+            if planet == Planet.SATURN and night_third == 2:
+                return 60.0
+            if planet == Planet.SUN and night_third == 3:
+                return 60.0
+
+        return 0.0
+
+    def _calculate_varsha_masa_dina_hora_bala(self, planet: Planet, chart: BirthChart) -> float:
+        """Calculate combined Varsha, Masa, Dina, and Hora Bala.
+
+        A planet gains strength (15 virupas each) for being the lord of:
+        - Varsha (year): Based on the weekday of the first day of that Hindu year
+        - Masa (month): Based on the weekday of the first day of that month
+        - Dina (day): Based on the weekday of birth
+        - Hora (hour): Based on the planetary hour at birth
+
+        Args:
+            planet: The planet to evaluate
+            chart: Birth chart (for date/time)
+
+        Returns:
+            Combined strength in virupas (0-60, 15 per match)
+        """
+        birth_dt = chart.birth_data.datetime_utc
+        strength = 0.0
+
+        # Dina Bala: Lord of the weekday
+        weekday = birth_dt.weekday()  # Monday=0, Sunday=6
+        dina_lord = _WEEKDAY_LORDS.get(weekday)
+        if planet == dina_lord:
+            strength += 15.0
+
+        # Hora Bala: Planetary hour at birth
+        # Each day has 24 horas, cycling through the 7 planets
+        # Starting from the lord of the day at sunrise (assumed 6 AM)
+        hours_from_sunrise = (birth_dt.hour - 6) % 24
+        # Find day lord's position in hora sequence
+        if dina_lord and dina_lord in _HORA_SEQUENCE:
+            day_lord_idx = _HORA_SEQUENCE.index(dina_lord)
+            hora_lord_idx = (day_lord_idx + hours_from_sunrise) % 7
+            hora_lord = _HORA_SEQUENCE[hora_lord_idx]
+            if planet == hora_lord:
+                strength += 15.0
+
+        # Masa Bala: Lord of the month (simplified - use weekday of 1st of month)
+        first_of_month = birth_dt.replace(day=1)
+        masa_weekday = first_of_month.weekday()
+        masa_lord = _WEEKDAY_LORDS.get(masa_weekday)
+        if planet == masa_lord:
+            strength += 15.0
+
+        # Varsha Bala: Lord of the year (simplified - weekday of Jan 1)
+        first_of_year = birth_dt.replace(month=1, day=1)
+        varsha_weekday = first_of_year.weekday()
+        varsha_lord = _WEEKDAY_LORDS.get(varsha_weekday)
+        if planet == varsha_lord:
+            strength += 15.0
+
+        return strength
+
+    def _calculate_yuddha_bala(
+        self, planet1: Planet, planet2: Planet, lon1: float, lon2: float
+    ) -> float:
+        """Calculate Yuddha Bala (planetary war strength).
+
+        Planetary war occurs when two planets (excluding Sun, Moon, Rahu, Ketu)
+        are within 1 degree of each other. The planet with higher longitude
+        (northern latitude in classical texts) wins the war.
+
+        Args:
+            planet1: First planet
+            planet2: Second planet
+            lon1: Longitude of first planet
+            lon2: Longitude of second planet
+
+        Returns:
+            Positive value for winner, negative for loser, 0 if no war.
+            Range: -60 to +60 virupas
+        """
+        # Only true planets (Mars through Saturn) can engage in war
+        war_planets = {Planet.MARS, Planet.MERCURY, Planet.JUPITER, Planet.VENUS, Planet.SATURN}
+        if planet1 not in war_planets or planet2 not in war_planets:
+            return 0.0
+
+        # Check if within 1 degree
+        distance = abs(lon1 - lon2) % 360
+        distance = min(distance, 360 - distance)
+
+        if distance > 1.0:
+            return 0.0
+
+        # The planet with higher longitude wins (simplified from BPHS)
+        # In classical texts, the brighter/larger planet wins
+        # Using longitude as a proxy: higher longitude = winner
+        if lon1 > lon2:
+            return 60.0  # planet1 wins
+        elif lon2 > lon1:
+            return -60.0  # planet1 loses
+        else:
+            return 0.0  # exact conjunction = draw
 
     def _calc_chesta_bala(self, pos: PlanetPosition) -> float:
         """Calculate Chesta Bala (motional strength, 0-60 virupas).
@@ -764,3 +957,183 @@ class StrengthCalculator:
             return "fair"
         else:
             return "weak"
+
+    def calculate_bhava_bala(self, house_num: int, chart: BirthChart) -> dict:
+        """Calculate Bhava Bala (house strength) for a specific house.
+
+        Components:
+        - Bhavadhipati Bala: Strength of the house lord
+        - Bhava Dig Bala: Directional strength of the house
+        - Bhava Drishti Bala: Strength from aspects received
+        - Occupant strength: Strength of planets occupying the house
+
+        Args:
+            house_num: House number (1-12)
+            chart: The birth chart
+
+        Returns:
+            Dictionary with total strength and component breakdown
+        """
+        if house_num < 1 or house_num > 12:
+            return {
+                "house": house_num,
+                "total": 0.0,
+                "components": {},
+                "note": "Invalid house number",
+            }
+
+        # 1. Bhavadhipati Bala (house lord strength)
+        bhavadhipati = self._calc_bhavadhipati_bala(house_num, chart)
+
+        # 2. Bhava Dig Bala (directional strength)
+        dig_bala = self._calc_bhava_dig_bala(house_num)
+
+        # 3. Bhava Drishti Bala (aspect strength)
+        drishti_bala = self._calc_bhava_drishti_bala(house_num, chart)
+
+        # 4. Occupant strength
+        occupant_strength = self._calc_occupant_strength(house_num, chart)
+
+        components = {
+            "bhavadhipati_bala": round(bhavadhipati, 2),
+            "bhava_dig_bala": round(dig_bala, 2),
+            "bhava_drishti_bala": round(drishti_bala, 2),
+            "occupant_strength": round(occupant_strength, 2),
+        }
+
+        total = sum(components.values())
+
+        return {
+            "house": house_num,
+            "total": round(total, 2),
+            "components": components,
+            "is_strong": total > 100,
+            "strength_rating": self._get_bhava_rating(total),
+        }
+
+    def _calc_bhavadhipati_bala(self, house_num: int, chart: BirthChart) -> float:
+        """Calculate strength of the house lord.
+
+        The house lord's Shadbala directly contributes to house strength.
+        A strong lord = strong house.
+        """
+        # Get house sign
+        lagna_index = list(Rashi).index(chart.lagna_rashi)
+        house_sign_index = (lagna_index + house_num - 1) % 12
+        house_sign = list(Rashi)[house_sign_index]
+
+        # Get lord of that sign
+        house_lord = _SIGN_RULERS.get(house_sign)
+        if not house_lord or house_lord not in chart.planets:
+            return 30.0  # Default moderate strength
+
+        # Get lord's Shadbala (simplified: use strength rating)
+        shadbala = self.calculate_shadbala(house_lord, chart)
+        lord_total = shadbala.get("total", 0)
+
+        # Normalize to 0-60 range
+        return min(60.0, lord_total / 5.0)
+
+    def _calc_bhava_dig_bala(self, house_num: int) -> float:
+        """Calculate directional strength of a house.
+
+        Certain houses are inherently strong by direction:
+        - Kendra houses (1, 4, 7, 10): 60 points
+        - Trikona houses (1, 5, 9): 45 points (1 already counted)
+        - Upachaya houses (3, 6, 10, 11): 30 points
+        - Dusthana houses (6, 8, 12): 15 points
+        """
+        if house_num in [1, 4, 7, 10]:
+            return 60.0
+        elif house_num in [5, 9]:
+            return 45.0
+        elif house_num in [3, 11]:
+            return 30.0
+        elif house_num in [2]:
+            return 25.0
+        else:  # 6, 8, 12
+            return 15.0
+
+    def _calc_bhava_drishti_bala(self, house_num: int, chart: BirthChart) -> float:
+        """Calculate strength from aspects received by the house.
+
+        Benefic aspects add strength, malefic aspects reduce it.
+        """
+        benefics = {Planet.JUPITER, Planet.VENUS, Planet.MERCURY}
+        malefics = {Planet.SUN, Planet.MARS, Planet.SATURN, Planet.RAHU, Planet.KETU}
+
+        strength = 0.0
+
+        for planet, pos in chart.planets.items():
+            if pos.house == house_num:
+                continue  # Skip occupants, handled separately
+
+            # Check 7th aspect (all planets have this)
+            aspected_house = ((pos.house - 1 + 6) % 12) + 1
+            if aspected_house == house_num:
+                if planet in benefics:
+                    strength += 10.0
+                elif planet in malefics:
+                    strength -= 5.0
+
+            # Special aspects for Mars (4th, 8th), Jupiter (5th, 9th), Saturn (3rd, 10th)
+            special_aspects = {
+                Planet.MARS: [4, 8],
+                Planet.JUPITER: [5, 9],
+                Planet.SATURN: [3, 10],
+            }
+            for aspect_distance in special_aspects.get(planet, []):
+                target = ((pos.house - 1 + aspect_distance - 1) % 12) + 1
+                if target == house_num:
+                    if planet in benefics:
+                        strength += 10.0
+                    elif planet in malefics:
+                        strength -= 5.0
+
+        return max(0.0, strength + 15.0)  # Base 15 + aspects
+
+    def _calc_occupant_strength(self, house_num: int, chart: BirthChart) -> float:
+        """Calculate strength from planets occupying the house."""
+        benefics = {Planet.JUPITER, Planet.VENUS, Planet.MERCURY, Planet.MOON}
+        malefics = {Planet.SUN, Planet.MARS, Planet.SATURN, Planet.RAHU, Planet.KETU}
+
+        strength = 0.0
+        occupant_count = 0
+
+        for planet, pos in chart.planets.items():
+            if pos.house == house_num:
+                occupant_count += 1
+                if planet in benefics:
+                    strength += 15.0
+                elif planet in malefics:
+                    strength += 5.0
+
+        # Empty house gets moderate default
+        if occupant_count == 0:
+            return 10.0
+
+        return strength
+
+    def _get_bhava_rating(self, total: float) -> str:
+        """Get qualitative rating of house strength."""
+        if total >= 150:
+            return "very_strong"
+        elif total >= 100:
+            return "strong"
+        elif total >= 60:
+            return "moderate"
+        elif total >= 30:
+            return "weak"
+        else:
+            return "very_weak"
+
+    def get_all_bhava_balas(self, chart: BirthChart) -> dict[int, dict]:
+        """Calculate Bhava Bala for all 12 houses.
+
+        Args:
+            chart: The birth chart
+
+        Returns:
+            Dictionary mapping house numbers (1-12) to their strength data
+        """
+        return {h: self.calculate_bhava_bala(h, chart) for h in range(1, 13)}

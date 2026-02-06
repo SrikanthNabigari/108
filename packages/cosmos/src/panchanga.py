@@ -169,7 +169,6 @@ def get_tithi(sun_longitude: float, moon_longitude: float) -> dict[str, Any]:
 
     # Each tithi spans 12 degrees
     tithi_float = distance / 12.0
-    int(tithi_float) + 1
 
     # Determine paksha (waxing or waning)
     if tithi_float < 15:
@@ -342,8 +341,6 @@ def get_karana(tithi_number: int) -> dict[str, Any]:
     # Repeating karanas (indices 1-54 in the month)
     # First 4 entries are handled above as fixed
     # Remaining are cyclic through 7 karanas
-    elif half_tithi_idx == 0:  # Already handled
-        pass
     else:
         # For half-tithis in the repeating section
         # Skip the fixed ones: positions 0 (Kimstughna), 28 (Chatushpada), 29 (Nagava)
@@ -521,20 +518,16 @@ def get_panchanga(
                 "Pass ephemeris_module parameter or ensure cosmos.ephemeris is available."
             ) from err
 
-    # Get planetary positions
+    # Get planetary positions using ephemeris module
     try:
-        planets = ephemeris_module.planetary_positions(
-            datetime=dt.isoformat(),
-            latitude=latitude,
-            longitude=longitude,
-            ayanamsa="lahiri",
-        )
+        jd = ephemeris_module.get_julian_day(dt)
+        planets = ephemeris_module.get_all_planets(jd)
     except Exception as e:
         raise ValueError(f"Failed to calculate planetary positions: {e}") from e
 
     # Extract Sun and Moon longitudes
-    sun_lon = planets["Sun"]["longitude"]
-    moon_lon = planets["Moon"]["longitude"]
+    sun_lon = planets["sun"]["longitude"]
+    moon_lon = planets["moon"]["longitude"]
 
     # Calculate Tithi
     tithi_data = get_tithi(sun_lon, moon_lon)
@@ -548,21 +541,24 @@ def get_panchanga(
     # Calculate Vara
     vara_data = get_vara(dt)
 
-    # Calculate Nakshatra (if available in ephemeris)
+    # Calculate Nakshatra from Moon longitude
     nakshatra_data = {}
-    if "nakshatra" in ephemeris_module.__dict__:
-        try:
-            nakshatra_data = ephemeris_module.nakshatra(
-                datetime=dt.isoformat(),
-                ayanamsa="lahiri",
-            )
-        except Exception:
-            # Nakshatra calculation failed, but continue with other components
-            nakshatra_data = {
-                "name": "Unavailable",
-                "number": None,
-                "pada": None,
-            }
+    try:
+        from .nakshatras import longitude_to_nakshatra
+
+        nak_result = longitude_to_nakshatra(moon_lon)
+        nakshatra_data = {
+            "name": nak_result["name"],
+            "number": nak_result["number"],
+            "pada": nak_result["pada"],
+        }
+    except Exception:
+        # Nakshatra calculation failed, but continue with other components
+        nakshatra_data = {
+            "name": "Unavailable",
+            "number": None,
+            "pada": None,
+        }
 
     # Compile complete panchanga
     panchanga = {

@@ -7,11 +7,14 @@ import pytest
 from packages.context.src.yogini_dasha import (
     TOTAL_CYCLE,
     YOGINI_DATA,
+    YOGINI_EFFECTS,
     calculate_yogini_sequence,
     get_current_yogini_dasha,
     get_starting_yogini,
     get_yogini_antardasha,
     get_yogini_balance_at_birth,
+    get_yogini_effects,
+    get_yogini_pratyantardasha,
 )
 from packages.core.src.constants import Planet, YoginiName
 from packages.core.src.models import YoginiDashaPeriod
@@ -330,3 +333,168 @@ class TestYoginiAntardasha:
 
         for i, antardasha in enumerate(antardashas):
             assert antardasha["yogini"] == expected_sequence[i]
+
+
+class TestYoginiEffects:
+    """Tests for YOGINI_EFFECTS and get_yogini_effects."""
+
+    def test_all_eight_yoginis_present(self):
+        expected = [
+            "mangala",
+            "pingala",
+            "dhanya",
+            "bhramari",
+            "bhadrika",
+            "ulka",
+            "siddha",
+            "sankata",
+        ]
+        for name in expected:
+            assert name in YOGINI_EFFECTS
+
+    def test_each_effect_has_required_fields(self):
+        required_fields = [
+            "planet",
+            "years",
+            "general",
+            "positive",
+            "negative",
+            "health",
+            "career",
+            "relationships",
+            "spiritual",
+        ]
+        for name, effects in YOGINI_EFFECTS.items():
+            for field in required_fields:
+                assert field in effects, f"Missing '{field}' for {name}"
+
+    def test_mangala_planet_is_moon(self):
+        assert YOGINI_EFFECTS["mangala"]["planet"] == "moon"
+
+    def test_mangala_years_is_1(self):
+        assert YOGINI_EFFECTS["mangala"]["years"] == 1
+
+    def test_sankata_planet_is_rahu(self):
+        assert YOGINI_EFFECTS["sankata"]["planet"] == "rahu"
+
+    def test_sankata_years_is_8(self):
+        assert YOGINI_EFFECTS["sankata"]["years"] == 8
+
+    def test_positive_is_list(self):
+        for name, effects in YOGINI_EFFECTS.items():
+            assert isinstance(effects["positive"], list), f"positive not list for {name}"
+            assert len(effects["positive"]) > 0, f"Empty positive for {name}"
+
+    def test_negative_is_list(self):
+        for name, effects in YOGINI_EFFECTS.items():
+            assert isinstance(effects["negative"], list), f"negative not list for {name}"
+            assert len(effects["negative"]) > 0, f"Empty negative for {name}"
+
+    def test_get_yogini_effects_valid_name(self):
+        result = get_yogini_effects("mangala")
+        assert result["planet"] == "moon"
+        assert result["years"] == 1
+
+    def test_get_yogini_effects_case_insensitive(self):
+        result = get_yogini_effects("MANGALA")
+        assert result["planet"] == "moon"
+
+    def test_get_yogini_effects_invalid_name(self):
+        result = get_yogini_effects("nonexistent")
+        assert result == {}
+
+    def test_year_totals_match_cycle(self):
+        total = sum(YOGINI_EFFECTS[name]["years"] for name in YOGINI_EFFECTS)
+        assert total == TOTAL_CYCLE  # 36
+
+
+class TestYoginiPratyantardasha:
+    """Tests for get_yogini_pratyantardasha (3rd level)."""
+
+    def test_pratyantardasha_count(self):
+        ad = {
+            "yogini": YoginiName.BHADRIKA,
+            "lord": Planet.MERCURY,
+            "start_date": datetime(2020, 1, 1, tzinfo=UTC),
+            "end_date": datetime(2020, 7, 1, tzinfo=UTC),
+        }
+        pads = get_yogini_pratyantardasha(ad)
+        assert len(pads) == 8
+
+    def test_pratyantardasha_starts_with_antardasha_yogini(self):
+        ad = {
+            "yogini": YoginiName.ULKA,
+            "lord": Planet.SATURN,
+            "start_date": datetime(2020, 1, 1, tzinfo=UTC),
+            "end_date": datetime(2020, 6, 1, tzinfo=UTC),
+        }
+        pads = get_yogini_pratyantardasha(ad)
+        assert pads[0]["yogini"] == YoginiName.ULKA
+
+    def test_pratyantardasha_no_overlaps(self):
+        ad = {
+            "yogini": YoginiName.SIDDHA,
+            "lord": Planet.VENUS,
+            "start_date": datetime(2020, 1, 1, tzinfo=UTC),
+            "end_date": datetime(2021, 1, 1, tzinfo=UTC),
+        }
+        pads = get_yogini_pratyantardasha(ad)
+        for i in range(len(pads) - 1):
+            assert pads[i]["end_date"] == pads[i + 1]["start_date"]
+
+    def test_pratyantardasha_within_antardasha_bounds(self):
+        ad = {
+            "yogini": YoginiName.MANGALA,
+            "lord": Planet.MOON,
+            "start_date": datetime(2020, 3, 1, tzinfo=UTC),
+            "end_date": datetime(2020, 6, 1, tzinfo=UTC),
+        }
+        pads = get_yogini_pratyantardasha(ad)
+        assert pads[0]["start_date"] == ad["start_date"]
+        assert pads[-1]["end_date"] <= ad["end_date"]
+
+    def test_pratyantardasha_proportional_duration(self):
+        ad = {
+            "yogini": YoginiName.MANGALA,
+            "lord": Planet.MOON,
+            "start_date": datetime(2020, 1, 1, tzinfo=UTC),
+            "end_date": datetime(2021, 1, 1, tzinfo=UTC),
+        }
+        pads = get_yogini_pratyantardasha(ad)
+        ad_days = (ad["end_date"] - ad["start_date"]).days
+
+        # First PAD (Mangala) = 1/36 of AD duration
+        first_days = (pads[0]["end_date"] - pads[0]["start_date"]).days
+        expected = int((1 / TOTAL_CYCLE) * ad_days)
+        assert abs(first_days - expected) <= 1
+
+    def test_pratyantardasha_cycles_correctly(self):
+        ad = {
+            "yogini": YoginiName.SANKATA,
+            "lord": Planet.RAHU,
+            "start_date": datetime(2020, 1, 1, tzinfo=UTC),
+            "end_date": datetime(2020, 12, 1, tzinfo=UTC),
+        }
+        pads = get_yogini_pratyantardasha(ad)
+        expected = [
+            YoginiName.SANKATA,
+            YoginiName.MANGALA,
+            YoginiName.PINGALA,
+            YoginiName.DHANYA,
+            YoginiName.BHRAMARI,
+            YoginiName.BHADRIKA,
+            YoginiName.ULKA,
+            YoginiName.SIDDHA,
+        ]
+        for i, pad in enumerate(pads):
+            assert pad["yogini"] == expected[i]
+
+    def test_pratyantardasha_invalid_yogini_raises(self):
+        ad = {
+            "yogini": "invalid",
+            "lord": Planet.MOON,
+            "start_date": datetime(2020, 1, 1, tzinfo=UTC),
+            "end_date": datetime(2020, 6, 1, tzinfo=UTC),
+        }
+        with pytest.raises(ValueError, match="Invalid yogini"):
+            get_yogini_pratyantardasha(ad)

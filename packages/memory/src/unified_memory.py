@@ -2,10 +2,11 @@
 108 Unified Memory Interface
 
 Provides a single interface for memory operations that works with:
-1. Mem0 Cloud (if API key available)
-2. Local PostgreSQL + pgvector (fallback)
+1. Local PostgreSQL + pgvector (primary backend)
+2. Mock backend (for testing/development)
 
-This ensures 108 works in both cloud and self-hosted deployments.
+PostgreSQL + pgvector is the sole production backend.
+Mem0 Cloud support has been removed in favor of the simpler architecture.
 """
 
 import logging
@@ -46,7 +47,6 @@ logger = logging.getLogger(__name__)
 class MemoryBackend(StrEnum):
     """Available memory backends."""
 
-    MEM0_CLOUD = "mem0_cloud"
     POSTGRES = "postgres"
     MOCK = "mock"
 
@@ -103,7 +103,6 @@ class UnifiedMemoryClient:
         self,
         user_id: str,
         backend: MemoryBackend | None = None,
-        mem0_api_key: str | None = None,
         postgres_url: str | None = None,
         use_mock: bool = False,
     ):
@@ -112,13 +111,11 @@ class UnifiedMemoryClient:
 
         Args:
             user_id: Default user ID for operations
-            backend: Force specific backend
-            mem0_api_key: Mem0 API key (or use MEM0_API_KEY env)
+            backend: Force specific backend (POSTGRES or MOCK)
             postgres_url: PostgreSQL URL (or use DATABASE_URL env)
             use_mock: Use mock backend for testing
         """
         self.user_id = user_id
-        self._mem0_client = None
         self._postgres_store: MemoryStore | None = None
         self._embedding_service: EmbeddingService | None = None
         self._initialized = False
@@ -128,12 +125,9 @@ class UnifiedMemoryClient:
             self.backend = MemoryBackend.MOCK
         elif backend:
             self.backend = backend
-        elif mem0_api_key or os.getenv("MEM0_API_KEY"):
-            self.backend = MemoryBackend.MEM0_CLOUD
         else:
             self.backend = MemoryBackend.POSTGRES
 
-        self._mem0_api_key = mem0_api_key or os.getenv("MEM0_API_KEY")
         self._postgres_url = postgres_url or os.getenv("DATABASE_URL")
 
         logger.info(f"UnifiedMemoryClient initialized with backend: {self.backend.value}")
@@ -143,30 +137,12 @@ class UnifiedMemoryClient:
         if self._initialized:
             return
 
-        if self.backend == MemoryBackend.MEM0_CLOUD:
-            await self._init_mem0()
-        elif self.backend == MemoryBackend.POSTGRES:
+        if self.backend == MemoryBackend.POSTGRES:
             await self._init_postgres()
         # MOCK doesn't need initialization
 
         self._initialized = True
         logger.info(f"Memory backend {self.backend.value} initialized")
-
-    async def _init_mem0(self) -> None:
-        """Initialize Mem0 cloud client."""
-        try:
-            from mem0 import Memory
-
-            self._mem0_client = Memory(api_key=self._mem0_api_key)
-            logger.info("Mem0 cloud client initialized")
-        except ImportError:
-            logger.warning("mem0 package not installed, falling back to PostgreSQL")
-            self.backend = MemoryBackend.POSTGRES
-            await self._init_postgres()
-        except Exception as e:
-            logger.error(f"Failed to initialize Mem0: {e}, falling back to PostgreSQL")
-            self.backend = MemoryBackend.POSTGRES
-            await self._init_postgres()
 
     async def _init_postgres(self) -> None:
         """Initialize PostgreSQL store."""
@@ -189,9 +165,7 @@ class UnifiedMemoryClient:
         """Check memory system health."""
         result = {"backend": self.backend.value, "initialized": self._initialized, "healthy": False}
 
-        if self.backend == MemoryBackend.MEM0_CLOUD:
-            result["healthy"] = self._mem0_client is not None
-        elif self.backend == MemoryBackend.POSTGRES:
+        if self.backend == MemoryBackend.POSTGRES:
             if self._postgres_store:
                 result["healthy"] = await self._postgres_store.health_check()
         else:
@@ -228,37 +202,10 @@ class UnifiedMemoryClient:
         uid = user_id or self.user_id
         meta = metadata or {}
 
-        if self.backend == MemoryBackend.MEM0_CLOUD:
-            return await self._add_mem0(uid, content, category, meta, importance)
-        elif self.backend == MemoryBackend.POSTGRES:
+        if self.backend == MemoryBackend.POSTGRES:
             return await self._add_postgres(uid, content, category, meta, importance)
         else:
             return await self._add_mock(uid, content, category, meta, importance)
-
-    async def _add_mem0(
-        self, user_id: str, content: str, category: str, metadata: dict, importance: float
-    ) -> UnifiedMemory:
-        """Add memory via Mem0."""
-        # Mem0 auto-extracts memories from content
-        result = self._mem0_client.add(
-            content,
-            user_id=user_id,
-            metadata={**metadata, "category": category, "importance": importance},
-        )
-
-        # Extract the created memory ID
-        memory_id = result.get("id") or result.get("results", [{}])[0].get("id", "unknown")
-
-        return UnifiedMemory(
-            id=memory_id,
-            user_id=user_id,
-            content=content,
-            category=category,
-            metadata=metadata,
-            importance=importance,
-            created_at=datetime.now(),
-            source=MemoryBackend.MEM0_CLOUD,
-        )
 
     async def _add_postgres(
         self, user_id: str, content: str, category: str, metadata: dict, importance: float
@@ -328,45 +275,10 @@ class UnifiedMemoryClient:
         await self.initialize()
         uid = user_id or self.user_id
 
-        if self.backend == MemoryBackend.MEM0_CLOUD:
-            return await self._search_mem0(uid, query, limit, category)
-        elif self.backend == MemoryBackend.POSTGRES:
+        if self.backend == MemoryBackend.POSTGRES:
             return await self._search_postgres(uid, query, limit, category, min_similarity)
         else:
             return []  # Mock returns empty
-
-    async def _search_mem0(
-        self, user_id: str, query: str, limit: int, category: str | None
-    ) -> list[UnifiedSearchResult]:
-        """Search via Mem0."""
-        results = self._mem0_client.search(query, user_id=user_id, limit=limit)
-
-        unified_results = []
-        for item in results.get("results", []):
-            # Filter by category if specified
-            item_category = item.get("metadata", {}).get("category", "fact")
-            if category and item_category != category:
-                continue
-
-            unified_results.append(
-                UnifiedSearchResult(
-                    memory=UnifiedMemory(
-                        id=item.get("id", ""),
-                        user_id=user_id,
-                        content=item.get("memory", ""),
-                        category=item_category,
-                        metadata=item.get("metadata", {}),
-                        importance=item.get("metadata", {}).get("importance", 0.5),
-                        created_at=datetime.fromisoformat(item["created_at"])
-                        if item.get("created_at")
-                        else datetime.now(),
-                        source=MemoryBackend.MEM0_CLOUD,
-                    ),
-                    similarity=item.get("score", 0.0),
-                )
-            )
-
-        return unified_results
 
     async def _search_postgres(
         self, user_id: str, query: str, limit: int, category: str | None, min_similarity: float
@@ -417,30 +329,7 @@ class UnifiedMemoryClient:
         await self.initialize()
         uid = user_id or self.user_id
 
-        if self.backend == MemoryBackend.MEM0_CLOUD:
-            results = self._mem0_client.get_all(user_id=uid)
-            memories = []
-            for item in results.get("results", [])[:limit]:
-                item_category = item.get("metadata", {}).get("category", "fact")
-                if category and item_category != category:
-                    continue
-                memories.append(
-                    UnifiedMemory(
-                        id=item.get("id", ""),
-                        user_id=uid,
-                        content=item.get("memory", ""),
-                        category=item_category,
-                        metadata=item.get("metadata", {}),
-                        importance=item.get("metadata", {}).get("importance", 0.5),
-                        created_at=datetime.fromisoformat(item["created_at"])
-                        if item.get("created_at")
-                        else datetime.now(),
-                        source=MemoryBackend.MEM0_CLOUD,
-                    )
-                )
-            return memories
-
-        elif self.backend == MemoryBackend.POSTGRES:
+        if self.backend == MemoryBackend.POSTGRES:
             memories = (
                 await self._postgres_store.get_memories_by_category(
                     user_id=uid, category=category, limit=limit
@@ -464,25 +353,20 @@ class UnifiedMemoryClient:
 
         return []  # Mock
 
-    async def delete(self, memory_id: str, user_id: str | None = None) -> bool:
+    async def delete(self, memory_id: str) -> bool:
         """
         Delete a memory by ID.
 
         Args:
             memory_id: Memory ID to delete
-            user_id: User ID (for verification)
 
         Returns:
             True if deleted successfully
         """
         await self.initialize()
-        uid = user_id or self.user_id
 
-        if self.backend == MemoryBackend.MEM0_CLOUD:
-            self._mem0_client.delete(memory_id)
-            return True
-        elif self.backend == MemoryBackend.POSTGRES:
-            return await self._postgres_store.delete_memory(memory_id, uid)
+        if self.backend == MemoryBackend.POSTGRES:
+            return await self._postgres_store.delete_memory(memory_id)
 
         return True  # Mock always succeeds
 
@@ -673,16 +557,14 @@ def create_memory_client(
 
     Args:
         user_id: User ID
-        backend: Force backend ('mem0', 'postgres', 'mock')
+        backend: Force backend ('postgres', 'mock')
         use_mock: Use mock backend
 
     Returns:
         UnifiedMemoryClient instance
     """
     backend_enum = None
-    if backend == "mem0":
-        backend_enum = MemoryBackend.MEM0_CLOUD
-    elif backend == "postgres":
+    if backend == "postgres":
         backend_enum = MemoryBackend.POSTGRES
     elif backend == "mock":
         backend_enum = MemoryBackend.MOCK

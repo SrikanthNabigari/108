@@ -2,6 +2,12 @@
 
 Combustion occurs when a planet is too close to the Sun, losing strength.
 Uses thresholds from knowledge/rules/combustion_rules.json.
+
+Includes combustion mitigation/cancellation conditions:
+- Planet in own sign: combustion reduced by 50%
+- Planet in exaltation: combustion reduced by 75%
+- Jupiter's aspect on combust planet: reduces combustion
+- Retrograde combust planet: some traditions say NOT combust
 """
 
 from typing import Any
@@ -9,6 +15,26 @@ from typing import Any
 from packages.core.src.knowledge_loader import get_combustion_rules
 
 _combustion_cache: dict[str, Any] | None = None
+
+# Planet own signs for combustion mitigation
+_OWN_SIGNS: dict[str, set[str]] = {
+    "moon": {"cancer"},
+    "mars": {"aries", "scorpio"},
+    "mercury": {"gemini", "virgo"},
+    "jupiter": {"sagittarius", "pisces"},
+    "venus": {"taurus", "libra"},
+    "saturn": {"capricorn", "aquarius"},
+}
+
+# Planet exaltation signs for combustion mitigation
+_EXALTATION_SIGNS: dict[str, str] = {
+    "moon": "taurus",
+    "mars": "capricorn",
+    "mercury": "virgo",
+    "jupiter": "cancer",
+    "venus": "pisces",
+    "saturn": "libra",
+}
 
 
 def _get_rules() -> dict[str, Any]:
@@ -23,6 +49,97 @@ def _angular_distance(lon1: float, lon2: float) -> float:
     """Minimum angular distance between two longitudes (0-180)."""
     diff = abs(lon1 - lon2) % 360
     return min(diff, 360 - diff)
+
+
+def _get_rashi_name(longitude: float) -> str:
+    """Get rashi name from longitude."""
+    rashi_names = [
+        "aries",
+        "taurus",
+        "gemini",
+        "cancer",
+        "leo",
+        "virgo",
+        "libra",
+        "scorpio",
+        "sagittarius",
+        "capricorn",
+        "aquarius",
+        "pisces",
+    ]
+    index = int(longitude / 30) % 12
+    return rashi_names[index]
+
+
+def check_combustion_cancellation(
+    planet: str,
+    planet_lon: float,
+    is_retrograde: bool = False,
+    jupiter_lon: float | None = None,
+) -> dict[str, Any]:
+    """Check if combustion is cancelled or mitigated for a planet.
+
+    Cancellation/mitigation conditions:
+    1. Planet in own sign: combustion strength loss reduced by 50%
+    2. Planet in exaltation: combustion strength loss reduced by 75%
+    3. Jupiter aspects the combust planet: reduces combustion by 25%
+    4. Retrograde combust planet: some traditions say NOT combust
+
+    Args:
+        planet: Planet name (lowercase)
+        planet_lon: Planet's sidereal longitude
+        is_retrograde: Whether the planet is retrograde
+        jupiter_lon: Jupiter's longitude (for aspect check)
+
+    Returns:
+        Dictionary with cancellation status and mitigation factor.
+    """
+    p = planet.lower()
+    rashi = _get_rashi_name(planet_lon)
+    mitigation_factor = 1.0  # 1.0 = full combustion, 0.0 = fully cancelled
+    reasons: list[str] = []
+
+    # 1. Retrograde combust planet - some traditions say NOT combust
+    if is_retrograde:
+        mitigation_factor *= 0.0
+        reasons.append("Retrograde planet - combustion cancelled in some traditions")
+
+    # 2. Planet in own sign - reduced by 50%
+    if rashi in _OWN_SIGNS.get(p, set()):
+        mitigation_factor *= 0.5
+        reasons.append(f"{p.title()} in own sign ({rashi.title()}) - combustion reduced 50%")
+
+    # 3. Planet in exaltation - reduced by 75%
+    if _EXALTATION_SIGNS.get(p) == rashi:
+        mitigation_factor *= 0.25
+        reasons.append(f"{p.title()} in exaltation ({rashi.title()}) - combustion reduced 75%")
+
+    # 4. Jupiter's aspect - reduces by 25%
+    if jupiter_lon is not None:
+        jupiter_distance = _angular_distance(planet_lon, jupiter_lon)
+        # Jupiter's major aspects: conjunction (~0), trine (~120), opposition (~180)
+        # Also 5th and 9th aspects (Vedic special aspects)
+        aspect_orbs = [
+            (0, 12),  # Conjunction
+            (120, 10),  # Trine (5th/9th aspect)
+            (180, 10),  # Opposition (7th aspect)
+        ]
+        for aspect_angle, orb in aspect_orbs:
+            if abs(jupiter_distance - aspect_angle) <= orb:
+                mitigation_factor *= 0.75
+                reasons.append("Jupiter aspects the combust planet - combustion reduced 25%")
+                break
+
+    is_cancelled = mitigation_factor <= 0.0
+
+    return {
+        "planet": p,
+        "is_cancelled": is_cancelled,
+        "mitigation_factor": round(mitigation_factor, 4),
+        "adjusted_strength_loss_multiplier": round(mitigation_factor, 4),
+        "reasons": reasons,
+        "rashi": rashi,
+    }
 
 
 def check_combustion(

@@ -240,6 +240,95 @@ class DoshaDetector:
             ],
         )
 
+    def detect_mangal_dosha_female(self, chart: BirthChart) -> DetectedDosha | None:
+        """Detect Mangal Dosha specifically for female charts.
+
+        Female Mangal Dosha assessment differs from the general check:
+        - Primarily checked from Moon chart (not just Lagna)
+        - Mars in own sign (Aries, Scorpio) cancels for women
+        - Mars in exalted sign (Capricorn) cancels for women
+        - Different severity weighting for certain houses
+        - Additional cancellation: Mars aspected by Jupiter from Moon chart
+
+        Args:
+            chart: Birth chart to analyze
+
+        Returns:
+            DetectedDosha object if dosha is present, None otherwise
+        """
+        mars_pos = chart.planets[Planet.MARS]
+
+        # For females, primarily check from Moon
+        dosha_from_moon = self._check_mars_in_critical_houses(mars_pos, chart.moon_rashi, "Moon")
+        dosha_from_lagna = self._check_mars_in_critical_houses(mars_pos, chart.lagna_rashi, "Lagna")
+
+        dosha_present_checks = []
+        if dosha_from_moon:
+            dosha_present_checks.append((dosha_from_moon, "Moon"))
+        if dosha_from_lagna:
+            dosha_present_checks.append((dosha_from_lagna, "Lagna"))
+
+        if not dosha_present_checks:
+            return None
+
+        # Female-specific cancellation conditions
+        # 1. Mars in own sign cancels for women
+        if mars_pos.rashi in self.MARS_OWN_SIGNS:
+            return None
+
+        # 2. Mars in exalted sign cancels for women
+        if mars_pos.rashi == self.MARS_EXALTED_SIGN:
+            return None
+
+        # 3. Mars aspected by Jupiter cancels for women
+        jupiter_pos = chart.planets[Planet.JUPITER]
+        if self._are_planets_conjunct(mars_pos, jupiter_pos):
+            return None
+        if self._are_planets_aspecting(mars_pos, jupiter_pos, self.SQUARE_ORB):
+            return None
+
+        # 4. If Mars is in 2nd house from Moon (mild for women)
+        moon_house = dosha_from_moon
+        if moon_house == 2:
+            return None  # Generally not considered Mangal Dosha for women from 2nd
+
+        # Determine severity (different weighting for women)
+        most_severe_house = max([h for h, _ in dosha_present_checks])
+
+        if most_severe_house in [7, 8]:
+            severity = "severe"
+        elif most_severe_house in [1, 4, 12]:
+            severity = "moderate"
+        else:
+            severity = "mild"
+
+        viewpoints = [vp for _, vp in dosha_present_checks]
+        from_text = ", ".join(viewpoints)
+
+        description = (
+            f"Female chart: Mars is in {most_severe_house}th house (Mangal Dosha) "
+            f"as seen from {from_text}. "
+            f"This is assessed using Moon-chart primary viewpoint for women."
+        )
+
+        return DetectedDosha(
+            dosha_id="mangal_dosha_female",
+            name="Mangal Dosha (Female Chart)",
+            is_present=True,
+            severity=severity,
+            involved_planets=[Planet.MARS],
+            description=description.strip(),
+            remedies=self._get_dosha_remedies("mangal_dosha")
+            or [
+                "Chant Mangala Stotram daily",
+                "Perform Kumbh Vivah (symbolic marriage to pot/tree)",
+                "Donate red items and copper articles",
+                "Wear coral gemstone on Tuesday",
+                "Fast on Tuesdays",
+                "Recite Hanuman Chalisa",
+            ],
+        )
+
     def detect_kaal_sarp_dosha(self, chart: BirthChart) -> DetectedDosha | None:
         """Detect Kaal Sarp Dosha (Rahu-Ketu axis affliction).
 

@@ -12,6 +12,9 @@ Muhurta involves analyzing:
 - Vara (weekday)
 - Inauspicious periods (Rahu Kaal, Yamaghanda, Gulika)
 - Choghadiya (8 periods of day/night)
+- Abhijit Muhurta (most auspicious midday period)
+- Brahma Muhurta (pre-dawn spiritual window)
+- Eclipse detection (universally inauspicious)
 
 The module supports evaluation of various activities:
 - Marriage (Vivaha)
@@ -26,6 +29,8 @@ from collections.abc import Callable
 from datetime import datetime, timedelta
 from enum import Enum
 from typing import Any
+
+import swisseph as swe
 
 from packages.core.src.knowledge_loader import get_muhurta_rules
 
@@ -878,6 +883,104 @@ def get_choghadiya_at_time(
     return None
 
 
+def get_abhijit_muhurta(sunrise: datetime, sunset: datetime) -> tuple[datetime, datetime]:
+    """Calculate Abhijit Muhurta timing for the day.
+
+    Abhijit Muhurta is the 8th muhurta of the day (approximately around local noon).
+    The day is divided into 15 muhurtas from sunrise to sunset, each of equal duration.
+    The 8th muhurta (Abhijit) is considered the most universally auspicious time.
+
+    Args:
+        sunrise: Sunrise time for the day
+        sunset: Sunset time for the day
+
+    Returns:
+        Tuple of (start, end) datetimes for Abhijit Muhurta
+
+    Example:
+        >>> sunrise = datetime(2026, 2, 4, 6, 30)
+        >>> sunset = datetime(2026, 2, 4, 18, 30)
+        >>> start, end = get_abhijit_muhurta(sunrise, sunset)
+        >>> start.hour  # approximately noon
+        12
+    """
+    day_duration = (sunset - sunrise).total_seconds()
+    muhurta_duration = day_duration / 15  # 15 muhurtas in daytime
+
+    # Abhijit is the 8th muhurta (index 7, so 7 * duration after sunrise)
+    start = sunrise + timedelta(seconds=7 * muhurta_duration)
+    end = sunrise + timedelta(seconds=8 * muhurta_duration)
+
+    return (start, end)
+
+
+def get_brahma_muhurta(sunrise: datetime) -> tuple[datetime, datetime]:
+    """Calculate Brahma Muhurta timing.
+
+    Brahma Muhurta starts 1 hour 36 minutes (96 minutes) before sunrise
+    and lasts 48 minutes. It is the best time for spiritual practices,
+    meditation, and study of scriptures.
+
+    Args:
+        sunrise: Sunrise time for the day
+
+    Returns:
+        Tuple of (start, end) datetimes for Brahma Muhurta
+
+    Example:
+        >>> sunrise = datetime(2026, 2, 4, 6, 30)
+        >>> start, end = get_brahma_muhurta(sunrise)
+        >>> start.hour
+        4
+        >>> start.minute
+        54
+    """
+    # Brahma Muhurta: 96 minutes before sunrise, lasting 48 minutes
+    start = sunrise - timedelta(minutes=96)
+    end = sunrise - timedelta(minutes=48)
+
+    return (start, end)
+
+
+# Marana Kaal (death-like inauspicious periods) by weekday
+# Each entry is a list of (start_time, end_time) in HH:MM format
+_MARANA_KAAL_DATA: dict[int, list[tuple[str, str]]] = {
+    0: [("06:30", "07:30"), ("14:00", "15:00")],  # Monday
+    1: [("08:00", "09:00"), ("15:00", "16:00")],  # Tuesday
+    2: [("12:00", "13:00"), ("17:00", "18:00")],  # Wednesday
+    3: [("07:00", "08:00"), ("13:00", "14:00")],  # Thursday
+    4: [("10:00", "11:00"), ("15:30", "16:30")],  # Friday
+    5: [("06:00", "07:00"), ("09:00", "10:00")],  # Saturday
+    6: [("16:00", "17:00"), ("12:00", "13:00")],  # Sunday
+}
+
+
+def get_marana_kaal(weekday: int) -> list[tuple[str, str]]:
+    """Get Marana Kaal (death-like inauspicious periods) for a weekday.
+
+    These are extremely inauspicious time windows for each day of the week.
+    No important activities should be initiated during these periods.
+
+    Args:
+        weekday: Day of the week (0=Monday, 1=Tuesday, ..., 6=Sunday)
+
+    Returns:
+        List of (start_time, end_time) tuples in HH:MM format
+
+    Raises:
+        ValueError: If weekday is not 0-6
+
+    Example:
+        >>> periods = get_marana_kaal(0)  # Monday
+        >>> len(periods)
+        2
+    """
+    if not (0 <= weekday <= 6):
+        raise ValueError(f"Weekday must be 0-6, got {weekday}")
+
+    return _MARANA_KAAL_DATA[weekday]
+
+
 def validate_muhurta_input(panchanga: dict[str, Any]) -> bool:
     """Validate that panchanga data contains required fields.
 
@@ -906,3 +1009,118 @@ def validate_muhurta_input(panchanga: dict[str, Any]) -> bool:
                 raise KeyError(f"Missing required subfield: {field}.{subfield}")
 
     return True
+
+
+def _jd_to_datetime(jd: float) -> datetime:
+    """Convert Julian Day to datetime (UTC)."""
+    year, month, day, hour = swe.revjul(jd)
+    h = int(hour)
+    m = int((hour - h) * 60)
+    s = int(((hour - h) * 60 - m) * 60)
+    return datetime(int(year), int(month), int(day), h, m, s)
+
+
+def get_eclipse_periods(year: int, month: int) -> list[dict[str, Any]]:
+    """Check for solar and lunar eclipses in a given month using Swiss Ephemeris.
+
+    Eclipses are universally inauspicious for muhurta purposes.
+    No important activities should be initiated during eclipse periods.
+
+    Args:
+        year: Calendar year
+        month: Calendar month (1-12)
+
+    Returns:
+        List of dicts, each containing:
+            - type: "solar" or "lunar"
+            - start: datetime (UTC)
+            - maximum: datetime (UTC)
+            - end: datetime (UTC)
+            - description: Human-readable description
+
+    Example:
+        >>> eclipses = get_eclipse_periods(2025, 3)
+        >>> isinstance(eclipses, list)
+        True
+    """
+    if not (1 <= month <= 12):
+        raise ValueError(f"Month must be 1-12, got {month}")
+
+    eclipses: list[dict[str, Any]] = []
+
+    # Search window: start of month to end of month
+    jd_start = swe.julday(year, month, 1, 0.0)
+    # End of month: use first day of next month
+    jd_end = swe.julday(year + 1, 1, 1, 0.0) if month == 12 else swe.julday(year, month + 1, 1, 0.0)
+
+    # Search for solar eclipses
+    # swe.sol_eclipse_when_glob returns (retflag, jd_array) where jd_array is a tuple:
+    # [0]=max, [1]=local noon, [2]=begin, [3]=end (global), [4]=begin partial, etc.
+    jd_search = jd_start
+    while jd_search < jd_end:
+        try:
+            retval = swe.sol_eclipse_when_glob(jd_search, swe.FLG_SWIEPH)
+            if retval and len(retval) >= 2:
+                retflag = retval[0]
+                jd_arr = retval[1]
+                if retflag == 0 or not jd_arr:
+                    break
+
+                jd_max = jd_arr[0]
+                jd_eclipse_start = jd_arr[2] if len(jd_arr) > 2 and jd_arr[2] > 0 else jd_max
+                jd_eclipse_end = jd_arr[3] if len(jd_arr) > 3 and jd_arr[3] > 0 else jd_max
+
+                if jd_max >= jd_start and jd_max < jd_end:
+                    eclipses.append(
+                        {
+                            "type": "solar",
+                            "start": _jd_to_datetime(jd_eclipse_start),
+                            "maximum": _jd_to_datetime(jd_max),
+                            "end": _jd_to_datetime(jd_eclipse_end),
+                            "description": f"Solar eclipse on {_jd_to_datetime(jd_max).strftime('%Y-%m-%d')}",
+                        }
+                    )
+                    jd_search = jd_max + 20
+                else:
+                    break
+            else:
+                break
+        except Exception:
+            break
+
+    # Search for lunar eclipses
+    # swe.lun_eclipse_when returns (retflag, jd_array) where jd_array is:
+    # [0]=max, [2]=partial begin, [3]=partial end, [4]=total begin, [5]=total end, etc.
+    jd_search = jd_start
+    while jd_search < jd_end:
+        try:
+            retval = swe.lun_eclipse_when(jd_search, swe.FLG_SWIEPH)
+            if retval and len(retval) >= 2:
+                retflag = retval[0]
+                jd_arr = retval[1]
+                if retflag == 0 or not jd_arr:
+                    break
+
+                jd_max = jd_arr[0]
+                jd_eclipse_start = jd_arr[2] if len(jd_arr) > 2 and jd_arr[2] > 0 else jd_max
+                jd_eclipse_end = jd_arr[3] if len(jd_arr) > 3 and jd_arr[3] > 0 else jd_max
+
+                if jd_max >= jd_start and jd_max < jd_end:
+                    eclipses.append(
+                        {
+                            "type": "lunar",
+                            "start": _jd_to_datetime(jd_eclipse_start),
+                            "maximum": _jd_to_datetime(jd_max),
+                            "end": _jd_to_datetime(jd_eclipse_end),
+                            "description": f"Lunar eclipse on {_jd_to_datetime(jd_max).strftime('%Y-%m-%d')}",
+                        }
+                    )
+                    jd_search = jd_max + 20
+                else:
+                    break
+            else:
+                break
+        except Exception:
+            break
+
+    return eclipses
