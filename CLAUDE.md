@@ -177,15 +177,17 @@ See `docs/project_notes/work_log.md` Session 17 for full deliverables. Remaining
 5. Update work_log.md after completing tasks
 6. If using Agent Teams, respect package ownership boundaries
 
-## Current Stats (Session 18)
+## Current Stats (Session 21)
 
-- **1,285 tests passing**, 0 lint errors
+- **1,653 tests passing**, 0 lint errors
 - **522 yogas**, 55 doshas, 729 pratyantardasha combinations
-- **4 MCP servers**, ~59 tools (+14 in Session 18)
-- **~2.9MB** knowledge base (37 rule files, 15 definition files, 5 interpretation files)
-- **12 REST API endpoints** added in Session 18
-- **Ashtottari Dasha** (108-year cycle) + **Secondary Progressions** (day=year)
-- **All features exposed** as MCP tools + API endpoints
+- **4 MCP servers**, ~69 tools (+10 in Session 21)
+- **~3.5MB** knowledge base (40 rule files, 15 definition files, 5 interpretation files)
+- **23 REST API endpoints** (+11 in Session 21)
+- **Dasha-Transit Cross-Analysis** engine (the "killer feature" connecting WHAT → WHEN → NOW)
+- **Yoga Cancellation** + **Neecha Bhanga** 5-condition detection + **Planetary War**
+- **Event Correlation** + **Transit Trigger Tracker** + **Remedies Engine**
+- **Bhava Chalit** chart + **578 new interpretation rules** (D2/D4/D7/D24, Navamsha spouse, Ashtakavarga transit)
 
 ## Contact
 

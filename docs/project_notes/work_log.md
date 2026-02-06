@@ -1,5 +1,105 @@
 # 108 Work Log
 
+## 2026-02-06 (Session 21 - Claude Code Agent Team: 19 Features, 4 Agents)
+
+### Summary
+Massive feature expansion via 4-agent team (3 parallel + 1 sequential). Added 19 new features spanning all 5 layers: yoga cancellation engine, dasha-transit cross-analysis (the "killer feature"), transit trigger tracker, event correlation, planetary war, Bhava Chalit, remedies engine, D2/D4/D7/D24 interpretations, Navamsha spouse rules, and more. All wired as MCP tools + API endpoints + Guide agent integration.
+
+### Stats
+| Metric | Before | After | Delta |
+|--------|--------|-------|-------|
+| Tests | 1,285 | 1,653 | **+368** |
+| Lint errors | 0 | 0 | 0 |
+| Files | — | 48 | (22 modified + 26 new) |
+| Lines | — | +12,680 | net |
+| Knowledge rules | ~2.9MB | ~3.5MB | +578 rules |
+| MCP tools | ~59 | ~69 | +10 |
+| API endpoints | 12 | 23 | +11 |
+
+### Execution Plan
+```
+┌──────────────────────────────────────────────────────────────┐
+│                     RUN IN PARALLEL                          │
+├──────────────┬──────────────────┬────────────────────────────┤
+│ Agent 1      │ Agent 2          │ Agent 3                    │
+│ SELF         │ CONTEXT          │ KNOWLEDGE                  │
+│ 79 tests     │ 144 tests        │ 94 tests                   │
+├──────────────┴──────────────────┴────────────────────────────┤
+│                     RUN AFTER ALL 3 COMPLETE                 │
+├──────────────────────────────────────────────────────────────┤
+│ Agent 4: WIRING — 41 tests + fixed 10 lint errors            │
+└──────────────────────────────────────────────────────────────┘
+```
+
+### Agent 1: SELF (Pattern Detection) — 79 tests
+
+| Feature | File | Tests | Description |
+|---------|------|-------|-------------|
+| Yoga Cancellation Engine | `packages/self/src/yoga_cancellation.py` (NEW, ~524 lines) | 28 | Type-specific cancellation rules: Pancha Mahapurusha (combustion/war), Raja Yoga (debilitation/6-8-12), Dhana Yoga (malefic affliction), Gajakesari (dusthana). Also general checks (combustion, debilitation, malefic conjunction, planetary war). |
+| Neecha Bhanga Raja Yoga | `packages/self/src/yoga_detector.py` (extended +211 lines) | 13 | Public `detect_neecha_bhanga()` with full 5-condition check: (1) debil lord in kendra, (2) exalt lord in kendra, (3) exalted planet aspects, (4) retrograde, (5) Navamsha of exaltation. Srikanth's Mars: retrograde in Cancer = condition #4. |
+| Planetary War (Graha Yuddha) | `packages/self/src/planetary_war.py` (NEW, ~274 lines) | 23 | Mars/Mercury/Jupiter/Venus/Saturn only, within 1° longitude. Latitude-based winner, Venus retrograde rule, 360°/0° wraparound. `get_war_effects()` for lordship impact. |
+| Bhava Chalit Chart | `packages/cosmos/src/bhava_chalit.py` (NEW, ~182 lines) | 15 | Compares Rashi house vs cusp-midpoint house placement. `get_shifted_planets()` returns only planets that moved between Rashi and Bhava Chalit charts. |
+| Yoga Cancellation Rules | `knowledge/rules/yoga_cancellation_rules.json` (NEW) | — | Machine-parseable rules for 5 yoga types + general conditions |
+
+### Agent 2: CONTEXT (Timing Engine) — 144 tests
+
+| Feature | File | Tests | Description |
+|---------|------|-------|-------------|
+| **Dasha-Transit Cross-Analysis** ⭐ | `packages/context/src/dasha_transit.py` (NEW, ~400 lines) | 35 | THE killer feature. `cross_analyze()` scores dasha-transit activation 0-100, identifies active life themes (career/marriage/health), finds strongest house and most active planet. `find_activation_windows()` scans date ranges at weekly intervals. |
+| Transit-to-Natal Aspects | `packages/context/src/transit_aspects.py` (NEW, ~286 lines) | 36 | Degree-based aspects (conjunction/opposition/trine/square/sextile) + Parashari sign-based special aspects (Mars 4/8, Jupiter 5/9, Saturn 3/10). `find_upcoming_aspects()` with daily Swiss Ephemeris scan. |
+| Event Correlation Engine | `packages/context/src/event_correlator.py` (NEW, ~334 lines) | 22 | User inputs past event → system finds dasha/transit combination → validates chart accuracy. 7 event types: career, marriage, health, money, education, travel, loss. `batch_correlate()` for multiple events. |
+| Transit Trigger Tracker | `packages/context/src/transit_tracker.py` (NEW, ~444 lines) | 35 | `get_upcoming_triggers()` finds next N significant transit events: sign ingress, conjunctions (2° orb), Parashari aspects, retrograde stations, dasha period changes. All with exact dates. |
+| Varshaphal Current Year | `packages/context/src/varshaphal.py` (extended +127 lines) | 10 | `get_current_varshaphal()` convenience function: solar return for current year, annual chart, muntha, varshesha, tajika yogas, sahams, D3/D30 analysis. |
+
+### Agent 3: KNOWLEDGE (Interpretation Data) — 94 tests
+
+| Feature | File | Tests | Description |
+|---------|------|-------|-------------|
+| D2/D4/D7/D24 Interpretations | `knowledge/rules/divisional_interpretation.json` (extended +384 lines) | 18 | D2 Hora (18 rules, wealth), D4 Chaturthamsha (108 rules, property), D7 Saptamsha (108 rules, children), D24 Chaturvimshamsha (108 rules, education). **342 new rules.** |
+| Navamsha Spouse Rules | `knowledge/rules/navamsha_spouse_rules.json` (NEW) | 12 | 7th lord in 12 signs, Venus/Jupiter in D9, D9 Lagna, planets in 7th, Upapada cross-ref, planet combos. **153 rules.** |
+| Ashtakavarga Transit Rules | `knowledge/rules/ashtakavarga_transit_rules.json` (NEW) | 15 | SAV thresholds (5 ranges), BAV per planet (56 rules), transit modifiers (8), Kaksha effects (8), combined analysis (6). **83 rules.** |
+| Remedies Engine | `packages/self/src/remedies.py` (NEW, ~331 lines) | 49 | `recommend_remedies()` prioritizes into urgent/recommended/optional based on dasha, doshas, weak planets. `get_planet_remedies()` returns gemstone, mantra, charity, fasting, worship, yantra, rudraksha. |
+
+### Agent 4: WIRING (Exposure Layer) — 41 tests
+
+| Feature | File | Tests | Description |
+|---------|------|-------|-------------|
+| 10 MCP Tools | `patterns_server.py` +384, `context_server.py` +233 | — | yoga_cancellations, neecha_bhanga, planetary_wars, bhava_chalit, recommend_remedies, navamsha_spouse, dasha_transit_cross, transit_natal_aspects, correlate_life_event, upcoming_triggers |
+| 11 API Endpoints | `services/api/main.py` +621 | — | /analysis/yoga-cancellations, neecha-bhanga, planetary-wars, bhava-chalit, navamsha-spouse, remedies + /timing/dasha-transit, transit-aspects, event-correlation, upcoming-triggers, varshaphal-current |
+| Guide Agent Wiring | `tools.py` +386, `agent.py` +231 | — | 9 new AstrologyTools methods + dedicated REMEDY intent node + enhanced _analyze_patterns (cancellation, neecha bhanga, planetary wars) + enhanced _make_prediction (dasha-transit, triggers) + enhanced _calculate (bhava chalit) |
+| Memory Extensions | `store.py` +100, `unified_memory.py` +121 | — | save_event_correlation(), save_remedy_history(), remember_event_correlation(), remember_remedy(), remember_transit_trigger(), extended get_context_for_query |
+| Integration Tests | `tests/integration/test_session21_features.py` (NEW) | 41 | MCP tool smoke tests, API endpoint smoke tests, Guide agent wiring, memory extensions, context formatting |
+
+### New Test Files (13 files)
+| File | Tests |
+|------|-------|
+| `test_yoga_cancellation_engine.py` | 28 |
+| `test_neecha_bhanga.py` | 13 |
+| `test_planetary_war.py` | 23 |
+| `test_bhava_chalit.py` | 15 |
+| `test_dasha_transit.py` | 35 |
+| `test_transit_natal_aspects.py` | 36 |
+| `test_event_correlator.py` | 22 |
+| `test_transit_tracker.py` | 35 |
+| `test_divisional_interps.py` | 18 |
+| `test_navamsha_spouse.py` | 12 |
+| `test_ashtakavarga_transit.py` | 15 |
+| `test_remedies.py` | 49 |
+| `test_session21_features.py` | 41 |
+
+### Commit
+`d99c1ee` — feat: Add 19 features via 4-agent team (Session 21)
+
+### Current Stats (Post-Session 21)
+- **1,653 tests passing**, 1 skipped (ANTHROPIC_API_KEY), 0 lint errors
+- **~69 MCP tools** across 4 servers
+- **23 REST API endpoints** under `/api/v1/`
+- **~3.5MB knowledge base** (40 rule files, 15 definition files, 5 interpretation files)
+- **578 new interpretation rules** (342 divisional + 153 navamsha spouse + 83 ashtakavarga transit)
+- All features exposed as MCP tools + API endpoints + Guide agent integration
+
+---
+
 ## 2026-02-06 (Session 19/20 - Claude Cowork: Life Dashboard + Critical Timezone Bug Fix)
 
 ### Summary
