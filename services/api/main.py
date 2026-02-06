@@ -1835,6 +1835,627 @@ async def get_rashi_info(rashi_name: str):
 
 
 # ============================================================================
+# Session 21 Routes: Yoga Cancellation, Planetary War, Bhava Chalit, Remedies,
+# Dasha-Transit, Transit Aspects, Event Correlation, Transit Triggers, Varshaphal
+# ============================================================================
+
+
+class EventCorrelationRequest(BaseModel):
+    """Request model for event correlation."""
+
+    event_date: str = Field(..., description="Event date in ISO format (e.g., 2020-03-15)")
+    event_type: str = Field(
+        ..., description="Event category (career, marriage, health, money, education, travel, loss)"
+    )
+    event_description: str = Field(..., description="Brief description of the event")
+    birth_datetime: dt = Field(..., description="Birth datetime in ISO format")
+    latitude: float = Field(..., ge=-90, le=90, description="Birth latitude")
+    longitude: float = Field(..., ge=-180, le=180, description="Birth longitude")
+    timezone_offset: float = Field(default=5.5, description="Timezone offset from UTC")
+    ayanamsa: str = Field(default="lahiri", description="Ayanamsa system")
+
+
+class TransitTriggersRequest(BaseModel):
+    """Request model for upcoming transit triggers."""
+
+    birth_datetime: dt = Field(..., description="Birth datetime")
+    latitude: float = Field(..., ge=-90, le=90, description="Birth latitude")
+    longitude: float = Field(..., ge=-180, le=180, description="Birth longitude")
+    timezone_offset: float = Field(default=5.5, description="Timezone offset")
+    ayanamsa: str = Field(default="lahiri", description="Ayanamsa")
+    start_date: str | None = Field(default=None, description="Start date (ISO), defaults to today")
+    days_ahead: int = Field(default=30, ge=1, le=365, description="Days to look ahead")
+
+
+class RemediesRequest(BaseModel):
+    """Request model for remedy recommendations."""
+
+    current_dasha: dict[str, str] = Field(
+        ..., description="Active dasha lords {mahadasha_lord, antardasha_lord}"
+    )
+    active_doshas: list[dict[str, Any]] = Field(
+        default=[], description="List of doshas [{name, severity}]"
+    )
+    weak_planets: list[dict[str, Any]] = Field(
+        default=[], description="List of weak planets [{planet, shadbala}]"
+    )
+    lagna_rashi: str = Field(default="", description="Ascendant sign name")
+
+
+@app.post("/api/v1/analysis/yoga-cancellations", tags=["Analysis"])
+async def check_yoga_cancellations(request: BirthDataRequest):
+    """Check if detected yogas are cancelled by classical rules (Yoga Bhanga)."""
+    try:
+        from packages.self.src.yoga_cancellation import apply_cancellations_to_chart
+
+        jd = request_to_jd(request)
+        planets_raw = get_all_planets(jd, ayanamsa=request.ayanamsa)
+        houses_raw = get_house_cusps(
+            jd,
+            request.latitude,
+            request.longitude,
+            house_system=request.house_system,
+            ayanamsa=request.ayanamsa,
+        )
+
+        lagna_idx = int(houses_raw["ascendant"] // 30)
+        lagna_rashi = RASHI_NAMES[lagna_idx].lower()
+        sun_longitude = planets_raw["sun"]["longitude"]
+
+        # Build planet dict
+        planets_dict: dict[str, Any] = {}
+        for planet_id, data in planets_raw.items():
+            rashi_idx = int(data["longitude"] // 30)
+            house = ((rashi_idx - lagna_idx) % 12) + 1
+            planets_dict[planet_id] = {
+                "longitude": data["longitude"],
+                "rashi": RASHI_NAMES[rashi_idx].lower(),
+                "house": house,
+                "is_retrograde": data.get("is_retrograde", False),
+            }
+
+        # Detect basic yogas first (simplified)
+        yogas: list[dict[str, Any]] = []
+        kendras = [1, 4, 7, 10]
+        mp_planets = {
+            "mars": {
+                "own": ["aries", "scorpio"],
+                "exalted": "capricorn",
+                "cat": "pancha_mahapurusha",
+            },
+            "mercury": {
+                "own": ["gemini", "virgo"],
+                "exalted": "virgo",
+                "cat": "pancha_mahapurusha",
+            },
+            "jupiter": {
+                "own": ["sagittarius", "pisces"],
+                "exalted": "cancer",
+                "cat": "pancha_mahapurusha",
+            },
+            "venus": {"own": ["taurus", "libra"], "exalted": "pisces", "cat": "pancha_mahapurusha"},
+            "saturn": {
+                "own": ["capricorn", "aquarius"],
+                "exalted": "libra",
+                "cat": "pancha_mahapurusha",
+            },
+        }
+        for planet, mp_data in mp_planets.items():
+            if planet in planets_dict:
+                p = planets_dict[planet]
+                if p["house"] in kendras and (
+                    p["rashi"] in mp_data["own"] or p["rashi"] == mp_data["exalted"]
+                ):
+                    yogas.append(
+                        {
+                            "category": mp_data["cat"],
+                            "involved_planets": [planet],
+                            "name": f"{planet.title()} Mahapurusha",
+                            "strength": 1.0,
+                        }
+                    )
+
+        results = apply_cancellations_to_chart(yogas, planets_dict, lagna_rashi, sun_longitude)
+
+        cancelled_count = sum(1 for r in results if r.get("cancellation", {}).get("cancelled"))
+
+        return {
+            "total_yogas": len(results),
+            "cancelled_count": cancelled_count,
+            "active_count": len(results) - cancelled_count,
+            "yogas": results,
+        }
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Error checking yoga cancellations: {e!s}",
+        ) from e
+
+
+@app.post("/api/v1/analysis/neecha-bhanga", tags=["Analysis"])
+async def check_neecha_bhanga(request: BirthDataRequest):
+    """Check Neecha Bhanga Raja Yoga for all debilitated planets in the chart."""
+    try:
+        from packages.self.src.yoga_detector import detect_neecha_bhanga
+
+        jd = request_to_jd(request)
+        planets_raw = get_all_planets(jd, ayanamsa=request.ayanamsa)
+        houses_raw = get_house_cusps(
+            jd,
+            request.latitude,
+            request.longitude,
+            house_system=request.house_system,
+            ayanamsa=request.ayanamsa,
+        )
+
+        lagna_idx = int(houses_raw["ascendant"] // 30)
+        lagna_rashi = RASHI_NAMES[lagna_idx].lower()
+
+        planets_dict: dict[str, Any] = {}
+        for planet_id, data in planets_raw.items():
+            rashi_idx = int(data["longitude"] // 30)
+            house = ((rashi_idx - lagna_idx) % 12) + 1
+            planets_dict[planet_id] = {
+                "longitude": data["longitude"],
+                "sign": RASHI_NAMES[rashi_idx].lower(),
+                "rashi": RASHI_NAMES[rashi_idx].lower(),
+                "house": house,
+                "is_retrograde": data.get("is_retrograde", False),
+            }
+
+        # Check each planet for neecha bhanga
+        debilitation_map = {
+            "sun": "libra",
+            "moon": "scorpio",
+            "mars": "cancer",
+            "mercury": "pisces",
+            "jupiter": "capricorn",
+            "venus": "virgo",
+            "saturn": "aries",
+        }
+
+        results = []
+        for planet, debil_sign in debilitation_map.items():
+            if planet in planets_dict and planets_dict[planet]["rashi"] == debil_sign:
+                result = detect_neecha_bhanga(
+                    planet, planets_dict[planet], planets_dict, lagna_rashi
+                )
+                results.append({"planet": planet, **result})
+
+        return {
+            "debilitated_planets": len(results),
+            "neecha_bhanga_results": results,
+            "lagna_rashi": lagna_rashi,
+        }
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Error checking neecha bhanga: {e!s}",
+        ) from e
+
+
+@app.post("/api/v1/analysis/planetary-wars", tags=["Analysis"])
+async def check_planetary_wars(request: BirthDataRequest):
+    """Detect Graha Yuddha (planetary wars) in the birth chart."""
+    try:
+        from packages.core.src.constants import Planet
+        from packages.self.src.planetary_war import detect_planetary_wars
+
+        jd = request_to_jd(request)
+        planets_raw = get_all_planets(jd, ayanamsa=request.ayanamsa)
+
+        planet_dict = {}
+        for planet_id, data in planets_raw.items():
+            try:
+                p_enum = Planet(planet_id.lower())
+                planet_dict[p_enum] = {
+                    "longitude": data["longitude"],
+                    "latitude": data.get("latitude", 0.0),
+                    "is_retrograde": data.get("is_retrograde", False),
+                }
+            except (ValueError, KeyError):
+                continue
+
+        wars = detect_planetary_wars(planet_dict)
+
+        return {
+            "wars_found": len(wars),
+            "wars": wars,
+        }
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Error detecting planetary wars: {e!s}",
+        ) from e
+
+
+@app.post("/api/v1/analysis/bhava-chalit", tags=["Analysis"])
+async def calculate_bhava_chalit(request: BirthDataRequest):
+    """Calculate Bhava Chalit chart showing house shifts."""
+    try:
+        from packages.cosmos.src.bhava_chalit import calculate_bhava_chalit as calc_chalit
+        from packages.cosmos.src.bhava_chalit import get_shifted_planets
+
+        jd = request_to_jd(request)
+        planets_raw = get_all_planets(jd, ayanamsa=request.ayanamsa)
+        houses_raw = get_house_cusps(
+            jd,
+            request.latitude,
+            request.longitude,
+            house_system=request.house_system,
+            ayanamsa=request.ayanamsa,
+        )
+
+        result = calc_chalit(planets_raw, houses_raw["cusps"], houses_raw["ascendant"])
+        shifted = get_shifted_planets(result)
+
+        return {
+            "planets": result,
+            "shifted_planets": shifted,
+            "shift_count": len(shifted),
+        }
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Error calculating bhava chalit: {e!s}",
+        ) from e
+
+
+@app.post("/api/v1/analysis/navamsha-spouse", tags=["Analysis"])
+async def navamsha_spouse(request: BirthDataRequest):
+    """Analyze spouse characteristics from Navamsha (D9) chart."""
+    try:
+        import json
+
+        jd = request_to_jd(request)
+        planets_raw = get_all_planets(jd, ayanamsa=request.ayanamsa)
+        houses_raw = get_house_cusps(
+            jd,
+            request.latitude,
+            request.longitude,
+            house_system=request.house_system,
+            ayanamsa=request.ayanamsa,
+        )
+
+        # Calculate D9
+        planets_simple = {p: {"longitude": d["longitude"]} for p, d in planets_raw.items()}
+        d9 = get_divisional_chart(planets_simple, 9)
+
+        # D9 lagna
+        d9_asc_lon = (houses_raw["ascendant"] % 30) * 3 + (int(houses_raw["ascendant"] / 30) * 30)
+        d9_lagna_idx = int(d9_asc_lon % 360 // 30)
+
+        # D9 7th house sign
+        d9_7th_idx = (d9_lagna_idx + 6) % 12
+        d9_7th_sign = RASHI_NAMES[d9_7th_idx].lower()
+
+        # D9 7th lord sign
+        rashi_lords = {
+            "aries": "mars",
+            "taurus": "venus",
+            "gemini": "mercury",
+            "cancer": "moon",
+            "leo": "sun",
+            "virgo": "mercury",
+            "libra": "venus",
+            "scorpio": "mars",
+            "sagittarius": "jupiter",
+            "capricorn": "saturn",
+            "aquarius": "saturn",
+            "pisces": "jupiter",
+        }
+        d9_7th_lord = rashi_lords.get(d9_7th_sign, "")
+        d9_7th_lord_sign = ""
+        if d9_7th_lord and d9_7th_lord in d9:
+            lord_lon = d9[d9_7th_lord].get("longitude", 0)
+            d9_7th_lord_sign = RASHI_NAMES[int(lord_lon // 30)].lower()
+
+        # Venus in D9
+        d9_venus_sign = ""
+        if "venus" in d9:
+            venus_lon = d9["venus"].get("longitude", 0)
+            d9_venus_sign = RASHI_NAMES[int(venus_lon // 30)].lower()
+
+        # Planets in D9 7th house
+        d9_7th_planets = []
+        for planet_id, pdata in d9.items():
+            p_lon = pdata.get("longitude", 0)
+            p_rashi_idx = int(p_lon // 30)
+            if p_rashi_idx == d9_7th_idx:
+                d9_7th_planets.append(planet_id)
+
+        # Load navamsha spouse rules
+        rules_path = (
+            Path(__file__).parent.parent.parent
+            / "knowledge"
+            / "rules"
+            / "navamsha_spouse_rules.json"
+        )
+        with rules_path.open() as f:
+            rules = json.load(f)
+
+        spouse_rules = rules.get("navamsha_spouse_rules", rules)
+        result: dict[str, Any] = {"d9_7th_sign": d9_7th_sign, "d9_7th_lord": d9_7th_lord}
+
+        # Interpret 7th lord sign
+        for rule in spouse_rules.get("d9_7th_lord_in_sign", []):
+            if rule.get("sign", "").lower() == d9_7th_lord_sign:
+                result["d9_7th_lord_interpretation"] = rule
+                break
+
+        # Venus interpretation
+        for rule in spouse_rules.get("venus_in_d9_sign", []):
+            if rule.get("sign", "").lower() == d9_venus_sign:
+                result["d9_venus_interpretation"] = rule
+                break
+
+        # 7th house planets
+        result["d9_7th_house_planets"] = d9_7th_planets
+
+        return result
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Error analyzing navamsha spouse: {e!s}",
+        ) from e
+
+
+@app.post("/api/v1/analysis/remedies", tags=["Analysis"])
+async def get_remedies(request: RemediesRequest):
+    """Get prioritized remedy recommendations based on chart conditions."""
+    try:
+        from packages.self.src.remedies import recommend_remedies
+
+        result = recommend_remedies(
+            current_dasha=request.current_dasha,
+            active_doshas=request.active_doshas,
+            weak_planets=request.weak_planets,
+            lagna_rashi=request.lagna_rashi,
+        )
+
+        return result
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Error recommending remedies: {e!s}",
+        ) from e
+
+
+@app.post("/api/v1/timing/dasha-transit", tags=["Timing"])
+async def dasha_transit_analysis(request: BirthDataRequest):
+    """Cross-analyze dasha periods with current transits for timing insights."""
+    try:
+        from packages.context.src.dasha_transit import cross_analyze
+
+        jd = request_to_jd(request)
+        planets_raw = get_all_planets(jd, ayanamsa=request.ayanamsa)
+        houses_raw = get_house_cusps(
+            jd,
+            request.latitude,
+            request.longitude,
+            house_system=request.house_system,
+            ayanamsa=request.ayanamsa,
+        )
+
+        lagna_idx = int(houses_raw["ascendant"] // 30)
+        lagna_rashi = RASHI_NAMES[lagna_idx].lower()
+        moon_longitude = planets_raw["moon"]["longitude"]
+        moon_rashi = RASHI_NAMES[int(moon_longitude // 30)].lower()
+
+        # Get current dasha
+        current_dasha_data = get_current_dasha(request.datetime, moon_longitude, dt.now())
+        dasha_info = {
+            "mahadasha": current_dasha_data["mahadasha"]["lord"],
+            "antardasha": current_dasha_data["antardasha"]["lord"],
+        }
+        pd = current_dasha_data.get("pratyantardasha")
+        if pd:
+            dasha_info["pratyantardasha"] = pd.get("lord", "")
+
+        # Get current transits
+        current_jd = datetime_to_jd_utc(dt.utcnow())
+        current_transits = {}
+        transit_raw = get_all_planets(current_jd, ayanamsa=request.ayanamsa)
+        for planet_id, data in transit_raw.items():
+            current_transits[planet_id] = {
+                "longitude": data["longitude"],
+                "rashi": int(data["longitude"] // 30),
+            }
+
+        # Build natal planet positions
+        natal_planets: dict[str, Any] = {}
+        for planet_id, data in planets_raw.items():
+            natal_planets[planet_id] = {
+                "longitude": data["longitude"],
+                "rashi": int(data["longitude"] // 30),
+            }
+
+        result = cross_analyze(natal_planets, current_transits, dasha_info, lagna_rashi, moon_rashi)
+
+        return result
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Error in dasha-transit analysis: {e!s}",
+        ) from e
+
+
+@app.post("/api/v1/timing/transit-aspects", tags=["Timing"])
+async def transit_natal_aspects(request: BirthDataRequest):
+    """Calculate all aspects between current transits and natal planets."""
+    try:
+        from packages.context.src.transit_aspects import get_transit_natal_aspects
+
+        jd = request_to_jd(request)
+        planets_raw = get_all_planets(jd, ayanamsa=request.ayanamsa)
+
+        natal_planets: dict[str, Any] = {}
+        for planet_id, data in planets_raw.items():
+            natal_planets[planet_id] = {
+                "longitude": data["longitude"],
+                "rashi": int(data["longitude"] // 30),
+            }
+
+        # Get current transits
+        current_jd = datetime_to_jd_utc(dt.utcnow())
+        transit_raw = get_all_planets(current_jd, ayanamsa=request.ayanamsa)
+        transit_planets: dict[str, Any] = {}
+        for planet_id, data in transit_raw.items():
+            transit_planets[planet_id] = {
+                "longitude": data["longitude"],
+                "rashi": int(data["longitude"] // 30),
+                "speed": data.get("speed", 0),
+            }
+
+        aspects = get_transit_natal_aspects(natal_planets, transit_planets)
+
+        return {
+            "total_aspects": len(aspects),
+            "aspects": aspects,
+            "tightest": aspects[:5] if aspects else [],
+        }
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Error calculating transit aspects: {e!s}",
+        ) from e
+
+
+@app.post("/api/v1/timing/event-correlation", tags=["Timing"])
+async def correlate_event(request: EventCorrelationRequest):
+    """Correlate a past life event with dasha and transit configurations."""
+    try:
+        from datetime import timedelta
+
+        from packages.context.src.event_correlator import correlate_event as _correlate
+
+        utc_birth = request.birth_datetime - timedelta(hours=request.timezone_offset)
+        jd = get_julian_day(utc_birth)
+        planets_raw = get_all_planets(jd, ayanamsa=request.ayanamsa)
+        houses_raw = get_house_cusps(
+            jd,
+            request.latitude,
+            request.longitude,
+            house_system="whole_sign",
+            ayanamsa=request.ayanamsa,
+        )
+
+        lagna_idx = int(houses_raw["ascendant"] // 30)
+        lagna_rashi = RASHI_NAMES[lagna_idx].lower()
+        moon_longitude = planets_raw["moon"]["longitude"]
+
+        natal_planets: dict[str, Any] = {}
+        for planet_id, data in planets_raw.items():
+            natal_planets[planet_id] = {
+                "longitude": data["longitude"],
+                "rashi": int(data["longitude"] // 30),
+            }
+
+        result = _correlate(
+            event_date=request.event_date,
+            event_type=request.event_type,
+            event_description=request.event_description,
+            birth_datetime=request.birth_datetime,
+            natal_planets=natal_planets,
+            moon_longitude=moon_longitude,
+            lagna_rashi=lagna_rashi,
+        )
+
+        return result
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Error correlating event: {e!s}",
+        ) from e
+
+
+@app.post("/api/v1/timing/upcoming-triggers", tags=["Timing"])
+async def get_upcoming_triggers(request: TransitTriggersRequest):
+    """Find the next significant transit events for the birth chart."""
+    try:
+        from datetime import timedelta
+
+        from packages.context.src.transit_tracker import get_upcoming_triggers as _get_triggers
+
+        utc_birth = request.birth_datetime - timedelta(hours=request.timezone_offset)
+        jd = get_julian_day(utc_birth)
+        planets_raw = get_all_planets(jd, ayanamsa=request.ayanamsa)
+        houses_raw = get_house_cusps(
+            jd,
+            request.latitude,
+            request.longitude,
+            house_system="whole_sign",
+            ayanamsa=request.ayanamsa,
+        )
+
+        lagna_idx = int(houses_raw["ascendant"] // 30)
+        lagna_rashi = RASHI_NAMES[lagna_idx].lower()
+        moon_longitude = planets_raw["moon"]["longitude"]
+        moon_rashi = RASHI_NAMES[int(moon_longitude // 30)].lower()
+
+        natal_planets: dict[str, Any] = {}
+        for planet_id, data in planets_raw.items():
+            natal_planets[planet_id] = {
+                "longitude": data["longitude"],
+                "rashi": int(data["longitude"] // 30),
+            }
+
+        start_date = request.start_date or dt.utcnow().isoformat()
+
+        triggers = _get_triggers(
+            natal_planets=natal_planets,
+            lagna_rashi=lagna_rashi,
+            moon_rashi=moon_rashi,
+            start_date=start_date,
+            days_ahead=request.days_ahead,
+            birth_datetime=request.birth_datetime,
+            moon_longitude=moon_longitude,
+        )
+
+        return {
+            "total_triggers": len(triggers),
+            "triggers": triggers,
+            "high_significance": [t for t in triggers if t.get("significance") == "high"],
+        }
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Error finding upcoming triggers: {e!s}",
+        ) from e
+
+
+@app.post("/api/v1/timing/varshaphal", tags=["Timing"])
+async def get_varshaphal(request: BirthDataRequest):
+    """Get current Varshaphal (solar return / Tajika annual horoscope)."""
+    try:
+        from packages.context.src.varshaphal import get_current_varshaphal
+
+        result = get_current_varshaphal(
+            birth_datetime=request.datetime,
+            birth_lat=request.latitude,
+            birth_lon=request.longitude,
+        )
+
+        return result
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Error calculating varshaphal: {e!s}",
+        ) from e
+
+
+# ============================================================================
 # Main Entry Point
 # ============================================================================
 

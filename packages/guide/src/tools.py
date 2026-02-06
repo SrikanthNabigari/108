@@ -1044,6 +1044,336 @@ class AstrologyTools:
     # UTILITY METHODS
     # ===================
 
+    # ===================
+    # YOGA CANCELLATION & NEECHA BHANGA TOOLS
+    # ===================
+
+    def check_yoga_cancellations(
+        self,
+        yogas: list[dict[str, Any]],
+        planets: dict[str, dict],
+        lagna_rashi: str,
+        sun_longitude: float,
+    ) -> dict[str, Any]:
+        """Check which detected yogas are cancelled by classical rules.
+
+        Args:
+            yogas: List of detected yoga dicts
+            planets: Planet positions with longitude, sign, etc.
+            lagna_rashi: Ascendant sign name
+            sun_longitude: Sun's longitude
+
+        Returns:
+            Dictionary with original yogas, cancelled list, and surviving yogas
+        """
+        try:
+            from packages.self.src.yoga_cancellation import apply_cancellations_to_chart
+
+            result = apply_cancellations_to_chart(yogas, planets, lagna_rashi, sun_longitude)
+            cancelled = [y for y in result if y.get("cancelled")]
+            surviving = [y for y in result if not y.get("cancelled")]
+            return {
+                "total_yogas": len(yogas),
+                "cancelled_count": len(cancelled),
+                "surviving_count": len(surviving),
+                "cancelled_yogas": cancelled,
+                "surviving_yogas": surviving,
+                "success": True,
+            }
+        except Exception as e:
+            logger.error(f"Error checking yoga cancellations: {e!s}")
+            return {"success": False, "error": str(e)}
+
+    def detect_neecha_bhanga_yogas(
+        self, planets: dict[str, dict], lagna_rashi: str
+    ) -> dict[str, Any]:
+        """Detect Neecha Bhanga Raja Yoga (cancellation of debilitation).
+
+        Args:
+            planets: Planet positions with longitude, sign, etc.
+            lagna_rashi: Ascendant sign name
+
+        Returns:
+            Dictionary with debilitated planets and neecha bhanga results
+        """
+        try:
+            from packages.self.src.yoga_detector import detect_neecha_bhanga
+
+            results = []
+            for planet_name, planet_data in planets.items():
+                nb = detect_neecha_bhanga(planet_name, planet_data, planets, lagna_rashi)
+                if nb.get("is_debilitated") or nb.get("has_neecha_bhanga"):
+                    results.append(nb)
+            return {
+                "neecha_bhanga_results": results,
+                "count": len(results),
+                "success": True,
+            }
+        except Exception as e:
+            logger.error(f"Error detecting neecha bhanga: {e!s}")
+            return {"success": False, "error": str(e)}
+
+    def detect_planetary_wars(self, planets: dict[str, dict]) -> dict[str, Any]:
+        """Detect planetary wars (Graha Yuddha) between planets within 1 degree.
+
+        Args:
+            planets: Planet positions with longitude, sign, etc.
+
+        Returns:
+            Dictionary with detected wars and their effects
+        """
+        try:
+            from packages.self.src.planetary_war import detect_planetary_wars as _detect_wars
+            from packages.self.src.planetary_war import get_war_effects
+
+            wars = _detect_wars(planets)
+            war_details = []
+            for war in wars:
+                effects = get_war_effects(war.get("winner", ""), war.get("loser", ""))
+                war_details.append({**war, "effects": effects})
+            return {
+                "planetary_wars": war_details,
+                "war_count": len(war_details),
+                "success": True,
+            }
+        except Exception as e:
+            logger.error(f"Error detecting planetary wars: {e!s}")
+            return {"success": False, "error": str(e)}
+
+    # ===================
+    # BHAVA CHALIT TOOL
+    # ===================
+
+    def get_bhava_chalit(
+        self, planets: dict[str, dict], cusps: list[float], ascendant: float
+    ) -> dict[str, Any]:
+        """Calculate Bhava Chalit chart showing house-cusp-based placements.
+
+        Args:
+            planets: Planet positions with longitude
+            cusps: House cusp longitudes (12 values)
+            ascendant: Ascendant longitude
+
+        Returns:
+            Dictionary with bhava chalit data and shifted planets
+        """
+        try:
+            from packages.cosmos.src.bhava_chalit import (
+                calculate_bhava_chalit,
+                get_shifted_planets,
+            )
+
+            chalit = calculate_bhava_chalit(planets, cusps, ascendant)
+            shifted = get_shifted_planets(chalit)
+            return {
+                "bhava_chalit": chalit,
+                "shifted_planets": shifted,
+                "success": True,
+            }
+        except Exception as e:
+            logger.error(f"Error calculating bhava chalit: {e!s}")
+            return {"success": False, "error": str(e)}
+
+    # ===================
+    # DASHA-TRANSIT CROSS ANALYSIS TOOLS
+    # ===================
+
+    def get_dasha_transit_analysis(
+        self,
+        natal_planets: dict[str, dict],
+        current_transits: dict[str, dict],
+        current_dasha: dict[str, Any],
+        lagna_rashi: str,
+        moon_rashi: str,
+    ) -> dict[str, Any]:
+        """Cross-analyze dasha periods with current transits.
+
+        Args:
+            natal_planets: Birth chart positions
+            current_transits: Current transit positions
+            current_dasha: Current dasha info (mahadasha, antardasha, pratyantardasha)
+            lagna_rashi: Ascendant sign name
+            moon_rashi: Moon sign name
+
+        Returns:
+            Dictionary with active themes, strongest house, period quality, score
+        """
+        try:
+            from packages.context.src.dasha_transit import cross_analyze
+
+            result = cross_analyze(
+                natal_planets, current_transits, current_dasha, lagna_rashi, moon_rashi
+            )
+            return {"dasha_transit": result, "success": True}
+        except Exception as e:
+            logger.error(f"Error in dasha-transit analysis: {e!s}")
+            return {"success": False, "error": str(e)}
+
+    def get_transit_natal_aspects(
+        self,
+        natal_planets: dict[str, dict],
+        transit_planets: dict[str, dict],
+        orb: float = 5.0,
+    ) -> dict[str, Any]:
+        """Get aspects between transit and natal planets.
+
+        Args:
+            natal_planets: Birth chart positions
+            transit_planets: Current transit positions
+            orb: Aspect orb in degrees (default 5.0)
+
+        Returns:
+            Dictionary with list of transit-natal aspects
+        """
+        try:
+            from packages.context.src.transit_aspects import (
+                get_transit_natal_aspects as _get_aspects,
+            )
+
+            aspects = _get_aspects(natal_planets, transit_planets, orb)
+            return {
+                "transit_aspects": aspects,
+                "aspect_count": len(aspects),
+                "success": True,
+            }
+        except Exception as e:
+            logger.error(f"Error getting transit-natal aspects: {e!s}")
+            return {"success": False, "error": str(e)}
+
+    def correlate_life_event(
+        self,
+        event_date: str,
+        event_type: str,
+        event_description: str,
+        birth_datetime: str,
+        natal_planets: dict[str, dict],
+        moon_longitude: float,
+        lagna_rashi: str,
+    ) -> dict[str, Any]:
+        """Correlate a life event with dasha and transit data.
+
+        Args:
+            event_date: ISO date of the event
+            event_type: Type (career, marriage, health, money, etc.)
+            event_description: User's description
+            birth_datetime: ISO birth datetime
+            natal_planets: Birth chart positions
+            moon_longitude: Moon longitude at birth
+            lagna_rashi: Ascendant sign name
+
+        Returns:
+            Dictionary with correlation score, dasha/transit at event, explanation
+        """
+        try:
+            from packages.context.src.event_correlator import correlate_event
+
+            result = correlate_event(
+                event_date=event_date,
+                event_type=event_type,
+                event_description=event_description,
+                birth_datetime=birth_datetime,
+                natal_planets=natal_planets,
+                moon_longitude=moon_longitude,
+                lagna_rashi=lagna_rashi,
+            )
+            return {"correlation": result, "success": True}
+        except Exception as e:
+            logger.error(f"Error correlating event: {e!s}")
+            return {"success": False, "error": str(e)}
+
+    def get_upcoming_triggers(
+        self,
+        natal_planets: dict[str, dict],
+        lagna_rashi: str,
+        moon_rashi: str,
+        start_date: str | None = None,
+        days_ahead: int = 30,
+        birth_datetime: str | None = None,
+        moon_longitude: float | None = None,
+    ) -> dict[str, Any]:
+        """Find upcoming significant transit triggers.
+
+        Args:
+            natal_planets: Birth chart positions
+            lagna_rashi: Ascendant sign name
+            moon_rashi: Moon sign name
+            start_date: ISO start date (default: today)
+            days_ahead: Days to look ahead (default 30)
+            birth_datetime: ISO birth datetime (for dasha changes)
+            moon_longitude: Moon longitude (for dasha calculation)
+
+        Returns:
+            Dictionary with upcoming trigger events sorted by date
+        """
+        try:
+            from packages.context.src.transit_tracker import (
+                get_upcoming_triggers as _get_triggers,
+            )
+
+            sd = start_date or datetime.utcnow().isoformat()
+            triggers = _get_triggers(
+                natal_planets=natal_planets,
+                lagna_rashi=lagna_rashi,
+                moon_rashi=moon_rashi,
+                start_date=sd,
+                days_ahead=days_ahead,
+                birth_datetime=birth_datetime,
+                moon_longitude=moon_longitude,
+            )
+            return {
+                "triggers": triggers,
+                "trigger_count": len(triggers),
+                "success": True,
+            }
+        except Exception as e:
+            logger.error(f"Error getting upcoming triggers: {e!s}")
+            return {"success": False, "error": str(e)}
+
+    # ===================
+    # REMEDIES TOOL
+    # ===================
+
+    def get_remedies(
+        self,
+        current_dasha: str,
+        active_doshas: list[str],
+        weak_planets: list[str],
+        lagna_rashi: str = "",
+    ) -> dict[str, Any]:
+        """Get prioritized remedy recommendations.
+
+        Args:
+            current_dasha: Current mahadasha lord name
+            active_doshas: List of active dosha names
+            weak_planets: List of weak planet names
+            lagna_rashi: Ascendant sign name
+
+        Returns:
+            Dictionary with prioritized remedies
+        """
+        try:
+            from packages.self.src.remedies import recommend_remedies
+
+            # Convert simple strings to dicts expected by recommend_remedies
+            dasha_dict = {"mahadasha_lord": current_dasha}
+            dosha_dicts = [{"name": d} for d in active_doshas]
+            planet_dicts = [{"planet": p} for p in weak_planets]
+
+            result = recommend_remedies(
+                current_dasha=dasha_dict,
+                active_doshas=dosha_dicts,
+                weak_planets=planet_dicts,
+                lagna_rashi=lagna_rashi,
+            )
+            return {"remedies": result, "success": True}
+        except Exception as e:
+            logger.error(f"Error getting remedies: {e!s}")
+            return {"success": False, "error": str(e)}
+
+    # ===================
+    # UTILITY METHODS
+    # ===================
+
     def _lon_to_sign(self, longitude: float) -> str:
         """Convert longitude to sign name."""
         return RASHI_NAMES[int(longitude / 30)]
@@ -1051,10 +1381,10 @@ class AstrologyTools:
     def get_version(self) -> dict[str, str]:
         """Get version information of tools."""
         return {
-            "tools_version": "2.0.0",
+            "tools_version": "2.1.0",
             "cosmos_version": "2.0.0",
-            "context_version": "2.0.0",
-            "self_version": "2.0.0",
+            "context_version": "2.1.0",
+            "self_version": "2.1.0",
         }
 
 
@@ -1123,17 +1453,67 @@ def get_today_panchanga(
     return get_tools().get_today_panchanga(date, latitude, longitude)
 
 
+def check_yoga_cancellations(
+    yogas: list[dict[str, Any]],
+    planets: dict[str, dict],
+    lagna_rashi: str,
+    sun_longitude: float,
+) -> dict[str, Any]:
+    """Check yoga cancellations."""
+    return get_tools().check_yoga_cancellations(yogas, planets, lagna_rashi, sun_longitude)
+
+
+def get_dasha_transit_analysis(
+    natal_planets: dict[str, dict],
+    current_transits: dict[str, dict],
+    current_dasha: dict[str, Any],
+    lagna_rashi: str,
+    moon_rashi: str,
+) -> dict[str, Any]:
+    """Get dasha-transit cross analysis."""
+    return get_tools().get_dasha_transit_analysis(
+        natal_planets, current_transits, current_dasha, lagna_rashi, moon_rashi
+    )
+
+
+def get_upcoming_triggers(
+    natal_planets: dict[str, dict],
+    lagna_rashi: str,
+    moon_rashi: str,
+    start_date: str | None = None,
+    days_ahead: int = 30,
+) -> dict[str, Any]:
+    """Get upcoming transit triggers."""
+    return get_tools().get_upcoming_triggers(
+        natal_planets, lagna_rashi, moon_rashi, start_date, days_ahead
+    )
+
+
+def get_remedies(
+    current_dasha: str,
+    active_doshas: list[str],
+    weak_planets: list[str],
+    lagna_rashi: str = "",
+) -> dict[str, Any]:
+    """Get remedy recommendations."""
+    return get_tools().get_remedies(current_dasha, active_doshas, weak_planets, lagna_rashi)
+
+
 __all__ = [
     "ActivityType",
     "AstrologyTools",
     "ChartCache",
     "check_muhurta",
+    "check_yoga_cancellations",
     "detect_doshas",
     "detect_yogas",
     "get_birth_chart",
     "get_current_positions",
     "get_dasha_info",
+    "get_dasha_transit_analysis",
+    "get_remedies",
     "get_today_panchanga",
     "get_tools",
     "get_transit_analysis",
+    "get_upcoming_triggers",
 ]

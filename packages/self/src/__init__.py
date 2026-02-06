@@ -63,6 +63,10 @@ from .jaimini import (
     get_sign_mobility,
     interpret_upapada,
 )
+from .planetary_war import (
+    detect_planetary_wars,
+    get_war_effects,
+)
 from .prashna import (
     analyze_health_prashna,
     analyze_legal_prashna,
@@ -76,14 +80,25 @@ from .prashna import (
     judge_prashna,
     predict_timing,
 )
+from .remedies import (
+    get_planet_remedies,
+    prioritize_remedies,
+    recommend_remedies,
+)
 from .retrograde import (
     get_retrograde_analysis,
     get_retrograde_effects,
 )
 from .strength import StrengthCalculator
+from .yoga_cancellation import (
+    apply_cancellations_to_chart,
+    check_yoga_cancellation,
+    get_cancellation_rules,
+)
 from .yoga_detector import (
     YogaDetector,
     detect_all_yogas,
+    detect_neecha_bhanga,
     detect_yoga,
     evaluate_condition,
     get_yoga_strength,
@@ -99,6 +114,7 @@ __all__ = [
     "analyze_marriage_prashna",
     "analyze_prashna",
     "analyze_travel_prashna",
+    "apply_cancellations_to_chart",
     "calculate_all_arudha_padas",
     "calculate_argala",
     "calculate_arudha_pada",
@@ -117,17 +133,22 @@ __all__ = [
     "calculate_yoni_score",
     "check_combustion",
     "check_combustion_cancellation",
+    "check_yoga_cancellation",
     "create_prashna_chart",
     "detect_all_yogas",
+    "detect_neecha_bhanga",
+    "detect_planetary_wars",
     "detect_yoga",
     "evaluate_condition",
     "get_atmakaraka",
+    "get_cancellation_rules",
     "get_combustion_analysis",
     "get_combustion_house_effects",
     "get_compatibility_verdict",
     "get_divisional_analysis",
     "get_jaimini_aspects",
     "get_karakamsha",
+    "get_planet_remedies",
     "get_prashna_divisional_analysis",
     "get_retrograde_analysis",
     "get_retrograde_effects",
@@ -136,6 +157,7 @@ __all__ = [
     "get_transit_ashtakavarga_analysis",
     "get_transit_ashtakavarga_score",
     "get_transit_strength_modifier",
+    "get_war_effects",
     "get_yoga_strength",
     "interpret_ashtakavarga_score",
     "interpret_d2_position",
@@ -156,4 +178,6 @@ __all__ = [
     "interpret_upapada",
     "judge_prashna",
     "predict_timing",
+    "prioritize_remedies",
+    "recommend_remedies",
 ]

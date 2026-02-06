@@ -47,11 +47,24 @@ from packages.self.src.jaimini import (  # noqa: E402
     get_jaimini_aspects,
     interpret_upapada,
 )
+from packages.self.src.planetary_war import (  # noqa: E402
+    detect_planetary_wars as _detect_planetary_wars,
+)
+from packages.self.src.planetary_war import get_war_effects as _get_war_effects  # noqa: E402
 from packages.self.src.prashna import (  # noqa: E402
     analyze_prashna as _analyze_prashna,
 )
+from packages.self.src.remedies import (  # noqa: E402
+    recommend_remedies as _recommend_remedies,
+)
 from packages.self.src.retrograde import (  # noqa: E402
     get_retrograde_effects as _get_retrograde_effects,
+)
+from packages.self.src.yoga_cancellation import (  # noqa: E402
+    apply_cancellations_to_chart as _apply_cancellations_to_chart,
+)
+from packages.self.src.yoga_detector import (  # noqa: E402
+    detect_neecha_bhanga as _detect_neecha_bhanga,
 )
 
 # Initialize MCP server
@@ -967,6 +980,377 @@ def upapada_analysis(
         chart = _build_chart_for_yoga(planets, lagna_rashi, moon_rashi, houses)
         result = interpret_upapada(chart)
         return {**result, "success": True}
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__, "success": False}
+
+
+@mcp.tool()
+def check_yoga_cancellations(
+    planets: dict[str, dict[str, Any]],
+    lagna_rashi: str,
+    yogas: list[dict[str, Any]],
+    sun_longitude: float,
+) -> dict[str, Any]:
+    """
+    Check whether detected yogas are cancelled by classical rules (Yoga Bhanga).
+
+    Evaluates cancellation conditions for each yoga:
+    - Combustion: planet too close to Sun
+    - Debilitation: planet in debilitation without Neecha Bhanga
+    - Malefic affliction: planet conjunct 2+ malefics
+    - Type-specific: Pancha Mahapurusha, Raja, Dhana, Gajakesari rules
+
+    Args:
+        planets: Planet positions {name: {longitude, sign, house, rashi, is_retrograde}}
+        lagna_rashi: Ascendant sign name (e.g., "libra")
+        yogas: List of detected yoga dicts, each with at least:
+               - category (str): Yoga type (e.g., "pancha_mahapurusha", "raja_yoga")
+               - involved_planets (list[str]): Planets forming the yoga
+               Optional: name, strength, id
+        sun_longitude: Sun's sidereal longitude (0-360)
+
+    Returns:
+        Dictionary with:
+        - total_yogas: Number of yogas checked
+        - cancelled_count: Number fully cancelled
+        - partial_count: Number partially weakened
+        - yogas: List of enriched yoga dicts with cancellation status
+        - error: Error message if computation fails
+
+    Example:
+        check_yoga_cancellations(
+            {"sun": {"longitude": 52.5, "sign": "taurus", "house": 8}, ...},
+            "libra",
+            [{"category": "raja_yoga", "involved_planets": ["jupiter", "venus"], "strength": 0.8}],
+            52.5
+        )
+    """
+    try:
+        # Build planet dict with enum keys for cancellation engine
+        planet_dict = {}
+        for pname, pdata in planets.items():
+            try:
+                p_enum = Planet(pname.lower())
+                planet_dict[p_enum] = pdata
+                planet_dict[pname.lower()] = pdata
+            except (ValueError, KeyError):
+                continue
+
+        results = _apply_cancellations_to_chart(
+            yogas, planet_dict, lagna_rashi.lower(), sun_longitude
+        )
+
+        cancelled_count = sum(1 for r in results if r.get("cancellation", {}).get("cancelled"))
+        partial_count = sum(1 for r in results if r.get("cancellation", {}).get("partial"))
+
+        return {
+            "total_yogas": len(results),
+            "cancelled_count": cancelled_count,
+            "partial_count": partial_count,
+            "active_count": len(results) - cancelled_count,
+            "yogas": results,
+            "success": True,
+        }
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__, "success": False}
+
+
+@mcp.tool()
+def detect_neecha_bhanga_yoga(
+    planet: str,
+    planets: dict[str, dict[str, Any]],
+    lagna_rashi: str,
+    d9_positions: dict[str, dict[str, Any]] | None = None,
+) -> dict[str, Any]:
+    """
+    Check if a debilitated planet has Neecha Bhanga Raja Yoga (cancellation of debilitation).
+
+    Five classical conditions (any one suffices):
+    1. Lord of debilitation sign in kendra from Lagna or Moon
+    2. Lord of exaltation sign in kendra from Lagna or Moon
+    3. Planet exalted in the debilitation sign aspects the debilitated planet
+    4. Debilitated planet is retrograde
+    5. Debilitated planet in kendra with dignity in Navamsha (D9)
+
+    Args:
+        planet: Planet name to check (e.g., "mars", "jupiter")
+        planets: All planet positions {name: {longitude, sign, house, rashi, is_retrograde}}
+        lagna_rashi: Ascendant sign name
+        d9_positions: Optional Navamsha positions for condition 5
+
+    Returns:
+        Dictionary with has_neecha_bhanga, conditions_met, strength, and description
+
+    Example:
+        detect_neecha_bhanga_yoga("mars", {"mars": {"longitude": 100, "sign": "cancer", "house": 10}}, "libra")
+    """
+    try:
+        planet_lower = planet.lower()
+        planet_data = planets.get(planet_lower, {})
+
+        result = _detect_neecha_bhanga(
+            planet_lower, planet_data, planets, lagna_rashi.lower(), d9_positions
+        )
+
+        return {
+            "planet": planet_lower,
+            "lagna": lagna_rashi.lower(),
+            **result,
+            "success": True,
+        }
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__, "success": False}
+
+
+@mcp.tool()
+def detect_planetary_wars_tool(
+    planets: dict[str, dict[str, Any]],
+    lagna_rashi: str | None = None,
+) -> dict[str, Any]:
+    """
+    Detect Graha Yuddha (planetary wars) when two planets are within 1 degree.
+
+    Only Mars, Mercury, Jupiter, Venus, and Saturn can engage in planetary war.
+    The planet with higher latitude wins. Venus always wins when retrograde.
+    The loser's significations and house lordships are weakened.
+
+    Args:
+        planets: Planet positions {name: {longitude, latitude, is_retrograde, sign, house}}
+        lagna_rashi: Optional ascendant sign for house-based effect analysis
+
+    Returns:
+        Dictionary with wars detected, winner/loser for each, effects, and remedial notes
+
+    Example:
+        detect_planetary_wars_tool({
+            "mars": {"longitude": 120.5, "latitude": 1.2, "is_retrograde": false},
+            "mercury": {"longitude": 121.0, "latitude": 0.5, "is_retrograde": false}
+        }, "libra")
+    """
+    try:
+        # Build planet dict with enum keys
+        planet_dict = {}
+        for pname, pdata in planets.items():
+            try:
+                p_enum = Planet(pname.lower())
+                planet_dict[p_enum] = pdata
+            except (ValueError, KeyError):
+                continue
+
+        wars = _detect_planetary_wars(planet_dict)
+
+        # Enrich with house effects if lagna given
+        for war in wars:
+            if lagna_rashi:
+                effects = _get_war_effects(war["winner"], war["loser"], lagna_rashi.lower())
+                war["house_effects"] = effects.get("house_effects", [])
+                war["affected_houses"] = effects.get("affected_houses", [])
+                war["remedial_notes"] = effects.get("remedial_notes", "")
+
+        return {
+            "wars_found": len(wars),
+            "wars": wars,
+            "success": True,
+        }
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__, "success": False}
+
+
+@mcp.tool()
+def bhava_chalit_chart(
+    planets: dict[str, dict[str, Any]],
+    cusps: list[float],
+    ascendant: float,
+) -> dict[str, Any]:
+    """
+    Calculate Bhava Chalit chart showing house shifts from Rashi to cusp-based system.
+
+    In Rashi chart, houses = signs. In Bhava Chalit, house boundaries are midpoints
+    between consecutive cusps. Planets near cusp boundaries may shift to adjacent houses,
+    affecting their bhava phala (house-based results).
+
+    Args:
+        planets: Planet positions {name: {longitude, ...}}
+        cusps: List of 12 house cusp longitudes (0-360 degrees)
+        ascendant: Ascendant longitude in degrees (0-360)
+
+    Returns:
+        Dictionary with per-planet rashi house, chalit house, shift status,
+        and list of shifted planets
+
+    Example:
+        bhava_chalit_chart(
+            {"sun": {"longitude": 52.5}, "moon": {"longitude": 102.5}},
+            [180.0, 210.0, 240.0, 270.0, 300.0, 330.0, 0.0, 30.0, 60.0, 90.0, 120.0, 150.0],
+            180.0
+        )
+    """
+    try:
+        from packages.cosmos.src.bhava_chalit import calculate_bhava_chalit as _calc_bhava_chalit
+        from packages.cosmos.src.bhava_chalit import get_shifted_planets as _get_shifted
+
+        result = _calc_bhava_chalit(planets, cusps, ascendant)
+        shifted = _get_shifted(result)
+
+        return {
+            "planets": result,
+            "shifted_planets": shifted,
+            "shift_count": len(shifted),
+            "success": True,
+        }
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__, "success": False}
+
+
+@mcp.tool()
+def recommend_chart_remedies(
+    current_dasha: dict[str, str],
+    active_doshas: list[dict[str, Any]],
+    weak_planets: list[dict[str, Any]],
+    current_transits: dict[str, Any] | None = None,
+    lagna_rashi: str = "",
+) -> dict[str, Any]:
+    """
+    Get prioritized remedy recommendations based on chart conditions.
+
+    Combines active dasha lords, dosha-afflicted planets, weak planets,
+    and transit-afflicted planets to recommend mantras, gemstones, charity,
+    worship, and general remedies. Prioritizes into urgent/recommended/optional.
+
+    Args:
+        current_dasha: Active dasha lords {mahadasha_lord, antardasha_lord, pratyantardasha_lord}
+        active_doshas: List of doshas [{name, severity}]
+        weak_planets: List of weak planets [{planet, shadbala}]
+        current_transits: Optional transit data for transit-based remedies
+        lagna_rashi: Ascendant sign name
+
+    Returns:
+        Dictionary with urgent/recommended/optional remedy lists,
+        summary counts, and planets needing remedies
+
+    Example:
+        recommend_chart_remedies(
+            {"mahadasha_lord": "mercury", "antardasha_lord": "saturn"},
+            [{"name": "sade_sati", "severity": "high"}],
+            [{"planet": "moon", "shadbala": 180}]
+        )
+    """
+    try:
+        result = _recommend_remedies(
+            current_dasha=current_dasha,
+            active_doshas=active_doshas,
+            weak_planets=weak_planets,
+            current_transits=current_transits,
+            lagna_rashi=lagna_rashi.lower() if lagna_rashi else "",
+        )
+
+        return {**result, "success": True}
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__, "success": False}
+
+
+@mcp.tool()
+def navamsha_spouse_analysis(
+    d9_7th_lord_sign: str,
+    d9_venus_sign: str | None = None,
+    d9_7th_house_planets: list[str] | None = None,
+) -> dict[str, Any]:
+    """
+    Analyze spouse characteristics from Navamsha (D9) chart using classical rules.
+
+    The D9 chart is the primary indicator for marriage in Vedic astrology.
+    Analysis is based on:
+    - D9 7th lord sign placement (spouse nature)
+    - D9 Venus sign (relationship style)
+    - Planets in D9 7th house (spouse personality influences)
+
+    Args:
+        d9_7th_lord_sign: Sign where the D9 7th lord is placed (e.g., "aries", "taurus")
+        d9_venus_sign: Sign where Venus is placed in D9 (optional)
+        d9_7th_house_planets: List of planets in D9 7th house (optional)
+
+    Returns:
+        Dictionary with spouse nature, interpretation, relationship style,
+        and 7th house planetary influences
+
+    Example:
+        navamsha_spouse_analysis("taurus", "pisces", ["jupiter", "venus"])
+    """
+    try:
+        import json
+        from pathlib import Path
+
+        rules_path = (
+            Path(__file__).parent.parent.parent
+            / "knowledge"
+            / "rules"
+            / "navamsha_spouse_rules.json"
+        )
+        with rules_path.open() as f:
+            rules = json.load(f)
+
+        spouse_rules = rules.get("navamsha_spouse_rules", rules)
+
+        result: dict[str, Any] = {"success": True}
+
+        # 1. D9 7th lord sign interpretation
+        sign_lower = d9_7th_lord_sign.lower()
+        d9_7th_lord_rules = spouse_rules.get("d9_7th_lord_in_sign", [])
+        for rule in d9_7th_lord_rules:
+            if rule.get("sign", "").lower() == sign_lower:
+                result["d9_7th_lord"] = {
+                    "sign": sign_lower,
+                    "interpretation": rule.get("interpretation", ""),
+                    "spouse_nature": rule.get("spouse_nature", ""),
+                }
+                break
+        else:
+            result["d9_7th_lord"] = {"sign": sign_lower, "interpretation": "No data available"}
+
+        # 2. D9 Venus sign interpretation
+        if d9_venus_sign:
+            venus_lower = d9_venus_sign.lower()
+            venus_rules = spouse_rules.get("venus_in_d9_sign", [])
+            for rule in venus_rules:
+                if rule.get("sign", "").lower() == venus_lower:
+                    result["d9_venus"] = {
+                        "sign": venus_lower,
+                        "interpretation": rule.get("interpretation", ""),
+                        "relationship_style": rule.get("relationship_style", ""),
+                    }
+                    break
+            else:
+                result["d9_venus"] = {"sign": venus_lower, "interpretation": "No data available"}
+
+        # 3. Planets in D9 7th house
+        if d9_7th_house_planets:
+            planet_influences = []
+            planet_rules = spouse_rules.get("planets_in_d9_7th", [])
+            for planet_name in d9_7th_house_planets:
+                p_lower = planet_name.lower()
+                for rule in planet_rules:
+                    if rule.get("planet", "").lower() == p_lower:
+                        planet_influences.append(
+                            {
+                                "planet": p_lower,
+                                "interpretation": rule.get("interpretation", ""),
+                                "effect": rule.get("effect", ""),
+                            }
+                        )
+                        break
+                else:
+                    planet_influences.append(
+                        {"planet": p_lower, "interpretation": "No specific data"}
+                    )
+            result["d9_7th_house_planets"] = planet_influences
+
+        return result
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__, "success": False}

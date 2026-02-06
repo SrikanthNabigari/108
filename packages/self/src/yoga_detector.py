@@ -1001,6 +1001,217 @@ class YogaDetector:
         return yoga.strength
 
 
+def detect_neecha_bhanga(
+    planet: str,
+    planet_data: dict,
+    all_planets: dict,
+    lagna_rashi: str,
+    d9_positions: dict | None = None,
+) -> dict:
+    """Detect Neecha Bhanga Raja Yoga with full 5-condition check.
+
+    A debilitated planet gains cancellation of debilitation (Neecha Bhanga)
+    if ANY one of the following 5 conditions is met:
+
+    1. Lord of the debilitation sign is in kendra from Lagna or Moon
+    2. Lord of the exaltation sign is in kendra from Lagna or Moon
+    3. Planet exalted in the debilitation sign aspects the debilitated planet
+    4. Debilitated planet is retrograde
+    5. Debilitated planet is in Navamsha of its exaltation sign
+
+    Args:
+        planet: Planet name (e.g., "mars", "jupiter")
+        planet_data: Dict with keys like 'rashi', 'longitude', 'is_retrograde', 'house'
+        all_planets: Dict of all planet positions keyed by planet name or Planet enum
+        lagna_rashi: Ascendant sign name (e.g., "aries", "libra")
+        d9_positions: Optional dict of Navamsha positions keyed by planet name,
+                      each having a 'rashi' or 'rashi_name' field
+
+    Returns:
+        Dict with:
+        - has_neecha_bhanga (bool): Whether any condition is met
+        - conditions_met (list[str]): Descriptions of met conditions
+        - strength_modifier (float): 0.0 = no bhanga, higher = stronger cancellation
+    """
+    result = {
+        "has_neecha_bhanga": False,
+        "conditions_met": [],
+        "strength_modifier": 0.0,
+    }
+
+    # Exaltation/debilitation lookups
+    debilitation_map = {
+        "sun": "libra",
+        "moon": "scorpio",
+        "mars": "cancer",
+        "mercury": "pisces",
+        "jupiter": "capricorn",
+        "venus": "virgo",
+        "saturn": "aries",
+    }
+    exaltation_map = {
+        "sun": "aries",
+        "moon": "taurus",
+        "mars": "capricorn",
+        "mercury": "virgo",
+        "jupiter": "cancer",
+        "venus": "pisces",
+        "saturn": "libra",
+    }
+    sign_lords = {
+        "aries": "mars",
+        "taurus": "venus",
+        "gemini": "mercury",
+        "cancer": "moon",
+        "leo": "sun",
+        "virgo": "mercury",
+        "libra": "venus",
+        "scorpio": "mars",
+        "sagittarius": "jupiter",
+        "capricorn": "saturn",
+        "aquarius": "saturn",
+        "pisces": "jupiter",
+    }
+    rashi_list = [
+        "aries",
+        "taurus",
+        "gemini",
+        "cancer",
+        "leo",
+        "virgo",
+        "libra",
+        "scorpio",
+        "sagittarius",
+        "capricorn",
+        "aquarius",
+        "pisces",
+    ]
+
+    planet_lower = planet.lower()
+
+    # Get planet's current rashi
+    p_rashi = planet_data.get("rashi", "")
+    if hasattr(p_rashi, "value"):
+        p_rashi = p_rashi.value
+    p_rashi = p_rashi.lower()
+
+    # Check if planet is actually debilitated
+    debil_sign = debilitation_map.get(planet_lower)
+    if not debil_sign or p_rashi != debil_sign:
+        return result
+
+    exalt_sign = exaltation_map.get(planet_lower, "")
+
+    def _get_rashi(key):
+        """Extract rashi string from planet data in all_planets."""
+        data = all_planets.get(key)
+        if data is None:
+            # Try Planet enum
+            try:
+                data = all_planets.get(Planet(key))
+            except (ValueError, KeyError):
+                return None
+        if data is None:
+            return None
+        r = data.get("rashi", "") if isinstance(data, dict) else getattr(data, "rashi", "")
+        if hasattr(r, "value"):
+            r = r.value
+        return r.lower() if r else None
+
+    def _house_from_ref(planet_rashi_name, ref_rashi_name):
+        """Calculate house number from reference."""
+        if planet_rashi_name not in rashi_list or ref_rashi_name not in rashi_list:
+            return 0
+        p_idx = rashi_list.index(planet_rashi_name)
+        r_idx = rashi_list.index(ref_rashi_name)
+        return ((p_idx - r_idx) % 12) + 1
+
+    kendra_houses = {1, 4, 7, 10}
+    conditions_met = []
+
+    # Get Moon rashi for checks from Moon
+    moon_rashi = _get_rashi("moon")
+    lagna_lower = lagna_rashi.lower() if isinstance(lagna_rashi, str) else str(lagna_rashi).lower()
+
+    # Condition 1: Lord of debilitation sign in kendra from Lagna or Moon
+    debil_lord = sign_lords.get(debil_sign)
+    if debil_lord:
+        lord_rashi = _get_rashi(debil_lord)
+        if lord_rashi:
+            h_lagna = _house_from_ref(lord_rashi, lagna_lower)
+            h_moon = _house_from_ref(lord_rashi, moon_rashi) if moon_rashi else 0
+            if h_lagna in kendra_houses or h_moon in kendra_houses:
+                conditions_met.append(
+                    f"Lord of debilitation sign ({debil_lord.title()}) in kendra "
+                    f"from {'Lagna' if h_lagna in kendra_houses else 'Moon'}"
+                )
+
+    # Condition 2: Lord of exaltation sign in kendra from Lagna or Moon
+    if exalt_sign:
+        exalt_lord = sign_lords.get(exalt_sign)
+        if exalt_lord:
+            lord_rashi = _get_rashi(exalt_lord)
+            if lord_rashi:
+                h_lagna = _house_from_ref(lord_rashi, lagna_lower)
+                h_moon = _house_from_ref(lord_rashi, moon_rashi) if moon_rashi else 0
+                if h_lagna in kendra_houses or h_moon in kendra_houses:
+                    conditions_met.append(
+                        f"Lord of exaltation sign ({exalt_lord.title()}) in kendra "
+                        f"from {'Lagna' if h_lagna in kendra_houses else 'Moon'}"
+                    )
+
+    # Condition 3: Planet exalted in the debilitation sign aspects the debilitated planet
+    # Find which planet is exalted in the debilitation sign
+    for p_name, ex_sign in exaltation_map.items():
+        if ex_sign == debil_sign and p_name != planet_lower:
+            # This planet is exalted in the debilitation sign
+            aspecting_rashi = _get_rashi(p_name)
+            if aspecting_rashi and p_rashi:
+                # Check if it aspects the debilitated planet's sign
+                # All planets aspect 7th house, special aspects for Mars/Jupiter/Saturn
+                h = _house_from_ref(p_rashi, aspecting_rashi)
+                aspects = {7}
+                if p_name == "mars":
+                    aspects.update({4, 8})
+                elif p_name == "jupiter":
+                    aspects.update({5, 9})
+                elif p_name == "saturn":
+                    aspects.update({3, 10})
+                if h in aspects:
+                    conditions_met.append(
+                        f"{p_name.title()} (exalted in {debil_sign.title()}) "
+                        f"aspects the debilitated {planet_lower.title()}"
+                    )
+
+    # Condition 4: Debilitated planet is retrograde
+    is_retro = planet_data.get("is_retrograde", False)
+    if hasattr(is_retro, "__bool__"):
+        is_retro = bool(is_retro)
+    if is_retro:
+        conditions_met.append(f"{planet_lower.title()} is retrograde while debilitated")
+
+    # Condition 5: Debilitated planet is in Navamsha of its exaltation sign
+    if d9_positions and exalt_sign:
+        d9_data = d9_positions.get(planet_lower) or d9_positions.get(planet)
+        if d9_data:
+            d9_rashi = d9_data.get("rashi_name", d9_data.get("rashi", ""))
+            if hasattr(d9_rashi, "value"):
+                d9_rashi = d9_rashi.value
+            d9_rashi = d9_rashi.lower() if d9_rashi else ""
+            if d9_rashi == exalt_sign:
+                conditions_met.append(
+                    f"{planet_lower.title()} is in Navamsha of exaltation sign ({exalt_sign.title()})"
+                )
+
+    if conditions_met:
+        result["has_neecha_bhanga"] = True
+        result["conditions_met"] = conditions_met
+        # More conditions met = stronger cancellation
+        result["strength_modifier"] = min(1.0, 0.3 * len(conditions_met))
+
+    return result
+
+
 def detect_all_yogas(chart: BirthChart) -> list[DetectedYoga]:
     """Convenience function to detect all yogas in a birth chart.
 

@@ -62,6 +62,10 @@ from .aspects import (
     get_houses_aspected_by,
     get_planet_aspects,
 )
+from .bhava_chalit import (
+    calculate_bhava_chalit,
+    get_shifted_planets,
+)
 from .divisional import (
     DIVISIONAL_NAMES,
     ELEMENT_MAP,
@@ -201,6 +205,7 @@ __all__ = [
     "VargaStrength",
     "calculate_all_upagrahas",
     "calculate_ardhaprahara",
+    "calculate_bhava_chalit",
     "calculate_dhooma",
     "calculate_gulika",
     "calculate_indrachapa",
@@ -260,6 +265,7 @@ __all__ = [
     "get_planets_in_house",
     "get_saptamsha",
     "get_shashtiamsha",
+    "get_shifted_planets",
     "get_shodashamsha",
     "get_sunrise",
     "get_sunrise_sunset",

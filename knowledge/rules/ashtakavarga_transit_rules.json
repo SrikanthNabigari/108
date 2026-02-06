@@ -1,0 +1,282 @@
+{
+  "ashtakavarga_transit_rules": {
+    "description": "Ashtakavarga-based transit prediction rules from BPHS Chapter 66",
+    "version": "1.0",
+    "sav_thresholds": [
+      {
+        "type": "sav_threshold",
+        "min_bindus": 0,
+        "max_bindus": 18,
+        "quality": "very_unfavorable",
+        "interpretation": "Transit through this sign brings significant obstacles, losses, and setbacks. Health may suffer. Avoid initiating important activities when multiple planets transit this sign.",
+        "advice": "Practice patience, perform planetary remedies, avoid major decisions",
+        "remedies_suggested": true
+      },
+      {
+        "type": "sav_threshold",
+        "min_bindus": 19,
+        "max_bindus": 25,
+        "quality": "unfavorable",
+        "interpretation": "Transit through this sign brings below-average results. Mild obstacles and delays. Extra effort needed to achieve goals. Results are mediocre.",
+        "advice": "Proceed with caution, plan for delays, keep expectations moderate",
+        "remedies_suggested": true
+      },
+      {
+        "type": "sav_threshold",
+        "min_bindus": 26,
+        "max_bindus": 28,
+        "quality": "neutral",
+        "interpretation": "Transit through this sign brings average results. Neither strongly positive nor negative. Normal functioning with mixed outcomes.",
+        "advice": "Maintain routine activities, neither overly optimistic nor pessimistic",
+        "remedies_suggested": false
+      },
+      {
+        "type": "sav_threshold",
+        "min_bindus": 29,
+        "max_bindus": 33,
+        "quality": "favorable",
+        "interpretation": "Transit through this sign brings good results. Supportive environment for progress. Goals are achievable with reasonable effort.",
+        "advice": "Good time for important undertakings, positive outcomes likely",
+        "remedies_suggested": false
+      },
+      {
+        "type": "sav_threshold",
+        "min_bindus": 34,
+        "max_bindus": 56,
+        "quality": "very_favorable",
+        "interpretation": "Transit through this sign brings excellent results. Strong support for all endeavors. Highly auspicious period for major life events.",
+        "advice": "Excellent time for new ventures, major decisions, and important activities",
+        "remedies_suggested": false
+      }
+    ],
+    "bav_interpretations": {
+      "sun": [
+        {"min_bindus": 0, "max_bindus": 1, "quality": "very_weak", "interpretation": "Sun transit gives minimal vitality and recognition. Avoid authority confrontations. Health issues related to heart and eyes possible."},
+        {"min_bindus": 2, "max_bindus": 2, "quality": "weak", "interpretation": "Sun transit gives below-average results for career and status. Government matters face delays. Maintain low profile."},
+        {"min_bindus": 3, "max_bindus": 3, "quality": "below_average", "interpretation": "Sun transit brings mild challenges to authority matters. Some ego friction. Average health energy."},
+        {"min_bindus": 4, "max_bindus": 4, "quality": "average", "interpretation": "Sun transit gives normal results. Routine functioning in career and health. Neither gains nor losses in status."},
+        {"min_bindus": 5, "max_bindus": 5, "quality": "above_average", "interpretation": "Sun transit brings moderate success in career and recognition. Good time for government work. Vitality is good."},
+        {"min_bindus": 6, "max_bindus": 6, "quality": "strong", "interpretation": "Sun transit gives strong results for authority, career advancement, and health. Government favors likely. Leadership opportunities."},
+        {"min_bindus": 7, "max_bindus": 7, "quality": "very_strong", "interpretation": "Sun transit brings excellent authority and recognition. Promotion likely. Strong vitality. Father-related matters prosper."},
+        {"min_bindus": 8, "max_bindus": 8, "quality": "exceptional", "interpretation": "Sun transit at maximum strength. Peak career period. Government honors possible. Excellent health and confidence."}
+      ],
+      "moon": [
+        {"min_bindus": 0, "max_bindus": 1, "quality": "very_weak", "interpretation": "Moon transit gives emotional distress and mental anxiety. Poor sleep and restlessness. Mother's health may suffer."},
+        {"min_bindus": 2, "max_bindus": 2, "quality": "weak", "interpretation": "Moon transit brings below-average emotional state. Mild mood fluctuations. Public matters face obstacles."},
+        {"min_bindus": 3, "max_bindus": 3, "quality": "below_average", "interpretation": "Moon transit gives mildly unsettled emotions. Some domestic concerns. Average mental peace."},
+        {"min_bindus": 4, "max_bindus": 4, "quality": "average", "interpretation": "Moon transit gives normal emotional functioning. Routine domestic life. Average public interactions."},
+        {"min_bindus": 5, "max_bindus": 5, "quality": "above_average", "interpretation": "Moon transit brings good emotional state and mental peace. Favorable for public dealings and domestic happiness."},
+        {"min_bindus": 6, "max_bindus": 6, "quality": "strong", "interpretation": "Moon transit gives strong emotional well-being. Good for travel, public relations, and mother-related matters."},
+        {"min_bindus": 7, "max_bindus": 7, "quality": "very_strong", "interpretation": "Moon transit brings excellent mental peace and emotional fulfilment. Strong public support. Domestic bliss."},
+        {"min_bindus": 8, "max_bindus": 8, "quality": "exceptional", "interpretation": "Moon transit at maximum strength. Peak emotional happiness. Excellent for public ventures and family matters."}
+      ],
+      "mars": [
+        {"min_bindus": 0, "max_bindus": 1, "quality": "very_weak", "interpretation": "Mars transit brings injuries, accidents, and conflicts. Property disputes. Blood-related health issues. Avoid surgery."},
+        {"min_bindus": 2, "max_bindus": 2, "quality": "weak", "interpretation": "Mars transit gives below-average energy and courage. Conflicts with siblings. Technical projects face setbacks."},
+        {"min_bindus": 3, "max_bindus": 3, "quality": "below_average", "interpretation": "Mars transit brings mild competition and obstacles. Average physical energy. Some friction in relationships."},
+        {"min_bindus": 4, "max_bindus": 4, "quality": "average", "interpretation": "Mars transit gives normal energy and drive. Routine physical activities. Average courage and initiative."},
+        {"min_bindus": 5, "max_bindus": 5, "quality": "above_average", "interpretation": "Mars transit brings good energy and courage. Favorable for property matters and technical work. Siblings supportive."},
+        {"min_bindus": 6, "max_bindus": 6, "quality": "strong", "interpretation": "Mars transit gives strong energy and competitive edge. Good for real estate, sports, and military matters."},
+        {"min_bindus": 7, "max_bindus": 7, "quality": "very_strong", "interpretation": "Mars transit brings excellent physical strength and courage. Victory over competitors. Property gains likely."},
+        {"min_bindus": 8, "max_bindus": 8, "quality": "exceptional", "interpretation": "Mars transit at maximum strength. Peak physical prowess. Exceptional courage. Real estate and technical success."}
+      ],
+      "mercury": [
+        {"min_bindus": 0, "max_bindus": 1, "quality": "very_weak", "interpretation": "Mercury transit brings communication failures and business losses. Education disrupted. Nervous disorders possible."},
+        {"min_bindus": 2, "max_bindus": 2, "quality": "weak", "interpretation": "Mercury transit gives below-average intellectual performance. Business deals face complications. Writing and speech affected."},
+        {"min_bindus": 3, "max_bindus": 3, "quality": "below_average", "interpretation": "Mercury transit brings mild communication issues. Average business outcomes. Some confusion in planning."},
+        {"min_bindus": 4, "max_bindus": 4, "quality": "average", "interpretation": "Mercury transit gives normal intellectual functioning. Routine business and communication. Average academic performance."},
+        {"min_bindus": 5, "max_bindus": 5, "quality": "above_average", "interpretation": "Mercury transit brings good communication and business success. Favorable for education, writing, and trade."},
+        {"min_bindus": 6, "max_bindus": 6, "quality": "strong", "interpretation": "Mercury transit gives strong intellectual abilities. Good for examinations, contracts, and negotiations."},
+        {"min_bindus": 7, "max_bindus": 7, "quality": "very_strong", "interpretation": "Mercury transit brings excellent communication and business acumen. Academic honors. Successful negotiations."},
+        {"min_bindus": 8, "max_bindus": 8, "quality": "exceptional", "interpretation": "Mercury transit at maximum strength. Peak intellectual performance. Major business breakthroughs. Academic excellence."}
+      ],
+      "jupiter": [
+        {"min_bindus": 0, "max_bindus": 1, "quality": "very_weak", "interpretation": "Jupiter transit brings loss of fortune, poor judgment, and spiritual setbacks. Financial losses. Children may face difficulties."},
+        {"min_bindus": 2, "max_bindus": 2, "quality": "weak", "interpretation": "Jupiter transit gives below-average fortune and wisdom. Spiritual growth stalls. Financial growth is minimal."},
+        {"min_bindus": 3, "max_bindus": 3, "quality": "below_average", "interpretation": "Jupiter transit brings mild challenges in expansion and fortune. Average spiritual progress. Some teacher-student friction."},
+        {"min_bindus": 4, "max_bindus": 4, "quality": "average", "interpretation": "Jupiter transit gives normal fortune and wisdom. Routine religious observances. Average financial growth."},
+        {"min_bindus": 5, "max_bindus": 5, "quality": "above_average", "interpretation": "Jupiter transit brings good fortune and spiritual growth. Favorable for higher education, children, and dharmic pursuits."},
+        {"min_bindus": 6, "max_bindus": 6, "quality": "strong", "interpretation": "Jupiter transit gives strong prosperity and wisdom. Good for investments, teaching, and spiritual practices."},
+        {"min_bindus": 7, "max_bindus": 7, "quality": "very_strong", "interpretation": "Jupiter transit brings excellent fortune, prosperity, and spiritual advancement. Children thrive. Wealth increases."},
+        {"min_bindus": 8, "max_bindus": 8, "quality": "exceptional", "interpretation": "Jupiter transit at maximum strength. Peak prosperity and divine grace. Major wealth gains. Spiritual breakthroughs."}
+      ],
+      "venus": [
+        {"min_bindus": 0, "max_bindus": 1, "quality": "very_weak", "interpretation": "Venus transit brings relationship problems, lack of comfort, and financial difficulties. Romance suffers. Beauty and creativity blocked."},
+        {"min_bindus": 2, "max_bindus": 2, "quality": "weak", "interpretation": "Venus transit gives below-average relationship satisfaction and comfort. Luxury items may break. Artistic blocks."},
+        {"min_bindus": 3, "max_bindus": 3, "quality": "below_average", "interpretation": "Venus transit brings mild relationship concerns. Average comfort levels. Some creative challenges."},
+        {"min_bindus": 4, "max_bindus": 4, "quality": "average", "interpretation": "Venus transit gives normal relationship and comfort functioning. Routine pleasures. Average creative output."},
+        {"min_bindus": 5, "max_bindus": 5, "quality": "above_average", "interpretation": "Venus transit brings good relationship harmony and material comfort. Favorable for arts, romance, and luxury purchases."},
+        {"min_bindus": 6, "max_bindus": 6, "quality": "strong", "interpretation": "Venus transit gives strong romance, beauty, and material gains. Good for marriage, partnerships, and creative ventures."},
+        {"min_bindus": 7, "max_bindus": 7, "quality": "very_strong", "interpretation": "Venus transit brings excellent relationship fulfillment and luxury. Marriage prospects bright. Artistic success."},
+        {"min_bindus": 8, "max_bindus": 8, "quality": "exceptional", "interpretation": "Venus transit at maximum strength. Peak romance and material happiness. Exceptional beauty and creative brilliance."}
+      ],
+      "saturn": [
+        {"min_bindus": 0, "max_bindus": 1, "quality": "very_weak", "interpretation": "Saturn transit brings severe obstacles, chronic health issues, and delays. Loneliness and depression. Career setbacks."},
+        {"min_bindus": 2, "max_bindus": 2, "quality": "weak", "interpretation": "Saturn transit gives below-average results with frustrating delays. Hard work yields little reward. Health needs attention."},
+        {"min_bindus": 3, "max_bindus": 3, "quality": "below_average", "interpretation": "Saturn transit brings mild delays and restrictions. Average discipline. Some obstacles in long-term projects."},
+        {"min_bindus": 4, "max_bindus": 4, "quality": "average", "interpretation": "Saturn transit gives normal functioning with manageable restrictions. Routine discipline. Average long-term progress."},
+        {"min_bindus": 5, "max_bindus": 5, "quality": "above_average", "interpretation": "Saturn transit brings steady progress through discipline. Favorable for long-term investments and structured work."},
+        {"min_bindus": 6, "max_bindus": 6, "quality": "strong", "interpretation": "Saturn transit gives strong results through patience and hard work. Property gains. Career stability and recognition."},
+        {"min_bindus": 7, "max_bindus": 7, "quality": "very_strong", "interpretation": "Saturn transit brings excellent long-term gains. Discipline rewarded with authority. Property and career flourish."},
+        {"min_bindus": 8, "max_bindus": 8, "quality": "exceptional", "interpretation": "Saturn transit at maximum strength. Peak discipline bears fruit. Major career milestones. Long-term wealth accumulation."}
+      ]
+    },
+    "transit_modifiers": [
+      {
+        "type": "transit_modifier",
+        "condition": "planet_in_exaltation",
+        "modifier": 1.25,
+        "description": "Transit planet in exaltation sign amplifies ashtakavarga results by 25%"
+      },
+      {
+        "type": "transit_modifier",
+        "condition": "planet_in_debilitation",
+        "modifier": 0.75,
+        "description": "Transit planet in debilitation sign reduces ashtakavarga results by 25%"
+      },
+      {
+        "type": "transit_modifier",
+        "condition": "planet_in_own_sign",
+        "modifier": 1.15,
+        "description": "Transit planet in own sign slightly amplifies results by 15%"
+      },
+      {
+        "type": "transit_modifier",
+        "condition": "planet_retrograde",
+        "modifier": 0.80,
+        "description": "Retrograde transit planet reduces forward progress by 20%"
+      },
+      {
+        "type": "transit_modifier",
+        "condition": "planet_combust",
+        "modifier": 0.60,
+        "description": "Combust transit planet significantly weakens transit effects by 40%"
+      },
+      {
+        "type": "transit_modifier",
+        "condition": "conjunct_benefic",
+        "modifier": 1.20,
+        "description": "Transit planet conjunct benefic amplifies positive effects by 20%"
+      },
+      {
+        "type": "transit_modifier",
+        "condition": "conjunct_malefic",
+        "modifier": 0.85,
+        "description": "Transit planet conjunct malefic reduces positive effects by 15%"
+      },
+      {
+        "type": "transit_modifier",
+        "condition": "aspected_by_jupiter",
+        "modifier": 1.15,
+        "description": "Jupiter's aspect on transit planet provides protective boost of 15%"
+      }
+    ],
+    "kaksha_effects": [
+      {
+        "type": "kaksha",
+        "division": 1,
+        "ruler": "saturn",
+        "degrees": "0-3.75",
+        "effect": "Saturn's kaksha: Slow, methodical transit. Results delayed but lasting. Hard work during this sub-period.",
+        "nature": "restrictive"
+      },
+      {
+        "type": "kaksha",
+        "division": 2,
+        "ruler": "jupiter",
+        "degrees": "3.75-7.50",
+        "effect": "Jupiter's kaksha: Expansive and fortunate sub-period. Wisdom and growth during transit through this portion.",
+        "nature": "benefic"
+      },
+      {
+        "type": "kaksha",
+        "division": 3,
+        "ruler": "mars",
+        "degrees": "7.50-11.25",
+        "effect": "Mars's kaksha: Energetic and competitive sub-period. Action-oriented results. Possible conflicts.",
+        "nature": "mixed"
+      },
+      {
+        "type": "kaksha",
+        "division": 4,
+        "ruler": "sun",
+        "degrees": "11.25-15.00",
+        "effect": "Sun's kaksha: Authority and recognition sub-period. Government and leadership matters highlighted.",
+        "nature": "mixed"
+      },
+      {
+        "type": "kaksha",
+        "division": 5,
+        "ruler": "venus",
+        "degrees": "15.00-18.75",
+        "effect": "Venus's kaksha: Comfortable and pleasant sub-period. Romance, arts, and luxury favored.",
+        "nature": "benefic"
+      },
+      {
+        "type": "kaksha",
+        "division": 6,
+        "ruler": "mercury",
+        "degrees": "18.75-22.50",
+        "effect": "Mercury's kaksha: Intellectual and communicative sub-period. Business and education favored.",
+        "nature": "benefic"
+      },
+      {
+        "type": "kaksha",
+        "division": 7,
+        "ruler": "moon",
+        "degrees": "22.50-26.25",
+        "effect": "Moon's kaksha: Emotional and intuitive sub-period. Public dealings and domestic matters highlighted.",
+        "nature": "benefic"
+      },
+      {
+        "type": "kaksha",
+        "division": 8,
+        "ruler": "lagna",
+        "degrees": "26.25-30.00",
+        "effect": "Lagna's kaksha: Personal and self-focused sub-period. Results most directly felt by the native.",
+        "nature": "neutral"
+      }
+    ],
+    "combined_analysis": {
+      "description": "When SAV and BAV are both considered, use the following combination rules",
+      "rules": [
+        {
+          "sav_quality": "very_favorable",
+          "bav_quality": "strong",
+          "combined": "Highly auspicious transit period. Take bold action on important matters."
+        },
+        {
+          "sav_quality": "favorable",
+          "bav_quality": "strong",
+          "combined": "Good transit period with planetary support. Favorable for the planet's significations."
+        },
+        {
+          "sav_quality": "very_favorable",
+          "bav_quality": "weak",
+          "combined": "Sign is generally favorable but this planet struggles. Mixed results specific to planet's themes."
+        },
+        {
+          "sav_quality": "unfavorable",
+          "bav_quality": "strong",
+          "combined": "Planet is individually strong but environment unsupportive. Limited gains despite personal effort."
+        },
+        {
+          "sav_quality": "unfavorable",
+          "bav_quality": "weak",
+          "combined": "Challenging transit period. Avoid major decisions related to this planet's significations."
+        },
+        {
+          "sav_quality": "neutral",
+          "bav_quality": "average",
+          "combined": "Standard transit period. Routine activities proceed normally. No significant events expected."
+        }
+      ]
+    }
+  },
+  "metadata": {
+    "version": "1.0",
+    "total_rules": 101,
+    "categories": ["sav_thresholds", "bav_interpretations", "transit_modifiers", "kaksha_effects", "combined_analysis"],
+    "source": "BPHS Chapter 66, Traditional Vedic Astrology"
+  }
+}

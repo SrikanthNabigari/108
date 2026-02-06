@@ -1,0 +1,1201 @@
+{
+  "navamsha_spouse_rules": {
+    "description": "D9 Navamsha spouse prediction rules from BPHS and Jaimini Sutras",
+    "version": "1.0",
+    "d9_7th_lord_in_sign": [
+      {
+        "category": "d9_7th_lord_sign",
+        "sign": "aries",
+        "interpretation": "Spouse is assertive, independent, and pioneering. Quick to act, with leadership qualities. May have a reddish complexion or athletic build.",
+        "spouse_nature": "Independent, courageous, competitive",
+        "keywords": ["spouse", "assertive", "independent", "leadership"]
+      },
+      {
+        "category": "d9_7th_lord_sign",
+        "sign": "taurus",
+        "interpretation": "Spouse is stable, sensual, and beauty-loving. Values material comfort and security. Attractive appearance with pleasant features.",
+        "spouse_nature": "Stable, sensual, artistic",
+        "keywords": ["spouse", "stable", "beautiful", "comfort"]
+      },
+      {
+        "category": "d9_7th_lord_sign",
+        "sign": "gemini",
+        "interpretation": "Spouse is communicative, witty, and intellectually versatile. Youthful appearance with expressive eyes. May have dual interests.",
+        "spouse_nature": "Communicative, intelligent, youthful",
+        "keywords": ["spouse", "communicative", "intellectual", "witty"]
+      },
+      {
+        "category": "d9_7th_lord_sign",
+        "sign": "cancer",
+        "interpretation": "Spouse is nurturing, emotional, and family-oriented. Round face, caring disposition. Deeply attached to home and family.",
+        "spouse_nature": "Nurturing, emotional, domestic",
+        "keywords": ["spouse", "nurturing", "emotional", "family"]
+      },
+      {
+        "category": "d9_7th_lord_sign",
+        "sign": "leo",
+        "interpretation": "Spouse is regal, generous, and dignified. Commanding presence with warm personality. Desires admiration and respect in marriage.",
+        "spouse_nature": "Regal, generous, confident",
+        "keywords": ["spouse", "regal", "generous", "dignified"]
+      },
+      {
+        "category": "d9_7th_lord_sign",
+        "sign": "virgo",
+        "interpretation": "Spouse is practical, health-conscious, and detail-oriented. Neat appearance with analytical mind. Service-oriented and perfectionist.",
+        "spouse_nature": "Practical, analytical, health-conscious",
+        "keywords": ["spouse", "practical", "perfectionist", "service"]
+      },
+      {
+        "category": "d9_7th_lord_sign",
+        "sign": "libra",
+        "interpretation": "Spouse is diplomatic, charming, and aesthetically inclined. Attractive and well-balanced personality. Values harmony in relationships.",
+        "spouse_nature": "Diplomatic, charming, balanced",
+        "keywords": ["spouse", "charming", "diplomatic", "harmony"]
+      },
+      {
+        "category": "d9_7th_lord_sign",
+        "sign": "scorpio",
+        "interpretation": "Spouse is intense, passionate, and deeply loyal. Magnetic personality with penetrating eyes. Secretive nature with transformative influence.",
+        "spouse_nature": "Intense, passionate, loyal",
+        "keywords": ["spouse", "intense", "passionate", "secretive"]
+      },
+      {
+        "category": "d9_7th_lord_sign",
+        "sign": "sagittarius",
+        "interpretation": "Spouse is philosophical, optimistic, and freedom-loving. Tall or well-built with generous disposition. Values higher learning and travel.",
+        "spouse_nature": "Philosophical, optimistic, freedom-loving",
+        "keywords": ["spouse", "philosophical", "adventurous", "optimistic"]
+      },
+      {
+        "category": "d9_7th_lord_sign",
+        "sign": "capricorn",
+        "interpretation": "Spouse is mature, responsible, and ambitious. Structured approach to life with disciplined habits. May appear older or serious.",
+        "spouse_nature": "Mature, responsible, ambitious",
+        "keywords": ["spouse", "mature", "disciplined", "ambitious"]
+      },
+      {
+        "category": "d9_7th_lord_sign",
+        "sign": "aquarius",
+        "interpretation": "Spouse is unconventional, humanitarian, and intellectually independent. Unique appearance or style. Values friendship in marriage.",
+        "spouse_nature": "Unconventional, humanitarian, independent",
+        "keywords": ["spouse", "unconventional", "humanitarian", "independent"]
+      },
+      {
+        "category": "d9_7th_lord_sign",
+        "sign": "pisces",
+        "interpretation": "Spouse is compassionate, spiritual, and intuitive. Dreamy eyes with gentle demeanor. Artistic and selfless in love.",
+        "spouse_nature": "Compassionate, spiritual, intuitive",
+        "keywords": ["spouse", "compassionate", "spiritual", "artistic"]
+      }
+    ],
+    "venus_in_d9_sign": [
+      {
+        "category": "venus_d9_sign",
+        "planet": "venus",
+        "sign": "aries",
+        "applicable_for": "male_chart",
+        "interpretation": "Wife is energetic, bold, and passionate. Quick to express love. Athletic build, possibly sharp features. Reddish or warm complexion.",
+        "keywords": ["spouse", "appearance", "bold", "energetic"]
+      },
+      {
+        "category": "venus_d9_sign",
+        "planet": "venus",
+        "sign": "taurus",
+        "applicable_for": "male_chart",
+        "interpretation": "Wife is beautiful, graceful, and loves luxury. Venus in own sign gives an attractive, fair-complexioned spouse with artistic taste.",
+        "keywords": ["spouse", "appearance", "beautiful", "luxurious"]
+      },
+      {
+        "category": "venus_d9_sign",
+        "planet": "venus",
+        "sign": "gemini",
+        "applicable_for": "male_chart",
+        "interpretation": "Wife is communicative, witty, and youthful looking. Slim build with expressive features. Intellectually stimulating companion.",
+        "keywords": ["spouse", "appearance", "youthful", "communicative"]
+      },
+      {
+        "category": "venus_d9_sign",
+        "planet": "venus",
+        "sign": "cancer",
+        "applicable_for": "male_chart",
+        "interpretation": "Wife is nurturing, emotionally warm, with a round face. Fair or pale complexion. Devoted to family and home. Excellent cook.",
+        "keywords": ["spouse", "appearance", "nurturing", "domestic"]
+      },
+      {
+        "category": "venus_d9_sign",
+        "planet": "venus",
+        "sign": "leo",
+        "applicable_for": "male_chart",
+        "interpretation": "Wife has a regal bearing, warm and generous. Prominent hair, confident gait. Loves to be admired and attracts attention naturally.",
+        "keywords": ["spouse", "appearance", "regal", "confident"]
+      },
+      {
+        "category": "venus_d9_sign",
+        "planet": "venus",
+        "sign": "virgo",
+        "applicable_for": "male_chart",
+        "interpretation": "Wife is modest, neat, and health-conscious. Venus debilitated here gives a practical but less romantic spouse. Detail-oriented nature.",
+        "keywords": ["spouse", "appearance", "modest", "practical"]
+      },
+      {
+        "category": "venus_d9_sign",
+        "planet": "venus",
+        "sign": "libra",
+        "applicable_for": "male_chart",
+        "interpretation": "Wife is exceptionally beautiful, charming, and socially graceful. Venus in own sign gives balanced features and artistic temperament.",
+        "keywords": ["spouse", "appearance", "beautiful", "charming"]
+      },
+      {
+        "category": "venus_d9_sign",
+        "planet": "venus",
+        "sign": "scorpio",
+        "applicable_for": "male_chart",
+        "interpretation": "Wife is intensely attractive, magnetic, and passionate. Deep penetrating eyes. Secretive nature with strong sensuality.",
+        "keywords": ["spouse", "appearance", "magnetic", "passionate"]
+      },
+      {
+        "category": "venus_d9_sign",
+        "planet": "venus",
+        "sign": "sagittarius",
+        "applicable_for": "male_chart",
+        "interpretation": "Wife is tall, well-built, and optimistic. Freedom-loving with philosophical nature. Athletic appearance, enjoys outdoor activities.",
+        "keywords": ["spouse", "appearance", "tall", "optimistic"]
+      },
+      {
+        "category": "venus_d9_sign",
+        "planet": "venus",
+        "sign": "capricorn",
+        "applicable_for": "male_chart",
+        "interpretation": "Wife is mature-looking, serious, and disciplined. May appear older than actual age. Slim build with structured features.",
+        "keywords": ["spouse", "appearance", "mature", "disciplined"]
+      },
+      {
+        "category": "venus_d9_sign",
+        "planet": "venus",
+        "sign": "aquarius",
+        "applicable_for": "male_chart",
+        "interpretation": "Wife has unique or unconventional appearance. Tall with distinctive features. Independent thinker with humanitarian interests.",
+        "keywords": ["spouse", "appearance", "unique", "unconventional"]
+      },
+      {
+        "category": "venus_d9_sign",
+        "planet": "venus",
+        "sign": "pisces",
+        "applicable_for": "male_chart",
+        "interpretation": "Wife is dreamy, beautiful with large expressive eyes. Venus exalted here gives a compassionate, spiritual, and artistically gifted spouse.",
+        "keywords": ["spouse", "appearance", "dreamy", "spiritual"]
+      }
+    ],
+    "jupiter_in_d9_sign": [
+      {
+        "category": "jupiter_d9_sign",
+        "planet": "jupiter",
+        "sign": "aries",
+        "applicable_for": "female_chart",
+        "interpretation": "Husband is assertive, confident, and pioneering. Strong build with commanding presence. Natural leader with protective instincts.",
+        "keywords": ["spouse", "appearance", "assertive", "leader"]
+      },
+      {
+        "category": "jupiter_d9_sign",
+        "planet": "jupiter",
+        "sign": "taurus",
+        "applicable_for": "female_chart",
+        "interpretation": "Husband is stable, wealthy, and comfort-loving. Solid build with pleasant face. Values material security and family traditions.",
+        "keywords": ["spouse", "appearance", "stable", "wealthy"]
+      },
+      {
+        "category": "jupiter_d9_sign",
+        "planet": "jupiter",
+        "sign": "gemini",
+        "applicable_for": "female_chart",
+        "interpretation": "Husband is intellectual, communicative, and versatile. Medium build with youthful appearance. Enjoys learning and social interaction.",
+        "keywords": ["spouse", "appearance", "intellectual", "versatile"]
+      },
+      {
+        "category": "jupiter_d9_sign",
+        "planet": "jupiter",
+        "sign": "cancer",
+        "applicable_for": "female_chart",
+        "interpretation": "Husband is nurturing, emotionally wise, and protective. Jupiter exalted here gives a deeply caring, prosperous, and spiritual spouse.",
+        "keywords": ["spouse", "appearance", "nurturing", "prosperous"]
+      },
+      {
+        "category": "jupiter_d9_sign",
+        "planet": "jupiter",
+        "sign": "leo",
+        "applicable_for": "female_chart",
+        "interpretation": "Husband is dignified, generous, and authoritative. Tall with commanding presence. Natural leader with noble character.",
+        "keywords": ["spouse", "appearance", "dignified", "generous"]
+      },
+      {
+        "category": "jupiter_d9_sign",
+        "planet": "jupiter",
+        "sign": "virgo",
+        "applicable_for": "female_chart",
+        "interpretation": "Husband is analytical, health-conscious, and service-oriented. Medium build with intelligent features. Practical and methodical nature.",
+        "keywords": ["spouse", "appearance", "analytical", "practical"]
+      },
+      {
+        "category": "jupiter_d9_sign",
+        "planet": "jupiter",
+        "sign": "libra",
+        "applicable_for": "female_chart",
+        "interpretation": "Husband is balanced, diplomatic, and socially graceful. Handsome with refined manners. Values justice and harmony in relationships.",
+        "keywords": ["spouse", "appearance", "balanced", "diplomatic"]
+      },
+      {
+        "category": "jupiter_d9_sign",
+        "planet": "jupiter",
+        "sign": "scorpio",
+        "applicable_for": "female_chart",
+        "interpretation": "Husband is intense, deeply insightful, and transformative. Magnetic presence with piercing gaze. May be involved in research or occult.",
+        "keywords": ["spouse", "appearance", "intense", "insightful"]
+      },
+      {
+        "category": "jupiter_d9_sign",
+        "planet": "jupiter",
+        "sign": "sagittarius",
+        "applicable_for": "female_chart",
+        "interpretation": "Husband is wise, philosophical, and generous. Jupiter in own sign gives a tall, well-built, dharmic, and spiritually inclined spouse.",
+        "keywords": ["spouse", "appearance", "wise", "philosophical"]
+      },
+      {
+        "category": "jupiter_d9_sign",
+        "planet": "jupiter",
+        "sign": "capricorn",
+        "applicable_for": "female_chart",
+        "interpretation": "Husband is serious, ambitious, and disciplined. Jupiter debilitated here may give a less religious or materialistic spouse. Thin build.",
+        "keywords": ["spouse", "appearance", "serious", "ambitious"]
+      },
+      {
+        "category": "jupiter_d9_sign",
+        "planet": "jupiter",
+        "sign": "aquarius",
+        "applicable_for": "female_chart",
+        "interpretation": "Husband is innovative, humanitarian, and unconventional. Tall with distinctive features. Progressive thinker with scientific mind.",
+        "keywords": ["spouse", "appearance", "innovative", "humanitarian"]
+      },
+      {
+        "category": "jupiter_d9_sign",
+        "planet": "jupiter",
+        "sign": "pisces",
+        "applicable_for": "female_chart",
+        "interpretation": "Husband is spiritual, compassionate, and artistic. Jupiter in own sign gives a wise, generous, and spiritually evolved spouse.",
+        "keywords": ["spouse", "appearance", "spiritual", "compassionate"]
+      }
+    ],
+    "d9_lagna_in_sign": [
+      {
+        "category": "d9_lagna_sign",
+        "sign": "aries",
+        "interpretation": "Dynamic and passionate marriage. Both partners are independent. Quick engagement but possible conflicts from ego. Marriage brings energy and initiative.",
+        "marriage_quality": "Passionate but fiery, needs patience",
+        "keywords": ["marriage", "quality", "passionate", "independent"]
+      },
+      {
+        "category": "d9_lagna_sign",
+        "sign": "taurus",
+        "interpretation": "Stable and comfortable marriage. Partners value security and sensual pleasures. Wealth accumulates after marriage. Strong physical bond.",
+        "marriage_quality": "Stable, comfortable, enduring",
+        "keywords": ["marriage", "quality", "stable", "comfortable"]
+      },
+      {
+        "category": "d9_lagna_sign",
+        "sign": "gemini",
+        "interpretation": "Intellectually stimulating marriage. Communication is central. May have dual nature in partnerships. Friendship-based relationship.",
+        "marriage_quality": "Communicative, intellectual, sometimes dual",
+        "keywords": ["marriage", "quality", "intellectual", "communicative"]
+      },
+      {
+        "category": "d9_lagna_sign",
+        "sign": "cancer",
+        "interpretation": "Emotionally deep marriage. Home and family are priorities. Strong nurturing bond. Possible mood swings affecting relationship.",
+        "marriage_quality": "Nurturing, emotional, home-centered",
+        "keywords": ["marriage", "quality", "nurturing", "emotional"]
+      },
+      {
+        "category": "d9_lagna_sign",
+        "sign": "leo",
+        "interpretation": "Royal and dignified marriage. Both partners seek recognition. Generous and warm relationship. Children bring joy.",
+        "marriage_quality": "Dignified, generous, expressive",
+        "keywords": ["marriage", "quality", "dignified", "generous"]
+      },
+      {
+        "category": "d9_lagna_sign",
+        "sign": "virgo",
+        "interpretation": "Practical and service-oriented marriage. Focus on health and daily routines. May lack romance but strong in devotion and duty.",
+        "marriage_quality": "Practical, dutiful, health-conscious",
+        "keywords": ["marriage", "quality", "practical", "dutiful"]
+      },
+      {
+        "category": "d9_lagna_sign",
+        "sign": "libra",
+        "interpretation": "Harmonious and balanced marriage. Beauty and aesthetics play a role. Strong partnership with mutual respect. Social life is important.",
+        "marriage_quality": "Harmonious, balanced, social",
+        "keywords": ["marriage", "quality", "harmonious", "balanced"]
+      },
+      {
+        "category": "d9_lagna_sign",
+        "sign": "scorpio",
+        "interpretation": "Intense and transformative marriage. Deep emotional and physical connection. Power dynamics may be challenging. Loyalty is paramount.",
+        "marriage_quality": "Intense, transformative, deeply bonded",
+        "keywords": ["marriage", "quality", "intense", "transformative"]
+      },
+      {
+        "category": "d9_lagna_sign",
+        "sign": "sagittarius",
+        "interpretation": "Philosophical and freedom-loving marriage. Partners share spiritual interests. Long-distance or cross-cultural marriage possible.",
+        "marriage_quality": "Philosophical, adventurous, growth-oriented",
+        "keywords": ["marriage", "quality", "philosophical", "adventurous"]
+      },
+      {
+        "category": "d9_lagna_sign",
+        "sign": "capricorn",
+        "interpretation": "Structured and serious marriage. Partners are ambitious and goal-oriented. Delayed marriage possible but long-lasting once established.",
+        "marriage_quality": "Structured, ambitious, enduring",
+        "keywords": ["marriage", "quality", "structured", "ambitious"]
+      },
+      {
+        "category": "d9_lagna_sign",
+        "sign": "aquarius",
+        "interpretation": "Unconventional marriage. Partners value intellectual freedom. Friendship is the basis of the relationship. May have unusual living arrangements.",
+        "marriage_quality": "Unconventional, friendship-based, independent",
+        "keywords": ["marriage", "quality", "unconventional", "independent"]
+      },
+      {
+        "category": "d9_lagna_sign",
+        "sign": "pisces",
+        "interpretation": "Spiritual and compassionate marriage. Deep soul connection with partner. Artistic and romantic relationship. Possible idealization of spouse.",
+        "marriage_quality": "Spiritual, compassionate, romantic",
+        "keywords": ["marriage", "quality", "spiritual", "romantic"]
+      }
+    ],
+    "planet_in_d9_7th": [
+      {
+        "category": "planet_in_d9_7th",
+        "planet": "sun",
+        "interpretation": "Spouse is authoritative, proud, and status-conscious. Government or leadership career for spouse. Ego clashes possible in marriage.",
+        "spouse_characteristics": "Authoritative, proud, status-conscious",
+        "keywords": ["spouse", "characteristics", "authoritative", "proud"]
+      },
+      {
+        "category": "planet_in_d9_7th",
+        "planet": "moon",
+        "interpretation": "Spouse is emotional, nurturing, and changeable. Public-facing career for spouse. Strong emotional bond in marriage. May have mood fluctuations.",
+        "spouse_characteristics": "Emotional, nurturing, intuitive",
+        "keywords": ["spouse", "characteristics", "emotional", "nurturing"]
+      },
+      {
+        "category": "planet_in_d9_7th",
+        "planet": "mars",
+        "interpretation": "Spouse is energetic, courageous, and possibly aggressive. Technical or military career. Passionate marriage with potential for conflicts.",
+        "spouse_characteristics": "Energetic, courageous, passionate",
+        "keywords": ["spouse", "characteristics", "energetic", "passionate"]
+      },
+      {
+        "category": "planet_in_d9_7th",
+        "planet": "mercury",
+        "interpretation": "Spouse is intelligent, communicative, and business-minded. Young appearance. Marriage based on intellectual connection and friendship.",
+        "spouse_characteristics": "Intelligent, communicative, youthful",
+        "keywords": ["spouse", "characteristics", "intelligent", "communicative"]
+      },
+      {
+        "category": "planet_in_d9_7th",
+        "planet": "jupiter",
+        "interpretation": "Spouse is wise, religious, and prosperous. Teaching or advisory career. Blessed marriage with dharmic foundation. Generous partner.",
+        "spouse_characteristics": "Wise, religious, prosperous",
+        "keywords": ["spouse", "characteristics", "wise", "prosperous"]
+      },
+      {
+        "category": "planet_in_d9_7th",
+        "planet": "venus",
+        "interpretation": "Spouse is beautiful, artistic, and pleasure-loving. Creative or luxury industry career. Romantic and harmonious marriage. Physical attraction strong.",
+        "spouse_characteristics": "Beautiful, artistic, romantic",
+        "keywords": ["spouse", "characteristics", "beautiful", "artistic"]
+      },
+      {
+        "category": "planet_in_d9_7th",
+        "planet": "saturn",
+        "interpretation": "Spouse is serious, mature, and hardworking. Delayed marriage possible. Older spouse or one with heavy responsibilities. Enduring bond.",
+        "spouse_characteristics": "Serious, mature, responsible",
+        "keywords": ["spouse", "characteristics", "mature", "responsible"]
+      },
+      {
+        "category": "planet_in_d9_7th",
+        "planet": "rahu",
+        "interpretation": "Spouse is unconventional, foreign, or from different background. May involve inter-caste or cross-cultural marriage. Unusual circumstances around marriage.",
+        "spouse_characteristics": "Unconventional, foreign influence, unique",
+        "keywords": ["spouse", "characteristics", "unconventional", "foreign"]
+      },
+      {
+        "category": "planet_in_d9_7th",
+        "planet": "ketu",
+        "interpretation": "Spouse is spiritual, detached, or reclusive. Past-life karmic connection with partner. Spiritual bond but may lack material focus.",
+        "spouse_characteristics": "Spiritual, detached, karmic connection",
+        "keywords": ["spouse", "characteristics", "spiritual", "detached"]
+      }
+    ],
+    "upapada_cross_reference": [
+      {
+        "category": "upapada_sign",
+        "sign": "aries",
+        "interpretation": "Upapada in Aries: Spouse is assertive and independent. Marriage happens quickly. Partner from military, sports, or competitive fields.",
+        "keywords": ["upapada", "marriage", "assertive"]
+      },
+      {
+        "category": "upapada_sign",
+        "sign": "taurus",
+        "interpretation": "Upapada in Taurus: Spouse is wealthy and beautiful. Venus-ruled sign indicates comfort and luxury in marriage. Stable relationship.",
+        "keywords": ["upapada", "marriage", "wealthy"]
+      },
+      {
+        "category": "upapada_sign",
+        "sign": "gemini",
+        "interpretation": "Upapada in Gemini: Spouse is communicative and intellectual. May meet through education or media. Dual nature possible in relationships.",
+        "keywords": ["upapada", "marriage", "intellectual"]
+      },
+      {
+        "category": "upapada_sign",
+        "sign": "cancer",
+        "interpretation": "Upapada in Cancer: Spouse is nurturing and family-oriented. Emotional bond is strong. Marriage brings domestic happiness.",
+        "keywords": ["upapada", "marriage", "nurturing"]
+      },
+      {
+        "category": "upapada_sign",
+        "sign": "leo",
+        "interpretation": "Upapada in Leo: Spouse is proud and dignified. Partner may be from royal, political, or entertainment background. Generous marriage.",
+        "keywords": ["upapada", "marriage", "dignified"]
+      },
+      {
+        "category": "upapada_sign",
+        "sign": "virgo",
+        "interpretation": "Upapada in Virgo: Spouse is practical and service-oriented. Marriage based on duty and shared responsibilities. Health-conscious partner.",
+        "keywords": ["upapada", "marriage", "practical"]
+      },
+      {
+        "category": "upapada_sign",
+        "sign": "libra",
+        "interpretation": "Upapada in Libra: Spouse is attractive and diplomatic. Marriage is harmonious with mutual respect. Partner from artistic or legal background.",
+        "keywords": ["upapada", "marriage", "harmonious"]
+      },
+      {
+        "category": "upapada_sign",
+        "sign": "scorpio",
+        "interpretation": "Upapada in Scorpio: Spouse is intense and secretive. Deep karmic connection. Marriage involves transformation. Partner from research or occult fields.",
+        "keywords": ["upapada", "marriage", "intense"]
+      },
+      {
+        "category": "upapada_sign",
+        "sign": "sagittarius",
+        "interpretation": "Upapada in Sagittarius: Spouse is philosophical and freedom-loving. Partner from teaching, law, or religious background. Cross-cultural marriage possible.",
+        "keywords": ["upapada", "marriage", "philosophical"]
+      },
+      {
+        "category": "upapada_sign",
+        "sign": "capricorn",
+        "interpretation": "Upapada in Capricorn: Spouse is ambitious and disciplined. Delayed marriage but enduring. Partner from business or government background.",
+        "keywords": ["upapada", "marriage", "ambitious"]
+      },
+      {
+        "category": "upapada_sign",
+        "sign": "aquarius",
+        "interpretation": "Upapada in Aquarius: Spouse is unconventional and humanitarian. Unique marriage circumstances. Partner from technology or social work background.",
+        "keywords": ["upapada", "marriage", "unconventional"]
+      },
+      {
+        "category": "upapada_sign",
+        "sign": "pisces",
+        "interpretation": "Upapada in Pisces: Spouse is spiritual and compassionate. Deep soul connection. Partner from artistic, healing, or spiritual background.",
+        "keywords": ["upapada", "marriage", "spiritual"]
+      }
+    ],
+    "planet_combinations_in_d9_7th": [
+      {
+        "category": "d9_7th_combo",
+        "planet": "sun",
+        "sign": "aries",
+        "interpretation": "Sun exalted in D9 7th: Spouse from prestigious family with strong social standing. Marriage elevates status.",
+        "strength": "strong",
+        "keywords": ["spouse", "marriage", "prestigious"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "sun",
+        "sign": "taurus",
+        "interpretation": "Sun in Taurus in D9 7th: Spouse is materially stable and values traditions. Steady but slightly rigid partnership.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "stable"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "sun",
+        "sign": "gemini",
+        "interpretation": "Sun in Gemini in D9 7th: Spouse is articulate and socially active. Intellectual stimulation in marriage.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "intellectual"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "sun",
+        "sign": "cancer",
+        "interpretation": "Sun in Cancer in D9 7th: Spouse is emotionally caring but ego may affect domestic harmony. Protective partner.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "protective"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "sun",
+        "sign": "leo",
+        "interpretation": "Sun in own sign in D9 7th: Spouse has strong personality and leadership abilities. Dignified and proud partner.",
+        "strength": "strong",
+        "keywords": ["spouse", "marriage", "dignified"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "sun",
+        "sign": "virgo",
+        "interpretation": "Sun in Virgo in D9 7th: Spouse is analytical and service-oriented. Critical nature may create friction.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "analytical"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "sun",
+        "sign": "libra",
+        "interpretation": "Sun debilitated in D9 7th: Challenges in marriage from ego issues. Spouse may lack confidence or face health issues.",
+        "strength": "weak",
+        "keywords": ["spouse", "marriage", "challenges"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "sun",
+        "sign": "scorpio",
+        "interpretation": "Sun in Scorpio in D9 7th: Spouse has deep psychological insight. Intense and transformative marriage dynamics.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "transformative"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "sun",
+        "sign": "sagittarius",
+        "interpretation": "Sun in Sagittarius in D9 7th: Spouse is philosophical and righteous. Marriage has dharmic foundation.",
+        "strength": "strong",
+        "keywords": ["spouse", "marriage", "dharmic"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "sun",
+        "sign": "capricorn",
+        "interpretation": "Sun in Capricorn in D9 7th: Spouse is ambitious and hardworking. Structured marriage with clear responsibilities.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "ambitious"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "sun",
+        "sign": "aquarius",
+        "interpretation": "Sun in Aquarius in D9 7th: Spouse is independent and humanitarian. Unconventional marriage dynamics.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "independent"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "sun",
+        "sign": "pisces",
+        "interpretation": "Sun in Pisces in D9 7th: Spouse is compassionate and spiritual. Selfless love in marriage.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "compassionate"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "moon",
+        "sign": "aries",
+        "interpretation": "Moon in Aries in D9 7th: Emotionally impulsive spouse. Quick reactions in marriage. Partner is emotionally courageous.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "impulsive"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "moon",
+        "sign": "taurus",
+        "interpretation": "Moon exalted in D9 7th: Emotionally stable and nurturing spouse. Excellent for marital harmony and domestic happiness.",
+        "strength": "strong",
+        "keywords": ["spouse", "marriage", "emotionally_stable"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "moon",
+        "sign": "gemini",
+        "interpretation": "Moon in Gemini in D9 7th: Communicative and mentally agile spouse. Emotional connection through words and ideas.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "communicative"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "moon",
+        "sign": "cancer",
+        "interpretation": "Moon in own sign in D9 7th: Deeply nurturing and protective spouse. Strong maternal instincts. Ideal for domestic happiness.",
+        "strength": "strong",
+        "keywords": ["spouse", "marriage", "nurturing"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "moon",
+        "sign": "leo",
+        "interpretation": "Moon in Leo in D9 7th: Emotionally proud and generous spouse. Dramatic expressions of love. Warm-hearted partner.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "generous"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "moon",
+        "sign": "virgo",
+        "interpretation": "Moon in Virgo in D9 7th: Emotionally practical spouse. Caring through service and attention to detail.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "practical"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "moon",
+        "sign": "libra",
+        "interpretation": "Moon in Libra in D9 7th: Emotionally balanced and harmonious spouse. Aesthetic sensibility in partner.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "balanced"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "moon",
+        "sign": "scorpio",
+        "interpretation": "Moon debilitated in D9 7th: Emotionally intense spouse. Deep but turbulent emotional connection. Jealousy possible.",
+        "strength": "weak",
+        "keywords": ["spouse", "marriage", "intense"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "moon",
+        "sign": "sagittarius",
+        "interpretation": "Moon in Sagittarius in D9 7th: Emotionally optimistic spouse. Freedom in emotional expression. Philosophical partner.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "optimistic"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "moon",
+        "sign": "capricorn",
+        "interpretation": "Moon in Capricorn in D9 7th: Emotionally reserved spouse. Stability through structure. Mature emotional bond.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "reserved"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "moon",
+        "sign": "aquarius",
+        "interpretation": "Moon in Aquarius in D9 7th: Emotionally detached but intellectually connected spouse. Friendship-based emotional bond.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "detached"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "moon",
+        "sign": "pisces",
+        "interpretation": "Moon in Pisces in D9 7th: Dreamy, compassionate, and intuitive spouse. Deep spiritual and emotional connection.",
+        "strength": "strong",
+        "keywords": ["spouse", "marriage", "compassionate"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "venus",
+        "sign": "aries",
+        "interpretation": "Venus in Aries in D9 7th: Passionate and bold spouse. Quick to fall in love. Romantic but impulsive partner.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "passionate"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "venus",
+        "sign": "taurus",
+        "interpretation": "Venus in own sign in D9 7th: Beautiful, luxurious, and devoted spouse. Excellent for marital harmony and material comfort.",
+        "strength": "strong",
+        "keywords": ["spouse", "marriage", "beautiful"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "venus",
+        "sign": "gemini",
+        "interpretation": "Venus in Gemini in D9 7th: Charming and communicative spouse. Social butterfly. Flirtatious but intellectually engaging.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "charming"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "venus",
+        "sign": "cancer",
+        "interpretation": "Venus in Cancer in D9 7th: Loving, caring, and emotionally giving spouse. Home-oriented partner with good cooking skills.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "caring"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "venus",
+        "sign": "leo",
+        "interpretation": "Venus in Leo in D9 7th: Glamorous and expressive spouse. Loves grand romantic gestures. Artistic and warm partner.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "glamorous"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "venus",
+        "sign": "virgo",
+        "interpretation": "Venus debilitated in D9 7th: Challenges in marital harmony. Spouse may be overly critical or lack romantic expression.",
+        "strength": "weak",
+        "keywords": ["spouse", "marriage", "challenges"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "venus",
+        "sign": "libra",
+        "interpretation": "Venus in own sign in D9 7th: Exceptionally harmonious marriage. Beautiful and charming spouse. Strong partnership.",
+        "strength": "strong",
+        "keywords": ["spouse", "marriage", "harmonious"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "venus",
+        "sign": "scorpio",
+        "interpretation": "Venus in Scorpio in D9 7th: Deeply passionate and magnetic spouse. Intense physical connection. Jealousy possible.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "passionate"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "venus",
+        "sign": "sagittarius",
+        "interpretation": "Venus in Sagittarius in D9 7th: Adventurous and freedom-loving spouse. Romance through shared travel and philosophy.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "adventurous"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "venus",
+        "sign": "capricorn",
+        "interpretation": "Venus in Capricorn in D9 7th: Practical and committed spouse. Marriage improves over time. Loyalty-based partnership.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "committed"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "venus",
+        "sign": "aquarius",
+        "interpretation": "Venus in Aquarius in D9 7th: Independent and unique spouse. Non-traditional approach to love. Friendship-first marriage.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "independent"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "venus",
+        "sign": "pisces",
+        "interpretation": "Venus exalted in D9 7th: Exceptionally beautiful and spiritual spouse. Ideal placement for marital bliss and devotion.",
+        "strength": "strong",
+        "keywords": ["spouse", "marriage", "spiritual"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "jupiter",
+        "sign": "aries",
+        "interpretation": "Jupiter in Aries in D9 7th: Wise and pioneering spouse. Partner provides moral leadership and courage in marriage.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "wise"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "jupiter",
+        "sign": "taurus",
+        "interpretation": "Jupiter in Taurus in D9 7th: Wealthy and generous spouse. Material prosperity through marriage. Comfort-oriented partnership.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "wealthy"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "jupiter",
+        "sign": "gemini",
+        "interpretation": "Jupiter in Gemini in D9 7th: Knowledgeable and communicative spouse. Marriage benefits from shared intellectual pursuits.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "knowledgeable"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "jupiter",
+        "sign": "cancer",
+        "interpretation": "Jupiter exalted in D9 7th: Deeply fortunate marriage. Nurturing, wise, and prosperous spouse. Blessings from divine grace.",
+        "strength": "strong",
+        "keywords": ["spouse", "marriage", "fortunate"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "jupiter",
+        "sign": "leo",
+        "interpretation": "Jupiter in Leo in D9 7th: Noble and generous spouse. Partner from respected family. Marriage brings honor and status.",
+        "strength": "strong",
+        "keywords": ["spouse", "marriage", "noble"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "jupiter",
+        "sign": "virgo",
+        "interpretation": "Jupiter in Virgo in D9 7th: Analytical and service-oriented spouse. Marriage grounded in practical wisdom.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "practical"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "jupiter",
+        "sign": "libra",
+        "interpretation": "Jupiter in Libra in D9 7th: Balanced and just spouse. Marriage based on dharmic principles. Fair-minded partner.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "balanced"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "jupiter",
+        "sign": "scorpio",
+        "interpretation": "Jupiter in Scorpio in D9 7th: Deeply spiritual spouse. Transformative marriage. Partner interested in occult or research.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "spiritual"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "jupiter",
+        "sign": "sagittarius",
+        "interpretation": "Jupiter in own sign in D9 7th: Ideal spouse - wise, generous, dharmic. Excellent marriage with shared values and growth.",
+        "strength": "strong",
+        "keywords": ["spouse", "marriage", "ideal"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "jupiter",
+        "sign": "capricorn",
+        "interpretation": "Jupiter debilitated in D9 7th: Challenges from materialistic spouse. Lack of dharmic foundation in marriage.",
+        "strength": "weak",
+        "keywords": ["spouse", "marriage", "challenges"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "jupiter",
+        "sign": "aquarius",
+        "interpretation": "Jupiter in Aquarius in D9 7th: Progressive and humanitarian spouse. Unique marriage philosophy. Friendship-based bond.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "progressive"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "jupiter",
+        "sign": "pisces",
+        "interpretation": "Jupiter in own sign in D9 7th: Spiritual and compassionate spouse. Deep devotional marriage. Partner brings divine grace.",
+        "strength": "strong",
+        "keywords": ["spouse", "marriage", "devotional"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "mars",
+        "sign": "aries",
+        "interpretation": "Mars in own sign in D9 7th: Strong and courageous spouse. Passionate marriage with assertive dynamics.",
+        "strength": "strong",
+        "keywords": ["spouse", "marriage", "courageous"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "mars",
+        "sign": "taurus",
+        "interpretation": "Mars in Taurus in D9 7th: Determined and possessive spouse. Strong physical attraction. Financial disputes possible.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "determined"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "mars",
+        "sign": "gemini",
+        "interpretation": "Mars in Gemini in D9 7th: Argumentative but intellectually stimulating spouse. Debates energize the relationship.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "argumentative"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "mars",
+        "sign": "cancer",
+        "interpretation": "Mars debilitated in D9 7th: Emotional conflicts in marriage. Spouse may have anger management issues affecting domestic peace.",
+        "strength": "weak",
+        "keywords": ["spouse", "marriage", "conflicts"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "mars",
+        "sign": "leo",
+        "interpretation": "Mars in Leo in D9 7th: Proud and brave spouse. Protective but dominating. Leadership dynamic in marriage.",
+        "strength": "strong",
+        "keywords": ["spouse", "marriage", "brave"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "mars",
+        "sign": "virgo",
+        "interpretation": "Mars in Virgo in D9 7th: Critical and health-conscious spouse. Analytical approach to relationship issues.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "analytical"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "mars",
+        "sign": "libra",
+        "interpretation": "Mars in Libra in D9 7th: Desire for balanced partnership but conflicts from decisiveness issues.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "balanced"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "mars",
+        "sign": "scorpio",
+        "interpretation": "Mars in own sign in D9 7th: Intensely passionate spouse. Deep physical and emotional bond. Power struggles possible.",
+        "strength": "strong",
+        "keywords": ["spouse", "marriage", "intense"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "mars",
+        "sign": "sagittarius",
+        "interpretation": "Mars in Sagittarius in D9 7th: Adventurous and righteous spouse. Active marriage with shared adventures.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "adventurous"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "mars",
+        "sign": "capricorn",
+        "interpretation": "Mars exalted in D9 7th: Extremely capable and ambitious spouse. Powerful marriage that achieves great things together.",
+        "strength": "strong",
+        "keywords": ["spouse", "marriage", "ambitious"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "mars",
+        "sign": "aquarius",
+        "interpretation": "Mars in Aquarius in D9 7th: Independent and unconventional spouse. Non-traditional approach to marriage.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "independent"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "mars",
+        "sign": "pisces",
+        "interpretation": "Mars in Pisces in D9 7th: Spiritual warrior spouse. Compassionate but can be passive-aggressive.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "spiritual"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "saturn",
+        "sign": "aries",
+        "interpretation": "Saturn debilitated in D9 7th: Significant marital challenges. Delayed marriage with frustrations and restrictions.",
+        "strength": "weak",
+        "keywords": ["spouse", "marriage", "challenges"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "saturn",
+        "sign": "taurus",
+        "interpretation": "Saturn in Taurus in D9 7th: Financially prudent spouse. Slow-building but very stable marriage.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "prudent"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "saturn",
+        "sign": "gemini",
+        "interpretation": "Saturn in Gemini in D9 7th: Serious and intellectual spouse. Communication may feel restricted. Methodical partner.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "serious"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "saturn",
+        "sign": "cancer",
+        "interpretation": "Saturn in Cancer in D9 7th: Emotionally reserved spouse. Challenges in expressing feelings. Security-seeking partner.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "reserved"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "saturn",
+        "sign": "leo",
+        "interpretation": "Saturn in Leo in D9 7th: Spouse faces ego-authority conflicts. Delayed recognition. Responsible but rigid partner.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "rigid"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "saturn",
+        "sign": "virgo",
+        "interpretation": "Saturn in Virgo in D9 7th: Extremely practical and health-focused spouse. Detail-oriented partnership.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "practical"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "saturn",
+        "sign": "libra",
+        "interpretation": "Saturn exalted in D9 7th: Ideal for long-lasting marriage. Just, balanced, and committed spouse. Dharmic partnership.",
+        "strength": "strong",
+        "keywords": ["spouse", "marriage", "committed"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "saturn",
+        "sign": "scorpio",
+        "interpretation": "Saturn in Scorpio in D9 7th: Deep and enduring marriage with transformative challenges. Spouse is intense and resolute.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "enduring"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "saturn",
+        "sign": "sagittarius",
+        "interpretation": "Saturn in Sagittarius in D9 7th: Disciplined and philosophical spouse. Marriage grounded in shared values.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "disciplined"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "saturn",
+        "sign": "capricorn",
+        "interpretation": "Saturn in own sign in D9 7th: Very stable and long-lasting marriage. Serious spouse with strong work ethic.",
+        "strength": "strong",
+        "keywords": ["spouse", "marriage", "stable"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "saturn",
+        "sign": "aquarius",
+        "interpretation": "Saturn in own sign in D9 7th: Unconventional but committed marriage. Spouse values independence within structure.",
+        "strength": "strong",
+        "keywords": ["spouse", "marriage", "unconventional"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "saturn",
+        "sign": "pisces",
+        "interpretation": "Saturn in Pisces in D9 7th: Spiritual duties in marriage. Spouse is compassionate but may feel restricted.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "spiritual"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "mercury",
+        "sign": "aries",
+        "interpretation": "Mercury in Aries in D9 7th: Quick-witted and spontaneous spouse. Rapid communication. Impulsive decisions in marriage.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "witty"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "mercury",
+        "sign": "taurus",
+        "interpretation": "Mercury in Taurus in D9 7th: Practical and financially savvy spouse. Slow but steady communication style.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "practical"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "mercury",
+        "sign": "gemini",
+        "interpretation": "Mercury in own sign in D9 7th: Brilliant communicator as spouse. Intellectual marriage. Versatile and adaptable partner.",
+        "strength": "strong",
+        "keywords": ["spouse", "marriage", "intellectual"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "mercury",
+        "sign": "cancer",
+        "interpretation": "Mercury in Cancer in D9 7th: Emotional communicator as spouse. Intuitive understanding between partners.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "intuitive"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "mercury",
+        "sign": "leo",
+        "interpretation": "Mercury in Leo in D9 7th: Dramatic and expressive communicator as spouse. Creative partnership.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "expressive"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "mercury",
+        "sign": "virgo",
+        "interpretation": "Mercury in own sign in D9 7th: Analytically brilliant spouse. Perfect for intellectual partnership. Health-conscious partner.",
+        "strength": "strong",
+        "keywords": ["spouse", "marriage", "analytical"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "mercury",
+        "sign": "libra",
+        "interpretation": "Mercury in Libra in D9 7th: Diplomatic and fair-minded spouse. Balanced communication in marriage.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "diplomatic"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "mercury",
+        "sign": "scorpio",
+        "interpretation": "Mercury in Scorpio in D9 7th: Penetrating communicator as spouse. Secrets in marriage. Research-oriented partner.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "penetrating"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "mercury",
+        "sign": "sagittarius",
+        "interpretation": "Mercury in Sagittarius in D9 7th: Philosophical communicator as spouse. Teaching-oriented partner.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "philosophical"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "mercury",
+        "sign": "capricorn",
+        "interpretation": "Mercury in Capricorn in D9 7th: Business-minded and structured communicator. Practical approach to marriage.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "business"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "mercury",
+        "sign": "aquarius",
+        "interpretation": "Mercury in Aquarius in D9 7th: Innovative and tech-savvy spouse. Progressive ideas about marriage.",
+        "strength": "moderate",
+        "keywords": ["spouse", "marriage", "innovative"]
+      },
+      {
+        "category": "d9_7th_combo",
+        "planet": "mercury",
+        "sign": "pisces",
+        "interpretation": "Mercury debilitated in D9 7th: Communication challenges in marriage. Spouse may be vague or indecisive.",
+        "strength": "weak",
+        "keywords": ["spouse", "marriage", "communication_issues"]
+      }
+    ]
+  },
+  "metadata": {
+    "version": "1.0",
+    "total_rules": 141,
+    "categories": [
+      "d9_7th_lord_sign",
+      "venus_d9_sign",
+      "jupiter_d9_sign",
+      "d9_lagna_sign",
+      "planet_in_d9_7th",
+      "upapada_sign",
+      "d9_7th_combo"
+    ],
+    "source": "BPHS, Jaimini Sutras, Traditional Vedic Astrology"
+  }
+}

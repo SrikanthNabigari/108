@@ -806,16 +806,15 @@ def _interpret_upapada_lord(ul_lord: Planet, ul_lord_rashi: Rashi, ul_lord_house
         quality_score -= 15
         if ul_lord_house == 6:
             quality_factors.append(
-                f"UL lord {ul_lord.value} in 6th house: " "conflict or health issues in marriage"
+                f"UL lord {ul_lord.value} in 6th house: conflict or health issues in marriage"
             )
         elif ul_lord_house == 8:
             quality_factors.append(
-                f"UL lord {ul_lord.value} in 8th house: "
-                "transformation or hidden issues in marriage"
+                f"UL lord {ul_lord.value} in 8th house: transformation or hidden issues in marriage"
             )
         else:
             quality_factors.append(
-                f"UL lord {ul_lord.value} in 12th house: " "loss or separation tendency in marriage"
+                f"UL lord {ul_lord.value} in 12th house: loss or separation tendency in marriage"
             )
     elif ul_lord_house in upachaya_houses:
         quality_score += 5
@@ -825,7 +824,7 @@ def _interpret_upapada_lord(ul_lord: Planet, ul_lord_rashi: Rashi, ul_lord_house
         )
     else:
         quality_factors.append(
-            f"UL lord {ul_lord.value} in house {ul_lord_house}: " "moderate marriage quality"
+            f"UL lord {ul_lord.value} in house {ul_lord_house}: moderate marriage quality"
         )
 
     # Exaltation/debilitation of UL lord
@@ -903,12 +902,11 @@ def _analyze_second_from_ul(chart: BirthChart, ul_rashi: Rashi) -> dict:
 
     if benefics_found:
         factors.append(
-            f"Benefics in 2nd from UL ({', '.join(benefics_found)}): "
-            "marriage sustenance is strong"
+            f"Benefics in 2nd from UL ({', '.join(benefics_found)}): marriage sustenance is strong"
         )
     if malefics_found:
         factors.append(
-            f"Malefics in 2nd from UL ({', '.join(malefics_found)}): " "separation or discord risk"
+            f"Malefics in 2nd from UL ({', '.join(malefics_found)}): separation or discord risk"
         )
         separation_risk = "high" if len(malefics_found) >= 2 else "moderate"
 
@@ -1028,8 +1026,7 @@ def _analyze_dk_ul_connection(chart: BirthChart, ul_rashi: Rashi) -> dict:
     # DK placed in UL sign
     if dk_rashi == ul_rashi:
         connections.append(
-            f"Darakaraka {dk_planet.value} placed in Upapada sign: "
-            "very strong marriage indication"
+            f"Darakaraka {dk_planet.value} placed in Upapada sign: very strong marriage indication"
         )
         connection_strength += 30.0
 
@@ -1037,8 +1034,7 @@ def _analyze_dk_ul_connection(chart: BirthChart, ul_rashi: Rashi) -> dict:
     dk_aspects = get_jaimini_aspects(dk_rashi)
     if ul_rashi in dk_aspects:
         connections.append(
-            f"Darakaraka {dk_planet.value} aspects Upapada (Jaimini): "
-            "spouse connection confirmed"
+            f"Darakaraka {dk_planet.value} aspects Upapada (Jaimini): spouse connection confirmed"
         )
         connection_strength += 20.0
 
@@ -1046,7 +1042,7 @@ def _analyze_dk_ul_connection(chart: BirthChart, ul_rashi: Rashi) -> dict:
     ul_lord = _get_sign_lord(ul_rashi)
     if dk_planet == ul_lord:
         connections.append(
-            f"Darakaraka {dk_planet.value} is also lord of Upapada: " "very strong marital bond"
+            f"Darakaraka {dk_planet.value} is also lord of Upapada: very strong marital bond"
         )
         connection_strength += 25.0
 

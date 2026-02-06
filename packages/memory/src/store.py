@@ -1480,6 +1480,106 @@ class MemoryStore:
         return timeline
 
     # ===================
+    # Event Correlation Operations
+    # ===================
+
+    async def save_event_correlation(
+        self,
+        user_id: str,
+        event_date: str,
+        event_type: str,
+        event_description: str,
+        correlation_score: int,
+        dasha_at_event: dict[str, Any] | None = None,
+        transits_at_event: dict[str, Any] | None = None,
+        explanation: str = "",
+    ) -> dict[str, Any]:
+        """Save an event correlation result.
+
+        Stores in the memories table with category='event_correlation' and
+        rich metadata so it can be retrieved and analyzed later.
+
+        Args:
+            user_id: User's UUID
+            event_date: ISO date of the event
+            event_type: Type of event (career, marriage, health, etc.)
+            event_description: User's description
+            correlation_score: Match score (0-100)
+            dasha_at_event: Dasha active at event time
+            transits_at_event: Transit positions at event time
+            explanation: Generated explanation of the correlation
+
+        Returns:
+            Dictionary with saved memory details
+        """
+        content = (
+            f"Life event ({event_type}) on {event_date}: {event_description}. "
+            f"Correlation score: {correlation_score}/100. {explanation}"
+        )
+        metadata = {
+            "event_date": event_date,
+            "event_type": event_type,
+            "event_description": event_description,
+            "correlation_score": correlation_score,
+            "dasha_at_event": dasha_at_event or {},
+            "transits_at_event": transits_at_event or {},
+            "explanation": explanation,
+        }
+
+        memory = await self.add_memory(
+            user_id=user_id,
+            content=content,
+            category="event_correlation",
+            metadata=metadata,
+            importance=0.8,
+        )
+
+        logger.info(f"Saved event correlation for user {user_id}: {event_type} on {event_date}")
+        return memory.to_dict()
+
+    async def save_remedy_history(
+        self,
+        user_id: str,
+        remedies: dict[str, Any],
+        trigger: str = "",
+        dasha_lord: str = "",
+        active_doshas: list[str] | None = None,
+    ) -> dict[str, Any]:
+        """Save remedy recommendations for tracking.
+
+        Args:
+            user_id: User's UUID
+            remedies: Full remedy recommendation dict
+            trigger: What triggered the remedy request
+            dasha_lord: Current mahadasha lord
+            active_doshas: List of active dosha names
+
+        Returns:
+            Dictionary with saved memory details
+        """
+        dosha_str = ", ".join(active_doshas) if active_doshas else "none"
+        content = (
+            f"Remedies recommended for {dasha_lord} dasha, doshas: {dosha_str}. Trigger: {trigger}"
+        )
+        metadata = {
+            "remedies": remedies,
+            "trigger": trigger,
+            "dasha_lord": dasha_lord,
+            "active_doshas": active_doshas or [],
+        }
+
+        memory = await self.add_memory(
+            user_id=user_id,
+            content=content,
+            category="remedy",
+            metadata=metadata,
+            importance=0.6,
+        )
+
+        logger.info(f"Saved remedy history for user {user_id}")
+        return memory.to_dict()
+
+    # ===================
     # Bulk Operations
     # ===================
 

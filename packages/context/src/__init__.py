@@ -32,6 +32,14 @@ from .dasha import (
     get_pratyantardasha_sequence,
     validate_dasha_data,
 )
+from .dasha_transit import (
+    cross_analyze,
+    find_activation_windows,
+)
+from .event_correlator import (
+    batch_correlate,
+    correlate_event,
+)
 from .muhurta import (
     ACTIVITY_RULES,
     CHOGHADIYA_ORDER,
@@ -70,6 +78,13 @@ from .progressions import (
     get_current_progressions,
     get_progression_timeline,
 )
+from .transit_aspects import (
+    find_upcoming_aspects,
+    get_transit_natal_aspects,
+)
+from .transit_tracker import (
+    get_upcoming_triggers,
+)
 from .transits import (
     GOCHARA_FAVORABLE,
     TRANSIT_EFFECTS,
@@ -95,6 +110,7 @@ from .varshaphal import (
     compare_natal_annual,
     detect_tajika_yogas,
     determine_varshesha,
+    get_current_varshaphal,
     get_varshaphal_analysis,
 )
 from .yogini_dasha import (
@@ -129,6 +145,7 @@ __all__ = [
     "MuhurtaQuality",
     "analyze_annual_dreshkana",
     "analyze_annual_trimshamsha",
+    "batch_correlate",
     "calculate_all_inauspicious",
     "calculate_ashtottari_balance",
     "calculate_ashtottari_sequence",
@@ -147,11 +164,15 @@ __all__ = [
     "check_dhaiya",
     "check_sade_sati",
     "compare_natal_annual",
+    "correlate_event",
+    "cross_analyze",
     "detect_tajika_yogas",
     "determine_varshesha",
     "evaluate_muhurta",
     "evaluate_with_inauspicious_check",
+    "find_activation_windows",
     "find_next_good_muhurta",
+    "find_upcoming_aspects",
     "get_abhijit_muhurta",
     "get_antardasha_effect",
     "get_antardasha_sequence",
@@ -163,6 +184,7 @@ __all__ = [
     "get_current_dasha",
     "get_current_narayana_dasha",
     "get_current_progressions",
+    "get_current_varshaphal",
     "get_current_yogini_dasha",
     "get_dasha_balance_at_birth",
     "get_dasha_periods_for_year",
@@ -180,8 +202,10 @@ __all__ = [
     "get_progression_timeline",
     "get_starting_yogini",
     "get_transit_aspects",
+    "get_transit_natal_aspects",
     "get_transit_positions",
     "get_transiting_planet_house",
+    "get_upcoming_triggers",
     "get_varshaphal_analysis",
     "get_yogini_antardasha",
     "get_yogini_balance_at_birth",

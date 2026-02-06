@@ -188,7 +188,7 @@ def test_route_by_intent():
     assert guide._route_by_intent({"intent": IntentType.PREDICT}) == "predict"
     assert guide._route_by_intent({"intent": IntentType.TIMING}) == "predict"
     assert guide._route_by_intent({"intent": IntentType.GENERAL}) == "general"
-    assert guide._route_by_intent({"intent": IntentType.REMEDY}) == "general"
+    assert guide._route_by_intent({"intent": IntentType.REMEDY}) == "remedy"
     assert guide._route_by_intent({"intent": IntentType.UNKNOWN}) == "general"
 
 

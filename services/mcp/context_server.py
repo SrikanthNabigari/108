@@ -36,6 +36,8 @@ from packages.context.src.ashtottari_dasha import (  # noqa: E402
     get_current_ashtottari,
     is_ashtottari_applicable,
 )
+from packages.context.src.dasha_transit import cross_analyze as _cross_analyze  # noqa: E402
+from packages.context.src.event_correlator import correlate_event as _correlate_event  # noqa: E402
 from packages.context.src.muhurta import (  # noqa: E402
     get_abhijit_muhurta,
     get_brahma_muhurta,
@@ -47,6 +49,12 @@ from packages.context.src.narayana_dasha import (  # noqa: E402
     get_current_narayana_dasha,
 )
 from packages.context.src.progressions import get_current_progressions  # noqa: E402
+from packages.context.src.transit_aspects import (  # noqa: E402
+    get_transit_natal_aspects as _get_transit_natal_aspects,
+)
+from packages.context.src.transit_tracker import (  # noqa: E402
+    get_upcoming_triggers as _get_upcoming_triggers,
+)
 from packages.context.src.transits import get_enriched_transit_analysis  # noqa: E402
 from packages.context.src.yogini_dasha import (  # noqa: E402
     calculate_yogini_sequence,
@@ -1361,6 +1369,231 @@ def secondary_progressions(
             "progressed_positions": result.get("progressed_positions", {}),
             "natal_positions": result.get("natal_positions", {}),
             "active_aspects": result.get("active_aspects", []),
+            "success": True,
+        }
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__}
+
+
+@mcp.tool()
+def dasha_transit_cross_analysis(
+    natal_planets: dict[str, dict[str, Any]],
+    current_transits: dict[str, dict[str, Any]],
+    current_dasha: dict[str, str],
+    lagna_rashi: str,
+    moon_rashi: str,
+) -> dict[str, Any]:
+    """
+    Cross-analyze dasha periods with current transits for timing insights.
+
+    Connects WHAT (yogas/patterns) to WHEN (dasha periods) to NOW (current transits).
+    Determines which life themes are currently activated by transit planets
+    triggering dasha lord significations.
+
+    Args:
+        natal_planets: Birth chart positions {planet: {longitude, rashi, ...}}
+        current_transits: Current transit positions {planet: {longitude, rashi, ...}}
+        current_dasha: Active dasha lords {mahadasha, antardasha, pratyantardasha}
+        lagna_rashi: Ascendant sign name (e.g., "libra")
+        moon_rashi: Moon sign name (e.g., "aquarius")
+
+    Returns:
+        Dictionary with active_themes, strongest_house, most_active_planet,
+        overall_period_quality, score (0-100), and house_scores
+
+    Example:
+        dasha_transit_cross_analysis(
+            {"sun": {"longitude": 52.5, "rashi": 1}, ...},
+            {"saturn": {"longitude": 310.0, "rashi": 10}, ...},
+            {"mahadasha": "mercury", "antardasha": "saturn"},
+            "libra", "aquarius"
+        )
+    """
+    try:
+        result = _cross_analyze(
+            natal_planets, current_transits, current_dasha, lagna_rashi, moon_rashi
+        )
+        return {**result, "success": True}
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__}
+
+
+@mcp.tool()
+def transit_natal_aspects_tool(
+    natal_planets: dict[str, dict[str, Any]],
+    transit_planets: dict[str, dict[str, Any]],
+    orb: float = 5.0,
+) -> dict[str, Any]:
+    """
+    Calculate all aspects between transiting and natal planets.
+
+    Detects both Western-style degree-based aspects (conjunction, opposition,
+    trine, square, sextile) and Vedic Parashari special aspects (Mars 4th/8th,
+    Jupiter 5th/9th, Saturn 3rd/10th).
+
+    Each aspect includes whether it is applying (approaching exactness) or
+    separating (moving away), plus effect descriptions.
+
+    Args:
+        natal_planets: Birth chart positions {planet: {longitude, rashi, speed, ...}}
+        transit_planets: Current transit positions {planet: {longitude, rashi, speed, ...}}
+        orb: Maximum orb in degrees (default 5.0)
+
+    Returns:
+        Dictionary with list of aspects, counts by type, and tightest aspects
+
+    Example:
+        transit_natal_aspects_tool(
+            {"sun": {"longitude": 228.5}, "moon": {"longitude": 326.85}},
+            {"saturn": {"longitude": 310.0, "speed": 0.03}, "jupiter": {"longitude": 88.5, "speed": 0.08}},
+            5.0
+        )
+    """
+    try:
+        aspects = _get_transit_natal_aspects(natal_planets, transit_planets, orb)
+
+        # Count by type
+        type_counts: dict[str, int] = {}
+        for asp in aspects:
+            t = asp.get("aspect_type", "unknown")
+            type_counts[t] = type_counts.get(t, 0) + 1
+
+        return {
+            "total_aspects": len(aspects),
+            "aspects": aspects,
+            "type_counts": type_counts,
+            "tightest": aspects[:3] if aspects else [],
+            "success": True,
+        }
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__}
+
+
+@mcp.tool()
+def correlate_life_event(
+    event_date: str,
+    event_type: str,
+    event_description: str,
+    birth_datetime: str,
+    natal_planets: dict[str, dict[str, Any]],
+    moon_longitude: float,
+    lagna_rashi: str,
+) -> dict[str, Any]:
+    """
+    Correlate a past life event with dasha periods and transits active at that time.
+
+    Validates chart accuracy by checking whether the astrological configuration
+    at the event date explains the event type. Useful for:
+    - Verifying birth time accuracy
+    - Understanding past events astrologically
+    - Building historical pattern for predictions
+
+    Args:
+        event_date: Date of the event in ISO format (e.g., "2020-03-15")
+        event_type: Category (career, marriage, health, money, education, travel, loss, children, property, spiritual)
+        event_description: Brief description of the event
+        birth_datetime: Birth datetime in ISO format
+        natal_planets: Birth chart positions {planet: {longitude, rashi, ...}}
+        moon_longitude: Moon's longitude at birth (for dasha calculation)
+        lagna_rashi: Ascendant sign name
+
+    Returns:
+        Dictionary with dasha at event, transit at event, correlation score (0-100),
+        and explanation of the astrological connection
+
+    Example:
+        correlate_life_event(
+            "2020-03-15", "career", "Got promoted to manager",
+            "1992-12-03T03:00:00+05:30",
+            {"sun": {"longitude": 228.5}, "mercury": {"longitude": 245.0}, ...},
+            326.85, "libra"
+        )
+    """
+    try:
+        result = _correlate_event(
+            event_date=event_date,
+            event_type=event_type,
+            event_description=event_description,
+            birth_datetime=birth_datetime,
+            natal_planets=natal_planets,
+            moon_longitude=moon_longitude,
+            lagna_rashi=lagna_rashi,
+        )
+        return {**result, "success": True}
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__}
+
+
+@mcp.tool()
+def upcoming_transit_triggers(
+    natal_planets: dict[str, dict[str, Any]],
+    lagna_rashi: str,
+    moon_rashi: str,
+    start_date: str,
+    days_ahead: int = 30,
+    birth_datetime: str | None = None,
+    moon_longitude: float | None = None,
+) -> dict[str, Any]:
+    """
+    Find the next significant transit events for a birth chart.
+
+    Tracks 6 types of triggers:
+    1. Sign ingress (planet enters new sign/house)
+    2. Transit conjunctions with natal planets (within 2 deg)
+    3. Parashari aspects on natal planets
+    4. Retrograde stations (planet direction change)
+    5. Dasha period changes (MD/AD/PD transitions)
+    6. Eclipses on natal positions
+
+    Args:
+        natal_planets: Birth chart positions {planet: {longitude, ...}}
+        lagna_rashi: Ascendant sign name
+        moon_rashi: Moon sign name
+        start_date: Start date in ISO format (e.g., "2026-02-07")
+        days_ahead: Number of days to look ahead (default 30)
+        birth_datetime: Birth datetime (for dasha change detection, optional)
+        moon_longitude: Moon longitude at birth (for dasha calculation, optional)
+
+    Returns:
+        Dictionary with list of triggers sorted by date and significance
+
+    Example:
+        upcoming_transit_triggers(
+            {"sun": {"longitude": 228.5}, "moon": {"longitude": 326.85}},
+            "libra", "aquarius", "2026-02-07", 30,
+            "1992-12-03T03:00:00+05:30", 326.85
+        )
+    """
+    try:
+        birth_dt = None
+        if birth_datetime:
+            birth_dt = datetime.fromisoformat(birth_datetime.replace("Z", "+00:00"))
+
+        triggers = _get_upcoming_triggers(
+            natal_planets=natal_planets,
+            lagna_rashi=lagna_rashi,
+            moon_rashi=moon_rashi,
+            start_date=start_date,
+            days_ahead=days_ahead,
+            birth_datetime=birth_dt,
+            moon_longitude=moon_longitude,
+        )
+
+        # Summarize by type
+        type_counts: dict[str, int] = {}
+        for t in triggers:
+            ttype = t.get("type", "unknown")
+            type_counts[ttype] = type_counts.get(ttype, 0) + 1
+
+        return {
+            "total_triggers": len(triggers),
+            "triggers": triggers,
+            "type_counts": type_counts,
+            "high_significance": [t for t in triggers if t.get("significance") == "high"],
             "success": True,
         }
 

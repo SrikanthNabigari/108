@@ -931,12 +931,10 @@ def compare_natal_annual(
     # Summary interpretation
     themes = []
     if close_conjunctions:
-        themes.append(
-            f"Near-return for {', '.join(close_conjunctions)}: " "familiar themes resurface"
-        )
+        themes.append(f"Near-return for {', '.join(close_conjunctions)}: familiar themes resurface")
     if sign_changes:
         themes.append(
-            f"Sign changes for {', '.join(sign_changes)}: " "new expressions of planetary energy"
+            f"Sign changes for {', '.join(sign_changes)}: new expressions of planetary energy"
         )
     if len(house_changes) > 4:
         themes.append("Major house shifts: significant change in life areas")
@@ -948,4 +946,125 @@ def compare_natal_annual(
         "house_changes": house_changes,
         "cross_aspects": cross_aspects[:10],  # Limit to most relevant
         "themes": themes or ["Stable planetary patterns between natal and annual charts"],
+    }
+
+
+def get_current_varshaphal(
+    birth_datetime: str | datetime,
+    birth_lat: float,
+    birth_lon: float,
+    query_date: str | datetime | None = None,
+) -> dict[str, Any]:
+    """Calculate Varshaphal for the current solar year.
+
+    Convenience function that calculates the solar return for the year
+    containing query_date, then produces Muntha, Varshesha, Tajika yogas,
+    and Sahams.
+
+    Args:
+        birth_datetime: Birth date and time (ISO string or datetime)
+        birth_lat: Birth latitude
+        birth_lon: Birth longitude
+        query_date: Date to analyze (ISO string, datetime, or None for today)
+
+    Returns:
+        Dictionary with solar_return_date, age, muntha, varshesha, tajika_yogas,
+        sahams, and annual planet positions.
+    """
+    from packages.cosmos.src.ephemeris import (
+        get_all_planets,
+        get_house_cusps,
+        get_julian_day,
+    )
+
+    # Parse dates
+    if isinstance(birth_datetime, str):
+        birth_dt = datetime.fromisoformat(birth_datetime)
+    else:
+        birth_dt = birth_datetime
+
+    if query_date is None:
+        query_dt = datetime.now()
+    elif isinstance(query_date, str):
+        query_dt = datetime.fromisoformat(query_date)
+    else:
+        query_dt = query_date
+
+    # Calculate birth Sun longitude
+    birth_jd = get_julian_day(birth_dt)
+    birth_planets = get_all_planets(birth_jd)
+    birth_sun_lon = birth_planets["sun"]["longitude"]
+
+    # Get birth lagna
+    birth_houses = get_house_cusps(birth_jd, birth_lat, birth_lon)
+    birth_lagna_lon = birth_houses["ascendant"]
+    birth_lagna_rashi = int(birth_lagna_lon // 30)
+
+    # Determine the solar return year
+    # The solar return for a given year happens when Sun returns to birth longitude
+    # Use the query year as the solar return year
+    sr_year = query_dt.year
+
+    # Calculate solar return date
+    sr_date = calculate_solar_return_date(birth_sun_lon, sr_year)
+
+    # If the solar return hasn't happened yet this year, use previous year
+    if sr_date > query_dt:
+        sr_year -= 1
+        sr_date = calculate_solar_return_date(birth_sun_lon, sr_year)
+
+    # Age at solar return
+    age = sr_year - birth_dt.year
+
+    # Get solar return chart positions
+    sr_jd = get_julian_day(sr_date)
+    sr_planets_raw = get_all_planets(sr_jd)
+    sr_houses = get_house_cusps(sr_jd, birth_lat, birth_lon)
+    sr_lagna_lon = sr_houses["ascendant"]
+    sr_lagna_rashi = int(sr_lagna_lon // 30)
+
+    # Build planet position dict with house info
+    sr_planet_positions = {}
+    sr_planet_longitudes = {}
+    for planet, data in sr_planets_raw.items():
+        lon = data["longitude"]
+        rashi = int(lon // 30)
+        house = ((rashi - sr_lagna_rashi) % 12) + 1
+        sr_planet_positions[planet] = {
+            "longitude": lon,
+            "rashi": rashi,
+            "house": house,
+            "is_retrograde": data.get("is_retrograde", False),
+        }
+        sr_planet_longitudes[planet] = lon
+
+    # Determine if day chart (Sun above horizon)
+    sun_house = sr_planet_positions.get("sun", {}).get("house", 1)
+    is_day_chart = sun_house in (7, 8, 9, 10, 11, 12)  # Simplified: above-horizon houses
+
+    # 1. Muntha
+    muntha = calculate_muntha(birth_lagna_rashi, age)
+
+    # 2. Varshesha
+    varshesha = determine_varshesha(sr_lagna_rashi)
+
+    # 3. Tajika yogas
+    tajika_yogas = detect_tajika_yogas(sr_planet_positions)
+
+    # 4. Sahams
+    sahams = calculate_sahams(sr_planet_longitudes, sr_lagna_lon, is_day_chart)
+
+    return {
+        "solar_return_date": sr_date.strftime("%Y-%m-%d %H:%M:%S"),
+        "solar_return_year": sr_year,
+        "age": age,
+        "birth_sun_longitude": round(birth_sun_lon, 4),
+        "sr_lagna_rashi": sr_lagna_rashi,
+        "sr_lagna_longitude": round(sr_lagna_lon, 4),
+        "muntha": muntha,
+        "varshesha": varshesha,
+        "tajika_yogas": tajika_yogas,
+        "sahams": sahams,
+        "annual_planets": sr_planet_positions,
+        "is_day_chart": is_day_chart,
     }

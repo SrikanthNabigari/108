@@ -438,6 +438,7 @@ class Guide:
         graph.add_node("calculate", self._calculate)
         graph.add_node("analyze", self._analyze_patterns)
         graph.add_node("predict", self._make_prediction)
+        graph.add_node("remedy", self._handle_remedy)
         graph.add_node("general", self._handle_general)
         graph.add_node("interpret", self._interpret)
         graph.add_node("save_memory", self._save_memory)
@@ -460,7 +461,7 @@ class Guide:
                 IntentType.ANALYZE.value: "analyze",
                 IntentType.PREDICT.value: "predict",
                 IntentType.TIMING.value: "predict",
-                IntentType.REMEDY.value: "general",
+                IntentType.REMEDY.value: "remedy",
                 IntentType.PERSONAL.value: "general",
                 IntentType.GENERAL.value: "general",
                 IntentType.UNKNOWN.value: "general",
@@ -471,6 +472,7 @@ class Guide:
         graph.add_edge("calculate", "interpret")
         graph.add_edge("analyze", "interpret")
         graph.add_edge("predict", "interpret")
+        graph.add_edge("remedy", "interpret")
         graph.add_edge("general", "interpret")
 
         # Final steps
@@ -692,6 +694,8 @@ Respond with ONLY the intent name (e.g., "calculate")"""
             return "analyze"
         elif intent in [IntentType.PREDICT, IntentType.TIMING]:
             return "predict"
+        elif intent == IntentType.REMEDY:
+            return "remedy"
         else:
             return "general"
 
@@ -801,6 +805,31 @@ Respond with ONLY the intent name (e.g., "calculate")"""
                     state["analysis_results"]["aspects"] = aspects
             except Exception as e:
                 logger.warning(f"Aspect calculation error: {e}")
+
+            # Bhava Chalit chart
+            try:
+                from packages.cosmos.src.bhava_chalit import (
+                    calculate_bhava_chalit,
+                    get_shifted_planets,
+                )
+
+                houses_info = birth_chart.get("houses", {})
+                cusps = houses_info.get(
+                    "cusps",
+                    [
+                        houses_info.get(f"house_{i}", {}).get("cusp_longitude", (i - 1) * 30)
+                        if isinstance(houses_info.get(f"house_{i}"), dict)
+                        else (i - 1) * 30
+                        for i in range(1, 13)
+                    ],
+                )
+                ascendant_lon = houses_info.get("ascendant", cusps[0] if cusps else 0)
+                chalit = calculate_bhava_chalit(planets_data, cusps, ascendant_lon)
+                shifted = get_shifted_planets(chalit)
+                if shifted:
+                    state["analysis_results"]["bhava_chalit_shifts"] = shifted
+            except Exception as e:
+                logger.debug(f"Bhava chalit calculation skipped: {e}")
 
         state["analysis_results"]["calculations_performed"] = True
         state["analysis_results"]["calculation_type"] = intent.value if intent else "general"
@@ -943,6 +972,57 @@ Respond with ONLY the intent name (e.g., "calculate")"""
                         f"Detected {len(detected_yogas)} yogas, {len(detected_doshas)} doshas"
                     )
 
+                    # Check yoga cancellations
+                    if yoga_dicts:
+                        try:
+                            from packages.self.src.yoga_cancellation import (
+                                apply_cancellations_to_chart,
+                            )
+
+                            sun_lon = 0.0
+                            sun_data = planets_raw.get("sun", {})
+                            if isinstance(sun_data, dict):
+                                sun_lon = sun_data.get("longitude", 0.0)
+
+                            cancellation_results = apply_cancellations_to_chart(
+                                yoga_dicts, planets_raw, lagna_str, sun_lon
+                            )
+                            cancelled = [y for y in cancellation_results if y.get("cancelled")]
+                            surviving = [y for y in cancellation_results if not y.get("cancelled")]
+                            state["analysis_results"]["yoga_cancellations"] = {
+                                "cancelled_count": len(cancelled),
+                                "surviving_count": len(surviving),
+                                "cancelled_names": [y.get("name", "") for y in cancelled],
+                            }
+                        except Exception as e:
+                            logger.debug(f"Yoga cancellation check skipped: {e}")
+
+                    # Detect Neecha Bhanga Raja Yoga
+                    try:
+                        from packages.self.src.yoga_detector import detect_neecha_bhanga
+
+                        nb_results = []
+                        for pname, pdata in planets_raw.items():
+                            nb = detect_neecha_bhanga(pname, pdata, planets_raw, lagna_str)
+                            if nb.get("is_debilitated") or nb.get("has_neecha_bhanga"):
+                                nb_results.append(nb)
+                        if nb_results:
+                            state["analysis_results"]["neecha_bhanga"] = nb_results
+                    except Exception as e:
+                        logger.debug(f"Neecha Bhanga detection skipped: {e}")
+
+                    # Detect Planetary Wars
+                    try:
+                        from packages.self.src.planetary_war import (
+                            detect_planetary_wars as _detect_pw,
+                        )
+
+                        wars = _detect_pw(planets_raw)
+                        if wars:
+                            state["analysis_results"]["planetary_wars"] = wars
+                    except Exception as e:
+                        logger.debug(f"Planetary war detection skipped: {e}")
+
                     # Calculate Bhava Bala for strongest/weakest houses
                     try:
                         from packages.self.src import StrengthCalculator as SC
@@ -1018,6 +1098,69 @@ Respond with ONLY the intent name (e.g., "calculate")"""
             except Exception as e:
                 logger.debug(f"Ashtottari check skipped: {e}")
 
+            # Dasha-Transit Cross Analysis
+            try:
+                from packages.context.src.dasha_transit import cross_analyze
+
+                bc = state["birth_chart"]
+                planets_raw = bc.get("planets", {})
+                lagna_str = bc.get("lagna_rashi", "aries").lower()
+                moon_str = bc.get("moon_rashi", "aries").lower()
+
+                dasha_info = state.get("current_dasha", {})
+                if planets_raw and dasha_info:
+                    # Get current transit positions
+                    from packages.cosmos.src import get_all_planets as _gap
+                    from packages.cosmos.src import get_julian_day as _gjd
+
+                    current_jd = _gjd(datetime.now())
+                    transit_pos = _gap(current_jd)
+
+                    cross = cross_analyze(
+                        natal_planets=planets_raw,
+                        current_transits=transit_pos,
+                        current_dasha=dasha_info,
+                        lagna_rashi=lagna_str,
+                        moon_rashi=moon_str,
+                    )
+                    state["analysis_results"]["dasha_transit"] = cross
+                    themes = cross.get("active_themes", [])
+                    quality = cross.get("overall_period_quality", "neutral")
+                    prediction_factors.append(f"Dasha-transit period quality: {quality}")
+                    for theme in themes[:3]:
+                        prediction_factors.append(f"Active theme: {theme}")
+            except Exception as e:
+                logger.debug(f"Dasha-transit cross analysis skipped: {e}")
+
+            # Upcoming Transit Triggers
+            try:
+                from packages.context.src.transit_tracker import (
+                    get_upcoming_triggers as _gut,
+                )
+
+                bc = state["birth_chart"]
+                planets_raw = bc.get("planets", {})
+                lagna_str = bc.get("lagna_rashi", "aries").lower()
+                moon_str = bc.get("moon_rashi", "aries").lower()
+                birth_dt_str = bc.get("birth_datetime")
+                moon_lon = bc.get("moon_longitude")
+
+                if planets_raw:
+                    triggers = _gut(
+                        natal_planets=planets_raw,
+                        lagna_rashi=lagna_str,
+                        moon_rashi=moon_str,
+                        start_date=datetime.now().isoformat(),
+                        days_ahead=30,
+                        birth_datetime=birth_dt_str,
+                        moon_longitude=moon_lon,
+                    )
+                    if triggers:
+                        state["analysis_results"]["upcoming_triggers"] = triggers[:5]
+                        prediction_factors.append(f"Upcoming triggers in 30 days: {len(triggers)}")
+            except Exception as e:
+                logger.debug(f"Upcoming triggers check skipped: {e}")
+
             # Check Secondary Progressions
             try:
                 from packages.context.src.progressions import get_current_progressions
@@ -1045,6 +1188,46 @@ Respond with ONLY the intent name (e.g., "calculate")"""
         state["analysis_results"]["predictions_generated"] = True
         state["analysis_results"]["prediction_factors"] = prediction_factors
 
+        return state
+
+    def _handle_remedy(self, state: AgentState) -> AgentState:
+        """Handle remedy requests with the remedies engine."""
+        if self.debug:
+            logger.debug("Handling remedy request")
+
+        birth_chart = state.get("birth_chart")
+        if birth_chart:
+            try:
+                from packages.self.src.remedies import recommend_remedies
+
+                dasha = state.get("current_dasha", {})
+                current_dasha_lord = dasha.get("mahadasha_lord", "")
+                lagna_str = birth_chart.get("lagna_rashi", "")
+
+                # Get active doshas from state
+                active_doshas = [d.get("name", "") for d in state.get("detected_doshas", [])]
+
+                # Determine weak planets from strength data or debilitated planets
+                weak_planets = []
+                planets_raw = birth_chart.get("planets", {})
+                for pname, pdata in planets_raw.items():
+                    if isinstance(pdata, dict) and pdata.get("dignity") in (
+                        "debilitated",
+                        "enemy",
+                    ):
+                        weak_planets.append(pname)
+
+                result = recommend_remedies(
+                    current_dasha=current_dasha_lord,
+                    active_doshas=active_doshas,
+                    weak_planets=weak_planets,
+                    lagna_rashi=lagna_str,
+                )
+                state["analysis_results"]["remedies"] = result
+            except Exception as e:
+                logger.warning(f"Remedy generation error: {e}")
+
+        state["analysis_results"]["query_type"] = "remedy"
         return state
 
     def _handle_general(self, state: AgentState) -> AgentState:
@@ -1088,9 +1271,9 @@ Respond with ONLY the intent name (e.g., "calculate")"""
                     "response"
                 ] = "I need a moment to gather my thoughts. Please try again shortly."
             elif "connection" in str(e).lower() or "timeout" in str(e).lower():
-                state["response"] = (
-                    "I'm having trouble connecting right now. " "Let me try a simpler analysis."
-                )
+                state[
+                    "response"
+                ] = "I'm having trouble connecting right now. Let me try a simpler analysis."
             else:
                 state["response"] = self._generate_fallback_response(state)
 
@@ -1333,6 +1516,44 @@ Be the user's trusted guide on their life journey. Combine Vedic wisdom with com
         if results.get("progression_aspects"):
             prog_aspects = results["progression_aspects"]
             parts.append(f"Active progressed aspects: {len(prog_aspects)}")
+
+        # Yoga Cancellations
+        if results.get("yoga_cancellations"):
+            yc = results["yoga_cancellations"]
+            parts.append(
+                f"Yoga cancellations: {yc.get('cancelled_count', 0)} cancelled, "
+                f"{yc.get('surviving_count', 0)} surviving"
+            )
+
+        # Neecha Bhanga
+        if results.get("neecha_bhanga"):
+            nb = results["neecha_bhanga"]
+            parts.append(f"Neecha Bhanga results: {len(nb)} debilitated planets analyzed")
+
+        # Planetary Wars
+        if results.get("planetary_wars"):
+            pw = results["planetary_wars"]
+            parts.append(f"Planetary Wars detected: {len(pw)}")
+
+        # Dasha-Transit Cross Analysis
+        if results.get("dasha_transit"):
+            dt = results["dasha_transit"]
+            parts.append(f"Dasha-transit quality: {dt.get('overall_period_quality', 'neutral')}")
+
+        # Upcoming Triggers
+        if results.get("upcoming_triggers"):
+            triggers = results["upcoming_triggers"]
+            parts.append(f"Upcoming triggers (30 days): {len(triggers)}")
+
+        # Bhava Chalit Shifts
+        if results.get("bhava_chalit_shifts"):
+            shifts = results["bhava_chalit_shifts"]
+            shifted_count = sum(1 for s in shifts if s.get("shifted", False))
+            parts.append(f"Bhava Chalit: {shifted_count} planets shifted from rashi chart")
+
+        # Remedies
+        if results.get("remedies"):
+            parts.append("Remedy recommendations available")
 
         # Memories
         if state.get("memories"):

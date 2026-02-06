@@ -14,6 +14,7 @@ from packages.context.src.varshaphal import (
     compare_natal_annual,
     detect_tajika_yogas,
     determine_varshesha,
+    get_current_varshaphal,
     get_varshaphal_analysis,
 )
 
@@ -648,3 +649,120 @@ class TestCompareNatalAnnual:
         }
         result = compare_natal_annual(natal, annual)
         assert any("house shifts" in t.lower() for t in result["themes"])
+
+
+class TestGetCurrentVarshaphal:
+    """Tests for get_current_varshaphal."""
+
+    def test_returns_expected_keys(self):
+        result = get_current_varshaphal(
+            birth_datetime="1992-12-03T03:00:00",
+            birth_lat=16.722786,
+            birth_lon=81.294264,
+            query_date="2025-06-15",
+        )
+        assert "solar_return_date" in result
+        assert "solar_return_year" in result
+        assert "age" in result
+        assert "muntha" in result
+        assert "varshesha" in result
+        assert "tajika_yogas" in result
+        assert "sahams" in result
+        assert "annual_planets" in result
+
+    def test_age_calculation(self):
+        result = get_current_varshaphal(
+            birth_datetime="1992-12-03T03:00:00",
+            birth_lat=16.722786,
+            birth_lon=81.294264,
+            query_date="2025-06-15",
+        )
+        # Solar return for 2025 should be ~2024 (since Dec birth, SR in late Nov/Dec)
+        # Age should be 32 or 33 depending on exact SR date vs query
+        assert 31 <= result["age"] <= 33
+
+    def test_muntha_present(self):
+        result = get_current_varshaphal(
+            birth_datetime="1992-12-03T03:00:00",
+            birth_lat=16.722786,
+            birth_lon=81.294264,
+            query_date="2025-06-15",
+        )
+        muntha = result["muntha"]
+        assert "muntha_rashi" in muntha
+        assert 0 <= muntha["muntha_rashi"] <= 11
+
+    def test_varshesha_present(self):
+        result = get_current_varshaphal(
+            birth_datetime="1992-12-03T03:00:00",
+            birth_lat=16.722786,
+            birth_lon=81.294264,
+            query_date="2025-06-15",
+        )
+        v = result["varshesha"]
+        assert "year_lord" in v
+        assert v["year_lord"] in ("sun", "moon", "mars", "mercury", "jupiter", "venus", "saturn")
+
+    def test_sahams_present(self):
+        result = get_current_varshaphal(
+            birth_datetime="1992-12-03T03:00:00",
+            birth_lat=16.722786,
+            birth_lon=81.294264,
+            query_date="2025-06-15",
+        )
+        assert len(result["sahams"]) > 0
+        assert "punya_saham" in result["sahams"]
+
+    def test_annual_planets_present(self):
+        result = get_current_varshaphal(
+            birth_datetime="1992-12-03T03:00:00",
+            birth_lat=16.722786,
+            birth_lon=81.294264,
+            query_date="2025-06-15",
+        )
+        planets = result["annual_planets"]
+        assert "sun" in planets
+        assert "moon" in planets
+        assert "saturn" in planets
+        for planet_data in planets.values():
+            assert "longitude" in planet_data
+            assert "rashi" in planet_data
+            assert "house" in planet_data
+
+    def test_tajika_yogas_list(self):
+        result = get_current_varshaphal(
+            birth_datetime="1992-12-03T03:00:00",
+            birth_lat=16.722786,
+            birth_lon=81.294264,
+            query_date="2025-06-15",
+        )
+        assert isinstance(result["tajika_yogas"], list)
+
+    def test_is_day_chart_boolean(self):
+        result = get_current_varshaphal(
+            birth_datetime="1992-12-03T03:00:00",
+            birth_lat=16.722786,
+            birth_lon=81.294264,
+            query_date="2025-06-15",
+        )
+        assert isinstance(result["is_day_chart"], bool)
+
+    def test_sr_lagna_rashi_range(self):
+        result = get_current_varshaphal(
+            birth_datetime="1992-12-03T03:00:00",
+            birth_lat=16.722786,
+            birth_lon=81.294264,
+            query_date="2025-06-15",
+        )
+        assert 0 <= result["sr_lagna_rashi"] <= 11
+
+    def test_datetime_input(self):
+        from datetime import datetime
+
+        result = get_current_varshaphal(
+            birth_datetime=datetime(1992, 12, 3, 3, 0),
+            birth_lat=16.722786,
+            birth_lon=81.294264,
+            query_date=datetime(2025, 6, 15),
+        )
+        assert "solar_return_date" in result

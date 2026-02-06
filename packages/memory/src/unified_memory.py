@@ -493,6 +493,118 @@ class UnifiedMemoryClient:
             user_id=user_id,
         )
 
+    async def remember_event_correlation(
+        self,
+        event_date: str,
+        event_type: str,
+        event_description: str,
+        correlation_score: int,
+        dasha_at_event: dict[str, Any] | None = None,
+        explanation: str = "",
+        user_id: str | None = None,
+    ) -> UnifiedMemory:
+        """Store a life event correlation result.
+
+        Args:
+            event_date: ISO date of the event
+            event_type: Type (career, marriage, health, money, etc.)
+            event_description: User's description
+            correlation_score: Match score (0-100)
+            dasha_at_event: Dasha active at event time
+            explanation: Correlation explanation
+            user_id: Override default user ID
+
+        Returns:
+            Created UnifiedMemory
+        """
+        content = (
+            f"Life event ({event_type}) on {event_date}: {event_description}. "
+            f"Correlation: {correlation_score}/100. {explanation}"
+        )
+        return await self.add(
+            content=content,
+            category="event_correlation",
+            metadata={
+                "event_date": event_date,
+                "event_type": event_type,
+                "event_description": event_description,
+                "correlation_score": correlation_score,
+                "dasha_at_event": dasha_at_event or {},
+                "explanation": explanation,
+            },
+            importance=0.8,
+            user_id=user_id,
+        )
+
+    async def remember_remedy(
+        self,
+        remedy_summary: str,
+        dasha_lord: str,
+        active_doshas: list[str],
+        user_id: str | None = None,
+    ) -> UnifiedMemory:
+        """Store remedy recommendations.
+
+        Args:
+            remedy_summary: Summary of recommended remedies
+            dasha_lord: Current mahadasha lord
+            active_doshas: Active dosha names
+            user_id: Override default user ID
+
+        Returns:
+            Created UnifiedMemory
+        """
+        dosha_str = ", ".join(active_doshas) if active_doshas else "none"
+        content = f"Remedies for {dasha_lord} dasha, doshas: {dosha_str}. {remedy_summary}"
+        return await self.add(
+            content=content,
+            category="remedy",
+            metadata={
+                "dasha_lord": dasha_lord,
+                "active_doshas": active_doshas,
+                "remedy_summary": remedy_summary,
+            },
+            importance=0.6,
+            user_id=user_id,
+        )
+
+    async def remember_transit_trigger(
+        self,
+        trigger_date: str,
+        trigger_type: str,
+        significance: str,
+        effect: str,
+        user_id: str | None = None,
+    ) -> UnifiedMemory:
+        """Store an upcoming transit trigger as a memory.
+
+        Args:
+            trigger_date: ISO date of the trigger
+            trigger_type: Type (ingress, conjunction, aspect, retrograde, dasha_change)
+            significance: Significance level (high, medium, low)
+            effect: Expected effect description
+            user_id: Override default user ID
+
+        Returns:
+            Created UnifiedMemory
+        """
+        content = (
+            f"Transit trigger on {trigger_date}: {trigger_type} "
+            f"(significance: {significance}). {effect}"
+        )
+        return await self.add(
+            content=content,
+            category="transit_trigger",
+            metadata={
+                "trigger_date": trigger_date,
+                "trigger_type": trigger_type,
+                "significance": significance,
+                "effect": effect,
+            },
+            importance=0.7,
+            user_id=user_id,
+        )
+
     async def get_context_for_query(
         self,
         query: str,
@@ -520,6 +632,9 @@ class UnifiedMemoryClient:
             "current_dasha": None,
             "active_yogas": [],
             "preferences": [],
+            "event_correlations": [],
+            "remedies": [],
+            "transit_triggers": [],
         }
 
         # Search for relevant memories
@@ -544,6 +659,12 @@ class UnifiedMemoryClient:
                 context["active_yogas"].append(memory.metadata)
             elif memory.category == "preference":
                 context["preferences"].append(memory.metadata)
+            elif memory.category == "event_correlation":
+                context["event_correlations"].append(memory.metadata)
+            elif memory.category == "remedy":
+                context["remedies"].append(memory.metadata)
+            elif memory.category == "transit_trigger":
+                context["transit_triggers"].append(memory.metadata)
 
         return context
 

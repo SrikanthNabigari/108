@@ -1,0 +1,54 @@
+{
+  "version": "1.0",
+  "description": "Yoga cancellation (Yoga Bhanga) rules for Vedic astrology. Defines conditions under which yogas are cancelled, partially weakened, or fully negated.",
+  "cancellation_types": {
+    "pancha_mahapurusha": {
+      "description": "Pancha Mahapurusha yogas (Hamsa, Malavya, Ruchaka, Bhadra, Sasa) are cancelled when the forming planet is combust or loses a planetary war.",
+      "conditions": [
+        {"type": "combustion", "effect": "full_cancel", "description": "Planet combust by Sun"},
+        {"type": "planetary_war_loss", "effect": "full_cancel", "description": "Planet loses Graha Yuddha"},
+        {"type": "debilitation_navamsha", "effect": "partial_weaken", "strength_modifier": 0.5, "description": "Planet in debilitated navamsha"}
+      ]
+    },
+    "raja_yoga": {
+      "description": "Raja Yoga cancelled when forming planets are debilitated or in 6/8/12 from each other.",
+      "conditions": [
+        {"type": "debilitation_without_neecha_bhanga", "effect": "full_cancel", "description": "Forming planet debilitated without Neecha Bhanga"},
+        {"type": "mutual_dusthana", "effect": "full_cancel", "description": "Forming planets in 6/8/12 from each other"},
+        {"type": "combustion", "effect": "full_cancel", "description": "Forming planet combust"},
+        {"type": "planetary_war_loss", "effect": "partial_weaken", "strength_modifier": 0.4, "description": "Forming planet loses planetary war"}
+      ]
+    },
+    "dhana_yoga": {
+      "description": "Dhana Yoga cancelled when 2nd/11th lords are afflicted by malefics.",
+      "conditions": [
+        {"type": "lord_affliction", "houses": [2, 11], "effect": "full_cancel", "description": "2nd or 11th lord conjunct 2+ malefics"},
+        {"type": "lord_debilitated", "houses": [2, 11], "effect": "partial_weaken", "strength_modifier": 0.3, "description": "2nd or 11th lord debilitated"},
+        {"type": "lord_combust", "houses": [2, 11], "effect": "partial_weaken", "strength_modifier": 0.4, "description": "2nd or 11th lord combust"}
+      ]
+    },
+    "gajakesari": {
+      "description": "Gajakesari Yoga cancelled when Moon or Jupiter in dusthana (6/8/12) from Lagna.",
+      "conditions": [
+        {"type": "planet_in_dusthana", "planets": ["moon", "jupiter"], "effect": "full_cancel", "description": "Moon or Jupiter in 6th, 8th, or 12th house"},
+        {"type": "combustion", "planet": "jupiter", "effect": "partial_weaken", "strength_modifier": 0.4, "description": "Jupiter combust"},
+        {"type": "debilitation_without_neecha_bhanga", "planets": ["moon", "jupiter"], "effect": "full_cancel", "description": "Moon or Jupiter debilitated without Neecha Bhanga"}
+      ]
+    },
+    "neecha_bhanga_raja_yoga": {
+      "description": "Neecha Bhanga itself is cancelled if the debilitated planet is also combust.",
+      "conditions": [
+        {"type": "combustion_of_debilitated", "effect": "full_cancel", "description": "Debilitated planet with Neecha Bhanga is also combust - cancellation of cancellation"}
+      ]
+    }
+  },
+  "general_cancellation_conditions": [
+    {"type": "combustion", "description": "Planet within combustion orb of Sun", "effect": "full_cancel"},
+    {"type": "debilitation_without_neecha_bhanga", "description": "Planet in debilitation sign without cancellation", "effect": "full_cancel"},
+    {"type": "severe_malefic_affliction", "description": "Conjunct 2 or more malefics (Saturn, Mars, Rahu, Ketu)", "effect": "full_cancel"},
+    {"type": "planetary_war_loss", "description": "Planet lost in Graha Yuddha (within 1 degree)", "effect": "partial_weaken", "strength_modifier": 0.4}
+  ],
+  "malefic_planets": ["mars", "saturn", "rahu", "ketu"],
+  "dusthana_houses": [6, 8, 12],
+  "kendra_houses": [1, 4, 7, 10]
+}

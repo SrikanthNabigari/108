@@ -1110,7 +1110,7 @@ def _analyze_prashna_navamsha(d9_chart: dict, prashna_lagna_sign: Rashi) -> dict
         if jup_d9_rashi in (3, 8, 11):
             d9_strength_score += 15
             factors.append(
-                f"Jupiter strong in D9 ({jupiter_d9['rashi_name']}): " "deep underlying fortune"
+                f"Jupiter strong in D9 ({jupiter_d9['rashi_name']}): deep underlying fortune"
             )
 
     d9_strength_score = max(0.0, min(100.0, d9_strength_score))
@@ -1221,7 +1221,7 @@ def _analyze_prashna_drekkana(d3_chart: dict, lagna_degree: float) -> dict[str, 
         if mars_d3_rashi in (0, 7, 9):
             d3_strength_score += 10
             factors.append(
-                f"Mars strong in D3 ({mars_d3['rashi_name']}): " "good courage and initiative"
+                f"Mars strong in D3 ({mars_d3['rashi_name']}): good courage and initiative"
             )
 
     if not factors:
