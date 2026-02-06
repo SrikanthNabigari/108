@@ -403,7 +403,7 @@ def get_current_yogini_dasha(
     if query_dt is None:
         query_dt = datetime.now()
 
-    # Ensure timezone consistency: strip tzinfo for comparison
+    # Normalize query_dt to naive for comparison with period dates
     if query_dt.tzinfo is not None:
         query_dt = query_dt.replace(tzinfo=None)
 
@@ -415,7 +415,6 @@ def get_current_yogini_dasha(
 
     # Find the period that contains the query date
     for period in periods:
-        # Strip timezone from period dates for comparison
         start = (
             period.start_date.replace(tzinfo=None)
             if period.start_date.tzinfo

@@ -1400,16 +1400,12 @@ async def get_abhijit(lat: float, lon: float, date: str | None = None):
         from packages.cosmos.src.sunrise_sunset import get_sunrise_sunset as _get_sr
 
         query_dt = dt.fromisoformat(date) if date else dt.utcnow()
-        if query_dt.tzinfo:
-            query_dt = query_dt.replace(tzinfo=None)
+        # NOTE: Do NOT strip timezone — get_julian_day handles conversion to UTC
 
         sr_data = _get_sr(query_dt, lat, lon)
         sunrise = sr_data["sunrise"]
         sunset = sr_data["sunset"]
-        if sunrise.tzinfo:
-            sunrise = sunrise.replace(tzinfo=None)
-        if sunset.tzinfo:
-            sunset = sunset.replace(tzinfo=None)
+        # NOTE: Do NOT strip timezone — get_julian_day handles conversion to UTC
 
         start, end = _get_abhijit(sunrise, sunset)
 
@@ -1435,13 +1431,11 @@ async def get_brahma(lat: float, lon: float, date: str | None = None):
         from packages.cosmos.src.sunrise_sunset import get_sunrise_sunset as _get_sr
 
         query_dt = dt.fromisoformat(date) if date else dt.utcnow()
-        if query_dt.tzinfo:
-            query_dt = query_dt.replace(tzinfo=None)
+        # NOTE: Do NOT strip timezone — get_julian_day handles conversion to UTC
 
         sr_data = _get_sr(query_dt, lat, lon)
         sunrise = sr_data["sunrise"]
-        if sunrise.tzinfo:
-            sunrise = sunrise.replace(tzinfo=None)
+        # NOTE: Do NOT strip timezone — get_julian_day handles conversion to UTC
 
         start, end = _get_brahma(sunrise)
 
@@ -1532,12 +1526,10 @@ async def get_ashtottari(request: DashaRequest):
         )
 
         birth_dt = request.birth_datetime
-        if birth_dt.tzinfo:
-            birth_dt = birth_dt.replace(tzinfo=None)
+        # NOTE: Do NOT strip timezone — get_julian_day handles conversion to UTC
 
         query_dt = request.query_datetime
-        if query_dt and query_dt.tzinfo:
-            query_dt = query_dt.replace(tzinfo=None)
+        # NOTE: Do NOT strip timezone — get_julian_day handles conversion to UTC
 
         applicable = True
         if request.rahu_house > 0 and request.lagna_lord_house > 0:
@@ -1582,8 +1574,7 @@ async def get_progressions(request: BirthDataRequest):
         from packages.context.src.progressions import get_current_progressions as _get_prog
 
         birth_dt = request.datetime
-        if birth_dt.tzinfo:
-            birth_dt = birth_dt.replace(tzinfo=None)
+        # NOTE: Do NOT strip timezone — get_julian_day handles conversion to UTC
 
         result = _get_prog(birth_dt, request.latitude, request.longitude)
 

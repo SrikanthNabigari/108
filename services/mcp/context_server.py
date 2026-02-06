@@ -105,13 +105,12 @@ def current_dasha(
     """
     try:
         birth_dt = datetime.fromisoformat(birth_datetime.replace("Z", "+00:00"))
-        if birth_dt.tzinfo:
-            birth_dt = birth_dt.replace(tzinfo=None)
+        # NOTE: Keep timezone for accurate UTC conversion
+        # Do NOT strip timezone - downstream dasha functions handle UTC properly
 
         if query_datetime:
             query_dt = datetime.fromisoformat(query_datetime.replace("Z", "+00:00"))
-            if query_dt.tzinfo:
-                query_dt = query_dt.replace(tzinfo=None)
+            # NOTE: Keep timezone for accurate UTC conversion
         else:
             query_dt = datetime.now()
 
@@ -179,8 +178,8 @@ def dasha_periods(
     """
     try:
         birth_dt = datetime.fromisoformat(birth_datetime.replace("Z", "+00:00"))
-        if birth_dt.tzinfo:
-            birth_dt = birth_dt.replace(tzinfo=None)
+        # NOTE: Keep timezone for accurate UTC conversion
+        # Do NOT strip timezone - downstream dasha functions handle UTC properly
 
         # Get initial balance
         balance = get_dasha_balance_at_birth(moon_longitude, birth_dt)
@@ -417,8 +416,8 @@ def muhurta_check(
     """
     try:
         dt = datetime.fromisoformat(datetime_iso.replace("Z", "+00:00"))
-        if dt.tzinfo:
-            dt = dt.replace(tzinfo=None)
+        # NOTE: Keep timezone for accurate UTC conversion to Julian Day
+        # Do NOT strip timezone - get_julian_day() needs accurate UTC time
 
         # Calculate panchanga for the time
         jd = get_julian_day(dt)
@@ -525,10 +524,9 @@ def find_good_muhurta(
         start_dt = datetime.fromisoformat(start_date)
         end_dt = datetime.fromisoformat(end_date)
 
-        if start_dt.tzinfo:
-            start_dt = start_dt.replace(tzinfo=None)
-        if end_dt.tzinfo:
-            end_dt = end_dt.replace(tzinfo=None)
+        # NOTE: Keep timezone for accurate UTC conversion
+        # Do NOT strip timezone - downstream functions handle UTC properly
+        # (functions will handle naive datetimes from API, but keep tz if present)
 
         results = find_next_good_muhurta(start_dt, end_dt, activity, count)
 
@@ -577,8 +575,8 @@ def antardasha_periods(
     """
     try:
         birth_dt = datetime.fromisoformat(birth_datetime.replace("Z", "+00:00"))
-        if birth_dt.tzinfo:
-            birth_dt = birth_dt.replace(tzinfo=None)
+        # NOTE: Keep timezone for accurate UTC conversion
+        # Do NOT strip timezone - downstream dasha functions handle UTC properly
 
         # Get antardasha sequences
         antardashas = get_antardasha_sequence(birth_dt, moon_longitude, mahadasha_lord)
@@ -794,14 +792,13 @@ def yogini_dasha(
     """
     try:
         birth_dt = datetime.fromisoformat(birth_datetime.replace("Z", "+00:00"))
-        if birth_dt.tzinfo:
-            birth_dt = birth_dt.replace(tzinfo=None)
+        # NOTE: Keep timezone for accurate UTC conversion
+        # Do NOT strip timezone - downstream dasha functions handle UTC properly
 
         query_dt = None
         if query_datetime:
             query_dt = datetime.fromisoformat(query_datetime.replace("Z", "+00:00"))
-            if query_dt.tzinfo:
-                query_dt = query_dt.replace(tzinfo=None)
+            # NOTE: Keep timezone for accurate UTC conversion
 
         # Get current dasha
         current = get_current_yogini_dasha(
@@ -905,8 +902,8 @@ def narayana_dasha(
         )
 
         birth_dt = datetime.fromisoformat(birth_datetime.replace("Z", "+00:00"))
-        if birth_dt.tzinfo:
-            birth_dt = birth_dt.replace(tzinfo=None)
+        # NOTE: Keep timezone for accurate UTC conversion
+        # Do NOT strip timezone - downstream dasha functions handle UTC properly
 
         # Build BirthChart from chart_data
         lagna_str = chart_data.get("lagna_rashi", "aries").lower()
@@ -954,8 +951,7 @@ def narayana_dasha(
         query_dt = None
         if query_datetime:
             query_dt = datetime.fromisoformat(query_datetime.replace("Z", "+00:00"))
-            if query_dt.tzinfo:
-                query_dt = query_dt.replace(tzinfo=None)
+            # NOTE: Keep timezone for accurate UTC conversion
 
         current = get_current_narayana_dasha(birth_dt, chart, query_dt)
 
@@ -1017,14 +1013,13 @@ def compare_dashas(
     """
     try:
         birth_dt = datetime.fromisoformat(birth_datetime.replace("Z", "+00:00"))
-        if birth_dt.tzinfo:
-            birth_dt = birth_dt.replace(tzinfo=None)
+        # NOTE: Keep timezone for accurate UTC conversion
+        # Do NOT strip timezone - downstream dasha functions handle UTC properly
 
         query_dt = None
         if query_datetime:
             query_dt = datetime.fromisoformat(query_datetime.replace("Z", "+00:00"))
-            if query_dt.tzinfo:
-                query_dt = query_dt.replace(tzinfo=None)
+            # NOTE: Keep timezone for accurate UTC conversion
 
         # Vimshottari
         vimshottari = get_current_dasha(birth_dt, moon_longitude, query_dt)
@@ -1080,16 +1075,14 @@ def abhijit_muhurta(datetime_iso: str, latitude: float, longitude: float) -> dic
     """
     try:
         dt = datetime.fromisoformat(datetime_iso.replace("Z", "+00:00"))
-        if dt.tzinfo:
-            dt = dt.replace(tzinfo=None)
+        # NOTE: Keep timezone for accurate UTC conversion to sunrise/sunset calculation
+        # Do NOT strip timezone - get_sunrise_sunset() needs accurate UTC time
 
         sr_data = get_sunrise_sunset(dt, latitude, longitude)
         sunrise = sr_data["sunrise"]
         sunset = sr_data["sunset"]
-        if sunrise.tzinfo:
-            sunrise = sunrise.replace(tzinfo=None)
-        if sunset.tzinfo:
-            sunset = sunset.replace(tzinfo=None)
+        # NOTE: Keep timezone from get_sunrise_sunset() results for accurate calculation
+        # Downstream functions handle UTC conversion properly
 
         start, end = get_abhijit_muhurta(sunrise, sunset)
 
@@ -1129,13 +1122,13 @@ def brahma_muhurta(datetime_iso: str, latitude: float, longitude: float) -> dict
     """
     try:
         dt = datetime.fromisoformat(datetime_iso.replace("Z", "+00:00"))
-        if dt.tzinfo:
-            dt = dt.replace(tzinfo=None)
+        # NOTE: Keep timezone for accurate UTC conversion to sunrise calculation
+        # Do NOT strip timezone - get_sunrise_sunset() needs accurate UTC time
 
         sr_data = get_sunrise_sunset(dt, latitude, longitude)
         sunrise = sr_data["sunrise"]
-        if sunrise.tzinfo:
-            sunrise = sunrise.replace(tzinfo=None)
+        # NOTE: Keep timezone from get_sunrise_sunset() results for accurate calculation
+        # Downstream functions handle UTC conversion properly
 
         start, end = get_brahma_muhurta(sunrise)
 
@@ -1268,14 +1261,13 @@ def ashtottari_dasha(
     """
     try:
         birth_dt = datetime.fromisoformat(birth_datetime.replace("Z", "+00:00"))
-        if birth_dt.tzinfo:
-            birth_dt = birth_dt.replace(tzinfo=None)
+        # NOTE: Keep timezone for accurate UTC conversion
+        # Do NOT strip timezone - downstream dasha functions handle UTC properly
 
         query_dt = None
         if query_datetime:
             query_dt = datetime.fromisoformat(query_datetime.replace("Z", "+00:00"))
-            if query_dt.tzinfo:
-                query_dt = query_dt.replace(tzinfo=None)
+            # NOTE: Keep timezone for accurate UTC conversion
 
         # Check applicability
         applicable = True
@@ -1351,14 +1343,13 @@ def secondary_progressions(
     """
     try:
         birth_dt = datetime.fromisoformat(birth_datetime.replace("Z", "+00:00"))
-        if birth_dt.tzinfo:
-            birth_dt = birth_dt.replace(tzinfo=None)
+        # NOTE: Keep timezone for accurate UTC conversion
+        # Do NOT strip timezone - downstream functions handle UTC properly
 
         query_dt = None
         if query_datetime:
             query_dt = datetime.fromisoformat(query_datetime.replace("Z", "+00:00"))
-            if query_dt.tzinfo:
-                query_dt = query_dt.replace(tzinfo=None)
+            # NOTE: Keep timezone for accurate UTC conversion
 
         result = get_current_progressions(birth_dt, birth_lat, birth_lon, query_dt)
 

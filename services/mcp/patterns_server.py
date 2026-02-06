@@ -683,8 +683,7 @@ def chara_dasha(
         from datetime import datetime as dt_class
 
         birth_dt = dt_class.fromisoformat(birth_datetime.replace("Z", "+00:00"))
-        if birth_dt.tzinfo:
-            birth_dt = birth_dt.replace(tzinfo=None)
+        # NOTE: Do NOT strip timezone — get_julian_day handles conversion to UTC
 
         chart = _build_chart_for_yoga(planets, lagna_rashi, moon_rashi, houses)
         periods = calculate_chara_dasha(birth_dt, chart, years)

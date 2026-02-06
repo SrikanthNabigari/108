@@ -553,8 +553,7 @@ Respond with ONLY the intent name (e.g., "calculate")"""
                     moon_lon = state["birth_chart"].get("moon_longitude")
                     if birth_dt_str and moon_lon:
                         birth_dt = datetime.fromisoformat(birth_dt_str.replace("Z", "+00:00"))
-                        if birth_dt.tzinfo:
-                            birth_dt = birth_dt.replace(tzinfo=None)
+                        # NOTE: Do NOT strip timezone — get_julian_day handles conversion to UTC
                         dasha = get_current_dasha(birth_dt, moon_lon, datetime.now())
                         state["current_dasha"] = {
                             "mahadasha_lord": dasha["mahadasha"]["lord"],
@@ -713,8 +712,7 @@ Respond with ONLY the intent name (e.g., "calculate")"""
                 moon_lon = birth_chart.get("moon_longitude")
                 if birth_dt_str and moon_lon:
                     birth_dt = datetime.fromisoformat(birth_dt_str.replace("Z", "+00:00"))
-                    if birth_dt.tzinfo:
-                        birth_dt = birth_dt.replace(tzinfo=None)
+                    # NOTE: Do NOT strip timezone — get_julian_day handles conversion to UTC
 
                     # Get current dasha
                     current = get_current_dasha(birth_dt, moon_lon, datetime.now())
@@ -885,11 +883,12 @@ Respond with ONLY the intent name (e.g., "calculate")"""
                     chart = BirthChart(
                         user_id=state.get("user_id", "unknown"),
                         birth_data=BirthData(
+                            # NOTE: Do NOT strip timezone — get_julian_day handles conversion to UTC
                             datetime_utc=datetime.fromisoformat(
                                 birth_chart.get(
                                     "birth_datetime", datetime.now().isoformat()
                                 ).replace("Z", "+00:00")
-                            ).replace(tzinfo=None),
+                            ),
                             latitude=birth_chart.get("latitude", 0.0),
                             longitude=birth_chart.get("longitude", 0.0),
                             timezone=birth_chart.get("timezone", "UTC"),
@@ -1007,8 +1006,7 @@ Respond with ONLY the intent name (e.g., "calculate")"""
 
                 if birth_dt_str and moon_nak_num and moon_deg:
                     birth_dt = datetime.fromisoformat(birth_dt_str.replace("Z", "+00:00"))
-                    if birth_dt.tzinfo:
-                        birth_dt = birth_dt.replace(tzinfo=None)
+                    # NOTE: Do NOT strip timezone — get_julian_day handles conversion to UTC
                     ashtottari = get_current_ashtottari(birth_dt, moon_nak_num, moon_deg)
                     prediction_factors.append(
                         f"Ashtottari Dasha: {ashtottari['mahadasha']['lord']}-{ashtottari['antardasha']['lord']}"
@@ -1031,8 +1029,7 @@ Respond with ONLY the intent name (e.g., "calculate")"""
 
                 if birth_dt_str and lat and lon:
                     birth_dt = datetime.fromisoformat(birth_dt_str.replace("Z", "+00:00"))
-                    if birth_dt.tzinfo:
-                        birth_dt = birth_dt.replace(tzinfo=None)
+                    # NOTE: Do NOT strip timezone — get_julian_day handles conversion to UTC
                     prog = get_current_progressions(birth_dt, lat, lon)
                     active_aspects = prog.get("active_aspects", [])
                     if active_aspects:

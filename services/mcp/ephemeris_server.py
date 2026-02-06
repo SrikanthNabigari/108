@@ -136,9 +136,7 @@ def house_cusps(
     """
     try:
         dt = datetime.fromisoformat(datetime_iso.replace("Z", "+00:00"))
-        if dt.tzinfo is not None:
-            dt = dt.replace(tzinfo=None)
-
+        # NOTE: Do NOT strip timezone — get_julian_day handles conversion to UTC
         jd = get_julian_day(dt)
         houses_data = calc_house_cusps(jd, latitude, longitude, house_system)
 

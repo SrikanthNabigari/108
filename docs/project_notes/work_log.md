@@ -1,5 +1,92 @@
 # 108 Work Log
 
+## 2026-02-06 (Session 19/20 - Claude Cowork: Life Dashboard + Critical Timezone Bug Fix)
+
+### Summary
+Built the **Life Dashboard** report format (WHAT → WHEN → WHY connection) and discovered a **critical timezone bug** in house cusp calculations that was producing wrong Lagnas for ALL charts. The bug caused 3:00 AM IST to be treated as 3:00 AM UTC (= 8:30 AM IST), shifting the ascendant by ~82°. Fixed across all affected files and rebuilt Srikanth's Life Dashboard with the correct **Libra Lagna** (was incorrectly showing Sagittarius).
+
+### Critical Bug: Timezone Stripping in Julian Day Computation
+
+**Root Cause:** Multiple functions across the codebase had this pattern:
+```python
+dt = datetime.fromisoformat(datetime_iso.replace("Z", "+00:00"))
+if dt.tzinfo is not None:
+    dt = dt.replace(tzinfo=None)  # BUG! Strips timezone before JD calc
+jd = get_julian_day(dt)
+```
+
+Stripping `tzinfo` caused `get_julian_day()` to treat local time as UTC. For IST (+5:30), this produces a 5.5-hour error in the Julian Day number, which translates to ~82° error in the ascendant.
+
+**Discovery:** User cross-checked against Co-Star app which showed **Libra** ascendant. Our system showed **Sagittarius**. All 7 planet positions matched perfectly (different code path without the bug), but the ascendant was off by exactly the IST offset.
+
+**Verification:**
+- Correct JD: `2448959.3958` (Dec 2, 1992, 21:30 UTC) → **Libra 0.04° sidereal**
+- Buggy JD: `2448959.6250` (Dec 3, 1992, 03:00 UTC) → **Sagittarius 15.61° sidereal**
+
+**Why planets were correct but houses weren't:**
+`planetary_positions()` in `ephemeris_server.py` (line 71-74) passed timezone-aware datetime directly to `get_julian_day()` — no stripping. But `house_cusps()` (line 138-140) stripped timezone first. Different code paths, same file.
+
+### Files Modified (Bug Fix)
+
+| Action | File | Instances Fixed |
+|--------|------|----------------|
+| FIX | `services/mcp/ephemeris_server.py` | 1 (house_cusps function) |
+| FIX | `services/mcp/context_server.py` | 15+ (12 functions: current_dasha, dasha_periods, muhurta_check, abhijit_muhurta, brahma_muhurta, find_good_muhurta, antardasha_periods, yogini_dasha, narayana_dasha, compare_dashas, ashtottari_dasha, secondary_progressions) |
+| FIX | `services/mcp/patterns_server.py` | 1 (chara_dasha function) |
+| FIX | `services/api/main.py` | 8 (get_abhijit, get_brahma, get_ashtottari, get_progressions) |
+| FIX | `packages/guide/src/agent.py` | 5 (_load_context, _calculate, _analyze_patterns, _make_prediction) |
+
+**Fix pattern:** Removed `dt.replace(tzinfo=None)` lines and added comment:
+```python
+dt = datetime.fromisoformat(datetime_iso.replace("Z", "+00:00"))
+# NOTE: Do NOT strip timezone — get_julian_day handles conversion to UTC
+jd = get_julian_day(dt)
+```
+
+### Files Created (Life Dashboard)
+
+| Action | File | Description |
+|--------|------|-------------|
+| CREATE | `docs/life_dashboard_19feb1994.md` | Life Dashboard for Feb 19, 1994 chart (template/reference) |
+| CREATE | `docs/life_dashboard_srikanth.md` | Srikanth's Life Dashboard (rebuilt with correct Libra Lagna) |
+
+### Life Dashboard Format (New Report Type)
+
+The Life Dashboard connects WHAT (yogas/placements) → WHEN (dasha timing) → WHY (current reality):
+
+1. **Power Centers** — table of planet, sign, house, lordship, strength, dignity
+2. **Dasha Timeline** — ASCII timeline with age markers showing all Mahadashas
+3. **Antardasha Map** — current Mahadasha broken into sub-periods with dates
+4. **Yoga Activation Windows** — when specific yogas activate based on dasha lords
+5. **Reality Check** — how current period explains what the person is experiencing NOW
+6. **Transit Snapshot** — current planetary transits and their effects
+7. **Past Verification** — table matching past events to dasha periods (builds trust)
+8. **Future Roadmap** — upcoming periods with predictions
+
+### Srikanth's Correct Chart (Libra Lagna 0°56')
+
+| Planet | Sign | House | Lordship | Notes |
+|--------|------|-------|----------|-------|
+| Mercury | Libra 28°40' | 1 (Lagna) | 9th+12th lord | Strong (318.21), fortune + foreign |
+| Sun | Scorpio 17°13' | 2 | 11th lord | Gains → wealth house |
+| Rahu | Scorpio 28°12' | 2 | — | Amplifying wealth house |
+| Venus | Sagittarius 29°21' | 3 | Lagna lord | Self through effort |
+| Saturn | Capricorn 19°56' | 4 | 4th+5th lord (YOGA KARAKA) | Own sign, **Sasa Yoga**, strong (318.57) |
+| Moon | Aquarius 24°07' | 5 | 10th lord | Career through creativity |
+| Ketu | Taurus 28°12' | 8 | — | Transformation |
+| Mars | Cancer 3°46' | 10 | 2nd+7th lord | Debilitated + Retrograde |
+| Jupiter | Virgo 16°14' | 12 | 3rd+6th lord | Viparita Raja potential |
+
+Key yogas: **Sasa Yoga** (Saturn own sign in 4th kendra), Saturn as **Yoga Karaka** for Libra Lagna.
+
+### Impact & Known Issues
+
+- **ALL previously generated charts have incorrect house placements** from the same bug. Reports for the Feb 19, 1994 chart (`life_dashboard_19feb1994.md`, `report_19feb1994.md`) need recalculation.
+- **MCP servers need restart** to pick up fixes — the running servers still use old (buggy) code.
+- Tests couldn't run in Cowork VM (requires Python 3.11+ for `StrEnum`/`datetime.UTC`). Fix verified directly via `pyswisseph`.
+
+---
+
 ## 2026-02-06 (Session 18 - Claude Cowork → Claude Code Agent Team)
 
 ### Summary
