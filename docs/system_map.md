@@ -309,7 +309,7 @@ YOGA MAP:
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-### Doshas — The Afflictions (42 total)
+### Doshas — The Afflictions (55 total)
 
 ```
 DOSHA MAP:
@@ -542,7 +542,7 @@ JAIMINI COMPONENTS WE HAVE:
 | Layer | Component | Count | Status |
 |-------|-----------|-------|--------|
 | **Knowledge** | Yoga definitions | 522 | ✅ Complete |
-| | Dosha definitions | 42 | ✅ Complete |
+| | Dosha definitions | 55 | ✅ Complete |
 | | Antardasha effects | 81 (9×9) | ✅ Complete |
 | | Pratyantardasha effects | 729 (9×9×9) | ✅ Complete |
 | | Nakshatra transit rules | 243 (9×27) | ✅ Complete |
@@ -562,17 +562,24 @@ JAIMINI COMPONENTS WE HAVE:
 | | Planet-in-house interpretations | 108 (9×12) | ✅ Complete |
 | | Planet-in-nakshatra interps | 243 (9×27) | ✅ Complete |
 | | House-lord-in-house interps | 144 (12×12) | ✅ Complete |
-| | Divisional chart interpretations | D9+D10 | ✅ Partial |
+| | Divisional chart interpretations | D2+D3+D4+D7+D9+D10+D24 | ✅ Complete |
+| | Yoga cancellation rules | 5 types + general | ✅ Session 21 |
+| | Navamsha spouse rules | 153 rules | ✅ Session 21 |
+| | Ashtakavarga transit rules | 83 rules | ✅ Session 21 |
+| | Atmakaraka interpretation rules | 66 rules | ✅ Session 22 |
+| | Synastry interpretation rules | 206 rules | ✅ Session 22 |
+| | Gem prescription rules | 150 rules | ✅ Session 22 |
 | **Cosmos** | Planetary positions | Swiss Ephemeris | ✅ Complete |
-| | House cusps (6 systems) | Placidus/Whole/Equal/Koch/Campanus | ✅ Fixed |
+| | House cusps (6 systems) | Placidus/Whole/Equal/Koch/Campanus | ✅ Complete |
 | | Nakshatra calculations | 27+padas | ✅ Complete |
 | | Divisional charts | D1-D60 | ✅ Complete |
 | | Panchanga | 5 limbs | ✅ Complete |
 | | Sunrise/Sunset | Swiss Ephemeris | ✅ Complete |
 | | Aspects (Parashari) | Full+Special | ✅ Complete |
 | | Upagrahas | 11 sub-planets | ✅ Complete |
+| | Bhava Chalit | Rashi vs cusp-midpoint | ✅ Session 21 |
 | **Self** | Yoga detection | 522 rules | ✅ Complete |
-| | Dosha detection | 42 rules | ✅ Complete |
+| | Dosha detection | 55 rules | ✅ Complete |
 | | Shadbala strength | 6 components | ✅ Complete |
 | | Vimshopaka strength | 4 schemes | ✅ Complete |
 | | Bhava Bala (house strength) | 12 houses | ✅ Complete |
@@ -582,8 +589,15 @@ JAIMINI COMPONENTS WE HAVE:
 | | Jaimini (Karakas, Arudhas, Aspects) | Full system | ✅ Complete |
 | | Prashna (horary) | 10 categories | ✅ Complete |
 | | Compatibility (Ashta Kuta) | 36 points | ✅ Complete |
-| | Divisional interpretation | D9+D10 | ✅ Partial |
+| | Divisional interpretation | D2-D60 | ✅ Complete |
 | | Upapada (marriage analysis) | Jaimini | ✅ Complete |
+| | Yoga cancellation engine | Type-specific | ✅ Session 21 |
+| | Neecha Bhanga detection | 5 conditions | ✅ Session 21 |
+| | Planetary War (Graha Yuddha) | Latitude-based | ✅ Session 21 |
+| | Remedies engine | Prioritized prescriptions | ✅ Session 21 |
+| | Synastry & Composite Charts | Overlay + Aspects + Midpoint | ✅ Session 22 |
+| | Gem Recommendation Engine | Lagna-based + contraindications | ✅ Session 22 |
+| | Atmakaraka Deep Analysis | Soul purpose + Ishta Devata | ✅ Session 22 |
 | **Context** | Vimshottari Dasha | 120-year, 3 levels | ✅ Complete |
 | | Yogini Dasha | 36-year | ✅ Complete |
 | | Ashtottari Dasha | 108-year | ✅ Complete |
@@ -596,58 +610,49 @@ JAIMINI COMPONENTS WE HAVE:
 | | Abhijit / Brahma Muhurta | Daily | ✅ Complete |
 | | Eclipse periods | Monthly | ✅ Complete |
 | | Marana Kaal | Daily | ✅ Complete |
-| | Varshaphal (Solar Return) | Tajika | ✅ Complete |
+| | Varshaphal (Solar Return) | Tajika + current year | ✅ Complete |
 | | Secondary Progressions | Day=Year | ✅ Complete |
-| | Synastry & Composite Charts | Overlay + Aspects + Midpoint | ✅ Complete |
-| | Gem Recommender | Lagna-based prescription + compatibility | ✅ Complete |
-| | Atmakaraka Analysis | Soul purpose, Ishta Devata, Karakamsha | ✅ Complete |
-| | Daily Forecast | Day rating + panchanga + transits + dasha | ✅ Complete |
-| | Weekly Forecast | 7-day area ratings + peak/challenging days | ✅ Complete |
-| | Monthly Forecast | Major transits + retrogrades + area analysis | ✅ Complete |
-| **MCP Tools** | Total tools | 76 | ✅ Complete |
-| **API Endpoints** | Total endpoints | 37 | ✅ Complete |
+| | Dasha-Transit Cross-Analysis | 0-100 activation scoring | ✅ Session 21 |
+| | Transit-to-Natal Aspects | Degree + Parashari special | ✅ Session 21 |
+| | Event Correlation Engine | Past event → chart validation | ✅ Session 21 |
+| | Transit Trigger Tracker | Upcoming ingresses/aspects/stations | ✅ Session 21 |
+| | Daily Forecast Engine | Day rating + all timing layers | ✅ Session 22 |
+| | Weekly Forecast Engine | 7-day area ratings + peak days | ✅ Session 22 |
+| | Monthly Forecast Engine | Transits + retrogrades + areas | ✅ Session 22 |
+| **MCP Tools** | Total tools | ~76 | ✅ Complete |
+| **API Endpoints** | Total endpoints | 30 | ✅ Complete |
 | **Tests** | Total test items | 2,026 | ✅ Complete |
 
 ### WHAT'S MISSING OR INCOMPLETE
 
 | Gap | Priority | What It Would Add |
 |-----|----------|-------------------|
-| **Divisional charts beyond D9/D10** | HIGH | D7 (children), D4 (property), D24 (education), D3 (siblings) interpretations |
-| **Transit-to-natal aspect analysis** | HIGH | When transiting Jupiter aspects natal Saturn — this is what makes forecasts precise |
-| **Yoga CANCELLATION rules** | HIGH | Many yogas get cancelled by specific conditions (e.g., Sasa Yoga cancelled if Saturn combust) |
-| **Neecha Bhanga Raja Yoga detection** | MEDIUM | Your Mars is debilitated but retrograde — specific cancellation rules for this |
-| **Ashtakavarga-weighted transit predictions** | MEDIUM | Using BAV/SAV scores to predict WHICH transits actually deliver |
-| **Sarvashtakavarga analysis** | MEDIUM | Total bindu scores to rank signs for overall chart strength |
-| **Dasha-Transit cross-analysis** | HIGH | The WHAT×WHEN engine — which dasha activates which transit |
-| **Remedies engine** | MEDIUM | We have remedy data but no engine to recommend specific remedies based on current doshas + dashas |
-| ~~**Gem recommendation engine**~~ | ~~LOW~~ | ~~Based on Lagna + weak planets, recommend specific gems~~ ✅ Done Session 22 |
-| **Varshaphal for current year** | MEDIUM | Solar return chart for 2025-26 — adds another timing layer |
-| **D9 Navamsha spouse analysis** | HIGH | D9 is THE chart for marriage — spouse appearance, nature, timing |
-| **Bhava Chalit (cuspal chart)** | MEDIUM | Planets may shift houses when using Bhava Chalit vs Rashi chart |
-| **Planetary WAR (Graha Yuddha)** | LOW | When two planets are within 1° — one wins, one loses |
-| ~~**Atmakaraka-based analysis**~~ | ~~MEDIUM~~ | ~~Jaimini soul-planet analysis for spiritual path~~ ✅ Done Session 22 |
-| **KP (Krishnamurti Paddhati)** | LOW | Alternative prediction system using sub-lords |
-| **Real-time transit tracker** | HIGH | Live dashboard showing current transits + when next aspect triggers |
-| **Event correlation engine** | HIGH | User inputs life events → system maps them to dasha/transits → validates chart |
-| ~~**Composite charts (synastry)**~~ | ~~MEDIUM~~ | ~~Relationship compatibility beyond Ashta Kuta — overlay two charts~~ ✅ Done Session 22 |
-| **Hora chart (D2)** | MEDIUM | Specifically for wealth analysis |
+| **KP (Krishnamurti Paddhati)** | LOW | Alternative prediction system using sub-lords — entirely new framework |
+| **Chara Dasha antardashas** | LOW | Jaimini sub-period calculations within Chara Dasha sign periods |
+| **Deeper Rashi aspects** | LOW | Jaimini sign-based aspects with detailed interpretations |
+| **planet_in_nakshatra.json expansion** | LOW | Currently 78KB, expected ~200KB — partial coverage of 243 combinations |
+| **Real-time push notifications** | MEDIUM | Live transit alerts when aspects become exact — needs infrastructure |
+| **Multi-user auth** | MEDIUM | Proper user management with JWT/OAuth — needed for production |
+| **Frontend (Next.js + React Native)** | HIGH | No UI yet — all features are API/MCP only |
 
 ### What We Need for the USER-FACING Product
 
 | Feature | What User Sees | Backend Status |
 |---------|---------------|----------------|
-| **Onboarding report** | "Here's who you are" — personality, strengths, challenges | ✅ Have data, need better template |
-| **Life timeline** | Visual dasha timeline with past events mapped | ✅ Have dasha engine, need UI |
+| **Onboarding report** | "Here's who you are" — personality, strengths, challenges | ✅ Have data, need template + UI |
+| **Life timeline** | Visual dasha timeline with past events mapped | ✅ Have dasha engine + event correlator, need UI |
 | **Daily forecast** | "Today's energy" based on transit Moon + panchanga | ✅ Complete — day rating, panchanga, choghadiya, dasha, transits |
 | **Weekly forecast** | 7-day transit-based predictions | ✅ Complete — area ratings, peak/challenging days, transit aggregation |
 | **Monthly forecast** | Money/career/relationship focus per month | ✅ Complete — major transits, retrogrades, weekly summaries, best dates |
-| **Yoga report** | "Your superpowers" — what yogas you have, when they activate | ✅ Have detection, need activation mapping |
-| **Dosha report** | "Your challenges" — what doshas, remedies, when they ease | ✅ Have detection + remedies data |
+| **Yoga report** | "Your superpowers" — what yogas you have, when they activate | ✅ Complete — yoga detection + cancellation + dasha-transit activation |
+| **Dosha report** | "Your challenges" — what doshas, remedies, when they ease | ✅ Complete — detection + remedies engine + gem recommendations |
 | **Compatibility report** | Match two charts — Ashta Kuta + Upapada + synastry | ✅ Complete — Ashta Kuta + Upapada + full synastry (overlay, aspects, composite) |
 | **Muhurta finder** | "Best time to..." — marriage, business, travel | ✅ Complete |
-| **Event validator** | User inputs past event → system shows why it happened | ❌ Need event correlation engine |
-| **Remedies dashboard** | Current remedies based on active doshas + dashas | ✅ Complete — remedies engine + gem recommendations |
-| **Real-time transit dashboard** | Live "what's happening now" with countdown to next trigger | ❌ Need real-time engine |
+| **Event validator** | User inputs past event → system shows why it happened | ✅ Complete — event correlation engine (Session 21) |
+| **Remedies dashboard** | Current remedies based on active doshas + dashas | ✅ Complete — remedies engine + gem recommendations (Sessions 21+22) |
+| **Real-time transit dashboard** | Live "what's happening now" with countdown to next trigger | ✅ Complete — transit trigger tracker (Session 21), needs UI |
+| **Soul purpose report** | Atmakaraka analysis + Ishta Devata + spiritual path | ✅ Complete — atmakaraka deep analysis (Session 22) |
+| **Gem prescription** | Personalized gem recommendations based on Lagna + dasha | ✅ Complete — gem recommendation engine (Session 22) |
 
 ---
 
@@ -696,5 +701,6 @@ Step 5: GUIDE — Synthesize for user
 
 ---
 
-*108 System Map — v1.2 | Feb 7, 2026*
-*76 MCP tools | 522 yogas | 55 doshas | 729 pratyantardasha effects | 2,026 tests*
+*108 System Map — v2.0 | Feb 7, 2026*
+*76 MCP tools | 30 API endpoints | 522 yogas | 55 doshas | 729 pratyantardasha effects | 2,026 tests*
+*43 rule files | 15 definition files | 5 interpretation files | ~1,000 interpretation rules added (Sessions 21-22)*
