@@ -61,6 +61,7 @@ from .jaimini import (
     get_jaimini_aspects,
     get_karakamsha,
     get_sign_mobility,
+    interpret_upapada,
 )
 from .prashna import (
     analyze_health_prashna,
@@ -70,6 +71,7 @@ from .prashna import (
     analyze_prashna,
     analyze_travel_prashna,
     create_prashna_chart,
+    get_prashna_divisional_analysis,
     get_significator,
     judge_prashna,
     predict_timing,
@@ -91,14 +93,12 @@ __all__ = [
     "DoshaDetector",
     "StrengthCalculator",
     "YogaDetector",
-    # Prashna
     "analyze_health_prashna",
     "analyze_legal_prashna",
     "analyze_lost_object_prashna",
     "analyze_marriage_prashna",
     "analyze_prashna",
     "analyze_travel_prashna",
-    # Jaimini
     "calculate_all_arudha_padas",
     "calculate_argala",
     "calculate_arudha_pada",
@@ -128,6 +128,7 @@ __all__ = [
     "get_divisional_analysis",
     "get_jaimini_aspects",
     "get_karakamsha",
+    "get_prashna_divisional_analysis",
     "get_retrograde_analysis",
     "get_retrograde_effects",
     "get_sign_mobility",
@@ -152,6 +153,7 @@ __all__ = [
     "interpret_d27_position",
     "interpret_d30_position",
     "interpret_d60_position",
+    "interpret_upapada",
     "judge_prashna",
     "predict_timing",
 ]

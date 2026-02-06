@@ -1248,6 +1248,515 @@ async def create_user_profile(request: CreateUserRequest, req: Request):
 
 
 # ============================================================================
+# Aspects & Bhava Bala Routes
+# ============================================================================
+
+
+@app.post("/api/v1/analysis/aspects", tags=["Analysis"])
+async def calculate_aspects(request: BirthDataRequest):
+    """Calculate Parashari Graha Drishti (planetary aspects) for the birth chart."""
+    try:
+        from packages.cosmos.src.aspects import get_all_aspects, get_houses_aspected_by
+
+        jd = request_to_jd(request)
+        planets_raw = get_all_planets(jd, ayanamsa=request.ayanamsa)
+        houses_raw = get_house_cusps(
+            jd,
+            request.latitude,
+            request.longitude,
+            house_system=request.house_system,
+            ayanamsa=request.ayanamsa,
+        )
+
+        lagna_idx = int(houses_raw["ascendant"] // 30)
+
+        # Build planet -> house mapping
+        planet_houses = {}
+        for planet_id, data in planets_raw.items():
+            rashi_idx = int(data["longitude"] // 30)
+            house = ((rashi_idx - lagna_idx) % 12) + 1
+            planet_houses[planet_id] = house
+
+        aspects = get_all_aspects(planet_houses)
+        houses_aspected = get_houses_aspected_by(planet_houses)
+
+        return {
+            "aspects": aspects,
+            "houses_aspected": {str(k): v for k, v in houses_aspected.items()},
+            "planet_houses": planet_houses,
+        }
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Error calculating aspects: {e!s}",
+        ) from e
+
+
+@app.post("/api/v1/analysis/bhava-bala", tags=["Analysis"])
+async def calculate_bhava_bala_endpoint(request: BirthDataRequest):
+    """Calculate Bhava Bala (house strength) for all 12 houses."""
+    try:
+        from packages.self.src import StrengthCalculator
+
+        jd = request_to_jd(request)
+        planets_raw = get_all_planets(jd, ayanamsa=request.ayanamsa)
+        houses_raw = get_house_cusps(
+            jd,
+            request.latitude,
+            request.longitude,
+            house_system=request.house_system,
+            ayanamsa=request.ayanamsa,
+        )
+
+        # Build a BirthChart for strength calculation
+        from packages.core.src import (
+            BirthChart,
+            BirthData,
+            HouseCusps,
+            Planet,
+            PlanetPosition,
+            Rashi,
+        )
+
+        lagna_idx = int(houses_raw["ascendant"] // 30)
+        lagna_rashi = Rashi(RASHI_NAMES[lagna_idx].lower())
+
+        planet_positions = {}
+        for planet_id, data in planets_raw.items():
+            try:
+                p_enum = Planet(planet_id.lower())
+                rashi_idx = int(data["longitude"] // 30)
+                r_enum = Rashi(RASHI_NAMES[rashi_idx].lower())
+                nak = longitude_to_nakshatra(data["longitude"])
+                house = ((rashi_idx - lagna_idx) % 12) + 1
+
+                planet_positions[p_enum] = PlanetPosition(
+                    planet=p_enum,
+                    longitude=data["longitude"],
+                    latitude=data.get("latitude", 0.0),
+                    speed=data.get("speed", 0.0),
+                    rashi=r_enum,
+                    rashi_degree=data["longitude"] % 30,
+                    nakshatra=nak.get("name", "ashwini"),
+                    nakshatra_pada=nak.get("pada", 1),
+                    nakshatra_lord=Planet.KETU,
+                    is_retrograde=data.get("is_retrograde", False),
+                    house=house,
+                )
+            except (ValueError, KeyError):
+                continue
+
+        moon_pos = planet_positions.get(Planet.MOON)
+        moon_rashi = moon_pos.rashi if moon_pos else lagna_rashi
+        moon_nak = moon_pos.nakshatra if moon_pos else "ashwini"
+
+        chart = BirthChart(
+            user_id="api_query",
+            birth_data=BirthData(
+                datetime_utc=request.datetime,
+                latitude=request.latitude,
+                longitude=request.longitude,
+                timezone="UTC",
+            ),
+            planets=planet_positions,
+            houses=HouseCusps(
+                ascendant=houses_raw["ascendant"],
+                mc=houses_raw.get("mc", 0.0),
+                cusps=houses_raw["cusps"],
+            ),
+            lagna_rashi=lagna_rashi,
+            moon_rashi=moon_rashi,
+            moon_nakshatra=moon_nak,
+            ayanamsa=23.85,
+            calculated_at=dt.utcnow(),
+        )
+
+        calc = StrengthCalculator()
+        all_balas = calc.get_all_bhava_balas(chart)
+
+        return {
+            "lagna_rashi": lagna_rashi.value,
+            "houses": {str(k): v for k, v in all_balas.items()},
+        }
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Error calculating bhava bala: {e!s}",
+        ) from e
+
+
+# ============================================================================
+# Muhurta & Eclipse Routes
+# ============================================================================
+
+
+@app.get("/api/v1/timing/abhijit-muhurta", tags=["Timing"])
+async def get_abhijit(lat: float, lon: float, date: str | None = None):
+    """Get Abhijit Muhurta (most universally auspicious time) for a date/location."""
+    try:
+        from packages.context.src.muhurta import get_abhijit_muhurta as _get_abhijit
+        from packages.cosmos.src.sunrise_sunset import get_sunrise_sunset as _get_sr
+
+        query_dt = dt.fromisoformat(date) if date else dt.utcnow()
+        if query_dt.tzinfo:
+            query_dt = query_dt.replace(tzinfo=None)
+
+        sr_data = _get_sr(query_dt, lat, lon)
+        sunrise = sr_data["sunrise"]
+        sunset = sr_data["sunset"]
+        if sunrise.tzinfo:
+            sunrise = sunrise.replace(tzinfo=None)
+        if sunset.tzinfo:
+            sunset = sunset.replace(tzinfo=None)
+
+        start, end = _get_abhijit(sunrise, sunset)
+
+        return {
+            "date": query_dt.date().isoformat(),
+            "abhijit_start": start.isoformat(),
+            "abhijit_end": end.isoformat(),
+            "duration_minutes": round((end - start).total_seconds() / 60, 1),
+        }
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Error calculating Abhijit muhurta: {e!s}",
+        ) from e
+
+
+@app.get("/api/v1/timing/brahma-muhurta", tags=["Timing"])
+async def get_brahma(lat: float, lon: float, date: str | None = None):
+    """Get Brahma Muhurta (best time for spiritual practices) for a date/location."""
+    try:
+        from packages.context.src.muhurta import get_brahma_muhurta as _get_brahma
+        from packages.cosmos.src.sunrise_sunset import get_sunrise_sunset as _get_sr
+
+        query_dt = dt.fromisoformat(date) if date else dt.utcnow()
+        if query_dt.tzinfo:
+            query_dt = query_dt.replace(tzinfo=None)
+
+        sr_data = _get_sr(query_dt, lat, lon)
+        sunrise = sr_data["sunrise"]
+        if sunrise.tzinfo:
+            sunrise = sunrise.replace(tzinfo=None)
+
+        start, end = _get_brahma(sunrise)
+
+        return {
+            "date": query_dt.date().isoformat(),
+            "brahma_start": start.isoformat(),
+            "brahma_end": end.isoformat(),
+            "duration_minutes": 48,
+        }
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Error calculating Brahma muhurta: {e!s}",
+        ) from e
+
+
+@app.get("/api/v1/timing/eclipses/{year}/{month}", tags=["Timing"])
+async def get_eclipses(year: int, month: int):
+    """Check for solar and lunar eclipses in a given month."""
+    try:
+        from packages.context.src.muhurta import get_eclipse_periods as _get_eclipses
+
+        eclipses = _get_eclipses(year, month)
+
+        formatted = []
+        for eclipse in eclipses:
+            formatted.append(
+                {
+                    "type": eclipse["type"],
+                    "start": eclipse["start"].isoformat()
+                    if hasattr(eclipse["start"], "isoformat")
+                    else str(eclipse["start"]),
+                    "maximum": eclipse["maximum"].isoformat()
+                    if hasattr(eclipse["maximum"], "isoformat")
+                    else str(eclipse["maximum"]),
+                    "end": eclipse["end"].isoformat()
+                    if hasattr(eclipse["end"], "isoformat")
+                    else str(eclipse["end"]),
+                    "description": eclipse.get("description", ""),
+                }
+            )
+
+        return {
+            "year": year,
+            "month": month,
+            "eclipse_count": len(formatted),
+            "eclipses": formatted,
+        }
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Error checking eclipses: {e!s}",
+        ) from e
+
+
+# ============================================================================
+# Ashtottari Dasha & Progressions Routes
+# ============================================================================
+
+
+class DashaRequest(BaseModel):
+    """Request model for dasha calculations."""
+
+    birth_datetime: dt = Field(..., description="Birth datetime (ISO format)")
+    moon_nakshatra: int = Field(..., ge=1, le=27, description="Moon nakshatra number (1-27)")
+    degree_in_nakshatra: float = Field(..., ge=0, le=14, description="Degrees in nakshatra")
+    rahu_house: int = Field(default=0, ge=0, le=12, description="Rahu house (1-12), 0 to skip")
+    lagna_lord_house: int = Field(
+        default=0, ge=0, le=12, description="Lagna lord house (1-12), 0 to skip"
+    )
+    query_datetime: dt | None = Field(default=None, description="Query datetime")
+
+
+@app.post("/api/v1/dasha/ashtottari", tags=["Timing"])
+async def get_ashtottari(request: DashaRequest):
+    """Calculate Ashtottari Dasha (108-year planetary period system)."""
+    try:
+        from packages.context.src.ashtottari_dasha import (
+            calculate_ashtottari_sequence as _calc_seq,
+        )
+        from packages.context.src.ashtottari_dasha import (
+            get_current_ashtottari as _get_current,
+        )
+        from packages.context.src.ashtottari_dasha import (
+            is_ashtottari_applicable as _is_applicable,
+        )
+
+        birth_dt = request.birth_datetime
+        if birth_dt.tzinfo:
+            birth_dt = birth_dt.replace(tzinfo=None)
+
+        query_dt = request.query_datetime
+        if query_dt and query_dt.tzinfo:
+            query_dt = query_dt.replace(tzinfo=None)
+
+        applicable = True
+        if request.rahu_house > 0 and request.lagna_lord_house > 0:
+            applicable = _is_applicable(request.rahu_house, request.lagna_lord_house)
+
+        current = _get_current(
+            birth_dt, request.moon_nakshatra, request.degree_in_nakshatra, query_dt
+        )
+        periods = _calc_seq(birth_dt, request.moon_nakshatra, request.degree_in_nakshatra)
+
+        return {
+            "system": "ashtottari",
+            "applicable": applicable,
+            "current": {
+                "mahadasha_lord": current["mahadasha"]["lord"],
+                "antardasha_lord": current["antardasha"]["lord"],
+                "remaining_days_maha": current["remaining_days_maha"],
+                "remaining_days_antar": current["remaining_days_antar"],
+            },
+            "periods": [
+                {
+                    "lord": p["lord"],
+                    "start_date": p["start_date"].isoformat(),
+                    "end_date": p["end_date"].isoformat(),
+                    "years": round(p["years"], 2),
+                }
+                for p in periods
+            ],
+        }
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Error calculating Ashtottari: {e!s}",
+        ) from e
+
+
+@app.post("/api/v1/progressions/current", tags=["Timing"])
+async def get_progressions(request: BirthDataRequest):
+    """Get current Secondary Progressions (day-for-a-year technique)."""
+    try:
+        from packages.context.src.progressions import get_current_progressions as _get_prog
+
+        birth_dt = request.datetime
+        if birth_dt.tzinfo:
+            birth_dt = birth_dt.replace(tzinfo=None)
+
+        result = _get_prog(birth_dt, request.latitude, request.longitude)
+
+        return {
+            "system": "secondary_progressions",
+            "age_years": result.get("age"),
+            "progressed_positions": result.get("progressed_positions", {}),
+            "active_aspects": result.get("active_aspects", []),
+        }
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Error calculating progressions: {e!s}",
+        ) from e
+
+
+# ============================================================================
+# Panchanga Knowledge Routes (New)
+# ============================================================================
+
+
+@app.get("/api/v1/knowledge/tithis/{number}", tags=["Knowledge"])
+async def get_tithi(number: int):
+    """Get tithi (lunar day) definition by number."""
+    try:
+        from packages.core.src.knowledge_loader import get_tithi_definitions
+
+        data = get_tithi_definitions()
+        tithis = data.get("tithis", data)
+
+        tithi_key = str(number)
+        if isinstance(tithis, dict) and tithi_key in tithis:
+            return tithis[tithi_key]
+
+        if isinstance(tithis, list):
+            for t in tithis:
+                if isinstance(t, dict) and t.get("number") == number:
+                    return t
+
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail=f"Tithi {number} not found"
+        )
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail=f"Error looking up tithi: {e!s}"
+        ) from e
+
+
+@app.get("/api/v1/knowledge/karanas/{name}", tags=["Knowledge"])
+async def get_karana(name: str):
+    """Get karana (half-tithi) definition by name."""
+    try:
+        from packages.core.src.knowledge_loader import get_karana_definitions
+
+        data = get_karana_definitions()
+        karanas = data.get("karanas", data)
+
+        search = name.lower().replace(" ", "_")
+        if isinstance(karanas, dict):
+            if search in karanas:
+                return karanas[search]
+            for key, val in karanas.items():
+                if search in key.lower():
+                    return val
+
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail=f"Karana '{name}' not found"
+        )
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail=f"Error looking up karana: {e!s}"
+        ) from e
+
+
+@app.get("/api/v1/knowledge/varas/{name}", tags=["Knowledge"])
+async def get_vara(name: str):
+    """Get vara (weekday) definition by name."""
+    try:
+        from packages.core.src.knowledge_loader import get_vara_definitions
+
+        data = get_vara_definitions()
+        varas = data.get("varas", data)
+
+        search = name.lower().replace(" ", "_")
+        if isinstance(varas, dict):
+            if search in varas:
+                return varas[search]
+            for key, val in varas.items():
+                if search in key.lower():
+                    return val
+
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail=f"Vara '{name}' not found"
+        )
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail=f"Error looking up vara: {e!s}"
+        ) from e
+
+
+@app.get("/api/v1/knowledge/avasthas/{planet}", tags=["Knowledge"])
+async def get_avastha(planet: str, longitude: float = 0.0):
+    """Get avastha (planetary state) for a planet."""
+    try:
+        from packages.core.src.knowledge_loader import get_avastha_definitions
+
+        data = get_avastha_definitions()
+        avasthas = data.get("avasthas", data)
+
+        result: dict[str, Any] = {"planet": planet.lower(), "avasthas": avasthas}
+
+        if longitude > 0:
+            degree_in_sign = longitude % 30
+            if degree_in_sign < 6:
+                result["baladi_avastha"] = "bala"
+            elif degree_in_sign < 12:
+                result["baladi_avastha"] = "kumara"
+            elif degree_in_sign < 18:
+                result["baladi_avastha"] = "yuva"
+            elif degree_in_sign < 24:
+                result["baladi_avastha"] = "vridha"
+            else:
+                result["baladi_avastha"] = "mrita"
+
+        return result
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail=f"Error looking up avastha: {e!s}"
+        ) from e
+
+
+@app.get("/api/v1/knowledge/nitya-yogas/{number}", tags=["Knowledge"])
+async def get_nitya_yoga(number: int):
+    """Get Nitya Yoga definition by number (1-27)."""
+    try:
+        from packages.core.src.knowledge_loader import get_nitya_yoga_definitions
+
+        data = get_nitya_yoga_definitions()
+        yogas = data.get("nitya_yogas", data)
+
+        yoga_key = str(number)
+        if isinstance(yogas, dict) and yoga_key in yogas:
+            return yogas[yoga_key]
+
+        if isinstance(yogas, list):
+            for y in yogas:
+                if isinstance(y, dict) and y.get("number") == number:
+                    return y
+
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail=f"Nitya Yoga {number} not found"
+        )
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail=f"Error looking up nitya yoga: {e!s}"
+        ) from e
+
+
+# ============================================================================
 # Knowledge Routes
 # ============================================================================
 

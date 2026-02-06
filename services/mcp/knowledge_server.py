@@ -14,6 +14,13 @@ SERVICES_ROOT = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(SERVICES_ROOT))
 
 from mcp.server.fastmcp import FastMCP  # noqa: E402
+from packages.core.src.knowledge_loader import (  # noqa: E402
+    get_avastha_definitions,
+    get_karana_definitions,
+    get_nitya_yoga_definitions,
+    get_tithi_definitions,
+    get_vara_definitions,
+)
 
 # Initialize MCP server
 mcp = FastMCP("108-knowledge")
@@ -515,6 +522,226 @@ def list_all(category: str) -> dict[str, Any]:
                 "error": f"Unknown category: {category}",
                 "available": ["planets", "rashis", "nakshatras", "houses", "yogas", "doshas"],
             }
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__}
+
+
+@mcp.tool()
+def lookup_tithi(tithi_number: int) -> dict[str, Any]:
+    """
+    Get tithi (lunar day) definition.
+
+    There are 30 tithis in a lunar month (15 in Shukla Paksha, 15 in Krishna Paksha).
+    Each tithi has specific qualities for muhurta and activity planning.
+
+    Args:
+        tithi_number: Tithi number (1-30, where 1-15 = Shukla, 16-30 = Krishna)
+
+    Returns:
+        Tithi details including name, deity, nature, and auspicious activities
+
+    Example:
+        lookup_tithi(1)  # Pratipada
+    """
+    try:
+        data = get_tithi_definitions()
+        tithis = data.get("tithis", data)
+
+        # Search by number
+        tithi_key = str(tithi_number)
+        if isinstance(tithis, dict):
+            if tithi_key in tithis:
+                return {"found": True, "tithi": tithis[tithi_key]}
+            # Try searching in list format
+            for _key, val in tithis.items():
+                if isinstance(val, dict) and val.get("number") == tithi_number:
+                    return {"found": True, "tithi": val}
+        elif isinstance(tithis, list):
+            for t in tithis:
+                if isinstance(t, dict) and t.get("number") == tithi_number:
+                    return {"found": True, "tithi": t}
+
+        return {"found": False, "error": f"Tithi {tithi_number} not found"}
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__}
+
+
+@mcp.tool()
+def lookup_karana(karana_name: str) -> dict[str, Any]:
+    """
+    Get karana (half-tithi) definition.
+
+    There are 11 karanas, each covering half a tithi. 4 are fixed (Shakuni,
+    Chatushpada, Naga, Kimstughna) and 7 are repeating.
+
+    Args:
+        karana_name: Karana name (e.g., "bava", "balava", "shakuni")
+
+    Returns:
+        Karana details including nature and effects
+
+    Example:
+        lookup_karana("bava")
+    """
+    try:
+        data = get_karana_definitions()
+        karanas = data.get("karanas", data)
+
+        search = karana_name.lower().replace(" ", "_")
+        if isinstance(karanas, dict):
+            if search in karanas:
+                return {"found": True, "karana": karanas[search]}
+            for key, val in karanas.items():
+                if search in key.lower() or (
+                    isinstance(val, dict) and search in val.get("name", "").lower()
+                ):
+                    return {"found": True, "karana": val, "matched_key": key}
+        elif isinstance(karanas, list):
+            for k in karanas:
+                if isinstance(k, dict) and search in k.get("name", "").lower():
+                    return {"found": True, "karana": k}
+
+        return {"found": False, "error": f"Karana '{karana_name}' not found"}
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__}
+
+
+@mcp.tool()
+def lookup_vara(day_name: str) -> dict[str, Any]:
+    """
+    Get vara (weekday) definition.
+
+    Each day of the week has a ruling planet and specific qualities that
+    affect muhurta and activity planning.
+
+    Args:
+        day_name: Day name in English or Sanskrit (e.g., "monday", "somavara", "sunday")
+
+    Returns:
+        Vara details including ruling planet, nature, and auspicious activities
+
+    Example:
+        lookup_vara("thursday")
+    """
+    try:
+        data = get_vara_definitions()
+        varas = data.get("varas", data)
+
+        search = day_name.lower().replace(" ", "_")
+        if isinstance(varas, dict):
+            if search in varas:
+                return {"found": True, "vara": varas[search]}
+            for key, val in varas.items():
+                if search in key.lower() or (
+                    isinstance(val, dict)
+                    and (
+                        search in val.get("name", "").lower()
+                        or search in val.get("english_name", "").lower()
+                    )
+                ):
+                    return {"found": True, "vara": val, "matched_key": key}
+        elif isinstance(varas, list):
+            for v in varas:
+                if isinstance(v, dict) and (
+                    search in v.get("name", "").lower()
+                    or search in v.get("english_name", "").lower()
+                ):
+                    return {"found": True, "vara": v}
+
+        return {"found": False, "error": f"Vara '{day_name}' not found"}
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__}
+
+
+@mcp.tool()
+def lookup_avastha(planet: str, longitude: float = 0.0) -> dict[str, Any]:
+    """
+    Get avastha (planetary state) definitions for a planet.
+
+    Avasthas describe the state/condition of a planet. There are multiple
+    avastha systems: Baladi (age), Jagradadi (alertness), Deeptadi (luminosity).
+
+    Args:
+        planet: Planet name (e.g., "sun", "jupiter")
+        longitude: Planet's longitude for calculating specific avastha (optional)
+
+    Returns:
+        Avastha system definitions and the planet's current avastha if longitude given
+
+    Example:
+        lookup_avastha("jupiter", 136.24)
+    """
+    try:
+        data = get_avastha_definitions()
+        avasthas = data.get("avasthas", data)
+
+        planet_lower = planet.lower()
+        result: dict[str, Any] = {"found": True, "planet": planet_lower, "avasthas": avasthas}
+
+        # Calculate Baladi Avastha from longitude if provided
+        if longitude > 0:
+            degree_in_sign = longitude % 30
+            # Baladi avastha: Bala (0-6), Kumara (6-12), Yuva (12-18), Vridha (18-24), Mrita (24-30)
+            if degree_in_sign < 6:
+                result["baladi_avastha"] = "bala"
+                result["baladi_meaning"] = "Infant state - weak expression"
+            elif degree_in_sign < 12:
+                result["baladi_avastha"] = "kumara"
+                result["baladi_meaning"] = "Adolescent state - developing"
+            elif degree_in_sign < 18:
+                result["baladi_avastha"] = "yuva"
+                result["baladi_meaning"] = "Youthful state - strongest expression"
+            elif degree_in_sign < 24:
+                result["baladi_avastha"] = "vridha"
+                result["baladi_meaning"] = "Old state - declining strength"
+            else:
+                result["baladi_avastha"] = "mrita"
+                result["baladi_meaning"] = "Dead state - weakest expression"
+
+        return result
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__}
+
+
+@mcp.tool()
+def lookup_nitya_yoga(yoga_number: int) -> dict[str, Any]:
+    """
+    Get Nitya Yoga definition.
+
+    Nitya Yogas are 27 yogas formed by the combined longitudes of Sun and Moon.
+    Each yoga has specific qualities for muhurta and daily activity planning.
+
+    Args:
+        yoga_number: Yoga number (1-27)
+
+    Returns:
+        Nitya Yoga details including name, nature, ruling planet, and effects
+
+    Example:
+        lookup_nitya_yoga(1)  # Vishkambha
+    """
+    try:
+        data = get_nitya_yoga_definitions()
+        yogas = data.get("nitya_yogas", data)
+
+        yoga_key = str(yoga_number)
+        if isinstance(yogas, dict):
+            if yoga_key in yogas:
+                return {"found": True, "nitya_yoga": yogas[yoga_key]}
+            for _key, val in yogas.items():
+                if isinstance(val, dict) and val.get("number") == yoga_number:
+                    return {"found": True, "nitya_yoga": val}
+        elif isinstance(yogas, list):
+            for y in yogas:
+                if isinstance(y, dict) and y.get("number") == yoga_number:
+                    return {"found": True, "nitya_yoga": y}
+
+        return {"found": False, "error": f"Nitya Yoga {yoga_number} not found"}
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__}

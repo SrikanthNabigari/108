@@ -177,13 +177,15 @@ See `docs/project_notes/work_log.md` Session 17 for full deliverables. Remaining
 5. Update work_log.md after completing tasks
 6. If using Agent Teams, respect package ownership boundaries
 
-## Current Stats (Session 17)
+## Current Stats (Session 18)
 
-- **1,035 tests passing**, 0 lint errors
+- **1,285 tests passing**, 0 lint errors
 - **522 yogas**, 55 doshas, 729 pratyantardasha combinations
-- **4 MCP servers**, ~45 tools
+- **4 MCP servers**, ~59 tools (+14 in Session 18)
 - **~2.9MB** knowledge base (37 rule files, 15 definition files, 5 interpretation files)
-- **All P0 bugs fixed**, all P1 features done — remaining: P2/P3 enhancements only
+- **12 REST API endpoints** added in Session 18
+- **Ashtottari Dasha** (108-year cycle) + **Secondary Progressions** (day=year)
+- **All features exposed** as MCP tools + API endpoints
 
 ## Contact
 

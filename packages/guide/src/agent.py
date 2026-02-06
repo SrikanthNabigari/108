@@ -230,7 +230,16 @@ INTENT_KEYWORDS = {
         "outcome",
         "result",
     ],
-    IntentType.DASHA: ["dasha", "mahadasha", "antardasha", "period", "timing"],
+    IntentType.DASHA: [
+        "dasha",
+        "mahadasha",
+        "antardasha",
+        "period",
+        "timing",
+        "ashtottari",
+        "yogini",
+        "progression",
+    ],
     IntentType.TRANSIT: [
         "transit",
         "gochara",
@@ -244,6 +253,9 @@ INTENT_KEYWORDS = {
         "auspicious",
         "inauspicious",
         "when should",
+        "abhijit",
+        "brahma muhurta",
+        "eclipse",
     ],
     IntentType.REMEDY: ["remedy", "solution", "what should", "help", "fix", "improve"],
     IntentType.PERSONAL: ["my chart", "my birth", "about me", "tell me about", "my future"],
@@ -767,6 +779,31 @@ Respond with ONLY the intent name (e.g., "calculate")"""
             # Planetary positions are already in birth_chart
             state["analysis_results"]["positions_available"] = True
 
+            # Add aspect analysis
+            try:
+                from packages.cosmos.src import RASHI_NAMES as _RASHI_NAMES
+                from packages.cosmos.src.aspects import get_all_aspects
+
+                planets_data = birth_chart.get("planets", {})
+                lagna_rashi_str = birth_chart.get("lagna_rashi", "aries").lower()
+                lagna_names_lower = [r.lower() for r in _RASHI_NAMES]
+                lagna_idx = (
+                    lagna_names_lower.index(lagna_rashi_str)
+                    if lagna_rashi_str in lagna_names_lower
+                    else 0
+                )
+
+                planet_houses = {}
+                for pname, pdata in planets_data.items():
+                    rashi_idx = pdata.get("rashi_num", int(pdata.get("longitude", 0) // 30))
+                    planet_houses[pname] = ((rashi_idx - lagna_idx) % 12) + 1
+
+                if planet_houses:
+                    aspects = get_all_aspects(planet_houses)
+                    state["analysis_results"]["aspects"] = aspects
+            except Exception as e:
+                logger.warning(f"Aspect calculation error: {e}")
+
         state["analysis_results"]["calculations_performed"] = True
         state["analysis_results"]["calculation_type"] = intent.value if intent else "general"
 
@@ -907,6 +944,26 @@ Respond with ONLY the intent name (e.g., "calculate")"""
                         f"Detected {len(detected_yogas)} yogas, {len(detected_doshas)} doshas"
                     )
 
+                    # Calculate Bhava Bala for strongest/weakest houses
+                    try:
+                        from packages.self.src import StrengthCalculator as SC
+
+                        sc = SC()
+                        all_balas = sc.get_all_bhava_balas(chart)
+                        ranked = sorted(
+                            all_balas.items(),
+                            key=lambda x: x[1].get("total", 0),
+                            reverse=True,
+                        )
+                        state["analysis_results"]["strongest_houses"] = [
+                            {"house": h, "total": data.get("total", 0)} for h, data in ranked[:3]
+                        ]
+                        state["analysis_results"]["weakest_houses"] = [
+                            {"house": h, "total": data.get("total", 0)} for h, data in ranked[-3:]
+                        ]
+                    except Exception as e:
+                        logger.debug(f"Bhava Bala calculation skipped: {e}")
+
             except Exception as e:
                 logger.warning(f"Pattern analysis error: {e}")
 
@@ -937,6 +994,56 @@ Respond with ONLY the intent name (e.g., "calculate")"""
             )
             if transit.get("sade_sati"):
                 prediction_factors.append("Sade Sati is active")
+
+        # Check Ashtottari Dasha if birth data available
+        if state.get("birth_chart"):
+            try:
+                from packages.context.src.ashtottari_dasha import get_current_ashtottari
+
+                bc = state["birth_chart"]
+                birth_dt_str = bc.get("birth_datetime")
+                moon_nak_num = bc.get("moon_nakshatra_number")
+                moon_deg = bc.get("degree_in_nakshatra")
+
+                if birth_dt_str and moon_nak_num and moon_deg:
+                    birth_dt = datetime.fromisoformat(birth_dt_str.replace("Z", "+00:00"))
+                    if birth_dt.tzinfo:
+                        birth_dt = birth_dt.replace(tzinfo=None)
+                    ashtottari = get_current_ashtottari(birth_dt, moon_nak_num, moon_deg)
+                    prediction_factors.append(
+                        f"Ashtottari Dasha: {ashtottari['mahadasha']['lord']}-{ashtottari['antardasha']['lord']}"
+                    )
+                    state["analysis_results"]["ashtottari_current"] = {
+                        "mahadasha": ashtottari["mahadasha"]["lord"],
+                        "antardasha": ashtottari["antardasha"]["lord"],
+                    }
+            except Exception as e:
+                logger.debug(f"Ashtottari check skipped: {e}")
+
+            # Check Secondary Progressions
+            try:
+                from packages.context.src.progressions import get_current_progressions
+
+                bc = state["birth_chart"]
+                birth_dt_str = bc.get("birth_datetime")
+                lat = bc.get("latitude")
+                lon = bc.get("longitude")
+
+                if birth_dt_str and lat and lon:
+                    birth_dt = datetime.fromisoformat(birth_dt_str.replace("Z", "+00:00"))
+                    if birth_dt.tzinfo:
+                        birth_dt = birth_dt.replace(tzinfo=None)
+                    prog = get_current_progressions(birth_dt, lat, lon)
+                    active_aspects = prog.get("active_aspects", [])
+                    if active_aspects:
+                        top_aspects = active_aspects[:3]
+                        for asp in top_aspects:
+                            prediction_factors.append(
+                                f"Progressed {asp.get('progressed_planet', '?')} {asp.get('aspect', '?')} natal {asp.get('natal_planet', '?')}"
+                            )
+                        state["analysis_results"]["progression_aspects"] = top_aspects
+            except Exception as e:
+                logger.debug(f"Progressions check skipped: {e}")
 
         state["analysis_results"]["predictions_generated"] = True
         state["analysis_results"]["prediction_factors"] = prediction_factors
@@ -1182,23 +1289,22 @@ Be the user's trusted guide on their life journey. Combine Vedic wisdom with com
             parts.append(dasha_str)
 
         # Analysis results
-        if state.get("analysis_results"):
-            results = state["analysis_results"]
+        results = state.get("analysis_results") or {}
 
-            if results.get("current_dasha"):
-                cd = results["current_dasha"]
-                parts.append(f"Dasha Period: {cd.get('mahadasha')}-{cd.get('antardasha')}")
+        if results.get("current_dasha"):
+            cd = results["current_dasha"]
+            parts.append(f"Dasha Period: {cd.get('mahadasha')}-{cd.get('antardasha')}")
 
-            if results.get("transit_analysis"):
-                ta = results["transit_analysis"]
-                parts.append(f"Transit Trend: {ta.get('overall_trend', 'neutral')}")
-                if ta.get("sade_sati"):
-                    parts.append("Note: Sade Sati is currently active")
+        if results.get("transit_analysis"):
+            ta = results["transit_analysis"]
+            parts.append(f"Transit Trend: {ta.get('overall_trend', 'neutral')}")
+            if ta.get("sade_sati"):
+                parts.append("Note: Sade Sati is currently active")
 
-            if results.get("prediction_factors"):
-                parts.append("Prediction factors:")
-                for factor in results["prediction_factors"]:
-                    parts.append(f"  - {factor}")
+        if results.get("prediction_factors"):
+            parts.append("Prediction factors:")
+            for factor in results["prediction_factors"]:
+                parts.append(f"  - {factor}")
 
         # Detected yogas
         if state.get("detected_yogas"):
@@ -1209,6 +1315,27 @@ Be the user's trusted guide on their life journey. Combine Vedic wisdom with com
         if state.get("detected_doshas"):
             doshas = [d.get("name", "Unknown") for d in state["detected_doshas"]]
             parts.append(f"Important Doshas: {', '.join(doshas)}")
+
+        # Bhava Bala (house strengths)
+        if results.get("strongest_houses"):
+            strong = results["strongest_houses"]
+            labels = ", ".join("H{}({})".format(h["house"], h["total"]) for h in strong)
+            parts.append(f"Strongest houses: {labels}")
+
+        if results.get("weakest_houses"):
+            weak = results["weakest_houses"]
+            labels = ", ".join("H{}({})".format(h["house"], h["total"]) for h in weak)
+            parts.append(f"Weakest houses: {labels}")
+
+        # Ashtottari
+        if results.get("ashtottari_current"):
+            ac = results["ashtottari_current"]
+            parts.append(f"Ashtottari Dasha: {ac.get('mahadasha')}-{ac.get('antardasha')}")
+
+        # Progressions
+        if results.get("progression_aspects"):
+            prog_aspects = results["progression_aspects"]
+            parts.append(f"Active progressed aspects: {len(prog_aspects)}")
 
         # Memories
         if state.get("memories"):

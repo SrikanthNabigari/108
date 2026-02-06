@@ -31,10 +31,22 @@ from packages.context.src import (  # noqa: E402
     get_mahadasha_sequence,
     get_pratyantardasha_effect,
 )
+from packages.context.src.ashtottari_dasha import (  # noqa: E402
+    calculate_ashtottari_sequence,
+    get_current_ashtottari,
+    is_ashtottari_applicable,
+)
+from packages.context.src.muhurta import (  # noqa: E402
+    get_abhijit_muhurta,
+    get_brahma_muhurta,
+    get_eclipse_periods,
+    get_marana_kaal,
+)
 from packages.context.src.narayana_dasha import (  # noqa: E402
     calculate_narayana_sequence,
     get_current_narayana_dasha,
 )
+from packages.context.src.progressions import get_current_progressions  # noqa: E402
 from packages.context.src.transits import get_enriched_transit_analysis  # noqa: E402
 from packages.context.src.yogini_dasha import (  # noqa: E402
     calculate_yogini_sequence,
@@ -1040,6 +1052,325 @@ def compare_dashas(
                 "end_date": yogini_current["end_date"].isoformat(),
                 "remaining_days": yogini_current["remaining_days"],
             },
+        }
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__}
+
+
+@mcp.tool()
+def abhijit_muhurta(datetime_iso: str, latitude: float, longitude: float) -> dict[str, Any]:
+    """
+    Calculate Abhijit Muhurta (the most universally auspicious time of the day).
+
+    Abhijit is the 8th muhurta of the day (around local noon). The day is divided
+    into 15 muhurtas from sunrise to sunset. Abhijit is ideal for starting any
+    important activity.
+
+    Args:
+        datetime_iso: Date in ISO format (e.g., "2026-02-04T12:00:00+05:30")
+        latitude: Geographic latitude (-90 to 90)
+        longitude: Geographic longitude (-180 to 180)
+
+    Returns:
+        Start and end times of Abhijit Muhurta for the given date/location
+
+    Example:
+        abhijit_muhurta("2026-02-04T12:00:00+05:30", 16.726, 81.288)
+    """
+    try:
+        dt = datetime.fromisoformat(datetime_iso.replace("Z", "+00:00"))
+        if dt.tzinfo:
+            dt = dt.replace(tzinfo=None)
+
+        sr_data = get_sunrise_sunset(dt, latitude, longitude)
+        sunrise = sr_data["sunrise"]
+        sunset = sr_data["sunset"]
+        if sunrise.tzinfo:
+            sunrise = sunrise.replace(tzinfo=None)
+        if sunset.tzinfo:
+            sunset = sunset.replace(tzinfo=None)
+
+        start, end = get_abhijit_muhurta(sunrise, sunset)
+
+        return {
+            "datetime": datetime_iso,
+            "location": {"latitude": latitude, "longitude": longitude},
+            "abhijit_start": start.isoformat(),
+            "abhijit_end": end.isoformat(),
+            "duration_minutes": round((end - start).total_seconds() / 60, 1),
+            "sunrise": sunrise.isoformat(),
+            "sunset": sunset.isoformat(),
+            "success": True,
+        }
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__}
+
+
+@mcp.tool()
+def brahma_muhurta(datetime_iso: str, latitude: float, longitude: float) -> dict[str, Any]:
+    """
+    Calculate Brahma Muhurta (best time for spiritual practices).
+
+    Brahma Muhurta starts 96 minutes before sunrise and lasts 48 minutes.
+    It is the ideal time for meditation, prayer, study, and spiritual practice.
+
+    Args:
+        datetime_iso: Date in ISO format
+        latitude: Geographic latitude
+        longitude: Geographic longitude
+
+    Returns:
+        Start and end times of Brahma Muhurta
+
+    Example:
+        brahma_muhurta("2026-02-04T12:00:00+05:30", 16.726, 81.288)
+    """
+    try:
+        dt = datetime.fromisoformat(datetime_iso.replace("Z", "+00:00"))
+        if dt.tzinfo:
+            dt = dt.replace(tzinfo=None)
+
+        sr_data = get_sunrise_sunset(dt, latitude, longitude)
+        sunrise = sr_data["sunrise"]
+        if sunrise.tzinfo:
+            sunrise = sunrise.replace(tzinfo=None)
+
+        start, end = get_brahma_muhurta(sunrise)
+
+        return {
+            "datetime": datetime_iso,
+            "location": {"latitude": latitude, "longitude": longitude},
+            "brahma_start": start.isoformat(),
+            "brahma_end": end.isoformat(),
+            "duration_minutes": 48,
+            "sunrise": sunrise.isoformat(),
+            "success": True,
+        }
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__}
+
+
+@mcp.tool()
+def eclipse_periods(year: int, month: int) -> dict[str, Any]:
+    """
+    Check for solar and lunar eclipses in a given month.
+
+    Eclipses are universally inauspicious for muhurta purposes.
+    No important activities should be initiated during eclipse periods.
+
+    Args:
+        year: Calendar year (e.g., 2026)
+        month: Calendar month (1-12)
+
+    Returns:
+        List of eclipse events with type, start/end times, and description
+
+    Example:
+        eclipse_periods(2026, 3)
+    """
+    try:
+        eclipses = get_eclipse_periods(year, month)
+
+        formatted = []
+        for eclipse in eclipses:
+            formatted.append(
+                {
+                    "type": eclipse["type"],
+                    "start": eclipse["start"].isoformat()
+                    if hasattr(eclipse["start"], "isoformat")
+                    else str(eclipse["start"]),
+                    "maximum": eclipse["maximum"].isoformat()
+                    if hasattr(eclipse["maximum"], "isoformat")
+                    else str(eclipse["maximum"]),
+                    "end": eclipse["end"].isoformat()
+                    if hasattr(eclipse["end"], "isoformat")
+                    else str(eclipse["end"]),
+                    "description": eclipse.get("description", ""),
+                }
+            )
+
+        return {
+            "year": year,
+            "month": month,
+            "eclipse_count": len(formatted),
+            "eclipses": formatted,
+            "success": True,
+        }
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__}
+
+
+@mcp.tool()
+def marana_kaal(weekday: int) -> dict[str, Any]:
+    """
+    Get Marana Kaal (death-like inauspicious periods) for a weekday.
+
+    These are extremely inauspicious time windows for each day of the week.
+    No important activities should be initiated during these periods.
+
+    Args:
+        weekday: Day of week (0=Monday, 1=Tuesday, ..., 6=Sunday)
+
+    Returns:
+        List of inauspicious time windows in HH:MM format
+
+    Example:
+        marana_kaal(0)  # Monday
+    """
+    try:
+        day_names = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+        periods = get_marana_kaal(weekday)
+
+        return {
+            "weekday": weekday,
+            "day_name": day_names[weekday],
+            "periods": [{"start": p[0], "end": p[1]} for p in periods],
+            "count": len(periods),
+            "success": True,
+        }
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__}
+
+
+@mcp.tool()
+def ashtottari_dasha(
+    moon_nakshatra: int,
+    degree_in_nakshatra: float,
+    birth_datetime: str,
+    rahu_house: int = 0,
+    lagna_lord_house: int = 0,
+    query_datetime: str | None = None,
+) -> dict[str, Any]:
+    """
+    Calculate Ashtottari Dasha (108-year planetary period system).
+
+    Ashtottari uses 8 planets (Sun, Moon, Mars, Mercury, Saturn, Jupiter, Venus, Rahu)
+    in a 108-year cycle. It is applicable when Rahu is in kendra/trikona from Lagna lord.
+
+    Args:
+        moon_nakshatra: Moon's nakshatra number (1-27)
+        degree_in_nakshatra: Degrees traversed in nakshatra (0 to ~13.333)
+        birth_datetime: Birth datetime in ISO format
+        rahu_house: House number of Rahu (1-12), 0 to skip applicability check
+        lagna_lord_house: House number of Lagna lord (1-12), 0 to skip
+        query_datetime: Query datetime (ISO format, defaults to now)
+
+    Returns:
+        Applicability status, current Mahadasha/Antardasha, and full sequence
+
+    Example:
+        ashtottari_dasha(25, 10.0, "1992-12-03T03:00:00+05:30", 7, 1)
+    """
+    try:
+        birth_dt = datetime.fromisoformat(birth_datetime.replace("Z", "+00:00"))
+        if birth_dt.tzinfo:
+            birth_dt = birth_dt.replace(tzinfo=None)
+
+        query_dt = None
+        if query_datetime:
+            query_dt = datetime.fromisoformat(query_datetime.replace("Z", "+00:00"))
+            if query_dt.tzinfo:
+                query_dt = query_dt.replace(tzinfo=None)
+
+        # Check applicability
+        applicable = True
+        if rahu_house > 0 and lagna_lord_house > 0:
+            applicable = is_ashtottari_applicable(rahu_house, lagna_lord_house)
+
+        # Get current dasha
+        current = get_current_ashtottari(birth_dt, moon_nakshatra, degree_in_nakshatra, query_dt)
+
+        # Get full sequence
+        periods = calculate_ashtottari_sequence(birth_dt, moon_nakshatra, degree_in_nakshatra)
+
+        return {
+            "system": "ashtottari",
+            "applicable": applicable,
+            "birth_datetime": birth_datetime,
+            "current": {
+                "mahadasha": {
+                    "lord": current["mahadasha"]["lord"],
+                    "start_date": current["mahadasha"]["start_date"].isoformat(),
+                    "end_date": current["mahadasha"]["end_date"].isoformat(),
+                    "years": current["mahadasha"]["years"],
+                },
+                "antardasha": {
+                    "lord": current["antardasha"]["lord"],
+                    "start_date": current["antardasha"]["start_date"].isoformat(),
+                    "end_date": current["antardasha"]["end_date"].isoformat(),
+                },
+                "remaining_days_maha": current["remaining_days_maha"],
+                "remaining_days_antar": current["remaining_days_antar"],
+            },
+            "full_sequence": [
+                {
+                    "lord": p["lord"],
+                    "start_date": p["start_date"].isoformat(),
+                    "end_date": p["end_date"].isoformat(),
+                    "years": round(p["years"], 2),
+                }
+                for p in periods
+            ],
+            "success": True,
+        }
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__}
+
+
+@mcp.tool()
+def secondary_progressions(
+    birth_datetime: str,
+    birth_lat: float,
+    birth_lon: float,
+    query_datetime: str | None = None,
+) -> dict[str, Any]:
+    """
+    Calculate Secondary Progressions (day-for-a-year technique).
+
+    Secondary Progressions show how the birth chart evolves over time.
+    Each day after birth represents one year of life. Active progressed-to-natal
+    aspects indicate current life themes.
+
+    Args:
+        birth_datetime: Birth datetime in ISO format
+        birth_lat: Birth latitude
+        birth_lon: Birth longitude
+        query_datetime: Query datetime (ISO format, defaults to now)
+
+    Returns:
+        Progressed positions, active aspects to natal chart, and current age
+
+    Example:
+        secondary_progressions("1992-12-03T03:00:00+05:30", 16.726, 81.288)
+    """
+    try:
+        birth_dt = datetime.fromisoformat(birth_datetime.replace("Z", "+00:00"))
+        if birth_dt.tzinfo:
+            birth_dt = birth_dt.replace(tzinfo=None)
+
+        query_dt = None
+        if query_datetime:
+            query_dt = datetime.fromisoformat(query_datetime.replace("Z", "+00:00"))
+            if query_dt.tzinfo:
+                query_dt = query_dt.replace(tzinfo=None)
+
+        result = get_current_progressions(birth_dt, birth_lat, birth_lon, query_dt)
+
+        return {
+            "system": "secondary_progressions",
+            "birth_datetime": birth_datetime,
+            "query_datetime": query_datetime or datetime.now().isoformat(),
+            "age_years": result.get("age"),
+            "progressed_positions": result.get("progressed_positions", {}),
+            "natal_positions": result.get("natal_positions", {}),
+            "active_aspects": result.get("active_aspects", []),
+            "success": True,
         }
 
     except Exception as e:

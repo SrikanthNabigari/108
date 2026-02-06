@@ -18,6 +18,7 @@ from typing import Any
 
 from packages.core.src.constants import Planet, PrashnaCategory, PrashnaJudgment, Rashi
 from packages.core.src.models import HouseCusps, PlanetPosition, PrashnaChart, PrashnaResult
+from packages.cosmos.src.divisional import get_divisional_chart
 from packages.cosmos.src.ephemeris import (
     get_all_planets,
     get_ayanamsa,
@@ -1033,6 +1034,248 @@ def analyze_legal_prashna(chart: PrashnaChart) -> dict[str, Any]:
     }
 
 
+def _analyze_prashna_navamsha(d9_chart: dict, prashna_lagna_sign: Rashi) -> dict[str, Any]:
+    """Analyze the Navamsha (D9) chart specific to a Prashna question.
+
+    The D9 in Prashna shows the hidden or deeper dimension of the question.
+    A strong D9 lagna indicates the underlying situation will improve; a weak
+    D9 lagna indicates hidden weakness.
+
+    Args:
+        d9_chart: Divisional chart from get_divisional_chart(..., 9)
+        prashna_lagna_sign: The lagna rashi of the Prashna D1 chart
+
+    Returns:
+        Dictionary with D9 analysis: lagna_d9_sign, strength assessment,
+        benefic/malefic presence, and interpretation.
+    """
+    # Get lagna sign index (0-based) and find where it falls in D9
+    lagna_index = RASHI_LIST.index(prashna_lagna_sign)
+
+    # Find D9 lagna: the D9 position of the ascendant longitude is already
+    # captured in the d9_chart if we passed the ascendant as a "planet".
+    # We check the lagna entry if present, otherwise derive from the sign.
+    d9_lagna_info = d9_chart["positions"].get("lagna")
+
+    if d9_lagna_info:
+        d9_lagna_rashi_index = d9_lagna_info["rashi"]
+        d9_lagna_rashi_name = d9_lagna_info["rashi_name"]
+    else:
+        # Fallback: use the prashna lagna sign directly
+        d9_lagna_rashi_index = lagna_index
+        d9_lagna_rashi_name = prashna_lagna_sign.value.capitalize()
+
+    # Assess D9 lagna strength based on benefic/malefic planets in that sign
+    benefic_planets = {Planet.JUPITER, Planet.VENUS, Planet.MERCURY, Planet.MOON}
+    malefic_planets = {Planet.SATURN, Planet.MARS, Planet.RAHU, Planet.KETU, Planet.SUN}
+
+    benefics_in_d9_lagna = []
+    malefics_in_d9_lagna = []
+    d9_strength_score = 50.0
+    factors = []
+
+    for planet_name, pos in d9_chart["positions"].items():
+        if planet_name == "lagna":
+            continue
+        if pos["rashi"] == d9_lagna_rashi_index:
+            try:
+                planet_enum = Planet(planet_name)
+            except ValueError:
+                continue
+            if planet_enum in benefic_planets:
+                benefics_in_d9_lagna.append(planet_name)
+                d9_strength_score += 10
+            elif planet_enum in malefic_planets:
+                malefics_in_d9_lagna.append(planet_name)
+                d9_strength_score -= 10
+
+    if benefics_in_d9_lagna:
+        factors.append(
+            f"Benefics in D9 lagna ({', '.join(benefics_in_d9_lagna)}): "
+            "hidden support for the question"
+        )
+    if malefics_in_d9_lagna:
+        factors.append(
+            f"Malefics in D9 lagna ({', '.join(malefics_in_d9_lagna)}): "
+            "hidden obstacles or challenges"
+        )
+    if not benefics_in_d9_lagna and not malefics_in_d9_lagna:
+        factors.append("D9 lagna empty: neutral hidden dimension")
+
+    # Check D9 significator strength (Jupiter = general karaka for fortune)
+    jupiter_d9 = d9_chart["positions"].get("jupiter")
+    if jupiter_d9:
+        jup_d9_rashi = jupiter_d9["rashi"]
+        # Jupiter in own sign (Sag=8, Pisces=11) or exaltation (Cancer=3)
+        if jup_d9_rashi in (3, 8, 11):
+            d9_strength_score += 15
+            factors.append(
+                f"Jupiter strong in D9 ({jupiter_d9['rashi_name']}): " "deep underlying fortune"
+            )
+
+    d9_strength_score = max(0.0, min(100.0, d9_strength_score))
+
+    if d9_strength_score >= 65:
+        interpretation = (
+            "Strong D9 lagna indicates the situation has a solid underlying "
+            "foundation. The hidden dimension of the question is favorable."
+        )
+    elif d9_strength_score >= 45:
+        interpretation = (
+            "Moderate D9 lagna suggests mixed hidden influences. "
+            "The deeper reality requires more effort to bring to light."
+        )
+    else:
+        interpretation = (
+            "Weak D9 lagna reveals hidden weakness in the situation. "
+            "Despite surface appearances, underlying conditions are not supportive."
+        )
+
+    return {
+        "d9_lagna_sign": d9_lagna_rashi_name,
+        "d9_lagna_rashi_index": d9_lagna_rashi_index,
+        "strength_score": round(d9_strength_score, 2),
+        "benefics_in_d9_lagna": benefics_in_d9_lagna,
+        "malefics_in_d9_lagna": malefics_in_d9_lagna,
+        "factors": factors,
+        "interpretation": interpretation,
+    }
+
+
+def _analyze_prashna_drekkana(d3_chart: dict, lagna_degree: float) -> dict[str, Any]:
+    """Analyze the Drekkana (D3) chart for effort assessment in a Prashna question.
+
+    In Prashna, the D3 shows the effort required to achieve the desired outcome:
+    - 1st Drekkana (0-10 degrees): Self-effort is sufficient
+    - 2nd Drekkana (10-20 degrees): Needs help from others
+    - 3rd Drekkana (20-30 degrees): Very difficult, requires great effort
+
+    Args:
+        d3_chart: Divisional chart from get_divisional_chart(..., 3)
+        lagna_degree: The ascendant longitude (0-360) of the Prashna chart
+
+    Returns:
+        Dictionary with drekkana number, effort assessment, D3 planet analysis,
+        and interpretation.
+    """
+    degree_in_sign = lagna_degree % 30.0
+
+    if degree_in_sign < 10.0:
+        drekkana_num = 1
+        effort_level = "self_effort"
+        effort_description = (
+            "First Drekkana: Self-effort is sufficient. "
+            "The querent can achieve the desired outcome through their own actions."
+        )
+    elif degree_in_sign < 20.0:
+        drekkana_num = 2
+        effort_level = "needs_help"
+        effort_description = (
+            "Second Drekkana: Help from others is needed. "
+            "The querent should seek assistance or collaboration to succeed."
+        )
+    else:
+        drekkana_num = 3
+        effort_level = "very_difficult"
+        effort_description = (
+            "Third Drekkana: Very difficult path ahead. "
+            "Great effort, persistence, and possibly divine grace are required."
+        )
+
+    # Analyze D3 lagna sign for additional insights
+    d3_lagna_info = d3_chart["positions"].get("lagna")
+    factors = []
+
+    benefic_planets = {Planet.JUPITER, Planet.VENUS, Planet.MERCURY, Planet.MOON}
+    malefic_planets = {Planet.SATURN, Planet.MARS, Planet.RAHU, Planet.KETU, Planet.SUN}
+
+    d3_strength_score = 50.0
+
+    if d3_lagna_info:
+        d3_lagna_rashi = d3_lagna_info["rashi"]
+        d3_lagna_name = d3_lagna_info["rashi_name"]
+
+        # Check planets in D3 lagna sign
+        for planet_name, pos in d3_chart["positions"].items():
+            if planet_name == "lagna":
+                continue
+            if pos["rashi"] == d3_lagna_rashi:
+                try:
+                    planet_enum = Planet(planet_name)
+                except ValueError:
+                    continue
+                if planet_enum in benefic_planets:
+                    d3_strength_score += 10
+                    factors.append(f"Benefic {planet_name} in D3 lagna: eases the effort required")
+                elif planet_enum in malefic_planets:
+                    d3_strength_score -= 10
+                    factors.append(f"Malefic {planet_name} in D3 lagna: increases difficulty")
+    else:
+        d3_lagna_name = "Unknown"
+
+    # Mars in D3 (courage/effort indicator)
+    mars_d3 = d3_chart["positions"].get("mars")
+    if mars_d3:
+        mars_d3_rashi = mars_d3["rashi"]
+        # Mars in Aries(0), Scorpio(7), Capricorn(9) = strong effort capacity
+        if mars_d3_rashi in (0, 7, 9):
+            d3_strength_score += 10
+            factors.append(
+                f"Mars strong in D3 ({mars_d3['rashi_name']}): " "good courage and initiative"
+            )
+
+    if not factors:
+        factors.append("D3 analysis neutral: standard effort dynamics apply")
+
+    d3_strength_score = max(0.0, min(100.0, d3_strength_score))
+
+    return {
+        "drekkana_number": drekkana_num,
+        "effort_level": effort_level,
+        "effort_description": effort_description,
+        "d3_lagna_sign": d3_lagna_name,
+        "strength_score": round(d3_strength_score, 2),
+        "factors": factors,
+    }
+
+
+def get_prashna_divisional_analysis(
+    prashna_chart: PrashnaChart,
+) -> dict[str, Any]:
+    """Analyze D9 (Navamsha) and D3 (Drekkana) of a Prashna chart.
+
+    The D9 shows the hidden dimension of the question - whether the underlying
+    situation is strong or weak. The D3 shows the effort required to achieve
+    the desired outcome.
+
+    Args:
+        prashna_chart: A complete PrashnaChart with planet positions
+
+    Returns:
+        Dictionary with navamsha_analysis and drekkana_analysis sub-dicts.
+    """
+    # Build planet longitudes dict for get_divisional_chart
+    planet_longitudes: dict[str, float] = {}
+    for planet, pos in prashna_chart.planets.items():
+        planet_longitudes[planet.value] = pos.longitude
+
+    # Include lagna as a pseudo-planet for divisional chart positioning
+    planet_longitudes["lagna"] = prashna_chart.lagna_degree
+
+    # Get D9 and D3 charts
+    d9_chart = get_divisional_chart(planet_longitudes, 9)
+    d3_chart = get_divisional_chart(planet_longitudes, 3)
+
+    # Analyze each
+    navamsha_analysis = _analyze_prashna_navamsha(d9_chart, prashna_chart.lagna_rashi)
+    drekkana_analysis = _analyze_prashna_drekkana(d3_chart, prashna_chart.lagna_degree)
+
+    return {
+        "navamsha_analysis": navamsha_analysis,
+        "drekkana_analysis": drekkana_analysis,
+    }
+
+
 def analyze_prashna(
     question: str,
     question_dt: datetime,
@@ -1139,6 +1382,11 @@ def analyze_prashna(
 
     recommendation = " ".join(recommendations)
 
+    # Divisional analysis (D9 Navamsha + D3 Drekkana)
+    divisional = get_prashna_divisional_analysis(chart)
+    navamsha_analysis = divisional["navamsha_analysis"]
+    drekkana_analysis = divisional["drekkana_analysis"]
+
     return PrashnaResult(
         chart=chart,
         judgment=judgment,
@@ -1147,6 +1395,8 @@ def analyze_prashna(
         unfavorable_factors=unfavorable_factors,
         timing=timing,
         recommendation=recommendation,
+        navamsha_analysis=navamsha_analysis,
+        drekkana_analysis=drekkana_analysis,
     )
 
 
@@ -1162,6 +1412,7 @@ __all__ = [
     "analyze_significator",
     "analyze_travel_prashna",
     "create_prashna_chart",
+    "get_prashna_divisional_analysis",
     "get_significator",
     "judge_prashna",
     "predict_timing",

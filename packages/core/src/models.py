@@ -457,6 +457,12 @@ class PrashnaResult(BaseModel):
     )
     timing: dict[str, Any] = Field(default_factory=dict, description="Timing predictions")
     recommendation: str = Field(default="", description="Overall recommendation")
+    navamsha_analysis: dict[str, Any] | None = Field(
+        default=None, description="D9 Navamsha analysis of the Prashna chart"
+    )
+    drekkana_analysis: dict[str, Any] | None = Field(
+        default=None, description="D3 Drekkana analysis of the Prashna chart"
+    )
 
 
 # ===================
@@ -487,3 +493,50 @@ class UpagrahaAnalysis(BaseModel):
     effects: list[dict[str, Any]] = Field(
         default_factory=list, description="Effects for each upagraha"
     )
+
+
+# ===================
+# Ashtottari Dasha Models
+# ===================
+
+
+class AshtottariDashaPeriod(BaseModel):
+    """One period in the Ashtottari Dasha system (108-year cycle)."""
+
+    lord: str = Field(description="Ruling planet of this dasha period")
+    start_date: datetime = Field(description="Period start date")
+    end_date: datetime = Field(description="Period end date")
+    years: float = Field(description="Duration in years (may be fractional for first period)")
+    is_current: bool = Field(
+        default=False, description="Whether this is the currently active period"
+    )
+
+
+# ===================
+# Secondary Progression Models
+# ===================
+
+
+class ProgressedPosition(BaseModel):
+    """Progressed position of a planet using secondary progressions."""
+
+    planet: str = Field(description="Planet name")
+    natal_longitude: float = Field(ge=0, lt=360, description="Natal sidereal longitude")
+    progressed_longitude: float = Field(ge=0, lt=360, description="Progressed sidereal longitude")
+    sign_change: bool = Field(
+        default=False, description="Whether the planet changed signs from natal"
+    )
+
+
+class ProgressionResult(BaseModel):
+    """Complete secondary progression result for a given age."""
+
+    age: float = Field(description="Age in years")
+    progressed_positions: list[ProgressedPosition] = Field(
+        description="List of progressed planet positions"
+    )
+    active_aspects: list[dict[str, Any]] = Field(
+        default_factory=list, description="Active progressed-to-natal aspects"
+    )
+    progressed_moon_sign: str = Field(description="Progressed Moon's rashi")
+    progressed_sun_sign: str = Field(description="Progressed Sun's rashi")

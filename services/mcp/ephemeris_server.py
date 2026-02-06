@@ -32,6 +32,7 @@ from packages.cosmos.src import (  # noqa: E402
 from packages.cosmos.src import (  # noqa: E402
     get_house_cusps as calc_house_cusps,
 )
+from packages.cosmos.src.aspects import get_all_aspects, get_houses_aspected_by  # noqa: E402
 from packages.cosmos.src.panchanga import (  # noqa: E402
     get_karana,
     get_tithi,
@@ -373,6 +374,43 @@ def sunrise_sunset(datetime_iso: str, latitude: float, longitude: float) -> dict
             "sunset": result["sunset"].isoformat(),
             "day_duration_hours": round(result["day_duration_hours"], 2),
             "night_duration_hours": round(result["night_duration_hours"], 2),
+        }
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__}
+
+
+@mcp.tool()
+def planetary_aspects(planet_positions: dict[str, int]) -> dict[str, Any]:
+    """
+    Calculate Parashari Graha Drishti (planetary aspects) for all planets.
+
+    Given planet house positions, returns the full aspect map showing which
+    houses each planet aspects and which planets aspect each house.
+
+    Args:
+        planet_positions: Dictionary mapping planet names to house numbers (1-12).
+                          Example: {"sun": 1, "moon": 4, "mars": 7, "jupiter": 10}
+
+    Returns:
+        Dictionary containing:
+        - aspects: Outgoing aspects from each planet (planet -> list of aspected houses with strength)
+        - houses_aspected: Incoming aspects for each house (house -> list of aspecting planets)
+
+    Example:
+        planetary_aspects({"sun": 1, "mars": 4, "jupiter": 10})
+    """
+    try:
+        aspects = get_all_aspects(planet_positions)
+        houses_aspected = get_houses_aspected_by(planet_positions)
+
+        # Convert house keys to strings for JSON serialization
+        houses_aspected_str = {str(k): v for k, v in houses_aspected.items()}
+
+        return {
+            "aspects": aspects,
+            "houses_aspected": houses_aspected_str,
+            "success": True,
         }
 
     except Exception as e:

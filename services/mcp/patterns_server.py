@@ -45,6 +45,7 @@ from packages.self.src.jaimini import (  # noqa: E402
     calculate_chara_dasha,
     calculate_chara_karakas,
     get_jaimini_aspects,
+    interpret_upapada,
 )
 from packages.self.src.prashna import (  # noqa: E402
     analyze_prashna as _analyze_prashna,
@@ -842,6 +843,131 @@ def all_vimshopaka(
             ],
             "success": True,
         }
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__, "success": False}
+
+
+@mcp.tool()
+def bhava_bala(
+    house_number: int,
+    planets: dict[str, dict[str, Any]],
+    lagna_rashi: str,
+    moon_rashi: str | None = None,
+    houses: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """
+    Calculate Bhava Bala (house strength) for a specific house.
+
+    Bhava Bala measures the strength of a house through four components:
+    - Bhavadhipati Bala: Strength of the house lord
+    - Bhava Dig Bala: Directional strength of the house
+    - Bhava Drishti Bala: Strength from aspects received
+    - Occupant Strength: Strength from planets in the house
+
+    Args:
+        house_number: House number (1-12)
+        planets: Planet positions {name: {longitude, sign, house, ...}}
+        lagna_rashi: Ascendant sign
+        moon_rashi: Moon sign (optional)
+        houses: House cusps data (optional)
+
+    Returns:
+        Bhava Bala components and total strength for the house
+
+    Example:
+        bhava_bala(1, {"sun": {"longitude": 52.5, "sign": "taurus", "house": 8}}, "libra")
+    """
+    try:
+        chart = _build_chart_for_yoga(planets, lagna_rashi, moon_rashi, houses)
+        result = strength_calc.calculate_bhava_bala(house_number, chart)
+        return {**result, "success": True}
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__, "success": False}
+
+
+@mcp.tool()
+def all_bhava_balas(
+    planets: dict[str, dict[str, Any]],
+    lagna_rashi: str,
+    moon_rashi: str | None = None,
+    houses: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """
+    Calculate Bhava Bala for all 12 houses in the chart.
+
+    Provides a comparative strength analysis of all houses, helping identify
+    the strongest and weakest areas of the chart.
+
+    Args:
+        planets: Planet positions {name: {longitude, sign, house, ...}}
+        lagna_rashi: Ascendant sign
+        moon_rashi: Moon sign (optional)
+        houses: House cusps data (optional)
+
+    Returns:
+        Bhava Bala for all 12 houses with ranking
+
+    Example:
+        all_bhava_balas({"sun": {"longitude": 52.5, "sign": "taurus", "house": 8}}, "libra")
+    """
+    try:
+        chart = _build_chart_for_yoga(planets, lagna_rashi, moon_rashi, houses)
+        result = strength_calc.get_all_bhava_balas(chart)
+
+        # Convert int keys to string for JSON and add ranking
+        bhava_dict = {str(k): v for k, v in result.items()}
+        ranked = sorted(result.items(), key=lambda x: x[1].get("total", 0), reverse=True)
+
+        return {
+            "houses": bhava_dict,
+            "ranking": [
+                {
+                    "house": h,
+                    "total": data.get("total", 0),
+                    "rating": data.get("strength_rating", "unknown"),
+                }
+                for h, data in ranked
+            ],
+            "success": True,
+        }
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__, "success": False}
+
+
+@mcp.tool()
+def upapada_analysis(
+    planets: dict[str, dict[str, Any]],
+    lagna_rashi: str,
+    moon_rashi: str | None = None,
+    houses: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """
+    Perform Upapada Lagna (UL) marriage analysis using Jaimini principles.
+
+    The Upapada Lagna is the Arudha Pada of the 12th house and is the primary
+    Jaimini indicator for marriage. Analysis includes partner type, marriage
+    quality, sustenance, timing, and separation indicators.
+
+    Args:
+        planets: Planet positions {name: {longitude, sign, house, ...}}
+        lagna_rashi: Ascendant sign
+        moon_rashi: Moon sign (optional)
+        houses: House cusps data (optional)
+
+    Returns:
+        Complete Upapada marriage analysis including partner type, quality,
+        sustenance factors, timing, and separation risk
+
+    Example:
+        upapada_analysis({"sun": {"longitude": 52.5, "sign": "taurus", "house": 8}}, "libra")
+    """
+    try:
+        chart = _build_chart_for_yoga(planets, lagna_rashi, moon_rashi, houses)
+        result = interpret_upapada(chart)
+        return {**result, "success": True}
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__, "success": False}

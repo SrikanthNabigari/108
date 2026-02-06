@@ -640,6 +640,623 @@ def _get_argala_summary(active_count: int) -> str:
     return summaries.get(active_count, "Very strong argala - all four types active")
 
 
+def _interpret_upapada_sign(ul_rashi: Rashi) -> dict:
+    """Interpret the Upapada Lagna sign to describe partner type.
+
+    The sign where UL falls describes the nature and personality of the spouse.
+
+    Args:
+        ul_rashi: The rashi where Upapada Lagna is placed
+
+    Returns:
+        Dictionary with sign, element, quality, and description of partner type
+    """
+    sign_interpretations = {
+        Rashi.ARIES: {
+            "element": "fire",
+            "quality": "movable",
+            "partner_type": (
+                "Independent, assertive, and energetic partner. "
+                "Spouse may be athletic, competitive, or a natural leader."
+            ),
+        },
+        Rashi.TAURUS: {
+            "element": "earth",
+            "quality": "fixed",
+            "partner_type": (
+                "Stable, sensual, and materially comfortable partner. "
+                "Spouse values security, beauty, and luxury."
+            ),
+        },
+        Rashi.GEMINI: {
+            "element": "air",
+            "quality": "dual",
+            "partner_type": (
+                "Intellectual, communicative, and versatile partner. "
+                "Spouse is witty, curious, and may have multiple interests."
+            ),
+        },
+        Rashi.CANCER: {
+            "element": "water",
+            "quality": "movable",
+            "partner_type": (
+                "Nurturing, emotional, and family-oriented partner. "
+                "Spouse is caring, protective, and deeply attached."
+            ),
+        },
+        Rashi.LEO: {
+            "element": "fire",
+            "quality": "fixed",
+            "partner_type": (
+                "Dignified, proud, and charismatic partner. "
+                "Spouse commands respect, may be from a good family or prominent."
+            ),
+        },
+        Rashi.VIRGO: {
+            "element": "earth",
+            "quality": "dual",
+            "partner_type": (
+                "Analytical, service-oriented, and practical partner. "
+                "Spouse is detail-oriented, health-conscious, and methodical."
+            ),
+        },
+        Rashi.LIBRA: {
+            "element": "air",
+            "quality": "movable",
+            "partner_type": (
+                "Balanced, charming, and diplomatic partner. "
+                "Spouse values harmony, beauty, and social relationships."
+            ),
+        },
+        Rashi.SCORPIO: {
+            "element": "water",
+            "quality": "fixed",
+            "partner_type": (
+                "Intense, transformative, and deeply passionate partner. "
+                "Spouse is secretive, powerful, and magnetically attractive."
+            ),
+        },
+        Rashi.SAGITTARIUS: {
+            "element": "fire",
+            "quality": "dual",
+            "partner_type": (
+                "Philosophical, optimistic, and adventurous partner. "
+                "Spouse is well-educated, spiritual, or fond of travel."
+            ),
+        },
+        Rashi.CAPRICORN: {
+            "element": "earth",
+            "quality": "movable",
+            "partner_type": (
+                "Disciplined, ambitious, and mature partner. "
+                "Spouse is hardworking, responsible, and status-conscious."
+            ),
+        },
+        Rashi.AQUARIUS: {
+            "element": "air",
+            "quality": "fixed",
+            "partner_type": (
+                "Unconventional, humanitarian, and independent partner. "
+                "Spouse is progressive, intellectual, and socially conscious."
+            ),
+        },
+        Rashi.PISCES: {
+            "element": "water",
+            "quality": "dual",
+            "partner_type": (
+                "Compassionate, spiritual, and imaginative partner. "
+                "Spouse is intuitive, artistic, and emotionally deep."
+            ),
+        },
+    }
+
+    info = sign_interpretations.get(
+        ul_rashi,
+        {
+            "element": "unknown",
+            "quality": "unknown",
+            "partner_type": "Partner characteristics require deeper analysis.",
+        },
+    )
+
+    return {
+        "sign": ul_rashi.value,
+        "element": info["element"],
+        "quality": info["quality"],
+        "partner_type": info["partner_type"],
+    }
+
+
+def _interpret_upapada_lord(ul_lord: Planet, ul_lord_rashi: Rashi, ul_lord_house: int) -> dict:
+    """Interpret the UL lord's placement for marriage quality assessment.
+
+    The lord of the Upapada sign and its placement indicates the overall
+    quality and nature of the marriage.
+
+    Args:
+        ul_lord: Planet ruling the UL sign
+        ul_lord_rashi: Rashi where UL lord is placed
+        ul_lord_house: House number (1-12) where UL lord is placed
+
+    Returns:
+        Dictionary with lord, placement, and quality assessment
+    """
+    # House-based quality assessment
+    kendra_houses = {1, 4, 7, 10}
+    trikona_houses = {1, 5, 9}
+    dusthana_houses = {6, 8, 12}
+    upachaya_houses = {3, 6, 10, 11}
+
+    quality_factors = []
+    quality_score = 50.0
+
+    if ul_lord_house in kendra_houses:
+        quality_score += 20
+        quality_factors.append(
+            f"UL lord {ul_lord.value} in kendra house {ul_lord_house}: "
+            "strong marriage, stable relationship"
+        )
+    elif ul_lord_house in trikona_houses:
+        quality_score += 15
+        quality_factors.append(
+            f"UL lord {ul_lord.value} in trikona house {ul_lord_house}: "
+            "fortunate marriage, dharmic partnership"
+        )
+    elif ul_lord_house in dusthana_houses:
+        quality_score -= 15
+        if ul_lord_house == 6:
+            quality_factors.append(
+                f"UL lord {ul_lord.value} in 6th house: " "conflict or health issues in marriage"
+            )
+        elif ul_lord_house == 8:
+            quality_factors.append(
+                f"UL lord {ul_lord.value} in 8th house: "
+                "transformation or hidden issues in marriage"
+            )
+        else:
+            quality_factors.append(
+                f"UL lord {ul_lord.value} in 12th house: " "loss or separation tendency in marriage"
+            )
+    elif ul_lord_house in upachaya_houses:
+        quality_score += 5
+        quality_factors.append(
+            f"UL lord {ul_lord.value} in upachaya house {ul_lord_house}: "
+            "marriage improves over time"
+        )
+    else:
+        quality_factors.append(
+            f"UL lord {ul_lord.value} in house {ul_lord_house}: " "moderate marriage quality"
+        )
+
+    # Exaltation/debilitation of UL lord
+    exaltation_signs = {
+        Planet.SUN: Rashi.ARIES,
+        Planet.MOON: Rashi.TAURUS,
+        Planet.MARS: Rashi.CAPRICORN,
+        Planet.MERCURY: Rashi.VIRGO,
+        Planet.JUPITER: Rashi.CANCER,
+        Planet.VENUS: Rashi.PISCES,
+        Planet.SATURN: Rashi.LIBRA,
+    }
+    debilitation_signs = {
+        Planet.SUN: Rashi.LIBRA,
+        Planet.MOON: Rashi.SCORPIO,
+        Planet.MARS: Rashi.CANCER,
+        Planet.MERCURY: Rashi.PISCES,
+        Planet.JUPITER: Rashi.CAPRICORN,
+        Planet.VENUS: Rashi.VIRGO,
+        Planet.SATURN: Rashi.ARIES,
+    }
+
+    if ul_lord in exaltation_signs and ul_lord_rashi == exaltation_signs[ul_lord]:
+        quality_score += 20
+        quality_factors.append(f"UL lord {ul_lord.value} exalted: excellent marriage quality")
+    elif ul_lord in debilitation_signs and ul_lord_rashi == debilitation_signs[ul_lord]:
+        quality_score -= 20
+        quality_factors.append(f"UL lord {ul_lord.value} debilitated: challenges in marriage")
+
+    quality_score = max(0.0, min(100.0, quality_score))
+
+    if quality_score >= 70:
+        quality_summary = "High quality marriage expected"
+    elif quality_score >= 50:
+        quality_summary = "Moderate marriage quality"
+    else:
+        quality_summary = "Marriage may face significant challenges"
+
+    return {
+        "lord": ul_lord.value,
+        "lord_sign": ul_lord_rashi.value,
+        "lord_house": ul_lord_house,
+        "quality_score": round(quality_score, 2),
+        "quality_summary": quality_summary,
+        "factors": quality_factors,
+    }
+
+
+def _analyze_second_from_ul(chart: BirthChart, ul_rashi: Rashi) -> dict:
+    """Analyze the 2nd house from Upapada for marriage sustenance.
+
+    The 2nd from UL is critical for marriage longevity. Benefics here
+    sustain the marriage; malefics create separation risk.
+
+    Args:
+        chart: Birth chart with planet positions
+        ul_rashi: Rashi of the Upapada Lagna
+
+    Returns:
+        Dictionary with planets, sustenance assessment, and separation risk
+    """
+    ul_index = RASHI_TO_INDEX[ul_rashi]
+    second_from_ul_index = (ul_index + 1) % 12
+    second_from_ul_rashi = INDEX_TO_RASHI[second_from_ul_index]
+
+    benefics = {Planet.JUPITER, Planet.VENUS, Planet.MERCURY, Planet.MOON}
+    malefics = {Planet.SATURN, Planet.MARS, Planet.RAHU, Planet.KETU, Planet.SUN}
+
+    planets_in_second = _get_planets_in_sign(chart, second_from_ul_rashi)
+    benefics_found = [p.value for p in planets_in_second if p in benefics]
+    malefics_found = [p.value for p in planets_in_second if p in malefics]
+
+    factors = []
+    separation_risk = "low"
+
+    if benefics_found:
+        factors.append(
+            f"Benefics in 2nd from UL ({', '.join(benefics_found)}): "
+            "marriage sustenance is strong"
+        )
+    if malefics_found:
+        factors.append(
+            f"Malefics in 2nd from UL ({', '.join(malefics_found)}): " "separation or discord risk"
+        )
+        separation_risk = "high" if len(malefics_found) >= 2 else "moderate"
+
+    if not planets_in_second:
+        factors.append("2nd from UL empty: no strong sustenance or threat indicators")
+
+    # Check lord of 2nd from UL
+    second_lord = _get_sign_lord(second_from_ul_rashi)
+    if second_lord in chart.planets:
+        second_lord_pos = chart.planets[second_lord]
+        dusthana = {6, 8, 12}
+        if second_lord_pos.house in dusthana:
+            separation_risk = "high" if separation_risk == "moderate" else "moderate"
+            factors.append(
+                f"Lord of 2nd from UL ({second_lord.value}) in dusthana "
+                f"house {second_lord_pos.house}: weakens marriage sustenance"
+            )
+
+    return {
+        "second_from_ul_sign": second_from_ul_rashi.value,
+        "planets_in_second": [p.value for p in planets_in_second],
+        "benefics": benefics_found,
+        "malefics": malefics_found,
+        "separation_risk": separation_risk,
+        "factors": factors,
+    }
+
+
+def _check_separation_indicators(chart: BirthChart, ul_rashi: Rashi) -> dict:
+    """Check for classical separation indicators related to Upapada.
+
+    Multiple factors can indicate separation in marriage:
+    - Rahu/Ketu axis on UL or 2nd from UL
+    - Saturn aspecting or placed in UL
+    - UL lord debilitated or combust
+    - Malefics in 2nd from UL without benefic aspect
+
+    Args:
+        chart: Birth chart
+        ul_rashi: Rashi of Upapada Lagna
+
+    Returns:
+        Dictionary with separation indicators and risk assessment
+    """
+    ul_index = RASHI_TO_INDEX[ul_rashi]
+    indicators = []
+
+    # Check Rahu/Ketu on UL
+    planets_in_ul = _get_planets_in_sign(chart, ul_rashi)
+    if Planet.RAHU in planets_in_ul:
+        indicators.append("Rahu on Upapada: unconventional marriage or illusion about spouse")
+    if Planet.KETU in planets_in_ul:
+        indicators.append("Ketu on Upapada: detachment from marriage or past-life karmic bond")
+
+    # Check Saturn on UL
+    if Planet.SATURN in planets_in_ul:
+        indicators.append("Saturn on Upapada: delays and hardship in marriage, but longevity")
+
+    # Check Rahu/Ketu on 2nd from UL
+    second_ul_index = (ul_index + 1) % 12
+    second_ul_rashi = INDEX_TO_RASHI[second_ul_index]
+    planets_in_2nd = _get_planets_in_sign(chart, second_ul_rashi)
+
+    if Planet.RAHU in planets_in_2nd:
+        indicators.append("Rahu in 2nd from UL: disruption risk in marriage sustenance")
+    if Planet.KETU in planets_in_2nd:
+        indicators.append("Ketu in 2nd from UL: sudden separation or loss tendency")
+
+    # Check UL lord combustion (proximity to Sun)
+    ul_lord = _get_sign_lord(ul_rashi)
+    if ul_lord in chart.planets and ul_lord != Planet.SUN:
+        ul_lord_pos = chart.planets[ul_lord]
+        sun_pos = chart.planets.get(Planet.SUN)
+        if sun_pos:
+            distance = abs(ul_lord_pos.longitude - sun_pos.longitude)
+            distance = min(distance, 360.0 - distance)
+            if distance < 8.0:
+                indicators.append(f"UL lord {ul_lord.value} combust: weakened marriage prospects")
+
+    risk_level = "low"
+    if len(indicators) >= 3:
+        risk_level = "high"
+    elif len(indicators) >= 1:
+        risk_level = "moderate"
+
+    return {
+        "indicators": indicators,
+        "indicator_count": len(indicators),
+        "risk_level": risk_level,
+    }
+
+
+def _analyze_dk_ul_connection(chart: BirthChart, ul_rashi: Rashi) -> dict:
+    """Analyze the connection between Darakaraka and Upapada Lagna.
+
+    When Darakaraka (planet with lowest degree = spouse significator) has
+    a connection to UL, it strengthens marriage indications. Connections include:
+    - DK placed in UL sign
+    - DK aspecting UL (Jaimini aspects)
+    - DK lord of UL sign
+
+    Args:
+        chart: Birth chart
+        ul_rashi: Rashi of Upapada Lagna
+
+    Returns:
+        Dictionary with DK planet, connections found, and strength assessment
+    """
+    karakas = calculate_chara_karakas(chart)
+    dk_result = karakas[-1]  # Last one is Darakaraka (lowest degree)
+    dk_planet = dk_result.planet
+    dk_rashi = dk_result.rashi
+
+    connections = []
+    connection_strength = 0.0
+
+    # DK placed in UL sign
+    if dk_rashi == ul_rashi:
+        connections.append(
+            f"Darakaraka {dk_planet.value} placed in Upapada sign: "
+            "very strong marriage indication"
+        )
+        connection_strength += 30.0
+
+    # DK aspecting UL (Jaimini aspects)
+    dk_aspects = get_jaimini_aspects(dk_rashi)
+    if ul_rashi in dk_aspects:
+        connections.append(
+            f"Darakaraka {dk_planet.value} aspects Upapada (Jaimini): "
+            "spouse connection confirmed"
+        )
+        connection_strength += 20.0
+
+    # DK is lord of UL
+    ul_lord = _get_sign_lord(ul_rashi)
+    if dk_planet == ul_lord:
+        connections.append(
+            f"Darakaraka {dk_planet.value} is also lord of Upapada: " "very strong marital bond"
+        )
+        connection_strength += 25.0
+
+    # DK in kendra/trikona from UL
+    ul_index = RASHI_TO_INDEX[ul_rashi]
+    dk_index = RASHI_TO_INDEX[dk_rashi]
+    distance = (dk_index - ul_index) % 12
+    kendra_offsets = {0, 3, 6, 9}
+    trikona_offsets = {0, 4, 8}
+
+    if distance in kendra_offsets and distance != 0:
+        connections.append("Darakaraka in kendra from UL: solid marriage foundation")
+        connection_strength += 15.0
+    elif distance in trikona_offsets and distance != 0:
+        connections.append("Darakaraka in trikona from UL: fortunate marriage connection")
+        connection_strength += 10.0
+
+    if not connections:
+        connections.append("No direct DK-UL connection: spouse may come through other factors")
+
+    connection_strength = min(100.0, connection_strength)
+
+    return {
+        "darakaraka_planet": dk_planet.value,
+        "darakaraka_sign": dk_rashi.value,
+        "darakaraka_degree": round(dk_result.degree_in_sign, 2),
+        "connections": connections,
+        "connection_strength": round(connection_strength, 2),
+    }
+
+
+def _marriage_timing_from_ul(chart: BirthChart, ul_rashi: Rashi) -> dict:
+    """Estimate marriage timing indicators from Upapada analysis.
+
+    Jaimini timing principles based on UL:
+    - Transit of Jupiter/Saturn over UL or 7th from UL activates marriage
+    - Chara Dasha of UL sign or its 7th triggers marriage
+    - UL lord's transit position relative to natal UL
+
+    This provides qualitative timing indicators, not exact dates.
+
+    Args:
+        chart: Birth chart
+        ul_rashi: Rashi of Upapada Lagna
+
+    Returns:
+        Dictionary with timing indicators and activating signs
+    """
+    ul_index = RASHI_TO_INDEX[ul_rashi]
+    seventh_from_ul_index = (ul_index + 6) % 12
+    seventh_from_ul = INDEX_TO_RASHI[seventh_from_ul_index]
+
+    # Signs that can activate marriage
+    activating_signs = [ul_rashi, seventh_from_ul]
+
+    # Also consider trikona from UL (5th and 9th)
+    fifth_from_ul = INDEX_TO_RASHI[(ul_index + 4) % 12]
+    ninth_from_ul = INDEX_TO_RASHI[(ul_index + 8) % 12]
+
+    timing_factors = [
+        f"Jupiter or Saturn transiting {ul_rashi.value} or "
+        f"{seventh_from_ul.value} can trigger marriage",
+        f"Chara Dasha of {ul_rashi.value} or {seventh_from_ul.value} "
+        "is a strong marriage timing period",
+        f"Trikona signs ({fifth_from_ul.value}, {ninth_from_ul.value}) "
+        "from UL are secondary timing indicators",
+    ]
+
+    # UL lord placement for additional timing clue
+    ul_lord = _get_sign_lord(ul_rashi)
+    if ul_lord in chart.planets:
+        ul_lord_sign = chart.planets[ul_lord].rashi
+        timing_factors.append(
+            f"UL lord {ul_lord.value} in {ul_lord_sign.value}: "
+            "transit activation of this sign also relevant for timing"
+        )
+
+    return {
+        "primary_activating_signs": [s.value for s in activating_signs],
+        "secondary_activating_signs": [fifth_from_ul.value, ninth_from_ul.value],
+        "timing_factors": timing_factors,
+    }
+
+
+def interpret_upapada(chart: BirthChart) -> dict:
+    """Complete Upapada Lagna analysis for marriage from Jaimini perspective.
+
+    The Upapada Lagna (UL) is the Arudha Pada of the 12th house and is the
+    primary Jaimini indicator for marriage. This function provides a comprehensive
+    marriage analysis including:
+    - UL sign = type of partner
+    - UL lord placement = marriage quality
+    - 2nd from UL = marriage sustenance
+    - 7th from UL = physical relationship
+    - Darakaraka connection = spouse bond strength
+    - Marriage timing indicators
+
+    Args:
+        chart: Birth chart with planet positions and lagna
+
+    Returns:
+        Dictionary with complete Upapada marriage analysis
+    """
+    # Calculate UL (Arudha of 12th house)
+    ul_pada = calculate_arudha_pada(12, chart)
+    ul_rashi = ul_pada.rashi
+
+    # 1. Partner type from UL sign
+    sign_analysis = _interpret_upapada_sign(ul_rashi)
+
+    # 2. UL lord placement for marriage quality
+    ul_lord = _get_sign_lord(ul_rashi)
+    if ul_lord in chart.planets:
+        ul_lord_pos = chart.planets[ul_lord]
+        lord_analysis = _interpret_upapada_lord(ul_lord, ul_lord_pos.rashi, ul_lord_pos.house)
+    else:
+        lord_analysis = {
+            "lord": ul_lord.value,
+            "lord_sign": "unknown",
+            "lord_house": 0,
+            "quality_score": 50.0,
+            "quality_summary": "UL lord not found in chart",
+            "factors": [],
+        }
+
+    # 3. Marriage sustenance (2nd from UL)
+    second_analysis = _analyze_second_from_ul(chart, ul_rashi)
+
+    # 4. Seventh from UL (physical relationship)
+    ul_index = RASHI_TO_INDEX[ul_rashi]
+    seventh_from_ul_index = (ul_index + 6) % 12
+    seventh_from_ul = INDEX_TO_RASHI[seventh_from_ul_index]
+    planets_in_7th_from_ul = _get_planets_in_sign(chart, seventh_from_ul)
+
+    benefics = {Planet.JUPITER, Planet.VENUS, Planet.MERCURY, Planet.MOON}
+    seventh_factors = []
+    if planets_in_7th_from_ul:
+        benefics_7th = [p.value for p in planets_in_7th_from_ul if p in benefics]
+        malefics_7th = [p.value for p in planets_in_7th_from_ul if p not in benefics]
+        if benefics_7th:
+            seventh_factors.append(
+                f"Benefics in 7th from UL ({', '.join(benefics_7th)}): "
+                "harmonious physical relationship"
+            )
+        if malefics_7th:
+            seventh_factors.append(
+                f"Malefics in 7th from UL ({', '.join(malefics_7th)}): "
+                "challenges in physical compatibility"
+            )
+    else:
+        seventh_factors.append("7th from UL empty: neutral physical compatibility")
+
+    seventh_analysis = {
+        "sign": seventh_from_ul.value,
+        "planets": [p.value for p in planets_in_7th_from_ul],
+        "factors": seventh_factors,
+    }
+
+    # 5. Separation indicators
+    separation = _check_separation_indicators(chart, ul_rashi)
+
+    # 6. DK-UL connection
+    dk_connection = _analyze_dk_ul_connection(chart, ul_rashi)
+
+    # 7. Marriage timing
+    timing = _marriage_timing_from_ul(chart, ul_rashi)
+
+    # Overall summary
+    quality_score = lord_analysis["quality_score"]
+    if separation["risk_level"] == "high":
+        quality_score -= 15
+    elif separation["risk_level"] == "moderate":
+        quality_score -= 5
+    if dk_connection["connection_strength"] >= 30:
+        quality_score += 10
+    if second_analysis["separation_risk"] == "high":
+        quality_score -= 10
+
+    quality_score = max(0.0, min(100.0, quality_score))
+
+    if quality_score >= 70:
+        overall_summary = "Strong Upapada indications for a successful and fulfilling marriage."
+    elif quality_score >= 50:
+        overall_summary = (
+            "Moderate Upapada indications. Marriage is likely but may require "
+            "effort and understanding from both partners."
+        )
+    else:
+        overall_summary = (
+            "Challenging Upapada indications for marriage. There may be delays, "
+            "obstacles, or need for compromise."
+        )
+
+    return {
+        "upapada_lagna": {
+            "sign": ul_rashi.value,
+            "calculation_note": ul_pada.calculation_note,
+        },
+        "partner_type": sign_analysis,
+        "marriage_quality": lord_analysis,
+        "marriage_sustenance": second_analysis,
+        "physical_relationship": seventh_analysis,
+        "separation_indicators": separation,
+        "dk_connection": dk_connection,
+        "marriage_timing": timing,
+        "overall_score": round(quality_score, 2),
+        "overall_summary": overall_summary,
+    }
+
+
 __all__ = [
     "calculate_all_arudha_padas",
     "calculate_argala",
@@ -650,4 +1267,5 @@ __all__ = [
     "get_jaimini_aspects",
     "get_karakamsha",
     "get_sign_mobility",
+    "interpret_upapada",
 ]

@@ -1,6 +1,6 @@
 ---
 name: context-agent
-description: CONTEXT layer specialist — dasha timing, transits, muhurta, varshaphal
+description: CONTEXT layer specialist — Session 18 tasks — Ashtottari Dasha + Secondary Progressions
 model: claude-sonnet-4-20250514
 tools:
   - Edit
@@ -11,166 +11,212 @@ tools:
   - Bash
 ---
 
-# CONTEXT Agent — Temporal Dynamics Layer
+# CONTEXT Agent — Session 18 (Final Features)
 
-You are responsible for `packages/context/` — the timing engine that tracks dashas, transits, muhurtas, and temporal predictions.
+You are responsible for `packages/context/` — specifically finishing 2 remaining features.
 
-## Your Codebase
+## Session 17 completed: 16 Tajika yogas, solar return calc, Yogini effects + pratyantardasha, Narayana stronger lord, transit aspects, Abhijit/Brahma muhurta, Marana Kaal, eclipse detection. All working. DO NOT re-do these.
 
-```
-packages/context/src/
-├── __init__.py
-├── dasha.py              # Vimshottari Dasha (5 levels)
-├── transits.py           # Gochara + enriched transit analysis
-├── muhurta.py            # Electional timing
-├── yogini_dasha.py       # Yogini Dasha (36-year cycle)
-├── narayana_dasha.py     # Narayana Dasha (108-year, Jaimini)
-└── varshaphal.py         # Varshaphal/Solar Return (HEAVILY STUBBED)
-```
+## TASK 1: Ashtottari Dasha (108-year cycle)
 
-## P1 TASKS — Core Gaps
-
-### Task 1: Complete `varshaphal.py` — Currently ~30% done
-This is the **most incomplete module**. Fix:
-
-**a) Solar Return Date Calculation:**
-```python
-def calculate_solar_return_date(birth_sun_longitude: float, year: int) -> datetime:
-    """Find exact datetime when Sun returns to birth longitude in given year.
-    Use Swiss Ephemeris iterative search."""
-```
-
-**b) Complete all 16 Tajika Yogas** (currently only 4):
-```python
-TAJIKA_YOGAS = [
-    "ishkavala",      # Full aspect yoga (implemented)
-    "induvara",       # Moon-based yoga (implemented)
-    "ithasala",       # Approaching conjunction (implemented)
-    "easarapha",      # Separating conjunction (implemented)
-    "nakta",          # Night yoga — ADD
-    "yamaya",         # Mutual aspect — ADD
-    "manau",          # Moon not aspecting lagna lord — ADD
-    "kamboola",       # Moon applying to both — ADD
-    "gairi_kamboola", # Moon separating from both — ADD
-    "khallasara",     # Light planet separating, heavy applying — ADD
-    "rudda",          # Both retrograde — ADD
-    "duttottadavira",  # Mixed aspect — ADD
-    "tambira",        # Malefic between two — ADD
-    "kuttha",         # Exchange between enemies — ADD
-    "durupha",        # No ithasala — ADD
-    "durapha",        # Slow planet behind fast — ADD
-]
-```
-
-**c) Dreshkana & Trimshamsha in annual chart:**
-```python
-def analyze_annual_dreshkana(varshaphal_chart: dict) -> dict:
-    """D3 of annual chart for courage/siblings in that year."""
-
-def analyze_annual_trimshamsha(varshaphal_chart: dict) -> dict:
-    """D30 of annual chart for misfortunes in that year."""
-```
-
-**d) Natal-to-Annual Aspect Analysis:**
-```python
-def compare_natal_annual(natal_planets: dict, annual_planets: dict) -> dict:
-    """Compare natal positions with annual positions.
-    Key: aspects between natal and annual lords of same house."""
-```
-
-### Task 2: Add Yogini Dasha Effects/Interpretations
-In `yogini_dasha.py`, add interpretation data:
-
-```python
-YOGINI_EFFECTS = {
-    "mangala": {
-        "planet": "moon",
-        "years": 1,
-        "general": "New beginnings, emotional changes, short travels",
-        "positive": ["Fresh starts", "Emotional clarity", "Good for Moon-related activities"],
-        "negative": ["Restlessness", "Emotional turbulence", "Short-lived results"],
-        "health": "Watch mental health, hydration, sleep patterns",
-        "career": "Quick changes, new connections, not for long-term planning",
-    },
-    "pingala": { "planet": "sun", "years": 2, ... },
-    "dhanya": { "planet": "jupiter", "years": 3, ... },
-    "bhramari": { "planet": "mars", "years": 4, ... },
-    "bhadrika": { "planet": "mercury", "years": 5, ... },
-    "ulka": { "planet": "saturn", "years": 6, ... },
-    "siddha": { "planet": "venus", "years": 7, ... },
-    "sankata": { "planet": "rahu", "years": 8, ... },
-}
-```
-
-Also add Pratyantardasha (3rd level) calculation.
-
-### Task 3: Fix Narayana Dasha `_get_stronger_lord()`
-Current implementation is oversimplified. Fix:
-
-```python
-def _get_stronger_lord(planet1: str, planet2: str, chart: BirthChart) -> str:
-    """Determine stronger lord using proper rules:
-    1. Planet in own sign > planet not in own sign
-    2. Planet in exaltation > planet not exalted
-    3. Planet with more aspects > fewer aspects
-    4. Planet in kendra > planet not in kendra
-    5. Higher degree in sign > lower degree (last resort)
-    """
-```
-
-### Task 4: Add Transit Aspects in `transits.py`
-Currently transits only check house positions, not aspects:
-
-```python
-def get_transit_aspects(transit_positions: dict, natal_positions: dict) -> list:
-    """Check if transiting planets aspect natal planets.
-    E.g., transiting Saturn aspecting natal Moon = significant."""
-```
-
-### Task 5: Add Abhijit & Brahma Muhurta in `muhurta.py`
-
-```python
-def get_abhijit_muhurta(sunrise: datetime, sunset: datetime) -> tuple[datetime, datetime]:
-    """Abhijit = 8th muhurta of the day (around noon).
-    Most auspicious universal muhurta."""
-
-def get_brahma_muhurta(sunrise: datetime) -> tuple[datetime, datetime]:
-    """Brahma Muhurta = 1hr 36min before sunrise.
-    Best for spiritual practices."""
-
-def get_marana_kaal(weekday: int) -> list[tuple[str, str]]:
-    """Death-like inauspicious periods for each weekday."""
-```
-
-### Task 6: Eclipse Period Detection in `muhurta.py`
-
-```python
-def get_eclipse_periods(year: int, month: int) -> list[dict]:
-    """Check for solar/lunar eclipses using Swiss Ephemeris.
-    Eclipses are universally inauspicious for muhurta."""
-```
-
-## P2 TASKS
-
-### Task 7: Ashtottari Dasha (108-year cycle)
 Create `packages/context/src/ashtottari_dasha.py`:
-- 8 planets (no Ketu): Sun(6), Moon(15), Mars(8), Mercury(17), Saturn(10), Jupiter(19), Rahu(12), Venus(21)
-- Applicable when: Rahu in kendra/trikona from Lagna lord
-- Total: 108 years
+
+The Ashtottari Dasha is an alternative to Vimshottari, used when **Rahu is in kendra (1,4,7,10) or trikona (1,5,9) from the Lagna lord**. It uses 8 planets (no Ketu) totaling 108 years.
+
+```python
+"""Ashtottari Dasha — 108-year planetary period system.
+
+Usage condition: Rahu must be in kendra/trikona from Lagna lord.
+8 planets (no Ketu): Sun(6), Moon(15), Mars(8), Mercury(17),
+                      Saturn(10), Jupiter(19), Rahu(12), Venus(21)
+Total: 108 years
+
+Nakshatra-to-starting-lord mapping:
+  Ardra, Punarvasu → Sun
+  Pushya, Ashlesha → Moon
+  Magha, Purva Phalguni → Mars
+  Uttara Phalguni, Hasta → Mercury
+  Chitra, Swati → Saturn
+  Vishakha, Anuradha → Jupiter
+  Jyeshtha, Moola → Rahu
+  Purva Ashadha, Uttara Ashadha → Venus
+  (Other nakshatras → Ashtottari not applicable)
+"""
+
+ASHTOTTARI_PERIODS = {
+    "sun": 6, "moon": 15, "mars": 8, "mercury": 17,
+    "saturn": 10, "jupiter": 19, "rahu": 12, "venus": 21,
+}
+
+ASHTOTTARI_SEQUENCE = ["sun", "moon", "mars", "mercury", "saturn", "jupiter", "rahu", "venus"]
+
+NAKSHATRA_TO_LORD = {
+    "ardra": "sun", "punarvasu": "sun",
+    "pushya": "moon", "ashlesha": "moon",
+    "magha": "mars", "purva_phalguni": "mars",
+    "uttara_phalguni": "mercury", "hasta": "mercury",
+    "chitra": "saturn", "swati": "saturn",
+    "vishakha": "jupiter", "anuradha": "jupiter",
+    "jyeshtha": "rahu", "moola": "rahu",
+    "purva_ashadha": "venus", "uttara_ashadha": "venus",
+}
+
+def is_ashtottari_applicable(rahu_house: int, lagna_lord_house: int) -> bool:
+    """Check if Ashtottari Dasha should be used.
+    Condition: Rahu in kendra (1,4,7,10) or trikona (1,5,9) from lagna lord."""
+    distance = (rahu_house - lagna_lord_house) % 12
+    return distance in [0, 3, 6, 9, 4, 8]  # kendra + trikona
+
+def get_starting_lord(moon_nakshatra: str) -> str | None:
+    """Get starting dasha lord from Moon's nakshatra.
+    Returns None if nakshatra is not in Ashtottari mapping."""
+    return NAKSHATRA_TO_LORD.get(moon_nakshatra.lower().replace(" ", "_"))
+
+def calculate_ashtottari_balance(moon_nakshatra: str, degree_in_nakshatra: float) -> dict:
+    """Calculate remaining balance of first dasha period."""
+    lord = get_starting_lord(moon_nakshatra)
+    if not lord:
+        return {"applicable": False, "reason": "Moon nakshatra not in Ashtottari system"}
+    total_years = ASHTOTTARI_PERIODS[lord]
+    elapsed_fraction = degree_in_nakshatra / 13.333
+    remaining_years = total_years * (1 - elapsed_fraction)
+    return {"lord": lord, "total_years": total_years, "remaining_years": remaining_years}
+
+def calculate_ashtottari_sequence(birth_datetime: str, moon_nakshatra: str,
+                                   degree_in_nakshatra: float, years: int = 108) -> list[dict]:
+    """Calculate full Ashtottari Dasha sequence."""
+    # Similar pattern to Vimshottari but with 8 planets, 108 years
+
+def get_current_ashtottari(birth_datetime: str, moon_nakshatra: str,
+                            degree_in_nakshatra: float,
+                            query_datetime: str = None) -> dict:
+    """Get current Ashtottari Mahadasha + Antardasha."""
+    # Find which period covers the query date
+
+def get_ashtottari_antardasha(birth_datetime: str, moon_nakshatra: str,
+                               degree_in_nakshatra: float,
+                               mahadasha_lord: str = None) -> list[dict]:
+    """Get Antardasha breakdown for a Mahadasha period."""
+    # 8 sub-periods within each Mahadasha, proportional to their years
+```
+
+**Effects**: Use the same knowledge base patterns as Vimshottari but note that Ashtottari is considered more suitable for nighttime births and for charts where Rahu is prominently placed.
+
+**Models**: Add to `packages/core/src/models.py`:
+```python
+class AshtottariDashaPeriod(BaseModel):
+    lord: str
+    start_date: datetime
+    end_date: datetime
+    years: float
+    is_current: bool = False
+```
+
+**Exports**: Update `packages/context/src/__init__.py` to export new functions.
+
+## TASK 2: Secondary Progressions
+
+Create `packages/context/src/progressions.py`:
+
+Secondary progressions use the principle that **1 day after birth = 1 year of life**. So to see what happens at age 30, look at planetary positions 30 days after birth.
+
+```python
+"""Secondary Progressions — Day-for-a-Year system.
+
+Principle: Each day after birth corresponds to one year of life.
+To find progressed positions for age N: calculate positions for birth_date + N days.
+"""
+
+from datetime import datetime, timedelta
+from packages.cosmos.src.ephemeris import get_all_planets, get_julian_day
+
+def calculate_progressed_positions(birth_datetime: str, birth_lat: float,
+                                    birth_lon: float, target_age: float) -> dict:
+    """Calculate progressed planetary positions for a given age.
+
+    Args:
+        birth_datetime: Birth datetime ISO format
+        birth_lat: Birth latitude
+        birth_lon: Birth longitude
+        target_age: Age in years (e.g., 30.5 for age 30 years 6 months)
+
+    Returns:
+        Progressed positions for all 9 planets + progressed Ascendant
+    """
+    birth_dt = datetime.fromisoformat(birth_datetime)
+    progressed_dt = birth_dt + timedelta(days=target_age)
+    jd = get_julian_day(progressed_dt)
+    return get_all_planets(jd)
+
+def calculate_progressed_to_natal_aspects(progressed: dict, natal: dict) -> list[dict]:
+    """Find aspects between progressed and natal planets.
+
+    Key aspects to check:
+    - Progressed Sun to natal planets (major life themes)
+    - Progressed Moon to natal planets (emotional themes, ~2.5yr cycle)
+    - Progressed Ascendant to natal planets (self-expression changes)
+    """
+    # Check conjunction (0°), opposition (180°), trine (120°), square (90°), sextile (60°)
+    # Use 1° orb for progressed aspects
+
+def get_current_progressions(birth_datetime: str, birth_lat: float,
+                              birth_lon: float, query_datetime: str = None) -> dict:
+    """Get current progressed positions and active aspects."""
+    birth_dt = datetime.fromisoformat(birth_datetime)
+    query_dt = datetime.fromisoformat(query_datetime) if query_datetime else datetime.now()
+    age_years = (query_dt - birth_dt).days / 365.25
+    progressed = calculate_progressed_positions(birth_datetime, birth_lat, birth_lon, age_years)
+    # Also get natal positions for aspect comparison
+    natal_jd = get_julian_day(birth_dt)
+    natal = get_all_planets(natal_jd)
+    aspects = calculate_progressed_to_natal_aspects(progressed, natal)
+    return {
+        "age": age_years,
+        "progressed_date": str(birth_dt + timedelta(days=age_years)),
+        "progressed_positions": progressed,
+        "active_aspects": aspects,
+        "progressed_moon_sign": _get_sign(progressed["moon"]["longitude"]),
+        "progressed_sun_sign": _get_sign(progressed["sun"]["longitude"]),
+    }
+
+def get_progression_timeline(birth_datetime: str, birth_lat: float,
+                              birth_lon: float, start_age: int,
+                              end_age: int) -> list[dict]:
+    """Get progression timeline showing key aspect formations over a range of years."""
+    # Useful for seeing upcoming major progressed aspects
+```
+
+**Models**: Add to `packages/core/src/models.py`:
+```python
+class ProgressedPosition(BaseModel):
+    planet: str
+    natal_longitude: float
+    progressed_longitude: float
+    sign_change: bool = False
+
+class ProgressionResult(BaseModel):
+    age: float
+    progressed_positions: list[ProgressedPosition]
+    active_aspects: list[dict]
+    progressed_moon_sign: str
+    progressed_sun_sign: str
+```
+
+**Exports**: Update `packages/context/src/__init__.py`.
 
 ## Testing Requirements
 
-After every change:
 ```bash
-uv run pytest tests/ -v --tb=short -k "test_context or test_dasha or test_transit or test_muhurta or test_yogini or test_narayana or test_varshaphal"
+uv run pytest tests/ -v --tb=short -k "test_ashtottari or test_progression"
 uv run ruff check packages/context/
 ```
 
-## DO NOT TOUCH
+Create `tests/unit/test_ashtottari_dasha.py` and `tests/unit/test_progressions.py`.
+Use the standard test birth data: Dec 3, 1992, 3:00 AM, 16.722786, 81.294264
 
-- `packages/cosmos/` — owned by cosmos-agent
+## DO NOT TOUCH
+- `packages/cosmos/` — only READ for imports
 - `packages/self/` — owned by self-agent
-- `packages/guide/` — owned by guide-memory-agent
-- `packages/memory/` — owned by guide-memory-agent
-- Only modify `packages/context/` and its tests
-- You may READ (not write) `knowledge/` and `packages/cosmos/` for reference
+- `packages/guide/` — owned by wiring-agent
+- `services/` — owned by wiring-agent
+- Only modify `packages/context/`, `packages/core/src/models.py` (new models only), and tests

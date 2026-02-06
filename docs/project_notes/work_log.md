@@ -1,5 +1,74 @@
 # 108 Work Log
 
+## 2026-02-06 (Session 18 - Claude Cowork → Claude Code Agent Team)
+
+### Summary
+Post-Session 17 audit revealed two categories of remaining work: (A) features that are CODED but not EXPOSED as MCP tools/API endpoints, and (B) features still MISSING entirely. This session creates targeted agents to finish the backend to v1.0 completeness.
+
+### Remaining Work — Two Categories
+
+#### Category A: Coded But Not Exposed (MCP + API gaps)
+
+| Feature | Code Location | MCP Tool? | API Endpoint? |
+|---------|--------------|-----------|---------------|
+| Parashari Aspects | `cosmos/aspects.py` | NO | NO |
+| Bhava Bala (house strength) | `self/strength.py` | NO | NO |
+| Abhijit/Brahma Muhurta | `context/muhurta.py` | NO | NO |
+| Eclipse Detection | `context/muhurta.py` | NO | NO |
+| Marana Kaal | `context/muhurta.py` | NO | NO |
+| Tithi Lookup | `knowledge/definitions/tithis.json` | NO | NO |
+| Karana Lookup | `knowledge/definitions/karanas.json` | NO | NO |
+| Vara Lookup | `knowledge/definitions/varas.json` | NO | NO |
+| Avastha Lookup | `knowledge/definitions/avasthas.json` | NO | NO |
+| Nitya Yoga Lookup | `knowledge/definitions/nitya_yogas.json` | NO | NO |
+
+#### Category B: Still Missing Entirely
+
+| Feature | Priority | Effort |
+|---------|----------|--------|
+| Prashna D9/D3 (Navamsha + Drekkana in horary) | P2-HIGH | 2-3 hrs |
+| Upapada Interpretation (marriage from Jaimini) | P2-HIGH | 2 hrs |
+| Ashtottari Dasha (108-year, 8 planets) | P2-MED | 3-4 hrs |
+| Secondary Progressions (day=year) | P2-MED | 4-5 hrs |
+| Guide agent wiring (aspects, eclipse, muhurta, panchanga) | P2-HIGH | 2-3 hrs |
+
+### Agent Team — 3 Agents, ~15 min wall-clock
+
+| Agent | Scope | New Features | New Tests |
+|-------|-------|-------------|-----------|
+| `self-agent` | `packages/self/` | Prashna D9/D3 analysis, Upapada interpretation | 60 |
+| `context-agent` | `packages/context/` | Ashtottari Dasha (108-year), Secondary Progressions | 116 |
+| `wiring-agent` | `services/`, `packages/guide/` | 14 MCP tools, 12 API endpoints, Guide agent wiring | 74 |
+
+### Execution Order
+- self-agent and context-agent ran **in parallel** (no dependencies)
+- wiring-agent started **after both completed** (needs to expose their new features)
+
+### Deliverables
+
+#### Self-agent
+- **Prashna D9/D3** (`prashna.py`): `get_prashna_divisional_analysis()` — Navamsha (hidden dimension) + Drekkana (effort level) for horary charts
+- **Upapada Interpretation** (`jaimini.py`): `interpret_upapada()` — Marriage analysis from UL sign, lord placement, 2nd from UL sustenance, Darakaraka connection, separation risk, timing
+
+#### Context-agent
+- **Ashtottari Dasha** (`ashtottari_dasha.py`, NEW): 108-year cycle with 8 planets (no Ketu). `is_ashtottari_applicable()`, `calculate_ashtottari_sequence()`, `get_current_ashtottari()`, `get_ashtottari_antardasha()`
+- **Secondary Progressions** (`progressions.py`, NEW): Day-for-a-year system. `calculate_progressed_positions()`, `calculate_progressed_to_natal_aspects()` (1° orb), `get_progression_timeline()`
+
+#### Wiring-agent
+- **14 new MCP tools**: `planetary_aspects`, `bhava_bala`, `all_bhava_balas`, `interpret_upapada`, `abhijit_muhurta`, `brahma_muhurta`, `eclipse_periods`, `marana_kaal`, `ashtottari_dasha`, `secondary_progressions`, `lookup_tithi`, `lookup_karana`, `lookup_vara`, `lookup_avastha`, `lookup_nitya_yoga`
+- **12 new REST API endpoints** under `/api/v1/` (aspects, bhava-bala, muhurtas, eclipses, ashtottari, progressions, knowledge lookups)
+- **Guide agent wiring**: Agent now uses aspects, bhava bala, panchanga details, muhurta features, Ashtottari Dasha, and progressions
+
+### Final Stats
+- **1,285 tests passing** (was 1,035, +250), 1 skipped (needs ANTHROPIC_API_KEY)
+- **0 ruff lint errors**
+- **~59 MCP tools** across 4 servers (was ~45)
+- **+2,669 lines** across 16 modified + 10 new files
+- All Category A features now exposed as MCP + API
+- All Category B features implemented
+
+---
+
 ## 2026-02-06 (Session 17 - Claude Code Agent Team)
 
 ### Summary
