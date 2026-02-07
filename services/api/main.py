@@ -2866,6 +2866,58 @@ async def get_monthly_forecast_endpoint(request: ForecastRequest):
 
 
 # ============================================================================
+# KP (Krishnamurti Paddhati) Analysis Endpoints
+# ============================================================================
+
+
+@app.get("/api/v1/analysis/kp-sublord", tags=["KP Analysis"])
+async def get_kp_sublord_endpoint(longitude: float):
+    """Get KP sign/star/sub-lord for a longitude."""
+    try:
+        from packages.self.src.kp import get_kp_sublord
+
+        return get_kp_sublord(longitude)
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Error in KP sub-lord calculation: {e!s}",
+        ) from e
+
+
+@app.post("/api/v1/analysis/kp-significators", tags=["KP Analysis"])
+async def get_kp_significators_endpoint(request: dict):
+    """Get KP significators for all houses."""
+    try:
+        from packages.self.src.kp import get_kp_significators
+
+        planets = request.get("planets", {})
+        cusps = [float(c) for c in request.get("cusps", [])]
+        return get_kp_significators(planets, cusps)
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Error in KP significator calculation: {e!s}",
+        ) from e
+
+
+@app.post("/api/v1/analysis/kp-prediction", tags=["KP Analysis"])
+async def get_kp_prediction_endpoint(request: dict):
+    """Get full KP prediction for a life question."""
+    try:
+        from packages.self.src.kp import get_kp_prediction
+
+        planets = request.get("planets", {})
+        cusps = [float(c) for c in request.get("cusps", [])]
+        query_type = request.get("query_type", "career")
+        return get_kp_prediction(planets, cusps, query_type)
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Error in KP prediction: {e!s}",
+        ) from e
+
+
+# ============================================================================
 # Main Entry Point
 # ============================================================================
 

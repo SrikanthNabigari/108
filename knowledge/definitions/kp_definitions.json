@@ -1,0 +1,591 @@
+{
+  "kp_system": {
+    "name": "Krishnamurti Paddhati",
+    "founder": "Late Prof. K.S. Krishnamurti",
+    "description": "A refined system of Vedic astrology that emphasizes the sub-lord as the decisive factor in chart interpretation. KP introduces mathematical precision to horary astrology and birth chart analysis through the subdivision of nakshatras into sub-divisions based on Vimshottari Dasha proportions.",
+    "key_principles": [
+      "Sub-lord is the decisive factor",
+      "Cuspal sub-lord determines house fulfillment",
+      "Ruling planets confirm timing",
+      "Placidus house system is mandatory",
+      "Krishnamurti Ayanamsa for precision",
+      "Nakshatra subdivision creates 249 precise divisions in zodiac",
+      "Event timing depends on dasha activation of significators",
+      "Retrograde planets give results of previously occupied houses"
+    ]
+  },
+  "house_matters": {
+    "1": {
+      "primary_significations": [
+        "self",
+        "body",
+        "personality",
+        "health",
+        "vitality",
+        "appearance",
+        "longevity",
+        "character"
+      ],
+      "support_houses": [1, 5, 9, 11],
+      "denial_houses": [6, 8, 12],
+      "karaka": "sun",
+      "significance": "Represents native's physical form, constitution, and overall vitality"
+    },
+    "2": {
+      "primary_significations": [
+        "wealth",
+        "family",
+        "speech",
+        "food",
+        "bank_balance",
+        "face",
+        "accumulated_assets",
+        "right_eye"
+      ],
+      "support_houses": [2, 6, 10, 11],
+      "denial_houses": [1, 5, 8, 12],
+      "karaka": "jupiter",
+      "significance": "Indicates financial status, family relationships, and capacity for speech"
+    },
+    "3": {
+      "primary_significations": [
+        "siblings",
+        "courage",
+        "short_travel",
+        "communication",
+        "neighbors",
+        "hands",
+        "writing",
+        "initiative"
+      ],
+      "support_houses": [3, 9, 12],
+      "denial_houses": [1, 4, 10],
+      "karaka": "mars",
+      "significance": "Represents mental abilities, communication skills, and short journeys"
+    },
+    "4": {
+      "primary_significations": [
+        "mother",
+        "home",
+        "property",
+        "vehicles",
+        "education",
+        "comfort",
+        "immovable_assets",
+        "foundational_matters"
+      ],
+      "support_houses": [4, 9, 11],
+      "denial_houses": [3, 5, 12],
+      "karaka": "moon",
+      "significance": "Signifies domestic happiness, maternal influence, and real estate matters"
+    },
+    "5": {
+      "primary_significations": [
+        "children",
+        "intelligence",
+        "speculation",
+        "creativity",
+        "romance",
+        "purva_punya",
+        "education",
+        "artistic_expression"
+      ],
+      "support_houses": [2, 5, 11],
+      "denial_houses": [1, 4, 10, 12],
+      "karaka": "jupiter",
+      "significance": "Indicates creative potential, progeny, and intellectual capabilities"
+    },
+    "6": {
+      "primary_significations": [
+        "enemies",
+        "disease",
+        "debt",
+        "service",
+        "competition",
+        "maternal_uncle",
+        "litigation",
+        "obstacles"
+      ],
+      "support_houses": [6, 10, 11],
+      "denial_houses": [1, 5, 7, 12],
+      "karaka": "mars",
+      "significance": "Represents challenges, health issues, and service-related matters"
+    },
+    "7": {
+      "primary_significations": [
+        "marriage",
+        "partnership",
+        "spouse",
+        "business",
+        "public_dealings",
+        "foreign_travel",
+        "legal_contracts",
+        "negotiation"
+      ],
+      "support_houses": [2, 7, 11],
+      "denial_houses": [1, 6, 10, 12],
+      "karaka": "venus",
+      "significance": "Signifies marital relationships, business partnerships, and public interactions"
+    },
+    "8": {
+      "primary_significations": [
+        "longevity",
+        "death",
+        "transformation",
+        "insurance",
+        "inheritance",
+        "occult",
+        "hidden_matters",
+        "chronic_illness"
+      ],
+      "support_houses": [3, 8, 12],
+      "denial_houses": [1, 5, 9, 11],
+      "karaka": "saturn",
+      "significance": "Represents hidden forces, occult knowledge, and transformative events"
+    },
+    "9": {
+      "primary_significations": [
+        "fortune",
+        "father",
+        "guru",
+        "dharma",
+        "long_travel",
+        "higher_education",
+        "luck",
+        "pilgrimage"
+      ],
+      "support_houses": [3, 9, 12],
+      "denial_houses": [1, 4, 10],
+      "karaka": "jupiter",
+      "significance": "Indicates fortune, spiritual guidance, and higher knowledge"
+    },
+    "10": {
+      "primary_significations": [
+        "career",
+        "profession",
+        "status",
+        "government",
+        "fame",
+        "authority",
+        "public_position",
+        "mother's_father"
+      ],
+      "support_houses": [2, 6, 10, 11],
+      "denial_houses": [1, 5, 9, 12],
+      "karaka": "sun",
+      "significance": "Represents professional achievement, social status, and public image"
+    },
+    "11": {
+      "primary_significations": [
+        "gains",
+        "income",
+        "friends",
+        "wishes_fulfilled",
+        "elder_siblings",
+        "association",
+        "group_activities",
+        "social_circles"
+      ],
+      "support_houses": [3, 6, 10, 11],
+      "denial_houses": [1, 5, 8, 12],
+      "karaka": "jupiter",
+      "significance": "Signifies achievement of desires, friendships, and material prosperity"
+    },
+    "12": {
+      "primary_significations": [
+        "losses",
+        "expenses",
+        "foreign_lands",
+        "hospitals",
+        "moksha",
+        "bed_pleasures",
+        "imprisonment",
+        "seclusion"
+      ],
+      "support_houses": [3, 9, 12],
+      "denial_houses": [1, 2, 10, 11],
+      "karaka": "saturn",
+      "significance": "Represents spiritual liberation, losses, and matters of isolation"
+    }
+  },
+  "query_house_groups": {
+    "marriage": {
+      "primary_house": 7,
+      "support_houses": [2, 7, 11],
+      "denial_houses": [1, 6, 10, 12],
+      "description": "2nd = family addition and expansion, 7th = spouse and partnership bond, 11th = fulfillment of marriage desire. 6th = separation and conflict, 10th = partner away from home, 12th = loss of marital relationship."
+    },
+    "career": {
+      "primary_house": 10,
+      "support_houses": [2, 6, 10, 11],
+      "denial_houses": [1, 5, 9, 12],
+      "description": "2nd = income and earnings, 6th = service and employment competition, 10th = profession and authority, 11th = gains from job. 5th/9th = away from regular service or study, 12th = loss of status or position."
+    },
+    "children": {
+      "primary_house": 5,
+      "support_houses": [2, 5, 11],
+      "denial_houses": [1, 4, 10, 12],
+      "description": "2nd = family growth and expansion, 5th = progeny and childbirth, 11th = fulfillment of desire for children. 4th = away from children, 10th = children away from home."
+    },
+    "wealth": {
+      "primary_house": 2,
+      "support_houses": [2, 6, 10, 11],
+      "denial_houses": [1, 5, 8, 12],
+      "description": "2nd = bank balance and accumulated wealth, 6th = overcoming debt, 10th = earning capacity through profession, 11th = receipt of money and gains. 8th = hidden losses and inheritance issues, 12th = expenditure and financial outflow."
+    },
+    "health": {
+      "primary_house": 1,
+      "support_houses": [1, 5, 9, 11],
+      "denial_houses": [6, 8, 12],
+      "description": "1st = physical body and immunity, 5th/9th = trinal protection for good health, 11th = recovery and positive health outcomes. 6th = disease and illness, 8th = chronic conditions, 12th = hospitalization and health emergency."
+    },
+    "education": {
+      "primary_house": 4,
+      "support_houses": [4, 9, 11],
+      "denial_houses": [3, 8, 12],
+      "description": "4th = basic and foundational education, 9th = higher learning and advanced studies, 11th = success and completion of education. 3rd = distraction, 8th = interruption, 12th = change of institution or studies abroad."
+    },
+    "travel_short": {
+      "primary_house": 3,
+      "support_houses": [3, 9, 12],
+      "denial_houses": [1, 4, 10],
+      "description": "3rd = short local journeys and travels, 9th = extended travel distance, 12th = going away or relocation. 4th = staying rooted at home."
+    },
+    "travel_foreign": {
+      "primary_house": 9,
+      "support_houses": [3, 9, 12],
+      "denial_houses": [1, 4, 10],
+      "description": "3rd = initial travel impulse, 9th = foreign travel and international journeys, 12th = settlement abroad and permanent relocation. 4th = rooted at home, unable to travel."
+    },
+    "property": {
+      "primary_house": 4,
+      "support_houses": [4, 11, 12],
+      "denial_houses": [3, 5, 10],
+      "description": "4th = immovable property and real estate ownership, 11th = acquiring and gaining property, 12th = investment in property. 3rd/10th = negotiations and dealings in property."
+    },
+    "legal": {
+      "primary_house": 6,
+      "support_houses": [6, 11],
+      "denial_houses": [7, 12],
+      "description": "6th = winning over opposition and legal victory, 11th = favorable verdict and successful outcome. 7th = opponent's strength and equal opposition, 12th = loss of legal case."
+    },
+    "spiritual": {
+      "primary_house": 12,
+      "support_houses": [5, 9, 12],
+      "denial_houses": [1, 3, 10],
+      "description": "5th = mantra siddhi and spiritual practices, 9th = guru connection and dharma, 12th = moksha and spiritual liberation. 1st/10th = worldly attachment and material focus."
+    }
+  },
+  "significator_levels": {
+    "level_1": {
+      "name": "Planets in the star of occupants",
+      "description": "Most powerful significators. Planets whose nakshatra lord occupies the queried house are strongest indicators.",
+      "strength": "strongest",
+      "example": "If Mars occupies 5th house and Venus is in Mars's nakshatra, Venus becomes a strong 5th house significator"
+    },
+    "level_2": {
+      "name": "Occupants of the house",
+      "description": "Planets physically placed in the house are significant for that house's matters.",
+      "strength": "strong",
+      "example": "Jupiter in 5th house directly indicates children and progeny"
+    },
+    "level_3": {
+      "name": "Planets in the star of the house lord",
+      "description": "Planets whose nakshatra lord is the owner of the house sign are moderately significant.",
+      "strength": "moderate",
+      "example": "If Sun owns 5th house and Mercury is in Sun's nakshatra, Mercury significates 5th house"
+    },
+    "level_4": {
+      "name": "House lord",
+      "description": "The planet that owns the sign on the cusp of the house is the weakest significator.",
+      "strength": "weakest",
+      "example": "Leo on 5th house cusp makes Sun the 5th house lord"
+    }
+  },
+  "ruling_planets": {
+    "description": "Five factors that confirm KP predictions at the moment of judgment or query",
+    "factors": [
+      {
+        "name": "ascendant_sign_lord",
+        "description": "Lord of the rising sign at query time",
+        "role": "Confirms overall query viability"
+      },
+      {
+        "name": "ascendant_star_lord",
+        "description": "Nakshatra lord of the ascendant degree",
+        "role": "Refines query timing and nature"
+      },
+      {
+        "name": "moon_sign_lord",
+        "description": "Lord of the sign Moon occupies at query time",
+        "role": "Indicates emotional state regarding query"
+      },
+      {
+        "name": "moon_star_lord",
+        "description": "Nakshatra lord of Moon's degree at query time",
+        "role": "Connects to native's emotional significators"
+      },
+      {
+        "name": "day_lord",
+        "description": "Planet ruling the weekday of query",
+        "role": "Provides cosmic timing confirmation"
+      }
+    ],
+    "usage": "Planets appearing as ruling planets that also significate the queried house CONFIRM the event. The more a planet repeats across the five factors, the stronger its role in the event. A single repetition indicates possibility, double repetition indicates probability, triple or more indicates certainty.",
+    "day_lords": {
+      "sunday": "sun",
+      "monday": "moon",
+      "tuesday": "mars",
+      "wednesday": "mercury",
+      "thursday": "jupiter",
+      "friday": "venus",
+      "saturday": "saturn"
+    }
+  },
+  "kp_ayanamsa": {
+    "name": "Krishnamurti Ayanamsa",
+    "description": "The ayanamsa (precession correction) used exclusively in the KP system. It differs slightly from the more commonly used Lahiri ayanamsa.",
+    "difference_from_lahiri": "approximately 6 arc-minutes less than Lahiri ayanamsa",
+    "year_introduced": "Developed by Prof. K.S. Krishnamurti in the 1960s",
+    "precision": "Provides greater precision for horary and divisional chart calculations",
+    "note": "The 108 system supports KP ayanamsa via the 'krishnamurti' parameter in planetary_positions tool"
+  },
+  "sub_lord_theory": {
+    "name": "Sub-Lord Theory",
+    "description": "The core innovation and foundation of Krishnamurti Paddhati. Each nakshatra (13°20') is divided into 9 unequal sub-divisions proportional to the Vimshottari Dasha years of each planet.",
+    "division_method": "Each of the 27 nakshatras is subdivided into 9 parts following the Vimshottari sequence",
+    "calculation": "Sub-lord span = (planet_dasha_years / 120) × 13.333°",
+    "subdivision_sequence": "Ketu(7yr) → Venus(20yr) → Sun(6yr) → Moon(10yr) → Mars(7yr) → Rahu(18yr) → Jupiter(16yr) → Saturn(19yr) → Mercury(17yr)",
+    "total_subdivisions": "27 nakshatras × 9 sub-lords = 243 total sub-divisions across 360° zodiac",
+    "significance": "The sub-lord of a house cusp is the DECISIVE FACTOR in KP. It determines whether the house promise is fulfilled (sub-lord significates supporting houses) or denied (sub-lord significates denial houses).",
+    "cuspal_sub_lord": "Most critical: the sub-lord occupying the house cusp is more important than the house lord",
+    "principle": "An event occurs when: (1) Significators activate via dasha/transit AND (2) Sub-lord of that house's cusp signifies its favorable disposition"
+  },
+  "interpretations": {
+    "sub_lord_favorable": {
+      "condition": "Sub-lord in star of planets significating supporting houses",
+      "result": "FAVORABLE - House promise manifests",
+      "practical": "If 5th cusp sub-lord is in Jupiter's star (Jupiter significates 5th), children are promised"
+    },
+    "sub_lord_unfavorable": {
+      "condition": "Sub-lord in star of planets significating denial houses",
+      "result": "UNFAVORABLE - House promise is denied",
+      "practical": "If 5th cusp sub-lord is in Saturn's star (Saturn significates 6,8,12), children are denied"
+    },
+    "sub_lord_mixed": {
+      "condition": "Sub-lord connects to both supporting and denial houses",
+      "result": "MIXED - Results depend on dasha timing and transit activation",
+      "practical": "Event occurs late or with delays/obstacles; timing becomes critical"
+    },
+    "retrograde_in_kp": {
+      "description": "In KP, retrograde planets are NOT weakened. They give results of the house they PREVIOUSLY occupied (by transit).",
+      "principle": "Retrograde = redirected, not denied",
+      "practical": "A retrograde significator may delay results but does not deny them if it signifies the right houses. The event manifests through the planet's previous house significations."
+    },
+    "conjunction_in_kp": {
+      "description": "In KP, conjunction means planets share the same sub-lord division. This creates a powerful connection between their significations.",
+      "principle": "Planets in same sub-lord = synchronized results",
+      "practical": "When one conjoined planet is activated by dasha/transit, the other also gives results. Their combined significations must be analyzed."
+    },
+    "exaltation_debilitation": {
+      "description": "In KP, exaltation and debilitation are considered but are SECONDARY to sub-lord analysis. The sub-lord is always the deciding factor.",
+      "principle": "Sub-lord > Dignities",
+      "practical": "A debilitated planet with favorable sub-lord can still give results; an exalted planet with unfavorable sub-lord will not."
+    }
+  },
+  "dasha_activation": {
+    "name": "Dasha Activation of Events",
+    "description": "Events manifest when the dasha periods of significators activate",
+    "activation_hierarchy": [
+      "Mahadasha lord (primary force)",
+      "Antardasha lord (secondary refinement)",
+      "Pratyantardasha lord (fine timing)",
+      "Current transit of significator (exact trigger)"
+    ],
+    "significance_rule": "For an event to occur: (1) Dasha must be of a significator for that matter AND (2) Sub-lord of that house must be favorable",
+    "double_activation": "When both Mahadasha and Antardasha lords significate the same house, results are very strong",
+    "example": "Marriage in Jupiter Mahadasha, Venus Antardasha if both are 7th house significators and 7th cusp sub-lord is favorable"
+  },
+  "cusps_and_sub_lords": {
+    "name": "Critical Role of Cusps and Sub-Lords",
+    "description": "In KP, the cusps of houses are far more important than in traditional Vedic astrology",
+    "twelve_cusps": "Each of the 12 house cusps has its own sub-lord which determines that house's promise",
+    "cusp_subdivision": "Houses are not entire signs but precise degree intervals determined by Placidus house system",
+    "sub_lord_determination": "Find which nakshatra-sub combination the house cusp degree falls into; that sub-lord is the decider",
+    "example": "If 7th house cusp is at 15°23'30\", find which nakshatra-sub this degree belongs to. That sub-lord determines marriage timing and quality."
+  },
+  "birth_chart_analysis": {
+    "name": "KP Birth Chart Reading Sequence",
+    "step_1": {
+      "name": "Identify House Cusps",
+      "description": "Calculate exact degree of each house cusp using Placidus system"
+    },
+    "step_2": {
+      "name": "Find Cusp Sub-Lords",
+      "description": "For each cusp, determine which nakshatra-sub it occupies"
+    },
+    "step_3": {
+      "name": "Determine Significators",
+      "description": "List all significators for each house (level 1-4) in order of strength"
+    },
+    "step_4": {
+      "name": "Check Sub-Lord Disposition",
+      "description": "Does each cusp's sub-lord signify supporting or denial houses?"
+    },
+    "step_5": {
+      "name": "Analyze Dasha Periods",
+      "description": "Calculate Vimshottari Dasha and identify when significators activate"
+    },
+    "step_6": {
+      "name": "Cross-Check with Ruling Planets",
+      "description": "At time of prediction, verify with 5 ruling planets"
+    },
+    "result": "Combination of favorable sub-lord + significator activation via dasha + ruling planet confirmation = event certainty"
+  },
+  "horary_principles": {
+    "name": "KP Horary Astrology",
+    "description": "KP excels in horary (prashna) questions due to sub-lord precision",
+    "principle_1": "Question time's Lagna cusp is the main significator for the querist",
+    "principle_2": "Different houses represent different types of questions",
+    "principle_3": "Ruling planets at question time strongly confirm or deny the event",
+    "principle_4": "Sub-lord of relevant cusp gives final yes/no answer",
+    "accuracy": "KP horary is highly precise when sub-lord analysis is applied correctly",
+    "example": "For 'Will I marry this year?': Check 7th house cusp sub-lord. If it significates 2,7,11, answer is YES. If it significates 1,6,10,12, answer is NO."
+  },
+  "comparison_with_traditional": {
+    "name": "KP vs. Traditional Vedic Astrology",
+    "differences": [
+      {
+        "aspect": "House System",
+        "traditional": "Whole sign houses",
+        "kp": "Placidus cuspal divisions"
+      },
+      {
+        "aspect": "Decision Making",
+        "traditional": "Planet aspects and conjunctions primary",
+        "kp": "Sub-lord is decisive; aspects secondary"
+      },
+      {
+        "aspect": "Strength Assessment",
+        "traditional": "Dignities (exaltation, debilitation) critical",
+        "kp": "Significator level + sub-lord disposition > dignities"
+      },
+      {
+        "aspect": "Prediction Method",
+        "traditional": "Philosophical interpretation",
+        "kp": "Mathematical, logical deduction"
+      },
+      {
+        "aspect": "Horary Suitability",
+        "traditional": "Possible but less precise",
+        "kp": "Highly precise, specifically designed for horary"
+      },
+      {
+        "aspect": "Ayanamsa",
+        "traditional": "Lahiri or other systems",
+        "kp": "Krishnamurti Ayanamsa exclusively"
+      }
+    ]
+  },
+  "advanced_concepts": {
+    "constellation_lords": {
+      "name": "Constellation (Nakshatra) Lords",
+      "description": "In KP, the nakshatra lord is given importance second only to the sub-lord",
+      "role": "Determines the primary significations of a planet"
+    },
+    "bhava_analysis": {
+      "name": "Bhava (House) Analysis",
+      "description": "Each bhava (house) spans from one cusp to the next, not entire signs",
+      "advantage": "More precise definition of house boundaries and significations"
+    },
+    "transits_in_kp": {
+      "name": "Transit Analysis",
+      "description": "Transits are used to trigger dasha significators, not independently",
+      "principle": "Transit of a significator to favorable positions confirms the dasha results"
+    },
+    "divisional_charts": {
+      "name": "Divisional Charts (Vargas)",
+      "description": "D9 (Navamsha) and other divisions are used in KP to confirm birth chart significators",
+      "method": "Check if divisional sub-lords also signify supportive houses"
+    },
+    "combustion": {
+      "name": "Combustion (Sun Proximity)",
+      "description": "In KP, combustion does not deny results; it delays them or modifies expression",
+      "principle": "Combusted planet can still act as significator if sub-lord is favorable"
+    }
+  },
+  "remedial_measures": {
+    "name": "Remedies in KP Context",
+    "philosophy": "KP focuses on understanding the inexorable results of karma. Remedies work by shifting consciousness and attracting beneficial transits.",
+    "methods": [
+      {
+        "name": "Gem Stones",
+        "rationale": "Wear gems for strong significators to enhance their positive expression"
+      },
+      {
+        "name": "Fasting",
+        "rationale": "Fast on day of weak significator to reduce adverse effects"
+      },
+      {
+        "name": "Mantra Recitation",
+        "rationale": "Recite mantras of strong beneficial significators"
+      },
+      {
+        "name": "Charity",
+        "rationale": "Give to those ruled by malefic significators to mitigate their negative effects"
+      },
+      {
+        "name": "Timing",
+        "rationale": "KP's greatest strength: use sub-lord analysis to time actions perfectly"
+      }
+    ],
+    "timing_as_remedy": "The best remedy in KP is to understand when an event WILL occur (through sub-lord analysis) and prepare accordingly"
+  },
+  "common_errors": {
+    "error_1": {
+      "name": "Ignoring House Cups",
+      "problem": "Treating houses as entire signs instead of cuspal divisions",
+      "solution": "Always identify exact cusp degrees and their sub-lords"
+    },
+    "error_2": {
+      "name": "Over-relying on Aspects",
+      "problem": "Using traditional aspect rules without sub-lord confirmation",
+      "solution": "Sub-lord is the final arbiter; aspects are secondary"
+    },
+    "error_3": {
+      "name": "Misunderstanding Retrograde",
+      "problem": "Thinking retrograde planets are weak or denied",
+      "solution": "Retrograde = redirected, not denied; still acts as significator"
+    },
+    "error_4": {
+      "name": "Neglecting Ruling Planets",
+      "problem": "Not checking ruling planets at judgment time",
+      "solution": "Always verify with 5 ruling planets for confirmation"
+    },
+    "error_5": {
+      "name": "Wrong House System",
+      "problem": "Using whole sign or equal house instead of Placidus",
+      "solution": "KP mandates Placidus house system exclusively"
+    },
+    "error_6": {
+      "name": "Ignoring Dasha Timing",
+      "problem": "Predicting event without dasha activation of significators",
+      "solution": "Event only manifests when dasha-significator alignment occurs"
+    }
+  },
+  "glossary": {
+    "significator": "A planet that represents the queried matter through house significations",
+    "sub_lord": "The planet owning the nakshatra-sub division where a cusp degree falls",
+    "cusp": "The exact degree marking the boundary of a house",
+    "placidus_system": "House division system using semi-arcs, mandatory for KP",
+    "vimshottari_dasha": "120-year planetary period cycle used for timing events",
+    "mahadasha": "Major 9-planet period in Vimshottari dasha",
+    "antardasha": "Sub-period within Mahadasha",
+    "pratyantardasha": "Sub-sub-period within Antardasha",
+    "ruling_planets": "5 factors determined at query time that confirm predictions",
+    "nakshatra": "Lunar mansion; 27 divisions of 13°20' each",
+    "horary": "Astrology of questions; using query chart to answer specific questions",
+    "bhava": "House in Sanskrit; the 12 divisions of the chart",
+    "karaka": "Significator planet for a house or matter"
+  }
+}

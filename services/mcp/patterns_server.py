@@ -1729,6 +1729,78 @@ def _get_strength_rating(total: float) -> str:
         return "very_weak"
 
 
+# ============================================================================
+# KP (Krishnamurti Paddhati) MCP Tools
+# ============================================================================
+
+
+@mcp.tool()
+async def kp_sublord(longitude: float) -> dict:
+    """Get KP sign lord, star lord, and sub-lord for a given longitude.
+
+    Args:
+        longitude: Sidereal longitude (0-360)
+
+    Returns:
+        Sign lord, star lord, sub-lord trilogy with degree info
+    """
+    from packages.self.src.kp import get_kp_sublord
+
+    return get_kp_sublord(longitude)
+
+
+@mcp.tool()
+async def kp_cuspal_sublords(cusps: list) -> dict:
+    """Get KP sub-lord analysis for all 12 house cusps.
+
+    Args:
+        cusps: List of 12 house cusp longitudes (0-360)
+
+    Returns:
+        Sub-lord analysis for each house cusp
+    """
+    from packages.self.src.kp import get_cuspal_sublords
+
+    cusps_float = [float(c) for c in cusps]
+    return {"cusps": get_cuspal_sublords(cusps_float)}
+
+
+@mcp.tool()
+async def kp_significators(planets: dict, cusps: list) -> dict:
+    """Determine KP significators for each house using the 4-level hierarchy.
+
+    Args:
+        planets: Dictionary of planet positions {planet: {longitude, sign, house, ...}}
+        cusps: List of 12 house cusp longitudes
+
+    Returns:
+        4-level significators for each house (1-12)
+    """
+    from packages.self.src.kp import get_kp_significators
+
+    cusps_float = [float(c) for c in cusps]
+    return get_kp_significators(planets, cusps_float)
+
+
+@mcp.tool()
+async def kp_prediction(planets: dict, cusps: list, query_type: str) -> dict:
+    """Get a full KP prediction for a life question.
+
+    Args:
+        planets: Dictionary of planet positions {planet: {longitude, sign, house, ...}}
+        cusps: List of 12 house cusp longitudes
+        query_type: Type of question (marriage, career, children, wealth, health,
+                   education, travel_short, travel_foreign, property, legal, spiritual)
+
+    Returns:
+        Complete KP prediction with judgment, confidence, and timing hints
+    """
+    from packages.self.src.kp import get_kp_prediction
+
+    cusps_float = [float(c) for c in cusps]
+    return get_kp_prediction(planets, cusps_float, query_type)
+
+
 # Main entry point for MCP server
 if __name__ == "__main__":
     mcp.run()

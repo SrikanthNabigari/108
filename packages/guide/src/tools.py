@@ -1713,6 +1713,103 @@ class AstrologyTools:
             return {"success": False, "error": str(e)}
 
     # ===================
+    # KP (KRISHNAMURTI PADDHATI) TOOLS
+    # ===================
+
+    def get_kp_sublord(
+        self,
+        longitude: float,
+    ) -> dict[str, Any]:
+        """Get KP sub-lord for a given longitude.
+
+        Args:
+            longitude: Sidereal longitude (0-360)
+
+        Returns:
+            Sub-lord details with nakshatra lord, sub-lord, and sub-sub-lord
+        """
+        try:
+            from packages.self.src.kp import get_kp_sublord as _kp_sublord
+
+            result = _kp_sublord(longitude)
+            return {"kp_sublord": result, "success": True}
+        except Exception as e:
+            logger.error(f"Error getting KP sub-lord: {e!s}")
+            return {"success": False, "error": str(e)}
+
+    def get_kp_analysis(
+        self,
+        birth_datetime: datetime,
+        latitude: float,
+        longitude: float,
+        query_type: str = "career",
+        ayanamsa: str = "krishnamurti",
+    ) -> dict[str, Any]:
+        """Get complete KP analysis for a life query.
+
+        Uses Krishnamurti Paddhati sub-lord system for precise yes/no predictions.
+        Automatically uses Placidus houses and Krishnamurti ayanamsa.
+
+        Args:
+            birth_datetime: Birth datetime
+            latitude: Birth latitude
+            longitude: Birth longitude
+            query_type: Life area to analyze (career, marriage, children, wealth,
+                       health, education, travel, property, legal, spiritual, longevity)
+            ayanamsa: Ayanamsa system (default: krishnamurti)
+
+        Returns:
+            KP prediction with verdict, significators, ruling planets, and analysis
+        """
+        try:
+            from packages.self.src.kp import (
+                get_cuspal_sublords,
+                get_kp_prediction,
+                get_kp_significators,
+                get_ruling_planets,
+            )
+
+            # Calculate chart with Placidus (KP requirement)
+            chart = self.get_birth_chart(
+                birth_datetime, latitude, longitude, ayanamsa, house_system="placidus"
+            )
+            if not chart.get("success"):
+                return chart
+
+            planets = chart.get("planets", {})
+            houses = chart.get("houses", {})
+
+            # Extract cusp longitudes
+            cusps = []
+            for i in range(1, 13):
+                house_data = houses.get(str(i), {})
+                cusps.append(house_data.get("cusp_longitude", (i - 1) * 30))
+
+            # Get KP components
+            cuspal_sublords = get_cuspal_sublords(cusps)
+            significators = get_kp_significators(planets, cusps)
+            ruling = get_ruling_planets(planets, cusps, birth_datetime)
+
+            # Get prediction
+            prediction = get_kp_prediction(planets, cusps, birth_datetime, query_type)
+
+            return {
+                "kp_analysis": {
+                    "query_type": query_type,
+                    "prediction": prediction,
+                    "cuspal_sublords": cuspal_sublords,
+                    "significators": significators,
+                    "ruling_planets": ruling,
+                    "ayanamsa": ayanamsa,
+                    "house_system": "placidus",
+                },
+                "success": True,
+            }
+        except Exception as e:
+            logger.error(f"Error in KP analysis: {e!s}")
+            return {"success": False, "error": str(e)}
+
+    # ===================
     # UTILITY METHODS
     # ===================
 
@@ -1925,6 +2022,22 @@ def get_monthly_forecast(
     )
 
 
+def get_kp_sublord_info(longitude: float) -> dict[str, Any]:
+    """Get KP sub-lord for a longitude."""
+    return get_tools().get_kp_sublord(longitude)
+
+
+def get_kp_analysis(
+    birth_datetime: datetime,
+    latitude: float,
+    longitude: float,
+    query_type: str = "career",
+    ayanamsa: str = "krishnamurti",
+) -> dict[str, Any]:
+    """Get KP analysis for a life query."""
+    return get_tools().get_kp_analysis(birth_datetime, latitude, longitude, query_type, ayanamsa)
+
+
 __all__ = [
     "ActivityType",
     "AstrologyTools",
@@ -1940,6 +2053,8 @@ __all__ = [
     "get_dasha_info",
     "get_dasha_transit_analysis",
     "get_gem_recommendation",
+    "get_kp_analysis",
+    "get_kp_sublord_info",
     "get_monthly_forecast",
     "get_remedies",
     "get_synastry_report_fn",

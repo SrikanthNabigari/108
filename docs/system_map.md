@@ -598,6 +598,7 @@ JAIMINI COMPONENTS WE HAVE:
 | | Synastry & Composite Charts | Overlay + Aspects + Midpoint | ✅ Session 22 |
 | | Gem Recommendation Engine | Lagna-based + contraindications | ✅ Session 22 |
 | | Atmakaraka Deep Analysis | Soul purpose + Ishta Devata | ✅ Session 22 |
+| | KP (Krishnamurti Paddhati) | Sub-lord table + significators + predictions | ✅ Session 23 |
 | **Context** | Vimshottari Dasha | 120-year, 3 levels | ✅ Complete |
 | | Yogini Dasha | 36-year | ✅ Complete |
 | | Ashtottari Dasha | 108-year | ✅ Complete |
@@ -619,16 +620,16 @@ JAIMINI COMPONENTS WE HAVE:
 | | Daily Forecast Engine | Day rating + all timing layers | ✅ Session 22 |
 | | Weekly Forecast Engine | 7-day area ratings + peak days | ✅ Session 22 |
 | | Monthly Forecast Engine | Transits + retrogrades + areas | ✅ Session 22 |
-| **MCP Tools** | Total tools | ~76 | ✅ Complete |
-| **API Endpoints** | Total endpoints | 30 | ✅ Complete |
-| **Tests** | Total test items | 2,026 | ✅ Complete |
+| **MCP Tools** | Total tools | ~80 | ✅ Complete |
+| **API Endpoints** | Total endpoints | 33 | ✅ Complete |
+| **Tests** | Total test items | ~2,126 | ✅ Complete |
 
 ### WHAT'S MISSING OR INCOMPLETE
 
 | Gap | Priority | What It Would Add |
 |-----|----------|-------------------|
-| **KP (Krishnamurti Paddhati)** | LOW | Alternative prediction system using sub-lords — entirely new framework |
 | **Chara Dasha antardashas** | LOW | Jaimini sub-period calculations within Chara Dasha sign periods |
+| **KP Prashna (real-time)** | LOW | Live KP prashna using current moment chart for real-time queries |
 | **Deeper Rashi aspects** | LOW | Jaimini sign-based aspects with detailed interpretations |
 | **planet_in_nakshatra.json expansion** | LOW | Currently 78KB, expected ~200KB — partial coverage of 243 combinations |
 | **Real-time push notifications** | MEDIUM | Live transit alerts when aspects become exact — needs infrastructure |
@@ -702,5 +703,5 @@ Step 5: GUIDE — Synthesize for user
 ---
 
 *108 System Map — v2.0 | Feb 7, 2026*
-*76 MCP tools | 30 API endpoints | 522 yogas | 55 doshas | 729 pratyantardasha effects | 2,026 tests*
+*~80 MCP tools | 33 API endpoints | 522 yogas | 55 doshas | 729 pratyantardasha effects | ~2,126 tests*
 *43 rule files | 15 definition files | 5 interpretation files | ~1,000 interpretation rules added (Sessions 21-22)*

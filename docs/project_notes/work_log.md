@@ -1,5 +1,68 @@
 # 108 Work Log
 
+## 2026-02-07 (Session 23 - KP Krishnamurti Paddhati Module)
+
+### Summary
+Built the complete Krishnamurti Paddhati (KP) system as an alternative prediction engine. KP specializes in precise yes/no event timing using sub-lord theory — each nakshatra (13°20') is divided into 9 unequal sub-divisions proportional to Vimshottari Dasha years (120-year cycle). The sub-lord of a house cusp is the decisive factor for whether a house promise is fulfilled or denied. Complements existing Parashari+Jaimini system.
+
+### Stats
+| Metric | Before | After | Delta |
+|--------|--------|-------|-------|
+| Tests | 2,026 | ~2,126 | **+100** |
+| Lint errors | 0 | 0 | 0 |
+| Files | — | 10 | (5 modified + 5 new) |
+| Lines | — | +2,700 | net |
+| Knowledge rules | ~3.6MB | ~3.6MB | +25KB (KP definitions) |
+| MCP tools | ~76 | ~80 | +4 |
+| API endpoints | 30 | 33 | +3 |
+
+### New Files
+
+| File | Lines | Description |
+|------|-------|-------------|
+| `packages/self/src/kp.py` | 847 | Core KP module — sub-lord table generation (249 entries), cuspal analysis, 4-level significator hierarchy, ruling planets, house analysis, prediction engine for 11 query types |
+| `knowledge/definitions/kp_definitions.json` | ~25KB | KP knowledge base — house matters (12), query house groups (11), significator levels, sub-lord theory, interpretations, advanced concepts, glossary |
+| `tests/unit/test_kp.py` | 907 | 100 unit tests across 10 test classes covering all 7 public functions + integration + edge cases + data integrity |
+
+### Modified Files
+
+| File | Changes |
+|------|---------|
+| `packages/self/src/__init__.py` | Added 7 KP exports to `__all__` |
+| `services/mcp/patterns_server.py` | Added 4 MCP tools: `kp_sublord`, `kp_cuspal_sublords`, `kp_significators`, `kp_prediction` |
+| `services/api/main.py` | Added 3 API endpoints: `GET /api/v1/analysis/kp-sublord`, `POST /api/v1/analysis/kp-significators`, `POST /api/v1/analysis/kp-prediction` |
+| `packages/guide/src/tools.py` | Added `get_kp_sublord()` and `get_kp_analysis()` methods + module-level convenience functions |
+| `packages/guide/src/agent.py` | Added KP keywords to ANALYZE and PREDICT intents |
+
+### KP Module Public API (7 functions)
+
+| Function | Purpose |
+|----------|---------|
+| `get_kp_sublord(longitude)` | Get nakshatra lord, sub-lord, sub-sub-lord for any degree |
+| `get_cuspal_sublords(cusps)` | Get sub-lords for all 12 house cusps |
+| `get_kp_significators(planets, cusps)` | 4-level significator hierarchy per planet |
+| `get_ruling_planets(planets, cusps, query_dt)` | 5 ruling planets for prashna confirmation |
+| `analyze_kp_house(house_num, planets, cusps)` | Analyze single house with support/denial |
+| `get_kp_prediction(planets, cusps, query_dt, query_type)` | Full yes/no prediction for 11 life areas |
+| `get_kp_sublord_table()` | Complete 249-entry sub-lord table |
+
+### Key Design Decisions
+
+1. **Krishnamurti Ayanamsa** — KP uses its own ayanamsa (already in constants.py), slightly different from Lahiri
+2. **Placidus houses only** — KP mandates Placidus; Whole Sign is NOT used for KP
+3. **Sub-lord as decisive** — The sub-lord of a cusp determines YES/NO; star lord determines strength
+4. **4-level significator hierarchy** — Planets in star of occupants > Occupants > Planets in star of lord > Lord
+5. **Ruling planets for confirmation** — 5 factors (lagna sign/star lord, moon sign/star lord, day lord) must agree with significators
+6. **11 query types** — marriage, career, children, wealth, health, education, travel, property, legal, spiritual, longevity
+
+### Remaining (P3 / Future)
+
+- [ ] KP Prashna real-time (use current moment chart instead of birth chart)
+- [ ] KP transit overlay (sub-lord transits for timing refinement)
+- [ ] KP Number system (1-249 horary numbers)
+
+---
+
 ## 2026-02-07 (Session 22 - Claude Code Agent Team: 9 Features, 4 Agents)
 
 ### Summary

@@ -232,6 +232,13 @@ INTENT_KEYWORDS = {
         "gem",
         "ratna",
         "stone",
+        "kp",
+        "krishnamurti",
+        "sub-lord",
+        "sublord",
+        "cuspal",
+        "significator",
+        "ruling planet",
     ],
     IntentType.PREDICT: [
         "predict",
@@ -249,6 +256,9 @@ INTENT_KEYWORDS = {
         "weekly",
         "monthly",
         "outlook",
+        "kp prediction",
+        "will i get",
+        "yes or no",
     ],
     IntentType.DASHA: [
         "dasha",
