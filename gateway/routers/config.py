@@ -3,9 +3,13 @@
 from __future__ import annotations
 
 import logging
+import sys
+from pathlib import Path
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException, status
+
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from gateway.dependencies import get_app_config
 from gateway.models import ConfigResponse
@@ -47,4 +51,4 @@ async def get_config(
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Failed to retrieve configuration",
-        ) from e
+        ) from None

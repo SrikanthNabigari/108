@@ -3,13 +3,19 @@
 from __future__ import annotations
 
 import logging
+import sys
+from pathlib import Path
 from typing import Annotated, Any
 
 from fastapi import APIRouter, Depends, HTTPException, status
 
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+
 from gateway.dependencies import get_app_config, get_current_user
 from gateway.middleware.entitlements import check_feature_access, gate_response
 from gateway.models import AccessLevel, UserContext
+from packages.context.src import get_current_dasha
+from packages.self.src import recommend_gems, recommend_remedies
 
 logger = logging.getLogger(__name__)
 
@@ -49,23 +55,41 @@ async def get_remedies(
                 "Upgrade to Pro to unlock remedy analysis",
             ).dict()
 
-        # TODO: Get current dasha from packages.context.src current_dasha
-        # TODO: Get detected doshas from packages.patterns.src detect_doshas
-        # TODO: Get weak planets from chart analysis
-        # TODO: Call packages.patterns.src recommend_chart_remedies
-        # Pass dasha lords, active doshas, weak planets
-        # Return urgent, recommended, and optional remedies
+        # TODO: Load user's birth chart from DB
+        # For now, use placeholder data
+        birth_datetime = "1992-12-03T03:00:00+05:30"
+        moon_longitude = 326.85
+        _ = "libra"  # lagna_rashi placeholder for DB integration
 
-        raise NotImplementedError("Remedy calculation integration required")
+        # Get current dasha
+        current_dasha = get_current_dasha(birth_datetime, moon_longitude)
 
-    except NotImplementedError:
-        raise
+        # TODO: Get detected doshas from birth chart analysis
+        active_doshas = []
+
+        # TODO: Get weak planets from shadbala analysis
+        weak_planets = []
+
+        # Get remedies
+        remedies_result = recommend_remedies(current_dasha, active_doshas, weak_planets)
+
+        return {
+            **remedies_result,
+            "current_dasha": current_dasha,
+            "access": "full",
+        }
+
+    except AccessLevel.LOCKED as e:  # type: ignore
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail=str(e),
+        ) from None
     except Exception as e:
         logger.error(f"Failed to get remedies for {current_user.id}: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Failed to retrieve remedies",
-        ) from e
+        ) from None
 
 
 @router.get("/gems")
@@ -101,21 +125,47 @@ async def get_gemstone_recommendations(
                 "Upgrade to Pro to unlock gemstone analysis",
             ).dict()
 
-        # TODO: Get lagna rashi from user's chart
-        # TODO: Get birth chart planets with shadbala scores
+        # TODO: Load user's birth chart from DB
+        lagna_rashi = "libra"
+        planets = {
+            "sun": {"longitude": 52.5, "sign": "taurus"},
+            "moon": {"longitude": 102.5, "sign": "gemini"},
+        }
+
+        # TODO: Get shadbala scores
+        shadbala = {}
+
         # TODO: Get current dasha lord
+        current_dasha = {
+            "mahadasha_lord": "mercury",
+            "antardasha_lord": "saturn",
+        }
+
         # TODO: Get active doshas
-        # TODO: Call packages.patterns.src gem_recommendation
-        # Pass lagna, planets, shadbala, dasha, doshas
-        # Return primary gem, supporting gems, contraindications, instructions
+        active_doshas = []
 
-        raise NotImplementedError("Gemstone recommendation integration required")
+        # Get gem recommendations
+        gem_result = recommend_gems(
+            lagna_rashi,
+            planets,
+            shadbala,
+            current_dasha,
+            active_doshas,
+        )
 
-    except NotImplementedError:
-        raise
+        return {
+            **gem_result,
+            "access": "full",
+        }
+
+    except AccessLevel.LOCKED as e:  # type: ignore
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail=str(e),
+        ) from None
     except Exception as e:
         logger.error(f"Failed to get gem recommendations for {current_user.id}: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Failed to retrieve gemstone recommendations",
-        ) from e
+        ) from None

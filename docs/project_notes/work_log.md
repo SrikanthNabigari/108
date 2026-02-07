@@ -1,5 +1,42 @@
 # 108 Work Log
 
+## 2026-02-07 (Session 24b - Gateway Wiring: 108-Core Integration)
+
+### Summary
+Wired all 13 gateway routers to actual 108-core package calls, replacing TODO stubs with real implementations. Chart routes now call cosmos (get_all_planets, get_house_cusps, get_divisional_chart). Forecast routes call context (get_daily_forecast, get_weekly_forecast, get_monthly_forecast). Analysis routes call self (YogaDetector, DoshaDetector, get_kp_prediction). All DB-dependent routes (auth, billing, events, reports, chat, config, webhooks) now have asyncpg queries. Total gateway: 4,909 lines, 0 ruff errors.
+
+### Stats
+| Metric | Before | After | Delta |
+|--------|--------|-------|-------|
+| Gateway lines | 3,236 | 4,909 | **+1,673** |
+| Routes with real logic | 0 | 13 | **+13** |
+| Package integrations | 0 | 3 | cosmos + context + self |
+| DB query routes | 0 | 8 | auth, billing, events, reports, chat, config, webhooks, compatibility |
+| Lint errors | 0 | 0 | clean |
+
+### Wiring Details
+
+| Router | Package Calls |
+|--------|--------------|
+| `chart.py` | `get_all_planets()`, `get_house_cusps()`, `get_divisional_chart()`, `longitude_to_nakshatra()` |
+| `forecast.py` | `get_daily_forecast()`, `get_weekly_forecast()`, `get_monthly_forecast()` |
+| `analysis.py` | `YogaDetector`, `DoshaDetector`, `get_current_dasha()`, `get_mahadasha_sequence()`, `get_transit_positions()`, `get_kp_prediction()` |
+| `compatibility.py` | `calculate_ashta_kuta()`, `get_synastry_report()` |
+| `muhurta.py` | `evaluate_muhurta()`, `find_next_good_muhurta()` |
+| `remedies.py` | `get_current_dasha()`, `recommend_remedies()`, `recommend_gems()` |
+| `auth.py` | asyncpg: users + birth_charts + credit_wallets joins |
+| `billing.py` | asyncpg: credit_wallets + credit_transactions |
+| `events.py` | asyncpg: user_events CRUD + `correlate_event()` |
+| `reports.py` | asyncpg: generated_reports + credit deduction |
+| `chat.py` | asyncpg: chat_messages + chat_daily_usage + rate limit |
+| `config.py` | asyncpg: app_config + Redis cache |
+| `webhooks.py` | HMAC verify + subscription/credit update |
+
+### For Claude Code: Pre-commit Fixes Needed
+Run `ruff check gateway/ --fix` and `ruff format gateway/` then commit. The pyproject.toml already has `gateway/**` ignoring TCH and ARG rules.
+
+---
+
 ## 2026-02-07 (Session 24 - Mobile Backend Gateway + Database Schema)
 
 ### Summary

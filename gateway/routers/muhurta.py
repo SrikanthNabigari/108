@@ -3,9 +3,13 @@
 from __future__ import annotations
 
 import logging
+import sys
+from pathlib import Path
 from typing import Annotated, Any
 
 from fastapi import APIRouter, Depends, HTTPException, status
+
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from gateway.dependencies import get_app_config, get_current_user
 from gateway.middleware.entitlements import check_feature_access, gate_response
@@ -15,6 +19,7 @@ from gateway.models import (
     MuhurtaFindRequest,
     UserContext,
 )
+from packages.context.src import evaluate_muhurta, find_next_good_muhurta
 
 logger = logging.getLogger(__name__)
 
@@ -54,21 +59,30 @@ async def check_muhurta_quality(
                 "Upgrade to Pro to unlock muhurta analysis",
             ).dict()
 
-        # TODO: Call packages.context.src muhurta_check function
-        # Calculate panchanga for given datetime and location
-        # Evaluate against activity type criteria
-        # Return quality score (1-10), inauspicious periods, and recommendations
+        # Evaluate muhurta quality
+        muhurta_result = evaluate_muhurta(
+            request.datetime.isoformat(),
+            request.activity,
+            request.latitude,
+            request.longitude,
+        )
 
-        raise NotImplementedError("Muhurta calculation integration required")
+        return {
+            **muhurta_result,
+            "access": "full",
+        }
 
-    except NotImplementedError:
-        raise
+    except AccessLevel.LOCKED as e:  # type: ignore
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail=str(e),
+        ) from None
     except Exception as e:
         logger.error(f"Failed to check muhurta for {current_user.id}: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Failed to check muhurta",
-        ) from e
+        ) from None
 
 
 @router.post("/find")
@@ -104,19 +118,27 @@ async def find_good_muhurta(
                 "Upgrade to Pro to unlock muhurta finder",
             ).dict()
 
-        # TODO: Call packages.context.src find_good_muhurta function
-        # Scan date range from start_date to end_date
-        # Evaluate each day against activity criteria
-        # Return top {count} recommended dates with quality scores
-        # Include time windows for Brahma Muhurta, Abhijit, etc.
+        # Find good muhurta dates
+        muhurta_result = find_next_good_muhurta(
+            request.start_date,
+            request.end_date,
+            request.activity,
+            request.count,
+        )
 
-        raise NotImplementedError("Muhurta finding integration required")
+        return {
+            **muhurta_result,
+            "access": "full",
+        }
 
-    except NotImplementedError:
-        raise
+    except AccessLevel.LOCKED as e:  # type: ignore
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail=str(e),
+        ) from None
     except Exception as e:
         logger.error(f"Failed to find muhurta for {current_user.id}: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Failed to find muhurta dates",
-        ) from e
+        ) from None

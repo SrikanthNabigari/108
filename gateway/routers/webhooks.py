@@ -6,8 +6,12 @@ import hashlib
 import hmac
 import json
 import logging
+import sys
+from pathlib import Path
 
 from fastapi import APIRouter, HTTPException, Request, status
+
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from gateway.config import Settings
 
@@ -76,20 +80,100 @@ async def handle_revenuecat_webhook(request: Request) -> dict[str, str]:
         # Parse webhook payload
         payload = json.loads(body_str)
         event_type = payload.get("event", {}).get("type")
-        event_data = payload.get("event", {}).get("app_user_id")
+        app_user_id = payload.get("event", {}).get("app_user_id")
 
-        logger.info(f"RevenueCat webhook received: {event_type} for {event_data}")
+        logger.info(f"RevenueCat webhook received: {event_type} for {app_user_id}")
 
-        # TODO: Process event based on type
-        # Event types:
-        # - INITIAL_PURCHASE: New subscription
-        # - NON_RENEWING_PURCHASE: One-time purchase (credits)
-        # - RENEWAL: Subscription renewal
-        # - CANCELLATION: Subscription cancelled
-        # - UNCANCELLATION: Subscription uncancelled
-        # TODO: Update users.subscription_tier based on RevenueCat product ID
-        # TODO: For NON_RENEWING_PURCHASE, add credits to user_credits
-        # TODO: Invalidate user cache in Redis (user:{user_id}:*)
+        # Get database connection
+        db = request.app.state.db
+        redis = request.app.state.redis
+
+        # Map RevenueCat product IDs to subscription tiers
+        product_id = payload.get("event", {}).get("product_id", "").lower()
+        subscription_mapping = {
+            "pro_annual": "pro",
+            "pro_monthly": "pro",
+            "premium_annual": "premium",
+            "premium_monthly": "premium",
+        }
+
+        # Process event based on type
+        if event_type == "INITIAL_PURCHASE":
+            tier = subscription_mapping.get(product_id, "pro")
+            await db.execute(
+                "UPDATE users SET subscription_tier = $1 WHERE revenuecat_id = $2",
+                tier,
+                app_user_id,
+            )
+
+        elif event_type == "RENEWAL":
+            # Subscription renewed, tier already set
+            tier = subscription_mapping.get(product_id, "pro")
+            await db.execute(
+                "UPDATE users SET subscription_tier = $1 WHERE revenuecat_id = $2",
+                tier,
+                app_user_id,
+            )
+
+        elif event_type == "CANCELLATION":
+            # Downgrade to free tier
+            await db.execute(
+                "UPDATE users SET subscription_tier = $1 WHERE revenuecat_id = $2",
+                "free",
+                app_user_id,
+            )
+
+        elif event_type == "NON_RENEWING_PURCHASE":
+            # Credit purchase - extract amount and add to wallet
+            price_in_usd = payload.get("event", {}).get("price_in_usd", 0.0)
+            # Simple mapping: $1 USD = 10 credits (configurable)
+            credit_amount = int(price_in_usd * 10)
+
+            # Get user ID from revenuecat_id
+            user_row = await db.fetchrow(
+                "SELECT id FROM users WHERE revenuecat_id = $1",
+                app_user_id,
+            )
+
+            if user_row:
+                user_id = user_row["id"]
+
+                # Add transaction
+                import uuid
+
+                transaction_id = uuid.uuid4()
+                await db.execute(
+                    """
+                    INSERT INTO credit_transactions
+                    (id, user_id, amount, transaction_type, description,
+                     created_at)
+                    VALUES ($1, $2, $3, $4, $5, NOW())
+                    """,
+                    str(transaction_id),
+                    str(user_id),
+                    credit_amount,
+                    "credit_purchase",
+                    f"Purchased {credit_amount} credits",
+                )
+
+                # Update wallet balance
+                await db.execute(
+                    """
+                    INSERT INTO credit_wallets
+                    (user_id, balance, created_at, updated_at)
+                    VALUES ($1, $2, NOW(), NOW())
+                    ON CONFLICT (user_id) DO UPDATE SET
+                        balance = credit_wallets.balance + $2,
+                        updated_at = NOW()
+                    """,
+                    str(user_id),
+                    credit_amount,
+                )
+
+        # Invalidate user cache in Redis
+        if app_user_id:
+            # Clear any cached user data
+            await redis.delete(f"user:{app_user_id}:*")
 
         return {"status": "processed"}
 
@@ -100,4 +184,4 @@ async def handle_revenuecat_webhook(request: Request) -> dict[str, str]:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Failed to process webhook",
-        ) from e
+        ) from None

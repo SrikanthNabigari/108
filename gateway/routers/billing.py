@@ -3,11 +3,15 @@
 from __future__ import annotations
 
 import logging
+import sys
+from pathlib import Path
 from typing import Annotated, Any
 
 from fastapi import APIRouter, Depends, HTTPException, status
 
-from gateway.dependencies import get_current_user
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+
+from gateway.dependencies import get_current_user, get_db
 from gateway.models import CreditBalance, CreditTransaction, UserContext
 
 logger = logging.getLogger(__name__)
@@ -18,12 +22,14 @@ router = APIRouter()
 @router.get("/balance", response_model=CreditBalance)
 async def get_credit_balance(
     current_user: Annotated[UserContext, Depends(get_current_user)],
+    db: Annotated[object, Depends(get_db)],
 ) -> CreditBalance:
     """
     Get user's credit wallet balance.
 
     Args:
         current_user: Authenticated user context.
+        db: Database connection.
 
     Returns:
         CreditBalance: Current credit balance.
@@ -32,9 +38,13 @@ async def get_credit_balance(
         HTTPException: 401 if not authenticated, 500 if query fails.
     """
     try:
-        # TODO: Query user_credits table
-        # Select balance for current_user
+        # Query credit wallet balance
+        query = "SELECT balance FROM credit_wallets WHERE user_id = $1"
+        row = await db.fetchrow(query, str(current_user.id))
+
         balance = 0
+        if row:
+            balance = row["balance"]
 
         return CreditBalance(
             user_id=current_user.id,
@@ -47,12 +57,13 @@ async def get_credit_balance(
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Failed to retrieve credit balance",
-        ) from e
+        ) from None
 
 
 @router.get("/history")
 async def get_credit_history(
     current_user: Annotated[UserContext, Depends(get_current_user)],
+    db: Annotated[object, Depends(get_db)],
     skip: int = 0,
     limit: int = 50,
 ) -> dict[str, Any]:
@@ -61,6 +72,7 @@ async def get_credit_history(
 
     Args:
         current_user: Authenticated user context.
+        db: Database connection.
         skip: Number of transactions to skip (pagination offset).
         limit: Number of transactions to return (max 100).
 
@@ -74,15 +86,37 @@ async def get_credit_history(
         if limit > 100:
             limit = 100
 
-        # TODO: Query credit_transactions table
-        # Select transactions for current_user, ordered by created_at DESC
-        # Apply skip and limit for pagination
+        # Query credit transactions
+        query = """
+            SELECT *
+            FROM credit_transactions
+            WHERE user_id = $1
+            ORDER BY created_at DESC
+            LIMIT $2 OFFSET $3
+        """
 
-        transactions: list[CreditTransaction] = []
+        rows = await db.fetch(query, str(current_user.id), limit, skip)
+
+        # Get total count
+        count_query = "SELECT COUNT(*) as total FROM credit_transactions WHERE user_id = $1"
+        count_row = await db.fetchrow(count_query, str(current_user.id))
+        total = count_row["total"] if count_row else 0
+
+        transactions = [
+            CreditTransaction(
+                id=row["id"],
+                user_id=row["user_id"],
+                amount=row["amount"],
+                transaction_type=row["transaction_type"],
+                description=row["description"],
+                created_at=row["created_at"],
+            )
+            for row in rows
+        ]
 
         return {
             "transactions": [t.dict() for t in transactions],
-            "total": len(transactions),
+            "total": total,
             "skip": skip,
             "limit": limit,
         }
@@ -92,4 +126,4 @@ async def get_credit_history(
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Failed to retrieve credit history",
-        ) from e
+        ) from None
