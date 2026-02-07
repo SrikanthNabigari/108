@@ -1,5 +1,79 @@
 # 108 Work Log
 
+## 2026-02-07 (Session 24c - Flutter App Scaffold: Full UI Layer)
+
+### Summary
+Created the complete Flutter mobile app scaffold — 64 Dart files, 8,579 lines covering all screens, widgets, providers, models, services, and design system from MOBILE_ARCHITECTURE.md. Dark cosmic theme with glassmorphic cards, star particle backgrounds, and South Indian chart grid. Full Riverpod state management with 10 providers, Freezed models, Supabase auth, RevenueCat billing, and FCM push notifications. Every screen from the architecture doc is implemented: auth, onboarding, home dashboard, birth chart viewer, AI chat with rich blocks, life timeline, reports store, event calendar, muhurta finder, remedies, compatibility, settings, paywall, and credit store.
+
+### Stats
+| Metric | Before | After | Delta |
+|--------|--------|-------|-------|
+| Dart files | 0 | 64 | **+64** |
+| Dart lines | 0 | 8,579 | **+8,579** |
+| Feature screens | 0 | 15 | auth, onboarding(2), home, chart, chat, timeline, reports(2), calendar, muhurta, remedies, compatibility, settings, paywall, credit_store |
+| Shared widgets | 0 | 7 | star_background, glass_card, cosmic_loader, planet_glyph, bottom_nav, locked_feature, star_field |
+| Feature widgets | 0 | 16 | today_score, quick_cards, forecast_tabs, area_bars, south_indian_chart, planet_list, planet_detail, chat_bubble, chat_input, remaining_counter, dasha_card, place_search, social_login, locked_overlay, chat_score_card, report_card |
+| Riverpod providers | 0 | 10 | auth, user, config, entitlement, chat, chart, forecast, events, credits, reports |
+| Freezed models | 0 | 7 | user, birth_chart, chat_message, forecast, event, report, config |
+| Services | 0 | 3 | api_service, supabase_service, notification_service |
+
+### File Structure
+```
+mobile/
+├── pubspec.yaml                          (25 deps + 8 dev deps)
+├── lib/
+│   ├── main.dart                         (app init: Supabase + Firebase + RevenueCat)
+│   ├── app.dart                          (MaterialApp.router + dark theme)
+│   ├── core/
+│   │   ├── theme/   (3)                  colors, text_styles, app_theme
+│   │   ├── router/  (1)                  app_router (GoRouter + auth guards)
+│   │   ├── constants/ (1)                api_constants (40+ endpoints)
+│   │   └── utils/   (2)                  date_utils, format_utils
+│   ├── data/
+│   │   ├── models/    (7)                Freezed: user, chart, chat, forecast, event, report, config
+│   │   ├── providers/ (10)               Riverpod: auth, user, config, entitlement, chat, chart, forecast, events, credits, reports
+│   │   └── services/  (3)                api_service, supabase_service, notification_service
+│   ├── features/
+│   │   ├── auth/         (3)             phone_auth, otp_verify, social_login_buttons
+│   │   ├── onboarding/   (3)             profile, birth_details, place_search
+│   │   ├── home/         (5)             home_screen, today_score, quick_cards, forecast_tabs, area_bars
+│   │   ├── chart/        (4)             chart_screen, south_indian_chart, planet_list, planet_detail
+│   │   ├── chat/         (4)             chat_screen, chat_bubble, chat_input, remaining_counter
+│   │   ├── timeline/     (2)             timeline_screen, dasha_chapter_card
+│   │   ├── reports/      (1)             reports_store_screen
+│   │   ├── calendar/     (1)             calendar_screen
+│   │   ├── muhurta/      (1)             muhurta_screen
+│   │   ├── remedies/     (1)             remedies_screen
+│   │   ├── compatibility/(1)             compatibility_screen
+│   │   ├── settings/     (1)             settings_screen
+│   │   └── paywall/      (2)             paywall_screen, credit_store_screen
+│   └── shared/
+│       ├── widgets/   (6)                star_background, glass_card, cosmic_loader, planet_glyph, bottom_nav, locked_feature
+│       └── animations/(1)                star_field
+```
+
+### For Claude Code
+Run on the user's machine (needs Flutter SDK):
+```bash
+cd mobile
+flutter pub get
+flutter pub run build_runner build --delete-conflicting-outputs  # generates Freezed + Riverpod code
+flutter analyze  # check for Dart analysis errors
+```
+
+### Next Steps (Phase 3-6)
+- [ ] `flutter create` base project, then overlay these files
+- [ ] Generate Freezed + Riverpod code with build_runner
+- [ ] Fix any Dart analyzer issues
+- [ ] Create asset directories (fonts, images, animations, icons)
+- [ ] Supabase project setup + apply mobile_schema.sql
+- [ ] RevenueCat project setup + product configuration
+- [ ] Firebase project setup + FCM keys
+- [ ] Connect Flutter to local gateway (http://localhost:8001)
+- [ ] End-to-end flow: auth → onboarding → home → chat
+
+---
+
 ## 2026-02-07 (Session 24b - Gateway Wiring: 108-Core Integration)
 
 ### Summary
