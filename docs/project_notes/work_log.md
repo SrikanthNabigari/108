@@ -1,5 +1,64 @@
 # 108 Work Log
 
+## 2026-02-07 (Session 25 - Local Dev Environment + Theme & Auth Screen Redesign)
+
+### Summary
+Set up the complete local development environment for the mobile app and redesigned the phone auth screen to match reference cosmic dark theme. Fixed critical `.gitignore` issue where root `lib/` pattern blocked all `mobile/lib/` Dart source files from git tracking (Session 24c commit never included any Dart source code). Applied mobile database schema to local Supabase, configured gateway for local development, resolved 5 Flutter build failures (RevenueCat Xcode 26 conflict, stale Podfile.lock, missing fonts, Firebase non-modular headers), and got the app running on iPhone 17 Pro simulator.
+
+### Local Dev Environment Setup
+- **Supabase**: Reused existing local instance (swara-chitta, ports 54321/54322)
+- **Database**: Created `database/mobile_schema_local.sql` adapted for `profiles` table (vs `users`), applied 8 new tables + RLS + seed data (31 total tables)
+- **Gateway**: Created `gateway/.env` for local Supabase URLs, fixed `gateway/config.py` with `extra = "ignore"` and dual env_file lookup. Health check passing on port 8001
+- **Root .env**: Fixed misspellings (RevenueCart → RevenueCat, REVENUE_CART_API_KEY → REVENUECAT_API_KEY, AWS_ACCESS_KEY → AWS_ACCESS_KEY_ID), organized into sections
+
+### Flutter Build Fixes (5 failures → success)
+| # | Error | Fix |
+|---|-------|-----|
+| 1 | `SubscriptionPeriod` ambiguous (RevenueCat + Xcode 26 StoreKit 2) | `purchases_flutter: ^7.0.0` → `^8.10.2` |
+| 2 | Stale Podfile.lock (PurchasesHybridCommon 13.0.1 vs 14.3.0) | Deleted Podfile.lock, `pod install --repo-update` |
+| 3 | Missing font `SpaceGrotesk-Regular.ttf` | Removed bundled fonts, switched to `GoogleFonts.spaceGrotesk()` |
+| 4 | Firebase non-modular header (Xcode 26) | `firebase_core: ^3.12.0`, `share_plus: ^12.0.1`, `platform :ios, '15.0'` |
+| 5 | RenderFlex overflow on keyboard open | `resizeToAvoidBottomInset: false` on Scaffold |
+
+### Theme & Auth Screen Redesign
+- **colors.dart**: Rewrote — pure black (#000000) background, glass (3%/8%/12%/5% white), text hierarchy (100%/60%/35%/20%), accents (#8B5CF6 purple, #3B82F6 blue, #D4AF37 gold)
+- **text_styles.dart**: Switched from static `fontFamily: 'SpaceGrotesk'` to `GoogleFonts.spaceGrotesk()` (runtime font loading)
+- **phone_auth_screen.dart**: Complete redesign — left-aligned layout, big bold heading, glass input with +91 country code, white Send OTP button, Skip for now link, privacy note at bottom
+- **star_background.dart**: Pure black background
+- **app_theme.dart**: scaffoldBackgroundColor → Colors.black
+
+### Critical Fix: .gitignore
+- Root `.gitignore` line 13 had `lib/` which blocked ALL `mobile/lib/` files
+- Session 24c commit (4c9f05d) never included any Dart source code despite the commit message
+- Fixed: `lib/` → `/lib/` (only matches repo root, not subdirectories)
+- 93 Dart files (64 source + 29 generated) now properly tracked by git
+
+### Files Changed
+| File | Action |
+|------|--------|
+| `.gitignore` | Fixed `lib/` → `/lib/` to allow `mobile/lib/` tracking |
+| `database/mobile_schema_local.sql` | NEW — adapted schema for local Supabase `profiles` table |
+| `gateway/config.py` | Added `extra = "ignore"`, dual env_file lookup |
+| `mobile/pubspec.yaml` | Upgraded purchases_flutter, firebase_core, share_plus; removed bundled fonts |
+| `mobile/ios/Podfile` | `platform :ios, '15.0'` |
+| `mobile/lib/main.dart` | Default Supabase URL/key, Firebase try/catch for dev |
+| `mobile/lib/core/theme/colors.dart` | Rewrote — pure black cosmic palette |
+| `mobile/lib/core/theme/text_styles.dart` | GoogleFonts.spaceGrotesk() instead of bundled |
+| `mobile/lib/core/theme/app_theme.dart` | scaffoldBackgroundColor → Colors.black |
+| `mobile/lib/shared/widgets/star_background.dart` | Pure black background |
+| `mobile/lib/features/auth/screens/phone_auth_screen.dart` | Complete redesign matching reference |
+| `mobile/assets/icons/google.png` | NEW — placeholder for social login |
+
+### Next Steps
+- [ ] OTP verification screen + Supabase phone auth integration
+- [ ] Onboarding flow (profile + birth details) connected to gateway
+- [ ] RevenueCat project setup + product configuration
+- [ ] Firebase project setup + FCM push notifications
+- [ ] Connect Flutter to local gateway (http://localhost:8001)
+- [ ] End-to-end flow: auth → onboarding → home → chat
+
+---
+
 ## 2026-02-07 (Session 24c - Flutter App Scaffold: Full UI Layer)
 
 ### Summary
@@ -61,11 +120,20 @@ flutter pub run build_runner build --delete-conflicting-outputs  # generates Fre
 flutter analyze  # check for Dart analysis errors
 ```
 
+### Claude Code Fixes (post-commit 4c9f05d)
+- Fixed `google_places_flutter` version (^3.0.0 → ^2.1.1)
+- Fixed `app_router.dart` — moved 18 imports to top, removed duplicate placeholder classes
+- Fixed `reports_provider.dart` and `credits_provider.dart` — added missing freezed imports
+- Created 2 missing screen files: `compatibility_screen.dart`, `report_view_screen.dart`
+- Fixed 26 analyzer errors (Material 3 API, Supabase ^2.5, RevenueCat ^7.0 API, type mismatches)
+- Generated 754 build_runner outputs (Freezed + Riverpod codegen)
+- Final: 142 files, +8,587 lines, 0 errors, 0 warnings, 272 info hints, 2,126 Python tests green
+
 ### Next Steps (Phase 3-6)
-- [ ] `flutter create` base project, then overlay these files
-- [ ] Generate Freezed + Riverpod code with build_runner
-- [ ] Fix any Dart analyzer issues
-- [ ] Create asset directories (fonts, images, animations, icons)
+- [x] `flutter create` base project ✅
+- [x] Generate Freezed + Riverpod code with build_runner ✅
+- [x] Fix Dart analyzer issues (26 fixed) ✅
+- [x] Create asset directories ✅
 - [ ] Supabase project setup + apply mobile_schema.sql
 - [ ] RevenueCat project setup + product configuration
 - [ ] Firebase project setup + FCM keys

@@ -46,7 +46,7 @@
       "Bash(git reset --hard *)"
     ]
   },
-  "environment": {
+  "env": {
     "PYTHONPATH": "packages",
     "UV_SYSTEM_PYTHON": "1"
   }
