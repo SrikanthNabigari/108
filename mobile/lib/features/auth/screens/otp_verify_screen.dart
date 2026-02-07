@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
+import '../../../core/theme/colors.dart';
 import '../../../shared/widgets/star_background.dart';
-import '../../../shared/widgets/glass_card.dart';
+import '../../../data/services/supabase_service.dart';
 
-/// OTP verification screen with auto-verify and resend timer.
 class OtpVerifyScreen extends ConsumerStatefulWidget {
   final String phoneNumber;
 
@@ -39,16 +40,37 @@ class _OtpVerifyScreenState extends ConsumerState<OtpVerifyScreen> {
       _resendTimer = 30;
       _canResend = false;
     });
+    _tick();
+  }
+
+  void _tick() {
     Future.delayed(const Duration(seconds: 1), () {
-      if (mounted) {
-        setState(() => _resendTimer--);
-        if (_resendTimer > 0) {
-          _startResendTimer();
-        } else {
-          setState(() => _canResend = true);
-        }
+      if (!mounted) return;
+      setState(() => _resendTimer--);
+      if (_resendTimer > 0) {
+        _tick();
+      } else {
+        setState(() => _canResend = true);
       }
     });
+  }
+
+  Future<void> _resendOtp() async {
+    try {
+      await SupabaseService().signInWithPhone(widget.phoneNumber);
+      _startResendTimer();
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('OTP resent')),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to resend: $e')),
+        );
+      }
+    }
   }
 
   Future<void> _verifyOtp() async {
@@ -62,10 +84,20 @@ class _OtpVerifyScreenState extends ConsumerState<OtpVerifyScreen> {
 
     setState(() => _isLoading = true);
     try {
-      // TODO: Call auth service to verify OTP
-      // await ref.read(authProvider.notifier).verifyOtp(widget.phoneNumber, otp);
+      final response = await SupabaseService().verifyOtp(
+        phone: widget.phoneNumber,
+        token: otp,
+      );
+
       if (mounted) {
-        context.go('/profile');
+        if (response.session != null) {
+          // Auth successful — navigate to onboarding
+          context.go('/profile');
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Verification failed. Please try again.')),
+          );
+        }
       }
     } catch (e) {
       if (mounted) {
@@ -74,13 +106,16 @@ class _OtpVerifyScreenState extends ConsumerState<OtpVerifyScreen> {
         );
       }
     } finally {
-      setState(() => _isLoading = false);
+      if (mounted) setState(() => _isLoading = false);
     }
   }
 
   void _onChanged(String value, int index) {
     if (value.length == 1 && index < 5) {
       _focusNodes[index + 1].requestFocus();
+    }
+    if (value.isEmpty && index > 0) {
+      _focusNodes[index - 1].requestFocus();
     }
     if (_otpControllers.every((c) => c.text.isNotEmpty) && !_isLoading) {
       _verifyOtp();
@@ -103,54 +138,74 @@ class _OtpVerifyScreenState extends ConsumerState<OtpVerifyScreen> {
     return StarBackground(
       child: Scaffold(
         backgroundColor: Colors.transparent,
+        resizeToAvoidBottomInset: false,
         body: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
+            padding: const EdgeInsets.symmetric(horizontal: 28),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 24),
                 // Back button
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: IconButton(
-                    icon: const Icon(Icons.arrow_back_rounded),
-                    onPressed: () => context.pop(),
-                    color: Colors.white,
-                  ),
+                IconButton(
+                  icon: const Icon(Icons.arrow_back_rounded),
+                  onPressed: () => context.pop(),
+                  color: CosmicColors.textPrimary,
+                  padding: EdgeInsets.zero,
+                  constraints: const BoxConstraints(),
                 ),
                 const SizedBox(height: 40),
+
+                // Header
                 Text(
-                  'Enter verification code',
-                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                        color: Colors.white,
-                      ),
+                  'Enter verification\ncode',
+                  style: GoogleFonts.spaceGrotesk(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    color: CosmicColors.textPrimary,
+                    height: 1.15,
+                  ),
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 14),
                 Text(
-                  'We sent a code to ${widget.phoneNumber}',
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Colors.white70,
-                      ),
+                  'We sent a 6-digit code to\n${widget.phoneNumber}',
+                  style: GoogleFonts.spaceGrotesk(
+                    fontSize: 15,
+                    color: CosmicColors.textMuted,
+                    height: 1.5,
+                  ),
                 ),
+
                 const SizedBox(height: 48),
+
                 // OTP input fields
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: List.generate(
                     6,
                     (index) => SizedBox(
                       width: 48,
-                      child: GlassCard(
-                        padding: EdgeInsets.zero,
+                      height: 56,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: CosmicColors.glass,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            color: _otpControllers[index].text.isNotEmpty
+                                ? CosmicColors.textDim
+                                : CosmicColors.glassBorder,
+                            width: 1,
+                          ),
+                        ),
                         child: TextField(
                           controller: _otpControllers[index],
                           focusNode: _focusNodes[index],
                           keyboardType: TextInputType.number,
                           textAlign: TextAlign.center,
                           maxLength: 1,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
+                          style: GoogleFonts.spaceGrotesk(
+                            color: CosmicColors.textPrimary,
+                            fontSize: 22,
                             fontWeight: FontWeight.bold,
                           ),
                           decoration: const InputDecoration(
@@ -163,61 +218,69 @@ class _OtpVerifyScreenState extends ConsumerState<OtpVerifyScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 48),
+
+                const SizedBox(height: 32),
+
                 // Resend timer
-                if (!_canResend)
-                  Text(
-                    'Resend code in ${_resendTimer}s',
-                    style: TextStyle(
-                      color: Colors.white54,
-                      fontSize: 14,
-                    ),
-                  )
-                else
-                  GestureDetector(
-                    onTap: _startResendTimer,
-                    child: Text(
-                      'Resend code',
-                      style: const TextStyle(
-                        color: Color(0xff6C63FF),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                const Spacer(),
-                // Verify button (shown below if not auto-verifying)
+                Center(
+                  child: _canResend
+                      ? GestureDetector(
+                          onTap: _resendOtp,
+                          child: Text(
+                            'Resend code',
+                            style: GoogleFonts.spaceGrotesk(
+                              fontSize: 14,
+                              color: CosmicColors.accentPurple,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        )
+                      : Text(
+                          'Resend code in ${_resendTimer}s',
+                          style: GoogleFonts.spaceGrotesk(
+                            fontSize: 14,
+                            color: CosmicColors.textMuted,
+                          ),
+                        ),
+                ),
+
+                const SizedBox(height: 40),
+
+                // Verify button
                 SizedBox(
                   width: double.infinity,
-                  height: 48,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        colors: [Color(0xff6C63FF), Color(0xff8A84FF)],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
+                  height: 52,
+                  child: ElevatedButton(
+                    onPressed: _isLoading ? null : _verifyOtp,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.black,
+                      disabledBackgroundColor: Colors.white24,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
                       ),
-                      borderRadius: BorderRadius.circular(12),
                     ),
-                    child: ElevatedButton(
-                      onPressed: _isLoading ? null : _verifyOtp,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.transparent,
-                        shadowColor: Colors.transparent,
-                      ),
-                      child: _isLoading
-                          ? const SizedBox(
-                              width: 20,
-                              height: 20,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                              ),
-                            )
-                          : const Text('Verify'),
-                    ),
+                    child: _isLoading
+                        ? const SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              color: Colors.black,
+                            ),
+                          )
+                        : Text(
+                            'Verify',
+                            style: GoogleFonts.spaceGrotesk(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
                   ),
                 ),
-                const SizedBox(height: 24),
+
+                const Spacer(),
               ],
             ),
           ),

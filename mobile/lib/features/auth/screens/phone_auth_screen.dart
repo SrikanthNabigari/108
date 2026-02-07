@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/theme/colors.dart';
 import '../../../shared/widgets/star_background.dart';
+import '../../../data/services/supabase_service.dart';
 
 class PhoneAuthScreen extends ConsumerStatefulWidget {
   const PhoneAuthScreen({super.key});
@@ -34,13 +35,14 @@ class _PhoneAuthScreenState extends ConsumerState<PhoneAuthScreen> {
     setState(() => _isLoading = true);
     try {
       final phoneNumber = '$_countryCode${_phoneController.text}';
+      await SupabaseService().signInWithPhone(phoneNumber);
       if (mounted) {
-        context.pushNamed('otp', extra: phoneNumber);
+        context.push('/otp-verify', extra: phoneNumber);
       }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error: $e')),
+          SnackBar(content: Text('Error sending OTP: $e')),
         );
       }
     } finally {
@@ -194,11 +196,11 @@ class _PhoneAuthScreenState extends ConsumerState<PhoneAuthScreen> {
 
                 const SizedBox(height: 20),
 
-                // Skip for now
+                // Skip for now → dev bypass to onboarding
                 Center(
                   child: TextButton(
                     onPressed: () {
-                      // TODO: Skip auth flow for dev
+                      context.go('/profile');
                     },
                     child: Text(
                       'Skip for now',

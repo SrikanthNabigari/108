@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+import '../../../core/theme/colors.dart';
 import '../../../shared/widgets/star_background.dart';
-import '../../../shared/widgets/glass_card.dart';
 import '../../../shared/widgets/cosmic_loader.dart';
+import '../../../data/services/api_service.dart';
+import '../../../core/constants/api_constants.dart';
 import '../widgets/place_search_field.dart';
 
-/// Birth details screen with date, time, and location pickers (onboarding step 2 of 2).
 class BirthDetailsScreen extends ConsumerStatefulWidget {
   const BirthDetailsScreen({Key? key}) : super(key: key);
 
@@ -21,7 +24,6 @@ class _BirthDetailsScreenState extends ConsumerState<BirthDetailsScreen> {
   String? _selectedPlace;
   double? _latitude;
   double? _longitude;
-  bool _isLoading = false;
   bool _isCalculating = false;
 
   Future<void> _selectDate() async {
@@ -32,8 +34,10 @@ class _BirthDetailsScreenState extends ConsumerState<BirthDetailsScreen> {
       lastDate: DateTime.now(),
       builder: (context, child) => Theme(
         data: ThemeData.dark().copyWith(
-          primaryColor: const Color(0xff6C63FF),
-          scaffoldBackgroundColor: const Color(0xff0a0a1a),
+          colorScheme: const ColorScheme.dark(
+            primary: CosmicColors.accentPurple,
+            surface: Color(0xFF1A1A2E),
+          ),
         ),
         child: child!,
       ),
@@ -46,10 +50,13 @@ class _BirthDetailsScreenState extends ConsumerState<BirthDetailsScreen> {
   Future<void> _selectTime() async {
     final time = await showTimePicker(
       context: context,
-      initialTime: TimeOfDay.now(),
+      initialTime: const TimeOfDay(hour: 6, minute: 0),
       builder: (context, child) => Theme(
         data: ThemeData.dark().copyWith(
-          primaryColor: const Color(0xff6C63FF),
+          colorScheme: const ColorScheme.dark(
+            primary: CosmicColors.accentPurple,
+            surface: Color(0xFF1A1A2E),
+          ),
         ),
         child: child!,
       ),
@@ -60,34 +67,48 @@ class _BirthDetailsScreenState extends ConsumerState<BirthDetailsScreen> {
   }
 
   Future<void> _calculateChart() async {
-    if (_selectedDate == null || _selectedTime == null || _latitude == null) {
+    if (_selectedDate == null ||
+        _selectedTime == null ||
+        _latitude == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-            content: Text('Please fill in all fields')),
+        const SnackBar(content: Text('Please fill in all fields')),
       );
       return;
     }
 
     setState(() => _isCalculating = true);
+
+    // Build birth datetime in ISO format
+    final birthDt = DateTime(
+      _selectedDate!.year,
+      _selectedDate!.month,
+      _selectedDate!.day,
+      _selectedTime!.hour,
+      _selectedTime!.minute,
+    );
+
+    // Calculate timezone offset (rough estimate from longitude)
+    final tzOffset = (_longitude! / 15).round().toDouble();
+
     try {
-      // TODO: Call chart calculation
-      // await ref.read(userProvider.notifier).calculateBirthChart(
-      //   birthDate: _selectedDate!,
-      //   birthTime: _selectedTime!,
-      //   latitude: _latitude!,
-      //   longitude: _longitude!,
-      // );
-      if (mounted) {
-        context.go('/home');
-      }
+      await ApiService().put(
+        ApiConstants.userBirthDetails,
+        body: {
+          'datetime': birthDt.toIso8601String(),
+          'latitude': _latitude,
+          'longitude': _longitude,
+          'timezone_offset': tzOffset,
+          'place_name': _selectedPlace ?? '',
+        },
+        fromJson: (json) => json,
+      );
     } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error: $e')),
-        );
-      }
-    } finally {
+      debugPrint('Birth details save failed (continuing): $e');
+    }
+
+    if (mounted) {
       setState(() => _isCalculating = false);
+      context.go('/home');
     }
   }
 
@@ -107,10 +128,12 @@ class _BirthDetailsScreenState extends ConsumerState<BirthDetailsScreen> {
     return StarBackground(
       child: Scaffold(
         backgroundColor: Colors.transparent,
+        resizeToAvoidBottomInset: true,
         body: SafeArea(
           child: SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+            padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 24),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // Progress indicator
                 Row(
@@ -118,142 +141,73 @@ class _BirthDetailsScreenState extends ConsumerState<BirthDetailsScreen> {
                     2,
                     (index) => Expanded(
                       child: Container(
-                        height: 4,
-                        margin: const EdgeInsets.symmetric(horizontal: 2),
+                        height: 3,
+                        margin: const EdgeInsets.symmetric(horizontal: 3),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(2),
-                          color: index == 1
-                              ? const Color(0xff6C63FF)
-                              : Colors.white24,
+                          color: index <= 1
+                              ? CosmicColors.accentPurple
+                              : CosmicColors.glassBorder,
                         ),
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(height: 40),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Let\'s meet the real you',
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                          color: Colors.white,
-                        ),
+
+                const SizedBox(height: 48),
+
+                // Header
+                Text(
+                  "Let's meet the\nreal you",
+                  style: GoogleFonts.spaceGrotesk(
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
+                    color: CosmicColors.textPrimary,
+                    height: 1.15,
                   ),
                 ),
                 const SizedBox(height: 8),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Your birth details reveal your cosmic blueprint.',
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Colors.white54,
-                        ),
+                Text(
+                  'Your birth details reveal your cosmic blueprint.',
+                  style: GoogleFonts.spaceGrotesk(
+                    fontSize: 14,
+                    color: CosmicColors.textMuted,
                   ),
                 ),
-                const SizedBox(height: 32),
-                // Birth date picker
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'BIRTH DATE',
-                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                          color: Colors.white54,
-                        ),
-                  ),
-                ),
+
+                const SizedBox(height: 36),
+
+                // Birth date
+                _sectionLabel('BIRTH DATE'),
                 const SizedBox(height: 8),
-                GlassCard(
+                _pickerTile(
+                  icon: Icons.calendar_today_rounded,
+                  label: _selectedDate != null
+                      ? DateFormat('d MMMM, yyyy').format(_selectedDate!)
+                      : 'Select your birth date',
+                  hasValue: _selectedDate != null,
                   onTap: _selectDate,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 16,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        _selectedDate != null
-                            ? '${_selectedDate!.day}/${_selectedDate!.month}/${_selectedDate!.year}'
-                            : 'Select your birth date',
-                        style: TextStyle(
-                          color: _selectedDate != null
-                              ? Colors.white
-                              : Colors.white54,
-                          fontSize: 16,
-                        ),
-                      ),
-                      Icon(
-                        Icons.calendar_today_rounded,
-                        color: Colors.white54,
-                      ),
-                    ],
-                  ),
                 ),
+
                 const SizedBox(height: 24),
-                // Birth time picker
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'BIRTH TIME',
-                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                          color: Colors.white54,
-                        ),
-                  ),
-                ),
+
+                // Birth time
+                _sectionLabel('BIRTH TIME'),
                 const SizedBox(height: 8),
-                GlassCard(
+                _pickerTile(
+                  icon: Icons.access_time_rounded,
+                  label: _selectedTime != null
+                      ? _selectedTime!.format(context)
+                      : 'Select your birth time',
+                  subtitle: 'As accurate as possible for precise calculations',
+                  hasValue: _selectedTime != null,
                   onTap: _selectTime,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 16,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            _selectedTime != null
-                                ? _selectedTime!.format(context)
-                                : 'Select your birth time',
-                            style: TextStyle(
-                              color: _selectedTime != null
-                                  ? Colors.white
-                                  : Colors.white54,
-                              fontSize: 16,
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            'As accurate as possible for precise calculations',
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelSmall
-                                ?.copyWith(
-                                  color: Colors.white38,
-                                ),
-                          ),
-                        ],
-                      ),
-                      Icon(
-                        Icons.lock_clock_rounded,
-                        color: Colors.white54,
-                      ),
-                    ],
-                  ),
                 ),
+
                 const SizedBox(height: 24),
-                // Birth place search
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'BIRTH PLACE',
-                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                          color: Colors.white54,
-                        ),
-                  ),
-                ),
+
+                // Birth place
+                _sectionLabel('BIRTH PLACE'),
                 const SizedBox(height: 8),
                 PlaceSearchField(
                   onPlaceSelected: (place, lat, lon) {
@@ -264,50 +218,115 @@ class _BirthDetailsScreenState extends ConsumerState<BirthDetailsScreen> {
                     });
                   },
                 ),
-                if (_latitude != null && _longitude != null) ...[
-                  const SizedBox(height: 8),
-                  Text(
-                    '$_latitude°, $_longitude°',
-                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                          color: Colors.white54,
-                        ),
+                if (_latitude != null && _longitude != null)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8),
+                    child: Text(
+                      '${_latitude!.toStringAsFixed(4)}°, ${_longitude!.toStringAsFixed(4)}°',
+                      style: GoogleFonts.spaceGrotesk(
+                        fontSize: 12,
+                        color: CosmicColors.textSubtle,
+                      ),
+                    ),
                   ),
-                ],
+
                 const SizedBox(height: 48),
+
                 // Calculate button
                 SizedBox(
                   width: double.infinity,
-                  height: 48,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        colors: [Color(0xff6C63FF), Color(0xff8A84FF)],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
+                  height: 52,
+                  child: ElevatedButton(
+                    onPressed: _isCalculating ? null : _calculateChart,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.black,
+                      disabledBackgroundColor: Colors.white24,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
                       ),
-                      borderRadius: BorderRadius.circular(12),
                     ),
-                    child: ElevatedButton(
-                      onPressed: _isLoading ? null : _calculateChart,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.transparent,
-                        shadowColor: Colors.transparent,
+                    child: Text(
+                      'Calculate My Chart',
+                      style: GoogleFonts.spaceGrotesk(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
                       ),
-                      child: _isLoading
-                          ? const SizedBox(
-                              width: 20,
-                              height: 20,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                              ),
-                            )
-                          : const Text('Calculate My Chart'),
                     ),
                   ),
                 ),
+
+                const SizedBox(height: 24),
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _sectionLabel(String text) {
+    return Text(
+      text,
+      style: GoogleFonts.spaceGrotesk(
+        fontSize: 11,
+        fontWeight: FontWeight.w600,
+        color: CosmicColors.textMuted,
+        letterSpacing: 1.2,
+      ),
+    );
+  }
+
+  Widget _pickerTile({
+    required IconData icon,
+    required String label,
+    String? subtitle,
+    required bool hasValue,
+    required VoidCallback onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        decoration: BoxDecoration(
+          color: CosmicColors.glass,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: CosmicColors.glassBorder,
+            width: 1,
+          ),
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    label,
+                    style: GoogleFonts.spaceGrotesk(
+                      color: hasValue
+                          ? CosmicColors.textPrimary
+                          : CosmicColors.textSubtle,
+                      fontSize: 16,
+                    ),
+                  ),
+                  if (subtitle != null) ...[
+                    const SizedBox(height: 4),
+                    Text(
+                      subtitle,
+                      style: GoogleFonts.spaceGrotesk(
+                        fontSize: 12,
+                        color: CosmicColors.textSubtle,
+                      ),
+                    ),
+                  ],
+                ],
+              ),
+            ),
+            Icon(icon, color: CosmicColors.textMuted, size: 20),
+          ],
         ),
       ),
     );
