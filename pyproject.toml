@@ -117,6 +117,9 @@ ignore = [
 known-first-party = ["core", "cosmos", "self_pkg", "context", "guide", "memory"]
 section-order = ["future", "standard-library", "third-party", "first-party", "local-folder"]
 
+[tool.ruff.lint.per-file-ignores]
+"gateway/**" = ["TCH", "ARG"]  # FastAPI needs runtime types; gateway has TODO stubs
+
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"

@@ -1,5 +1,79 @@
 # 108 Work Log
 
+## 2026-02-07 (Session 24 - Mobile Backend Gateway + Database Schema)
+
+### Summary
+Built Phase 1 of the mobile app backend: complete API gateway layer with auth, entitlements, rate limiting, and all 40+ endpoints defined in MOBILE_ARCHITECTURE.md. Created the mobile database schema extending the existing Postgres schema with 8 new tables for credits, chat, reports, events, config, and notifications. Gateway wraps existing 108-core calculation packages with Supabase JWT auth, tier-based feature gating (free/pro/premium), Redis-backed rate limiting, and RevenueCat webhook handling.
+
+### Stats
+| Metric | Before | After | Delta |
+|--------|--------|-------|-------|
+| Gateway files | 0 | 23 | **+23 Python files** |
+| Gateway lines | 0 | 3,236 | **+3,236** |
+| SQL schema lines | 260 | 717 | **+457** (mobile_schema.sql) |
+| API endpoints | 33 | 73+ | **+40** (gated mobile endpoints) |
+| Routers | 0 | 13 | **+13** |
+| Middleware | 0 | 3 | auth + entitlements + rate_limiter |
+| Docker configs | 1 | 2 | +docker-compose.mobile.yml |
+| Lint errors | 0 | 0 | all clean |
+
+### New Files
+
+| File | Lines | Description |
+|------|-------|-------------|
+| `database/mobile_schema.sql` | 457 | 8 new tables: credit_wallets, credit_transactions, chat_messages, chat_daily_usage, generated_reports, user_events, app_config (with seed data), notification_preferences. ALTER TABLE users with mobile columns. RLS policies, indexes, views. |
+| `gateway/__init__.py` | 5 | Package init with version |
+| `gateway/config.py` | 44 | Pydantic Settings — Supabase, Redis, Anthropic, RevenueCat, FCM, DB env vars |
+| `gateway/models.py` | ~180 | 20+ Pydantic models — AccessLevel, SubscriptionTier, UserContext, GatedResponse, ChatRequest/Response, BirthDetailsUpdate, EventCreate, ReportGenerateRequest, etc. |
+| `gateway/main.py` | ~280 | FastAPI app — lifespan (Redis + DB init), CORS, 13 routers at /api/v1, webhooks at /webhooks, exception handlers, health check |
+| `gateway/dependencies.py` | 170 | JWT auth dependency, Redis/DB/config getters, UserContext extraction |
+| `gateway/middleware/auth.py` | ~140 | Supabase JWT verification, user auto-provisioning on first login |
+| `gateway/middleware/entitlements.py` | ~110 | Feature gating engine — FULL/PREVIEW/LOCKED based on tier + feature_gates config |
+| `gateway/middleware/rate_limiter.py` | ~95 | Redis INCR with daily TTL, per-tier limits (free=5, pro=30, premium=unlimited) |
+| `gateway/routers/auth.py` | ~150 | GET/PUT /me, PUT /me/birth-details, DELETE /me |
+| `gateway/routers/chart.py` | ~160 | GET /chart/summary, /chart/full, /chart/divisional/{d} — tier-gated |
+| `gateway/routers/forecast.py` | ~170 | GET /forecast/daily (free), /weekly (pro+), /monthly (pro+), /yearly (premium) |
+| `gateway/routers/analysis.py` | ~240 | GET /analysis/yogas, /doshas, /dasha, /transits, POST /analysis/kp — tier-gated |
+| `gateway/routers/chat.py` | ~155 | POST /chat (rate limited), GET /chat/history, GET /chat/remaining |
+| `gateway/routers/billing.py` | ~85 | GET /credits/balance, GET /credits/history |
+| `gateway/routers/events.py` | ~210 | CRUD for user_events + POST /events/{id}/correlate |
+| `gateway/routers/reports.py` | ~175 | GET /reports, POST /reports/generate (credit-gated), GET /reports/{id}, GET /reports/{id}/pdf |
+| `gateway/routers/compatibility.py` | ~125 | POST /compatibility/quick (pro+), /compatibility/full (premium) |
+| `gateway/routers/muhurta.py` | ~125 | POST /muhurta/check (pro+), POST /muhurta/find (pro+) |
+| `gateway/routers/remedies.py` | ~130 | GET /remedies (pro+), GET /remedies/gems (pro+) |
+| `gateway/routers/config.py` | ~45 | GET /config — all feature gates, limits, prices (cached 5 min) |
+| `gateway/routers/webhooks.py` | ~100 | POST /revenuecat — subscription + credit purchase webhook handler |
+| `gateway/Dockerfile` | 30 | Python 3.11-slim, uv install, uvicorn runner |
+| `gateway/.env.example` | 22 | Template for all required env vars |
+| `docker-compose.mobile.yml` | 55 | Redis (6380) + Gateway (8001) — runs alongside Supabase CLI |
+
+### Architecture Decisions Locked
+
+1. **Supabase JWT auth** — Bearer token in every request, decoded with HS256, auto-provision user on first login
+2. **Entitlements as middleware** — Every gated response returns `{data, access: "full"|"preview"|"locked", upgrade_hint}`
+3. **Redis rate limiting** — Daily counter per user with tier-based limits, midnight reset
+4. **RevenueCat webhooks** — Subscription changes + credit purchases update DB directly, invalidate Redis cache
+5. **Separate compose file** — `docker-compose.mobile.yml` runs alongside `supabase start` (no conflict with existing docker-compose.yml)
+
+### Integration Points (TODO markers in code)
+
+All routers have `TODO` comments where actual 108-core package calls need to be wired in:
+- Chart routes → `packages.cosmos.src` (get_all_planets, get_house_cusps, get_divisional_chart)
+- Forecast routes → `packages.context.src` (daily_forecast, weekly_forecast, monthly_forecast)
+- Analysis routes → `packages.self.src` (detect_yogas, detect_doshas, kp_prediction)
+- Chat route → Guide agent integration
+- Database queries → asyncpg connection pool
+
+### Next Steps (Phase 2)
+
+- [ ] Wire 108-core package calls into gateway routers (remove TODO stubs)
+- [ ] Flutter project scaffold (Riverpod + GoRouter + Supabase + RevenueCat)
+- [ ] Supabase migrations (apply mobile_schema.sql)
+- [ ] Gateway unit tests
+- [ ] End-to-end auth flow test
+
+---
+
 ## 2026-02-07 (Session 23 - KP Krishnamurti Paddhati Module)
 
 ### Summary
