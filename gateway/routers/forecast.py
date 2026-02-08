@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import json
 import logging
 import sys
 from datetime import datetime
@@ -29,16 +28,7 @@ router = APIRouter()
 
 
 async def _load_birth_chart(db: Any, user_id: str) -> dict[str, Any] | None:
-    """
-    Load user's birth chart from database.
-
-    Args:
-        db: Database connection.
-        user_id: User UUID.
-
-    Returns:
-        Birth chart data or None if not found.
-    """
+    """Load user's birth chart from database."""
     try:
         row = await db.fetchrow(
             "SELECT * FROM birth_charts WHERE user_id = $1",
@@ -47,16 +37,17 @@ async def _load_birth_chart(db: Any, user_id: str) -> dict[str, Any] | None:
         if not row:
             return None
 
+        # asyncpg returns JSONB as Python dict already
         return {
             "birth_datetime": row["birth_datetime"],
             "latitude": float(row["latitude"]),
             "longitude": float(row["longitude"]),
             "timezone": row["timezone"],
-            "planets": json.loads(row["planets"]) if row["planets"] else {},
+            "planets": row["planets"] if row["planets"] else {},
             "lagna_rashi": row["lagna_rashi"],
             "moon_rashi": row["moon_rashi"],
             "moon_nakshatra": row["moon_nakshatra"],
-            "ayanamsa": row["ayanamsa"],
+            "ayanamsa": row.get("ayanamsa"),
         }
     except Exception as e:
         logger.error(f"Failed to load birth chart: {e}")
@@ -64,15 +55,7 @@ async def _load_birth_chart(db: Any, user_id: str) -> dict[str, Any] | None:
 
 
 def _build_natal_planets(planets: dict) -> dict[str, Any]:
-    """
-    Build natal planets dict for forecast functions.
-
-    Args:
-        planets: Raw planets dict from DB.
-
-    Returns:
-        Formatted planets dict with required fields.
-    """
+    """Build natal planets dict for forecast functions."""
     result = {}
     for planet_name, planet_data in planets.items():
         if isinstance(planet_data, dict):
@@ -85,27 +68,20 @@ def _build_natal_planets(planets: dict) -> dict[str, Any]:
     return result
 
 
+def _extract_moon_longitude(planets: dict) -> float | None:
+    """Extract moon longitude — planet names are dict KEYS, not a 'name' field."""
+    moon_data = planets.get("moon", {})
+    if isinstance(moon_data, dict) and "longitude" in moon_data:
+        return float(moon_data["longitude"])
+    return None
+
+
 @router.get("/daily")
 async def get_daily_forecast_endpoint(
     current_user: Annotated[UserContext, Depends(get_current_user)],
     db: Annotated[Any, Depends(get_db)],
 ) -> dict[str, Any]:
-    """
-    Get daily forecast.
-
-    Available to all tiers. Free tier returns limited data.
-
-    Args:
-        current_user: Authenticated user context.
-        db: Database connection.
-
-    Returns:
-        dict: Daily forecast data.
-
-    Raises:
-        HTTPException: 401 if not authenticated, 404 if no birth
-            chart, 500 if calculation fails.
-    """
+    """Get daily forecast. Available to all tiers."""
     try:
         chart = await _load_birth_chart(db, str(current_user.id))
         if not chart:
@@ -115,12 +91,7 @@ async def get_daily_forecast_endpoint(
             ) from None
 
         natal_planets = _build_natal_planets(chart.get("planets", {}))
-        moon_longitude = None
-
-        for planet_data in chart.get("planets", {}).values():
-            if isinstance(planet_data, dict) and planet_data.get("name") == "moon":
-                moon_longitude = float(planet_data.get("longitude", 0))
-                break
+        moon_longitude = _extract_moon_longitude(chart.get("planets", {}))
 
         if moon_longitude is None:
             raise ValueError("Moon position not found in birth chart")
@@ -129,7 +100,6 @@ async def get_daily_forecast_endpoint(
         if isinstance(birth_dt, str):
             birth_dt = datetime.fromisoformat(birth_dt)
 
-        # Call forecast function
         forecast = get_daily_forecast(
             birth_datetime_iso=birth_dt.isoformat(),
             birth_lat=chart["latitude"],
@@ -148,7 +118,6 @@ async def get_daily_forecast_endpoint(
                 "access": "preview",
             }
 
-        # Pro+ tier: full response
         return forecast
 
     except HTTPException:
@@ -167,23 +136,7 @@ async def get_weekly_forecast_endpoint(
     config: Annotated[dict, Depends(get_app_config)],
     db: Annotated[Any, Depends(get_db)],
 ) -> dict[str, Any]:
-    """
-    Get weekly forecast.
-
-    Available to pro and premium tiers.
-
-    Args:
-        current_user: Authenticated user context.
-        config: Application configuration.
-        db: Database connection.
-
-    Returns:
-        dict: Weekly forecast data (gated by subscription tier).
-
-    Raises:
-        HTTPException: 401 if not authenticated, 403 if locked for
-            tier, 404 if no birth chart, 500 if calculation fails.
-    """
+    """Get weekly forecast. Pro and premium tiers."""
     try:
         access = await check_feature_access(
             "forecast_weekly", current_user.subscription_tier, config
@@ -204,12 +157,7 @@ async def get_weekly_forecast_endpoint(
             ) from None
 
         natal_planets = _build_natal_planets(chart.get("planets", {}))
-        moon_longitude = None
-
-        for planet_data in chart.get("planets", {}).values():
-            if isinstance(planet_data, dict) and planet_data.get("name") == "moon":
-                moon_longitude = float(planet_data.get("longitude", 0))
-                break
+        moon_longitude = _extract_moon_longitude(chart.get("planets", {}))
 
         if moon_longitude is None:
             raise ValueError("Moon position not found in birth chart")
@@ -218,7 +166,6 @@ async def get_weekly_forecast_endpoint(
         if isinstance(birth_dt, str):
             birth_dt = datetime.fromisoformat(birth_dt)
 
-        # Call forecast function
         forecast = get_weekly_forecast(
             birth_datetime_iso=birth_dt.isoformat(),
             birth_lat=chart["latitude"],
@@ -248,25 +195,7 @@ async def get_monthly_forecast_endpoint(
     month: int | None = None,
     year: int | None = None,
 ) -> dict[str, Any]:
-    """
-    Get monthly forecast.
-
-    Available to pro and premium tiers.
-
-    Args:
-        current_user: Authenticated user context.
-        config: Application configuration.
-        db: Database connection.
-        month: Month number (1-12), defaults to current month.
-        year: Year, defaults to current year.
-
-    Returns:
-        dict: Monthly forecast data (gated by subscription tier).
-
-    Raises:
-        HTTPException: 401 if not authenticated, 403 if locked for
-            tier, 404 if no birth chart, 500 if calculation fails.
-    """
+    """Get monthly forecast. Pro and premium tiers."""
     try:
         access = await check_feature_access(
             "forecast_monthly", current_user.subscription_tier, config
@@ -287,12 +216,7 @@ async def get_monthly_forecast_endpoint(
             ) from None
 
         natal_planets = _build_natal_planets(chart.get("planets", {}))
-        moon_longitude = None
-
-        for planet_data in chart.get("planets", {}).values():
-            if isinstance(planet_data, dict) and planet_data.get("name") == "moon":
-                moon_longitude = float(planet_data.get("longitude", 0))
-                break
+        moon_longitude = _extract_moon_longitude(chart.get("planets", {}))
 
         if moon_longitude is None:
             raise ValueError("Moon position not found in birth chart")
@@ -301,14 +225,12 @@ async def get_monthly_forecast_endpoint(
         if isinstance(birth_dt, str):
             birth_dt = datetime.fromisoformat(birth_dt)
 
-        # Default to current month/year if not specified
         now = datetime.now()
         if month is None:
             month = now.month
         if year is None:
             year = now.year
 
-        # Call forecast function
         forecast = get_monthly_forecast(
             birth_datetime_iso=birth_dt.isoformat(),
             birth_lat=chart["latitude"],
@@ -338,24 +260,7 @@ async def get_yearly_forecast_endpoint(
     config: Annotated[dict, Depends(get_app_config)],
     db: Annotated[Any, Depends(get_db)],
 ) -> dict[str, Any]:
-    """
-    Get yearly forecast.
-
-    Available to premium tier only. Aggregates monthly forecasts
-    for the year.
-
-    Args:
-        current_user: Authenticated user context.
-        config: Application configuration.
-        db: Database connection.
-
-    Returns:
-        dict: Yearly forecast data (premium only).
-
-    Raises:
-        HTTPException: 401 if not authenticated, 403 if not premium,
-            404 if no birth chart, 500 if calculation fails.
-    """
+    """Get yearly forecast. Premium tier only."""
     try:
         access = await check_feature_access(
             "forecast_yearly", current_user.subscription_tier, config
@@ -376,12 +281,7 @@ async def get_yearly_forecast_endpoint(
             ) from None
 
         natal_planets = _build_natal_planets(chart.get("planets", {}))
-        moon_longitude = None
-
-        for planet_data in chart.get("planets", {}).values():
-            if isinstance(planet_data, dict) and planet_data.get("name") == "moon":
-                moon_longitude = float(planet_data.get("longitude", 0))
-                break
+        moon_longitude = _extract_moon_longitude(chart.get("planets", {}))
 
         if moon_longitude is None:
             raise ValueError("Moon position not found in birth chart")
@@ -390,12 +290,11 @@ async def get_yearly_forecast_endpoint(
         if isinstance(birth_dt, str):
             birth_dt = datetime.fromisoformat(birth_dt)
 
-        # Aggregate monthly forecasts for current year
         now = datetime.now()
         monthly_forecasts = []
         yearly_ratings = []
 
-        for month in range(1, 13):
+        for m in range(1, 13):
             try:
                 forecast = get_monthly_forecast(
                     birth_datetime_iso=birth_dt.isoformat(),
@@ -404,12 +303,12 @@ async def get_yearly_forecast_endpoint(
                     natal_planets=natal_planets,
                     moon_longitude=moon_longitude,
                     lagna_rashi=chart["lagna_rashi"],
-                    month=month,
+                    month=m,
                     year=now.year,
                 )
                 monthly_forecasts.append(
                     {
-                        "month": month,
+                        "month": m,
                         "rating": forecast.get("month_rating", 5),
                         "summary": forecast.get("theme", ""),
                     }
@@ -417,7 +316,7 @@ async def get_yearly_forecast_endpoint(
                 if "month_rating" in forecast:
                     yearly_ratings.append(forecast["month_rating"])
             except Exception as month_err:
-                logger.warning(f"Failed to calculate month {month} for yearly: {month_err}")
+                logger.warning(f"Failed to calculate month {m} for yearly: {month_err}")
 
         avg_rating = sum(yearly_ratings) / len(yearly_ratings) if yearly_ratings else 5
 

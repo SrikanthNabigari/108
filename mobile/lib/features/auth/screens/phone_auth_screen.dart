@@ -1,10 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
-import '../../../core/theme/colors.dart';
-import '../../../shared/widgets/star_background.dart';
-import '../../../data/services/supabase_service.dart';
+import 'package:one_zero_eight/core/theme/app_theme.dart';
+import 'package:one_zero_eight/shared/widgets/glass_container.dart';
+import 'package:one_zero_eight/shared/widgets/ambient_background.dart';
+import 'package:one_zero_eight/data/services/supabase_service.dart';
 
 class PhoneAuthScreen extends ConsumerStatefulWidget {
   const PhoneAuthScreen({super.key});
@@ -15,8 +16,8 @@ class PhoneAuthScreen extends ConsumerStatefulWidget {
 
 class _PhoneAuthScreenState extends ConsumerState<PhoneAuthScreen> {
   final _phoneController = TextEditingController();
-  String _countryCode = '+91';
-  bool _isLoading = false;
+  bool _isSending = false;
+  final String _countryCode = '+91';
 
   @override
   void dispose() {
@@ -25,132 +26,113 @@ class _PhoneAuthScreenState extends ConsumerState<PhoneAuthScreen> {
   }
 
   Future<void> _sendOtp() async {
-    if (_phoneController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please enter your phone number')),
-      );
+    final phone = _phoneController.text.trim();
+    if (phone.length < 10) {
+      _showSnack('Enter a valid phone number');
       return;
     }
 
-    setState(() => _isLoading = true);
+    setState(() => _isSending = true);
     try {
-      final phoneNumber = '$_countryCode${_phoneController.text}';
-      await SupabaseService().signInWithPhone(phoneNumber);
-      if (mounted) {
-        context.push('/otp-verify', extra: phoneNumber);
-      }
+      final fullPhone = '$_countryCode$phone';
+      await SupabaseService().signInWithPhone(fullPhone);
+      if (mounted) context.push('/otp-verify', extra: fullPhone);
     } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error sending OTP: $e')),
-        );
-      }
+      _showSnack('Failed to send OTP: $e');
     } finally {
-      if (mounted) setState(() => _isLoading = false);
+      if (mounted) setState(() => _isSending = false);
     }
+  }
+
+  Future<void> _devSignIn() async {
+    setState(() => _isSending = true);
+    try {
+      await SupabaseService().signInAnonymously();
+      // Auth listener in GoRouter will redirect to /profile
+    } catch (e) {
+      _showSnack('Anonymous sign-in failed: $e');
+      if (mounted) setState(() => _isSending = false);
+    }
+  }
+
+  void _showSnack(String msg) {
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(msg)));
   }
 
   @override
   Widget build(BuildContext context) {
-    return StarBackground(
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        resizeToAvoidBottomInset: false,
-        body: SafeArea(
+    return Scaffold(
+      body: AmbientBackground(
+        child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 28),
+            padding: S.pagePadding,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 80),
+                const Spacer(flex: 2),
 
-                // Header
-                Text(
-                  'Enter your\nphone number',
-                  style: GoogleFonts.spaceGrotesk(
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                    color: CosmicColors.textPrimary,
-                    height: 1.15,
-                  ),
-                ),
-                const SizedBox(height: 14),
-                Text(
-                  "We'll use this to identify you and keep\nyour chart secure.",
-                  style: GoogleFonts.spaceGrotesk(
-                    fontSize: 15,
-                    color: CosmicColors.textMuted,
-                    height: 1.5,
-                  ),
-                ),
-
-                const SizedBox(height: 48),
-
-                // Phone input row
-                Container(
-                  height: 56,
-                  decoration: BoxDecoration(
-                    color: CosmicColors.glass,
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(
-                      color: CosmicColors.glassBorder,
-                      width: 1,
+                // Logo
+                Center(
+                  child: Text(
+                    '108',
+                    style: T.h1.copyWith(
+                      fontSize: 48,
+                      fontWeight: FontWeight.w800,
+                      color: C.accent,
+                      letterSpacing: 4,
                     ),
                   ),
+                ),
+                const SizedBox(height: S.sm),
+                Center(
+                  child: Text(
+                    'Your cosmic operating system',
+                    style: T.bodySm.copyWith(color: C.textMuted),
+                  ),
+                ),
+
+                const Spacer(flex: 2),
+
+                // Phone input
+                GlassContainer(
+                  padding: const EdgeInsets.symmetric(horizontal: S.lg),
                   child: Row(
                     children: [
                       // Country code
                       GestureDetector(
                         onTap: () {
-                          // TODO: Country picker
+                          // TODO: country picker
                         },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                _countryCode,
-                                style: GoogleFonts.spaceGrotesk(
-                                  fontSize: 16,
-                                  color: CosmicColors.textPrimary,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              const SizedBox(width: 4),
-                              Icon(
-                                Icons.keyboard_arrow_down_rounded,
-                                color: CosmicColors.textMuted,
-                                size: 18,
-                              ),
-                            ],
-                          ),
+                        child: Row(
+                          children: [
+                            Text(
+                              _countryCode,
+                              style: T.body.copyWith(color: C.textPrimary),
+                            ),
+                            const SizedBox(width: S.xs),
+                            const Icon(Icons.keyboard_arrow_down,
+                                color: C.textMuted, size: 18),
+                          ],
                         ),
                       ),
                       Container(
                         width: 1,
                         height: 24,
-                        color: CosmicColors.glassBorder,
+                        margin: const EdgeInsets.symmetric(horizontal: S.md),
+                        color: C.glassBorder,
                       ),
-                      // Phone field
                       Expanded(
                         child: TextField(
                           controller: _phoneController,
                           keyboardType: TextInputType.phone,
-                          style: GoogleFonts.spaceGrotesk(
-                            fontSize: 16,
-                            color: CosmicColors.textPrimary,
-                          ),
+                          style: T.body,
                           decoration: InputDecoration(
                             hintText: 'Phone number',
-                            hintStyle: GoogleFonts.spaceGrotesk(
-                              fontSize: 16,
-                              color: CosmicColors.textSubtle,
-                            ),
+                            hintStyle: T.body.copyWith(color: C.textMuted),
                             border: InputBorder.none,
                             contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                            ),
+                                vertical: S.lg),
                           ),
                         ),
                       ),
@@ -158,77 +140,65 @@ class _PhoneAuthScreenState extends ConsumerState<PhoneAuthScreen> {
                   ),
                 ),
 
-                const SizedBox(height: 28),
+                const SizedBox(height: S.lg),
 
-                // Send OTP button — white on black
+                // Send OTP button
                 SizedBox(
                   width: double.infinity,
                   height: 52,
                   child: ElevatedButton(
-                    onPressed: _isLoading ? null : _sendOtp,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      foregroundColor: Colors.black,
-                      disabledBackgroundColor: Colors.white24,
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                    ),
-                    child: _isLoading
+                    onPressed: _isSending ? null : _sendOtp,
+                    child: _isSending
                         ? const SizedBox(
                             width: 20,
                             height: 20,
                             child: CircularProgressIndicator(
                               strokeWidth: 2,
-                              color: Colors.black,
+                              color: C.textOnAccent,
                             ),
                           )
-                        : Text(
-                            'Send OTP',
-                            style: GoogleFonts.spaceGrotesk(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
+                        : const Text('Send OTP'),
                   ),
                 ),
 
-                const SizedBox(height: 20),
+                const SizedBox(height: S.xl),
 
-                // Skip for now → dev bypass to onboarding
+                // Divider
+                Row(
+                  children: [
+                    const Expanded(child: Divider(color: C.divider)),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: S.lg),
+                      child: Text('or', style: T.caption),
+                    ),
+                    const Expanded(child: Divider(color: C.divider)),
+                  ],
+                ),
+
+                const SizedBox(height: S.xl),
+
+                // Dev anonymous sign-in
+                if (kDebugMode)
+                  SizedBox(
+                    width: double.infinity,
+                    height: 52,
+                    child: OutlinedButton(
+                      onPressed: _isSending ? null : _devSignIn,
+                      child: const Text('Continue as Guest (Dev)'),
+                    ),
+                  ),
+
+                const Spacer(flex: 3),
+
+                // Footer
                 Center(
-                  child: TextButton(
-                    onPressed: () {
-                      context.go('/profile');
-                    },
-                    child: Text(
-                      'Skip for now',
-                      style: GoogleFonts.spaceGrotesk(
-                        fontSize: 14,
-                        color: CosmicColors.textMuted,
-                      ),
-                    ),
+                  child: Text(
+                    'By continuing, you agree to our Terms of Service',
+                    style: T.caption,
+                    textAlign: TextAlign.center,
                   ),
                 ),
-
-                const Spacer(),
-
-                // Privacy note
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 32),
-                  child: Center(
-                    child: Text(
-                      'Your phone number is only used for account verification\nand will never be shared.',
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.spaceGrotesk(
-                        fontSize: 12,
-                        color: CosmicColors.textSubtle,
-                        height: 1.5,
-                      ),
-                    ),
-                  ),
-                ),
+                const SizedBox(height: S.lg),
               ],
             ),
           ),

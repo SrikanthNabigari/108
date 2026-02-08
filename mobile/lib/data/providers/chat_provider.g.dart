@@ -6,7 +6,6 @@ part of 'chat_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-// chatMessagesProvider is defined manually in chat_provider.dart
 String _$remainingMessagesHash() => r'b54c2a22a2075d256532f36964a701f684af26fb';
 
 /// Get remaining messages today

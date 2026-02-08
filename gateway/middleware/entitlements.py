@@ -34,14 +34,12 @@ async def check_feature_access(
     feature_gates = config.get("feature_gates", {})
     feature = feature_gates.get(feature_key, {})
 
-    tier_access = feature.get(user_tier.value)
-    if not tier_access:
-        return AccessLevel.LOCKED
+    # tier_access is a string like "full", "preview", or "locked"
+    tier_access = feature.get(user_tier.value, "locked")
 
-    access_type = tier_access.get("access", "locked")
-    if access_type == "full":
+    if tier_access == "full":
         return AccessLevel.FULL
-    elif access_type == "preview":
+    elif tier_access == "preview":
         return AccessLevel.PREVIEW
     else:
         return AccessLevel.LOCKED

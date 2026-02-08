@@ -10,17 +10,17 @@ class Settings(BaseSettings):
 
     # Supabase Configuration
     supabase_url: str = "http://localhost:54321"
-    supabase_service_key: str
-    supabase_jwt_secret: str
+    supabase_service_key: str = ""
+    supabase_jwt_secret: str = ""
 
     # Redis Configuration
     redis_url: str = "redis://localhost:6379"
 
     # Anthropic Configuration
-    anthropic_api_key: str
+    anthropic_api_key: str = ""
 
     # RevenueCat Configuration
-    revenuecat_webhook_secret: str
+    revenuecat_webhook_secret: str = ""
 
     # FCM Configuration (optional)
     fcm_server_key: str | None = None
@@ -37,7 +37,7 @@ class Settings(BaseSettings):
     class Config:
         """Pydantic configuration."""
 
-        env_file = "gateway/.env", ".env"
+        env_file = ".env", "gateway/.env"
         env_file_encoding = "utf-8"
         case_sensitive = False
         extra = "ignore"

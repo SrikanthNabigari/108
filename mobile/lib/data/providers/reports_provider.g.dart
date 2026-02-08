@@ -372,7 +372,7 @@ class _ReportPdfUrlProviderElement
   String get reportId => (origin as ReportPdfUrlProvider).reportId;
 }
 
-String _$generateReportHash() => r'f39667e7203efbe9b6db43d51ae0a28739a0564b';
+String _$generateReportHash() => r'e4170c6b0333457bc188c2ec5f38e4a0bbc2ee7b';
 
 /// Generate new report
 ///

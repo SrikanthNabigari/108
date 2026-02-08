@@ -400,7 +400,11 @@ def get_pratyantardasha_sequence(
     if antardasha_lord not in dasha_years:
         raise ValueError(f"Invalid antardasha lord: {antardasha_lord}")
 
-    antar_years = dasha_years[antardasha_lord]
+    # Use ACTUAL antardasha duration from dates, not standard planet years.
+    # The standard years (e.g. Venus=20) represent the full Mahadasha period,
+    # but the actual AD is much shorter (e.g. Venus AD in Mercury MD = 2.83 yrs).
+    actual_antar_days = (_antar_end - antar_start).total_seconds() / 86400
+    actual_antar_years = actual_antar_days / 365.25
 
     # Start sequence from antardasha lord
     start_idx = dasha_sequence.index(antardasha_lord)
@@ -414,8 +418,9 @@ def get_pratyantardasha_sequence(
         pratyantar_lord = dasha_sequence[lord_idx]
         pratyantar_years = dasha_years[pratyantar_lord]
 
-        # Pratyantardasha duration formula: (Antar years * Pratyantar years) / 120
-        duration_years = (antar_years * pratyantar_years) / 120
+        # Pratyantardasha gets a proportional share of the actual AD duration
+        # proportion = standard_years / 120 (sums to 1.0 across all 9 planets)
+        duration_years = (actual_antar_years * pratyantar_years) / 120
         duration_days = duration_years * 365.25
 
         end_date = current_date + timedelta(days=duration_days)

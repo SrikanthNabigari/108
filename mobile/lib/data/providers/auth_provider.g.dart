@@ -61,7 +61,7 @@ final isAuthenticatedProvider = AutoDisposeFutureProvider<bool>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef IsAuthenticatedRef = AutoDisposeFutureProviderRef<bool>;
-String _$accessTokenHash() => r'7040cad92a3ab052a104aa6d40c47b0f398ef31b';
+String _$accessTokenHash() => r'fff8172002733a007ca0154b8e0cb48f405a3578';
 
 /// Get access token
 ///

@@ -1,0 +1,221 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 393 852" width="393" height="852">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0A0A12"/>
+      <stop offset="50%" stop-color="#050508"/>
+      <stop offset="100%" stop-color="#08050F"/>
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#22C55E"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#6366F1"/>
+    </linearGradient>
+    <linearGradient id="scoreGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#22C55E"/>
+      <stop offset="50%" stop-color="#06B6D4"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#EF4444"/>
+    </linearGradient>
+    <linearGradient id="cardGlassGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.06)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0.02)"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+    <clipPath id="phoneClip">
+      <rect x="0" y="0" width="393" height="852" rx="40"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#phoneClip)">
+  <!-- Background -->
+  <rect width="393" height="852" fill="url(#bgGrad)"/>
+  <!-- Stars -->
+  <g id="stars" opacity="0.6">
+    <circle cx="134" cy="338" r="0.47758289140793797" fill="white" opacity="0.3158781073505693"/>
+    <circle cx="63" cy="304" r="0.7286130976508494" fill="white" opacity="0.5347368374453424"/>
+    <circle cx="318" cy="248" r="0.4309243187330793" fill="white" opacity="0.5783903509130504"/>
+    <circle cx="261" cy="7" r="1.0660069514211" fill="white" opacity="0.21701074765067677"/>
+    <circle cx="259" cy="181" r="1.0131947087647" fill="white" opacity="0.31473843533090456"/>
+    <circle cx="203" cy="192" r="0.5983401595751496" fill="white" opacity="0.2703849692069695"/>
+    <circle cx="287" cy="802" r="0.534318634722914" fill="white" opacity="0.4817985394819511"/>
+    <circle cx="120" cy="201" r="0.36469484845440137" fill="white" opacity="0.7072360211616693"/>
+    <circle cx="361" cy="578" r="1.111036514445222" fill="white" opacity="0.5571924330484612"/>
+    <circle cx="280" cy="83" r="0.3898601029480857" fill="white" opacity="0.6808427035007669"/>
+    <circle cx="367" cy="762" r="0.4908332688273507" fill="white" opacity="0.3973256909090771"/>
+    <circle cx="49" cy="102" r="0.8192003720634771" fill="white" opacity="0.6964170533984801"/>
+    <circle cx="280" cy="114" r="0.5447313785574022" fill="white" opacity="0.5762414728559931"/>
+    <circle cx="287" cy="129" r="0.6162721123037302" fill="white" opacity="0.5178336458939035"/>
+    <circle cx="211" cy="774" r="0.8242652509456887" fill="white" opacity="0.5633552411092897"/>
+    <circle cx="131" cy="229" r="0.8153970265765487" fill="white" opacity="0.44158636363513537"/>
+    <circle cx="75" cy="791" r="1.023470704599434" fill="white" opacity="0.20767548060674468"/>
+    <circle cx="22" cy="58" r="0.7462310915382495" fill="white" opacity="0.2236743468605136"/>
+    <circle cx="188" cy="783" r="1.1903704366797596" fill="white" opacity="0.27073861475008465"/>
+    <circle cx="263" cy="581" r="0.9194461907445424" fill="white" opacity="0.23357366018288678"/>
+    <circle cx="246" cy="847" r="0.9227598062833156" fill="white" opacity="0.25711492365930877"/>
+    <circle cx="157" cy="548" r="0.38264246743509744" fill="white" opacity="0.706103499914055"/>
+    <circle cx="185" cy="839" r="0.9756841873670399" fill="white" opacity="0.5453500255974125"/>
+    <circle cx="36" cy="818" r="0.7332809472962583" fill="white" opacity="0.6563771344513523"/>
+    <circle cx="18" cy="722" r="0.3073871405118353" fill="white" opacity="0.25289998203467057"/>
+    <circle cx="243" cy="121" r="1.0776509244086796" fill="white" opacity="0.7846756434853428"/>
+    <circle cx="57" cy="143" r="0.5154398980392142" fill="white" opacity="0.32595950710145394"/>
+    <circle cx="49" cy="170" r="0.4478238689470405" fill="white" opacity="0.2150566878193059"/>
+    <circle cx="124" cy="691" r="0.7513604819227532" fill="white" opacity="0.42749875024077827"/>
+    <circle cx="300" cy="734" r="0.9590083855464848" fill="white" opacity="0.45039011011803326"/>
+    <circle cx="264" cy="279" r="0.8384380560762323" fill="white" opacity="0.7312208075958002"/>
+    <circle cx="246" cy="641" r="0.6735137743170447" fill="white" opacity="0.5245727283191246"/>
+    <circle cx="152" cy="469" r="1.0865061757728744" fill="white" opacity="0.21098091717885206"/>
+    <circle cx="254" cy="77" r="0.33208658931352614" fill="white" opacity="0.6410721338152585"/>
+    <circle cx="9" cy="97" r="0.8927734955431543" fill="white" opacity="0.2655735351609954"/>
+    <circle cx="109" cy="700" r="0.374776244172059" fill="white" opacity="0.455098824942179"/>
+    <circle cx="60" cy="685" r="0.6458723161773334" fill="white" opacity="0.47614989076809583"/>
+    <circle cx="255" cy="550" r="0.9257461721904867" fill="white" opacity="0.6610288563471307"/>
+    <circle cx="104" cy="670" r="0.6853002560205794" fill="white" opacity="0.35062081642531195"/>
+    <circle cx="49" cy="541" r="0.5911262846254687" fill="white" opacity="0.7483271100841191"/>
+    <circle cx="148" cy="382" r="0.979369537920872" fill="white" opacity="0.7998760983995421"/>
+    <circle cx="249" cy="772" r="0.9909424923588976" fill="white" opacity="0.5932834991414111"/>
+    <circle cx="206" cy="521" r="0.7810384449390366" fill="white" opacity="0.7815077909910271"/>
+    <circle cx="135" cy="392" r="1.1733880055836108" fill="white" opacity="0.7252271856152632"/>
+    <circle cx="366" cy="679" r="0.5782649959058418" fill="white" opacity="0.24733376625601952"/>
+    <circle cx="350" cy="110" r="0.4305331090376435" fill="white" opacity="0.41573637394384155"/>
+    <circle cx="361" cy="55" r="0.490903517007241" fill="white" opacity="0.6945447888472596"/>
+    <circle cx="324" cy="579" r="0.8446079135640714" fill="white" opacity="0.5478544178171223"/>
+    <circle cx="275" cy="27" r="1.0704206164815493" fill="white" opacity="0.7767293807261608"/>
+    <circle cx="66" cy="659" r="0.9226167719129958" fill="white" opacity="0.2766977903437839"/>
+    <circle cx="87" cy="673" r="1.1720261246616404" fill="white" opacity="0.23628708576235596"/>
+    <circle cx="269" cy="754" r="0.8615681374416062" fill="white" opacity="0.7730670200746099"/>
+    <circle cx="49" cy="724" r="0.5703823802689485" fill="white" opacity="0.41571776175709485"/>
+    <circle cx="336" cy="640" r="0.9631648187634911" fill="white" opacity="0.20305064192633795"/>
+    <circle cx="235" cy="771" r="1.0591182800677408" fill="white" opacity="0.497313773951033"/>
+    <circle cx="277" cy="844" r="0.36901260381099754" fill="white" opacity="0.20274849583016522"/>
+    <circle cx="21" cy="389" r="1.002778539910625" fill="white" opacity="0.22301116252336797"/>
+    <circle cx="331" cy="831" r="0.5355024832176993" fill="white" opacity="0.5594561872035505"/>
+    <circle cx="135" cy="653" r="1.1157793599552923" fill="white" opacity="0.30467797015394343"/>
+    <circle cx="347" cy="94" r="0.36274194524109044" fill="white" opacity="0.5303878232790287"/>
+    <circle cx="320" cy="120" r="60" fill="#8B5CF6" opacity="0.04" filter="url(#softGlow)"/>
+    <circle cx="80" cy="650" r="50" fill="#22C55E" opacity="0.03" filter="url(#softGlow)"/>
+  </g>
+  <!-- Status Bar -->
+  <g id="statusBar">
+    <text x="32" y="22" font-family="SF Pro Display, -apple-system, sans-serif" font-size="15" font-weight="600" fill="#F8FAFC">9:41</text>
+    <!-- Signal bars -->
+    <g transform="translate(295, 8)">
+      <rect x="0" y="6" width="3" height="4" rx="0.5" fill="#F8FAFC"/>
+      <rect x="5" y="4" width="3" height="6" rx="0.5" fill="#F8FAFC"/>
+      <rect x="10" y="2" width="3" height="8" rx="0.5" fill="#F8FAFC"/>
+      <rect x="15" y="0" width="3" height="10" rx="0.5" fill="#F8FAFC"/>
+    </g>
+    <!-- WiFi -->
+    <g transform="translate(325, 7)">
+      <path d="M0 6 Q6 -2 12 6" stroke="#F8FAFC" stroke-width="1.5" fill="none"/>
+      <path d="M2 4 Q6 0 10 4" stroke="#F8FAFC" stroke-width="1.5" fill="none"/>
+      <circle cx="6" cy="7" r="1.5" fill="#F8FAFC"/>
+    </g>
+    <!-- Battery -->
+    <g transform="translate(348, 7)">
+      <rect x="0" y="0" width="24" height="11" rx="3" stroke="#F8FAFC" stroke-width="1" fill="none"/>
+      <rect x="2" y="2" width="18" height="7" rx="1.5" fill="#22C55E"/>
+      <rect x="25" y="3" width="2" height="5" rx="1" fill="#F8FAFC" opacity="0.4"/>
+    </g>
+  </g>
+  <!-- Chat Header -->
+  <g id="chatHeader">
+    <text x="196.5" y="60" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="18" font-weight="700" fill="#F8FAFC">Ask 108</text>
+    <rect x="293" y="45" width="80" height="24" rx="12" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+    <text x="333" y="61" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="11" fill="#9CA3AF">12/30 left</text>
+    <line x1="0" y1="78" x2="393" y2="78" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+  </g>
+  <!-- User Message -->
+  <g id="userMsg">
+    <rect x="100" y="95" width="273" height="40" rx="16" fill="#22C55E" opacity="0.12"/>
+    <rect x="100" y="95" width="273" height="40" rx="16" fill="none" stroke="#22C55E" stroke-width="0.5" opacity="0.3"/>
+    <text x="116" y="120" font-family="SF Pro Display, -apple-system, sans-serif" font-size="14" fill="#F8FAFC">What about my career this month?</text>
+  </g>
+  <!-- AI Response -->
+  <g id="aiResponse">
+    <!-- AI avatar -->
+    <circle cx="32" cy="164" r="14" fill="#111115" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+    <text x="32" y="168" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#22C55E">108</text>
+    <rect x="20" y="184" width="353" height="460" rx="16" fill="#111115" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+    <text x="36" y="207" font-family="SF Pro Display, -apple-system, sans-serif" font-size="13" fill="#F8FAFC">Your career is entering an activation phase.</text>
+    <text x="36" y="227" font-family="SF Pro Display, -apple-system, sans-serif" font-size="13" fill="#F8FAFC">Mercury MD activates your 9th lord (fortune)</text>
+    <text x="36" y="247" font-family="SF Pro Display, -apple-system, sans-serif" font-size="13" fill="#F8FAFC">from the Lagna — opportunities come through</text>
+    <text x="36" y="267" font-family="SF Pro Display, -apple-system, sans-serif" font-size="13" fill="#F8FAFC">YOUR initiative this month.</text>
+    <rect x="36" y="287" width="301" height="72" rx="12" fill="rgba(34,197,94,0.06)" stroke="rgba(34,197,94,0.15)" stroke-width="0.5"/>
+    <circle cx="80" cy="323" r="22" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="6"/>
+    <circle cx="80" cy="323" r="22" fill="none" stroke="url(#scoreGrad)" stroke-width="6" stroke-dasharray="103.7 34.6" stroke-linecap="round" transform="rotate(-90 80 323)"/>
+    <text x="80" y="327" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#F8FAFC">7.5</text>
+    <text x="120" y="315" font-family="SF Pro Display, -apple-system, sans-serif" font-size="14" font-weight="600" fill="#F8FAFC">Career Score</text>
+    <text x="120" y="335" font-family="SF Pro Display, -apple-system, sans-serif" font-size="11" fill="#9CA3AF">Strong period for professional moves</text>
+    <text x="323" y="325" font-family="SF Pro Display, -apple-system, sans-serif" font-size="18" fill="#22C55E">↑</text>
+    <text x="323" y="342" font-family="SF Pro Display, -apple-system, sans-serif" font-size="10" fill="#22C55E">+1.2</text>
+    <text x="36" y="372" font-family="SF Pro Display, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#F8FAFC">Key Transits This Month</text>
+    <rect x="36" y="380" width="301" height="105" rx="8" fill="rgba(255,255,255,0.03)"/>
+    <text x="48" y="400" font-family="SF Pro Display, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#22C55E">Feb 12</text>
+    <text x="108" y="400" font-family="SF Pro Display, -apple-system, sans-serif" font-size="11" fill="#F8FAFC">Venus → Pisces</text>
+    <text x="108" y="414" font-family="SF Pro Display, -apple-system, sans-serif" font-size="10" fill="#9CA3AF">9th house boost</text>
+    <line x1="48" y1="420" x2="333" y2="420" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+    <text x="48" y="430" font-family="SF Pro Display, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#EAB308">Feb 18</text>
+    <text x="108" y="430" font-family="SF Pro Display, -apple-system, sans-serif" font-size="11" fill="#F8FAFC">Sun → Aquarius</text>
+    <text x="108" y="444" font-family="SF Pro Display, -apple-system, sans-serif" font-size="10" fill="#9CA3AF">5th house creativity</text>
+    <line x1="48" y1="450" x2="333" y2="450" stroke="rgba(255,255,255,0.05)" stroke-width="0.5"/>
+    <text x="48" y="460" font-family="SF Pro Display, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#06B6D4">Feb 24</text>
+    <text x="108" y="460" font-family="SF Pro Display, -apple-system, sans-serif" font-size="11" fill="#F8FAFC">5-planet stellium</text>
+    <text x="108" y="474" font-family="SF Pro Display, -apple-system, sans-serif" font-size="10" fill="#9CA3AF">Peak career window</text>
+    <rect x="36" y="497" width="301" height="44" rx="10" fill="url(#greenGrad)" opacity="0.12"/>
+    <rect x="36" y="497" width="301" height="44" rx="10" fill="none" stroke="#22C55E" stroke-width="0.5" opacity="0.3"/>
+    <text x="196.5" y="519" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="13" fill="#22C55E">✦</text>
+    <text x="206.5" y="519" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="13" font-weight="600" fill="#22C55E">  See Full Career Report →</text>
+    <text x="196.5" y="535" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="10" fill="#6B7280">40 credits</text>
+  </g>
+  <rect x="20" y="657" width="182.5" height="30" rx="15" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+  <text x="111.25" y="676" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="11" fill="#9CA3AF">When will I get promoted?</text>
+  <rect x="210.5" y="657" width="195.5" height="30" rx="15" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+  <text x="308.25" y="676" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="11" fill="#9CA3AF">Best months for salary hike</text>
+  <rect x="414.0" y="657" width="156.5" height="30" rx="15" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+  <text x="492.25" y="676" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="11" fill="#9CA3AF">Should I switch jobs?</text>
+  <!-- Input Bar -->
+  <g id="inputBar">
+    <rect x="20" y="722" width="313" height="44" rx="22" fill="#111115" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+    <text x="44" y="749" font-family="SF Pro Display, -apple-system, sans-serif" font-size="14" fill="#6B7280">Ask about your chart...</text>
+    <circle cx="355" cy="744" r="20" fill="#22C55E"/>
+    <text x="355" y="749" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="16" font-weight="700" fill="#000">↑</text>
+  </g>
+  <!-- Bottom Navigation -->
+  <g id="bottomNav">
+    <rect x="0" y="764" width="393" height="88" fill="#111115" opacity="0.95"/>
+    <line x1="0" y1="764" x2="393" y2="764" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+    <g transform="translate(27.299999999999997, 782) scale(1)">
+      <path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z" fill="#6B7280" transform="scale(1)"/>
+    </g>
+    <text x="39.3" y="816" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="10" fill="#6B7280">Home</text>
+    <g transform="translate(105.89999999999999, 782) scale(1)">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" fill="#6B7280" transform="scale(1)"/>
+    </g>
+    <text x="117.89999999999999" y="816" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="10" fill="#6B7280">Chart</text>
+    <g transform="translate(184.5, 782) scale(1)">
+      <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z" fill="#22C55E" transform="scale(1)"/>
+    </g>
+    <text x="196.5" y="816" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="10" fill="#22C55E">Chat</text>
+    <circle cx="196.5" cy="776" r="2" fill="#22C55E"/>
+    <g transform="translate(263.09999999999997, 782) scale(1)">
+      <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z" fill="#6B7280" transform="scale(1)"/>
+    </g>
+    <text x="275.09999999999997" y="816" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="10" fill="#6B7280">Calendar</text>
+    <g transform="translate(341.7, 782) scale(1)">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" fill="#6B7280" transform="scale(1)"/>
+    </g>
+    <text x="353.7" y="816" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="10" fill="#6B7280">Profile</text>
+  </g>
+  </g>
+</svg>

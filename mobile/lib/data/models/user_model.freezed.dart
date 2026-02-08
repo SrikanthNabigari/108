@@ -26,14 +26,14 @@ mixin _$UserModel {
   String? get name => throw _privateConstructorUsedError;
   String? get gender => throw _privateConstructorUsedError;
   String? get avatarUrl => throw _privateConstructorUsedError;
-  bool get onboardingComplete => throw _privateConstructorUsedError;
   String get subscriptionTier => throw _privateConstructorUsedError;
-  String? get lagnaRashi => throw _privateConstructorUsedError;
-  String? get moonRashi => throw _privateConstructorUsedError;
-  String? get moonNakshatra => throw _privateConstructorUsedError;
   DateTime? get birthDatetime => throw _privateConstructorUsedError;
+  double? get birthLatitude => throw _privateConstructorUsedError;
+  double? get birthLongitude => throw _privateConstructorUsedError;
+  double? get timezoneOffset => throw _privateConstructorUsedError;
   String? get placeName => throw _privateConstructorUsedError;
-  int get creditBalance => throw _privateConstructorUsedError;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
+  DateTime? get updatedAt => throw _privateConstructorUsedError;
 
   /// Serializes this UserModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -57,14 +57,14 @@ abstract class $UserModelCopyWith<$Res> {
       String? name,
       String? gender,
       String? avatarUrl,
-      bool onboardingComplete,
       String subscriptionTier,
-      String? lagnaRashi,
-      String? moonRashi,
-      String? moonNakshatra,
       DateTime? birthDatetime,
+      double? birthLatitude,
+      double? birthLongitude,
+      double? timezoneOffset,
       String? placeName,
-      int creditBalance});
+      DateTime? createdAt,
+      DateTime? updatedAt});
 }
 
 /// @nodoc
@@ -88,14 +88,14 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? name = freezed,
     Object? gender = freezed,
     Object? avatarUrl = freezed,
-    Object? onboardingComplete = null,
     Object? subscriptionTier = null,
-    Object? lagnaRashi = freezed,
-    Object? moonRashi = freezed,
-    Object? moonNakshatra = freezed,
     Object? birthDatetime = freezed,
+    Object? birthLatitude = freezed,
+    Object? birthLongitude = freezed,
+    Object? timezoneOffset = freezed,
     Object? placeName = freezed,
-    Object? creditBalance = null,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -122,38 +122,38 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.avatarUrl
           : avatarUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      onboardingComplete: null == onboardingComplete
-          ? _value.onboardingComplete
-          : onboardingComplete // ignore: cast_nullable_to_non_nullable
-              as bool,
       subscriptionTier: null == subscriptionTier
           ? _value.subscriptionTier
           : subscriptionTier // ignore: cast_nullable_to_non_nullable
               as String,
-      lagnaRashi: freezed == lagnaRashi
-          ? _value.lagnaRashi
-          : lagnaRashi // ignore: cast_nullable_to_non_nullable
-              as String?,
-      moonRashi: freezed == moonRashi
-          ? _value.moonRashi
-          : moonRashi // ignore: cast_nullable_to_non_nullable
-              as String?,
-      moonNakshatra: freezed == moonNakshatra
-          ? _value.moonNakshatra
-          : moonNakshatra // ignore: cast_nullable_to_non_nullable
-              as String?,
       birthDatetime: freezed == birthDatetime
           ? _value.birthDatetime
           : birthDatetime // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      birthLatitude: freezed == birthLatitude
+          ? _value.birthLatitude
+          : birthLatitude // ignore: cast_nullable_to_non_nullable
+              as double?,
+      birthLongitude: freezed == birthLongitude
+          ? _value.birthLongitude
+          : birthLongitude // ignore: cast_nullable_to_non_nullable
+              as double?,
+      timezoneOffset: freezed == timezoneOffset
+          ? _value.timezoneOffset
+          : timezoneOffset // ignore: cast_nullable_to_non_nullable
+              as double?,
       placeName: freezed == placeName
           ? _value.placeName
           : placeName // ignore: cast_nullable_to_non_nullable
               as String?,
-      creditBalance: null == creditBalance
-          ? _value.creditBalance
-          : creditBalance // ignore: cast_nullable_to_non_nullable
-              as int,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -173,14 +173,14 @@ abstract class _$$UserModelImplCopyWith<$Res>
       String? name,
       String? gender,
       String? avatarUrl,
-      bool onboardingComplete,
       String subscriptionTier,
-      String? lagnaRashi,
-      String? moonRashi,
-      String? moonNakshatra,
       DateTime? birthDatetime,
+      double? birthLatitude,
+      double? birthLongitude,
+      double? timezoneOffset,
       String? placeName,
-      int creditBalance});
+      DateTime? createdAt,
+      DateTime? updatedAt});
 }
 
 /// @nodoc
@@ -202,14 +202,14 @@ class __$$UserModelImplCopyWithImpl<$Res>
     Object? name = freezed,
     Object? gender = freezed,
     Object? avatarUrl = freezed,
-    Object? onboardingComplete = null,
     Object? subscriptionTier = null,
-    Object? lagnaRashi = freezed,
-    Object? moonRashi = freezed,
-    Object? moonNakshatra = freezed,
     Object? birthDatetime = freezed,
+    Object? birthLatitude = freezed,
+    Object? birthLongitude = freezed,
+    Object? timezoneOffset = freezed,
     Object? placeName = freezed,
-    Object? creditBalance = null,
+    Object? createdAt = freezed,
+    Object? updatedAt = freezed,
   }) {
     return _then(_$UserModelImpl(
       id: null == id
@@ -236,45 +236,46 @@ class __$$UserModelImplCopyWithImpl<$Res>
           ? _value.avatarUrl
           : avatarUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      onboardingComplete: null == onboardingComplete
-          ? _value.onboardingComplete
-          : onboardingComplete // ignore: cast_nullable_to_non_nullable
-              as bool,
       subscriptionTier: null == subscriptionTier
           ? _value.subscriptionTier
           : subscriptionTier // ignore: cast_nullable_to_non_nullable
               as String,
-      lagnaRashi: freezed == lagnaRashi
-          ? _value.lagnaRashi
-          : lagnaRashi // ignore: cast_nullable_to_non_nullable
-              as String?,
-      moonRashi: freezed == moonRashi
-          ? _value.moonRashi
-          : moonRashi // ignore: cast_nullable_to_non_nullable
-              as String?,
-      moonNakshatra: freezed == moonNakshatra
-          ? _value.moonNakshatra
-          : moonNakshatra // ignore: cast_nullable_to_non_nullable
-              as String?,
       birthDatetime: freezed == birthDatetime
           ? _value.birthDatetime
           : birthDatetime // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      birthLatitude: freezed == birthLatitude
+          ? _value.birthLatitude
+          : birthLatitude // ignore: cast_nullable_to_non_nullable
+              as double?,
+      birthLongitude: freezed == birthLongitude
+          ? _value.birthLongitude
+          : birthLongitude // ignore: cast_nullable_to_non_nullable
+              as double?,
+      timezoneOffset: freezed == timezoneOffset
+          ? _value.timezoneOffset
+          : timezoneOffset // ignore: cast_nullable_to_non_nullable
+              as double?,
       placeName: freezed == placeName
           ? _value.placeName
           : placeName // ignore: cast_nullable_to_non_nullable
               as String?,
-      creditBalance: null == creditBalance
-          ? _value.creditBalance
-          : creditBalance // ignore: cast_nullable_to_non_nullable
-              as int,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      updatedAt: freezed == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$UserModelImpl implements _UserModel {
+
+@JsonSerializable(fieldRename: FieldRename.snake)
+class _$UserModelImpl extends _UserModel {
   const _$UserModelImpl(
       {required this.id,
       this.email,
@@ -282,14 +283,15 @@ class _$UserModelImpl implements _UserModel {
       this.name,
       this.gender,
       this.avatarUrl,
-      this.onboardingComplete = false,
       this.subscriptionTier = 'free',
-      this.lagnaRashi,
-      this.moonRashi,
-      this.moonNakshatra,
       this.birthDatetime,
+      this.birthLatitude,
+      this.birthLongitude,
+      this.timezoneOffset,
       this.placeName,
-      this.creditBalance = 0});
+      this.createdAt,
+      this.updatedAt})
+      : super._();
 
   factory _$UserModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserModelImplFromJson(json);
@@ -308,27 +310,25 @@ class _$UserModelImpl implements _UserModel {
   final String? avatarUrl;
   @override
   @JsonKey()
-  final bool onboardingComplete;
-  @override
-  @JsonKey()
   final String subscriptionTier;
-  @override
-  final String? lagnaRashi;
-  @override
-  final String? moonRashi;
-  @override
-  final String? moonNakshatra;
   @override
   final DateTime? birthDatetime;
   @override
+  final double? birthLatitude;
+  @override
+  final double? birthLongitude;
+  @override
+  final double? timezoneOffset;
+  @override
   final String? placeName;
   @override
-  @JsonKey()
-  final int creditBalance;
+  final DateTime? createdAt;
+  @override
+  final DateTime? updatedAt;
 
   @override
   String toString() {
-    return 'UserModel(id: $id, email: $email, phone: $phone, name: $name, gender: $gender, avatarUrl: $avatarUrl, onboardingComplete: $onboardingComplete, subscriptionTier: $subscriptionTier, lagnaRashi: $lagnaRashi, moonRashi: $moonRashi, moonNakshatra: $moonNakshatra, birthDatetime: $birthDatetime, placeName: $placeName, creditBalance: $creditBalance)';
+    return 'UserModel(id: $id, email: $email, phone: $phone, name: $name, gender: $gender, avatarUrl: $avatarUrl, subscriptionTier: $subscriptionTier, birthDatetime: $birthDatetime, birthLatitude: $birthLatitude, birthLongitude: $birthLongitude, timezoneOffset: $timezoneOffset, placeName: $placeName, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -343,22 +343,22 @@ class _$UserModelImpl implements _UserModel {
             (identical(other.gender, gender) || other.gender == gender) &&
             (identical(other.avatarUrl, avatarUrl) ||
                 other.avatarUrl == avatarUrl) &&
-            (identical(other.onboardingComplete, onboardingComplete) ||
-                other.onboardingComplete == onboardingComplete) &&
             (identical(other.subscriptionTier, subscriptionTier) ||
                 other.subscriptionTier == subscriptionTier) &&
-            (identical(other.lagnaRashi, lagnaRashi) ||
-                other.lagnaRashi == lagnaRashi) &&
-            (identical(other.moonRashi, moonRashi) ||
-                other.moonRashi == moonRashi) &&
-            (identical(other.moonNakshatra, moonNakshatra) ||
-                other.moonNakshatra == moonNakshatra) &&
             (identical(other.birthDatetime, birthDatetime) ||
                 other.birthDatetime == birthDatetime) &&
+            (identical(other.birthLatitude, birthLatitude) ||
+                other.birthLatitude == birthLatitude) &&
+            (identical(other.birthLongitude, birthLongitude) ||
+                other.birthLongitude == birthLongitude) &&
+            (identical(other.timezoneOffset, timezoneOffset) ||
+                other.timezoneOffset == timezoneOffset) &&
             (identical(other.placeName, placeName) ||
                 other.placeName == placeName) &&
-            (identical(other.creditBalance, creditBalance) ||
-                other.creditBalance == creditBalance));
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -371,14 +371,14 @@ class _$UserModelImpl implements _UserModel {
       name,
       gender,
       avatarUrl,
-      onboardingComplete,
       subscriptionTier,
-      lagnaRashi,
-      moonRashi,
-      moonNakshatra,
       birthDatetime,
+      birthLatitude,
+      birthLongitude,
+      timezoneOffset,
       placeName,
-      creditBalance);
+      createdAt,
+      updatedAt);
 
   /// Create a copy of UserModel
   /// with the given fields replaced by the non-null parameter values.
@@ -396,7 +396,7 @@ class _$UserModelImpl implements _UserModel {
   }
 }
 
-abstract class _UserModel implements UserModel {
+abstract class _UserModel extends UserModel {
   const factory _UserModel(
       {required final String id,
       final String? email,
@@ -404,14 +404,15 @@ abstract class _UserModel implements UserModel {
       final String? name,
       final String? gender,
       final String? avatarUrl,
-      final bool onboardingComplete,
       final String subscriptionTier,
-      final String? lagnaRashi,
-      final String? moonRashi,
-      final String? moonNakshatra,
       final DateTime? birthDatetime,
+      final double? birthLatitude,
+      final double? birthLongitude,
+      final double? timezoneOffset,
       final String? placeName,
-      final int creditBalance}) = _$UserModelImpl;
+      final DateTime? createdAt,
+      final DateTime? updatedAt}) = _$UserModelImpl;
+  const _UserModel._() : super._();
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$UserModelImpl.fromJson;
@@ -429,21 +430,21 @@ abstract class _UserModel implements UserModel {
   @override
   String? get avatarUrl;
   @override
-  bool get onboardingComplete;
-  @override
   String get subscriptionTier;
-  @override
-  String? get lagnaRashi;
-  @override
-  String? get moonRashi;
-  @override
-  String? get moonNakshatra;
   @override
   DateTime? get birthDatetime;
   @override
+  double? get birthLatitude;
+  @override
+  double? get birthLongitude;
+  @override
+  double? get timezoneOffset;
+  @override
   String? get placeName;
   @override
-  int get creditBalance;
+  DateTime? get createdAt;
+  @override
+  DateTime? get updatedAt;
 
   /// Create a copy of UserModel
   /// with the given fields replaced by the non-null parameter values.

@@ -101,7 +101,7 @@ async def handle_revenuecat_webhook(request: Request) -> dict[str, str]:
         if event_type == "INITIAL_PURCHASE":
             tier = subscription_mapping.get(product_id, "pro")
             await db.execute(
-                "UPDATE users SET subscription_tier = $1 WHERE revenuecat_id = $2",
+                "UPDATE public.users SET subscription_tier = $1 WHERE revenuecat_id = $2",
                 tier,
                 app_user_id,
             )
@@ -110,7 +110,7 @@ async def handle_revenuecat_webhook(request: Request) -> dict[str, str]:
             # Subscription renewed, tier already set
             tier = subscription_mapping.get(product_id, "pro")
             await db.execute(
-                "UPDATE users SET subscription_tier = $1 WHERE revenuecat_id = $2",
+                "UPDATE public.users SET subscription_tier = $1 WHERE revenuecat_id = $2",
                 tier,
                 app_user_id,
             )
@@ -118,7 +118,7 @@ async def handle_revenuecat_webhook(request: Request) -> dict[str, str]:
         elif event_type == "CANCELLATION":
             # Downgrade to free tier
             await db.execute(
-                "UPDATE users SET subscription_tier = $1 WHERE revenuecat_id = $2",
+                "UPDATE public.users SET subscription_tier = $1 WHERE revenuecat_id = $2",
                 "free",
                 app_user_id,
             )
@@ -131,7 +131,7 @@ async def handle_revenuecat_webhook(request: Request) -> dict[str, str]:
 
             # Get user ID from revenuecat_id
             user_row = await db.fetchrow(
-                "SELECT id FROM users WHERE revenuecat_id = $1",
+                "SELECT id FROM public.users WHERE revenuecat_id = $1",
                 app_user_id,
             )
 

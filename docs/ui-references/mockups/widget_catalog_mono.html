@@ -1,0 +1,2189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>108 Widget Catalog · Monochrome</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ===== FILM GRAIN FILTER ===== */
+        @keyframes grain {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 256px 256px;
+            }
+        }
+
+        body {
+            background: #000000;
+            color: #999999;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'SF Pro Display', Helvetica, Arial, sans-serif;
+            font-weight: 400;
+            line-height: 1.6;
+            letter-spacing: 0;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Film grain overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch' seed='1'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3C/defs%3E%3Crect width='256' height='256' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+            background-size: 256px 256px;
+            background-repeat: repeat;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.4;
+            mix-blend-mode: overlay;
+            animation: grain 8s steps(8) infinite;
+        }
+
+        /* Dust particles */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                radial-gradient(2px 2px at 20px 30px, white, rgba(255,255,255,.2)),
+                radial-gradient(2px 2px at 60px 70px, white, rgba(255,255,255,.1)),
+                radial-gradient(1px 1px at 50px 50px, white, rgba(255,255,255,.1)),
+                radial-gradient(1px 1px at 130px 80px, white, rgba(255,255,255,.05)),
+                radial-gradient(2px 2px at 90px 10px, white, rgba(255,255,255,.1)),
+                radial-gradient(1px 1px at 200px 120px, white, rgba(255,255,255,.05));
+            background-size: 200px 200px;
+            background-repeat: repeat;
+            background-position: 0 0;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.15;
+            mix-blend-mode: screen;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            margin-bottom: 80px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            padding-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 64px;
+            font-weight: 100;
+            letter-spacing: 8px;
+            color: #E8E8E8;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+        }
+
+        .header p {
+            font-size: 14px;
+            color: #555555;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+
+        /* ===== CATEGORY SECTION ===== */
+        .category {
+            margin-bottom: 100px;
+        }
+
+        .category-header {
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .category-title {
+            font-size: 18px;
+            font-weight: 500;
+            color: #D0D0D0;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .category-count {
+            font-size: 12px;
+            color: #444444;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* ===== WIDGET GRID ===== */
+        .widget-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 28px;
+            margin-bottom: 60px;
+        }
+
+        @media (max-width: 768px) {
+            .widget-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ===== WIDGET CARD ===== */
+        .widget-card {
+            background: #0A0A0A;
+            border: 0.5px solid rgba(255, 255, 255, 0.06);
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .widget-card:hover {
+            background: #0F0F0F;
+            border-color: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.03);
+        }
+
+        .widget-content {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .widget-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: #E8E8E8;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 8px;
+        }
+
+        .widget-tags {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .widget-tag {
+            font-size: 10px;
+            color: #555555;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 4px 8px;
+            border-radius: 2px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* ===== WIDGET COMPONENTS ===== */
+
+        /* Score Ring */
+        .score-ring {
+            position: relative;
+            width: 120px;
+            height: 120px;
+        }
+
+        .score-ring-bg {
+            position: absolute;
+            inset: 0;
+            border: 3px solid rgba(255, 255, 255, 0.04);
+            border-radius: 50%;
+        }
+
+        .score-ring-fill {
+            position: absolute;
+            inset: 0;
+            border: 3px solid transparent;
+            border-radius: 50%;
+            border-top-color: rgba(255, 255, 255, 0.8);
+            border-right-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .score-ring-text {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .score-ring-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #E8E8E8;
+            line-height: 1;
+        }
+
+        .score-ring-label {
+            font-size: 10px;
+            color: #666666;
+            margin-top: 4px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Horizontal Bar */
+        .bar-container {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bar-fill {
+            height: 100%;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        /* Nested Rings */
+        .nested-rings {
+            position: relative;
+            width: 100px;
+            height: 100px;
+        }
+
+        .ring {
+            position: absolute;
+            inset: 0;
+            border: 2px solid transparent;
+            border-radius: 50%;
+            border-top-color: rgba(255, 255, 255, var(--opacity));
+            border-right-color: rgba(255, 255, 255, var(--opacity));
+        }
+
+        .ring:nth-child(1) {
+            --opacity: 0.3;
+        }
+
+        .ring:nth-child(2) {
+            --opacity: 0.5;
+        }
+
+        .ring:nth-child(3) {
+            --opacity: 0.7;
+        }
+
+        /* Period Card */
+        .period-card {
+            width: 100%;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .period-glyph {
+            font-size: 36px;
+            color: #E8E8E8;
+            margin-bottom: 12px;
+            font-weight: 300;
+        }
+
+        .period-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: #D0D0D0;
+            margin-bottom: 4px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .period-years {
+            font-size: 11px;
+            color: #666666;
+            letter-spacing: 1px;
+        }
+
+        /* South Indian Chart */
+        .si-chart {
+            width: 140px;
+            height: 140px;
+            position: relative;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+        }
+
+        .si-cell {
+            background: rgba(255, 255, 255, 0.02);
+            border: 0.5px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #999999;
+        }
+
+        .si-center {
+            grid-column: 2;
+            grid-row: 2;
+            background: rgba(255, 255, 255, 0.04);
+            color: #D0D0D0;
+            font-size: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        /* Planet Badge */
+        .planet-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 4px;
+            background: transparent;
+        }
+
+        .planet-glyph {
+            font-size: 16px;
+            color: #E8E8E8;
+        }
+
+        .planet-name {
+            font-size: 11px;
+            color: #999999;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Status Banner */
+        .status-banner {
+            width: 100%;
+            padding: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: transparent;
+            border-radius: 2px;
+        }
+
+        .status-banner.high-severity {
+            border-color: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .status-banner.warning {
+            border-style: dashed;
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .status-banner.info {
+            border-style: dotted;
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .status-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #E8E8E8;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .status-content {
+            font-size: 11px;
+            color: #888888;
+            line-height: 1.5;
+        }
+
+        /* Panchanga Strip */
+        .panchanga-strip {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+        }
+
+        .panchanga-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 0.5px solid rgba(255, 255, 255, 0.06);
+            padding: 12px;
+            text-align: center;
+            border-radius: 2px;
+        }
+
+        .panchanga-label {
+            font-size: 9px;
+            color: #555555;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .panchanga-value {
+            font-size: 11px;
+            color: #D0D0D0;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        /* Choghadiya Strip */
+        .choghadiya-strip {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 6px;
+        }
+
+        .choghadiya-slot {
+            height: 24px;
+            border-radius: 2px;
+            border: 0.5px solid rgba(255, 255, 255, 0.08);
+            position: relative;
+        }
+
+        .choghadiya-slot.auspicious {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .choghadiya-slot.normal {
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .choghadiya-slot.inauspicious {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        /* Alert Badge */
+        .alert-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .alert-badge.high {
+            background: rgba(255, 255, 255, 0.06);
+            color: #E8E8E8;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .alert-badge.medium {
+            background: transparent;
+            color: #999999;
+            border: 1px dashed rgba(255, 255, 255, 0.12);
+        }
+
+        .alert-badge.low {
+            background: transparent;
+            color: #666666;
+            border: 1px dotted rgba(255, 255, 255, 0.08);
+        }
+
+        /* Compatibility Ring */
+        .compat-ring {
+            position: relative;
+            width: 140px;
+            height: 140px;
+        }
+
+        .compat-outer {
+            position: absolute;
+            inset: 0;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .compat-middle {
+            position: absolute;
+            inset: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+        }
+
+        .compat-inner {
+            position: absolute;
+            inset: 24px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .compat-score {
+            font-size: 28px;
+            font-weight: 700;
+            color: #E8E8E8;
+        }
+
+        /* Data Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11px;
+        }
+
+        .data-table th {
+            background: rgba(255, 255, 255, 0.04);
+            color: #999999;
+            padding: 8px;
+            text-align: left;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .data-table td {
+            color: #777777;
+            padding: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Action Button */
+        .action-btn {
+            padding: 12px 24px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: transparent;
+            color: #E8E8E8;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .action-btn::after {
+            content: ' →';
+        }
+
+        /* Question Chips */
+        .question-chips {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .question-chip {
+            padding: 8px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: transparent;
+            color: #888888;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .question-chip:hover {
+            border-color: rgba(255, 255, 255, 0.25);
+            color: #999999;
+        }
+
+        /* Atmakaraka Card */
+        .atmakaraka-content {
+            text-align: center;
+        }
+
+        .atmakaraka-glyph {
+            font-size: 72px;
+            color: #E8E8E8;
+            margin-bottom: 16px;
+            font-weight: 300;
+        }
+
+        .atmakaraka-title {
+            font-size: 12px;
+            font-weight: 500;
+            color: #D0D0D0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .atmakaraka-purpose {
+            font-size: 11px;
+            color: #777777;
+            font-style: italic;
+            line-height: 1.6;
+        }
+
+        /* Nakshatra Info */
+        .nakshatra-info {
+            text-align: center;
+            width: 100%;
+        }
+
+        .nakshatra-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: #E8E8E8;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .nakshatra-details {
+            font-size: 10px;
+            color: #666666;
+            line-height: 1.8;
+            letter-spacing: 0.5px;
+        }
+
+        .nakshatra-detail-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+        }
+
+        .nakshatra-detail-label {
+            color: #555555;
+            text-transform: uppercase;
+        }
+
+        .nakshatra-detail-value {
+            color: #888888;
+        }
+
+        /* Ashtakavarga Heatmap */
+        .ashtakavarga-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 3px;
+            width: 100%;
+        }
+
+        .bindhu-cell {
+            width: 20px;
+            height: 20px;
+            border-radius: 2px;
+            border: 0.5px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .bindhu-cell.level-0 { background: rgba(255, 255, 255, 0.02); }
+        .bindhu-cell.level-1 { background: rgba(255, 255, 255, 0.08); }
+        .bindhu-cell.level-2 { background: rgba(255, 255, 255, 0.12); }
+        .bindhu-cell.level-3 { background: rgba(255, 255, 255, 0.16); }
+        .bindhu-cell.level-4 { background: rgba(255, 255, 255, 0.20); }
+        .bindhu-cell.level-5 { background: rgba(255, 255, 255, 0.30); }
+        .bindhu-cell.level-6 { background: rgba(255, 255, 255, 0.45); }
+        .bindhu-cell.level-7 { background: rgba(255, 255, 255, 0.60); }
+        .bindhu-cell.level-8 { background: rgba(255, 255, 255, 0.80); }
+
+        /* Bhava Bala Bars */
+        .bhava-bars {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 6px;
+            width: 100%;
+            align-items: flex-end;
+            height: 120px;
+        }
+
+        .bhava-bar {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .bhava-bar-label {
+            position: absolute;
+            bottom: -16px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 8px;
+            color: #555555;
+            letter-spacing: 0.5px;
+        }
+
+        /* Dasha Timeline */
+        .dasha-timeline {
+            width: 100%;
+            display: flex;
+            height: 24px;
+            gap: 2px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .dasha-segment {
+            flex: 1;
+            background: rgba(255, 255, 255, var(--brightness));
+            border-right: 1px solid rgba(0, 0, 0, 0.2);
+        }
+
+        /* Gem Card */
+        .gem-card-content {
+            text-align: center;
+            width: 100%;
+        }
+
+        .gem-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: #E8E8E8;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .gem-instructions {
+            font-size: 10px;
+            color: #666666;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        /* Remedy Card */
+        .remedy-type {
+            display: inline-block;
+            padding: 4px 8px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 2px;
+            font-size: 9px;
+            color: #999999;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+
+        .remedy-instructions {
+            font-size: 11px;
+            color: #777777;
+            line-height: 1.6;
+        }
+
+        /* Credit Balance */
+        .credit-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: #E8E8E8;
+            line-height: 1;
+        }
+
+        .credit-label {
+            font-size: 11px;
+            color: #666666;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 8px;
+        }
+
+        /* Locked Overlay */
+        .locked-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(3px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            gap: 16px;
+            border-radius: 2px;
+        }
+
+        .lock-icon {
+            font-size: 36px;
+            color: #E8E8E8;
+        }
+
+        .locked-text {
+            font-size: 12px;
+            color: #999999;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        /* Shadbala Gauge */
+        .shadbala-gauge {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .shadbala-bar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .shadbala-label {
+            font-size: 10px;
+            color: #666666;
+            min-width: 60px;
+            text-align: right;
+            letter-spacing: 0.5px;
+        }
+
+        .shadbala-container {
+            flex: 1;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .shadbala-fill {
+            height: 100%;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 2px;
+        }
+
+        /* Mini Score Badge */
+        .mini-score-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .mini-score-value {
+            font-size: 14px;
+            font-weight: 700;
+            color: #E8E8E8;
+        }
+
+        .mini-score-trend {
+            font-size: 12px;
+            color: #999999;
+        }
+
+        /* Muhurta Badge */
+        .muhurta-badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .muhurta-quality {
+            font-size: 12px;
+            font-weight: 500;
+            color: #E8E8E8;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .muhurta-time {
+            font-size: 10px;
+            color: #666666;
+            letter-spacing: 0.5px;
+        }
+
+        /* Vimshopaka */
+        .vimshopaka-content {
+            text-align: center;
+            width: 100%;
+        }
+
+        .vimshopaka-score {
+            font-size: 36px;
+            font-weight: 700;
+            color: #E8E8E8;
+            margin-bottom: 8px;
+        }
+
+        .vimshopaka-label {
+            font-size: 10px;
+            color: #666666;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .vimshopaka-bar {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .vimshopaka-fill {
+            height: 100%;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 2px;
+        }
+
+        /* Area Rating */
+        .area-rating {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .area-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .area-label {
+            font-size: 10px;
+            color: #666666;
+            min-width: 70px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .area-bar {
+            flex: 1;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .area-fill {
+            height: 100%;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 2px;
+        }
+
+        /* Report Card */
+        .report-card-content {
+            text-align: center;
+            width: 100%;
+        }
+
+        .report-title {
+            font-size: 12px;
+            font-weight: 500;
+            color: #E8E8E8;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .report-price {
+            font-size: 16px;
+            font-weight: 700;
+            color: #D0D0D0;
+            margin-bottom: 12px;
+        }
+
+        /* Retrograde Badge */
+        .retrograde-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border: 1px dashed rgba(255, 255, 255, 0.15);
+            border-radius: 2px;
+            background: transparent;
+        }
+
+        .retrograde-symbol {
+            font-size: 14px;
+            color: #E8E8E8;
+            font-weight: 300;
+        }
+
+        .retrograde-text {
+            font-size: 10px;
+            color: #888888;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Planetary War */
+        .planetary-war {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .war-planet {
+            font-size: 32px;
+            color: #E8E8E8;
+        }
+
+        .war-vs {
+            font-size: 10px;
+            color: #666666;
+            letter-spacing: 1px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        /* Eclipse Alert */
+        .eclipse-alert {
+            border: 2px double rgba(255, 255, 255, 0.2);
+            padding: 16px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.01);
+        }
+
+        .eclipse-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: #999999;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .eclipse-content {
+            font-size: 10px;
+            color: #666666;
+            letter-spacing: 0.5px;
+        }
+
+        /* Life Chapter Card */
+        .life-chapter {
+            text-align: center;
+            width: 100%;
+            position: relative;
+        }
+
+        .chapter-glyph {
+            font-size: 42px;
+            color: #D0D0D0;
+            margin-bottom: 8px;
+        }
+
+        .chapter-name {
+            font-size: 12px;
+            font-weight: 500;
+            color: #E8E8E8;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .chapter-years {
+            font-size: 10px;
+            color: #666666;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .chapter-now {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+        }
+
+        /* Transit Event Row */
+        .transit-row {
+            width: 100%;
+            text-align: left;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .transit-row:last-child {
+            border-bottom: none;
+        }
+
+        .transit-date {
+            font-size: 10px;
+            color: #555555;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+
+        .transit-event {
+            font-size: 12px;
+            color: #D0D0D0;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .transit-desc {
+            font-size: 10px;
+            color: #666666;
+        }
+
+        /* Combustion Warning */
+        .combustion-warning {
+            text-align: center;
+        }
+
+        .combustion-text {
+            font-size: 11px;
+            color: #999999;
+            margin-bottom: 8px;
+        }
+
+        .combustion-distance {
+            font-size: 18px;
+            font-weight: 700;
+            color: #E8E8E8;
+        }
+
+        .combustion-label {
+            font-size: 9px;
+            color: #555555;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
+        /* Chat Score Card */
+        .chat-score-inline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 8px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 2px;
+            font-size: 11px;
+            font-weight: 500;
+            color: #D0D0D0;
+        }
+
+        .chat-score-value {
+            font-size: 12px;
+            font-weight: 700;
+            color: #E8E8E8;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 120px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            text-align: center;
+        }
+
+        .footer p {
+            font-size: 11px;
+            color: #444444;
+            letter-spacing: 1px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1200px) {
+            .widget-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 20px;
+            }
+
+            .header h1 {
+                font-size: 42px;
+                letter-spacing: 4px;
+            }
+
+            .widget-card {
+                min-height: 250px;
+                padding: 24px;
+            }
+
+            .panchanga-strip {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HEADER -->
+        <div class="header">
+            <h1>108</h1>
+            <p>42 Widgets · Monochromatic · Film Grain</p>
+        </div>
+
+        <!-- ===== CATEGORY 1: SCORE & RATING ===== -->
+        <div class="category">
+            <div class="category-header">
+                <div class="category-title">Score & Rating</div>
+                <div class="category-count">8 Widgets</div>
+            </div>
+            <div class="widget-grid">
+                <!-- 1. Day Score Ring -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div class="score-ring">
+                            <div class="score-ring-bg"></div>
+                            <div class="score-ring-fill" style="transform: rotate(259deg);"></div>
+                            <div class="score-ring-text">
+                                <div class="score-ring-value">7.2</div>
+                                <div class="score-ring-label">out of 10</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-name">Day Score Ring</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Score</span>
+                        <span class="widget-tag">Ring</span>
+                        <span class="widget-tag">Home</span>
+                    </div>
+                </div>
+
+                <!-- 2. Area Rating Bars -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div class="area-rating">
+                            <div class="area-item">
+                                <div class="area-label">Career</div>
+                                <div class="area-bar"><div class="area-fill" style="width: 85%;"></div></div>
+                            </div>
+                            <div class="area-item">
+                                <div class="area-label">Finance</div>
+                                <div class="area-bar"><div class="area-fill" style="width: 62%;"></div></div>
+                            </div>
+                            <div class="area-item">
+                                <div class="area-label">Relation</div>
+                                <div class="area-bar"><div class="area-fill" style="width: 73%;"></div></div>
+                            </div>
+                            <div class="area-item">
+                                <div class="area-label">Health</div>
+                                <div class="area-bar"><div class="area-fill" style="width: 55%;"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-name">Area Rating Bars</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Rating</span>
+                        <span class="widget-tag">Bar</span>
+                        <span class="widget-tag">Home</span>
+                    </div>
+                </div>
+
+                <!-- 3. Mini Score Badge -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div class="mini-score-badge">
+                            <div class="mini-score-value">8.4</div>
+                            <div class="mini-score-trend">↑</div>
+                        </div>
+                    </div>
+                    <div class="widget-name">Mini Score Badge</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Badge</span>
+                        <span class="widget-tag">Compact</span>
+                    </div>
+                </div>
+
+                <!-- 4. Compatibility Ring -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div class="compat-ring">
+                            <div class="compat-outer"></div>
+                            <div class="compat-middle"></div>
+                            <div class="compat-inner">
+                                <div class="compat-score">24</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-name">Compatibility Ring</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Kundali</span>
+                        <span class="widget-tag">Ring</span>
+                    </div>
+                </div>
+
+                <!-- 5. Shadbala Gauge -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div class="shadbala-gauge">
+                            <div class="shadbala-bar">
+                                <div class="shadbala-label">Jupiter</div>
+                                <div class="shadbala-container">
+                                    <div class="shadbala-fill" style="width: 72%;"></div>
+                                </div>
+                            </div>
+                            <div class="shadbala-bar">
+                                <div class="shadbala-label">Mercury</div>
+                                <div class="shadbala-container">
+                                    <div class="shadbala-fill" style="width: 58%;"></div>
+                                </div>
+                            </div>
+                            <div class="shadbala-bar">
+                                <div class="shadbala-label">Venus</div>
+                                <div class="shadbala-container">
+                                    <div class="shadbala-fill" style="width: 81%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-name">Shadbala Gauge</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Strength</span>
+                        <span class="widget-tag">Planet</span>
+                    </div>
+                </div>
+
+                <!-- 6. Muhurta Badge -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div class="muhurta-badge">
+                            <div class="muhurta-quality">Excellent</div>
+                            <div class="muhurta-time">2:30 PM — 3:45 PM</div>
+                        </div>
+                    </div>
+                    <div class="widget-name">Muhurta Badge</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Auspicious</span>
+                        <span class="widget-tag">Time</span>
+                    </div>
+                </div>
+
+                <!-- 7. Vimshopaka Score -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div class="vimshopaka-content">
+                            <div class="vimshopaka-score">8.9</div>
+                            <div class="vimshopaka-label">Divisional Strength</div>
+                            <div class="vimshopaka-bar">
+                                <div class="vimshopaka-fill" style="width: 89%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-name">Vimshopaka Score</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Strength</span>
+                        <span class="widget-tag">D-Chart</span>
+                    </div>
+                </div>
+
+                <!-- 8. Bhava Bala Bars -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div class="bhava-bars">
+                            <div class="bhava-bar" style="height: 45%;"><span class="bhava-bar-label">H1</span></div>
+                            <div class="bhava-bar" style="height: 62%;"><span class="bhava-bar-label">H2</span></div>
+                            <div class="bhava-bar" style="height: 38%;"><span class="bhava-bar-label">H3</span></div>
+                            <div class="bhava-bar" style="height: 71%;"><span class="bhava-bar-label">H4</span></div>
+                            <div class="bhava-bar" style="height: 52%;"><span class="bhava-bar-label">H5</span></div>
+                            <div class="bhava-bar" style="height: 48%;"><span class="bhava-bar-label">H6</span></div>
+                            <div class="bhava-bar" style="height: 78%;"><span class="bhava-bar-label">H7</span></div>
+                            <div class="bhava-bar" style="height: 55%;"><span class="bhava-bar-label">H8</span></div>
+                            <div class="bhava-bar" style="height: 68%;"><span class="bhava-bar-label">H9</span></div>
+                            <div class="bhava-bar" style="height: 42%;"><span class="bhava-bar-label">H10</span></div>
+                            <div class="bhava-bar" style="height: 65%;"><span class="bhava-bar-label">H11</span></div>
+                            <div class="bhava-bar" style="height: 35%;"><span class="bhava-bar-label">H12</span></div>
+                        </div>
+                    </div>
+                    <div class="widget-name">Bhava Bala Bars</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">House</span>
+                        <span class="widget-tag">Strength</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== CATEGORY 2: PERIOD & TIMELINE ===== -->
+        <div class="category">
+            <div class="category-header">
+                <div class="category-title">Period & Timeline</div>
+                <div class="category-count">6 Widgets</div>
+            </div>
+            <div class="widget-grid">
+                <!-- 9. Dasha Period Bar -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div class="period-glyph">☿</div>
+                        <div class="period-name">Mercury Mahadasha</div>
+                        <div class="period-years">17 Years · 2024–2041</div>
+                        <div class="bar-container" style="width: 100%; margin-top: 12px;">
+                            <div class="bar-fill" style="width: 12%;"></div>
+                        </div>
+                    </div>
+                    <div class="widget-name">Dasha Period Bar</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Dasha</span>
+                        <span class="widget-tag">Timeline</span>
+                    </div>
+                </div>
+
+                <!-- 10. Nested Dasha Rings -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div class="nested-rings">
+                            <div class="ring" style="--opacity: 0.3;"></div>
+                            <div class="ring" style="--opacity: 0.5;"></div>
+                            <div class="ring" style="--opacity: 0.7;"></div>
+                        </div>
+                    </div>
+                    <div class="widget-name">Nested Dasha Rings</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Dasha</span>
+                        <span class="widget-tag">Ring</span>
+                    </div>
+                </div>
+
+                <!-- 11. Life Chapter Card -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div class="life-chapter">
+                            <div class="chapter-glyph">♃</div>
+                            <div class="chapter-name">Jupiter</div>
+                            <div class="chapter-years">2024 – 2041</div>
+                            <div class="chapter-now"></div>
+                        </div>
+                    </div>
+                    <div class="widget-name">Life Chapter Card</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Dasha</span>
+                        <span class="widget-tag">Card</span>
+                    </div>
+                </div>
+
+                <!-- 12. Dasha Timeline Strip -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div class="dasha-timeline" style="--brightness: 0.15;">
+                            <div class="dasha-segment" style="--brightness: 0.12;"></div>
+                            <div class="dasha-segment" style="--brightness: 0.35;"></div>
+                            <div class="dasha-segment" style="--brightness: 0.18;"></div>
+                            <div class="dasha-segment" style="--brightness: 0.08;"></div>
+                            <div class="dasha-segment" style="--brightness: 0.42;"></div>
+                        </div>
+                    </div>
+                    <div class="widget-name">Dasha Timeline Strip</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Timeline</span>
+                        <span class="widget-tag">Dasha</span>
+                    </div>
+                </div>
+
+                <!-- 13. Transit Event Row -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div style="width: 100%; text-align: left;">
+                            <div class="transit-row">
+                                <div class="transit-date">Feb 14, 2026</div>
+                                <div class="transit-event">Saturn enters Aquarius</div>
+                                <div class="transit-desc">Aspect to natal Moon 2°</div>
+                            </div>
+                            <div class="transit-row">
+                                <div class="transit-date">Mar 03, 2026</div>
+                                <div class="transit-event">Venus conjunct Jupiter</div>
+                                <div class="transit-desc">Career advancement likely</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-name">Transit Event Row</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Transit</span>
+                        <span class="widget-tag">List</span>
+                    </div>
+                </div>
+
+                <!-- 14. Antardasha Timeline -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div style="width: 100%; text-align: center; font-size: 10px; color: #666666; margin-bottom: 12px; letter-spacing: 1px; text-transform: uppercase;">Mercury MD · Antardasha Periods</div>
+                        <div class="dasha-timeline">
+                            <div class="dasha-segment" style="--brightness: 0.08;"></div>
+                            <div class="dasha-segment" style="--brightness: 0.25;"></div>
+                            <div class="dasha-segment" style="--brightness: 0.50;"></div>
+                            <div class="dasha-segment" style="--brightness: 0.18;"></div>
+                            <div class="dasha-segment" style="--brightness: 0.12;"></div>
+                        </div>
+                    </div>
+                    <div class="widget-name">Antardasha Timeline</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Dasha</span>
+                        <span class="widget-tag">Sub</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== CATEGORY 3: CHART & GRID ===== -->
+        <div class="category">
+            <div class="category-header">
+                <div class="category-title">Chart & Grid</div>
+                <div class="category-count">5 Widgets</div>
+            </div>
+            <div class="widget-grid">
+                <!-- 15. South Indian Chart -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div class="si-chart">
+                            <div class="si-cell">♂</div>
+                            <div class="si-cell">☉</div>
+                            <div class="si-cell">☽</div>
+                            <div class="si-cell">♃</div>
+                            <div class="si-center">Lagna</div>
+                            <div class="si-cell">♀</div>
+                            <div class="si-cell">☿</div>
+                            <div class="si-cell">♄</div>
+                            <div class="si-cell">☊</div>
+                        </div>
+                    </div>
+                    <div class="widget-name">South Indian Chart</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Chart</span>
+                        <span class="widget-tag">Grid</span>
+                    </div>
+                </div>
+
+                <!-- 16. Planet Badge -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div style="display: flex; flex-direction: column; gap: 12px; width: 100%;">
+                            <div class="planet-badge">
+                                <div class="planet-glyph">☉</div>
+                                <div class="planet-name">Sun</div>
+                            </div>
+                            <div class="planet-badge">
+                                <div class="planet-glyph">☽</div>
+                                <div class="planet-name">Moon</div>
+                            </div>
+                            <div class="planet-badge">
+                                <div class="planet-glyph">♂</div>
+                                <div class="planet-name">Mars</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-name">Planet Badge</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Planet</span>
+                        <span class="widget-tag">Badge</span>
+                    </div>
+                </div>
+
+                <!-- 17. Planet Detail Row -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Planet</th>
+                                    <th>Sign</th>
+                                    <th>House</th>
+                                    <th>Degree</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>☉ Sun</td>
+                                    <td>Libra</td>
+                                    <td>H9</td>
+                                    <td>18°20'</td>
+                                </tr>
+                                <tr>
+                                    <td>☽ Moon</td>
+                                    <td>Aquarius</td>
+                                    <td>H1</td>
+                                    <td>24°15'</td>
+                                </tr>
+                                <tr>
+                                    <td>♂ Mars</td>
+                                    <td>Virgo</td>
+                                    <td>H8</td>
+                                    <td>12°45'</td>
+                                </tr>
+                            </tbody>
+                        </div>
+                    </div>
+                    <div class="widget-name">Planet Detail Row</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Data</span>
+                        <span class="widget-tag">Table</span>
+                    </div>
+                </div>
+
+                <!-- 18. Ashtakavarga Heatmap -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div style="font-size: 10px; color: #666666; margin-bottom: 12px; letter-spacing: 1px; text-transform: uppercase;">Sarvashtakavarga (Bindus)</div>
+                        <div class="ashtakavarga-grid">
+                            <div class="bindhu-cell level-3"></div>
+                            <div class="bindhu-cell level-5"></div>
+                            <div class="bindhu-cell level-7"></div>
+                            <div class="bindhu-cell level-8"></div>
+                            <div class="bindhu-cell level-6"></div>
+                            <div class="bindhu-cell level-4"></div>
+                            <div class="bindhu-cell level-2"></div>
+                            <div class="bindhu-cell level-5"></div>
+                            <div class="bindhu-cell level-8"></div>
+                            <div class="bindhu-cell level-6"></div>
+                            <div class="bindhu-cell level-3"></div>
+                            <div class="bindhu-cell level-1"></div>
+                        </div>
+                    </div>
+                    <div class="widget-name">Ashtakavarga Heatmap</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Heatmap</span>
+                        <span class="widget-tag">Ashtaka</span>
+                    </div>
+                </div>
+
+                <!-- 19. Divisional Chart Chips -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; width: 100%;">
+                            <button class="action-btn" style="flex: 1; min-width: 70px; background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); padding: 8px 12px; font-size: 10px;">D1</button>
+                            <button class="action-btn" style="flex: 1; min-width: 70px; background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); padding: 8px 12px; font-size: 10px;">D9</button>
+                            <button class="action-btn" style="flex: 1; min-width: 70px; background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); padding: 8px 12px; font-size: 10px;">D10</button>
+                            <button class="action-btn" style="flex: 1; min-width: 70px; background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); padding: 8px 12px; font-size: 10px;">D20</button>
+                            <button class="action-btn" style="flex: 1; min-width: 70px; background: transparent; border-color: rgba(255,255,255,0.08); padding: 8px 12px; font-size: 10px; color: #888888;">D60</button>
+                        </div>
+                    </div>
+                    <div class="widget-name">Divisional Chart Chips</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Chart</span>
+                        <span class="widget-tag">Tabs</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== CATEGORY 4: STATUS & ALERT ===== -->
+        <div class="category">
+            <div class="category-header">
+                <div class="category-title">Status & Alert</div>
+                <div class="category-count">7 Widgets</div>
+            </div>
+            <div class="widget-grid">
+                <!-- 20. Sade Sati Banner -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div class="status-banner high-severity">
+                            <div class="status-title">♄ Sade Sati Phase 2</div>
+                            <div class="status-content">Peak Phase · Saturn over Natal Moon · Expect challenges</div>
+                        </div>
+                    </div>
+                    <div class="widget-name">Sade Sati Banner</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Status</span>
+                        <span class="widget-tag">Saturn</span>
+                    </div>
+                </div>
+
+                <!-- 21. Dosha Alert -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div class="status-banner warning">
+                            <div class="status-title">Mangal Dosha</div>
+                            <div class="status-content">Moderate severity · Mars in 7th/12th house from Moon</div>
+                        </div>
+                    </div>
+                    <div class="widget-name">Dosha Alert</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Dosha</span>
+                        <span class="widget-tag">Alert</span>
+                    </div>
+                </div>
+
+                <!-- 22. Yoga Badge -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div style="text-align: center;">
+                            <div style="font-size: 12px; font-weight: 500; color: #E8E8E8; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px;">Gajakesari Yoga</div>
+                            <div style="font-size: 10px; color: #666666; margin-bottom: 12px;">Jupiter & Moon conjunction</div>
+                            <div style="height: 6px; background: rgba(255,255,255,0.04); border-radius: 2px; overflow: hidden;">
+                                <div style="width: 78%; height: 100%; background: rgba(255,255,255,0.6); border-radius: 2px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-name">Yoga Badge</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Yoga</span>
+                        <span class="widget-tag">Strength</span>
+                    </div>
+                </div>
+
+                <!-- 23. Combustion Warning -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div class="combustion-warning">
+                            <div class="combustion-text">Mercury too close to ☉</div>
+                            <div class="combustion-distance">3.2°</div>
+                            <div class="combustion-label">Combustion Distance</div>
+                        </div>
+                    </div>
+                    <div class="widget-name">Combustion Warning</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Status</span>
+                        <span class="widget-tag">Alert</span>
+                    </div>
+                </div>
+
+                <!-- 24. Retrograde Badge -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div class="retrograde-badge">
+                            <div class="retrograde-symbol">℞</div>
+                            <div class="retrograde-text">Saturn Retrograde</div>
+                        </div>
+                    </div>
+                    <div class="widget-name">Retrograde Badge</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Status</span>
+                        <span class="widget-tag">Planet</span>
+                    </div>
+                </div>
+
+                <!-- 25. Planetary War -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div class="planetary-war">
+                            <div class="war-planet">♂</div>
+                            <div class="war-vs">vs</div>
+                            <div class="war-planet">♀</div>
+                        </div>
+                        <div style="font-size: 10px; color: #666666; text-align: center; margin-top: 12px; letter-spacing: 0.5px;">Mars wins · Strength reduced</div>
+                    </div>
+                    <div class="widget-name">Planetary War</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Status</span>
+                        <span class="widget-tag">War</span>
+                    </div>
+                </div>
+
+                <!-- 26. Eclipse Alert -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div class="eclipse-alert">
+                            <div class="eclipse-title">☀ Total Solar Eclipse</div>
+                            <div class="eclipse-content">Feb 24, 2026 · Pisces 6° · Avoid muhurtas</div>
+                        </div>
+                    </div>
+                    <div class="widget-name">Eclipse Alert</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Alert</span>
+                        <span class="widget-tag">Eclipse</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== CATEGORY 5: PANCHANGA & CALENDAR ===== -->
+        <div class="category">
+            <div class="category-header">
+                <div class="category-title">Panchanga & Calendar</div>
+                <div class="category-count">5 Widgets</div>
+            </div>
+            <div class="widget-grid">
+                <!-- 27. Panchanga Strip -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div class="panchanga-strip">
+                            <div class="panchanga-item">
+                                <div class="panchanga-label">Tithi</div>
+                                <div class="panchanga-value">Shukla 10</div>
+                            </div>
+                            <div class="panchanga-item">
+                                <div class="panchanga-label">Nakshatra</div>
+                                <div class="panchanga-value">Pushya</div>
+                            </div>
+                            <div class="panchanga-item">
+                                <div class="panchanga-label">Yoga</div>
+                                <div class="panchanga-value">Auspicious</div>
+                            </div>
+                            <div class="panchanga-item">
+                                <div class="panchanga-label">Karana</div>
+                                <div class="panchanga-value">Bava</div>
+                            </div>
+                            <div class="panchanga-item">
+                                <div class="panchanga-label">Vara</div>
+                                <div class="panchanga-value">Friday</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-name">Panchanga Strip</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Calendar</span>
+                        <span class="widget-tag">Panchanga</span>
+                    </div>
+                </div>
+
+                <!-- 28. Choghadiya Strip -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div style="font-size: 10px; color: #666666; margin-bottom: 12px; letter-spacing: 1px; text-transform: uppercase; text-align: center;">Choghadiya Periods</div>
+                        <div class="choghadiya-strip">
+                            <div class="choghadiya-slot auspicious"></div>
+                            <div class="choghadiya-slot normal"></div>
+                            <div class="choghadiya-slot inauspicious"></div>
+                            <div class="choghadiya-slot auspicious"></div>
+                            <div class="choghadiya-slot normal"></div>
+                            <div class="choghadiya-slot auspicious"></div>
+                            <div class="choghadiya-slot inauspicious"></div>
+                            <div class="choghadiya-slot normal"></div>
+                        </div>
+                    </div>
+                    <div class="widget-name">Choghadiya Strip</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Calendar</span>
+                        <span class="widget-tag">Time</span>
+                    </div>
+                </div>
+
+                <!-- 29. Rahu Kaal Badge -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div class="status-banner info">
+                            <div class="status-title">Rahu Kaal</div>
+                            <div class="status-content">4:30 PM — 6:00 PM · Avoid important activities</div>
+                        </div>
+                    </div>
+                    <div class="widget-name">Rahu Kaal Badge</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Inauspicious</span>
+                        <span class="widget-tag">Time</span>
+                    </div>
+                </div>
+
+                <!-- 30. Abhijit Muhurta Card -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div class="muhurta-badge">
+                            <div class="muhurta-quality">Abhijit Muhurta</div>
+                            <div class="muhurta-time">11:45 AM — 12:30 PM</div>
+                        </div>
+                        <div style="font-size: 10px; color: #666666; margin-top: 12px; text-align: center; font-style: italic;">Best for any activity</div>
+                    </div>
+                    <div class="widget-name">Abhijit Muhurta Card</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Muhurta</span>
+                        <span class="widget-tag">Best</span>
+                    </div>
+                </div>
+
+                <!-- 31. Calendar Day Cells -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; width: 100%;">
+                            <div style="font-size: 10px; color: #555555; text-align: center; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px;">S</div>
+                            <div style="font-size: 10px; color: #555555; text-align: center; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px;">M</div>
+                            <div style="font-size: 10px; color: #555555; text-align: center; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px;">T</div>
+                            <div style="font-size: 10px; color: #555555; text-align: center; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px;">W</div>
+                            <div style="font-size: 10px; color: #555555; text-align: center; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px;">T</div>
+                            <div style="font-size: 10px; color: #555555; text-align: center; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px;">F</div>
+                            <div style="font-size: 10px; color: #555555; text-align: center; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px;">S</div>
+
+                            <div style="width: 24px; height: 24px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; color: #666666; font-size: 11px;">1</div>
+                            <div style="width: 24px; height: 24px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; color: #666666; font-size: 11px;">2</div>
+                            <div style="width: 24px; height: 24px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; color: #E8E8E8; font-size: 11px; background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.15);">3</div>
+                            <div style="width: 24px; height: 24px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; color: #666666; font-size: 11px;">4</div>
+                            <div style="width: 24px; height: 24px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; color: #999999; font-size: 11px; position: relative;">5<span style="position: absolute; bottom: 2px; width: 4px; height: 4px; background: rgba(255,255,255,0.5); border-radius: 50%;"></span></div>
+                            <div style="width: 24px; height: 24px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; color: #666666; font-size: 11px;">6</div>
+                            <div style="width: 24px; height: 24px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; color: #666666; font-size: 11px;">7</div>
+                        </div>
+                    </div>
+                    <div class="widget-name">Calendar Day Cells</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Calendar</span>
+                        <span class="widget-tag">Grid</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== CATEGORY 6: RECOMMENDATION & ACTION ===== -->
+        <div class="category">
+            <div class="category-header">
+                <div class="category-title">Recommendation & Action</div>
+                <div class="category-count">5 Widgets</div>
+            </div>
+            <div class="widget-grid">
+                <!-- 32. Gem Card -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div class="gem-card-content">
+                            <div class="gem-name">Yellow Sapphire</div>
+                            <div style="font-size: 11px; color: #777777; margin-bottom: 12px;">For Jupiter</div>
+                            <div class="gem-instructions">Wear on right hand, Thursday morning. 4-6 carats recommended.</div>
+                        </div>
+                    </div>
+                    <div class="widget-name">Gem Card</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Gem</span>
+                        <span class="widget-tag">Remedy</span>
+                    </div>
+                </div>
+
+                <!-- 33. Remedy Card -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div style="text-align: center; width: 100%;">
+                            <div class="remedy-type">MANTRA</div>
+                            <div class="remedy-instructions">Chant "Om Namah Shivaya" 108 times on Mondays to strengthen Moon. Best during Brahma Muhurta.</div>
+                        </div>
+                    </div>
+                    <div class="widget-name">Remedy Card</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Remedy</span>
+                        <span class="widget-tag">Mantra</span>
+                    </div>
+                </div>
+
+                <!-- 34. Report Card -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div class="report-card-content">
+                            <div class="report-title">Full Birth Chart Analysis</div>
+                            <div class="report-price">$29</div>
+                            <button class="action-btn">Generate</button>
+                        </div>
+                    </div>
+                    <div class="widget-name">Report Card</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Report</span>
+                        <span class="widget-tag">Action</span>
+                    </div>
+                </div>
+
+                <!-- 35. Credit Balance -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div style="text-align: center;">
+                            <div class="credit-number">450</div>
+                            <div class="credit-label">Credits Available</div>
+                        </div>
+                    </div>
+                    <div class="widget-name">Credit Balance</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Account</span>
+                        <span class="widget-tag">Balance</span>
+                    </div>
+                </div>
+
+                <!-- 36. Locked Overlay -->
+                <div class="widget-card" style="position: relative;">
+                    <div class="widget-content">
+                        <div style="text-align: center; opacity: 0.3;">
+                            <div style="font-size: 12px; color: #777777; margin-bottom: 12px;">Advanced Remedies</div>
+                            <div style="font-size: 10px; color: #555555; line-height: 1.6;">Personalized ritual guidance based on your chart</div>
+                        </div>
+                    </div>
+                    <div class="locked-overlay">
+                        <div class="lock-icon">🔒</div>
+                        <div class="locked-text">Premium Only</div>
+                    </div>
+                    <div class="widget-name">Locked Overlay</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Premium</span>
+                        <span class="widget-tag">Access</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== CATEGORY 7: CHAT-SPECIFIC ===== -->
+        <div class="category">
+            <div class="category-header">
+                <div class="category-title">Chat-Specific</div>
+                <div class="category-count">4 Widgets</div>
+            </div>
+            <div class="widget-grid">
+                <!-- 37. Chat Score Card -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div style="width: 100%; text-align: center;">
+                            <div style="display: inline-flex; flex-direction: column; gap: 12px; width: 100%; max-width: 200px;">
+                                <div style="font-size: 11px; color: #666666; letter-spacing: 1px; text-transform: uppercase;">Today's Score</div>
+                                <div class="chat-score-inline">
+                                    <span class="chat-score-value">7.8</span>
+                                    <span>/10</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-name">Chat Score Card</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Chat</span>
+                        <span class="widget-tag">Inline</span>
+                    </div>
+                </div>
+
+                <!-- 38. Chat Data Table -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div class="data-table" style="font-size: 10px;">
+                            <thead>
+                                <tr>
+                                    <th>Area</th>
+                                    <th>Score</th>
+                                    <th>Trend</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Career</td>
+                                    <td>8.5</td>
+                                    <td>↑</td>
+                                </tr>
+                                <tr>
+                                    <td>Finance</td>
+                                    <td>6.2</td>
+                                    <td>↓</td>
+                                </tr>
+                                <tr>
+                                    <td>Health</td>
+                                    <td>7.9</td>
+                                    <td>→</td>
+                                </tr>
+                            </tbody>
+                        </div>
+                    </div>
+                    <div class="widget-name">Chat Data Table</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Chat</span>
+                        <span class="widget-tag">Table</span>
+                    </div>
+                </div>
+
+                <!-- 39. Chat Action Card -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div style="text-align: center; width: 100%;">
+                            <div style="font-size: 11px; color: #666666; margin-bottom: 12px;">Ready to explore deeper?</div>
+                            <button class="action-btn">View Full Analysis</button>
+                        </div>
+                    </div>
+                    <div class="widget-name">Chat Action Card</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Chat</span>
+                        <span class="widget-tag">CTA</span>
+                    </div>
+                </div>
+
+                <!-- 40. Question Chips -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div class="question-chips">
+                            <button class="question-chip">Career prospects?</button>
+                            <button class="question-chip">Marriage timing?</button>
+                            <button class="question-chip">Money outlook?</button>
+                        </div>
+                    </div>
+                    <div class="widget-name">Question Chips</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Chat</span>
+                        <span class="widget-tag">Suggestions</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== CATEGORY 8: SOUL & SPIRITUAL ===== -->
+        <div class="category">
+            <div class="category-header">
+                <div class="category-title">Soul & Spiritual</div>
+                <div class="category-count">2 Widgets</div>
+            </div>
+            <div class="widget-grid">
+                <!-- 41. Atmakaraka Card -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div class="atmakaraka-content">
+                            <div class="atmakaraka-glyph">♄</div>
+                            <div class="atmakaraka-title">Atmakaraka</div>
+                            <div class="atmakaraka-purpose">Your soul purpose is transformation through discipline and wisdom. The path of the sage.</div>
+                        </div>
+                    </div>
+                    <div class="widget-name">Atmakaraka Card</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Soul</span>
+                        <span class="widget-tag">Jaimini</span>
+                    </div>
+                </div>
+
+                <!-- 42. Nakshatra Info Card -->
+                <div class="widget-card">
+                    <div class="widget-content">
+                        <div class="nakshatra-info">
+                            <div class="nakshatra-name">Pushya</div>
+                            <div class="nakshatra-details">
+                                <div class="nakshatra-detail-item">
+                                    <span class="nakshatra-detail-label">Lord</span>
+                                    <span class="nakshatra-detail-value">Saturn</span>
+                                </div>
+                                <div class="nakshatra-detail-item">
+                                    <span class="nakshatra-detail-label">Symbol</span>
+                                    <span class="nakshatra-detail-value">Bow</span>
+                                </div>
+                                <div class="nakshatra-detail-item">
+                                    <span class="nakshatra-detail-label">Deity</span>
+                                    <span class="nakshatra-detail-value">Brihaspati</span>
+                                </div>
+                                <div class="nakshatra-detail-item">
+                                    <span class="nakshatra-detail-label">Range</span>
+                                    <span class="nakshatra-detail-value">93°–106°</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-name">Nakshatra Info Card</div>
+                    <div class="widget-tags">
+                        <span class="widget-tag">Nakshatra</span>
+                        <span class="widget-tag">Reference</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            <p>Museum-grade monochromatic design system for Vedic astrology</p>
+        </div>
+    </div>
+</body>
+</html>

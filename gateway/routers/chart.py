@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import json
 import logging
 import sys
 from pathlib import Path
@@ -46,6 +45,7 @@ async def _load_birth_chart(db: Any, user_id: str) -> dict[str, Any] | None:
         if not row:
             return None
 
+        # asyncpg returns JSONB as Python dict already — no json.loads needed
         return {
             "id": str(row["id"]),
             "user_id": str(row["user_id"]),
@@ -53,13 +53,13 @@ async def _load_birth_chart(db: Any, user_id: str) -> dict[str, Any] | None:
             "latitude": float(row["latitude"]),
             "longitude": float(row["longitude"]),
             "timezone": row["timezone"],
-            "planets": json.loads(row["planets"]) if row["planets"] else {},
-            "houses": json.loads(row["houses"]) if row["houses"] else {},
+            "planets": row["planets"] if row["planets"] else {},
+            "houses": row["houses"] if row["houses"] else {},
             "lagna_rashi": row["lagna_rashi"],
             "moon_rashi": row["moon_rashi"],
             "moon_nakshatra": row["moon_nakshatra"],
             "moon_nakshatra_pada": row.get("moon_nakshatra_pada"),
-            "ayanamsa": row["ayanamsa"],
+            "ayanamsa": row.get("ayanamsa"),
         }
     except Exception as e:
         logger.error(f"Failed to load birth chart: {e}")

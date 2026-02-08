@@ -1,0 +1,2003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>108 Vedic Astrology - Entity Detail Panels Reference</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            background: #0A0A0A;
+            color: #E8E8E8;
+        }
+
+        /* Film grain background */
+        @keyframes grain {
+            0% { background-position: 0 0; }
+            100% { background-position: 100% 100%; }
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" /><feColorMatrix type="saturate" values="0"/></filter><rect width="100" height="100" filter="url(%23grain)" opacity="0.05"/></svg>');
+            background-size: 100px 100px;
+            animation: grain 8s steps(10) infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100%;
+            background: #0A0A0A;
+        }
+
+        /* Top control bar */
+        .control-bar {
+            padding: 16px;
+            border-bottom: 1px solid #333;
+            background: #0A0A0A;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .control-bar label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: #999;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .control-bar select {
+            padding: 8px 12px;
+            background: #1A1A1A;
+            border: 1px solid #444;
+            color: #E8E8E8;
+            font-size: 13px;
+            border-radius: 2px;
+            cursor: pointer;
+        }
+
+        .control-bar select:hover {
+            border-color: #666;
+            background: #232323;
+        }
+
+        /* Panels container */
+        .panels-container {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            padding: 16px;
+            gap: 24px;
+            scroll-behavior: smooth;
+        }
+
+        /* Individual panel */
+        .panel {
+            max-width: 393px;
+            margin: 0 auto;
+            width: 100%;
+            background: #1A1A1A;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+            page-break-inside: avoid;
+        }
+
+        .panel.hidden {
+            display: none;
+        }
+
+        /* Panel header */
+        .panel-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #333;
+        }
+
+        .panel-glyph {
+            font-size: 32px;
+            font-weight: 300;
+            line-height: 1;
+            color: #E8E8E8;
+        }
+
+        .panel-title-group {
+            flex: 1;
+        }
+
+        .panel-title {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            color: #E8E8E8;
+            margin-bottom: 4px;
+        }
+
+        .panel-subtitle {
+            font-size: 12px;
+            color: #999;
+            letter-spacing: 0.3px;
+        }
+
+        .panel-badge {
+            display: inline-block;
+            background: #333;
+            border: 1px solid #555;
+            padding: 4px 10px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            color: #CCC;
+            border-radius: 2px;
+        }
+
+        /* Section structure */
+        .section {
+            margin-bottom: 24px;
+        }
+
+        .section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: #999;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .section-content {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #CCC;
+        }
+
+        /* Position block (grid) */
+        .position-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .position-item {
+            background: #0A0A0A;
+            border: 1px solid #333;
+            padding: 12px;
+            border-radius: 4px;
+        }
+
+        .position-label {
+            font-size: 10px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+
+        .position-value {
+            font-size: 13px;
+            color: #E8E8E8;
+            font-weight: 600;
+        }
+
+        /* Strength meter */
+        .strength-meter {
+            margin: 16px 0;
+        }
+
+        .meter-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            margin-bottom: 8px;
+            color: #999;
+        }
+
+        .meter-bar-bg {
+            background: #0A0A0A;
+            border: 1px solid #333;
+            height: 20px;
+            border-radius: 2px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .meter-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #444 0%, #666 50%, #444 100%);
+            transition: width 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 6px;
+        }
+
+        .meter-label-value {
+            font-size: 10px;
+            color: #E8E8E8;
+            font-weight: 600;
+        }
+
+        .meter-verdict {
+            font-size: 12px;
+            color: #999;
+            margin-top: 8px;
+        }
+
+        /* Why this matters block */
+        .why-block {
+            background: #0A0A0A;
+            border-left: 2px solid #555;
+            padding: 12px;
+            border-radius: 2px;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #CCC;
+            font-style: italic;
+        }
+
+        /* List blocks */
+        .detail-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .list-item {
+            padding: 10px 0;
+            font-size: 13px;
+            line-height: 1.5;
+            color: #CCC;
+            border-bottom: 1px solid #222;
+        }
+
+        .list-item:last-child {
+            border-bottom: none;
+        }
+
+        .list-item-label {
+            font-weight: 600;
+            color: #E8E8E8;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .list-item-detail {
+            color: #999;
+            font-size: 12px;
+        }
+
+        /* Tappable elements */
+        .tappable {
+            border: 1px dashed #555;
+            padding: 8px;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s;
+            display: inline-block;
+        }
+
+        .tappable:hover {
+            background: #232323;
+            border-color: #666;
+        }
+
+        /* Status indicators */
+        .status-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            background: #1A1A1A;
+            border: 1px solid #444;
+            border-radius: 2px;
+            margin-left: 6px;
+        }
+
+        .status-strong { border-color: #666; color: #E8E8E8; }
+        .status-moderate { border-color: #555; color: #CCC; }
+        .status-weak { border-color: #444; color: #999; }
+        .status-severe { border-color: #666; color: #CCC; }
+        .status-mild { border-color: #555; color: #CCC; }
+        .status-active { border-color: #555; color: #CCC; }
+
+        /* Timeline */
+        .timeline {
+            background: #0A0A0A;
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 12px;
+            font-size: 12px;
+            line-height: 1.6;
+            color: #CCC;
+        }
+
+        .timeline-item {
+            padding: 8px 0;
+            border-bottom: 1px solid #222;
+        }
+
+        .timeline-item:last-child {
+            border-bottom: none;
+        }
+
+        .timeline-label {
+            color: #999;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        /* Remedies block */
+        .remedies-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .remedy-item {
+            background: #0A0A0A;
+            border: 1px solid #333;
+            padding: 12px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .remedy-label {
+            font-weight: 600;
+            color: #999;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-bottom: 6px;
+        }
+
+        .remedy-content {
+            color: #CCC;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        /* Pass/fail check */
+        .check-list {
+            background: #0A0A0A;
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 12px;
+            font-size: 12px;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 8px 0;
+            border-bottom: 1px solid #222;
+        }
+
+        .check-item:last-child {
+            border-bottom: none;
+        }
+
+        .check-icon {
+            font-weight: 700;
+            color: #666;
+            min-width: 16px;
+        }
+
+        .check-item.pass .check-icon { color: #666; }
+        .check-item.fail .check-icon { color: #555; }
+
+        .check-text {
+            flex: 1;
+            color: #CCC;
+        }
+
+        .check-text.fail { color: #999; }
+
+        /* Ashtakavarga bar chart */
+        .ashtakavarga-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin: 12px 0;
+        }
+
+        .ashtakavarga-item {
+            text-align: center;
+        }
+
+        .ashtakavarga-label {
+            font-size: 10px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+
+        .ashtakavarga-bar {
+            background: #0A0A0A;
+            border: 1px solid #333;
+            height: 40px;
+            border-radius: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ashtakavarga-fill {
+            background: #555;
+            height: 100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        .ashtakavarga-value {
+            position: absolute;
+            bottom: 4px;
+            left: 0;
+            right: 0;
+            font-size: 10px;
+            color: #E8E8E8;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        /* Properties grid (element, quality, etc) */
+        .properties-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .property-item {
+            background: #0A0A0A;
+            border: 1px solid #333;
+            padding: 12px;
+            border-radius: 4px;
+        }
+
+        .property-label {
+            font-size: 10px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .property-value {
+            font-size: 13px;
+            color: #E8E8E8;
+            font-weight: 600;
+        }
+
+        /* Severity badges */
+        .severity-severe {
+            border-color: #666;
+            color: #E8E8E8;
+        }
+
+        .severity-moderate {
+            border-color: #555;
+            color: #CCC;
+        }
+
+        .severity-mild {
+            border-color: #444;
+            color: #999;
+        }
+
+        /* Cancellation indicator */
+        .cancellation-status {
+            padding: 12px;
+            background: #0A0A0A;
+            border: 1px solid #333;
+            border-radius: 4px;
+            margin: 12px 0;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #CCC;
+        }
+
+        .cancellation-status.cancelled {
+            border-color: #555;
+            background: #0A0A0A;
+        }
+
+        .cancellation-status.not-cancelled {
+            border-color: #333;
+        }
+
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+            .panel {
+                page-break-after: always;
+                box-shadow: none;
+                border: 1px solid black;
+            }
+            .control-bar {
+                display: none;
+            }
+        }
+
+        /* Scrollbar styling */
+        .panels-container::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .panels-container::-webkit-scrollbar-track {
+            background: #0A0A0A;
+        }
+
+        .panels-container::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+
+        .panels-container::-webkit-scrollbar-thumb:hover {
+            background: #444;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="control-bar">
+            <label for="entity-type">Entity Type:</label>
+            <select id="entity-type" onchange="filterPanels()">
+                <option value="all">All Panels (Reference)</option>
+                <option value="planet">Planets</option>
+                <option value="rashi">Signs/Rashis</option>
+                <option value="house">Houses/Bhavas</option>
+                <option value="nakshatra">Nakshatras</option>
+                <option value="yoga">Yogas</option>
+                <option value="dosha">Doshas</option>
+            </select>
+        </div>
+
+        <div class="panels-container" id="panels-container">
+
+            <!-- ============================================ -->
+            <!-- 1. PLANET DETAIL PANEL - SATURN -->
+            <!-- ============================================ -->
+            <div class="panel" data-type="planet">
+                <div class="panel-header">
+                    <div class="panel-glyph">♄</div>
+                    <div class="panel-title-group">
+                        <div class="panel-title">Saturn (Shani)</div>
+                        <div class="panel-subtitle">Lord of 4th & 5th Houses</div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Position</span>
+                    <div class="position-grid">
+                        <div class="position-item">
+                            <div class="position-label">Sign & Degree</div>
+                            <div class="position-value">♑ 18°24'</div>
+                        </div>
+                        <div class="position-item">
+                            <div class="position-label">House</div>
+                            <div class="position-value">House 4</div>
+                        </div>
+                        <div class="position-item">
+                            <div class="position-label">Nakshatra (Pada)</div>
+                            <div class="position-value">Uttara Ashadha IV</div>
+                        </div>
+                        <div class="position-item">
+                            <div class="position-label">Dignity Status</div>
+                            <div class="position-value">Own Sign</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Strength (Shadbala)</span>
+                    <div class="strength-meter">
+                        <div class="meter-label">
+                            <span>Overall Strength</span>
+                            <span>318.57 / 600</span>
+                        </div>
+                        <div class="meter-bar-bg">
+                            <div class="meter-bar-fill" style="width: 53%;">
+                                <span class="meter-label-value">Strong</span>
+                            </div>
+                        </div>
+                        <div class="meter-verdict">Verdict: Strong — Saturn is well-placed in its own sign, providing solid foundation for 4th & 5th house significations</div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Why This Matters</span>
+                    <div class="why-block">
+                        As lord of the 4th (home, property, inner peace) and 5th (creativity, children, past merit), Saturn placed in its own sign in the 4th house brings discipline, structure, and long-term stability to domestic matters. Saturn's natural delay and caution bless property through patient accumulation rather than sudden gain.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Aspects Cast</span>
+                    <div class="detail-list">
+                        <div class="list-item">
+                            <span class="list-item-label">3rd aspect (House 6)</span>
+                            <span class="list-item-detail">Afflicts house of health, enemies, daily work</span>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-item-label">10th aspect (House 1)</span>
+                            <span class="list-item-detail">Aspects ascendant — influences personality</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Involved In</span>
+                    <div class="detail-list">
+                        <div class="list-item">
+                            <span class="list-item-label"><span class="tappable">Sasa Yoga</span></span>
+                            <span class="list-item-detail">Pancha Mahapurusha — grants authority & discipline</span>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-item-label"><span class="tappable">Raja Yoga (Saturn-Moon)</span></span>
+                            <span class="list-item-detail">Lord of 5th in trikona from Moon</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Combustion Status</span>
+                    <div class="section-content">None — Saturn is 128° away from Sun</div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Retrograde Status</span>
+                    <div class="section-content">Direct motion — Saturn moves forward, effects are straightforward and not delayed</div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Current Transit</span>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-label">Natal Position</div>
+                            Capricorn 18°24' (House 4)
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-label">Transit Position (Feb 2026)</div>
+                            Aquarius 09°15' (House 5)
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-label">Status</div>
+                            Progressed one house beyond natal; aspects shifting to House 7
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Remedies</span>
+                    <div class="remedies-grid">
+                        <div class="remedy-item">
+                            <div class="remedy-label">Mantra</div>
+                            <div class="remedy-content">ॐ शं शनैश्चराय नमः (108x Saturday)</div>
+                        </div>
+                        <div class="remedy-item">
+                            <div class="remedy-label">Gemstone</div>
+                            <div class="remedy-content">Blue Sapphire (Saturn ring), 4-5 carats</div>
+                        </div>
+                        <div class="remedy-item">
+                            <div class="remedy-label">Day & Time</div>
+                            <div class="remedy-content">Saturday, morning, Sunrise to 2 hours</div>
+                        </div>
+                        <div class="remedy-item">
+                            <div class="remedy-label">Deity</div>
+                            <div class="remedy-content">Shani Devata, Lord of Justice</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- 2. PLANET DETAIL PANEL - MERCURY -->
+            <!-- ============================================ -->
+            <div class="panel" data-type="planet">
+                <div class="panel-header">
+                    <div class="panel-glyph">☿</div>
+                    <div class="panel-title-group">
+                        <div class="panel-title">Mercury (Budha)</div>
+                        <div class="panel-subtitle">Lord of 3rd & 6th Houses</div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Position</span>
+                    <div class="position-grid">
+                        <div class="position-item">
+                            <div class="position-label">Sign & Degree</div>
+                            <div class="position-value">♓ 06°12'</div>
+                        </div>
+                        <div class="position-item">
+                            <div class="position-label">House</div>
+                            <div class="position-value">House 9</div>
+                        </div>
+                        <div class="position-item">
+                            <div class="position-label">Nakshatra (Pada)</div>
+                            <div class="position-value">Revati I</div>
+                        </div>
+                        <div class="position-item">
+                            <div class="position-label">Dignity Status</div>
+                            <div class="position-value">Debilitated</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Strength (Shadbala)</span>
+                    <div class="strength-meter">
+                        <div class="meter-label">
+                            <span>Overall Strength</span>
+                            <span>187.23 / 600</span>
+                        </div>
+                        <div class="meter-bar-bg">
+                            <div class="meter-bar-fill" style="width: 31%;">
+                                <span class="meter-label-value">Weak</span>
+                            </div>
+                        </div>
+                        <div class="meter-verdict">Verdict: Weak — Mercury is debilitated in Pisces; logic & communication faculties need support</div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Why This Matters</span>
+                    <div class="why-block">
+                        Mercury, lord of communication (3rd) and service (6th), placed in mutable Pisces (detriment) in the 9th house of philosophy creates a paradox: higher wisdom (9th) at odds with intellectual clarity. Mercury here favors intuitive communication over logical analysis. Yet in House 9, it also brings diplomatic wisdom and connects learning to spirituality.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Aspects Cast</span>
+                    <div class="detail-list">
+                        <div class="list-item">
+                            <span class="list-item-label">7th aspect (House 3)</span>
+                            <span class="list-item-detail">Aspects own 3rd house (siblings, short travels)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Involved In</span>
+                    <div class="detail-list">
+                        <div class="list-item">
+                            <span class="list-item-label"><span class="tappable">Neecha Bhanga Yoga (possible)</span></span>
+                            <span class="list-item-detail">If Jupiter (exaltation lord) placed strong</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Combustion Status</span>
+                    <div class="section-content">Close to Sun — 14° away; minor combustion effect reducing clarity</div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Retrograde Status</span>
+                    <div class="section-content">Direct motion</div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Current Transit</span>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-label">Natal Position</div>
+                            Pisces 06°12' (House 9)
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-label">Transit Position (Feb 2026)</div>
+                            Aquarius 19°48' (House 8)
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-label">Status</div>
+                            Moving into 8th house (mysteries, transformation, research)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Remedies</span>
+                    <div class="remedies-grid">
+                        <div class="remedy-item">
+                            <div class="remedy-label">Mantra</div>
+                            <div class="remedy-content">ॐ बुद्ध बुद्धये नमः (96x Wednesday)</div>
+                        </div>
+                        <div class="remedy-item">
+                            <div class="remedy-label">Gemstone</div>
+                            <div class="remedy-content">Emerald (Mercury ring), 3-4 carats</div>
+                        </div>
+                        <div class="remedy-item">
+                            <div class="remedy-label">Day & Time</div>
+                            <div class="remedy-content">Wednesday, morning hours</div>
+                        </div>
+                        <div class="remedy-item">
+                            <div class="remedy-label">Charity</div>
+                            <div class="remedy-content">Green vegetables, books, writing supplies</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- 3. PLANET DETAIL PANEL - MOON -->
+            <!-- ============================================ -->
+            <div class="panel" data-type="planet">
+                <div class="panel-header">
+                    <div class="panel-glyph">☽</div>
+                    <div class="panel-title-group">
+                        <div class="panel-title">Moon (Chandra)</div>
+                        <div class="panel-subtitle">Mind & Emotions</div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Position</span>
+                    <div class="position-grid">
+                        <div class="position-item">
+                            <div class="position-label">Sign & Degree</div>
+                            <div class="position-value">♒ 14°36'</div>
+                        </div>
+                        <div class="position-item">
+                            <div class="position-label">House</div>
+                            <div class="position-value">House 5</div>
+                        </div>
+                        <div class="position-item">
+                            <div class="position-label">Nakshatra (Pada)</div>
+                            <div class="position-value">Shatabhisha II</div>
+                        </div>
+                        <div class="position-item">
+                            <div class="position-label">Dignity Status</div>
+                            <div class="position-value">Neutral</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Strength (Shadbala)</span>
+                    <div class="strength-meter">
+                        <div class="meter-label">
+                            <span>Overall Strength</span>
+                            <span>276.84 / 600</span>
+                        </div>
+                        <div class="meter-bar-bg">
+                            <div class="meter-bar-fill" style="width: 46%;">
+                                <span class="meter-label-value">Moderate</span>
+                            </div>
+                        </div>
+                        <div class="meter-verdict">Verdict: Moderate — Moon's emotional expression is stable but sometimes detached</div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Why This Matters</span>
+                    <div class="why-block">
+                        Moon in Aquarius (humanitarian, eccentric) in House 5 (creativity, romance, intellect) creates a mind that values freedom and innovation. Emotions are processed through logic rather than sentiment. Perfect for scientific thinking, creative breakthroughs, but may struggle with conventional sentimentality.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Aspects Cast</span>
+                    <div class="detail-list">
+                        <div class="list-item">
+                            <span class="list-item-label">7th aspect (House 11)</span>
+                            <span class="list-item-detail">Aspects 11th house of friendship, networks, gains</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Involved In</span>
+                    <div class="detail-list">
+                        <div class="list-item">
+                            <span class="list-item-label"><span class="tappable">No major yogas</span></span>
+                            <span class="list-item-detail">Moon independent of grand combinations</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Combustion Status</span>
+                    <div class="section-content">None — Moon is 48° away from Sun</div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Retrograde Status</span>
+                    <div class="section-content">Direct motion (Moon never goes retrograde)</div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Current Transit</span>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-label">Natal Position</div>
+                            Aquarius 14°36' (House 5)
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-label">Transit Position (Feb 2026)</div>
+                            Capricorn 18°24' (House 4)
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-label">Status</div>
+                            Waning Moon — periods of introspection and consolidation
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Remedies</span>
+                    <div class="remedies-grid">
+                        <div class="remedy-item">
+                            <div class="remedy-label">Mantra</div>
+                            <div class="remedy-content">ॐ सोम सोमाय नमः (108x Monday)</div>
+                        </div>
+                        <div class="remedy-item">
+                            <div class="remedy-label">Gemstone</div>
+                            <div class="remedy-content">Pearl (Moon ring), 6-8 carats</div>
+                        </div>
+                        <div class="remedy-item">
+                            <div class="remedy-label">Day & Time</div>
+                            <div class="remedy-content">Monday, especially full moon</div>
+                        </div>
+                        <div class="remedy-item">
+                            <div class="remedy-label">Deity</div>
+                            <div class="remedy-content">Chandra Devata, Soma Rasa</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- 4. RASHI/SIGN DETAIL PANEL - CAPRICORN -->
+            <!-- ============================================ -->
+            <div class="panel" data-type="rashi">
+                <div class="panel-header">
+                    <div class="panel-glyph">♑</div>
+                    <div class="panel-title-group">
+                        <div class="panel-title">Capricorn (Makara)</div>
+                        <div class="panel-subtitle">House 4 in your chart</div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Properties</span>
+                    <div class="properties-grid">
+                        <div class="property-item">
+                            <div class="property-label">Element</div>
+                            <div class="property-value">Earth</div>
+                        </div>
+                        <div class="property-item">
+                            <div class="property-label">Quality</div>
+                            <div class="property-value">Movable</div>
+                        </div>
+                        <div class="property-item">
+                            <div class="property-label">Ruler</div>
+                            <div class="property-value"><span class="tappable">♄ Saturn</span></div>
+                        </div>
+                        <div class="property-item">
+                            <div class="property-label">Exaltation</div>
+                            <div class="property-value">♂ Mars</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Occupants in Your Chart</span>
+                    <div class="detail-list">
+                        <div class="list-item">
+                            <span class="list-item-label"><span class="tappable">♄ Saturn</span> 18°24' (Own Sign)</span>
+                            <span class="list-item-detail">Strengthens property, real estate, home security</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Ashtakavarga Bindus</span>
+                    <div class="ashtakavarga-grid">
+                        <div class="ashtakavarga-item">
+                            <div class="ashtakavarga-label">Sun</div>
+                            <div class="ashtakavarga-bar">
+                                <div class="ashtakavarga-fill" style="height: 75%;"></div>
+                                <div class="ashtakavarga-value">6</div>
+                            </div>
+                        </div>
+                        <div class="ashtakavarga-item">
+                            <div class="ashtakavarga-label">Moon</div>
+                            <div class="ashtakavarga-bar">
+                                <div class="ashtakavarga-fill" style="height: 50%;"></div>
+                                <div class="ashtakavarga-value">4</div>
+                            </div>
+                        </div>
+                        <div class="ashtakavarga-item">
+                            <div class="ashtakavarga-label">Mars</div>
+                            <div class="ashtakavarga-bar">
+                                <div class="ashtakavarga-fill" style="height: 100%;"></div>
+                                <div class="ashtakavarga-value">8</div>
+                            </div>
+                        </div>
+                        <div class="ashtakavarga-item">
+                            <div class="ashtakavarga-label">Mercury</div>
+                            <div class="ashtakavarga-bar">
+                                <div class="ashtakavarga-fill" style="height: 25%;"></div>
+                                <div class="ashtakavarga-value">2</div>
+                            </div>
+                        </div>
+                        <div class="ashtakavarga-item">
+                            <div class="ashtakavarga-label">Jupiter</div>
+                            <div class="ashtakavarga-bar">
+                                <div class="ashtakavarga-fill" style="height: 62%;"></div>
+                                <div class="ashtakavarga-value">5</div>
+                            </div>
+                        </div>
+                        <div class="ashtakavarga-item">
+                            <div class="ashtakavarga-label">Venus</div>
+                            <div class="ashtakavarga-bar">
+                                <div class="ashtakavarga-fill" style="height: 37%;"></div>
+                                <div class="ashtakavarga-value">3</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Sarvashtakavarga (SAV)</span>
+                    <div class="strength-meter">
+                        <div class="meter-label">
+                            <span>Total Bindus</span>
+                            <span>32 / 56</span>
+                        </div>
+                        <div class="meter-bar-bg">
+                            <div class="meter-bar-fill" style="width: 57%;">
+                                <span class="meter-label-value">Strong</span>
+                            </div>
+                        </div>
+                        <div class="meter-verdict">Verdict: Above Average — Capricorn House receives strong benevolent planetary influx</div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">House Significations (House 4)</span>
+                    <div class="section-content">
+                        Mother, home, domestic peace, real estate, vehicles, ancestral property, buried treasure, emotions, gardens, wells, peace of mind, end of life (death), storage, comfort.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Arudha Padas in This Sign</span>
+                    <div class="detail-list">
+                        <div class="list-item">
+                            <span class="list-item-label"><span class="tappable">AL (Lagna Arudha)</span></span>
+                            <span class="list-item-detail">15°42' — perception of self is grounded, practical</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- 5. HOUSE/BHAVA DETAIL PANEL - HOUSE 10 -->
+            <!-- ============================================ -->
+            <div class="panel" data-type="house">
+                <div class="panel-header">
+                    <div class="panel-glyph">X</div>
+                    <div class="panel-title-group">
+                        <div class="panel-title">House 10 (Karma Bhava)</div>
+                        <div class="panel-subtitle">Career & Public Status</div>
+                    </div>
+                    <span class="panel-badge">Kendra</span>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">House Category</span>
+                    <div class="section-content">Kendra (Angular House) — Primary life pillar, gives direct results</div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Governs</span>
+                    <div class="section-content">
+                        Career, profession, status, public reputation, authority, government, business, fame, honors, achievements, employer, leadership, tenth sign (Cancer), actions/karma itself.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Lord Placement in Your Chart</span>
+                    <div class="position-grid">
+                        <div class="position-item">
+                            <div class="position-label">10th Lord</div>
+                            <div class="position-value"><span class="tappable">☽ Moon</span></div>
+                        </div>
+                        <div class="position-item">
+                            <div class="position-label">Moon in</div>
+                            <div class="position-value">Aquarius, House 5</div>
+                        </div>
+                    </div>
+                    <div class="why-block" style="margin-top: 12px;">
+                        Moon as 10th lord in the 5th house transforms career toward creative, educational, or emotional domains. Your professional identity is built through networking, innovation, and intellectual pursuits rather than authority or traditional power.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Occupants in This House</span>
+                    <div class="detail-list">
+                        <div class="list-item">
+                            <span class="list-item-label"><span class="tappable">♂ Mars</span> 12°08' (Debilitated, Retrograde)</span>
+                            <span class="list-item-detail">Challenges in career momentum; needs strategic action</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Aspects Received</span>
+                    <div class="detail-list">
+                        <div class="list-item">
+                            <span class="list-item-label"><span class="tappable">♄ Saturn</span> from House 4</span>
+                            <span class="list-item-detail">10th aspect: Discipline, delays, but long-term success</span>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-item-label"><span class="tappable">♃ Jupiter</span> from House 12</span>
+                            <span class="list-item-detail">5th aspect: Expansion, wisdom, spiritual approach to career</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Bhava Bala (House Strength)</span>
+                    <div class="strength-meter">
+                        <div class="meter-label">
+                            <span>Overall Strength</span>
+                            <span>243.67 / 600</span>
+                        </div>
+                        <div class="meter-bar-bg">
+                            <div class="meter-bar-fill" style="width: 41%;">
+                                <span class="meter-label-value">Moderate</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="detail-list" style="margin-top: 12px;">
+                        <div class="list-item">
+                            <span class="list-item-label">Bhavadhipati Bala</span>
+                            <span class="list-item-detail">Moon (10th lord) — Moderate (276.84)</span>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-item-label">Dig Bala</span>
+                            <span class="list-item-detail">High in 10th house position</span>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-item-label">Drishti Bala</span>
+                            <span class="list-item-detail">Saturn (strong), Jupiter (moderate)</span>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-item-label">Occupant Strength</span>
+                            <span class="list-item-detail">Mars (weak, debilitated, retrograde)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Natural Karaka (Significator)</span>
+                    <div class="section-content"><span class="tappable">♄ Saturn</span> — The planet naturally representing 10th house matters</div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Why Chain (Interpretation)</span>
+                    <div class="why-block">
+                        Because <span class="tappable">☽ Moon</span> (your 10th lord) sits in the 5th house in Aquarius, your career is oriented toward innovation, communication, and intellectual work. Mars in the 10th shows periods of struggle, but Saturn's aspect provides steady discipline that eventually leads to achievement.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- 6. NAKSHATRA DETAIL PANEL - PURVA BHADRAPADA -->
+            <!-- ============================================ -->
+            <div class="panel" data-type="nakshatra">
+                <div class="panel-header">
+                    <div class="panel-glyph">✦</div>
+                    <div class="panel-title-group">
+                        <div class="panel-title">Purva Bhadrapada</div>
+                        <div class="panel-subtitle">Nakshatra #25 — Ruled by <span class="tappable">♃</span></div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Properties</span>
+                    <div class="properties-grid">
+                        <div class="property-item">
+                            <div class="property-label">Ruler Planet</div>
+                            <div class="property-value"><span class="tappable">♃ Jupiter</span></div>
+                        </div>
+                        <div class="property-item">
+                            <div class="property-label">Deity</div>
+                            <div class="property-value">Aja Ekapada</div>
+                        </div>
+                        <div class="property-item">
+                            <div class="property-label">Symbol</div>
+                            <div class="property-value">Sword / Funeral Cot</div>
+                        </div>
+                        <div class="property-item">
+                            <div class="property-label">Animal</div>
+                            <div class="property-value">Male Lion</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Temperament & Power</span>
+                    <div class="properties-grid">
+                        <div class="property-item">
+                            <div class="property-label">Gana (Temperament)</div>
+                            <div class="property-value">Rakshasa (Fierce)</div>
+                        </div>
+                        <div class="property-item">
+                            <div class="property-label">Shakti (Power)</div>
+                            <div class="property-value">Teekshna (Sharp, Piercing)</div>
+                        </div>
+                        <div class="property-item">
+                            <div class="property-label">Varna (Caste)</div>
+                            <div class="property-value">Shudra</div>
+                        </div>
+                        <div class="property-item">
+                            <div class="property-label">Nature</div>
+                            <div class="property-value">Fierce, Transformative</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Pada (Quarter) Details</span>
+                    <div class="detail-list">
+                        <div class="list-item">
+                            <span class="list-item-label">Pada I (Aquarius ♒, 320°-323°20')</span>
+                            <span class="list-item-detail">Saturn sub-lord; philosophical, eccentric</span>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-item-label">Pada II (Pisces ♓, 323°20'-326°40')</span>
+                            <span class="list-item-detail">Mercury sub-lord; analytical within mysticism</span>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-item-label">Pada III (Pisces ♓, 326°40'-330°)</span>
+                            <span class="list-item-detail">Venus sub-lord; artistic, romantic transformation</span>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-item-label">Pada IV (Pisces ♓, 330°-333°20')</span>
+                            <span class="list-item-detail">Mars sub-lord; intense, aggressive spirituality</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Dasha Connection</span>
+                    <div class="detail-list">
+                        <div class="list-item">
+                            <span class="list-item-label"><span class="tappable">Jupiter Mahadasha</span></span>
+                            <span class="list-item-detail">16-year period (Vimshottari Dasha)</span>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-item-label">Themes</span>
+                            <span class="list-item-detail">Expansion, wisdom, spirituality, luck, dharma</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Planets Placed in Purva Bhadrapada</span>
+                    <div class="detail-list">
+                        <div class="list-item">
+                            <span class="list-item-label"><span class="tappable">☽ Moon</span> 14°36' (Pada II)</span>
+                            <span class="list-item-detail">Analytical mysticism; spiritual inquiry through logic; detached emotions</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Transit Significance</span>
+                    <div class="section-content">
+                        When planets transit Purva Bhadrapada, they undergo deep psychological transformation. Sun here brings spiritual authority; Moon here brings intuitive wisdom; Saturn here brings harsh lessons leading to enlightenment.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Pada of Moon (Determining Dasha Sequence)</span>
+                    <div class="detail-list">
+                        <div class="list-item">
+                            <span class="list-item-label">Moon in Pada II</span>
+                            <span class="list-item-detail">Mercury sub-lord influences Moon's dasha sequence</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- 7. YOGA DETAIL PANEL - SASA YOGA -->
+            <!-- ============================================ -->
+            <div class="panel" data-type="yoga">
+                <div class="panel-header">
+                    <div class="panel-glyph">▲</div>
+                    <div class="panel-title-group">
+                        <div class="panel-title">Sasa Yoga</div>
+                        <div class="panel-subtitle">Saturn Pancha Mahapurusha</div>
+                    </div>
+                    <span class="panel-badge">Strong ★★★</span>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Yoga Category</span>
+                    <div class="section-content">Pancha Mahapurusha Yoga — One of the five great-person yogas</div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">The Formation Rule</span>
+                    <div class="why-block">
+                        This yoga forms when Saturn is placed in its own sign or exaltation sign, AND sits in a Kendra house (1, 4, 7, 10 from Lagna). Saturn must be strong, unafflicted by malefics.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Why It Exists in Your Chart</span>
+                    <div class="why-block">
+                        <span class="tappable">♄ Saturn</span> is in Capricorn (its own sign, dignity 100%) and placed in the 4th house (a Kendra). Saturn is not combusted and not aspected by malefic planets. All conditions are satisfied.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">What It Gives You</span>
+                    <div class="detail-list">
+                        <div class="list-item">
+                            <span class="list-item-label">✓ Authority & Leadership</span>
+                            <span class="list-item-detail">You command respect through discipline and structure</span>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-item-label">✓ Property & Wealth</span>
+                            <span class="list-item-detail">Significant real estate holdings; long-term accumulation</span>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-item-label">✓ Stability & Longevity</span>
+                            <span class="list-item-detail">Long life, enduring relationships, lasting legacy</span>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-item-label">✓ Administrative Skills</span>
+                            <span class="list-item-detail">Excellent organizer; suited for government/corporate roles</span>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-item-label">✓ Virtue & Justice</span>
+                            <span class="list-item-detail">Strong sense of fairness; dharmic orientation</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">When It Activates</span>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-label">Saturn Mahadasha</div>
+                            2003–2022 ★ PAST (19 years of direct authority)
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-label">Saturn Antardasha within future MD</div>
+                            Will run again during later Mahadashas
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-label">Current Activation</div>
+                            Saturn transit through House 5 (Aquarius 2025–2027) amplifies yoga effects
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Cancellation Check (Yoga Bhanga)</span>
+                    <div class="check-list">
+                        <div class="check-item pass">
+                            <div class="check-icon">✓</div>
+                            <div class="check-text">Not combusted — Saturn 128° from Sun</div>
+                        </div>
+                        <div class="check-item pass">
+                            <div class="check-icon">✓</div>
+                            <div class="check-text">Not debilitated — In own sign Capricorn</div>
+                        </div>
+                        <div class="check-item pass">
+                            <div class="check-icon">✓</div>
+                            <div class="check-text">Not afflicted by 2+ malefics — Mars is distant</div>
+                        </div>
+                        <div class="check-item pass">
+                            <div class="check-icon">✓</div>
+                            <div class="check-text">In Kendra — House 4 is a Kendra</div>
+                        </div>
+                        <div class="check-item pass">
+                            <div class="check-icon">✓</div>
+                            <div class="check-text">Strong dignity — Own sign (100%)</div>
+                        </div>
+                    </div>
+                    <div class="cancellation-status cancelled" style="margin-top: 12px;">
+                        <strong>Result: NOT CANCELLED</strong> — This yoga is fully active and operating at its strongest potential.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Yoga Strength Rating</span>
+                    <div class="strength-meter">
+                        <div class="meter-label">
+                            <span>Overall Strength</span>
+                            <span>★ ★ ★ Strong</span>
+                        </div>
+                        <div class="meter-bar-bg">
+                            <div class="meter-bar-fill" style="width: 85%;">
+                                <span class="meter-label-value">Strong</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Related Yogas in Your Chart</span>
+                    <div class="detail-list">
+                        <div class="list-item">
+                            <span class="list-item-label"><span class="tappable">Raja Yoga (Saturn-Moon)</span></span>
+                            <span class="list-item-detail">Complementary kendra-trikona yoga amplifying authority</span>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-item-label"><span class="tappable">Property Yoga</span></span>
+                            <span class="list-item-detail">Saturn in 4th house with strong Moon aspects</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- 8. YOGA DETAIL PANEL - GAJAKESARI YOGA -->
+            <!-- ============================================ -->
+            <div class="panel" data-type="yoga">
+                <div class="panel-header">
+                    <div class="panel-glyph">◇</div>
+                    <div class="panel-title-group">
+                        <div class="panel-title">Gajakesari Yoga</div>
+                        <div class="panel-subtitle">Jupiter-Moon Yoga</div>
+                    </div>
+                    <span class="panel-badge">Moderate ★★</span>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Yoga Category</span>
+                    <div class="section-content">Yoga of Prosperity — Classic fame & fortune combination</div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">The Formation Rule</span>
+                    <div class="why-block">
+                        Jupiter and Moon are in Kendra relationship (1, 4, 7, 10 houses apart). Both should be strong (ideally unafflicted, not debilitated). This is one of the most auspicious yogas in classical Vedic astrology.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Why It Exists in Your Chart</span>
+                    <div class="why-block">
+                        <span class="tappable">☽ Moon</span> is in House 5 (Aquarius) and <span class="tappable">♃ Jupiter</span> is in House 8 (Gemini). They are 3 houses apart — close to Kendra relationship. Moon is of moderate strength (276.84). Jupiter is reasonably strong. The yoga is present but not powerfully formed.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">What It Gives You</span>
+                    <div class="detail-list">
+                        <div class="list-item">
+                            <span class="list-item-label">✓ Reputation & Fame</span>
+                            <span class="list-item-detail">Recognition in intellectual or spiritual fields</span>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-item-label">✓ Wisdom & Learning</span>
+                            <span class="list-item-detail">Natural inclination toward philosophy, arts, education</span>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-item-label">✓ Happiness & Contentment</span>
+                            <span class="list-item-detail">Emotional equilibrium; peace of mind</span>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-item-label">✓ Prosperity</span>
+                            <span class="list-item-detail">Financial gains through knowledge and networks</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">When It Activates</span>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-label">Jupiter Mahadasha</div>
+                            2016–2032 ★ CURRENT (16 years; currently in Jupiter MD)
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-label">Moon Antardasha in Jupiter MD</div>
+                            Intensifies yoga effects; emotional expansion
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-label">Transit Jupiter over Natal Moon</div>
+                            Every 12 years; brings growth and luck
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Cancellation Check (Yoga Bhanga)</span>
+                    <div class="check-list">
+                        <div class="check-item pass">
+                            <div class="check-icon">✓</div>
+                            <div class="check-text">Jupiter not combusted — 98° from Sun</div>
+                        </div>
+                        <div class="check-item pass">
+                            <div class="check-icon">✓</div>
+                            <div class="check-text">Moon not debilitated — In friendly Aquarius</div>
+                        </div>
+                        <div class="check-item fail">
+                            <div class="check-icon">✗</div>
+                            <div class="check-text fail">Not perfect Kendra — 3 houses apart (weak point)</div>
+                        </div>
+                        <div class="check-item pass">
+                            <div class="check-icon">✓</div>
+                            <div class="check-text">Neither afflicted by Saturn or Mars aspect</div>
+                        </div>
+                    </div>
+                    <div class="cancellation-status not-cancelled" style="margin-top: 12px;">
+                        <strong>Result: PARTIALLY ACTIVE</strong> — The yoga exists but is weakened by the non-perfect Kendra placement. Effects are moderate, not maximum.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Yoga Strength Rating</span>
+                    <div class="strength-meter">
+                        <div class="meter-label">
+                            <span>Overall Strength</span>
+                            <span>★ ★ Moderate</span>
+                        </div>
+                        <div class="meter-bar-bg">
+                            <div class="meter-bar-fill" style="width: 55%;">
+                                <span class="meter-label-value">Moderate</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Related Yogas in Your Chart</span>
+                    <div class="detail-list">
+                        <div class="list-item">
+                            <span class="list-item-label"><span class="tappable">Sasa Yoga</span></span>
+                            <span class="list-item-detail">Saturn yoga reinforces the theme of steady growth</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- 9. DOSHA DETAIL PANEL - SADE SATI (SIMULATED) -->
+            <!-- ============================================ -->
+            <div class="panel" data-type="dosha">
+                <div class="panel-header">
+                    <div class="panel-glyph">⚠</div>
+                    <div class="panel-title-group">
+                        <div class="panel-title">Sade Sati</div>
+                        <div class="panel-subtitle">Saturn's 7.5-Year Test</div>
+                    </div>
+                    <span class="panel-badge severity-moderate">Moderate</span>
+                    <span class="panel-badge">DORMANT (Not Current)</span>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">The Formation Rule</span>
+                    <div class="why-block">
+                        Sade Sati occurs when Saturn transits the 12th, 1st, or 2nd house from your natal Moon. It lasts approximately 7.5 years total (2.5 years per phase). A period of karmic testing, challenge, and eventual transformation.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Why It Exists / Did Exist in Your Chart</span>
+                    <div class="why-block">
+                        Your natal <span class="tappable">☽ Moon</span> is in Aquarius (House 5). Sade Sati would activate when Saturn transited Capricorn (12th), Aquarius (1st), or Pisces (2nd) from Moon. Saturn last entered Capricorn in January 2020 and exited Pisces in January 2023. You completed your last Sade Sati in January 2023.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">What It Affects</span>
+                    <div class="detail-list">
+                        <div class="list-item">
+                            <span class="list-item-label">✗ Mental Peace</span>
+                            <span class="list-item-detail">Anxiety, worry, inner turmoil, depression</span>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-item-label">✗ Health</span>
+                            <span class="list-item-detail">Chronic illnesses, fatigue, hormonal changes</span>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-item-label">✗ Relationships</span>
+                            <span class="list-item-detail">Separation, misunderstandings, isolation</span>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-item-label">✗ Career</span>
+                            <span class="list-item-detail">Job loss, business setbacks, lack of recognition</span>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-item-label">✗ Finances</span>
+                            <span class="list-item-detail">Unexpected expenses, losses, debt</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Current Status (Feb 2026)</span>
+                    <div class="cancellation-status not-cancelled">
+                        <strong>Not Active</strong> — Saturn is in Aquarius (entering 2nd phase from Moon's perspective), moving through House 5 in your birth chart. Your Sade Sati period ended in January 2023. You are now in a benefic period following the dosha.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Cancellation Conditions</span>
+                    <div class="check-list">
+                        <div class="check-item pass">
+                            <div class="check-icon">✓</div>
+                            <div class="check-text">Strong natal Saturn — Sade Sati is less severe</div>
+                        </div>
+                        <div class="check-item pass">
+                            <div class="check-icon">✓</div>
+                            <div class="check-text">Strong Moon — Resilience to Saturn's effects</div>
+                        </div>
+                        <div class="check-item fail">
+                            <div class="check-icon">✗</div>
+                            <div class="check-text fail">Moon in Aquarius (air, detachment) — Deepens mental turmoil</div>
+                        </div>
+                        <div class="check-item pass">
+                            <div class="check-icon">✓</div>
+                            <div class="check-text">Jupiter strong — Mitigates Saturn's harshness</div>
+                        </div>
+                    </div>
+                    <div class="cancellation-status not-cancelled" style="margin-top: 12px;">
+                        <strong>Mitigation Level: Moderate</strong> — Your chart has protective factors but also challenging ones.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Remedies</span>
+                    <div class="remedies-grid">
+                        <div class="remedy-item">
+                            <div class="remedy-label">Mantra</div>
+                            <div class="remedy-content">ॐ शं शनैश्चराय नमः — 108x on Saturday mornings</div>
+                        </div>
+                        <div class="remedy-item">
+                            <div class="remedy-label">Gemstone</div>
+                            <div class="remedy-content">Blue Sapphire (4–5 carats) on Saturn finger</div>
+                        </div>
+                        <div class="remedy-item">
+                            <div class="remedy-label">Charity</div>
+                            <div class="remedy-content">Black sesame, mustard oil, steel items — Saturdays</div>
+                        </div>
+                        <div class="remedy-item">
+                            <div class="remedy-label">Worship</div>
+                            <div class="remedy-content">Shani Devi (Saturn as benefic force), Hanuman (courage)</div>
+                        </div>
+                        <div class="remedy-item">
+                            <div class="remedy-label">Behavioral</div>
+                            <div class="remedy-content">Service to elderly, discipline, honesty, delayed gratification</div>
+                        </div>
+                        <div class="remedy-item">
+                            <div class="remedy-label">Timing</div>
+                            <div class="remedy-content">Wednesday (Mercury) to sharpen intellect; avoid Saturday major decisions</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Timeline (Historical & Future)</span>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-label">2020–2023 ★ COMPLETED</div>
+                            Last Sade Sati (Jan 2020–Jan 2023) — Testing period completed
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-label">2023–2026 ★ CURRENT</div>
+                            Post-Sade Sati recovery phase — building after tests
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-label">2047–2054 ★ FUTURE</div>
+                            Next Sade Sati (Moon enters Scorpio sign in ~25 years)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- 10. DOSHA DETAIL PANEL - MANGAL DOSHA -->
+            <!-- ============================================ -->
+            <div class="panel" data-type="dosha">
+                <div class="panel-header">
+                    <div class="panel-glyph">⚠</div>
+                    <div class="panel-title-group">
+                        <div class="panel-title">Mangal Dosha</div>
+                        <div class="panel-subtitle">Mars Affliction</div>
+                    </div>
+                    <span class="panel-badge severity-mild">Mild</span>
+                    <span class="panel-badge">ACTIVE</span>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">The Formation Rule</span>
+                    <div class="why-block">
+                        Mars in houses 2, 4, 7, 8, or 12 from Lagna (or Moon, or Venus) creates Mangal Dosha. The severity depends on Mars's dignity, aspect support, and which house it occupies. House 12 is mildest; House 7 (marriage) is most severe.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Why It Exists in Your Chart</span>
+                    <div class="why-block">
+                        <span class="tappable">♂ Mars</span> is in House 10 (Gemini, debilitated, retrograde). While House 10 is not technically a Mangal Dosha position, Mars here is weak (dignity 35%) and afflicts career, authority, and public reputation. This creates a "Mars weakness" pattern similar to Mangal Dosha effects.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">What It Affects</span>
+                    <div class="detail-list">
+                        <div class="list-item">
+                            <span class="list-item-label">✗ Marriage (if in 7th)</span>
+                            <span class="list-item-detail">Delays, mismatches, aggressive tendencies</span>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-item-label">✗ Career (if in 10th)</span>
+                            <span class="list-item-detail">Conflicts with superiors, sudden job changes, loss of authority</span>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-item-label">✗ Relationships</span>
+                            <span class="list-item-detail">Arguments, aggression, passionate disputes</span>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-item-label">✗ Accident Risk</span>
+                            <span class="list-item-detail">Increased injuries, surgery needs, burns</span>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-item-label">✗ Finances</span>
+                            <span class="list-item-detail">Impulsive spending, wasteful expenditures</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Current Status (Feb 2026)</span>
+                    <div class="cancellation-status cancelled">
+                        <strong>Actively Influencing</strong> — Mars is retrograde in House 10, currently aspected by Saturn (10th aspect from House 4). Career and authority are challenging; patience and strategy required.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Cancellation Conditions</span>
+                    <div class="check-list">
+                        <div class="check-item fail">
+                            <div class="check-icon">✗</div>
+                            <div class="check-text fail">Mars debilitated in Gemini — Low natural strength</div>
+                        </div>
+                        <div class="check-item fail">
+                            <div class="check-icon">✗</div>
+                            <div class="check-text fail">Mars retrograde — Effects internalized, delayed, persistent</div>
+                        </div>
+                        <div class="check-item pass">
+                            <div class="check-icon">✓</div>
+                            <div class="check-text">Saturn aspect from 4th provides discipline (partial mitigation)</div>
+                        </div>
+                        <div class="check-item fail">
+                            <div class="check-icon">✗</div>
+                            <div class="check-text fail">Moon weak in Aquarius — Limited emotional support</div>
+                        </div>
+                    </div>
+                    <div class="cancellation-status cancelled" style="margin-top: 12px;">
+                        <strong>Mitigation Level: LOW</strong> — This Mars weakness is active and requires management through remedies.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Remedies</span>
+                    <div class="remedies-grid">
+                        <div class="remedy-item">
+                            <div class="remedy-label">Mantra</div>
+                            <div class="remedy-content">ॐ अँ अंगारकाय नमः — 108x on Tuesday</div>
+                        </div>
+                        <div class="remedy-item">
+                            <div class="remedy-label">Gemstone</div>
+                            <div class="remedy-content">Red Coral (3–4 carats) on ring finger</div>
+                        </div>
+                        <div class="remedy-item">
+                            <div class="remedy-label">Charity</div>
+                            <div class="remedy-content">Red lentils, wheat, blood donation — on Tuesdays</div>
+                        </div>
+                        <div class="remedy-item">
+                            <div class="remedy-label">Worship</div>
+                            <div class="remedy-content">Lord Hanuman (courage), Lord Murugan (war god)</div>
+                        </div>
+                        <div class="remedy-item">
+                            <div class="remedy-label">Behavioral</div>
+                            <div class="remedy-content">Channel aggression into sports/martial arts; avoid recklessness</div>
+                        </div>
+                        <div class="remedy-item">
+                            <div class="remedy-label">Timing</div>
+                            <div class="remedy-content">Mars Antardasha (2026–2027) will intensify effects; be cautious</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Timeline (Dasha Activation)</span>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-label">2016–2032 ★ CURRENT</div>
+                            Jupiter Mahadasha (Mars Antardasha: 2026–2027)
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-label">2026–2027</div>
+                            Mars Antardasha — Dosha effects amplified; use caution
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-label">Post-2027</div>
+                            Effects ease as Mars Antardasha closes
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+            <!-- 11. DOSHA DETAIL PANEL - KAAL SARP DOSHA -->
+            <!-- ============================================ -->
+            <div class="panel" data-type="dosha">
+                <div class="panel-header">
+                    <div class="panel-glyph">⚠</div>
+                    <div class="panel-title-group">
+                        <div class="panel-title">Kaal Sarp Dosha</div>
+                        <div class="panel-subtitle">Rahu-Ketu Axis Affliction</div>
+                    </div>
+                    <span class="panel-badge severity-severe">Severe</span>
+                    <span class="panel-badge">DORMANT (Not Your Chart)</span>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">The Formation Rule</span>
+                    <div class="why-block">
+                        Kaal Sarp Dosha forms when ALL planets (Sun through Saturn) are confined between Rahu and Ketu, with neither node having planets beyond them. This creates a "strangled" chart where karmic momentum is blocked. Extremely rare (affects ~5% of population) but when present, very challenging.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Why It Does NOT Exist in Your Chart</span>
+                    <div class="why-block">
+                        In your chart, Rahu is in House 11 (Gemini, 85°42'), Ketu in House 5 (Sagittarius, 265°42'). Mercury is in House 9 (Pisces, 6°12') — positioned outside the Rahu-Ketu axis. Therefore, Kaal Sarp Dosha is not present. Your chart is free from this dosha.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">What It Would Affect (If Present)</span>
+                    <div class="detail-list">
+                        <div class="list-item">
+                            <span class="list-item-label">✗ Life Purpose</span>
+                            <span class="list-item-detail">Confusion about dharma, blocked destiny</span>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-item-label">✗ Career</span>
+                            <span class="list-item-detail">Obstacles at every turn; sudden reversals</span>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-item-label">✗ Relationships</span>
+                            <span class="list-item-detail">Karmic entanglement; difficult separations</span>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-item-label">✗ Health</span>
+                            <span class="list-item-detail">Chronic illnesses; psychosomatic disorders</span>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-item-label">✗ Finances</span>
+                            <span class="list-item-detail">Constant financial struggle; wealth slips away</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Cancellation Conditions</span>
+                    <div class="check-list">
+                        <div class="check-item pass">
+                            <div class="check-icon">✓</div>
+                            <div class="check-text">NOT PRESENT — Dosha cannot be cancelled if not formed</div>
+                        </div>
+                        <div class="check-item pass">
+                            <div class="check-icon">✓</div>
+                            <div class="check-text">Chart free from Kaal Sarp — No remedies needed</div>
+                        </div>
+                    </div>
+                    <div class="cancellation-status not-cancelled" style="margin-top: 12px;">
+                        <strong>Status: FREE FROM DOSHA</strong> — Your chart does not contain this affliction.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Rahu-Ketu Positions in Your Chart</span>
+                    <div class="detail-list">
+                        <div class="list-item">
+                            <span class="list-item-label"><span class="tappable">☊ Rahu</span> in Gemini, House 11</span>
+                            <span class="list-item-detail">Networking desires, technology, friend circles, gains through collective</span>
+                        </div>
+                        <div class="list-item">
+                            <span class="list-item-label"><span class="tappable">☋ Ketu</span> in Sagittarius, House 5</span>
+                            <span class="list-item-detail">Spiritual dissatisfaction with creative pursuits, past-life knowledge</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <span class="section-label">Your Rahu-Ketu Axis Interpretation</span>
+                    <div class="why-block">
+                        Your Rahu (worldly desire) is in 11th house (networking, technology), while Ketu (spiritual detachment) in 5th (creativity, learning). This axis suggests you're learning to balance social ambition with inner wisdom. You naturally gravitate toward technology and networks (Rahu), but Ketu whispers that true fulfillment lies in knowledge and spiritual practice.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function filterPanels() {
+            const selector = document.getElementById('entity-type').value;
+            const panels = document.querySelectorAll('.panel');
+
+            panels.forEach(panel => {
+                if (selector === 'all') {
+                    panel.classList.remove('hidden');
+                } else {
+                    if (panel.getAttribute('data-type') === selector) {
+                        panel.classList.remove('hidden');
+                    } else {
+                        panel.classList.add('hidden');
+                    }
+                }
+            });
+
+            // Scroll to top when filtering
+            document.getElementById('panels-container').scrollTop = 0;
+        }
+
+        // Initialize with all panels visible
+        filterPanels();
+    </script>
+</body>
+</html>

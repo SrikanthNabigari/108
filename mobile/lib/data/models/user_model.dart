@@ -3,8 +3,12 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'user_model.freezed.dart';
 part 'user_model.g.dart';
 
-@freezed
+@Freezed(fromJson: true, toJson: true)
 class UserModel with _$UserModel {
+  const UserModel._();
+
+  // ignore: invalid_annotation_target
+  @JsonSerializable(fieldRename: FieldRename.snake)
   const factory UserModel({
     required String id,
     String? email,
@@ -12,16 +16,25 @@ class UserModel with _$UserModel {
     String? name,
     String? gender,
     String? avatarUrl,
-    @Default(false) bool onboardingComplete,
     @Default('free') String subscriptionTier,
-    String? lagnaRashi,
-    String? moonRashi,
-    String? moonNakshatra,
     DateTime? birthDatetime,
+    double? birthLatitude,
+    double? birthLongitude,
+    double? timezoneOffset,
     String? placeName,
-    @Default(0) int creditBalance,
+    DateTime? createdAt,
+    DateTime? updatedAt,
   }) = _UserModel;
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);
+
+  /// Whether user has completed the onboarding flow
+  bool get onboardingComplete => name != null && birthDatetime != null;
+
+  /// Whether user has set their profile (name)
+  bool get hasProfile => name != null && name!.isNotEmpty;
+
+  /// Whether user has entered birth details
+  bool get hasBirthDetails => birthDatetime != null;
 }

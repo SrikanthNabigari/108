@@ -1,0 +1,273 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 393 852" width="393" height="852">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0A0A12"/>
+      <stop offset="50%" stop-color="#050508"/>
+      <stop offset="100%" stop-color="#08050F"/>
+    </linearGradient>
+    <linearGradient id="greenGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#22C55E"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+    <linearGradient id="purpleGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#6366F1"/>
+    </linearGradient>
+    <linearGradient id="scoreGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#22C55E"/>
+      <stop offset="50%" stop-color="#06B6D4"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#EF4444"/>
+    </linearGradient>
+    <linearGradient id="cardGlassGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.06)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0.02)"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+    <clipPath id="phoneClip">
+      <rect x="0" y="0" width="393" height="852" rx="40"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#phoneClip)">
+  <!-- Background -->
+  <rect width="393" height="852" fill="url(#bgGrad)"/>
+  <!-- Stars -->
+  <g id="stars" opacity="0.6">
+    <circle cx="211" cy="394" r="0.4800679001174508" fill="white" opacity="0.3072813923519674"/>
+    <circle cx="132" cy="141" r="0.98388969285727" fill="white" opacity="0.35069060502513205"/>
+    <circle cx="201" cy="548" r="0.9158777745845867" fill="white" opacity="0.5231774781189991"/>
+    <circle cx="324" cy="506" r="0.4795213116666328" fill="white" opacity="0.6333353666061882"/>
+    <circle cx="306" cy="226" r="1.0133526110038114" fill="white" opacity="0.6729896621733"/>
+    <circle cx="203" cy="703" r="0.4913317735273307" fill="white" opacity="0.47688997385159687"/>
+    <circle cx="96" cy="585" r="0.6049260606964598" fill="white" opacity="0.7681154402346015"/>
+    <circle cx="275" cy="698" r="0.997026207141742" fill="white" opacity="0.4814234285788778"/>
+    <circle cx="211" cy="48" r="0.5424592934709543" fill="white" opacity="0.20457187634053525"/>
+    <circle cx="109" cy="376" r="1.1906129720793786" fill="white" opacity="0.5205860171354552"/>
+    <circle cx="241" cy="536" r="1.110218036757945" fill="white" opacity="0.563305476886185"/>
+    <circle cx="31" cy="371" r="0.41622575070143464" fill="white" opacity="0.771455260757048"/>
+    <circle cx="371" cy="169" r="0.9727574774075687" fill="white" opacity="0.46502877143957105"/>
+    <circle cx="95" cy="520" r="0.8942696873725997" fill="white" opacity="0.22223730136361308"/>
+    <circle cx="16" cy="180" r="0.7263541930577027" fill="white" opacity="0.6918008390919408"/>
+    <circle cx="46" cy="440" r="0.8688132299290374" fill="white" opacity="0.28574693341466895"/>
+    <circle cx="321" cy="10" r="0.6429553605372302" fill="white" opacity="0.28148966963619926"/>
+    <circle cx="212" cy="210" r="1.1099731349087825" fill="white" opacity="0.7842983710262175"/>
+    <circle cx="332" cy="221" r="0.6986754963682511" fill="white" opacity="0.5272825557175322"/>
+    <circle cx="69" cy="367" r="1.1472172023765668" fill="white" opacity="0.4856860246756646"/>
+    <circle cx="33" cy="139" r="0.9646986736173666" fill="white" opacity="0.6310181480631294"/>
+    <circle cx="387" cy="159" r="0.8472311090461988" fill="white" opacity="0.44497967716023457"/>
+    <circle cx="54" cy="126" r="0.4292961691795023" fill="white" opacity="0.3044810443719696"/>
+    <circle cx="95" cy="424" r="0.4309603030362762" fill="white" opacity="0.3245475927610577"/>
+    <circle cx="292" cy="331" r="0.9935104373784376" fill="white" opacity="0.6787793616976114"/>
+    <circle cx="136" cy="125" r="1.072079489678991" fill="white" opacity="0.4170215555397508"/>
+    <circle cx="352" cy="79" r="0.7511095580379876" fill="white" opacity="0.20668909662526486"/>
+    <circle cx="29" cy="350" r="0.49468994095382723" fill="white" opacity="0.4394605010900824"/>
+    <circle cx="209" cy="400" r="0.6726586895608883" fill="white" opacity="0.4225859740422721"/>
+    <circle cx="52" cy="190" r="1.0916115249233933" fill="white" opacity="0.753821696518342"/>
+    <circle cx="374" cy="413" r="0.9937394574252991" fill="white" opacity="0.33812587996461435"/>
+    <circle cx="340" cy="236" r="0.8880272853968298" fill="white" opacity="0.3863938485342952"/>
+    <circle cx="357" cy="743" r="0.5825395874436464" fill="white" opacity="0.658395966034862"/>
+    <circle cx="369" cy="695" r="0.940454343145702" fill="white" opacity="0.4301327435510311"/>
+    <circle cx="229" cy="774" r="1.163182685316461" fill="white" opacity="0.729513440003168"/>
+    <circle cx="220" cy="267" r="0.36270897725847057" fill="white" opacity="0.3758178751492753"/>
+    <circle cx="355" cy="333" r="1.0093837434752921" fill="white" opacity="0.5199464758960028"/>
+    <circle cx="136" cy="446" r="1.093420985056416" fill="white" opacity="0.4455994768505429"/>
+    <circle cx="342" cy="630" r="0.44347783963428256" fill="white" opacity="0.4273752153437247"/>
+    <circle cx="352" cy="623" r="1.0764360888940334" fill="white" opacity="0.5711974129085915"/>
+    <circle cx="370" cy="455" r="0.47502471537770374" fill="white" opacity="0.4021082485652604"/>
+    <circle cx="106" cy="358" r="0.30388018861677624" fill="white" opacity="0.41317351770849897"/>
+    <circle cx="156" cy="202" r="1.1021960623451341" fill="white" opacity="0.6006900958940036"/>
+    <circle cx="332" cy="272" r="0.8914499295878517" fill="white" opacity="0.6458096820979602"/>
+    <circle cx="366" cy="241" r="0.6674212610308443" fill="white" opacity="0.7170514360615747"/>
+    <circle cx="341" cy="414" r="0.3032564371906141" fill="white" opacity="0.5009937474060734"/>
+    <circle cx="108" cy="6" r="0.7698901241979099" fill="white" opacity="0.7699415013445938"/>
+    <circle cx="387" cy="176" r="0.7600043632565767" fill="white" opacity="0.6834752087777116"/>
+    <circle cx="110" cy="275" r="0.9737192374937755" fill="white" opacity="0.6433552850045436"/>
+    <circle cx="244" cy="578" r="0.7779279490066991" fill="white" opacity="0.5718822662585737"/>
+    <circle cx="328" cy="788" r="0.8453442476096942" fill="white" opacity="0.37250219226010717"/>
+    <circle cx="383" cy="26" r="1.199584801455113" fill="white" opacity="0.683826009813701"/>
+    <circle cx="43" cy="599" r="0.32876478705573164" fill="white" opacity="0.2349873621021492"/>
+    <circle cx="158" cy="383" r="1.1737295568101542" fill="white" opacity="0.5758397994115032"/>
+    <circle cx="368" cy="607" r="0.8174212348882501" fill="white" opacity="0.31640233139692286"/>
+    <circle cx="56" cy="817" r="0.6551949378743906" fill="white" opacity="0.6735490225505215"/>
+    <circle cx="140" cy="476" r="0.5961511270375682" fill="white" opacity="0.7267236730337008"/>
+    <circle cx="233" cy="716" r="0.9316566649833324" fill="white" opacity="0.450897825785948"/>
+    <circle cx="371" cy="188" r="0.6238552557315745" fill="white" opacity="0.3245669064234702"/>
+    <circle cx="242" cy="591" r="1.0599113673030387" fill="white" opacity="0.6198509442030828"/>
+    <circle cx="320" cy="120" r="60" fill="#8B5CF6" opacity="0.04" filter="url(#softGlow)"/>
+    <circle cx="80" cy="650" r="50" fill="#22C55E" opacity="0.03" filter="url(#softGlow)"/>
+  </g>
+  <!-- Status Bar -->
+  <g id="statusBar">
+    <text x="32" y="22" font-family="SF Pro Display, -apple-system, sans-serif" font-size="15" font-weight="600" fill="#F8FAFC">9:41</text>
+    <!-- Signal bars -->
+    <g transform="translate(295, 8)">
+      <rect x="0" y="6" width="3" height="4" rx="0.5" fill="#F8FAFC"/>
+      <rect x="5" y="4" width="3" height="6" rx="0.5" fill="#F8FAFC"/>
+      <rect x="10" y="2" width="3" height="8" rx="0.5" fill="#F8FAFC"/>
+      <rect x="15" y="0" width="3" height="10" rx="0.5" fill="#F8FAFC"/>
+    </g>
+    <!-- WiFi -->
+    <g transform="translate(325, 7)">
+      <path d="M0 6 Q6 -2 12 6" stroke="#F8FAFC" stroke-width="1.5" fill="none"/>
+      <path d="M2 4 Q6 0 10 4" stroke="#F8FAFC" stroke-width="1.5" fill="none"/>
+      <circle cx="6" cy="7" r="1.5" fill="#F8FAFC"/>
+    </g>
+    <!-- Battery -->
+    <g transform="translate(348, 7)">
+      <rect x="0" y="0" width="24" height="11" rx="3" stroke="#F8FAFC" stroke-width="1" fill="none"/>
+      <rect x="2" y="2" width="18" height="7" rx="1.5" fill="#22C55E"/>
+      <rect x="25" y="3" width="2" height="5" rx="1" fill="#F8FAFC" opacity="0.4"/>
+    </g>
+  </g>
+  <!-- Header -->
+  <g id="chartHeader">
+    <text x="196.5" y="62" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="18" font-weight="700" fill="#F8FAFC">Birth Chart</text>
+    <rect x="20" y="75" width="36" height="26" rx="13" fill="#22C55E" opacity="0.15"/>
+    <text x="38.0" y="92" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="12" font-weight="600" fill="#22C55E">D1</text>
+    <rect x="64" y="75" width="36" height="26" rx="13" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+    <text x="82.0" y="92" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="12" fill="#6B7280">D9</text>
+    <rect x="108" y="75" width="44" height="26" rx="13" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+    <text x="130.0" y="92" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="12" fill="#6B7280">D10</text>
+    <rect x="160" y="75" width="52" height="26" rx="13" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+    <text x="186.0" y="92" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="12" fill="#6B7280">More</text>
+  </g>
+  <!-- South Indian Chart -->
+  <g id="chartGrid">
+    <rect x="20" y="115" width="353" height="353" rx="12" fill="#111115" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+
+    <line x1="28" y1="123.0" x2="365" y2="123.0" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+    <line x1="28.0" y1="123" x2="28.0" y2="460" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+    <line x1="28" y1="207.25" x2="365" y2="207.25" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+    <line x1="112.25" y1="123" x2="112.25" y2="460" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+    <line x1="28" y1="291.5" x2="365" y2="291.5" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+    <line x1="196.5" y1="123" x2="196.5" y2="460" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+    <line x1="28" y1="375.75" x2="365" y2="375.75" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+    <line x1="280.75" y1="123" x2="280.75" y2="460" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+    <line x1="28" y1="460.0" x2="365" y2="460.0" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+    <line x1="365.0" y1="123" x2="365.0" y2="460" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+    <rect x="112.25" y="207.25" width="168.5" height="168.5" fill="#111115"/>
+    <text x="196.5" y="283.5" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="14" fill="#6B7280">RASI</text>
+    <text x="196.5" y="303.5" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="12" fill="#9CA3AF">Lagna: Libra</text>
+    <text x="34.0" y="137.0" font-family="SF Pro Display, -apple-system, sans-serif" font-size="9" fill="#6B7280">Pis</text>
+    <text x="118.25" y="137.0" font-family="SF Pro Display, -apple-system, sans-serif" font-size="9" fill="#6B7280">Ari</text>
+    <text x="202.5" y="137.0" font-family="SF Pro Display, -apple-system, sans-serif" font-size="9" fill="#6B7280">Tau</text>
+    <text x="286.75" y="137.0" font-family="SF Pro Display, -apple-system, sans-serif" font-size="9" fill="#6B7280">Gem</text>
+    <text x="286.75" y="221.25" font-family="SF Pro Display, -apple-system, sans-serif" font-size="9" fill="#6B7280">Can</text>
+    <text x="286.75" y="305.5" font-family="SF Pro Display, -apple-system, sans-serif" font-size="9" fill="#6B7280">Leo</text>
+    <text x="286.75" y="389.75" font-family="SF Pro Display, -apple-system, sans-serif" font-size="9" fill="#6B7280">Vir</text>
+    <text x="202.5" y="389.75" font-family="SF Pro Display, -apple-system, sans-serif" font-size="9" fill="#6B7280">Lib</text>
+    <text x="118.25" y="389.75" font-family="SF Pro Display, -apple-system, sans-serif" font-size="9" fill="#6B7280">Sco</text>
+    <text x="34.0" y="389.75" font-family="SF Pro Display, -apple-system, sans-serif" font-size="9" fill="#6B7280">Sag</text>
+    <text x="34.0" y="305.5" font-family="SF Pro Display, -apple-system, sans-serif" font-size="9" fill="#6B7280">Cap</text>
+    <text x="34.0" y="221.25" font-family="SF Pro Display, -apple-system, sans-serif" font-size="9" fill="#6B7280">Aqu</text>
+    <rect x="204.5" y="415.75" width="24" height="24" rx="7.199999999999999" fill="#22C55E" opacity="0.2"/>
+    <text x="216.5" y="431.35" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="10.8" font-weight="700" fill="#22C55E">Me</text>
+    <rect x="234.5" y="415.75" width="24" height="24" rx="7.199999999999999" fill="#FACC15" opacity="0.2"/>
+    <text x="246.5" y="431.35" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="10.8" font-weight="700" fill="#FACC15">ASC</text>
+    <rect x="120.25" y="415.75" width="24" height="24" rx="7.199999999999999" fill="#F97316" opacity="0.2"/>
+    <text x="132.25" y="431.35" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="10.8" font-weight="700" fill="#F97316">Su</text>
+    <rect x="150.25" y="415.75" width="24" height="24" rx="7.199999999999999" fill="#9CA3AF" opacity="0.2"/>
+    <text x="162.25" y="431.35" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="10.8" font-weight="700" fill="#9CA3AF">Ra</text>
+    <rect x="36.0" y="415.75" width="24" height="24" rx="7.199999999999999" fill="#EC4899" opacity="0.2"/>
+    <text x="48.0" y="431.35" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="10.8" font-weight="700" fill="#EC4899">Ve</text>
+    <rect x="36.0" y="331.5" width="24" height="24" rx="7.199999999999999" fill="#8B5CF6" opacity="0.2"/>
+    <text x="48.0" y="347.1" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="10.8" font-weight="700" fill="#8B5CF6">Sa</text>
+    <rect x="36.0" y="247.25" width="24" height="24" rx="7.199999999999999" fill="#60A5FA" opacity="0.2"/>
+    <text x="48.0" y="262.85" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="10.8" font-weight="700" fill="#60A5FA">Mo</text>
+    <rect x="204.5" y="163.0" width="24" height="24" rx="7.199999999999999" fill="#F472B6" opacity="0.2"/>
+    <text x="216.5" y="178.6" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="10.8" font-weight="700" fill="#F472B6">Ke</text>
+    <rect x="288.75" y="247.25" width="24" height="24" rx="7.199999999999999" fill="#EF4444" opacity="0.2"/>
+    <text x="300.75" y="262.85" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="10.8" font-weight="700" fill="#EF4444">Ma</text>
+    <rect x="288.75" y="415.75" width="24" height="24" rx="7.199999999999999" fill="#818CF8" opacity="0.2"/>
+    <text x="300.75" y="431.35" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="10.8" font-weight="700" fill="#818CF8">Ju</text>
+  </g>
+  <!-- Planet List -->
+  <g id="planetList">
+    <text x="20" y="490" font-family="SF Pro Display, -apple-system, sans-serif" font-size="16" font-weight="600" fill="#F8FAFC">Planets</text>
+    <rect x="20" y="505" width="28" height="28" rx="8.4" fill="#F97316" opacity="0.2"/>
+    <text x="34.0" y="523.2" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="12.6" font-weight="700" fill="#F97316">Su</text>
+    <text x="58" y="517" font-family="SF Pro Display, -apple-system, sans-serif" font-size="14" font-weight="600" fill="#F8FAFC">sun</text>
+    <text x="58" y="531" font-family="SF Pro Display, -apple-system, sans-serif" font-size="11" fill="#9CA3AF">Scorpio  ·  House 2</text>
+    <text x="363" y="517" text-anchor="end" font-family="SF Pro Display, -apple-system, sans-serif" font-size="13" fill="#9CA3AF">17° 14'</text>
+    <text x="363" y="531" text-anchor="end" font-family="SF Pro Display, -apple-system, sans-serif" font-size="10" fill="#6B7280">Jyeshtha</text>
+    <text x="378" y="523" font-family="SF Pro Display, -apple-system, sans-serif" font-size="14" fill="#6B7280">›</text>
+    <rect x="20" y="549" width="28" height="28" rx="8.4" fill="#60A5FA" opacity="0.2"/>
+    <text x="34.0" y="567.2" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="12.6" font-weight="700" fill="#60A5FA">Mo</text>
+    <text x="58" y="561" font-family="SF Pro Display, -apple-system, sans-serif" font-size="14" font-weight="600" fill="#F8FAFC">moon</text>
+    <text x="58" y="575" font-family="SF Pro Display, -apple-system, sans-serif" font-size="11" fill="#9CA3AF">Aquarius  ·  House 5</text>
+    <text x="363" y="561" text-anchor="end" font-family="SF Pro Display, -apple-system, sans-serif" font-size="13" fill="#9CA3AF">24° 21'</text>
+    <text x="363" y="575" text-anchor="end" font-family="SF Pro Display, -apple-system, sans-serif" font-size="10" fill="#6B7280">P. Bhadrapada</text>
+    <text x="378" y="567" font-family="SF Pro Display, -apple-system, sans-serif" font-size="14" fill="#6B7280">›</text>
+    <rect x="20" y="593" width="28" height="28" rx="8.4" fill="#EF4444" opacity="0.2"/>
+    <text x="34.0" y="611.2" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="12.6" font-weight="700" fill="#EF4444">Ma</text>
+    <text x="58" y="605" font-family="SF Pro Display, -apple-system, sans-serif" font-size="14" font-weight="600" fill="#F8FAFC">mars</text>
+    <text x="58" y="619" font-family="SF Pro Display, -apple-system, sans-serif" font-size="11" fill="#9CA3AF">Cancer  ·  House 10  Retrograde</text>
+    <text x="363" y="605" text-anchor="end" font-family="SF Pro Display, -apple-system, sans-serif" font-size="13" fill="#9CA3AF">3° 45'</text>
+    <text x="363" y="619" text-anchor="end" font-family="SF Pro Display, -apple-system, sans-serif" font-size="10" fill="#6B7280">Pushya</text>
+    <text x="378" y="611" font-family="SF Pro Display, -apple-system, sans-serif" font-size="14" fill="#6B7280">›</text>
+    <rect x="20" y="637" width="28" height="28" rx="8.4" fill="#22C55E" opacity="0.2"/>
+    <text x="34.0" y="655.2" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="12.6" font-weight="700" fill="#22C55E">Me</text>
+    <text x="58" y="649" font-family="SF Pro Display, -apple-system, sans-serif" font-size="14" font-weight="600" fill="#F8FAFC">mercury</text>
+    <text x="58" y="663" font-family="SF Pro Display, -apple-system, sans-serif" font-size="11" fill="#9CA3AF">Libra  ·  House 1</text>
+    <text x="363" y="649" text-anchor="end" font-family="SF Pro Display, -apple-system, sans-serif" font-size="13" fill="#9CA3AF">28° 40'</text>
+    <text x="363" y="663" text-anchor="end" font-family="SF Pro Display, -apple-system, sans-serif" font-size="10" fill="#6B7280">Vishakha</text>
+    <text x="378" y="655" font-family="SF Pro Display, -apple-system, sans-serif" font-size="14" fill="#6B7280">›</text>
+    <rect x="20" y="681" width="28" height="28" rx="8.4" fill="#818CF8" opacity="0.2"/>
+    <text x="34.0" y="699.2" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="12.6" font-weight="700" fill="#818CF8">Ju</text>
+    <text x="58" y="693" font-family="SF Pro Display, -apple-system, sans-serif" font-size="14" font-weight="600" fill="#F8FAFC">jupiter</text>
+    <text x="58" y="707" font-family="SF Pro Display, -apple-system, sans-serif" font-size="11" fill="#9CA3AF">Virgo  ·  House 12</text>
+    <text x="363" y="693" text-anchor="end" font-family="SF Pro Display, -apple-system, sans-serif" font-size="13" fill="#9CA3AF">16° 24'</text>
+    <text x="363" y="707" text-anchor="end" font-family="SF Pro Display, -apple-system, sans-serif" font-size="10" fill="#6B7280">Hasta</text>
+    <text x="378" y="699" font-family="SF Pro Display, -apple-system, sans-serif" font-size="14" fill="#6B7280">›</text>
+    <rect x="20" y="725" width="28" height="28" rx="8.4" fill="#EC4899" opacity="0.2"/>
+    <text x="34.0" y="743.2" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="12.6" font-weight="700" fill="#EC4899">Ve</text>
+    <text x="58" y="737" font-family="SF Pro Display, -apple-system, sans-serif" font-size="14" font-weight="600" fill="#F8FAFC">venus</text>
+    <text x="58" y="751" font-family="SF Pro Display, -apple-system, sans-serif" font-size="11" fill="#9CA3AF">Sagittarius  ·  House 3</text>
+    <text x="363" y="737" text-anchor="end" font-family="SF Pro Display, -apple-system, sans-serif" font-size="13" fill="#9CA3AF">29° 18'</text>
+    <text x="363" y="751" text-anchor="end" font-family="SF Pro Display, -apple-system, sans-serif" font-size="10" fill="#6B7280">U. Ashadha</text>
+    <text x="378" y="743" font-family="SF Pro Display, -apple-system, sans-serif" font-size="14" fill="#6B7280">›</text>
+    <rect x="20" y="769" width="28" height="28" rx="8.4" fill="#8B5CF6" opacity="0.2"/>
+    <text x="34.0" y="787.2" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="12.6" font-weight="700" fill="#8B5CF6">Sa</text>
+    <text x="58" y="781" font-family="SF Pro Display, -apple-system, sans-serif" font-size="14" font-weight="600" fill="#F8FAFC">saturn</text>
+    <text x="58" y="795" font-family="SF Pro Display, -apple-system, sans-serif" font-size="11" fill="#9CA3AF">Capricorn  ·  House 4</text>
+    <text x="363" y="781" text-anchor="end" font-family="SF Pro Display, -apple-system, sans-serif" font-size="13" fill="#9CA3AF">19° 30'</text>
+    <text x="363" y="795" text-anchor="end" font-family="SF Pro Display, -apple-system, sans-serif" font-size="10" fill="#6B7280">Shravana</text>
+    <text x="378" y="787" font-family="SF Pro Display, -apple-system, sans-serif" font-size="14" fill="#6B7280">›</text>
+  </g>
+  <!-- Bottom Navigation -->
+  <g id="bottomNav">
+    <rect x="0" y="764" width="393" height="88" fill="#111115" opacity="0.95"/>
+    <line x1="0" y1="764" x2="393" y2="764" stroke="rgba(255,255,255,0.06)" stroke-width="0.5"/>
+    <g transform="translate(27.299999999999997, 782) scale(1)">
+      <path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z" fill="#6B7280" transform="scale(1)"/>
+    </g>
+    <text x="39.3" y="816" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="10" fill="#6B7280">Home</text>
+    <g transform="translate(105.89999999999999, 782) scale(1)">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" fill="#22C55E" transform="scale(1)"/>
+    </g>
+    <text x="117.89999999999999" y="816" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="10" fill="#22C55E">Chart</text>
+    <circle cx="117.89999999999999" cy="776" r="2" fill="#22C55E"/>
+    <g transform="translate(184.5, 782) scale(1)">
+      <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z" fill="#6B7280" transform="scale(1)"/>
+    </g>
+    <text x="196.5" y="816" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="10" fill="#6B7280">Chat</text>
+    <g transform="translate(263.09999999999997, 782) scale(1)">
+      <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z" fill="#6B7280" transform="scale(1)"/>
+    </g>
+    <text x="275.09999999999997" y="816" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="10" fill="#6B7280">Calendar</text>
+    <g transform="translate(341.7, 782) scale(1)">
+      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z" fill="#6B7280" transform="scale(1)"/>
+    </g>
+    <text x="353.7" y="816" text-anchor="middle" font-family="SF Pro Display, -apple-system, sans-serif" font-size="10" fill="#6B7280">Profile</text>
+  </g>
+  </g>
+</svg>

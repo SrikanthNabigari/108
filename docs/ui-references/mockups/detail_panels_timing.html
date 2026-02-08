@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>108 Vedic Astrology — Timing & Event Detail Panels (Part 2)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0A0A0A;
+            color: #E8E8E8;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        /* Film Grain Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise"/><feColorMatrix in="noise" type="saturate" values="0"/></filter><rect width="100" height="100" filter="url(%23noise)" opacity="0.03"/></svg>');
+            background-size: 100px 100px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            font-size: 14px;
+            color: #999;
+            margin-bottom: 20px;
+        }
+
+        /* Tab Navigation */
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 30px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #333;
+        }
+
+        .tab-btn {
+            flex-shrink: 0;
+            padding: 10px 16px;
+            background: transparent;
+            border: 1px solid #444;
+            color: #999;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s;
+            border-radius: 4px;
+        }
+
+        .tab-btn:hover {
+            border-color: #666;
+            color: #CCC;
+        }
+
+        .tab-btn.active {
+            background: #333;
+            border-color: #666;
+            color: #E8E8E8;
+        }
+
+        /* Panel Container */
+        .panels {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(393px, 1fr));
+            gap: 40px;
+        }
+
+        .panel {
+            display: none;
+        }
+
+        .panel.active {
+            display: block;
+        }
+
+        /* Panel Card (Bottom Sheet Style) */
+        .panel-card {
+            background: #1A1A1A;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 24px;
+            max-width: 393px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Handle Bar */
+        .handle-bar {
+            width: 40px;
+            height: 4px;
+            background: #444;
+            border-radius: 2px;
+            margin: 0 auto 20px;
+        }
+
+        /* Panel Header */
+        .panel-header {
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #333;
+        }
+
+        .panel-header h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            letter-spacing: -0.3px;
+        }
+
+        .panel-header p {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            background: #2A2A2A;
+            border: 1px solid #444;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: 500;
+            color: #CCC;
+            margin-top: 8px;
+        }
+
+        .badge.urgent {
+            border-color: #666;
+            background: #2A2A2A;
+            color: #E8E8E8;
+            font-weight: 600;
+        }
+
+        /* Section */
+        .section {
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #2A2A2A;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .section-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #E8E8E8;
+        }
+
+        .section-content {
+            font-size: 13px;
+            color: #CCC;
+            line-height: 1.6;
+        }
+
+        /* Tappable Element */
+        .tappable {
+            padding: 8px 0;
+            border-bottom: 1px dashed #444;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s;
+        }
+
+        .tappable:hover {
+            background: #262626;
+            border-color: #555;
+            padding-left: 4px;
+            padding-right: 4px;
+        }
+
+        .tappable::after {
+            content: '→';
+            color: #666;
+            font-size: 12px;
+            margin-left: 8px;
+        }
+
+        /* Key-Value Pairs */
+        .key-value {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            font-size: 13px;
+        }
+
+        .key-value .key {
+            color: #999;
+            font-weight: 500;
+        }
+
+        .key-value .value {
+            color: #E8E8E8;
+            font-weight: 500;
+            text-align: right;
+        }
+
+        /* Data List */
+        .data-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .data-item {
+            padding: 8px 12px;
+            background: #262626;
+            border: 1px solid #333;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #CCC;
+        }
+
+        .data-item .label {
+            font-weight: 600;
+            color: #E8E8E8;
+            margin-bottom: 2px;
+        }
+
+        /* Status Indicator */
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #666;
+        }
+
+        .status.positive .status-dot {
+            background: #999;
+        }
+
+        .status.negative .status-dot {
+            background: #666;
+        }
+
+        /* Timeline Bars */
+        .timeline-bar {
+            width: 100%;
+            height: 24px;
+            background: #262626;
+            border: 1px solid #333;
+            border-radius: 3px;
+            position: relative;
+            margin: 8px 0;
+            overflow: hidden;
+        }
+
+        .timeline-segment {
+            position: absolute;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 600;
+            color: #0A0A0A;
+        }
+
+        .timeline-segment.active {
+            background: #666;
+            border-right: 1px solid #444;
+        }
+
+        .timeline-segment.inactive {
+            background: #3A3A3A;
+        }
+
+        /* Score Bars */
+        .score-bar-container {
+            margin: 8px 0;
+        }
+
+        .score-bar-label {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 4px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .score-bar {
+            width: 100%;
+            height: 16px;
+            background: #262626;
+            border: 1px solid #333;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .score-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #555 0%, #777 50%, #666 100%);
+            transition: width 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 600;
+            color: #0A0A0A;
+        }
+
+        /* Code Block (for mantras) */
+        .code-block {
+            background: #262626;
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: #CCC;
+            text-align: center;
+            margin: 8px 0;
+            line-height: 1.8;
+            word-break: break-word;
+        }
+
+        /* Alert Box */
+        .alert {
+            background: #2A2A2A;
+            border: 1px solid #444;
+            border-radius: 4px;
+            padding: 12px;
+            font-size: 12px;
+            color: #CCC;
+            margin: 8px 0;
+        }
+
+        .alert.info {
+            border-color: #444;
+            background: #1F2A2A;
+        }
+
+        /* Glyph */
+        .glyph {
+            font-size: 18px;
+            font-weight: bold;
+            margin-right: 6px;
+        }
+
+        /* Grid for Key Info */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .info-grid-item {
+            background: #262626;
+            border: 1px solid #333;
+            padding: 12px;
+            border-radius: 4px;
+        }
+
+        .info-grid-item .label {
+            font-size: 11px;
+            color: #999;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .info-grid-item .value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #E8E8E8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .panels {
+                grid-template-columns: 1fr;
+            }
+
+            .panel-card {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>108 Vedic Astrology — Timing & Event Detail Panels</h1>
+            <p>PART 2: Interactive reference for all clickable detail panel designs • Monochrome film-grain aesthetic • Realistic Vedic astrology data</p>
+        </header>
+
+        <!-- Tab Navigation -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchPanel(0)">7. Dasha Period</button>
+            <button class="tab-btn" onclick="switchPanel(1)">8. Transit</button>
+            <button class="tab-btn" onclick="switchPanel(2)">9. Conjunction</button>
+            <button class="tab-btn" onclick="switchPanel(3)">10. Panchanga</button>
+            <button class="tab-btn" onclick="switchPanel(4)">11. Muhurta</button>
+            <button class="tab-btn" onclick="switchPanel(5)">12. Remedy</button>
+            <button class="tab-btn" onclick="switchPanel(6)">13. Kuta Matching</button>
+        </div>
+
+        <!-- Panels Container -->
+        <div class="panels">
+
+            <!-- PANEL 7: DASHA PERIOD DETAIL -->
+            <div class="panel active">
+                <div class="panel-card">
+                    <div class="handle-bar"></div>
+
+                    <div class="panel-header">
+                        <h2><span class="glyph">☿</span> Mercury Mahadasha</h2>
+                        <p>2022–2039 (17 years)</p>
+                        <div class="badge">Currently Active</div>
+                    </div>
+
+                    <!-- Period Duration -->
+                    <div class="section">
+                        <div class="section-label">Period Duration</div>
+                        <div class="section-content">
+                            <div class="key-value">
+                                <span class="key">Start</span>
+                                <span class="value">Apr 2, 2022</span>
+                            </div>
+                            <div class="key-value">
+                                <span class="key">End</span>
+                                <span class="value">Apr 17, 2039</span>
+                            </div>
+                            <div class="key-value">
+                                <span class="key">Duration</span>
+                                <span class="value">17y 0m</span>
+                            </div>
+                            <div class="key-value">
+                                <span class="key">Remaining</span>
+                                <span class="value">12y 2m</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- THE LORD -->
+                    <div class="section">
+                        <div class="section-label">The Lord</div>
+                        <div class="section-title">Mercury in House 1, Libra</div>
+                        <div class="section-content">
+                            <div class="data-item">
+                                <div class="label">Owns</div>
+                                Houses 3 & 6 (communication, service)
+                            </div>
+                            <div class="data-item">
+                                <div class="label">Dignity</div>
+                                Own sign (Virgo), exalted in Gemini — strong
+                            </div>
+                            <div class="data-item">
+                                <div class="label">Current Status</div>
+                                In Libra (sign of Venus) — friendly placement
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- WHY THIS PERIOD MATTERS -->
+                    <div class="section">
+                        <div class="section-label">Why This Period Matters</div>
+                        <div class="section-content">
+                            As lord of houses 3 & 6, Mercury activates communication, writing, commerce, siblings, and service work. Placed in House 1 (self), the results manifest through intellectual pursuits, business ventures, and analytical problem-solving. This is a period of learning, trading, and mental expansion.
+                        </div>
+                    </div>
+
+                    <!-- COMBINED EFFECTS (current sub-dasha) -->
+                    <div class="section">
+                        <div class="section-label">Current Sub-Period</div>
+                        <div class="section-title"><span class="glyph">♄</span> Saturn Antardasha (Jan 2024 – Jan 2027)</div>
+                        <div class="section-content">
+                            <div class="alert info">
+                                <strong>Mercury-Saturn Combination:</strong> Intellect meets discipline and limitations. Saturn acting as 7th lord brings focus to contracts, business partnerships, and maturity in decision-making. Results come through delayed but solid efforts.
+                            </div>
+                            <div class="tappable">
+                                <span>Career Effects</span>
+                            </div>
+                            <div class="tappable">
+                                <span>Relationship Effects</span>
+                            </div>
+                            <div class="tappable">
+                                <span>Health Effects</span>
+                            </div>
+                            <div class="tappable">
+                                <span>Financial Effects</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- YOGAS ACTIVATED -->
+                    <div class="section">
+                        <div class="section-label">Yogas Activated</div>
+                        <div class="section-content">
+                            <div class="tappable">
+                                <span>Panchasiddhi Yoga (Mercury in Kendra)</span>
+                            </div>
+                            <div class="tappable">
+                                <span>Budha Aditya Yoga (Mercury-Sun link)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DOSHAS TRIGGERED -->
+                    <div class="section">
+                        <div class="section-label">Doshas Triggered</div>
+                        <div class="section-content">
+                            <div class="alert">No major doshas activated during Mercury Mahadasha.</div>
+                        </div>
+                    </div>
+
+                    <!-- KEY TRANSITS -->
+                    <div class="section">
+                        <div class="section-label">Key Transits This Period</div>
+                        <div class="section-content">
+                            <div class="tappable">
+                                <span>Jupiter Libra Transit (2024–2025)</span>
+                            </div>
+                            <div class="tappable">
+                                <span>Saturn Aquarius Ingress (2025)</span>
+                            </div>
+                            <div class="tappable">
+                                <span>Rahu Node Ingress Virgo (2023–2024)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- HISTORICAL EVENTS -->
+                    <div class="section">
+                        <div class="section-label">Logged Events</div>
+                        <div class="section-content">
+                            <div class="data-item">
+                                <div class="label">Feb 2023 — Job Promotion</div>
+                                Mercury dasha, Mercury rules career 6th house
+                            </div>
+                            <div class="data-item">
+                                <div class="label">Aug 2023 — Business Launch</div>
+                                Mercury as commerce lord, House 1 identity
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANEL 8: TRANSIT DETAIL -->
+            <div class="panel">
+                <div class="panel-card">
+                    <div class="handle-bar"></div>
+
+                    <div class="panel-header">
+                        <h2><span class="glyph">♃</span> Jupiter in Gemini</h2>
+                        <p>House 9 • Intellectual Expansion</p>
+                        <div class="badge">Current Transit</div>
+                    </div>
+
+                    <!-- Position -->
+                    <div class="section">
+                        <div class="section-label">Position Details</div>
+                        <div class="info-grid">
+                            <div class="info-grid-item">
+                                <div class="label">Degree</div>
+                                <div class="value">18° 45'</div>
+                            </div>
+                            <div class="info-grid-item">
+                                <div class="label">Nakshatra</div>
+                                <div class="value">Ardra (Rahu)</div>
+                            </div>
+                            <div class="info-grid-item">
+                                <div class="label">Pada</div>
+                                <div class="value">3 of 4</div>
+                            </div>
+                            <div class="info-grid-item">
+                                <div class="label">Speed</div>
+                                <div class="value">Normal</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Duration in Sign -->
+                    <div class="section">
+                        <div class="section-label">Duration in Sign</div>
+                        <div class="section-content">
+                            <div class="key-value">
+                                <span class="key">Entered Gemini</span>
+                                <span class="value">May 1, 2024</span>
+                            </div>
+                            <div class="key-value">
+                                <span class="key">Exits Gemini</span>
+                                <span class="value">May 14, 2025</span>
+                            </div>
+                            <div class="key-value">
+                                <span class="key">Days Remaining</span>
+                                <span class="value">95 days</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- GOCHARA -->
+                    <div class="section">
+                        <div class="section-label">Gochara Analysis</div>
+                        <div class="section-content">
+                            <div class="key-value">
+                                <span class="key">From Natal Moon</span>
+                                <span class="value">11th House (Labha)</span>
+                            </div>
+                            <div class="status positive">
+                                <span class="status-dot"></span>
+                                <span>Favorable</span>
+                            </div>
+                            <div class="alert info" style="margin-top: 8px;">
+                                The 11th house from Moon brings gains, friendships, fulfillment of desires, and social recognition. Jupiter here amplifies positive outcomes.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- WHY THIS TRANSIT MATTERS -->
+                    <div class="section">
+                        <div class="section-label">Why This Transit Matters</div>
+                        <div class="section-content">
+                            Jupiter is the lord of houses 5 & 8 (creativity, transformation). Now transiting your 9th house of luck, education, and spirituality, this activates higher learning, international travel, and philosophical exploration. Results are expansive and fortunate.
+                        </div>
+                    </div>
+
+                    <!-- ASPECT TO NATAL PLANETS -->
+                    <div class="section">
+                        <div class="section-label">Aspects to Natal Planets</div>
+                        <div class="section-content">
+                            <div class="tappable">
+                                <span>Conjunction with Natal Mercury (9°)</span>
+                            </div>
+                            <div class="tappable">
+                                <span>Square to Natal Venus (95°)</span>
+                            </div>
+                            <div class="tappable">
+                                <span>Trine to Natal Moon (120°)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ASHTAKAVARGA STRENGTH -->
+                    <div class="section">
+                        <div class="section-label">Ashtakavarga Strength</div>
+                        <div class="section-content">
+                            <div class="score-bar-container">
+                                <div class="score-bar-label">
+                                    <span>Jupiter's Bindus in Gemini</span>
+                                    <span>5 / 8</span>
+                                </div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 62.5%;"></div>
+                                </div>
+                            </div>
+                            <div class="alert info" style="font-size: 12px; margin-top: 8px;">
+                                Moderate strength. Jupiter is reasonably powerful in this sign, but not at peak capacity. Results will be steady, not explosive.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- NAKSHATRA EFFECTS -->
+                    <div class="section">
+                        <div class="section-label">Nakshatra-Level Effects</div>
+                        <div class="section-content">
+                            <div class="data-item">
+                                <div class="label">Ardra Nakshatra (Rahu-ruled)</div>
+                                Brings sudden insights, mental turbulence then clarity. Jupiter here: confusion gives way to profound understanding. Ideal for research, writing, discovery.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- COMBUSTION CHECK -->
+                    <div class="section">
+                        <div class="section-label">Combustion Status</div>
+                        <div class="status positive">
+                            <span class="status-dot"></span>
+                            <span>Not Combust</span>
+                        </div>
+                        <div class="section-content" style="margin-top: 8px;">
+                            Jupiter is 38° from transit Sun — well outside combustion range. Full power.
+                        </div>
+                    </div>
+
+                    <!-- RETROGRADE STATUS -->
+                    <div class="section">
+                        <div class="section-label">Retrograde Status</div>
+                        <div class="status positive">
+                            <span class="status-dot"></span>
+                            <span>Direct Motion</span>
+                        </div>
+                        <div class="section-content" style="margin-top: 8px;">
+                            Jupiter is moving forward at normal speed. Results manifest outwardly and swiftly.
+                        </div>
+                    </div>
+
+                    <!-- DASHA INTERACTION -->
+                    <div class="section">
+                        <div class="section-label">Dasha Interaction</div>
+                        <div class="section-content">
+                            Transit Jupiter activating House 9 during Mercury Mahadasha amplifies intellectual growth and business expansion through education and partnerships.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANEL 9: CONJUNCTION DETAIL -->
+            <div class="panel">
+                <div class="panel-card">
+                    <div class="handle-bar"></div>
+
+                    <div class="panel-header">
+                        <h2><span class="glyph">☉</span> ☌ <span class="glyph">☊</span> Sun-Rahu Conjunction</h2>
+                        <p>Scorpio, House 2</p>
+                        <div class="badge">Grahan Dosha</div>
+                    </div>
+
+                    <!-- Separation -->
+                    <div class="section">
+                        <div class="section-label">Separation</div>
+                        <div class="section-content">
+                            <div class="key-value">
+                                <span class="key">Angular Distance</span>
+                                <span class="value">3° 18'</span>
+                            </div>
+                            <div class="key-value">
+                                <span class="key">Status</span>
+                                <span class="value">Exact Conjunction</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- WHAT IS A CONJUNCTION -->
+                    <div class="section">
+                        <div class="section-label">What Is a Conjunction?</div>
+                        <div class="section-content">
+                            Two planets in the same sign share energy. They blend their significations, amplify their effects, and create either harmonious or challenging combinations depending on their natures.
+                        </div>
+                    </div>
+
+                    <!-- PLANET A's ROLE -->
+                    <div class="section">
+                        <div class="section-label">Sun's Role</div>
+                        <div class="section-content">
+                            <div class="data-item">
+                                <div class="label">Lord of</div>
+                                House 11 (gains, friendships, social fulfillment)
+                            </div>
+                            <div class="data-item">
+                                <div class="label">Nature</div>
+                                Benefic (for Libra Lagna), natural benefic
+                            </div>
+                            <div class="data-item">
+                                <div class="label">Carries</div>
+                                Self-expression, authority, ego, life force
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PLANET B's ROLE -->
+                    <div class="section">
+                        <div class="section-label">Rahu's Role</div>
+                        <div class="section-content">
+                            <div class="data-item">
+                                <div class="label">Nature</div>
+                                Shadowy node, amplifier, obsession
+                            </div>
+                            <div class="data-item">
+                                <div class="label">Carries</div>
+                                Desire, illusion, foreign interests, unconventional paths
+                            </div>
+                            <div class="data-item">
+                                <div class="label">Currently</div>
+                                Transiting Scorpio (H2 of wealth, speech)
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- WHY THIS CONJUNCTION MATTERS -->
+                    <div class="section">
+                        <div class="section-label">Why This Conjunction Matters</div>
+                        <div class="section-content">
+                            As Sun (lord of gains, H11) meets Rahu (amplifier, foreign) in Scorpio (hidden matters, H2 of speech/wealth), the themes of gains and speech merge and express through unconventional, taboo, or foreign channels. Results are amplified but unpredictable.
+                        </div>
+                    </div>
+
+                    <!-- WHAT IT CREATES -->
+                    <div class="section">
+                        <div class="section-label">What It Creates</div>
+                        <div class="tappable">
+                            <span>Dosha: Grahan Dosha (Solar Eclipse)</span>
+                        </div>
+                        <div class="tappable">
+                            <span>Yoga: Chandramasi Yoga (conditional)</span>
+                        </div>
+                        <div class="alert info" style="margin-top: 12px;">
+                            Grahan Dosha eclipse effect weakens Sun's significations. Speech becomes harsh, ego inflated, authority questioned.
+                        </div>
+                    </div>
+
+                    <!-- NATURE OF BLEND -->
+                    <div class="section">
+                        <div class="section-label">Nature of Blend</div>
+                        <div class="section-content">
+                            <div class="key-value">
+                                <span class="key">Classification</span>
+                                <span class="value">Benefic + Malefic</span>
+                            </div>
+                            <div class="alert info" style="margin-top: 8px;">
+                                Conflicted combination. Sun seeks clarity, authority, and stable gains. Rahu seeks amplification, illusion, and unconventional paths. Results are gains through foreign/tech/hidden channels, but with ego clashes and unpredictability.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PLANETARY WAR -->
+                    <div class="section">
+                        <div class="section-label">Graha Yuddha Analysis</div>
+                        <div class="section-content">
+                            <div class="key-value">
+                                <span class="key">War Participants</span>
+                                <span class="value">Sun vs Rahu</span>
+                            </div>
+                            <div class="key-value">
+                                <span class="key">Winner</span>
+                                <span class="value">Sun (luminous body)</span>
+                            </div>
+                            <div class="alert info" style="margin-top: 8px;">
+                                Sun wins, but Rahu's presence weakens its authority function. Speech may be unconventional, gains come through unusual sources.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CURRENT TRANSIT -->
+                    <div class="section">
+                        <div class="section-label">Transit Overlay</div>
+                        <div class="section-content">
+                            <div class="status negative">
+                                <span class="status-dot"></span>
+                                <span>Transit conjunction NOT active (natal only)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANEL 10: PANCHANGA ELEMENT DETAIL -->
+            <div class="panel">
+                <div class="panel-card">
+                    <div class="handle-bar"></div>
+
+                    <div class="panel-header">
+                        <h2>Tithi — Shukla Ekadashi</h2>
+                        <p>11th Lunar Day (Waxing Phase)</p>
+                        <div class="badge">Auspicious</div>
+                    </div>
+
+                    <!-- Properties -->
+                    <div class="section">
+                        <div class="section-label">Properties</div>
+                        <div class="info-grid">
+                            <div class="info-grid-item">
+                                <div class="label">Number</div>
+                                <div class="value">11</div>
+                            </div>
+                            <div class="info-grid-item">
+                                <div class="label">Deity</div>
+                                <div class="value">Rudra (Shiva)</div>
+                            </div>
+                            <div class="info-grid-item">
+                                <div class="label">Ruling Planet</div>
+                                <div class="value">Moon</div>
+                            </div>
+                            <div class="info-grid-item">
+                                <div class="label">Nature</div>
+                                <div class="value">Auspicious</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- WHAT IS TITHI -->
+                    <div class="section">
+                        <div class="section-label">What Is Tithi?</div>
+                        <div class="section-content">
+                            Tithi is the lunar day, based on the angular distance between the Sun and Moon. There are 30 tithis in a lunar month (15 in waxing phase, 15 in waning phase). Each tithi has unique qualities that influence muhurta and activity planning.
+                        </div>
+                    </div>
+
+                    <!-- TODAY'S STATUS -->
+                    <div class="section">
+                        <div class="section-label">Today's Status</div>
+                        <div class="section-content">
+                            <div class="key-value">
+                                <span class="key">Current Tithi</span>
+                                <span class="value">Shukla Ekadashi</span>
+                            </div>
+                            <div class="key-value">
+                                <span class="key">Started</span>
+                                <span class="value">6:45 AM Today</span>
+                            </div>
+                            <div class="key-value">
+                                <span class="key">Ends</span>
+                                <span class="value">7:23 AM Tomorrow</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AUSPICIOUS FOR -->
+                    <div class="section">
+                        <div class="section-label">Auspicious For</div>
+                        <div class="section-content">
+                            <div class="tappable">
+                                <span>Fasting (Ekadashi Vrat)</span>
+                            </div>
+                            <div class="tappable">
+                                <span>Spiritual practices & meditation</span>
+                            </div>
+                            <div class="tappable">
+                                <span>Worship of Vishnu/Krishna</span>
+                            </div>
+                            <div class="tappable">
+                                <span>Mantra chanting</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AVOID -->
+                    <div class="section">
+                        <div class="section-label">Avoid</div>
+                        <div class="section-content">
+                            <div class="tappable">
+                                <span>Starting new material ventures</span>
+                            </div>
+                            <div class="tappable">
+                                <span>Major transactions</span>
+                            </div>
+                            <div class="tappable">
+                                <span>Eating grains (strict fast)</span>
+                            </div>
+                            <div class="tappable">
+                                <span>Worldly entertainment</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DEEPER MEANING -->
+                    <div class="section">
+                        <div class="section-label">Deeper Meaning</div>
+                        <div class="section-content">
+                            Ekadashi is considered one of the most sacred tithis for spiritual practice. Fasting on Ekadashi purifies the body and mind, eliminates toxins, and brings clarity. The 11th lunar day represents liberation from ignorance. Observing Ekadashi accelerates spiritual evolution and removes karmic blockages.
+                        </div>
+                    </div>
+
+                    <!-- Associated Festival -->
+                    <div class="section">
+                        <div class="section-label">Associated Festivals</div>
+                        <div class="section-content">
+                            <div class="data-item">
+                                <div class="label">Margasirsha Ekadashi</div>
+                                Winter fasting period, honors the start of Uttarayan (Sun's northern journey)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANEL 11: MUHURTA DETAIL -->
+            <div class="panel">
+                <div class="panel-card">
+                    <div class="handle-bar"></div>
+
+                    <div class="panel-header">
+                        <h2>Muhurta for Business Launch</h2>
+                        <p>Feb 14, 2026 • 10:30 AM</p>
+                    </div>
+
+                    <!-- Score -->
+                    <div class="section">
+                        <div class="section-label">Quality Assessment</div>
+                        <div class="info-grid">
+                            <div class="info-grid-item">
+                                <div class="label">Score</div>
+                                <div class="value">72 / 100</div>
+                            </div>
+                            <div class="info-grid-item">
+                                <div class="label">Verdict</div>
+                                <div class="value">Good</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SCORE BREAKDOWN -->
+                    <div class="section">
+                        <div class="section-label">Score Breakdown</div>
+                        <div class="score-bar-container">
+                            <div class="score-bar-label">
+                                <span>Tithi Strength</span>
+                                <span>+18</span>
+                            </div>
+                            <div class="score-bar">
+                                <div class="score-fill" style="width: 72%; background: linear-gradient(90deg, #555 0%, #777 50%, #666 100%);"></div>
+                            </div>
+                        </div>
+                        <div class="score-bar-container">
+                            <div class="score-bar-label">
+                                <span>Nakshatra Strength</span>
+                                <span>+22</span>
+                            </div>
+                            <div class="score-bar">
+                                <div class="score-fill" style="width: 88%;"></div>
+                            </div>
+                        </div>
+                        <div class="score-bar-container">
+                            <div class="score-bar-label">
+                                <span>Yoga Quality</span>
+                                <span>+15</span>
+                            </div>
+                            <div class="score-bar">
+                                <div class="score-fill" style="width: 60%;"></div>
+                            </div>
+                        </div>
+                        <div class="score-bar-container">
+                            <div class="score-bar-label">
+                                <span>Vara Suitability</span>
+                                <span>+17</span>
+                            </div>
+                            <div class="score-bar">
+                                <div class="score-fill" style="width: 68%;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TITHI -->
+                    <div class="section">
+                        <div class="section-label">Tithi</div>
+                        <div class="section-content">
+                            <div class="key-value">
+                                <span class="key">Current Tithi</span>
+                                <span class="value">Shukla Dashami (10)</span>
+                            </div>
+                            <div class="status positive" style="margin-top: 8px;">
+                                <span class="status-dot"></span>
+                                <span>Favorable for business launch</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- NAKSHATRA -->
+                    <div class="section">
+                        <div class="section-label">Nakshatra</div>
+                        <div class="section-content">
+                            <div class="key-value">
+                                <span class="key">Current Nakshatra</span>
+                                <span class="value">Rohini (Soma-ruled)</span>
+                            </div>
+                            <div class="status positive" style="margin-top: 8px;">
+                                <span class="status-dot"></span>
+                                <span>Excellent for commerce & wealth creation</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- YOGA -->
+                    <div class="section">
+                        <div class="section-label">Nitya Yoga</div>
+                        <div class="section-content">
+                            <div class="key-value">
+                                <span class="key">Current Yoga</span>
+                                <span class="value">Shukra Yoga (Venus yoga)</span>
+                            </div>
+                            <div class="status positive" style="margin-top: 8px;">
+                                <span class="status-dot"></span>
+                                <span>Promotes harmony & success</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- KARANA -->
+                    <div class="section">
+                        <div class="section-label">Karana</div>
+                        <div class="section-content">
+                            <div class="key-value">
+                                <span class="key">Current Karana</span>
+                                <span class="value">Bava (Gajamukha)</span>
+                            </div>
+                            <div class="status positive" style="margin-top: 8px;">
+                                <span class="status-dot"></span>
+                                <span>Favorable for important activities</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- VARA -->
+                    <div class="section">
+                        <div class="section-label">Vara (Weekday)</div>
+                        <div class="section-content">
+                            <div class="key-value">
+                                <span class="key">Day</span>
+                                <span class="value">Thursday (Jupiter day)</span>
+                            </div>
+                            <div class="status positive" style="margin-top: 8px;">
+                                <span class="status-dot"></span>
+                                <span>Excellent for commerce & expansion</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- INAUSPICIOUS PERIODS -->
+                    <div class="section">
+                        <div class="section-label">Avoid These Windows</div>
+                        <div class="section-content" style="margin-bottom: 12px;">
+                            <div class="timeline-bar">
+                                <div class="timeline-segment inactive" style="left: 0%; width: 15%;">
+                                    <span style="font-size: 9px;">RK</span>
+                                </div>
+                                <div class="timeline-segment active" style="left: 15%; width: 50%;"></div>
+                                <div class="timeline-segment inactive" style="left: 65%; width: 15%;">
+                                    <span style="font-size: 9px;">YK</span>
+                                </div>
+                                <div class="timeline-segment active" style="left: 80%; width: 20%;"></div>
+                            </div>
+                            <div class="data-item" style="font-size: 11px; padding: 6px 8px;">
+                                <strong>Rahu Kaal</strong> 1:30 PM – 3:00 PM
+                            </div>
+                            <div class="data-item" style="font-size: 11px; padding: 6px 8px;">
+                                <strong>Yamaghanda</strong> 7:45 AM – 9:15 AM
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ABHIJIT MUHURTA -->
+                    <div class="section">
+                        <div class="section-label">Abhijit Muhurta (Universal Auspicious Time)</div>
+                        <div class="section-content">
+                            <div class="key-value">
+                                <span class="key">Window</span>
+                                <span class="value">11:48 AM – 12:36 PM</span>
+                            </div>
+                            <div class="alert info" style="margin-top: 8px; font-size: 12px;">
+                                The universally auspicious noon window. Any important activity initiated here has divine support.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CHOGHADIYA -->
+                    <div class="section">
+                        <div class="section-label">Choghadiya Period</div>
+                        <div class="section-content">
+                            <div class="key-value">
+                                <span class="key">Current Period</span>
+                                <span class="value">Amrit (Auspicious)</span>
+                            </div>
+                            <div class="key-value">
+                                <span class="key">Time</span>
+                                <span class="value">10:15 AM – 11:48 AM</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RECOMMENDED ACTIVITIES -->
+                    <div class="section">
+                        <div class="section-label">Recommended Activities</div>
+                        <div class="section-content">
+                            <div class="tappable">
+                                <span>Business Launch (high compatibility)</span>
+                            </div>
+                            <div class="tappable">
+                                <span>Commercial Transactions</span>
+                            </div>
+                            <div class="tappable">
+                                <span>Financial Investments</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TRANSIT CONTEXT -->
+                    <div class="section">
+                        <div class="section-label">Transit Context</div>
+                        <div class="section-content">
+                            Jupiter in Gemini aspecting H9 of luck enhances business venture success. No major malefic aspects at this time.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANEL 12: REMEDY DETAIL -->
+            <div class="panel">
+                <div class="panel-card">
+                    <div class="handle-bar"></div>
+
+                    <div class="panel-header">
+                        <h2><span class="glyph">♄</span> Saturn Remedy</h2>
+                        <p>Sade Sati Setting Phase</p>
+                        <div class="badge urgent">Recommended</div>
+                    </div>
+
+                    <!-- WHY THIS REMEDY -->
+                    <div class="section">
+                        <div class="section-label">Why This Remedy?</div>
+                        <div class="section-content">
+                            Your Saturn is in the 3rd phase of Sade Sati (2 years remaining). This final phase can still bring karma resolution challenges. Regular Saturn remedies accelerate the clearing process and reduce remaining hardships.
+                        </div>
+                    </div>
+
+                    <!-- MANTRA BLOCK -->
+                    <div class="section">
+                        <div class="section-label">Mantra Remedy</div>
+                        <div class="section-title" style="margin-bottom: 12px;">Shani Mantra</div>
+                        <div class="code-block">
+                            ॐ शं शनैश्चराय नमः।<br>
+                            <br>
+                            <span style="font-size: 11px;">Om Sham Shanaishcharaya Namah</span>
+                        </div>
+                        <div class="section-content" style="margin-top: 12px;">
+                            <div class="key-value">
+                                <span class="key">Repetitions</span>
+                                <span class="value">108 (minimum)</span>
+                            </div>
+                            <div class="key-value">
+                                <span class="key">Best Day</span>
+                                <span class="value">Saturday</span>
+                            </div>
+                            <div class="key-value">
+                                <span class="key">Best Time</span>
+                                <span class="value">6:00 AM – 8:00 AM</span>
+                            </div>
+                            <div class="key-value">
+                                <span class="key">Minimum Duration</span>
+                                <span class="value">40 days continuous</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- GEMSTONE BLOCK -->
+                    <div class="section">
+                        <div class="section-label">Gemstone Remedy</div>
+                        <div class="section-title" style="margin-bottom: 12px;">Blue Sapphire (Neelam)</div>
+                        <div class="section-content">
+                            <div class="key-value">
+                                <span class="key">Weight</span>
+                                <span class="value">4-6 carats</span>
+                            </div>
+                            <div class="key-value">
+                                <span class="key">Metal</span>
+                                <span class="value">Iron, Steel, or Silver</span>
+                            </div>
+                            <div class="key-value">
+                                <span class="key">Finger</span>
+                                <span class="value">Middle finger (right hand)</span>
+                            </div>
+                            <div class="key-value">
+                                <span class="key">Wearing Day</span>
+                                <span class="value">Saturday</span>
+                            </div>
+                            <div class="key-value">
+                                <span class="key">Wearing Time</span>
+                                <span class="value">Morning (6:00–8:00 AM)</span>
+                            </div>
+                            <div class="alert info" style="margin-top: 12px;">
+                                <strong>IMPORTANT:</strong> Consult a qualified Vedic astrologer before wearing Blue Sapphire. For Libra Lagna, Saturn is highly beneficial (yogakaraka), making Blue Sapphire safe. However, test with a ring for 3 days first to ensure compatibility.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CHARITY BLOCK -->
+                    <div class="section">
+                        <div class="section-label">Charity / Donation</div>
+                        <div class="section-content">
+                            <div class="key-value">
+                                <span class="key">Donate</span>
+                                <span class="value">Black sesame, mustard oil, iron items</span>
+                            </div>
+                            <div class="key-value">
+                                <span class="key">To Whom</span>
+                                <span class="value">Poor, elderly, disabled persons</span>
+                            </div>
+                            <div class="key-value">
+                                <span class="key">On Which Day</span>
+                                <span class="value">Saturday</span>
+                            </div>
+                            <div class="key-value">
+                                <span class="key">Frequency</span>
+                                <span class="value">Every Saturday for 40 days</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- WORSHIP BLOCK -->
+                    <div class="section">
+                        <div class="section-label">Worship / Ritual</div>
+                        <div class="section-content">
+                            <div class="key-value">
+                                <span class="key">Deity</span>
+                                <span class="value">Lord Hanuman, Maa Kali</span>
+                            </div>
+                            <div class="key-value">
+                                <span class="key">Practice</span>
+                                <span class="value">Hanuman Chalisa recitation</span>
+                            </div>
+                            <div class="key-value">
+                                <span class="key">Frequency</span>
+                                <span class="value">Every Saturday or daily</span>
+                            </div>
+                            <div class="key-value">
+                                <span class="key">Duration</span>
+                                <span class="value">13 weeks (Sade Sati ritual cycle)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BEHAVIORAL BLOCK -->
+                    <div class="section">
+                        <div class="section-label">Behavioral & Lifestyle</div>
+                        <div class="section-content">
+                            <div class="tappable">
+                                <span>Practice patience & acceptance of difficulties</span>
+                            </div>
+                            <div class="tappable">
+                                <span>Avoid indulgence & excessive luxury</span>
+                            </div>
+                            <div class="tappable">
+                                <span>Wear black or dark blue clothing on Saturdays</span>
+                            </div>
+                            <div class="tappable">
+                                <span>Avoid white & bright colors on Saturdays</span>
+                            </div>
+                            <div class="tappable">
+                                <span>Practice meditation & introspection</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- EFFECTIVENESS TIMELINE -->
+                    <div class="section">
+                        <div class="section-label">Timeline for Effects</div>
+                        <div class="section-content">
+                            <div class="key-value">
+                                <span class="key">Notice effects after</span>
+                                <span class="value">40 days of consistent practice</span>
+                            </div>
+                            <div class="key-value">
+                                <span class="key">Significant relief after</span>
+                                <span class="value">120 days (full cycle)</span>
+                            </div>
+                            <div class="alert info" style="margin-top: 12px; font-size: 12px;">
+                                Remedies work cumulatively. Consistency matters more than intensity. Do not skip days.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANEL 13: KUTA MATCHING DETAIL -->
+            <div class="panel">
+                <div class="panel-card">
+                    <div class="handle-bar"></div>
+
+                    <div class="panel-header">
+                        <h2>Nadi Kuta</h2>
+                        <p>Physiological Compatibility • 0 / 8 points</p>
+                        <div class="badge">Critical Issue</div>
+                    </div>
+
+                    <!-- WHAT IS KUTA -->
+                    <div class="section">
+                        <div class="section-label">What Is Nadi Kuta?</div>
+                        <div class="section-content">
+                            Nadi Kuta measures physiological and constitutional compatibility. It assesses whether the couple's body systems (Vata, Pitta, Kapha) are harmonious. Same Nadi indicates potential health issues, particularly in offspring. This is one of the most critical kutas in matching.
+                        </div>
+                    </div>
+
+                    <!-- THE MATCHING LOGIC -->
+                    <div class="section">
+                        <div class="section-label">The Matching Logic</div>
+                        <div class="section-content">
+                            <div class="data-item">
+                                <div class="label">Boy's Nakshatra</div>
+                                Ashwini (Vata Nadi)
+                            </div>
+                            <div class="data-item">
+                                <div class="label">Girl's Nakshatra</div>
+                                Ashwini (Vata Nadi)
+                            </div>
+                            <div class="alert info" style="margin-top: 12px;">
+                                Both share the same Nadi (Vata). The ancient texts state: "Nadi Kuta same = health problems in marriage & children with weak immunity." This is a critical mismatch.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SIGNIFICANCE -->
+                    <div class="section">
+                        <div class="section-label">Significance of Low Nadi Score</div>
+                        <div class="section-content">
+                            A zero Nadi Kuta score indicates:
+                            <div class="tappable">
+                                <span>Health incompatibility in the couple</span>
+                            </div>
+                            <div class="tappable">
+                                <span>Weak offspring due to constitutional clash</span>
+                            </div>
+                            <div class="tappable">
+                                <span>Potential reproductive issues</span>
+                            </div>
+                            <div class="tappable">
+                                <span>Chronic health issues in children</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- YOUR RESULT -->
+                    <div class="section">
+                        <div class="section-label">Your Result</div>
+                        <div class="section-content">
+                            <div class="key-value">
+                                <span class="key">Nadi Kuta Points</span>
+                                <span class="value">0 / 8</span>
+                            </div>
+                            <div class="alert">
+                                <strong>Interpretation:</strong> This couple cannot have healthy children according to classical Jyotish rules. However, modern medical science, nutrition, and lifestyle can overcome this dosha. Many couples with zero Nadi Kuta have healthy children. This is NOT a marriage breaker, but requires awareness and remedial measures (health optimizations, medical counseling).
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- REMEDIAL MEASURES -->
+                    <div class="section">
+                        <div class="section-label">Remedial Measures</div>
+                        <div class="section-content">
+                            <div class="tappable">
+                                <span>Perform "Nadi Dosha Nivaran" puja before marriage</span>
+                            </div>
+                            <div class="tappable">
+                                <span>Consult an Ayurvedic practitioner for health optimization</span>
+                            </div>
+                            <div class="tappable">
+                                <span>Both partners undergo genetic screening before conception</span>
+                            </div>
+                            <div class="tappable">
+                                <span>Practice yoga & pranayama to strengthen constitutions</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- OTHER KUTAS OVERVIEW -->
+                    <div class="section">
+                        <div class="section-label">Other Kuta Scores</div>
+                        <div class="section-content">
+                            <div class="score-bar-container">
+                                <div class="score-bar-label">
+                                    <span>Varna Kuta</span>
+                                    <span>1 / 1</span>
+                                </div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 100%;"></div>
+                                </div>
+                            </div>
+                            <div class="score-bar-container">
+                                <div class="score-bar-label">
+                                    <span>Vasya Kuta</span>
+                                    <span>2 / 2</span>
+                                </div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 100%;"></div>
+                                </div>
+                            </div>
+                            <div class="score-bar-container">
+                                <div class="score-bar-label">
+                                    <span>Tara Kuta</span>
+                                    <span>3 / 3</span>
+                                </div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 100%;"></div>
+                                </div>
+                            </div>
+                            <div class="score-bar-container">
+                                <div class="score-bar-label">
+                                    <span>Yoni Kuta</span>
+                                    <span>4 / 4</span>
+                                </div>
+                                <div class="score-bar">
+                                    <div class="score-fill" style="width: 100%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- OVERALL COMPATIBILITY -->
+                    <div class="section">
+                        <div class="section-label">Overall Ashta Kuta Score</div>
+                        <div class="info-grid">
+                            <div class="info-grid-item">
+                                <div class="label">Total Points</div>
+                                <div class="value">18 / 36</div>
+                            </div>
+                            <div class="info-grid-item">
+                                <div class="label">Verdict</div>
+                                <div class="value">Moderate Match</div>
+                            </div>
+                        </div>
+                        <div class="alert info" style="margin-top: 12px;">
+                            Despite the critical Nadi Kuta mismatch, other kutas are excellent. The marriage is viable with awareness and remedial measures. Consult a senior astrologer for complete synastry analysis beyond kuta matching.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function switchPanel(index) {
+            // Hide all panels
+            const panels = document.querySelectorAll('.panel');
+            panels.forEach(panel => panel.classList.remove('active'));
+
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Show selected panel
+            panels[index].classList.add('active');
+            buttons[index].classList.add('active');
+        }
+    </script>
+</body>
+</html>

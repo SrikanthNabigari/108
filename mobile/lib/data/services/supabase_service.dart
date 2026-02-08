@@ -69,6 +69,11 @@ class SupabaseService {
     }
   }
 
+  /// Anonymous sign-in (dev/testing)
+  Future<AuthResponse> signInAnonymously() async {
+    return await client.auth.signInAnonymously();
+  }
+
   /// Sign out
   Future<void> signOut() async {
     await client.auth.signOut();

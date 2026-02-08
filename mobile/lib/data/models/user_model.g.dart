@@ -13,17 +13,21 @@ _$UserModelImpl _$$UserModelImplFromJson(Map<String, dynamic> json) =>
       phone: json['phone'] as String?,
       name: json['name'] as String?,
       gender: json['gender'] as String?,
-      avatarUrl: json['avatarUrl'] as String?,
-      onboardingComplete: json['onboardingComplete'] as bool? ?? false,
-      subscriptionTier: json['subscriptionTier'] as String? ?? 'free',
-      lagnaRashi: json['lagnaRashi'] as String?,
-      moonRashi: json['moonRashi'] as String?,
-      moonNakshatra: json['moonNakshatra'] as String?,
-      birthDatetime: json['birthDatetime'] == null
+      avatarUrl: json['avatar_url'] as String?,
+      subscriptionTier: json['subscription_tier'] as String? ?? 'free',
+      birthDatetime: json['birth_datetime'] == null
           ? null
-          : DateTime.parse(json['birthDatetime'] as String),
-      placeName: json['placeName'] as String?,
-      creditBalance: (json['creditBalance'] as num?)?.toInt() ?? 0,
+          : DateTime.parse(json['birth_datetime'] as String),
+      birthLatitude: (json['birth_latitude'] as num?)?.toDouble(),
+      birthLongitude: (json['birth_longitude'] as num?)?.toDouble(),
+      timezoneOffset: (json['timezone_offset'] as num?)?.toDouble(),
+      placeName: json['place_name'] as String?,
+      createdAt: json['created_at'] == null
+          ? null
+          : DateTime.parse(json['created_at'] as String),
+      updatedAt: json['updated_at'] == null
+          ? null
+          : DateTime.parse(json['updated_at'] as String),
     );
 
 Map<String, dynamic> _$$UserModelImplToJson(_$UserModelImpl instance) =>
@@ -33,13 +37,13 @@ Map<String, dynamic> _$$UserModelImplToJson(_$UserModelImpl instance) =>
       'phone': instance.phone,
       'name': instance.name,
       'gender': instance.gender,
-      'avatarUrl': instance.avatarUrl,
-      'onboardingComplete': instance.onboardingComplete,
-      'subscriptionTier': instance.subscriptionTier,
-      'lagnaRashi': instance.lagnaRashi,
-      'moonRashi': instance.moonRashi,
-      'moonNakshatra': instance.moonNakshatra,
-      'birthDatetime': instance.birthDatetime?.toIso8601String(),
-      'placeName': instance.placeName,
-      'creditBalance': instance.creditBalance,
+      'avatar_url': instance.avatarUrl,
+      'subscription_tier': instance.subscriptionTier,
+      'birth_datetime': instance.birthDatetime?.toIso8601String(),
+      'birth_latitude': instance.birthLatitude,
+      'birth_longitude': instance.birthLongitude,
+      'timezone_offset': instance.timezoneOffset,
+      'place_name': instance.placeName,
+      'created_at': instance.createdAt?.toIso8601String(),
+      'updated_at': instance.updatedAt?.toIso8601String(),
     };

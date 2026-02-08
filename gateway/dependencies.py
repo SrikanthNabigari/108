@@ -4,72 +4,76 @@ from __future__ import annotations
 
 import json
 import logging
-from typing import Annotated
+import uuid
+from typing import Annotated, Any
 
 import jwt
 from fastapi import Depends, HTTPException, Request, status
-from redis.asyncio import Redis
+from jwt import PyJWKClient
 
 from gateway.config import Settings
-from gateway.models import UserContext
+from gateway.models import SubscriptionTier, UserContext
 
 logger = logging.getLogger(__name__)
 
 _settings_cache: Settings | None = None
+_jwks_client: PyJWKClient | None = None
 
 
 async def get_settings() -> Settings:
-    """
-    Get cached settings singleton.
-
-    Returns:
-        Settings: Application settings loaded from environment.
-
-    Raises:
-        RuntimeError: If settings cannot be loaded.
-    """
+    """Get cached settings singleton."""
     global _settings_cache
     if _settings_cache is None:
         _settings_cache = Settings()
     return _settings_cache
 
 
-async def get_redis(request: Request) -> Redis:
-    """
-    Get Redis connection from application state.
+def _get_jwks_client(supabase_url: str) -> PyJWKClient:
+    """Get or create cached JWKS client for Supabase auth."""
+    global _jwks_client
+    if _jwks_client is None:
+        jwks_url = f"{supabase_url}/auth/v1/.well-known/jwks.json"
+        _jwks_client = PyJWKClient(jwks_url, cache_keys=True)
+        logger.info(f"JWKS client initialized: {jwks_url}")
+    return _jwks_client
 
-    Args:
-        request: FastAPI request object.
 
-    Returns:
-        Redis: Redis connection instance.
-
-    Raises:
-        RuntimeError: If Redis is not initialized in app state.
-    """
-    redis = getattr(request.app.state, "redis", None)
-    if redis is None:
-        raise RuntimeError("Redis not initialized")
-    return redis
+async def get_redis(request: Request) -> Any:
+    """Get Redis connection from app state. Returns None if unavailable."""
+    return getattr(request.app.state, "redis", None)
 
 
 async def get_db(request: Request):
-    """
-    Get database connection from application state.
-
-    Args:
-        request: FastAPI request object.
-
-    Returns:
-        Database connection instance.
-
-    Raises:
-        RuntimeError: If database is not initialized in app state.
-    """
+    """Get database pool from application state."""
     db = getattr(request.app.state, "db", None)
     if db is None:
         raise RuntimeError("Database not initialized")
     return db
+
+
+def _decode_token(token: str, settings: Settings) -> dict:
+    """Decode JWT using JWKS (ES256) with HS256 fallback."""
+    header = jwt.get_unverified_header(token)
+    alg = header.get("alg", "")
+
+    if alg in ("ES256", "RS256"):
+        # Use JWKS public key verification
+        jwks_client = _get_jwks_client(settings.supabase_url)
+        signing_key = jwks_client.get_signing_key_from_jwt(token)
+        return jwt.decode(
+            token,
+            signing_key.key,
+            algorithms=[alg],
+            options={"verify_aud": False},
+        )
+    else:
+        # Fallback to HS256 with JWT secret
+        return jwt.decode(
+            token,
+            settings.supabase_jwt_secret,
+            algorithms=["HS256"],
+            options={"verify_aud": False},
+        )
 
 
 async def get_current_user(
@@ -77,20 +81,7 @@ async def get_current_user(
     settings: Annotated[Settings, Depends(get_settings)],
 ) -> UserContext:
     """
-    Extract and verify JWT from Authorization header.
-
-    Decodes the JWT token using the Supabase JWT secret and validates it.
-    The user information is attached to request.state by the auth middleware.
-
-    Args:
-        request: FastAPI request object.
-        settings: Application settings.
-
-    Returns:
-        UserContext: Authenticated user context.
-
-    Raises:
-        HTTPException: 401 if token is invalid, expired, or missing.
+    Extract JWT, decode it, look up (or auto-create) user in DB, return UserContext.
     """
     auth_header = request.headers.get("Authorization")
     if not auth_header:
@@ -105,14 +96,10 @@ async def get_current_user(
             detail="Invalid authorization header format",
         )
 
-    token = auth_header[7:]  # Remove "Bearer " prefix
+    token = auth_header[7:]
 
     try:
-        jwt.decode(
-            token,
-            settings.supabase_jwt_secret,
-            algorithms=["HS256"],
-        )
+        payload = _decode_token(token, settings)
     except jwt.ExpiredSignatureError:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -125,45 +112,85 @@ async def get_current_user(
             detail="Invalid token",
         ) from e
 
-    user_context = getattr(request.state, "user", None)
-    if user_context is None:
+    # Extract Supabase user id from the `sub` claim
+    auth_id = payload.get("sub")
+    if not auth_id:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="User not found",
+            detail="Token missing sub claim",
         )
 
-    return user_context
+    # Look up user by auth_id in database
+    db = getattr(request.app.state, "db", None)
+    if db is None:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Database unavailable",
+        )
+
+    try:
+        row = await db.fetchrow(
+            "SELECT * FROM public.users WHERE auth_id = $1",
+            auth_id,
+        )
+    except Exception as db_err:
+        logger.error(f"DB query failed: {db_err!r}, auth_id={auth_id}")
+        logger.error(f"DB pool: {db}, type: {type(db)}")
+        raise
+
+    if row is None:
+        # First-login provisioning: auto-create user row
+        email = payload.get("email", "")
+        phone = payload.get("phone", "")
+        new_id = uuid.uuid4()
+
+        await db.execute(
+            """
+            INSERT INTO public.users (id, auth_id, email, phone, subscription_tier, created_at, updated_at)
+            VALUES ($1, $2, $3, $4, 'free', NOW(), NOW())
+            """,
+            new_id,
+            auth_id,
+            email,
+            phone,
+        )
+
+        # Also provision a credit wallet
+        await db.execute(
+            "INSERT INTO public.credit_wallets (user_id, balance) VALUES ($1, 0)",
+            new_id,
+        )
+
+        row = await db.fetchrow("SELECT * FROM public.users WHERE id = $1", new_id)
+
+    return UserContext(
+        id=row["id"],
+        auth_id=str(row["auth_id"]),
+        email=row.get("email") or "",
+        phone=row.get("phone"),
+        name=row.get("name"),
+        subscription_tier=SubscriptionTier(row.get("subscription_tier", "free")),
+    )
 
 
-async def get_app_config(
-    redis: Annotated[Redis, Depends(get_redis)],
-) -> dict:
-    """
-    Load application configuration from Redis cache (with DB fallback).
+async def get_app_config(request: Request) -> dict:
+    """Load app config from Redis cache, falling back to app.state.config."""
+    redis = getattr(request.app.state, "redis", None)
 
-    Attempts to load cached config from Redis first, then falls back to
-    querying the database if not cached.
-
-    Args:
-        redis: Redis connection instance.
-
-    Returns:
-        dict: Application configuration dictionary.
-
-    Raises:
-        RuntimeError: If configuration cannot be loaded.
-    """
-    cache_key = "app_config:v1"
-
-    # Try Redis cache first
-    cached = await redis.get(cache_key)
-    if cached:
+    if redis is not None:
         try:
-            return json.loads(cached)
-        except json.JSONDecodeError:
-            logger.warning("Invalid cached config, falling back to DB")
+            cached = await redis.get("app_config:v1")
+            if cached:
+                return json.loads(cached)
+        except Exception:
+            logger.warning("Failed to read config from Redis, using in-memory")
 
-    # TODO: Load from database if not in cache
-    # Once database is set up, query the app_config table
-    # and cache the result for 5 minutes
-    raise RuntimeError("Configuration not available")
+    # Fallback to in-memory config set during startup
+    config = getattr(request.app.state, "config", None)
+    if config:
+        return config
+
+    # Ultimate fallback
+    from gateway.main import DEFAULT_APP_CONFIG
+
+    return DEFAULT_APP_CONFIG

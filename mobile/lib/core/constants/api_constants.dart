@@ -37,6 +37,14 @@ class ApiConstants {
   static const String analysisTransits = '$apiVersion/analysis/transits';
   static const String analysisKp = '$apiVersion/analysis/kp';
 
+  /// Dasha effects endpoint with MD/AD/PD query params
+  static String dashaEffects({required String md, String? ad, String? pd}) {
+    var url = '$apiVersion/analysis/dasha/effects?md=$md';
+    if (ad != null) url += '&ad=$ad';
+    if (pd != null) url += '&pd=$pd';
+    return url;
+  }
+
   // Chat
   static const String chat = '$apiVersion/chat';
   static const String chatHistory = '$apiVersion/chat/history';

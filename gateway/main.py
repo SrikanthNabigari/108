@@ -15,7 +15,6 @@ from typing import Any
 from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from redis.asyncio import from_url as redis_from_url
 
 from gateway import __version__
 from gateway.config import Settings
@@ -24,131 +23,112 @@ from gateway.models import AppInfoResponse, HealthResponse
 logger = logging.getLogger(__name__)
 
 
+# Default config used when Redis is unavailable or not yet cached.
+DEFAULT_APP_CONFIG: dict[str, Any] = {
+    "feature_gates": {
+        "forecast_daily": {"free": "full", "pro": "full", "premium": "full"},
+        "forecast_weekly": {"free": "locked", "pro": "full", "premium": "full"},
+        "forecast_monthly": {"free": "locked", "pro": "full", "premium": "full"},
+        "forecast_yearly": {"free": "locked", "pro": "locked", "premium": "full"},
+        "chart_divisional": {"free": "locked", "pro": "full", "premium": "full"},
+        "analysis_yogas": {"free": "locked", "pro": "full", "premium": "full"},
+        "analysis_doshas": {"free": "locked", "pro": "full", "premium": "full"},
+        "analysis_dasha": {"free": "preview", "pro": "full", "premium": "full"},
+        "analysis_transits": {"free": "locked", "pro": "full", "premium": "full"},
+        "analysis_kp": {"free": "locked", "pro": "locked", "premium": "full"},
+        "compatibility_quick": {"free": "locked", "pro": "full", "premium": "full"},
+        "compatibility_full": {"free": "locked", "pro": "locked", "premium": "full"},
+        "muhurta_check": {"free": "locked", "pro": "full", "premium": "full"},
+        "muhurta_find": {"free": "locked", "pro": "full", "premium": "full"},
+        "remedies": {"free": "locked", "pro": "full", "premium": "full"},
+    },
+    "chat_limits": {"free": 5, "pro": 30, "premium": -1},
+    "subscription_tiers": {
+        "free": {"name": "Free", "price": 0},
+        "pro": {"name": "Pro", "price": 999},
+        "premium": {"name": "Premium", "price": 2999},
+    },
+    "credit_packs": [
+        {"credits": 10, "price": 99},
+        {"credits": 50, "price": 399},
+        {"credits": 100, "price": 699},
+    ],
+    "report_prices": {
+        "annual_report": 50,
+        "career_report": 40,
+        "health_report": 30,
+        "relationship_report": 30,
+    },
+}
+
+
 async def initialize_redis(redis_url: str) -> Any:
-    """
-    Initialize Redis connection.
-
-    Args:
-        redis_url: Redis connection URL.
-
-    Returns:
-        Redis connection instance.
-
-    Raises:
-        RuntimeError: If Redis connection fails.
-    """
+    """Initialize Redis connection. Returns None if unavailable."""
     try:
+        from redis.asyncio import from_url as redis_from_url
+
         redis = await redis_from_url(redis_url)
         await redis.ping()
         logger.info("Redis connected successfully")
         return redis
     except Exception as e:
-        logger.error(f"Failed to connect to Redis: {e}")
-        raise RuntimeError(f"Redis initialization failed: {e}") from e
+        logger.warning(f"Redis unavailable, running without cache: {e}")
+        return None
 
 
 async def initialize_database(database_url: str) -> Any:
-    """
-    Initialize database connection.
-
-    Args:
-        database_url: Database connection URL.
-
-    Returns:
-        Database connection instance.
-
-    Raises:
-        RuntimeError: If database connection fails.
-    """
+    """Initialize asyncpg connection pool."""
     try:
-        # TODO: Initialize asyncpg connection pool
-        # import asyncpg
-        # pool = await asyncpg.create_pool(database_url)
-        logger.info("Database connected successfully")
-        return None  # Placeholder
+        import asyncpg
+
+        pool = await asyncpg.create_pool(
+            database_url,
+            min_size=2,
+            max_size=10,
+            server_settings={"search_path": "public"},
+        )
+        # Startup self-test: verify public.users is accessible
+        test_row = await pool.fetchrow(
+            "SELECT column_name FROM information_schema.columns "
+            "WHERE table_schema='public' AND table_name='users' AND column_name='auth_id'"
+        )
+        print(f"[STARTUP] DB URL: {database_url}")
+        if test_row:
+            print("[STARTUP] public.users.auth_id column VERIFIED")
+        else:
+            print("[STARTUP] ERROR: public.users.auth_id NOT FOUND!")
+        return pool
     except Exception as e:
         logger.error(f"Failed to connect to database: {e}")
         raise RuntimeError(f"Database initialization failed: {e}") from e
 
 
 async def load_app_config(redis: Any, db: Any) -> dict[str, Any]:
-    """
-    Load application configuration into Redis cache.
+    """Load app configuration, caching to Redis if available."""
+    config = DEFAULT_APP_CONFIG
 
-    Args:
-        redis: Redis connection instance.
-        db: Database connection instance.
+    # Try to cache in Redis if available
+    if redis is not None:
+        try:
+            cache_key = "app_config:v1"
+            await redis.setex(cache_key, 300, json.dumps(config))
+            logger.info("Application config loaded and cached in Redis")
+        except Exception as e:
+            logger.warning(f"Failed to cache config in Redis: {e}")
+    else:
+        logger.info("Application config loaded (no Redis cache)")
 
-    Returns:
-        dict: Application configuration.
-    """
-    try:
-        # TODO: Query app_config table from database
-        # For now, return default config structure
-        default_config = {
-            "feature_gates": {
-                "forecast_daily": {"free": "full", "pro": "full", "premium": "full"},
-                "forecast_weekly": {"free": "locked", "pro": "full", "premium": "full"},
-                "forecast_monthly": {"free": "locked", "pro": "full", "premium": "full"},
-                "forecast_yearly": {"free": "locked", "pro": "locked", "premium": "full"},
-                "chart_divisional": {"free": "locked", "pro": "full", "premium": "full"},
-                "analysis_yogas": {"free": "locked", "pro": "full", "premium": "full"},
-                "analysis_doshas": {"free": "locked", "pro": "full", "premium": "full"},
-                "analysis_dasha": {"free": "locked", "pro": "full", "premium": "full"},
-                "analysis_transits": {"free": "locked", "pro": "full", "premium": "full"},
-                "analysis_kp": {"free": "locked", "pro": "locked", "premium": "full"},
-                "compatibility_quick": {"free": "locked", "pro": "full", "premium": "full"},
-                "compatibility_full": {"free": "locked", "pro": "locked", "premium": "full"},
-                "muhurta_check": {"free": "locked", "pro": "full", "premium": "full"},
-                "muhurta_find": {"free": "locked", "pro": "full", "premium": "full"},
-                "remedies": {"free": "locked", "pro": "full", "premium": "full"},
-            },
-            "chat_limits": {"free": 5, "pro": 30, "premium": -1},
-            "subscription_tiers": {
-                "free": {"name": "Free", "price": 0},
-                "pro": {"name": "Pro", "price": 999},
-                "premium": {"name": "Premium", "price": 2999},
-            },
-            "credit_packs": [
-                {"credits": 10, "price": 99},
-                {"credits": 50, "price": 399},
-                {"credits": 100, "price": 699},
-            ],
-            "report_prices": {
-                "annual_report": 50,
-                "career_report": 40,
-                "health_report": 30,
-                "relationship_report": 30,
-            },
-        }
-
-        # Cache config for 5 minutes
-        cache_key = "app_config:v1"
-        await redis.setex(cache_key, 300, json.dumps(default_config))
-        logger.info("Application config loaded and cached")
-        return default_config
-
-    except Exception as e:
-        logger.error(f"Failed to load app config: {e}")
-        raise RuntimeError(f"Config initialization failed: {e}") from e
+    return config
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    """
-    Manage application lifespan (startup and shutdown).
-
-    Args:
-        app: FastAPI application instance.
-
-    Yields:
-        None
-    """
-    # Startup
+    """Manage application lifespan (startup and shutdown)."""
     settings = Settings()
     logger.info(f"Starting 108 Gateway in {settings.env} environment")
 
     try:
+        # Redis is optional — gateway works without it
         redis = await initialize_redis(settings.redis_url)
         app.state.redis = redis
 
@@ -169,21 +149,17 @@ async def lifespan(app: FastAPI):
     # Shutdown
     logger.info("Shutting down 108 Gateway")
     try:
-        if hasattr(app.state, "redis"):
+        if hasattr(app.state, "redis") and app.state.redis is not None:
             await app.state.redis.close()
-        # TODO: Close database connection
+        if hasattr(app.state, "db") and app.state.db is not None:
+            await app.state.db.close()
         logger.info("Application shutdown complete")
     except Exception as e:
         logger.error(f"Shutdown error: {e}")
 
 
 def create_app() -> FastAPI:
-    """
-    Create and configure FastAPI application.
-
-    Returns:
-        FastAPI: Configured application instance.
-    """
+    """Create and configure FastAPI application."""
     settings = Settings()
 
     app = FastAPI(
@@ -229,12 +205,7 @@ def create_app() -> FastAPI:
     # Health Check
     @app.get("/health", response_model=HealthResponse)
     async def health_check() -> HealthResponse:
-        """
-        Health check endpoint.
-
-        Returns:
-            HealthResponse: Health status.
-        """
+        """Health check endpoint."""
         return HealthResponse(
             status="healthy",
             version=__version__,
@@ -245,12 +216,7 @@ def create_app() -> FastAPI:
     # Root Endpoint
     @app.get("/", response_model=AppInfoResponse)
     async def root() -> AppInfoResponse:
-        """
-        Root endpoint returning application information.
-
-        Returns:
-            AppInfoResponse: Application metadata.
-        """
+        """Root endpoint returning application information."""
         return AppInfoResponse(
             name="108 Gateway",
             version=__version__,
@@ -276,7 +242,8 @@ def create_app() -> FastAPI:
         webhooks,
     )
 
-    app.include_router(auth.router, prefix="/api/v1/auth", tags=["auth"])
+    # Auth router at /api/v1 (not /api/v1/auth) so /me is at /api/v1/me
+    app.include_router(auth.router, prefix="/api/v1", tags=["auth"])
     app.include_router(chart.router, prefix="/api/v1/chart", tags=["chart"])
     app.include_router(forecast.router, prefix="/api/v1/forecast", tags=["forecast"])
     app.include_router(analysis.router, prefix="/api/v1/analysis", tags=["analysis"])
@@ -301,6 +268,6 @@ if __name__ == "__main__":
     uvicorn.run(
         "gateway.main:app",
         host="0.0.0.0",
-        port=8000,
+        port=8001,
         reload=True,
     )
