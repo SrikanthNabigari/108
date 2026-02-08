@@ -20,17 +20,23 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from packages.context.src import (
     check_dhaiya,
     check_sade_sati,
+    find_upcoming_aspects,
     get_antardasha_effect,
     get_antardasha_sequence,
     get_current_dasha,
     get_dhaiya_dates,
     get_enriched_transit_analysis,
+    get_gochara,
     get_mahadasha_sequence,
     get_pratyantardasha_effect,
     get_pratyantardasha_sequence,
     get_sade_sati_dates,
+    get_transit_natal_aspects,
+    get_transit_positions,
+    get_transit_snapshot,
 )
 from packages.context.src.dasha_transit import cross_analyze
+from packages.context.src.transit_tracker import get_upcoming_triggers
 from packages.core.src.constants import Planet, Rashi
 from packages.core.src.knowledge_loader import get_dasha_guide, load_definition
 from packages.core.src.models import BirthChart, BirthData, HouseCusps, PlanetPosition
@@ -39,8 +45,10 @@ from packages.cosmos.src.ephemeris import get_julian_day
 from packages.self.src import (
     DoshaDetector,
     YogaDetector,
+    analyze_transit_lordships,
     get_kp_prediction,
     get_kp_significators,
+    get_lordship_summary,
     recommend_remedies,
 )
 
@@ -113,6 +121,30 @@ def _build_planets_for_analysis(planets: dict) -> dict[str, Any]:
 
 
 RASHI_LIST = list(Rashi)
+
+RASHI_NAME_TO_IDX: dict[str, int] = {
+    "aries": 0,
+    "taurus": 1,
+    "gemini": 2,
+    "cancer": 3,
+    "leo": 4,
+    "virgo": 5,
+    "libra": 6,
+    "scorpio": 7,
+    "sagittarius": 8,
+    "capricorn": 9,
+    "aquarius": 10,
+    "pisces": 11,
+}
+
+
+def _rashi_to_int(rashi: str | int | None) -> int:
+    """Convert rashi name or int to 0-11 index."""
+    if rashi is None:
+        return 0
+    if isinstance(rashi, int):
+        return rashi % 12
+    return RASHI_NAME_TO_IDX.get(rashi.lower(), 0)
 
 
 def _build_chart_for_doshas(chart: dict) -> BirthChart:
@@ -1051,25 +1083,72 @@ async def get_transit_analysis(
                 detail="Birth chart not found",
             ) from None
 
-        # Build transit positions dict (would come from current ephemeris)
-        # For now, use a placeholder with standard transit format
-        transit_positions = {
-            "sun": {"sign": chart["lagna_rashi"], "nakshatra": ""},
-            "moon": {"sign": chart["moon_rashi"], "nakshatra": ""},
-            "mars": {"sign": chart["lagna_rashi"], "nakshatra": ""},
-            "mercury": {"sign": chart["moon_rashi"], "nakshatra": ""},
-            "jupiter": {"sign": chart["lagna_rashi"], "nakshatra": ""},
-            "venus": {"sign": chart["moon_rashi"], "nakshatra": ""},
-            "saturn": {"sign": chart["lagna_rashi"], "nakshatra": ""},
-            "rahu": {"sign": chart["moon_rashi"], "nakshatra": ""},
-            "ketu": {"sign": chart["lagna_rashi"], "nakshatra": ""},
-        }
+        # Live ephemeris positions
+        now_jd = get_julian_day(datetime.utcnow())
+        live_positions = get_transit_positions(now_jd)
 
-        # Get enriched transit analysis
+        # Build transit positions with nakshatra data
+        transit_positions: dict[str, Any] = {}
+        for planet, pos in live_positions.items():
+            nak = longitude_to_nakshatra(pos["longitude"])
+            nak_name = nak.get("name", "") if isinstance(nak, dict) else getattr(nak, "name", "")
+            nak_pada = nak.get("pada", 0) if isinstance(nak, dict) else getattr(nak, "pada", 0)
+            transit_positions[planet] = {
+                "rashi": pos["rashi"],
+                "rashi_num": pos["rashi_num"],
+                "nakshatra": nak_name,
+                "nakshatra_pada": nak_pada,
+                "longitude": pos["longitude"],
+                "degree_in_rashi": round(pos["degree_in_rashi"], 2),
+                "is_retrograde": pos.get("is_retrograde", False),
+                "speed": round(pos.get("speed", 0.0), 4),
+            }
+
+        # Preview tier: return positions + summary only
+        if access == AccessLevel.PREVIEW:
+            moon_idx = _rashi_to_int(chart.get("moon_rashi"))
+            favorable = 0
+            unfavorable = 0
+            for planet, pos in transit_positions.items():
+                gochara = get_gochara(moon_idx, planet, pos["rashi_num"])
+                if gochara.get("is_favorable"):
+                    favorable += 1
+                else:
+                    unfavorable += 1
+            trend = (
+                "positive"
+                if favorable > unfavorable
+                else ("mixed" if favorable == unfavorable else "challenging")
+            )
+            return {
+                "transit_positions": transit_positions,
+                "summary": {
+                    "favorable_count": favorable,
+                    "unfavorable_count": unfavorable,
+                    "trend": trend,
+                },
+                "access": "preview",
+                "upgrade_hint": "Upgrade to Pro for full transit analysis with gochara, aspects, and triggers",
+            }
+
+        # Full tier: enriched analysis + raw positions
+        moon_idx = _rashi_to_int(chart.get("moon_rashi"))
+
+        # Build int-rashi format for enriched analysis
+        transit_for_enriched: dict[str, dict[str, Any]] = {}
+        for planet, pos in transit_positions.items():
+            transit_for_enriched[planet] = {
+                "rashi": pos["rashi_num"],
+                "nakshatra": pos["nakshatra"],
+                "longitude": pos["longitude"],
+                "is_retrograde": pos["is_retrograde"],
+            }
+
         analysis = get_enriched_transit_analysis(
-            natal_moon_rashi=chart["moon_rashi"],
-            transit_positions=transit_positions,
+            natal_moon_rashi=moon_idx,
+            transit_data=transit_for_enriched,
         )
+        analysis["transit_positions"] = transit_positions
 
         return analysis
 
@@ -1080,6 +1159,292 @@ async def get_transit_analysis(
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Failed to analyze transits",
+        ) from e
+
+
+@router.get("/transits/aspects")
+async def get_transit_aspects_endpoint(
+    current_user: Annotated[UserContext, Depends(get_current_user)],
+    config: Annotated[dict, Depends(get_app_config)],
+    db: Annotated[Any, Depends(get_db)],
+) -> dict[str, Any]:
+    """Get current transit-to-natal aspects."""
+    try:
+        access = await check_feature_access(
+            "analysis_transits", current_user.subscription_tier, config
+        )
+        if access == AccessLevel.LOCKED:
+            return gate_response(
+                {"message": "Upgrade to Pro to unlock transit aspects"},
+                access,
+                "Upgrade to Pro to unlock transit aspects",
+            ).model_dump()
+
+        chart = await _load_birth_chart(db, str(current_user.id))
+        if not chart:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND, detail="Birth chart not found"
+            ) from None
+
+        natal_planets = _build_planets_for_analysis(chart.get("planets", {}))
+        now_jd = get_julian_day(datetime.utcnow())
+        live_positions = get_transit_positions(now_jd)
+        aspects = get_transit_natal_aspects(natal_planets, live_positions)
+
+        return {"aspects": aspects, "count": len(aspects)}
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Failed to get transit aspects for {current_user.id}: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to get transit aspects",
+        ) from e
+
+
+@router.get("/transits/triggers")
+async def get_transit_triggers_endpoint(
+    current_user: Annotated[UserContext, Depends(get_current_user)],
+    config: Annotated[dict, Depends(get_app_config)],
+    db: Annotated[Any, Depends(get_db)],
+    days: int = 30,
+) -> dict[str, Any]:
+    """Get upcoming transit triggers (ingresses, stations, aspects, dasha changes)."""
+    try:
+        access = await check_feature_access(
+            "analysis_transits", current_user.subscription_tier, config
+        )
+        if access == AccessLevel.LOCKED:
+            return gate_response(
+                {"message": "Upgrade to Pro to unlock transit triggers"},
+                access,
+                "Upgrade to Pro to unlock transit triggers",
+            ).model_dump()
+
+        chart = await _load_birth_chart(db, str(current_user.id))
+        if not chart:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND, detail="Birth chart not found"
+            ) from None
+
+        natal_planets = _build_planets_for_analysis(chart.get("planets", {}))
+        lagna_rashi = chart.get("lagna_rashi", "Libra")
+        moon_rashi = chart.get("moon_rashi", "Aquarius")
+
+        triggers = get_upcoming_triggers(
+            natal_planets=natal_planets,
+            lagna_rashi=lagna_rashi,
+            moon_rashi=moon_rashi,
+            start_date=datetime.utcnow().isoformat(),
+            days_ahead=min(days, 90),
+        )
+
+        return {"triggers": triggers, "count": len(triggers)}
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Failed to get transit triggers for {current_user.id}: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to get transit triggers",
+        ) from e
+
+
+@router.get("/transits/snapshot")
+async def get_transit_snapshot_endpoint(
+    current_user: Annotated[UserContext, Depends(get_current_user)],
+    config: Annotated[dict, Depends(get_app_config)],
+    db: Annotated[Any, Depends(get_db)],
+) -> dict[str, Any]:
+    """Get house-centric transit snapshot with activation scores and lordship analysis.
+
+    Combines house activation engine (double transit, aspects, gochara, ashtakavarga)
+    with transit lordship resolver (functional nature, yogakaraka detection).
+
+    Gated feature - preview tier gets positions + house scores + double transit only.
+    Full tier includes lordship analysis.
+
+    Args:
+        current_user: Authenticated user context.
+        config: Application configuration.
+        db: Database connection.
+
+    Returns:
+        dict: Transit snapshot with house activations and lordship analysis.
+    """
+    try:
+        access = await check_feature_access(
+            "analysis_transits", current_user.subscription_tier, config
+        )
+        if access == AccessLevel.LOCKED:
+            return gate_response(
+                {"message": "Upgrade to Pro to unlock transit snapshot"},
+                access,
+                "Upgrade to Pro to unlock transit snapshot",
+            ).model_dump()
+
+        chart = await _load_birth_chart(db, str(current_user.id))
+        if not chart:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND, detail="Birth chart not found"
+            ) from None
+
+        natal_planets = _build_planets_for_analysis(chart.get("planets", {}))
+        lagna_idx = _rashi_to_int(chart.get("lagna_rashi"))
+        moon_idx = _rashi_to_int(chart.get("moon_rashi"))
+
+        now_jd = get_julian_day(datetime.utcnow())
+        snapshot = get_transit_snapshot(
+            julian_day=now_jd,
+            lagna_rashi=lagna_idx,
+            moon_rashi=moon_idx,
+            natal_planets=natal_planets,
+            chart=None,
+        )
+
+        # Preview tier: positions + house scores + double transit only
+        if access == AccessLevel.PREVIEW:
+            return {
+                "transit_positions": snapshot.get("transit_positions", {}),
+                "house_activations": [
+                    {
+                        "house": h["house"],
+                        "score": h["score"],
+                        "grade": h["grade"],
+                        "double_transit": h["double_transit"],
+                        "themes": h["themes"],
+                    }
+                    for h in snapshot.get("house_activations", [])
+                ],
+                "double_transit_houses": snapshot.get("double_transit_houses", []),
+                "most_active_houses": snapshot.get("most_active_houses", []),
+                "overall_trend": snapshot.get("overall_trend", "mixed"),
+                "access": "preview",
+                "upgrade_hint": "Upgrade to Pro for full lordship analysis and detailed house breakdowns",
+            }
+
+        # Full tier: everything including lordship analysis
+        transit_positions = snapshot.get("transit_positions", {})
+        lordship_analysis = analyze_transit_lordships(transit_positions, lagna_idx)
+        lordship_summary = get_lordship_summary(lordship_analysis)
+
+        return {
+            **snapshot,
+            "lordship_analysis": lordship_analysis,
+            "lordship_summary": lordship_summary,
+        }
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Failed to get transit snapshot for {current_user.id}: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to get transit snapshot",
+        ) from e
+
+
+@router.get("/transits/{planet}")
+async def get_transit_planet_detail(
+    planet: str,
+    current_user: Annotated[UserContext, Depends(get_current_user)],
+    config: Annotated[dict, Depends(get_app_config)],
+    db: Annotated[Any, Depends(get_db)],
+) -> dict[str, Any]:
+    """Get detailed transit info for a single planet."""
+    try:
+        valid_planets = {
+            "sun",
+            "moon",
+            "mars",
+            "mercury",
+            "jupiter",
+            "venus",
+            "saturn",
+            "rahu",
+            "ketu",
+        }
+        planet_lower = planet.lower()
+        if planet_lower not in valid_planets:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail=f"Invalid planet: {planet}. Must be one of: {', '.join(sorted(valid_planets))}",
+            )
+
+        access = await check_feature_access(
+            "analysis_transits", current_user.subscription_tier, config
+        )
+        if access == AccessLevel.LOCKED:
+            return gate_response(
+                {"message": "Upgrade to Pro to unlock planet transit details"},
+                access,
+                "Upgrade to Pro to unlock planet transit details",
+            ).model_dump()
+
+        chart = await _load_birth_chart(db, str(current_user.id))
+        if not chart:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND, detail="Birth chart not found"
+            ) from None
+
+        # Current transit position
+        now_jd = get_julian_day(datetime.utcnow())
+        live_positions = get_transit_positions(now_jd)
+        pos = live_positions.get(planet_lower, {})
+
+        nak = longitude_to_nakshatra(pos.get("longitude", 0.0))
+        nak_name = nak.get("name", "") if isinstance(nak, dict) else getattr(nak, "name", "")
+        nak_pada = nak.get("pada", 0) if isinstance(nak, dict) else getattr(nak, "pada", 0)
+
+        position = {
+            "planet": planet_lower,
+            "longitude": pos.get("longitude", 0.0),
+            "rashi": pos.get("rashi", ""),
+            "rashi_num": pos.get("rashi_num", 0),
+            "degree_in_rashi": round(pos.get("degree_in_rashi", 0.0), 2),
+            "nakshatra": nak_name,
+            "nakshatra_pada": nak_pada,
+            "speed": round(pos.get("speed", 0.0), 4),
+            "is_retrograde": pos.get("is_retrograde", False),
+        }
+
+        # Gochara (house from Moon)
+        moon_idx = _rashi_to_int(chart.get("moon_rashi"))
+        gochara = get_gochara(moon_idx, planet_lower, pos.get("rashi_num", 0))
+
+        # Natal aspects for this planet
+        natal_planets = _build_planets_for_analysis(chart.get("planets", {}))
+        single_transit = {planet_lower: pos}
+        aspects = get_transit_natal_aspects(natal_planets, single_transit)
+
+        # Upcoming aspects for this planet (30 days)
+        upcoming = find_upcoming_aspects(
+            natal_planets=natal_planets,
+            start_date=datetime.utcnow().isoformat(),
+            days_ahead=30,
+        )
+        planet_upcoming = [
+            a for a in upcoming if a.get("transit_planet", "").lower() == planet_lower
+        ]
+
+        result: dict[str, Any] = {
+            "position": position,
+            "gochara": gochara,
+            "natal_aspects": aspects,
+            "upcoming": planet_upcoming[:10],
+        }
+
+        return result
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Failed to get transit detail for {planet}/{current_user.id}: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to get transit planet detail",
         ) from e
 
 

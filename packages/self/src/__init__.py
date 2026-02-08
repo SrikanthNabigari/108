@@ -113,6 +113,13 @@ from .synastry import (
     calculate_house_overlay,
     get_synastry_report,
 )
+from .transit_lordship import (
+    analyze_transit_lordships,
+    classify_planet_role,
+    get_all_house_lords,
+    get_lordship_summary,
+    get_planet_lordships,
+)
 from .yoga_cancellation import (
     apply_cancellations_to_chart,
     check_yoga_cancellation,
@@ -137,6 +144,7 @@ __all__ = [
     "analyze_lost_object_prashna",
     "analyze_marriage_prashna",
     "analyze_prashna",
+    "analyze_transit_lordships",
     "analyze_travel_prashna",
     "apply_cancellations_to_chart",
     "calculate_all_arudha_padas",
@@ -162,6 +170,7 @@ __all__ = [
     "check_combustion_cancellation",
     "check_gem_compatibility",
     "check_yoga_cancellation",
+    "classify_planet_role",
     "create_prashna_chart",
     "detect_all_yogas",
     "detect_neecha_bhanga",
@@ -169,6 +178,7 @@ __all__ = [
     "detect_yoga",
     "evaluate_condition",
     "get_all_chara_karaka_analysis",
+    "get_all_house_lords",
     "get_atmakaraka",
     "get_atmakaraka_analysis",
     "get_cancellation_rules",
@@ -185,6 +195,8 @@ __all__ = [
     "get_kp_sublord",
     "get_kp_sublord_table",
     "get_lagna_gem_map",
+    "get_lordship_summary",
+    "get_planet_lordships",
     "get_planet_remedies",
     "get_prashna_divisional_analysis",
     "get_retrograde_analysis",

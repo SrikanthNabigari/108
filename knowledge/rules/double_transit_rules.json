@@ -1,0 +1,149 @@
+{
+    "description": "Double transit rules - effects when both Jupiter and Saturn simultaneously influence a house through occupation or aspect. Based on Brihat Parasara Hora Shastra principle that major life events only manifest when both Jupiter and Saturn activate the same house.",
+    "rules": [
+        {
+            "house": 1,
+            "themes": ["self-transformation", "health changes", "new identity"],
+            "effect": "Significant personal transformation and identity shift. Health matters come to focus with both benefic expansion (Jupiter) and karmic restructuring (Saturn) acting on the self. A new chapter in life begins, often marked by a visible change in appearance, outlook, or life direction.",
+            "strength_factors": {
+                "both_occupy": "Extremely powerful - rare conjunction bringing total life overhaul. The native undergoes a complete reinvention of self, often through health crisis or major life decision.",
+                "one_occupy_one_aspect": "Strong activation - major changes in self-expression and health. One planet directly reshapes identity while the other provides supporting pressure from afar.",
+                "both_aspect": "Moderate influence - gradual shifts in personality and approach to life. Changes are internal first, manifesting externally over months."
+            },
+            "typical_events": ["Career change driven by personal values", "Health regimen overhaul", "New public image or personal brand", "Major life decision affecting identity", "Relocation to a new environment"],
+            "duration_note": "Effects strongest when both planets are within 15 degrees of house cusp. Peak impact lasts 3-6 months during overlap."
+        },
+        {
+            "house": 2,
+            "themes": ["wealth restructuring", "family dynamics", "speech and values"],
+            "effect": "Financial restructuring period where old income patterns dissolve and new ones emerge. Family dynamics shift significantly, potentially through additions, separations, or changed roles. Speech and communication style transforms, becoming more authoritative or restrained.",
+            "strength_factors": {
+                "both_occupy": "Extremely powerful - complete financial overhaul. Family structure fundamentally changes. Savings patterns, investments, and wealth sources are rebuilt from the ground up.",
+                "one_occupy_one_aspect": "Strong activation - significant financial changes with family adjustments. One planet drives the change while the other ensures lasting impact on values and resources.",
+                "both_aspect": "Moderate influence - gradual shifts in financial habits and family relationships. Slow but steady transformation of material security."
+            },
+            "typical_events": ["Major financial decision or investment", "Family business restructuring", "Change in dietary habits or lifestyle", "Inheritance or financial settlement", "Speech therapy or communication training"],
+            "duration_note": "Effects strongest when both planets are within 15 degrees of house cusp. Financial changes often materialize within the first half of the transit."
+        },
+        {
+            "house": 3,
+            "themes": ["courage and initiative", "communication breakthroughs", "sibling events"],
+            "effect": "A period of bold new ventures and communication breakthroughs. Siblings or close relatives experience significant life changes. The native finds new courage to pursue long-delayed projects, especially in writing, media, or short-distance business.",
+            "strength_factors": {
+                "both_occupy": "Extremely powerful - life-changing initiative taken. The native launches a venture or project that defines the next decade. Sibling relationships transform completely.",
+                "one_occupy_one_aspect": "Strong activation - significant new ventures begin with structured planning. Media or communication projects gain momentum with both creative vision and disciplined execution.",
+                "both_aspect": "Moderate influence - gradual increase in courage and communication effectiveness. Short travels become more purposeful and productive."
+            },
+            "typical_events": ["Launching a business or creative venture", "Publishing a book or major content", "Sibling's marriage, relocation, or career change", "Learning a new skill or certification", "Starting a media or communication project"],
+            "duration_note": "Effects strongest when both planets are within 15 degrees of house cusp. Courage peaks when both transits are exact."
+        },
+        {
+            "house": 4,
+            "themes": ["home and property", "mother's health", "emotional foundation"],
+            "effect": "Real estate changes dominate this period, from buying or selling property to major renovations. Mother's health or life situation shifts significantly. The emotional foundation undergoes restructuring, often through changes in living environment or inner psychological work.",
+            "strength_factors": {
+                "both_occupy": "Extremely powerful - complete change of residence or major property transaction. Mother may face serious health event. Deep psychological transformation reshapes emotional core.",
+                "one_occupy_one_aspect": "Strong activation - home renovation, property purchase, or relocation likely. Mother's life changes direction. Emotional patterns from childhood surface for healing.",
+                "both_aspect": "Moderate influence - gradual improvements to home environment and domestic peace. Mother's influence in life shifts. Inner emotional security slowly strengthens."
+            },
+            "typical_events": ["Buying, selling, or building a home", "Major home renovation or relocation", "Mother's health event or life transition", "Academic milestone or degree completion", "Acquiring a vehicle or major comfort item"],
+            "duration_note": "Effects strongest when both planets are within 15 degrees of house cusp. Property transactions most likely during exact aspect periods."
+        },
+        {
+            "house": 5,
+            "themes": ["children and progeny", "creative breakthroughs", "education milestones"],
+            "effect": "Childbirth or significant events related to children mark this transit. Creative projects reach a breakthrough or completion. Education milestones are achieved, and speculative ventures may bring results. Romance takes on a serious, life-changing quality.",
+            "strength_factors": {
+                "both_occupy": "Extremely powerful - childbirth, major creative achievement, or educational breakthrough. Romance may lead to commitment. Speculative ventures bring significant returns.",
+                "one_occupy_one_aspect": "Strong activation - children's milestones, creative projects gain recognition. Educational goals are achieved with focused effort. Romantic relationships deepen.",
+                "both_aspect": "Moderate influence - gradual creative growth and educational progress. Children's needs become more prominent. Intellectual and spiritual expansion through learning."
+            },
+            "typical_events": ["Birth of a child or pregnancy", "Creative work gaining public recognition", "Completing a degree or major exam", "Romantic relationship becoming serious", "Successful speculation or investment"],
+            "duration_note": "Effects strongest when both planets are within 15 degrees of house cusp. Childbirth and creative peaks often coincide with exact transit aspects."
+        },
+        {
+            "house": 6,
+            "themes": ["overcoming obstacles", "health improvements", "debt clearance"],
+            "effect": "A period of overcoming long-standing obstacles, enemies, and health challenges. Debts and legal matters find resolution. Service-oriented work brings recognition. Enemies are subdued through a combination of strategic wisdom (Jupiter) and persistent effort (Saturn).",
+            "strength_factors": {
+                "both_occupy": "Extremely powerful - decisive victory over enemies and obstacles. Chronic health conditions find treatment or cure. Major debt clearance or legal victory.",
+                "one_occupy_one_aspect": "Strong activation - significant improvement in health and competitive situations. Debts reduce substantially. Service at work is recognized and rewarded.",
+                "both_aspect": "Moderate influence - gradual improvement in health, reduction of obstacles. Legal matters progress slowly in the native's favor. Work environment improves."
+            },
+            "typical_events": ["Overcoming a chronic health condition", "Winning a legal dispute or competition", "Clearing a major debt or loan", "Promotion through dedicated service", "Defeating a business competitor"],
+            "duration_note": "Effects strongest when both planets are within 15 degrees of house cusp. Health improvements often begin within weeks of the double transit forming."
+        },
+        {
+            "house": 7,
+            "themes": ["marriage and partnerships", "business contracts", "legal agreements"],
+            "effect": "Marriage or significant partnership events define this period. Business partnerships are formed or dissolved. Legal contracts and agreements come to fruition. The native's public dealings and one-on-one relationships undergo fundamental transformation.",
+            "strength_factors": {
+                "both_occupy": "Extremely powerful - marriage, major business partnership, or significant legal contract. Relationships that begin now are karmic and long-lasting. Existing partnerships are tested and either strengthened or dissolved.",
+                "one_occupy_one_aspect": "Strong activation - partnership milestones reached. Business contracts signed. Marriage proposals or engagements likely. Legal matters settle.",
+                "both_aspect": "Moderate influence - gradual evolution in partnerships and public dealings. Relationships mature slowly. Business collaborations improve over time."
+            },
+            "typical_events": ["Marriage or engagement", "Forming a major business partnership", "Signing a significant legal contract", "Relocation with or for a partner", "Public recognition through partnership work"],
+            "duration_note": "Effects strongest when both planets are within 15 degrees of house cusp. Marriage timing is especially potent when both planets simultaneously activate the 7th."
+        },
+        {
+            "house": 8,
+            "themes": ["deep transformation", "inheritance and insurance", "occult awakening"],
+            "effect": "Major life transformation through crisis, death-rebirth experiences, or sudden changes in circumstances. Inheritance, insurance settlements, or partner's finances come into focus. Interest in occult, tantra, or deep psychological work intensifies. This is the most intense double transit.",
+            "strength_factors": {
+                "both_occupy": "Extremely powerful - life-altering transformation that fundamentally changes the native's relationship with mortality, sexuality, or hidden knowledge. Inheritance or major financial windfall through others' resources.",
+                "one_occupy_one_aspect": "Strong activation - significant transformation in one area of life spreads to others. Insurance or inheritance matters progress. Deep healing through therapy or spiritual practice.",
+                "both_aspect": "Moderate influence - gradual inner transformation and increased interest in the hidden dimensions of life. Financial matters related to others' resources slowly resolve."
+            },
+            "typical_events": ["Receiving an inheritance or insurance payout", "Undergoing deep psychological therapy", "Near-death experience or health crisis leading to transformation", "Awakening interest in occult or spiritual traditions", "Major surgery or medical procedure"],
+            "duration_note": "Effects strongest when both planets are within 15 degrees of house cusp. Transformation often begins with a crisis event that catalyzes deeper change."
+        },
+        {
+            "house": 9,
+            "themes": ["spiritual journey", "higher education", "long-distance travel"],
+            "effect": "Spiritual awakening or deepening of dharmic practice marks this transit. Higher education milestones are reached. Long-distance or foreign travel opens new horizons. The relationship with guru, father, or spiritual mentor transforms. Fortune and luck shift based on accumulated karma.",
+            "strength_factors": {
+                "both_occupy": "Extremely powerful - pilgrimage, spiritual initiation, or major philosophical shift. Foreign travel that changes life direction. Academic achievement at the highest level. Father's life changes significantly.",
+                "one_occupy_one_aspect": "Strong activation - significant spiritual progress and educational achievement. Long-distance travel with lasting impact. Fortune improves through righteous action and disciplined practice.",
+                "both_aspect": "Moderate influence - gradual deepening of spiritual practice and philosophical understanding. Short pilgrimages and educational courses. Father's influence in life shifts."
+            },
+            "typical_events": ["Embarking on a spiritual pilgrimage or retreat", "Completing a graduate degree or higher certification", "Long-distance relocation or extended foreign travel", "Meeting a spiritual guru or life-changing mentor", "Father's significant life event"],
+            "duration_note": "Effects strongest when both planets are within 15 degrees of house cusp. Spiritual openings tend to occur during exact transit aspects."
+        },
+        {
+            "house": 10,
+            "themes": ["career peak", "public recognition", "authority and status"],
+            "effect": "Career reaches a peak or decisive turning point. Promotions, public recognition, and authority gains define this period. Government dealings are favored. The native's social status and professional reputation undergo lasting change. This is the most career-significant double transit.",
+            "strength_factors": {
+                "both_occupy": "Extremely powerful - career-defining achievement, major promotion, or public honor. Government favor at the highest level. The native establishes lasting authority in their field.",
+                "one_occupy_one_aspect": "Strong activation - significant career advancement and professional recognition. Promotion or new role with greater responsibility. Public image strengthens considerably.",
+                "both_aspect": "Moderate influence - gradual career growth and increasing professional reputation. Slow but steady rise in authority. Government matters progress favorably."
+            },
+            "typical_events": ["Major promotion or career milestone", "Public award or professional recognition", "Starting a new leadership role", "Government approval or official appointment", "Establishing a professional legacy or brand"],
+            "duration_note": "Effects strongest when both planets are within 15 degrees of house cusp. Career peaks typically manifest when both planets are in or aspecting the 10th simultaneously."
+        },
+        {
+            "house": 11,
+            "themes": ["financial gains", "social expansion", "fulfilled aspirations"],
+            "effect": "Period of maximum gains and wish fulfillment. Income increases through multiple channels. Social network expands with influential connections. Long-held aspirations begin to materialize. Elder siblings or close friends play pivotal roles in the native's progress.",
+            "strength_factors": {
+                "both_occupy": "Extremely powerful - windfall gains, major social advancement, and fulfillment of long-standing desires. Elder sibling's significant life event. Network becomes a powerful asset.",
+                "one_occupy_one_aspect": "Strong activation - substantial income growth and social recognition. Influential new friendships form. One or more major wishes come true through combined effort and fortune.",
+                "both_aspect": "Moderate influence - gradual increase in income and social standing. Aspirations progress steadily. Friendships become more meaningful and supportive."
+            },
+            "typical_events": ["Significant income increase or bonus", "Joining an influential social or professional group", "Achieving a long-cherished goal", "Elder sibling's marriage or major milestone", "Receiving support from powerful patrons"],
+            "duration_note": "Effects strongest when both planets are within 15 degrees of house cusp. Financial gains are most pronounced during the first half of the double transit."
+        },
+        {
+            "house": 12,
+            "themes": ["spiritual awakening", "foreign settlement", "retreat and liberation"],
+            "effect": "Spiritual awakening intensifies with a pull toward renunciation, meditation, or withdrawal from material pursuits. Foreign travel or settlement becomes likely. Expenses increase but for meaningful purposes such as charity, pilgrimage, or spiritual practice. Sleep patterns and subconscious patterns transform.",
+            "strength_factors": {
+                "both_occupy": "Extremely powerful - complete spiritual overhaul or foreign settlement. The native may renounce certain material attachments permanently. Hospitalization or institutional stay possible but transformative.",
+                "one_occupy_one_aspect": "Strong activation - significant spiritual progress through structured practice. Foreign travel with lasting impact. Charitable giving or volunteer work brings deep satisfaction.",
+                "both_aspect": "Moderate influence - gradual spiritual deepening and increased interest in meditation or yoga. Expenses on spiritual or healing pursuits. Sleep and dream life become more vivid."
+            },
+            "typical_events": ["Spiritual retreat or extended meditation practice", "Emigrating or settling in a foreign country", "Significant charitable donation or philanthropy", "Hospitalization leading to spiritual insight", "Completing a karmic cycle or past-life resolution"],
+            "duration_note": "Effects strongest when both planets are within 15 degrees of house cusp. Spiritual openings are most profound during exact transit aspects to the 12th house cusp."
+        }
+    ]
+}

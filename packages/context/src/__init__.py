@@ -41,6 +41,11 @@ from .event_correlator import (
     batch_correlate,
     correlate_event,
 )
+from .house_activation import (
+    check_double_transit,
+    get_house_activations,
+    get_transit_snapshot,
+)
 from .monthly_forecast import get_monthly_forecast
 from .muhurta import (
     ACTIVITY_RULES,
@@ -167,6 +172,7 @@ __all__ = [
     "calculate_yamaghanda",
     "calculate_yogini_sequence",
     "check_dhaiya",
+    "check_double_transit",
     "check_sade_sati",
     "compare_natal_annual",
     "correlate_event",
@@ -199,6 +205,7 @@ __all__ = [
     "get_enriched_transit_analysis",
     "get_full_transit_analysis",
     "get_gochara",
+    "get_house_activations",
     "get_mahadasha_sequence",
     "get_marana_kaal",
     "get_monthly_forecast",
@@ -213,6 +220,7 @@ __all__ = [
     "get_transit_aspects",
     "get_transit_natal_aspects",
     "get_transit_positions",
+    "get_transit_snapshot",
     "get_transiting_planet_house",
     "get_upcoming_triggers",
     "get_varshaphal_analysis",

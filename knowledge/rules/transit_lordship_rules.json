@@ -1,0 +1,220 @@
+{
+    "description": "Transit lordship rules - how the functional nature of a transiting planet (based on houses it rules in the native's chart) modifies its transit effects. Core principle: a planet carries its lordship significance wherever it transits.",
+    "functional_nature_rules": [
+        {
+            "nature": "yogakaraka",
+            "description": "Planet ruling both a Kendra (1,4,7,10) and Trikona (1,5,9) house",
+            "transit_boost": 1.5,
+            "interpretation": "Transit effects are amplified positively. Whatever house the yogakaraka transits receives strong benefic activation for the houses it rules. This is the most favorable functional status a planet can have, and its transits bring the best results for the native's overall prosperity and dharmic progress.",
+            "examples": [
+                "Saturn for Libra lagna (4th and 5th lord)",
+                "Saturn for Taurus lagna (9th and 10th lord)",
+                "Mars for Cancer lagna (5th and 10th lord)",
+                "Mars for Leo lagna (4th and 9th lord)",
+                "Venus for Capricorn lagna (5th and 10th lord)",
+                "Venus for Aquarius lagna (4th and 9th lord)"
+            ]
+        },
+        {
+            "nature": "benefic",
+            "description": "Planet ruling a Trikona house (5th or 9th) without dusthana involvement, or ruling both a kendra and trikona without being yogakaraka",
+            "transit_boost": 1.2,
+            "interpretation": "Transit brings favorable results for the trikona themes it rules. Benefic functional lords in good transit houses give excellent results. The planet acts as a supportive force, enhancing the areas of life governed by the trikona houses while blessing the transit house with auspicious energy.",
+            "examples": [
+                "Jupiter for Aries lagna (9th and 12th lord - 9th is trikona)",
+                "Mercury for Taurus lagna (2nd and 5th lord - 5th is trikona)",
+                "Sun for Sagittarius lagna (9th lord)",
+                "Moon for Scorpio lagna (9th lord)",
+                "Jupiter for Leo lagna (5th and 8th lord - 5th is trikona)"
+            ]
+        },
+        {
+            "nature": "neutral",
+            "description": "Planet with mixed lordship (kendra only, or mixed kendra/upachaya) without clear benefic or malefic dominance",
+            "transit_boost": 1.0,
+            "interpretation": "Transit effects are standard. Planet delivers neutral results based on its natural signification and transit house. Kendra lords by themselves are considered neutral (kendradhipati dosha for benefics), and their transits give mixed results depending on other factors like dignity and aspects.",
+            "examples": [
+                "Mercury for Aries lagna (3rd and 6th lord)",
+                "Moon as single-house lord in neutral position",
+                "Jupiter for Gemini lagna (7th and 10th lord - kendra only, kendradhipati dosha)",
+                "Venus for Aries lagna (2nd and 7th lord - maraka but also kendra)",
+                "Mercury for Cancer lagna (3rd and 12th lord)"
+            ]
+        },
+        {
+            "nature": "malefic",
+            "description": "Planet ruling dusthana houses (6th, 8th, 12th) primarily, without compensating trikona lordship",
+            "transit_boost": 0.7,
+            "interpretation": "Transit activates challenges. Dusthana lord transiting good houses can bring hidden problems to the surface. The areas of life governed by the transit house may experience obstacles, delays, or losses. However, dusthana lords transiting other dusthana houses (viparita raja yoga in transit) can paradoxically bring gains through crisis resolution.",
+            "examples": [
+                "Mars for Gemini lagna (6th and 11th lord - 6th is dusthana)",
+                "Saturn for Gemini lagna (8th and 9th lord - 8th is dusthana)",
+                "Mercury for Leo lagna (2nd and 11th lord when afflicted)",
+                "Venus for Scorpio lagna (7th and 12th lord - 12th is dusthana)",
+                "Jupiter for Capricorn lagna (3rd and 12th lord)"
+            ]
+        },
+        {
+            "nature": "maraka",
+            "description": "Planet ruling maraka houses (2nd and 7th) without trikona or yogakaraka status to compensate",
+            "transit_boost": 0.8,
+            "interpretation": "Transit may bring health concerns or endings. Maraka planets transiting sensitive houses (1st, 8th, or other maraka houses) require caution, especially during maraka dasha periods. These transits can indicate separations, health crises, or the end of phases in life. The effect is strongest when the native is in the dasha or antardasha of another maraka planet.",
+            "examples": [
+                "Mars for Libra lagna (2nd and 7th lord)",
+                "Venus for Aries lagna (2nd and 7th lord)",
+                "Jupiter for Virgo lagna (4th and 7th lord - 7th is maraka)",
+                "Mercury for Sagittarius lagna (7th and 10th lord - 7th is maraka)",
+                "Saturn for Cancer lagna (7th and 8th lord - both maraka and dusthana)"
+            ]
+        }
+    ],
+    "lord_transit_house_rules": [
+        {
+            "condition": "own_house",
+            "description": "Lord transiting its own house (e.g., 5th lord transiting the 5th house, or a planet transiting the sign it rules)",
+            "score_modifier": 15,
+            "interpretation": "Strongly fortifies the house themes. Planet is at home and delivers its best results for that house's significations. The native feels a natural ease and alignment in the areas governed by that house. Own-house transit is one of the strongest positive indicators in gochara analysis."
+        },
+        {
+            "condition": "exaltation",
+            "description": "Lord transiting its exaltation sign (e.g., Jupiter in Cancer, Saturn in Libra)",
+            "score_modifier": 20,
+            "interpretation": "Maximum benefic effect. Planet's lordship themes flourish as the planet gains maximum dignity. The houses it rules experience peak positive activation. This is the strongest transit position and can mark significant milestones in the areas of life governed by the lord's houses."
+        },
+        {
+            "condition": "debilitation",
+            "description": "Lord transiting its debilitation sign (e.g., Jupiter in Capricorn, Saturn in Aries)",
+            "score_modifier": -15,
+            "interpretation": "Weakened delivery of lordship themes. The houses it rules may see setbacks, delays, or diminished results. The planet struggles to fulfill its promises in the natal chart. However, if debilitation is cancelled (neecha bhanga), the negative effect is reduced and may even reverse into unexpected gains."
+        },
+        {
+            "condition": "friend_sign",
+            "description": "Lord transiting a sign ruled by a natural or temporal friend",
+            "score_modifier": 10,
+            "interpretation": "Comfortable transit - lordship themes progress smoothly with natural support. The planet receives hospitality from the sign lord, facilitating easier delivery of its house significations. Results come without excessive effort or obstacles."
+        },
+        {
+            "condition": "enemy_sign",
+            "description": "Lord transiting a sign ruled by a natural or temporal enemy",
+            "score_modifier": -10,
+            "interpretation": "Friction in delivering lordship results. Houses ruled may see obstacles from competing interests. The planet is unwelcome in the sign and must work harder to produce results. Conflicts between the significations of the transit sign lord and the transiting planet's lordship are common."
+        }
+    ],
+    "special_transit_rules": [
+        {
+            "condition": "retrograde",
+            "description": "Lord is retrograde during transit, appearing to move backward through the zodiac",
+            "score_modifier": -5,
+            "interpretation": "Revisiting past themes of the ruled houses. Delays but deeper processing. Unfinished business from previous cycles resurfaces for resolution. External progress slows but internal understanding deepens.",
+            "additional_notes": "Retrograde planets give internalized results - external progress slows but inner transformation accelerates. A retrograde lord re-entering its previous sign indicates revisiting issues from that sign's transit period. Retrograde transit through own house is especially powerful for internal reflection."
+        },
+        {
+            "condition": "combust",
+            "description": "Lord is within combustion range of the Sun (varies by planet: Moon 12 deg, Mars 17 deg, Mercury 14/12 deg, Jupiter 11 deg, Venus 10/8 deg, Saturn 15 deg)",
+            "score_modifier": -10,
+            "interpretation": "Lordship themes are obscured. The houses ruled lose visibility and external support temporarily. The planet's significations are overpowered by the Sun's energy, making it difficult for the native to access or express those areas of life.",
+            "additional_notes": "Combust lords make the person blind to that area of life - requires conscious attention. The combustion effect is strongest when the planet is within 3 degrees of the Sun. Mercury in its own sign is considered less affected by combustion."
+        },
+        {
+            "condition": "with_benefic",
+            "description": "Lord is conjunct a natural benefic planet (Jupiter, Venus, waxing Moon, or unafflicted Mercury) during transit",
+            "score_modifier": 8,
+            "interpretation": "Lordship results are enhanced by benefic association. Smoother delivery of house themes with added grace, wisdom, or comfort depending on which benefic is involved. The conjunction creates a supportive environment for the lord's significations to manifest positively.",
+            "additional_notes": "Best when conjunct Jupiter for wisdom and expansion, or Venus for comfort and harmony. Mercury conjunction enhances communication and business aspects. Waxing Moon conjunction brings popularity and emotional support."
+        },
+        {
+            "condition": "with_malefic",
+            "description": "Lord is conjunct a natural malefic planet (Saturn, Mars, Rahu, Ketu, or Sun) during transit",
+            "score_modifier": -8,
+            "interpretation": "Lordship results face interference from malefic energy. Houses ruled may see stress, conflict, or forced transformation. The conjunction introduces friction, delays, or intensity to the lord's significations, requiring the native to work harder for results.",
+            "additional_notes": "Saturn conjunction delays but eventually delivers lasting results. Mars conjunction accelerates recklessly, causing haste-related mistakes. Rahu conjunction creates confusion, illusion, and unconventional approaches. Ketu conjunction detaches or spiritualizes the results. Sun conjunction can ego-inflate the lordship themes."
+        }
+    ],
+    "lagna_specific_lords": {
+        "description": "Quick reference for functional nature of planets by lagna (ascendant). This helps quickly determine which functional_nature_rule applies for a given native.",
+        "aries": {
+            "yogakaraka": null,
+            "benefic": ["sun", "jupiter", "mars"],
+            "neutral": ["moon"],
+            "malefic": ["mercury", "saturn"],
+            "maraka": ["venus"]
+        },
+        "taurus": {
+            "yogakaraka": "saturn",
+            "benefic": ["mercury", "sun"],
+            "neutral": ["mars"],
+            "malefic": ["jupiter", "moon"],
+            "maraka": ["venus"]
+        },
+        "gemini": {
+            "yogakaraka": null,
+            "benefic": ["venus"],
+            "neutral": ["mercury", "sun"],
+            "malefic": ["mars", "jupiter"],
+            "maraka": ["saturn"]
+        },
+        "cancer": {
+            "yogakaraka": "mars",
+            "benefic": ["moon", "jupiter"],
+            "neutral": ["sun"],
+            "malefic": ["venus", "mercury"],
+            "maraka": ["saturn"]
+        },
+        "leo": {
+            "yogakaraka": "mars",
+            "benefic": ["sun", "jupiter"],
+            "neutral": ["moon"],
+            "malefic": ["mercury", "venus"],
+            "maraka": ["saturn"]
+        },
+        "virgo": {
+            "yogakaraka": null,
+            "benefic": ["venus", "mercury"],
+            "neutral": ["sun"],
+            "malefic": ["mars", "moon"],
+            "maraka": ["jupiter"]
+        },
+        "libra": {
+            "yogakaraka": "saturn",
+            "benefic": ["mercury", "venus"],
+            "neutral": ["jupiter"],
+            "malefic": ["sun", "mars"],
+            "maraka": ["moon"]
+        },
+        "scorpio": {
+            "yogakaraka": null,
+            "benefic": ["moon", "sun", "jupiter"],
+            "neutral": ["mars"],
+            "malefic": ["mercury", "saturn"],
+            "maraka": ["venus"]
+        },
+        "sagittarius": {
+            "yogakaraka": null,
+            "benefic": ["sun", "mars"],
+            "neutral": ["jupiter"],
+            "malefic": ["venus", "saturn"],
+            "maraka": ["mercury"]
+        },
+        "capricorn": {
+            "yogakaraka": "venus",
+            "benefic": ["mercury", "saturn"],
+            "neutral": ["sun"],
+            "malefic": ["mars", "jupiter"],
+            "maraka": ["moon"]
+        },
+        "aquarius": {
+            "yogakaraka": "venus",
+            "benefic": ["saturn", "mercury"],
+            "neutral": ["sun"],
+            "malefic": ["mars", "jupiter"],
+            "maraka": ["moon"]
+        },
+        "pisces": {
+            "yogakaraka": null,
+            "benefic": ["moon", "mars"],
+            "neutral": ["jupiter"],
+            "malefic": ["sun", "venus", "saturn"],
+            "maraka": ["mercury"]
+        }
+    }
+}
