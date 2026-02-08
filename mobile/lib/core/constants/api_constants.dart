@@ -45,6 +45,21 @@ class ApiConstants {
     return url;
   }
 
+  /// Dasha sub-periods (AD for an MD, or PD for an AD)
+  static String dashaSubPeriods({
+    required String parentLord,
+    required String parentStart,
+    required String parentEnd,
+    required String level,
+    String? mdLord,
+  }) {
+    var url = '$apiVersion/analysis/dasha/sub-periods'
+        '?parent_lord=$parentLord&parent_start=$parentStart'
+        '&parent_end=$parentEnd&level=$level';
+    if (mdLord != null) url += '&md_lord=$mdLord';
+    return url;
+  }
+
   // Chat
   static const String chat = '$apiVersion/chat';
   static const String chatHistory = '$apiVersion/chat/history';

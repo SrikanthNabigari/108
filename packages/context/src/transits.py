@@ -448,6 +448,145 @@ def check_dhaiya(natal_moon_rashi: int, saturn_rashi: int) -> dict[str, Any]:
         }
 
 
+def get_sade_sati_dates(
+    natal_moon_rashi: int,
+    current_saturn_rashi: int,  # noqa: ARG001
+) -> dict[str, Any]:
+    """Compute approximate start/end dates for each Sade Sati phase.
+
+    Uses ephemeris binary search to find when Saturn enters the 12th, 1st,
+    and 2nd rashis from the natal Moon.
+
+    Args:
+        natal_moon_rashi: Natal Moon's rashi (0-11).
+        current_saturn_rashi: Current Saturn's rashi (0-11).
+
+    Returns:
+        Dictionary with ``phase_dates`` mapping phase names to
+        ``{"start": "YYYY-MM-DD", "end": "YYYY-MM-DD"}``.
+    """
+    from datetime import UTC, datetime, timedelta
+
+    from packages.cosmos.src.ephemeris import find_planet_rashi_ingress, get_julian_day
+
+    now = datetime.now(tz=UTC)
+    # Search window: 5 years back to 5 years forward
+    start_jd = get_julian_day(now - timedelta(days=5 * 365))
+    end_jd = get_julian_day(now + timedelta(days=5 * 365))
+
+    # The three rashis for Sade Sati
+    rashi_12th = (natal_moon_rashi - 1) % 12  # rising
+    rashi_1st = natal_moon_rashi  # peak
+    rashi_2nd = (natal_moon_rashi + 1) % 12  # setting
+    rashi_3rd = (natal_moon_rashi + 2) % 12  # end of Sade Sati
+
+    phase_dates: dict[str, dict[str, str]] = {}
+
+    def _jd_to_date_str(jd: float) -> str:
+        """Convert JD to ISO date string."""
+        import swisseph as swe
+
+        y, m, d, _h = swe.revjul(jd)
+        return f"{y:04d}-{m:02d}-{int(d):02d}"
+
+    # Build continuous timeline: each phase ends where the next begins
+    # Find start of first phase (rising = Saturn enters 12th from Moon)
+    rising_start = find_planet_rashi_ingress(
+        "saturn", rashi_12th, start_jd, end_jd, find_first=True
+    )
+    if rising_start is None:
+        return {"phase_dates": phase_dates}
+
+    # Peak start = first time Saturn enters Moon's rashi after rising start
+    peak_start = find_planet_rashi_ingress(
+        "saturn", rashi_1st, rising_start, end_jd, find_first=True
+    )
+
+    # Setting start = first time Saturn enters 2nd from Moon after peak start
+    setting_start = (
+        find_planet_rashi_ingress("saturn", rashi_2nd, peak_start, end_jd, find_first=True)
+        if peak_start
+        else None
+    )
+
+    # Setting end = first time Saturn enters 3rd from Moon after setting start
+    setting_end = (
+        find_planet_rashi_ingress("saturn", rashi_3rd, setting_start, end_jd, find_first=True)
+        if setting_start
+        else None
+    )
+
+    phase_dates["rising"] = {
+        "start": _jd_to_date_str(rising_start),
+        "end": _jd_to_date_str(peak_start) if peak_start else "",
+    }
+    if peak_start:
+        phase_dates["peak"] = {
+            "start": _jd_to_date_str(peak_start),
+            "end": _jd_to_date_str(setting_start) if setting_start else "",
+        }
+    if setting_start:
+        phase_dates["setting"] = {
+            "start": _jd_to_date_str(setting_start),
+            "end": _jd_to_date_str(setting_end) if setting_end else "",
+        }
+
+    return {"phase_dates": phase_dates}
+
+
+def get_dhaiya_dates(
+    natal_moon_rashi: int,
+    current_saturn_rashi: int,
+) -> dict[str, Any]:
+    """Compute approximate start/end dates for an active Dhaiya phase.
+
+    Args:
+        natal_moon_rashi: Natal Moon's rashi (0-11).
+        current_saturn_rashi: Current Saturn's rashi (0-11).
+
+    Returns:
+        Dictionary with ``phase_dates`` mapping the dhaiya type to
+        ``{"start": "YYYY-MM-DD", "end": "YYYY-MM-DD"}``.
+    """
+    from datetime import UTC, datetime, timedelta
+
+    from packages.cosmos.src.ephemeris import find_planet_rashi_ingress, get_julian_day
+
+    house_from_moon = _calculate_house_from_moon(natal_moon_rashi, current_saturn_rashi)
+    if house_from_moon not in (4, 8):
+        return {"phase_dates": {}}
+
+    now = datetime.now(tz=UTC)
+    start_jd = get_julian_day(now - timedelta(days=5 * 365))
+    end_jd = get_julian_day(now + timedelta(days=5 * 365))
+
+    import swisseph as swe
+
+    def _jd_to_date_str(jd: float) -> str:
+        y, m, d, _h = swe.revjul(jd)
+        return f"{y:04d}-{m:02d}-{int(d):02d}"
+
+    phase_name = "kantaka_shani" if house_from_moon == 4 else "ashtama_shani"
+    target_rashi = current_saturn_rashi
+    next_rashi = (current_saturn_rashi + 1) % 12
+
+    ingress_jd = find_planet_rashi_ingress("saturn", target_rashi, start_jd, end_jd)
+    end_jd_phase = (
+        find_planet_rashi_ingress("saturn", next_rashi, ingress_jd, end_jd, find_first=True)
+        if ingress_jd
+        else None
+    )
+
+    phase_dates: dict[str, dict[str, str]] = {}
+    if ingress_jd:
+        phase_dates[phase_name] = {
+            "start": _jd_to_date_str(ingress_jd),
+            "end": _jd_to_date_str(end_jd_phase) if end_jd_phase else "",
+        }
+
+    return {"phase_dates": phase_dates}
+
+
 def get_gochara(
     natal_moon_rashi: int,
     transit_planet: str,
@@ -1039,11 +1178,13 @@ __all__ = [
     "VEDHA_POINTS",
     "check_dhaiya",
     "check_sade_sati",
+    "get_dhaiya_dates",
     "get_enriched_transit_analysis",
     "get_full_transit_analysis",
     # Main analysis functions
     "get_gochara",
     "get_nakshatra_transit_effect",
+    "get_sade_sati_dates",
     "get_transit_aspects",
     "get_transit_positions",
     # Helper functions

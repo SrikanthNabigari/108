@@ -18,18 +18,23 @@ from gateway.models import AccessLevel, KPPredictionRequest, UserContext
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from packages.context.src import (
+    check_dhaiya,
     check_sade_sati,
     get_antardasha_effect,
     get_antardasha_sequence,
     get_current_dasha,
+    get_dhaiya_dates,
     get_enriched_transit_analysis,
     get_mahadasha_sequence,
     get_pratyantardasha_effect,
     get_pratyantardasha_sequence,
+    get_sade_sati_dates,
 )
 from packages.context.src.dasha_transit import cross_analyze
-from packages.core.src.knowledge_loader import get_dasha_guide
-from packages.cosmos.src import get_all_planets
+from packages.core.src.constants import Planet, Rashi
+from packages.core.src.knowledge_loader import get_dasha_guide, load_definition
+from packages.core.src.models import BirthChart, BirthData, HouseCusps, PlanetPosition
+from packages.cosmos.src import get_all_planets, longitude_to_nakshatra
 from packages.cosmos.src.ephemeris import get_julian_day
 from packages.self.src import (
     DoshaDetector,
@@ -105,6 +110,95 @@ def _build_planets_for_analysis(planets: dict) -> dict[str, Any]:
                 "is_retrograde": planet_data.get("is_retrograde", False),
             }
     return result
+
+
+RASHI_LIST = list(Rashi)
+
+
+def _build_chart_for_doshas(chart: dict) -> BirthChart:
+    """Construct BirthChart from DB dict for DoshaDetector."""
+    planets_dict: dict[Planet, PlanetPosition] = {}
+    for pname, pdata in chart.get("planets", {}).items():
+        if not isinstance(pdata, dict):
+            continue
+        try:
+            planet = Planet(pname)
+        except ValueError:
+            continue
+        lon = float(pdata.get("longitude", 0))
+        rashi_idx = int(pdata.get("rashi", int(lon / 30) % 12))
+        nak_info = longitude_to_nakshatra(lon)
+        planets_dict[planet] = PlanetPosition(
+            planet=planet,
+            longitude=lon,
+            rashi=RASHI_LIST[rashi_idx % 12],
+            rashi_degree=lon % 30,
+            nakshatra=nak_info.get("name", ""),
+            nakshatra_pada=nak_info.get("pada", 1),
+            nakshatra_lord=Planet(nak_info.get("lord", "ketu")),
+            is_retrograde=pdata.get("is_retrograde", False),
+            house=int(pdata.get("house", 1)),
+        )
+
+    houses = chart.get("houses", {})
+    asc = float(houses.get("ascendant", 0))
+    mc = float(houses.get("mc", 0))
+    cusps: list[float] = []
+    for i in range(1, 13):
+        h = houses.get(f"house_{i}")
+        if isinstance(h, dict):
+            cusps.append(float(h.get("longitude", (i - 1) * 30)))
+        else:
+            cusps.append(float(h if h is not None else (i - 1) * 30))
+
+    lagna_str = chart.get("lagna_rashi", "aries")
+    moon_str = chart.get("moon_rashi", "aries")
+
+    birth_dt = chart.get("birth_datetime", datetime.utcnow())
+    if isinstance(birth_dt, str):
+        birth_dt = datetime.fromisoformat(birth_dt)
+
+    return BirthChart(
+        user_id="",
+        birth_data=BirthData(
+            datetime_utc=birth_dt,
+            latitude=chart.get("latitude", 0),
+            longitude=chart.get("longitude", 0),
+            timezone="UTC",
+        ),
+        planets=planets_dict,
+        houses=HouseCusps(ascendant=asc, mc=mc, cusps=cusps),
+        lagna_rashi=Rashi(lagna_str),
+        moon_rashi=Rashi(moon_str),
+        moon_nakshatra=chart.get("moon_nakshatra", ""),
+        ayanamsa=chart.get("ayanamsa") or 0.0,
+        calculated_at=datetime.utcnow(),
+    )
+
+
+def _detect_dosha_markers(chart: dict) -> dict[str, list[dict]]:
+    """Detect natal doshas and return planet -> marker mapping."""
+    try:
+        chart_obj = _build_chart_for_doshas(chart)
+        detector = DoshaDetector()
+        detected = detector.detect_all(chart_obj)
+
+        markers: dict[str, list[dict]] = {}
+        for dosha in detected:
+            marker = {
+                "dosha_id": dosha.dosha_id,
+                "name": dosha.name,
+                "severity": dosha.severity,
+                "description": dosha.description,
+                "remedies": dosha.remedies,
+            }
+            for planet in dosha.involved_planets:
+                pname = planet.value if hasattr(planet, "value") else str(planet)
+                markers.setdefault(pname, []).append(marker)
+        return markers
+    except Exception as e:
+        logger.warning(f"Dosha detection failed: {e}")
+        return {}
 
 
 @router.get("/yogas")
@@ -230,15 +324,22 @@ async def get_doshas(
                 detail="Birth chart not found",
             ) from None
 
-        planets = _build_planets_for_analysis(chart.get("planets", {}))
-
-        # Detect doshas
-        detector = DoshaDetector(
-            planets=planets,
-            lagna_rashi=chart["lagna_rashi"],
-            moon_rashi=chart["moon_rashi"],
-        )
-        doshas = detector.detect_all()
+        # Detect doshas using BirthChart model
+        chart_obj = _build_chart_for_doshas(chart)
+        detector = DoshaDetector()
+        detected = detector.detect_all(chart_obj)
+        doshas = [
+            {
+                "dosha_id": d.dosha_id,
+                "name": d.name,
+                "is_present": d.is_present,
+                "severity": d.severity,
+                "involved_planets": [p.value for p in d.involved_planets],
+                "description": d.description,
+                "remedies": d.remedies,
+            }
+            for d in detected
+        ]
 
         # Free tier: names only
         if access == AccessLevel.PREVIEW:
@@ -412,15 +513,43 @@ async def get_dasha_timeline(
                         moon_rashi_idx = int(moon_rashi)
                     sade_sati = check_sade_sati(moon_rashi_idx, saturn_rashi)
                     if sade_sati.get("active"):
-                        alerts.append(
-                            {
-                                "type": "sade_sati",
-                                "phase": sade_sati.get("phase"),
-                                "description": sade_sati.get("description"),
-                            }
-                        )
+                        sade_sati_alert = {
+                            "type": "sade_sati",
+                            "phase": sade_sati.get("phase"),
+                            "description": sade_sati.get("description"),
+                            "effects": sade_sati.get("effects", []),
+                            "remedies": sade_sati.get("remedies", []),
+                            "duration_years": sade_sati.get("duration_years"),
+                            "house_from_moon": sade_sati.get("house_from_moon"),
+                        }
+                        try:
+                            ss_dates = get_sade_sati_dates(moon_rashi_idx, saturn_rashi)
+                            sade_sati_alert["phase_dates"] = ss_dates.get("phase_dates", {})
+                        except Exception:
+                            pass
+                        alerts.append(sade_sati_alert)
+
+                    dhaiya = check_dhaiya(moon_rashi_idx, saturn_rashi)
+                    if dhaiya.get("active"):
+                        dhaiya_alert = {
+                            "type": "dhaiya",
+                            "dhaiya_type": dhaiya.get("type"),
+                            "description": dhaiya.get("description"),
+                            "effects": dhaiya.get("effects", []),
+                            "remedies": dhaiya.get("remedies", []),
+                            "duration_years": dhaiya.get("duration_years"),
+                            "house_from_moon": dhaiya.get("house_from_moon"),
+                        }
+                        try:
+                            dh_dates = get_dhaiya_dates(moon_rashi_idx, saturn_rashi)
+                            dhaiya_alert["phase_dates"] = dh_dates.get("phase_dates", {})
+                        except Exception:
+                            pass
+                        alerts.append(dhaiya_alert)
             except Exception as alert_err:
                 logger.warning(f"Failed to check alerts: {alert_err}")
+
+            dosha_markers = _detect_dosha_markers(chart) if chart else {}
 
             return {
                 "current": {
@@ -440,6 +569,7 @@ async def get_dasha_timeline(
                 "antardasha_sequence": _fmt_seq(ad_seq),
                 "pratyantardasha_sequence": _fmt_seq(pd_seq),
                 "alerts": alerts,
+                "dosha_markers": dosha_markers,
             }
 
         # Pro+ tier: full timeline
@@ -673,6 +803,12 @@ async def get_dasha_effects(
         # Area scores (derived from knowledge text — available at all tiers)
         result["area_scores"] = _compute_area_scores(md_guide, ad_effects, pd_effects)
 
+        # Relationship info between period lords
+        if ad:
+            result["md_ad_relationship"] = _get_planet_relationship(md.lower(), ad.lower())
+        if ad and pd:
+            result["ad_pd_relationship"] = _get_planet_relationship(ad.lower(), pd.lower())
+
         # Cross-analysis (requires birth chart + live transits — pro+ only)
         if access != AccessLevel.PREVIEW:
             chart = await _load_birth_chart(db, str(current_user.id))
@@ -710,6 +846,40 @@ async def get_dasha_effects(
                 except Exception as cross_err:
                     logger.warning(f"Cross-analysis failed: {cross_err}")
 
+        # Activated doshas for this period + natal doshas for context
+        try:
+            dosha_chart = await _load_birth_chart(db, str(current_user.id))
+            if dosha_chart:
+                all_markers = _detect_dosha_markers(dosha_chart)
+                queried_lords = {md.lower()}
+                if ad:
+                    queried_lords.add(ad.lower())
+                if pd:
+                    queried_lords.add(pd.lower())
+
+                activated = []
+                seen: set[str] = set()
+                for lord in queried_lords:
+                    for marker in all_markers.get(lord, []):
+                        if marker["dosha_id"] not in seen:
+                            seen.add(marker["dosha_id"])
+                            activated.append({**marker, "activated_by": lord})
+                if activated:
+                    result["activated_doshas"] = activated
+
+                # Always include natal doshas so detail panel can show them
+                natal_seen: set[str] = set()
+                natal_doshas = []
+                for markers_list in all_markers.values():
+                    for marker in markers_list:
+                        if marker["dosha_id"] not in natal_seen:
+                            natal_seen.add(marker["dosha_id"])
+                            natal_doshas.append(marker)
+                if natal_doshas:
+                    result["natal_doshas"] = natal_doshas
+        except Exception as e:
+            logger.warning(f"Dosha activation check failed: {e}")
+
         return result
 
     except HTTPException:
@@ -719,6 +889,123 @@ async def get_dasha_effects(
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Failed to get dasha effects",
+        ) from e
+
+
+def _get_planet_relationship(planet1: str, planet2: str) -> dict[str, str]:
+    """Get natural relationship between two planets.
+
+    Returns dict with 'type' (friend/enemy/neutral/self) and 'label'.
+    """
+    p1, p2 = planet1.lower(), planet2.lower()
+    if p1 == p2:
+        return {"type": "self", "label": "Same planet"}
+
+    relationships = load_definition("relationships")
+    natural = relationships.get("natural_relationships", {})
+    info = natural.get(p1, {})
+
+    # Rahu/Ketu share relationships with Saturn/Mars respectively
+    if p1 in ("rahu", "ketu") and not info:
+        proxy = "saturn" if p1 == "rahu" else "mars"
+        info = natural.get(proxy, {})
+    p2_proxy = ("saturn" if p2 == "rahu" else "mars") if p2 in ("rahu", "ketu") else p2
+
+    if p2_proxy in info.get("friends", []):
+        return {
+            "type": "friend",
+            "label": f"{planet1.title()} and {planet2.title()} are natural friends",
+        }
+    if p2_proxy in info.get("enemies", []):
+        return {
+            "type": "enemy",
+            "label": f"{planet1.title()} and {planet2.title()} are natural enemies",
+        }
+    return {"type": "neutral", "label": f"{planet1.title()} and {planet2.title()} are neutral"}
+
+
+@router.get("/dasha/sub-periods")
+async def get_dasha_sub_periods(
+    parent_lord: str,
+    parent_start: str,
+    parent_end: str,
+    level: str,
+    current_user: Annotated[UserContext, Depends(get_current_user)],
+    config: Annotated[dict, Depends(get_app_config)],
+    db: Annotated[Any, Depends(get_db)],
+    md_lord: str | None = None,
+) -> dict[str, Any]:
+    """Get sub-period sequence for a given parent period.
+
+    Args:
+        parent_lord: Lord of the parent period.
+        parent_start: ISO start date of parent.
+        parent_end: ISO end date of parent.
+        level: 'ad' for antardashas, 'pd' for pratyantardashas.
+        md_lord: Mahadasha lord (needed for relationship context).
+        current_user: Authenticated user context.
+        config: Application configuration.
+        db: Database connection.
+
+    Returns:
+        dict with periods list, each including lord, dates, duration, and relationship.
+    """
+    try:
+        await check_feature_access("analysis_dasha", current_user.subscription_tier, config)
+
+        start_dt = datetime.fromisoformat(parent_start)
+        end_dt = datetime.fromisoformat(parent_end)
+
+        if level == "ad":
+            sequence = get_antardasha_sequence(parent_lord, start_dt, end_dt)
+            context_lord = parent_lord  # AD relates to MD
+        elif level == "pd":
+            sequence = get_pratyantardasha_sequence(parent_lord, start_dt, end_dt)
+            context_lord = md_lord or parent_lord  # PD relates to AD (but MD for broader context)
+        else:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="level must be 'ad' or 'pd'",
+            )
+
+        periods = []
+        for p in sequence:
+            lord = p.get("lord", "")
+            rel = _get_planet_relationship(context_lord, lord)
+            periods.append(
+                {
+                    "lord": lord,
+                    "start": str(p.get("start_date", "")),
+                    "end": str(p.get("end_date", "")),
+                    "years": p.get("years"),
+                    "relationship": rel["type"],
+                    "relationship_label": rel["label"],
+                }
+            )
+
+        # Attach dosha markers per period
+        try:
+            chart = await _load_birth_chart(db, str(current_user.id))
+            if chart:
+                all_markers = _detect_dosha_markers(chart)
+                for p in periods:
+                    p["dosha_markers"] = all_markers.get(p["lord"], [])
+        except Exception as e:
+            logger.warning(f"Dosha markers for sub-periods failed: {e}")
+
+        return {
+            "level": level,
+            "parent_lord": parent_lord,
+            "periods": periods,
+        }
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Failed to get sub-periods for {current_user.id}: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to get sub-periods",
         ) from e
 
 

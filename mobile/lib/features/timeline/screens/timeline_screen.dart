@@ -7,6 +7,7 @@ import 'package:one_zero_eight/shared/widgets/glass_container.dart';
 import 'package:one_zero_eight/shared/widgets/ambient_background.dart';
 import 'package:one_zero_eight/data/services/api_service.dart';
 import 'package:one_zero_eight/core/constants/api_constants.dart';
+import 'package:one_zero_eight/features/timeline/widgets/alert_detail_panel.dart';
 import 'package:one_zero_eight/features/timeline/widgets/dasha_detail_panel.dart';
 
 class TimelineScreen extends ConsumerStatefulWidget {
@@ -23,6 +24,16 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
 
   final _scrollController = ScrollController();
   double _scrollHintOpacity = 1.0;
+
+  // Selection state — which MD/AD the user has tapped
+  String? _selectedMdLord;
+  String? _selectedAdLord;
+
+  // Dynamic sub-period sequences (fetched on tap)
+  List<dynamic>? _adSequence;
+  List<dynamic>? _pdSequence;
+  bool _loadingAd = false;
+  bool _loadingPd = false;
 
   @override
   void initState() {
@@ -53,6 +64,59 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
       if (mounted) setState(() { _dashaData = data; _loading = false; });
     } catch (e) {
       if (mounted) setState(() { _error = '$e'; _loading = false; });
+    }
+  }
+
+  /// Fetch AD sequence for a selected MD period.
+  Future<void> _fetchAdForMd(String lord, String start, String end) async {
+    if (_selectedMdLord == lord) return; // already selected
+    setState(() {
+      _selectedMdLord = lord;
+      _selectedAdLord = null;
+      _pdSequence = null;
+      _loadingAd = true;
+    });
+    try {
+      final data = await ApiService().get(
+        ApiConstants.dashaSubPeriods(
+          parentLord: lord, parentStart: start, parentEnd: end, level: 'ad',
+        ),
+        fromJson: (json) => json as Map<String, dynamic>,
+      );
+      if (mounted) {
+        setState(() {
+          _adSequence = (data['periods'] as List?) ?? [];
+          _loadingAd = false;
+        });
+      }
+    } catch (_) {
+      if (mounted) setState(() { _loadingAd = false; });
+    }
+  }
+
+  /// Fetch PD sequence for a selected AD period.
+  Future<void> _fetchPdForAd(String lord, String start, String end) async {
+    if (_selectedAdLord == lord) return;
+    setState(() {
+      _selectedAdLord = lord;
+      _loadingPd = true;
+    });
+    try {
+      final data = await ApiService().get(
+        ApiConstants.dashaSubPeriods(
+          parentLord: lord, parentStart: start, parentEnd: end, level: 'pd',
+          mdLord: _selectedMdLord,
+        ),
+        fromJson: (json) => json as Map<String, dynamic>,
+      );
+      if (mounted) {
+        setState(() {
+          _pdSequence = (data['periods'] as List?) ?? [];
+          _loadingPd = false;
+        });
+      }
+    } catch (_) {
+      if (mounted) setState(() { _loadingPd = false; });
     }
   }
 
@@ -137,13 +201,22 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
     final current =
         _dashaData?['current'] as Map<String, dynamic>? ?? _dashaData ?? {};
     final mdSequence = _dashaData?['mahadasha_sequence'] as List? ?? [];
-    final adSequence = _dashaData?['antardasha_sequence'] as List? ?? [];
-    final pdSequence = _dashaData?['pratyantardasha_sequence'] as List? ?? [];
+    final initialAdSeq = _dashaData?['antardasha_sequence'] as List? ?? [];
+    final initialPdSeq = _dashaData?['pratyantardasha_sequence'] as List? ?? [];
     final alerts = _dashaData?['alerts'] as List? ?? [];
 
-    final mdLord = current['mahadasha_lord'] as String? ?? 'mercury';
-    final adLord = current['antardasha_lord'] as String? ?? '';
-    final pdLord = current['pratyantardasha_lord'] as String? ?? '';
+    final currentMdLord = current['mahadasha_lord'] as String? ?? 'mercury';
+    final currentAdLord = current['antardasha_lord'] as String? ?? '';
+    final currentPdLord = current['pratyantardasha_lord'] as String? ?? '';
+
+    // Use selected or fallback to current
+    final mdLord = _selectedMdLord ?? currentMdLord;
+    final adLord = _selectedAdLord ?? currentAdLord;
+    final pdLord = _selectedAdLord != null ? (_selectedAdLord == currentAdLord ? currentPdLord : '') : currentPdLord;
+    final adSequence = _adSequence ?? initialAdSeq;
+    final pdSequence = _pdSequence ?? initialPdSeq;
+    final bool isSelectedMdCurrent = mdLord.toLowerCase() == currentMdLord.toLowerCase();
+    final bool isSelectedAdCurrent = adLord.toLowerCase() == currentAdLord.toLowerCase();
     final remaining = current['remaining_years'];
     final mdStart = current['mahadasha_start'] as String? ?? '';
     final mdEnd = current['mahadasha_end'] as String? ?? '';
@@ -286,38 +359,61 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
                     itemBuilder: (_, i) {
                       final p = mdSequence[i] as Map<String, dynamic>;
                       final lord = p['lord'] as String? ?? 'sun';
+                      final pStart = p['start'] as String? ?? '';
+                      final pEnd = p['end'] as String? ?? '';
+                      final isSelected = lord.toLowerCase() == mdLord.toLowerCase();
+                      final isNow = lord.toLowerCase() == currentMdLord.toLowerCase();
+                      // Is this card currently driving the AD row?
+                      final isShowingAds = isNow
+                          ? (_selectedMdLord == null || _selectedMdLord!.toLowerCase() == lord.toLowerCase())
+                          : isSelected;
                       return _PeriodCard(
                         lord: lord,
                         duration: _yearStr(p['years']),
-                        startYear: _yearFromIso(p['start'] as String? ?? ''),
-                        endYear: _yearFromIso(p['end'] as String? ?? ''),
-                        isCurrent:
-                            lord.toLowerCase() == mdLord.toLowerCase(),
+                        startYear: _yearFromIso(pStart),
+                        endYear: _yearFromIso(pEnd),
+                        isCurrent: isNow,
+                        isSelected: isSelected && !isNow,
                         size: _CardSize.large,
-                        onTap: () => DashaDetailPanel.show(
-                          context,
-                          level: 'md',
-                          lord: lord,
-                          mdLord: lord,
-                          startDate: p['start'] as String? ?? '',
-                          endDate: p['end'] as String? ?? '',
-                          isCurrent: lord.toLowerCase() == mdLord.toLowerCase(),
-                        ),
+                        doshaMarkers: _getDoshaMarkersForLord(lord),
+                        onTap: () {
+                          if (isShowingAds) {
+                            // Already showing this MD's ADs → open detail
+                            DashaDetailPanel.show(context,
+                              level: 'md', lord: lord, mdLord: lord,
+                              startDate: pStart, endDate: pEnd, isCurrent: isNow);
+                          } else if (isNow) {
+                            // Current MD but user was browsing another → go back
+                            setState(() {
+                              _selectedMdLord = null;
+                              _selectedAdLord = null;
+                              _adSequence = null;
+                              _pdSequence = null;
+                            });
+                          } else if (pStart.isNotEmpty && pEnd.isNotEmpty) {
+                            _fetchAdForMd(lord, pStart, pEnd);
+                          }
+                        },
                       );
                     },
                   )
-                : _buildFallbackMD(mdLord),
+                : _buildFallbackMD(currentMdLord),
           ),
 
           const SizedBox(height: S.xl),
 
           // ── Row 2: Antardashas ──
-          if (adSequence.isNotEmpty) ...[
-            _SectionLabel(
-              title: 'Antardasha',
-              subtitle: 'in ${_planetName(mdLord)} MD',
-            ),
-            const SizedBox(height: S.sm),
+          _SectionLabel(
+            title: 'Antardasha',
+            subtitle: 'in ${_planetName(mdLord)} MD${isSelectedMdCurrent ? '' : ' (tap)'}',
+          ),
+          const SizedBox(height: S.sm),
+          if (_loadingAd)
+            const SizedBox(
+              height: 100,
+              child: Center(child: CircularProgressIndicator(color: C.accent, strokeWidth: 2)),
+            )
+          else if (adSequence.isNotEmpty) ...[
             SizedBox(
               height: 100,
               child: ListView.separated(
@@ -328,36 +424,60 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
                 itemBuilder: (_, i) {
                   final p = adSequence[i] as Map<String, dynamic>;
                   final lord = p['lord'] as String? ?? 'sun';
+                  final pStart = p['start'] as String? ?? '';
+                  final pEnd = p['end'] as String? ?? '';
+                  final rel = p['relationship'] as String?;
+                  final isNow = isSelectedMdCurrent && lord.toLowerCase() == currentAdLord.toLowerCase();
+                  final isSelected = lord.toLowerCase() == adLord.toLowerCase() && !isNow;
+                  // Is this card currently driving the PD row?
+                  final isShowingPds = isNow
+                      ? (_selectedAdLord == null || _selectedAdLord!.toLowerCase() == lord.toLowerCase())
+                      : isSelected;
                   return _PeriodCard(
                     lord: lord,
-                    duration: _monthStr(p['years'], p['start'], p['end']),
-                    startYear: _shortDate(p['start'] as String? ?? ''),
-                    endYear: _shortDate(p['end'] as String? ?? ''),
-                    isCurrent:
-                        lord.toLowerCase() == adLord.toLowerCase(),
+                    duration: _monthStr(p['years'], pStart, pEnd),
+                    startYear: _shortDate(pStart),
+                    endYear: _shortDate(pEnd),
+                    isCurrent: isNow,
+                    isSelected: isSelected,
                     size: _CardSize.medium,
-                    onTap: () => DashaDetailPanel.show(
-                      context,
-                      level: 'ad',
-                      lord: lord,
-                      mdLord: mdLord,
-                      adLord: lord,
-                      startDate: p['start'] as String? ?? '',
-                      endDate: p['end'] as String? ?? '',
-                      isCurrent: lord.toLowerCase() == adLord.toLowerCase(),
-                    ),
+                    relationship: rel,
+                    doshaMarkers: (p['dosha_markers'] as List?)
+                        ?.cast<Map<String, dynamic>>() ?? _getDoshaMarkersForLord(lord),
+                    onTap: () {
+                      if (isShowingPds) {
+                        // Already showing this AD's PDs → open detail
+                        DashaDetailPanel.show(context,
+                          level: 'ad', lord: lord, mdLord: mdLord, adLord: lord,
+                          startDate: pStart, endDate: pEnd, isCurrent: isNow);
+                      } else if (isNow) {
+                        // Current AD but user was browsing another → go back
+                        setState(() {
+                          _selectedAdLord = null;
+                          _pdSequence = null;
+                        });
+                      } else if (pStart.isNotEmpty && pEnd.isNotEmpty) {
+                        _fetchPdForAd(lord, pStart, pEnd);
+                      }
+                    },
                   );
                 },
               ),
             ),
-            const SizedBox(height: S.xl),
           ],
 
+          const SizedBox(height: S.xl),
+
           // ── Row 3: Pratyantardashas ──
-          if (pdSequence.isNotEmpty) ...[
+          if (_loadingPd)
+            const SizedBox(
+              height: 86,
+              child: Center(child: CircularProgressIndicator(color: C.accent, strokeWidth: 2)),
+            )
+          else if (pdSequence.isNotEmpty) ...[
             _SectionLabel(
               title: 'Pratyantardasha',
-              subtitle: 'in ${_planetName(adLord)} AD',
+              subtitle: 'in ${_planetName(adLord)} AD${isSelectedAdCurrent ? '' : ' (tap)'}',
             ),
             const SizedBox(height: S.sm),
             SizedBox(
@@ -370,14 +490,21 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
                 itemBuilder: (_, i) {
                   final p = pdSequence[i] as Map<String, dynamic>;
                   final lord = p['lord'] as String? ?? 'sun';
+                  final pStart = p['start'] as String? ?? '';
+                  final pEnd = p['end'] as String? ?? '';
+                  final rel = p['relationship'] as String?;
+                  final isNow = isSelectedMdCurrent && isSelectedAdCurrent
+                      && lord.toLowerCase() == currentPdLord.toLowerCase();
                   return _PeriodCard(
                     lord: lord,
-                    duration: _monthStr(p['years'], p['start'], p['end']),
+                    duration: _monthStr(p['years'], pStart, pEnd),
                     startYear: '',
                     endYear: '',
-                    isCurrent:
-                        lord.toLowerCase() == pdLord.toLowerCase(),
+                    isCurrent: isNow,
                     size: _CardSize.small,
+                    relationship: rel,
+                    doshaMarkers: (p['dosha_markers'] as List?)
+                        ?.cast<Map<String, dynamic>>() ?? _getDoshaMarkersForLord(lord),
                     onTap: () => DashaDetailPanel.show(
                       context,
                       level: 'pd',
@@ -385,9 +512,9 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
                       mdLord: mdLord,
                       adLord: adLord,
                       pdLord: lord,
-                      startDate: p['start'] as String? ?? '',
-                      endDate: p['end'] as String? ?? '',
-                      isCurrent: lord.toLowerCase() == pdLord.toLowerCase(),
+                      startDate: pStart,
+                      endDate: pEnd,
+                      isCurrent: isNow,
                     ),
                   );
                 },
@@ -409,6 +536,13 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
         ],
       ),
     );
+  }
+
+  List<Map<String, dynamic>> _getDoshaMarkersForLord(String lord) {
+    final markers = _dashaData?['dosha_markers'] as Map<String, dynamic>?;
+    if (markers == null) return [];
+    final list = markers[lord.toLowerCase()] as List?;
+    return list?.cast<Map<String, dynamic>>() ?? [];
   }
 
   Widget _buildFallbackMD(String currentLord) {
@@ -562,6 +696,31 @@ Color _planetColor(String planet) {
   return colors[planet.toLowerCase()] ?? C.accent;
 }
 
+String _doshaSymbol(String name) {
+  final n = name.toLowerCase();
+  if (n.contains('mangal')) return '\u25B2';       // Mars triangle
+  if (n.contains('kaal sarp')) return '\u25C6';     // Serpent diamond
+  if (n.contains('pitra')) return '\u2726';         // Ancestral star
+  if (n.contains('grahan')) return '\u25D0';        // Eclipse half-circle
+  if (n.contains('guru chandal')) return '\u2B21';  // Hexagon
+  if (n.contains('angarak')) return '\u25B2';       // Mars-Rahu triangle
+  if (n.contains('vish')) return '\u25C9';          // Saturn-Moon target
+  if (n.contains('kemdrum')) return '\u25CB';       // Empty Moon circle
+  return '\u2022';                                  // Default bullet
+}
+
+Color _doshaColor(String name) {
+  final n = name.toLowerCase();
+  if (n.contains('mangal') || n.contains('angarak')) return C.mars;
+  if (n.contains('kaal sarp') || n.contains('sarpa')) return C.rahu;
+  if (n.contains('pitra')) return C.sun;
+  if (n.contains('grahan')) return C.textSecondary;
+  if (n.contains('guru chandal')) return C.jupiter;
+  if (n.contains('vish') || n.contains('shapit')) return C.saturn;
+  if (n.contains('kemdrum')) return C.moon;
+  return C.warning;
+}
+
 // ── Widgets ──
 
 class _Badge extends StatelessWidget {
@@ -611,8 +770,11 @@ class _PeriodCard extends StatelessWidget {
   final String startYear;
   final String endYear;
   final bool isCurrent;
+  final bool isSelected;
   final _CardSize size;
   final VoidCallback? onTap;
+  final String? relationship; // 'friend', 'enemy', 'neutral', 'self'
+  final List<Map<String, dynamic>> doshaMarkers;
 
   const _PeriodCard({
     required this.lord,
@@ -620,8 +782,11 @@ class _PeriodCard extends StatelessWidget {
     required this.startYear,
     required this.endYear,
     required this.isCurrent,
+    this.isSelected = false,
     required this.size,
     this.onTap,
+    this.relationship,
+    this.doshaMarkers = const [],
   });
 
   @override
@@ -658,73 +823,132 @@ class _PeriodCard extends StatelessWidget {
         dateSize = 9;
     }
 
+    final bool highlighted = isCurrent || isSelected;
+    // Relationship dot color
+    Color? relColor;
+    if (relationship == 'friend') {
+      relColor = C.positive;
+    } else if (relationship == 'enemy') {
+      relColor = C.negative;
+    } else if (relationship == 'neutral') {
+      relColor = C.warning;
+    }
+
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-      width: width,
-      padding: const EdgeInsets.symmetric(vertical: S.sm, horizontal: S.xs),
-      decoration: BoxDecoration(
-        borderRadius: R.lgBr,
-        color: isCurrent
-            ? color.withValues(alpha: 0.18)
-            : color.withValues(alpha: 0.04),
-        border: Border.all(
-          color: isCurrent
-              ? color.withValues(alpha: 0.6)
-              : color.withValues(alpha: 0.15),
-          width: isCurrent ? 1.5 : 0.5,
-        ),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+      child: Stack(
         children: [
-          Text(
-            _planetGlyph(lord),
-            style: TextStyle(fontSize: glyphSize, color: color),
-          ),
-          const SizedBox(height: 3),
-          Text(
-            _planetName(lord),
-            style: T.bodySm.copyWith(
-              color: C.textPrimary,
-              fontWeight: FontWeight.w600,
-              fontSize: nameSize,
+          Container(
+            width: width,
+            padding: const EdgeInsets.symmetric(vertical: S.sm, horizontal: S.xs),
+            decoration: BoxDecoration(
+              borderRadius: R.lgBr,
+              color: highlighted
+                  ? color.withValues(alpha: 0.18)
+                  : color.withValues(alpha: 0.04),
+              border: Border.all(
+                color: highlighted
+                    ? color.withValues(alpha: 0.6)
+                    : color.withValues(alpha: 0.15),
+                width: highlighted ? 1.5 : 0.5,
+              ),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  _planetGlyph(lord),
+                  style: TextStyle(fontSize: glyphSize, color: color),
+                ),
+                const SizedBox(height: 3),
+                Text(
+                  _planetName(lord),
+                  style: T.bodySm.copyWith(
+                    color: C.textPrimary,
+                    fontWeight: FontWeight.w600,
+                    fontSize: nameSize,
+                  ),
+                ),
+                const SizedBox(height: 1),
+                Text(
+                  duration,
+                  style: T.caption.copyWith(color: color, fontSize: durSize),
+                ),
+                if (dateRange.isNotEmpty) ...[
+                  const SizedBox(height: 1),
+                  Text(dateRange,
+                      style: T.caption.copyWith(fontSize: dateSize),
+                      overflow: TextOverflow.ellipsis),
+                ],
+                if (isCurrent && size == _CardSize.large) ...[
+                  const SizedBox(height: 3),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: S.sm, vertical: 2),
+                    decoration: BoxDecoration(
+                      borderRadius: R.xlBr,
+                      color: color.withValues(alpha: 0.2),
+                    ),
+                    child: Text(
+                      'NOW',
+                      style: TextStyle(
+                        fontSize: 8,
+                        fontWeight: FontWeight.w700,
+                        color: color,
+                        letterSpacing: 0.8,
+                      ),
+                    ),
+                  ),
+                ],
+                if (isSelected && !isCurrent) ...[
+                  const SizedBox(height: 2),
+                  Container(
+                    width: 4,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: color,
+                    ),
+                  ),
+                ],
+              ],
             ),
           ),
-          const SizedBox(height: 1),
-          Text(
-            duration,
-            style: T.caption.copyWith(color: color, fontSize: durSize),
-          ),
-          if (dateRange.isNotEmpty) ...[
-            const SizedBox(height: 1),
-            Text(dateRange,
-                style: T.caption.copyWith(fontSize: dateSize),
-                overflow: TextOverflow.ellipsis),
-          ],
-          if (isCurrent && size == _CardSize.large) ...[
-            const SizedBox(height: 3),
-            Container(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: S.sm, vertical: 2),
-              decoration: BoxDecoration(
-                borderRadius: R.xlBr,
-                color: color.withValues(alpha: 0.2),
-              ),
-              child: Text(
-                'NOW',
-                style: TextStyle(
-                  fontSize: 8,
-                  fontWeight: FontWeight.w700,
-                  color: color,
-                  letterSpacing: 0.8,
+          // Relationship dot — overlaid top-right, no layout impact
+          if (relColor != null)
+            Positioned(
+              top: 4,
+              right: 4,
+              child: Container(
+                width: 6,
+                height: 6,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: relColor,
                 ),
               ),
             ),
-          ],
+          // Dosha markers — bottom-left
+          if (doshaMarkers.isNotEmpty)
+            Positioned(
+              bottom: 4,
+              left: 4,
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: doshaMarkers.take(3).map((m) => Padding(
+                  padding: const EdgeInsets.only(right: 1),
+                  child: Text(
+                    _doshaSymbol(m['name'] as String? ?? ''),
+                    style: TextStyle(
+                      fontSize: 8,
+                      color: _doshaColor(m['name'] as String? ?? ''),
+                    ),
+                  ),
+                )).toList(),
+              ),
+            ),
         ],
       ),
-    ),
     );
   }
 }
@@ -738,33 +962,45 @@ class _AlertCard extends StatelessWidget {
     final type = alert['type'] as String? ?? '';
     final phase = alert['phase'] as String? ?? '';
     final desc = alert['description'] as String? ?? '';
+    final dhaiyaType = alert['dhaiya_type'] as String? ?? '';
 
     final bool isSadeSati = type == 'sade_sati';
-    final color = isSadeSati ? C.saturn : C.warning;
-    final icon = isSadeSati ? '♄' : '⚠';
-    final title = isSadeSati
-        ? 'Sade Sati — ${phase[0].toUpperCase()}${phase.substring(1)} Phase'
-        : desc;
+    final bool isDhaiya = type == 'dhaiya';
+    final color = (isSadeSati || isDhaiya) ? C.saturn : C.warning;
+    final icon = (isSadeSati || isDhaiya) ? '\u2644' : '\u26A0';
+    final String title;
+    if (isSadeSati) {
+      title = 'Sade Sati \u2014 ${phase[0].toUpperCase()}${phase.substring(1)} Phase';
+    } else if (isDhaiya) {
+      final dName = dhaiyaType == 'kantaka_shani' ? 'Kantaka Shani' : 'Ashtama Shani';
+      title = 'Dhaiya \u2014 $dName';
+    } else {
+      title = desc;
+    }
 
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: S.md, vertical: S.sm),
-      decoration: BoxDecoration(
-        borderRadius: R.mdBr,
-        color: color.withValues(alpha: 0.08),
-        border: Border.all(color: color.withValues(alpha: 0.3)),
-      ),
-      child: Row(
-        children: [
-          Text(icon, style: TextStyle(fontSize: 18, color: color)),
-          const SizedBox(width: S.sm),
-          Expanded(
-            child: Text(
-              title,
-              style: T.bodySm.copyWith(color: color, fontWeight: FontWeight.w600),
+    return GestureDetector(
+      onTap: () => AlertDetailPanel.show(context, alert: alert),
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: S.md, vertical: S.sm),
+        decoration: BoxDecoration(
+          borderRadius: R.mdBr,
+          color: color.withValues(alpha: 0.08),
+          border: Border.all(color: color.withValues(alpha: 0.3)),
+        ),
+        child: Row(
+          children: [
+            Text(icon, style: TextStyle(fontSize: 18, color: color)),
+            const SizedBox(width: S.sm),
+            Expanded(
+              child: Text(
+                title,
+                style: T.bodySm.copyWith(color: color, fontWeight: FontWeight.w600),
+              ),
             ),
-          ),
-        ],
+            Icon(Icons.chevron_right, color: color.withValues(alpha: 0.5), size: 18),
+          ],
+        ),
       ),
     );
   }

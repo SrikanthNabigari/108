@@ -266,6 +266,9 @@ class _DashaDetailPanelState extends ConsumerState<DashaDetailPanel> {
     final pdData = _data?['pratyantardasha'] as Map<String, dynamic>?;
     final cross = _data?['cross_analysis'] as Map<String, dynamic>?;
     final areaScores = _data?['area_scores'] as Map<String, dynamic>?;
+    // Relationship info
+    final mdAdRel = _data?['md_ad_relationship'] as Map<String, dynamic>?;
+    final adPdRel = _data?['ad_pd_relationship'] as Map<String, dynamic>?;
 
     return ListView(
       controller: controller,
@@ -276,6 +279,24 @@ class _DashaDetailPanelState extends ConsumerState<DashaDetailPanel> {
         // B. Educational card
         _buildEducationalCard(),
         const SizedBox(height: S.md),
+
+        // Relationship chip (AD→MD or PD→AD)
+        if (widget.level == 'ad' && mdAdRel != null)
+          _buildRelationshipChip(mdAdRel, widget.mdLord, widget.lord),
+        if (widget.level == 'pd' && adPdRel != null && widget.adLord != null)
+          _buildRelationshipChip(adPdRel, widget.adLord!, widget.lord),
+
+        // Dosha activation section — show activated doshas (period-specific)
+        // or natal doshas (chart-wide) as fallback
+        if ((_data?['activated_doshas'] as List?)?.isNotEmpty ?? false) ...[
+          const SizedBox(height: S.md),
+          _buildDoshaActivationSection(
+              _data!['activated_doshas'] as List, activated: true),
+        ] else if ((_data?['natal_doshas'] as List?)?.isNotEmpty ?? false) ...[
+          const SizedBox(height: S.md),
+          _buildDoshaActivationSection(
+              _data!['natal_doshas'] as List, activated: false),
+        ],
 
         // C. Theme quote
         if (md['theme'] != null && (md['theme'] as String).isNotEmpty) ...[
@@ -331,6 +352,80 @@ class _DashaDetailPanelState extends ConsumerState<DashaDetailPanel> {
               ],
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  // ── Relationship Chip ──
+
+  Widget _buildRelationshipChip(Map<String, dynamic> rel, String parent, String child) {
+    final type = rel['type'] as String? ?? 'neutral';
+    final label = rel['label'] as String? ?? '';
+    final Color dotColor;
+    final String emoji;
+    switch (type) {
+      case 'friend':
+        dotColor = C.positive;
+        emoji = '\u2764'; // heart
+      case 'enemy':
+        dotColor = C.negative;
+        emoji = '\u26a0'; // warning
+      default:
+        dotColor = C.warning;
+        emoji = '\u2022'; // bullet
+    }
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: S.sm),
+      child: Row(
+        children: [
+          Container(
+            width: 8,
+            height: 8,
+            decoration: BoxDecoration(shape: BoxShape.circle, color: dotColor),
+          ),
+          const SizedBox(width: 6),
+          Expanded(
+            child: Text(
+              '$emoji $label',
+              style: T.caption.copyWith(color: dotColor),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // ── Dosha Activation Section ──
+
+  Widget _buildDoshaActivationSection(List doshas, {bool activated = true}) {
+    final title = activated ? 'Dosha Activation' : 'Natal Doshas';
+    final icon = activated ? Icons.warning_amber_rounded : Icons.info_outline;
+    final iconColor = activated ? C.warning : C.accent;
+    return GlassContainer(
+      padding: const EdgeInsets.all(S.md),
+      blur: 0,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(icon, color: iconColor, size: 18),
+              const SizedBox(width: 6),
+              Text(title,
+                  style: T.bodySm.copyWith(
+                      color: C.textPrimary, fontWeight: FontWeight.w600)),
+            ],
+          ),
+          const SizedBox(height: S.sm),
+          ...doshas.take(5).map((d) {
+            final dosha = d as Map<String, dynamic>;
+            return Padding(
+              padding: const EdgeInsets.only(bottom: S.sm),
+              child: _DoshaActivationCard(dosha: dosha),
+            );
+          }),
         ],
       ),
     );
@@ -807,6 +902,167 @@ class _ExpandableAreaState extends State<_ExpandableArea> {
       ),
     );
   }
+}
+
+// ── Dosha Activation Card ──
+
+class _DoshaActivationCard extends StatefulWidget {
+  final Map<String, dynamic> dosha;
+
+  const _DoshaActivationCard({required this.dosha});
+
+  @override
+  State<_DoshaActivationCard> createState() => _DoshaActivationCardState();
+}
+
+class _DoshaActivationCardState extends State<_DoshaActivationCard> {
+  bool _showRemedies = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final name = widget.dosha['name'] as String? ?? 'Dosha';
+    final severity = widget.dosha['severity'] as String? ?? 'moderate';
+    final description = widget.dosha['description'] as String? ?? '';
+    final activatedBy = widget.dosha['activated_by'] as String? ?? '';
+    final remedies = (widget.dosha['remedies'] as List?)?.cast<String>() ?? [];
+
+    final symbol = _doshaSymbol(name);
+    final symbolColor = _doshaColor(name);
+    final Color severityColor;
+    switch (severity) {
+      case 'mild':
+        severityColor = C.positive;
+      case 'severe':
+        severityColor = C.negative;
+      default:
+        severityColor = C.warning;
+    }
+
+    return Container(
+      padding: const EdgeInsets.all(S.sm),
+      decoration: BoxDecoration(
+        borderRadius: R.mdBr,
+        color: symbolColor.withValues(alpha: 0.05),
+        border: Border.all(color: symbolColor.withValues(alpha: 0.15)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Header: symbol + name + severity badge
+          Row(
+            children: [
+              Text(symbol, style: TextStyle(fontSize: 16, color: symbolColor)),
+              const SizedBox(width: 6),
+              Expanded(
+                child: Text(name,
+                    style: T.bodySm.copyWith(
+                        color: C.textPrimary, fontWeight: FontWeight.w600)),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                decoration: BoxDecoration(
+                  borderRadius: R.xlBr,
+                  color: severityColor.withValues(alpha: 0.15),
+                ),
+                child: Text(
+                  severity[0].toUpperCase() + severity.substring(1),
+                  style: T.caption.copyWith(
+                      color: severityColor,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 9),
+                ),
+              ),
+            ],
+          ),
+          // Activated by caption
+          if (activatedBy.isNotEmpty) ...[
+            const SizedBox(height: 2),
+            Text(
+              'Activated by ${activatedBy[0].toUpperCase()}${activatedBy.substring(1)} in this period',
+              style: T.caption.copyWith(color: C.textMuted, fontSize: 10),
+            ),
+          ],
+          // Description
+          if (description.isNotEmpty) ...[
+            const SizedBox(height: 4),
+            Text(
+              description,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+              style: T.caption.copyWith(color: C.textSecondary, height: 1.4),
+            ),
+          ],
+          // Remedies toggle
+          if (remedies.isNotEmpty) ...[
+            const SizedBox(height: 4),
+            GestureDetector(
+              onTap: () => setState(() => _showRemedies = !_showRemedies),
+              child: Row(
+                children: [
+                  Icon(
+                    _showRemedies ? Icons.expand_less : Icons.expand_more,
+                    size: 14,
+                    color: C.accent,
+                  ),
+                  const SizedBox(width: 4),
+                  Text(
+                    _showRemedies ? 'Hide Remedies' : 'Show Remedies',
+                    style: T.caption.copyWith(color: C.accent, fontSize: 10),
+                  ),
+                ],
+              ),
+            ),
+            if (_showRemedies) ...[
+              const SizedBox(height: 4),
+              ...remedies.take(5).map((r) => Padding(
+                    padding: const EdgeInsets.only(bottom: 2),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 4),
+                          child: Icon(Icons.circle, size: 4, color: C.accent),
+                        ),
+                        const SizedBox(width: 6),
+                        Expanded(
+                          child: Text(r,
+                              style: T.caption.copyWith(
+                                  color: C.textSecondary, fontSize: 10)),
+                        ),
+                      ],
+                    ),
+                  )),
+            ],
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+String _doshaSymbol(String name) {
+  final n = name.toLowerCase();
+  if (n.contains('mangal')) return '\u25B2';
+  if (n.contains('kaal sarp')) return '\u25C6';
+  if (n.contains('pitra')) return '\u2726';
+  if (n.contains('grahan')) return '\u25D0';
+  if (n.contains('guru chandal')) return '\u2B21';
+  if (n.contains('angarak')) return '\u25B2';
+  if (n.contains('vish')) return '\u25C9';
+  if (n.contains('kemdrum')) return '\u25CB';
+  return '\u2022';
+}
+
+Color _doshaColor(String name) {
+  final n = name.toLowerCase();
+  if (n.contains('mangal') || n.contains('angarak')) return C.mars;
+  if (n.contains('kaal sarp') || n.contains('sarpa')) return C.rahu;
+  if (n.contains('pitra')) return C.sun;
+  if (n.contains('grahan')) return C.textSecondary;
+  if (n.contains('guru chandal')) return C.jupiter;
+  if (n.contains('vish') || n.contains('shapit')) return C.saturn;
+  if (n.contains('kemdrum')) return C.moon;
+  return C.warning;
 }
 
 // ── Planet helpers (duplicated from timeline_screen for encapsulation) ──

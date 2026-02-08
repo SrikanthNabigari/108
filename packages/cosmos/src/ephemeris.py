@@ -424,6 +424,80 @@ def datetime_to_jd(
     return float(jd)
 
 
+def find_planet_rashi_ingress(
+    planet: str,
+    target_rashi: int,
+    start_jd: float,
+    end_jd: float,
+    *,
+    find_first: bool = False,
+) -> float | None:
+    """Find when a planet enters a target sidereal rashi between two Julian Days.
+
+    Uses monthly sampling followed by binary search to find the crossing day
+    (within ~0.5 day precision).
+
+    Args:
+        planet: Planet name (e.g. "saturn", "jupiter").
+        target_rashi: Target rashi index (0-11, 0=Aries).
+        start_jd: Start of search window (Julian Day).
+        end_jd: End of search window (Julian Day).
+        find_first: If True, return the *first* ingress. If False (default),
+            return the *last* ingress (definitive entry after retrogrades).
+
+    Returns:
+        Julian Day of ingress, or None if the planet never enters that rashi
+        in the window.
+    """
+    _validate_jd(start_jd)
+    _validate_jd(end_jd)
+    if target_rashi < 0 or target_rashi > 11:
+        raise ValueError(f"target_rashi must be 0-11, got {target_rashi}")
+
+    step = 30.0  # ~1 month sampling
+    samples: list[tuple[float, int]] = []
+    jd = start_jd
+    while jd <= end_jd:
+        pos = get_planet_position(planet, jd)
+        rashi = int(pos["longitude"] / 30) % 12
+        samples.append((jd, rashi))
+        jd += step
+    # ensure we include end_jd
+    if not samples or samples[-1][0] < end_jd:
+        pos = get_planet_position(planet, end_jd)
+        rashi = int(pos["longitude"] / 30) % 12
+        samples.append((end_jd, rashi))
+
+    # Find crossing pairs where planet enters target_rashi
+    crossing_pair: tuple[float, float] | None = None
+    for i in range(1, len(samples)):
+        prev_rashi = samples[i - 1][1]
+        curr_rashi = samples[i][1]
+        if curr_rashi == target_rashi and prev_rashi != target_rashi:
+            crossing_pair = (samples[i - 1][0], samples[i][0])
+            if find_first:
+                break  # stop at first crossing
+
+    if crossing_pair is None:
+        # Planet may already be in target rashi at start
+        if samples and samples[0][1] == target_rashi:
+            return start_jd
+        return None
+
+    # Binary search to refine crossing to ~0.5 day
+    lo, hi = crossing_pair
+    while (hi - lo) > 0.5:
+        mid = (lo + hi) / 2.0
+        pos = get_planet_position(planet, mid)
+        mid_rashi = int(pos["longitude"] / 30) % 12
+        if mid_rashi == target_rashi:
+            hi = mid
+        else:
+            lo = mid
+
+    return hi
+
+
 def close_ephemeris() -> None:
     """Close Swiss Ephemeris resources.
 
