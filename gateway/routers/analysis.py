@@ -38,14 +38,23 @@ from packages.context.src import (
 from packages.context.src.dasha_transit import cross_analyze
 from packages.context.src.transit_tracker import get_upcoming_triggers
 from packages.core.src.constants import Planet, Rashi
-from packages.core.src.knowledge_loader import get_dasha_guide, load_definition
+from packages.core.src.knowledge_loader import (
+    get_dasha_guide,
+    get_planet_in_house_interpretations,
+    get_planet_in_sign_interpretations,
+    load_definition,
+)
 from packages.core.src.models import BirthChart, BirthData, HouseCusps, PlanetPosition
 from packages.cosmos.src import get_all_planets, longitude_to_nakshatra
 from packages.cosmos.src.ephemeris import get_julian_day
 from packages.self.src import (
     DoshaDetector,
+    StrengthCalculator,
     YogaDetector,
     analyze_transit_lordships,
+    get_all_chara_karaka_analysis,
+    get_atmakaraka_analysis,
+    get_ishta_devata,
     get_kp_prediction,
     get_kp_significators,
     get_lordship_summary,
@@ -477,139 +486,131 @@ async def get_dasha_timeline(
         # Get current dasha
         current = get_current_dasha(birth_dt, moon_longitude)
 
-        # Free tier: current period only (preview for onboarding)
-        if access == AccessLevel.PREVIEW:
-            md = current.get("mahadasha", {}) if current else {}
-            ad = current.get("antardasha", {}) if current else {}
-            pd = current.get("pratyantardasha", {}) if current else {}
-            # Mahadasha sequence for life chapters
-            periods = get_mahadasha_sequence(birth_dt, moon_longitude, 120)
+        # Extract current period components
+        md = current.get("mahadasha", {}) if current else {}
+        ad = current.get("antardasha", {}) if current else {}
+        pd = current.get("pratyantardasha", {}) if current else {}
 
-            # Antardasha sequence within current MD
-            md_start = md.get("start_date")
-            md_end = md.get("end_date")
-            ad_seq = []
-            if md.get("lord") and md_start and md_end:
-                ad_seq = get_antardasha_sequence(md["lord"], md_start, md_end)
-
-            # Pratyantardasha sequence within current AD
-            ad_start = ad.get("start_date")
-            ad_end = ad.get("end_date")
-            pd_seq = []
-            if ad.get("lord") and ad_start and ad_end:
-                pd_seq = get_pratyantardasha_sequence(ad["lord"], ad_start, ad_end)
-
-            def _fmt_seq(seq: list) -> list:
-                return [
-                    {
-                        "lord": p.get("lord"),
-                        "years": p.get("years"),
-                        "start": str(p.get("start_date", "")),
-                        "end": str(p.get("end_date", "")),
-                    }
-                    for p in seq
-                ]
-
-            # Check Sade Sati using current Saturn transit
-            alerts = []
-            try:
-                now_utc = datetime.utcnow()
-                current_jd = get_julian_day(now_utc)
-                transit_planets = get_all_planets(current_jd)
-                saturn_lon = transit_planets.get("saturn", {}).get("longitude", 0)
-                saturn_rashi = int(saturn_lon / 30) % 12
-                moon_rashi = chart.get("moon_rashi")
-                if moon_rashi is not None:
-                    # Convert moon_rashi name to index if needed
-                    rashi_names = [
-                        "aries",
-                        "taurus",
-                        "gemini",
-                        "cancer",
-                        "leo",
-                        "virgo",
-                        "libra",
-                        "scorpio",
-                        "sagittarius",
-                        "capricorn",
-                        "aquarius",
-                        "pisces",
-                    ]
-                    if isinstance(moon_rashi, str):
-                        moon_rashi_idx = (
-                            rashi_names.index(moon_rashi.lower())
-                            if moon_rashi.lower() in rashi_names
-                            else 0
-                        )
-                    else:
-                        moon_rashi_idx = int(moon_rashi)
-                    sade_sati = check_sade_sati(moon_rashi_idx, saturn_rashi)
-                    if sade_sati.get("active"):
-                        sade_sati_alert = {
-                            "type": "sade_sati",
-                            "phase": sade_sati.get("phase"),
-                            "description": sade_sati.get("description"),
-                            "effects": sade_sati.get("effects", []),
-                            "remedies": sade_sati.get("remedies", []),
-                            "duration_years": sade_sati.get("duration_years"),
-                            "house_from_moon": sade_sati.get("house_from_moon"),
-                        }
-                        try:
-                            ss_dates = get_sade_sati_dates(moon_rashi_idx, saturn_rashi)
-                            sade_sati_alert["phase_dates"] = ss_dates.get("phase_dates", {})
-                        except Exception:
-                            pass
-                        alerts.append(sade_sati_alert)
-
-                    dhaiya = check_dhaiya(moon_rashi_idx, saturn_rashi)
-                    if dhaiya.get("active"):
-                        dhaiya_alert = {
-                            "type": "dhaiya",
-                            "dhaiya_type": dhaiya.get("type"),
-                            "description": dhaiya.get("description"),
-                            "effects": dhaiya.get("effects", []),
-                            "remedies": dhaiya.get("remedies", []),
-                            "duration_years": dhaiya.get("duration_years"),
-                            "house_from_moon": dhaiya.get("house_from_moon"),
-                        }
-                        try:
-                            dh_dates = get_dhaiya_dates(moon_rashi_idx, saturn_rashi)
-                            dhaiya_alert["phase_dates"] = dh_dates.get("phase_dates", {})
-                        except Exception:
-                            pass
-                        alerts.append(dhaiya_alert)
-            except Exception as alert_err:
-                logger.warning(f"Failed to check alerts: {alert_err}")
-
-            dosha_markers = _detect_dosha_markers(chart) if chart else {}
-
-            return {
-                "current": {
-                    "mahadasha_lord": md.get("lord"),
-                    "mahadasha_start": str(md.get("start_date", "")),
-                    "mahadasha_end": str(md.get("end_date", "")),
-                    "remaining_years": md.get("years_remaining")
-                    or md.get("days_remaining", 0) / 365.25,
-                    "antardasha_lord": ad.get("lord"),
-                    "antardasha_start": str(ad.get("start_date", "")),
-                    "antardasha_end": str(ad.get("end_date", "")),
-                    "pratyantardasha_lord": pd.get("lord"),
-                    "pratyantardasha_start": str(pd.get("start_date", "")),
-                    "pratyantardasha_end": str(pd.get("end_date", "")),
-                },
-                "mahadasha_sequence": _fmt_seq(periods),
-                "antardasha_sequence": _fmt_seq(ad_seq),
-                "pratyantardasha_sequence": _fmt_seq(pd_seq),
-                "alerts": alerts,
-                "dosha_markers": dosha_markers,
-            }
-
-        # Pro+ tier: full timeline
+        # Mahadasha sequence for life chapters
         periods = get_mahadasha_sequence(birth_dt, moon_longitude, 120)
 
+        # Antardasha sequence within current MD
+        md_start = md.get("start_date")
+        md_end = md.get("end_date")
+        ad_seq = []
+        if md.get("lord") and md_start and md_end:
+            ad_seq = get_antardasha_sequence(md["lord"], md_start, md_end)
+
+        # Pratyantardasha sequence within current AD
+        ad_start = ad.get("start_date")
+        ad_end = ad.get("end_date")
+        pd_seq = []
+        if ad.get("lord") and ad_start and ad_end:
+            pd_seq = get_pratyantardasha_sequence(ad["lord"], ad_start, ad_end)
+
+        def _fmt_seq(seq: list) -> list:
+            return [
+                {
+                    "lord": p.get("lord"),
+                    "years": p.get("years"),
+                    "start": str(p.get("start_date", "")),
+                    "end": str(p.get("end_date", "")),
+                }
+                for p in seq
+            ]
+
+        # Check Sade Sati using current Saturn transit
+        alerts = []
+        try:
+            now_utc = datetime.utcnow()
+            current_jd = get_julian_day(now_utc)
+            transit_planets = get_all_planets(current_jd)
+            saturn_lon = transit_planets.get("saturn", {}).get("longitude", 0)
+            saturn_rashi = int(saturn_lon / 30) % 12
+            moon_rashi = chart.get("moon_rashi")
+            if moon_rashi is not None:
+                # Convert moon_rashi name to index if needed
+                rashi_names = [
+                    "aries",
+                    "taurus",
+                    "gemini",
+                    "cancer",
+                    "leo",
+                    "virgo",
+                    "libra",
+                    "scorpio",
+                    "sagittarius",
+                    "capricorn",
+                    "aquarius",
+                    "pisces",
+                ]
+                if isinstance(moon_rashi, str):
+                    moon_rashi_idx = (
+                        rashi_names.index(moon_rashi.lower())
+                        if moon_rashi.lower() in rashi_names
+                        else 0
+                    )
+                else:
+                    moon_rashi_idx = int(moon_rashi)
+                sade_sati = check_sade_sati(moon_rashi_idx, saturn_rashi)
+                if sade_sati.get("active"):
+                    sade_sati_alert = {
+                        "type": "sade_sati",
+                        "phase": sade_sati.get("phase"),
+                        "description": sade_sati.get("description"),
+                        "effects": sade_sati.get("effects", []),
+                        "remedies": sade_sati.get("remedies", []),
+                        "duration_years": sade_sati.get("duration_years"),
+                        "house_from_moon": sade_sati.get("house_from_moon"),
+                    }
+                    try:
+                        ss_dates = get_sade_sati_dates(moon_rashi_idx, saturn_rashi)
+                        sade_sati_alert["phase_dates"] = ss_dates.get("phase_dates", {})
+                    except Exception:
+                        pass
+                    alerts.append(sade_sati_alert)
+
+                dhaiya = check_dhaiya(moon_rashi_idx, saturn_rashi)
+                if dhaiya.get("active"):
+                    dhaiya_alert = {
+                        "type": "dhaiya",
+                        "dhaiya_type": dhaiya.get("type"),
+                        "description": dhaiya.get("description"),
+                        "effects": dhaiya.get("effects", []),
+                        "remedies": dhaiya.get("remedies", []),
+                        "duration_years": dhaiya.get("duration_years"),
+                        "house_from_moon": dhaiya.get("house_from_moon"),
+                    }
+                    try:
+                        dh_dates = get_dhaiya_dates(moon_rashi_idx, saturn_rashi)
+                        dhaiya_alert["phase_dates"] = dh_dates.get("phase_dates", {})
+                    except Exception:
+                        pass
+                    alerts.append(dhaiya_alert)
+        except Exception as alert_err:
+            logger.warning(f"Failed to check alerts: {alert_err}")
+
+        dosha_markers = _detect_dosha_markers(chart) if chart else {}
+
         return {
-            "current": current,
-            "mahadasha_sequence": periods,
+            "current": {
+                "mahadasha_lord": md.get("lord"),
+                "mahadasha_start": str(md.get("start_date", "")),
+                "mahadasha_end": str(md.get("end_date", "")),
+                "remaining_years": md.get("years_remaining")
+                or md.get("days_remaining", 0) / 365.25,
+                "antardasha_lord": ad.get("lord"),
+                "antardasha_start": str(ad.get("start_date", "")),
+                "antardasha_end": str(ad.get("end_date", "")),
+                "pratyantardasha_lord": pd.get("lord"),
+                "pratyantardasha_start": str(pd.get("start_date", "")),
+                "pratyantardasha_end": str(pd.get("end_date", "")),
+            },
+            "mahadasha_sequence": _fmt_seq(periods),
+            "antardasha_sequence": _fmt_seq(ad_seq),
+            "pratyantardasha_sequence": _fmt_seq(pd_seq),
+            "alerts": alerts,
+            "dosha_markers": dosha_markers,
         }
 
     except HTTPException:
@@ -1330,6 +1331,25 @@ async def get_transit_snapshot_endpoint(
         lordship_analysis = analyze_transit_lordships(transit_positions, lagna_idx)
         lordship_summary = get_lordship_summary(lordship_analysis)
 
+        # Enrich house activations with planet-in-house interpretations
+        house_interp_data = get_planet_in_house_interpretations()
+        for activation in snapshot.get("house_activations", []):
+            planet_interps = []
+            for planet_name in activation.get("planets_present", []):
+                key = f"{planet_name.lower()}_in_house_{activation['house']}"
+                interp = house_interp_data.get(key)
+                if interp:
+                    planet_interps.append(
+                        {
+                            "planet": planet_name,
+                            "summary": interp.get("summary", ""),
+                            "positive": interp.get("positive", []),
+                            "negative": interp.get("negative", []),
+                        }
+                    )
+            if planet_interps:
+                activation["planet_interpretations"] = planet_interps
+
         return {
             **snapshot,
             "lordship_analysis": lordship_analysis,
@@ -1429,12 +1449,36 @@ async def get_transit_planet_detail(
             a for a in upcoming if a.get("transit_planet", "").lower() == planet_lower
         ]
 
+        # Interpretations from knowledge base
+        lagna_idx = _rashi_to_int(chart.get("lagna_rashi"))
+        rashi_num = pos.get("rashi_num", 0)
+        transit_house = (rashi_num - lagna_idx) % 12 + 1
+
+        sign_interpretation = None
+        sign_name = pos.get("rashi", "").lower() if isinstance(pos.get("rashi"), str) else ""
+        if sign_name:
+            sign_data = get_planet_in_sign_interpretations()
+            sign_key = f"{planet_lower}_in_{sign_name}"
+            if sign_key in sign_data:
+                sign_interpretation = sign_data[sign_key]
+
+        house_interpretation = None
+        house_data = get_planet_in_house_interpretations()
+        house_key = f"{planet_lower}_in_house_{transit_house}"
+        if house_key in house_data:
+            house_interpretation = house_data[house_key]
+
         result: dict[str, Any] = {
             "position": position,
+            "transit_house": transit_house,
             "gochara": gochara,
             "natal_aspects": aspects,
             "upcoming": planet_upcoming[:10],
         }
+        if sign_interpretation:
+            result["sign_interpretation"] = sign_interpretation
+        if house_interpretation:
+            result["house_interpretation"] = house_interpretation
 
         return result
 
@@ -1445,6 +1489,154 @@ async def get_transit_planet_detail(
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Failed to get transit planet detail",
+        ) from e
+
+
+@router.get("/strength")
+async def get_strength(
+    current_user: Annotated[UserContext, Depends(get_current_user)],
+    config: Annotated[dict, Depends(get_app_config)],
+    db: Annotated[Any, Depends(get_db)],
+) -> dict[str, Any]:
+    """Get Shadbala (six-fold strength) for all planets.
+
+    Gated feature - pro and premium tiers.
+
+    Args:
+        current_user: Authenticated user context.
+        config: Application configuration.
+        db: Database connection.
+
+    Returns:
+        dict: Planet strengths (gated by subscription tier).
+    """
+    try:
+        access = await check_feature_access(
+            "analysis_strength", current_user.subscription_tier, config
+        )
+
+        if access == AccessLevel.LOCKED:
+            return gate_response(
+                {"message": "Upgrade to Pro to unlock strength analysis"},
+                access,
+                "Upgrade to Pro to unlock strength analysis",
+            ).model_dump()
+
+        chart = await _load_birth_chart(db, str(current_user.id))
+        if not chart:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="Birth chart not found",
+            ) from None
+
+        chart_obj = _build_chart_for_doshas(chart)
+        calculator = StrengthCalculator()
+
+        planets_list = []
+        for planet in Planet:
+            if planet not in chart_obj.planets:
+                continue
+            result = calculator.calculate_shadbala(planet, chart_obj)
+            total = result.get("total", 0.0)
+            grade = (
+                "very_strong"
+                if total >= 1.5
+                else "strong"
+                if total >= 1.0
+                else "average"
+                if total >= 0.7
+                else "weak"
+            )
+            entry: dict[str, Any] = {
+                "planet": planet.value,
+                "total_shadbala": round(total, 2),
+                "grade": grade,
+            }
+            if access != AccessLevel.PREVIEW:
+                components = result.get("components", {})
+                entry["components"] = {
+                    k: round(v, 2) if isinstance(v, float) else v for k, v in components.items()
+                }
+            planets_list.append(entry)
+
+        return {"planets": planets_list}
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Failed to calculate strength for {current_user.id}: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to calculate strength",
+        ) from e
+
+
+@router.get("/atmakaraka")
+async def get_atmakaraka(
+    current_user: Annotated[UserContext, Depends(get_current_user)],
+    config: Annotated[dict, Depends(get_app_config)],
+    db: Annotated[Any, Depends(get_db)],
+) -> dict[str, Any]:
+    """Get Atmakaraka analysis, Ishta Devata, and Chara Karakas.
+
+    Gated feature - pro and premium tiers.
+
+    Args:
+        current_user: Authenticated user context.
+        config: Application configuration.
+        db: Database connection.
+
+    Returns:
+        dict: Soul purpose analysis (gated by subscription tier).
+    """
+    try:
+        access = await check_feature_access(
+            "analysis_atmakaraka", current_user.subscription_tier, config
+        )
+
+        if access == AccessLevel.LOCKED:
+            return gate_response(
+                {"message": "Upgrade to Pro to unlock Atmakaraka analysis"},
+                access,
+                "Upgrade to Pro to unlock Atmakaraka analysis",
+            ).model_dump()
+
+        chart = await _load_birth_chart(db, str(current_user.id))
+        if not chart:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="Birth chart not found",
+            ) from None
+
+        chart_obj = _build_chart_for_doshas(chart)
+        ak_analysis = get_atmakaraka_analysis(chart_obj)
+
+        # Preview tier: AK planet name only
+        if access == AccessLevel.PREVIEW:
+            return {
+                "atmakaraka": {
+                    "planet": ak_analysis.get("planet", ""),
+                    "sign": ak_analysis.get("sign", ""),
+                },
+            }
+
+        # Full tier: AK + ishta devata + chara karakas
+        ishta = get_ishta_devata(chart_obj)
+        chara = get_all_chara_karaka_analysis(chart_obj)
+
+        return {
+            "atmakaraka": ak_analysis,
+            "ishta_devata": ishta,
+            "chara_karakas": chara.get("karakas", []),
+        }
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Failed to get atmakaraka for {current_user.id}: {e}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to get atmakaraka analysis",
         ) from e
 
 

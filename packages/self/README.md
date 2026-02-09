@@ -22,20 +22,20 @@ Measures a planet's strength based on its position in the chart.
   - Maximum at exact exaltation degree
   - Zero at debilitation (180° opposite)
   - 30 points in neutral positions
-  
+
 - **Saptavargaja Bala**: Strength in 7 divisional charts
   - D1 (Rashi), D2 (Hora), D3 (Drekkana)
   - D7 (Saptamsha), D9 (Navamsha)
   - D12 (Dwadasamsha), D24 (Chaturvimshamsha)
-  
+
 - **Ojhayugmarasyamsa Bala**: Odd/even sign placement
   - Generally beneficial in odd signs (7.5) vs even signs (5.0)
-  
+
 - **Kendradi Bala** (House Placement)
   - Kendra (1, 4, 7, 10): 60 points (angular houses)
   - Panapara (2, 5, 8, 11): 30 points (succeedent)
   - Apoklima (3, 6, 9, 12): 15 points (cadent)
-  
+
 - **Drekkana Bala**: Decanate placement
   - Each sign divided into 3 decanates (10° each)
   - 10 points for favorable placement
@@ -64,15 +64,15 @@ Measures planetary strength based on time factors.
   - Sun & Mars: strong during day (15 points)
   - Moon & Venus: strong during night (15 points)
   - Others: 10 points
-  
+
 - **Paksha Bala**: Lunar phase strength
   - Moon strongest during waxing (Shukla) phase
   - Other planets modulated by lunar phase
-  
+
 - **Ayana Bala**: Declination strength
   - Based on planet's latitude/declination
   - 5 points (simplified)
-  
+
 - **Varsha/Masa/Dina/Hora Bala**: Year/month/day/hour lords
 - **Tribhaga Bala**: Three parts of day/night
 
@@ -155,14 +155,14 @@ For each planet, specific signs receive bindus from each reference point:
 1. For each sign (0-11):
    - Count how many references contribute a bindu
    - Sum contributions from all 8 references
-   
+
 2. Result: 0-8 bindus per sign per planet
 
 3. Example output:
 ```
 Moon Ashtakavarga: [4, 1, 3, 1, 4, 2, 1, 2, 5, 0, 3, 0]
-Sign:              [Aries, Taurus, Gemini, Cancer, Leo, Virgo, 
-                    Libra, Scorpio, Sagittarius, Capricorn, 
+Sign:              [Aries, Taurus, Gemini, Cancer, Leo, Virgo,
+                    Libra, Scorpio, Sagittarius, Capricorn,
                     Aquarius, Pisces]
 ```
 
@@ -207,23 +207,23 @@ Classification of a planet's status in a sign.
 1. **Exalted** (Uchcha)
    - Planet at peak strength
    - Example: Sun in Aries (exaltation 10°)
-   
+
 2. **Own Sign** (Swarucha)
    - Planet in its own ruled sign
    - Example: Sun in Leo
-   
+
 3. **Friendly Sign**
    - Planet in sign of a friendly planet
    - Moderate strength
-   
+
 4. **Neutral Sign**
    - Neither beneficial nor harmful
    - Average strength
-   
+
 5. **Enemy Sign**
    - Planet in sign of enemy planet
    - Reduced strength
-   
+
 6. **Debilitated** (Neecha)
    - Planet at lowest strength (opposite of exaltation)
    - Example: Sun in Libra
@@ -479,7 +479,7 @@ for i, bindus in enumerate(sav):
         rating = "Fair"
     else:
         rating = "Poor"
-    
+
     print(f"{signs[i]:<15} {bindus:<10} {rating:<15}")
 
 # Find best signs for starting ventures
@@ -491,20 +491,20 @@ print(f"\nBest signs for new ventures: {', '.join(excellent_signs)}")
 ```
 Sarvashtakavarga Analysis:
 ==================================================
-Sign           Bindus     Rating         
+Sign           Bindus     Rating
 ==================================================
-Aries          34         Good           
-Taurus         14         Poor           
-Gemini         20         Fair           
-Cancer         26         Fair           
-Leo            22         Fair           
-Virgo          25         Fair           
-Libra          24         Fair           
-Scorpio        15         Poor           
-Sagittarius    19         Fair           
-Capricorn      22         Fair           
-Aquarius       31         Good           
-Pisces         26         Fair           
+Aries          34         Good
+Taurus         14         Poor
+Gemini         20         Fair
+Cancer         26         Fair
+Leo            22         Fair
+Virgo          25         Fair
+Libra          24         Fair
+Scorpio        15         Poor
+Sagittarius    19         Fair
+Capricorn      22         Fair
+Aquarius       31         Good
+Pisces         26         Fair
 
 Best signs for new ventures: Aries, Aquarius
 ```
@@ -515,7 +515,7 @@ Determine the status of planets in their placed signs:
 
 ```python
 # Get planets from chart and check their dignity
-planets = [Planet.SUN, Planet.MOON, Planet.MARS, 
+planets = [Planet.SUN, Planet.MOON, Planet.MARS,
            Planet.MERCURY, Planet.JUPITER, Planet.VENUS, Planet.SATURN]
 
 print("Planet Dignity Analysis:")
@@ -533,15 +533,15 @@ for planet in planets:
 ```
 Planet Dignity Analysis:
 ============================================================
-Planet     Sign            Dignity             
+Planet     Sign            Dignity
 ============================================================
-sun        taurus          enemy               
-moon       leo             friendly            
-mars       gemini          neutral             
-mercury    aries           own                 
-jupiter    virgo           friendly            
-venus      aries           friendly            
-saturn     libra           exalted             
+sun        taurus          enemy
+moon       leo             friendly
+mars       gemini          neutral
+mercury    aries           own
+jupiter    virgo           friendly
+venus      aries           friendly
+saturn     libra           exalted
 ```
 
 ## Example 5: Comprehensive Strength Profile
@@ -616,10 +616,10 @@ Find planets in weak positions that might need remedial work:
 # Find planets with low strength
 weak_planets = []
 
-for planet in [Planet.SUN, Planet.MOON, Planet.MARS, 
+for planet in [Planet.SUN, Planet.MOON, Planet.MARS,
                Planet.MERCURY, Planet.JUPITER, Planet.VENUS, Planet.SATURN]:
     strength = calculator.calculate_shadbala(planet, chart)
-    
+
     if strength['total'] < 200:  # Below "moderate" threshold
         weak_planets.append({
             'planet': planet.value,
@@ -640,7 +640,7 @@ for item in weak_planets:
     planet = item['planet']
     sign = item['position']
     strength = f"{item['strength']:.1f}"
-    
+
     # Recommendation based on planet
     if planet == "saturn":
         rec = "Saturn Mantra"
@@ -650,7 +650,7 @@ for item in weak_planets:
         rec = "Mercury Remedies"
     else:
         rec = f"{planet.title()} Meditation"
-    
+
     print(f"{planet:<12} {sign:<12} {strength:<12} {rec:<20}")
 ```
 
@@ -658,11 +658,11 @@ for item in weak_planets:
 ```
 PLANETS NEEDING REMEDIAL SUPPORT:
 ============================================================
-Planet       Sign         Strength     Recommendation      
+Planet       Sign         Strength     Recommendation
 ============================================================
-ketu         leo          156.3        Ketu Meditation      
-saturn       libra        167.8        Saturn Mantra        
-mars         gemini       189.4        Mars Worship         
+ketu         leo          156.3        Ketu Meditation
+saturn       libra        167.8        Saturn Mantra
+mars         gemini       189.4        Mars Worship
 ```
 
 ## Example 7: Monitor Strength Changes (Longitudinal Analysis)
@@ -687,7 +687,7 @@ for planet in planets:
     d1_strength = calculator.calculate_shadbala(planet, chart)['total']
     d9_strength = calculator.calculate_shadbala(planet, d9_chart)['total']
     diff = d9_strength - d1_strength
-    
+
     sign = "+" if diff >= 0 else ""
     print(f"{planet.value:<12} {d1_strength:<15.1f} {d9_strength:<15.1f} {sign}{diff:<14.1f}")
 ```
@@ -713,7 +713,7 @@ for planet in raja_yoga_planets:
         strength = all_strengths[planet.value]['total']
         rating = all_strengths[planet.value]['strength_rating']
         yoga_strength += strength
-        
+
         print(f"{planet.value.upper():<12} {strength:6.1f} virupas ({rating})")
 
 avg_yoga_strength = yoga_strength / len(raja_yoga_planets)
@@ -737,9 +737,9 @@ import json
 
 def generate_strength_report(chart, calculator):
     """Generate comprehensive strength report as dictionary."""
-    
+
     profile = calculator.analyze_strength_profile(chart)
-    
+
     report = {
         "chart_id": chart.user_id,
         "chart_type": "natal",
@@ -759,7 +759,7 @@ def generate_strength_report(chart, calculator):
             "weak": profile['weak_count'],
         }
     }
-    
+
     return report
 
 # Generate and export
@@ -777,28 +777,28 @@ Create specialized strength analysis for specific life areas:
 ```python
 def analyze_marital_strength(chart, calculator):
     """Analyze planetary strength for marriage/relationships."""
-    
+
     # Key planets for marriage: Venus, Jupiter, 7th house lord
     marital_planets = {
         'venus': Planet.VENUS,
         'jupiter': Planet.JUPITER,
         '7th_lord': chart.planets[Planet.VENUS],  # Simplified
     }
-    
+
     strengths = {}
     for key, planet in marital_planets.items():
         if isinstance(planet, Planet):
             strength = calculator.calculate_shadbala(planet, chart)
             strengths[key] = strength['total']
-    
+
     total = sum(strengths.values())
     average = total / len(strengths)
-    
+
     print("Marital Strength Assessment:")
     print(f"  Venus Strength: {strengths['venus']:.1f}")
     print(f"  Jupiter Strength: {strengths['jupiter']:.1f}")
     print(f"  Average: {average:.1f}")
-    
+
     if average >= 300:
         return "EXCELLENT - Strong marital prospects"
     elif average >= 250:

@@ -523,12 +523,12 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
             const SizedBox(height: S.xl),
           ],
 
-          // ── Continue Button ──
+          // ── Continue Button → Transit Dashboard ──
           SizedBox(
             width: double.infinity,
             height: 48,
             child: ElevatedButton(
-              onPressed: () => context.go('/home'),
+              onPressed: () => context.push('/transits'),
               child: const Text('Continue'),
             ),
           ),

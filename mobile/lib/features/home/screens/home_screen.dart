@@ -59,59 +59,33 @@ class HomeScreen extends ConsumerWidget {
 
                 const SizedBox(height: S.xxxl),
 
-                // Placeholder cards
-                GlassContainer(
-                  padding: const EdgeInsets.all(S.xl),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              border: Border.all(color: C.accent, width: 2),
-                            ),
-                            child: const Center(
-                              child: Text('~',
-                                  style: TextStyle(
-                                      color: C.accent, fontSize: 20)),
-                            ),
-                          ),
-                          const SizedBox(width: S.lg),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('Chart Calculated',
-                                  style: T.h3.copyWith(color: C.accent)),
-                              Text('Your cosmic blueprint is ready',
-                                  style: T.caption),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                // Navigation cards
+                _NavCard(
+                  icon: Icons.auto_awesome,
+                  title: 'Your Chart',
+                  subtitle: 'Who you are — planets, yogas, doshas, strength',
+                  color: C.accent,
+                  onTap: () => context.go('/chart'),
                 ),
 
                 const SizedBox(height: S.lg),
 
-                GlassContainer(
-                  padding: const EdgeInsets.all(S.xl),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Coming Soon', style: T.h3),
-                      const SizedBox(height: S.sm),
-                      Text(
-                        'Daily forecasts, life timeline, chat with your chart, '
-                        'muhurta finder, and more.',
-                        style: T.bodySm.copyWith(color: C.textMuted),
-                      ),
-                    ],
-                  ),
+                _NavCard(
+                  icon: Icons.timeline,
+                  title: 'Life Timeline',
+                  subtitle: 'When things happen — dasha periods and life chapters',
+                  color: C.jupiter,
+                  onTap: () => context.go('/timeline'),
+                ),
+
+                const SizedBox(height: S.lg),
+
+                _NavCard(
+                  icon: Icons.sync,
+                  title: "What's Happening Now",
+                  subtitle: 'Current transits, active houses, upcoming triggers',
+                  color: C.mercury,
+                  onTap: () => context.go('/transits'),
                 ),
 
                 const Spacer(),
@@ -127,6 +101,63 @@ class HomeScreen extends ConsumerWidget {
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class _NavCard extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String subtitle;
+  final Color color;
+  final VoidCallback onTap;
+
+  const _NavCard({
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+    required this.color,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: GlassContainer(
+        padding: const EdgeInsets.all(S.xl),
+        child: Row(
+          children: [
+            Container(
+              width: 44,
+              height: 44,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: color.withValues(alpha: 0.15),
+                border: Border.all(color: color.withValues(alpha: 0.3)),
+              ),
+              child: Center(
+                child: Icon(icon, color: color, size: 22),
+              ),
+            ),
+            const SizedBox(width: S.lg),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title,
+                      style: T.h3.copyWith(color: C.textPrimary)),
+                  const SizedBox(height: 2),
+                  Text(subtitle,
+                      style: T.caption),
+                ],
+              ),
+            ),
+            Icon(Icons.chevron_right,
+                color: color.withValues(alpha: 0.5), size: 22),
+          ],
         ),
       ),
     );

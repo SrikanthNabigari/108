@@ -162,22 +162,22 @@ Dictionary with all five panchanga components:
   - `number`: Tithi number
   - `name`: Tithi name (e.g., "Navami")
   - `progress`: Progress within tithi (0-1)
-  
+
 - **Nakshatra**: Lunar mansion where Moon is positioned
   - `number`: Nakshatra number (1-27)
   - `name`: Nakshatra name
   - `pada`: Quarter of nakshatra
   - `lord`: Vimshottari lord
-  
+
 - **Yoga**: Auspicious combination (1-27)
   - `number`: Yoga number
   - `name`: Yoga name
   - `progress`: Progress within yoga (0-1)
-  
+
 - **Karana**: Half of a tithi (1-11, repeated)
   - `number`: Karana number
   - `name`: Karana name
-  
+
 - **Vara**: Day of week (0-6)
   - `number`: Weekday number
   - `name`: Sanskrit day name

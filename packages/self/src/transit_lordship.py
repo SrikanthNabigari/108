@@ -304,7 +304,7 @@ def get_lordship_summary(transit_lordships: list[dict[str, Any]]) -> dict[str, A
             if entry["planet"] == yk:
                 yk_house = entry["transit_house"]
                 break
-        key_insight = f"Yogakaraka {yk} transiting house {yk_house} " f"— strong period for growth"
+        key_insight = f"Yogakaraka {yk} transiting house {yk_house} — strong period for growth"
     elif unfavorable_count > favorable_count:
         houses_str = ", ".join(str(h) for h in sorted(set(dusthana_activations)))
         if houses_str:

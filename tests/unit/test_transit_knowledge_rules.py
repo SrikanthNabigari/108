@@ -1,4 +1,5 @@
 """Tests for transit knowledge rule files."""
+
 from __future__ import annotations
 
 import json

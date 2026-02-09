@@ -82,14 +82,14 @@ class TestAreaSummary:
 
 class TestComputeAreaRatings:
     def test_returns_five_areas(self):
-        forecasts = [_make_daily_forecast(f"2026-02-0{i+1}", 5) for i in range(7)]
+        forecasts = [_make_daily_forecast(f"2026-02-0{i + 1}", 5) for i in range(7)]
         areas = _compute_area_ratings(forecasts, NATAL_PLANETS, "libra", "mercury", "ketu")
         assert len(areas) == 5
         for key in ("career", "finance", "relationships", "health", "spiritual"):
             assert key in areas
 
     def test_each_area_has_rating_and_summary(self):
-        forecasts = [_make_daily_forecast(f"2026-02-0{i+1}", 5) for i in range(7)]
+        forecasts = [_make_daily_forecast(f"2026-02-0{i + 1}", 5) for i in range(7)]
         areas = _compute_area_ratings(forecasts, NATAL_PLANETS, "libra", "mercury", "ketu")
         for area_data in areas.values():
             assert "rating" in area_data
@@ -97,7 +97,7 @@ class TestComputeAreaRatings:
             assert 1 <= area_data["rating"] <= 10
 
     def test_dasha_lord_matching_boosts_area(self):
-        forecasts = [_make_daily_forecast(f"2026-02-0{i+1}", 5) for i in range(7)]
+        forecasts = [_make_daily_forecast(f"2026-02-0{i + 1}", 5) for i in range(7)]
         # Mercury is in AREA_PLANETS["finance"]
         areas = _compute_area_ratings(forecasts, NATAL_PLANETS, "libra", "mercury", "jupiter")
         # Both mercury and jupiter are finance planets
@@ -105,7 +105,7 @@ class TestComputeAreaRatings:
 
     def test_aspects_boost_areas(self):
         asp = [{"transit": "jupiter", "natal": "venus", "aspect": "trine", "orb": 1.0}]
-        forecasts = [_make_daily_forecast(f"2026-02-0{i+1}", 5, asp) for i in range(7)]
+        forecasts = [_make_daily_forecast(f"2026-02-0{i + 1}", 5, asp) for i in range(7)]
         areas = _compute_area_ratings(forecasts, NATAL_PLANETS, "libra", "mercury", "ketu")
         # Jupiter+Venus aspects should help finance and relationships
         assert areas["finance"]["rating"] >= 5
@@ -135,7 +135,7 @@ class TestExtractKeyTransits:
 
     def test_deduplicates_across_days(self):
         asp = [{"transit": "jupiter", "natal": "sun", "aspect": "trine", "orb": 2.0}]
-        forecasts = [_make_daily_forecast(f"2026-02-0{i+1}", 5, asp) for i in range(3)]
+        forecasts = [_make_daily_forecast(f"2026-02-0{i + 1}", 5, asp) for i in range(3)]
         result = _extract_key_transits(forecasts)
         assert len(result) == 1
 

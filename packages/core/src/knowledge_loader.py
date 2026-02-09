@@ -187,6 +187,11 @@ def get_nakshatra_transit_rules() -> dict[str, Any]:
     return load_rules("nakshatra_transit_rules").get("nakshatra_transit_rules", {})
 
 
+def get_transit_aspect_effects() -> dict[str, Any]:
+    """Get transit aspect effect interpretations (405 entries: 9x9x5)."""
+    return load_rules("transit_aspect_effects").get("transit_aspect_effects", {})
+
+
 def get_varshaphal_rules() -> dict[str, Any]:
     """Get Varshaphal (Solar Return / Tajika) rules."""
     return load_rules("varshaphal_rules").get("varshaphal_rules", {})

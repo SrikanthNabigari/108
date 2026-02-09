@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:one_zero_eight/core/constants/api_constants.dart';
 import 'package:one_zero_eight/core/theme/app_theme.dart';
 import 'package:one_zero_eight/data/services/api_service.dart';
@@ -741,10 +740,7 @@ class _DashaDetailPanelState extends ConsumerState<DashaDetailPanel> {
         width: double.infinity,
         height: 44,
         child: ElevatedButton.icon(
-          onPressed: () {
-            Navigator.of(context).pop(); // close sheet
-            context.go('/chat');
-          },
+          onPressed: () => Navigator.of(context).pop(),
           style: ElevatedButton.styleFrom(
             backgroundColor: _color,
             foregroundColor: C.bg,

@@ -1,6 +1,5 @@
 """Tests for the Gem Recommendation Engine."""
 
-
 from packages.self.src.gem_recommender import (
     LAGNA_CLASSIFICATIONS,
     PLANET_GEMS,

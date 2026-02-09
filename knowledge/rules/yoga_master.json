@@ -44,7 +44,8 @@
         "planet": "mars",
         "conditions": [
           {
-            "type": "in_kendra"
+            "type": "in_kendra",
+            "reference": "lagna_or_moon"
           },
           {
             "type": "in_own_or_exalted_sign",
@@ -103,7 +104,8 @@
         "planet": "mercury",
         "conditions": [
           {
-            "type": "in_kendra"
+            "type": "in_kendra",
+            "reference": "lagna_or_moon"
           },
           {
             "type": "in_own_or_exalted_sign",
@@ -154,7 +156,8 @@
         "planet": "jupiter",
         "conditions": [
           {
-            "type": "in_kendra"
+            "type": "in_kendra",
+            "reference": "lagna_or_moon"
           },
           {
             "type": "in_own_or_exalted_sign",
@@ -206,7 +209,8 @@
         "planet": "venus",
         "conditions": [
           {
-            "type": "in_kendra"
+            "type": "in_kendra",
+            "reference": "lagna_or_moon"
           },
           {
             "type": "in_own_or_exalted_sign",
@@ -257,7 +261,8 @@
         "planet": "saturn",
         "conditions": [
           {
-            "type": "in_kendra"
+            "type": "in_kendra",
+            "reference": "lagna_or_moon"
           },
           {
             "type": "in_own_or_exalted_sign",

@@ -120,6 +120,10 @@ from .transit_lordship import (
     get_lordship_summary,
     get_planet_lordships,
 )
+from .yoga_activation import (
+    extract_yoga_houses,
+    get_active_yogas,
+)
 from .yoga_cancellation import (
     apply_cancellations_to_chart,
     check_yoga_cancellation,
@@ -177,6 +181,8 @@ __all__ = [
     "detect_planetary_wars",
     "detect_yoga",
     "evaluate_condition",
+    "extract_yoga_houses",
+    "get_active_yogas",
     "get_all_chara_karaka_analysis",
     "get_all_house_lords",
     "get_atmakaraka",

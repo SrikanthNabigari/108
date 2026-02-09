@@ -498,7 +498,12 @@ class YogaDetector:
 
             pos = chart.planets[planet]
 
-            if reference == "moon":
+            if reference == "lagna_or_moon":
+                # Check from both Lagna and Moon (classical Pancha Mahapurusha rule)
+                house_lagna = pos.house
+                house_moon = self._get_house_from_reference(pos.rashi, chart.moon_rashi)
+                return is_kendra(house_lagna) or is_kendra(house_moon)
+            elif reference == "moon":
                 # Calculate house from Moon instead of Lagna
                 house = self._get_house_from_reference(pos.rashi, chart.moon_rashi)
             else:

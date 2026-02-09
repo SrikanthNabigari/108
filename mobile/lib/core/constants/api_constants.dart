@@ -39,6 +39,8 @@ class ApiConstants {
   static const String transitSnapshot = '$apiVersion/analysis/transits/snapshot';
   static const String transitAspects = '$apiVersion/analysis/transits/aspects';
   static String transitTriggers({int days = 30}) => '$apiVersion/analysis/transits/triggers?days=$days';
+  static const String analysisStrength = '$apiVersion/analysis/strength';
+  static const String analysisAtmakaraka = '$apiVersion/analysis/atmakaraka';
   static const String analysisKp = '$apiVersion/analysis/kp';
 
   /// Dasha effects endpoint with MD/AD/PD query params

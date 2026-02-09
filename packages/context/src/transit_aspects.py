@@ -16,6 +16,7 @@ Each aspect is evaluated for:
 from datetime import datetime, timedelta
 from typing import Any
 
+from packages.core.src.knowledge_loader import get_transit_aspect_effects
 from packages.cosmos.src.ephemeris import get_all_planets, get_julian_day
 
 # Standard Western aspects with default orbs
@@ -122,18 +123,45 @@ def _is_applying(transit_lon: float, natal_lon: float, transit_speed: float) -> 
     return bool(transit_speed < 0 and -180 < diff < 0)
 
 
-def _get_effect(transit_planet: str, natal_planet: str) -> str:
-    """Get effect description for a transit-natal aspect."""
+def _get_effect(transit_planet: str, natal_planet: str, aspect_type: str = "") -> dict[str, str]:
+    """Get effect description and nature for a transit-natal aspect.
+
+    Returns dict with 'effect' and 'nature' keys.
+    """
     t = transit_planet.lower()
     n = natal_planet.lower()
+    a = aspect_type.lower()
+
+    # Try knowledge JSON first (aspect-type-specific)
+    try:
+        knowledge = get_transit_aspect_effects()
+        if knowledge and t in knowledge:
+            planet_data = knowledge[t].get(n, {})
+            if a in planet_data:
+                entry = planet_data[a]
+                return {
+                    "effect": entry.get("effect", ""),
+                    "nature": entry.get("nature", "neutral"),
+                }
+            # If aspect type not found, try any entry for general effect
+            if planet_data:
+                first = next(iter(planet_data.values()))
+                return {
+                    "effect": first.get("effect", ""),
+                    "nature": first.get("nature", "neutral"),
+                }
+    except Exception:
+        pass
+
+    # Fallback to hardcoded dict
     planet_effects = _TRANSIT_ASPECT_EFFECTS.get(t, {})
     if n in planet_effects:
-        return planet_effects[n]
+        return {"effect": planet_effects[n], "nature": "neutral"}
     # Try reverse
     planet_effects = _TRANSIT_ASPECT_EFFECTS.get(n, {})
     if t in planet_effects:
-        return planet_effects[t]
-    return f"Transit {t.title()} activating natal {n.title()}"
+        return {"effect": planet_effects[t], "nature": "neutral"}
+    return {"effect": f"Transit {t.title()} activating natal {n.title()}", "nature": "neutral"}
 
 
 def get_transit_natal_aspects(
@@ -173,7 +201,7 @@ def get_transit_natal_aspects(
 
             for match in matches:
                 applying = _is_applying(t_lon, n_lon, t_speed)
-                effect = _get_effect(t_planet, n_planet)
+                effect_data = _get_effect(t_planet, n_planet, match["aspect_type"])
 
                 aspects.append(
                     {
@@ -186,7 +214,8 @@ def get_transit_natal_aspects(
                         "applying": applying,
                         "transit_rashi": t_rashi,
                         "natal_rashi": n_rashi,
-                        "effect": effect,
+                        "effect": effect_data["effect"],
+                        "nature": effect_data["nature"],
                     }
                 )
 
@@ -203,7 +232,7 @@ def get_transit_natal_aspects(
                             for a in aspects
                         )
                         if not already_found:
-                            effect = _get_effect(t_planet, n_planet)
+                            effect_data = _get_effect(t_planet, n_planet)
                             aspects.append(
                                 {
                                     "transit_planet": t_planet.lower(),
@@ -215,7 +244,8 @@ def get_transit_natal_aspects(
                                     "applying": False,
                                     "transit_rashi": t_rashi,
                                     "natal_rashi": n_rashi,
-                                    "effect": effect,
+                                    "effect": effect_data["effect"],
+                                    "nature": effect_data["nature"],
                                 }
                             )
 

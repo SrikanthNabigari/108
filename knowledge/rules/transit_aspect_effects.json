@@ -1,0 +1,605 @@
+{
+  "metadata": {
+    "description": "Transit aspect effects for all planet-to-planet combinations across 5 aspect types",
+    "total_combinations": 405,
+    "structure": "9 transit planets x 9 natal planets x 5 aspect types",
+    "aspect_types": ["conjunction", "opposition", "trine", "square", "sextile"],
+    "planets": ["sun", "moon", "mars", "mercury", "jupiter", "venus", "saturn", "rahu", "ketu"],
+    "source": "Brihat Parashara Hora Shastra, Phaladeepika, Saravali, Jataka Parijata",
+    "last_updated": "2026-02-08"
+  },
+  "aspect_type_general": {
+    "conjunction": { "keyword": "Fusion", "quality": "intense", "orb_degrees": 8 },
+    "opposition": { "keyword": "Awareness", "quality": "challenging", "orb_degrees": 8 },
+    "trine": { "keyword": "Flow", "quality": "harmonious", "orb_degrees": 6 },
+    "square": { "keyword": "Tension", "quality": "tense", "orb_degrees": 6 },
+    "sextile": { "keyword": "Opportunity", "quality": "harmonious", "orb_degrees": 4 }
+  },
+  "transit_aspect_effects": {
+    "sun": {
+      "sun": {
+        "conjunction": { "effect": "Identity renewal, ego confrontation, new life direction emerges", "nature": "intense" },
+        "opposition": { "effect": "Relationship awareness peaks, others mirror your strengths and blind spots", "nature": "challenging" },
+        "trine": { "effect": "Creative confidence flows naturally, vitality and self-expression boosted", "nature": "harmonious" },
+        "square": { "effect": "Authority conflicts force growth through frustration and self-doubt", "nature": "tense" },
+        "sextile": { "effect": "Gentle opportunities for leadership and recognition present themselves", "nature": "harmonious" }
+      },
+      "moon": {
+        "conjunction": { "effect": "Emotions and willpower fuse, heightened awareness of inner needs", "nature": "intense" },
+        "opposition": { "effect": "Head versus heart tension, desires clash with emotional security", "nature": "challenging" },
+        "trine": { "effect": "Emotional clarity supports confident decisions and self-care", "nature": "harmonious" },
+        "square": { "effect": "Inner restlessness as ego demands override emotional comfort", "nature": "tense" },
+        "sextile": { "effect": "Small emotional insights improve daily habits and self-expression", "nature": "harmonious" }
+      },
+      "mars": {
+        "conjunction": { "effect": "Burst of energy and drive, ambition peaks but temper flares", "nature": "intense" },
+        "opposition": { "effect": "Power struggles with others, competitive urges demand an outlet", "nature": "challenging" },
+        "trine": { "effect": "Physical vitality and courage combine for effective bold action", "nature": "harmonious" },
+        "square": { "effect": "Frustration and impatience surge, accidents possible if reckless", "nature": "tense" },
+        "sextile": { "effect": "Motivated energy finds productive channels without excess aggression", "nature": "harmonious" }
+      },
+      "mercury": {
+        "conjunction": { "effect": "Mental sharpness peaks, important communications and decisions arise", "nature": "intense" },
+        "opposition": { "effect": "Miscommunications likely, your ideas face criticism from others", "nature": "challenging" },
+        "trine": { "effect": "Clear thinking supports negotiations, writing, and intellectual pursuits", "nature": "harmonious" },
+        "square": { "effect": "Nervous tension and scattered focus, avoid signing important contracts", "nature": "tense" },
+        "sextile": { "effect": "Quick-witted exchanges and minor learning breakthroughs bring satisfaction", "nature": "harmonious" }
+      },
+      "jupiter": {
+        "conjunction": { "effect": "Optimism and expansion surge, opportunities for growth and recognition", "nature": "harmonious" },
+        "opposition": { "effect": "Overconfidence risks, promises may exceed your capacity to deliver", "nature": "challenging" },
+        "trine": { "effect": "Luck and wisdom align beautifully, excellent for major life decisions", "nature": "harmonious" },
+        "square": { "effect": "Excessive ambition leads to overcommitment, judge situations carefully", "nature": "tense" },
+        "sextile": { "effect": "Quiet blessings arrive through mentors, education, or travel plans", "nature": "harmonious" }
+      },
+      "venus": {
+        "conjunction": { "effect": "Love and creativity surge, attraction and social charm heightened", "nature": "harmonious" },
+        "opposition": { "effect": "Relationship dynamics demand attention, desire for validation increases", "nature": "challenging" },
+        "trine": { "effect": "Artistic expression flows, romantic connections deepen with warmth", "nature": "harmonious" },
+        "square": { "effect": "Indulgence temptations and relationship friction over values arise", "nature": "tense" },
+        "sextile": { "effect": "Pleasant social encounters and minor financial gains lift your mood", "nature": "harmonious" }
+      },
+      "saturn": {
+        "conjunction": { "effect": "Serious responsibilities crystallize, maturity tested through hard work", "nature": "intense" },
+        "opposition": { "effect": "Authority figures restrict you, patience required with slow progress", "nature": "challenging" },
+        "trine": { "effect": "Disciplined effort yields lasting results, steady career progress", "nature": "harmonious" },
+        "square": { "effect": "Frustrating delays and obstacles force restructuring of ambitions", "nature": "tense" },
+        "sextile": { "effect": "Practical planning pays off, small structural improvements bring stability", "nature": "harmonious" }
+      },
+      "rahu": {
+        "conjunction": { "effect": "Obsessive drive for recognition, unconventional paths to success open", "nature": "intense" },
+        "opposition": { "effect": "Others' illusions challenge your identity, beware of deceptive alliances", "nature": "challenging" },
+        "trine": { "effect": "Innovative self-expression finds audience, technology aids your visibility", "nature": "harmonious" },
+        "square": { "effect": "Compulsive ego inflation, risk of chasing hollow status symbols", "nature": "tense" },
+        "sextile": { "effect": "Unusual opportunities for advancement appear through foreign connections", "nature": "harmonious" }
+      },
+      "ketu": {
+        "conjunction": { "effect": "Ego dissolves into spiritual questioning, identity crisis transforms you", "nature": "intense" },
+        "opposition": { "effect": "Detachment from worldly recognition, past-life themes surface in relationships", "nature": "challenging" },
+        "trine": { "effect": "Spiritual insight illuminates your purpose with quiet confidence", "nature": "harmonious" },
+        "square": { "effect": "Confusion about life direction, let go of outdated self-images", "nature": "tense" },
+        "sextile": { "effect": "Subtle intuitive guidance helps refine your authentic self-expression", "nature": "harmonious" }
+      }
+    },
+    "moon": {
+      "sun": {
+        "conjunction": { "effect": "New emotional cycle begins, feelings align with core purpose", "nature": "intense" },
+        "opposition": { "effect": "Full moon energy illuminates what needs emotional release now", "nature": "challenging" },
+        "trine": { "effect": "Emotional harmony with life direction, feel supported and aligned", "nature": "harmonious" },
+        "square": { "effect": "Inner tension between duty and feelings creates restless mood", "nature": "tense" },
+        "sextile": { "effect": "Minor mood boost helps you handle daily tasks with grace", "nature": "harmonious" }
+      },
+      "moon": {
+        "conjunction": { "effect": "Emotional reset, heightened sensitivity and intuitive awareness peak", "nature": "intense" },
+        "opposition": { "effect": "Emotional mirror effect, others reflect your unconscious patterns back", "nature": "challenging" },
+        "trine": { "effect": "Emotional flow and comfort, nurturing instincts work beautifully today", "nature": "harmonious" },
+        "square": { "effect": "Mood swings and emotional friction, old habits trigger discomfort", "nature": "tense" },
+        "sextile": { "effect": "Gentle emotional awareness supports better self-care and communication", "nature": "harmonious" }
+      },
+      "mars": {
+        "conjunction": { "effect": "Emotional intensity fuels passionate action, temper may flare quickly", "nature": "intense" },
+        "opposition": { "effect": "Emotional reactions to aggression around you, guard against impulsiveness", "nature": "challenging" },
+        "trine": { "effect": "Feelings and courage combine for emotionally honest assertiveness", "nature": "harmonious" },
+        "square": { "effect": "Irritability and emotional volatility, avoid confrontations if possible", "nature": "tense" },
+        "sextile": { "effect": "Emotional motivation supports taking small courageous steps forward", "nature": "harmonious" }
+      },
+      "mercury": {
+        "conjunction": { "effect": "Mind and emotions merge, intuitive thinking and emotional articulation peak", "nature": "intense" },
+        "opposition": { "effect": "Overthinking feelings or emotionalizing logic creates inner debate", "nature": "challenging" },
+        "trine": { "effect": "Heart and mind work together for clear emotional communication", "nature": "harmonious" },
+        "square": { "effect": "Nervous anxiety, difficulty expressing feelings clearly to others", "nature": "tense" },
+        "sextile": { "effect": "Small conversations bring emotional clarity and understanding today", "nature": "harmonious" }
+      },
+      "jupiter": {
+        "conjunction": { "effect": "Emotional expansion and generosity overflow, feel deeply optimistic", "nature": "harmonious" },
+        "opposition": { "effect": "Emotional excess risks, overgiving or overindulging in comfort foods", "nature": "challenging" },
+        "trine": { "effect": "Deep contentment and gratitude arise, wisdom guides emotional choices", "nature": "harmonious" },
+        "square": { "effect": "Emotional restlessness from wanting more than current reality offers", "nature": "tense" },
+        "sextile": { "effect": "Quiet emotional uplift through learning, travel plans, or spiritual moments", "nature": "harmonious" }
+      },
+      "venus": {
+        "conjunction": { "effect": "Love feelings intensify, desire for beauty and emotional connection peaks", "nature": "harmonious" },
+        "opposition": { "effect": "Emotional needs clash with relationship expectations creating longing", "nature": "challenging" },
+        "trine": { "effect": "Emotional warmth enhances all relationships, artistic sensitivity heightened", "nature": "harmonious" },
+        "square": { "effect": "Emotional dissatisfaction in love, craving comfort that feels unavailable", "nature": "tense" },
+        "sextile": { "effect": "Pleasant emotional moments through art, music, or gentle companionship", "nature": "harmonious" }
+      },
+      "saturn": {
+        "conjunction": { "effect": "Emotional heaviness and seriousness descend, maturity through sadness possible", "nature": "intense" },
+        "opposition": { "effect": "Loneliness or emotional isolation surfaces, need for boundaries felt", "nature": "challenging" },
+        "trine": { "effect": "Emotional stability and patience create reliable inner foundation today", "nature": "harmonious" },
+        "square": { "effect": "Emotional restriction and melancholy, past regrets weigh on mood", "nature": "tense" },
+        "sextile": { "effect": "Calm emotional discipline helps manage difficult feelings constructively", "nature": "harmonious" }
+      },
+      "rahu": {
+        "conjunction": { "effect": "Obsessive emotional states arise, compulsive attachments may form quickly", "nature": "intense" },
+        "opposition": { "effect": "Others' manipulative behavior triggers deep emotional insecurity patterns", "nature": "challenging" },
+        "trine": { "effect": "Unconventional emotional experiences bring exciting new perspectives on life", "nature": "harmonious" },
+        "square": { "effect": "Emotional confusion from desires that feel foreign to your nature", "nature": "tense" },
+        "sextile": { "effect": "Unusual emotional connections or insights emerge through unexpected encounters", "nature": "harmonious" }
+      },
+      "ketu": {
+        "conjunction": { "effect": "Emotional detachment and spiritual longing replace worldly attachments temporarily", "nature": "intense" },
+        "opposition": { "effect": "Past emotional wounds surface for healing, nostalgia mixes with loss", "nature": "challenging" },
+        "trine": { "effect": "Intuitive emotional wisdom flows, meditation and solitude feel nourishing", "nature": "harmonious" },
+        "square": { "effect": "Emotional numbness or disconnection, difficulty accessing feelings clearly", "nature": "tense" },
+        "sextile": { "effect": "Subtle spiritual insights arrive through quiet emotional reflection moments", "nature": "harmonious" }
+      }
+    },
+    "mars": {
+      "sun": {
+        "conjunction": { "effect": "Aggressive energy targets your identity, courage and conflict both surge", "nature": "intense" },
+        "opposition": { "effect": "Confrontations with authority figures test your strength and diplomacy", "nature": "challenging" },
+        "trine": { "effect": "Bold action aligns with life purpose, physical energy supports ambitions", "nature": "harmonious" },
+        "square": { "effect": "Anger erupts around ego matters, accidents from impatience possible", "nature": "tense" },
+        "sextile": { "effect": "Motivated action helps advance personal projects without major friction", "nature": "harmonious" }
+      },
+      "moon": {
+        "conjunction": { "effect": "Emotional intensity spikes dramatically, passions run hot and volatile", "nature": "intense" },
+        "opposition": { "effect": "Emotional confrontations erupt, domestic tensions need careful handling", "nature": "challenging" },
+        "trine": { "effect": "Emotional courage supports standing up for yourself and loved ones", "nature": "harmonious" },
+        "square": { "effect": "Emotional aggression and impatience disrupt peace at home", "nature": "tense" },
+        "sextile": { "effect": "Productive emotional energy channels into protective and nurturing action", "nature": "harmonious" }
+      },
+      "mars": {
+        "conjunction": { "effect": "Mars return brings peak physical energy, aggression, and competitive drive", "nature": "intense" },
+        "opposition": { "effect": "Direct conflicts and power struggles with others demand resolution", "nature": "challenging" },
+        "trine": { "effect": "Physical strength and willpower combine for impressive accomplishments", "nature": "harmonious" },
+        "square": { "effect": "Explosive frustration, risk of accidents, injuries, or heated arguments", "nature": "tense" },
+        "sextile": { "effect": "Constructive use of energy in sports, exercise, or focused work", "nature": "harmonious" }
+      },
+      "mercury": {
+        "conjunction": { "effect": "Sharp words and quick decisions, mental aggression fuels debate and action", "nature": "intense" },
+        "opposition": { "effect": "Arguments over ideas, verbal conflicts and communication breakdowns likely", "nature": "challenging" },
+        "trine": { "effect": "Strategic thinking is sharp, excellent for decisive planning and problem-solving", "nature": "harmonious" },
+        "square": { "effect": "Hasty words cause damage, nervous tension and mental combativeness spike", "nature": "tense" },
+        "sextile": { "effect": "Quick mind supports effective negotiations and technical problem-solving", "nature": "harmonious" }
+      },
+      "jupiter": {
+        "conjunction": { "effect": "Bold expansion and adventurous risk-taking, enthusiasm may outpace wisdom", "nature": "intense" },
+        "opposition": { "effect": "Overreach and excessive confidence clash with practical limitations", "nature": "challenging" },
+        "trine": { "effect": "Courageous optimism creates real breakthroughs in growth and achievement", "nature": "harmonious" },
+        "square": { "effect": "Reckless overextension, fighting for beliefs without considering consequences", "nature": "tense" },
+        "sextile": { "effect": "Energized pursuit of education, legal matters, or philosophical growth", "nature": "harmonious" }
+      },
+      "venus": {
+        "conjunction": { "effect": "Passionate desire intensifies, romantic pursuit becomes bold and direct", "nature": "intense" },
+        "opposition": { "effect": "Relationship conflicts over desires, passion clashes with harmony needs", "nature": "challenging" },
+        "trine": { "effect": "Passionate creativity and romantic energy flow with attractive magnetism", "nature": "harmonious" },
+        "square": { "effect": "Jealousy, possessiveness, or relationship friction from competing desires", "nature": "tense" },
+        "sextile": { "effect": "Active social life and creative projects benefit from energized enthusiasm", "nature": "harmonious" }
+      },
+      "saturn": {
+        "conjunction": { "effect": "Controlled force meets immovable structure, frustration from blocked ambitions", "nature": "intense" },
+        "opposition": { "effect": "Actions meet rigid resistance, authority figures block your initiatives", "nature": "challenging" },
+        "trine": { "effect": "Disciplined effort produces lasting results through sustained hard work", "nature": "harmonious" },
+        "square": { "effect": "Extreme frustration as efforts meet walls, anger at restrictions builds", "nature": "tense" },
+        "sextile": { "effect": "Patient effort on practical tasks yields solid incremental progress", "nature": "harmonious" }
+      },
+      "rahu": {
+        "conjunction": { "effect": "Obsessive aggression or compulsive risk-taking, unconventional battles begin", "nature": "intense" },
+        "opposition": { "effect": "Hidden enemies or deceptive conflicts surface, guard against manipulation", "nature": "challenging" },
+        "trine": { "effect": "Innovative courage opens doors through technology or foreign connections", "nature": "harmonious" },
+        "square": { "effect": "Compulsive anger directed at wrong targets, misdirected fierce energy", "nature": "tense" },
+        "sextile": { "effect": "Unusual opportunities require bold action and calculated unconventional risks", "nature": "harmonious" }
+      },
+      "ketu": {
+        "conjunction": { "effect": "Sudden energy loss or spiritual warrior awakening, past-life anger surfaces", "nature": "intense" },
+        "opposition": { "effect": "Aggression seems pointless, existential frustration with worldly competition", "nature": "challenging" },
+        "trine": { "effect": "Spiritual courage and detached action create powerful selfless results", "nature": "harmonious" },
+        "square": { "effect": "Directionless anger and confusion about what to fight for", "nature": "tense" },
+        "sextile": { "effect": "Subtle inner strength helps release old anger patterns with wisdom", "nature": "harmonious" }
+      }
+    },
+    "mercury": {
+      "sun": {
+        "conjunction": { "effect": "Mental focus on identity matters, important self-defining communications arise", "nature": "intense" },
+        "opposition": { "effect": "Your ideas face ego-driven opposition from authority figures", "nature": "challenging" },
+        "trine": { "effect": "Clear self-expression and confident communication serve you well today", "nature": "harmonious" },
+        "square": { "effect": "Mental tension between what you think and what others expect", "nature": "tense" },
+        "sextile": { "effect": "Small intellectual opportunities support self-improvement and personal branding", "nature": "harmonious" }
+      },
+      "moon": {
+        "conjunction": { "effect": "Analytical mind meets emotional depth, excellent for journaling and therapy", "nature": "intense" },
+        "opposition": { "effect": "Overthinking emotions creates confusion between logic and feelings", "nature": "challenging" },
+        "trine": { "effect": "Emotional intelligence sharpens, intuitive communication flows naturally today", "nature": "harmonious" },
+        "square": { "effect": "Mental anxiety disrupts emotional peace, overthinking creates worry loops", "nature": "tense" },
+        "sextile": { "effect": "Thoughtful conversations about feelings bring small emotional breakthroughs", "nature": "harmonious" }
+      },
+      "mars": {
+        "conjunction": { "effect": "Quick sharp thinking meets aggressive drive, debates and arguments intensify", "nature": "intense" },
+        "opposition": { "effect": "Verbal confrontations likely, your logic meets others' force directly", "nature": "challenging" },
+        "trine": { "effect": "Strategic mind works efficiently, excellent for technical and analytical tasks", "nature": "harmonious" },
+        "square": { "effect": "Impulsive words and mental agitation lead to regrettable statements", "nature": "tense" },
+        "sextile": { "effect": "Quick problem-solving and efficient communication cut through complexity", "nature": "harmonious" }
+      },
+      "mercury": {
+        "conjunction": { "effect": "Mercury return sharpens all mental faculties, communication and learning peak", "nature": "intense" },
+        "opposition": { "effect": "Different thinking styles create misunderstandings and intellectual friction", "nature": "challenging" },
+        "trine": { "effect": "Brilliant mental clarity, writing, speaking, and studying flow effortlessly", "nature": "harmonious" },
+        "square": { "effect": "Mental scattered energy and communication breakdowns frustrate daily plans", "nature": "tense" },
+        "sextile": { "effect": "Pleasant intellectual exchanges and minor learning gains brighten your day", "nature": "harmonious" }
+      },
+      "jupiter": {
+        "conjunction": { "effect": "Mind expands toward big ideas, excellent for planning and vision-setting", "nature": "harmonious" },
+        "opposition": { "effect": "Details lost to grand thinking, promises outpace intellectual capacity", "nature": "challenging" },
+        "trine": { "effect": "Wisdom and intelligence merge beautifully for teaching and publishing", "nature": "harmonious" },
+        "square": { "effect": "Mental overload from too many ideas, scattered focus needs discipline", "nature": "tense" },
+        "sextile": { "effect": "Helpful conversations with wise people open educational or travel doors", "nature": "harmonious" }
+      },
+      "venus": {
+        "conjunction": { "effect": "Charming communication and artistic thinking, pleasant intellectual connections form", "nature": "harmonious" },
+        "opposition": { "effect": "Communication style clashes with relationship needs, diplomacy tested", "nature": "challenging" },
+        "trine": { "effect": "Social wit and artistic appreciation enhanced, enjoyable creative exchanges", "nature": "harmonious" },
+        "square": { "effect": "Superficial thinking about relationships, difficulty expressing affection clearly", "nature": "tense" },
+        "sextile": { "effect": "Light social banter and pleasant exchanges bring enjoyment and connections", "nature": "harmonious" }
+      },
+      "saturn": {
+        "conjunction": { "effect": "Serious structured thinking, mental burden but deep concentration possible", "nature": "intense" },
+        "opposition": { "effect": "Communication restricted by authority or bureaucracy, delays in responses", "nature": "challenging" },
+        "trine": { "effect": "Methodical thinking produces solid results in research and planning", "nature": "harmonious" },
+        "square": { "effect": "Mental pessimism and negative thinking patterns dominate, worry increases", "nature": "tense" },
+        "sextile": { "effect": "Practical mental discipline helps organize and complete pending tasks", "nature": "harmonious" }
+      },
+      "rahu": {
+        "conjunction": { "effect": "Obsessive thinking about unusual topics, compulsive information seeking begins", "nature": "intense" },
+        "opposition": { "effect": "Deceptive communications from others, verify all information carefully", "nature": "challenging" },
+        "trine": { "effect": "Innovative thinking through technology or unconventional knowledge sources", "nature": "harmonious" },
+        "square": { "effect": "Mental confusion from misinformation, anxious thoughts loop obsessively", "nature": "tense" },
+        "sextile": { "effect": "Unusual intellectual connections yield creative solutions to old problems", "nature": "harmonious" }
+      },
+      "ketu": {
+        "conjunction": { "effect": "Detached analytical perspective, intuitive knowing replaces logical reasoning", "nature": "intense" },
+        "opposition": { "effect": "Communication feels meaningless, struggle to articulate spiritual insights", "nature": "challenging" },
+        "trine": { "effect": "Intuitive intelligence pierces through complexity to essential truth", "nature": "harmonious" },
+        "square": { "effect": "Mental fog and confusion, logical thinking fails to resolve inner questions", "nature": "tense" },
+        "sextile": { "effect": "Quiet insights from meditation or reflection clarify mental confusion", "nature": "harmonious" }
+      }
+    },
+    "jupiter": {
+      "sun": {
+        "conjunction": { "effect": "Expansive self-confidence and optimism, major life growth opportunity arrives", "nature": "harmonious" },
+        "opposition": { "effect": "Overconfidence and ego inflation, others challenge your grandiose plans", "nature": "challenging" },
+        "trine": { "effect": "Lucky period for personal advancement, natural wisdom guides life direction", "nature": "harmonious" },
+        "square": { "effect": "Excessive ambition creates overreach, growth meets resistance from reality", "nature": "tense" },
+        "sextile": { "effect": "Opportunities for recognition through teaching, mentoring, or spiritual growth", "nature": "harmonious" }
+      },
+      "moon": {
+        "conjunction": { "effect": "Emotional generosity and deep contentment, nurturing wisdom expands within", "nature": "harmonious" },
+        "opposition": { "effect": "Emotional overindulgence, difficulty setting boundaries with needy people", "nature": "challenging" },
+        "trine": { "effect": "Deep emotional fulfillment and inner peace, faith in life strengthens", "nature": "harmonious" },
+        "square": { "effect": "Emotional excess and restlessness, wanting more than life currently provides", "nature": "tense" },
+        "sextile": { "effect": "Gentle emotional growth through compassionate connections and inner wisdom", "nature": "harmonious" }
+      },
+      "mars": {
+        "conjunction": { "effect": "Enthusiastic action and bold expansion, courage meets opportunity powerfully", "nature": "intense" },
+        "opposition": { "effect": "Overaggressive pursuit of growth, enthusiasm clashes with others' boundaries", "nature": "challenging" },
+        "trine": { "effect": "Confident action produces excellent results, leadership and initiative rewarded", "nature": "harmonious" },
+        "square": { "effect": "Reckless risk-taking and aggressive overexpansion create problems ahead", "nature": "tense" },
+        "sextile": { "effect": "Motivated pursuit of goals receives support from mentors and luck", "nature": "harmonious" }
+      },
+      "mercury": {
+        "conjunction": { "effect": "Mind expands into philosophical territory, big-picture thinking illuminates details", "nature": "harmonious" },
+        "opposition": { "effect": "Intellectual arrogance or losing details in grand theories frustrates others", "nature": "challenging" },
+        "trine": { "effect": "Excellent for studying, writing, and teaching, wisdom meets clarity beautifully", "nature": "harmonious" },
+        "square": { "effect": "Information overload and scattered thinking from too many promising ideas", "nature": "tense" },
+        "sextile": { "effect": "Educational opportunities and helpful conversations expand your understanding subtly", "nature": "harmonious" }
+      },
+      "jupiter": {
+        "conjunction": { "effect": "Jupiter return brings major expansion cycle, optimism and opportunity peak", "nature": "harmonious" },
+        "opposition": { "effect": "Excess and overcommitment, growth promises strain resources and relationships", "nature": "challenging" },
+        "trine": { "effect": "Abundant blessings flow in career, education, and spiritual life", "nature": "harmonious" },
+        "square": { "effect": "Overextension in finances or commitments, too many good opportunities conflict", "nature": "tense" },
+        "sextile": { "effect": "Steady growth through education, travel, or philosophical deepening continues", "nature": "harmonious" }
+      },
+      "venus": {
+        "conjunction": { "effect": "Love and abundance expand together, generous romantic and financial blessings", "nature": "harmonious" },
+        "opposition": { "effect": "Excessive indulgence in pleasure and luxury strains budget and waistline", "nature": "challenging" },
+        "trine": { "effect": "Beautiful period for love, art, and financial growth flowing harmoniously", "nature": "harmonious" },
+        "square": { "effect": "Overindulgence in comfort, relationship excess, or financial carelessness tempts", "nature": "tense" },
+        "sextile": { "effect": "Pleasant social expansion and gentle financial improvements lift spirits", "nature": "harmonious" }
+      },
+      "saturn": {
+        "conjunction": { "effect": "Wisdom meets discipline in a powerful structural growth cycle beginning", "nature": "intense" },
+        "opposition": { "effect": "Growth impulse meets restriction, expansion blocked by responsibilities and duties", "nature": "challenging" },
+        "trine": { "effect": "Steady long-term progress through disciplined optimism and patient effort", "nature": "harmonious" },
+        "square": { "effect": "Philosophical conflicts between freedom and duty create restless ambition", "nature": "tense" },
+        "sextile": { "effect": "Balanced growth through realistic planning and measured expansion strategies", "nature": "harmonious" }
+      },
+      "rahu": {
+        "conjunction": { "effect": "Obsessive expansion into unconventional territory, foreign opportunities call strongly", "nature": "intense" },
+        "opposition": { "effect": "Inflated beliefs face reality check through unconventional challengers", "nature": "challenging" },
+        "trine": { "effect": "Growth through technology, foreign connections, or innovative wisdom paths", "nature": "harmonious" },
+        "square": { "effect": "Deceptive growth opportunities tempt with shortcuts, verify all promises", "nature": "tense" },
+        "sextile": { "effect": "Unique philosophical insights arrive through cross-cultural or digital connections", "nature": "harmonious" }
+      },
+      "ketu": {
+        "conjunction": { "effect": "Spiritual expansion and detachment from material growth, inner wisdom deepens", "nature": "intense" },
+        "opposition": { "effect": "External growth feels empty, existential questioning of success and purpose", "nature": "challenging" },
+        "trine": { "effect": "Spiritual wisdom and material growth coexist beautifully in balance", "nature": "harmonious" },
+        "square": { "effect": "Confusion between spiritual and material goals creates indecisive paralysis", "nature": "tense" },
+        "sextile": { "effect": "Subtle spiritual insights guide practical growth decisions with quiet certainty", "nature": "harmonious" }
+      }
+    },
+    "venus": {
+      "sun": {
+        "conjunction": { "effect": "Attractiveness and creative self-expression peak, social charm magnetized", "nature": "harmonious" },
+        "opposition": { "effect": "Desire for love and recognition creates tension between self and others", "nature": "challenging" },
+        "trine": { "effect": "Creative confidence and romantic magnetism flow naturally and enjoyably", "nature": "harmonious" },
+        "square": { "effect": "Vanity or indulgence conflicts with authentic self-expression needs", "nature": "tense" },
+        "sextile": { "effect": "Gentle appreciation from others boosts confidence and creative output", "nature": "harmonious" }
+      },
+      "moon": {
+        "conjunction": { "effect": "Emotional sweetness and desire for comfort, love feelings overflow", "nature": "harmonious" },
+        "opposition": { "effect": "Emotional neediness in relationships, craving affection that feels insufficient", "nature": "challenging" },
+        "trine": { "effect": "Emotional warmth and relationship satisfaction create beautiful inner harmony", "nature": "harmonious" },
+        "square": { "effect": "Emotional dissatisfaction with love life, comfort-seeking overrides discipline", "nature": "tense" },
+        "sextile": { "effect": "Small pleasures and gentle emotional connections nourish your inner world", "nature": "harmonious" }
+      },
+      "mars": {
+        "conjunction": { "effect": "Passionate desire ignites, romantic and creative energy combusts intensely", "nature": "intense" },
+        "opposition": { "effect": "Attraction and conflict intertwine, push-pull dynamics in relationships intensify", "nature": "challenging" },
+        "trine": { "effect": "Passionate creativity and romantic energy combine beautifully and productively", "nature": "harmonious" },
+        "square": { "effect": "Jealousy and possessiveness flare, attraction mixed with irritation confuses", "nature": "tense" },
+        "sextile": { "effect": "Social assertiveness and romantic initiative produce pleasant encounters", "nature": "harmonious" }
+      },
+      "mercury": {
+        "conjunction": { "effect": "Charming wit and social grace enhance all communications and negotiations", "nature": "harmonious" },
+        "opposition": { "effect": "Superficial pleasantries mask real communication needs in relationships", "nature": "challenging" },
+        "trine": { "effect": "Diplomatic and articulate expression creates harmony in all exchanges", "nature": "harmonious" },
+        "square": { "effect": "Difficulty balancing honesty with diplomacy in delicate conversations", "nature": "tense" },
+        "sextile": { "effect": "Pleasant social exchanges and artistic conversations enrich daily life", "nature": "harmonious" }
+      },
+      "jupiter": {
+        "conjunction": { "effect": "Love and abundance expand generously, lucky period for relationships and money", "nature": "harmonious" },
+        "opposition": { "effect": "Overindulgence in luxury and pleasure, generosity exceeds practical limits", "nature": "challenging" },
+        "trine": { "effect": "Exceptional period for love, finances, and creative growth together", "nature": "harmonious" },
+        "square": { "effect": "Extravagance and excess in spending, socializing, or romantic pursuits", "nature": "tense" },
+        "sextile": { "effect": "Modest financial and social improvements create growing sense of abundance", "nature": "harmonious" }
+      },
+      "venus": {
+        "conjunction": { "effect": "Venus return heightens all matters of love, beauty, and financial flow", "nature": "harmonious" },
+        "opposition": { "effect": "Relationship mirror reveals your deepest desires and relationship patterns", "nature": "challenging" },
+        "trine": { "effect": "Love, art, and pleasure flow in perfect harmony during this period", "nature": "harmonious" },
+        "square": { "effect": "Relationship dissatisfaction and indulgence patterns surface for examination", "nature": "tense" },
+        "sextile": { "effect": "Small romantic gestures and creative pleasures bring satisfaction today", "nature": "harmonious" }
+      },
+      "saturn": {
+        "conjunction": { "effect": "Love meets reality, relationships tested through commitment and responsibility demands", "nature": "intense" },
+        "opposition": { "effect": "Loneliness or relationship coldness, duty overrides pleasure and affection", "nature": "challenging" },
+        "trine": { "effect": "Mature love deepens, lasting commitments and stable finances develop naturally", "nature": "harmonious" },
+        "square": { "effect": "Love feels restricted, financial limitations or relationship duties burden you", "nature": "tense" },
+        "sextile": { "effect": "Practical beauty and modest pleasures bring stable satisfying contentment", "nature": "harmonious" }
+      },
+      "rahu": {
+        "conjunction": { "effect": "Obsessive attraction or compulsive spending, unconventional relationships tempt strongly", "nature": "intense" },
+        "opposition": { "effect": "Deceptive attractions and illusory relationships demand discernment now", "nature": "challenging" },
+        "trine": { "effect": "Exciting unconventional relationships or creative breakthroughs through innovation", "nature": "harmonious" },
+        "square": { "effect": "Compulsive desires for forbidden pleasures or taboo relationships surface", "nature": "tense" },
+        "sextile": { "effect": "Unusual artistic inspiration or cross-cultural romantic connections emerge", "nature": "harmonious" }
+      },
+      "ketu": {
+        "conjunction": { "effect": "Detachment from material pleasure, past-life love connections may reactivate", "nature": "intense" },
+        "opposition": { "effect": "Worldly pleasures feel empty, spiritual longing replaces romantic desire", "nature": "challenging" },
+        "trine": { "effect": "Spiritual love and selfless giving bring deeper satisfaction than luxury", "nature": "harmonious" },
+        "square": { "effect": "Confusion between spiritual and sensual desires creates inner conflict", "nature": "tense" },
+        "sextile": { "effect": "Quiet appreciation of simple beauty and non-attachment brings peace", "nature": "harmonious" }
+      }
+    },
+    "saturn": {
+      "sun": {
+        "conjunction": { "effect": "Heavy responsibility descends on identity, serious life restructuring begins now", "nature": "intense" },
+        "opposition": { "effect": "Authority figures restrict your freedom, patience tested by external demands", "nature": "challenging" },
+        "trine": { "effect": "Disciplined self-mastery produces lasting achievements and steady recognition", "nature": "harmonious" },
+        "square": { "effect": "Crushing pressure on ego and vitality, self-doubt and delays frustrate", "nature": "tense" },
+        "sextile": { "effect": "Steady structural improvements to life direction yield gradual solid results", "nature": "harmonious" }
+      },
+      "moon": {
+        "conjunction": { "effect": "Emotional heaviness and depression possible, emotional maturity demanded now", "nature": "intense" },
+        "opposition": { "effect": "Emotional isolation and loneliness test inner strength and resilience", "nature": "challenging" },
+        "trine": { "effect": "Emotional stability and maturity create reliable inner foundation", "nature": "harmonious" },
+        "square": { "effect": "Emotional depression, fear, and anxiety patterns intensify temporarily", "nature": "tense" },
+        "sextile": { "effect": "Calm emotional discipline helps process difficult feelings constructively", "nature": "harmonious" }
+      },
+      "mars": {
+        "conjunction": { "effect": "Controlled force and frustrated ambition, great endurance but blocked action", "nature": "intense" },
+        "opposition": { "effect": "Your actions meet immovable resistance from authority and circumstances", "nature": "challenging" },
+        "trine": { "effect": "Disciplined courage produces remarkable endurance and lasting accomplishments", "nature": "harmonious" },
+        "square": { "effect": "Extreme frustration, anger at limitations, risk of injury from pressure", "nature": "tense" },
+        "sextile": { "effect": "Patient persistent effort on difficult tasks produces reliable results", "nature": "harmonious" }
+      },
+      "mercury": {
+        "conjunction": { "effect": "Serious deep thinking, mental burden but excellent concentration emerges", "nature": "intense" },
+        "opposition": { "effect": "Communication blocked by bureaucracy, ideas dismissed by authority figures", "nature": "challenging" },
+        "trine": { "effect": "Structured thinking and methodical research produce excellent scholarly results", "nature": "harmonious" },
+        "square": { "effect": "Mental pessimism, negative thought patterns, and communication delays frustrate", "nature": "tense" },
+        "sextile": { "effect": "Practical mental organization helps complete long-pending intellectual tasks", "nature": "harmonious" }
+      },
+      "jupiter": {
+        "conjunction": { "effect": "Wisdom tested by reality, beliefs face practical examination and restructuring", "nature": "intense" },
+        "opposition": { "effect": "Growth restricted by duties, philosophical crisis over meaning and purpose", "nature": "challenging" },
+        "trine": { "effect": "Patient wisdom builds lasting success through sustained disciplined effort", "nature": "harmonious" },
+        "square": { "effect": "Conflicting desires for freedom and security create paralysis and doubt", "nature": "tense" },
+        "sextile": { "effect": "Gradual wise expansion through realistic planning and measured ambition", "nature": "harmonious" }
+      },
+      "venus": {
+        "conjunction": { "effect": "Love tested by commitment, relationships face reality and maturity demands", "nature": "intense" },
+        "opposition": { "effect": "Relationship coldness or loneliness, duty overwhelms pleasure and romance", "nature": "challenging" },
+        "trine": { "effect": "Mature stable love and financial security develop through patient commitment", "nature": "harmonious" },
+        "square": { "effect": "Love feels burdensome, financial restrictions and relationship duties weigh heavily", "nature": "tense" },
+        "sextile": { "effect": "Practical approach to relationships and finances creates steady improvements", "nature": "harmonious" }
+      },
+      "saturn": {
+        "conjunction": { "effect": "Saturn return brings major life restructuring, karmic reckoning arrives forcefully", "nature": "intense" },
+        "opposition": { "effect": "External structures and authorities demand accountability for past choices", "nature": "challenging" },
+        "trine": { "effect": "Mature discipline builds lasting structures, hard work finally pays off", "nature": "harmonious" },
+        "square": { "effect": "Life foundations crack under pressure, major restructuring forced upon you", "nature": "tense" },
+        "sextile": { "effect": "Gradual structural improvements and steady disciplined progress continue building", "nature": "harmonious" }
+      },
+      "rahu": {
+        "conjunction": { "effect": "Obsessive ambition meets karmic restrictions, unconventional duties bind you tightly", "nature": "intense" },
+        "opposition": { "effect": "Foreign or unconventional forces challenge your established life structures", "nature": "challenging" },
+        "trine": { "effect": "Disciplined pursuit of unconventional goals produces lasting innovative results", "nature": "harmonious" },
+        "square": { "effect": "Fear and anxiety about unconventional changes disrupting your security", "nature": "tense" },
+        "sextile": { "effect": "Structured approach to technology or foreign matters yields practical gains", "nature": "harmonious" }
+      },
+      "ketu": {
+        "conjunction": { "effect": "Karmic structures dissolve, spiritual detachment from material security intensifies", "nature": "intense" },
+        "opposition": { "effect": "Worldly responsibilities feel spiritually meaningless, existential crisis deepens", "nature": "challenging" },
+        "trine": { "effect": "Spiritual discipline and renunciation bring deep peace and karmic resolution", "nature": "harmonious" },
+        "square": { "effect": "Confusion between duty and detachment, security foundations feel unstable", "nature": "tense" },
+        "sextile": { "effect": "Gradual spiritual maturity helps release attachment to rigid structures", "nature": "harmonious" }
+      }
+    },
+    "rahu": {
+      "sun": {
+        "conjunction": { "effect": "Obsessive drive for power and recognition, unconventional identity emerges compulsively", "nature": "intense" },
+        "opposition": { "effect": "Others' illusions challenge your true self, beware manipulative authority figures", "nature": "challenging" },
+        "trine": { "effect": "Innovative self-expression gains unexpected recognition through unusual channels", "nature": "harmonious" },
+        "square": { "effect": "Compulsive ego inflation through false personas, identity confusion deepens", "nature": "tense" },
+        "sextile": { "effect": "Unconventional opportunities for recognition arrive through technology or foreigners", "nature": "harmonious" }
+      },
+      "moon": {
+        "conjunction": { "effect": "Obsessive emotional patterns intensify, compulsive attachments and anxieties surge", "nature": "intense" },
+        "opposition": { "effect": "Emotional manipulation by others or self-deception in emotional matters", "nature": "challenging" },
+        "trine": { "effect": "Emotionally exciting new experiences broaden your feeling nature profoundly", "nature": "harmonious" },
+        "square": { "effect": "Anxiety and obsessive worrying, emotional patterns feel beyond your control", "nature": "tense" },
+        "sextile": { "effect": "Unusual emotional connections offer fresh perspective on old feeling patterns", "nature": "harmonious" }
+      },
+      "mars": {
+        "conjunction": { "effect": "Obsessive aggressive energy, compulsive risk-taking and unconventional battles begin", "nature": "intense" },
+        "opposition": { "effect": "Hidden enemies use deception, conflicts arise from unexpected and shadowy sources", "nature": "challenging" },
+        "trine": { "effect": "Bold innovative action through technology or unconventional methods succeeds", "nature": "harmonious" },
+        "square": { "effect": "Misdirected aggression toward wrong targets, compulsive fighting without purpose", "nature": "tense" },
+        "sextile": { "effect": "Unusual courage and drive help tackle problems others avoid entirely", "nature": "harmonious" }
+      },
+      "mercury": {
+        "conjunction": { "effect": "Obsessive thinking about unusual subjects, compulsive information gathering intensifies", "nature": "intense" },
+        "opposition": { "effect": "Deceptive communications and misinformation surround you, verify everything carefully", "nature": "challenging" },
+        "trine": { "effect": "Brilliant unconventional insights through technology, research, or foreign knowledge", "nature": "harmonious" },
+        "square": { "effect": "Mental obsession and conspiracy thinking, anxious thoughts loop compulsively", "nature": "tense" },
+        "sextile": { "effect": "Innovative communication methods and unusual intellectual pursuits yield results", "nature": "harmonious" }
+      },
+      "jupiter": {
+        "conjunction": { "effect": "Obsessive philosophical seeking, compulsive expansion through unconventional wisdom paths", "nature": "intense" },
+        "opposition": { "effect": "Inflated beliefs meet harsh reality through foreign or unconventional challengers", "nature": "challenging" },
+        "trine": { "effect": "Expansion through unconventional channels, foreign travel, or innovative teaching", "nature": "harmonious" },
+        "square": { "effect": "Deceptive growth opportunities, false gurus, or inflated promises mislead", "nature": "tense" },
+        "sextile": { "effect": "Gradual growth through technology, foreign connections, or alternative education", "nature": "harmonious" }
+      },
+      "venus": {
+        "conjunction": { "effect": "Obsessive attraction and compulsive desire, unconventional relationships form rapidly", "nature": "intense" },
+        "opposition": { "effect": "Deceptive romantic illusions, attraction to unavailable or inappropriate partners", "nature": "challenging" },
+        "trine": { "effect": "Exciting unconventional love and creative inspiration through foreign sources", "nature": "harmonious" },
+        "square": { "effect": "Compulsive desires for forbidden pleasures, obsessive romantic fixations", "nature": "tense" },
+        "sextile": { "effect": "Unusual artistic inspiration and cross-cultural romantic possibilities emerge gently", "nature": "harmonious" }
+      },
+      "saturn": {
+        "conjunction": { "effect": "Obsessive ambition within restrictive structures, compulsive career climbing intensifies", "nature": "intense" },
+        "opposition": { "effect": "Unconventional forces disrupt established structures and security painfully", "nature": "challenging" },
+        "trine": { "effect": "Innovative approach to responsibilities creates efficient unconventional solutions", "nature": "harmonious" },
+        "square": { "effect": "Fear of change battling compulsive desire for it creates paralysis", "nature": "tense" },
+        "sextile": { "effect": "Gradual integration of new technology or methods into existing structures", "nature": "harmonious" }
+      },
+      "rahu": {
+        "conjunction": { "effect": "Rahu return amplifies all obsessions, major karmic cycle of desire restarts", "nature": "intense" },
+        "opposition": { "effect": "Confrontation with deepest illusions, what you chase may be mirage", "nature": "challenging" },
+        "trine": { "effect": "Amplified desire energy finds productive unconventional outlets for manifestation", "nature": "neutral" },
+        "square": { "effect": "Compulsive self-defeating patterns reach crisis point demanding conscious change", "nature": "tense" },
+        "sextile": { "effect": "Subtle shifts in desire nature open new unconventional possibilities", "nature": "neutral" }
+      },
+      "ketu": {
+        "conjunction": { "effect": "Eclipse energy activates karmic axis, worldly obsession meets spiritual surrender", "nature": "intense" },
+        "opposition": { "effect": "Material desires directly oppose spiritual detachment in powerful karmic tension", "nature": "challenging" },
+        "trine": { "effect": "Desire and detachment find surprising harmony through transcendent action", "nature": "harmonious" },
+        "square": { "effect": "Torn between worldly ambition and spiritual withdrawal with no resolution", "nature": "tense" },
+        "sextile": { "effect": "Subtle integration of ambition and spirituality creates balanced purpose", "nature": "harmonious" }
+      }
+    },
+    "ketu": {
+      "sun": {
+        "conjunction": { "effect": "Ego dissolution and spiritual awakening, identity crisis leads to transformation", "nature": "intense" },
+        "opposition": { "effect": "Detachment from worldly recognition, past-life themes challenge current identity", "nature": "challenging" },
+        "trine": { "effect": "Spiritual insight illuminates life purpose with quiet effortless confidence", "nature": "harmonious" },
+        "square": { "effect": "Confusion about life direction, ego dissolution without clear replacement path", "nature": "tense" },
+        "sextile": { "effect": "Subtle spiritual awareness helps refine authentic self-expression gracefully", "nature": "harmonious" }
+      },
+      "moon": {
+        "conjunction": { "effect": "Emotional detachment deepens, psychic sensitivity peaks but comfort decreases", "nature": "intense" },
+        "opposition": { "effect": "Past emotional wounds resurface for final healing and karmic release", "nature": "challenging" },
+        "trine": { "effect": "Intuitive emotional wisdom flows naturally, inner peace deepens beautifully", "nature": "harmonious" },
+        "square": { "effect": "Emotional numbness alternating with psychic overwhelm creates instability", "nature": "tense" },
+        "sextile": { "effect": "Gentle spiritual insights emerge through quiet emotional reflection periods", "nature": "harmonious" }
+      },
+      "mars": {
+        "conjunction": { "effect": "Sudden energy loss or spiritual warrior activation, past-life anger releases", "nature": "intense" },
+        "opposition": { "effect": "Worldly aggression feels pointless, existential frustration with competition arises", "nature": "challenging" },
+        "trine": { "effect": "Selfless courageous action produces powerful results without ego attachment", "nature": "harmonious" },
+        "square": { "effect": "Directionless anger and frustration from inability to assert effectively", "nature": "tense" },
+        "sextile": { "effect": "Subtle inner strength helps release anger patterns with spiritual wisdom", "nature": "harmonious" }
+      },
+      "mercury": {
+        "conjunction": { "effect": "Rational mind surrenders to intuition, intellectual detachment and spiritual insight", "nature": "intense" },
+        "opposition": { "effect": "Communication feels futile, spiritual truths resist logical articulation", "nature": "challenging" },
+        "trine": { "effect": "Intuitive knowing transcends logic, excellent for meditation and spiritual study", "nature": "harmonious" },
+        "square": { "effect": "Mental fog and inability to concentrate, intellectual confidence undermined", "nature": "tense" },
+        "sextile": { "effect": "Quiet contemplative insights help simplify overcomplicated mental patterns", "nature": "harmonious" }
+      },
+      "jupiter": {
+        "conjunction": { "effect": "Detachment from material expansion, renunciation and spiritual wisdom deepen profoundly", "nature": "intense" },
+        "opposition": { "effect": "Worldly success feels hollow, existential questioning of growth and meaning", "nature": "challenging" },
+        "trine": { "effect": "Spiritual wisdom and material blessings coexist in beautiful natural balance", "nature": "harmonious" },
+        "square": { "effect": "Conflict between spiritual renunciation and worldly abundance creates confusion", "nature": "tense" },
+        "sextile": { "effect": "Gradual spiritual maturity enriches understanding of true prosperity", "nature": "harmonious" }
+      },
+      "venus": {
+        "conjunction": { "effect": "Detachment from sensual pleasure, past-life love connections may resurface", "nature": "intense" },
+        "opposition": { "effect": "Worldly pleasures and romance feel empty, spiritual longing intensifies", "nature": "challenging" },
+        "trine": { "effect": "Unconditional love and non-attachment bring deeper satisfaction than possession", "nature": "harmonious" },
+        "square": { "effect": "Torn between sensual desire and spiritual detachment, neither satisfies", "nature": "tense" },
+        "sextile": { "effect": "Simple beauty appreciation and non-possessive love bring quiet contentment", "nature": "harmonious" }
+      },
+      "saturn": {
+        "conjunction": { "effect": "Karmic structures dissolve, material security released for spiritual liberation", "nature": "intense" },
+        "opposition": { "effect": "Worldly responsibilities feel like spiritual prison, deep existential heaviness", "nature": "challenging" },
+        "trine": { "effect": "Spiritual discipline and patient detachment create profound karmic resolution", "nature": "harmonious" },
+        "square": { "effect": "Fear of losing security battles spiritual urge to renounce attachments", "nature": "tense" },
+        "sextile": { "effect": "Gradual release of rigid structures allows spiritual freedom to grow", "nature": "harmonious" }
+      },
+      "rahu": {
+        "conjunction": { "effect": "Eclipse energy on karmic axis, intense purging of desires and illusions", "nature": "intense" },
+        "opposition": { "effect": "Spiritual surrender directly opposes worldly ambition in karmic confrontation", "nature": "challenging" },
+        "trine": { "effect": "Detachment from obsessions allows genuine spiritual insight and freedom", "nature": "harmonious" },
+        "square": { "effect": "Spiritual confusion as detachment and desire pull in opposing directions", "nature": "tense" },
+        "sextile": { "effect": "Subtle release of compulsive patterns through growing spiritual awareness", "nature": "harmonious" }
+      },
+      "ketu": {
+        "conjunction": { "effect": "Ketu return brings deep karmic reckoning, spiritual liberation cycle peaks", "nature": "intense" },
+        "opposition": { "effect": "Mirror of detachment reveals where you still cling to past patterns", "nature": "challenging" },
+        "trine": { "effect": "Profound spiritual realization and liberation from old karmic patterns flow", "nature": "harmonious" },
+        "square": { "effect": "Disorientation and loss of grounding as familiar spiritual props dissolve", "nature": "tense" },
+        "sextile": { "effect": "Gentle deepening of spiritual practice and release of subtle attachments", "nature": "harmonious" }
+      }
+    }
+  }
+}

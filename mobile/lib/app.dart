@@ -10,6 +10,8 @@ import 'features/onboarding/screens/profile_screen.dart';
 import 'features/onboarding/screens/birth_details_screen.dart';
 import 'features/home/screens/home_screen.dart';
 import 'features/timeline/screens/timeline_screen.dart';
+import 'features/transits/screens/transit_dashboard_screen.dart';
+import 'features/chart/screens/chart_screen.dart';
 
 /// Triggers GoRouter redirect re-evaluation on auth changes.
 class _AuthNotifier extends ChangeNotifier {
@@ -58,6 +60,14 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/timeline',
         builder: (_, __) => const TimelineScreen(),
+      ),
+      GoRoute(
+        path: '/transits',
+        builder: (_, __) => const TransitDashboardScreen(),
+      ),
+      GoRoute(
+        path: '/chart',
+        builder: (_, __) => const ChartScreen(),
       ),
       GoRoute(
         path: '/home',

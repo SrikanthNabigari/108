@@ -19,6 +19,7 @@ from packages.context.src.dasha import (
     get_mahadasha_sequence,
     get_pratyantardasha_sequence,
 )
+from packages.core.src.knowledge_loader import get_transit_aspect_effects
 from packages.cosmos.src.ephemeris import get_all_planets, get_julian_day
 
 # Parashari special aspects
@@ -101,6 +102,21 @@ def _detect_sign_ingresses(
     return triggers
 
 
+def _lookup_what(transit_planet: str, natal_planet: str, aspect_type: str = "conjunction") -> str:
+    """Look up WHAT interpretation from knowledge for a transit-natal aspect."""
+    try:
+        knowledge = get_transit_aspect_effects()
+        t = transit_planet.lower()
+        n = natal_planet.lower()
+        if knowledge and t in knowledge:
+            planet_data = knowledge[t].get(n, {})
+            if aspect_type in planet_data:
+                return planet_data[aspect_type].get("effect", "")
+    except Exception:
+        pass
+    return ""
+
+
 def _detect_conjunctions(
     curr_positions: dict[str, dict[str, Any]],
     natal_planets: dict[str, dict[str, Any]],
@@ -117,6 +133,7 @@ def _detect_conjunctions(
             dist = _angular_distance(t_lon, n_lon)
 
             if dist <= orb:
+                what = _lookup_what(t_planet, n_planet, "conjunction")
                 triggers.append(
                     {
                         "date": check_date.strftime("%Y-%m-%d"),
@@ -128,6 +145,7 @@ def _detect_conjunctions(
                         "orb": round(dist, 2),
                         "significance": _TRIGGER_SIGNIFICANCE["conjunction"],
                         "effect": f"Transit {t_planet.title()} activating natal {n_planet.title()} by conjunction",
+                        "what": what,
                     }
                 )
     return triggers
@@ -169,6 +187,10 @@ def _detect_aspects(
                 slow_planets = {"saturn", "jupiter", "rahu", "ketu", "mars"}
                 sig = "high" if t_lower in slow_planets else "low"
 
+                # Map house distance to aspect type for knowledge lookup
+                aspect_lookup = {7: "opposition", 4: "square", 8: "square"}.get(house_dist, "")
+                what = _lookup_what(t_planet, n_planet, aspect_lookup) if aspect_lookup else ""
+
                 triggers.append(
                     {
                         "date": check_date.strftime("%Y-%m-%d"),
@@ -180,6 +202,7 @@ def _detect_aspects(
                         "aspect_house": house_dist,
                         "significance": sig,
                         "effect": f"Transit {t_planet.title()} influencing natal {n_planet.title()} via {aspect_name} aspect",
+                        "what": what,
                     }
                 )
     return triggers

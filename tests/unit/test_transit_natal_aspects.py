@@ -98,21 +98,33 @@ class TestGetEffect:
     """Test effect description retrieval."""
 
     def test_saturn_moon_effect(self):
-        effect = _get_effect("saturn", "moon")
-        assert "emotional" in effect.lower() or "mental" in effect.lower()
+        result = _get_effect("saturn", "moon")
+        assert isinstance(result, dict)
+        effect = result["effect"]
+        assert (
+            "emotional" in effect.lower() or "mental" in effect.lower() or "mood" in effect.lower()
+        )
 
     def test_jupiter_sun_effect(self):
-        effect = _get_effect("jupiter", "sun")
-        assert "expansion" in effect.lower() or "leadership" in effect.lower()
+        result = _get_effect("jupiter", "sun")
+        assert isinstance(result, dict)
+        effect = result["effect"]
+        assert (
+            "expansion" in effect.lower()
+            or "leadership" in effect.lower()
+            or "confidence" in effect.lower()
+        )
 
     def test_unknown_combination_fallback(self):
-        effect = _get_effect("rahu", "ketu")
-        assert "transit" in effect.lower()
+        result = _get_effect("pluto", "chiron")
+        assert isinstance(result, dict)
+        assert "transit" in result["effect"].lower()
 
     def test_reverse_lookup(self):
         # Should find effect even if planets are in reverse order
-        effect = _get_effect("moon", "saturn")
-        assert len(effect) > 0
+        result = _get_effect("moon", "saturn")
+        assert isinstance(result, dict)
+        assert len(result["effect"]) > 0
 
 
 class TestGetTransitNatalAspects:
