@@ -72,6 +72,7 @@ class IntentType(StrEnum):
     REMEDY = "remedy"  # User asks for remedies
     GENERAL = "general"  # General questions about astrology
     PERSONAL = "personal"  # Personal questions about their chart
+    STATE_MAP = "state_map"  # User asks about life areas, state, overall condition
     UNKNOWN = "unknown"  # Can't determine intent
 
 
@@ -289,6 +290,29 @@ INTENT_KEYWORDS = {
     ],
     IntentType.REMEDY: ["remedy", "solution", "what should", "help", "fix", "improve"],
     IntentType.PERSONAL: ["my chart", "my birth", "about me", "tell me about", "my future"],
+    IntentType.STATE_MAP: [
+        "state",
+        "life area",
+        "area score",
+        "how is my",
+        "career today",
+        "health today",
+        "money today",
+        "love today",
+        "family today",
+        "education today",
+        "travel today",
+        "spiritual today",
+        "overall state",
+        "state map",
+        "how am i doing",
+        "what areas",
+        "which areas",
+        "strong areas",
+        "weak areas",
+        "composite score",
+        "mental state",
+    ],
     IntentType.GENERAL: ["tell me", "explain", "what is", "how does", "define", "mean"],
 }
 
@@ -491,6 +515,7 @@ class Guide:
                 IntentType.ANALYZE.value: "analyze",
                 IntentType.PREDICT.value: "predict",
                 IntentType.TIMING.value: "predict",
+                IntentType.STATE_MAP.value: "predict",
                 IntentType.REMEDY.value: "remedy",
                 IntentType.PERSONAL.value: "general",
                 IntentType.GENERAL.value: "general",
@@ -722,7 +747,7 @@ Respond with ONLY the intent name (e.g., "calculate")"""
             return "calculate"
         elif intent == IntentType.ANALYZE:
             return "analyze"
-        elif intent in [IntentType.PREDICT, IntentType.TIMING]:
+        elif intent in [IntentType.PREDICT, IntentType.TIMING, IntentType.STATE_MAP]:
             return "predict"
         elif intent == IntentType.REMEDY:
             return "remedy"
@@ -1326,6 +1351,54 @@ Respond with ONLY the intent name (e.g., "calculate")"""
                 except Exception as e:
                     logger.debug(f"Forecast generation skipped: {e}")
 
+            # State Vector — compute for STATE_MAP, PREDICT, and PERSONAL intents
+            intent = state.get("intent")
+            if intent in (IntentType.STATE_MAP, IntentType.PREDICT, IntentType.PERSONAL):
+                try:
+                    from packages.context.src.state_engine import compute_state_vector
+
+                    bc = state["birth_chart"]
+                    birth_dt_str = bc.get("birth_datetime")
+                    lat = bc.get("latitude")
+                    lon = bc.get("longitude")
+                    planets_raw = bc.get("planets", {})
+                    lagna_str = bc.get("lagna_rashi", "aries").lower()
+                    moon_str = bc.get("moon_rashi")
+                    moon_lon = 0.0
+                    if "moon" in planets_raw:
+                        moon_data = planets_raw["moon"]
+                        if isinstance(moon_data, dict):
+                            moon_lon = moon_data.get("longitude", 0.0)
+
+                    if birth_dt_str and lat and lon:
+                        sv = compute_state_vector(
+                            birth_datetime=birth_dt_str,
+                            birth_lat=lat,
+                            birth_lon=lon,
+                            natal_planets=planets_raw,
+                            moon_longitude=moon_lon,
+                            lagna_rashi=lagna_str,
+                            moon_rashi=moon_str,
+                        )
+                        state["analysis_results"]["state_vector"] = sv
+                        composite = sv.get("composite", 0.0)
+                        mental = sv.get("mental_state", "unknown")
+                        prediction_factors.append(f"Composite score: {composite:.1f}/10 ({mental})")
+                        # Add top 3 areas
+                        areas = sv.get("areas", [])
+                        sorted_areas = sorted(
+                            areas,
+                            key=lambda x: x.get("score", 0) if isinstance(x, dict) else 0,
+                            reverse=True,
+                        )
+                        for area_data in sorted_areas[:3]:
+                            if isinstance(area_data, dict):
+                                prediction_factors.append(
+                                    f"Top area: {area_data.get('id', '?')} = {area_data.get('score', 0):.1f}/10"
+                                )
+                except Exception as e:
+                    logger.debug(f"State vector computation skipped: {e}")
+
         state["analysis_results"]["predictions_generated"] = True
         state["analysis_results"]["prediction_factors"] = prediction_factors
 
@@ -1706,6 +1779,55 @@ Be the user's trusted guide on their life journey. Combine Vedic wisdom with com
         # Remedies
         if results.get("remedies"):
             parts.append("Remedy recommendations available")
+
+        # State Vector
+        if results.get("state_vector"):
+            sv = results["state_vector"]
+            composite = sv.get("composite", 0.0)
+            mental = sv.get("mental_state", "unknown")
+            parts.append(f"STATE: composite={composite:.1f}/10 mental_state={mental}")
+
+            # Factor short scores
+            factors = sv.get("factors", [])
+            factor_parts = []
+            for fdata in factors:
+                if isinstance(fdata, dict):
+                    abbr = fdata.get("short_name", fdata.get("id", "?")[:3].upper())
+                    fscore = fdata.get("score", 0.0)
+                    factor_parts.append(f"{abbr}={fscore:.1f}")
+            if factor_parts:
+                parts.append(f"Factors: {', '.join(factor_parts)}")
+
+            # Area scores ranked high→low
+            areas = sv.get("areas", [])
+            sorted_areas = sorted(
+                areas,
+                key=lambda x: x.get("score", 0) if isinstance(x, dict) else 0,
+                reverse=True,
+            )
+            area_lines = []
+            for area_data in sorted_areas:
+                if isinstance(area_data, dict):
+                    aid = area_data.get("id", "?")
+                    score = area_data.get("score", 0.0)
+                    annotations = []
+                    if area_data.get("double_transit"):
+                        annotations.append("DT")
+                    if area_data.get("active_yogas"):
+                        annotations.append(f"{len(area_data['active_yogas'])}Y")
+                    ann_str = f" [{','.join(annotations)}]" if annotations else ""
+                    area_lines.append(f"  {aid}: {score:.1f}/10{ann_str}")
+            if area_lines:
+                parts.append("Life areas:\n" + "\n".join(area_lines))
+
+            # Sade Sati if active
+            if sv.get("sade_sati_active"):
+                parts.append("Sade Sati is currently active")
+
+            # Area insights
+            if sv.get("insights"):
+                for insight in sv["insights"][:3]:
+                    parts.append(f"Insight: {insight}")
 
         # Memories
         if state.get("memories"):

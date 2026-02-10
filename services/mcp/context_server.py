@@ -1895,5 +1895,132 @@ def monthly_forecast(
         return {"error": str(e), "type": type(e).__name__, "success": False}
 
 
+@mcp.tool()
+def state_vector(
+    birth_datetime: str,
+    birth_lat: float,
+    birth_lon: float,
+    natal_planets: dict[str, Any],
+    moon_longitude: float,
+    lagna_rashi: str,
+    moon_rashi: str | None = None,
+    query_datetime: str | None = None,
+    location_lat: float | None = None,
+    location_lon: float | None = None,
+) -> dict[str, Any]:
+    """
+    Compute the full state vector for a given moment.
+
+    Returns 7 factor scores (panchanga, transit_moon, gochara, dasha,
+    yoga_activation, shadbala, ashtakavarga), 8 life area scores
+    (career, relationships, health, finance, spiritual, family,
+    education, travel), a composite score (0-10), mental state label,
+    confluence measure, and hora lord.
+
+    Args:
+        birth_datetime: Birth date/time ISO string (e.g. "1992-12-03T03:00:00+05:30")
+        birth_lat: Birth latitude
+        birth_lon: Birth longitude
+        natal_planets: Natal planet positions dict {name: {longitude, rashi, house}}
+        moon_longitude: Moon's sidereal longitude at birth (0-360)
+        lagna_rashi: Ascendant rashi name (e.g. "libra")
+        moon_rashi: Moon rashi name (optional, computed from longitude if missing)
+        query_datetime: ISO string for the moment to evaluate (default: now)
+        location_lat: Current location latitude (default: birth lat)
+        location_lon: Current location longitude (default: birth lon)
+
+    Returns:
+        State vector dict with factors, areas, composite, mental_state,
+        confluence, and hora_lord
+
+    Example:
+        state_vector("1992-12-03T03:00:00+05:30", 16.73, 81.29,
+            {"sun": {"longitude": 240.5}}, 326.85, "libra")
+    """
+    try:
+        from packages.context.src.state_engine import compute_state_vector
+
+        result = compute_state_vector(
+            birth_datetime=birth_datetime,
+            birth_lat=birth_lat,
+            birth_lon=birth_lon,
+            natal_planets=natal_planets,
+            moon_longitude=moon_longitude,
+            lagna_rashi=lagna_rashi,
+            moon_rashi=moon_rashi,
+            query_datetime=query_datetime,
+            location_lat=location_lat,
+            location_lon=location_lon,
+        )
+        return {"success": True, **result}
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__, "success": False}
+
+
+@mcp.tool()
+def state_range(
+    birth_datetime: str,
+    birth_lat: float,
+    birth_lon: float,
+    natal_planets: dict[str, Any],
+    moon_longitude: float,
+    lagna_rashi: str,
+    moon_rashi: str | None = None,
+    start_date: str | None = None,
+    end_date: str | None = None,
+    resolution: str = "daily",
+    location_lat: float | None = None,
+    location_lon: float | None = None,
+) -> dict[str, Any]:
+    """
+    Compute state vectors for a date range.
+
+    Returns a list of state vectors, one per time step, allowing trend
+    analysis across days, weeks, or months.
+
+    Args:
+        birth_datetime: Birth date/time ISO string
+        birth_lat: Birth latitude
+        birth_lon: Birth longitude
+        natal_planets: Natal planet positions dict
+        moon_longitude: Moon's sidereal longitude at birth
+        lagna_rashi: Ascendant rashi name
+        moon_rashi: Moon rashi name (optional)
+        start_date: Start date YYYY-MM-DD (default: 30 days ago)
+        end_date: End date YYYY-MM-DD (default: today)
+        resolution: "hourly" | "daily" | "weekly" | "monthly" | "yearly"
+        location_lat: Current location latitude (default: birth lat)
+        location_lon: Current location longitude (default: birth lon)
+
+    Returns:
+        Dict with vectors list, resolution, and events
+
+    Example:
+        state_range("1992-12-03T03:00:00+05:30", 16.73, 81.29,
+            {"sun": {"longitude": 240.5}}, 326.85, "libra",
+            start_date="2026-01-01", end_date="2026-01-31")
+    """
+    try:
+        from packages.context.src.state_engine import compute_state_range
+
+        result = compute_state_range(
+            birth_datetime=birth_datetime,
+            birth_lat=birth_lat,
+            birth_lon=birth_lon,
+            natal_planets=natal_planets,
+            moon_longitude=moon_longitude,
+            lagna_rashi=lagna_rashi,
+            moon_rashi=moon_rashi,
+            start_date=start_date,
+            end_date=end_date,
+            resolution=resolution,
+            location_lat=location_lat,
+            location_lon=location_lon,
+        )
+        return {"success": True, **result}
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__, "success": False}
+
+
 if __name__ == "__main__":
     mcp.run()

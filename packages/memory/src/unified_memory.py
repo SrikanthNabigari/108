@@ -605,6 +605,49 @@ class UnifiedMemoryClient:
             user_id=user_id,
         )
 
+    async def remember_state_vector(
+        self,
+        query_date: str,
+        composite_score: float,
+        mental_state: str,
+        top_factors: list[str] | None = None,
+        top_areas: list[str] | None = None,
+        confluence: float = 0.0,
+        user_id: str | None = None,
+    ) -> Any:
+        """Store a state vector snapshot in memory.
+
+        Args:
+            query_date: ISO date string for this snapshot
+            composite_score: Overall composite score (0-10)
+            mental_state: Mental state label (e.g. "positive", "challenging")
+            top_factors: Top contributing factors
+            top_areas: Top scoring life areas
+            confluence: Confluence measure
+            user_id: Optional user ID override
+        """
+        factors_str = ", ".join(top_factors[:3]) if top_factors else "none"
+        areas_str = ", ".join(top_areas[:3]) if top_areas else "none"
+        content = (
+            f"State on {query_date}: composite={composite_score:.1f}/10 "
+            f"({mental_state}). Top factors: {factors_str}. "
+            f"Top areas: {areas_str}."
+        )
+        return await self.add(
+            content=content,
+            category="state_vector",
+            metadata={
+                "query_date": query_date,
+                "composite_score": composite_score,
+                "mental_state": mental_state,
+                "top_factors": top_factors or [],
+                "top_areas": top_areas or [],
+                "confluence": confluence,
+            },
+            importance=0.5,
+            user_id=user_id,
+        )
+
     async def get_context_for_query(
         self,
         query: str,
@@ -635,6 +678,7 @@ class UnifiedMemoryClient:
             "event_correlations": [],
             "remedies": [],
             "transit_triggers": [],
+            "state_vectors": [],
         }
 
         # Search for relevant memories
@@ -665,6 +709,8 @@ class UnifiedMemoryClient:
                 context["remedies"].append(memory.metadata)
             elif memory.category == "transit_trigger":
                 context["transit_triggers"].append(memory.metadata)
+            elif memory.category == "state_vector":
+                context["state_vectors"].append(memory.metadata)
 
         return context
 

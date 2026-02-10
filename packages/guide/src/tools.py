@@ -1713,6 +1713,121 @@ class AstrologyTools:
             return {"success": False, "error": str(e)}
 
     # ===================
+    # STATE ENGINE TOOLS
+    # ===================
+
+    def get_state_vector(
+        self,
+        birth_datetime: datetime,
+        birth_lat: float,
+        birth_lon: float,
+        natal_planets: dict[str, Any],
+        moon_longitude: float,
+        lagna_rashi: str,
+        moon_rashi: str | None = None,
+        query_datetime: datetime | None = None,
+    ) -> dict[str, Any]:
+        """Compute the full state vector (7 factors + 8 areas + composite).
+
+        Args:
+            birth_datetime: Birth date/time
+            birth_lat: Birth latitude
+            birth_lon: Birth longitude
+            natal_planets: Dict of natal planet positions
+            moon_longitude: Moon's longitude at birth (0-360)
+            lagna_rashi: Ascendant rashi name
+            moon_rashi: Moon rashi name (optional)
+            query_datetime: Moment to evaluate (default: now)
+
+        Returns:
+            State vector with factors, areas, composite, mental_state
+        """
+        try:
+            from packages.context.src.state_engine import compute_state_vector
+
+            birth_dt_str = (
+                birth_datetime.isoformat()
+                if isinstance(birth_datetime, datetime)
+                else str(birth_datetime)
+            )
+            query_dt_str = query_datetime.isoformat() if query_datetime else None
+
+            result = compute_state_vector(
+                birth_datetime=birth_dt_str,
+                birth_lat=birth_lat,
+                birth_lon=birth_lon,
+                natal_planets=natal_planets,
+                moon_longitude=moon_longitude,
+                lagna_rashi=lagna_rashi,
+                moon_rashi=moon_rashi,
+                query_datetime=query_dt_str,
+            )
+            return {"state_vector": result, "success": True}
+        except Exception as e:
+            logger.error(f"Error computing state vector: {e!s}")
+            return {"success": False, "error": str(e)}
+
+    def get_life_area_score(
+        self,
+        area_id: str,
+        birth_datetime: datetime,
+        birth_lat: float,
+        birth_lon: float,
+        natal_planets: dict[str, Any],
+        moon_longitude: float,
+        lagna_rashi: str,
+        moon_rashi: str | None = None,
+        query_datetime: datetime | None = None,
+    ) -> dict[str, Any]:
+        """Get the score for a specific life area.
+
+        Args:
+            area_id: One of career, relationships, health, finance,
+                     spiritual, family, education, travel
+            birth_datetime: Birth date/time
+            birth_lat: Birth latitude
+            birth_lon: Birth longitude
+            natal_planets: Dict of natal planet positions
+            moon_longitude: Moon's longitude at birth
+            lagna_rashi: Ascendant rashi name
+            moon_rashi: Moon rashi name (optional)
+            query_datetime: Moment to evaluate (default: now)
+
+        Returns:
+            Single area score with composite and mental_state
+        """
+        sv = self.get_state_vector(
+            birth_datetime=birth_datetime,
+            birth_lat=birth_lat,
+            birth_lon=birth_lon,
+            natal_planets=natal_planets,
+            moon_longitude=moon_longitude,
+            lagna_rashi=lagna_rashi,
+            moon_rashi=moon_rashi,
+            query_datetime=query_datetime,
+        )
+        if not sv.get("success"):
+            return sv
+
+        vector = sv["state_vector"]
+        areas = vector.get("areas", [])
+        area = None
+        for a in areas:
+            if isinstance(a, dict) and a.get("id") == area_id:
+                area = a
+                break
+        if area is None:
+            return {"success": False, "error": f"Unknown area: {area_id}"}
+
+        return {
+            "area": area,
+            "area_id": area_id,
+            "composite": vector.get("composite", 0.0),
+            "mental_state": vector.get("mental_state", "unknown"),
+            "success": True,
+        }
+
+    # ===================
     # KP (KRISHNAMURTI PADDHATI) TOOLS
     # ===================
 

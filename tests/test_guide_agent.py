@@ -190,6 +190,224 @@ def test_route_by_intent():
     assert guide._route_by_intent({"intent": IntentType.GENERAL}) == "general"
     assert guide._route_by_intent({"intent": IntentType.REMEDY}) == "remedy"
     assert guide._route_by_intent({"intent": IntentType.UNKNOWN}) == "general"
+    assert guide._route_by_intent({"intent": IntentType.STATE_MAP}) == "predict"
+
+
+def test_state_map_intent_classification():
+    """Test that STATE_MAP intent is classified by keywords."""
+    from packages.guide.src.agent import INTENT_KEYWORDS, IntentType
+
+    # Verify STATE_MAP keywords exist
+    assert IntentType.STATE_MAP in INTENT_KEYWORDS
+    keywords = INTENT_KEYWORDS[IntentType.STATE_MAP]
+    assert len(keywords) > 0
+
+    # Test specific queries that should trigger STATE_MAP
+    test_queries = [
+        "how is my career today",
+        "show me the state map",
+        "what are my strong areas",
+        "how am i doing overall state",
+        "life area scores please",
+    ]
+
+    for query in test_queries:
+        query_lower = query.lower()
+        max_matches = 0
+        best_intent = IntentType.UNKNOWN
+
+        for intent_type, kws in INTENT_KEYWORDS.items():
+            matches = sum(1 for kw in kws if kw in query_lower)
+            if matches > max_matches:
+                max_matches = matches
+                best_intent = intent_type
+
+        assert (
+            best_intent == IntentType.STATE_MAP
+        ), f"Expected STATE_MAP for '{query}', got {best_intent}"
+
+
+def test_state_map_conditional_edges():
+    """Test that STATE_MAP is wired in the conditional edges."""
+    from packages.guide.src.agent import IntentType
+
+    # STATE_MAP should route to predict
+    assert IntentType.STATE_MAP.value == "state_map"
+
+
+def test_format_context_with_state_vector():
+    """Test context formatting with state_vector in analysis_results."""
+    from packages.guide.src.agent import Guide
+
+    guide = Guide.__new__(Guide)
+    guide.debug = False
+
+    state = {
+        "birth_chart": {
+            "lagna_rashi": "Libra",
+            "moon_rashi": "Aquarius",
+        },
+        "current_dasha": {},
+        "analysis_results": {
+            "state_vector": {
+                "composite": 6.3,
+                "mental_state": "positive",
+                "factors": [
+                    {"id": "panchanga", "short_name": "PAN", "score": 6.2, "label": "good"},
+                    {"id": "transit_moon", "short_name": "MON", "score": 5.1, "label": "moderate"},
+                    {"id": "gochara", "short_name": "GOC", "score": 7.0, "label": "good"},
+                    {"id": "dasha", "short_name": "DAS", "score": 6.8, "label": "good"},
+                    {
+                        "id": "yoga_activation",
+                        "short_name": "YOG",
+                        "score": 5.5,
+                        "label": "moderate",
+                    },
+                    {"id": "shadbala", "short_name": "SHA", "score": 6.0, "label": "moderate"},
+                    {"id": "ashtakavarga", "short_name": "ASH", "score": 5.9, "label": "moderate"},
+                ],
+                "areas": [
+                    {
+                        "id": "career",
+                        "score": 7.2,
+                        "double_transit": True,
+                        "active_yogas": ["Raja Yoga"],
+                    },
+                    {"id": "relationships", "score": 5.5},
+                    {"id": "health", "score": 6.1},
+                    {"id": "finance", "score": 6.8, "active_yogas": ["Dhana Yoga"]},
+                    {"id": "spiritual", "score": 4.3},
+                    {"id": "family", "score": 5.9},
+                    {"id": "education", "score": 6.0},
+                    {"id": "travel", "score": 5.0},
+                ],
+            },
+        },
+        "detected_yogas": [],
+        "detected_doshas": [],
+        "memories": [],
+    }
+
+    context = guide._format_context(state)
+    assert "composite=6.3/10" in context
+    assert "positive" in context
+    assert "PAN=6.2" in context
+    assert "career: 7.2/10" in context
+    assert "DT" in context  # double transit annotation
+    assert "1Y" in context  # 1 yoga annotation for career
+
+
+def test_get_state_vector_tool():
+    """Test AstrologyTools.get_state_vector() returns correct structure."""
+    from datetime import datetime
+
+    from packages.guide.src.tools import AstrologyTools
+
+    tools = AstrologyTools()
+
+    natal_planets = {
+        "sun": {"longitude": 226.5, "rashi": 7, "house": 2},
+        "moon": {"longitude": 326.85, "rashi": 10, "house": 5},
+        "mars": {"longitude": 103.2, "rashi": 3, "house": 10},
+        "mercury": {"longitude": 241.3, "rashi": 8, "house": 2},
+        "jupiter": {"longitude": 142.8, "rashi": 4, "house": 11},
+        "venus": {"longitude": 206.1, "rashi": 6, "house": 12},
+        "saturn": {"longitude": 313.7, "rashi": 10, "house": 4},
+        "rahu": {"longitude": 205.5, "rashi": 6, "house": 12},
+        "ketu": {"longitude": 25.5, "rashi": 0, "house": 6},
+    }
+
+    result = tools.get_state_vector(
+        birth_datetime=datetime(1992, 12, 3, 3, 0, 0),
+        birth_lat=16.726239,
+        birth_lon=81.288428,
+        natal_planets=natal_planets,
+        moon_longitude=326.85,
+        lagna_rashi="libra",
+        moon_rashi="aquarius",
+    )
+
+    assert result["success"] is True
+    sv = result["state_vector"]
+    assert "factors" in sv
+    assert "areas" in sv
+    assert "composite" in sv
+    assert "mental_state" in sv
+    assert isinstance(sv["factors"], list)
+    assert len(sv["factors"]) == 7
+    assert isinstance(sv["areas"], list)
+    assert len(sv["areas"]) == 8
+
+
+def test_get_life_area_score_tool():
+    """Test AstrologyTools.get_life_area_score() returns single area."""
+    from datetime import datetime
+
+    from packages.guide.src.tools import AstrologyTools
+
+    tools = AstrologyTools()
+
+    natal_planets = {
+        "sun": {"longitude": 226.5, "rashi": 7, "house": 2},
+        "moon": {"longitude": 326.85, "rashi": 10, "house": 5},
+        "mars": {"longitude": 103.2, "rashi": 3, "house": 10},
+        "mercury": {"longitude": 241.3, "rashi": 8, "house": 2},
+        "jupiter": {"longitude": 142.8, "rashi": 4, "house": 11},
+        "venus": {"longitude": 206.1, "rashi": 6, "house": 12},
+        "saturn": {"longitude": 313.7, "rashi": 10, "house": 4},
+        "rahu": {"longitude": 205.5, "rashi": 6, "house": 12},
+        "ketu": {"longitude": 25.5, "rashi": 0, "house": 6},
+    }
+
+    result = tools.get_life_area_score(
+        area_id="career",
+        birth_datetime=datetime(1992, 12, 3, 3, 0, 0),
+        birth_lat=16.726239,
+        birth_lon=81.288428,
+        natal_planets=natal_planets,
+        moon_longitude=326.85,
+        lagna_rashi="libra",
+    )
+
+    assert result["success"] is True
+    assert result["area_id"] == "career"
+    assert "area" in result
+    assert "composite" in result
+    assert "mental_state" in result
+
+
+def test_get_life_area_score_unknown_area():
+    """Test get_life_area_score with unknown area returns error."""
+    from datetime import datetime
+
+    from packages.guide.src.tools import AstrologyTools
+
+    tools = AstrologyTools()
+
+    natal_planets = {
+        "sun": {"longitude": 226.5, "rashi": 7, "house": 2},
+        "moon": {"longitude": 326.85, "rashi": 10, "house": 5},
+        "mars": {"longitude": 103.2, "rashi": 3, "house": 10},
+        "mercury": {"longitude": 241.3, "rashi": 8, "house": 2},
+        "jupiter": {"longitude": 142.8, "rashi": 4, "house": 11},
+        "venus": {"longitude": 206.1, "rashi": 6, "house": 12},
+        "saturn": {"longitude": 313.7, "rashi": 10, "house": 4},
+        "rahu": {"longitude": 205.5, "rashi": 6, "house": 12},
+        "ketu": {"longitude": 25.5, "rashi": 0, "house": 6},
+    }
+
+    result = tools.get_life_area_score(
+        area_id="nonexistent",
+        birth_datetime=datetime(1992, 12, 3, 3, 0, 0),
+        birth_lat=16.726239,
+        birth_lon=81.288428,
+        natal_planets=natal_planets,
+        moon_longitude=326.85,
+        lagna_rashi="libra",
+    )
+
+    assert result["success"] is False
+    assert "Unknown area" in result["error"]
 
 
 if __name__ == "__main__":
