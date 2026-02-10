@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import logging
 import sys
 from datetime import datetime
@@ -37,16 +38,17 @@ async def _load_birth_chart(db: Any, user_id: str) -> dict[str, Any] | None:
         if not row:
             return None
 
-        # asyncpg returns JSONB as Python dict already
         return {
             "birth_datetime": row["birth_datetime"],
             "latitude": float(row["latitude"]),
             "longitude": float(row["longitude"]),
             "timezone": row["timezone"],
-            "planets": row["planets"] if row["planets"] else {},
-            "lagna_rashi": row["lagna_rashi"],
-            "moon_rashi": row["moon_rashi"],
-            "moon_nakshatra": row["moon_nakshatra"],
+            "planets": json.loads(row["planets"])
+            if isinstance(row["planets"], str)
+            else (row["planets"] or {}),
+            "lagna_rashi": row.get("lagna_rashi"),
+            "moon_rashi": row.get("moon_rashi"),
+            "moon_nakshatra": row.get("moon_nakshatra"),
             "ayanamsa": row.get("ayanamsa"),
         }
     except Exception as e:

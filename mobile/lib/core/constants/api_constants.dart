@@ -97,6 +97,16 @@ class ApiConstants {
   static const String remedies = '$apiVersion/remedies';
   static const String remediesGems = '$apiVersion/remedies/gems';
 
+  // State Map
+  static const String stateNow = '$apiVersion/state/now';
+  static String stateDate(String date) => '$apiVersion/state/date/$date';
+  static String stateRange({
+    required String start,
+    required String end,
+    String resolution = 'daily',
+  }) =>
+      '$apiVersion/state/range?start=$start&end=$end&resolution=$resolution';
+
   // Webhooks
   static const String webhooksRevenuecat = '/webhooks/revenuecat';
 

@@ -85,6 +85,11 @@ from .progressions import (
     get_current_progressions,
     get_progression_timeline,
 )
+from .state_engine import (
+    compute_state_range,
+    compute_state_vector,
+    get_hora_lord,
+)
 from .transit_aspects import (
     find_upcoming_aspects,
     get_transit_natal_aspects,
@@ -175,6 +180,8 @@ __all__ = [
     "check_double_transit",
     "check_sade_sati",
     "compare_natal_annual",
+    "compute_state_range",
+    "compute_state_vector",
     "correlate_event",
     "cross_analyze",
     "detect_tajika_yogas",
@@ -205,6 +212,7 @@ __all__ = [
     "get_enriched_transit_analysis",
     "get_full_transit_analysis",
     "get_gochara",
+    "get_hora_lord",
     "get_house_activations",
     "get_mahadasha_sequence",
     "get_marana_kaal",

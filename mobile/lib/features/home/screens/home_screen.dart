@@ -88,6 +88,16 @@ class HomeScreen extends ConsumerWidget {
                   onTap: () => context.go('/transits'),
                 ),
 
+                const SizedBox(height: S.lg),
+
+                _NavCard(
+                  icon: Icons.grid_on,
+                  title: 'State Map',
+                  subtitle: 'Your cosmic state — 7 factors, heat map, life areas',
+                  color: C.saturn,
+                  onTap: () => context.go('/state-map'),
+                ),
+
                 const Spacer(),
 
                 // Footer

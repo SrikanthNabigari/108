@@ -40,6 +40,7 @@ DEFAULT_APP_CONFIG: dict[str, Any] = {
         "analysis_kp": {"free": "locked", "pro": "locked", "premium": "full"},
         "compatibility_quick": {"free": "full", "pro": "full", "premium": "full"},
         "compatibility_full": {"free": "locked", "pro": "locked", "premium": "full"},
+        "state_map": {"free": "full", "pro": "full", "premium": "full"},
         "muhurta_check": {"free": "full", "pro": "full", "premium": "full"},
         "muhurta_find": {"free": "full", "pro": "full", "premium": "full"},
         "remedies": {"free": "full", "pro": "full", "premium": "full"},
@@ -241,6 +242,7 @@ def create_app() -> FastAPI:
         muhurta,
         remedies,
         reports,
+        state,
         webhooks,
     )
 
@@ -257,6 +259,7 @@ def create_app() -> FastAPI:
     app.include_router(remedies.router, prefix="/api/v1/remedies", tags=["remedies"])
     app.include_router(compatibility.router, prefix="/api/v1/compatibility", tags=["compatibility"])
     app.include_router(muhurta.router, prefix="/api/v1/muhurta", tags=["muhurta"])
+    app.include_router(state.router, prefix="/api/v1/state", tags=["state"])
     app.include_router(webhooks.router, prefix="/webhooks", tags=["webhooks"])
 
     return app
