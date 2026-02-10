@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:one_zero_eight/core/theme/app_theme.dart';
 import 'package:one_zero_eight/shared/widgets/glass_container.dart';
 import 'package:one_zero_eight/shared/widgets/ambient_background.dart';
@@ -12,6 +13,7 @@ import '../widgets/view_toggle.dart';
 import '../widgets/heat_map_grid.dart';
 import '../widgets/state_now_card.dart';
 import '../widgets/area_score_card.dart';
+import '../widgets/area_detail_panel.dart';
 import '../widgets/factor_detail_panel.dart';
 import '../widgets/add_event_sheet.dart';
 
@@ -331,7 +333,20 @@ class _StateMapScreenState extends ConsumerState<StateMapScreen> {
           Center(
             child: Column(
               children: [
-                Text('State Map', style: T.h2),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: () => context.go('/home'),
+                      child: const Padding(
+                        padding: EdgeInsets.only(right: S.sm),
+                        child: Icon(Icons.arrow_back_ios,
+                            color: C.textSecondary, size: 18),
+                      ),
+                    ),
+                    Text('State Map', style: T.h2),
+                  ],
+                ),
                 const SizedBox(height: 4),
                 Text(
                   'Your predicted state across time',
@@ -399,9 +414,17 @@ class _StateMapScreenState extends ConsumerState<StateMapScreen> {
 
           // ── Area Scores (from selected state) ──
           if (_selectedVector != null && _selectedVector!.areas.isNotEmpty) ...[
-            _SectionLabel(title: 'Life Areas', subtitle: _selectedLabel),
-            const SizedBox(height: S.sm),
-            AreaScoreCard(areas: _selectedVector!.areas),
+            AreaScoreCard(
+              areas: _selectedVector!.areas,
+              rangeVectors: _mapData?.vectors ?? [],
+              selectedDate: _selectedVector!.date,
+              onAreaTap: (area) => AreaDetailPanel.show(
+                context,
+                area: area,
+                rangeVectors: _mapData?.vectors ?? [],
+                selectedDate: _selectedVector!.date,
+              ),
+            ),
             const SizedBox(height: S.xl),
           ],
 

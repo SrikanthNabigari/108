@@ -122,7 +122,7 @@ class _TransitDashboardScreenState extends ConsumerState<TransitDashboardScreen>
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     GestureDetector(
-                      onTap: () => Navigator.of(context).pop(),
+                      onTap: () => context.go('/home'),
                       child: const Padding(
                         padding: EdgeInsets.only(right: S.sm),
                         child: Icon(Icons.arrow_back_ios, color: C.textSecondary, size: 18),

@@ -6,7 +6,7 @@ all outputs to a unified 0-10 scale.
 
 Each vector contains:
 - 7 factor scores (panchanga, transit_moon, gochara, dasha, yoga, shadbala, ashtakavarga)
-- 5 area scores (career, relationships, health, finance, spiritual)
+- 8 area scores (career, relationships, health, finance, spiritual, family, education, travel)
 - 1 composite score (weighted average)
 - mental state label + confluence measure + hora lord
 """
@@ -50,6 +50,9 @@ AREA_HOUSES: dict[str, list[int]] = {
     "health": [1, 6, 8],
     "finance": [2, 11, 5],
     "spiritual": [9, 12, 5],
+    "family": [4, 2, 1],
+    "education": [4, 5, 9],
+    "travel": [3, 9, 12],
 }
 
 AREA_PLANETS: dict[str, str] = {
@@ -58,6 +61,9 @@ AREA_PLANETS: dict[str, str] = {
     "health": "sun",
     "finance": "jupiter",
     "spiritual": "ketu",
+    "family": "moon",
+    "education": "mercury",
+    "travel": "rahu",
 }
 
 RASHI_NAMES = [
@@ -330,6 +336,9 @@ _AREA_NAMES: dict[str, str] = {
     "health": "Health",
     "finance": "Money",
     "spiritual": "Spirit",
+    "family": "Family",
+    "education": "Education",
+    "travel": "Travel",
 }
 
 
@@ -1132,21 +1141,21 @@ def _detect_natal_yogas(
     natal_planets: dict[str, Any],  # noqa: ARG001 — kept for fallback signature
     lagna_index: int,  # noqa: ARG001
     birth_chart: BirthChart | None = None,
-) -> list[dict[str, Any]]:
+) -> tuple[list[dict[str, Any]], list[Any]]:
     """Detect natal yogas using real YogaDetector (522 rules from knowledge).
 
     When birth_chart is available, delegates to YogaDetector.detect_all_yogas()
     which evaluates all 522 yoga rules from yoga_master.json.
-    Returns list of {name, planets, houses, category, strength}.
+    Returns tuple of (list of yoga dicts, list of raw DetectedYoga objects).
     """
     if birth_chart is None:
-        return []
+        return [], []
 
     try:
         detected = _yoga_detector.detect_all_yogas(birth_chart)
     except Exception as e:
         logger.warning(f"YogaDetector failed: {e}")
-        return []
+        return [], []
 
     yogas: list[dict[str, Any]] = []
     for dy in detected:
@@ -1167,7 +1176,7 @@ def _detect_natal_yogas(
             }
         )
 
-    return yogas
+    return yogas, detected
 
 
 def _detect_natal_doshas(
@@ -1193,12 +1202,12 @@ def _detect_natal_doshas(
     # Map dosha names to affected life areas
     _dosha_area_map: dict[str, list[str]] = {
         "mangal": ["relationships", "health"],
-        "kaal sarp": ["career", "health", "spiritual"],
+        "kaal sarp": ["career", "health", "spiritual", "travel"],
         "pitra": ["spiritual", "finance"],
         "guru chandal": ["spiritual", "career"],
         "grahan": ["health", "spiritual"],
-        "kemdrum": ["finance", "relationships"],
-        "shakat": ["career", "health"],
+        "kemdrum": ["finance", "relationships", "family"],
+        "shakat": ["career", "health", "education"],
         "daridra": ["finance", "career"],
     }
 
@@ -1317,6 +1326,9 @@ def _score_dosha_impact(
         "health": 0.0,
         "finance": 0.0,
         "spiritual": 0.0,
+        "family": 0.0,
+        "education": 0.0,
+        "travel": 0.0,
     }
 
     for dosha in natal_doshas:
@@ -1359,6 +1371,7 @@ def _score_dosha_impact(
             # Setting: family/money concerns
             penalties["finance"] -= 0.6
             penalties["relationships"] -= 0.4
+            penalties["family"] -= 0.5
 
     # Dhaiya (small panoti): Saturn in 4th or 8th from Moon
     if sade_sati and not sade_sati.get("active"):
@@ -1431,6 +1444,23 @@ def get_hora_lord(query_dt: datetime, lat: float, lon: float) -> str:
 # ── Area Scores ──
 
 
+_NATURE_SCORE: dict[str, float] = {
+    "yogakaraka": 9.0,
+    "benefic": 7.5,
+    "neutral": 5.0,
+    "malefic": 3.0,
+    "maraka": 2.0,
+}
+
+_NATURE_ASPECT_SCORE: dict[str, float] = {
+    "harmonious": 8.0,
+    "intense": 7.0,
+    "neutral": 5.0,
+    "tense": 3.5,
+    "challenging": 2.5,
+}
+
+
 def _compute_area_scores(
     factor_scores: list[dict[str, Any]],
     transit_positions: dict[str, int],
@@ -1438,38 +1468,25 @@ def _compute_area_scores(
     transit_result: dict[str, Any] | None = None,
     natal_planets: dict[str, Any] | None = None,
     dosha_penalties: dict[str, float] | None = None,
+    house_activations: list[dict[str, Any]] | None = None,
+    transit_lordships: list[dict[str, Any]] | None = None,
+    transit_aspects: list[dict[str, Any]] | None = None,
+    active_yogas: list[dict[str, Any]] | None = None,
+    dasha_result: dict[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
-    """Compute 5 life area scores from per-house transit analysis.
+    """Compute 8 life area scores using 6-component model.
 
-    Each area maps to specific houses. We score each area by checking
-    which planets are transiting those houses and whether those transits
-    are favorable or unfavorable — giving each area a distinct score.
-    Dosha penalties are applied per-area from natal dosha + transit amplification.
+    When house_activations are available, uses the rich model:
+    1. House Activation Score (35%) — composite per-house activation (0-100)
+    2. Lordship Quality (15%) — functional nature of ruling planets
+    3. Transit Aspects (10%) — aspect effects on natal planets in area houses
+    4. Dasha-Area Relevance (20%) — whether dasha lord rules area houses
+    5. Yoga Activation Boost (10%) — active yogas touching area houses
+    6. Panchanga + Natal Baseline (10%)
+
+    Falls back to old transit-favorability model when engines unavailable.
     """
-    # Planet transits keyed by planet name, each has house_from_moon + is_favorable
-    planet_transits = (transit_result or {}).get("planet_transits", {})
-
-    # Build house → list of (planet, favorable?) from lagna perspective
-    house_transits: dict[int, list[tuple[str, bool]]] = {h: [] for h in range(1, 13)}
-    for planet_name, rashi_idx in transit_positions.items():
-        house = _house_from_lagna(rashi_idx, lagna_index)
-        # Check favorability from gochara data
-        pt = planet_transits.get(planet_name, {})
-        favorable = pt.get("is_favorable", True)  # default favorable if unknown
-        house_transits[house].append((planet_name, favorable))
-
-    # Planet strength weights — benefics/malefics matter differently
-    _planet_weight = {
-        "jupiter": 1.5,
-        "venus": 1.2,
-        "mercury": 1.0,
-        "moon": 1.0,
-        "sun": 1.0,
-        "mars": 1.2,
-        "saturn": 1.5,
-        "rahu": 1.3,
-        "ketu": 1.0,
-    }
+    factor_map = {f["id"]: f["score"] for f in factor_scores}
 
     # Natal planet house map — planets sitting in the house natally
     natal_house_map: dict[int, list[str]] = {h: [] for h in range(1, 13)}
@@ -1480,79 +1497,215 @@ def _compute_area_scores(
                 if 1 <= h <= 12:
                     natal_house_map[h].append(pname)
 
-    factor_map = {f["id"]: f["score"] for f in factor_scores}
+    # House importance weights: primary house matters most
+    _house_weights = [0.50, 0.30, 0.20]
+
+    # ── Pre-index engine outputs for fast lookup ──
+    ha_map: dict[int, dict[str, Any]] = {}
+    if house_activations:
+        for ha in house_activations:
+            ha_map[ha.get("house", 0)] = ha
+
+    # Lordship: planet → {functional_nature, houses_ruled}
+    lordship_map: dict[str, dict[str, Any]] = {}
+    if transit_lordships:
+        for tl in transit_lordships:
+            lordship_map[tl.get("planet", "")] = tl
+
+    # Natal planet → house (for aspect matching)
+    natal_planet_house: dict[str, int] = {}
+    if natal_planets:
+        for pname, pdata in natal_planets.items():
+            if isinstance(pdata, dict):
+                natal_planet_house[pname] = int(pdata.get("house", 0))
+
+    # Dasha lord houses (for area relevance)
+    md_lord = (dasha_result or {}).get("mahadasha", {}).get("lord", "")
+    ad_lord = (dasha_result or {}).get("antardasha", {}).get("lord", "")
+    dasha_lord_houses: set[int] = set()
+    if md_lord or ad_lord:
+        try:
+            from packages.self.src.transit_lordship import get_planet_lordships
+
+            if md_lord:
+                dasha_lord_houses.update(get_planet_lordships(md_lord, lagna_index))
+            if ad_lord:
+                dasha_lord_houses.update(get_planet_lordships(ad_lord, lagna_index))
+        except Exception:
+            pass
+
+    use_rich_model = bool(ha_map)
     areas: list[dict[str, Any]] = []
 
-    # House importance weights: primary house matters most
-    _house_weights = [0.50, 0.30, 0.20]  # for houses[0], houses[1], houses[2]
-
     for area_id, houses in AREA_HOUSES.items():
-        # 1. Per-house transit scores (weighted by house importance)
-        house_scores: list[float] = []
+        houses_set = set(houses)
         dominant = AREA_PLANETS.get(area_id, "")
-        max_impact = 0.0
 
-        for _i, house in enumerate(houses):
-            occupants = house_transits.get(house, [])
-            if occupants:
-                h_fav = 0.0
-                h_total = 0.0
-                for planet_name, favorable in occupants:
-                    w = _planet_weight.get(planet_name, 1.0)
-                    h_total += w
-                    h_fav += w if favorable else 0.0
-                    if w > max_impact:
-                        max_impact = w
-                        dominant = planet_name
-                house_scores.append((h_fav / h_total * 10.0) if h_total > 0 else 5.0)
+        if use_rich_model:
+            # ── Component 1: House Activation Score (35%) ──
+            ha_scores = [ha_map.get(h, {}).get("score", 50) for h in houses]
+            house_act_score = (
+                sum(
+                    s * w for s, w in zip(ha_scores, _house_weights[: len(ha_scores)], strict=False)
+                )
+                / 10
+            )  # 0-100 -> 0-10
+            # Double transit bonus on primary house
+            primary_ha = ha_map.get(houses[0], {})
+            if primary_ha.get("double_transit"):
+                house_act_score += 1.0
+            has_double_transit = any(ha_map.get(h, {}).get("double_transit") for h in houses)
+
+            # ── Component 2: Lordship Quality (15%) ──
+            lordship_scores: list[float] = []
+            best_nature = "neutral"
+            for tl in transit_lordships or []:
+                ruled = set(tl.get("houses_ruled", []))
+                if ruled & houses_set:
+                    nature = tl.get("functional_nature", "neutral")
+                    lordship_scores.append(_NATURE_SCORE.get(nature, 5.0))
+                    if _NATURE_SCORE.get(nature, 5.0) > _NATURE_SCORE.get(best_nature, 5.0):
+                        best_nature = nature
+            lordship_score = sum(lordship_scores) / len(lordship_scores) if lordship_scores else 5.0
+
+            # ── Component 3: Transit Aspects (10%) ──
+            aspect_scores: list[float] = []
+            for asp in transit_aspects or []:
+                np_name = asp.get("natal_planet", "")
+                np_house = natal_planet_house.get(np_name, 0)
+                if np_house in houses_set:
+                    nature = asp.get("nature", "neutral")
+                    aspect_scores.append(_NATURE_ASPECT_SCORE.get(nature, 5.0))
+            aspect_score = sum(aspect_scores) / len(aspect_scores) if aspect_scores else 5.0
+
+            # ── Component 4: Dasha-Area Relevance (20%) ──
+            dasha_factor_score = factor_map.get("dasha", 5.0)
+            if dasha_lord_houses & houses_set:
+                dasha_area_score = dasha_factor_score  # full relevance
             else:
-                house_scores.append(5.0)  # empty house = neutral
+                dasha_area_score = dasha_factor_score * 0.5 + 5.0 * 0.5  # diluted
 
-        # Weighted house score
-        house_score = sum(s * _house_weights[i] for i, s in enumerate(house_scores[:3]))
+            # ── Component 5: Yoga Activation Boost (10%) ──
+            yoga_boost = 5.0  # neutral base
+            area_active_yogas: list[str] = []
+            for ay in active_yogas or []:
+                activated = set(ay.get("activated_houses", []))
+                involved = set(ay.get("involved_houses", []))
+                if ay.get("is_active_now") and (activated | involved) & houses_set:
+                    yoga_boost += ay.get("strength", 0.5) * 2.0
+                    area_active_yogas.append(ay.get("yoga_name", ""))
 
-        # 2. Karaka planet's transit quality — area-specific differentiator
-        karaka = AREA_PLANETS.get(area_id, "")
-        karaka_data = planet_transits.get(karaka, {})
-        karaka_house = _house_from_lagna(transit_positions.get(karaka, 0), lagna_index)
-        # Karaka in good house from lagna = boost, bad house = drag
-        _good_houses = {1, 2, 4, 5, 7, 9, 10, 11}
-        karaka_score = 7.0 if karaka_house in _good_houses else 3.0
-        if karaka_data.get("is_favorable"):
-            karaka_score += 1.0
+            # ── Component 6: Panchanga + Natal Baseline (10%) ──
+            pan_score = factor_map.get("panchanga", 5.0)
+            natal_bonus = 0.0
+            for house in houses:
+                for pname in natal_house_map.get(house, []):
+                    if pname in ("jupiter", "venus", "mercury"):
+                        natal_bonus += 0.5
+                    elif pname in ("saturn", "mars", "rahu", "ketu"):
+                        natal_bonus -= 0.2
+            baseline_score = pan_score * 0.5 + _clamp(5.0 + natal_bonus) * 0.5
+
+            # ── Final blend ──
+            area_score = (
+                _clamp(house_act_score) * 0.35
+                + _clamp(lordship_score) * 0.15
+                + _clamp(aspect_score) * 0.10
+                + _clamp(dasha_area_score) * 0.20
+                + _clamp(yoga_boost) * 0.10
+                + _clamp(baseline_score) * 0.10
+            )
+
+            # Track dominant planet from house activation
+            for h in houses:
+                ha_data = ha_map.get(h, {})
+                present = ha_data.get("planets_present", [])
+                if present:
+                    dominant = present[0] if isinstance(present[0], str) else dominant
+
         else:
-            karaka_score -= 1.0
+            # ── FALLBACK: old transit-favorability model ──
+            planet_transits = (transit_result or {}).get("planet_transits", {})
+            house_transits: dict[int, list[tuple[str, bool]]] = {h: [] for h in range(1, 13)}
+            for planet_name, rashi_idx in transit_positions.items():
+                house = _house_from_lagna(rashi_idx, lagna_index)
+                pt = planet_transits.get(planet_name, {})
+                favorable = pt.get("is_favorable", True)
+                house_transits[house].append((planet_name, favorable))
 
-        # 3. Natal strength modifier
-        natal_bonus = 0.0
-        for house in houses:
-            for pname in natal_house_map.get(house, []):
-                if pname in ("jupiter", "venus", "mercury"):
-                    natal_bonus += 0.5
-                elif pname in ("saturn", "mars", "rahu", "ketu"):
-                    natal_bonus -= 0.2
+            _planet_weight = {
+                "jupiter": 1.5,
+                "venus": 1.2,
+                "mercury": 1.0,
+                "moon": 1.0,
+                "sun": 1.0,
+                "mars": 1.2,
+                "saturn": 1.5,
+                "rahu": 1.3,
+                "ketu": 1.0,
+            }
+            house_scores_list: list[float] = []
+            max_impact = 0.0
+            for house in houses:
+                occupants = house_transits.get(house, [])
+                if occupants:
+                    h_fav = 0.0
+                    h_total = 0.0
+                    for planet_name, favorable in occupants:
+                        w = _planet_weight.get(planet_name, 1.0)
+                        h_total += w
+                        h_fav += w if favorable else 0.0
+                        if w > max_impact:
+                            max_impact = w
+                            dominant = planet_name
+                    house_scores_list.append((h_fav / h_total * 10.0) if h_total > 0 else 5.0)
+                else:
+                    house_scores_list.append(5.0)
+            house_score = sum(s * _house_weights[i] for i, s in enumerate(house_scores_list[:3]))
 
-        # 4. Blend: house transits (40%) + karaka (20%) + dasha (20%) + panchanga (10%) + natal (10%)
-        dasha_score = factor_map.get("dasha", 5.0)
-        pan_score = factor_map.get("panchanga", 5.0)
-        area_score = (
-            house_score * 0.40
-            + _clamp(karaka_score) * 0.20
-            + dasha_score * 0.20
-            + pan_score * 0.10
-            + _clamp(5.0 + natal_bonus, 0.0, 10.0) * 0.10
-        )
+            karaka = AREA_PLANETS.get(area_id, "")
+            karaka_data = planet_transits.get(karaka, {})
+            karaka_house = _house_from_lagna(transit_positions.get(karaka, 0), lagna_index)
+            _good_houses = {1, 2, 4, 5, 7, 9, 10, 11}
+            karaka_score = 7.0 if karaka_house in _good_houses else 3.0
+            if karaka_data.get("is_favorable"):
+                karaka_score += 1.0
+            else:
+                karaka_score -= 1.0
 
-        # 5. Apply dosha & sade sati penalties (per-area)
+            natal_bonus = 0.0
+            for house in houses:
+                for pname in natal_house_map.get(house, []):
+                    if pname in ("jupiter", "venus", "mercury"):
+                        natal_bonus += 0.5
+                    elif pname in ("saturn", "mars", "rahu", "ketu"):
+                        natal_bonus -= 0.2
+
+            dasha_score = factor_map.get("dasha", 5.0)
+            pan_score = factor_map.get("panchanga", 5.0)
+            area_score = (
+                house_score * 0.40
+                + _clamp(karaka_score) * 0.20
+                + dasha_score * 0.20
+                + pan_score * 0.10
+                + _clamp(5.0 + natal_bonus, 0.0, 10.0) * 0.10
+            )
+            has_double_transit = False
+            best_nature = "neutral"
+            area_active_yogas = []
+
+        # ── Apply dosha & sade sati penalties (per-area) ──
         if dosha_penalties:
             area_score += dosha_penalties.get(area_id, 0.0)
 
         area_score = _clamp(area_score)
 
-        # Insight — include dosha/sade sati context
+        # Insight
         dosha_drag = dosha_penalties.get(area_id, 0.0) if dosha_penalties else 0.0
         if dosha_drag < -1.0:
             insight = f"Dosha pressure on {area_id} — take extra care"
+        elif has_double_transit and area_score >= 6.0:
+            insight = f"Strong double transit activating {area_id}"
         elif area_score >= 7.5:
             insight = f"Strong energy for {area_id} today"
         elif area_score >= 5.5:
@@ -1562,16 +1715,18 @@ def _compute_area_scores(
         else:
             insight = f"Challenging period for {area_id}"
 
-        areas.append(
-            {
-                "id": area_id,
-                "name": _AREA_NAMES.get(area_id, area_id.title()),
-                "score": round(area_score, 1),
-                "houses": houses,
-                "insight": insight,
-                "dominant_planet": dominant,
-            }
-        )
+        area_dict: dict[str, Any] = {
+            "id": area_id,
+            "name": _AREA_NAMES.get(area_id, area_id.title()),
+            "score": round(area_score, 1),
+            "houses": houses,
+            "insight": insight,
+            "dominant_planet": dominant,
+            "double_transit": has_double_transit,
+            "active_yogas": area_active_yogas,
+            "lordship_quality": best_nature,
+        }
+        areas.append(area_dict)
 
     return areas
 
@@ -1662,6 +1817,16 @@ def compute_state_vector(
         logger.warning(f"Transit positions failed: {e}")
         transit_positions = {}
 
+    # Rich transit positions for house_activation + transit_lordship
+    transit_positions_rich: dict[str, dict[str, Any]] = {}
+    for name, data in raw_planets.items():
+        lng = float(data.get("longitude", 0))
+        transit_positions_rich[name] = {
+            "longitude": lng,
+            "rashi_num": int(lng / 30),
+            "speed": data.get("speed", 0),
+        }
+
     # ── 3. Transit Moon ──
     birth_moon_nak = int(moon_longitude / 13.333333) + 1  # 1-27
     moon_score, moon_planet, moon_desc = _normalize_transit_moon(
@@ -1715,7 +1880,7 @@ def compute_state_vector(
         birth_chart = None
 
     # ── 6a. Natal Yogas & Doshas (real detectors: 522 yogas, 55 doshas) ──
-    natal_yogas = _detect_natal_yogas(natal_planets, lagna_index, birth_chart)
+    natal_yogas, natal_yogas_raw = _detect_natal_yogas(natal_planets, lagna_index, birth_chart)
     natal_doshas = _detect_natal_doshas(natal_planets, lagna_index, birth_chart)
 
     # Sade Sati detail (already in transit_result, extract for dosha scoring)
@@ -1733,6 +1898,50 @@ def compute_state_vector(
     dosha_penalties = _score_dosha_impact(
         natal_doshas, transit_positions, lagna_index, sade_sati_detail
     )
+
+    # ── 6b. House Activations, Transit Lordships, Transit Aspects, Yoga Activation ──
+    house_activations: list[dict[str, Any]] = []
+    if transit_positions_rich:
+        try:
+            from packages.context.src.house_activation import get_house_activations
+
+            house_activations = get_house_activations(
+                transit_positions_rich, lagna_index, moon_rashi_idx, birth_chart
+            )
+        except Exception as e:
+            logger.warning(f"House activation failed: {e}")
+
+    transit_lordships: list[dict[str, Any]] = []
+    if transit_positions_rich:
+        try:
+            from packages.self.src.transit_lordship import analyze_transit_lordships
+
+            transit_lordships = analyze_transit_lordships(transit_positions_rich, lagna_index)
+        except Exception as e:
+            logger.warning(f"Transit lordship failed: {e}")
+
+    transit_aspects: list[dict[str, Any]] = []
+    if transit_positions_rich and natal_planets:
+        try:
+            from packages.context.src.transit_aspects import get_transit_natal_aspects
+
+            natal_for_aspects = {
+                name: {"longitude": float(d.get("longitude", 0))}
+                for name, d in natal_planets.items()
+                if isinstance(d, dict)
+            }
+            transit_aspects = get_transit_natal_aspects(natal_for_aspects, transit_positions_rich)
+        except Exception as e:
+            logger.warning(f"Transit aspects failed: {e}")
+
+    active_yogas: list[dict[str, Any]] = []
+    if natal_yogas_raw and house_activations:
+        try:
+            from packages.self.src.yoga_activation import get_active_yogas
+
+            active_yogas = get_active_yogas(natal_yogas_raw, house_activations)
+        except Exception as e:
+            logger.warning(f"Yoga activation failed: {e}")
 
     # ── 7. Shadbala (real 6-component via StrengthCalculator) ──
     shd_score, shd_planet, shd_desc = _score_shadbala(dasha_result, natal_planets, birth_chart)
@@ -1826,6 +2035,11 @@ def compute_state_vector(
         transit_result=transit_result,
         natal_planets=natal_planets,
         dosha_penalties=dosha_penalties,
+        house_activations=house_activations,
+        transit_lordships=transit_lordships,
+        transit_aspects=transit_aspects,
+        active_yogas=active_yogas,
+        dasha_result=dasha_result,
     )
 
     return {

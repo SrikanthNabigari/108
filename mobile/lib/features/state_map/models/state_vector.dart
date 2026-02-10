@@ -1,7 +1,7 @@
 /// Data models for the State Map — prediction engine output.
 ///
 /// The State Vector captures seven astrological prediction factors
-/// (0-10 each) plus five life-area scores, a composite rating,
+/// (0-10 each) plus eight life-area scores, a composite rating,
 /// and a confluence measure.
 
 class FactorScore {
@@ -38,6 +38,9 @@ class AreaScore {
   final List<int> houses;
   final String insight;
   final String dominantPlanet;
+  final bool doubleTransit;
+  final List<String> activeYogas;
+  final String lordshipQuality;
 
   const AreaScore({
     required this.id,
@@ -46,6 +49,9 @@ class AreaScore {
     this.houses = const [],
     this.insight = '',
     this.dominantPlanet = '',
+    this.doubleTransit = false,
+    this.activeYogas = const [],
+    this.lordshipQuality = 'neutral',
   });
 
   factory AreaScore.fromJson(Map<String, dynamic> json) => AreaScore(
@@ -55,6 +61,9 @@ class AreaScore {
         houses: (json['houses'] as List?)?.cast<int>() ?? [],
         insight: json['insight'] as String? ?? '',
         dominantPlanet: json['dominant_planet'] as String? ?? '',
+        doubleTransit: json['double_transit'] as bool? ?? false,
+        activeYogas: (json['active_yogas'] as List?)?.cast<String>() ?? [],
+        lordshipQuality: json['lordship_quality'] as String? ?? 'neutral',
       );
 }
 
@@ -185,7 +194,16 @@ const kFactorShortNames = {
   'ashtakavarga': 'ASH',
 };
 
-const kAreaIds = ['career', 'relationships', 'health', 'finance', 'spiritual'];
+const kAreaIds = [
+  'career',
+  'relationships',
+  'health',
+  'finance',
+  'spiritual',
+  'family',
+  'education',
+  'travel',
+];
 
 const kAreaNames = {
   'career': 'Career',
@@ -193,14 +211,32 @@ const kAreaNames = {
   'health': 'Health',
   'finance': 'Money',
   'spiritual': 'Spirit',
+  'family': 'Family',
+  'education': 'Education',
+  'travel': 'Travel',
 };
 
 const kAreaIcons = {
-  'career': '💼',
-  'relationships': '❤️',
-  'health': '🏥',
-  'finance': '💰',
-  'spiritual': '🕉️',
+  'career': '\u{1F4BC}',
+  'relationships': '\u{2764}\u{FE0F}',
+  'health': '\u{1F3E5}',
+  'finance': '\u{1F4B0}',
+  'spiritual': '\u{1F549}\u{FE0F}',
+  'family': '\u{1F3E0}',
+  'education': '\u{1F4DA}',
+  'travel': '\u{2708}\u{FE0F}',
+};
+
+/// Maps area id to its karaka planet (for color theming).
+const kAreaPlanets = {
+  'career': 'saturn',
+  'relationships': 'venus',
+  'health': 'sun',
+  'finance': 'jupiter',
+  'spiritual': 'ketu',
+  'family': 'moon',
+  'education': 'mercury',
+  'travel': 'rahu',
 };
 
 const kEventTypes = [

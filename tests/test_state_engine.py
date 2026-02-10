@@ -1,6 +1,7 @@
 """Tests for the State Vector Engine."""
 
 from datetime import datetime
+from typing import Any, ClassVar
 
 from packages.context.src.state_engine import (
     AREA_HOUSES,
@@ -634,9 +635,10 @@ class TestDetectNatalYogas:
     def test_user_chart_has_yogas(self):
         """User's actual chart should detect multiple yogas from 522-rule base."""
         chart = self._make_chart(NATAL_PLANETS)
-        yogas = _detect_natal_yogas(NATAL_PLANETS, 6, chart)
+        yogas, raw = _detect_natal_yogas(NATAL_PLANETS, 6, chart)
         assert isinstance(yogas, list)
         assert len(yogas) > 0, "Real detector should find yogas in user's chart"
+        assert len(raw) == len(yogas), "Raw list should match dict list length"
         # All entries have required keys
         for y in yogas:
             assert "name" in y
@@ -658,7 +660,7 @@ class TestDetectNatalYogas:
             "ketu": {"longitude": 240.0, "rashi": 8, "house": 3},
         }
         chart = self._make_chart(planets, moon_lon=50.0, moon_rashi="taurus")
-        yogas = _detect_natal_yogas(planets, 6, chart)
+        yogas, _raw = _detect_natal_yogas(planets, 6, chart)
         names = [y["name"] for y in yogas]
         assert any(
             "sasa" in n.lower() or "shasha" in n.lower() for n in names
@@ -666,13 +668,14 @@ class TestDetectNatalYogas:
 
     def test_no_chart_returns_empty(self):
         """Without BirthChart, returns empty list (graceful fallback)."""
-        yogas = _detect_natal_yogas(NATAL_PLANETS, 6, None)
+        yogas, raw = _detect_natal_yogas(NATAL_PLANETS, 6, None)
         assert yogas == []
+        assert raw == []
 
     def test_yoga_has_house_info(self):
         """Detected yogas should include house numbers from involved planets."""
         chart = self._make_chart(NATAL_PLANETS)
-        yogas = _detect_natal_yogas(NATAL_PLANETS, 6, chart)
+        yogas, _raw = _detect_natal_yogas(NATAL_PLANETS, 6, chart)
         # At least some yogas should have houses populated
         has_houses = any(len(y.get("houses", [])) > 0 for y in yogas)
         assert has_houses or len(yogas) == 0
@@ -861,7 +864,7 @@ class TestGetHoraLord:
 
 
 class TestAreaScores:
-    def test_returns_5_areas(self):
+    def test_returns_8_areas(self):
         factors = [
             {"id": "panchanga", "score": 6.0},
             {"id": "transit_moon", "score": 7.0},
@@ -875,10 +878,19 @@ class TestAreaScores:
         lagna = 6  # Libra
 
         areas = _compute_area_scores(factors, transit_pos, lagna)
-        assert len(areas) == 5
+        assert len(areas) == 8
 
         area_ids = {a["id"] for a in areas}
-        assert area_ids == {"career", "relationships", "health", "finance", "spiritual"}
+        assert area_ids == {
+            "career",
+            "relationships",
+            "health",
+            "finance",
+            "spiritual",
+            "family",
+            "education",
+            "travel",
+        }
 
     def test_area_score_in_range(self):
         factors = [{"id": k, "score": 5.0} for k in FACTOR_WEIGHTS]
@@ -943,7 +955,7 @@ class TestComputeStateVector:
             assert 0 <= f["score"] <= 10
 
         # Areas
-        assert len(result["areas"]) == 5
+        assert len(result["areas"]) == 8
 
         # Composite
         assert 0 <= result["composite"] <= 10
@@ -1086,6 +1098,7 @@ class TestConstants:
         assert abs(total - 1.0) < 0.001
 
     def test_area_houses_valid(self):
+        assert len(AREA_HOUSES) == 8
         for _area_id, houses in AREA_HOUSES.items():
             assert len(houses) == 3
             for h in houses:
@@ -1098,3 +1111,292 @@ class TestConstants:
 
     def test_rashi_names_count(self):
         assert len(RASHI_NAMES) == 12
+
+
+# ── Area Scores with Engine Wiring tests ──
+
+
+class TestAreaScoresWithEngines:
+    """Test the 6-component area scoring model using house activations + lordship + aspects."""
+
+    _BASE_FACTORS: ClassVar[list[dict[str, Any]]] = [
+        {"id": "panchanga", "score": 5.0},
+        {"id": "transit_moon", "score": 5.0},
+        {"id": "gochara", "score": 5.0},
+        {"id": "dasha", "score": 5.0},
+        {"id": "yoga_activation", "score": 5.0},
+        {"id": "shadbala", "score": 5.0},
+        {"id": "ashtakavarga", "score": 5.0},
+    ]
+
+    @staticmethod
+    def _make_house_activations(overrides: dict[int, dict] | None = None) -> list[dict]:
+        """Build a 12-house activation list. Override specific houses."""
+        activations = []
+        for h in range(1, 13):
+            base = {
+                "house": h,
+                "score": 50,
+                "grade": "moderate",
+                "double_transit": False,
+                "planets_present": [],
+                "planets_aspecting": [],
+                "ashtakavarga_sav": 25,
+                "themes": [],
+                "summary": "",
+            }
+            if overrides and h in overrides:
+                base.update(overrides[h])
+            activations.append(base)
+        return activations
+
+    def test_house_activation_boosts_area_score(self):
+        """Area with high house activation score should score higher than area without."""
+        # Career houses = [10, 6, 2]. Give house 10 a very high score.
+        ha = self._make_house_activations({10: {"score": 90}, 6: {"score": 80}, 2: {"score": 70}})
+        # Health houses = [1, 6, 8]. Keep them at default 50.
+        areas = _compute_area_scores(
+            self._BASE_FACTORS,
+            {"moon": 0},
+            0,
+            house_activations=ha,
+        )
+        career = next(a for a in areas if a["id"] == "career")
+        health = next(a for a in areas if a["id"] == "health")
+        assert career["score"] > health["score"]
+
+    def test_double_transit_bonus(self):
+        """Area whose primary house has double transit should get a boost."""
+        ha_with_dt = self._make_house_activations({10: {"score": 60, "double_transit": True}})
+        ha_without_dt = self._make_house_activations({10: {"score": 60, "double_transit": False}})
+        areas_with = _compute_area_scores(
+            self._BASE_FACTORS,
+            {"moon": 0},
+            0,
+            house_activations=ha_with_dt,
+        )
+        areas_without = _compute_area_scores(
+            self._BASE_FACTORS,
+            {"moon": 0},
+            0,
+            house_activations=ha_without_dt,
+        )
+        career_with = next(a for a in areas_with if a["id"] == "career")
+        career_without = next(a for a in areas_without if a["id"] == "career")
+        assert career_with["score"] > career_without["score"]
+        assert career_with["double_transit"] is True
+        assert career_without["double_transit"] is False
+
+    def test_lordship_quality_affects_score(self):
+        """Yogakaraka lord for area houses should score higher than malefic."""
+        ha = self._make_house_activations()
+        # Transit lordships: planet ruling career houses [10, 6, 2] as yogakaraka
+        tl_yk = [
+            {"planet": "saturn", "houses_ruled": [10, 11], "functional_nature": "yogakaraka"},
+        ]
+        tl_mal = [
+            {"planet": "saturn", "houses_ruled": [10, 11], "functional_nature": "malefic"},
+        ]
+        areas_yk = _compute_area_scores(
+            self._BASE_FACTORS,
+            {"moon": 0},
+            0,
+            house_activations=ha,
+            transit_lordships=tl_yk,
+        )
+        areas_mal = _compute_area_scores(
+            self._BASE_FACTORS,
+            {"moon": 0},
+            0,
+            house_activations=ha,
+            transit_lordships=tl_mal,
+        )
+        career_yk = next(a for a in areas_yk if a["id"] == "career")
+        career_mal = next(a for a in areas_mal if a["id"] == "career")
+        assert career_yk["score"] > career_mal["score"]
+        assert career_yk["lordship_quality"] == "yogakaraka"
+
+    def test_transit_aspects_affect_score(self):
+        """Harmonious aspects should boost area; challenging should drag."""
+        ha = self._make_house_activations()
+        natal = {"jupiter": {"longitude": 142.8, "rashi": 4, "house": 11}}
+        # Finance houses = [2, 11, 5]. Jupiter natally in house 11.
+        aspects_good = [
+            {"natal_planet": "jupiter", "transit_planet": "venus", "nature": "harmonious"},
+        ]
+        aspects_bad = [
+            {"natal_planet": "jupiter", "transit_planet": "saturn", "nature": "challenging"},
+        ]
+        areas_good = _compute_area_scores(
+            self._BASE_FACTORS,
+            {"moon": 0},
+            0,
+            natal_planets=natal,
+            house_activations=ha,
+            transit_aspects=aspects_good,
+        )
+        areas_bad = _compute_area_scores(
+            self._BASE_FACTORS,
+            {"moon": 0},
+            0,
+            natal_planets=natal,
+            house_activations=ha,
+            transit_aspects=aspects_bad,
+        )
+        fin_good = next(a for a in areas_good if a["id"] == "finance")
+        fin_bad = next(a for a in areas_bad if a["id"] == "finance")
+        assert fin_good["score"] > fin_bad["score"]
+
+    def test_dasha_area_relevance(self):
+        """Dasha lord ruling area house should produce higher area score."""
+        ha = self._make_house_activations()
+        factors_high_dasha = [
+            {"id": "panchanga", "score": 5.0},
+            {"id": "transit_moon", "score": 5.0},
+            {"id": "gochara", "score": 5.0},
+            {"id": "dasha", "score": 8.0},  # high dasha score
+            {"id": "yoga_activation", "score": 5.0},
+            {"id": "shadbala", "score": 5.0},
+            {"id": "ashtakavarga", "score": 5.0},
+        ]
+        # Mercury MD rules houses from Libra lagna (6): H9 and H12
+        # Spiritual houses = [9, 12, 5] → Mercury lords 9 and 12 → full relevance
+        # Use Mercury MD only (no AD that overlaps career)
+        # Moon AD rules H10 (career overlap) — use Venus AD instead (H1, H8)
+        dasha = {"mahadasha": {"lord": "mercury"}, "antardasha": {"lord": "venus"}}
+        # Venus from Libra: rules H1, H8 → no career overlap [10,6,2], no spiritual overlap [9,12,5]
+        areas = _compute_area_scores(
+            factors_high_dasha,
+            {"moon": 0},
+            6,  # Libra lagna
+            house_activations=ha,
+            dasha_result=dasha,
+        )
+        spiritual = next(a for a in areas if a["id"] == "spiritual")
+        career = next(a for a in areas if a["id"] == "career")
+        # Spiritual should benefit more from dasha (Mercury lords its houses 9+12)
+        assert spiritual["score"] > career["score"]
+
+    def test_yoga_activation_boost(self):
+        """Active yoga touching area houses should boost that area's score."""
+        ha = self._make_house_activations()
+        ay = [
+            {
+                "yoga_name": "Gajakesari",
+                "is_active_now": True,
+                "activated_houses": [11],
+                "involved_houses": [5, 11],
+                "strength": 0.8,
+            },
+        ]
+        areas_with = _compute_area_scores(
+            self._BASE_FACTORS,
+            {"moon": 0},
+            0,
+            house_activations=ha,
+            active_yogas=ay,
+        )
+        areas_without = _compute_area_scores(
+            self._BASE_FACTORS,
+            {"moon": 0},
+            0,
+            house_activations=ha,
+            active_yogas=[],
+        )
+        # Finance houses = [2, 11, 5] — yoga activates house 11
+        fin_with = next(a for a in areas_with if a["id"] == "finance")
+        fin_without = next(a for a in areas_without if a["id"] == "finance")
+        assert fin_with["score"] > fin_without["score"]
+        assert "Gajakesari" in fin_with["active_yogas"]
+
+    def test_fallback_when_no_activations(self):
+        """When house_activations=None, old model should be used."""
+        areas = _compute_area_scores(
+            self._BASE_FACTORS,
+            {"moon": 0},
+            0,
+            house_activations=None,  # triggers fallback
+        )
+        assert len(areas) == 8
+        for a in areas:
+            assert 0 <= a["score"] <= 10
+            # Fallback should still produce the new fields with defaults
+            assert a["double_transit"] is False
+            assert a["lordship_quality"] == "neutral"
+            assert a["active_yogas"] == []
+
+    def test_area_scores_in_range(self):
+        """All area scores should clamp to 0-10 regardless of input."""
+        # Extreme inputs: house activation scores at 100 + all boosts
+        ha = self._make_house_activations(
+            {h: {"score": 100, "double_transit": True} for h in range(1, 13)}
+        )
+        tl = [
+            {
+                "planet": "jupiter",
+                "houses_ruled": list(range(1, 13)),
+                "functional_nature": "yogakaraka",
+            },
+        ]
+        ay = [
+            {
+                "yoga_name": "Test",
+                "is_active_now": True,
+                "activated_houses": list(range(1, 13)),
+                "involved_houses": list(range(1, 13)),
+                "strength": 1.0,
+            },
+        ]
+        areas = _compute_area_scores(
+            self._BASE_FACTORS,
+            {"moon": 0},
+            0,
+            house_activations=ha,
+            transit_lordships=tl,
+            active_yogas=ay,
+        )
+        for a in areas:
+            assert 0 <= a["score"] <= 10
+
+    def test_new_areas_have_valid_scores(self):
+        """Family, education, and travel should produce valid scores."""
+        ha = self._make_house_activations()
+        areas = _compute_area_scores(
+            self._BASE_FACTORS,
+            {"moon": 0},
+            0,
+            house_activations=ha,
+        )
+        new_ids = {"family", "education", "travel"}
+        found_ids = {a["id"] for a in areas}
+        assert new_ids.issubset(found_ids)
+
+        for a in areas:
+            if a["id"] in new_ids:
+                assert 0 <= a["score"] <= 10
+                assert len(a["houses"]) == 3
+                assert a["dominant_planet"] != ""
+                assert a["insight"] != ""
+
+    def test_new_area_house_mappings(self):
+        """Verify the correct house mappings for new areas."""
+        from packages.context.src.state_engine import AREA_HOUSES
+
+        assert AREA_HOUSES["family"] == [4, 2, 1]
+        assert AREA_HOUSES["education"] == [4, 5, 9]
+        assert AREA_HOUSES["travel"] == [3, 9, 12]
+
+    def test_new_areas_dosha_penalties(self):
+        """_score_dosha_impact should include all 8 areas."""
+        penalties = _score_dosha_impact([], {}, 0, {"active": False, "house_from_moon": 5})
+        assert "family" in penalties
+        assert "education" in penalties
+        assert "travel" in penalties
+        for v in penalties.values():
+            assert v == 0.0
+
+    def test_sade_sati_setting_affects_family(self):
+        """Sade Sati setting phase should penalize family area."""
+        sade_sati = {"active": True, "phase": "setting", "house_from_moon": 2}
+        penalties = _score_dosha_impact([], {}, 0, sade_sati)
+        assert penalties["family"] < 0

@@ -4,14 +4,58 @@ import 'package:go_router/go_router.dart';
 import 'package:one_zero_eight/core/theme/app_theme.dart';
 import 'package:one_zero_eight/shared/widgets/glass_container.dart';
 import 'package:one_zero_eight/shared/widgets/ambient_background.dart';
+import 'package:one_zero_eight/shared/utils/planet_helpers.dart';
 import 'package:one_zero_eight/data/providers/user_provider.dart';
 import 'package:one_zero_eight/data/services/supabase_service.dart';
+import 'package:one_zero_eight/core/constants/api_constants.dart';
+import 'package:one_zero_eight/data/services/api_service.dart';
+import 'package:one_zero_eight/features/state_map/models/state_vector.dart';
+import 'package:one_zero_eight/features/state_map/models/mock_data.dart';
 
-class HomeScreen extends ConsumerWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends ConsumerState<HomeScreen> {
+  List<AreaScore> _areas = [];
+  bool _areasLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchAreas();
+  }
+
+  Future<void> _fetchAreas() async {
+    try {
+      final result = await ApiService().get<StateVector>(
+        ApiConstants.stateNow,
+        fromJson: (json) =>
+            StateVector.fromJson(json as Map<String, dynamic>),
+      );
+      if (mounted) {
+        setState(() {
+          _areas = result.areas;
+          _areasLoading = false;
+        });
+      }
+    } catch (_) {
+      // Fallback to mock data
+      final mock = MockStateData.now();
+      if (mounted) {
+        setState(() {
+          _areas = mock.areas;
+          _areasLoading = false;
+        });
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final profileAsync = ref.watch(userProfileProvider);
 
     return Scaffold(
@@ -98,6 +142,33 @@ class HomeScreen extends ConsumerWidget {
                   onTap: () => context.go('/state-map'),
                 ),
 
+                // Mini life areas preview
+                if (!_areasLoading && _areas.isNotEmpty) ...[
+                  const SizedBox(height: S.xl),
+                  Row(
+                    children: [
+                      Text('Life Areas',
+                          style: T.h3.copyWith(fontSize: 16)),
+                      const SizedBox(width: S.sm),
+                      Text('today', style: T.caption),
+                    ],
+                  ),
+                  const SizedBox(height: S.sm),
+                  SizedBox(
+                    height: 36,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: _areas.length,
+                      separatorBuilder: (_, __) =>
+                          const SizedBox(width: S.sm),
+                      itemBuilder: (_, i) => _MiniAreaChip(
+                        area: _areas[i],
+                        onTap: () => context.go('/state-map'),
+                      ),
+                    ),
+                  ),
+                ],
+
                 const Spacer(),
 
                 // Footer
@@ -167,6 +238,56 @@ class _NavCard extends StatelessWidget {
             ),
             Icon(Icons.chevron_right,
                 color: color.withValues(alpha: 0.5), size: 22),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _MiniAreaChip extends StatelessWidget {
+  final AreaScore area;
+  final VoidCallback onTap;
+
+  const _MiniAreaChip({required this.area, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    final planet = kAreaPlanets[area.id] ?? 'saturn';
+    final color = planetColor(planet);
+    final icon = kAreaIcons[area.id] ?? '\u2022';
+
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: S.md, vertical: S.xs),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(18),
+          color: color.withValues(alpha: 0.08),
+          border: Border.all(color: color.withValues(alpha: 0.15)),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(icon, style: const TextStyle(fontSize: 12)),
+            const SizedBox(width: 4),
+            Text(
+              area.name,
+              style: T.bodySm.copyWith(
+                color: C.textPrimary,
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            const SizedBox(width: 4),
+            Text(
+              area.score.toStringAsFixed(1),
+              style: T.bodySm.copyWith(
+                color: color,
+                fontSize: 12,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
           ],
         ),
       ),

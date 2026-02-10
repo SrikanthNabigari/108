@@ -4,6 +4,81 @@ import 'package:one_zero_eight/shared/widgets/glass_container.dart';
 import 'package:one_zero_eight/shared/utils/planet_helpers.dart';
 import '../models/state_vector.dart';
 
+const _factorExplainers = {
+  'gochara': {
+    'title': 'What is Gochara?',
+    'body': 'Gochara means "transit of planets." It tracks where the 9 planets '
+        'are RIGHT NOW relative to your Moon sign. Each planet in each house '
+        'from Moon creates different effects — some favorable, some challenging.\n\n'
+        'Classical texts grade each planet\'s transit through all 12 houses. '
+        'Slow planets (Jupiter, Saturn) matter most because they stay for months or years.',
+    'key_concept': 'House from Moon \u2192 effect quality',
+  },
+  'panchanga': {
+    'title': 'What is Panchanga?',
+    'body': 'Panchanga means "five limbs" — the 5 elements of the Vedic calendar:\n\n'
+        '\u2022 Tithi — lunar day (phase of Moon)\n'
+        '\u2022 Vara — weekday lord (Sun, Moon, Mars...)\n'
+        '\u2022 Nakshatra — Moon\'s constellation (27 total)\n'
+        '\u2022 Yoga — Sun-Moon angular relationship\n'
+        '\u2022 Karana — half of a tithi\n\n'
+        'Together they define the quality of any moment.',
+    'key_concept': 'Universal — same for everyone on a given day',
+  },
+  'transit_moon': {
+    'title': 'What is Transit Moon?',
+    'body': 'The Moon changes sign every 2.5 days, making it the fastest-moving '
+        'factor. Its current sign relative to your birth Moon (Tarabala) and '
+        'relative to your lagna determines emotional tone, mental clarity, '
+        'and receptivity.\n\n'
+        'Good Moon transits bring emotional ease; challenging ones create '
+        'restlessness or sensitivity.',
+    'key_concept': 'Emotional tone changes every 2.5 days',
+  },
+  'dasha': {
+    'title': 'What is Dasha?',
+    'body': 'Vimshottari Dasha is the Vedic planetary period system. Your life '
+        'is divided into chapters ruled by different planets:\n\n'
+        '\u2022 Mahadasha (MD) — the big period (years)\n'
+        '\u2022 Antardasha (AD) — sub-period (months)\n'
+        '\u2022 Pratyantardasha (PD) — sub-sub-period (weeks)\n\n'
+        'The dignity and nature of each lord in YOUR chart determines '
+        'whether these periods bring growth or challenges.',
+    'key_concept': 'MD \u2192 AD \u2192 PD = life chapter hierarchy',
+  },
+  'yoga_activation': {
+    'title': 'What is Yoga Activation?',
+    'body': 'Natal yogas are planetary combinations in your birth chart that '
+        'hold promises — like Gajakesari (Jupiter-Moon), or Panch Mahapurusha. '
+        'These promises are ACTIVATED when current transits touch the yoga\'s '
+        'involved houses or planets.\n\n'
+        'A dormant yoga is potential; an activated yoga delivers results.',
+    'key_concept': 'Promise (natal) + trigger (transit) = result',
+  },
+  'shadbala': {
+    'title': 'What is Shadbala?',
+    'body': 'Shadbala means "six-fold strength" — the most comprehensive '
+        'measure of a planet\'s power:\n\n'
+        '\u2022 Sthana Bala — positional (sign, house)\n'
+        '\u2022 Dig Bala — directional (angular houses)\n'
+        '\u2022 Kaala Bala — temporal (day/night, season)\n'
+        '\u2022 Chesta Bala — motional (speed, retrogression)\n'
+        '\u2022 Naisargika Bala — natural (inherent to planet)\n'
+        '\u2022 Drik Bala — aspectual (aspects received)\n\n'
+        'Higher Shadbala means more capacity to produce results.',
+    'key_concept': 'Sthana + Dig + Kaala + Chesta + Naisargika + Drik',
+  },
+  'ashtakavarga': {
+    'title': 'What is Ashtakavarga?',
+    'body': 'Ashtakavarga assigns "benefic points" (bindus, 0-8) to each sign '
+        'for each planet. When a planet transits a sign with high bindus, '
+        'it delivers good results; low bindus bring difficulty.\n\n'
+        'SAV (Sarvashtakavarga) combines all planets\' contributions to show '
+        'which signs in YOUR chart are inherently supportive.',
+    'key_concept': 'Higher bindus = more support in that sign',
+  },
+};
+
 /// Bottom sheet detail panel — opened when a heat map cell is tapped.
 ///
 /// Follows the DashaDetailPanel pattern: DraggableScrollableSheet with
@@ -171,6 +246,45 @@ class FactorDetailPanel extends StatelessWidget {
                         ),
                       ),
                     ] else ...[
+                      // ── What is [Factor]? ──
+                      if (_factorExplainers.containsKey(factor!.id)) ...[
+                        _SectionTitle(text: _factorExplainers[factor.id]!['title']!),
+                        const SizedBox(height: S.sm),
+                        GlassContainer(
+                          padding: const EdgeInsets.all(S.lg),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                _factorExplainers[factor.id]!['body']!,
+                                style: T.bodySm.copyWith(
+                                  color: C.textSecondary,
+                                  height: 1.6,
+                                ),
+                              ),
+                              const SizedBox(height: S.md),
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: S.md, vertical: S.sm),
+                                decoration: BoxDecoration(
+                                  borderRadius: R.mdBr,
+                                  color: color.withValues(alpha: 0.1),
+                                  border: Border.all(color: color.withValues(alpha: 0.3)),
+                                ),
+                                child: Text(
+                                  _factorExplainers[factor.id]!['key_concept']!,
+                                  style: T.bodySm.copyWith(
+                                    color: color,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: S.xl),
+                      ],
                       // Single factor detail
                       _SectionTitle(text: 'Score Interpretation'),
                       const SizedBox(height: S.sm),
@@ -231,6 +345,46 @@ class FactorDetailPanel extends StatelessWidget {
                         ),
                       ],
                       const SizedBox(height: S.xl),
+                      // ── Affects These Areas ──
+                      if (factor!.dominantPlanet.isNotEmpty) ...[
+                        _SectionTitle(text: 'Affects These Areas'),
+                        const SizedBox(height: S.sm),
+                        Wrap(
+                          spacing: S.sm,
+                          runSpacing: S.sm,
+                          children: kAreaPlanets.entries
+                              .where((e) => e.value == factor.dominantPlanet)
+                              .map((e) => Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: S.md, vertical: S.xs),
+                                    decoration: BoxDecoration(
+                                      borderRadius: R.xlBr,
+                                      color: color.withValues(alpha: 0.08),
+                                      border: Border.all(
+                                        color: color.withValues(alpha: 0.2)),
+                                    ),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Text(
+                                          kAreaIcons[e.key] ?? '\u2022',
+                                          style: const TextStyle(fontSize: 12),
+                                        ),
+                                        const SizedBox(width: S.xs),
+                                        Text(
+                                          kAreaNames[e.key] ?? e.key,
+                                          style: T.bodySm.copyWith(
+                                            color: C.textPrimary,
+                                            fontSize: 12,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ))
+                              .toList(),
+                        ),
+                        const SizedBox(height: S.xl),
+                      ],
                       // Context within other factors
                       _SectionTitle(text: 'In Context'),
                       const SizedBox(height: S.sm),

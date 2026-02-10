@@ -180,6 +180,42 @@ class MockStateData {
             : 'Steady contemplation',
         dominantPlanet: 'ketu',
       ),
+      AreaScore(
+        id: 'family',
+        name: 'Family',
+        score:
+            _clamp(composite + _noise(1.0) + (transitWave > 0.4 ? 0.8 : -0.4)),
+        houses: const [4, 2, 1],
+        insight: transitWave > 0.4
+            ? 'Harmonious home environment'
+            : 'Family matters need attention',
+        dominantPlanet: 'moon',
+        doubleTransit: transitWave > 0.7 && dashaWave > 0.6,
+        activeYogas: transitWave > 0.6 ? const ['Gajakesari'] : const [],
+        lordshipQuality: transitWave > 0.5 ? 'benefic' : 'neutral',
+      ),
+      AreaScore(
+        id: 'education',
+        name: 'Education',
+        score:
+            _clamp(composite + _noise(0.9) + (dashaWave > 0.4 ? 0.7 : -0.3)),
+        houses: const [4, 5, 9],
+        insight: dashaWave > 0.4
+            ? 'Good period for learning'
+            : 'Focus on revision over new topics',
+        dominantPlanet: 'mercury',
+      ),
+      AreaScore(
+        id: 'travel',
+        name: 'Travel',
+        score:
+            _clamp(composite + _noise(1.1) + (horaWave > 0.6 ? 1.2 : -0.6)),
+        houses: const [3, 9, 12],
+        insight: horaWave > 0.6
+            ? 'Favorable for journeys'
+            : 'Postpone long-distance travel',
+        dominantPlanet: 'rahu',
+      ),
     ];
 
     // Confluence: how many factors agree (above or below 5)

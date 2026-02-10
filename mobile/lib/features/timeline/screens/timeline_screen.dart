@@ -242,7 +242,20 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
           Center(
             child: Column(
               children: [
-                Text('Your Life Timeline', style: T.h2),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: () => context.go('/home'),
+                      child: const Padding(
+                        padding: EdgeInsets.only(right: S.sm),
+                        child: Icon(Icons.arrow_back_ios,
+                            color: C.textSecondary, size: 18),
+                      ),
+                    ),
+                    Text('Your Life Timeline', style: T.h2),
+                  ],
+                ),
                 const SizedBox(height: 4),
                 Text(
                   'Vimshottari Dasha — your cosmic chapters',
