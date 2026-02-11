@@ -79,10 +79,11 @@ CREATE INDEX IF NOT EXISTS idx_credit_transactions_reference ON credit_transacti
 CREATE TABLE IF NOT EXISTS chat_messages (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    role VARCHAR(10) NOT NULL,
-    content TEXT NOT NULL,
+    role VARCHAR(20) NOT NULL,
+    message TEXT NOT NULL,
     content_type VARCHAR(20) DEFAULT 'text',
     metadata JSONB DEFAULT '{}',
+    blocks JSONB DEFAULT '[]',
     tokens_used INTEGER DEFAULT 0,
     created_at TIMESTAMP DEFAULT NOW()
 );

@@ -505,7 +505,7 @@ class _TransitDetailPanelState extends ConsumerState<TransitDetailPanel> {
           child: ElevatedButton.icon(
             onPressed: () {
               Navigator.of(context).pop();
-              context.push('/home'); // TODO: deep-link to chat with prompt
+              context.push('/chat?prompt=${Uri.encodeComponent("Tell me about ${planetName(widget.planet)}'s transit right now and how it's affecting me")}');
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: _color,

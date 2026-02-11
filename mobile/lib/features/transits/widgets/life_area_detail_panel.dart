@@ -653,7 +653,7 @@ class LifeAreaDetailPanel extends StatelessWidget {
           child: ElevatedButton.icon(
             onPressed: () {
               Navigator.of(context).pop();
-              context.push('/home');
+              context.push('/chat?prompt=${Uri.encodeComponent("How is my $_areaName right now? What transits are affecting it?")}');
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: _gradeColor,

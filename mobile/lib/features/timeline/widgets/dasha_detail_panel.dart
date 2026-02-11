@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:one_zero_eight/core/constants/api_constants.dart';
 import 'package:one_zero_eight/core/theme/app_theme.dart';
 import 'package:one_zero_eight/data/services/api_service.dart';
@@ -666,7 +667,8 @@ class _DashaDetailPanelState extends ConsumerState<DashaDetailPanel> {
   // ── F. Cross Analysis ──
 
   Widget _buildCrossAnalysis(Map<String, dynamic> cross) {
-    final themes = (cross['active_themes'] as List?)?.cast<String>() ?? [];
+    final rawThemes = cross['active_themes'] as List? ?? [];
+    final themes = rawThemes.map((t) => t is String ? t : (t is Map ? (t['name'] ?? t.toString()) : t.toString())).cast<String>().toList();
     final quality = cross['period_quality'] as String? ?? '';
     final score = (cross['score'] as num?)?.toInt();
     final house = cross['strongest_house'];
@@ -740,7 +742,10 @@ class _DashaDetailPanelState extends ConsumerState<DashaDetailPanel> {
         width: double.infinity,
         height: 44,
         child: ElevatedButton.icon(
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () {
+            Navigator.of(context).pop();
+            context.push('/chat?prompt=${Uri.encodeComponent("Tell me about my current ${widget.lord} ${widget.level.toUpperCase()} dasha period — what should I expect?")}');
+          },
           style: ElevatedButton.styleFrom(
             backgroundColor: _color,
             foregroundColor: C.bg,

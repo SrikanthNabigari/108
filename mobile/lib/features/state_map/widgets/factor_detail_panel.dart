@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:one_zero_eight/core/theme/app_theme.dart';
 import 'package:one_zero_eight/shared/widgets/glass_container.dart';
 import 'package:one_zero_eight/shared/utils/planet_helpers.dart';
@@ -217,6 +218,17 @@ class FactorDetailPanel extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(
                       horizontal: S.xl, vertical: S.md),
                   children: [
+                    // Ask about button at top for easy access
+                    _AskAboutButton(
+                      label: isComposite
+                          ? 'Ask about my overall state'
+                          : 'Ask about my ${title.toLowerCase()}',
+                      prompt: isComposite
+                          ? 'Tell me about my overall state right now — what are the key factors affecting me?'
+                          : 'Tell me about my $title factor — what does a score of ${score.toStringAsFixed(1)} mean and how is it affecting me?',
+                      color: color,
+                    ),
+                    const SizedBox(height: S.xl),
                     if (isComposite) ...[
                       // Show all factors breakdown
                       _SectionTitle(text: 'Factor Breakdown'),
@@ -628,6 +640,41 @@ class _AreaRow extends StatelessWidget {
     if (score >= 7) return C.positive;
     if (score >= 4) return C.warning;
     return C.negative;
+  }
+}
+
+class _AskAboutButton extends StatelessWidget {
+  final String label;
+  final String prompt;
+  final Color color;
+  const _AskAboutButton({
+    required this.label,
+    required this.prompt,
+    required this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      height: 44,
+      child: ElevatedButton.icon(
+        onPressed: () {
+          Navigator.of(context).pop();
+          context.push('/chat?prompt=${Uri.encodeComponent(prompt)}');
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: color,
+          foregroundColor: C.bg,
+          shape: RoundedRectangleBorder(borderRadius: R.xlBr),
+        ),
+        icon: const Icon(Icons.auto_awesome, size: 18),
+        label: Text(
+          label,
+          style: T.bodySm.copyWith(color: C.bg, fontWeight: FontWeight.w600),
+        ),
+      ),
+    );
   }
 }
 

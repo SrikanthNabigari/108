@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:one_zero_eight/core/theme/app_theme.dart';
 import 'package:one_zero_eight/shared/widgets/glass_container.dart';
 
@@ -557,7 +558,13 @@ class AlertDetailPanel extends StatelessWidget {
         width: double.infinity,
         height: 44,
         child: ElevatedButton.icon(
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () {
+            final prompt = isSadeSati
+                ? 'Tell me about my Sade Sati — what phase am I in and how is it affecting me?'
+                : 'Tell me about my Dhaiya (small Sade Sati) — what should I know?';
+            Navigator.of(context).pop();
+            context.push('/chat?prompt=${Uri.encodeComponent(prompt)}');
+          },
           style: ElevatedButton.styleFrom(
             backgroundColor: C.saturn,
             foregroundColor: C.bg,

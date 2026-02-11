@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:one_zero_eight/core/theme/app_theme.dart';
 import 'package:one_zero_eight/shared/widgets/glass_container.dart';
 import 'package:one_zero_eight/shared/utils/planet_helpers.dart';
@@ -418,6 +419,13 @@ class _NowTab extends StatelessWidget {
             ),
           ),
         ],
+        const SizedBox(height: S.xl),
+        // Ask about button
+        _AskAboutButton(
+          label: 'Ask about ${area.name.toLowerCase()}',
+          prompt: 'How is my ${area.name.toLowerCase()} right now? What should I focus on?',
+          color: color,
+        ),
         const SizedBox(height: S.xxl),
       ],
     );
@@ -906,6 +914,41 @@ class _LearnTab extends StatelessWidget {
 }
 
 // -- Shared sub-widgets --
+
+class _AskAboutButton extends StatelessWidget {
+  final String label;
+  final String prompt;
+  final Color color;
+  const _AskAboutButton({
+    required this.label,
+    required this.prompt,
+    required this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: double.infinity,
+      height: 44,
+      child: ElevatedButton.icon(
+        onPressed: () {
+          Navigator.of(context).pop();
+          context.push('/chat?prompt=${Uri.encodeComponent(prompt)}');
+        },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: color,
+          foregroundColor: C.bg,
+          shape: RoundedRectangleBorder(borderRadius: R.xlBr),
+        ),
+        icon: const Icon(Icons.auto_awesome, size: 18),
+        label: Text(
+          label,
+          style: T.bodySm.copyWith(color: C.bg, fontWeight: FontWeight.w600),
+        ),
+      ),
+    );
+  }
+}
 
 class _SectionTitle extends StatelessWidget {
   final String text;

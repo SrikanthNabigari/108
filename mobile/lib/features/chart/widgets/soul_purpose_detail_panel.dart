@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:one_zero_eight/core/theme/app_theme.dart';
 import 'package:one_zero_eight/shared/utils/planet_helpers.dart';
 import 'package:one_zero_eight/shared/widgets/glass_container.dart';
@@ -510,7 +511,10 @@ class SoulPurposeDetailPanel extends ConsumerWidget {
         width: double.infinity,
         height: 44,
         child: ElevatedButton.icon(
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () {
+            Navigator.of(context).pop();
+            context.push('/chat?prompt=${Uri.encodeComponent("Tell me about my soul purpose and Atmakaraka — what is my dharma?")}');
+          },
           style: ElevatedButton.styleFrom(
             backgroundColor: color,
             foregroundColor: C.bg,

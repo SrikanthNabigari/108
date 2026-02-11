@@ -37,7 +37,13 @@ from typing_extensions import TypedDict
 # Optional dependencies - may not be installed
 try:
     from langchain_anthropic import ChatAnthropic
-    from langchain_core.messages import AIMessage, BaseMessage, HumanMessage, SystemMessage
+    from langchain_core.messages import (
+        AIMessage,
+        BaseMessage,
+        HumanMessage,
+        SystemMessage,
+        ToolMessage,
+    )
     from langgraph.graph import END, StateGraph
 
     _HAS_LANGGRAPH = True
@@ -48,6 +54,7 @@ except ImportError:
     BaseMessage = None
     HumanMessage = None
     SystemMessage = None
+    ToolMessage = None
     END = None
     StateGraph = None
 
@@ -447,12 +454,41 @@ class Guide:
             temperature=0.7,
         )
 
+        # LLM with tool-use for the interpret node
+        self._chat_tools = self._load_chat_tools()
+        self.llm_with_tools = (
+            self.llm.bind_tools(self._chat_tools) if self._chat_tools else self.llm
+        )
+        self._max_tool_rounds = 5
+
         # Build the state machine
         self.graph = self._build_graph()
         self._compiled_graph = self.graph.compile()
 
         if debug:
             logger.setLevel(logging.DEBUG)
+
+    @staticmethod
+    def _load_chat_tools() -> list[dict[str, Any]]:
+        """Load chat tool definitions for LLM tool-use binding."""
+        try:
+            from packages.guide.src.chat_tools import get_tool_definitions
+
+            # Convert Anthropic tool format to LangChain format
+            anthropic_tools = get_tool_definitions()
+            langchain_tools = []
+            for t in anthropic_tools:
+                langchain_tools.append(
+                    {
+                        "name": t["name"],
+                        "description": t["description"],
+                        "parameters": t["input_schema"],
+                    }
+                )
+            return langchain_tools
+        except Exception as e:
+            logger.warning("Could not load chat tools for Guide agent: %s", e)
+            return []
 
     async def _get_store(self):
         """Get or initialize memory store."""
@@ -823,6 +859,7 @@ Respond with ONLY the intent name (e.g., "calculate")"""
                                 "planet": p,
                                 "from_moon": t.get("house_from_moon"),
                                 "favorable": t.get("is_favorable"),
+                                "sign": raw_transits.get(p, {}).get("rashi", ""),
                             }
                             for p, t in analysis.get("planet_transits", {}).items()
                         ][:5],
@@ -1466,7 +1503,16 @@ Respond with ONLY the intent name (e.g., "calculate")"""
         return state
 
     def _interpret(self, state: AgentState) -> AgentState:
-        """Generate personalized interpretation using LLM with error handling."""
+        """Generate personalized interpretation using LLM with tool-use loop.
+
+        The LLM can dynamically call 10 calculation tools (state engine,
+        dasha, transits, yogas, doshas, panchanga, strength, etc.) to
+        fetch exactly the data it needs for the user's question. Tool
+        results are also stored in analysis_results for render block
+        generation.
+        """
+        import json as _json
+
         # Get personality style
         personality = state.get("personality_style", "unknown")
         style = PERSONALITY_STYLES.get(personality, {})
@@ -1478,14 +1524,77 @@ Respond with ONLY the intent name (e.g., "calculate")"""
         messages = state.get("messages", [])
         messages.append(HumanMessage(content=state["user_input"]))
 
-        # Call LLM with error handling
+        # Build birth_context dict for tool execution
+        bc = state.get("birth_chart") or {}
+        birth_context = {
+            "birth_datetime": bc.get("birth_datetime", ""),
+            "birth_lat": bc.get("latitude", bc.get("birth_lat", 0)),
+            "birth_lon": bc.get("longitude", bc.get("birth_lon", 0)),
+            "natal_planets": bc.get("natal_planets", bc.get("planets", {})),
+            "moon_longitude": bc.get("moon_longitude"),
+            "lagna_rashi": bc.get("lagna_rashi"),
+            "moon_rashi": bc.get("moon_rashi"),
+            "moon_nakshatra": bc.get("moon_nakshatra"),
+        }
+
+        # Call LLM with tool-use loop
         if self.debug:
-            logger.debug(f"Calling LLM with personality: {personality}")
+            logger.debug(
+                f"Calling LLM with personality: {personality}, tools={len(self._chat_tools)}"
+            )
+
+        tool_results_for_blocks: list[tuple[str, dict, dict]] = []
 
         try:
-            response = self.llm.invoke([SystemMessage(content=system_prompt), *messages])
-            state["response"] = response.content
-            messages.append(AIMessage(content=response.content))
+            llm = self.llm_with_tools if self._chat_tools else self.llm
+            has_birth_data = birth_context.get("moon_longitude") is not None
+
+            for round_num in range(self._max_tool_rounds):
+                response = llm.invoke([SystemMessage(content=system_prompt), *messages])
+
+                # Check if the LLM wants to call tools
+                if hasattr(response, "tool_calls") and response.tool_calls and has_birth_data:
+                    # Add the AI message (with tool_calls) to history
+                    messages.append(response)
+
+                    for tool_call in response.tool_calls:
+                        tool_name = tool_call["name"]
+                        tool_input = tool_call["args"]
+                        tool_id = tool_call.get("id", tool_name)
+
+                        if self.debug:
+                            logger.debug(f"Tool call round {round_num + 1}: {tool_name}")
+
+                        try:
+                            from packages.guide.src.chat_tools import execute_tool
+
+                            result = execute_tool(tool_name, tool_input, birth_context)
+                        except Exception as te:
+                            logger.warning(f"Tool {tool_name} failed: {te}")
+                            result = {"success": False, "error": str(te)}
+
+                        tool_results_for_blocks.append((tool_name, tool_input, result))
+                        messages.append(
+                            ToolMessage(
+                                content=_json.dumps(result, default=str),
+                                tool_call_id=tool_id,
+                            )
+                        )
+
+                    # Continue loop so LLM can process tool results
+                    continue
+
+                # No tool calls — we have the final text response
+                state["response"] = response.content
+                messages.append(AIMessage(content=response.content))
+                break
+            else:
+                # Hit max rounds — use last response if available
+                if not state.get("response"):
+                    state["response"] = response.content if hasattr(response, "content") else ""
+                    messages.append(AIMessage(content=state["response"]))
+                logger.warning(f"Interpret hit max tool rounds ({self._max_tool_rounds})")
+
         except Exception as e:
             error_type = type(e).__name__
             logger.error(f"LLM error ({error_type}): {e}")
@@ -1503,6 +1612,10 @@ Respond with ONLY the intent name (e.g., "calculate")"""
                 state["response"] = self._generate_fallback_response(state)
 
             messages.append(AIMessage(content=state["response"]))
+
+        # Merge tool results into analysis_results for block generation
+        if tool_results_for_blocks:
+            state["analysis_results"]["_tool_results"] = tool_results_for_blocks
 
         state["messages"] = messages
 
@@ -1642,9 +1755,15 @@ Respond with ONLY the intent name (e.g., "calculate")"""
         """Build personality-adapted system prompt."""
         context_str = self._format_context(state)
 
+        today = datetime.now().strftime("%Y-%m-%d")
+
         prompt = f"""You are the 108 Guide, a wise and compassionate Vedic astrology companion.
 
 Your role is to help users understand their birth chart, navigate dasha periods, and plan for their future using Vedic astrology wisdom.
+
+=== TODAY'S DATE ===
+{today}
+IMPORTANT: The current date is {today}. All transit predictions, timing advice, and date references MUST be relative to this date. Never reference past dates as upcoming.
 
 === PERSONALITY ADAPTATION ===
 The user has a {style.get("name", "Unknown")} Lagna.
@@ -1659,14 +1778,30 @@ Emphasize these themes in your response: {", ".join(style.get("keywords", ["wisd
 === USER CONTEXT ===
 {context_str}
 
+=== TOOLS ===
+You have access to calculation tools that fetch LIVE data from the user's birth chart. Use them whenever the user asks about specific topics:
+- get_state_now: Current 7-factor state + 8 life area scores (use for "how am I doing", "my state", career/health/etc.)
+- get_life_area: Detailed score for one life area (career, relationships, health, finance, spiritual, family, education, travel)
+- get_current_dasha: Current Vimshottari dasha periods with dates and progress
+- get_current_transits: Current planetary transits, Sade Sati status
+- get_panchanga: Today's panchanga (tithi, nakshatra, yoga, karana)
+- get_birth_chart_summary: Natal planet positions, lagna, moon sign
+- get_yogas: Detect all natal yogas (522 combinations)
+- get_doshas: Detect all natal doshas
+- get_planet_strength: Shadbala strength for a specific planet
+- get_compatibility: Synastry with partner (needs partner birth details)
+
+ALWAYS call relevant tools before answering chart-specific questions. Do not guess or use only the pre-loaded context — fetch fresh data with tools.
+
 === GUIDELINES ===
 1. Be warm, insightful, and practical in your guidance
 2. Connect to the user's specific chart when relevant
 3. Provide actionable advice aligned with their Lagna nature
 4. Reference dasha periods, transits, and yogas when they apply
-5. Suggest remedies when appropriate (mantras, gemstones, rituals)
+5. Do NOT suggest remedies, mantras, gemstones, pujas, or rituals. Focus on analysis, timing, and practical life advice only
 6. Always explain astrology concepts in accessible language
 7. Remember that the user may be new to astrology - educate gently
+8. Keep responses concise - prefer short paragraphs with clear structure
 
 === TONE ===
 Be the user's trusted guide on their life journey. Combine Vedic wisdom with compassion."""
@@ -1855,6 +1990,7 @@ Be the user's trusted guide on their life journey. Combine Vedic wisdom with com
         detected_yogas: list[dict[str, Any]] | None = None,
         detected_doshas: list[dict[str, Any]] | None = None,
         memories: list[dict[str, Any]] | None = None,
+        chat_history: list[dict[str, str]] | None = None,
     ) -> dict[str, Any]:
         """
         Process a user message and return response (sync version).
@@ -1869,13 +2005,27 @@ Be the user's trusted guide on their life journey. Combine Vedic wisdom with com
             detected_yogas: List of detected yogas (optional)
             detected_doshas: List of detected doshas (optional)
             memories: Retrieved memories (optional)
+            chat_history: Previous messages as [{role, content}] for continuity.
 
         Returns:
             Dictionary with response and metadata
         """
+        # Build conversation history as LangChain messages
+        history_messages: list[BaseMessage] = []
+        if chat_history and _HAS_LANGGRAPH:
+            for msg in chat_history:
+                role = msg.get("role", "")
+                content = msg.get("content", "")
+                if not content:
+                    continue
+                if role == "user":
+                    history_messages.append(HumanMessage(content=content))
+                elif role == "assistant":
+                    history_messages.append(AIMessage(content=content))
+
         # Initialize state
         state: AgentState = {
-            "messages": [],
+            "messages": history_messages,
             "user_input": user_input,
             "response": None,
             "user_id": user_id,

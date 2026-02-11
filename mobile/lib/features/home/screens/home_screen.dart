@@ -61,126 +61,143 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     return Scaffold(
       body: AmbientBackground(
         child: SafeArea(
-          child: Padding(
+          child: ListView(
             padding: S.pagePadding,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: S.xl),
+            children: [
+              const SizedBox(height: S.xl),
 
-                // Header
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    profileAsync.when(
-                      data: (p) => Text(
-                        'Hello, ${p.name ?? 'Explorer'}',
-                        style: T.h2,
-                      ),
-                      loading: () =>
-                          Text('Hello...', style: T.h2),
-                      error: (_, __) =>
-                          Text('Hello', style: T.h2),
+              // Header
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  profileAsync.when(
+                    data: (p) => Text(
+                      'Hello, ${p.name ?? 'Explorer'}',
+                      style: T.h2,
                     ),
-                    GestureDetector(
-                      onTap: () async {
-                        await SupabaseService().signOut();
-                        if (context.mounted) context.go('/phone-auth');
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.all(S.sm),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: C.glassBg,
-                          border: Border.all(color: C.glassBorder),
-                        ),
-                        child: const Icon(Icons.logout,
-                            color: C.textMuted, size: 18),
-                      ),
-                    ),
-                  ],
-                ),
-
-                const SizedBox(height: S.xxxl),
-
-                // Navigation cards
-                _NavCard(
-                  icon: Icons.auto_awesome,
-                  title: 'Your Chart',
-                  subtitle: 'Who you are — planets, yogas, doshas, strength',
-                  color: C.accent,
-                  onTap: () => context.go('/chart'),
-                ),
-
-                const SizedBox(height: S.lg),
-
-                _NavCard(
-                  icon: Icons.timeline,
-                  title: 'Life Timeline',
-                  subtitle: 'When things happen — dasha periods and life chapters',
-                  color: C.jupiter,
-                  onTap: () => context.go('/timeline'),
-                ),
-
-                const SizedBox(height: S.lg),
-
-                _NavCard(
-                  icon: Icons.sync,
-                  title: "What's Happening Now",
-                  subtitle: 'Current transits, active houses, upcoming triggers',
-                  color: C.mercury,
-                  onTap: () => context.go('/transits'),
-                ),
-
-                const SizedBox(height: S.lg),
-
-                _NavCard(
-                  icon: Icons.grid_on,
-                  title: 'State Map',
-                  subtitle: 'Your cosmic state — 7 factors, heat map, life areas',
-                  color: C.saturn,
-                  onTap: () => context.go('/state-map'),
-                ),
-
-                // Mini life areas preview
-                if (!_areasLoading && _areas.isNotEmpty) ...[
-                  const SizedBox(height: S.xl),
-                  Row(
-                    children: [
-                      Text('Life Areas',
-                          style: T.h3.copyWith(fontSize: 16)),
-                      const SizedBox(width: S.sm),
-                      Text('today', style: T.caption),
-                    ],
+                    loading: () =>
+                        Text('Hello...', style: T.h2),
+                    error: (_, __) =>
+                        Text('Hello', style: T.h2),
                   ),
-                  const SizedBox(height: S.sm),
-                  SizedBox(
-                    height: 36,
-                    child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: _areas.length,
-                      separatorBuilder: (_, __) =>
-                          const SizedBox(width: S.sm),
-                      itemBuilder: (_, i) => _MiniAreaChip(
-                        area: _areas[i],
-                        onTap: () => context.go('/state-map'),
+                  GestureDetector(
+                    onTap: () async {
+                      await SupabaseService().signOut();
+                      if (context.mounted) context.go('/phone-auth');
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(S.sm),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: C.glassBg,
+                        border: Border.all(color: C.glassBorder),
                       ),
+                      child: const Icon(Icons.logout,
+                          color: C.textMuted, size: 18),
                     ),
                   ),
                 ],
+              ),
 
-                const Spacer(),
+              const SizedBox(height: S.xxxl),
 
-                // Footer
-                Center(
-                  child: Text(
-                    'v1.0 — built with cosmic intention',
-                    style: T.caption,
+              // Navigation cards
+              _NavCard(
+                icon: Icons.auto_awesome,
+                title: 'Your Chart',
+                subtitle: 'Who you are — planets, yogas, doshas, strength',
+                color: C.accent,
+                onTap: () => context.go('/chart'),
+              ),
+
+              const SizedBox(height: S.lg),
+
+              _NavCard(
+                icon: Icons.timeline,
+                title: 'Life Timeline',
+                subtitle: 'When things happen — dasha periods and life chapters',
+                color: C.jupiter,
+                onTap: () => context.go('/timeline'),
+              ),
+
+              const SizedBox(height: S.lg),
+
+              _NavCard(
+                icon: Icons.sync,
+                title: "What's Happening Now",
+                subtitle: 'Current transits, active houses, upcoming triggers',
+                color: C.mercury,
+                onTap: () => context.go('/transits'),
+              ),
+
+              const SizedBox(height: S.lg),
+
+              _NavCard(
+                icon: Icons.grid_on,
+                title: 'State Map',
+                subtitle: 'Your cosmic state — 7 factors, heat map, life areas',
+                color: C.saturn,
+                onTap: () => context.go('/state-map'),
+              ),
+
+              const SizedBox(height: S.lg),
+
+              _NavCard(
+                icon: Icons.auto_awesome,
+                title: 'Ask Guide',
+                subtitle: 'Chat with your astrologer — powered by AI',
+                color: C.moon,
+                onTap: () => context.go('/chat'),
+              ),
+
+              const SizedBox(height: S.lg),
+
+              _NavCard(
+                icon: Icons.menu_book_rounded,
+                title: 'Learn Jyotish',
+                subtitle: 'The complete Vedic Astrology guide',
+                color: C.ketu,
+                onTap: () => context.go('/learn'),
+              ),
+
+              // Mini life areas preview
+              if (!_areasLoading && _areas.isNotEmpty) ...[
+                const SizedBox(height: S.xl),
+                Row(
+                  children: [
+                    Text('Life Areas',
+                        style: T.h3.copyWith(fontSize: 16)),
+                    const SizedBox(width: S.sm),
+                    Text('today', style: T.caption),
+                  ],
+                ),
+                const SizedBox(height: S.sm),
+                SizedBox(
+                  height: 36,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: _areas.length,
+                    separatorBuilder: (_, __) =>
+                        const SizedBox(width: S.sm),
+                    itemBuilder: (_, i) => _MiniAreaChip(
+                      area: _areas[i],
+                      onTap: () => context.go('/state-map'),
+                    ),
                   ),
                 ),
-                const SizedBox(height: S.lg),
               ],
-            ),
+
+              const SizedBox(height: S.xxxl),
+
+              // Footer
+              Center(
+                child: Text(
+                  'v1.0 — built with cosmic intention',
+                  style: T.caption,
+                ),
+              ),
+              const SizedBox(height: S.lg),
+            ],
           ),
         ),
       ),

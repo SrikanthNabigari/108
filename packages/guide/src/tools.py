@@ -439,18 +439,23 @@ class AstrologyTools:
         try:
             query_date = query_date or datetime.utcnow()
 
-            # Get current dasha
+            # Get current dasha — returns nested dicts: {"mahadasha": {"lord", "start_date", "end_date", ...}}
             current = get_current_dasha(birth_datetime, moon_longitude, query_date)
 
             # Get timeline of mahadashas
             timeline = get_mahadasha_sequence(birth_datetime, moon_longitude)
 
-            # Calculate how far into current dasha we are
-            maha_start = current.get("mahadasha_start")
-            maha_end = current.get("mahadasha_end")
-            anta_start = current.get("antardasha_start")
-            anta_end = current.get("antardasha_end")
+            # Extract nested dasha data
+            maha = current.get("mahadasha", {}) if current else {}
+            antar = current.get("antardasha", {}) if current else {}
+            pratyantar = current.get("pratyantardasha", {}) if current else {}
 
+            maha_start = maha.get("start_date")
+            maha_end = maha.get("end_date")
+            anta_start = antar.get("start_date")
+            anta_end = antar.get("end_date")
+
+            # Calculate progress percentages
             maha_percent = 0.0
             anta_percent = 0.0
 
@@ -467,18 +472,27 @@ class AstrologyTools:
             return {
                 "query_date": query_date.isoformat(),
                 "current_mahadasha": {
-                    "lord": current.get("mahadasha_lord"),
+                    "lord": maha.get("lord", ""),
                     "start": maha_start.isoformat() if maha_start else None,
                     "end": maha_end.isoformat() if maha_end else None,
-                    "years": current.get("mahadasha_years"),
+                    "years": maha.get("years", 0),
                     "progress_percent": round(maha_percent, 1),
                 },
                 "current_antardasha": {
-                    "lord": current.get("antardasha_lord"),
+                    "lord": antar.get("lord", ""),
                     "start": anta_start.isoformat() if anta_start else None,
                     "end": anta_end.isoformat() if anta_end else None,
-                    "years": current.get("antardasha_years"),
+                    "years": antar.get("years", 0),
                     "progress_percent": round(anta_percent, 1),
+                },
+                "current_pratyantardasha": {
+                    "lord": pratyantar.get("lord", ""),
+                    "start": pratyantar.get("start_date", "").isoformat()
+                    if pratyantar.get("start_date")
+                    else None,
+                    "end": pratyantar.get("end_date", "").isoformat()
+                    if pratyantar.get("end_date")
+                    else None,
                 },
                 "dasha_timeline": timeline[:10] if timeline else [],
                 "success": True,
