@@ -607,11 +607,12 @@ class AstrologyTools:
                 if planet in transit_planets:
                     planet_long = transit_planets[planet]["longitude"]
                     planet_sign, _ = longitude_to_rashi(planet_long)
-                    transit_idx = sign_to_idx.get(planet_sign.value, 0)
+                    sign_name = planet_sign.value.title()
+                    transit_idx = sign_to_idx.get(sign_name, 0)
                     house_from_moon = ((transit_idx - natal_moon_idx) % 12) + 1
 
                     transit_analysis["transits"][planet] = {
-                        "sign": planet_sign.value,
+                        "sign": sign_name,
                         "house_from_moon": house_from_moon,
                         "degree": round(planet_long, 2),
                         "favorable": is_planet_favorable_in_house(planet, house_from_moon),
