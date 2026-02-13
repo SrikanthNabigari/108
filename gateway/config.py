@@ -34,6 +34,9 @@ class Settings(BaseSettings):
     # Environment
     env: str = "development"
 
+    # Dev tier override for local testing ("free" | "pro" | "premium")
+    dev_tier: str = "free"
+
     class Config:
         """Pydantic configuration."""
 

@@ -153,15 +153,27 @@ class TestExecuteTool:
 
     def test_get_yogas_returns_list(self):
         result = execute_tool("get_yogas", {}, SAMPLE_BIRTH_CONTEXT)
-        if result.get("success"):
-            assert "yogas" in result
-            assert isinstance(result["yogas"], list)
+        assert result["success"] is True, f"get_yogas failed: {result.get('error')}"
+        assert "yogas" in result
+        assert isinstance(result["yogas"], list)
+        assert result["yoga_count"] >= 0
+        # Verify serialization — each yoga should be a dict (not pydantic model)
+        for y in result["yogas"]:
+            assert isinstance(y, dict)
+            assert "name" in y
+            assert "yoga_id" in y
 
     def test_get_doshas_returns_list(self):
         result = execute_tool("get_doshas", {}, SAMPLE_BIRTH_CONTEXT)
-        if result.get("success"):
-            assert "doshas" in result
-            assert isinstance(result["doshas"], list)
+        assert result["success"] is True, f"get_doshas failed: {result.get('error')}"
+        assert "doshas" in result
+        assert isinstance(result["doshas"], list)
+        assert result["dosha_count"] >= 0
+        # Verify serialization — each dosha should be a dict (not pydantic model)
+        for d in result["doshas"]:
+            assert isinstance(d, dict)
+            assert "name" in d
+            assert "dosha_id" in d
 
     def test_get_planet_strength_sun(self):
         result = execute_tool("get_planet_strength", {"planet": "sun"}, SAMPLE_BIRTH_CONTEXT)

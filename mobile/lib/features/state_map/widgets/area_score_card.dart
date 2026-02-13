@@ -26,6 +26,10 @@ class AreaScoreCard extends StatelessWidget {
   Widget build(BuildContext context) {
     if (areas.isEmpty) return const SizedBox.shrink();
 
+    // Sort by score descending so strongest areas show first
+    final sorted = List<AreaScore>.from(areas)
+      ..sort((a, b) => b.score.compareTo(a.score));
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -44,11 +48,11 @@ class AreaScoreCard extends StatelessWidget {
           height: 132,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
-            itemCount: areas.length,
+            itemCount: sorted.length,
             separatorBuilder: (_, __) => const SizedBox(width: S.sm),
             itemBuilder: (_, i) => _AreaCard(
-              area: areas[i],
-              onTap: onAreaTap != null ? () => onAreaTap!(areas[i]) : null,
+              area: sorted[i],
+              onTap: onAreaTap != null ? () => onAreaTap!(sorted[i]) : null,
             ),
           ),
         ),

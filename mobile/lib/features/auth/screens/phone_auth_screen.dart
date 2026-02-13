@@ -17,7 +17,7 @@ class PhoneAuthScreen extends ConsumerStatefulWidget {
 class _PhoneAuthScreenState extends ConsumerState<PhoneAuthScreen> {
   final _phoneController = TextEditingController();
   bool _isSending = false;
-  final String _countryCode = '+91';
+  String _countryCode = '+91';
 
   @override
   void dispose() {
@@ -53,6 +53,49 @@ class _PhoneAuthScreenState extends ConsumerState<PhoneAuthScreen> {
       _showSnack('Anonymous sign-in failed: $e');
       if (mounted) setState(() => _isSending = false);
     }
+  }
+
+  static const _countries = [
+    ('+91', 'IN', 'India'),
+    ('+1', 'US', 'United States'),
+    ('+44', 'GB', 'United Kingdom'),
+    ('+61', 'AU', 'Australia'),
+    ('+971', 'AE', 'UAE'),
+    ('+65', 'SG', 'Singapore'),
+    ('+60', 'MY', 'Malaysia'),
+    ('+977', 'NP', 'Nepal'),
+    ('+94', 'LK', 'Sri Lanka'),
+    ('+880', 'BD', 'Bangladesh'),
+  ];
+
+  void _showCountryPicker() {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: C.surface,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(R.xl)),
+      ),
+      builder: (_) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const SizedBox(height: S.lg),
+            Text('Select Country', style: T.h3),
+            const SizedBox(height: S.lg),
+            ..._countries.map((c) => ListTile(
+              leading: Text(c.$2, style: T.body),
+              title: Text(c.$3, style: T.bodySm.copyWith(color: C.textPrimary)),
+              trailing: Text(c.$1, style: T.bodySm.copyWith(color: C.textSecondary)),
+              onTap: () {
+                setState(() => _countryCode = c.$1);
+                Navigator.pop(context);
+              },
+            )),
+            const SizedBox(height: S.lg),
+          ],
+        ),
+      ),
+    );
   }
 
   void _showSnack(String msg) {
@@ -102,7 +145,7 @@ class _PhoneAuthScreenState extends ConsumerState<PhoneAuthScreen> {
                       // Country code
                       GestureDetector(
                         onTap: () {
-                          // TODO: country picker
+                          _showCountryPicker();
                         },
                         child: Row(
                           children: [

@@ -8,13 +8,15 @@ import 'features/auth/screens/phone_auth_screen.dart';
 import 'features/auth/screens/otp_verify_screen.dart';
 import 'features/onboarding/screens/profile_screen.dart';
 import 'features/onboarding/screens/birth_details_screen.dart';
-import 'features/home/screens/home_screen.dart';
+import 'features/shell/app_shell.dart';
 import 'features/timeline/screens/timeline_screen.dart';
 import 'features/transits/screens/transit_dashboard_screen.dart';
-import 'features/chart/screens/chart_screen.dart';
 import 'features/state_map/screens/state_map_screen.dart';
-import 'features/chat/screens/chat_screen.dart';
 import 'features/learn/screens/learn_screen.dart';
+import 'features/compatibility/screens/compatibility_screen.dart';
+import 'features/reports/screens/reports_screen.dart';
+import 'features/reports/widgets/report_viewer.dart';
+import 'features/credits/screens/credits_screen.dart';
 
 /// Triggers GoRouter redirect re-evaluation on auth changes.
 class _AuthNotifier extends ChangeNotifier {
@@ -38,10 +40,11 @@ final routerProvider = Provider<GoRouter>((ref) {
           state.uri.path == '/otp-verify';
 
       if (!loggedIn && !onAuth) return '/phone-auth';
-      if (loggedIn && onAuth) return '/profile';
+      if (loggedIn && onAuth) return '/profile-onboard';
       return null;
     },
     routes: [
+      // Auth routes (outside shell)
       GoRoute(
         path: '/phone-auth',
         builder: (_, __) => const PhoneAuthScreen(),
@@ -53,13 +56,40 @@ final routerProvider = Provider<GoRouter>((ref) {
         ),
       ),
       GoRoute(
-        path: '/profile',
+        path: '/profile-onboard',
         builder: (_, __) => const ProfileScreen(),
       ),
       GoRoute(
         path: '/birth-details',
         builder: (_, __) => const BirthDetailsScreen(),
       ),
+
+      // Main app shell with bottom nav
+      GoRoute(
+        path: '/home',
+        builder: (_, __) => const AppShell(initialIndex: 0),
+      ),
+      GoRoute(
+        path: '/chart',
+        builder: (_, __) => const AppShell(initialIndex: 1),
+      ),
+      GoRoute(
+        path: '/chat',
+        builder: (context, state) {
+          final prompt = state.uri.queryParameters['prompt'];
+          return AppShell(initialIndex: 2, chatPrompt: prompt);
+        },
+      ),
+      GoRoute(
+        path: '/forecast',
+        builder: (_, __) => const AppShell(initialIndex: 3),
+      ),
+      GoRoute(
+        path: '/profile',
+        builder: (_, __) => const AppShell(initialIndex: 4),
+      ),
+
+      // Push routes (outside shell, stack on top)
       GoRoute(
         path: '/timeline',
         builder: (_, __) => const TimelineScreen(),
@@ -69,27 +99,31 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (_, __) => const TransitDashboardScreen(),
       ),
       GoRoute(
-        path: '/chart',
-        builder: (_, __) => const ChartScreen(),
-      ),
-      GoRoute(
-        path: '/home',
-        builder: (_, __) => const HomeScreen(),
-      ),
-      GoRoute(
         path: '/state-map',
         builder: (_, __) => const StateMapScreen(),
       ),
       GoRoute(
-        path: '/chat',
-        builder: (context, state) {
-          final prompt = state.uri.queryParameters['prompt'];
-          return ChatScreen(initialPrompt: prompt);
+        path: '/learn',
+        builder: (_, __) => const LearnScreen(),
+      ),
+      GoRoute(
+        path: '/compatibility',
+        builder: (_, __) => const CompatibilityScreen(),
+      ),
+      GoRoute(
+        path: '/reports',
+        builder: (_, __) => const ReportsScreen(),
+      ),
+      GoRoute(
+        path: '/report-view',
+        builder: (_, state) {
+          final report = state.extra as Map<String, dynamic>?;
+          return ReportViewer(reportData: report ?? {});
         },
       ),
       GoRoute(
-        path: '/learn',
-        builder: (_, __) => const LearnScreen(),
+        path: '/credits',
+        builder: (_, __) => const CreditsScreen(),
       ),
     ],
   );

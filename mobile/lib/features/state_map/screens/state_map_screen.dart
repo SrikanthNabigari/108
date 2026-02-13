@@ -260,7 +260,19 @@ class _StateMapScreenState extends ConsumerState<StateMapScreen> {
       context,
       onSave: (event) {
         setState(() => _userEvents.add(event));
-        // TODO: POST to /api/v1/events when backend ready
+        // POST event to backend (fire-and-forget)
+        ApiService().post(
+          ApiConstants.events,
+          body: {
+            'date': event.date.toIso8601String(),
+            'type': event.type,
+            'description': event.description,
+            'actual_rating': event.actualRating,
+          },
+          fromJson: (json) => json,
+        ).catchError((e) {
+          debugPrint('[StateMap] Failed to save event: $e');
+        });
       },
     );
   }

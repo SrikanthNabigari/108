@@ -238,7 +238,9 @@ class FactorDetailPanel extends StatelessWidget {
                       // Area scores
                       _SectionTitle(text: 'Life Areas'),
                       const SizedBox(height: S.sm),
-                      ...vector.areas.map((a) => _AreaRow(area: a)),
+                      ...(List<AreaScore>.from(vector.areas)
+                        ..sort((a, b) => b.score.compareTo(a.score)))
+                          .map((a) => _AreaRow(area: a)),
                       const SizedBox(height: S.xl),
                       // Mental state
                       GlassContainer(

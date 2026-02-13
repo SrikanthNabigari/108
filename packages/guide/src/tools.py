@@ -634,6 +634,81 @@ class AstrologyTools:
     # YOGA (AUSPICIOUS COMBINATIONS) TOOLS
     # ===================
 
+    def _dict_to_birth_chart(self, natal_chart: dict[str, Any]) -> Any:
+        """Convert a natal_chart dict to a BirthChart model for detectors.
+
+        Args:
+            natal_chart: Dict with "planets" and "lagna" keys.
+
+        Returns:
+            BirthChart pydantic model.
+        """
+        from packages.core.src.models import BirthChart, BirthData, HouseCusps, PlanetPosition
+
+        planets_raw = natal_chart.get("planets", {})
+        lagna_info = natal_chart.get("lagna", {})
+        lagna_str = (lagna_info.get("sign") or "aries").lower()
+        lagna_rashi = Rashi(lagna_str)
+        lagna_idx = list(Rashi).index(lagna_rashi)
+
+        planet_positions: dict[Planet, PlanetPosition] = {}
+        for name, data in planets_raw.items():
+            if not isinstance(data, dict):
+                continue
+            try:
+                planet_enum = Planet(name.lower())
+                lon = float(data.get("longitude", 0))
+                rashi_idx = int(lon // 30) % 12
+                rashi_enum = list(Rashi)[rashi_idx]
+                house = data.get("house", ((rashi_idx - lagna_idx) % 12) + 1)
+                nak = data.get("nakshatra", "")
+                nak_pada = data.get("nakshatra_pada", 1)
+                try:
+                    nak_lord = Planet(data.get("nakshatra_lord", name).lower())
+                except (ValueError, AttributeError):
+                    nak_lord = planet_enum
+
+                planet_positions[planet_enum] = PlanetPosition(
+                    planet=planet_enum,
+                    longitude=lon,
+                    latitude=float(data.get("latitude", 0.0)),
+                    speed=float(data.get("speed", 0.0)),
+                    rashi=rashi_enum,
+                    rashi_degree=lon % 30,
+                    nakshatra=nak if isinstance(nak, str) else str(nak),
+                    nakshatra_pada=max(1, min(4, int(nak_pada))),
+                    nakshatra_lord=nak_lord,
+                    is_retrograde=bool(data.get("is_retrograde", False)),
+                    house=int(house),
+                )
+            except (ValueError, KeyError):
+                continue
+
+        moon_pos = planet_positions.get(Planet.MOON)
+        moon_rashi = moon_pos.rashi if moon_pos else lagna_rashi
+        moon_nak = moon_pos.nakshatra if moon_pos else ""
+
+        return BirthChart(
+            user_id="tool_call",
+            birth_data=BirthData(
+                datetime_utc=datetime.utcnow(),
+                latitude=0.0,
+                longitude=0.0,
+                timezone="UTC",
+            ),
+            planets=planet_positions,
+            houses=HouseCusps(
+                ascendant=lagna_idx * 30.0,
+                mc=0.0,
+                cusps=[(lagna_idx * 30 + i * 30) % 360 for i in range(12)],
+            ),
+            lagna_rashi=lagna_rashi,
+            moon_rashi=moon_rashi,
+            moon_nakshatra=moon_nak,
+            ayanamsa=23.85,
+            calculated_at=datetime.utcnow(),
+        )
+
     def detect_yogas(self, natal_chart: dict[str, Any]) -> dict[str, Any]:
         """
         Detect all auspicious yogas (planetary combinations) in birth chart.
@@ -651,21 +726,29 @@ class AstrologyTools:
             Dictionary with detected yogas and their interpretations
         """
         try:
-            planets = natal_chart.get("planets", {})
-            lagna = natal_chart.get("lagna", {})
-            lagna_sign = Rashi(lagna.get("sign", "aries").lower())
+            chart = self._dict_to_birth_chart(natal_chart)
+            detected = self.yoga_detector.detect_all_yogas(chart)
 
-            # Extract planet data for detector
-            chart_data = {
-                "planets": planets,
-                "lagna_rashi": lagna_sign,
-            }
-
-            detected = self.yoga_detector.detect_all(chart_data)
+            # Convert pydantic models to dicts for JSON serialization
+            yogas_list = []
+            for y in detected:
+                yogas_list.append(
+                    {
+                        "yoga_id": y.yoga_id,
+                        "name": y.name,
+                        "category": y.category.value
+                        if hasattr(y.category, "value")
+                        else str(y.category),
+                        "is_present": y.is_present,
+                        "strength": y.strength,
+                        "involved_planets": [p.value for p in y.involved_planets],
+                        "description": y.description,
+                    }
+                )
 
             return {
-                "yogas": detected,
-                "yoga_count": len(detected),
+                "yogas": yogas_list,
+                "yoga_count": len(yogas_list),
                 "success": True,
             }
         except Exception as e:
@@ -743,24 +826,28 @@ class AstrologyTools:
             Dictionary with detected doshas and remedies
         """
         try:
-            planets = natal_chart.get("planets", {})
-            lagna = natal_chart.get("lagna", {})
-            lagna_sign = Rashi(lagna.get("sign", "aries").lower())
-            moon = natal_chart.get("planets", {}).get("moon", {})
-            moon_sign = Rashi(moon.get("sign", "aries").lower())
+            chart = self._dict_to_birth_chart(natal_chart)
+            detected = self.dosha_detector.detect_all(chart)
 
-            chart_data = {
-                "planets": planets,
-                "lagna_rashi": lagna_sign,
-                "moon_rashi": moon_sign,
-            }
-
-            detected = self.dosha_detector.detect_all(chart_data)
+            # Convert pydantic models to dicts for JSON serialization
+            doshas_list = []
+            for d in detected:
+                doshas_list.append(
+                    {
+                        "dosha_id": d.dosha_id,
+                        "name": d.name,
+                        "is_present": d.is_present,
+                        "severity": d.severity,
+                        "involved_planets": [p.value for p in d.involved_planets],
+                        "description": d.description,
+                        "remedies": d.remedies,
+                    }
+                )
 
             return {
-                "doshas": detected,
-                "dosha_count": len(detected),
-                "remedies_available": any(d.get("remedy") for d in detected),
+                "doshas": doshas_list,
+                "dosha_count": len(doshas_list),
+                "remedies_available": any(d.get("remedies") for d in doshas_list),
                 "success": True,
             }
         except Exception as e:

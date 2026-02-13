@@ -163,7 +163,7 @@ async def get_current_user(
 
         row = await db.fetchrow("SELECT * FROM public.users WHERE id = $1", new_id)
 
-    return UserContext(
+    user_context = UserContext(
         id=row["id"],
         auth_id=str(row["auth_id"]),
         email=row.get("email") or "",
@@ -171,6 +171,19 @@ async def get_current_user(
         name=row.get("name"),
         subscription_tier=SubscriptionTier(row.get("subscription_tier", "free")),
     )
+
+    # Override subscription tier for local testing
+    if settings.env == "development" and settings.dev_tier != "free":
+        user_context = UserContext(
+            id=user_context.id,
+            auth_id=user_context.auth_id,
+            email=user_context.email,
+            phone=user_context.phone,
+            name=user_context.name,
+            subscription_tier=SubscriptionTier(settings.dev_tier),
+        )
+
+    return user_context
 
 
 async def get_app_config(request: Request) -> dict:

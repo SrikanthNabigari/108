@@ -11,7 +11,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
-from gateway.dependencies import get_app_config, get_current_user
+from gateway.dependencies import get_app_config, get_current_user, get_db
 from gateway.middleware.entitlements import check_feature_access, gate_response
 from gateway.models import (
     AccessLevel,
@@ -36,6 +36,7 @@ async def get_quick_compatibility(
     request: CompatibilityQuickRequest,
     current_user: Annotated[UserContext, Depends(get_current_user)],
     config: Annotated[dict, Depends(get_app_config)],
+    db: Annotated[object, Depends(get_db)],
 ) -> dict[str, Any]:
     """
     Get quick compatibility check (Ashta Kuta).
@@ -46,13 +47,14 @@ async def get_quick_compatibility(
         request: Compatibility check request with partner birth details.
         current_user: Authenticated user context.
         config: Application configuration.
+        db: Database connection pool.
 
     Returns:
         dict: Quick compatibility score and analysis (gated by tier).
 
     Raises:
         HTTPException: 401 if not authenticated, 403 if locked for tier,
-            500 if calculation fails.
+            400 if no birth chart, 500 if calculation fails.
     """
     try:
         access = await check_feature_access(
@@ -66,10 +68,29 @@ async def get_quick_compatibility(
                 "Upgrade to Pro to unlock compatibility check",
             ).dict()
 
-        # Get user's moon position from birth chart (TODO: load from DB)
-        # For now, we'll need to calculate partner positions
-        user_nakshatra = 1  # TODO: Get from user's birth chart
-        user_rashi = "aries"  # TODO: Get from user's birth chart
+        # Load user's birth chart from DB
+        chart_row = await db.fetchrow(
+            "SELECT * FROM birth_charts WHERE user_id = $1",
+            str(current_user.id),
+        )
+        if chart_row is None:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Birth chart not found. Please enter birth details first.",
+            )
+
+        import json as _json
+
+        user_planets = (
+            _json.loads(chart_row["planets"])
+            if isinstance(chart_row["planets"], str)
+            else (chart_row["planets"] or {})
+        )
+        user_moon_data = user_planets.get("moon", {})
+        user_moon_lon = float(user_moon_data.get("longitude", 0))
+        user_nakshatra_data = longitude_to_nakshatra(user_moon_lon)
+        user_nakshatra = user_nakshatra_data.get("nakshatra_number", 1)
+        user_rashi = user_moon_data.get("sign", "aries")
 
         # Calculate partner's planets and houses
         partner_planets = get_all_planets(
@@ -119,6 +140,7 @@ async def get_full_compatibility(
     request: CompatibilityFullRequest,
     current_user: Annotated[UserContext, Depends(get_current_user)],
     config: Annotated[dict, Depends(get_app_config)],
+    db: Annotated[object, Depends(get_db)],
 ) -> dict[str, Any]:
     """
     Get full compatibility analysis (Synastry).
@@ -129,13 +151,14 @@ async def get_full_compatibility(
         request: Full compatibility request with partner birth details.
         current_user: Authenticated user context.
         config: Application configuration.
+        db: Database connection pool.
 
     Returns:
         dict: Full synastry analysis (premium only).
 
     Raises:
         HTTPException: 401 if not authenticated, 403 if not premium,
-            500 if calculation fails.
+            400 if no birth chart, 500 if calculation fails.
     """
     try:
         access = await check_feature_access(
@@ -149,13 +172,31 @@ async def get_full_compatibility(
                 "Upgrade to Premium to unlock full compatibility analysis",
             ).dict()
 
-        # Get user's birth chart (TODO: load from DB)
-        # For now, use mock data
-        user_planets = {
-            "sun": {"longitude": 52.5, "sign": "taurus"},
-            "moon": {"longitude": 102.5, "sign": "gemini"},
-        }
-        user_cusps = [0] * 12  # TODO: Load from DB
+        # Load user's birth chart from DB
+        chart_row = await db.fetchrow(
+            "SELECT * FROM birth_charts WHERE user_id = $1",
+            str(current_user.id),
+        )
+        if chart_row is None:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Birth chart not found. Please enter birth details first.",
+            )
+
+        import json as _json
+
+        user_planets = (
+            _json.loads(chart_row["planets"])
+            if isinstance(chart_row["planets"], str)
+            else (chart_row["planets"] or {})
+        )
+        user_cusps_raw = chart_row.get("cusps")
+        if user_cusps_raw is not None:
+            user_cusps = (
+                _json.loads(user_cusps_raw) if isinstance(user_cusps_raw, str) else user_cusps_raw
+            )
+        else:
+            user_cusps = [0] * 12
 
         # Calculate partner's planets and houses
         partner_planets_data = get_all_planets(

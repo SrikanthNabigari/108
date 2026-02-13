@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import logging
 import sys
 from pathlib import Path
@@ -12,7 +13,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
-from gateway.dependencies import get_app_config, get_current_user, get_db
+from gateway.dependencies import get_app_config, get_current_user, get_db, get_settings
 from gateway.models import (
     ReportGenerateRequest,
     ReportResponse,
@@ -175,14 +176,44 @@ async def generate_report(
             str(current_user.id),
         )
 
-        # TODO: Queue async job to generate PDF report
+        # Generate report content using AI
+        from gateway.report_generator import ReportGenerator
+
+        settings = await get_settings()
+
+        # Load birth chart for context
+        chart_row = await db.fetchrow(
+            "SELECT * FROM birth_charts WHERE user_id = $1",
+            str(current_user.id),
+        )
+
+        birth_context: dict[str, Any] = {}
+        if chart_row:
+            planets = (
+                json.loads(chart_row["planets"])
+                if isinstance(chart_row["planets"], str)
+                else (chart_row["planets"] or {})
+            )
+            birth_context["natal_planets"] = planets
+
+        generator = ReportGenerator(api_key=settings.anthropic_api_key)
+        content = generator.generate(request.report_type, birth_context)
+
+        # Update report with generated content
+        await db.execute(
+            """UPDATE generated_reports
+               SET content = $1, status = 'completed', updated_at = NOW()
+               WHERE id = $2""",
+            json.dumps(content),
+            str(report_id),
+        )
 
         return ReportResponse(
             id=report_row["id"],
             user_id=report_row["user_id"],
             report_type=report_row["report_type"],
             title=report_row["title"],
-            status=report_row["status"],
+            status="completed",
             credit_cost=report_row["credit_cost"],
             pdf_url=None,
             created_at=report_row["created_at"],

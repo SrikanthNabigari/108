@@ -6,7 +6,6 @@ import 'package:one_zero_eight/shared/widgets/glass_container.dart';
 import 'package:one_zero_eight/shared/widgets/ambient_background.dart';
 import 'package:one_zero_eight/shared/utils/planet_helpers.dart';
 import 'package:one_zero_eight/data/providers/user_provider.dart';
-import 'package:one_zero_eight/data/services/supabase_service.dart';
 import 'package:one_zero_eight/core/constants/api_constants.dart';
 import 'package:one_zero_eight/data/services/api_service.dart';
 import 'package:one_zero_eight/features/state_map/models/state_vector.dart';
@@ -21,15 +20,17 @@ class HomeScreen extends ConsumerStatefulWidget {
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   List<AreaScore> _areas = [];
-  bool _areasLoading = true;
+  double _composite = 0;
+  String _mentalState = '';
+  bool _loading = true;
 
   @override
   void initState() {
     super.initState();
-    _fetchAreas();
+    _fetchState();
   }
 
-  Future<void> _fetchAreas() async {
+  Future<void> _fetchState() async {
     try {
       final result = await ApiService().get<StateVector>(
         ApiConstants.stateNow,
@@ -37,18 +38,25 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             StateVector.fromJson(json as Map<String, dynamic>),
       );
       if (mounted) {
+        final sorted = List<AreaScore>.from(result.areas)
+          ..sort((a, b) => b.score.compareTo(a.score));
         setState(() {
-          _areas = result.areas;
-          _areasLoading = false;
+          _areas = sorted;
+          _composite = result.composite;
+          _mentalState = result.mentalState;
+          _loading = false;
         });
       }
     } catch (_) {
-      // Fallback to mock data
       final mock = MockStateData.now();
       if (mounted) {
+        final sorted = List<AreaScore>.from(mock.areas)
+          ..sort((a, b) => b.score.compareTo(a.score));
         setState(() {
-          _areas = mock.areas;
-          _areasLoading = false;
+          _areas = sorted;
+          _composite = mock.composite;
+          _mentalState = mock.mentalState;
+          _loading = false;
         });
       }
     }
@@ -61,161 +69,232 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     return Scaffold(
       body: AmbientBackground(
         child: SafeArea(
-          child: ListView(
-            padding: S.pagePadding,
-            children: [
-              const SizedBox(height: S.xl),
+          child: RefreshIndicator(
+            onRefresh: _fetchState,
+            color: C.accent,
+            backgroundColor: C.surface,
+            child: ListView(
+              padding: S.pagePadding,
+              children: [
+                const SizedBox(height: S.xl),
 
-              // Header
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  profileAsync.when(
-                    data: (p) => Text(
-                      'Hello, ${p.name ?? 'Explorer'}',
-                      style: T.h2,
-                    ),
-                    loading: () =>
-                        Text('Hello...', style: T.h2),
-                    error: (_, __) =>
-                        Text('Hello', style: T.h2),
+                // Greeting
+                profileAsync.when(
+                  data: (p) => Text(
+                    'Hello, ${p.name ?? 'Explorer'}',
+                    style: T.h2,
                   ),
-                  GestureDetector(
-                    onTap: () async {
-                      await SupabaseService().signOut();
-                      if (context.mounted) context.go('/phone-auth');
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.all(S.sm),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: C.glassBg,
-                        border: Border.all(color: C.glassBorder),
+                  loading: () => Text('Hello...', style: T.h2),
+                  error: (_, __) => Text('Hello', style: T.h2),
+                ),
+
+                const SizedBox(height: S.xl),
+
+                // Day rating mini card
+                if (!_loading)
+                  GlassContainer(
+                    padding: const EdgeInsets.all(S.xl),
+                    borderColor: _scoreColor(_composite).withValues(alpha: 0.3),
+                    child: Row(
+                      children: [
+                        // Score circle
+                        Container(
+                          width: 56,
+                          height: 56,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: _scoreColor(_composite).withValues(alpha: 0.12),
+                            border: Border.all(
+                              color: _scoreColor(_composite).withValues(alpha: 0.4),
+                            ),
+                          ),
+                          child: Center(
+                            child: Text(
+                              _composite.toStringAsFixed(1),
+                              style: T.h3.copyWith(
+                                color: _scoreColor(_composite),
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: S.lg),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Today's State",
+                                  style: T.bodySm.copyWith(color: C.textMuted)),
+                              const SizedBox(height: 2),
+                              Text(
+                                _mentalState.isNotEmpty ? _mentalState : 'Steady',
+                                style: T.h3.copyWith(
+                                  color: _scoreColor(_composite),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Icon(
+                          Icons.chevron_right,
+                          color: C.textMuted.withValues(alpha: 0.5),
+                          size: 22,
+                        ),
+                      ],
+                    ),
+                  ),
+                if (_loading)
+                  GlassContainer(
+                    padding: const EdgeInsets.all(S.xl),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 56,
+                          height: 56,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: C.glassBg,
+                          ),
+                        ),
+                        const SizedBox(width: S.lg),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: 80,
+                                height: 12,
+                                decoration: BoxDecoration(
+                                  color: C.glassBg,
+                                  borderRadius: R.smBr,
+                                ),
+                              ),
+                              const SizedBox(height: S.sm),
+                              Container(
+                                width: 120,
+                                height: 16,
+                                decoration: BoxDecoration(
+                                  color: C.glassBg,
+                                  borderRadius: R.smBr,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                const SizedBox(height: S.xl),
+
+                // Quick actions
+                Text('Quick Actions',
+                    style: T.h3.copyWith(fontSize: 16)),
+                const SizedBox(height: S.sm),
+                Wrap(
+                  spacing: S.sm,
+                  runSpacing: S.sm,
+                  children: [
+                    _QuickAction(
+                      icon: Icons.grid_on,
+                      label: 'State Map',
+                      color: C.saturn,
+                      onTap: () => context.push('/state-map'),
+                    ),
+                    _QuickAction(
+                      icon: Icons.timeline,
+                      label: 'Timeline',
+                      color: C.jupiter,
+                      onTap: () => context.push('/timeline'),
+                    ),
+                    _QuickAction(
+                      icon: Icons.sync,
+                      label: 'Transits',
+                      color: C.mercury,
+                      onTap: () => context.push('/transits'),
+                    ),
+                    _QuickAction(
+                      icon: Icons.menu_book_rounded,
+                      label: 'Learn',
+                      color: C.ketu,
+                      onTap: () => context.push('/learn'),
+                    ),
+                    _QuickAction(
+                      icon: Icons.people_outline,
+                      label: 'Compatibility',
+                      color: C.venus,
+                      onTap: () => context.push('/compatibility'),
+                    ),
+                    _QuickAction(
+                      icon: Icons.description_outlined,
+                      label: 'Reports',
+                      color: C.sun,
+                      onTap: () => context.push('/reports'),
+                    ),
+                  ],
+                ),
+
+                // Mini life areas preview
+                if (!_loading && _areas.isNotEmpty) ...[
+                  const SizedBox(height: S.xl),
+                  Row(
+                    children: [
+                      Text('Life Areas',
+                          style: T.h3.copyWith(fontSize: 16)),
+                      const SizedBox(width: S.sm),
+                      Text('today', style: T.caption),
+                    ],
+                  ),
+                  const SizedBox(height: S.sm),
+                  SizedBox(
+                    height: 36,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: _areas.length,
+                      separatorBuilder: (_, __) =>
+                          const SizedBox(width: S.sm),
+                      itemBuilder: (_, i) => _MiniAreaChip(
+                        area: _areas[i],
+                        onTap: () => context.push('/state-map'),
                       ),
-                      child: const Icon(Icons.logout,
-                          color: C.textMuted, size: 18),
                     ),
                   ),
                 ],
-              ),
 
-              const SizedBox(height: S.xxxl),
+                const SizedBox(height: S.xxxl),
 
-              // Navigation cards
-              _NavCard(
-                icon: Icons.auto_awesome,
-                title: 'Your Chart',
-                subtitle: 'Who you are — planets, yogas, doshas, strength',
-                color: C.accent,
-                onTap: () => context.go('/chart'),
-              ),
-
-              const SizedBox(height: S.lg),
-
-              _NavCard(
-                icon: Icons.timeline,
-                title: 'Life Timeline',
-                subtitle: 'When things happen — dasha periods and life chapters',
-                color: C.jupiter,
-                onTap: () => context.go('/timeline'),
-              ),
-
-              const SizedBox(height: S.lg),
-
-              _NavCard(
-                icon: Icons.sync,
-                title: "What's Happening Now",
-                subtitle: 'Current transits, active houses, upcoming triggers',
-                color: C.mercury,
-                onTap: () => context.go('/transits'),
-              ),
-
-              const SizedBox(height: S.lg),
-
-              _NavCard(
-                icon: Icons.grid_on,
-                title: 'State Map',
-                subtitle: 'Your cosmic state — 7 factors, heat map, life areas',
-                color: C.saturn,
-                onTap: () => context.go('/state-map'),
-              ),
-
-              const SizedBox(height: S.lg),
-
-              _NavCard(
-                icon: Icons.auto_awesome,
-                title: 'Ask Guide',
-                subtitle: 'Chat with your astrologer — powered by AI',
-                color: C.moon,
-                onTap: () => context.go('/chat'),
-              ),
-
-              const SizedBox(height: S.lg),
-
-              _NavCard(
-                icon: Icons.menu_book_rounded,
-                title: 'Learn Jyotish',
-                subtitle: 'The complete Vedic Astrology guide',
-                color: C.ketu,
-                onTap: () => context.go('/learn'),
-              ),
-
-              // Mini life areas preview
-              if (!_areasLoading && _areas.isNotEmpty) ...[
-                const SizedBox(height: S.xl),
-                Row(
-                  children: [
-                    Text('Life Areas',
-                        style: T.h3.copyWith(fontSize: 16)),
-                    const SizedBox(width: S.sm),
-                    Text('today', style: T.caption),
-                  ],
-                ),
-                const SizedBox(height: S.sm),
-                SizedBox(
-                  height: 36,
-                  child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: _areas.length,
-                    separatorBuilder: (_, __) =>
-                        const SizedBox(width: S.sm),
-                    itemBuilder: (_, i) => _MiniAreaChip(
-                      area: _areas[i],
-                      onTap: () => context.go('/state-map'),
-                    ),
+                // Footer
+                Center(
+                  child: Text(
+                    'v1.0 — built with cosmic intention',
+                    style: T.caption,
                   ),
                 ),
+                const SizedBox(height: S.lg),
               ],
-
-              const SizedBox(height: S.xxxl),
-
-              // Footer
-              Center(
-                child: Text(
-                  'v1.0 — built with cosmic intention',
-                  style: T.caption,
-                ),
-              ),
-              const SizedBox(height: S.lg),
-            ],
+            ),
           ),
         ),
       ),
     );
   }
+
+  Color _scoreColor(double s) {
+    if (s >= 7) return C.positive;
+    if (s >= 4) return C.warning;
+    return C.negative;
+  }
 }
 
-class _NavCard extends StatelessWidget {
+class _QuickAction extends StatelessWidget {
   final IconData icon;
-  final String title;
-  final String subtitle;
+  final String label;
   final Color color;
   final VoidCallback onTap;
 
-  const _NavCard({
+  const _QuickAction({
     required this.icon,
-    required this.title,
-    required this.subtitle,
+    required this.label,
     required this.color,
     required this.onTap,
   });
@@ -225,36 +304,21 @@ class _NavCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: GlassContainer(
-        padding: const EdgeInsets.all(S.xl),
+        padding: const EdgeInsets.symmetric(horizontal: S.md, vertical: S.sm),
+        borderRadius: 12,
         child: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Container(
-              width: 44,
-              height: 44,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: color.withValues(alpha: 0.15),
-                border: Border.all(color: color.withValues(alpha: 0.3)),
-              ),
-              child: Center(
-                child: Icon(icon, color: color, size: 22),
+            Icon(icon, color: color, size: 16),
+            const SizedBox(width: S.xs),
+            Text(
+              label,
+              style: T.bodySm.copyWith(
+                color: C.textPrimary,
+                fontSize: 13,
+                fontWeight: FontWeight.w500,
               ),
             ),
-            const SizedBox(width: S.lg),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(title,
-                      style: T.h3.copyWith(color: C.textPrimary)),
-                  const SizedBox(height: 2),
-                  Text(subtitle,
-                      style: T.caption),
-                ],
-              ),
-            ),
-            Icon(Icons.chevron_right,
-                color: color.withValues(alpha: 0.5), size: 22),
           ],
         ),
       ),

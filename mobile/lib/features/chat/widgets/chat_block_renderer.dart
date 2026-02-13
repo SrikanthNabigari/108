@@ -137,7 +137,9 @@ class ChatBlockRenderer extends StatelessWidget {
   // ── area_list ──
 
   Widget _buildAreaList() {
-    final areas = _data['areas'] as List<dynamic>? ?? [];
+    final areas = List<dynamic>.from(_data['areas'] as List<dynamic>? ?? [])
+      ..sort((a, b) => ((b as Map)['score'] as num? ?? 0)
+          .compareTo((a as Map)['score'] as num? ?? 0));
 
     return Column(
       children: areas.map<Widget>((a) {
