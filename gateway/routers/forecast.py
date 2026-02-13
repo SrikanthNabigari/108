@@ -103,7 +103,7 @@ async def get_daily_forecast_endpoint(
             birth_dt = datetime.fromisoformat(birth_dt)
 
         forecast = get_daily_forecast(
-            birth_datetime_iso=birth_dt.isoformat(),
+            birth_datetime=birth_dt.isoformat(),
             birth_lat=chart["latitude"],
             birth_lon=chart["longitude"],
             natal_planets=natal_planets,
@@ -169,7 +169,7 @@ async def get_weekly_forecast_endpoint(
             birth_dt = datetime.fromisoformat(birth_dt)
 
         forecast = get_weekly_forecast(
-            birth_datetime_iso=birth_dt.isoformat(),
+            birth_datetime=birth_dt.isoformat(),
             birth_lat=chart["latitude"],
             birth_lon=chart["longitude"],
             natal_planets=natal_planets,
@@ -234,7 +234,7 @@ async def get_monthly_forecast_endpoint(
             year = now.year
 
         forecast = get_monthly_forecast(
-            birth_datetime_iso=birth_dt.isoformat(),
+            birth_datetime=birth_dt.isoformat(),
             birth_lat=chart["latitude"],
             birth_lon=chart["longitude"],
             natal_planets=natal_planets,
@@ -299,7 +299,7 @@ async def get_yearly_forecast_endpoint(
         for m in range(1, 13):
             try:
                 forecast = get_monthly_forecast(
-                    birth_datetime_iso=birth_dt.isoformat(),
+                    birth_datetime=birth_dt.isoformat(),
                     birth_lat=chart["latitude"],
                     birth_lon=chart["longitude"],
                     natal_planets=natal_planets,

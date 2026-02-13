@@ -284,15 +284,22 @@ async def get_yogas(
                 detail="Birth chart not found",
             ) from None
 
-        planets = _build_planets_for_analysis(chart.get("planets", {}))
-
-        # Detect yogas
-        detector = YogaDetector(
-            planets=planets,
-            lagna_rashi=chart["lagna_rashi"],
-            moon_rashi=chart["moon_rashi"],
-        )
-        yogas = detector.detect_all()
+        # Detect yogas using BirthChart model
+        chart_obj = _build_chart_for_doshas(chart)
+        detector = YogaDetector()
+        detected = detector.detect_all_yogas(chart_obj)
+        yogas = [
+            {
+                "yoga_id": y.yoga_id,
+                "name": y.name,
+                "category": y.category.value if hasattr(y.category, "value") else str(y.category),
+                "is_present": y.is_present,
+                "strength": y.strength,
+                "involved_planets": [p.value for p in y.involved_planets],
+                "description": y.description,
+            }
+            for y in detected
+        ]
 
         # Free tier: names only
         if access == AccessLevel.PREVIEW:
