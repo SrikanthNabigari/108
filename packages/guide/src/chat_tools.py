@@ -297,6 +297,21 @@ def _exec_current_dasha(ctx: dict[str, Any]) -> dict[str, Any]:
 def _exec_current_transits(ctx: dict[str, Any]) -> dict[str, Any]:
     from packages.guide.src.tools import get_tools
 
+    signs = [
+        "Aries",
+        "Taurus",
+        "Gemini",
+        "Cancer",
+        "Leo",
+        "Virgo",
+        "Libra",
+        "Scorpio",
+        "Sagittarius",
+        "Capricorn",
+        "Aquarius",
+        "Pisces",
+    ]
+
     tools = get_tools()
     birth_dt = ctx["birth_datetime"]
     if isinstance(birth_dt, str):
@@ -307,11 +322,17 @@ def _exec_current_transits(ctx: dict[str, Any]) -> dict[str, Any]:
         "planets": ctx.get("natal_planets", {}),
         "lagna": {"sign": ctx.get("lagna_rashi", "Aries")},
     }
-    # Ensure moon has sign info for transit analysis
+    # Ensure moon has sign info for transit analysis (title case required)
     moon_data = natal_chart["planets"].get("moon", {})
-    if "sign" not in moon_data and ctx.get("moon_rashi"):
-        moon_data["sign"] = ctx["moon_rashi"]
-        natal_chart["planets"]["moon"] = moon_data
+    if "sign" not in moon_data:
+        moon_sign = ctx.get("moon_rashi")
+        if not moon_sign and moon_data.get("rashi_name"):
+            moon_sign = moon_data["rashi_name"].title()
+        if not moon_sign and moon_data.get("longitude") is not None:
+            moon_sign = signs[int(float(moon_data["longitude"]) / 30) % 12]
+        if moon_sign:
+            moon_data["sign"] = moon_sign
+            natal_chart["planets"]["moon"] = moon_data
 
     return tools.get_transit_analysis(natal_chart)
 

@@ -214,13 +214,13 @@ class AstrologyTools:
             ascendant = houses.get("ascendant", 0)
 
             # Determine lagna details
-            lagna_sign = longitude_to_rashi(ascendant)
+            lagna_sign, _ = longitude_to_rashi(ascendant)
             lagna_nak = longitude_to_nakshatra(ascendant)
 
             # Build planets dictionary with rashi information
             planets_data = {}
             for planet_name, position in planets.items():
-                planet_sign = longitude_to_rashi(position["longitude"])
+                planet_sign, _ = longitude_to_rashi(position["longitude"])
                 nakshatra = longitude_to_nakshatra(position["longitude"])
 
                 planets_data[planet_name] = {
@@ -242,7 +242,7 @@ class AstrologyTools:
                 cusps_key = f"house_{house_num}"
                 if cusps_key in houses:
                     house_long = houses[cusps_key]
-                    house_sign = longitude_to_rashi(house_long)
+                    house_sign, _ = longitude_to_rashi(house_long)
                     house_lord_planet = get_house_lord(house_num, lagna_sign)
                     planets_in_house = get_planets_in_house(house_num, planets_data)
 
@@ -293,7 +293,7 @@ class AstrologyTools:
 
             planets_data = {}
             for planet_name, position in planets.items():
-                planet_sign = longitude_to_rashi(position["longitude"])
+                planet_sign, _ = longitude_to_rashi(position["longitude"])
                 planets_data[planet_name] = {
                     "longitude": round(position["longitude"], 2),
                     "sign": planet_sign.value,
@@ -568,9 +568,13 @@ class AstrologyTools:
             jd = get_julian_day(transit_date)
             transit_planets = get_all_planets(jd)
 
-            # Extract natal moon sign
+            # Extract natal moon sign (check "sign", "rashi_name", or compute from longitude)
             natal_moon = natal_chart.get("planets", {}).get("moon", {})
-            natal_moon_rashi = natal_moon.get("sign")
+            natal_moon_rashi = natal_moon.get("sign") or natal_moon.get("rashi_name")
+            if not natal_moon_rashi and natal_moon.get("longitude") is not None:
+                natal_moon_rashi = RASHI_NAMES[int(float(natal_moon["longitude"]) / 30) % 12]
+            if natal_moon_rashi:
+                natal_moon_rashi = natal_moon_rashi.title()
 
             if not natal_moon_rashi:
                 return {"success": False, "error": "Natal moon sign not found"}
@@ -602,7 +606,7 @@ class AstrologyTools:
             for planet in ["saturn", "jupiter", "rahu"]:
                 if planet in transit_planets:
                     planet_long = transit_planets[planet]["longitude"]
-                    planet_sign = longitude_to_rashi(planet_long)
+                    planet_sign, _ = longitude_to_rashi(planet_long)
                     transit_idx = sign_to_idx.get(planet_sign.value, 0)
                     house_from_moon = ((transit_idx - natal_moon_idx) % 12) + 1
 

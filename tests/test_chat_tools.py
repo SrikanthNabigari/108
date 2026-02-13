@@ -175,6 +175,32 @@ class TestExecuteTool:
             assert "name" in d
             assert "dosha_id" in d
 
+    def test_get_current_transits_success(self):
+        result = execute_tool("get_current_transits", {}, SAMPLE_BIRTH_CONTEXT)
+        assert result["success"] is True, f"get_current_transits failed: {result.get('error')}"
+        assert "transits" in result
+        assert "natal_moon" in result
+
+    def test_get_current_transits_without_sign_key(self):
+        """Transit tool works even when moon has rashi_name instead of sign."""
+        ctx_no_sign = {
+            **SAMPLE_BIRTH_CONTEXT,
+            "natal_planets": {
+                **SAMPLE_BIRTH_CONTEXT["natal_planets"],
+                "moon": {
+                    "longitude": 326.85,
+                    "rashi": 10,
+                    "rashi_name": "aquarius",
+                    "house": 5,
+                    "nakshatra": "Purva Bhadrapada",
+                },
+            },
+            "moon_rashi": None,  # simulate missing DB field
+        }
+        result = execute_tool("get_current_transits", {}, ctx_no_sign)
+        assert result["success"] is True, f"transit failed without sign: {result.get('error')}"
+        assert result["natal_moon"] == "Aquarius"
+
     def test_get_planet_strength_sun(self):
         result = execute_tool("get_planet_strength", {"planet": "sun"}, SAMPLE_BIRTH_CONTEXT)
         if result.get("success"):
