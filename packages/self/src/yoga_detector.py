@@ -96,6 +96,16 @@ class YogaDetector:
             "exchange": self._eval_exchange,
             "in_kendra_or_trikona": self._eval_in_kendra_or_trikona,
             "all_in_beneficial_houses": self._eval_all_in_beneficial,
+            # Aspect-target conditions (planet_aspects_target)
+            "saturn_aspects_moon": self._eval_planet_aspects_target,
+            "saturn_aspects_lagna": self._eval_planet_aspects_target,
+            "mars_aspects_moon": self._eval_planet_aspects_target,
+            "mars_aspects_lagna": self._eval_planet_aspects_target,
+            "jupiter_aspects_moon": self._eval_planet_aspects_target,
+            "jupiter_aspects_lagna": self._eval_planet_aspects_target,
+            "jupiter_aspects_5th": self._eval_planet_aspects_target,
+            "jupiter_aspects_7th": self._eval_planet_aspects_target,
+            "jupiter_aspects_9th": self._eval_planet_aspects_target,
         }
 
     def _load_yoga_rules(self) -> dict[str, dict[str, Any]]:
@@ -871,6 +881,42 @@ class YogaDetector:
                 return False
 
         return True
+
+    def _eval_planet_aspects_target(self, condition: dict[str, Any], chart: BirthChart) -> bool:
+        """Check if a planet aspects a target (moon, lagna, or specific house).
+
+        The condition type encodes planet and target:
+          saturn_aspects_moon, mars_aspects_lagna, jupiter_aspects_5th, etc.
+        """
+        cond_type = condition.get("type", "")
+        parts = cond_type.split("_aspects_")
+        if len(parts) != 2:
+            return False
+
+        planet_name, target = parts
+
+        try:
+            planet = Planet(planet_name)
+        except ValueError:
+            return False
+
+        if planet not in chart.planets:
+            return False
+
+        aspects = calculate_aspect_houses(planet, chart.planets[planet].house)
+
+        if target == "moon":
+            moon = chart.planets.get(Planet("moon"))
+            return moon is not None and moon.house in aspects
+        elif target == "lagna":
+            return 1 in aspects
+        else:
+            # Numeric house target: "5th" → 5, "7th" → 7, "9th" → 9
+            try:
+                house_num = int(target.rstrip("stndrh"))
+                return house_num in aspects
+            except ValueError:
+                return False
 
     # Helper methods
 

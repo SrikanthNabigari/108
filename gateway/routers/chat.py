@@ -305,6 +305,15 @@ async def send_message(
             )
             render_blocks = []
 
+        # Safety: ensure agent_response is a plain string (LLM may return list of blocks)
+        if not isinstance(agent_response, str):
+            if isinstance(agent_response, list):
+                agent_response = "\n".join(
+                    b.get("text", "") if isinstance(b, dict) else str(b) for b in agent_response
+                )
+            else:
+                agent_response = str(agent_response)
+
         # Save user message
         user_msg_id = uuid.uuid4()
         now = datetime.utcnow()

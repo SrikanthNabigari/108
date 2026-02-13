@@ -62,6 +62,26 @@ except ImportError:
 logger = logging.getLogger(__name__)
 
 
+def _extract_text(content: Any) -> str:
+    """Extract plain text from LLM response content.
+
+    LangChain's ChatAnthropic can return content as a string or a list of
+    content blocks (e.g. [{"type": "text", "text": "..."}, {"type": "tool_use", ...}]).
+    This helper always returns a string.
+    """
+    if isinstance(content, str):
+        return content
+    if isinstance(content, list):
+        parts = []
+        for block in content:
+            if isinstance(block, dict) and block.get("type") == "text":
+                parts.append(block.get("text", ""))
+            elif isinstance(block, str):
+                parts.append(block)
+        return "\n".join(parts) if parts else ""
+    return str(content) if content else ""
+
+
 # =====================
 # Type Definitions
 # =====================
@@ -1585,13 +1605,14 @@ Respond with ONLY the intent name (e.g., "calculate")"""
                     continue
 
                 # No tool calls — we have the final text response
-                state["response"] = response.content
-                messages.append(AIMessage(content=response.content))
+                state["response"] = _extract_text(response.content)
+                messages.append(AIMessage(content=state["response"]))
                 break
             else:
-                # Hit max rounds — use last response if available
+                # Hit max rounds — extract text from last response
                 if not state.get("response"):
-                    state["response"] = response.content if hasattr(response, "content") else ""
+                    raw = response.content if hasattr(response, "content") else ""
+                    state["response"] = _extract_text(raw)
                     messages.append(AIMessage(content=state["response"]))
                 logger.warning(f"Interpret hit max tool rounds ({self._max_tool_rounds})")
 
