@@ -332,13 +332,33 @@ class TestConstants:
     def test_weekday_names_count(self):
         assert len(WEEKDAY_NAMES) == 7
 
-    def test_area_houses_five_areas(self):
-        assert len(AREA_HOUSES) == 5
-        for key in ("career", "finance", "relationships", "health", "spiritual"):
+    def test_area_houses_eight_areas(self):
+        assert len(AREA_HOUSES) == 8
+        for key in (
+            "career",
+            "finance",
+            "relationships",
+            "health",
+            "spiritual",
+            "family",
+            "education",
+            "travel",
+        ):
             assert key in AREA_HOUSES
 
-    def test_area_planets_five_areas(self):
-        assert len(AREA_PLANETS) == 5
+    def test_area_planets_eight_areas(self):
+        assert len(AREA_PLANETS) == 8
+        for key in (
+            "career",
+            "finance",
+            "relationships",
+            "health",
+            "spiritual",
+            "family",
+            "education",
+            "travel",
+        ):
+            assert key in AREA_PLANETS
 
     def test_area_houses_valid_house_numbers(self):
         for houses in AREA_HOUSES.values():
@@ -434,6 +454,35 @@ class TestGetDailyForecast:
         assert "inauspicious_periods" in result
         assert "choghadiya_highlights" in result
         assert "recommendations" in result
+        assert "area_scores" in result
+        assert len(result["area_scores"]) == 8
+        for key in (
+            "career",
+            "finance",
+            "relationships",
+            "health",
+            "spiritual",
+            "family",
+            "education",
+            "travel",
+        ):
+            assert key in result["area_scores"]
+
+        # New enriched fields
+        assert "mental_state" in result
+        assert "hora_lord" in result
+        assert "gochara_summary" in result
+        assert "is_chandrashtama" in result
+        assert "active_yogas" in result
+        assert "active_doshas" in result
+        assert "sade_sati" in result
+        assert "factor_scores" in result
+        assert "upcoming_triggers" in result
+        assert "composite_score" in result
+        assert isinstance(result["gochara_summary"], list)
+        assert isinstance(result["active_yogas"], list)
+        assert isinstance(result["active_doshas"], list)
+        assert isinstance(result["is_chandrashtama"], bool)
 
     @patch("packages.cosmos.src.sunrise_sunset.get_sunrise_sunset")
     @patch("packages.cosmos.src.ephemeris.get_all_planets")

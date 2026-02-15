@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 import logging
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Annotated, Any
 
@@ -18,6 +18,8 @@ from gateway.models import AccessLevel, UserContext
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from packages.context.src import (
+    compute_area_trend,
+    compute_state_vector,
     get_daily_forecast,
     get_monthly_forecast,
     get_weekly_forecast,
@@ -120,6 +122,34 @@ async def get_daily_forecast_endpoint(
                 "access": "preview",
             }
 
+        # Add area trends (compare today vs yesterday)
+        try:
+            yesterday = (datetime.now() - timedelta(days=1)).isoformat()
+            yesterday_vec = compute_state_vector(
+                birth_datetime=birth_dt.isoformat(),
+                birth_lat=chart["latitude"],
+                birth_lon=chart["longitude"],
+                natal_planets=natal_planets,
+                moon_longitude=moon_longitude,
+                lagna_rashi=chart["lagna_rashi"],
+                query_datetime=yesterday,
+            )
+            today_vec = compute_state_vector(
+                birth_datetime=birth_dt.isoformat(),
+                birth_lat=chart["latitude"],
+                birth_lon=chart["longitude"],
+                natal_planets=natal_planets,
+                moon_longitude=moon_longitude,
+                lagna_rashi=chart["lagna_rashi"],
+            )
+            trends = compute_area_trend(today_vec["areas"], yesterday_vec["areas"])
+            # Merge trend into area_scores
+            for area_id, trend in trends.items():
+                if area_id in forecast.get("area_scores", {}):
+                    forecast["area_scores"][area_id]["trend"] = trend
+        except Exception:
+            pass  # trends are optional
+
         return forecast
 
     except HTTPException:
@@ -176,6 +206,35 @@ async def get_weekly_forecast_endpoint(
             moon_longitude=moon_longitude,
             lagna_rashi=chart["lagna_rashi"],
         )
+
+        # Add area trends (compare this week vs last week)
+        try:
+            week_start = datetime.fromisoformat(forecast["week_start"])
+            prev_week_start = (week_start - timedelta(days=7)).strftime("%Y-%m-%d")
+            prev_forecast = get_weekly_forecast(
+                birth_datetime=birth_dt.isoformat(),
+                birth_lat=chart["latitude"],
+                birth_lon=chart["longitude"],
+                natal_planets=natal_planets,
+                moon_longitude=moon_longitude,
+                lagna_rashi=chart["lagna_rashi"],
+                start_date=prev_week_start,
+            )
+            # Build area lists for trend computation
+            current_areas = [
+                {"id": k, "score": v.get("score", v.get("rating", 5))}
+                for k, v in forecast.get("areas", {}).items()
+            ]
+            prev_areas = [
+                {"id": k, "score": v.get("score", v.get("rating", 5))}
+                for k, v in prev_forecast.get("areas", {}).items()
+            ]
+            trends = compute_area_trend(current_areas, prev_areas)
+            for area_id, trend in trends.items():
+                if area_id in forecast.get("areas", {}):
+                    forecast["areas"][area_id]["trend"] = trend
+        except Exception:
+            pass  # trends are optional
 
         return forecast
 
@@ -243,6 +302,35 @@ async def get_monthly_forecast_endpoint(
             month=month,
             year=year,
         )
+
+        # Add area trends (compare this month vs last month)
+        try:
+            prev_month = month - 1 if month > 1 else 12
+            prev_year = year if month > 1 else year - 1
+            prev_forecast = get_monthly_forecast(
+                birth_datetime=birth_dt.isoformat(),
+                birth_lat=chart["latitude"],
+                birth_lon=chart["longitude"],
+                natal_planets=natal_planets,
+                moon_longitude=moon_longitude,
+                lagna_rashi=chart["lagna_rashi"],
+                month=prev_month,
+                year=prev_year,
+            )
+            current_areas = [
+                {"id": k, "score": v.get("score", v.get("rating", 5))}
+                for k, v in forecast.get("areas", {}).items()
+            ]
+            prev_areas = [
+                {"id": k, "score": v.get("score", v.get("rating", 5))}
+                for k, v in prev_forecast.get("areas", {}).items()
+            ]
+            trends = compute_area_trend(current_areas, prev_areas)
+            for area_id, trend in trends.items():
+                if area_id in forecast.get("areas", {}):
+                    forecast["areas"][area_id]["trend"] = trend
+        except Exception:
+            pass  # trends are optional
 
         return forecast
 

@@ -33,6 +33,7 @@ class DoshaDetailPanel extends ConsumerWidget {
     final remedies = dosha['remedies'] as List? ?? [];
     final isPresent = dosha['is_present'] as bool? ?? true;
     final conditions = dosha['conditions_met'] as List? ?? [];
+    final effects = dosha['effects'] as List? ?? [];
     final sevColor = severity == 'severe'
         ? C.negative
         : severity == 'moderate'
@@ -64,9 +65,9 @@ class DoshaDetailPanel extends ConsumerWidget {
                     // Educational card
                     _buildEducationalCard(name, sevColor),
                     const SizedBox(height: S.md),
-                    // WHAT — description
-                    if (description.isNotEmpty) ...[
-                      _buildWhatSection(description, sevColor),
+                    // WHAT — description + effects
+                    if (description.isNotEmpty || effects.isNotEmpty) ...[
+                      _buildWhatSection(description, effects, sevColor),
                       const SizedBox(height: S.md),
                     ],
                     // WHY — involved planets + conditions
@@ -238,7 +239,7 @@ class DoshaDetailPanel extends ConsumerWidget {
 
   // ── WHAT Section ──
 
-  Widget _buildWhatSection(String description, Color color) {
+  Widget _buildWhatSection(String description, List effects, Color color) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -246,18 +247,62 @@ class DoshaDetailPanel extends ConsumerWidget {
             style: T.bodySm.copyWith(
                 color: C.textPrimary, fontWeight: FontWeight.w600)),
         const SizedBox(height: S.sm),
-        Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(S.md),
-          decoration: BoxDecoration(
-            borderRadius: R.mdBr,
-            color: color.withValues(alpha: 0.04),
-            border: Border.all(color: color.withValues(alpha: 0.1)),
+        if (description.isNotEmpty)
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(S.md),
+            decoration: BoxDecoration(
+              borderRadius: R.mdBr,
+              color: color.withValues(alpha: 0.04),
+              border: Border.all(color: color.withValues(alpha: 0.1)),
+            ),
+            child: Text(description,
+                style:
+                    T.caption.copyWith(color: C.textSecondary, height: 1.5)),
           ),
-          child: Text(description,
-              style:
-                  T.caption.copyWith(color: C.textSecondary, height: 1.5)),
-        ),
+        // Effects list from knowledge base
+        if (effects.isNotEmpty) ...[
+          const SizedBox(height: S.sm),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(S.md),
+            decoration: BoxDecoration(
+              borderRadius: R.mdBr,
+              color: color.withValues(alpha: 0.04),
+              border: Border.all(color: color.withValues(alpha: 0.1)),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Effects',
+                    style: T.bodySm.copyWith(
+                        color: C.textPrimary,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 13)),
+                const SizedBox(height: S.sm),
+                ...effects.map((e) => Padding(
+                      padding: const EdgeInsets.only(bottom: 6),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 4),
+                            child: Icon(Icons.warning_amber_rounded,
+                                size: 10, color: color),
+                          ),
+                          const SizedBox(width: 6),
+                          Expanded(
+                            child: Text('$e',
+                                style: T.caption.copyWith(
+                                    color: C.textSecondary, height: 1.4)),
+                          ),
+                        ],
+                      ),
+                    )),
+              ],
+            ),
+          ),
+        ],
       ],
     );
   }

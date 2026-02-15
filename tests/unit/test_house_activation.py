@@ -350,6 +350,7 @@ class TestGetTransitSnapshot:
             "most_active_houses",
             "most_quiet_houses",
             "active_aspects",
+            "gochara_summary",
             "overall_trend",
             "summary",
         }
@@ -471,3 +472,88 @@ class TestGetTransitSnapshot:
         assert "timestamp" in result
         assert isinstance(result["timestamp"], str)
         assert "T" in result["timestamp"]  # ISO format
+
+
+class TestGocharaSummary:
+    """Tests for gochara_summary in get_transit_snapshot."""
+
+    @patch("packages.context.src.house_activation.get_transit_positions")
+    def test_gochara_summary_present(self, mock_positions):
+        """Snapshot includes gochara_summary with entries for all 9 planets."""
+        mock_positions.return_value = MOCK_TRANSITS
+        result = get_transit_snapshot(
+            julian_day=2460400.5,
+            lagna_rashi=LAGNA_LIBRA,
+            moon_rashi=MOON_AQUARIUS,
+            natal_planets=MOCK_NATAL_PLANETS,
+        )
+        assert "gochara_summary" in result
+        gochara = result["gochara_summary"]
+        assert isinstance(gochara, list)
+        assert len(gochara) == 9  # all 9 planets
+
+    @patch("packages.context.src.house_activation.get_transit_positions")
+    def test_gochara_entry_keys(self, mock_positions):
+        """Each gochara entry has required keys."""
+        mock_positions.return_value = MOCK_TRANSITS
+        result = get_transit_snapshot(
+            julian_day=2460400.5,
+            lagna_rashi=LAGNA_LIBRA,
+            moon_rashi=MOON_AQUARIUS,
+            natal_planets=MOCK_NATAL_PLANETS,
+        )
+        required_keys = {
+            "planet",
+            "sign",
+            "house_from_moon",
+            "is_favorable",
+            "has_vedha",
+            "vedha_by",
+            "net_effect",
+            "effects",
+            "is_retrograde",
+            "degree_in_sign",
+            "bav_score",
+        }
+        for entry in result["gochara_summary"]:
+            assert required_keys.issubset(set(entry.keys())), f"Missing keys in {entry['planet']}"
+
+    @patch("packages.context.src.house_activation.get_transit_positions")
+    def test_gochara_house_from_moon_range(self, mock_positions):
+        """house_from_moon should be 1-12."""
+        mock_positions.return_value = MOCK_TRANSITS
+        result = get_transit_snapshot(
+            julian_day=2460400.5,
+            lagna_rashi=LAGNA_LIBRA,
+            moon_rashi=MOON_AQUARIUS,
+            natal_planets=MOCK_NATAL_PLANETS,
+        )
+        for entry in result["gochara_summary"]:
+            assert 1 <= entry["house_from_moon"] <= 12
+
+    @patch("packages.context.src.house_activation.get_transit_positions")
+    def test_gochara_bav_none_without_chart(self, mock_positions):
+        """BAV score is None when no chart is provided."""
+        mock_positions.return_value = MOCK_TRANSITS
+        result = get_transit_snapshot(
+            julian_day=2460400.5,
+            lagna_rashi=LAGNA_LIBRA,
+            moon_rashi=MOON_AQUARIUS,
+            natal_planets=MOCK_NATAL_PLANETS,
+            chart=None,
+        )
+        for entry in result["gochara_summary"]:
+            assert entry["bav_score"] is None
+
+    @patch("packages.context.src.house_activation.get_transit_positions")
+    def test_gochara_net_effect_values(self, mock_positions):
+        """net_effect is either 'favorable' or 'unfavorable'."""
+        mock_positions.return_value = MOCK_TRANSITS
+        result = get_transit_snapshot(
+            julian_day=2460400.5,
+            lagna_rashi=LAGNA_LIBRA,
+            moon_rashi=MOON_AQUARIUS,
+            natal_planets=MOCK_NATAL_PLANETS,
+        )
+        for entry in result["gochara_summary"]:
+            assert entry["net_effect"] in ("favorable", "unfavorable")

@@ -10,7 +10,6 @@ import 'package:one_zero_eight/data/providers/forecast_provider.dart';
 import 'package:one_zero_eight/features/state_map/models/state_vector.dart';
 import '../mock/forecast_mock_data.dart';
 import '../widgets/day_rating_ring.dart';
-import '../widgets/panchanga_card.dart';
 import '../widgets/area_trend_card.dart';
 
 /// Forecast screen with Daily / Weekly / Monthly tabs.
@@ -139,34 +138,25 @@ class _ForecastScreenState extends ConsumerState<ForecastScreen>
         child: SafeArea(
           child: Column(
             children: [
-              const SizedBox(height: S.lg),
+              const SizedBox(height: S.sm),
               // Header
-              Center(
-                child: Column(
+              Padding(
+                padding: S.pagePadding,
+                child: Row(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        GestureDetector(
-                          onTap: () => context.go('/home'),
-                          child: const Padding(
-                            padding: EdgeInsets.only(right: S.sm),
-                            child: Icon(Icons.arrow_back_ios,
-                                color: C.textSecondary, size: 18),
-                          ),
-                        ),
-                        Text('Forecast', style: T.h2),
-                      ],
+                    GestureDetector(
+                      onTap: () => context.canPop()
+                          ? context.pop()
+                          : context.go('/home'),
+                      child: const Icon(Icons.arrow_back_ios,
+                          color: C.textSecondary, size: 18),
                     ),
-                    const SizedBox(height: 4),
-                    Text(
-                      'What the stars say',
-                      style: T.bodySm.copyWith(color: C.textMuted),
-                    ),
+                    const SizedBox(width: S.sm),
+                    Text('Forecast', style: T.h2),
                   ],
                 ),
               ),
-              const SizedBox(height: S.xl),
+              const SizedBox(height: S.sm),
               // Tab bar
               Padding(
                 padding: S.pagePadding,
@@ -193,7 +183,7 @@ class _ForecastScreenState extends ConsumerState<ForecastScreen>
                   ),
                 ),
               ),
-              const SizedBox(height: S.lg),
+              const SizedBox(height: S.sm),
               // Tab content
               Expanded(
                 child: RefreshIndicator(
@@ -228,37 +218,101 @@ class _ForecastScreenState extends ConsumerState<ForecastScreen>
 
     final mentalState = f.details['mental_state'] as String? ?? '';
     final summary = f.details['summary'] as String? ?? '';
+    final horaLord = f.details['hora_lord'] as String? ?? '';
+    final isChandrashtama = f.details['is_chandrashtama'] as bool? ?? false;
+    final triggers = (f.details['upcoming_triggers'] as List?)
+        ?.map((t) => t as Map<String, dynamic>)
+        .toList() ?? [];
 
     return ListView(
       padding: S.pagePadding,
       children: [
         // Date selector
         _buildDateSelector(),
-        const SizedBox(height: S.xl),
+        const SizedBox(height: S.md),
 
-        // Day rating ring
-        Center(child: DayRatingRing(score: f.dayRating)),
-        const SizedBox(height: S.sm),
-        Center(
-          child: Text('Day Rating', style: T.caption),
-        ),
-        if (mentalState.isNotEmpty) ...[
-          const SizedBox(height: S.xs),
-          Center(
-            child: Text(
-              mentalState,
-              style: T.bodySm.copyWith(
-                color: _mentalStateColor(mentalState),
-                fontWeight: FontWeight.w600,
+        // Rating + Panchanga banner (compact)
+        GlassContainer(
+          padding: const EdgeInsets.all(S.md),
+          child: Row(
+            children: [
+              DayRatingRing(score: f.dayRating, size: 72),
+              const SizedBox(width: S.md),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        if (mentalState.isNotEmpty)
+                          Text(
+                            mentalState,
+                            style: T.bodySm.copyWith(
+                              color: _mentalStateColor(mentalState),
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        if (horaLord.isNotEmpty) ...[
+                          const SizedBox(width: S.sm),
+                          Text(planetGlyph(horaLord), style: TextStyle(fontSize: 12, color: planetColor(horaLord))),
+                          const SizedBox(width: 2),
+                          Text(
+                            planetName(horaLord),
+                            style: T.caption.copyWith(color: planetColor(horaLord), fontSize: 10),
+                          ),
+                        ],
+                      ],
+                    ),
+                    if (f.panchanga != null) ...[
+                      const SizedBox(height: S.xs),
+                      _panchangaInline(f.panchanga!),
+                    ],
+                  ],
+                ),
               ),
+            ],
+          ),
+        ),
+        const SizedBox(height: S.md),
+
+        // Chandrashtama warning
+        if (isChandrashtama) ...[
+          GlassContainer(
+            padding: const EdgeInsets.symmetric(horizontal: S.md, vertical: S.sm),
+            borderColor: C.negative.withValues(alpha: 0.5),
+            backgroundColor: C.negative.withValues(alpha: 0.05),
+            child: Row(
+              children: [
+                const Icon(Icons.warning_amber_rounded, color: C.negative, size: 16),
+                const SizedBox(width: S.sm),
+                Expanded(
+                  child: Text(
+                    'Chandrashtama active - Avoid major decisions',
+                    style: T.caption.copyWith(color: C.negative),
+                  ),
+                ),
+              ],
             ),
           ),
+          const SizedBox(height: S.md),
         ],
-        const SizedBox(height: S.xl),
 
-        // Panchanga
-        PanchangaCard(panchanga: f.panchanga),
-        const SizedBox(height: S.xl),
+        // Summary (moved up)
+        if (summary.isNotEmpty) ...[
+          Text(
+            summary,
+            style: T.bodySm.copyWith(color: C.textSecondary, height: 1.5),
+          ),
+          const SizedBox(height: S.lg),
+        ],
+
+        // Recommendations (moved up)
+        if (f.recommendations.isNotEmpty) ...[
+          _sectionLabel('Recommendations'),
+          const SizedBox(height: S.sm),
+          _buildRecommendations(f.recommendations),
+          const SizedBox(height: S.lg),
+        ],
 
         // Life areas (sorted by score, highest first)
         _sectionLabel('Life Areas'),
@@ -283,39 +337,51 @@ class _ForecastScreenState extends ConsumerState<ForecastScreen>
             ),
           );
         }),
-        const SizedBox(height: S.xl),
+        const SizedBox(height: S.lg),
 
-        // Summary
-        if (summary.isNotEmpty) ...[
+        // Upcoming Triggers
+        if (triggers.isNotEmpty) ...[
+          _sectionLabel('Coming Up'),
+          const SizedBox(height: S.sm),
           GlassContainer(
-            padding: const EdgeInsets.all(S.lg),
+            padding: const EdgeInsets.all(S.md),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Summary',
-                  style: T.bodySm.copyWith(
-                    color: C.textPrimary,
-                    fontWeight: FontWeight.w600,
+              children: triggers.map((t) {
+                final days = t['days_from_now'] as int? ?? 0;
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: S.sm),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 32,
+                        height: 32,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: C.accentSurface,
+                        ),
+                        alignment: Alignment.center,
+                        child: Text(
+                          '${days}d',
+                          style: T.caption.copyWith(
+                            color: C.accent,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: S.sm),
+                      Expanded(
+                        child: Text(
+                          t['trigger'] as String? ?? '',
+                          style: T.bodySm.copyWith(color: C.textSecondary),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                const SizedBox(height: S.sm),
-                Text(
-                  summary,
-                  style: T.bodySm.copyWith(color: C.textSecondary, height: 1.6),
-                ),
-              ],
+                );
+              }).toList(),
             ),
           ),
-          const SizedBox(height: S.xl),
-        ],
-
-        // Recommendations
-        if (f.recommendations.isNotEmpty) ...[
-          _sectionLabel('Recommendations'),
-          const SizedBox(height: S.sm),
-          _buildRecommendations(f.recommendations),
-          const SizedBox(height: S.xl),
+          const SizedBox(height: S.lg),
         ],
 
         // Ask Guide CTA
@@ -405,26 +471,67 @@ class _ForecastScreenState extends ConsumerState<ForecastScreen>
             .toList() ??
         ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
     final summary = f.details['summary'] as String? ?? '';
+    final chandrashtamaDays = (f.details['chandrashtama_days'] as List?)
+        ?.map((d) => d as String).toList() ?? [];
 
     return ListView(
       padding: S.pagePadding,
       children: [
-        // Week rating
-        Center(
-          child: Column(
+        // Week rating banner
+        GlassContainer(
+          padding: const EdgeInsets.symmetric(horizontal: S.lg, vertical: S.md),
+          child: Row(
             children: [
               Text(
                 f.dayRating.toStringAsFixed(1),
                 style: T.h1.copyWith(
                   color: _ratingColor(f.dayRating),
-                  fontSize: 36,
+                  fontSize: 28,
                 ),
               ),
+              const SizedBox(width: S.sm),
               Text('Week Average', style: T.caption),
             ],
           ),
         ),
-        const SizedBox(height: S.xl),
+        const SizedBox(height: S.md),
+
+        // Chandrashtama days warning
+        if (chandrashtamaDays.isNotEmpty) ...[
+          GlassContainer(
+            padding: const EdgeInsets.symmetric(horizontal: S.md, vertical: S.sm),
+            borderColor: C.warning.withValues(alpha: 0.4),
+            backgroundColor: C.warning.withValues(alpha: 0.05),
+            child: Row(
+              children: [
+                const Icon(Icons.warning_amber_rounded, color: C.warning, size: 16),
+                const SizedBox(width: S.sm),
+                Text(
+                  'Chandrashtama: ${chandrashtamaDays.map((d) => d.substring(5)).join(', ')}',
+                  style: T.caption.copyWith(color: C.warning),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: S.md),
+        ],
+
+        // Summary (moved up)
+        if (summary.isNotEmpty) ...[
+          Text(
+            summary,
+            style: T.bodySm.copyWith(color: C.textSecondary, height: 1.5),
+          ),
+          const SizedBox(height: S.lg),
+        ],
+
+        // Recommendations (moved up)
+        if (f.recommendations.isNotEmpty) ...[
+          _sectionLabel('Recommendations'),
+          const SizedBox(height: S.sm),
+          _buildRecommendations(f.recommendations),
+          const SizedBox(height: S.lg),
+        ],
 
         // 7-day bar chart
         _sectionLabel('Daily Breakdown'),
@@ -432,13 +539,13 @@ class _ForecastScreenState extends ConsumerState<ForecastScreen>
         GlassContainer(
           padding: const EdgeInsets.all(S.lg),
           child: SizedBox(
-            height: 180,
+            height: 160,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: List.generate(dailyRatings.length, (i) {
                 final score = dailyRatings[i];
                 final label = i < dailyLabels.length ? dailyLabels[i] : '';
-                final barHeight = (score / 10).clamp(0.0, 1.0) * 120;
+                final barHeight = (score / 10).clamp(0.0, 1.0) * 110;
                 final color = _ratingColor(score);
 
                 return Expanded(
@@ -478,40 +585,7 @@ class _ForecastScreenState extends ConsumerState<ForecastScreen>
             ),
           ),
         ),
-        const SizedBox(height: S.xl),
-
-        // Summary
-        if (summary.isNotEmpty) ...[
-          GlassContainer(
-            padding: const EdgeInsets.all(S.lg),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Weekly Outlook',
-                  style: T.bodySm.copyWith(
-                    color: C.textPrimary,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                const SizedBox(height: S.sm),
-                Text(
-                  summary,
-                  style: T.bodySm.copyWith(color: C.textSecondary, height: 1.6),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: S.xl),
-        ],
-
-        // Recommendations
-        if (f.recommendations.isNotEmpty) ...[
-          _sectionLabel('Recommendations'),
-          const SizedBox(height: S.sm),
-          _buildRecommendations(f.recommendations),
-          const SizedBox(height: S.xl),
-        ],
+        const SizedBox(height: S.lg),
 
         _buildAskGuideCta('How is my week looking?'),
         const SizedBox(height: S.xxxl),
@@ -531,40 +605,67 @@ class _ForecastScreenState extends ConsumerState<ForecastScreen>
     final summary = f.details['summary'] as String? ?? '';
     final bestArea = f.details['best_area'] as String?;
     final weakestArea = f.details['weakest_area'] as String?;
+    final muhurtaDates = (f.details['muhurta_dates'] as List?)
+        ?.map((m) => m as Map<String, dynamic>).toList() ?? [];
 
     return ListView(
       padding: S.pagePadding,
       children: [
-        // Monthly overview card
+        // Monthly overview card (compact horizontal)
         GlassContainer(
-          padding: const EdgeInsets.all(S.xl),
-          child: Column(
+          padding: const EdgeInsets.all(S.md),
+          child: Row(
             children: [
-              DayRatingRing(score: f.dayRating, size: 130),
-              const SizedBox(height: S.sm),
-              Text('Month Rating', style: T.caption),
-              const SizedBox(height: S.xl),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  if (bestArea != null)
-                    _areaHighlight(
-                      label: 'Strongest',
-                      areaId: bestArea,
-                      color: C.positive,
+              DayRatingRing(score: f.dayRating, size: 72),
+              const SizedBox(width: S.md),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Month Rating', style: T.caption),
+                    const SizedBox(height: S.sm),
+                    Row(
+                      children: [
+                        if (bestArea != null) ...[
+                          _areaHighlightCompact(
+                            label: 'Strongest',
+                            areaId: bestArea,
+                            color: C.positive,
+                          ),
+                          const SizedBox(width: S.lg),
+                        ],
+                        if (weakestArea != null)
+                          _areaHighlightCompact(
+                            label: 'Needs Care',
+                            areaId: weakestArea,
+                            color: C.warning,
+                          ),
+                      ],
                     ),
-                  if (weakestArea != null)
-                    _areaHighlight(
-                      label: 'Needs Care',
-                      areaId: weakestArea,
-                      color: C.warning,
-                    ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),
         ),
-        const SizedBox(height: S.xl),
+        const SizedBox(height: S.md),
+
+        // Summary (moved up)
+        if (summary.isNotEmpty) ...[
+          Text(
+            summary,
+            style: T.bodySm.copyWith(color: C.textSecondary, height: 1.5),
+          ),
+          const SizedBox(height: S.lg),
+        ],
+
+        // Recommendations (moved up)
+        if (f.recommendations.isNotEmpty) ...[
+          _sectionLabel('Recommendations'),
+          const SizedBox(height: S.sm),
+          _buildRecommendations(f.recommendations),
+          const SizedBox(height: S.lg),
+        ],
 
         // Life areas (sorted by score, highest first)
         _sectionLabel('Area Overview'),
@@ -589,47 +690,57 @@ class _ForecastScreenState extends ConsumerState<ForecastScreen>
             ),
           );
         }),
-        const SizedBox(height: S.xl),
+        const SizedBox(height: S.lg),
 
-        // Summary
-        if (summary.isNotEmpty) ...[
+        // Muhurta dates
+        if (muhurtaDates.isNotEmpty) ...[
+          _sectionLabel('Abhijit Muhurta'),
+          const SizedBox(height: S.xs),
+          Text(
+            'Best time for important actions',
+            style: T.caption.copyWith(color: C.textMuted),
+          ),
+          const SizedBox(height: S.sm),
           GlassContainer(
-            padding: const EdgeInsets.all(S.lg),
+            padding: const EdgeInsets.all(S.md),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Monthly Outlook',
-                  style: T.bodySm.copyWith(
-                    color: C.textPrimary,
-                    fontWeight: FontWeight.w600,
+              children: muhurtaDates.map((m) {
+                final date = m['date'] as String? ?? '';
+                final start = m['abhijit_start'] as String? ?? '';
+                final end = m['abhijit_end'] as String? ?? '';
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: S.sm),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 60,
+                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(6),
+                          color: C.accentSurface,
+                        ),
+                        alignment: Alignment.center,
+                        child: Text(
+                          date.length >= 5 ? date.substring(5) : date,
+                          style: T.caption.copyWith(
+                            color: C.accent,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: S.sm),
+                      Text(
+                        '$start - $end',
+                        style: T.bodySm.copyWith(color: C.textSecondary),
+                      ),
+                    ],
                   ),
-                ),
-                const SizedBox(height: S.sm),
-                Text(
-                  summary,
-                  style: T.bodySm.copyWith(color: C.textSecondary, height: 1.6),
-                ),
-              ],
+                );
+              }).toList(),
             ),
           ),
-          const SizedBox(height: S.xl),
+          const SizedBox(height: S.lg),
         ],
-
-        // Recommendations
-        if (f.recommendations.isNotEmpty) ...[
-          _sectionLabel('Recommendations'),
-          const SizedBox(height: S.sm),
-          _buildRecommendations(f.recommendations),
-          const SizedBox(height: S.xl),
-        ],
-
-        // Upgrade CTA
-        OutlinedButton(
-          onPressed: () {},
-          child: const Text('Upgrade for Yearly Forecast'),
-        ),
-        const SizedBox(height: S.xl),
 
         _buildAskGuideCta('How is my month looking?'),
         const SizedBox(height: S.xxxl),
@@ -705,20 +816,45 @@ class _ForecastScreenState extends ConsumerState<ForecastScreen>
     );
   }
 
-  Widget _areaHighlight({
+  /// Compact inline panchanga — single line per limb, no card wrapper.
+  Widget _panchangaInline(PanchangaData p) {
+    final items = <String>[
+      if (p.tithi != null) p.tithi!,
+      if (p.nakshatra != null) p.nakshatra!,
+      if (p.yoga != null) p.yoga!,
+      if (p.vara != null) p.vara!,
+    ];
+    return Wrap(
+      spacing: S.sm,
+      runSpacing: 2,
+      children: items.map((item) {
+        return Text(
+          item,
+          style: T.caption.copyWith(color: C.textMuted, fontSize: 10),
+        );
+      }).toList(),
+    );
+  }
+
+  Widget _areaHighlightCompact({
     required String label,
     required String areaId,
     required Color color,
   }) {
     final icon = kAreaIcons[areaId] ?? '?';
     final name = kAreaNames[areaId] ?? areaId;
-    return Column(
+    return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        Text(label, style: T.caption.copyWith(color: color)),
-        const SizedBox(height: S.xs),
-        Text(icon, style: const TextStyle(fontSize: 24)),
-        const SizedBox(height: S.xs),
-        Text(name, style: T.bodySm.copyWith(color: C.textPrimary)),
+        Text(icon, style: const TextStyle(fontSize: 18)),
+        const SizedBox(width: 4),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(label, style: T.caption.copyWith(color: color, fontSize: 10)),
+            Text(name, style: T.caption.copyWith(color: C.textPrimary)),
+          ],
+        ),
       ],
     );
   }

@@ -35,6 +35,9 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
   bool _loadingAd = false;
   bool _loadingPd = false;
 
+  // Guide section collapsed by default
+  bool _guideExpanded = false;
+
   @override
   void initState() {
     super.initState();
@@ -189,7 +192,7 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
             height: 48,
             child: ElevatedButton(
               onPressed: () => context.go('/home'),
-              child: const Text('Continue to Home'),
+              child: const Text('Go Home'),
             ),
           ),
         ],
@@ -221,6 +224,13 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
     final mdStart = current['mahadasha_start'] as String? ?? '';
     final mdEnd = current['mahadasha_end'] as String? ?? '';
 
+    // Dasha guide data (enriched from backend)
+    final mdTheme = current['theme'] as String? ?? '';
+    final focusAreas = (current['focus_areas'] as List?)?.cast<String>() ?? [];
+    final practicalAdvice = (current['practical_advice'] as List?)?.cast<String>() ?? [];
+    final challenges = current['challenges'] as String? ?? '';
+    final opportunities = current['opportunities'] as String? ?? '';
+
     // MD progress
     double mdProgress = 0;
     if (mdStart.isNotEmpty && mdEnd.isNotEmpty) {
@@ -239,30 +249,28 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
           const SizedBox(height: S.lg),
 
           // Header
-          Center(
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    GestureDetector(
-                      onTap: () => context.go('/home'),
-                      child: const Padding(
-                        padding: EdgeInsets.only(right: S.sm),
-                        child: Icon(Icons.arrow_back_ios,
-                            color: C.textSecondary, size: 18),
-                      ),
-                    ),
-                    Text('Your Life Timeline', style: T.h2),
-                  ],
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  'Vimshottari Dasha — your cosmic chapters',
-                  style: T.bodySm.copyWith(color: C.textMuted),
-                ),
-              ],
-            ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  GestureDetector(
+                    onTap: () => context.canPop()
+                        ? context.pop()
+                        : context.go('/home'),
+                    child: const Icon(Icons.arrow_back_ios,
+                        color: C.textSecondary, size: 18),
+                  ),
+                  const SizedBox(width: S.sm),
+                  Text('Your Life Timeline', style: T.h2),
+                ],
+              ),
+              const SizedBox(height: 4),
+              Text(
+                'Vimshottari Dasha \u2014 your cosmic chapters',
+                style: T.bodySm.copyWith(color: C.textMuted),
+              ),
+            ],
           ),
 
           const SizedBox(height: S.xl),
@@ -306,6 +314,17 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
                         style: T.h3.copyWith(
                             color: _planetColor(mdLord), fontSize: 18),
                       ),
+                      if (mdTheme.isNotEmpty) ...[
+                        const SizedBox(height: 2),
+                        Text(
+                          mdTheme,
+                          style: T.caption.copyWith(
+                              color: _planetColor(mdLord).withValues(alpha: 0.7),
+                              fontSize: 10),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
                       if (adLord.isNotEmpty) ...[
                         const SizedBox(height: 2),
                         Text(
@@ -354,6 +373,98 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
             const SizedBox(height: S.md),
             for (final alert in alerts)
               _AlertCard(alert: alert as Map<String, dynamic>),
+          ],
+
+          // ── Collapsible Guide Section ──
+          if (focusAreas.isNotEmpty || practicalAdvice.isNotEmpty) ...[
+            const SizedBox(height: S.md),
+            GestureDetector(
+              onTap: () => setState(() => _guideExpanded = !_guideExpanded),
+              behavior: HitTestBehavior.opaque,
+              child: Row(
+                children: [
+                  Icon(Icons.auto_stories,
+                      color: _planetColor(mdLord), size: 16),
+                  const SizedBox(width: 6),
+                  Text('Period Guide',
+                      style: T.bodySm.copyWith(
+                          color: C.textPrimary,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 13)),
+                  const SizedBox(width: 4),
+                  Icon(
+                    _guideExpanded ? Icons.expand_less : Icons.expand_more,
+                    size: 18,
+                    color: C.textMuted,
+                  ),
+                ],
+              ),
+            ),
+            if (_guideExpanded) ...[
+              const SizedBox(height: S.sm),
+              // Focus area chips
+              if (focusAreas.isNotEmpty) ...[
+                Wrap(
+                  spacing: 6,
+                  runSpacing: 6,
+                  children: focusAreas.map((area) => Container(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: S.sm, vertical: 4),
+                    decoration: BoxDecoration(
+                      borderRadius: R.xlBr,
+                      color: _planetColor(mdLord).withValues(alpha: 0.08),
+                      border: Border.all(
+                          color: _planetColor(mdLord).withValues(alpha: 0.2)),
+                    ),
+                    child: Text(
+                      area,
+                      style: T.caption.copyWith(
+                          color: _planetColor(mdLord), fontSize: 10),
+                    ),
+                  )).toList(),
+                ),
+                const SizedBox(height: S.sm),
+              ],
+              // Key advice
+              if (practicalAdvice.isNotEmpty)
+                ...practicalAdvice.take(3).map((advice) => Padding(
+                  padding: const EdgeInsets.only(bottom: 4),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 5),
+                        child: Icon(Icons.circle, size: 4,
+                            color: _planetColor(mdLord)),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          advice,
+                          style: T.caption.copyWith(
+                              color: C.textSecondary, height: 1.4),
+                        ),
+                      ),
+                    ],
+                  ),
+                )),
+              // Opportunities / Challenges
+              if (opportunities.isNotEmpty || challenges.isNotEmpty) ...[
+                const SizedBox(height: S.sm),
+                if (opportunities.isNotEmpty)
+                  _InlineHint(
+                    icon: Icons.trending_up,
+                    color: C.positive,
+                    text: opportunities,
+                  ),
+                if (challenges.isNotEmpty)
+                  _InlineHint(
+                    icon: Icons.warning_amber_rounded,
+                    color: C.warning,
+                    text: challenges,
+                  ),
+              ],
+            ],
           ],
 
           const SizedBox(height: S.xl),
@@ -536,15 +647,6 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
             const SizedBox(height: S.xl),
           ],
 
-          // ── Continue Button → Transit Dashboard ──
-          SizedBox(
-            width: double.infinity,
-            height: 48,
-            child: ElevatedButton(
-              onPressed: () => context.push('/transits'),
-              child: const Text('Continue'),
-            ),
-          ),
           const SizedBox(height: S.xl),
         ],
       ),
@@ -1014,6 +1116,44 @@ class _AlertCard extends StatelessWidget {
             Icon(Icons.chevron_right, color: color.withValues(alpha: 0.5), size: 18),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _InlineHint extends StatelessWidget {
+  final IconData icon;
+  final Color color;
+  final String text;
+
+  const _InlineHint({
+    required this.icon,
+    required this.color,
+    required this.text,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 4),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 2),
+            child: Icon(icon, size: 12, color: color),
+          ),
+          const SizedBox(width: 4),
+          Expanded(
+            child: Text(
+              text,
+              style: T.caption.copyWith(
+                  color: color, fontSize: 10, height: 1.3),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+        ],
       ),
     );
   }

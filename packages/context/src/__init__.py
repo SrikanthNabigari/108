@@ -86,6 +86,7 @@ from .progressions import (
     get_progression_timeline,
 )
 from .state_engine import (
+    compute_area_trend,
     compute_state_range,
     compute_state_vector,
     get_hora_lord,
@@ -180,6 +181,7 @@ __all__ = [
     "check_double_transit",
     "check_sade_sati",
     "compare_natal_annual",
+    "compute_area_trend",
     "compute_state_range",
     "compute_state_vector",
     "correlate_event",

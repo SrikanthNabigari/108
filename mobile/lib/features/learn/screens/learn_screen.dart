@@ -27,21 +27,11 @@ class LearnScreen extends StatelessWidget {
                       onTap: () => context.canPop()
                           ? context.pop()
                           : context.go('/home'),
-                      child: Container(
-                        padding: const EdgeInsets.all(S.sm),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: C.glassBg,
-                          border: Border.all(color: C.glassBorder),
-                        ),
-                        child: const Icon(Icons.arrow_back,
-                            color: C.textPrimary, size: 18),
-                      ),
+                      child: const Icon(Icons.arrow_back_ios,
+                          color: C.textSecondary, size: 18),
                     ),
-                    const Spacer(),
+                    const SizedBox(width: S.sm),
                     Text('Vedic Astrology', style: T.h3),
-                    const Spacer(),
-                    const SizedBox(width: 36),
                   ],
                 ),
               ),

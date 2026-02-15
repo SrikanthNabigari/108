@@ -99,22 +99,28 @@ _DASHA_LORD_QUALITY: dict[str, float] = {
     "ketu": -0.5,
 }
 
-# Area -> associated houses
+# Area -> associated houses (8 areas, matching state_engine.AREA_HOUSES)
 AREA_HOUSES: dict[str, list[int]] = {
     "career": [10, 6, 2],
     "finance": [2, 11, 5],
     "relationships": [7, 5, 1],
     "health": [1, 6, 8],
     "spiritual": [12, 9, 5],
+    "family": [4, 2, 1],
+    "education": [4, 5, 9],
+    "travel": [3, 9, 12],
 }
 
-# Area -> associated planets
+# Area -> associated planets (8 areas)
 AREA_PLANETS: dict[str, list[str]] = {
     "career": ["saturn", "sun", "mars"],
     "finance": ["jupiter", "venus", "mercury"],
     "relationships": ["venus", "moon", "jupiter"],
     "health": ["sun", "mars", "saturn"],
     "spiritual": ["jupiter", "ketu", "moon"],
+    "family": ["moon", "venus", "mars"],
+    "education": ["mercury", "jupiter", "moon"],
+    "travel": ["rahu", "jupiter", "moon"],
 }
 
 
@@ -538,28 +544,158 @@ def get_daily_forecast(
     # ---- 7. Compute overall rating ----
     day_rating = _compute_day_rating(panchanga_score, moon_bav, aspect_score, dasha_quality)
 
-    # ---- 8. Recommendations ----
-    recommendations = _generate_recommendations(
-        panchanga_raw,
-        moon_house_from_lagna,
-        weekday,
-        aspect_score,
-        dasha_quality,
-    )
+    # ---- 8. Recommendations (knowledge-backed) ----
+    try:
+        from packages.context.src.forecast_knowledge import (
+            build_daily_recommendations,
+            build_daily_summary,
+        )
 
-    # ---- 9. Summary ----
-    summary = _generate_daily_summary(
-        day_rating,
-        moon_sign,
-        moon_house_from_lagna,
-        dasha_md,
-        dasha_ad,
-    )
+        tithi_name = panchanga_out.get("tithi", "")
+        recommendations = build_daily_recommendations(
+            weekday=weekday,
+            tithi_name=tithi_name,
+            moon_nakshatra=moon_nakshatra,
+            dasha_md=dasha_md,
+            dasha_ad=dasha_ad,
+            transit_aspects=transit_aspects_today,
+            is_chandrashtama=(moon_house_from_moon == 8),
+        )
+    except Exception:
+        recommendations = _generate_recommendations(
+            panchanga_raw,
+            moon_house_from_lagna,
+            weekday,
+            aspect_score,
+            dasha_quality,
+        )
+
+    # ---- 9. Summary (knowledge-backed) ----
+    try:
+        summary = build_daily_summary(
+            day_rating=day_rating,
+            moon_sign=moon_sign,
+            moon_nakshatra=moon_nakshatra,
+            moon_house_from_lagna=moon_house_from_lagna,
+            dasha_md=dasha_md,
+            dasha_ad=dasha_ad,
+            transit_aspects=transit_aspects_today,
+            is_chandrashtama=(moon_house_from_moon == 8),
+        )
+    except Exception:
+        summary = _generate_daily_summary(
+            day_rating,
+            moon_sign,
+            moon_house_from_lagna,
+            dasha_md,
+            dasha_ad,
+        )
+
+    # ---- 10. State engine (single source of truth for composite + areas) ----
+    area_scores: dict[str, dict[str, Any]] = {}
+    state_composite: float | None = None
+    mental_state = ""
+    hora_lord = ""
+    active_yogas: list[str] = []
+    active_doshas: list[str] = []
+    sade_sati_info: dict[str, Any] = {"active": False, "phase": None}
+    factor_scores: list[dict[str, Any]] = []
+
+    try:
+        from packages.context.src.state_engine import compute_state_vector
+
+        state_vec = compute_state_vector(
+            birth_datetime=birth_datetime,
+            birth_lat=birth_lat,
+            birth_lon=birth_lon,
+            natal_planets=natal_planets,
+            moon_longitude=moon_longitude,
+            lagna_rashi=lagna_rashi,
+            query_datetime=forecast_date.isoformat(),
+            location_lat=loc_lat,
+            location_lon=loc_lon,
+        )
+        for area in state_vec.get("areas", []):
+            area_scores[area["id"]] = {
+                "score": area["score"],
+                "insight": area["insight"],
+                "dominant_planet": area["dominant_planet"],
+                "double_transit": area["double_transit"],
+            }
+        # Extract rich data from state vector
+        state_composite = state_vec.get("composite")
+        mental_state = state_vec.get("mental_state", "")
+        hora_lord = state_vec.get("hora_lord", "")
+        active_yogas = state_vec.get("natal_yogas", [])
+        active_doshas = state_vec.get("natal_doshas", [])
+        sade_sati_info = state_vec.get("sade_sati", {"active": False, "phase": None})
+        factor_scores = state_vec.get("factors", [])
+    except Exception:
+        # Fallback: all areas neutral
+        for area_id in AREA_HOUSES:
+            area_scores[area_id] = {
+                "score": 5.0,
+                "insight": f"Score unavailable for {area_id}",
+                "dominant_planet": AREA_PLANETS.get(area_id, [""])[0]
+                if AREA_PLANETS.get(area_id)
+                else "",
+                "double_transit": False,
+            }
+
+    # Use state engine composite as day_rating if available (replaces primitive weights)
+    if state_composite is not None:
+        day_rating = max(1, min(10, round(state_composite)))
+
+    # ---- 11. Gochara summary per planet ----
+    gochara_summary: list[dict[str, Any]] = []
+    try:
+        from packages.context.src.transits import get_gochara
+
+        transit_rashis = {p: int(d.get("longitude", 0) // 30) for p, d in all_transits.items()}
+        for planet_name, planet_data in all_transits.items():
+            if planet_name == "moon":
+                continue  # Moon has its own section
+            t_rashi = int(planet_data.get("longitude", 0) // 30)
+            gochara = get_gochara(natal_moon_rashi_idx, planet_name, t_rashi, transit_rashis)
+            gochara_summary.append(
+                {
+                    "planet": planet_name,
+                    "sign": RASHI_NAMES[t_rashi] if 0 <= t_rashi < 12 else "unknown",
+                    "house_from_moon": gochara.get("house_from_moon", 0),
+                    "is_favorable": gochara.get("is_favorable", False),
+                    "has_vedha": gochara.get("has_vedha", False),
+                    "net_effect": gochara.get("net_effect", "neutral"),
+                }
+            )
+    except Exception:
+        pass
+
+    # ---- 12. Chandrashtama check (8th from natal Moon) ----
+    is_chandrashtama = moon_house_from_moon == 8
+
+    # ---- 13. Upcoming triggers (next 3 days) ----
+    upcoming_triggers: list[dict[str, Any]] = []
+    try:
+        from packages.context.src.transit_tracker import get_upcoming_triggers
+
+        triggers = get_upcoming_triggers(
+            natal_planets=natal_planets,
+            moon_longitude=moon_longitude,
+            birth_datetime=birth_datetime,
+            lagna_rashi=lagna_rashi,
+            query_date=qdate.strftime("%Y-%m-%d"),
+            days_ahead=3,
+        )
+        upcoming_triggers = triggers[:5]  # top 5
+    except Exception:
+        pass
 
     return {
         "date": qdate.strftime("%Y-%m-%d"),
         "day_rating": day_rating,
         "summary": summary,
+        "mental_state": mental_state,
+        "composite_score": state_composite,
         "panchanga": panchanga_out,
         "moon_transit": moon_transit_out,
         "active_dasha": active_dasha_out,
@@ -567,6 +703,15 @@ def get_daily_forecast(
         "inauspicious_periods": inauspicious_out,
         "choghadiya_highlights": choghadiya_highlights,
         "recommendations": recommendations,
+        "area_scores": area_scores,
+        "hora_lord": hora_lord,
+        "gochara_summary": gochara_summary,
+        "is_chandrashtama": is_chandrashtama,
+        "active_yogas": active_yogas[:10],  # top 10
+        "active_doshas": active_doshas,
+        "sade_sati": sade_sati_info,
+        "factor_scores": factor_scores,
+        "upcoming_triggers": upcoming_triggers,
     }
 
 

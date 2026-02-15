@@ -2,7 +2,7 @@
 
 Generates a 7-day forecast by composing daily forecasts, identifying
 peak/challenging days, aggregating transit events, and computing
-area-wise ratings for career, finance, relationships, health, and spiritual.
+area-wise ratings for 8 life areas using the state engine (single source of truth).
 """
 
 from datetime import datetime, timedelta
@@ -10,7 +10,6 @@ from typing import Any
 
 from packages.context.src.daily_forecast import (
     AREA_HOUSES,
-    AREA_PLANETS,
     get_daily_forecast,
 )
 
@@ -19,53 +18,33 @@ def _compute_area_ratings(
     daily_forecasts: list[dict[str, Any]],
     natal_planets: dict[str, dict[str, Any]],  # noqa: ARG001
     lagna_rashi: str,  # noqa: ARG001
-    dasha_md: str,
-    dasha_ad: str,
+    dasha_md: str,  # noqa: ARG001
+    dasha_ad: str,  # noqa: ARG001
 ) -> dict[str, dict[str, Any]]:
-    """Compute area ratings from daily forecast data.
+    """Compute area ratings by averaging state engine area scores from daily forecasts.
 
-    Areas: career, finance, relationships, health, spiritual.
-    Each gets a 1-10 rating and a short summary.
+    8 areas: career, finance, relationships, health, spiritual, family, education, travel.
+    Each daily forecast includes `area_scores` from compute_state_vector().
     """
     areas: dict[str, dict[str, Any]] = {}
 
-    for area, houses in AREA_HOUSES.items():
-        planets = AREA_PLANETS.get(area, [])
-        score = 5.0  # baseline
+    # Collect per-area scores across 7 days
+    area_totals: dict[str, list[float]] = {area: [] for area in AREA_HOUSES}
 
-        # Count transit aspects involving area-relevant planets
-        total_aspect_boost = 0.0
-        for df in daily_forecasts:
-            for asp in df.get("transit_aspects_today", []):
-                t_planet = asp.get("transit", "").lower()
-                n_planet = asp.get("natal", "").lower()
-                aspect_type = asp.get("aspect", "")
+    for df in daily_forecasts:
+        day_area_scores = df.get("area_scores", {})
+        for area_id in AREA_HOUSES:
+            score_data = day_area_scores.get(area_id, {})
+            if isinstance(score_data, dict) and "score" in score_data:
+                area_totals[area_id].append(float(score_data["score"]))
 
-                if t_planet in planets or n_planet in planets:
-                    if aspect_type in ("trine", "sextile", "conjunction"):
-                        total_aspect_boost += 0.3
-                    elif aspect_type in ("square", "opposition"):
-                        total_aspect_boost -= 0.2
+    for area_id in AREA_HOUSES:
+        scores = area_totals[area_id]
+        avg_score = sum(scores) / len(scores) if scores else 5.0
 
-        score += total_aspect_boost / max(len(daily_forecasts), 1)
-
-        # Dasha lord affinity with area planets
-        if dasha_md in planets:
-            score += 1.0
-        if dasha_ad in planets:
-            score += 0.5
-
-        # Moon house transits through area houses during the week
-        moon_in_area_count = 0
-        for df in daily_forecasts:
-            moon_house = df.get("moon_transit", {}).get("house_from_lagna", 0)
-            if moon_house in houses:
-                moon_in_area_count += 1
-        score += moon_in_area_count * 0.3
-
-        rating = max(1, min(10, round(score)))
-        summary = _area_summary(area, rating)
-        areas[area] = {"rating": rating, "summary": summary}
+        rating = max(1, min(10, round(avg_score)))
+        summary = _area_summary(area_id, rating)
+        areas[area_id] = {"rating": rating, "score": round(avg_score, 1), "summary": summary}
 
     return areas
 
@@ -87,6 +66,9 @@ def _area_summary(area: str, rating: int) -> str:
         "relationships": "social connections",
         "health": "physical wellbeing",
         "spiritual": "inner growth practices",
+        "family": "family matters",
+        "education": "learning and studies",
+        "travel": "travel and exploration",
     }
     action = area_actions.get(area, area)
     return f"{tone} week for {action}"
@@ -152,6 +134,9 @@ def _generate_weekly_theme(
         "relationships": "relationship dynamics",
         "health": "health awareness",
         "spiritual": "spiritual depth",
+        "family": "family harmony",
+        "education": "learning focus",
+        "travel": "travel opportunities",
     }
 
     top_label = area_labels.get(top_area, top_area)
@@ -280,20 +265,114 @@ def get_weekly_forecast(
         dasha_ad,
     )
 
-    # Weekly theme
-    weekly_theme = _generate_weekly_theme(overall_rating, dasha_md, dasha_ad, area_ratings)
+    # Weekly theme (knowledge-backed)
+    try:
+        from packages.context.src.forecast_knowledge import (
+            build_weekly_recommendations,
+            build_weekly_summary,
+        )
+
+        weekly_theme = build_weekly_summary(
+            overall_rating=overall_rating,
+            dasha_md=dasha_md,
+            dasha_ad=dasha_ad,
+            key_transits=key_transits,
+            areas=area_ratings,
+        )
+        weekly_recommendations = build_weekly_recommendations(
+            dasha_md=dasha_md,
+            dasha_ad=dasha_ad,
+            key_transits=key_transits,
+        )
+    except Exception:
+        weekly_theme = _generate_weekly_theme(overall_rating, dasha_md, dasha_ad, area_ratings)
+        weekly_recommendations = []
+
+    # ---- Enriched: Gochara overview from daily gochara_summary ----
+    gochara_overview = _aggregate_gochara(daily_forecasts)
+
+    # ---- Enriched: Active yogas/doshas from daily data ----
+    week_yogas: set[str] = set()
+    week_doshas: set[str] = set()
+    chandrashtama_days: list[str] = []
+    for df in daily_forecasts:
+        for y in df.get("active_yogas", []):
+            week_yogas.add(y)
+        for d in df.get("active_doshas", []):
+            week_doshas.add(d)
+        if df.get("is_chandrashtama", False):
+            chandrashtama_days.append(df.get("date", ""))
+
+    # ---- Enriched: Sade Sati from first available daily ----
+    sade_sati_info = {"active": False, "phase": None}
+    for df in daily_forecasts:
+        si = df.get("sade_sati", {})
+        if si.get("active"):
+            sade_sati_info = si
+            break
 
     return {
         "week_start": week_start.strftime("%Y-%m-%d"),
         "week_end": week_end.strftime("%Y-%m-%d"),
         "overall_rating": overall_rating,
         "weekly_theme": weekly_theme,
+        "summary": weekly_theme,  # Flutter reads "summary" from details
+        "recommendations": weekly_recommendations,
         "peak_days": peak_days,
         "challenging_days": challenging_days,
         "daily_forecasts": daily_forecasts,
         "key_transits_this_week": key_transits,
         "dasha_context": dasha_context,
         "areas": area_ratings,
+        "gochara_overview": gochara_overview,
+        "active_yogas": sorted(week_yogas),
+        "active_doshas": sorted(week_doshas),
+        "chandrashtama_days": chandrashtama_days,
+        "sade_sati": sade_sati_info,
+    }
+
+
+def _aggregate_gochara(
+    daily_forecasts: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """Aggregate gochara data from daily forecasts into a weekly overview.
+
+    Shows per-planet average favorability and counts favorable vs blocked planets.
+    """
+    planet_effects: dict[str, list[str]] = {}
+    for df in daily_forecasts:
+        for g in df.get("gochara_summary", []):
+            planet = g.get("planet", "")
+            if not planet:
+                continue
+            if planet not in planet_effects:
+                planet_effects[planet] = []
+            planet_effects[planet].append(g.get("net_effect", "neutral"))
+
+    # Summarize per planet
+    planet_summary: list[dict[str, Any]] = []
+    favorable_count = 0
+    unfavorable_count = 0
+    for planet, effects in planet_effects.items():
+        fav = sum(1 for e in effects if e == "favorable")
+        dominant = "favorable" if fav > len(effects) // 2 else "unfavorable"
+        if dominant == "favorable":
+            favorable_count += 1
+        else:
+            unfavorable_count += 1
+        planet_summary.append(
+            {
+                "planet": planet,
+                "dominant_effect": dominant,
+                "favorable_days": fav,
+                "total_days": len(effects),
+            }
+        )
+
+    return {
+        "planets": planet_summary,
+        "favorable_count": favorable_count,
+        "unfavorable_count": unfavorable_count,
     }
 
 

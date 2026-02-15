@@ -90,6 +90,7 @@ class YogaDetailPanel extends ConsumerWidget {
     final description = yoga['description'] as String? ?? '';
     final involved = yoga['involved_planets'] as List? ?? [];
     final conditions = yoga['conditions_met'] as List? ?? [];
+    final effects = yoga['effects'] as List? ?? [];
     final effect = yoga['effect'] as String? ?? '';
     final interpretation = yoga['interpretation'] as String? ?? '';
     final color = _categoryColor(category);
@@ -119,9 +120,11 @@ class YogaDetailPanel extends ConsumerWidget {
                     // Educational card
                     _buildEducationalCard(category, color),
                     const SizedBox(height: S.md),
-                    // WHAT — description + effect
-                    if (description.isNotEmpty || effect.isNotEmpty) ...[
-                      _buildWhatSection(description, effect, color),
+                    // WHAT — description + effects
+                    if (description.isNotEmpty ||
+                        effects.isNotEmpty ||
+                        effect.isNotEmpty) ...[
+                      _buildWhatSection(description, effects, effect, color),
                       const SizedBox(height: S.md),
                     ],
                     // WHY — involved planets + conditions
@@ -283,7 +286,8 @@ class YogaDetailPanel extends ConsumerWidget {
 
   // ── WHAT Section ──
 
-  Widget _buildWhatSection(String description, String effect, Color color) {
+  Widget _buildWhatSection(
+      String description, List effects, String effect, Color color) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -294,7 +298,51 @@ class YogaDetailPanel extends ConsumerWidget {
         if (description.isNotEmpty)
           _ExpandableArea(
               title: 'Description', content: description, color: color),
-        if (effect.isNotEmpty) ...[
+        // Rich effects list from knowledge base
+        if (effects.isNotEmpty) ...[
+          const SizedBox(height: S.sm),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(S.md),
+            decoration: BoxDecoration(
+              borderRadius: R.mdBr,
+              color: color.withValues(alpha: 0.04),
+              border: Border.all(color: color.withValues(alpha: 0.1)),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Effects',
+                    style: T.bodySm.copyWith(
+                        color: C.textPrimary,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 13)),
+                const SizedBox(height: S.sm),
+                ...effects.map((e) => Padding(
+                      padding: const EdgeInsets.only(bottom: 6),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 4),
+                            child: Icon(Icons.star_rounded,
+                                size: 10, color: color),
+                          ),
+                          const SizedBox(width: 6),
+                          Expanded(
+                            child: Text('$e',
+                                style: T.caption.copyWith(
+                                    color: C.textSecondary, height: 1.4)),
+                          ),
+                        ],
+                      ),
+                    )),
+              ],
+            ),
+          ),
+        ],
+        // Fallback: single effect string (legacy format)
+        if (effects.isEmpty && effect.isNotEmpty) ...[
           const SizedBox(height: S.sm),
           _ExpandableArea(title: 'Effect', content: effect, color: color),
         ],

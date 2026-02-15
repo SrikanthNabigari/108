@@ -65,9 +65,12 @@ def _build_natal_planets(planets: dict) -> dict[str, Any]:
         if isinstance(planet_data, dict):
             result[planet_name] = {
                 "longitude": float(planet_data.get("longitude", 0)),
+                "latitude": float(planet_data.get("latitude", 0)),
+                "speed": float(planet_data.get("speed", 0)),
                 "rashi": int(planet_data.get("rashi", 0)),
                 "house": int(planet_data.get("house", 0)),
                 "nakshatra": planet_data.get("nakshatra"),
+                "is_retrograde": planet_data.get("is_retrograde", False),
             }
     return result
 

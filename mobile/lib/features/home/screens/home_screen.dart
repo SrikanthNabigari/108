@@ -191,9 +191,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 Text('Quick Actions',
                     style: T.h3.copyWith(fontSize: 16)),
                 const SizedBox(height: S.sm),
-                Wrap(
-                  spacing: S.sm,
-                  runSpacing: S.sm,
+                GridView.count(
+                  crossAxisCount: 3,
+                  mainAxisSpacing: S.sm,
+                  crossAxisSpacing: S.sm,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  childAspectRatio: 1.0,
                   children: [
                     _QuickAction(
                       icon: Icons.grid_on,
@@ -304,20 +308,32 @@ class _QuickAction extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: GlassContainer(
-        padding: const EdgeInsets.symmetric(horizontal: S.md, vertical: S.sm),
-        borderRadius: 12,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
+        padding: const EdgeInsets.all(S.md),
+        borderRadius: 14,
+        borderColor: color.withValues(alpha: 0.15),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, color: color, size: 16),
-            const SizedBox(width: S.xs),
+            Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: color.withValues(alpha: 0.12),
+              ),
+              child: Icon(icon, color: color, size: 20),
+            ),
+            const SizedBox(height: S.sm),
             Text(
               label,
               style: T.bodySm.copyWith(
                 color: C.textPrimary,
-                fontSize: 13,
+                fontSize: 12,
                 fontWeight: FontWeight.w500,
               ),
+              textAlign: TextAlign.center,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
             ),
           ],
         ),

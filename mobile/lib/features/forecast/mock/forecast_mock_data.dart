@@ -19,16 +19,37 @@ class ForecastMockData {
       'travel': const AreaRating(area: 'travel', score: 4.2, trend: 'down'),
     },
     recommendations: [
-      'Mercury hora (9-10 AM) is ideal for important communications.',
-      'Avoid major financial decisions after 4 PM today.',
-      'Good day for learning and skill development.',
-      'Evening meditation will be especially effective.',
+      'Wednesday favors: Education, Business, Writing.',
+      'Avoid on Wednesday: Buying iron, Giving away green items.',
+      'Shukla Saptami: Good for Travel, Buying vehicles, Starting journeys.',
+      'Moon in Pushya: Long-term bonds, Spiritual practice.',
+      'Dasha focus: Communication and intellectual pursuits thrive.',
     ],
     details: {
       'mental_state': 'Flowing',
-      'summary': 'A productive day with strong intellectual energy. '
-          'Mercury-Jupiter alignment supports career growth and learning. '
-          'Be mindful of impulsive spending.',
+      'composite_score': 7.3,
+      'summary': 'Moon in Pushya (Aquarius, house 5): Emotional nourishment '
+          'and discipline. Mercury-Ketu period sharpens intuition and '
+          'spiritual inquiry.',
+      'hora_lord': 'mercury',
+      'is_chandrashtama': false,
+      'gochara_summary': [
+        {'planet': 'jupiter', 'sign': 'taurus', 'house_from_moon': 4, 'is_favorable': false, 'has_vedha': false, 'net_effect': 'unfavorable'},
+        {'planet': 'saturn', 'sign': 'pisces', 'house_from_moon': 2, 'is_favorable': false, 'has_vedha': false, 'net_effect': 'unfavorable'},
+        {'planet': 'mars', 'sign': 'cancer', 'house_from_moon': 6, 'is_favorable': true, 'has_vedha': false, 'net_effect': 'favorable'},
+        {'planet': 'venus', 'sign': 'pisces', 'house_from_moon': 2, 'is_favorable': true, 'has_vedha': false, 'net_effect': 'favorable'},
+        {'planet': 'mercury', 'sign': 'aquarius', 'house_from_moon': 1, 'is_favorable': false, 'has_vedha': false, 'net_effect': 'unfavorable'},
+        {'planet': 'sun', 'sign': 'aquarius', 'house_from_moon': 1, 'is_favorable': false, 'has_vedha': false, 'net_effect': 'unfavorable'},
+        {'planet': 'rahu', 'sign': 'pisces', 'house_from_moon': 2, 'is_favorable': false, 'has_vedha': false, 'net_effect': 'unfavorable'},
+        {'planet': 'ketu', 'sign': 'virgo', 'house_from_moon': 8, 'is_favorable': false, 'has_vedha': false, 'net_effect': 'unfavorable'},
+      ],
+      'active_yogas': ['Gaja Kesari', 'Budha-Aditya'],
+      'active_doshas': ['Kaal Sarp'],
+      'sade_sati': {'active': false, 'phase': null},
+      'upcoming_triggers': [
+        {'trigger': 'Venus enters Aries', 'days_from_now': 2, 'type': 'sign_ingress'},
+        {'trigger': 'Mars trine natal Jupiter', 'days_from_now': 3, 'type': 'aspect'},
+      ],
     },
     panchanga: const PanchangaData(
       tithi: 'Shukla Saptami',
@@ -54,18 +75,32 @@ class ForecastMockData {
       'travel': const AreaRating(area: 'travel', score: 5.0, trend: 'neutral'),
     },
     recommendations: [
-      'Best days for career moves: Wednesday and Thursday.',
-      'Relationship energy peaks on Friday evening.',
-      'Avoid travel on Tuesday due to Mars transit.',
-      'Weekend ideal for spiritual practices and family time.',
+      'This period supports: Spiritual awakening through knowledge.',
+      'Career: Communication and intellectual pursuits thrive.',
+      'Invest in education and skill development.',
+      'Saturn trine natal Sun: Positive structural support.',
     ],
     details: {
       'mental_state': 'Steady',
-      'summary': 'A balanced week with gradual improvement. '
-          'Mid-week brings the strongest professional energy. '
-          'Weekend favors relationships and rest.',
+      'summary': 'Mercury-Ketu dasha emphasizes intuition and spiritual inquiry. '
+          'Strongest area: Relationships (8/10). '
+          'Needs attention: Finance (6/10).',
       'daily_ratings': [6.2, 5.8, 7.5, 7.9, 7.1, 6.5, 6.8],
       'daily_labels': ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      'gochara_overview': {
+        'favorable_count': 3,
+        'unfavorable_count': 5,
+        'planets': [
+          {'planet': 'mars', 'dominant_effect': 'favorable', 'favorable_days': 7, 'total_days': 7},
+          {'planet': 'venus', 'dominant_effect': 'favorable', 'favorable_days': 5, 'total_days': 7},
+          {'planet': 'jupiter', 'dominant_effect': 'unfavorable', 'favorable_days': 0, 'total_days': 7},
+          {'planet': 'saturn', 'dominant_effect': 'unfavorable', 'favorable_days': 0, 'total_days': 7},
+        ],
+      },
+      'active_yogas': ['Gaja Kesari', 'Budha-Aditya'],
+      'active_doshas': ['Kaal Sarp'],
+      'chandrashtama_days': ['2026-02-11'],
+      'sade_sati': {'active': false, 'phase': null},
     },
   );
 
@@ -84,18 +119,33 @@ class ForecastMockData {
       'travel': const AreaRating(area: 'travel', score: 5.5, trend: 'neutral'),
     },
     recommendations: [
-      'Jupiter transit supports financial growth after the 15th.',
-      'Health needs attention during first week — avoid overexertion.',
-      'Best period for career negotiations: 10th to 20th.',
-      'Spiritual retreats are highly favored this month.',
+      'Invest in education and skill development.',
+      'Start or expand a business venture.',
+      'House 10: Major promotion or career milestone ahead.',
+      'House 7: Favorable for partnerships and contracts.',
     ],
     details: {
       'mental_state': 'Steady',
-      'summary': 'A month of gradual consolidation. '
-          'Financial prospects improve in the second half. '
-          'Focus on health and rest during the opening days.',
+      'summary': 'Mercury Mahadasha: Intelligence, communication, education. '
+          'Jupiter-Saturn activate houses 10 and 7 — career and partnership '
+          'themes prominent. Strongest: Spiritual. Needs care: Travel.',
       'best_area': 'spiritual',
       'weakest_area': 'travel',
+      'gochara_summary': [
+        {'planet': 'jupiter', 'sign': 'taurus', 'house_from_moon': 4, 'net_effect': 'unfavorable'},
+        {'planet': 'saturn', 'sign': 'pisces', 'house_from_moon': 2, 'net_effect': 'unfavorable'},
+        {'planet': 'mars', 'sign': 'cancer', 'house_from_moon': 6, 'net_effect': 'favorable'},
+        {'planet': 'venus', 'sign': 'pisces', 'house_from_moon': 2, 'net_effect': 'favorable'},
+      ],
+      'active_yogas': ['Gaja Kesari', 'Budha-Aditya', 'Chandra-Mangal'],
+      'active_doshas': ['Kaal Sarp'],
+      'sade_sati': {'active': false, 'phase': null},
+      'muhurta_dates': [
+        {'date': '2026-02-04', 'abhijit_start': '11:48', 'abhijit_end': '12:36'},
+        {'date': '2026-02-11', 'abhijit_start': '11:48', 'abhijit_end': '12:36'},
+        {'date': '2026-02-18', 'abhijit_start': '11:47', 'abhijit_end': '12:36'},
+        {'date': '2026-02-25', 'abhijit_start': '11:46', 'abhijit_end': '12:35'},
+      ],
     },
   );
 }

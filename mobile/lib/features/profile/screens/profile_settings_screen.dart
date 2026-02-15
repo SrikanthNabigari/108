@@ -354,55 +354,76 @@ class _ProfileSettingsScreenState extends ConsumerState<ProfileSettingsScreen> {
   // ── Header ──
 
   Widget _buildHeader(UserModel user) {
-    return Center(
-      child: Column(
-        children: [
-          // Avatar
-          Container(
-            width: 80,
-            height: 80,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: C.glassBg,
-              border: Border.all(color: C.accent, width: 2),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        // Title row
+        Row(
+          children: [
+            GestureDetector(
+              onTap: () => context.canPop()
+                  ? context.pop()
+                  : context.go('/home'),
+              child: const Icon(Icons.arrow_back_ios,
+                  color: C.textSecondary, size: 18),
             ),
-            child: Center(
-              child: Text(
-                _initials(user.name),
-                style: T.h1.copyWith(
-                  color: C.accent,
-                  fontSize: 32,
+            const SizedBox(width: S.sm),
+            const Text('Profile', style: T.h2),
+          ],
+        ),
+        const SizedBox(height: S.xl),
+        // Avatar
+        Center(
+          child: Column(
+            children: [
+              Container(
+                width: 80,
+                height: 80,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: C.glassBg,
+                  border: Border.all(color: C.accent, width: 2),
+                ),
+                child: Center(
+                  child: Text(
+                    _initials(user.name),
+                    style: T.h1.copyWith(
+                      color: C.accent,
+                      fontSize: 32,
+                    ),
+                  ),
                 ),
               ),
-            ),
-          ),
-          const SizedBox(height: S.md),
-
-          // Name
-          Text(user.name ?? 'Explorer', style: T.h2),
-          const SizedBox(height: S.sm),
-
-          // Tier badge
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: S.md, vertical: S.xs),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: _tierColor(user.subscriptionTier).withValues(alpha: 0.15),
-              border: Border.all(
-                color: _tierColor(user.subscriptionTier).withValues(alpha: 0.3),
+              const SizedBox(height: S.md),
+              // Name
+              Text(user.name ?? 'Explorer', style: T.h2),
+              const SizedBox(height: S.sm),
+              // Tier badge
+              Container(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: S.md, vertical: S.xs),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: _tierColor(user.subscriptionTier)
+                      .withValues(alpha: 0.15),
+                  border: Border.all(
+                    color: _tierColor(user.subscriptionTier)
+                        .withValues(alpha: 0.3),
+                  ),
+                ),
+                child: Text(
+                  _tierLabel(user.subscriptionTier),
+                  style: T.caption.copyWith(
+                    color: _tierColor(user.subscriptionTier),
+                    fontWeight: FontWeight.w600,
+                    fontSize: 11,
+                  ),
+                ),
               ),
-            ),
-            child: Text(
-              _tierLabel(user.subscriptionTier),
-              style: T.caption.copyWith(
-                color: _tierColor(user.subscriptionTier),
-                fontWeight: FontWeight.w600,
-                fontSize: 11,
-              ),
-            ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

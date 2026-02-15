@@ -10,6 +10,7 @@ import 'package:one_zero_eight/shared/widgets/glass_container.dart';
 import 'package:one_zero_eight/features/chart/widgets/yoga_detail_panel.dart';
 import 'package:one_zero_eight/features/chart/widgets/dosha_detail_panel.dart';
 import 'package:one_zero_eight/features/chart/widgets/strength_detail_panel.dart';
+import 'package:one_zero_eight/features/chart/widgets/house_detail_panel.dart';
 import 'package:one_zero_eight/features/chart/widgets/soul_purpose_detail_panel.dart';
 
 /// "Your Chart" screen — the WHO layer.
@@ -111,16 +112,6 @@ class _ChartScreenState extends ConsumerState<ChartScreen> {
           const SizedBox(height: S.xl),
           _buildGemsSection(),
           const SizedBox(height: S.xl),
-          // Continue button
-          SizedBox(
-            width: double.infinity,
-            height: 48,
-            child: ElevatedButton(
-              onPressed: () => context.push('/timeline'),
-              child: const Text('Continue'),
-            ),
-          ),
-          const SizedBox(height: S.xl),
         ],
       ),
     );
@@ -134,34 +125,31 @@ class _ChartScreenState extends ConsumerState<ChartScreen> {
     final lagna = _chartData?['lagna_rashi'] as String? ?? 'Libra';
     final moonSign = _chartData?['moon_rashi'] as String? ?? 'Aquarius';
 
-    return Center(
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              GestureDetector(
-                onTap: () => context.go('/home'),
-                child: const Padding(
-                  padding: EdgeInsets.only(right: S.sm),
-                  child: Icon(Icons.arrow_back_ios,
-                      color: C.textSecondary, size: 18),
-                ),
-              ),
-              const Text('Your Chart', style: T.h2),
-            ],
-          ),
-          const SizedBox(height: S.sm),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _badge('Lagna: $lagna', C.accent),
-              const SizedBox(width: S.sm),
-              _badge('Moon: $moonSign', C.moon),
-            ],
-          ),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            GestureDetector(
+              onTap: () => context.canPop()
+                  ? context.pop()
+                  : context.go('/home'),
+              child: const Icon(Icons.arrow_back_ios,
+                  color: C.textSecondary, size: 18),
+            ),
+            const SizedBox(width: S.sm),
+            const Text('Your Chart', style: T.h2),
+          ],
+        ),
+        const SizedBox(height: S.sm),
+        Row(
+          children: [
+            _badge('Lagna: $lagna', C.accent),
+            const SizedBox(width: S.sm),
+            _badge('Moon: $moonSign', C.moon),
+          ],
+        ),
+      ],
     );
   }
 
@@ -186,8 +174,8 @@ class _ChartScreenState extends ConsumerState<ChartScreen> {
   // ===============================================================
 
   Widget _buildBirthChart() {
-    final planets = _chartData?['planets'] as Map<String, dynamic>? ??
-        _demoChart['planets'] as Map<String, dynamic>;
+    final planets =
+        _planetsAsMap(_chartData?['planets'] ?? _demoChart['planets']);
     final lagnaRashi =
         (_chartData?['lagna_rashi'] as String? ?? 'Libra').toLowerCase();
     final lagnaSign = _rashiToSign(lagnaRashi);
@@ -388,134 +376,56 @@ class _ChartScreenState extends ConsumerState<ChartScreen> {
       int signNum, int houseNum, List<String> planetsHere) {
     final signName = _signNames[signNum] ?? '';
     final lord = _signLords[signNum] ?? '';
-    final lifeArea = _houseAreas[houseNum] ?? '';
-    final lordColor = planetColor(lord);
+    final planets = _planetsAsMap(_chartData?['planets'] ?? _demoChart['planets']);
 
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: Colors.transparent,
-      builder: (_) => Container(
-        decoration: BoxDecoration(
-          color: C.surface,
-          borderRadius: const BorderRadius.vertical(
-              top: Radius.circular(R.xl)),
-        ),
-        padding: const EdgeInsets.fromLTRB(S.lg, S.md, S.lg, S.lg),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: Container(
-                width: 40,
-                height: 4,
-                decoration: BoxDecoration(
-                  color: C.glassBorder,
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
-            ),
-            const SizedBox(height: S.md),
-            Row(
-              children: [
-                Text('House $houseNum',
-                    style: T.h2.copyWith(fontSize: 20)),
-                const SizedBox(width: S.sm),
-                _badge(signName, C.accent),
-              ],
-            ),
-            const SizedBox(height: 4),
-            Text(lifeArea,
-                style: T.bodySm.copyWith(color: C.textSecondary)),
-            const SizedBox(height: S.lg),
-            // Lord card
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(S.md),
-              decoration: BoxDecoration(
-                borderRadius: R.mdBr,
-                color: lordColor.withValues(alpha: 0.06),
-                border: Border.all(
-                    color: lordColor.withValues(alpha: 0.15)),
-              ),
-              child: Row(
-                children: [
-                  Text(planetGlyph(lord),
-                      style:
-                          TextStyle(fontSize: 22, color: lordColor)),
-                  const SizedBox(width: S.sm),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('House Lord',
-                          style: T.caption
-                              .copyWith(color: C.textMuted)),
-                      Text(planetName(lord),
-                          style: T.bodySm.copyWith(
-                              color: lordColor,
-                              fontWeight: FontWeight.w600)),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            if (planetsHere.isNotEmpty) ...[
-              const SizedBox(height: S.md),
-              Text('Planets Present',
-                  style: T.bodySm.copyWith(
-                      color: C.textPrimary,
-                      fontWeight: FontWeight.w600)),
-              const SizedBox(height: S.sm),
-              Wrap(
-                spacing: S.sm,
-                runSpacing: S.sm,
-                children: planetsHere.map((p) {
-                  final pc = planetColor(p);
-                  final retro = _isPlanetRetro(p);
-                  return Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: S.sm, vertical: 4),
-                    decoration: BoxDecoration(
-                      borderRadius: R.xlBr,
-                      color: pc.withValues(alpha: 0.1),
-                      border: Border.all(
-                          color: pc.withValues(alpha: 0.2)),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(planetGlyph(p),
-                            style:
-                                TextStyle(fontSize: 16, color: pc)),
-                        const SizedBox(width: 4),
-                        Text(
-                          '${planetName(p)}${retro ? ' Rx' : ''}',
-                          style: T.bodySm.copyWith(
-                              color: pc,
-                              fontWeight: FontWeight.w500),
-                        ),
-                      ],
-                    ),
-                  );
-                }).toList(),
-              ),
-            ] else ...[
-              const SizedBox(height: S.md),
-              Text('No planets in this house',
-                  style: T.caption.copyWith(color: C.textMuted)),
-            ],
-            const SizedBox(height: S.lg),
-          ],
-        ),
-      ),
+    // Build enriched planet data list for this house
+    final planetDataList = <Map<String, dynamic>>[];
+    for (final pName in planetsHere) {
+      final pData = planets[pName] as Map<String, dynamic>? ?? {};
+      planetDataList.add({
+        'name': pName,
+        ...pData,
+      });
+    }
+
+    // Get house info from enriched API response
+    final housesMap = _chartData?['houses'] as Map<String, dynamic>? ?? {};
+    final houseInfo =
+        (housesMap['$houseNum'] as Map<String, dynamic>?) ?? const {};
+
+    // Filter yogas that involve any planet in this house
+    final planetSet = planetsHere.map((p) => p.toLowerCase()).toSet();
+    final matchingYogas = (_yogas ?? []).where((y) {
+      final involved = (y as Map<String, dynamic>)['involved_planets'] as List? ?? [];
+      return involved.any(
+          (p) => planetSet.contains(p.toString().toLowerCase()));
+    }).map((y) => y as Map<String, dynamic>).toList();
+
+    // Filter doshas that involve any planet in this house
+    final matchingDoshas = (_doshas ?? []).where((d) {
+      final involved = (d as Map<String, dynamic>)['involved_planets'] as List? ?? [];
+      return involved.any(
+          (p) => planetSet.contains(p.toString().toLowerCase()));
+    }).map((d) => d as Map<String, dynamic>).toList();
+
+    HouseDetailPanel.show(
+      context,
+      houseNum: houseNum,
+      signNum: signNum,
+      signName: signName,
+      lord: lord,
+      planetsHere: planetDataList,
+      houseInfo: Map<String, dynamic>.from(houseInfo),
+      matchingYogas: matchingYogas,
+      matchingDoshas: matchingDoshas,
     );
   }
 
   bool _isPlanetRetro(String planet) {
-    final planets = _chartData?['planets'] as Map<String, dynamic>? ??
-        _demoChart['planets'] as Map<String, dynamic>;
+    final planets =
+        _planetsAsMap(_chartData?['planets'] ?? _demoChart['planets']);
     final data = planets[planet] as Map<String, dynamic>? ?? {};
-    return data['is_retrograde'] == true;
+    return data['is_retrograde'] == true || data['retrograde'] == true;
   }
 
   // ===============================================================
@@ -1014,6 +924,29 @@ class _ChartScreenState extends ConsumerState<ChartScreen> {
   // HELPERS
   // ===============================================================
 
+  /// Convert planets data from either Map or List format to a Map keyed by
+  /// planet name.  The /chart/summary API returns a List of dicts while the
+  /// demo data uses a Map — this handles both.
+  Map<String, dynamic> _planetsAsMap(dynamic raw) {
+    if (raw is Map<String, dynamic>) return raw;
+    if (raw is Map) return Map<String, dynamic>.from(raw);
+    if (raw is List) {
+      final map = <String, dynamic>{};
+      for (final item in raw) {
+        if (item is Map<String, dynamic>) {
+          final name = (item['name'] as String? ?? '').toLowerCase();
+          if (name.isNotEmpty) map[name] = item;
+        } else if (item is Map) {
+          final name =
+              (item['name']?.toString() ?? '').toLowerCase();
+          if (name.isNotEmpty) map[name] = Map<String, dynamic>.from(item);
+        }
+      }
+      return map;
+    }
+    return {};
+  }
+
   /// Section label matching timeline/transit _SectionLabel pattern.
   Widget _sectionLabel(String title, String subtitle) {
     return Row(
@@ -1035,15 +968,78 @@ const Map<String, dynamic> _demoChart = {
   'moon_rashi': 'Aquarius',
   'moon_nakshatra': 'Purva Bhadrapada',
   'planets': {
-    'sun': {'rashi': 'scorpio', 'house': 2, 'is_retrograde': false},
-    'moon': {'rashi': 'aquarius', 'house': 5, 'is_retrograde': false},
-    'mars': {'rashi': 'cancer', 'house': 10, 'is_retrograde': true},
-    'mercury': {'rashi': 'sagittarius', 'house': 3, 'is_retrograde': false},
-    'jupiter': {'rashi': 'virgo', 'house': 12, 'is_retrograde': false},
-    'venus': {'rashi': 'sagittarius', 'house': 3, 'is_retrograde': false},
-    'saturn': {'rashi': 'capricorn', 'house': 4, 'is_retrograde': true},
-    'rahu': {'rashi': 'sagittarius', 'house': 3, 'is_retrograde': true},
-    'ketu': {'rashi': 'gemini', 'house': 9, 'is_retrograde': true},
+    'sun': {
+      'rashi': 'scorpio', 'house': 2, 'is_retrograde': false,
+      'house_summary': 'Sun in the 2nd house gives a strong, commanding voice and interest in accumulating wealth through self-effort.',
+      'house_positive': ['Confident speech', 'Wealth through authority'],
+      'house_negative': ['Ego in family matters'],
+      'sign_summary': 'Sun in Scorpio brings intensity, investigative nature, and transformative power.',
+    },
+    'moon': {
+      'rashi': 'aquarius', 'house': 5, 'is_retrograde': false,
+      'house_summary': 'Moon in the 5th house gives emotional intelligence, creative imagination, and love for children.',
+      'house_positive': ['Creative mind', 'Good with children', 'Romantic nature'],
+      'house_negative': ['Emotional fluctuations in speculation'],
+      'sign_summary': 'Moon in Aquarius gives humanitarian instincts and unconventional emotional expression.',
+    },
+    'mars': {
+      'rashi': 'cancer', 'house': 10, 'is_retrograde': true,
+      'house_summary': 'Mars in the 10th house gives tremendous drive for career success, leadership, and professional authority.',
+      'house_positive': ['Strong career ambition', 'Leadership ability', 'Action-oriented'],
+      'house_negative': ['Conflicts with authority', 'Aggressive management style'],
+      'sign_summary': 'Mars in Cancer is debilitated but retrograde creates Neecha Bhanga, transforming weakness into unique strength.',
+    },
+    'mercury': {
+      'rashi': 'sagittarius', 'house': 3, 'is_retrograde': false,
+      'house_summary': 'Mercury in the 3rd house excels in communication, writing, and short travels.',
+      'house_positive': ['Excellent communicator', 'Good with siblings'],
+      'house_negative': ['Restless mind'],
+      'sign_summary': 'Mercury in Sagittarius brings philosophical thinking and interest in higher knowledge.',
+    },
+    'jupiter': {
+      'rashi': 'virgo', 'house': 12, 'is_retrograde': false,
+      'house_summary': 'Jupiter in the 12th house gives spiritual wisdom, foreign connections, and charitable nature.',
+      'house_positive': ['Spiritual growth', 'Foreign opportunities'],
+      'house_negative': ['Over-spending on beliefs'],
+      'sign_summary': 'Jupiter in Virgo focuses wisdom on practical service and analytical spirituality.',
+    },
+    'venus': {
+      'rashi': 'sagittarius', 'house': 3, 'is_retrograde': false,
+      'house_summary': 'Venus in the 3rd house gives artistic talents, harmonious siblings, and love of creative pursuits.',
+      'house_positive': ['Artistic expression', 'Charming communication'],
+      'house_negative': ['Indulgence in pleasures'],
+      'sign_summary': 'Venus in Sagittarius brings love of adventure, philosophy, and cross-cultural connections.',
+    },
+    'saturn': {
+      'rashi': 'capricorn', 'house': 4, 'is_retrograde': true,
+      'house_summary': 'Saturn in the 4th house brings discipline to home life and deep attachment to property and roots.',
+      'house_positive': ['Real estate gains', 'Structured home life', 'Patience'],
+      'house_negative': ['Emotional reserve', 'Delayed domestic happiness'],
+      'sign_summary': 'Saturn in own sign Capricorn is very strong, giving determination and practical wisdom.',
+    },
+    'rahu': {
+      'rashi': 'sagittarius', 'house': 3, 'is_retrograde': true,
+      'house_summary': 'Rahu in the 3rd house amplifies courage, unconventional communication, and desire for adventure.',
+      'house_positive': ['Bold communication', 'Success through media'],
+      'house_negative': ['Exaggeration tendency'],
+      'sign_summary': 'Rahu in Sagittarius creates intense desire for knowledge, foreign cultures, and philosophical exploration.',
+    },
+    'ketu': {
+      'rashi': 'gemini', 'house': 9, 'is_retrograde': true,
+      'house_summary': 'Ketu in the 9th house gives past-life spiritual merit and unconventional approach to dharma.',
+      'house_positive': ['Intuitive wisdom', 'Spiritual gifts'],
+      'house_negative': ['Disinterest in organized religion'],
+      'sign_summary': 'Ketu in Gemini brings detachment from superficial knowledge, seeking deeper truths.',
+    },
+  },
+  'houses': {
+    '2': {'name': 'Dhana Bhava', 'significations': ['Wealth', 'Family', 'Speech', 'Food', 'Values'], 'karaka': 'Jupiter', 'body_parts': ['Face', 'Right eye']},
+    '3': {'name': 'Sahaja Bhava', 'significations': ['Siblings', 'Courage', 'Communication', 'Short travel', 'Skills'], 'karaka': 'Mars', 'body_parts': ['Arms', 'Hands']},
+    '4': {'name': 'Sukha Bhava', 'significations': ['Home', 'Mother', 'Property', 'Education', 'Comfort'], 'karaka': 'Moon', 'body_parts': ['Chest', 'Heart']},
+    '5': {'name': 'Putra Bhava', 'significations': ['Children', 'Intelligence', 'Creativity', 'Romance', 'Past merit'], 'karaka': 'Jupiter', 'body_parts': ['Stomach', 'Upper abdomen']},
+    '9': {'name': 'Dharma Bhava', 'significations': ['Fortune', 'Father', 'Dharma', 'Higher learning', 'Long travel'], 'karaka': 'Jupiter', 'body_parts': ['Hips', 'Thighs']},
+    '10': {'name': 'Karma Bhava', 'significations': ['Career', 'Status', 'Authority', 'Public image', 'Government'], 'karaka': 'Saturn', 'body_parts': ['Knees']},
+    '12': {'name': 'Moksha Bhava', 'significations': ['Spirituality', 'Foreign lands', 'Losses', 'Liberation', 'Sleep'], 'karaka': 'Saturn', 'body_parts': ['Feet', 'Left eye']},
   },
 };
 
@@ -1173,19 +1169,4 @@ const _signLords = <int, String>{
   1: 'mars', 2: 'venus', 3: 'mercury', 4: 'moon',
   5: 'sun', 6: 'mercury', 7: 'venus', 8: 'mars',
   9: 'jupiter', 10: 'saturn', 11: 'saturn', 12: 'jupiter',
-};
-
-const _houseAreas = <int, String>{
-  1: 'Self & Personality',
-  2: 'Wealth & Family',
-  3: 'Siblings & Courage',
-  4: 'Home & Mother',
-  5: 'Children & Creativity',
-  6: 'Health & Enemies',
-  7: 'Marriage & Partners',
-  8: 'Transformation & Longevity',
-  9: 'Fortune & Dharma',
-  10: 'Career & Status',
-  11: 'Gains & Friends',
-  12: 'Spirituality & Liberation',
 };

@@ -361,37 +361,59 @@ def _get_week_boundaries(
 def _compute_area_ratings_monthly(
     major_transits: list[dict[str, Any]],
     retro_info: dict[str, Any],
-    dasha_md: str,
-    dasha_ad: str,
-    natal_planets: dict[str, dict[str, Any]],  # noqa: ARG001
-    lagna_rashi: str,  # noqa: ARG001
-    month_start: datetime,  # noqa: ARG001
-    num_days: int,  # noqa: ARG001
+    dasha_md: str,  # noqa: ARG001
+    dasha_ad: str,  # noqa: ARG001
+    natal_planets: dict[str, dict[str, Any]],
+    lagna_rashi: str,
+    month_start: datetime,
+    num_days: int,
+    birth_datetime: str = "",
+    birth_lat: float = 0.0,
+    birth_lon: float = 0.0,
+    moon_longitude: float = 0.0,
 ) -> dict[str, dict[str, Any]]:
-    """Compute area ratings for the month."""
+    """Compute area ratings for the month by sampling state engine every 3rd day.
+
+    Uses compute_state_vector() as single source of truth, sampling ~10 days
+    and averaging area scores across samples.
+    """
+    import logging
+
+    logger = logging.getLogger(__name__)
     areas: dict[str, dict[str, Any]] = {}
 
-    for area, houses in AREA_HOUSES.items():
-        planets = AREA_PLANETS.get(area, [])
-        score = 5.0
+    # Sample state engine every 3rd day (~10 calls for a 30-day month)
+    sampled_areas: dict[str, list[float]] = {area: [] for area in AREA_HOUSES}
+    if birth_datetime and natal_planets:
+        try:
+            from packages.context.src.state_engine import compute_state_vector
 
-        # Transit ingresses into area houses
-        for transit in major_transits:
-            if transit.get("house") in houses:
-                score += 0.5
+            for day_offset in range(0, num_days, 3):
+                sample_dt = month_start + timedelta(days=day_offset)
+                try:
+                    vec = compute_state_vector(
+                        birth_datetime=birth_datetime,
+                        birth_lat=birth_lat,
+                        birth_lon=birth_lon,
+                        natal_planets=natal_planets,
+                        moon_longitude=moon_longitude,
+                        lagna_rashi=lagna_rashi,
+                        query_datetime=sample_dt.isoformat(),
+                    )
+                    for area in vec.get("areas", []):
+                        area_id = area["id"]
+                        if area_id in sampled_areas:
+                            sampled_areas[area_id].append(float(area["score"]))
+                except Exception as e:
+                    logger.debug(f"State vector sample failed for {sample_dt}: {e}")
+        except Exception as e:
+            logger.warning(f"State engine import failed for monthly areas: {e}")
 
-        # Dasha lords matching area planets
-        if dasha_md in planets:
-            score += 1.0
-        if dasha_ad in planets:
-            score += 0.5
+    for area_id, houses in AREA_HOUSES.items():
+        scores = sampled_areas.get(area_id, [])
+        avg_score = sum(scores) / len(scores) if scores else 5.0
 
-        # Retrograde penalty if area planet is retrograde
-        for retro_planet in retro_info.get("planets_retrograde", []):
-            if retro_planet in planets:
-                score -= 0.5
-
-        rating = max(1, min(10, round(score)))
+        rating = max(1, min(10, round(avg_score)))
 
         # Best/avoid dates from transit events
         best_dates = []
@@ -407,10 +429,11 @@ def _compute_area_ratings_monthly(
             elif house in houses and planet_name in ("saturn", "mars", "rahu"):
                 avoid_dates.append(date_str)
 
-        summary = _monthly_area_summary(area, rating, retro_info.get("planets_retrograde", []))
+        summary = _monthly_area_summary(area_id, rating, retro_info.get("planets_retrograde", []))
 
-        areas[area] = {
+        areas[area_id] = {
             "rating": rating,
+            "score": round(avg_score, 1),
             "best_dates": best_dates[:3],
             "avoid_dates": avoid_dates[:3],
             "summary": summary,
@@ -436,6 +459,9 @@ def _monthly_area_summary(area: str, rating: int, retro_planets: list[str]) -> s
         "relationships": "relationship dynamics",
         "health": "health and vitality",
         "spiritual": "spiritual growth",
+        "family": "family harmony",
+        "education": "learning and studies",
+        "travel": "travel and exploration",
     }
     label = area_labels.get(area, area)
 
@@ -488,8 +514,8 @@ def _compute_best_dates(
 
 def get_monthly_forecast(
     birth_datetime: str,
-    birth_lat: float,  # noqa: ARG001
-    birth_lon: float,  # noqa: ARG001
+    birth_lat: float,
+    birth_lon: float,
     natal_planets: dict[str, dict[str, Any]],
     moon_longitude: float,
     lagna_rashi: str,
@@ -567,6 +593,10 @@ def get_monthly_forecast(
         lagna_rashi,
         month_start,
         num_days,
+        birth_datetime=birth_datetime,
+        birth_lat=birth_lat,
+        birth_lon=birth_lon,
+        moon_longitude=moon_longitude,
     )
 
     # ---- 6. Weekly summaries ----
@@ -592,26 +622,142 @@ def get_monthly_forecast(
         1,
     )
 
-    # ---- 9. Monthly theme ----
-    monthly_theme = _generate_monthly_theme(
-        overall_rating,
-        dasha_md,
-        dasha_ad,
-        area_ratings,
-        retrograde_status,
-    )
+    # ---- 9. Monthly theme + summary + recommendations (knowledge-backed) ----
+    # Derive best/weakest areas
+    sorted_areas = sorted(area_ratings.items(), key=lambda x: x[1]["rating"], reverse=True)
+    best_area = sorted_areas[0][0] if sorted_areas else None
+    weakest_area = sorted_areas[-1][0] if sorted_areas else None
+
+    # Derive double-transit houses from area_scores that have double_transit
+    double_transit_houses: list[int] = []
+    for _area_id, area_data in area_ratings.items():
+        if area_data.get("double_transit"):
+            for h in AREA_HOUSES.get(_area_id, []):
+                if h not in double_transit_houses:
+                    double_transit_houses.append(h)
+
+    try:
+        from packages.context.src.forecast_knowledge import (
+            build_monthly_recommendations,
+            build_monthly_summary,
+        )
+
+        monthly_theme = build_monthly_summary(
+            month_rating=overall_rating,
+            dasha_md=dasha_md,
+            dasha_ad=dasha_ad,
+            double_transit_houses=double_transit_houses,
+            best_area=best_area,
+            weakest_area=weakest_area,
+        )
+        monthly_recommendations = build_monthly_recommendations(
+            dasha_md=dasha_md,
+            dasha_ad=dasha_ad,
+            double_transit_houses=double_transit_houses,
+        )
+    except Exception:
+        monthly_theme = _generate_monthly_theme(
+            overall_rating,
+            dasha_md,
+            dasha_ad,
+            area_ratings,
+            retrograde_status,
+        )
+        monthly_recommendations = []
+
+    # ---- 10. Gochara monthly summary (sample mid-month) ----
+    gochara_summary: list[dict[str, Any]] = []
+    sade_sati_info: dict[str, Any] = {"active": False, "phase": None}
+    active_yogas: list[str] = []
+    active_doshas: list[str] = []
+    try:
+        from packages.context.src.state_engine import compute_state_vector
+        from packages.context.src.transits import get_gochara
+
+        mid_dt = datetime(target_year, target_month, 15, 12, 0, 0)
+        mid_vec = compute_state_vector(
+            birth_datetime=birth_datetime,
+            birth_lat=birth_lat,
+            birth_lon=birth_lon,
+            natal_planets=natal_planets,
+            moon_longitude=moon_longitude,
+            lagna_rashi=lagna_rashi,
+            query_datetime=mid_dt.isoformat(),
+        )
+        active_yogas = mid_vec.get("natal_yogas", [])
+        active_doshas = mid_vec.get("natal_doshas", [])
+        sade_sati_info = mid_vec.get("sade_sati", {"active": False, "phase": None})
+
+        # Get transit positions at mid-month for gochara
+        from packages.cosmos.src.ephemeris import get_all_planets, get_julian_day
+
+        jd = get_julian_day(mid_dt)
+        transit_pos = get_all_planets(jd)
+        natal_moon_rashi = int(moon_longitude // 30)
+        transit_rashis = {p: int(d.get("longitude", 0) // 30) for p, d in transit_pos.items()}
+
+        for planet_name, pdata in transit_pos.items():
+            if planet_name == "moon":
+                continue
+            t_rashi = int(pdata.get("longitude", 0) // 30)
+            gochara = get_gochara(natal_moon_rashi, planet_name, t_rashi, transit_rashis)
+            gochara_summary.append(
+                {
+                    "planet": planet_name,
+                    "sign": RASHI_NAMES[t_rashi] if 0 <= t_rashi < 12 else "unknown",
+                    "house_from_moon": gochara.get("house_from_moon", 0),
+                    "is_favorable": gochara.get("is_favorable", False),
+                    "has_vedha": gochara.get("has_vedha", False),
+                    "net_effect": gochara.get("net_effect", "neutral"),
+                }
+            )
+    except Exception:
+        pass
+
+    # ---- 11. Abhijit muhurta dates (best days for important actions) ----
+    muhurta_dates: list[dict[str, str]] = []
+    try:
+        from packages.context.src.muhurta import get_abhijit_muhurta
+        from packages.cosmos.src.sunrise_sunset import get_sunrise_sunset
+
+        # Sample 4 dates (one per week) for Abhijit muhurta times
+        for week_offset in (3, 10, 17, 24):
+            if week_offset >= num_days:
+                break
+            sample_dt = month_start + timedelta(days=week_offset)
+            sun = get_sunrise_sunset(sample_dt, birth_lat, birth_lon)
+            abhijit = get_abhijit_muhurta(sun["sunrise"], sun["sunset"])
+            muhurta_dates.append(
+                {
+                    "date": sample_dt.strftime("%Y-%m-%d"),
+                    "abhijit_start": abhijit["start"].strftime("%H:%M"),
+                    "abhijit_end": abhijit["end"].strftime("%H:%M"),
+                }
+            )
+    except Exception:
+        pass
 
     return {
         "month": MONTH_NAMES[target_month - 1],
         "year": target_year,
         "overall_rating": overall_rating,
         "monthly_theme": monthly_theme,
+        "summary": monthly_theme,  # Flutter reads "summary" from details
+        "recommendations": monthly_recommendations,
+        "month_rating": round(overall_rating),
+        "best_area": best_area,
+        "weakest_area": weakest_area,
         "dasha_context": dasha_context,
         "major_transits": major_transits,
         "retrograde_status": retrograde_status,
         "areas": area_ratings,
         "weekly_summaries": weekly_summaries,
         "best_dates": best_dates,
+        "gochara_summary": gochara_summary,
+        "active_yogas": active_yogas[:10],
+        "active_doshas": active_doshas,
+        "sade_sati": sade_sati_info,
+        "muhurta_dates": muhurta_dates,
     }
 
 
@@ -632,6 +778,9 @@ def _generate_monthly_theme(
         "relationships": "relationship focus",
         "health": "health consciousness",
         "spiritual": "spiritual development",
+        "family": "family harmony",
+        "education": "learning and growth",
+        "travel": "travel and exploration",
     }
     top_label = area_labels.get(top_area, top_area)
 

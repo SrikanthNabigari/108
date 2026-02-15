@@ -62,7 +62,17 @@ class YogaCategory(StrEnum):
     CHANDRA = "chandra"  # Moon-related yogas
     SURYA = "surya"  # Sun-related yogas
     NABHASA = "nabhasa"  # Planetary configuration yogas
+    NABHAS = "nabhas"  # Nabhas yogas (alternate spelling in rules)
+    SPECIAL = "special"  # Special/miscellaneous yogas
     OTHER = "other"
+    DARIDRA = "daridra"  # Poverty yogas
+    DASHA = "dasha"  # Dasha-triggered yogas
+    NAKSHATRA = "nakshatra"  # Nakshatra-based yogas
+    NEECHA_BHANGA = "neecha_bhanga"  # Debilitation cancellation yogas
+    PARIVARTANA = "parivartana"  # Mutual exchange yogas
+    SANYASA = "sanyasa"  # Renunciation yogas
+    TRANSIT = "transit"  # Transit-activated yogas
+    VIPARITA_RAJA = "viparita_raja"  # Reversal of fortune yogas
 
 
 class AyanamsaType(StrEnum):

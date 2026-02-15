@@ -312,3 +312,74 @@ class TestGetUpcomingTriggers:
         # Some triggers may have same text for different dates, but the combination should be unique
         trigger_keys = [(t["trigger"], t["date"]) for t in result]
         assert len(trigger_keys) == len(set(trigger_keys))
+
+
+class TestTransitTrackerFiltering:
+    """Tests for transit trigger filtering fixes."""
+
+    def test_moon_conjunctions_excluded(self):
+        """Moon should be skipped in conjunction detection."""
+        curr = {
+            "moon": {"longitude": 100.0, "is_retrograde": False, "speed": 13.0},
+            "saturn": {"longitude": 200.0, "is_retrograde": False, "speed": 0.05},
+        }
+        natal = {
+            "sun": {"longitude": 100.5},
+            "mars": {"longitude": 200.3},
+        }
+        check_date = datetime(2026, 2, 15)
+        results = _detect_conjunctions(curr, natal, check_date, 5)
+        # Moon conjunction with natal Sun should be excluded
+        moon_triggers = [t for t in results if t.get("transit_planet") == "moon"]
+        assert len(moon_triggers) == 0
+        # Saturn conjunction with natal Mars should still be found
+        saturn_triggers = [t for t in results if t.get("transit_planet") == "saturn"]
+        assert len(saturn_triggers) == 1
+
+    def test_conjunctions_not_at_day_zero(self):
+        """get_upcoming_triggers should not return conjunction triggers at day 0."""
+        natal = {
+            "sun": {"longitude": 294.5},
+            "moon": {"longitude": 72.3},
+            "mars": {"longitude": 88.7},
+            "mercury": {"longitude": 280.1},
+            "jupiter": {"longitude": 70.4},
+            "venus": {"longitude": 318.9},
+            "saturn": {"longitude": 332.6},
+            "rahu": {"longitude": 150.2},
+            "ketu": {"longitude": 330.2},
+        }
+        results = get_upcoming_triggers(
+            natal_planets=natal,
+            lagna_rashi=6,
+            moon_rashi=10,
+            start_date=datetime(2026, 2, 15),
+            days_ahead=7,
+        )
+        conj_triggers = [t for t in results if t["type"] == "conjunction"]
+        for t in conj_triggers:
+            assert t["days_from_now"] >= 1, f"Conjunction at day 0: {t['trigger']}"
+
+    def test_aspects_not_at_day_zero(self):
+        """get_upcoming_triggers should not return aspect triggers at day 0."""
+        natal = {
+            "sun": {"longitude": 294.5},
+            "moon": {"longitude": 72.3},
+            "mars": {"longitude": 88.7},
+            "mercury": {"longitude": 280.1},
+            "jupiter": {"longitude": 70.4},
+            "venus": {"longitude": 318.9},
+            "saturn": {"longitude": 332.6},
+            "rahu": {"longitude": 150.2},
+            "ketu": {"longitude": 330.2},
+        }
+        results = get_upcoming_triggers(
+            natal_planets=natal,
+            lagna_rashi=6,
+            moon_rashi=10,
+            start_date=datetime(2026, 2, 15),
+            days_ahead=14,
+        )
+        aspect_triggers = [t for t in results if t["type"] == "aspect"]
+        for t in aspect_triggers:
+            assert t["days_from_now"] >= 7, f"Aspect at day {t['days_from_now']}: {t['trigger']}"

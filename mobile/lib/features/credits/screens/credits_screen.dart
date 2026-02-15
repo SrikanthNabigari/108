@@ -136,11 +136,13 @@ class _CreditsScreenState extends ConsumerState<CreditsScreen> {
     return Row(
       children: [
         GestureDetector(
-          onTap: () => context.pop(),
-          child: const Icon(Icons.arrow_back_ios_new,
-              color: C.textPrimary, size: 20),
+          onTap: () => context.canPop()
+              ? context.pop()
+              : context.go('/home'),
+          child: const Icon(Icons.arrow_back_ios,
+              color: C.textSecondary, size: 18),
         ),
-        const SizedBox(width: S.md),
+        const SizedBox(width: S.sm),
         Text('Credits', style: T.h2),
       ],
     );

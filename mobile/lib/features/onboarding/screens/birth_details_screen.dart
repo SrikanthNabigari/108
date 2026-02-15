@@ -191,7 +191,7 @@ class _BirthDetailsScreenState extends ConsumerState<BirthDetailsScreen> {
         fromJson: (json) => json,
       );
       ref.invalidate(userProfileProvider);
-      if (mounted) context.go('/timeline');
+      if (mounted) context.go('/home');
     } catch (e) {
       if (mounted) {
         setState(() => _saving = false);

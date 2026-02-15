@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:one_zero_eight/core/constants/api_constants.dart';
 import 'package:one_zero_eight/core/theme/app_theme.dart';
 import 'package:one_zero_eight/data/services/api_service.dart';
@@ -12,8 +13,8 @@ import 'package:one_zero_eight/features/transits/widgets/life_area_detail_panel.
 
 /// "Today" board — the house-centric transit dashboard.
 ///
-/// Shows WHAT is active (life areas), WHY (planets + yogas), WHEN (dasha + triggers).
-/// Follows the same design language as the dasha timeline screen.
+/// Shows WHAT is active (life areas), WHY (Gochara), WHEN (triggers).
+/// Classical hierarchy: Gochara from Moon > Ashtakavarga > Double Transit > Aspects.
 class TransitDashboardScreen extends ConsumerStatefulWidget {
   const TransitDashboardScreen({super.key});
 
@@ -47,7 +48,7 @@ class _TransitDashboardScreenState extends ConsumerState<TransitDashboardScreen>
       setState(() {
         _snapshotData = futures[0] ?? _demoSnapshot;
         _dashaData = futures[1]?['current'] as Map<String, dynamic>? ?? _demoDasha;
-        _triggers = (futures[2]?['triggers'] as List?) ?? [];
+        _triggers = (futures[2]?['triggers'] as List?) ?? _demoTriggers;
         _yogas = (futures[3]?['yogas'] as List?) ?? [];
         _loading = false;
       });
@@ -79,9 +80,9 @@ class _TransitDashboardScreenState extends ConsumerState<TransitDashboardScreen>
     );
   }
 
-  // ═══════════════════════════════════════════════════════════════
+  // =================================================================
   // MAIN BOARD
-  // ═══════════════════════════════════════════════════════════════
+  // =================================================================
 
   Widget _buildBoard() {
     final activations = _snapshotData?['house_activations'] as List? ?? [];
@@ -92,8 +93,6 @@ class _TransitDashboardScreenState extends ConsumerState<TransitDashboardScreen>
     final trend = _snapshotData?['overall_trend'] as String? ?? 'mixed';
     final lordshipSummary =
         _snapshotData?['lordship_summary'] as Map<String, dynamic>? ?? {};
-    final transitPositions =
-        _snapshotData?['transit_positions'] as Map<String, dynamic>? ?? {};
 
     // Sort life areas by score (highest first)
     final sortedAreas = List<Map<String, dynamic>>.from(
@@ -104,8 +103,15 @@ class _TransitDashboardScreenState extends ConsumerState<TransitDashboardScreen>
     // Count active areas (score >= 40)
     final activeCount = sortedAreas.where((a) => ((a['score'] as num?) ?? 0) >= 40).length;
 
-    // Build planet list with house info
-    final planetList = _buildPlanetList(transitPositions, activations);
+    // Build gochara list from snapshot
+    final gocharaList = _buildGocharaList();
+    final favorableCount = gocharaList.where((g) => g['net_effect'] == 'favorable').length;
+    final blockedCount = gocharaList.where((g) => g['has_vedha'] == true).length;
+
+    // Active aspects
+    final activeAspects = (_snapshotData?['active_aspects'] as List?)
+        ?.map((a) => a as Map<String, dynamic>)
+        .toList() ?? _demoActiveAspects;
 
     return SingleChildScrollView(
       padding: S.pagePadding,
@@ -114,35 +120,34 @@ class _TransitDashboardScreenState extends ConsumerState<TransitDashboardScreen>
         children: [
           const SizedBox(height: S.lg),
 
-          // ── Header ──
-          Center(
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    GestureDetector(
-                      onTap: () => context.go('/home'),
-                      child: const Padding(
-                        padding: EdgeInsets.only(right: S.sm),
-                        child: Icon(Icons.arrow_back_ios, color: C.textSecondary, size: 18),
-                      ),
-                    ),
-                    Text("What's Happening Now", style: T.h2),
-                  ],
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  'Transit activations on your chart',
-                  style: T.bodySm.copyWith(color: C.textMuted),
-                ),
-              ],
-            ),
+          // -- Header --
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  GestureDetector(
+                    onTap: () => context.canPop()
+                        ? context.pop()
+                        : context.go('/home'),
+                    child: const Icon(Icons.arrow_back_ios,
+                        color: C.textSecondary, size: 18),
+                  ),
+                  const SizedBox(width: S.sm),
+                  Text("What's Happening Now", style: T.h2),
+                ],
+              ),
+              const SizedBox(height: 4),
+              Text(
+                'Transit activations on your chart',
+                style: T.bodySm.copyWith(color: C.textMuted),
+              ),
+            ],
           ),
 
           const SizedBox(height: S.xl),
 
-          // ── Dasha Context + Trend ──
+          // -- Dasha Context + Trend --
           GlassContainer(
             padding: const EdgeInsets.symmetric(horizontal: S.lg, vertical: S.md),
             blur: 0,
@@ -230,7 +235,7 @@ class _TransitDashboardScreenState extends ConsumerState<TransitDashboardScreen>
             ),
           ),
 
-          // ── Key insight ──
+          // -- Key insight --
           if ((lordshipSummary['key_insight'] as String? ?? '').isNotEmpty) ...[
             const SizedBox(height: S.sm),
             Padding(
@@ -246,7 +251,7 @@ class _TransitDashboardScreenState extends ConsumerState<TransitDashboardScreen>
 
           const SizedBox(height: S.xl),
 
-          // ═══ WHAT — Life Areas ═══
+          // === WHAT — Life Areas ===
           _SectionLabel(
             title: 'Life Areas',
             subtitle: '$activeCount active',
@@ -271,33 +276,49 @@ class _TransitDashboardScreenState extends ConsumerState<TransitDashboardScreen>
 
           const SizedBox(height: S.xl),
 
-          // ═══ WHY — Key Planets ═══
+          // === WHY — Gochara (from Moon) ===
           _SectionLabel(
-            title: 'Key Planets',
-            subtitle: '${planetList.length} in transit',
+            title: 'Gochara',
+            subtitle: '$favorableCount favorable${blockedCount > 0 ? ' \u00b7 $blockedCount blocked' : ''}',
           ),
           const SizedBox(height: S.sm),
           SizedBox(
-            height: 100,
+            height: 140,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
-              itemCount: planetList.length,
+              itemCount: gocharaList.length,
               separatorBuilder: (_, __) => const SizedBox(width: S.sm),
               itemBuilder: (_, i) {
-                final p = planetList[i];
-                return _PlanetCard(
-                  planet: p['planet'] as String,
-                  sign: p['sign'] as String,
-                  lifeArea: p['life_area'] as String,
-                  isRetrograde: p['is_retrograde'] as bool,
+                final g = gocharaList[i];
+                return _GocharaCard(
+                  data: g,
                   onTap: () =>
-                      TransitDetailPanel.show(context, planet: p['planet'] as String),
+                      TransitDetailPanel.show(context, planet: g['planet'] as String),
                 );
               },
             ),
           ),
 
-          // ═══ Active Yogas (if available) ═══
+          // === Active Now (transit aspects) ===
+          if (activeAspects.isNotEmpty) ...[
+            const SizedBox(height: S.xl),
+            _SectionLabel(
+              title: 'Active Now',
+              subtitle: '${activeAspects.length} aspects',
+            ),
+            const SizedBox(height: S.sm),
+            GlassContainer(
+              padding: const EdgeInsets.all(S.md),
+              blur: 0,
+              child: Column(
+                children: activeAspects.take(6).map((asp) {
+                  return _ActiveAspectRow(aspect: asp);
+                }).toList(),
+              ),
+            ),
+          ],
+
+          // === Active Yogas (if available) ===
           if (_yogas != null && _yogas!.isNotEmpty) ...[
             const SizedBox(height: S.xl),
             _SectionLabel(
@@ -320,7 +341,6 @@ class _TransitDashboardScreenState extends ConsumerState<TransitDashboardScreen>
                     padding: const EdgeInsets.only(bottom: S.sm),
                     child: Row(
                       children: [
-                        // Strength dot
                         Container(
                           width: 8,
                           height: 8,
@@ -379,7 +399,7 @@ class _TransitDashboardScreenState extends ConsumerState<TransitDashboardScreen>
             ),
           ],
 
-          // ═══ WHEN — Coming Up ═══
+          // === WHEN — Coming Up ===
           if (_triggers != null && _triggers!.isNotEmpty) ...[
             const SizedBox(height: S.xl),
             _SectionLabel(
@@ -394,25 +414,14 @@ class _TransitDashboardScreenState extends ConsumerState<TransitDashboardScreen>
           ],
 
           const SizedBox(height: S.xl),
-
-          // ── Continue to Home ──
-          SizedBox(
-            width: double.infinity,
-            height: 48,
-            child: ElevatedButton(
-              onPressed: () => context.go('/home'),
-              child: const Text('Continue'),
-            ),
-          ),
-          const SizedBox(height: S.xl),
         ],
       ),
     );
   }
 
-  // ═══════════════════════════════════════════════════════════════
+  // =================================================================
   // HELPERS
-  // ═══════════════════════════════════════════════════════════════
+  // =================================================================
 
   void _onAreaTap(Map<String, dynamic> houseData) {
     final house = houseData['house'] as int? ?? 1;
@@ -427,7 +436,7 @@ class _TransitDashboardScreenState extends ConsumerState<TransitDashboardScreen>
       }
     }
 
-    // Find yogas related to this house (simple: check if any involved planet is in this house)
+    // Find yogas related to this house
     final relatedYogas = <Map<String, dynamic>>[];
     final planetsInHouse = (houseData['planets_present'] as List?)?.cast<String>() ?? [];
     for (final y in _yogas ?? []) {
@@ -459,37 +468,20 @@ class _TransitDashboardScreenState extends ConsumerState<TransitDashboardScreen>
     );
   }
 
-  List<Map<String, dynamic>> _buildPlanetList(
-    Map<String, dynamic> positions,
-    List<dynamic> activations,
-  ) {
-    final result = <Map<String, dynamic>>[];
-    for (final entry in positions.entries) {
-      final planet = entry.key;
-      final data = entry.value as Map<String, dynamic>? ?? {};
-      final rashi = data['rashi'] as String? ?? '';
-      final isRetro = data['is_retrograde'] as bool? ?? false;
-
-      // Find which house this planet is in
-      String lifeArea = '';
-      for (final a in activations) {
-        final h = a as Map<String, dynamic>;
-        final planetsPresent = (h['planets_present'] as List?)?.cast<String>() ?? [];
-        if (planetsPresent.any((p) => p.toLowerCase() == planet.toLowerCase())) {
-          final houseNum = h['house'] as int? ?? 0;
-          lifeArea = houseLifeArea[houseNum] ?? '';
-          break;
-        }
-      }
-
-      result.add({
-        'planet': planet,
-        'sign': rashi,
-        'life_area': lifeArea,
-        'is_retrograde': isRetro,
-      });
-    }
-    return result;
+  /// Build gochara list from the snapshot's gochara_summary.
+  /// Sorted: slow planets first (Saturn, Jupiter, Rahu, Ketu, Mars, Sun, Venus, Mercury, Moon).
+  List<Map<String, dynamic>> _buildGocharaList() {
+    final gochara = _snapshotData?['gochara_summary'] as List? ?? _demoGochara;
+    const order = ['saturn','jupiter','rahu','ketu','mars','sun','venus','mercury','moon'];
+    final sorted = List<Map<String, dynamic>>.from(
+      gochara.map((g) => g as Map<String, dynamic>),
+    );
+    sorted.sort((a, b) {
+      final ai = order.indexOf(a['planet'] as String? ?? '');
+      final bi = order.indexOf(b['planet'] as String? ?? '');
+      return (ai == -1 ? 99 : ai).compareTo(bi == -1 ? 99 : bi);
+    });
+    return sorted;
   }
 
   Color _trendColor(String trend) => switch (trend) {
@@ -519,15 +511,41 @@ class _TransitDashboardScreenState extends ConsumerState<TransitDashboardScreen>
     );
   }
 
-  // ═══════════════════════════════════════════════════════════════
+  // =================================================================
   // DEMO DATA
-  // ═══════════════════════════════════════════════════════════════
+  // =================================================================
 
   static final Map<String, dynamic> _demoDasha = {
     'mahadasha_lord': 'mercury',
     'antardasha_lord': 'venus',
     'pratyantardasha_lord': 'mars',
   };
+
+  static final List<Map<String, dynamic>> _demoGochara = [
+    {'planet': 'sun', 'sign': 'Aquarius', 'house_from_moon': 1, 'is_favorable': false, 'has_vedha': false, 'vedha_by': null, 'net_effect': 'unfavorable', 'effects': ['Authority', 'Confidence'], 'is_retrograde': false, 'degree_in_sign': 26.5, 'bav_score': 4},
+    {'planet': 'moon', 'sign': 'Gemini', 'house_from_moon': 5, 'is_favorable': false, 'has_vedha': false, 'vedha_by': null, 'net_effect': 'unfavorable', 'effects': ['Progeny joy', 'Creative pursuits'], 'is_retrograde': false, 'degree_in_sign': 12.3, 'bav_score': null},
+    {'planet': 'mars', 'sign': 'Gemini', 'house_from_moon': 5, 'is_favorable': false, 'has_vedha': false, 'vedha_by': null, 'net_effect': 'unfavorable', 'effects': ['Children issues', 'Speculation losses'], 'is_retrograde': false, 'degree_in_sign': 28.7, 'bav_score': 3},
+    {'planet': 'mercury', 'sign': 'Capricorn', 'house_from_moon': 12, 'is_favorable': false, 'has_vedha': false, 'vedha_by': null, 'net_effect': 'unfavorable', 'effects': ['Mental confusion', 'Travels'], 'is_retrograde': false, 'degree_in_sign': 10.1, 'bav_score': 5},
+    {'planet': 'jupiter', 'sign': 'Gemini', 'house_from_moon': 5, 'is_favorable': true, 'has_vedha': false, 'vedha_by': null, 'net_effect': 'favorable', 'effects': ['Progeny joy', 'Creative success', 'Spiritual advancement'], 'is_retrograde': false, 'degree_in_sign': 10.4, 'bav_score': 6},
+    {'planet': 'venus', 'sign': 'Aquarius', 'house_from_moon': 1, 'is_favorable': true, 'has_vedha': false, 'vedha_by': null, 'net_effect': 'favorable', 'effects': ['Pleasure', 'Attraction', 'Comfort'], 'is_retrograde': false, 'degree_in_sign': 18.9, 'bav_score': 4},
+    {'planet': 'saturn', 'sign': 'Pisces', 'house_from_moon': 2, 'is_favorable': false, 'has_vedha': false, 'vedha_by': null, 'net_effect': 'unfavorable', 'effects': ['Financial pressure', 'Family burden'], 'is_retrograde': false, 'degree_in_sign': 2.6, 'bav_score': 3},
+    {'planet': 'rahu', 'sign': 'Pisces', 'house_from_moon': 2, 'is_favorable': false, 'has_vedha': false, 'vedha_by': null, 'net_effect': 'unfavorable', 'effects': ['Financial confusion', 'Deception'], 'is_retrograde': true, 'degree_in_sign': 0.2, 'bav_score': null},
+    {'planet': 'ketu', 'sign': 'Virgo', 'house_from_moon': 8, 'is_favorable': false, 'has_vedha': false, 'vedha_by': null, 'net_effect': 'unfavorable', 'effects': ['Hidden obstacles', 'Sudden events'], 'is_retrograde': true, 'degree_in_sign': 0.2, 'bav_score': null},
+  ];
+
+  static final List<Map<String, dynamic>> _demoActiveAspects = [
+    {'transit_planet': 'saturn', 'natal_planet': 'moon', 'aspect_type': 'opposition', 'orb': 2.3, 'description': 'Saturn opposition natal Moon'},
+    {'transit_planet': 'jupiter', 'natal_planet': 'sun', 'aspect_type': 'trine', 'orb': 1.8, 'description': 'Jupiter trine natal Sun'},
+    {'transit_planet': 'mars', 'natal_planet': 'ketu', 'aspect_type': 'square', 'orb': 4.1, 'description': 'Mars square natal Ketu'},
+  ];
+
+  static final List<Map<String, dynamic>> _demoTriggers = [
+    {'date': '2026-02-20', 'days_from_now': 5, 'trigger': 'Saturn enters Pisces (house 6)', 'type': 'sign_ingress', 'significance': 'high', 'effect': 'Saturn changes sign, activating house 6 themes of service and health'},
+    {'date': '2026-02-25', 'days_from_now': 10, 'trigger': 'Transit Jupiter conjuncts natal Mars (orb 1.2 deg)', 'type': 'conjunction', 'significance': 'high', 'effect': 'Jupiter activating natal Mars by conjunction - energy, ambition, courage amplified'},
+    {'date': '2026-03-01', 'days_from_now': 14, 'trigger': 'Mercury enters Aquarius (house 5)', 'type': 'sign_ingress', 'significance': 'medium', 'effect': 'Mercury changes sign, activating house 5 themes of creativity and children'},
+    {'date': '2026-03-05', 'days_from_now': 18, 'trigger': 'Venus stations retrograde', 'type': 'retrograde_station', 'significance': 'high', 'effect': 'Venus turning retrograde - expect shifts in Venus-related matters'},
+    {'date': '2026-03-10', 'days_from_now': 23, 'trigger': 'Pratyantardasha changes to Jupiter', 'type': 'dasha_change', 'significance': 'medium', 'effect': 'Fine-grained period shift: Jupiter Pratyantardasha'},
+  ];
 
   static final Map<String, dynamic> _demoSnapshot = {
     'transit_positions': {
@@ -563,12 +581,14 @@ class _TransitDashboardScreenState extends ConsumerState<TransitDashboardScreen>
       'yogakaraka_transits': ['saturn'],
       'key_insight': 'Saturn yogakaraka in 6th conquers enemies while career gets double transit',
     },
+    'gochara_summary': null, // will use _demoGochara
+    'active_aspects': null, // will use _demoActiveAspects
   };
 }
 
-// ═══════════════════════════════════════════════════════════════
+// =================================================================
 // WIDGETS
-// ═══════════════════════════════════════════════════════════════
+// =================================================================
 
 class _SectionLabel extends StatelessWidget {
   final String title;
@@ -587,7 +607,7 @@ class _SectionLabel extends StatelessWidget {
   }
 }
 
-// ── Life Area Card (WHAT) ──
+// -- Life Area Card (WHAT) --
 
 class _LifeAreaCard extends StatelessWidget {
   final Map<String, dynamic> houseData;
@@ -718,48 +738,66 @@ class _LifeAreaCard extends StatelessWidget {
       };
 }
 
-// ── Planet Card (WHY) ──
+// -- Gochara Card (WHY — classical transit from Moon) --
 
-class _PlanetCard extends StatelessWidget {
-  final String planet;
-  final String sign;
-  final String lifeArea;
-  final bool isRetrograde;
+class _GocharaCard extends StatelessWidget {
+  final Map<String, dynamic> data;
   final VoidCallback? onTap;
 
-  const _PlanetCard({
-    required this.planet,
-    required this.sign,
-    required this.lifeArea,
-    required this.isRetrograde,
-    this.onTap,
-  });
+  const _GocharaCard({required this.data, this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    final color = planetColor(planet);
+    final planet = data['planet'] as String? ?? '';
+    final sign = data['sign'] as String? ?? '';
+    final houseFromMoon = data['house_from_moon'] as int? ?? 0;
+    final netEffect = data['net_effect'] as String? ?? 'unfavorable';
+    final hasVedha = data['has_vedha'] as bool? ?? false;
+    final isRetro = data['is_retrograde'] as bool? ?? false;
+    final bavScore = data['bav_score'];
+    final pColor = planetColor(planet);
+
+    // Border color: favorable=green, vedha=yellow, unfavorable=red
+    final Color borderColor;
+    final String effectLabel;
+    final Color effectColor;
+
+    if (hasVedha) {
+      borderColor = C.warning;
+      effectLabel = 'Vedha';
+      effectColor = C.warning;
+    } else if (netEffect == 'favorable') {
+      borderColor = C.positive;
+      effectLabel = 'Favorable';
+      effectColor = C.positive;
+    } else {
+      borderColor = C.negative;
+      effectLabel = 'Unfavorable';
+      effectColor = C.negative;
+    }
 
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 90,
+        width: 100,
         padding: const EdgeInsets.symmetric(vertical: S.sm, horizontal: S.xs),
         decoration: BoxDecoration(
           borderRadius: R.lgBr,
-          color: color.withValues(alpha: 0.06),
-          border: Border.all(color: color.withValues(alpha: 0.2), width: 0.5),
+          color: borderColor.withValues(alpha: 0.06),
+          border: Border.all(color: borderColor.withValues(alpha: 0.25), width: 0.8),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // Glyph + Rx badge
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   planetGlyph(planet),
-                  style: TextStyle(fontSize: 18, color: color),
+                  style: TextStyle(fontSize: 20, color: pColor),
                 ),
-                if (isRetrograde) ...[
+                if (isRetro) ...[
                   const SizedBox(width: 2),
                   Text(
                     'Rx',
@@ -773,6 +811,7 @@ class _PlanetCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 2),
+            // Planet name
             Text(
               planetName(planet),
               style: T.bodySm.copyWith(
@@ -781,17 +820,61 @@ class _PlanetCard extends StatelessWidget {
                 fontSize: 12,
               ),
             ),
-            const SizedBox(height: 1),
+            // Current sign
             Text(
               sign,
-              style: T.caption.copyWith(color: color, fontSize: 10),
+              style: T.caption.copyWith(color: pColor, fontSize: 10),
             ),
-            if (lifeArea.isNotEmpty) ...[
+            const SizedBox(height: 4),
+            // Divider line
+            Container(
+              width: 50,
+              height: 0.5,
+              color: C.glassBorder,
+            ),
+            const SizedBox(height: 4),
+            // House from Moon
+            Text(
+              'H$houseFromMoon from Moon',
+              style: T.caption.copyWith(
+                color: C.textSecondary,
+                fontSize: 9,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            const SizedBox(height: 2),
+            // Favorable/Unfavorable/Vedha indicator
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 5,
+                  height: 5,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: effectColor,
+                  ),
+                ),
+                const SizedBox(width: 3),
+                Text(
+                  effectLabel,
+                  style: T.caption.copyWith(
+                    color: effectColor,
+                    fontSize: 9,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
+            // BAV score if available
+            if (bavScore != null) ...[
               const SizedBox(height: 2),
               Text(
-                '\u2192 ${lifeArea.split(' & ').first}',
-                style: T.caption.copyWith(fontSize: 9),
-                overflow: TextOverflow.ellipsis,
+                'BAV: $bavScore',
+                style: T.caption.copyWith(
+                  fontSize: 8,
+                  color: C.textMuted,
+                ),
               ),
             ],
           ],
@@ -801,7 +884,64 @@ class _PlanetCard extends StatelessWidget {
   }
 }
 
-// ── Trigger Row (WHEN) ──
+// -- Active Aspect Row (Active Now section) --
+
+class _ActiveAspectRow extends StatelessWidget {
+  final Map<String, dynamic> aspect;
+  const _ActiveAspectRow({required this.aspect});
+
+  @override
+  Widget build(BuildContext context) {
+    final transitPlanet = aspect['transit_planet'] as String? ?? '';
+    final natalPlanet = aspect['natal_planet'] as String? ?? '';
+    final aspectType = aspect['aspect_type'] as String? ?? aspect['type'] as String? ?? '';
+    final orb = (aspect['orb'] as num?)?.toDouble();
+    final description = aspect['description'] as String? ?? aspect['effect'] as String? ??
+        '${planetName(transitPlanet)} $aspectType natal ${planetName(natalPlanet)}';
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: S.sm),
+      child: GestureDetector(
+        onTap: () => TransitDetailPanel.show(context, planet: transitPlanet),
+        child: Row(
+          children: [
+            // Transit glyph -> Natal glyph
+            Text(
+              planetGlyph(transitPlanet),
+              style: TextStyle(fontSize: 14, color: planetColor(transitPlanet)),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 3),
+              child: Icon(Icons.arrow_forward, size: 10, color: C.textMuted),
+            ),
+            Text(
+              planetGlyph(natalPlanet),
+              style: TextStyle(fontSize: 14, color: planetColor(natalPlanet)),
+            ),
+            const SizedBox(width: S.sm),
+            // Description
+            Expanded(
+              child: Text(
+                description,
+                style: T.bodySm.copyWith(color: C.textPrimary, fontSize: 12),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            // Orb
+            if (orb != null)
+              Text(
+                'orb ${orb.toStringAsFixed(1)}\u00b0',
+                style: T.caption.copyWith(fontSize: 9, color: C.textMuted),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// -- Trigger Row (WHEN) --
 
 class _TriggerRow extends StatefulWidget {
   final Map<String, dynamic> trigger;
@@ -821,6 +961,29 @@ class _TriggerRowState extends State<_TriggerRow> {
     final text = trigger['trigger'] as String? ?? trigger['description'] as String? ?? '';
     final significance = trigger['significance'] as String? ?? 'medium';
     final effect = trigger['what'] as String? ?? trigger['effect'] as String? ?? '';
+    final triggerType = trigger['type'] as String? ?? '';
+    final dateStr = trigger['date'] as String? ?? '';
+
+    // Format date to short form (e.g., "Feb 18")
+    String shortDate = '';
+    if (dateStr.isNotEmpty) {
+      try {
+        final parsed = DateTime.parse(dateStr);
+        shortDate = DateFormat('MMM d').format(parsed);
+      } catch (_) {
+        shortDate = dateStr;
+      }
+    }
+
+    // Color by trigger type
+    final Color typeColor = switch (triggerType) {
+      'sign_ingress' => C.accent,
+      'conjunction' => C.warning,
+      'retrograde_station' => C.saturn,
+      'dasha_change' => C.jupiter,
+      'aspect' => C.textSecondary,
+      _ => C.textSecondary,
+    };
 
     final Color sigColor = switch (significance) {
       'high' => C.warning,
@@ -835,21 +998,27 @@ class _TriggerRowState extends State<_TriggerRow> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Date + days column
             SizedBox(
-              width: 38,
+              width: 44,
               child: Column(
                 children: [
+                  if (shortDate.isNotEmpty)
+                    Text(
+                      shortDate,
+                      style: T.caption.copyWith(
+                        color: sigColor,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 10,
+                      ),
+                    ),
                   Text(
-                    '$daysFromNow',
+                    '${daysFromNow}d',
                     style: T.bodySm.copyWith(
                       color: sigColor,
                       fontWeight: FontWeight.w600,
-                      fontSize: 14,
+                      fontSize: 13,
                     ),
-                  ),
-                  Text(
-                    daysFromNow == 1 ? 'day' : 'days',
-                    style: T.caption.copyWith(fontSize: 8),
                   ),
                 ],
               ),
@@ -859,7 +1028,7 @@ class _TriggerRowState extends State<_TriggerRow> {
                 Container(
                   width: 6,
                   height: 6,
-                  decoration: BoxDecoration(shape: BoxShape.circle, color: sigColor),
+                  decoration: BoxDecoration(shape: BoxShape.circle, color: typeColor),
                 ),
                 Container(width: 1, height: _expanded ? 44 : 28, color: C.glassBorder),
               ],

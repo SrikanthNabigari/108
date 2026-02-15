@@ -29,6 +29,21 @@ from packages.cosmos.src.houses import (
 # Constants
 # ---------------------------------------------------------------------------
 
+RASHI_NAMES = [
+    "Aries",
+    "Taurus",
+    "Gemini",
+    "Cancer",
+    "Leo",
+    "Virgo",
+    "Libra",
+    "Scorpio",
+    "Sagittarius",
+    "Capricorn",
+    "Aquarius",
+    "Pisces",
+]
+
 HOUSE_THEMES: dict[int, list[str]] = {
     1: ["self", "health", "personality", "new beginnings"],
     2: ["wealth", "family", "speech", "savings"],
@@ -367,6 +382,50 @@ def get_transit_snapshot(
     except Exception:
         pass
 
+    # 5b. Build gochara summary for each transit planet
+    gochara_summary: list[dict[str, Any]] = []
+    transit_rashis: dict[str, int] = {}
+    for p_name, p_data in transit_positions.items():
+        transit_rashis[p_name] = int(p_data.get("longitude", 0)) // 30
+
+    for p_name, p_data in transit_positions.items():
+        t_rashi = int(p_data.get("longitude", 0)) // 30
+        try:
+            gochara = get_gochara(moon_rashi, p_name, t_rashi, transit_rashis)
+        except Exception:
+            continue
+
+        entry: dict[str, Any] = {
+            "planet": p_name,
+            "sign": RASHI_NAMES[t_rashi],
+            "house_from_moon": gochara["house_from_moon"],
+            "is_favorable": gochara["is_favorable"],
+            "has_vedha": gochara["has_vedha"],
+            "vedha_by": gochara.get("vedha_by"),
+            "net_effect": gochara["net_effect"],
+            "effects": gochara.get("effects", []),
+            "is_retrograde": p_data.get("is_retrograde", False),
+            "degree_in_sign": round(p_data.get("longitude", 0) % 30, 1),
+        }
+
+        # Add BAV score if chart is provided (skip Rahu/Ketu — no BAV)
+        if chart is not None and p_name.lower() not in ("rahu", "ketu"):
+            try:
+                from packages.core.src.constants import Planet
+                from packages.self.src.ashtakavarga import (
+                    get_transit_ashtakavarga_analysis,
+                )
+
+                planet_enum = Planet(p_name.lower())
+                av_analysis = get_transit_ashtakavarga_analysis(planet_enum, t_rashi, chart)
+                entry["bav_score"] = av_analysis["bav_score"]
+            except Exception:
+                entry["bav_score"] = None
+        else:
+            entry["bav_score"] = None
+
+        gochara_summary.append(entry)
+
     # 6. Overall trend from average of top 3 scores
     top_3_scores = [h["score"] for h in sorted_houses[:3]]
     avg_top = sum(top_3_scores) / len(top_3_scores) if top_3_scores else 0
@@ -393,6 +452,7 @@ def get_transit_snapshot(
         "most_active_houses": most_active,
         "most_quiet_houses": most_quiet,
         "active_aspects": active_aspects,
+        "gochara_summary": gochara_summary,
         "overall_trend": overall_trend,
         "summary": summary,
     }

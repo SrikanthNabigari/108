@@ -11,6 +11,7 @@ This module provides comprehensive yoga detection capabilities, including:
 import contextlib
 import json
 import logging
+import re
 from pathlib import Path
 from typing import Any, ClassVar
 
@@ -222,6 +223,37 @@ class YogaDetector:
             description=rule.get("description", ""),
         )
 
+    # Planet names for dynamic pattern matching (longest first for greedy match)
+    _PLANET_NAMES: ClassVar[tuple[str, ...]] = (
+        "mercury",
+        "jupiter",
+        "saturn",
+        "venus",
+        "mars",
+        "moon",
+        "rahu",
+        "ketu",
+        "sun",
+    )
+    # Sign names for dynamic matching
+    _SIGN_NAMES: ClassVar[tuple[str, ...]] = (
+        "sagittarius",
+        "capricorn",
+        "aquarius",
+        "scorpio",
+        "pisces",
+        "gemini",
+        "cancer",
+        "taurus",
+        "libra",
+        "aries",
+        "virgo",
+        "leo",
+    )
+    # Natural benefics and malefics
+    _BENEFICS: ClassVar[tuple[str, ...]] = ("jupiter", "venus", "mercury", "moon")
+    _MALEFICS: ClassVar[tuple[str, ...]] = ("saturn", "mars", "rahu", "ketu", "sun")
+
     def _evaluate_condition(self, condition: dict[str, Any], chart: BirthChart) -> bool:
         """Evaluate a single condition against the chart.
 
@@ -235,11 +267,576 @@ class YogaDetector:
         cond_type = condition.get("type")
         evaluator = self.condition_evaluators.get(cond_type)
 
-        if not evaluator:
-            logger.warning(f"Unknown condition type: {cond_type}")
+        if evaluator:
+            return evaluator(condition, chart)
+
+        # Try dynamic pattern matching for unregistered condition types
+        result = self._eval_dynamic(cond_type, condition, chart)
+        if result is not None:
+            return result
+
+        logger.debug(f"Unhandled condition type: {cond_type}")
+        return False
+
+    # ── Dynamic pattern evaluators ──────────────────────────────────
+
+    def _parse_planet(self, name: str) -> Planet | None:
+        """Try to parse a planet name string into a Planet enum."""
+        try:
+            return Planet(name)
+        except ValueError:
+            return None
+
+    def _parse_house_num(self, s: str) -> int | None:
+        """Parse '1st', '2nd', '3rd', '4th', ... '12th' or bare digits."""
+        cleaned = re.sub(r"(st|nd|rd|th)$", "", s)
+        try:
+            n = int(cleaned)
+            return n if 1 <= n <= 12 else None
+        except ValueError:
+            return None
+
+    def _planet_in_chart(self, planet_name: str, chart: BirthChart) -> Any | None:
+        """Get PlanetPosition from chart or None."""
+        p = self._parse_planet(planet_name)
+        return chart.planets.get(p) if p else None
+
+    def _eval_dynamic(
+        self,
+        cond_type: str | None,
+        condition: dict[str, Any],
+        chart: BirthChart,
+    ) -> bool | None:
+        """Try pattern-based evaluation for condition types not in the registry.
+
+        Returns True/False if handled, None if not recognized.
+        """
+        if not cond_type:
+            return None
+
+        # ── 1. {planet}_in_own  (e.g. mercury_in_own) ──
+        for pname in self._PLANET_NAMES:
+            if cond_type == f"{pname}_in_own":
+                pos = self._planet_in_chart(pname, chart)
+                if not pos:
+                    return False
+                return self._is_in_own_sign(Planet(pname), pos.rashi)
+
+        # ── 2. {p1}_{p2}_conjunction  (e.g. sun_moon_conjunction) ──
+        if cond_type.endswith("_conjunction"):
+            stem = cond_type[: -len("_conjunction")]
+            for p1 in self._PLANET_NAMES:
+                if stem.startswith(p1 + "_"):
+                    p2_name = stem[len(p1) + 1 :]
+                    p2 = self._parse_planet(p2_name)
+                    if p2 is not None:
+                        pos1 = self._planet_in_chart(p1, chart)
+                        pos2 = chart.planets.get(p2)
+                        if not pos1 or not pos2:
+                            return False
+                        return pos1.rashi == pos2.rashi
+            # lords_conjunction — handled separately below
+            if stem == "lords":
+                return self._eval_lords_conjunction(condition, chart)
+
+        # ── 3. lords_conjunction_or_aspect ──
+        if cond_type == "lords_conjunction_or_aspect":
+            return self._eval_lords_conjunction_or_aspect(condition, chart)
+
+        # ── 4. {planet}_strong ──
+        for pname in self._PLANET_NAMES:
+            if cond_type == f"{pname}_strong":
+                pos = self._planet_in_chart(pname, chart)
+                if not pos:
+                    return False
+                p = Planet(pname)
+                return (
+                    self._is_in_own_sign(p, pos.rashi)
+                    or self._is_in_exalted_sign(p, pos.rashi)
+                    or is_kendra(pos.house)
+                    or is_trikona(pos.house)
+                )
+
+        # ── 5. {planet}_exalted ──
+        for pname in self._PLANET_NAMES:
+            if cond_type == f"{pname}_exalted":
+                pos = self._planet_in_chart(pname, chart)
+                if not pos:
+                    return False
+                return self._is_in_exalted_sign(Planet(pname), pos.rashi)
+
+        # ── 6. {planet}_debilitated ──
+        for pname in self._PLANET_NAMES:
+            if cond_type == f"{pname}_debilitated":
+                pos = self._planet_in_chart(pname, chart)
+                if not pos:
+                    return False
+                return self._is_in_debilitated_sign(Planet(pname), pos.rashi)
+
+        # ── 7. {planet}_retrograde ──
+        for pname in self._PLANET_NAMES:
+            if cond_type == f"{pname}_retrograde":
+                pos = self._planet_in_chart(pname, chart)
+                if not pos:
+                    return False
+                return getattr(pos, "is_retrograde", False)
+
+        # ── 8. {planet}_combust ──
+        for pname in self._PLANET_NAMES:
+            if cond_type == f"{pname}_combust":
+                p = self._parse_planet(pname)
+                if not p:
+                    return False
+                return self._is_combust(p, chart)
+
+        # ── 9. {planet}_vargottama ──
+        for pname in self._PLANET_NAMES:
+            if cond_type == f"{pname}_vargottama":
+                pos = self._planet_in_chart(pname, chart)
+                if not pos:
+                    return False
+                # Vargottama: same sign in D1 and D9
+                # D9 sign = (navamsha_pada - 1) maps to sign
+                lon = pos.longitude
+                d1_sign = int(lon / 30) % 12
+                # Vargottama: D9 sign == D1 sign
+                navamsha_num = int(lon / (30 / 9)) % 12
+                return navamsha_num == d1_sign
+
+        # ── 10. {planet}_in_own_sign (e.g. jupiter_in_own_sign) ──
+        if cond_type.endswith("_in_own_sign"):
+            pname = cond_type[: -len("_in_own_sign")]
+            p = self._parse_planet(pname)
+            if p:
+                pos = chart.planets.get(p)
+                if not pos:
+                    return False
+                return self._is_in_own_sign(p, pos.rashi)
+
+        # ── 11. {planet}_in_own_or_exalted ──
+        if cond_type.endswith("_in_own_or_exalted"):
+            pname = cond_type[: -len("_in_own_or_exalted")]
+            p = self._parse_planet(pname)
+            if p:
+                pos = chart.planets.get(p)
+                if not pos:
+                    return False
+                return self._is_in_own_sign(p, pos.rashi) or self._is_in_exalted_sign(p, pos.rashi)
+
+        # ── 12. {planet}_in_{sign} (e.g. moon_in_cancer, sun_in_leo) ──
+        for pname in self._PLANET_NAMES:
+            prefix = f"{pname}_in_"
+            if cond_type.startswith(prefix):
+                rest = cond_type[len(prefix) :]
+                # Check if rest is a sign name
+                for sign in self._SIGN_NAMES:
+                    if rest == sign:
+                        pos = self._planet_in_chart(pname, chart)
+                        if not pos:
+                            return False
+                        return pos.rashi == Rashi(sign)
+
+        # ── 13. {planet}_in_{N}th (e.g. jupiter_in_5th, moon_in_2nd) ──
+        for pname in self._PLANET_NAMES:
+            prefix = f"{pname}_in_"
+            if cond_type.startswith(prefix):
+                rest = cond_type[len(prefix) :]
+                house_num = self._parse_house_num(rest)
+                if house_num is not None:
+                    pos = self._planet_in_chart(pname, chart)
+                    if not pos:
+                        return False
+                    return pos.house == house_num
+
+        # ── 14. {planet}_in_lagna (e.g. jupiter_in_lagna) ──
+        for pname in self._PLANET_NAMES:
+            if cond_type == f"{pname}_in_lagna":
+                pos = self._planet_in_chart(pname, chart)
+                if not pos:
+                    return False
+                return pos.house == 1
+
+        # ── 15. {N}th_lord_strong (e.g. 9th_lord_strong) ──
+        if cond_type.endswith("_lord_strong"):
+            prefix = cond_type[: -len("_lord_strong")]
+            house_num = self._parse_house_num(prefix)
+            if house_num:
+                lord = self._get_house_lord(house_num, chart)
+                if not lord or lord not in chart.planets:
+                    return False
+                pos = chart.planets[lord]
+                return (
+                    self._is_in_own_sign(lord, pos.rashi)
+                    or self._is_in_exalted_sign(lord, pos.rashi)
+                    or is_kendra(pos.house)
+                    or is_trikona(pos.house)
+                )
+
+        # ── 16. {N}th_lord_in_{M}th (e.g. 9th_lord_in_10th) ──
+        if "_lord_in_" in cond_type:
+            parts = cond_type.split("_lord_in_")
+            if len(parts) == 2:
+                src_house = self._parse_house_num(parts[0])
+                tgt_house = self._parse_house_num(parts[1])
+                if src_house and tgt_house:
+                    lord = self._get_house_lord(src_house, chart)
+                    if not lord or lord not in chart.planets:
+                        return False
+                    return chart.planets[lord].house == tgt_house
+
+        # ── 17. {N}th_lord_afflicted ──
+        if cond_type.endswith("_lord_afflicted"):
+            prefix = cond_type[: -len("_lord_afflicted")]
+            house_num = self._parse_house_num(prefix)
+            if house_num:
+                lord = self._get_house_lord(house_num, chart)
+                if not lord or lord not in chart.planets:
+                    return False
+                pos = chart.planets[lord]
+                return (
+                    self._is_in_debilitated_sign(lord, pos.rashi)
+                    or is_dusthana(pos.house)
+                    or self._is_combust(lord, chart)
+                )
+
+        # ── 18. {N}th_lord_debilitated ──
+        if cond_type.endswith("_lord_debilitated"):
+            prefix = cond_type[: -len("_lord_debilitated")]
+            house_num = self._parse_house_num(prefix)
+            if house_num:
+                lord = self._get_house_lord(house_num, chart)
+                if not lord or lord not in chart.planets:
+                    return False
+                pos = chart.planets[lord]
+                return self._is_in_debilitated_sign(lord, pos.rashi)
+
+        # ── 19. {N}th_lord_in_dusthana ──
+        if cond_type.endswith("_lord_in_dusthana"):
+            prefix = cond_type[: -len("_lord_in_dusthana")]
+            house_num = self._parse_house_num(prefix)
+            if house_num:
+                lord = self._get_house_lord(house_num, chart)
+                if not lord or lord not in chart.planets:
+                    return False
+                return is_dusthana(chart.planets[lord].house)
+
+        # ── 20. {N}th_lord_in_kendra ──
+        if cond_type.endswith("_lord_in_kendra"):
+            prefix = cond_type[: -len("_lord_in_kendra")]
+            house_num = self._parse_house_num(prefix)
+            if house_num:
+                lord = self._get_house_lord(house_num, chart)
+                if not lord or lord not in chart.planets:
+                    return False
+                return is_kendra(chart.planets[lord].house)
+
+        # ── 21. lagna_lord_strong ──
+        if cond_type == "lagna_lord_strong" or cond_type == "strong_lagna_lord":
+            lord = self._get_house_lord(1, chart)
+            if not lord or lord not in chart.planets:
+                return False
+            pos = chart.planets[lord]
+            return (
+                self._is_in_own_sign(lord, pos.rashi)
+                or self._is_in_exalted_sign(lord, pos.rashi)
+                or is_kendra(pos.house)
+            )
+
+        # ── 22. lagna_lord_in_kendra / lagna_lord_in_kendra_or_trikona ──
+        if cond_type == "lagna_lord_in_kendra":
+            lord = self._get_house_lord(1, chart)
+            if not lord or lord not in chart.planets:
+                return False
+            return is_kendra(chart.planets[lord].house)
+
+        if cond_type == "lagna_lord_in_kendra_or_trikona":
+            lord = self._get_house_lord(1, chart)
+            if not lord or lord not in chart.planets:
+                return False
+            h = chart.planets[lord].house
+            return is_kendra(h) or is_trikona(h)
+
+        # ── 23. lagna_lord_exalted / lagna_lord_debilitated ──
+        if cond_type == "lagna_lord_exalted":
+            lord = self._get_house_lord(1, chart)
+            if not lord or lord not in chart.planets:
+                return False
+            return self._is_in_exalted_sign(lord, chart.planets[lord].rashi)
+
+        if cond_type == "lagna_lord_debilitated":
+            lord = self._get_house_lord(1, chart)
+            if not lord or lord not in chart.planets:
+                return False
+            return self._is_in_debilitated_sign(lord, chart.planets[lord].rashi)
+
+        # ── 24. lagna_lord_afflicted ──
+        if cond_type == "lagna_lord_afflicted":
+            lord = self._get_house_lord(1, chart)
+            if not lord or lord not in chart.planets:
+                return False
+            pos = chart.planets[lord]
+            return (
+                self._is_in_debilitated_sign(lord, pos.rashi)
+                or is_dusthana(pos.house)
+                or self._is_combust(lord, chart)
+            )
+
+        # ── 25. {planet}_aspects_{target} — dynamic aspect checking ──
+        if "_aspects_" in cond_type:
+            return self._eval_planet_aspects_target(condition, chart)
+
+        # ── 26. benefics/malefics in houses patterns ──
+        if cond_type.startswith("benefics_in_") or cond_type.startswith("all_benefics_in_"):
+            return self._eval_group_in_houses(self._BENEFICS, cond_type, chart)
+
+        if cond_type.startswith("malefics_in_") or cond_type.startswith("all_malefics_in_"):
+            return self._eval_group_in_houses(self._MALEFICS, cond_type, chart)
+
+        # ── 27. {planet}_strong_in_{N}th ──
+        for pname in self._PLANET_NAMES:
+            prefix = f"{pname}_strong_in_"
+            if cond_type.startswith(prefix):
+                rest = cond_type[len(prefix) :]
+                house_num = self._parse_house_num(rest)
+                if rest == "kendra":
+                    pos = self._planet_in_chart(pname, chart)
+                    if not pos:
+                        return False
+                    p = Planet(pname)
+                    return is_kendra(pos.house) and (
+                        self._is_in_own_sign(p, pos.rashi) or self._is_in_exalted_sign(p, pos.rashi)
+                    )
+                if house_num is not None:
+                    pos = self._planet_in_chart(pname, chart)
+                    if not pos:
+                        return False
+                    p = Planet(pname)
+                    return pos.house == house_num and (
+                        self._is_in_own_sign(p, pos.rashi) or self._is_in_exalted_sign(p, pos.rashi)
+                    )
+
+        # ── 28. {planet}_not_combust ──
+        for pname in self._PLANET_NAMES:
+            if cond_type == f"{pname}_not_combust":
+                p = self._parse_planet(pname)
+                if not p:
+                    return False
+                return not self._is_combust(p, chart)
+
+        # ── 29. aspected_by_benefic / aspected_by_malefic ──
+        if cond_type == "aspected_by_benefic":
+            return self._eval_aspected_by_group(condition, chart, self._BENEFICS)
+
+        if cond_type == "aspected_by_malefic":
+            return self._eval_aspected_by_group(condition, chart, self._MALEFICS)
+
+        # ── 30. all_planets_in_{pattern} ──
+        if cond_type.startswith("all_planets_in_"):
+            return self._eval_all_planets_pattern(cond_type, condition, chart)
+
+        # ── 31. day_birth / night_birth ──
+        if cond_type == "day_birth":
+            sun_pos = chart.planets.get(Planet.SUN)
+            return sun_pos is not None and 1 <= sun_pos.house <= 6
+
+        if cond_type == "night_birth":
+            sun_pos = chart.planets.get(Planet.SUN)
+            return sun_pos is not None and 7 <= sun_pos.house <= 12
+
+        # ── 32. moon_weak / moon_afflicted ──
+        if cond_type == "moon_weak":
+            pos = chart.planets.get(Planet.MOON)
+            if not pos:
+                return False
+            return self._is_in_debilitated_sign(Planet.MOON, pos.rashi) or is_dusthana(pos.house)
+
+        if cond_type == "moon_afflicted":
+            pos = chart.planets.get(Planet.MOON)
+            if not pos:
+                return False
+            # Moon is afflicted if conjunct with malefics
+            for mal in ("saturn", "mars", "rahu", "ketu"):
+                mal_pos = self._planet_in_chart(mal, chart)
+                if mal_pos and mal_pos.rashi == pos.rashi:
+                    return True
             return False
 
-        return evaluator(condition, chart)
+        # Not recognized
+        return None
+
+    def _eval_lords_conjunction(
+        self,
+        condition: dict[str, Any],
+        chart: BirthChart,
+    ) -> bool:
+        """Check if lords of specified houses are conjunct."""
+        houses = condition.get("houses", [])
+        if len(houses) < 2:
+            return False
+        lords = []
+        for h in houses:
+            lord = self._get_house_lord(h, chart)
+            if not lord or lord not in chart.planets:
+                return False
+            lords.append(chart.planets[lord].rashi)
+        return len(set(lords)) == 1
+
+    def _eval_lords_conjunction_or_aspect(
+        self,
+        condition: dict[str, Any],
+        chart: BirthChart,
+    ) -> bool:
+        """Check if lords of specified houses are conjunct or mutually aspecting."""
+        houses = condition.get("houses", [])
+        if len(houses) < 2:
+            return False
+
+        lord_planets: list[tuple[Planet, Any]] = []
+        for h in houses:
+            lord = self._get_house_lord(h, chart)
+            if not lord or lord not in chart.planets:
+                return False
+            lord_planets.append((lord, chart.planets[lord]))
+
+        # Check conjunction (same sign)
+        rashis = [pos.rashi for _, pos in lord_planets]
+        if len(set(rashis)) == 1:
+            return True
+
+        # Check mutual aspect between any pair
+        for i in range(len(lord_planets)):
+            for j in range(i + 1, len(lord_planets)):
+                p1, pos1 = lord_planets[i]
+                p2, pos2 = lord_planets[j]
+                asp1 = calculate_aspect_houses(p1, pos1.house)
+                if pos2.house in asp1:
+                    return True
+                asp2 = calculate_aspect_houses(p2, pos2.house)
+                if pos1.house in asp2:
+                    return True
+        return False
+
+    def _eval_group_in_houses(
+        self,
+        group: tuple[str, ...],
+        cond_type: str,
+        chart: BirthChart,
+    ) -> bool:
+        """Check if benefics/malefics are in specified house positions."""
+        # Extract house numbers from the condition name
+        # e.g. "benefics_in_1_4_7" → [1, 4, 7]
+        # e.g. "all_benefics_in_kendras" → kendra houses
+        if "kendras" in cond_type or "kendra" in cond_type:
+            target_houses = {1, 4, 7, 10}
+        elif "trikona" in cond_type:
+            target_houses = {1, 5, 9}
+        elif "upachaya" in cond_type:
+            target_houses = {3, 6, 10, 11}
+        else:
+            # Parse numbers from the string
+            parts = cond_type.split("_in_")[-1].split("_")
+            target_houses = set()
+            for part in parts:
+                try:
+                    target_houses.add(int(part))
+                except ValueError:
+                    continue
+
+        if not target_houses:
+            return False
+
+        # Check if at least one planet from the group is in the target houses
+        for pname in group:
+            pos = self._planet_in_chart(pname, chart)
+            if pos and pos.house in target_houses:
+                return True
+        return False
+
+    def _eval_aspected_by_group(
+        self,
+        condition: dict[str, Any],
+        chart: BirthChart,
+        group: tuple[str, ...],
+    ) -> bool:
+        """Check if the target planet is aspected by any planet in the group."""
+        target_name = condition.get("planet")
+        if not target_name:
+            return False
+        target = self._parse_planet(target_name)
+        if not target or target not in chart.planets:
+            return False
+        target_house = chart.planets[target].house
+
+        for pname in group:
+            p = self._parse_planet(pname)
+            if not p or p not in chart.planets or p == target:
+                continue
+            aspects = calculate_aspect_houses(p, chart.planets[p].house)
+            if target_house in aspects:
+                return True
+        return False
+
+    def _eval_all_planets_pattern(
+        self,
+        cond_type: str,
+        _condition: dict[str, Any],
+        chart: BirthChart,
+    ) -> bool:
+        """Evaluate all_planets_in_{pattern} conditions."""
+        suffix = cond_type[len("all_planets_in_") :]
+
+        # Collect all planet houses
+        houses = []
+        for p in Planet:
+            pos = chart.planets.get(p)
+            if pos:
+                houses.append(pos.house)
+
+        if not houses:
+            return False
+
+        if suffix == "kendras" or suffix == "kendras_only":
+            return all(is_kendra(h) for h in houses)
+        if suffix == "kendra_or_trikona":
+            return all(is_kendra(h) or is_trikona(h) for h in houses)
+        if suffix == "trikonas":
+            return all(is_trikona(h) for h in houses)
+        if suffix == "one_kendra":
+            kendra = {1, 4, 7, 10}
+            return any(all(h in kendra for h in houses) for _ in [None])
+        if suffix == "different_signs":
+            rashis = set()
+            for p in Planet:
+                pos = chart.planets.get(p)
+                if pos:
+                    rashis.add(pos.rashi)
+            return len(rashis) == len(houses)
+
+        # Consecutive houses patterns: "seven_consecutive_houses", etc.
+        if "consecutive" in suffix:
+            house_set = set(houses)
+            # Try all starting positions
+            for start in range(1, 13):
+                for span in range(3, 10):
+                    window = {((start + i - 1) % 12) + 1 for i in range(span)}
+                    if house_set.issubset(window):
+                        return True
+            return False
+
+        # Houses pattern: "1_5_9", "1_and_7_only", etc.
+        # Extract numbers
+        parts = suffix.replace("and_", "").replace("only", "").replace("_to_", "_").split("_")
+        target_houses = set()
+        for part in parts:
+            try:
+                target_houses.add(int(part))
+            except ValueError:
+                continue
+
+        if target_houses:
+            return all(h in target_houses for h in houses)
+
+        return False
 
     def _calculate_strength(self, rule: dict[str, Any], chart: BirthChart) -> float:
         """Calculate yoga strength based on strength factors.

@@ -253,7 +253,7 @@ class TestGetMajorTransits:
 
 
 class TestComputeAreaRatingsMonthly:
-    def test_returns_five_areas(self):
+    def test_returns_eight_areas(self):
         areas = _compute_area_ratings_monthly(
             [],
             {"planets_retrograde": []},
@@ -264,7 +264,7 @@ class TestComputeAreaRatingsMonthly:
             datetime(2026, 2, 1),
             28,
         )
-        assert len(areas) == 5
+        assert len(areas) == 8
 
     def test_each_area_has_required_keys(self):
         areas = _compute_area_ratings_monthly(
@@ -283,9 +283,8 @@ class TestComputeAreaRatingsMonthly:
             assert "best_dates" in area_data
             assert "avoid_dates" in area_data
 
-    def test_retrograde_penalty(self):
-        # Jupiter retrograde should affect finance area
-        areas_no_retro = _compute_area_ratings_monthly(
+    def test_all_areas_have_valid_ratings(self):
+        areas = _compute_area_ratings_monthly(
             [],
             {"planets_retrograde": []},
             "mercury",
@@ -295,17 +294,8 @@ class TestComputeAreaRatingsMonthly:
             datetime(2026, 2, 1),
             28,
         )
-        areas_with_retro = _compute_area_ratings_monthly(
-            [],
-            {"planets_retrograde": ["jupiter"]},
-            "mercury",
-            "ketu",
-            NATAL_PLANETS,
-            "libra",
-            datetime(2026, 2, 1),
-            28,
-        )
-        assert areas_with_retro["finance"]["rating"] <= areas_no_retro["finance"]["rating"]
+        for area_data in areas.values():
+            assert 1 <= area_data["rating"] <= 10
 
 
 # ---------------------------------------------------------------------------
@@ -350,6 +340,9 @@ class TestGenerateMonthlyTheme:
             "relationships": {"rating": 6},
             "health": {"rating": 7},
             "spiritual": {"rating": 5},
+            "family": {"rating": 6},
+            "education": {"rating": 6},
+            "travel": {"rating": 5},
         }
         theme = _generate_monthly_theme(7.5, "jupiter", "venus", areas, {"planets_retrograde": []})
         assert "Strong" in theme
@@ -361,6 +354,9 @@ class TestGenerateMonthlyTheme:
             "relationships": {"rating": 5},
             "health": {"rating": 5},
             "spiritual": {"rating": 5},
+            "family": {"rating": 5},
+            "education": {"rating": 5},
+            "travel": {"rating": 5},
         }
         theme = _generate_monthly_theme(5.5, "mercury", "ketu", areas, {"planets_retrograde": []})
         assert "Balanced" in theme
@@ -372,6 +368,9 @@ class TestGenerateMonthlyTheme:
             "relationships": {"rating": 4},
             "health": {"rating": 3},
             "spiritual": {"rating": 3},
+            "family": {"rating": 3},
+            "education": {"rating": 3},
+            "travel": {"rating": 3},
         }
         theme = _generate_monthly_theme(3.0, "saturn", "rahu", areas, {"planets_retrograde": []})
         assert "Reflective" in theme
@@ -383,6 +382,9 @@ class TestGenerateMonthlyTheme:
             "relationships": {"rating": 5},
             "health": {"rating": 5},
             "spiritual": {"rating": 5},
+            "family": {"rating": 5},
+            "education": {"rating": 5},
+            "travel": {"rating": 5},
         }
         theme = _generate_monthly_theme(
             5.0, "mercury", "ketu", areas, {"planets_retrograde": ["mercury"]}
@@ -492,6 +494,9 @@ class TestGetMonthlyForecast:
             "relationships": {"rating": 5, "summary": "OK", "best_dates": [], "avoid_dates": []},
             "health": {"rating": 6, "summary": "Good", "best_dates": [], "avoid_dates": []},
             "spiritual": {"rating": 7, "summary": "Strong", "best_dates": [], "avoid_dates": []},
+            "family": {"rating": 5, "summary": "OK", "best_dates": [], "avoid_dates": []},
+            "education": {"rating": 6, "summary": "Good", "best_dates": [], "avoid_dates": []},
+            "travel": {"rating": 5, "summary": "OK", "best_dates": [], "avoid_dates": []},
         }
         mock_weeks.return_value = [
             {"week": 1, "dates": "Feb 1-7", "rating": 6, "theme": "Steady"},
@@ -525,6 +530,16 @@ class TestGetMonthlyForecast:
         assert "areas" in result
         assert "weekly_summaries" in result
         assert "best_dates" in result
+        # New enriched fields
+        assert "gochara_summary" in result
+        assert "active_yogas" in result
+        assert "active_doshas" in result
+        assert "sade_sati" in result
+        assert "muhurta_dates" in result
+        assert "month_rating" in result
+        assert isinstance(result["gochara_summary"], list)
+        assert isinstance(result["active_yogas"], list)
+        assert isinstance(result["muhurta_dates"], list)
 
     @patch("packages.context.src.monthly_forecast._compute_best_dates")
     @patch("packages.context.src.monthly_forecast._compute_weekly_summaries")
@@ -553,6 +568,9 @@ class TestGetMonthlyForecast:
             "relationships": {"rating": 5, "summary": "", "best_dates": [], "avoid_dates": []},
             "health": {"rating": 5, "summary": "", "best_dates": [], "avoid_dates": []},
             "spiritual": {"rating": 5, "summary": "", "best_dates": [], "avoid_dates": []},
+            "family": {"rating": 5, "summary": "", "best_dates": [], "avoid_dates": []},
+            "education": {"rating": 5, "summary": "", "best_dates": [], "avoid_dates": []},
+            "travel": {"rating": 5, "summary": "", "best_dates": [], "avoid_dates": []},
         }
         mock_weeks.return_value = []
         mock_dates.return_value = {
@@ -608,6 +626,9 @@ class TestGetMonthlyForecast:
             "relationships": {"rating": 5, "summary": "", "best_dates": [], "avoid_dates": []},
             "health": {"rating": 5, "summary": "", "best_dates": [], "avoid_dates": []},
             "spiritual": {"rating": 5, "summary": "", "best_dates": [], "avoid_dates": []},
+            "family": {"rating": 5, "summary": "", "best_dates": [], "avoid_dates": []},
+            "education": {"rating": 5, "summary": "", "best_dates": [], "avoid_dates": []},
+            "travel": {"rating": 5, "summary": "", "best_dates": [], "avoid_dates": []},
         }
         mock_weeks.return_value = []
         mock_dates.return_value = {

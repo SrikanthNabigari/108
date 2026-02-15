@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 import logging
 import sys
 from pathlib import Path
@@ -15,6 +16,11 @@ from gateway.models import AccessLevel, UserContext
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
+from packages.core.src.knowledge_loader import (
+    get_planet_in_house_interpretations,
+    get_planet_in_sign_interpretations,
+    load_definition,
+)
 from packages.cosmos.src import (
     RASHI_NAMES,
     get_divisional_chart,
@@ -45,7 +51,13 @@ async def _load_birth_chart(db: Any, user_id: str) -> dict[str, Any] | None:
         if not row:
             return None
 
-        # asyncpg returns JSONB as Python dict already — no json.loads needed
+        # asyncpg usually returns JSONB as Python dict, but some
+        # drivers/configs return a JSON string — handle both.
+        planets_raw = row["planets"]
+        houses_raw = row["houses"]
+        planets = json.loads(planets_raw) if isinstance(planets_raw, str) else (planets_raw or {})
+        houses = json.loads(houses_raw) if isinstance(houses_raw, str) else (houses_raw or {})
+
         return {
             "id": str(row["id"]),
             "user_id": str(row["user_id"]),
@@ -53,8 +65,8 @@ async def _load_birth_chart(db: Any, user_id: str) -> dict[str, Any] | None:
             "latitude": float(row["latitude"]),
             "longitude": float(row["longitude"]),
             "timezone": row["timezone"],
-            "planets": row["planets"] if row["planets"] else {},
-            "houses": row["houses"] if row["houses"] else {},
+            "planets": planets,
+            "houses": houses,
             "lagna_rashi": row["lagna_rashi"],
             "moon_rashi": row["moon_rashi"],
             "moon_nakshatra": row["moon_nakshatra"],
@@ -98,20 +110,77 @@ async def get_chart_summary(
 
         # Extract basic info from stored data
         planets = chart.get("planets", {})
+        lagna_rashi = chart.get("lagna_rashi", "aries")
 
-        # Build planet list with name and rashi only
+        # Determine lagna sign index (0-11) for house calculation
+        lagna_idx = next(
+            (i for i, n in enumerate(RASHI_NAMES) if n.lower() == str(lagna_rashi).lower()),
+            0,
+        )
+
+        # Build planet list with essential fields for chart rendering
         planet_list = []
         for planet_name, planet_data in planets.items():
             if isinstance(planet_data, dict):
-                rashi_num = int(planet_data.get("rashi", 0))
+                longitude = float(planet_data.get("longitude", 0))
+                # Compute rashi from longitude if not stored (DB only stores lon)
+                stored_rashi = planet_data.get("rashi")
+                if isinstance(stored_rashi, int) and 1 <= stored_rashi <= 12:
+                    rashi_num = stored_rashi
+                elif isinstance(stored_rashi, int):
+                    rashi_num = (stored_rashi % 12) + 1
+                else:
+                    # Not stored or stored as string — derive from longitude
+                    rashi_num = int(longitude / 30) % 12 + 1
                 rashi_name = RASHI_NAMES[rashi_num - 1] if 1 <= rashi_num <= 12 else "Unknown"
+
+                # Compute house from lagna if not stored
+                stored_house = planet_data.get("house")
+                if isinstance(stored_house, int) and 1 <= stored_house <= 12:
+                    house = stored_house
+                else:
+                    house = ((rashi_num - 1 - lagna_idx) % 12) + 1
+
                 planet_list.append(
                     {
                         "name": planet_name,
                         "rashi": rashi_name,
                         "rashi_number": rashi_num,
+                        "retrograde": planet_data.get("is_retrograde", False),
+                        "house": house,
                     }
                 )
+
+        # Enrich with planet-in-house and planet-in-sign knowledge
+        house_interps_raw = get_planet_in_house_interpretations()
+        house_interps = house_interps_raw.get("planet_in_house", house_interps_raw)
+        sign_interps_raw = get_planet_in_sign_interpretations()
+        sign_interps = sign_interps_raw.get("planet_in_sign", sign_interps_raw)
+        for p in planet_list:
+            h_key = f"{p['name']}_in_house_{p['house']}"
+            h_data = house_interps.get(h_key, {})
+            if h_data:
+                p["house_summary"] = h_data.get("summary", "")
+                p["house_positive"] = h_data.get("positive", [])[:3]
+                p["house_negative"] = h_data.get("negative", [])[:2]
+
+            s_key = f"{p['name']}_in_{p['rashi'].lower()}"
+            s_data = sign_interps.get(s_key, {})
+            if s_data:
+                p["sign_summary"] = s_data.get("summary", "")
+
+        # Load house significations
+        houses_def = load_definition("houses")
+        house_info: dict[int, dict] = {}
+        for h in houses_def.get("houses", {}).values():
+            hnum = h.get("number")
+            if hnum:
+                house_info[hnum] = {
+                    "name": h.get("name", ""),
+                    "significations": h.get("significations", [])[:6],
+                    "karaka": h.get("karaka", ""),
+                    "body_parts": h.get("body_parts", [])[:3],
+                }
 
         return {
             "user_id": str(current_user.id),
@@ -127,6 +196,7 @@ async def get_chart_summary(
             "moon_rashi": chart["moon_rashi"],
             "moon_nakshatra": chart["moon_nakshatra"],
             "planets": planet_list,
+            "houses": house_info,
         }
 
     except HTTPException:
@@ -189,7 +259,11 @@ async def get_full_chart(
         for planet_name, planet_data in planets.items():
             if isinstance(planet_data, dict):
                 longitude = float(planet_data.get("longitude", 0))
-                rashi_num = int(planet_data.get("rashi", 0))
+                stored_rashi = planet_data.get("rashi")
+                if isinstance(stored_rashi, int) and 1 <= stored_rashi <= 12:
+                    rashi_num = stored_rashi
+                else:
+                    rashi_num = int(longitude / 30) % 12 + 1
                 rashi_name = RASHI_NAMES[rashi_num - 1] if 1 <= rashi_num <= 12 else "Unknown"
 
                 nakshatra_info = longitude_to_nakshatra(longitude)

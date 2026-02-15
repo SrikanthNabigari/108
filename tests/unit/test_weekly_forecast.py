@@ -11,6 +11,7 @@ Tests cover:
 from unittest.mock import patch
 
 from packages.context.src.weekly_forecast import (
+    _aggregate_gochara,
     _area_summary,
     _compute_area_ratings,
     _dasha_week_theme,
@@ -49,6 +50,56 @@ def _make_daily_forecast(date: str, rating: int, aspects: list | None = None) ->
         "inauspicious_periods": {},
         "choghadiya_highlights": {"best_periods": [], "avoid_periods": []},
         "recommendations": {},
+        "area_scores": {
+            "career": {
+                "score": 5.0 + rating * 0.2,
+                "insight": "",
+                "dominant_planet": "saturn",
+                "double_transit": False,
+            },
+            "finance": {
+                "score": 5.0 + rating * 0.1,
+                "insight": "",
+                "dominant_planet": "jupiter",
+                "double_transit": False,
+            },
+            "relationships": {
+                "score": 5.0,
+                "insight": "",
+                "dominant_planet": "venus",
+                "double_transit": False,
+            },
+            "health": {
+                "score": 5.0,
+                "insight": "",
+                "dominant_planet": "sun",
+                "double_transit": False,
+            },
+            "spiritual": {
+                "score": 5.0,
+                "insight": "",
+                "dominant_planet": "ketu",
+                "double_transit": False,
+            },
+            "family": {
+                "score": 5.0,
+                "insight": "",
+                "dominant_planet": "moon",
+                "double_transit": False,
+            },
+            "education": {
+                "score": 5.0,
+                "insight": "",
+                "dominant_planet": "mercury",
+                "double_transit": False,
+            },
+            "travel": {
+                "score": 5.0,
+                "insight": "",
+                "dominant_planet": "rahu",
+                "double_transit": False,
+            },
+        },
     }
 
 
@@ -81,11 +132,20 @@ class TestAreaSummary:
 
 
 class TestComputeAreaRatings:
-    def test_returns_five_areas(self):
+    def test_returns_eight_areas(self):
         forecasts = [_make_daily_forecast(f"2026-02-0{i + 1}", 5) for i in range(7)]
         areas = _compute_area_ratings(forecasts, NATAL_PLANETS, "libra", "mercury", "ketu")
-        assert len(areas) == 5
-        for key in ("career", "finance", "relationships", "health", "spiritual"):
+        assert len(areas) == 8
+        for key in (
+            "career",
+            "finance",
+            "relationships",
+            "health",
+            "spiritual",
+            "family",
+            "education",
+            "travel",
+        ):
             assert key in areas
 
     def test_each_area_has_rating_and_summary(self):
@@ -96,19 +156,22 @@ class TestComputeAreaRatings:
             assert "summary" in area_data
             assert 1 <= area_data["rating"] <= 10
 
-    def test_dasha_lord_matching_boosts_area(self):
+    def test_area_scores_averaged_from_daily(self):
+        """Area ratings should come from averaging daily area_scores."""
         forecasts = [_make_daily_forecast(f"2026-02-0{i + 1}", 5) for i in range(7)]
-        # Mercury is in AREA_PLANETS["finance"]
-        areas = _compute_area_ratings(forecasts, NATAL_PLANETS, "libra", "mercury", "jupiter")
-        # Both mercury and jupiter are finance planets
-        assert areas["finance"]["rating"] >= 5
-
-    def test_aspects_boost_areas(self):
-        asp = [{"transit": "jupiter", "natal": "venus", "aspect": "trine", "orb": 1.0}]
-        forecasts = [_make_daily_forecast(f"2026-02-0{i + 1}", 5, asp) for i in range(7)]
         areas = _compute_area_ratings(forecasts, NATAL_PLANETS, "libra", "mercury", "ketu")
-        # Jupiter+Venus aspects should help finance and relationships
-        assert areas["finance"]["rating"] >= 5
+        # Career score = 5.0 + 5*0.2 = 6.0 in each daily forecast
+        assert areas["career"]["rating"] == 6
+
+    def test_fallback_when_no_area_scores(self):
+        """When daily forecasts have no area_scores, fallback to 5.0."""
+        forecasts = [
+            {"date": f"2026-02-0{i + 1}", "day_rating": 5, "transit_aspects_today": []}
+            for i in range(7)
+        ]
+        areas = _compute_area_ratings(forecasts, NATAL_PLANETS, "libra", "mercury", "ketu")
+        for area_data in areas.values():
+            assert area_data["rating"] == 5  # neutral fallback
 
 
 # ---------------------------------------------------------------------------
@@ -165,6 +228,9 @@ class TestGenerateWeeklyTheme:
             "relationships": {"rating": 6},
             "health": {"rating": 7},
             "spiritual": {"rating": 5},
+            "family": {"rating": 6},
+            "education": {"rating": 6},
+            "travel": {"rating": 5},
         }
         theme = _generate_weekly_theme(7.5, "jupiter", "venus", areas)
         assert "career" in theme.lower() or "Jupiter" in theme
@@ -176,6 +242,9 @@ class TestGenerateWeeklyTheme:
             "relationships": {"rating": 4},
             "health": {"rating": 3},
             "spiritual": {"rating": 5},
+            "family": {"rating": 3},
+            "education": {"rating": 3},
+            "travel": {"rating": 3},
         }
         theme = _generate_weekly_theme(3.0, "saturn", "rahu", areas)
         assert "patience" in theme.lower() or "carefully" in theme.lower()
@@ -187,6 +256,9 @@ class TestGenerateWeeklyTheme:
             "relationships": {"rating": 5},
             "health": {"rating": 5},
             "spiritual": {"rating": 5},
+            "family": {"rating": 5},
+            "education": {"rating": 5},
+            "travel": {"rating": 5},
         }
         theme = _generate_weekly_theme(5.0, "mercury", "ketu", areas)
         assert isinstance(theme, str)
@@ -242,6 +314,15 @@ class TestGetWeeklyForecast:
         assert "key_transits_this_week" in result
         assert "dasha_context" in result
         assert "areas" in result
+        # New enriched fields
+        assert "gochara_overview" in result
+        assert "active_yogas" in result
+        assert "active_doshas" in result
+        assert "chandrashtama_days" in result
+        assert "sade_sati" in result
+        assert isinstance(result["active_yogas"], list)
+        assert isinstance(result["active_doshas"], list)
+        assert isinstance(result["chandrashtama_days"], list)
 
     @patch("packages.context.src.weekly_forecast.get_daily_forecast")
     def test_seven_daily_forecasts(self, mock_daily):
@@ -333,7 +414,7 @@ class TestGetWeeklyForecast:
         assert len(result["challenging_days"]) >= 2
 
     @patch("packages.context.src.weekly_forecast.get_daily_forecast")
-    def test_areas_have_five_entries(self, mock_daily):
+    def test_areas_have_eight_entries(self, mock_daily):
         mock_daily.return_value = _make_daily_forecast("2026-02-07", 6)
 
         result = get_weekly_forecast(
@@ -346,7 +427,7 @@ class TestGetWeeklyForecast:
             start_date="2026-02-07",
         )
 
-        assert len(result["areas"]) == 5
+        assert len(result["areas"]) == 8
         for area_data in result["areas"].values():
             assert "rating" in area_data
             assert "summary" in area_data
@@ -368,3 +449,47 @@ class TestGetWeeklyForecast:
         dc = result["dasha_context"]
         assert "period" in dc
         assert "week_theme" in dc
+
+
+# ---------------------------------------------------------------------------
+# _aggregate_gochara tests
+# ---------------------------------------------------------------------------
+
+
+class TestAggregateGochara:
+    def test_empty_forecasts(self):
+        result = _aggregate_gochara([])
+        assert result["favorable_count"] == 0
+        assert result["unfavorable_count"] == 0
+        assert result["planets"] == []
+
+    def test_all_favorable(self):
+        forecasts = [
+            {
+                "gochara_summary": [
+                    {"planet": "jupiter", "net_effect": "favorable"},
+                    {"planet": "venus", "net_effect": "favorable"},
+                ]
+            }
+        ] * 7
+        result = _aggregate_gochara(forecasts)
+        assert result["favorable_count"] == 2
+        assert result["unfavorable_count"] == 0
+
+    def test_mixed_effects(self):
+        forecasts = [
+            {
+                "gochara_summary": [
+                    {"planet": "saturn", "net_effect": "unfavorable"},
+                    {"planet": "jupiter", "net_effect": "favorable"},
+                ]
+            }
+        ] * 7
+        result = _aggregate_gochara(forecasts)
+        assert result["favorable_count"] == 1
+        assert result["unfavorable_count"] == 1
+
+    def test_no_gochara_data(self):
+        forecasts = [{"date": "2026-02-07"}] * 7
+        result = _aggregate_gochara(forecasts)
+        assert result["planets"] == []

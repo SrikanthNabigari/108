@@ -127,6 +127,9 @@ def _detect_conjunctions(
     """Detect transit planets conjuncting natal planets."""
     triggers = []
     for t_planet, t_data in curr_positions.items():
+        # Skip Moon conjunctions — too frequent (every ~2.5 days per planet)
+        if t_planet.lower() == "moon":
+            continue
         t_lon = t_data["longitude"]
         for n_planet, n_data in natal_planets.items():
             n_lon = n_data.get("longitude", 0)
@@ -424,8 +427,8 @@ def get_upcoming_triggers(
                     seen_keys.add(key)
                     all_triggers.append(t)
 
-        # 2. Conjunctions (check every 3 days for efficiency)
-        if day_offset % 3 == 0:
+        # 2. Conjunctions (check every 3 days, skip day 0 — current aspects belong in snapshot)
+        if day_offset >= 1 and day_offset % 3 == 0:
             conjunctions = _detect_conjunctions(curr_positions, natal_planets, check_dt, day_offset)
             for t in conjunctions:
                 key = f"conj_{t['transit_planet']}_{t['natal_planet']}"
@@ -433,8 +436,8 @@ def get_upcoming_triggers(
                     seen_keys.add(key)
                     all_triggers.append(t)
 
-        # 3. Aspects (check weekly for slow planets)
-        if day_offset % 7 == 0:
+        # 3. Aspects (check weekly, skip day 0 — only report when sign change creates new aspect)
+        if day_offset >= 7 and day_offset % 7 == 0:
             aspects = _detect_aspects(curr_positions, natal_planets, check_dt, day_offset)
             for t in aspects:
                 key = f"asp_{t['transit_planet']}_{t['natal_planet']}_{t['aspect_house']}"

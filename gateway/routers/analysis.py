@@ -121,6 +121,8 @@ def _build_planets_for_analysis(planets: dict) -> dict[str, Any]:
         if isinstance(planet_data, dict):
             result[planet_name] = {
                 "longitude": float(planet_data.get("longitude", 0)),
+                "latitude": float(planet_data.get("latitude", 0)),
+                "speed": float(planet_data.get("speed", 0)),
                 "rashi": int(planet_data.get("rashi", 0)),
                 "house": int(planet_data.get("house", 0)),
                 "nakshatra": planet_data.get("nakshatra"),
@@ -158,6 +160,10 @@ def _rashi_to_int(rashi: str | int | None) -> int:
 
 def _build_chart_for_doshas(chart: dict) -> BirthChart:
     """Construct BirthChart from DB dict for DoshaDetector."""
+    # Determine lagna index (0-11) for house calculation
+    lagna_str = chart.get("lagna_rashi", "aries")
+    lagna_idx = RASHI_NAME_TO_IDX.get(str(lagna_str).lower(), 0)
+
     planets_dict: dict[Planet, PlanetPosition] = {}
     for pname, pdata in chart.get("planets", {}).items():
         if not isinstance(pdata, dict):
@@ -169,16 +175,26 @@ def _build_chart_for_doshas(chart: dict) -> BirthChart:
         lon = float(pdata.get("longitude", 0))
         rashi_idx = int(pdata.get("rashi", int(lon / 30) % 12))
         nak_info = longitude_to_nakshatra(lon)
+
+        # Compute house from lagna if not stored in DB
+        stored_house = pdata.get("house")
+        if isinstance(stored_house, int) and 1 <= stored_house <= 12:
+            house = stored_house
+        else:
+            house = ((rashi_idx - lagna_idx) % 12) + 1
+
         planets_dict[planet] = PlanetPosition(
             planet=planet,
             longitude=lon,
+            latitude=float(pdata.get("latitude", 0.0)),
+            speed=float(pdata.get("speed", 0.0)),
             rashi=RASHI_LIST[rashi_idx % 12],
             rashi_degree=lon % 30,
             nakshatra=nak_info.get("name", ""),
             nakshatra_pada=nak_info.get("pada", 1),
             nakshatra_lord=Planet(nak_info.get("lord", "ketu")),
             is_retrograde=pdata.get("is_retrograde", False),
-            house=int(pdata.get("house", 1)),
+            house=house,
         )
 
     houses = chart.get("houses", {})
@@ -288,8 +304,13 @@ async def get_yogas(
         chart_obj = _build_chart_for_doshas(chart)
         detector = YogaDetector()
         detected = detector.detect_all_yogas(chart_obj)
-        yogas = [
-            {
+
+        # Enrich with effects/interpretation from yoga rules
+        yoga_rules = detector.yoga_rules
+        yogas = []
+        for y in detected:
+            rule = yoga_rules.get(y.yoga_id, {})
+            entry: dict[str, Any] = {
                 "yoga_id": y.yoga_id,
                 "name": y.name,
                 "category": y.category.value if hasattr(y.category, "value") else str(y.category),
@@ -297,9 +318,15 @@ async def get_yogas(
                 "strength": y.strength,
                 "involved_planets": [p.value for p in y.involved_planets],
                 "description": y.description,
+                "effects": rule.get("effects", []),
             }
-            for y in detected
-        ]
+            # Add conditions_met from rule for "Why it forms"
+            conditions = rule.get("detection", {}).get("conditions", [])
+            if conditions:
+                entry["conditions_met"] = [
+                    c.get("type", "").replace("_", " ").title() for c in conditions
+                ]
+            yogas.append(entry)
 
         # Free tier: names only
         if access == AccessLevel.PREVIEW:
@@ -376,18 +403,27 @@ async def get_doshas(
         chart_obj = _build_chart_for_doshas(chart)
         detector = DoshaDetector()
         detected = detector.detect_all(chart_obj)
-        doshas = [
-            {
+
+        # Enrich with effects/conditions from dosha rules
+        doshas = []
+        for d in detected:
+            rule = detector.dosha_rules.get(d.dosha_id, {})
+            entry: dict[str, Any] = {
                 "dosha_id": d.dosha_id,
                 "name": d.name,
                 "is_present": d.is_present,
                 "severity": d.severity,
                 "involved_planets": [p.value for p in d.involved_planets],
                 "description": d.description,
-                "remedies": d.remedies,
+                "remedies": d.remedies or rule.get("remedies", []),
+                "effects": rule.get("effects", []),
             }
-            for d in detected
-        ]
+            conditions = rule.get("detection", {}).get("conditions", [])
+            if conditions:
+                entry["conditions_met"] = [
+                    c.get("type", "").replace("_", " ").title() for c in conditions
+                ]
+            doshas.append(entry)
 
         # Free tier: names only
         if access == AccessLevel.PREVIEW:
@@ -599,6 +635,18 @@ async def get_dasha_timeline(
 
         dosha_markers = _detect_dosha_markers(chart) if chart else {}
 
+        # Enrich with dasha guide data (theme, focus areas, practical advice)
+        guide_data = get_dasha_guide()
+        guide = guide_data.get("dasha_guide", guide_data)
+        current_md_lord = (md.get("lord") or "").lower()
+        current_guide = guide.get(current_md_lord, {})
+
+        # Add theme to each MD in the sequence
+        md_seq_enriched = _fmt_seq(periods)
+        for p in md_seq_enriched:
+            lord_guide = guide.get((p.get("lord") or "").lower(), {})
+            p["theme"] = lord_guide.get("theme", "")
+
         return {
             "current": {
                 "mahadasha_lord": md.get("lord"),
@@ -612,8 +660,13 @@ async def get_dasha_timeline(
                 "pratyantardasha_lord": pd.get("lord"),
                 "pratyantardasha_start": str(pd.get("start_date", "")),
                 "pratyantardasha_end": str(pd.get("end_date", "")),
+                "theme": current_guide.get("theme", ""),
+                "focus_areas": current_guide.get("focus_areas", []),
+                "practical_advice": current_guide.get("practical_advice", []),
+                "challenges": current_guide.get("challenges", ""),
+                "opportunities": current_guide.get("opportunities", ""),
             },
-            "mahadasha_sequence": _fmt_seq(periods),
+            "mahadasha_sequence": md_seq_enriched,
             "antardasha_sequence": _fmt_seq(ad_seq),
             "pratyantardasha_sequence": _fmt_seq(pd_seq),
             "alerts": alerts,
@@ -1304,12 +1357,17 @@ async def get_transit_snapshot_endpoint(
         moon_idx = _rashi_to_int(chart.get("moon_rashi"))
 
         now_jd = get_julian_day(datetime.utcnow())
+        # Build BirthChart for Ashtakavarga BAV lookups in snapshot
+        try:
+            birth_chart = _build_chart_for_doshas(chart)
+        except Exception:
+            birth_chart = None
         snapshot = get_transit_snapshot(
             julian_day=now_jd,
             lagna_rashi=lagna_idx,
             moon_rashi=moon_idx,
             natal_planets=natal_planets,
-            chart=None,
+            chart=birth_chart,
         )
 
         # Preview tier: positions + house scores + double transit only
@@ -1328,6 +1386,8 @@ async def get_transit_snapshot_endpoint(
                 ],
                 "double_transit_houses": snapshot.get("double_transit_houses", []),
                 "most_active_houses": snapshot.get("most_active_houses", []),
+                "gochara_summary": snapshot.get("gochara_summary", []),
+                "active_aspects": snapshot.get("active_aspects", []),
                 "overall_trend": snapshot.get("overall_trend", "mixed"),
                 "access": "preview",
                 "upgrade_hint": "Upgrade to Pro for full lordship analysis and detailed house breakdowns",
@@ -1539,24 +1599,42 @@ async def get_strength(
         chart_obj = _build_chart_for_doshas(chart)
         calculator = StrengthCalculator()
 
+        # Required minimum Shadbala virupas per planet (BPHS-based).
+        # Ratio = total_virupas / required → 1.0 means "meets threshold".
+        _required_virupas: dict[str, float] = {
+            "sun": 390,
+            "moon": 360,
+            "mars": 300,
+            "mercury": 420,
+            "jupiter": 390,
+            "venus": 330,
+            "saturn": 300,
+            "rahu": 300,
+            "ketu": 300,
+        }
+
         planets_list = []
         for planet in Planet:
             if planet not in chart_obj.planets:
                 continue
             result = calculator.calculate_shadbala(planet, chart_obj)
-            total = result.get("total", 0.0)
+            total_virupas = result.get("total", 0.0)
+            required = _required_virupas.get(planet.value, 300)
+            ratio = total_virupas / required if required > 0 else 0.0
+
+            # Grade based on ratio (1.0 = meets BPHS minimum)
             grade = (
                 "very_strong"
-                if total >= 1.5
+                if ratio >= 1.5
                 else "strong"
-                if total >= 1.0
+                if ratio >= 1.0
                 else "average"
-                if total >= 0.7
+                if ratio >= 0.7
                 else "weak"
             )
             entry: dict[str, Any] = {
                 "planet": planet.value,
-                "total_shadbala": round(total, 2),
+                "total_shadbala": round(ratio, 2),
                 "grade": grade,
             }
             if access != AccessLevel.PREVIEW:

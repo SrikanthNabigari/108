@@ -33,13 +33,13 @@ _dosha_detector = DoshaDetector()
 # ── Factor weights for composite calculation ──
 
 FACTOR_WEIGHTS: dict[str, float] = {
-    "panchanga": 0.15,
-    "transit_moon": 0.15,
-    "gochara": 0.15,
-    "dasha": 0.20,
-    "yoga_activation": 0.10,
-    "shadbala": 0.10,
-    "ashtakavarga": 0.15,
+    "panchanga": 0.05,  # Muhurta timing quality (background, not predictive)
+    "transit_moon": 0.10,  # Chandrashtama + Tarabala (evaluated from natal Moon)
+    "gochara": 0.20,  # BAV-modulated planet transits from Moon (BPHS Ch.65-66)
+    "dasha": 0.30,  # "Dasha is king" (BPHS Ch.46) + functional nature + Shadbala
+    "yoga_activation": 0.15,  # Natal yogas triggered by current transits
+    "shadbala": 0.10,  # Natal chart strength context (dasha lord weighted)
+    "ashtakavarga": 0.10,  # Chart-specific transit BAV strength
 }
 
 # ── Area → House mapping ──
@@ -458,58 +458,84 @@ def _normalize_panchanga(panchanga: dict[str, Any]) -> tuple[float, str, str]:
 
 def _normalize_transit_moon(
     transit_positions: dict[str, int],
-    lagna_index: int,
+    lagna_index: int,  # noqa: ARG001 — kept for signature compatibility
     birth_moon_nak: int = 0,
     raw_planets: dict[str, Any] | None = None,
+    moon_rashi_idx: int = 0,
 ) -> tuple[float, str, str]:
-    """Score Moon's transit position relative to lagna + nakshatra Tarabala.
+    """Score Moon's transit from natal Moon sign (BPHS Ch.65) + Tarabala.
 
-    Combines house-based score with Tarabala (birth nakshatra to transit
-    nakshatra relationship) for a more precise Moon transit assessment.
+    Classical evaluation: Transit Moon judged from natal Moon, NOT lagna.
+    Includes Chandrashtama (8th from Moon) — severe 2.5-day penalty.
+    Tarabala effects strengthened per Phaladeepika.
     """
     moon_rashi = transit_positions.get("moon", 0)
-    house = _house_from_lagna(moon_rashi, lagna_index)
+    # BPHS: evaluate from natal Moon sign (not lagna)
+    house_from_moon = ((moon_rashi - moon_rashi_idx) % 12) + 1
 
-    # Moon gochara house scores (per-house from lagna)
+    # Moon gochara house scores (from natal Moon per BPHS)
+    # Favorable: 1, 3, 6, 7, 10, 11
     house_scores: dict[int, float] = {
-        1: 7.5,
-        2: 4.5,
-        3: 7.0,
-        4: 5.5,
-        5: 5.0,
-        6: 6.5,
-        7: 5.5,
-        8: 3.0,
-        9: 6.0,
-        10: 7.5,
-        11: 8.0,
-        12: 3.5,
+        1: 6.5,  # Janma rashi — depends on Tarabala
+        2: 4.0,  # Expenses, food concerns
+        3: 7.5,  # Courage, success
+        4: 4.0,  # Emotional turbulence
+        5: 5.0,  # Neutral, mild challenges
+        6: 7.0,  # Victory over enemies
+        7: 6.5,  # Good for relationships
+        8: 2.0,  # CHANDRASHTAMA — worst position
+        9: 4.5,  # Mild challenges, travel issues
+        10: 8.0,  # Success, authority, respect
+        11: 8.5,  # Gains, best position
+        12: 3.0,  # Expenses, isolation, loss
     }
-    score = house_scores.get(house, 5.0)
+    score = house_scores.get(house_from_moon, 5.0)
 
-    # Tarabala: 9-fold relationship between birth and transit nakshatras
-    # Tara cycle: 1=Janma(mod), 2=Sampat(+), 3=Vipat(-), 4=Kshema(+),
-    #             5=Pratyak(-), 6=Sadhana(+), 7=Naidhana(-), 8=Mitra(+), 9=ParamaMitra(+)
+    # Chandrashtama: 8th from natal Moon (Phaladeepika: no auspicious activity)
+    chandrashtama = house_from_moon == 8
+    if chandrashtama:
+        score -= 1.0  # Additional penalty beyond low house score
+
+    # Tarabala: 9-fold nakshatra relationship (strengthened per classical texts)
+    # Tara cycle: 1=Janma, 2=Sampat, 3=Vipat, 4=Kshema,
+    #             5=Pratyak, 6=Sadhana, 7=Naidhana, 8=Mitra, 9=ParamaMitra
+    tara_name = ""
     if birth_moon_nak >= 1 and raw_planets:
         moon_lon = raw_planets.get("moon", {}).get("longitude", 0)
         transit_nak = int(moon_lon / 13.333333) + 1  # 1-27
         if transit_nak >= 1:
             tara = ((transit_nak - birth_moon_nak) % 9) + 1
             _TARA_ADJ = {
-                1: -0.3,  # Janma — moderate stress
-                2: 0.5,  # Sampat — wealth, gain
-                3: -0.6,  # Vipat — danger
-                4: 0.5,  # Kshema — prosperity
-                5: -0.4,  # Pratyak — obstacles
-                6: 0.3,  # Sadhana — achievement
-                7: -0.7,  # Naidhana — worst (death/loss)
-                8: 0.4,  # Mitra — friendly
-                9: 0.6,  # Parama Mitra — best friend
+                1: -0.8,  # Janma — stress on mind/body
+                2: 1.0,  # Sampat — wealth, gain
+                3: -1.5,  # Vipat — danger, sudden obstacles
+                4: 1.0,  # Kshema — prosperity, comfort
+                5: -1.0,  # Pratyak — obstacles, reversals
+                6: 0.8,  # Sadhana — achievement through effort
+                7: -2.0,  # Naidhana — worst: severe loss (BPHS)
+                8: 0.8,  # Mitra — friendship, support
+                9: 1.2,  # Parama Mitra — supreme friendship
+            }
+            _TARA_NAMES = {
+                1: "Janma",
+                2: "Sampat",
+                3: "Vipat",
+                4: "Kshema",
+                5: "Pratyak",
+                6: "Sadhana",
+                7: "Naidhana",
+                8: "Mitra",
+                9: "Parama Mitra",
             }
             score += _TARA_ADJ.get(tara, 0.0)
+            tara_name = _TARA_NAMES.get(tara, "")
 
     sign_name = RASHI_NAMES[moon_rashi] if 0 <= moon_rashi < 12 else "unknown"
-    desc = f"Moon in {sign_name.title()} (house {house})"
+    desc = f"Moon in {sign_name.title()} (H{house_from_moon} from Moon)"
+    if tara_name:
+        desc += f", {tara_name} tara"
+    if chandrashtama:
+        desc += " — CHANDRASHTAMA"
 
     return _clamp(score), "moon", desc
 
@@ -518,18 +544,22 @@ def _normalize_gochara(
     transit_result: dict[str, Any],
     raw_planets: dict[str, Any] | None = None,
     lagna_index: int | None = None,
+    birth_chart: BirthChart | None = None,
 ) -> tuple[float, str, str]:
     """Convert full transit analysis to (score 0-10, dominant_planet, description).
 
-    Uses per-planet per-house graded scoring from classical Jyotish texts.
-    Each planet in each house from Moon has a distinct score (not binary).
-    Modifiers: sandhi (sign boundary weakness), lordship role, retrograde.
+    BPHS Ch.65-66: Per-planet per-house graded scoring from natal Moon.
+    Moon excluded (has dedicated transit_moon factor).
+    BAV modulation: gochara effects qualified by Ashtakavarga bindus (BPHS Ch.66).
+    Vedha: 100% cancellation per classical texts.
+    Sade Sati NOT applied here (handled in dosha penalties to avoid triple-count).
     """
     planet_transits = transit_result.get("planet_transits", {})
     if not planet_transits:
         return 5.0, "", "No transit data"
 
     # Weight planets by astrological significance (slow > fast)
+    # Moon excluded — scored separately in transit_moon factor
     _gochara_weight: dict[str, float] = {
         "jupiter": 2.0,
         "saturn": 2.0,
@@ -539,7 +569,6 @@ def _normalize_gochara(
         "sun": 1.0,
         "venus": 1.0,
         "mercury": 0.8,
-        "moon": 1.5,
     }
 
     # Pre-compute lordship roles if lagna available
@@ -549,7 +578,8 @@ def _normalize_gochara(
             from packages.self.src.transit_lordship import classify_planet_role
 
             for planet in planet_transits:
-                lordship_roles[planet] = classify_planet_role(planet, lagna_index)
+                if planet != "moon":
+                    lordship_roles[planet] = classify_planet_role(planet, lagna_index)
         except Exception:
             pass
 
@@ -559,19 +589,22 @@ def _normalize_gochara(
     max_impact = 0.0
 
     for planet, data in planet_transits.items():
+        # Moon scored in dedicated transit_moon factor — skip here
+        if planet == "moon":
+            continue
+
         w = _gochara_weight.get(planet, 1.0)
 
-        # 1. Per-house graded score (replaces binary 8.0/2.0)
+        # 1. Per-house graded score from classical tables
         house_from_moon = data.get("house_from_moon", 0)
         if house_from_moon >= 1:
             base = _GOCHARA_HOUSE_SCORES.get(planet, {}).get(house_from_moon, 5.0)
         else:
-            # Fallback for data without house_from_moon
             base = 7.5 if data.get("is_favorable") else 3.0
 
-        # 2. Vedha cancellation — pull score toward neutral
+        # 2. Vedha — FULL cancellation per BPHS (not partial)
         if data.get("has_vedha") and data.get("is_favorable"):
-            base = 5.0 + (base - 5.0) * 0.3  # ~70% cancelled
+            base = 5.0  # 100% cancelled to neutral
 
         # 3. Sandhi & retrograde from raw longitude data
         if raw_planets and planet in raw_planets:
@@ -579,17 +612,17 @@ def _normalize_gochara(
             lon = pdata.get("longitude", 0)
             deg_in_sign = lon % 30
 
-            # Sandhi: planet at sign boundary (0° or 30°) is weak
+            # Sandhi: planet at sign boundary is weak
             dist_from_boundary = min(deg_in_sign, 30 - deg_in_sign)
             if dist_from_boundary < 1.0:
-                sandhi = 0.7  # significant weakness at exact junction
+                sandhi = 0.7
             elif dist_from_boundary < 3.0:
-                sandhi = 0.85  # mild weakness near boundary
+                sandhi = 0.85
             else:
                 sandhi = 1.0
             base = 5.0 + (base - 5.0) * sandhi
 
-            # 4. Retrograde: intensifies the effect (good → better, bad → worse)
+            # 4. Retrograde: intensifies the effect (good better, bad worse)
             if pdata.get("is_retrograde"):
                 base = 5.0 + (base - 5.0) * 1.25
 
@@ -606,6 +639,24 @@ def _normalize_gochara(
             elif nature == "maraka":
                 base -= 0.6
 
+        # 6. BAV modulation (BPHS Ch.66: transit qualified by Ashtakavarga)
+        # BAV 4/8 = neutral (1.0x), 0/8 = 0.3x effect, 8/8 = 1.7x effect
+        if (
+            birth_chart is not None
+            and planet not in ("rahu", "ketu")
+            and raw_planets
+            and planet in raw_planets
+        ):
+            rashi_idx = int(raw_planets[planet].get("longitude", 0) / 30)
+            try:
+                p_enum = Planet(planet)
+                bav = _strength_calculator.calculate_ashtakavarga(p_enum, birth_chart)
+                bav_score = float(bav[rashi_idx])
+                bav_mult = 0.3 + (bav_score / 8.0) * 1.4  # 0.3x to 1.7x
+                base = 5.0 + (base - 5.0) * bav_mult
+            except Exception:
+                pass
+
         base = _clamp(base)
         weighted_score += base * w
         total_weight += w
@@ -618,12 +669,9 @@ def _normalize_gochara(
 
     score = weighted_score / total_weight if total_weight > 0 else 5.0
 
-    # Sade Sati adjustment
-    sade_sati = transit_result.get("sade_sati", {})
-    if sade_sati.get("active"):
-        phase = sade_sati.get("phase", "")
-        score -= 2.0 if phase == "peak" else 1.0
-        dominant = "saturn"
+    # NOTE: Sade Sati NOT applied here — Saturn's house scores already reflect
+    # difficulty in houses 1/2/12 from Moon. Area-specific Sade Sati impact
+    # is handled in _score_dosha_impact to avoid triple-counting.
 
     summary = transit_result.get("summary", {})
     favorable = summary.get("favorable_count", 0)
@@ -664,14 +712,260 @@ _DASHA_RELATIONSHIP_ADJ: dict[str, float] = {
 }
 
 
+# Classical Parashari aspects: planet -> list of houses (from itself) it aspects
+_PARASHARI_ASPECTS: dict[str, list[int]] = {
+    "sun": [7],
+    "moon": [7],
+    "mercury": [7],
+    "venus": [7],
+    "jupiter": [5, 7, 9],
+    "mars": [4, 7, 8],
+    "saturn": [3, 7, 10],
+    "rahu": [5, 7, 9],  # treated like Jupiter
+    "ketu": [5, 7, 9],
+}
+
+# Slow planet weight for ashtakavarga-transit scoring
+_PLANET_TRANSIT_WEIGHT: dict[str, float] = {
+    "jupiter": 2.0,
+    "saturn": 2.0,
+    "mars": 1.2,
+    "sun": 0.8,
+    "mercury": 0.8,
+    "venus": 0.8,
+    "moon": 0.6,
+    "rahu": 1.5,
+    "ketu": 1.0,
+}
+
+
+def _compute_dasha_area_score(
+    area_houses: list[int],
+    dasha_result: dict[str, Any] | None,
+    natal_planets: dict[str, Any],
+    lagna_index: int,
+) -> float:
+    """Multi-signal dasha-area scorer (BPHS classical hierarchy).
+
+    Combines:
+    - Lordship (40%): Does MD/AD lord rule any area house?
+    - Natal placement (25%): Is MD/AD lord sitting in an area house natally?
+    - Natal aspects (10%): Does MD/AD lord aspect any area house?
+    - Dignity (15%): MD lord's dignity via _dignity_for_planet()
+    - MD x AD relationship (10%): friend/enemy quality
+
+    Returns 0-10 score.
+    """
+    if not dasha_result:
+        return 5.0
+
+    md = dasha_result.get("mahadasha", {})
+    ad = dasha_result.get("antardasha", {})
+    md_lord = md.get("lord", "")
+    ad_lord = ad.get("lord", "")
+
+    if not md_lord:
+        return 5.0
+
+    houses_set = set(area_houses)
+
+    # 1. Lordship (40%): does MD/AD lord rule any area house?
+    lordship_score = 0.0
+    try:
+        from packages.self.src.transit_lordship import get_planet_lordships
+
+        md_houses = set(get_planet_lordships(md_lord, lagna_index)) if md_lord else set()
+        ad_houses = set(get_planet_lordships(ad_lord, lagna_index)) if ad_lord else set()
+
+        md_overlap = len(md_houses & houses_set)
+        ad_overlap = len(ad_houses & houses_set)
+
+        if md_overlap > 0:
+            lordship_score += 7.0 + md_overlap  # 8-9 for 1-2 house overlap
+        if ad_overlap > 0:
+            lordship_score += 3.0 + ad_overlap * 0.5  # 3.5-4 boost
+        if md_overlap == 0 and ad_overlap == 0:
+            lordship_score = 3.0  # no connection
+    except Exception:
+        lordship_score = 5.0
+
+    lordship_score = _clamp(lordship_score)
+
+    # 2. Natal placement (25%): is MD/AD lord sitting in an area house natally?
+    placement_score = 3.0  # default: not in area house
+    for lord in [md_lord, ad_lord]:
+        if lord and natal_planets:
+            p_data = natal_planets.get(lord, {})
+            if isinstance(p_data, dict):
+                natal_house = int(p_data.get("house", 0))
+                if natal_house in houses_set:
+                    placement_score = 8.0 if lord == md_lord else max(placement_score, 6.5)
+
+    # 3. Natal aspects (10%): does MD/AD lord aspect any area house?
+    aspect_score = 3.0
+    for lord in [md_lord, ad_lord]:
+        if lord and natal_planets:
+            p_data = natal_planets.get(lord, {})
+            if isinstance(p_data, dict):
+                natal_house = int(p_data.get("house", 0))
+                if natal_house > 0:
+                    aspect_houses_from = _PARASHARI_ASPECTS.get(lord, [7])
+                    aspected_houses = {
+                        ((natal_house - 1 + off) % 12) + 1 for off in aspect_houses_from
+                    }
+                    if aspected_houses & houses_set:
+                        mult = 1.0 if lord == md_lord else 0.6
+                        aspect_score = max(aspect_score, 3.0 + 5.0 * mult)
+
+    # 4. Dignity (15%): MD lord's dignity
+    dignity_score = _dignity_for_planet(md_lord, natal_planets)
+
+    # 5. MD x AD relationship (10%)
+    relationship_score = 5.0
+    try:
+        from packages.core.src.knowledge_loader import get_antardasha_effects
+
+        all_effects = get_antardasha_effects()
+        ad_effects = all_effects.get(md_lord, {}).get(ad_lord, {})
+        relationship = ad_effects.get("relationship", "neutral")
+        rel_map = {"friend": 8.0, "same": 6.5, "neutral": 5.0, "enemy": 2.0}
+        relationship_score = rel_map.get(relationship, 5.0)
+    except Exception:
+        pass
+
+    # Blend
+    score = (
+        lordship_score * 0.40
+        + placement_score * 0.25
+        + aspect_score * 0.10
+        + dignity_score * 0.15
+        + relationship_score * 0.10
+    )
+    return _clamp(score)
+
+
+def _compute_ashtakavarga_transit_score(
+    area_houses: list[int],
+    transit_positions: dict[str, int],
+    lagna_index: int,
+    birth_chart: Any | None,
+) -> float:
+    """Score transits through area houses weighted by Ashtakavarga bindus.
+
+    For each planet transiting an area house, multiply gochara house quality
+    by BAV bindus (0-8 -> multiplier 0.25-1.75). Weight slow planets more.
+
+    Returns 0-10 score.
+    """
+    houses_set = set(area_houses)
+
+    planet_enum_map = {
+        "sun": Planet.SUN,
+        "moon": Planet.MOON,
+        "mars": Planet.MARS,
+        "mercury": Planet.MERCURY,
+        "jupiter": Planet.JUPITER,
+        "venus": Planet.VENUS,
+        "saturn": Planet.SATURN,
+    }
+
+    weighted_scores: list[float] = []
+    total_weight = 0.0
+
+    for planet_name, rashi_idx in transit_positions.items():
+        house = _house_from_lagna(rashi_idx, lagna_index)
+        if house not in houses_set:
+            continue
+
+        # Base quality from gochara house scores
+        gochara_scores = _GOCHARA_HOUSE_SCORES.get(planet_name, {})
+        base_quality = gochara_scores.get(house, 5.0)
+
+        # BAV multiplier
+        bav_multiplier = 1.0
+        if birth_chart is not None:
+            p_enum = planet_enum_map.get(planet_name)
+            if p_enum is not None:
+                try:
+                    bav = _strength_calculator.calculate_ashtakavarga(p_enum, birth_chart)
+                    bav_score = float(bav[rashi_idx])
+                    bav_multiplier = 0.25 + (bav_score / 8.0) * 1.5  # 0.25-1.75
+                except Exception:
+                    pass
+
+        # Planet weight (slow planets matter more)
+        p_weight = _PLANET_TRANSIT_WEIGHT.get(planet_name, 1.0)
+
+        weighted_scores.append(base_quality * bav_multiplier * p_weight)
+        total_weight += p_weight
+
+    if total_weight > 0:
+        return _clamp(sum(weighted_scores) / total_weight)
+
+    # Fallback: SAV of area house signs
+    if birth_chart is not None:
+        try:
+            sav = _strength_calculator.calculate_sarvashtakavarga(birth_chart)
+            sav_scores = []
+            for house in area_houses:
+                sign = (lagna_index + house - 1) % 12
+                sav_scores.append(float(sav[sign]))
+            avg_sav = sum(sav_scores) / len(sav_scores)
+            return _clamp(avg_sav / 337 * 12 * 10)  # SAV total ~337, per sign ~28, scale 0-10
+        except Exception:
+            pass
+
+    return 5.0  # neutral fallback
+
+
+def _compute_double_transit_area_score(
+    area_houses: list[int],
+    house_activations: list[dict[str, Any]] | None,
+) -> tuple[float, bool]:
+    """Score double transit activation for area houses.
+
+    Returns (score, has_double_transit_bool).
+    - Primary house has DT -> 10.0
+    - Secondary house has DT -> 7.0
+    - No DT -> 3.0
+    """
+    if not house_activations:
+        return 3.0, False
+
+    ha_map = {ha.get("house", 0): ha for ha in house_activations}
+
+    primary = area_houses[0] if area_houses else 0
+    secondary = area_houses[1] if len(area_houses) > 1 else 0
+
+    if ha_map.get(primary, {}).get("double_transit"):
+        return 10.0, True
+    if ha_map.get(secondary, {}).get("double_transit"):
+        return 7.0, True
+
+    # Check tertiary
+    for h in area_houses[2:]:
+        if ha_map.get(h, {}).get("double_transit"):
+            return 5.5, True
+
+    return 3.0, False
+
+
 def _normalize_dasha(
     dasha_result: dict[str, Any] | None,
     natal_planets: dict[str, Any],
+    lagna_index: int = 0,
+    birth_chart: BirthChart | None = None,
 ) -> tuple[float, str, str]:
-    """Score current dasha based on lord dignity + MD x AD relationship quality.
+    """Score current dasha using BPHS classical hierarchy.
 
-    Combines natal dignity (how strong each lord is in the chart) with
-    the natural relationship between MD and AD lords from the knowledge base.
+    BPHS Ch.46: "Dasha is the king of all predictive methods."
+
+    Components:
+    - Functional nature per lagna (35%): yogakaraka vs malefic vs maraka
+    - Natal dignity (25%): exaltation/debilitation/own sign
+    - House lordship quality (15%): trine lord vs dusthana lord
+    - MD x AD relationship (15%): friend/enemy quality
+    - Shadbala modifier (10%): natal strength of dasha lords
     """
     if not dasha_result:
         return 5.0, "", "Dasha data unavailable"
@@ -684,15 +978,59 @@ def _normalize_dasha(
     ad_lord = ad.get("lord", "")
     pd_lord = pd.get("lord", "")
 
-    # 1. Natal dignity scores (static per chart)
-    md_score = _dignity_for_planet(md_lord, natal_planets)
-    ad_score = _dignity_for_planet(ad_lord, natal_planets)
-    pd_score = _dignity_for_planet(pd_lord, natal_planets)
+    if not md_lord:
+        return 5.0, "", "Dasha lord unknown"
 
-    dignity_score = md_score * 0.5 + ad_score * 0.3 + pd_score * 0.2
+    # 1. Functional nature per lagna (35%) — THE most critical dasha factor
+    # Saturn for Libra lagna (yogakaraka) vs Saturn for Leo lagna (malefic+maraka)
+    functional_score = 5.0
+    md_nature_label = ""
+    try:
+        from packages.self.src.transit_lordship import classify_planet_role
 
-    # 2. MD x AD relationship quality from knowledge base
-    relationship_adj = 0.0
+        md_role = classify_planet_role(md_lord, lagna_index)
+        md_nature = md_role.get("functional_nature", "neutral")
+        md_nature_label = md_nature
+        functional_score = _NATURE_SCORE.get(md_nature, 5.0)
+
+        if ad_lord:
+            ad_role = classify_planet_role(ad_lord, lagna_index)
+            ad_nature = ad_role.get("functional_nature", "neutral")
+            ad_func = _NATURE_SCORE.get(ad_nature, 5.0)
+            # MD dominates (60/40 blend)
+            functional_score = functional_score * 0.6 + ad_func * 0.4
+    except Exception:
+        pass
+
+    # 2. Natal dignity (25%): how strong is the lord in the birth chart
+    md_dig = _dignity_for_planet(md_lord, natal_planets)
+    ad_dig = _dignity_for_planet(ad_lord, natal_planets) if ad_lord else 5.0
+    dignity_score = md_dig * 0.6 + ad_dig * 0.4
+
+    # 3. House lordship quality (15%): trine lord (1,5,9) > kendra (4,7,10) > dusthana (6,8,12)
+    lordship_score = 5.0
+    try:
+        from packages.self.src.transit_lordship import get_planet_lordships
+
+        md_houses = set(get_planet_lordships(md_lord, lagna_index)) if md_lord else set()
+        trine = {1, 5, 9}
+        kendra = {4, 7, 10}
+        dusthana = {6, 8, 12}
+
+        if md_houses & trine:
+            lordship_score = 8.5
+        elif md_houses & kendra:
+            lordship_score = 6.5
+        elif md_houses & dusthana:
+            lordship_score = 2.5
+        # Upachaya (3,6,11): moderate — natural malefics do well, benefics less so
+        elif md_houses & {3, 11}:
+            lordship_score = 5.5
+    except Exception:
+        pass
+
+    # 4. MD x AD relationship quality (15%)
+    relationship_score = 5.0
     ad_effects: dict[str, Any] = {}
     try:
         from packages.core.src.knowledge_loader import get_antardasha_effects
@@ -700,20 +1038,41 @@ def _normalize_dasha(
         all_effects = get_antardasha_effects()
         ad_effects = all_effects.get(md_lord, {}).get(ad_lord, {})
         relationship = ad_effects.get("relationship", "neutral")
-        relationship_adj = _DASHA_RELATIONSHIP_ADJ.get(relationship, 0.0)
+        rel_map = {"friend": 8.0, "same": 6.5, "neutral": 5.0, "enemy": 2.0}
+        relationship_score = rel_map.get(relationship, 5.0)
     except Exception:
         pass
 
-    # 3. Blend: dignity (75%) + relationship quality (25%)
-    score = dignity_score + relationship_adj * 0.5
+    # 5. Shadbala modifier (10%): natal strength of dasha lords
+    shadbala_score = 5.0
+    if birth_chart:
+        try:
+            all_strengths = _strength_calculator.get_all_planet_strengths(birth_chart)
+            md_virupas = float(all_strengths.get(md_lord, {}).get("total", 0.0))
+            shadbala_score = _virupas_to_score(md_virupas)
+        except Exception:
+            pass
+
+    # Blend per BPHS hierarchy
+    score = (
+        functional_score * 0.35
+        + dignity_score * 0.25
+        + lordship_score * 0.15
+        + relationship_score * 0.15
+        + shadbala_score * 0.10
+    )
 
     # Build rich description
-    desc = f"{md_lord.title()} MD / {ad_lord.title()} AD"
-    if pd_lord:
-        desc += f" / {pd_lord.title()} PD"
+    desc = f"{md_lord.title()} MD"
+    if md_nature_label:
+        desc += f" ({md_nature_label})"
+    if ad_lord:
+        desc += f" / {ad_lord.title()} AD"
     rel = ad_effects.get("relationship", "")
     if rel:
         desc += f" ({rel})"
+    if pd_lord:
+        desc += f" / {pd_lord.title()} PD"
 
     return _clamp(score), md_lord, desc
 
@@ -1356,29 +1715,32 @@ def _score_dosha_impact(
             if area in penalties:
                 penalties[area] += penalty
 
-    # Sade Sati area-specific impact
+    # Sade Sati area-specific impact (single calculation point — not in gochara)
+    # Saturn's gochara house scores already reflect general difficulty in H1/2/12.
+    # These area penalties capture the nuanced per-area Sade Sati effects.
     if sade_sati and sade_sati.get("active"):
         phase = sade_sati.get("phase", "")
         if phase == "peak":
-            # Peak: broad impact across all areas
-            for area in penalties:
-                penalties[area] -= 0.8
-        elif phase == "rising":
-            # Rising: mental stress, hidden issues
             penalties["health"] -= 0.6
-            penalties["spiritual"] -= 0.4
-        elif phase == "setting":
-            # Setting: family/money concerns
-            penalties["finance"] -= 0.6
+            penalties["career"] -= 0.5
             penalties["relationships"] -= 0.4
             penalties["family"] -= 0.5
+            penalties["finance"] -= 0.3
+            penalties["spiritual"] -= 0.2
+        elif phase == "rising":
+            penalties["health"] -= 0.4
+            penalties["spiritual"] -= 0.3
+        elif phase == "setting":
+            penalties["finance"] -= 0.4
+            penalties["relationships"] -= 0.3
+            penalties["family"] -= 0.4
 
     # Dhaiya (small panoti): Saturn in 4th or 8th from Moon
     if sade_sati and not sade_sati.get("active"):
         house_from_moon = sade_sati.get("house_from_moon", 0)
         if house_from_moon in (4, 8):
-            penalties["health"] -= 0.3
-            penalties["career"] -= 0.3
+            penalties["health"] -= 0.2
+            penalties["career"] -= 0.2
 
     # Clamp penalties
     return {k: max(v, -3.0) for k, v in penalties.items()}
@@ -1465,234 +1827,92 @@ def _compute_area_scores(
     factor_scores: list[dict[str, Any]],
     transit_positions: dict[str, int],
     lagna_index: int,
-    transit_result: dict[str, Any] | None = None,
+    transit_result: dict[str, Any] | None = None,  # noqa: ARG001
     natal_planets: dict[str, Any] | None = None,
     dosha_penalties: dict[str, float] | None = None,
     house_activations: list[dict[str, Any]] | None = None,
     transit_lordships: list[dict[str, Any]] | None = None,
-    transit_aspects: list[dict[str, Any]] | None = None,
+    transit_aspects: list[dict[str, Any]] | None = None,  # noqa: ARG001
     active_yogas: list[dict[str, Any]] | None = None,
     dasha_result: dict[str, Any] | None = None,
+    birth_chart: Any | None = None,
 ) -> list[dict[str, Any]]:
-    """Compute 8 life area scores using 6-component model.
+    """Compute 8 life area scores using BPHS-aligned 5-component model.
 
-    When house_activations are available, uses the rich model:
-    1. House Activation Score (35%) — composite per-house activation (0-100)
-    2. Lordship Quality (15%) — functional nature of ruling planets
-    3. Transit Aspects (10%) — aspect effects on natal planets in area houses
-    4. Dasha-Area Relevance (20%) — whether dasha lord rules area houses
-    5. Yoga Activation Boost (10%) — active yogas touching area houses
-    6. Panchanga + Natal Baseline (10%)
+    Classical hierarchy (Brihat Parashara Hora Shastra):
+    1. Dasha Analysis (40%) — lordship, natal placement, aspects, dignity, MD x AD
+    2. Ashtakavarga-Weighted Transits (25%) — BAV bindus filter transit strength
+    3. Double Transit (15%) — Jupiter + Saturn activation
+    4. Yoga/Dosha Status (15%) — active yogas boost, doshas penalize
+    5. Panchanga Baseline (5%) — daily timing quality (muhurta, not predictive)
 
-    Falls back to old transit-favorability model when engines unavailable.
+    Falls back to simplified model when birth_chart unavailable.
     """
     factor_map = {f["id"]: f["score"] for f in factor_scores}
 
-    # Natal planet house map — planets sitting in the house natally
-    natal_house_map: dict[int, list[str]] = {h: [] for h in range(1, 13)}
-    if natal_planets:
-        for pname, pdata in natal_planets.items():
-            if isinstance(pdata, dict):
-                h = int(pdata.get("house", 0))
-                if 1 <= h <= 12:
-                    natal_house_map[h].append(pname)
+    # Determine lordship quality from transit lordships for output
+    def _best_lordship_nature(houses_set: set[int]) -> str:
+        best = "neutral"
+        for tl in transit_lordships or []:
+            ruled = set(tl.get("houses_ruled", []))
+            if ruled & houses_set:
+                nature = tl.get("functional_nature", "neutral")
+                if _NATURE_SCORE.get(nature, 5.0) > _NATURE_SCORE.get(best, 5.0):
+                    best = nature
+        return best
 
-    # House importance weights: primary house matters most
-    _house_weights = [0.50, 0.30, 0.20]
-
-    # ── Pre-index engine outputs for fast lookup ──
-    ha_map: dict[int, dict[str, Any]] = {}
-    if house_activations:
-        for ha in house_activations:
-            ha_map[ha.get("house", 0)] = ha
-
-    # Lordship: planet → {functional_nature, houses_ruled}
-    lordship_map: dict[str, dict[str, Any]] = {}
-    if transit_lordships:
-        for tl in transit_lordships:
-            lordship_map[tl.get("planet", "")] = tl
-
-    # Natal planet → house (for aspect matching)
-    natal_planet_house: dict[str, int] = {}
-    if natal_planets:
-        for pname, pdata in natal_planets.items():
-            if isinstance(pdata, dict):
-                natal_planet_house[pname] = int(pdata.get("house", 0))
-
-    # Dasha lord houses (for area relevance)
-    md_lord = (dasha_result or {}).get("mahadasha", {}).get("lord", "")
-    ad_lord = (dasha_result or {}).get("antardasha", {}).get("lord", "")
-    dasha_lord_houses: set[int] = set()
-    if md_lord or ad_lord:
-        try:
-            from packages.self.src.transit_lordship import get_planet_lordships
-
-            if md_lord:
-                dasha_lord_houses.update(get_planet_lordships(md_lord, lagna_index))
-            if ad_lord:
-                dasha_lord_houses.update(get_planet_lordships(ad_lord, lagna_index))
-        except Exception:
-            pass
-
-    use_rich_model = bool(ha_map)
     areas: list[dict[str, Any]] = []
 
     for area_id, houses in AREA_HOUSES.items():
         houses_set = set(houses)
         dominant = AREA_PLANETS.get(area_id, "")
 
-        if use_rich_model:
-            # ── Component 1: House Activation Score (35%) ──
-            ha_scores = [ha_map.get(h, {}).get("score", 50) for h in houses]
-            house_act_score = (
-                sum(
-                    s * w for s, w in zip(ha_scores, _house_weights[: len(ha_scores)], strict=False)
-                )
-                / 10
-            )  # 0-100 -> 0-10
-            # Double transit bonus on primary house
-            primary_ha = ha_map.get(houses[0], {})
-            if primary_ha.get("double_transit"):
-                house_act_score += 1.0
-            has_double_transit = any(ha_map.get(h, {}).get("double_transit") for h in houses)
+        # ── Component 1: Dasha Analysis (40%) — BPHS: "Dasha is king" ──
+        dasha_area = _compute_dasha_area_score(
+            houses, dasha_result, natal_planets or {}, lagna_index
+        )
 
-            # ── Component 2: Lordship Quality (15%) ──
-            lordship_scores: list[float] = []
-            best_nature = "neutral"
-            for tl in transit_lordships or []:
-                ruled = set(tl.get("houses_ruled", []))
-                if ruled & houses_set:
-                    nature = tl.get("functional_nature", "neutral")
-                    lordship_scores.append(_NATURE_SCORE.get(nature, 5.0))
-                    if _NATURE_SCORE.get(nature, 5.0) > _NATURE_SCORE.get(best_nature, 5.0):
-                        best_nature = nature
-            lordship_score = sum(lordship_scores) / len(lordship_scores) if lordship_scores else 5.0
+        # ── Component 2: Ashtakavarga-Weighted Transits (25%) ──
+        ashta_transit = _compute_ashtakavarga_transit_score(
+            houses, transit_positions, lagna_index, birth_chart
+        )
 
-            # ── Component 3: Transit Aspects (10%) ──
-            aspect_scores: list[float] = []
-            for asp in transit_aspects or []:
-                np_name = asp.get("natal_planet", "")
-                np_house = natal_planet_house.get(np_name, 0)
-                if np_house in houses_set:
-                    nature = asp.get("nature", "neutral")
-                    aspect_scores.append(_NATURE_ASPECT_SCORE.get(nature, 5.0))
-            aspect_score = sum(aspect_scores) / len(aspect_scores) if aspect_scores else 5.0
+        # ── Component 3: Double Transit (15%) ──
+        dt_score, has_double_transit = _compute_double_transit_area_score(houses, house_activations)
 
-            # ── Component 4: Dasha-Area Relevance (20%) ──
-            dasha_factor_score = factor_map.get("dasha", 5.0)
-            if dasha_lord_houses & houses_set:
-                dasha_area_score = dasha_factor_score  # full relevance
-            else:
-                dasha_area_score = dasha_factor_score * 0.5 + 5.0 * 0.5  # diluted
+        # ── Component 4: Yoga/Dosha Status (10%) ──
+        yoga_dosha = 5.0  # neutral base
+        area_active_yogas: list[str] = []
+        for ay in active_yogas or []:
+            activated = set(ay.get("activated_houses", []))
+            involved = set(ay.get("involved_houses", []))
+            if ay.get("is_active_now") and (activated | involved) & houses_set:
+                yoga_dosha += ay.get("strength", 0.5) * 2.0
+                area_active_yogas.append(ay.get("yoga_name", ""))
 
-            # ── Component 5: Yoga Activation Boost (10%) ──
-            yoga_boost = 5.0  # neutral base
-            area_active_yogas: list[str] = []
-            for ay in active_yogas or []:
-                activated = set(ay.get("activated_houses", []))
-                involved = set(ay.get("involved_houses", []))
-                if ay.get("is_active_now") and (activated | involved) & houses_set:
-                    yoga_boost += ay.get("strength", 0.5) * 2.0
-                    area_active_yogas.append(ay.get("yoga_name", ""))
+        # ── Component 5: Panchanga Baseline (10%) ──
+        pan_score = factor_map.get("panchanga", 5.0)
 
-            # ── Component 6: Panchanga + Natal Baseline (10%) ──
-            pan_score = factor_map.get("panchanga", 5.0)
-            natal_bonus = 0.0
-            for house in houses:
-                for pname in natal_house_map.get(house, []):
-                    if pname in ("jupiter", "venus", "mercury"):
-                        natal_bonus += 0.5
-                    elif pname in ("saturn", "mars", "rahu", "ketu"):
-                        natal_bonus -= 0.2
-            baseline_score = pan_score * 0.5 + _clamp(5.0 + natal_bonus) * 0.5
+        # ── Final BPHS blend ──
+        area_score = (
+            _clamp(dasha_area) * 0.40
+            + _clamp(ashta_transit) * 0.25
+            + _clamp(dt_score) * 0.15
+            + _clamp(yoga_dosha) * 0.15
+            + _clamp(pan_score) * 0.05
+        )
 
-            # ── Final blend ──
-            area_score = (
-                _clamp(house_act_score) * 0.35
-                + _clamp(lordship_score) * 0.15
-                + _clamp(aspect_score) * 0.10
-                + _clamp(dasha_area_score) * 0.20
-                + _clamp(yoga_boost) * 0.10
-                + _clamp(baseline_score) * 0.10
-            )
-
-            # Track dominant planet from house activation
+        # Track dominant planet from house activation or transit
+        if house_activations:
+            ha_map_local = {ha.get("house", 0): ha for ha in house_activations}
             for h in houses:
-                ha_data = ha_map.get(h, {})
+                ha_data = ha_map_local.get(h, {})
                 present = ha_data.get("planets_present", [])
                 if present:
                     dominant = present[0] if isinstance(present[0], str) else dominant
 
-        else:
-            # ── FALLBACK: old transit-favorability model ──
-            planet_transits = (transit_result or {}).get("planet_transits", {})
-            house_transits: dict[int, list[tuple[str, bool]]] = {h: [] for h in range(1, 13)}
-            for planet_name, rashi_idx in transit_positions.items():
-                house = _house_from_lagna(rashi_idx, lagna_index)
-                pt = planet_transits.get(planet_name, {})
-                favorable = pt.get("is_favorable", True)
-                house_transits[house].append((planet_name, favorable))
-
-            _planet_weight = {
-                "jupiter": 1.5,
-                "venus": 1.2,
-                "mercury": 1.0,
-                "moon": 1.0,
-                "sun": 1.0,
-                "mars": 1.2,
-                "saturn": 1.5,
-                "rahu": 1.3,
-                "ketu": 1.0,
-            }
-            house_scores_list: list[float] = []
-            max_impact = 0.0
-            for house in houses:
-                occupants = house_transits.get(house, [])
-                if occupants:
-                    h_fav = 0.0
-                    h_total = 0.0
-                    for planet_name, favorable in occupants:
-                        w = _planet_weight.get(planet_name, 1.0)
-                        h_total += w
-                        h_fav += w if favorable else 0.0
-                        if w > max_impact:
-                            max_impact = w
-                            dominant = planet_name
-                    house_scores_list.append((h_fav / h_total * 10.0) if h_total > 0 else 5.0)
-                else:
-                    house_scores_list.append(5.0)
-            house_score = sum(s * _house_weights[i] for i, s in enumerate(house_scores_list[:3]))
-
-            karaka = AREA_PLANETS.get(area_id, "")
-            karaka_data = planet_transits.get(karaka, {})
-            karaka_house = _house_from_lagna(transit_positions.get(karaka, 0), lagna_index)
-            _good_houses = {1, 2, 4, 5, 7, 9, 10, 11}
-            karaka_score = 7.0 if karaka_house in _good_houses else 3.0
-            if karaka_data.get("is_favorable"):
-                karaka_score += 1.0
-            else:
-                karaka_score -= 1.0
-
-            natal_bonus = 0.0
-            for house in houses:
-                for pname in natal_house_map.get(house, []):
-                    if pname in ("jupiter", "venus", "mercury"):
-                        natal_bonus += 0.5
-                    elif pname in ("saturn", "mars", "rahu", "ketu"):
-                        natal_bonus -= 0.2
-
-            dasha_score = factor_map.get("dasha", 5.0)
-            pan_score = factor_map.get("panchanga", 5.0)
-            area_score = (
-                house_score * 0.40
-                + _clamp(karaka_score) * 0.20
-                + dasha_score * 0.20
-                + pan_score * 0.10
-                + _clamp(5.0 + natal_bonus, 0.0, 10.0) * 0.10
-            )
-            has_double_transit = False
-            best_nature = "neutral"
-            area_active_yogas = []
+        # Lordship quality for output
+        best_nature = _best_lordship_nature(houses_set)
 
         # ── Apply dosha & sade sati penalties (per-area) ──
         if dosha_penalties:
@@ -1827,44 +2047,8 @@ def compute_state_vector(
             "speed": data.get("speed", 0),
         }
 
-    # ── 3. Transit Moon ──
-    birth_moon_nak = int(moon_longitude / 13.333333) + 1  # 1-27
-    moon_score, moon_planet, moon_desc = _normalize_transit_moon(
-        transit_positions,
-        lagna_index,
-        birth_moon_nak,
-        raw_planets if transit_positions else None,
-    )
-
-    # ── 4. Gochara ──
+    # ── 3. Build BirthChart early (shared by gochara BAV, dasha, yogas, etc.) ──
     moon_rashi_idx = _rashi_index(moon_rashi) if moon_rashi else int(moon_longitude / 30)
-    try:
-        from packages.context.src.transits import get_full_transit_analysis
-
-        transit_result = get_full_transit_analysis(moon_rashi_idx, transit_positions)
-    except Exception as e:
-        logger.warning(f"Gochara computation failed: {e}")
-        transit_result = {}
-    goc_score, goc_planet, goc_desc = _normalize_gochara(
-        transit_result,
-        raw_planets if transit_positions else None,
-        lagna_index=lagna_index,
-    )
-
-    # ── 5. Dasha ──
-    try:
-        from packages.context.src.dasha import get_current_dasha
-
-        # Strip tzinfo for consistent comparison
-        birth_naive = _strip_tz(birth_dt)
-        query_naive = _strip_tz(query_dt)
-        dasha_result = get_current_dasha(birth_naive, moon_longitude, query_naive)
-    except Exception as e:
-        logger.warning(f"Dasha computation failed: {e}")
-        dasha_result = None
-    dsh_score, dsh_planet, dsh_desc = _normalize_dasha(dasha_result, natal_planets)
-
-    # ── 6. Build BirthChart (shared by yogas, doshas, shadbala, ashtakavarga) ──
     try:
         birth_chart = _build_birth_chart(
             birth_dt,
@@ -1879,7 +2063,47 @@ def compute_state_vector(
         logger.warning(f"BirthChart construction failed: {e}")
         birth_chart = None
 
-    # ── 6a. Natal Yogas & Doshas (real detectors: 522 yogas, 55 doshas) ──
+    # ── 4. Transit Moon (from natal Moon per BPHS Ch.65, not lagna) ──
+    birth_moon_nak = int(moon_longitude / 13.333333) + 1  # 1-27
+    moon_score, moon_planet, moon_desc = _normalize_transit_moon(
+        transit_positions,
+        lagna_index,
+        birth_moon_nak,
+        raw_planets if transit_positions else None,
+        moon_rashi_idx=moon_rashi_idx,
+    )
+
+    # ── 5. Gochara (BAV-modulated, Moon excluded, 100% Vedha) ──
+    try:
+        from packages.context.src.transits import get_full_transit_analysis
+
+        transit_result = get_full_transit_analysis(moon_rashi_idx, transit_positions)
+    except Exception as e:
+        logger.warning(f"Gochara computation failed: {e}")
+        transit_result = {}
+    goc_score, goc_planet, goc_desc = _normalize_gochara(
+        transit_result,
+        raw_planets if transit_positions else None,
+        lagna_index=lagna_index,
+        birth_chart=birth_chart,
+    )
+
+    # ── 6. Dasha (functional nature + lordship + shadbala per BPHS) ──
+    try:
+        from packages.context.src.dasha import get_current_dasha
+
+        # Strip tzinfo for consistent comparison
+        birth_naive = _strip_tz(birth_dt)
+        query_naive = _strip_tz(query_dt)
+        dasha_result = get_current_dasha(birth_naive, moon_longitude, query_naive)
+    except Exception as e:
+        logger.warning(f"Dasha computation failed: {e}")
+        dasha_result = None
+    dsh_score, dsh_planet, dsh_desc = _normalize_dasha(
+        dasha_result, natal_planets, lagna_index=lagna_index, birth_chart=birth_chart
+    )
+
+    # ── 7a. Natal Yogas & Doshas (real detectors: 522 yogas, 55 doshas) ──
     natal_yogas, natal_yogas_raw = _detect_natal_yogas(natal_planets, lagna_index, birth_chart)
     natal_doshas = _detect_natal_doshas(natal_planets, lagna_index, birth_chart)
 
@@ -1899,7 +2123,7 @@ def compute_state_vector(
         natal_doshas, transit_positions, lagna_index, sade_sati_detail
     )
 
-    # ── 6b. House Activations, Transit Lordships, Transit Aspects, Yoga Activation ──
+    # ── 7b. House Activations, Transit Lordships, Transit Aspects, Yoga Activation ──
     house_activations: list[dict[str, Any]] = []
     if transit_positions_rich:
         try:
@@ -1943,10 +2167,10 @@ def compute_state_vector(
         except Exception as e:
             logger.warning(f"Yoga activation failed: {e}")
 
-    # ── 7. Shadbala (real 6-component via StrengthCalculator) ──
+    # ── 8. Shadbala (real 6-component via StrengthCalculator) ──
     shd_score, shd_planet, shd_desc = _score_shadbala(dasha_result, natal_planets, birth_chart)
 
-    # ── 8. Ashtakavarga ──
+    # ── 9. Ashtakavarga ──
     ash_score, ash_planet, ash_desc = _score_ashtakavarga(
         transit_positions, lagna_index, birth_chart
     )
@@ -2040,6 +2264,7 @@ def compute_state_vector(
         transit_aspects=transit_aspects,
         active_yogas=active_yogas,
         dasha_result=dasha_result,
+        birth_chart=birth_chart,
     )
 
     return {
@@ -2138,3 +2363,34 @@ def compute_state_range(
         "resolution": resolution,
         "events": [],
     }
+
+
+def compute_area_trend(
+    current_areas: list[dict[str, Any]],
+    previous_areas: list[dict[str, Any]],
+    threshold: float = 0.5,
+) -> dict[str, str]:
+    """Compare current vs previous area scores to determine trends.
+
+    Args:
+        current_areas: Current area score dicts (from compute_state_vector).
+        previous_areas: Previous period area score dicts.
+        threshold: Minimum score difference to register as up/down.
+
+    Returns:
+        Dict mapping area_id -> "up" | "down" | "neutral".
+    """
+    prev_map = {a["id"]: a["score"] for a in previous_areas}
+    trends: dict[str, str] = {}
+    for area in current_areas:
+        area_id = area["id"]
+        current_score = area["score"]
+        prev_score = prev_map.get(area_id, current_score)
+        diff = current_score - prev_score
+        if diff > threshold:
+            trends[area_id] = "up"
+        elif diff < -threshold:
+            trends[area_id] = "down"
+        else:
+            trends[area_id] = "neutral"
+    return trends

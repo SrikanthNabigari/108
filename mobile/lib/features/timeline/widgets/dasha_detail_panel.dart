@@ -580,16 +580,50 @@ class _DashaDetailPanelState extends ConsumerState<DashaDetailPanel> {
           _buildListSection('Practical Advice', md['practical_advice'] as List,
               icon: Icons.lightbulb_outline, iconColor: C.warning),
         ],
+        // Opportunities & Challenges
+        if ((md['opportunities'] as String? ?? '').isNotEmpty ||
+            (md['challenges'] as String? ?? '').isNotEmpty) ...[
+          const SizedBox(height: S.md),
+          if ((md['opportunities'] as String? ?? '').isNotEmpty)
+            _buildHighlightCard(
+              icon: Icons.trending_up,
+              color: C.positive,
+              title: 'Opportunities',
+              text: md['opportunities'] as String,
+            ),
+          if ((md['challenges'] as String? ?? '').isNotEmpty) ...[
+            const SizedBox(height: S.sm),
+            _buildHighlightCard(
+              icon: Icons.warning_amber_rounded,
+              color: C.warning,
+              title: 'Challenges',
+              text: md['challenges'] as String,
+            ),
+          ],
+        ],
       ],
     );
   }
 
   Widget _buildAdEffects(Map<String, dynamic> ad) {
+    final generalEffects = (ad['general_effects'] as List?)?.cast<String>() ?? [];
     final positive = (ad['positive'] as List?)?.cast<String>() ?? [];
     final negative = (ad['negative'] as List?)?.cast<String>() ?? [];
+    final durationFormula = ad['duration_formula'] as String? ?? '';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        // Duration formula (educational)
+        if (durationFormula.isNotEmpty) ...[
+          _buildInfoRow(Icons.timelapse, 'Duration', durationFormula),
+          const SizedBox(height: S.md),
+        ],
+        // General effects summary (top-level overview)
+        if (generalEffects.isNotEmpty) ...[
+          _buildListSection('Summary', generalEffects,
+              icon: Icons.auto_awesome, iconColor: _color),
+          const SizedBox(height: S.md),
+        ],
         if (positive.isNotEmpty)
           _buildListSection('Positive', positive,
               icon: Icons.check_circle_outline, iconColor: C.positive),
@@ -611,12 +645,12 @@ class _DashaDetailPanelState extends ConsumerState<DashaDetailPanel> {
 
   Widget _buildPdEffects(Map<String, dynamic> pd) {
     final theme = pd['theme'] as String? ?? '';
+    final durationDays = pd['duration_days'];
 
     // Effects can be a dict (with 'general' key) or a list
     final rawEffects = pd['effects'];
     final List<String> effects;
     if (rawEffects is Map) {
-      // Flatten dict values into a list of strings
       effects = rawEffects.values
           .map((v) => v.toString())
           .where((v) => v.isNotEmpty)
@@ -629,16 +663,29 @@ class _DashaDetailPanelState extends ConsumerState<DashaDetailPanel> {
 
     // timing_events can be a dict (with phase keys) or a string
     final rawTiming = pd['timing_events'] ?? pd['timing'];
-    final String timing;
-    if (rawTiming is Map) {
-      timing = rawTiming.values.join(' \u2022 ');
+    final bool hasPhases = rawTiming is Map && rawTiming.isNotEmpty;
+    final Map<String, String> timingPhases = {};
+    final String timingFlat;
+    if (hasPhases) {
+      for (final entry in (rawTiming as Map).entries) {
+        final key = entry.key.toString();
+        final label = key[0].toUpperCase() + key.substring(1);
+        timingPhases[label] = entry.value.toString();
+      }
+      timingFlat = '';
     } else {
-      timing = rawTiming?.toString() ?? '';
+      timingFlat = rawTiming?.toString() ?? '';
     }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        // Duration (e.g., "10.4 days" or "23 months")
+        if (durationDays != null) ...[
+          _buildInfoRow(Icons.timelapse, 'Duration',
+              _formatDurationDays((durationDays as num).toDouble())),
+          const SizedBox(height: S.md),
+        ],
         if (theme.isNotEmpty) ...[
           Text('Theme',
               style: T.bodySm.copyWith(
@@ -650,9 +697,39 @@ class _DashaDetailPanelState extends ConsumerState<DashaDetailPanel> {
         if (effects.isNotEmpty)
           _buildListSection('Effects', effects,
               icon: Icons.circle, iconColor: _color),
-        if (timing.isNotEmpty) ...[
+        // Timing phases (structured) or flat string
+        if (timingPhases.isNotEmpty) ...[
           const SizedBox(height: S.md),
-          _buildInfoRow(Icons.schedule, 'Timing', timing),
+          Text('Timing',
+              style: T.bodySm.copyWith(
+                  color: C.textPrimary, fontWeight: FontWeight.w600)),
+          const SizedBox(height: S.sm),
+          ...timingPhases.entries.map((e) => Padding(
+            padding: const EdgeInsets.only(bottom: 4),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: 42,
+                  child: Text(
+                    e.key,
+                    style: T.caption.copyWith(
+                        color: _color, fontWeight: FontWeight.w600, fontSize: 10),
+                  ),
+                ),
+                Expanded(
+                  child: Text(
+                    e.value,
+                    style: T.caption.copyWith(
+                        color: C.textSecondary, height: 1.4),
+                  ),
+                ),
+              ],
+            ),
+          )),
+        ] else if (timingFlat.isNotEmpty) ...[
+          const SizedBox(height: S.md),
+          _buildInfoRow(Icons.schedule, 'Timing', timingFlat),
         ],
         const SizedBox(height: S.md),
         ..._buildAreaCards({
@@ -762,6 +839,48 @@ class _DashaDetailPanelState extends ConsumerState<DashaDetailPanel> {
     );
   }
 
+  // ── Highlight Card (challenges / opportunities) ──
+
+  Widget _buildHighlightCard({
+    required IconData icon,
+    required Color color,
+    required String title,
+    required String text,
+  }) {
+    return Container(
+      padding: const EdgeInsets.all(S.sm),
+      decoration: BoxDecoration(
+        borderRadius: R.mdBr,
+        color: color.withValues(alpha: 0.06),
+        border: Border.all(color: color.withValues(alpha: 0.15)),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 2),
+            child: Icon(icon, size: 14, color: color),
+          ),
+          const SizedBox(width: 6),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(title,
+                    style: T.caption.copyWith(
+                        color: color, fontWeight: FontWeight.w600, fontSize: 11)),
+                const SizedBox(height: 2),
+                Text(text,
+                    style: T.caption.copyWith(
+                        color: C.textSecondary, height: 1.4)),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   // ── Shared Helpers ──
 
   Widget _buildListSection(String title, List items,
@@ -817,6 +936,18 @@ class _DashaDetailPanelState extends ConsumerState<DashaDetailPanel> {
         ),
       ],
     );
+  }
+
+  String _formatDurationDays(double days) {
+    if (days >= 365) {
+      final years = (days / 365.25).toStringAsFixed(1);
+      return '$years years';
+    } else if (days >= 60) {
+      final months = (days / 30.44).round();
+      return '$months months';
+    } else {
+      return '${days.toStringAsFixed(1)} days';
+    }
   }
 
   /// Flatten a field that may be a String, Map, or List into a single String.

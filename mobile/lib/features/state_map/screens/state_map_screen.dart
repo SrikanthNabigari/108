@@ -342,30 +342,28 @@ class _StateMapScreenState extends ConsumerState<StateMapScreen> {
           const SizedBox(height: S.lg),
 
           // ── Header ──
-          Center(
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    GestureDetector(
-                      onTap: () => context.go('/home'),
-                      child: const Padding(
-                        padding: EdgeInsets.only(right: S.sm),
-                        child: Icon(Icons.arrow_back_ios,
-                            color: C.textSecondary, size: 18),
-                      ),
-                    ),
-                    Text('State Map', style: T.h2),
-                  ],
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  'Your predicted state across time',
-                  style: T.bodySm.copyWith(color: C.textMuted),
-                ),
-              ],
-            ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  GestureDetector(
+                    onTap: () => context.canPop()
+                        ? context.pop()
+                        : context.go('/home'),
+                    child: const Icon(Icons.arrow_back_ios,
+                        color: C.textSecondary, size: 18),
+                  ),
+                  const SizedBox(width: S.sm),
+                  Text('State Map', style: T.h2),
+                ],
+              ),
+              const SizedBox(height: 4),
+              Text(
+                'Your predicted state across time',
+                style: T.bodySm.copyWith(color: C.textMuted),
+              ),
+            ],
           ),
           const SizedBox(height: S.xl),
 

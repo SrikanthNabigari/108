@@ -11,6 +11,9 @@ from packages.context.src.state_engine import (
     _build_birth_chart,
     _clamp,
     _compute_area_scores,
+    _compute_ashtakavarga_transit_score,
+    _compute_dasha_area_score,
+    _compute_double_transit_area_score,
     _detect_natal_doshas,
     _detect_natal_yogas,
     _dignity_for_planet,
@@ -27,6 +30,7 @@ from packages.context.src.state_engine import (
     _score_yoga_activation,
     _score_yoga_with_natal,
     _virupas_to_score,
+    compute_area_trend,
     compute_state_range,
     compute_state_vector,
     get_hora_lord,
@@ -142,25 +146,52 @@ class TestNormalizePanchanga:
 
 class TestNormalizeTransitMoon:
     def test_favorable_house(self):
-        # Moon in house 11 (most favorable)
-        transit_positions = {"moon": 4}  # Leo
-        lagna_index = 6  # Libra → Leo is house 11
-        score, planet, desc = _normalize_transit_moon(transit_positions, lagna_index)
-        assert score == 8.0
+        # Moon in house 11 from natal Moon (most favorable)
+        # Natal Moon in Cancer (3), transit Moon in Taurus (1) → H11 from Moon
+        transit_positions = {"moon": 1}  # Taurus
+        lagna_index = 6  # Libra lagna (kept for signature compat)
+        score, planet, desc = _normalize_transit_moon(
+            transit_positions, lagna_index, moon_rashi_idx=3
+        )
+        assert score == 8.5  # H11 from Moon = best
         assert planet == "moon"
-        assert "house 11" in desc
+        assert "H11 from Moon" in desc
 
     def test_unfavorable_house(self):
-        # Moon in house 8
+        # Moon in house 8 from natal Moon (Chandrashtama)
+        # Natal Moon in Libra (6), transit Moon in Taurus (1) → H8 from Moon
         transit_positions = {"moon": 1}  # Taurus
-        lagna_index = 6  # Libra → Taurus is house 8
-        score, _, desc = _normalize_transit_moon(transit_positions, lagna_index)
-        assert score == 3.0
-        assert "house 8" in desc
+        lagna_index = 6
+        score, _, desc = _normalize_transit_moon(transit_positions, lagna_index, moon_rashi_idx=6)
+        assert score <= 1.0  # H8 = Chandrashtama (2.0 base - 1.0 penalty)
+        assert "H8 from Moon" in desc
+        assert "CHANDRASHTAMA" in desc
 
     def test_empty_positions(self):
         score, _, _ = _normalize_transit_moon({}, 0)
         assert 0 <= score <= 10
+
+    def test_chandrashtama_detection(self):
+        # Transit Moon in 8th from natal Moon should flag Chandrashtama
+        # Natal Moon in Aries (0), transit Moon in Scorpio (7) → H8
+        transit_positions = {"moon": 7}
+        score, _, desc = _normalize_transit_moon(transit_positions, 0, moon_rashi_idx=0)
+        assert "CHANDRASHTAMA" in desc
+        assert score < 3.0
+
+    def test_tarabala_naidhana(self):
+        # Naidhana tara (7th) should have strong negative effect
+        transit_positions = {"moon": 0}
+        # Birth Moon nak 1 (Ashwini), transit nak 7 (Punarvasu) → tara 7 = Naidhana
+        raw_planets = {"moon": {"longitude": 80.0}}  # ~nak 7
+        _score, _, desc = _normalize_transit_moon(
+            transit_positions,
+            0,
+            birth_moon_nak=1,
+            raw_planets=raw_planets,
+            moon_rashi_idx=0,
+        )
+        assert "Naidhana" in desc
 
 
 # ── Gochara tests ──
@@ -360,10 +391,11 @@ class TestNormalizeDasha:
         natal = {
             "jupiter": {"rashi": 3},  # Cancer = exalted
             "venus": {"rashi": 1},  # Taurus = own
-            "mercury": {"rashi": 5},  # Virgo = own (exalted actually, but still good)
+            "mercury": {"rashi": 5},  # Virgo = own
         }
-        score, planet, desc = _normalize_dasha(dasha, natal)
-        assert score > 7.0  # High dignity lords
+        # Sagittarius lagna (8): Jupiter lords 1+4 = benefic/yogakaraka
+        score, planet, desc = _normalize_dasha(dasha, natal, lagna_index=8)
+        assert score > 6.5  # High dignity + functional benefic
         assert planet == "jupiter"
         assert "Jupiter MD" in desc
 
@@ -379,8 +411,27 @@ class TestNormalizeDasha:
             "mars": {"rashi": 3},  # Cancer = debilitated
             "rahu": {"rashi": 4},  # Leo = neutral
         }
-        score, _, _ = _normalize_dasha(dasha, natal)
+        # Leo lagna (4): Saturn lords 6+7 (malefic+maraka)
+        score, _, _ = _normalize_dasha(dasha, natal, lagna_index=4)
         assert score < 5.0
+
+    def test_functional_nature_matters(self):
+        """Same planet, same dignity, different lagna = different score."""
+        dasha = {
+            "mahadasha": {"lord": "saturn"},
+            "antardasha": {"lord": "mercury"},
+            "pratyantardasha": {},
+        }
+        natal = {
+            "saturn": {"rashi": 10},  # Aquarius = own sign
+            "mercury": {"rashi": 2},  # Gemini = own sign
+        }
+        # Libra lagna (6): Saturn is YOGAKARAKA (lords 4+5)
+        score_yk, _, desc_yk = _normalize_dasha(dasha, natal, lagna_index=6)
+        # Leo lagna (4): Saturn lords 6+7 (malefic/maraka)
+        score_bad, _, _ = _normalize_dasha(dasha, natal, lagna_index=4)
+        assert score_yk > score_bad
+        assert "yogakaraka" in desc_yk.lower() or "Saturn MD" in desc_yk
 
 
 # ── Dignity tests ──
@@ -794,11 +845,17 @@ class TestScoreDoshaImpact:
         assert penalties["career"] == 0.0  # Not affected
 
     def test_sade_sati_peak_all_areas(self):
-        """Sade Sati peak should drag all areas."""
+        """Sade Sati peak should drag key areas (health, career, family, etc.)."""
         sade_sati = {"active": True, "phase": "peak", "house_from_moon": 1}
         penalties = _score_dosha_impact([], {}, 0, sade_sati)
-        for area in penalties.values():
-            assert area < 0
+        # Peak Sade Sati hits health, career, relationships, family, finance, spiritual
+        assert penalties["health"] < 0
+        assert penalties["career"] < 0
+        assert penalties["family"] < 0
+        assert penalties["relationships"] < 0
+        # At least 4 areas should be affected
+        negative_areas = sum(1 for v in penalties.values() if v < 0)
+        assert negative_areas >= 4
 
     def test_sade_sati_rising_targets_health(self):
         """Sade Sati rising should mainly hit health and spiritual."""
@@ -1117,7 +1174,7 @@ class TestConstants:
 
 
 class TestAreaScoresWithEngines:
-    """Test the 6-component area scoring model using house activations + lordship + aspects."""
+    """Test the BPHS-aligned 5-component area scoring model."""
 
     _BASE_FACTORS: ClassVar[list[dict[str, Any]]] = [
         {"id": "panchanga", "score": 5.0},
@@ -1150,23 +1207,23 @@ class TestAreaScoresWithEngines:
             activations.append(base)
         return activations
 
-    def test_house_activation_boosts_area_score(self):
-        """Area with high house activation score should score higher than area without."""
-        # Career houses = [10, 6, 2]. Give house 10 a very high score.
-        ha = self._make_house_activations({10: {"score": 90}, 6: {"score": 80}, 2: {"score": 70}})
-        # Health houses = [1, 6, 8]. Keep them at default 50.
+    def test_dasha_dominance_affects_area(self):
+        """Dasha lord ruling area houses should produce higher score (40% weight)."""
+        # Mercury MD rules H9, H12 from Libra lagna (6) → spiritual houses [9, 12, 5]
+        dasha = {"mahadasha": {"lord": "mercury"}, "antardasha": {"lord": "venus"}}
         areas = _compute_area_scores(
             self._BASE_FACTORS,
             {"moon": 0},
-            0,
-            house_activations=ha,
+            6,  # Libra lagna
+            dasha_result=dasha,
         )
+        spiritual = next(a for a in areas if a["id"] == "spiritual")
         career = next(a for a in areas if a["id"] == "career")
-        health = next(a for a in areas if a["id"] == "health")
-        assert career["score"] > health["score"]
+        # Spiritual should benefit more from dasha (Mercury lords its houses 9+12)
+        assert spiritual["score"] > career["score"]
 
     def test_double_transit_bonus(self):
-        """Area whose primary house has double transit should get a boost."""
+        """Area whose primary house has double transit should get a boost (15% weight)."""
         ha_with_dt = self._make_house_activations({10: {"score": 60, "double_transit": True}})
         ha_without_dt = self._make_house_activations({10: {"score": 60, "double_transit": False}})
         areas_with = _compute_area_scores(
@@ -1187,98 +1244,24 @@ class TestAreaScoresWithEngines:
         assert career_with["double_transit"] is True
         assert career_without["double_transit"] is False
 
-    def test_lordship_quality_affects_score(self):
-        """Yogakaraka lord for area houses should score higher than malefic."""
+    def test_lordship_quality_output(self):
+        """Lordship quality should be reflected in output field."""
         ha = self._make_house_activations()
-        # Transit lordships: planet ruling career houses [10, 6, 2] as yogakaraka
         tl_yk = [
             {"planet": "saturn", "houses_ruled": [10, 11], "functional_nature": "yogakaraka"},
         ]
-        tl_mal = [
-            {"planet": "saturn", "houses_ruled": [10, 11], "functional_nature": "malefic"},
-        ]
-        areas_yk = _compute_area_scores(
+        areas = _compute_area_scores(
             self._BASE_FACTORS,
             {"moon": 0},
             0,
             house_activations=ha,
             transit_lordships=tl_yk,
         )
-        areas_mal = _compute_area_scores(
-            self._BASE_FACTORS,
-            {"moon": 0},
-            0,
-            house_activations=ha,
-            transit_lordships=tl_mal,
-        )
-        career_yk = next(a for a in areas_yk if a["id"] == "career")
-        career_mal = next(a for a in areas_mal if a["id"] == "career")
-        assert career_yk["score"] > career_mal["score"]
-        assert career_yk["lordship_quality"] == "yogakaraka"
-
-    def test_transit_aspects_affect_score(self):
-        """Harmonious aspects should boost area; challenging should drag."""
-        ha = self._make_house_activations()
-        natal = {"jupiter": {"longitude": 142.8, "rashi": 4, "house": 11}}
-        # Finance houses = [2, 11, 5]. Jupiter natally in house 11.
-        aspects_good = [
-            {"natal_planet": "jupiter", "transit_planet": "venus", "nature": "harmonious"},
-        ]
-        aspects_bad = [
-            {"natal_planet": "jupiter", "transit_planet": "saturn", "nature": "challenging"},
-        ]
-        areas_good = _compute_area_scores(
-            self._BASE_FACTORS,
-            {"moon": 0},
-            0,
-            natal_planets=natal,
-            house_activations=ha,
-            transit_aspects=aspects_good,
-        )
-        areas_bad = _compute_area_scores(
-            self._BASE_FACTORS,
-            {"moon": 0},
-            0,
-            natal_planets=natal,
-            house_activations=ha,
-            transit_aspects=aspects_bad,
-        )
-        fin_good = next(a for a in areas_good if a["id"] == "finance")
-        fin_bad = next(a for a in areas_bad if a["id"] == "finance")
-        assert fin_good["score"] > fin_bad["score"]
-
-    def test_dasha_area_relevance(self):
-        """Dasha lord ruling area house should produce higher area score."""
-        ha = self._make_house_activations()
-        factors_high_dasha = [
-            {"id": "panchanga", "score": 5.0},
-            {"id": "transit_moon", "score": 5.0},
-            {"id": "gochara", "score": 5.0},
-            {"id": "dasha", "score": 8.0},  # high dasha score
-            {"id": "yoga_activation", "score": 5.0},
-            {"id": "shadbala", "score": 5.0},
-            {"id": "ashtakavarga", "score": 5.0},
-        ]
-        # Mercury MD rules houses from Libra lagna (6): H9 and H12
-        # Spiritual houses = [9, 12, 5] → Mercury lords 9 and 12 → full relevance
-        # Use Mercury MD only (no AD that overlaps career)
-        # Moon AD rules H10 (career overlap) — use Venus AD instead (H1, H8)
-        dasha = {"mahadasha": {"lord": "mercury"}, "antardasha": {"lord": "venus"}}
-        # Venus from Libra: rules H1, H8 → no career overlap [10,6,2], no spiritual overlap [9,12,5]
-        areas = _compute_area_scores(
-            factors_high_dasha,
-            {"moon": 0},
-            6,  # Libra lagna
-            house_activations=ha,
-            dasha_result=dasha,
-        )
-        spiritual = next(a for a in areas if a["id"] == "spiritual")
         career = next(a for a in areas if a["id"] == "career")
-        # Spiritual should benefit more from dasha (Mercury lords its houses 9+12)
-        assert spiritual["score"] > career["score"]
+        assert career["lordship_quality"] == "yogakaraka"
 
     def test_yoga_activation_boost(self):
-        """Active yoga touching area houses should boost that area's score."""
+        """Active yoga touching area houses should boost that area's score (10% weight)."""
         ha = self._make_house_activations()
         ay = [
             {
@@ -1309,25 +1292,41 @@ class TestAreaScoresWithEngines:
         assert fin_with["score"] > fin_without["score"]
         assert "Gajakesari" in fin_with["active_yogas"]
 
-    def test_fallback_when_no_activations(self):
-        """When house_activations=None, old model should be used."""
+    def test_panchanga_affects_all_areas(self):
+        """High panchanga factor should boost all area scores (10% weight)."""
+        factors_high_pan = [
+            {"id": "panchanga", "score": 9.0},
+            {"id": "transit_moon", "score": 5.0},
+            {"id": "gochara", "score": 5.0},
+            {"id": "dasha", "score": 5.0},
+            {"id": "yoga_activation", "score": 5.0},
+            {"id": "shadbala", "score": 5.0},
+            {"id": "ashtakavarga", "score": 5.0},
+        ]
+        areas_high = _compute_area_scores(factors_high_pan, {"moon": 0}, 0)
+        areas_low = _compute_area_scores(self._BASE_FACTORS, {"moon": 0}, 0)
+        # At least some areas should be higher with high panchanga
+        high_scores = [a["score"] for a in areas_high]
+        low_scores = [a["score"] for a in areas_low]
+        assert sum(high_scores) > sum(low_scores)
+
+    def test_no_activations_still_works(self):
+        """When house_activations=None, model should still produce valid scores."""
         areas = _compute_area_scores(
             self._BASE_FACTORS,
             {"moon": 0},
             0,
-            house_activations=None,  # triggers fallback
+            house_activations=None,
         )
         assert len(areas) == 8
         for a in areas:
             assert 0 <= a["score"] <= 10
-            # Fallback should still produce the new fields with defaults
             assert a["double_transit"] is False
             assert a["lordship_quality"] == "neutral"
             assert a["active_yogas"] == []
 
     def test_area_scores_in_range(self):
         """All area scores should clamp to 0-10 regardless of input."""
-        # Extreme inputs: house activation scores at 100 + all boosts
         ha = self._make_house_activations(
             {h: {"score": 100, "double_transit": True} for h in range(1, 13)}
         )
@@ -1400,3 +1399,120 @@ class TestAreaScoresWithEngines:
         sade_sati = {"active": True, "phase": "setting", "house_from_moon": 2}
         penalties = _score_dosha_impact([], {}, 0, sade_sati)
         assert penalties["family"] < 0
+
+
+# ── New helper function tests ──
+
+
+class TestComputeDashaAreaScore:
+    """Tests for _compute_dasha_area_score helper."""
+
+    def test_no_dasha_returns_neutral(self):
+        score = _compute_dasha_area_score([10, 6, 2], None, {}, 6)
+        assert score == 5.0
+
+    def test_lord_ruling_area_house_boosts_score(self):
+        # Mercury from Libra lagna rules H9, H12 → spiritual [9, 12, 5]
+        dasha = {"mahadasha": {"lord": "mercury"}, "antardasha": {"lord": "venus"}}
+        spiritual_score = _compute_dasha_area_score([9, 12, 5], dasha, NATAL_PLANETS, 6)
+        career_score = _compute_dasha_area_score([10, 6, 2], dasha, NATAL_PLANETS, 6)
+        assert spiritual_score > career_score
+
+    def test_lord_in_area_house_natally_boosts(self):
+        # Jupiter sits in house 11 natally → finance houses [2, 11, 5]
+        dasha = {"mahadasha": {"lord": "jupiter"}, "antardasha": {"lord": "moon"}}
+        score = _compute_dasha_area_score([2, 11, 5], dasha, NATAL_PLANETS, 6)
+        assert score > 5.0  # boosted by natal placement
+
+    def test_score_in_range(self):
+        dasha = {"mahadasha": {"lord": "saturn"}, "antardasha": {"lord": "rahu"}}
+        for houses in AREA_HOUSES.values():
+            score = _compute_dasha_area_score(houses, dasha, NATAL_PLANETS, 6)
+            assert 0 <= score <= 10
+
+
+class TestComputeAshtakavargaTransitScore:
+    """Tests for _compute_ashtakavarga_transit_score helper."""
+
+    def test_no_transits_in_area_returns_fallback(self):
+        # No planets in career houses
+        score = _compute_ashtakavarga_transit_score([10, 6, 2], {}, 6, None)
+        assert score == 5.0  # neutral fallback
+
+    def test_planet_in_area_house_produces_score(self):
+        # Jupiter in house 11 from Aries lagna (rashi 10 = Aquarius, house = 11 from 0)
+        transit_pos = {"jupiter": 10}  # rashi 10 = Aquarius
+        score = _compute_ashtakavarga_transit_score([2, 11, 5], transit_pos, 0, None)
+        assert 0 <= score <= 10
+
+    def test_score_in_range(self):
+        transit_pos = {"saturn": 3, "jupiter": 8, "mars": 0, "moon": 5}
+        for houses in AREA_HOUSES.values():
+            score = _compute_ashtakavarga_transit_score(houses, transit_pos, 6, None)
+            assert 0 <= score <= 10
+
+
+class TestComputeDoubleTransitAreaScore:
+    """Tests for _compute_double_transit_area_score helper."""
+
+    def test_no_activations_returns_low(self):
+        score, has_dt = _compute_double_transit_area_score([10, 6, 2], None)
+        assert score == 3.0
+        assert has_dt is False
+
+    def test_primary_house_dt_returns_max(self):
+        ha = [{"house": 10, "double_transit": True}]
+        score, has_dt = _compute_double_transit_area_score([10, 6, 2], ha)
+        assert score == 10.0
+        assert has_dt is True
+
+    def test_secondary_house_dt_returns_medium(self):
+        ha = [{"house": 10, "double_transit": False}, {"house": 6, "double_transit": True}]
+        score, has_dt = _compute_double_transit_area_score([10, 6, 2], ha)
+        assert score == 7.0
+        assert has_dt is True
+
+    def test_no_dt_returns_low(self):
+        ha = [
+            {"house": 10, "double_transit": False},
+            {"house": 6, "double_transit": False},
+            {"house": 2, "double_transit": False},
+        ]
+        score, has_dt = _compute_double_transit_area_score([10, 6, 2], ha)
+        assert score == 3.0
+        assert has_dt is False
+
+
+class TestComputeAreaTrend:
+    """Tests for compute_area_trend public function."""
+
+    def test_up_trend(self):
+        current = [{"id": "career", "score": 7.0}]
+        previous = [{"id": "career", "score": 5.0}]
+        trends = compute_area_trend(current, previous)
+        assert trends["career"] == "up"
+
+    def test_down_trend(self):
+        current = [{"id": "career", "score": 3.0}]
+        previous = [{"id": "career", "score": 5.0}]
+        trends = compute_area_trend(current, previous)
+        assert trends["career"] == "down"
+
+    def test_neutral_trend(self):
+        current = [{"id": "career", "score": 5.2}]
+        previous = [{"id": "career", "score": 5.0}]
+        trends = compute_area_trend(current, previous)
+        assert trends["career"] == "neutral"
+
+    def test_custom_threshold(self):
+        current = [{"id": "career", "score": 5.8}]
+        previous = [{"id": "career", "score": 5.0}]
+        trends = compute_area_trend(current, previous, threshold=1.0)
+        assert trends["career"] == "neutral"  # 0.8 < 1.0
+
+    def test_all_8_areas(self):
+        current = [{"id": a, "score": 5.0} for a in AREA_HOUSES]
+        previous = [{"id": a, "score": 5.0} for a in AREA_HOUSES]
+        trends = compute_area_trend(current, previous)
+        assert len(trends) == 8
+        assert all(t == "neutral" for t in trends.values())

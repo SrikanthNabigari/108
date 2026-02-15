@@ -248,6 +248,7 @@ class StrengthDetailPanel extends ConsumerWidget {
           return _balaBar(
             label: entry.label,
             value: value,
+            maxValue: entry.maxValue,
             color: color,
             meaning: entry.meaning,
           );
@@ -259,15 +260,22 @@ class StrengthDetailPanel extends ConsumerWidget {
   Widget _balaBar({
     required String label,
     required double value,
+    required double maxValue,
     required Color color,
     required String meaning,
   }) {
-    final barFraction = (value / 1.5).clamp(0.0, 1.0);
+    final barFraction = (value / maxValue).clamp(0.0, 1.0);
+    final pct = (barFraction * 100).round();
     final barColor = barFraction >= 0.6
         ? C.positive
-        : barFraction >= 0.3
+        : barFraction >= 0.35
             ? C.warning
             : C.negative;
+    final gradeLabel = barFraction >= 0.7
+        ? 'Strong'
+        : barFraction >= 0.4
+            ? 'Average'
+            : 'Weak';
 
     return Padding(
       padding: const EdgeInsets.only(bottom: S.xl),
@@ -275,40 +283,45 @@ class StrengthDetailPanel extends ConsumerWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(label,
-                  style: T.bodySm.copyWith(
-                      color: C.textPrimary,
-                      fontWeight: FontWeight.w500)),
-              Row(
-                children: [
-                  Text(value.toStringAsFixed(2), style: T.bodySm),
-                  const SizedBox(width: S.xs),
-                  Container(
-                    width: 8,
-                    height: 8,
-                    decoration:
-                        BoxDecoration(shape: BoxShape.circle, color: barColor),
-                  ),
-                ],
+              Expanded(
+                child: Text(label,
+                    style: T.bodySm.copyWith(
+                        color: C.textPrimary,
+                        fontWeight: FontWeight.w500)),
               ),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 6, vertical: 2),
+                decoration: BoxDecoration(
+                  borderRadius: R.xlBr,
+                  color: barColor.withValues(alpha: 0.12),
+                ),
+                child: Text(gradeLabel,
+                    style: T.caption.copyWith(
+                        color: barColor,
+                        fontSize: 9,
+                        fontWeight: FontWeight.w600)),
+              ),
+              const SizedBox(width: S.sm),
+              Text('$pct%',
+                  style: T.bodySm.copyWith(
+                      color: barColor, fontWeight: FontWeight.w600)),
             ],
           ),
-          const SizedBox(height: S.xs),
+          const SizedBox(height: 6),
           ClipRRect(
             borderRadius: R.smBr,
             child: SizedBox(
-              height: 8,
+              height: 6,
               child: LinearProgressIndicator(
                 value: barFraction,
                 backgroundColor: C.glassBg,
-                valueColor: AlwaysStoppedAnimation<Color>(
-                    color.withValues(alpha: 0.8)),
+                valueColor: AlwaysStoppedAnimation<Color>(barColor),
               ),
             ),
           ),
-          const SizedBox(height: S.xs),
+          const SizedBox(height: 4),
           Text(meaning,
               style: T.caption
                   .copyWith(color: C.textMuted, height: 1.3)),
@@ -321,30 +334,45 @@ class StrengthDetailPanel extends ConsumerWidget {
 
   Widget _buildOverallBar(
       double total, String grade, Color color, Color gradeColor) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('Overall',
-            style: T.bodySm.copyWith(
-                color: C.textPrimary, fontWeight: FontWeight.w600)),
-        const SizedBox(height: S.md),
-        ClipRRect(
-          borderRadius: R.smBr,
-          child: SizedBox(
-            height: 12,
-            child: LinearProgressIndicator(
-              value: (total / 2.0).clamp(0.0, 1.0),
-              backgroundColor: C.glassBg,
-              valueColor: AlwaysStoppedAnimation<Color>(color),
+    // total is now a ratio (0.0 - ~2.0), 1.0 = meets BPHS minimum
+    final barFraction = (total / 2.0).clamp(0.0, 1.0);
+
+    return GlassContainer(
+      padding: const EdgeInsets.all(S.md),
+      blur: 0,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Text('Overall Strength',
+                  style: T.bodySm.copyWith(
+                      color: C.textPrimary, fontWeight: FontWeight.w600)),
+              const Spacer(),
+              Text('${(total * 100).round()}%',
+                  style: T.bodySm.copyWith(
+                      color: gradeColor, fontWeight: FontWeight.w700)),
+            ],
+          ),
+          const SizedBox(height: S.sm),
+          ClipRRect(
+            borderRadius: R.smBr,
+            child: SizedBox(
+              height: 10,
+              child: LinearProgressIndicator(
+                value: barFraction,
+                backgroundColor: C.glassBg,
+                valueColor: AlwaysStoppedAnimation<Color>(gradeColor),
+              ),
             ),
           ),
-        ),
-        const SizedBox(height: S.sm),
-        Text(
-          _overallDescription(grade),
-          style: T.caption.copyWith(color: C.textSecondary, height: 1.4),
-        ),
-      ],
+          const SizedBox(height: S.sm),
+          Text(
+            _overallDescription(grade),
+            style: T.caption.copyWith(color: C.textSecondary, height: 1.4),
+          ),
+        ],
+      ),
     );
   }
 
@@ -424,21 +452,22 @@ class StrengthDetailPanel extends ConsumerWidget {
 class _BalaEntry {
   final String key;
   final String label;
+  final double maxValue;
   final String meaning;
-  const _BalaEntry(this.key, this.label, this.meaning);
+  const _BalaEntry(this.key, this.label, this.maxValue, this.meaning);
 }
 
 const _balaEntries = [
-  _BalaEntry('sthana_bala', 'Sthana Bala',
+  _BalaEntry('sthana_bala', 'Sthana Bala', 150.0,
       'Positional strength \u2014 how well placed in sign, house, and navamsha.'),
-  _BalaEntry('dig_bala', 'Dig Bala',
+  _BalaEntry('dig_bala', 'Dig Bala', 60.0,
       'Directional strength \u2014 strongest when in its preferred direction (kendra).'),
-  _BalaEntry('kala_bala', 'Kala Bala',
+  _BalaEntry('kala_bala', 'Kala Bala', 150.0,
       'Temporal strength \u2014 day/night, weekday, hora, and seasonal factors.'),
-  _BalaEntry('chesta_bala', 'Chesta Bala',
+  _BalaEntry('chesta_bala', 'Chesta Bala', 60.0,
       'Motional strength \u2014 based on speed, retrograde status, and planetary war.'),
-  _BalaEntry('naisargika_bala', 'Naisargika Bala',
+  _BalaEntry('naisargika_bala', 'Naisargika Bala', 60.0,
       'Natural strength \u2014 inherent power: Sun > Moon > Venus > Jupiter > Mars > Mercury > Saturn.'),
-  _BalaEntry('drik_bala', 'Drik Bala',
+  _BalaEntry('drik_bala', 'Drik Bala', 60.0,
       'Aspectual strength \u2014 modified by aspects from benefics (+) and malefics (\u2212).'),
 ];

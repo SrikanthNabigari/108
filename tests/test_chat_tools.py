@@ -50,7 +50,7 @@ class TestToolDefinitions:
     def test_get_tool_definitions_returns_list(self):
         defs = get_tool_definitions()
         assert isinstance(defs, list)
-        assert len(defs) == 10
+        assert len(defs) == 29
 
     def test_each_tool_has_required_keys(self):
         for tool in TOOL_DEFINITIONS:
@@ -72,6 +72,7 @@ class TestToolDefinitions:
     def test_known_tools_present(self):
         names = {t["name"] for t in TOOL_DEFINITIONS}
         expected = {
+            # Original 10
             "get_state_now",
             "get_life_area",
             "get_current_dasha",
@@ -82,6 +83,28 @@ class TestToolDefinitions:
             "get_doshas",
             "get_planet_strength",
             "get_compatibility",
+            # Phase 1: Timing & Predictions (6)
+            "get_forecast",
+            "get_upcoming_events",
+            "get_muhurta",
+            "get_remedies",
+            "get_dasha_timeline",
+            "correlate_event",
+            # Phase 2: Deep Analysis (6)
+            "get_soul_purpose",
+            "get_gem_recommendation",
+            "get_divisional_chart",
+            "check_yoga_cancellation",
+            "get_retrograde_effects",
+            "get_combustion_status",
+            # Phase 3: Advanced Systems (7)
+            "get_varshaphal",
+            "get_kp_prediction",
+            "get_prashna",
+            "get_ashtakavarga",
+            "get_alternative_dasha",
+            "get_jaimini_analysis",
+            "lookup_knowledge",
         }
         assert expected == names
 
@@ -216,3 +239,163 @@ class TestExecuteTool:
         result = execute_tool("get_state_now", {}, {"birth_datetime": "invalid"})
         # Should not raise, should return error dict
         assert isinstance(result, dict)
+
+    # ── Phase 1: Timing & Predictions ──
+
+    def test_get_forecast_daily(self):
+        result = execute_tool("get_forecast", {"period": "daily"}, SAMPLE_BIRTH_CONTEXT)
+        assert isinstance(result, dict)
+        if result.get("success"):
+            assert "forecast" in result
+
+    def test_get_forecast_weekly(self):
+        result = execute_tool("get_forecast", {"period": "weekly"}, SAMPLE_BIRTH_CONTEXT)
+        assert isinstance(result, dict)
+        if result.get("success"):
+            assert "forecast" in result
+
+    def test_get_forecast_monthly(self):
+        result = execute_tool("get_forecast", {"period": "monthly"}, SAMPLE_BIRTH_CONTEXT)
+        assert isinstance(result, dict)
+        if result.get("success"):
+            assert "forecast" in result
+
+    def test_get_upcoming_events(self):
+        result = execute_tool("get_upcoming_events", {"days_ahead": 7}, SAMPLE_BIRTH_CONTEXT)
+        assert isinstance(result, dict)
+        if result.get("success"):
+            assert "triggers" in result
+
+    def test_get_muhurta(self):
+        result = execute_tool("get_muhurta", {"activity": "travel"}, SAMPLE_BIRTH_CONTEXT)
+        assert isinstance(result, dict)
+        if result.get("success"):
+            assert "quality" in result or "score" in result or "overall_quality" in result
+
+    def test_get_remedies(self):
+        result = execute_tool("get_remedies", {}, SAMPLE_BIRTH_CONTEXT)
+        assert isinstance(result, dict)
+        if result.get("success"):
+            assert "remedies" in result
+
+    def test_get_dasha_timeline(self):
+        result = execute_tool("get_dasha_timeline", {"years": 10}, SAMPLE_BIRTH_CONTEXT)
+        assert isinstance(result, dict)
+        if result.get("success"):
+            assert "dasha_periods" in result or "dasha_timeline" in result
+
+    def test_correlate_event(self):
+        result = execute_tool(
+            "correlate_event",
+            {"event_date": "2020-03-15", "event_type": "career", "description": "Got promoted"},
+            SAMPLE_BIRTH_CONTEXT,
+        )
+        assert isinstance(result, dict)
+        if result.get("success"):
+            assert "correlation" in result
+
+    # ── Phase 2: Deep Analysis ──
+
+    def test_get_soul_purpose(self):
+        result = execute_tool("get_soul_purpose", {}, SAMPLE_BIRTH_CONTEXT)
+        assert isinstance(result, dict)
+        if result.get("success"):
+            assert "atmakaraka" in result
+
+    def test_get_gem_recommendation(self):
+        result = execute_tool("get_gem_recommendation", {}, SAMPLE_BIRTH_CONTEXT)
+        assert isinstance(result, dict)
+        if result.get("success"):
+            assert "gems" in result
+
+    def test_get_gem_recommendation_specific_planet(self):
+        result = execute_tool("get_gem_recommendation", {"planet": "jupiter"}, SAMPLE_BIRTH_CONTEXT)
+        assert isinstance(result, dict)
+
+    def test_get_divisional_chart_d9(self):
+        result = execute_tool("get_divisional_chart", {"chart_number": 9}, SAMPLE_BIRTH_CONTEXT)
+        assert isinstance(result, dict)
+        if result.get("success"):
+            assert "divisional_charts" in result
+
+    def test_check_yoga_cancellation(self):
+        result = execute_tool("check_yoga_cancellation", {}, SAMPLE_BIRTH_CONTEXT)
+        assert isinstance(result, dict)
+        if result.get("success"):
+            assert "total_yogas" in result
+            assert "surviving_count" in result
+
+    def test_get_retrograde_effects(self):
+        result = execute_tool("get_retrograde_effects", {}, SAMPLE_BIRTH_CONTEXT)
+        assert isinstance(result, dict)
+        assert result.get("success") is True
+
+    def test_get_combustion_status(self):
+        result = execute_tool("get_combustion_status", {}, SAMPLE_BIRTH_CONTEXT)
+        assert isinstance(result, dict)
+        assert result.get("success") is True
+
+    # ── Phase 3: Advanced Systems ──
+
+    def test_get_varshaphal(self):
+        result = execute_tool("get_varshaphal", {"year": 2025}, SAMPLE_BIRTH_CONTEXT)
+        assert isinstance(result, dict)
+        if result.get("success"):
+            assert "year" in result
+
+    def test_get_kp_prediction(self):
+        result = execute_tool(
+            "get_kp_prediction", {"question_type": "career"}, SAMPLE_BIRTH_CONTEXT
+        )
+        assert isinstance(result, dict)
+        if result.get("success"):
+            assert "kp_analysis" in result
+
+    def test_get_prashna(self):
+        result = execute_tool(
+            "get_prashna",
+            {"question": "Will I get the job?", "category": "career"},
+            SAMPLE_BIRTH_CONTEXT,
+        )
+        assert isinstance(result, dict)
+
+    def test_get_ashtakavarga(self):
+        result = execute_tool("get_ashtakavarga", {}, SAMPLE_BIRTH_CONTEXT)
+        assert isinstance(result, dict)
+        if result.get("success"):
+            assert "bhinnashtakavarga" in result or "sarvashtakavarga" in result
+
+    def test_get_alternative_dasha_yogini(self):
+        result = execute_tool("get_alternative_dasha", {"system": "yogini"}, SAMPLE_BIRTH_CONTEXT)
+        assert isinstance(result, dict)
+        if result.get("success"):
+            assert result.get("system") == "yogini"
+
+    def test_get_alternative_dasha_ashtottari(self):
+        result = execute_tool(
+            "get_alternative_dasha", {"system": "ashtottari"}, SAMPLE_BIRTH_CONTEXT
+        )
+        assert isinstance(result, dict)
+        if result.get("success"):
+            assert result.get("system") == "ashtottari"
+
+    def test_get_jaimini_analysis(self):
+        result = execute_tool("get_jaimini_analysis", {}, SAMPLE_BIRTH_CONTEXT)
+        assert isinstance(result, dict)
+        if result.get("success"):
+            assert "chara_karakas" in result
+
+    def test_lookup_knowledge_planet(self):
+        result = execute_tool(
+            "lookup_knowledge", {"query": "jupiter", "category": "planet"}, SAMPLE_BIRTH_CONTEXT
+        )
+        assert isinstance(result, dict)
+        assert result.get("success") is True
+        assert result.get("category") == "planet"
+
+    def test_lookup_knowledge_yoga(self):
+        result = execute_tool(
+            "lookup_knowledge", {"query": "gajakesari", "category": "yoga"}, SAMPLE_BIRTH_CONTEXT
+        )
+        assert isinstance(result, dict)
+        assert result.get("success") is True
