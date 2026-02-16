@@ -25,15 +25,18 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
   final _scrollController = ScrollController();
   double _scrollHintOpacity = 1.0;
 
-  // Selection state — which MD/AD the user has tapped
+  // Selection state — which MD/AD/PD the user has tapped
   String? _selectedMdLord;
   String? _selectedAdLord;
+  String? _selectedPdLord;
 
   // Dynamic sub-period sequences (fetched on tap)
   List<dynamic>? _adSequence;
   List<dynamic>? _pdSequence;
+  List<dynamic>? _sdSequence;
   bool _loadingAd = false;
   bool _loadingPd = false;
+  bool _loadingSd = false;
 
   // Guide section collapsed by default
   bool _guideExpanded = false;
@@ -76,7 +79,9 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
     setState(() {
       _selectedMdLord = lord;
       _selectedAdLord = null;
+      _selectedPdLord = null;
       _pdSequence = null;
+      _sdSequence = null;
       _loadingAd = true;
     });
     try {
@@ -102,6 +107,8 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
     if (_selectedAdLord == lord) return;
     setState(() {
       _selectedAdLord = lord;
+      _selectedPdLord = null;
+      _sdSequence = null;
       _loadingPd = true;
     });
     try {
@@ -120,6 +127,32 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
       }
     } catch (_) {
       if (mounted) setState(() { _loadingPd = false; });
+    }
+  }
+
+  /// Fetch SD (Sookshma Dasha) sequence for a selected PD period.
+  Future<void> _fetchSdForPd(String lord, String start, String end) async {
+    if (_selectedPdLord == lord) return;
+    setState(() {
+      _selectedPdLord = lord;
+      _loadingSd = true;
+    });
+    try {
+      final data = await ApiService().get(
+        ApiConstants.dashaSubPeriods(
+          parentLord: lord, parentStart: start, parentEnd: end, level: 'sd',
+          mdLord: _selectedMdLord,
+        ),
+        fromJson: (json) => json as Map<String, dynamic>,
+      );
+      if (mounted) {
+        setState(() {
+          _sdSequence = (data['periods'] as List?) ?? [];
+          _loadingSd = false;
+        });
+      }
+    } catch (_) {
+      if (mounted) setState(() { _loadingSd = false; });
     }
   }
 
@@ -211,6 +244,7 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
     final currentMdLord = current['mahadasha_lord'] as String? ?? 'mercury';
     final currentAdLord = current['antardasha_lord'] as String? ?? '';
     final currentPdLord = current['pratyantardasha_lord'] as String? ?? '';
+    final currentSdLord = current['sookshma_lord'] as String? ?? '';
 
     // Use selected or fallback to current
     final mdLord = _selectedMdLord ?? currentMdLord;
@@ -218,6 +252,8 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
     final pdLord = _selectedAdLord != null ? (_selectedAdLord == currentAdLord ? currentPdLord : '') : currentPdLord;
     final adSequence = _adSequence ?? initialAdSeq;
     final pdSequence = _pdSequence ?? initialPdSeq;
+    final initialSdSeq = _dashaData?['sookshma_sequence'] as List? ?? [];
+    final sdSequence = _sdSequence ?? initialSdSeq;
     final bool isSelectedMdCurrent = mdLord.toLowerCase() == currentMdLord.toLowerCase();
     final bool isSelectedAdCurrent = adLord.toLowerCase() == currentAdLord.toLowerCase();
     final remaining = current['remaining_years'];
@@ -283,8 +319,8 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
               children: [
                 // Nested rings
                 SizedBox(
-                  width: 90,
-                  height: 90,
+                  width: 100,
+                  height: 100,
                   child: CustomPaint(
                     painter: _NestedRingsPainter(
                       mdProgress: mdProgress,
@@ -292,12 +328,19 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
                       pdProgress: pdLord.isNotEmpty
                           ? _calcProgressFromCurrent(current, 'pratyantardasha')
                           : 0,
+                      sdProgress: currentSdLord.isNotEmpty
+                          ? _calcProgressFromCurrent(current, 'sookshma')
+                          : 0,
                       mdColor: _planetColor(mdLord),
                       adColor: _planetColor(adLord),
                       pdColor: pdLord.isNotEmpty
                           ? _planetColor(pdLord)
                           : C.glassBorder,
+                      sdColor: currentSdLord.isNotEmpty
+                          ? _planetColor(currentSdLord)
+                          : C.glassBorder,
                       hasPd: pdLord.isNotEmpty,
+                      hasSd: currentSdLord.isNotEmpty,
                     ),
                   ),
                 ),
@@ -337,6 +380,13 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
                         Text(
                           '${_planetGlyph(pdLord)} ${_planetName(pdLord)} PD  ·  ${_durationStr(current, 'pratyantardasha')}',
                           style: T.caption,
+                        ),
+                      ],
+                      if (currentSdLord.isNotEmpty) ...[
+                        const SizedBox(height: 1),
+                        Text(
+                          '${_planetGlyph(currentSdLord)} ${_planetName(currentSdLord)} SD  ·  ${_sdRemainingStr(current)}',
+                          style: T.caption.copyWith(fontSize: 10, color: C.textMuted),
                         ),
                       ],
                       const SizedBox(height: S.sm),
@@ -473,7 +523,7 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
           _SectionLabel(title: 'Mahadasha', subtitle: 'Life Chapters'),
           const SizedBox(height: S.sm),
           SizedBox(
-            height: 120,
+            height: 132,
             child: mdSequence.isNotEmpty
                 ? ListView.separated(
                     scrollDirection: Axis.horizontal,
@@ -491,6 +541,9 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
                       final isShowingAds = isNow
                           ? (_selectedMdLord == null || _selectedMdLord!.toLowerCase() == lord.toLowerCase())
                           : isSelected;
+                      final nature = p['functional_nature'] as String?;
+                      final houses = (p['houses_ruled'] as List?)
+                          ?.map((h) => h as int).toList() ?? [];
                       return _PeriodCard(
                         lord: lord,
                         duration: _yearStr(p['years']),
@@ -500,6 +553,8 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
                         isSelected: isSelected && !isNow,
                         size: _CardSize.large,
                         doshaMarkers: _getDoshaMarkersForLord(lord),
+                        functionalNature: nature,
+                        housesRuled: houses,
                         onTap: () {
                           if (isShowingAds) {
                             // Already showing this MD's ADs → open detail
@@ -511,8 +566,10 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
                             setState(() {
                               _selectedMdLord = null;
                               _selectedAdLord = null;
+                              _selectedPdLord = null;
                               _adSequence = null;
                               _pdSequence = null;
+                              _sdSequence = null;
                             });
                           } else if (pStart.isNotEmpty && pEnd.isNotEmpty) {
                             _fetchAdForMd(lord, pStart, pEnd);
@@ -578,7 +635,9 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
                         // Current AD but user was browsing another → go back
                         setState(() {
                           _selectedAdLord = null;
+                          _selectedPdLord = null;
                           _pdSequence = null;
+                          _sdSequence = null;
                         });
                       } else if (pStart.isNotEmpty && pEnd.isNotEmpty) {
                         _fetchPdForAd(lord, pStart, pEnd);
@@ -619,23 +678,89 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
                   final rel = p['relationship'] as String?;
                   final isNow = isSelectedMdCurrent && isSelectedAdCurrent
                       && lord.toLowerCase() == currentPdLord.toLowerCase();
+                  final isSelected = lord.toLowerCase() == (_selectedPdLord ?? '').toLowerCase() && !isNow;
+                  // Is this card currently driving the SD row?
+                  final isShowingSds = isNow
+                      ? (_selectedPdLord == null || _selectedPdLord!.toLowerCase() == lord.toLowerCase())
+                      : isSelected;
                   return _PeriodCard(
                     lord: lord,
                     duration: _monthStr(p['years'], pStart, pEnd),
                     startYear: '',
                     endYear: '',
                     isCurrent: isNow,
+                    isSelected: isSelected,
                     size: _CardSize.small,
                     relationship: rel,
                     doshaMarkers: (p['dosha_markers'] as List?)
                         ?.cast<Map<String, dynamic>>() ?? _getDoshaMarkersForLord(lord),
+                    onTap: () {
+                      if (isShowingSds) {
+                        // Already showing this PD's SDs → open detail
+                        DashaDetailPanel.show(context,
+                          level: 'pd', lord: lord, mdLord: mdLord,
+                          adLord: adLord, pdLord: lord,
+                          startDate: pStart, endDate: pEnd, isCurrent: isNow);
+                      } else if (isNow) {
+                        // Current PD but user was browsing another → go back
+                        setState(() {
+                          _selectedPdLord = null;
+                          _sdSequence = null;
+                        });
+                      } else if (pStart.isNotEmpty && pEnd.isNotEmpty) {
+                        _fetchSdForPd(lord, pStart, pEnd);
+                      }
+                    },
+                  );
+                },
+              ),
+            ),
+            const SizedBox(height: S.xl),
+          ],
+
+          // ── Row 4: Sookshma Dashas ──
+          if (_loadingSd)
+            const SizedBox(
+              height: 86,
+              child: Center(child: CircularProgressIndicator(color: C.accent, strokeWidth: 2)),
+            )
+          else if (sdSequence.isNotEmpty) ...[
+            _SectionLabel(
+              title: 'Sookshma Dasha',
+              subtitle: 'in ${_planetName(_selectedPdLord ?? currentPdLord)} PD',
+            ),
+            const SizedBox(height: S.sm),
+            SizedBox(
+              height: 86,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemCount: sdSequence.length,
+                separatorBuilder: (_, __) =>
+                    const SizedBox(width: S.xs),
+                itemBuilder: (_, i) {
+                  final p = sdSequence[i] as Map<String, dynamic>;
+                  final lord = p['lord'] as String? ?? 'sun';
+                  final pStart = p['start'] as String? ?? '';
+                  final pEnd = p['end'] as String? ?? '';
+                  final rel = p['relationship'] as String?;
+                  final isNow = isSelectedMdCurrent && isSelectedAdCurrent
+                      && (_selectedPdLord ?? currentPdLord).toLowerCase() == currentPdLord.toLowerCase()
+                      && lord.toLowerCase() == currentSdLord.toLowerCase();
+                  return _PeriodCard(
+                    lord: lord,
+                    duration: _dayStr(pStart, pEnd),
+                    startYear: _dayMonth(pStart),
+                    endYear: _dayMonth(pEnd),
+                    isCurrent: isNow,
+                    size: _CardSize.compact,
+                    relationship: rel,
                     onTap: () => DashaDetailPanel.show(
                       context,
-                      level: 'pd',
+                      level: 'sd',
                       lord: lord,
                       mdLord: mdLord,
                       adLord: adLord,
-                      pdLord: lord,
+                      pdLord: _selectedPdLord ?? currentPdLord,
                       startDate: pStart,
                       endDate: pEnd,
                       isCurrent: isNow,
@@ -651,6 +776,51 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
         ],
       ),
     );
+  }
+
+  /// Remaining time string for current SD (from sookshma_start/end).
+  String _sdRemainingStr(Map<String, dynamic> current) {
+    final start = current['sookshma_start'] as String? ?? '';
+    final end = current['sookshma_end'] as String? ?? '';
+    if (start.isEmpty || end.isEmpty) return '';
+    try {
+      final e = DateTime.parse(end);
+      final now = DateTime.now();
+      final remaining = e.difference(now).inDays;
+      if (remaining <= 0) return '<1d left';
+      return '${remaining}d left';
+    } catch (_) {
+      return '';
+    }
+  }
+
+  /// "15 Feb" style date for SD cards.
+  String _dayMonth(String iso) {
+    if (iso.isEmpty) return '';
+    try {
+      final dt = DateTime.parse(iso);
+      const months = [
+        '', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+      ];
+      return '${dt.day} ${months[dt.month]}';
+    } catch (_) {
+      return '';
+    }
+  }
+
+  /// Duration in days for SD cards.
+  String _dayStr(String startIso, String endIso) {
+    if (startIso.isEmpty || endIso.isEmpty) return '';
+    try {
+      final s = DateTime.parse(startIso);
+      final e = DateTime.parse(endIso);
+      final days = e.difference(s).inDays;
+      if (days <= 0) return '<1d';
+      return '${days}d';
+    } catch (_) {
+      return '';
+    }
   }
 
   List<Map<String, dynamic>> _getDoshaMarkersForLord(String lord) {
@@ -811,6 +981,19 @@ Color _planetColor(String planet) {
   return colors[planet.toLowerCase()] ?? C.accent;
 }
 
+Color _natureColor(String nature) {
+  switch (nature) {
+    case 'yogakaraka':
+    case 'benefic':
+      return C.positive;
+    case 'malefic':
+    case 'maraka':
+      return C.negative;
+    default:
+      return C.warning;
+  }
+}
+
 String _doshaSymbol(String name) {
   final n = name.toLowerCase();
   if (n.contains('mangal')) return '\u25B2';       // Mars triangle
@@ -877,7 +1060,7 @@ class _SectionLabel extends StatelessWidget {
   }
 }
 
-enum _CardSize { large, medium, small }
+enum _CardSize { large, medium, small, compact }
 
 class _PeriodCard extends StatelessWidget {
   final String lord;
@@ -890,6 +1073,8 @@ class _PeriodCard extends StatelessWidget {
   final VoidCallback? onTap;
   final String? relationship; // 'friend', 'enemy', 'neutral', 'self'
   final List<Map<String, dynamic>> doshaMarkers;
+  final String? functionalNature; // yogakaraka, benefic, neutral, malefic, maraka
+  final List<int> housesRuled;
 
   const _PeriodCard({
     required this.lord,
@@ -902,6 +1087,8 @@ class _PeriodCard extends StatelessWidget {
     this.onTap,
     this.relationship,
     this.doshaMarkers = const [],
+    this.functionalNature,
+    this.housesRuled = const [],
   });
 
   @override
@@ -936,6 +1123,12 @@ class _PeriodCard extends StatelessWidget {
         nameSize = 11;
         durSize = 10;
         dateSize = 9;
+      case _CardSize.compact:
+        width = 76;
+        glyphSize = 13;
+        nameSize = 10;
+        durSize = 9;
+        dateSize = 8;
     }
 
     final bool highlighted = isCurrent || isSelected;
@@ -976,15 +1169,41 @@ class _PeriodCard extends StatelessWidget {
                   style: TextStyle(fontSize: glyphSize, color: color),
                 ),
                 const SizedBox(height: 3),
-                Text(
-                  _planetName(lord),
-                  style: T.bodySm.copyWith(
-                    color: C.textPrimary,
-                    fontWeight: FontWeight.w600,
-                    fontSize: nameSize,
-                  ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (functionalNature != null) ...[
+                      Container(
+                        width: 6,
+                        height: 6,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: _natureColor(functionalNature!),
+                        ),
+                      ),
+                      const SizedBox(width: 3),
+                    ],
+                    Text(
+                      _planetName(lord),
+                      style: T.bodySm.copyWith(
+                        color: C.textPrimary,
+                        fontWeight: FontWeight.w600,
+                        fontSize: nameSize,
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 1),
+                if (housesRuled.isNotEmpty) ...[
+                  Text(
+                    housesRuled.map((h) => '${h}L').join(', '),
+                    style: T.caption.copyWith(
+                      color: color.withValues(alpha: 0.7),
+                      fontSize: 8,
+                    ),
+                  ),
+                ] else ...[
+                  const SizedBox(height: 1),
+                ],
                 Text(
                   duration,
                   style: T.caption.copyWith(color: color, fontSize: durSize),
@@ -1159,24 +1378,30 @@ class _InlineHint extends StatelessWidget {
   }
 }
 
-/// Paints three nested concentric progress rings.
+/// Paints up to four nested concentric progress rings.
 class _NestedRingsPainter extends CustomPainter {
   final double mdProgress;
   final double adProgress;
   final double pdProgress;
+  final double sdProgress;
   final Color mdColor;
   final Color adColor;
   final Color pdColor;
+  final Color sdColor;
   final bool hasPd;
+  final bool hasSd;
 
   _NestedRingsPainter({
     required this.mdProgress,
     required this.adProgress,
     required this.pdProgress,
+    this.sdProgress = 0,
     required this.mdColor,
     required this.adColor,
     required this.pdColor,
+    this.sdColor = C.glassBorder,
     required this.hasPd,
+    this.hasSd = false,
   });
 
   @override
@@ -1185,12 +1410,13 @@ class _NestedRingsPainter extends CustomPainter {
     final maxR = size.width / 2 - 4;
 
     // Equal visual weight — evenly spaced, same stroke width
-    const stroke = 5.0;
-    const gap = 9.0;
+    const stroke = 4.5;
+    const gap = 7.0;
     final rings = <(double, double, double, Color)>[
       (maxR, stroke, mdProgress, mdColor),
       (maxR - gap - stroke, stroke, adProgress, adColor),
       if (hasPd) (maxR - 2 * (gap + stroke), stroke, pdProgress, pdColor),
+      if (hasSd) (maxR - 3 * (gap + stroke), stroke, sdProgress, sdColor),
     ];
 
     final bgPaint = Paint()
@@ -1223,7 +1449,9 @@ class _NestedRingsPainter extends CustomPainter {
       old.mdProgress != mdProgress ||
       old.adProgress != adProgress ||
       old.pdProgress != pdProgress ||
+      old.sdProgress != sdProgress ||
       old.mdColor != mdColor ||
       old.adColor != adColor ||
-      old.pdColor != pdColor;
+      old.pdColor != pdColor ||
+      old.sdColor != sdColor;
 }

@@ -1,0 +1,1087 @@
+{
+  "metadata": {
+    "description": "Deha Dasha (Level 6) combination effects -- Prana lord x Deha lord = 81 combinations. Deha means 'body' and represents the finest subdivision of Vimshottari Dasha, lasting 20 minutes to 14 hours. The Deha lord colors the body's element balance and somatic response within the Prana lord's life-breath window.",
+    "total_combinations": 81,
+    "source": "BPHS, Phaladeepika",
+    "level": 6,
+    "level_name": "Deha Dasha",
+    "parent_level": "Prana Dasha (Level 5)",
+    "duration_range": "~20 minutes to ~14 hours",
+    "calculation_formula": "Prana_duration x Deha_planet_years / 120",
+    "interpretation_principle": "Deha lord provides a somatic micro-lens that physically colors the Prana lord's breath-energy. Effects are primarily felt through the body -- element shifts, organ sensitivity, energy quality changes. At this level, manifestation is physical/somatic rather than event-based.",
+    "last_updated": "2026-02-16"
+  },
+  "deha_dasha_effects": {
+    "sun": {
+      "sun": {
+        "relationship": "same",
+        "theme": "Double solar fire concentrates in the heart and head, producing intense pitta heat and a pulsing sense of vital power",
+        "effects": [
+          "Heart rate elevates and a warm flush spreads through the chest and face; the body radiates palpable heat from its core",
+          "Eyes become photosensitive and may water or ache under bright light; the skull feels pressurized behind the forehead",
+          "Digestion accelerates sharply with pitta surge; thirst intensifies and the mouth feels dry despite adequate hydration"
+        ],
+        "health": "Heart, eyes, and cranial circulation are hyper-active. Pitta peaks to maximum. Stay hydrated, avoid direct sun, and rest the eyes.",
+        "career": "Physical stamina for leadership tasks is very high; however, overheating may cause irritability that undermines focus.",
+        "relationships": "Body language projects dominance and authority; others sense your intensity and may instinctively yield or withdraw.",
+        "timing_quality": "favorable"
+      },
+      "moon": {
+        "relationship": "friend",
+        "theme": "Solar fire meets lunar water in the body, producing a balanced warmth that soothes the stomach and calms the pulse",
+        "effects": [
+          "Body temperature moderates as kapha fluids balance pitta heat; the skin feels pleasantly warm without burning",
+          "Stomach and digestive fluids harmonize; appetite feels natural and eating brings genuine nourishment and comfort",
+          "Breath deepens and steadies as the chest relaxes; lymphatic circulation improves and facial puffiness reduces"
+        ],
+        "health": "Heart-stomach axis is harmonized. Fluid balance is good. Hydration comes naturally. Gentle nourishment supports both organs.",
+        "career": "Balanced physical energy supports sustained work without burnout; the body cooperates with both mental and manual tasks.",
+        "relationships": "Physical warmth radiates outward as approachability; touch feels nurturing and voice carries a soothing timbre.",
+        "timing_quality": "favorable"
+      },
+      "mars": {
+        "relationship": "friend",
+        "theme": "Twin fires of Sun and Mars surge through the blood and muscles, creating explosive physical energy and adrenal heat",
+        "effects": [
+          "Muscles fill with blood and feel primed for exertion; adrenal glands release a burst of fight-or-flight readiness",
+          "Blood pressure rises noticeably and the temples may throb; physical reflexes sharpen to peak reaction speed",
+          "Core body temperature climbs and sweat breaks easily; the body craves movement, sport, or vigorous physical release"
+        ],
+        "health": "Blood, muscles, and adrenals are hyper-stimulated. Risk of overheating, minor cuts, or strain from excess force. Channel through exercise.",
+        "career": "Explosive physical output is available for demanding tasks; hands-on work, construction, or athletics benefit greatly.",
+        "relationships": "Physical presence is commanding and intense; handshakes are firm, posture assertive, voice carries force.",
+        "timing_quality": "favorable"
+      },
+      "mercury": {
+        "relationship": "neutral",
+        "theme": "Solar heat activates the nervous system, producing tingling alertness in the skin and rapid-fire neural processing",
+        "effects": [
+          "Nerve endings in the hands and fingers become hypersensitive; typing, writing, and fine motor tasks feel effortless",
+          "Respiratory rate quickens subtly as the lungs respond to nervous stimulation; shallow breathing may develop if unchecked",
+          "Skin flushes intermittently as vata-pitta interaction sends mixed signals; mild restlessness in the limbs emerges"
+        ],
+        "health": "Nervous system and skin are sensitized. Lungs process air rapidly. Watch for hyperventilation or nerve-based tremors. Breathe deeply.",
+        "career": "Fingers and voice are quick; ideal for data entry, calls, and any task requiring rapid hand-eye coordination.",
+        "relationships": "Gestures become animated and speech rapid; the body communicates through restless, expressive movement.",
+        "timing_quality": "neutral"
+      },
+      "jupiter": {
+        "relationship": "friend",
+        "theme": "Solar vitality expands through the liver and fat tissue, producing a warm glow of physical well-being and generous energy",
+        "effects": [
+          "Liver function optimizes and the body processes nutrients with unusual efficiency; a feeling of fullness and satisfaction arises",
+          "Fat tissue and thighs feel warm and energized; overall body weight feels lighter even without physical change",
+          "Growth hormones and anabolic processes receive a brief boost; the body inclines toward building rather than breaking down"
+        ],
+        "health": "Liver, fat metabolism, and growth processes are supported. Risk of overindulgence in rich food. Moderate portion sizes.",
+        "career": "Body feels expansive and capable; physical generosity in workspace -- standing tall, open posture, warm handshakes.",
+        "relationships": "Physical presence feels benevolent and large; others experience your body language as welcoming and protective.",
+        "timing_quality": "favorable"
+      },
+      "venus": {
+        "relationship": "enemy",
+        "theme": "Solar heat clashes with Venusian coolness in the kidneys and reproductive system, creating somatic tension between drive and rest",
+        "effects": [
+          "Kidneys and lower abdomen feel a dull pull as pitta fire meets kapha moisture; urinary frequency may increase briefly",
+          "Throat feels dry yet craves sweet and cool liquids; the vocal cords may feel strained or husky under conflicting elements",
+          "Skin oscillates between warm flushes and cool patches; the body cannot settle on a comfortable temperature"
+        ],
+        "health": "Kidneys, throat, and reproductive organs experience conflicting element signals. Avoid extremes of hot and cold food. Sip warm water.",
+        "career": "Physical comfort is disrupted, making sustained desk work uncomfortable; frequent position changes help.",
+        "relationships": "The body sends mixed signals -- warmth then withdrawal; physical intimacy may feel appealing then irritating in quick succession.",
+        "timing_quality": "unfavorable"
+      },
+      "saturn": {
+        "relationship": "enemy",
+        "theme": "Solar fire is dampened by Saturnian cold in the bones and joints, producing heaviness, stiffness, and depleted vitality",
+        "effects": [
+          "Bones and joints ache with a cold stiffness that resists warming; the spine feels compressed and posture slumps forward",
+          "Heart rate slows and vitality drops as vata cold suppresses pitta warmth; fatigue settles in the limbs like lead weight",
+          "Teeth and jaw may clench involuntarily; the body tightens in a defensive contraction against perceived karmic pressure"
+        ],
+        "health": "Bones, joints, teeth, and heart are under stress from opposing elements. Warm oil massage and gentle stretching recommended.",
+        "career": "Physical energy is low and tasks feel physically burdensome; the body resists exertion and demands rest.",
+        "relationships": "Body language becomes closed and rigid; shoulders hunch, arms cross, and physical warmth withdraws from others.",
+        "timing_quality": "unfavorable"
+      },
+      "rahu": {
+        "relationship": "neutral",
+        "theme": "Solar vitality encounters Rahu's smoky disruption in the nervous system, producing mixed body signals and unusual sensations",
+        "effects": [
+          "Nervous system fires unpredictably -- phantom tingles, sudden chills, or brief numbness appear without physical cause",
+          "Head feels foggy despite being physically awake; a disconnect between brain signals and body response emerges",
+          "Skin may break out or react to substances that are normally tolerated; the body's toxin filters feel temporarily overwhelmed"
+        ],
+        "health": "Nervous system and toxin processing receive mixed signals. Unusual sensations without clear cause. Grounding practices and clean food help.",
+        "career": "Body coordination may feel slightly off; proceed with awareness on precision physical tasks during this window.",
+        "relationships": "Others sense something unusual in your physical demeanor; eye contact may feel intermittent or distracted.",
+        "timing_quality": "mixed"
+      },
+      "ketu": {
+        "relationship": "neutral",
+        "theme": "Solar body-heat disperses into the subtle body and spine, producing a floating, detached physical sensation and low grounding",
+        "effects": [
+          "Spine tingles with subtle energy moving upward; the physical body feels less solid, as if partially transparent",
+          "Appetite disappears and the stomach feels disconnected from hunger signals; the body forgets its own physical needs",
+          "Eyes glaze over with an inward focus; peripheral vision narrows as awareness withdraws from the external body surface"
+        ],
+        "health": "Spine, subtle energy channels, and appetite regulation are affected. Eat grounding foods even without hunger. Stay connected to the body.",
+        "career": "Physical tasks require extra effort to initiate; the body prefers stillness and meditation over active output.",
+        "relationships": "Physical presence becomes ghost-like and hard to read; others may feel you are physically present but energetically absent.",
+        "timing_quality": "neutral"
+      }
+    },
+    "moon": {
+      "sun": {
+        "relationship": "friend",
+        "theme": "Lunar fluids are gently warmed by solar fire, producing a balanced flow of nourishing warmth through the stomach and chest",
+        "effects": [
+          "Stomach and digestive fluids activate with comfortable warmth; food is absorbed with unusual efficiency and satisfaction",
+          "Chest expands with a sense of emotional-physical fullness; the heart beats with steady, confident rhythm",
+          "Skin tone brightens as circulation improves through kapha channels; the face carries a healthy, radiant glow"
+        ],
+        "health": "Stomach and circulatory system benefit from harmonious fire-water balance. Digestion is optimized. Eat nourishing, warm meals.",
+        "career": "Body is cooperative for both mental and physical work; sustained energy without spikes or crashes.",
+        "relationships": "Warm physical presence that invites closeness; touch feels nurturing, voice carries gentle authority.",
+        "timing_quality": "favorable"
+      },
+      "moon": {
+        "relationship": "same",
+        "theme": "Double lunar energy floods the body with kapha moisture, amplifying fluid retention, emotional-body sensitivity, and sleep pull",
+        "effects": [
+          "Fluid retention increases visibly -- fingers swell, face puffs, and the body feels waterlogged and heavy",
+          "Stomach becomes extremely sensitive to food quality; even mild irritants cause bloating, nausea, or acid reflux",
+          "Eyelids grow heavy and the body craves sleep or horizontal rest; lymphatic movement slows to a crawl"
+        ],
+        "health": "All fluid systems are amplified -- lymph, blood plasma, stomach acid, hormones. Avoid salty food. Light, dry foods help reduce excess kapha.",
+        "career": "Physical energy is low and watery; tasks requiring strength or speed suffer, but gentle creative work is comfortable.",
+        "relationships": "Body becomes hypersensitive to touch -- either craving contact intensely or recoiling from it; emotional body dominates.",
+        "timing_quality": "neutral"
+      },
+      "mars": {
+        "relationship": "neutral",
+        "theme": "Lunar water meets martial fire in the blood, producing steamy internal heat that agitates the stomach and reddens the skin",
+        "effects": [
+          "Stomach acid surges as pitta fire heats the watery lunar domain; heartburn and acid reflux are likely without care",
+          "Blood runs hotter and the face flushes easily; capillaries near the skin surface dilate, creating visible redness",
+          "Muscles tense with restless energy that has no clear outlet; the body wants to move but feels simultaneously waterlogged"
+        ],
+        "health": "Stomach acid, blood heat, and muscle tension create a pitta-kapha conflict. Avoid spicy food. Cool water and gentle movement help.",
+        "career": "Physical restlessness disrupts sedentary work; standing meetings or walking tasks channel the steam productively.",
+        "relationships": "Body temperature and skin flushing make physical proximity feel intensely charged; protective instincts manifest as tense muscles.",
+        "timing_quality": "neutral"
+      },
+      "mercury": {
+        "relationship": "friend",
+        "theme": "Lunar moisture nourishes the nervous system and skin, producing smooth nerve conduction and heightened tactile sensitivity",
+        "effects": [
+          "Skin becomes silky and responsive to the slightest touch; nerve endings transmit sensation with crystal clarity",
+          "Lungs breathe with easy, rhythmic flow as vata air rides smoothly on kapha moisture; respiratory ease is notable",
+          "Fingers and hands feel nimble and coordinated; fine motor skills reach peak precision within this lunar window"
+        ],
+        "health": "Nervous system and skin benefit from ideal moisture balance. Lungs clear and breathing deepens. Enjoy the smooth body state.",
+        "career": "Hands and voice work in perfect coordination; ideal for writing, crafting, speaking, or any communication-body task.",
+        "relationships": "Touch becomes eloquent and meaningful; the body communicates care through gentle, precise gestures.",
+        "timing_quality": "favorable"
+      },
+      "jupiter": {
+        "relationship": "neutral",
+        "theme": "Lunar fluids expand through the liver and fat tissue, producing comfortable fullness and a soothing sense of physical abundance",
+        "effects": [
+          "Liver processes fluids with generous capacity; the body feels nourished and content as if recently fed a satisfying meal",
+          "Fat tissue absorbs excess kapha comfortably; the body feels padded and protected rather than heavy",
+          "Thighs and hips feel warm and relaxed; lower body circulation improves and leg restlessness subsides"
+        ],
+        "health": "Liver and fat metabolism work well together. Tendency to overeat from comfort. Moderate intake to avoid kapha accumulation.",
+        "career": "Body feels content and unhurried; ideal for thoughtful work rather than urgent physical tasks.",
+        "relationships": "Physical generosity is natural; hugs feel fuller, body language is open, presence is comforting and large.",
+        "timing_quality": "favorable"
+      },
+      "venus": {
+        "relationship": "neutral",
+        "theme": "Lunar kapha blends with Venusian kapha, doubling water-earth elements and producing sweet, comfort-seeking, sensory body states",
+        "effects": [
+          "Mucus production increases in the sinuses and throat; a feeling of pleasant congestion or sweet heaviness pervades",
+          "Reproductive organs feel warm and active; hormonal sensitivity heightens and the body inclines toward physical pleasure",
+          "Skin softens to an almost oily texture; the body craves sugar, cream, and rich comfort foods with unusual intensity"
+        ],
+        "health": "Kapha builds in sinuses, throat, and reproductive system. Sweet cravings peak. Light, dry, pungent foods help counterbalance.",
+        "career": "Physical lethargy makes productive work difficult; the body prefers rest, pleasure, and sensory enjoyment over effort.",
+        "relationships": "Body radiates sensual softness; physical intimacy desire rises but energy for action remains low -- receptive rather than active.",
+        "timing_quality": "neutral"
+      },
+      "saturn": {
+        "relationship": "neutral",
+        "theme": "Lunar moisture chills under Saturnian cold, producing heavy, sluggish body states with joint stiffness and emotional-body weight",
+        "effects": [
+          "Joints stiffen as cold vata meets damp kapha; knees and ankles feel swollen and reluctant to bend",
+          "Stomach digestion slows to a crawl; food sits like a stone and appetite disappears under the weight of internal cold",
+          "Body feels ancient and heavy; bones ache with a dull, persistent soreness that resists massage or stretching"
+        ],
+        "health": "Joints, bones, and digestion suffer from cold-damp combination. Warm soups, ginger tea, and heated spaces provide relief.",
+        "career": "Physical output drops to minimum; only the most essential body tasks get completed without great effort.",
+        "relationships": "Body withdraws into itself; physical contact feels burdensome and the skin seems to shrink from touch.",
+        "timing_quality": "neutral"
+      },
+      "rahu": {
+        "relationship": "neutral",
+        "theme": "Lunar body-water receives Rahu's unusual influence, producing queasy sensations, restless sleep signals, and fluctuating body comfort",
+        "effects": [
+          "Stomach turns with unexplained queasiness; fluids in the body feel unsettled without identifiable dietary cause",
+          "Sleep architecture shifts -- the body cycles between drowsiness and alertness in unfamiliar patterns",
+          "Skin reacts with mysterious sensitivity; the lymphatic system processes unusual signals and adjusts its rhythm"
+        ],
+        "health": "Stomach, lymph, and sleep systems receive mixed signals from Rahu's influence on lunar fluids. Purified water and routine rest schedules help.",
+        "career": "Body feels slightly off its usual rhythm; minimize demanding physical tasks and maintain stable routines.",
+        "relationships": "Others sense physical restlessness from you; touch may feel slightly charged or unusual rather than comforting.",
+        "timing_quality": "mixed"
+      },
+      "ketu": {
+        "relationship": "neutral",
+        "theme": "Lunar body-moisture disperses into Ketu's subtle channels, producing thinning of emotion-body fluids and reduced physical need awareness",
+        "effects": [
+          "Body forgets to drink water despite actual dehydration; the moisture that normally cushions joints and organs thins",
+          "Stomach signals become confused -- hunger and fullness are indistinguishable, leading to erratic eating patterns",
+          "Eyes dry out and become unfocused; the body's outer surface feels papery and thin as vitality withdraws inward"
+        ],
+        "health": "Fluid awareness diminishes and body signals thin. Maintain hydration on schedule. Eat at regular times even without hunger cues.",
+        "career": "Physical body operates on autopilot while awareness is elsewhere; repetitive tasks succeed, creative body tasks falter.",
+        "relationships": "Physical presence becomes ethereal and hard to connect with; hugs feel hollow and the body seems to pass through contact.",
+        "timing_quality": "mixed"
+      }
+    },
+    "mars": {
+      "sun": {
+        "relationship": "friend",
+        "theme": "Martial blood-fire receives solar backing, producing powerful muscular vitality and commanding physical authority",
+        "effects": [
+          "Muscles engorge with oxygenated blood and feel capable of extraordinary effort; grip strength and posture peak",
+          "Adrenal output is sustained rather than spiked; the body maintains high energy without the crash that follows adrenaline bursts",
+          "Core temperature rises steadily and the body radiates imposing physical heat; others physically sense your strength"
+        ],
+        "health": "Blood, muscles, and adrenals are powerfully supported. Channel through exercise to avoid overheating. Hydrate aggressively.",
+        "career": "Maximum physical output for demanding labor; the body performs feats of endurance and strength beyond its normal range.",
+        "relationships": "Physical dominance is unmistakable; handshakes crush, posture towers, and the body commands space effortlessly.",
+        "timing_quality": "favorable"
+      },
+      "moon": {
+        "relationship": "friend",
+        "theme": "Martial fire is tempered by lunar coolant in the blood, producing sustained muscular endurance without overheating",
+        "effects": [
+          "Blood temperature moderates as lunar moisture prevents pitta from burning out; sustained physical effort becomes easy",
+          "Stomach provides steady fuel as digestion cooperates with the muscles' energy demands; nutrient absorption optimizes",
+          "Sweat glands regulate efficiently, cooling the body during exertion; electrolyte balance holds under physical stress"
+        ],
+        "health": "Blood-stomach coordination is excellent. Muscles recover quickly. Ideal window for physical training and endurance activity.",
+        "career": "Body sustains effort over hours rather than minutes; marathon tasks benefit from this steady fuel supply.",
+        "relationships": "Physical warmth is present but moderated; protective strength without intimidation; touch is firm but caring.",
+        "timing_quality": "favorable"
+      },
+      "mars": {
+        "relationship": "same",
+        "theme": "Double martial fire explodes through the muscles and blood, producing extreme physical intensity with high injury and inflammation risk",
+        "effects": [
+          "Muscles tremble with barely contained force; the body feels like a compressed spring about to release with violent speed",
+          "Blood pressure spikes sharply and veins bulge visibly; the face reddens and the ears burn with excess pitta-rakta heat",
+          "Pain threshold drops to zero -- every minor sensation amplifies into urgent alarm signals through inflamed nerve pathways"
+        ],
+        "health": "Maximum inflammation, blood pressure, and injury risk. Avoid sharp objects, heavy machinery, and aggressive physical contact. Cool the body.",
+        "career": "Explosive power available but control is compromised; only use for very short physical bursts with extreme caution.",
+        "relationships": "Physical aggression is barely contained; body language is confrontational and others instinctively back away.",
+        "timing_quality": "neutral"
+      },
+      "mercury": {
+        "relationship": "enemy",
+        "theme": "Martial heat agitates the nervous system, producing jittery muscles, skin irritation, and conflicting body signals",
+        "effects": [
+          "Nerves fire erratically through the muscles, causing twitches, tremors, and coordination failures in the hands",
+          "Skin breaks out in heat rashes or allergic welts as pitta fire inflames the delicate dermal nerve network",
+          "Lungs struggle between the urge to breathe deeply for exertion and shallow nervous panting; respiratory rhythm breaks"
+        ],
+        "health": "Nervous system and skin are inflamed by excess martial heat. Allergic reactions and coordination problems likely. Cool the nerves with pranayama.",
+        "career": "Hands and fingers fumble on precision tasks; typing errors increase and tools may slip from trembling grip.",
+        "relationships": "Body communicates irritation through fidgeting, sharp gestures, and an inability to sit still near others.",
+        "timing_quality": "unfavorable"
+      },
+      "jupiter": {
+        "relationship": "friend",
+        "theme": "Martial strength expands through Jupiter's growth energy, producing powerful muscular development and robust physical vitality",
+        "effects": [
+          "Muscles respond to effort with growth-oriented anabolic signaling; the body builds rather than breaks during exertion",
+          "Liver efficiently processes the metabolic waste from intense physical activity; recovery feels rapid and complete",
+          "Thighs and large muscle groups feel especially powerful; the body's physical frame seems to expand with strength"
+        ],
+        "health": "Muscles, liver, and growth systems cooperate beautifully. Ideal window for strength training. Appetite increases to match effort.",
+        "career": "Physical capability is maximized with endurance; the body feels larger and more capable than its actual measurements.",
+        "relationships": "Physical generosity manifests as willing hands -- helping, lifting, carrying; the body serves others naturally.",
+        "timing_quality": "favorable"
+      },
+      "venus": {
+        "relationship": "neutral",
+        "theme": "Martial heat meets Venusian moisture in the reproductive system, producing intense physical desire and creative-body activation",
+        "effects": [
+          "Reproductive organs warm and activate; the lower abdomen fills with a magnetic, pulling sensation of physical desire",
+          "Kidneys work harder to filter the heat-moisture combination; lower back may ache with a warm, dull pressure",
+          "Throat and voice deepen as hormonal activation affects the vocal cords; the body projects physical attractiveness"
+        ],
+        "health": "Reproductive system and kidneys are activated by fire-water interaction. Lower back care needed. Physical desire is natural -- channel wisely.",
+        "career": "Creative physical energy is high; dance, sculpture, sport, and any embodied art form benefit from this combination.",
+        "relationships": "Physical attraction radiates powerfully; the body is magnetically charged and others respond to the raw physicality.",
+        "timing_quality": "neutral"
+      },
+      "saturn": {
+        "relationship": "neutral",
+        "theme": "Martial fire is blocked by Saturnian cold in the bones, producing frustrating muscular tension against rigid skeletal resistance",
+        "effects": [
+          "Muscles strain against stiff, unyielding joints; the body wants to move explosively but the skeleton refuses to cooperate",
+          "Bone-deep cold aches compete with surface-level muscular heat; the body oscillates between shivering and sweating",
+          "Teeth clench and jaw muscles lock as suppressed physical force has nowhere to discharge; tension headaches likely"
+        ],
+        "health": "Bone-muscle conflict creates strain injuries. Joints are vulnerable to sprains. Warm up thoroughly before any physical exertion.",
+        "career": "Physical labor is possible but painfully slow; every movement meets resistance from the body's own structural limitations.",
+        "relationships": "Body is tense and closed; physical proximity feels uncomfortable as the body radiates frustrated, blocked energy.",
+        "timing_quality": "neutral"
+      },
+      "rahu": {
+        "relationship": "neutral",
+        "theme": "Martial blood encounters Rahu's unusual energy, producing unpredictable muscular responses and erratic body alarm signals",
+        "effects": [
+          "Blood chemistry shifts unexpectedly; the body reacts with sudden hot flashes followed by cold waves without clear cause",
+          "Muscles fire without conscious command -- involuntary twitches, spasms, or sudden lurches in unexpected directions",
+          "Coordination between intention and movement becomes unreliable; the body requires extra attention to maintain control"
+        ],
+        "health": "Blood and muscular systems receive mixed signals. Exercise caution with machinery and vehicles. Grounding practices help stabilize.",
+        "career": "Physical reliability is variable; proceed with extra care on tasks requiring precise body control or equipment operation.",
+        "relationships": "Others notice unusual physical tension in your movements; extra care with gestures and proximity is advisable.",
+        "timing_quality": "mixed"
+      },
+      "ketu": {
+        "relationship": "friend",
+        "theme": "Martial force channels through Ketu's subtle spine-energy, producing precise, surgical physical control and detached body awareness",
+        "effects": [
+          "Spine aligns with unusual precision and energy flows upward through the central channel; posture becomes impeccable",
+          "Muscles operate with surgical accuracy rather than brute force; fine motor control reaches a meditative sharpness",
+          "Pain awareness detaches from emotional reaction; the body registers sensation without suffering, enabling fearless action"
+        ],
+        "health": "Spine and subtle energy channels open under martial discipline. Old injuries may briefly ache then release. Yoga and martial arts excel.",
+        "career": "Precision physical tasks -- surgery, assembly, martial arts, detailed handwork -- reach peak execution quality.",
+        "relationships": "Physical presence is sharp and still; others sense focused power without aggression; movements are minimal and exact.",
+        "timing_quality": "favorable"
+      }
+    },
+    "mercury": {
+      "sun": {
+        "relationship": "friend",
+        "theme": "Nervous system is energized by solar fire, producing sharp sensory acuity and rapid hand-eye coordination",
+        "effects": [
+          "Fingertips buzz with heightened tactile sensitivity; the hands feel like precision instruments responding to the smallest signal",
+          "Eye-brain processing speed increases noticeably; reading rate jumps and visual scanning becomes effortlessly rapid",
+          "Vocal cords warm and the voice projects with clear, authoritative tone; speech and breath coordinate fluidly"
+        ],
+        "health": "Nervous system, hands, eyes, and vocal cords are enhanced by solar fire. Avoid overstimulation. Rest the eyes periodically.",
+        "career": "Peak body-state for typing, writing, speaking, and any rapid sensory-motor task; the body is a communication instrument.",
+        "relationships": "Gestures are precise and eloquent; the body communicates intelligence and competence through graceful hand movements.",
+        "timing_quality": "favorable"
+      },
+      "moon": {
+        "relationship": "enemy",
+        "theme": "Nervous system is waterlogged by lunar moisture, producing sluggish nerve conduction and foggy sensory processing",
+        "effects": [
+          "Fingers feel swollen and clumsy; fine motor tasks suffer as nerve signals travel through excess kapha moisture",
+          "Stomach sends distracting signals to the brain, pulling attention from cognitive-body tasks to digestive discomfort",
+          "Skin becomes overly moist and clammy; the body's surface loses its crisp sensitivity to environmental input"
+        ],
+        "health": "Nervous system slowed by excess moisture. Hands and skin lose precision. Dry, warm foods and environments help restore nerve speed.",
+        "career": "Typing errors increase, voice wavers, and handwriting deteriorates; the body's communication instruments are dampened.",
+        "relationships": "Physical communication becomes muddled; gestures are vague, handshakes limp, and eye contact wavering.",
+        "timing_quality": "unfavorable"
+      },
+      "mars": {
+        "relationship": "neutral",
+        "theme": "Nervous system is heated by martial fire, producing mixed sensory signals with intermittent tremors and agitated breathing",
+        "effects": [
+          "Hands intermittently shake with excess energy; writing alternates between sharp precision and jagged overload",
+          "Skin warms and may itch, especially on the hands and forearms; mild inflammatory reactions flare and settle",
+          "Lungs shift between deep analytical breaths and shallow fight-response panting as fire and air elements compete"
+        ],
+        "health": "Skin, hands, and lungs receive mixed pitta-vata signals. Cooling pranayama helps. Alternate between rest and focused movement.",
+        "career": "Precision work is variable; some moments are sharp and others shaky. Schedule the most exacting tasks between tremor waves.",
+        "relationships": "Gestures oscillate between animated warmth and tense agitation; the body communicates mixed energy to those nearby.",
+        "timing_quality": "mixed"
+      },
+      "mercury": {
+        "relationship": "same",
+        "theme": "Double Mercurial energy supercharges the entire nervous system, producing lightning-fast reflexes and maximum sensory bandwidth",
+        "effects": [
+          "Every nerve ending fires at peak efficiency; the body registers the subtlest vibrations in air, surface, and temperature",
+          "Hands move with inhuman speed and coordination; finger dexterity reaches levels that surprise even the practitioner",
+          "Lungs and diaphragm synchronize perfectly with speech; voice modulation, breath control, and articulation are flawless"
+        ],
+        "health": "Nervous system at absolute peak. Risk of overstimulation, anxiety, or tremors from excess. Take deliberate pauses. Grounding foods help.",
+        "career": "Body is a perfect communication machine; typing, speaking, drawing, and all sensory-motor skills hit their ceiling.",
+        "relationships": "Physical wit and charm peak; the body moves with quick grace and hands express thoughts faster than words.",
+        "timing_quality": "favorable"
+      },
+      "jupiter": {
+        "relationship": "neutral",
+        "theme": "Nervous system expands through Jupiter's growth influence, producing comfortable nerve bandwidth and relaxed sensory processing",
+        "effects": [
+          "Nerve channels feel wider and more spacious; sensory input is processed without the usual Mercurial speed-anxiety",
+          "Liver and nervous system cooperate; the body's detoxification supports clearer neural transmission and calmer reflexes",
+          "Hands feel steady and capable rather than twitchy; the body's intelligence operates from a place of generous ease"
+        ],
+        "health": "Nervous system benefits from Jupiterian expansion. Liver-nerve axis cooperates. Ideal window for learning through body practice.",
+        "career": "Body tasks are performed with unhurried competence; the hands teach, the voice counsels, and the posture conveys wisdom.",
+        "relationships": "Physical communication becomes warm and expansive; gestures are generous and inclusive rather than quick and darting.",
+        "timing_quality": "favorable"
+      },
+      "venus": {
+        "relationship": "friend",
+        "theme": "Nervous system is pleasantly moistened by Venusian fluids, producing silky skin sensitivity and graceful physical expression",
+        "effects": [
+          "Skin becomes luminously smooth and responsive to the lightest touch; tactile pleasure heightens to an aesthetic degree",
+          "Throat and vocal cords produce especially melodious tones; the voice becomes an instrument of beauty and charm",
+          "Fingers create with artistic precision; drawing, playing instruments, or any craft feels divinely guided through the hands"
+        ],
+        "health": "Skin, throat, and hands are in peak aesthetic condition. Nerve-beauty axis is activated. Enjoy and express through the body.",
+        "career": "Ideal body-state for artistic creation, musical performance, design work, and any task blending intelligence with beauty.",
+        "relationships": "Touch becomes an art form; the body communicates affection through gentle, precisely beautiful gestures and caresses.",
+        "timing_quality": "favorable"
+      },
+      "saturn": {
+        "relationship": "neutral",
+        "theme": "Nervous system is slowed by Saturnian cold, producing methodical but rigid body processing and stiff-fingered precision",
+        "effects": [
+          "Fingers stiffen and lose their usual quick flexibility; fine motor tasks require conscious effort rather than fluid reflex",
+          "Nerve conduction slows as cold vata contracts the channels; reaction time increases noticeably in all sensory-motor tasks",
+          "Skin feels dry, tight, and less sensitive; the body's surface hardens as if forming a protective shell against input"
+        ],
+        "health": "Nerves slow and skin dries under Saturnian influence. Warm oil applied to hands and feet restores some circulation and sensitivity.",
+        "career": "Speed tasks suffer but methodical, careful work benefits from the forced slowdown; proofreading and auditing improve.",
+        "relationships": "Physical communication becomes formal and restrained; gestures are minimal and precise rather than warm and flowing.",
+        "timing_quality": "neutral"
+      },
+      "rahu": {
+        "relationship": "friend",
+        "theme": "Nervous system is harmoniously amplified by Rahu's electric energy, producing enhanced reflexes and innovative body-tech integration",
+        "effects": [
+          "Nerve endings crackle with electric-like intensity; the body picks up on environmental stimuli that normally go unnoticed",
+          "Hands gravitate toward electronic devices and screens; the body-technology interface feels unusually seamless and intuitive",
+          "Skin develops heightened sensitivity to environmental fields; the body becomes an antenna for subtle vibrations"
+        ],
+        "health": "Nervous system is electrically enhanced. EMF sensitivity may increase. Take breaks from screens. Walk barefoot on earth for grounding.",
+        "career": "Technology interaction is enhanced; the body interfaces with devices and digital tools with surprising fluency and comfort.",
+        "relationships": "Physical presence feels electrically alive; others sense a buzzing vitality that is fascinating and magnetically engaging.",
+        "timing_quality": "favorable"
+      },
+      "ketu": {
+        "relationship": "enemy",
+        "theme": "Nervous system is disrupted by Ketu's dissolving influence, producing numbness in the extremities and fragmented body-awareness",
+        "effects": [
+          "Fingertips lose sensitivity and the hands feel disconnected from the brain's usual precise commands",
+          "Skin becomes numb in patches; the body stops registering minor bumps, temperature shifts, or surface textures",
+          "Lungs breathe on autopilot with minimal conscious connection; the body's respiratory rhythm becomes mechanical and shallow"
+        ],
+        "health": "Nerve disconnection and reduced sensory input. Risk of accidental burns or cuts from not feeling contact. Stay aware. Practice body scanning.",
+        "career": "Communication-body tasks suffer from disconnection; voice may trail off mid-sentence, hands pause mid-gesture.",
+        "relationships": "Physical presence is absent-minded; the body is in the room but the nervous system has partially withdrawn from sensory contact.",
+        "timing_quality": "unfavorable"
+      }
+    },
+    "jupiter": {
+      "sun": {
+        "relationship": "friend",
+        "theme": "Jupiterian growth organs are vitalized by solar fire, producing expansive physical well-being and radiant liver-heart harmony",
+        "effects": [
+          "Liver warms with efficient processing power; the body metabolizes nutrients with generous effectiveness and minimal waste",
+          "Heart and liver synchronize beautifully; blood quality improves and the entire circulatory system hums with vitality",
+          "Physical frame feels larger and more dignified; the body naturally assumes an upright, open, authoritative posture"
+        ],
+        "health": "Liver and heart cooperate under friendly fire-ether harmony. Peak metabolic window. Nourish with wholesome, sattvic food.",
+        "career": "Body projects competence and generosity; physical presence commands respect through dignity rather than force.",
+        "relationships": "Physical warmth and expansiveness draw others near; the body radiates protective, fatherly, benevolent energy.",
+        "timing_quality": "favorable"
+      },
+      "moon": {
+        "relationship": "friend",
+        "theme": "Jupiterian expansion absorbs lunar nourishment, producing comfortable physical fullness and deeply satisfied body states",
+        "effects": [
+          "Stomach and liver work in perfect harmony; food is digested, absorbed, and distributed with contented efficiency",
+          "Fat tissue receives gentle, healthy hydration from lunar moisture; the body feels comfortably padded and protected",
+          "Breasts, stomach, and thighs feel warm and nourished; the entire abdominal cavity relaxes into a state of satiation"
+        ],
+        "health": "Liver-stomach axis is in ideal balance. Tendency to overeat from the pleasure of easy digestion. Practice moderation.",
+        "career": "Body is content and cooperates without resistance; ideal for sustained, comfortable work with minimal physical stress.",
+        "relationships": "Physical nurturing energy is abundant; cooking for others, feeding, and caring through bodily acts feels natural.",
+        "timing_quality": "favorable"
+      },
+      "mars": {
+        "relationship": "friend",
+        "theme": "Jupiterian growth is powered by martial energy, producing robust physical expansion and strong muscular-organ vitality",
+        "effects": [
+          "Liver processes martial blood-heat into growth signals; the body builds muscle and repairs tissue with unusual speed",
+          "Thighs and hips fill with powerful, warm energy; lower body strength increases noticeably during this window",
+          "Physical courage combines with bodily wisdom; the body knows instinctively how far it can push without injury"
+        ],
+        "health": "Growth and repair systems are maximally active. Ideal for physical training, healing from injury, or recovery from illness.",
+        "career": "Body combines strength with wisdom; physical tasks are performed with both power and intelligent restraint.",
+        "relationships": "Physical protectiveness is strong but measured; the body guards loved ones with confident, calm strength.",
+        "timing_quality": "favorable"
+      },
+      "mercury": {
+        "relationship": "enemy",
+        "theme": "Jupiterian organ-expansion is disrupted by nervous agitation, producing liver stress from mental tension and digestive nervousness",
+        "effects": [
+          "Liver struggles to maintain its generous processing rhythm as nervous signals fragment the body's digestive coordination",
+          "Stomach gurgles and protests as anxiety-driven nerve signals conflict with Jupiter's natural digestive confidence",
+          "Body oscillates between expansive comfort and nervous contraction; physical steadiness is undermined by fidgeting"
+        ],
+        "health": "Liver-nerve conflict produces indigestion and metabolic inconsistency. Avoid eating while stressed. Calm the nerves before meals.",
+        "career": "Body cannot decide between Jupiterian ease and Mercurial speed; physical task performance is uneven and inconsistent.",
+        "relationships": "Physical presence alternates between generous warmth and nervous withdrawal; others find the shifting energy confusing.",
+        "timing_quality": "unfavorable"
+      },
+      "jupiter": {
+        "relationship": "same",
+        "theme": "Double Jupiterian energy maximally expands all growth organs, producing peak physical abundance with risk of excess and bloating",
+        "effects": [
+          "Liver reaches maximum processing capacity; the body absorbs every nutrient and calorie with almost excessive efficiency",
+          "Physical frame feels enormous -- expansive, warm, and generously proportioned; spatial awareness extends outward",
+          "Fat tissue and fluids accumulate rapidly; the body gains noticeable volume even in this brief window through fluid and glycogen"
+        ],
+        "health": "All growth systems at maximum. Weight gain, bloating, and liver strain from excess processing. Fast or eat very lightly.",
+        "career": "Body feels too comfortable to push hard; physical productivity is moderate but the body's generous energy benefits team settings.",
+        "relationships": "Physical generosity overflows; the body wants to feed, embrace, and shelter everyone in proximity.",
+        "timing_quality": "favorable"
+      },
+      "venus": {
+        "relationship": "enemy",
+        "theme": "Jupiterian abundance clashes with Venusian indulgence in the body, producing liver-kidney tension and excessive sensory appetite",
+        "effects": [
+          "Liver and kidneys compete for processing priority; the body feels torn between expansion and filtration as both organs strain",
+          "Appetite for rich, sweet, and fatty foods becomes overwhelming; the body craves luxury substances beyond what it can process",
+          "Throat and face flush with excess as the body struggles to metabolize the combined kapha-ether overload of both planets"
+        ],
+        "health": "Liver and kidneys under dual strain from excess. Highest risk of overindulgence. Strict moderation in food, alcohol, and sweets.",
+        "career": "Body prioritizes comfort and pleasure over productive effort; physical laziness peaks during this window.",
+        "relationships": "Physical desire for luxury and intimacy competes with Jupiterian body-wisdom; the body wants both purity and pleasure.",
+        "timing_quality": "unfavorable"
+      },
+      "saturn": {
+        "relationship": "neutral",
+        "theme": "Jupiterian expansion is compressed by Saturnian restriction, producing disciplined organ function and measured physical growth",
+        "effects": [
+          "Liver slows its generous processing to a careful, measured pace; digestion becomes methodical rather than exuberant",
+          "Bones and joints integrate Jupiterian growth signals into structural improvement; skeletal alignment improves subtly",
+          "Body temperature cools from Jupiter's warmth toward Saturn's economy; energy expenditure becomes efficient and conserved"
+        ],
+        "health": "Growth organs are moderated by structure. Good window for fasting, bone-building exercises, and disciplined body regimens.",
+        "career": "Body performs with patient, methodical endurance; physical tasks are completed slowly but with excellent form.",
+        "relationships": "Physical presence is measured and serious; the body communicates reliability and gravitas rather than warmth.",
+        "timing_quality": "neutral"
+      },
+      "rahu": {
+        "relationship": "neutral",
+        "theme": "Jupiterian organs encounter Rahu's foreign substances, producing unusual digestive reactions and unpredictable metabolic responses",
+        "effects": [
+          "Liver encounters unfamiliar chemicals or food compounds and struggles to classify them; metabolic confusion results",
+          "Body reacts to previously tolerated substances with unexpected sensitivity; new food allergies may manifest briefly",
+          "Growth signals are amplified in unusual directions; the body may swell, bloat, or react in ways that feel foreign"
+        ],
+        "health": "Liver and metabolism face unexpected challenges. Avoid unfamiliar foods, supplements, or substances. Stick to known, safe diet.",
+        "career": "Body feels slightly foreign to itself; familiar physical routines feel off-kilter and require extra conscious attention.",
+        "relationships": "Physical presence carries an unusual quality that others notice but cannot name; the body seems slightly different today.",
+        "timing_quality": "neutral"
+      },
+      "ketu": {
+        "relationship": "neutral",
+        "theme": "Jupiterian physical abundance dissolves into Ketu's subtle channels, producing weightlessness and detachment from bodily appetite",
+        "effects": [
+          "Appetite vanishes as the body's usual Jupiterian hunger signals are redirected into subtle energy channels",
+          "Physical frame feels lighter and less substantial; fat tissue and fluid volume seem to decrease as awareness shifts inward",
+          "Liver enters a natural fasting state; the body stops demanding input and begins processing stored reserves with quiet efficiency"
+        ],
+        "health": "Natural fasting window. The body is comfortable without food. Honor this by eating lightly. Meditation and pranayama are physically easy.",
+        "career": "Body requires minimal maintenance and cooperates with spiritual or intellectual tasks that demand physical stillness.",
+        "relationships": "Physical generosity quiets; the body turns inward and others may feel less embraced than usual by your presence.",
+        "timing_quality": "neutral"
+      }
+    },
+    "venus": {
+      "sun": {
+        "relationship": "enemy",
+        "theme": "Venusian body-beauty is scorched by solar heat, producing skin inflammation, throat dryness, and disrupted reproductive comfort",
+        "effects": [
+          "Skin reddens and dries as solar pitta overrides Venus's natural moisture; facial glow is replaced by flushed irritation",
+          "Throat becomes parched and the voice cracks; the vocal cords lose their usual Venusian smoothness and melodic quality",
+          "Reproductive organs feel overheated and uncomfortable; the lower abdomen tightens with a dry, burning discomfort"
+        ],
+        "health": "Skin, throat, and reproductive system suffer from pitta aggression. Cool water, rose water on skin, and voice rest are remedies.",
+        "career": "Body's aesthetic presentation suffers; appearance feels below par and voice lacks its usual charm and smoothness.",
+        "relationships": "Physical attractiveness feels diminished; the body is uncomfortable in its own skin and resists intimate contact.",
+        "timing_quality": "unfavorable"
+      },
+      "moon": {
+        "relationship": "enemy",
+        "theme": "Venusian body-comfort is waterlogged by lunar excess, producing sluggish beauty, congested skin, and hormonal heaviness",
+        "effects": [
+          "Skin becomes puffy and dull as double kapha floods the dermal layers; facial features blur under water retention",
+          "Reproductive hormones fluctuate erratically; the body's sexual response alternates between intense craving and flat disinterest",
+          "Throat produces excess mucus and the voice sounds thick and congested; singing or clear speech becomes difficult"
+        ],
+        "health": "Skin, hormones, and throat congested with excess kapha. Dry brushing, light diet, and warm spiced drinks help drain the excess.",
+        "career": "Body feels bloated and aesthetically off; physical presentation work like modeling, performing, or presenting suffers.",
+        "relationships": "Physical intimacy desire fluctuates unpredictably; the body sends confusing signals of wanting then rejecting closeness.",
+        "timing_quality": "unfavorable"
+      },
+      "mars": {
+        "relationship": "neutral",
+        "theme": "Venusian softness is energized by martial fire, producing passionate body-warmth and dynamic physical attractiveness",
+        "effects": [
+          "Skin flushes with a warm, attractive glow as pitta fire lightly heats kapha moisture; complexion radiates vitality",
+          "Reproductive system activates with confident warmth; physical desire is direct, embodied, and unapologetically present",
+          "Muscles beneath the skin tone and tighten; the body achieves an attractive combination of softness and strength"
+        ],
+        "health": "Beauty-strength axis is activated. Physical attractiveness peaks. Channel through dance, sport, or creative physical expression.",
+        "career": "Body is in peak presentation condition; performing, presenting, modeling, and any appearance-dependent work excels.",
+        "relationships": "Physical magnetism is at its highest; the body radiates a potent combination of beauty and strength that attracts powerfully.",
+        "timing_quality": "neutral"
+      },
+      "mercury": {
+        "relationship": "friend",
+        "theme": "Venusian body-beauty is refined by Mercurial nerve intelligence, producing exquisite tactile sensitivity and graceful motor skills",
+        "effects": [
+          "Fingertips become instruments of artistic creation; every nerve ending in the hands transmits beauty-informed signals",
+          "Skin sensitivity reaches its most pleasurable peak; texture, temperature, and pressure are experienced as aesthetic events",
+          "Voice achieves perfect pitch and modulation as throat nerves and Venusian vocal cords harmonize in melodic coordination"
+        ],
+        "health": "Skin, hands, throat, and nerves in peak aesthetic-functional state. Ideal for massage, music, craft, and sensory arts.",
+        "career": "Body is a perfect instrument for artistic creation; every physical output carries inherent beauty and intelligence.",
+        "relationships": "Touch communicates volumes of affection and artistry; physical intimacy becomes a form of elegant, intelligent expression.",
+        "timing_quality": "favorable"
+      },
+      "jupiter": {
+        "relationship": "neutral",
+        "theme": "Venusian beauty expands through Jupiterian abundance, producing luxurious physical fullness and generous bodily comfort",
+        "effects": [
+          "Body feels voluptuously comfortable as Venus's pleasure meets Jupiter's expansion; every physical sensation is amplified pleasantly",
+          "Skin glows with healthy fat and good circulation; the complexion achieves a warm, prosperous, well-nourished appearance",
+          "Appetite for beautiful food increases; the body craves aesthetically presented, rich, nourishing cuisine"
+        ],
+        "health": "Beauty and abundance combine for physical well-being. Main risk is excess -- overeating, oversleeping, over-indulging. Moderate gently.",
+        "career": "Body projects prosperity and attractiveness; ideal for hospitality, luxury retail, fine dining, and entertainment work.",
+        "relationships": "Physical generosity and beauty combine; the body invites closeness through warm, attractive, comfortable presence.",
+        "timing_quality": "neutral"
+      },
+      "venus": {
+        "relationship": "same",
+        "theme": "Double Venusian energy saturates the body with maximum pleasure-sensitivity, beauty, and reproductive awareness",
+        "effects": [
+          "Every square inch of skin becomes a pleasure receptor; the body experiences physical existence as an aesthetic event",
+          "Reproductive system reaches peak sensitivity and hormonal alignment; fertility signals are at their strongest expression",
+          "Throat, face, and kidneys all function with Venusian grace; the voice is honey, the face glows, and filtration is smooth"
+        ],
+        "health": "Maximum beauty and pleasure sensitivity. Risk of sensory overload and reproductive-system hypersensitivity. Enjoy mindfully.",
+        "career": "Body is a temple of beauty; all appearance-dependent and sensory-pleasure work achieves its highest possible quality.",
+        "relationships": "Physical intimacy reaches peak potential; the body is maximally responsive, attractive, and receptive to pleasure.",
+        "timing_quality": "favorable"
+      },
+      "saturn": {
+        "relationship": "friend",
+        "theme": "Venusian beauty is tempered by Saturnian discipline, producing elegant bone structure and classical physical poise",
+        "effects": [
+          "Bone structure becomes prominent beneath the skin; cheekbones, jawline, and skeletal elegance are accentuated",
+          "Skin tightens and firms as excess kapha moisture is disciplined by vata cold; wrinkles temporarily appear but add character",
+          "Body posture becomes classically upright and poised; physical movement achieves the grace of disciplined training"
+        ],
+        "health": "Beauty meets structure. Skin firms and bones strengthen. Good window for skeletal alignment work, posture correction, and classical dance.",
+        "career": "Body projects timeless elegance rather than youthful softness; classical performance, architecture, and fine craft benefit.",
+        "relationships": "Physical attractiveness shifts from warm sensuality to cool elegance; others admire rather than desire, respect rather than crave.",
+        "timing_quality": "favorable"
+      },
+      "rahu": {
+        "relationship": "friend",
+        "theme": "Venusian body-beauty is electrified by Rahu's exotic energy, producing unusual physical allure and unconventional attractiveness",
+        "effects": [
+          "Skin develops an unusual luminosity that photographs and screens capture especially well; digital beauty is enhanced",
+          "Body gravitates toward exotic adornment, unfamiliar fragrances, and unconventional physical presentation styles",
+          "Reproductive system responds to novel stimuli; the body's attraction circuits are activated by the foreign and unusual"
+        ],
+        "health": "Beauty is enhanced but through unconventional means. Risk of allergic reaction to new cosmetics or substances. Patch test everything.",
+        "career": "Body is magnetically photogenic; ideal for film, photography, digital media, and any technology-enhanced appearance work.",
+        "relationships": "Physical allure carries a mysterious, exotic quality; the body attracts through fascination and novelty rather than familiarity.",
+        "timing_quality": "favorable"
+      },
+      "ketu": {
+        "relationship": "friend",
+        "theme": "Venusian body-beauty transcends into spiritual radiance, producing ethereal physical presence and detached aesthetic glow",
+        "effects": [
+          "Skin develops an inner luminosity that seems to come from within rather than from surface health or cosmetics",
+          "Reproductive desire quiets and transforms into creative-spiritual body energy that moves upward through the spine",
+          "Face takes on an ascetic beauty -- less fleshy, more refined, with the luminous quality of someone who has fasted or prayed"
+        ],
+        "health": "Beauty becomes spiritual rather than physical. Body naturally lightens its demands. Honor this with clean, simple food and quiet surroundings.",
+        "career": "Body projects a sacred, minimalist beauty; ideal for sacred arts, healing work, and spiritual teaching through physical presence.",
+        "relationships": "Physical presence attracts through spiritual radiance; intimacy becomes soul-level connection rather than body-level desire.",
+        "timing_quality": "favorable"
+      }
+    },
+    "saturn": {
+      "sun": {
+        "relationship": "enemy",
+        "theme": "Saturnian bones are further stressed by solar heat attacking their cold structure, producing joint inflammation and deep skeletal ache",
+        "effects": [
+          "Bones radiate a deep, hot ache as solar pitta invades cold Saturnian marrow; the skeletal frame feels attacked from within",
+          "Heart labors under opposing signals -- solar warmth demands expansion while Saturn constricts and slows the cardiac rhythm",
+          "Teeth and jaw throb with inflammatory pain; the entire dental structure feels vulnerable to heat-cold stress cracking"
+        ],
+        "health": "Bone-heart conflict from enemy planets. Joint inflammation, dental pain, and cardiac strain. Anti-inflammatory herbs and rest are essential.",
+        "career": "Body is in pain and resists all work; only the most essential physical tasks get completed under great protest.",
+        "relationships": "Physical suffering makes the body irritable and closed; touch brings no comfort and closeness feels like pressure.",
+        "timing_quality": "unfavorable"
+      },
+      "moon": {
+        "relationship": "enemy",
+        "theme": "Saturnian cold deepens with lunar dampness, producing bone-chilling moisture in the joints and heavy, depressive body states",
+        "effects": [
+          "Joints fill with cold fluid and swell; knees, ankles, and wrists become painfully stiff and resistant to movement",
+          "Stomach produces excess cold acid; nausea and a heavy, sinking sensation in the abdomen dominate physical awareness",
+          "Entire body feels waterlogged and frozen simultaneously; neither warmth nor dryness seems possible from within"
+        ],
+        "health": "Cold-damp invades joints and stomach. Worst combination for arthritis and depression. Hot baths, dry ginger tea, and heated spaces urgently needed.",
+        "career": "Body refuses productive movement; physical output drops to near zero as joints lock and energy drains completely.",
+        "relationships": "Physical withdrawal is total; the body curls inward and cannot offer or receive warmth or comfort from another.",
+        "timing_quality": "unfavorable"
+      },
+      "mars": {
+        "relationship": "enemy",
+        "theme": "Saturnian rigidity is attacked by martial force, producing bone-muscle tearing tension and explosive structural stress",
+        "effects": [
+          "Muscles pull against locked joints with dangerous force; the risk of sprains, strains, and ligament tears is extreme",
+          "Blood pressure oscillates between Saturnian suppression and martial spikes; the cardiovascular system is whiplashed",
+          "Teeth grind and jaw muscles clench to the point of pain; the body holds explosive tension with no safe release valve"
+        ],
+        "health": "Highest structural injury risk. Bone fractures, muscle tears, and blood pressure crises possible. Avoid all physical strain. Rest the body.",
+        "career": "Physical labor is extremely dangerous in this window; postpone heavy lifting, construction, and mechanical work.",
+        "relationships": "Body is a tightly wound spring of frustration; physical proximity to others risks accidental rough contact or explosive outburst.",
+        "timing_quality": "unfavorable"
+      },
+      "mercury": {
+        "relationship": "friend",
+        "theme": "Saturnian structure is intelligently managed by Mercurial nerve precision, producing methodical body-awareness and careful physical control",
+        "effects": [
+          "Nervous system maps the body's structural limitations with precise awareness; each joint's range and each bone's load is known",
+          "Hands perform careful, detailed work despite stiffness; the fingers compensate for slow joints with intelligent precision",
+          "Breathing becomes deliberately controlled and measured; the lungs operate within Saturn's restriction with Mercurial efficiency"
+        ],
+        "health": "Nerves help manage structural limitations. Careful stretching with body-awareness is beneficial. Precise, gentle movements aid recovery.",
+        "career": "Body performs detailed, careful work well despite limitations; accounting, filing, assembly, and inspection tasks benefit.",
+        "relationships": "Physical communication is minimal but precise; each touch and gesture carries deliberate, carefully considered meaning.",
+        "timing_quality": "favorable"
+      },
+      "jupiter": {
+        "relationship": "neutral",
+        "theme": "Saturnian bones receive Jupiterian growth support, producing slow but meaningful structural improvement and bone-density gains",
+        "effects": [
+          "Bones absorb minerals with improved efficiency as Jupiter's growth influence reaches Saturn's skeletal domain",
+          "Joint stiffness eases slightly as Jupiterian warmth brings modest relief to cold, contracted articular spaces",
+          "Body posture improves subtly as the spine receives both structural discipline from Saturn and growth support from Jupiter"
+        ],
+        "health": "Bone density and joint health improve modestly. Good window for calcium-rich foods, bone broth, and gentle weight-bearing exercise.",
+        "career": "Body manages structural tasks with patient competence; physical output is moderate but sustainable and gradually improving.",
+        "relationships": "Physical presence gains a quality of wise endurance; the body communicates patience and experience through its careful movement.",
+        "timing_quality": "neutral"
+      },
+      "venus": {
+        "relationship": "friend",
+        "theme": "Saturnian cold is soothed by Venusian warmth and moisture, producing comfortable joint lubrication and graceful structural movement",
+        "effects": [
+          "Joints receive Venusian moisture that lubricates cold, dry Saturnian articulations; movement becomes smoother and less painful",
+          "Skin softens over the bony prominences; knuckles, elbows, and knees lose their rough dryness and feel pleasantly supple",
+          "Kidneys and bones cooperate in mineral exchange; calcium and fluid balance improves as both planetary systems harmonize"
+        ],
+        "health": "Joint lubrication and bone comfort improve significantly. Warm oil massage is especially effective. Beauty treatments benefit the skin over bones.",
+        "career": "Body moves with surprising grace despite Saturnian heaviness; classical movement, careful craftsmanship, and precise physical work improve.",
+        "relationships": "Physical comfort returns enough to welcome touch; the body receives affection with grateful relief from Saturnian isolation.",
+        "timing_quality": "favorable"
+      },
+      "saturn": {
+        "relationship": "same",
+        "theme": "Double Saturnian energy compresses the entire skeletal system to maximum density, producing peak structural rigidity and chronic pain intensity",
+        "effects": [
+          "Every bone in the body feels its age and weight; the skeleton becomes an inescapable prison of cold, dense, aching matter",
+          "Joints lock completely; flexion and extension require conscious, painful effort as if moving through solidifying concrete",
+          "Teeth, nails, and hair -- all Saturnian tissues -- become brittle and vulnerable to breaking, cracking, or splitting"
+        ],
+        "health": "Maximum bone-joint stress. Chronic pain at peak. Teeth and nails fragile. Hot packs, calcium, and absolute minimal physical demand are essential.",
+        "career": "Body is at physical minimum; only essential survival tasks are possible. Accept the limitation and rest completely.",
+        "relationships": "Physical contact is painful rather than comforting; the body needs to be left alone in its Saturnian compression.",
+        "timing_quality": "unfavorable"
+      },
+      "rahu": {
+        "relationship": "neutral",
+        "theme": "Saturnian structure encounters Rahu's unconventional energy, producing unusual body sensations and shifting somatic patterns",
+        "effects": [
+          "Bones and joints respond to unconventional stimuli -- vibration, electricity, or frequency-based therapy brings unexpected shifts",
+          "Chronic pain shifts its location unpredictably; a knee that ached all day suddenly releases while a shoulder locks instead",
+          "The body's structural patterns reorganize under Rahu's disruptive influence; old postural habits break apart temporarily"
+        ],
+        "health": "Chronic conditions shift and reorganize unpredictably. Alternative therapies may help or confuse. Observe body changes carefully.",
+        "career": "Body finds unconventional ways to work around structural limitations; adaptive postures and creative physical solutions emerge.",
+        "relationships": "Physical presence carries an unusual quality of endurance meeting unpredictability; others sense your body adapting in real time.",
+        "timing_quality": "mixed"
+      },
+      "ketu": {
+        "relationship": "neutral",
+        "theme": "Saturnian physical weight meets Ketu's dissolving influence, producing shifting sensations of lightness and structural release",
+        "effects": [
+          "Bone pain may diminish as awareness partially detaches from the physical skeleton and rises into subtler body layers",
+          "Joints that were locked begin to move more freely as the body's grip on structural tension loosens through inner release",
+          "The spine experiences upward energy movement that partially overcomes gravitational compression; posture may lengthen"
+        ],
+        "health": "Structural release is possible through meditative practice. Yoga and spine-focused work are beneficial. Results are variable.",
+        "career": "Body cooperates with contemplative and meditative tasks; physical limitation may ease through detachment from body-frame focus.",
+        "relationships": "Physical heaviness lightens somewhat and the body becomes more available for quiet, peaceful connection with others.",
+        "timing_quality": "mixed"
+      }
+    },
+    "rahu": {
+      "sun": {
+        "relationship": "enemy",
+        "theme": "Rahu's nervous toxins are inflamed by solar heat, producing erratic headaches, eye disturbances, and unstable body temperature",
+        "effects": [
+          "Head throbs with an unpredictable, migrating pain that shifts from temple to crown to behind the eyes without pattern",
+          "Body temperature regulation fails; sudden hot flashes alternate with cold waves as Rahu disrupts the solar thermostat",
+          "Eyes develop strange visual artifacts -- floaters, light sensitivity, or brief blurring -- as solar-Rahu conflict hits the optic nerves"
+        ],
+        "health": "Head, eyes, and temperature regulation are destabilized. Dim lighting, cool compresses on eyes, and stable environment help.",
+        "career": "Physical reliability is compromised; the body cannot sustain focused physical work when its basic regulation systems are erratic.",
+        "relationships": "Others notice your physical discomfort through wincing, squinting, and restless temperature-seeking behavior.",
+        "timing_quality": "unfavorable"
+      },
+      "moon": {
+        "relationship": "enemy",
+        "theme": "Rahu's toxins flood lunar body-water, producing severe nausea, anxiety-body sensations, and hormonal disruption",
+        "effects": [
+          "Stomach churns with waves of nausea that come and go without dietary explanation; the body feels internally poisoned",
+          "Hormonal balance destabilizes -- sweat glands overreact, body odor changes, and fluid retention shifts unpredictably",
+          "Sleep-wake cycle is shattered; the body oscillates between collapsing drowsiness and wire-taut anxious wakefulness"
+        ],
+        "health": "Stomach, hormones, and sleep are severely disrupted. Ginger for nausea, melatonin for sleep, and bland food for the stomach.",
+        "career": "Body is too unreliable for productive work; nausea and fatigue undermine even basic physical task completion.",
+        "relationships": "Physical state broadcasts distress; others sense your body's turmoil and may feel anxious in your proximity.",
+        "timing_quality": "unfavorable"
+      },
+      "mars": {
+        "relationship": "enemy",
+        "theme": "Rahu's chaos amplifies martial aggression in the body, producing dangerous adrenaline spikes and reckless physical impulses",
+        "effects": [
+          "Adrenaline releases in unpredictable bursts; the body lurches into fight-or-flight mode without actual threat or stimulus",
+          "Blood rushes to the extremities in a disorganized pattern; hands and feet alternate between burning hot and ice cold",
+          "Muscles twitch and contract involuntarily; the body makes sudden, jerking movements that bypass conscious control"
+        ],
+        "health": "Maximum accident and injury risk from erratic neuromuscular firing. Stay still. Avoid vehicles, sharp objects, and heights.",
+        "career": "Physical work is dangerous; the body cannot be trusted to execute planned movements accurately. Rest is the only safe option.",
+        "relationships": "Others instinctively give you physical space as the body radiates unpredictable, potentially aggressive energy.",
+        "timing_quality": "unfavorable"
+      },
+      "mercury": {
+        "relationship": "friend",
+        "theme": "Rahu's electric energy harmonizes with the nervous system, producing enhanced sensory input and seamless technology-body integration",
+        "effects": [
+          "Nerve endings amplify every environmental signal; the body picks up sounds, vibrations, and electromagnetic fields with heightened clarity",
+          "Hands and fingers interact with screens and keyboards with accelerated fluency; the digital-body interface feels effortlessly seamless",
+          "Skin becomes an antenna for environmental data; the body processes technological and environmental input simultaneously"
+        ],
+        "health": "Nervous system is electrically enhanced. Ground the body by walking barefoot periodically. The enhanced sensitivity is productive but needs breaks.",
+        "career": "Technology-body interface is maximized; digital work, coding, and device operation benefit greatly from the electric nerve state.",
+        "relationships": "Physical presence carries a fascinating electric quality; others are drawn to the dynamic, tech-savvy energy you radiate.",
+        "timing_quality": "favorable"
+      },
+      "jupiter": {
+        "relationship": "neutral",
+        "theme": "Rahu's foreign substances meet Jupiterian growth organs, producing metabolic experimentation and unusual liver responses",
+        "effects": [
+          "Liver encounters novel compounds and processes them with experimental curiosity; new food tolerances or intolerances emerge",
+          "Body mass fluctuates unpredictably as Rahu disrupts Jupiter's steady growth signals; weight seems to shift without dietary cause",
+          "Thighs and hips store energy in unusual patterns; fat distribution temporarily reorganizes under the foreign influence"
+        ],
+        "health": "Liver is processing unfamiliar signals. Avoid alcohol, new supplements, and exotic foods. Support liver with known, clean nutrition.",
+        "career": "Body handles unfamiliar physical environments better than usual; travel, new workspaces, and foreign physical conditions are navigated.",
+        "relationships": "Physical presence carries a worldly, well-traveled quality; the body seems adapted to environments beyond its usual range.",
+        "timing_quality": "neutral"
+      },
+      "venus": {
+        "relationship": "friend",
+        "theme": "Rahu's exotic energy enhances Venusian body-beauty, producing magnetic physical allure and glamorous, photogenic presence",
+        "effects": [
+          "Skin develops an unusual luminescence that captures light and attention; physical appearance carries cinematic quality",
+          "Reproductive-hormonal system responds to novel stimuli; the body experiences attraction to unusual types and circumstances",
+          "Throat and voice develop a hypnotic quality; speech carries a persuasive, almost intoxicating physical resonance"
+        ],
+        "health": "Beauty is enhanced through exotic influence. Risk of allergic reaction to new beauty products or substances. Test everything first.",
+        "career": "Body is maximally photogenic and charismatic; ideal for media, entertainment, glamour work, and public-facing roles.",
+        "relationships": "Physical magnetism is amplified by exotic quality; the body attracts through mystery, glamour, and unconventional beauty.",
+        "timing_quality": "favorable"
+      },
+      "saturn": {
+        "relationship": "friend",
+        "theme": "Rahu's disruption finds structure in Saturn's discipline, producing controlled unconventional body practices and systematic detoxification",
+        "effects": [
+          "Body responds well to structured alternative health practices -- scheduled fasting, systematic detox, or disciplined breathwork",
+          "Chronic toxin accumulation shifts toward organized elimination; the body methodically purges what Rahu has deposited",
+          "Bones and nervous system find an unlikely harmony; structural integrity supports the electrical chaos with grounding stability"
+        ],
+        "health": "Structured detoxification is maximally effective. Scheduled fasting, disciplined alternative therapy, and systematic purging benefit.",
+        "career": "Body can sustain unconventional work practices; unusual work environments, night shifts, and non-standard physical routines cooperate.",
+        "relationships": "Physical presence stabilizes under structure; others experience your grounded unconventionality as reassuring and reliable.",
+        "timing_quality": "favorable"
+      },
+      "rahu": {
+        "relationship": "same",
+        "theme": "Double Rahu energy maximally disrupts all body systems, producing peak toxicity, confusion, and chaotic somatic experience",
+        "effects": [
+          "Every body system receives conflicting signals; the organism cannot find homeostasis on any axis -- temperature, hunger, sleep, or pain",
+          "Toxin load peaks as filtration organs are overwhelmed by the doubled shadow-planet influence; skin may break out dramatically",
+          "Nervous system enters a feedback loop of amplified anxiety; the body shakes, sweats, and cycles through phantom symptoms"
+        ],
+        "health": "Maximum systemic disruption. All body regulation compromised. Retreat to a clean, quiet, familiar environment. Eat only simple, known foods.",
+        "career": "Body is unreliable for any task; physical coordination, temperature regulation, and energy levels are all chaotic. Rest.",
+        "relationships": "Others should give you space; the body radiates confusion and distress that is contagious to sensitive people nearby.",
+        "timing_quality": "unfavorable"
+      },
+      "ketu": {
+        "relationship": "neutral",
+        "theme": "Rahu's material amplification meets Ketu's spiritual dissolution, producing disorienting body-spirit oscillation and mixed somatic signals",
+        "effects": [
+          "Vestibular system receives conflicting input; the body struggles to determine spatial orientation and balance wavers",
+          "Nervous system receives simultaneous amplifying (Rahu) and dissolving (Ketu) signals; numbness and hypersensitivity alternate",
+          "Stomach oscillates between hunger and disinterest in food; the body cannot settle on a consistent appetite pattern"
+        ],
+        "health": "Balance, orientation, and appetite regulation are confused by opposing nodal signals. Move slowly, sit when dizzy. Maintain steady intake.",
+        "career": "Physical tasks require extra care when balance and orientation are variable; gentle, grounded work is manageable.",
+        "relationships": "Physical presence oscillates between intense and absent; others may find this puzzling but not alarming if you move slowly.",
+        "timing_quality": "mixed"
+      }
+    },
+    "ketu": {
+      "sun": {
+        "relationship": "neutral",
+        "theme": "Ketu's subtle-body dissolution diffuses solar vitality, producing mixed physical energy and alternating heart-center awareness",
+        "effects": [
+          "Heart rhythm becomes variable as awareness alternates between the physical heartbeat and subtler energy pulsations",
+          "Eyes shift between focused external vision and soft internal gazing; the visual field expands and contracts in waves",
+          "Physical vitality alternates between normal functioning and subtle-body withdrawal; energy comes in meditative waves"
+        ],
+        "health": "Heart, eyes, and vitality receive mixed signals. Eat warm, nourishing food. Alternate between gentle activity and stillness.",
+        "career": "Body alternates between functional work output and contemplative pause; schedule tasks with flexibility for quiet intervals.",
+        "relationships": "Physical presence oscillates between engaged warmth and meditative withdrawal; others notice the shifting but adapt.",
+        "timing_quality": "mixed"
+      },
+      "moon": {
+        "relationship": "neutral",
+        "theme": "Ketu's dissolution thins lunar body-fluids, producing variable emotional-body moisture and fluctuating physical comfort awareness",
+        "effects": [
+          "Stomach alternates between comfortable fullness and hollow emptiness; the body's nourishment signals come in waves",
+          "Emotional body partially disconnects from physical sensation; comfort seeking alternates with meditative detachment",
+          "Lymphatic system slows periodically; the body's fluid-cleaning mechanisms pulse between active and suspended states"
+        ],
+        "health": "Emotional-body fluids fluctuate. Maintain regular fluid and food intake. Warm milk with ghee before bed supports stability.",
+        "career": "Body oscillates between productive engagement and contemplative withdrawal; flexible scheduling accommodates the rhythm.",
+        "relationships": "Physical nurturing capacity varies; the body alternates between warm care-giving and meditative self-containment.",
+        "timing_quality": "mixed"
+      },
+      "mars": {
+        "relationship": "friend",
+        "theme": "Ketu's subtle energy channels receive martial precision, producing razor-sharp body awareness and surgical physical control",
+        "effects": [
+          "Spine straightens with military precision as Ketu's central channel receives Mars's disciplined force; posture is impeccable",
+          "Pain awareness becomes clinically detached; the body registers injury signals as information rather than suffering",
+          "Muscles operate with minimal wasted movement; every physical action is executed with stripped-down, essential efficiency"
+        ],
+        "health": "Spine and subtle body energized by martial discipline. Ideal for yoga, martial arts, and surgical precision work. Pain may be ignored -- be cautious.",
+        "career": "Body performs precision physical tasks with meditative accuracy; surgery, assembly, calibration, and martial arts peak.",
+        "relationships": "Physical presence is sharp, still, and powerful; others sense focused force contained within deliberate stillness.",
+        "timing_quality": "favorable"
+      },
+      "mercury": {
+        "relationship": "enemy",
+        "theme": "Ketu's dissolution disrupts Mercurial nerves, producing scattered neural signals and fragmented body-communication breakdown",
+        "effects": [
+          "Nerves fire incompletely; signals from the brain reach the hands late or arrive garbled, producing clumsy physical responses",
+          "Skin sensitivity fluctuates between numb patches and hypersensitive zones without predictable pattern or location",
+          "Voice trails off as the connection between thought and speech-apparatus weakens; sentences start strong then dissolve"
+        ],
+        "health": "Neural communication is disrupted. Avoid tasks requiring rapid sensory-motor coordination. Gentle, slow movements are the safe approach.",
+        "career": "Communication-body tasks suffer significantly; typing, speaking, and gesture-based work produce inconsistent, unreliable results.",
+        "relationships": "Physical communication is fragmented; others struggle to read body language that keeps dissolving mid-gesture.",
+        "timing_quality": "unfavorable"
+      },
+      "jupiter": {
+        "relationship": "neutral",
+        "theme": "Ketu dissolves Jupiterian physical abundance, producing natural fasting state and lightened body-frame awareness",
+        "effects": [
+          "Appetite vanishes completely as Ketu redirects digestive energy into subtle channels; the stomach feels contentedly empty",
+          "Liver enters a gentle detoxification mode; stored toxins are released for elimination without dietary intervention",
+          "Physical frame feels lighter and less gravitationally bound; the body seems to require less space and fewer resources"
+        ],
+        "health": "Natural fasting and detox window. The body cleanses itself. Drink water but do not force food. Light broth if needed.",
+        "career": "Body requires minimal maintenance; all physical resources are freed for contemplative, spiritual, or research work.",
+        "relationships": "Physical generosity quiets; the body cannot host, feed, or physically comfort others but radiates peaceful non-demand.",
+        "timing_quality": "neutral"
+      },
+      "venus": {
+        "relationship": "friend",
+        "theme": "Ketu's spiritual fire refines Venusian beauty into ethereal radiance, producing transcendent physical glow and detached aesthetic presence",
+        "effects": [
+          "Skin develops a translucent, inner-lit quality; physical beauty shifts from material lustre to spiritual luminosity",
+          "Reproductive energy transforms and rises through the spine; sexual desire sublimates into creative-spiritual body force",
+          "Facial features soften into an expression of serene detachment; the body achieves the beauty of one who has released desire"
+        ],
+        "health": "Beauty becomes spiritual. Reproductive energy transforms. Honor with clean living and quiet surroundings. No need for cosmetic enhancement.",
+        "career": "Body projects sacred beauty; ideal for temple arts, healing presence, spiritual counseling, and contemplative creative work.",
+        "relationships": "Physical attraction operates on a soul level; the body draws others through spiritual radiance rather than sensual appeal.",
+        "timing_quality": "favorable"
+      },
+      "saturn": {
+        "relationship": "friend",
+        "theme": "Ketu's liberation meets Saturnian structure, producing deep karmic release from chronic body patterns and bone-level healing",
+        "effects": [
+          "Chronic bone and joint pain suddenly releases as Ketu dissolves the karmic tension Saturn has locked into the skeleton",
+          "The body's oldest, deepest physical holding patterns begin to unwind; postural distortions that have persisted for years soften",
+          "Teeth, nails, and bones feel less like a prison and more like a temporary dwelling that awareness can choose to inhabit"
+        ],
+        "health": "Deepest karmic-body release possible. Chronic pain may resolve permanently. Yoga, meditation, and surrender practices are maximally effective.",
+        "career": "Body transcends its usual limitations; physical constraints that normally block work dissolve temporarily through spiritual release.",
+        "relationships": "Physical presence becomes that of a liberated being; others sense deep peace radiating from a body that has released its burdens.",
+        "timing_quality": "favorable"
+      },
+      "rahu": {
+        "relationship": "neutral",
+        "theme": "Ketu's dissolution meets Rahu's amplification, producing oscillating body-confusion and alternating material-spiritual somatic signals",
+        "effects": [
+          "Body receives alternating signals to dissolve (Ketu) and amplify (Rahu); the result is wavering somatic awareness and mild vertigo",
+          "Appetite swings between spiritual emptiness and material craving; the body oscillates between fasting state and hunger",
+          "Nervous system blurs the boundary between real physical input and subtle signals; body awareness becomes dreamlike"
+        ],
+        "health": "Body regulation fluctuates from opposing nodal forces. Stay grounded. Hold something solid. Eat small, familiar meals. Move slowly.",
+        "career": "Physical tasks require extra grounding when body awareness wavers; gentle, routine work is manageable with attention.",
+        "relationships": "Physical presence oscillates between solid and ethereal; others may sense dreamlike quality but not distress.",
+        "timing_quality": "mixed"
+      },
+      "ketu": {
+        "relationship": "same",
+        "theme": "Double Ketu energy completely dissolves body-awareness, producing maximum detachment from physical form and ego-death body state",
+        "effects": [
+          "Physical body sensation reduces to near-zero; the practitioner may literally forget they have a body for extended minutes",
+          "Spine becomes a column of pure energy with no sense of bone, muscle, or flesh; the gross body is experienced as transparent",
+          "All bodily appetites -- hunger, thirst, sleep, comfort, pain -- cease simultaneously as awareness fully enters the subtle body"
+        ],
+        "health": "Complete physical detachment. The body must be cared for externally as internal awareness has withdrawn. Set timers for food and water. Stay safe.",
+        "career": "Worldly physical work is impossible; only deepest meditation, samadhi practice, or spiritual absorption is appropriate.",
+        "relationships": "Physical body is effectively unoccupied; loved ones should understand this is temporary spiritual absorption, not rejection.",
+        "timing_quality": "neutral"
+      }
+    }
+  }
+}

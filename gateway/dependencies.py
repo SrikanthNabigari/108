@@ -85,6 +85,28 @@ async def get_current_user(
     """
     auth_header = request.headers.get("Authorization")
     if not auth_header:
+        # Dev mode bypass — return a fixed user without auth
+        if settings.env == "development" and settings.dev_user_id:
+            db = getattr(request.app.state, "db", None)
+            if db:
+                row = await db.fetchrow(
+                    "SELECT * FROM public.users WHERE id = $1",
+                    uuid.UUID(settings.dev_user_id),
+                )
+                if row:
+                    tier = (
+                        settings.dev_tier
+                        if settings.dev_tier != "free"
+                        else row.get("subscription_tier", "free")
+                    )
+                    return UserContext(
+                        id=row["id"],
+                        auth_id=str(row.get("auth_id") or row["id"]),
+                        email=row.get("email") or "",
+                        phone=row.get("phone"),
+                        name=row.get("name"),
+                        subscription_tier=SubscriptionTier(tier),
+                    )
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Missing authorization header",

@@ -1,0 +1,113 @@
+{
+  "deha_dasha_guide": {
+    "description": "Deha Dasha (Level 6) -- finest subdivision of Vimshottari, 20 min to 14 hours. 'Deha' means body -- effects manifest primarily through physical sensations, somatic shifts, and brief energetic impulses. Per BPHS, the Deha lord colors the body's element balance for its brief duration. At this level, planetary influence is felt as fleeting physical micro-states rather than events or sustained moods.",
+    "sun": {
+      "duration_range": "20 min to 14 hours",
+      "theme": "Brief vitality surge, authority impulse, pitta flash",
+      "energy": "pitta_sharp",
+      "body_focus": "Heart, eyes, head -- brief heat activation, pulse quickens, forehead warmth",
+      "micro_advice": [
+        "Use for confident decisions requiring assertiveness",
+        "Avoid ego clashes and heated arguments",
+        "Drink cool water if body heat spikes"
+      ],
+      "avoid": "Overexertion in heat, staring at screens, confrontation with authority figures"
+    },
+    "moon": {
+      "duration_range": "30 min to 14 hours",
+      "theme": "Emotional micro-wave, fluid shift, comfort craving",
+      "energy": "kapha_cool",
+      "body_focus": "Stomach, chest, lymph -- brief water retention, appetite shift, sinus awareness",
+      "micro_advice": [
+        "Honor the comfort need briefly -- warm drink, soft music",
+        "Note any intuitive flash; it carries accuracy at this level",
+        "Avoid cold foods if body feels heavy"
+      ],
+      "avoid": "Emotional decisions, dairy overload, exposure to cold drafts"
+    },
+    "mars": {
+      "duration_range": "20 min to 8 hours",
+      "theme": "Adrenaline micro-burst, muscle tension, action urge",
+      "energy": "pitta_intense",
+      "body_focus": "Muscles, blood, adrenals -- brief heat in limbs, restless hands, jaw tension",
+      "micro_advice": [
+        "Channel into brief physical movement -- walk, stretch, push-ups",
+        "Handle one task requiring courage or confrontation",
+        "Be cautious with sharp objects and hot surfaces"
+      ],
+      "avoid": "Reckless driving, arguments, handling fire or blades carelessly"
+    },
+    "mercury": {
+      "duration_range": "30 min to 14 hours",
+      "theme": "Mental flicker, verbal impulse, nervous tingle",
+      "energy": "vata_light",
+      "body_focus": "Nervous system, hands, skin -- finger restlessness, throat dryness, skin tingle",
+      "micro_advice": [
+        "Send the important message or make the quick call now",
+        "Jot down any idea that flashes -- it fades fast at Deha level",
+        "Take a screen break if eyes feel strained"
+      ],
+      "avoid": "Verbal overcommitment, signing documents impulsively, caffeine excess"
+    },
+    "jupiter": {
+      "duration_range": "30 min to 14 hours",
+      "theme": "Warm expansiveness, brief optimism, appetite rise",
+      "energy": "sattva_warm",
+      "body_focus": "Liver, fat tissue, thighs -- warmth in abdomen, hunger spike, sense of ease",
+      "micro_advice": [
+        "Use the brief optimism for a decision you have been delaying",
+        "Eat mindfully -- appetite rises but digestion may not match",
+        "A brief prayer or gratitude moment amplifies the sattvic window"
+      ],
+      "avoid": "Overeating rich food, overcommitting from momentary optimism"
+    },
+    "venus": {
+      "duration_range": "40 min to 14 hours",
+      "theme": "Sensory pleasure flash, skin softening, social warmth",
+      "energy": "kapha_harmonious",
+      "body_focus": "Reproductive system, kidneys, skin -- brief glow, sweet craving, throat softness",
+      "micro_advice": [
+        "Appreciate something beautiful -- music, art, nature -- for grounding",
+        "Good micro-window for a kind word to partner or friend",
+        "Moisturize skin; body absorbs nourishment well now"
+      ],
+      "avoid": "Impulsive luxury purchases, sugar binge, romantic decisions based on fleeting attraction"
+    },
+    "saturn": {
+      "duration_range": "30 min to 14 hours",
+      "theme": "Brief heaviness, joint stiffness, duty awareness",
+      "energy": "vata_heavy",
+      "body_focus": "Joints, bones, lower back -- fleeting stiffness, cold hands, dryness in knees",
+      "micro_advice": [
+        "Stretch or apply warm oil to stiff joints",
+        "Complete one small pending duty -- clearing it lifts the heaviness",
+        "Drink warm water; avoid cold beverages"
+      ],
+      "avoid": "Starting new ventures, cold exposure, forcing energy when body asks to slow down"
+    },
+    "rahu": {
+      "duration_range": "30 min to 14 hours",
+      "theme": "Restless craving, sensory confusion, brief disorientation",
+      "energy": "vata_disruptive",
+      "body_focus": "Nervous system, stomach, skin -- unexplained itch, gurgling stomach, brief dizziness",
+      "micro_advice": [
+        "Ground yourself -- feet on floor, deep breaths, touch something solid",
+        "Do not trust a sudden intense craving; it passes in minutes",
+        "Check information twice if making any quick decisions"
+      ],
+      "avoid": "Intoxicants, impulsive online purchases, trusting unverified information"
+    },
+    "ketu": {
+      "duration_range": "20 min to 8 hours",
+      "theme": "Momentary detachment, body numbness, spiritual micro-flash",
+      "energy": "pitta_dissolving",
+      "body_focus": "Spine, pineal area, extremities -- brief tingling, numbness in fingers, spacey feeling",
+      "micro_advice": [
+        "If meditation calls, even 5 minutes yields disproportionate depth",
+        "Let go of one thing you are holding onto -- the release is effortless now",
+        "Eat warm grounding food if feeling spacey"
+      ],
+      "avoid": "Driving when feeling spacey, starting new material projects, forcing focus on worldly tasks"
+    }
+  }
+}

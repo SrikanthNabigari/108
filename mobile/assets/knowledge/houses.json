@@ -1,0 +1,362 @@
+{
+  "houses": {
+    "1": {
+      "number": 1,
+      "name": "Lagna",
+      "sanskrit": "तनु (Tanu)",
+      "category": "kendra,trikona",
+      "significations": [
+        "Self",
+        "Physical body",
+        "Personality",
+        "Temperament",
+        "Appearance",
+        "Health",
+        "Longevity",
+        "Intelligence",
+        "Vitality",
+        "Character",
+        "Will power",
+        "Life direction"
+      ],
+      "body_parts": [
+        "Head",
+        "Face",
+        "Brain",
+        "Eyes"
+      ],
+      "karaka": "sun",
+      "opposite_house": 7
+    },
+    "2": {
+      "number": 2,
+      "name": "Dhana",
+      "sanskrit": "धन (Dhana)",
+      "category": "maraka",
+      "significations": [
+        "Wealth",
+        "Finance",
+        "Monetary gains",
+        "Speech",
+        "Oral expression",
+        "Throat",
+        "Food",
+        "Family",
+        "Domestic happiness",
+        "Values",
+        "Self-worth",
+        "Savings",
+        "Movable property"
+      ],
+      "body_parts": [
+        "Throat",
+        "Teeth",
+        "Tongue",
+        "Face",
+        "Neck"
+      ],
+      "karaka": "jupiter",
+      "opposite_house": 8
+    },
+    "3": {
+      "number": 3,
+      "name": "Sahaja",
+      "sanskrit": "सहज (Sahaja)",
+      "category": "upachaya",
+      "significations": [
+        "Siblings",
+        "Courage",
+        "Communication",
+        "Short journeys",
+        "Neighbors",
+        "Writing",
+        "Publishing",
+        "Trade",
+        "Hobbies",
+        "Mental abilities",
+        "Hands",
+        "Ears",
+        "Enthusiasm"
+      ],
+      "body_parts": [
+        "Shoulders",
+        "Arms",
+        "Hands",
+        "Ears",
+        "Chest"
+      ],
+      "karaka": "mars",
+      "opposite_house": 9
+    },
+    "4": {
+      "number": 4,
+      "name": "Sukha",
+      "sanskrit": "सुख (Sukha)",
+      "category": "kendra",
+      "significations": [
+        "Mother",
+        "Home",
+        "Property",
+        "Real estate",
+        "Happiness",
+        "Comfort",
+        "Vehicles",
+        "Domestic life",
+        "Inheritance",
+        "Land",
+        "Education",
+        "Inner peace",
+        "Emotional security"
+      ],
+      "body_parts": [
+        "Chest",
+        "Lungs",
+        "Heart",
+        "Breasts"
+      ],
+      "karaka": "moon",
+      "opposite_house": 10
+    },
+    "5": {
+      "number": 5,
+      "name": "Putra",
+      "sanskrit": "पुत्र (Putra)",
+      "category": "trikona",
+      "significations": [
+        "Children",
+        "Intelligence",
+        "Intellect",
+        "Creativity",
+        "Romance",
+        "Love affairs",
+        "Entertainment",
+        "Games",
+        "Sports",
+        "Speculative gains",
+        "Stock market",
+        "Education",
+        "Artistic talents",
+        "Spiritual knowledge"
+      ],
+      "body_parts": [
+        "Stomach",
+        "Liver",
+        "Intestines",
+        "Spleen"
+      ],
+      "karaka": "jupiter",
+      "opposite_house": 11
+    },
+    "6": {
+      "number": 6,
+      "name": "Ripu",
+      "sanskrit": "रिपु (Ripu)",
+      "category": "dusthana,upachaya",
+      "significations": [
+        "Enemies",
+        "Opposition",
+        "Diseases",
+        "Illness",
+        "Obstacles",
+        "Debts",
+        "Service",
+        "Employment",
+        "Pets",
+        "Servants",
+        "Subordinates",
+        "Litigation",
+        "Accidents",
+        "Thieves"
+      ],
+      "body_parts": [
+        "Abdomen",
+        "Intestines",
+        "Kidneys",
+        "Colon"
+      ],
+      "karaka": "mars,saturn",
+      "opposite_house": 12
+    },
+    "7": {
+      "number": 7,
+      "name": "Kalatra",
+      "sanskrit": "कलत्र (Kalatra)",
+      "category": "kendra,maraka",
+      "significations": [
+        "Marriage",
+        "Spouse",
+        "Partnership",
+        "Business partners",
+        "Relationships",
+        "Sexual relations",
+        "Contractual agreements",
+        "Public relations",
+        "Open enemies",
+        "Competitors",
+        "Trade",
+        "Negotiations",
+        "Divorce"
+      ],
+      "body_parts": [
+        "Lower back",
+        "Pelvis",
+        "Kidneys",
+        "Urinary system"
+      ],
+      "karaka": "venus",
+      "opposite_house": 1
+    },
+    "8": {
+      "number": 8,
+      "name": "Ayur",
+      "sanskrit": "आयु (Ayur)",
+      "category": "dusthana",
+      "significations": [
+        "Longevity",
+        "Lifespan",
+        "Death",
+        "Transformation",
+        "Inheritance",
+        "Sudden gains",
+        "Insurance",
+        "Occult sciences",
+        "Mysteries",
+        "Secrets",
+        "Hidden enemies",
+        "Chronic diseases",
+        "Legacies",
+        "Sexual power"
+      ],
+      "body_parts": [
+        "Genitals",
+        "Reproductive system",
+        "Bladder",
+        "Rectum"
+      ],
+      "karaka": "saturn",
+      "opposite_house": 2
+    },
+    "9": {
+      "number": 9,
+      "name": "Dharma",
+      "sanskrit": "धर्म (Dharma)",
+      "category": "trikona",
+      "significations": [
+        "Father",
+        "Luck",
+        "Fortune",
+        "Dharma (righteousness)",
+        "Religion",
+        "Philosophy",
+        "Guru",
+        "Teacher",
+        "Wisdom",
+        "Spirituality",
+        "Long journeys",
+        "Foreign travel",
+        "Higher education",
+        "Pilgrimage"
+      ],
+      "body_parts": [
+        "Thighs",
+        "Hip",
+        "Liver",
+        "Sciatic nerve"
+      ],
+      "karaka": "jupiter",
+      "opposite_house": 3
+    },
+    "10": {
+      "number": 10,
+      "name": "Karma",
+      "sanskrit": "कर्म (Karma)",
+      "category": "kendra",
+      "significations": [
+        "Career",
+        "Profession",
+        "Occupation",
+        "Business",
+        "Fame",
+        "Status",
+        "Authority",
+        "Government",
+        "Administration",
+        "Public image",
+        "Reputation",
+        "Actions",
+        "Ambition",
+        "Social position"
+      ],
+      "body_parts": [
+        "Knees",
+        "Bones",
+        "Joints",
+        "Skeleton"
+      ],
+      "karaka": "sun,mercury,saturn",
+      "opposite_house": 4
+    },
+    "11": {
+      "number": 11,
+      "name": "Labha",
+      "sanskrit": "लाभ (Labha)",
+      "category": "upachaya",
+      "significations": [
+        "Gains",
+        "Profits",
+        "Income",
+        "Friends",
+        "Friendships",
+        "Social circles",
+        "Associations",
+        "Aspirations",
+        "Hopes",
+        "Wishes",
+        "Fulfillment",
+        "Community",
+        "Networking",
+        "Elder brother"
+      ],
+      "body_parts": [
+        "Legs",
+        "Ankles",
+        "Calves",
+        "Left ear"
+      ],
+      "karaka": "jupiter",
+      "opposite_house": 5
+    },
+    "12": {
+      "number": 12,
+      "name": "Vyaya",
+      "sanskrit": "व्यय (Vyaya)",
+      "category": "dusthana",
+      "significations": [
+        "Loss",
+        "Expenditure",
+        "Expenses",
+        "Moksha (liberation)",
+        "Enlightenment",
+        "Foreign lands",
+        "Foreign residence",
+        "Isolation",
+        "Seclusion",
+        "Hospitals",
+        "Prisons",
+        "Monasteries",
+        "Secret enemies",
+        "Subconscious mind",
+        "Sleep",
+        "Fatigue"
+      ],
+      "body_parts": [
+        "Feet",
+        "Toes",
+        "Left eye",
+        "Lymph system"
+      ],
+      "karaka": "saturn,ketu",
+      "opposite_house": 6
+    }
+  }
+}

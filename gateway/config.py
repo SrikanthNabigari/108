@@ -37,6 +37,9 @@ class Settings(BaseSettings):
     # Dev tier override for local testing ("free" | "pro" | "premium")
     dev_tier: str = "free"
 
+    # Dev user ID — skip auth in development mode and use this user
+    dev_user_id: str = ""
+
     class Config:
         """Pydantic configuration."""
 

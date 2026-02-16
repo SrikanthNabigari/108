@@ -1,0 +1,1168 @@
+{
+  "metadata": {
+    "description": "Sookshma Dasha (Level 4) combination effects for Vimshottari Dasha system. 9 Pratyantardasha lords x 9 Sookshma lords = 81 combinations. At this micro-level, effects manifest over days rather than months, coloring daily experience within the Pratyantardasha framework.",
+    "total_combinations": 81,
+    "source": "BPHS, Phaladeepika",
+    "dasha_system": "Vimshottari Dasha (120-year cycle)",
+    "level": 4,
+    "level_name": "Sookshma Dasha",
+    "parent_level": "Pratyantardasha (Level 3)",
+    "duration_note": "Each Sookshma period lasts hours to a few days depending on the PD and SD lords",
+    "calculation": "SD duration = PD_duration × SD_planet_years / 120",
+    "last_updated": "2026-02-15"
+  },
+  "sookshma_dasha_effects": {
+    "sun": {
+      "sun": {
+        "relationship": "same",
+        "theme": "Intensified solar ego and authority flash",
+        "effects": [
+          "Brief surge of confidence and self-assertion",
+          "Government or authority matters demand immediate attention",
+          "Father figure may contact or influence the day",
+          "Strong vitality but risk of overheating or headaches"
+        ],
+        "health": "Heart palpitations, eye strain, or heat-related discomfort possible during this brief window",
+        "career": "A day of peak visibility and leadership moments; decisions carry extra weight",
+        "relationships": "Ego dominates interactions; others may feel overshadowed or inspired depending on dignity",
+        "timing_quality": "mixed"
+      },
+      "moon": {
+        "relationship": "friend",
+        "theme": "Emotional awareness softens solar authority",
+        "effects": [
+          "Public interactions feel more natural and warm",
+          "Domestic matters blend smoothly with professional duties",
+          "Mother or maternal figure brings supportive energy",
+          "Intuition guides leadership decisions effectively"
+        ],
+        "health": "Hydration and rest needs increase; emotional balance supports physical well-being",
+        "career": "Good day for public-facing work, client meetings, and nurturing professional relationships",
+        "relationships": "Harmonious blending of authority with empathy; partner feels appreciated",
+        "timing_quality": "favorable"
+      },
+      "mars": {
+        "relationship": "friend",
+        "theme": "Courageous action under solar leadership",
+        "effects": [
+          "Bold initiatives and decisive action characterize the day",
+          "Physical energy peaks with competitive drive",
+          "Quick conflicts may arise but resolve through assertiveness",
+          "Technical or mechanical matters demand attention"
+        ],
+        "health": "High energy but risk of minor cuts, burns, or inflammation; blood pressure may spike briefly",
+        "career": "Excellent for competitive situations, presentations, and bold proposals",
+        "relationships": "Direct and forthright exchanges; arguments possible but clear the air quickly",
+        "timing_quality": "favorable"
+      },
+      "mercury": {
+        "relationship": "neutral",
+        "theme": "Intellectual clarity meets authoritative expression",
+        "effects": [
+          "Communication becomes sharp and commanding",
+          "Paperwork, contracts, and documents need attention",
+          "Analytical thinking enhances leadership decisions",
+          "Short trips or messages carry importance"
+        ],
+        "health": "Nervous energy may cause restlessness; mental fatigue from intense focus possible",
+        "career": "Strong day for negotiations, writing important emails, and strategic planning",
+        "relationships": "Conversations carry weight; choose words carefully as they create lasting impressions",
+        "timing_quality": "favorable"
+      },
+      "jupiter": {
+        "relationship": "friend",
+        "theme": "Wisdom and grace elevate the solar agenda",
+        "effects": [
+          "Optimism and generosity characterize the day",
+          "Teachers, mentors, or elders provide guidance",
+          "Legal or philosophical matters progress favorably",
+          "Expansion of authority through ethical conduct"
+        ],
+        "health": "General well-being and vitality; tendency to overindulge in food",
+        "career": "Excellent for seeking promotions, blessings from superiors, and educational pursuits",
+        "relationships": "Benevolent interactions; forgiveness comes easily; relationships feel uplifting",
+        "timing_quality": "favorable"
+      },
+      "venus": {
+        "relationship": "enemy",
+        "theme": "Desire for comfort distracts from duty",
+        "effects": [
+          "Pull between professional responsibilities and pleasure-seeking",
+          "Aesthetic or romantic matters intrude on the workday",
+          "Financial temptation to overspend on luxury items",
+          "Creative impulses compete with authoritative tasks"
+        ],
+        "health": "Indulgence risk; reproductive or throat area sensitivity",
+        "career": "Distraction from core duties; however, arts and beauty-related work thrives",
+        "relationships": "Romantic tension surfaces; attraction may conflict with existing commitments",
+        "timing_quality": "mixed"
+      },
+      "saturn": {
+        "relationship": "enemy",
+        "theme": "Karmic friction blocks the solar impulse",
+        "effects": [
+          "Delays and obstacles frustrate authority and plans",
+          "Responsibilities feel heavier than usual",
+          "Encounters with bureaucracy or rigid systems",
+          "Patience tested by slow-moving circumstances"
+        ],
+        "health": "Fatigue, joint stiffness, or cold-related discomfort; energy feels depleted",
+        "career": "Setbacks in leadership matters; approvals delayed; subordinates resist directives",
+        "relationships": "Cold interactions; distance felt from authority figures or father; loneliness possible",
+        "timing_quality": "challenging"
+      },
+      "rahu": {
+        "relationship": "enemy",
+        "theme": "Illusion and confusion cloud solar clarity",
+        "effects": [
+          "Unexpected disruptions to planned authority actions",
+          "Foreign or unconventional elements enter the picture",
+          "Technology or modern methods challenge traditional approaches",
+          "Deceptive situations require careful discernment"
+        ],
+        "health": "Mysterious or hard-to-diagnose discomfort; anxiety or restlessness",
+        "career": "Unconventional opportunities appear but carry hidden risks; verify all information",
+        "relationships": "Misunderstandings from miscommunication; hidden agendas surface",
+        "timing_quality": "challenging"
+      },
+      "ketu": {
+        "relationship": "neutral",
+        "theme": "Spiritual detachment from ego-driven matters",
+        "effects": [
+          "Sudden disinterest in worldly authority and recognition",
+          "Introspective mood interrupts active leadership",
+          "Past-life or karmic insights flash through consciousness",
+          "Technical or research focus sharpens unexpectedly"
+        ],
+        "health": "Vague unease or psychosomatic symptoms; digestive sensitivity",
+        "career": "Research, investigation, and behind-the-scenes work favored over public roles",
+        "relationships": "Emotional detachment from close ones; need for solitude felt strongly",
+        "timing_quality": "mixed"
+      }
+    },
+    "moon": {
+      "sun": {
+        "relationship": "friend",
+        "theme": "Confidence illuminates emotional landscape",
+        "effects": [
+          "Clarity of purpose energizes the emotional body",
+          "Authority figures or father provide emotional support",
+          "Public visibility during a nurturing PD phase",
+          "Self-esteem receives a brief but meaningful boost"
+        ],
+        "health": "Vitality improves; heart and circulatory system feel strong",
+        "career": "Good day for seeking recognition while maintaining emotional intelligence",
+        "relationships": "Warmth and generosity in personal interactions; parental bonds strengthen",
+        "timing_quality": "favorable"
+      },
+      "moon": {
+        "relationship": "same",
+        "theme": "Emotional intensity doubles at the micro level",
+        "effects": [
+          "Heightened sensitivity and emotional receptivity",
+          "Dreams and intuition become unusually vivid",
+          "Domestic and maternal matters dominate the day",
+          "Mood fluctuations are amplified, both highs and lows"
+        ],
+        "health": "Water retention, hormonal sensitivity, and sleep disturbances possible",
+        "career": "Best for nurturing work, counseling, hospitality, and creative arts",
+        "relationships": "Deep emotional connection possible; but also vulnerability to hurt feelings",
+        "timing_quality": "mixed"
+      },
+      "mars": {
+        "relationship": "neutral",
+        "theme": "Emotional courage and impulsive reactions",
+        "effects": [
+          "Protective instincts rise sharply",
+          "Quick emotional reactions to perceived threats",
+          "Domestic environment may see arguments or repairs",
+          "Physical activity helps channel emotional restlessness"
+        ],
+        "health": "Inflammatory conditions flare; stomach acidity from emotional stress",
+        "career": "Assertive in protecting team or project interests; conflict possible with colleagues",
+        "relationships": "Passionate but volatile exchanges; protective love may become possessive",
+        "timing_quality": "mixed"
+      },
+      "mercury": {
+        "relationship": "friend",
+        "theme": "Emotional intelligence sharpens communication",
+        "effects": [
+          "Ability to articulate feelings with unusual clarity",
+          "Practical solutions to emotional problems emerge",
+          "Short journeys or messages bring emotional comfort",
+          "Learning and study feel emotionally satisfying"
+        ],
+        "health": "Mind-body connection strong; nervous system responds to emotional state",
+        "career": "Excellent for writing, counseling, sales, and any work combining heart and mind",
+        "relationships": "Heart-to-heart conversations flow naturally; misunderstandings resolve through dialogue",
+        "timing_quality": "favorable"
+      },
+      "jupiter": {
+        "relationship": "neutral",
+        "theme": "Faith and optimism uplift emotional waters",
+        "effects": [
+          "Emotional generosity and expansiveness characterize the day",
+          "Spiritual or philosophical perspective eases worries",
+          "Teachers or mentors provide emotional reassurance",
+          "Feelings of abundance and gratitude surface naturally"
+        ],
+        "health": "Emotional well-being improves overall health; tendency to comfort-eat",
+        "career": "Good for educational or advisory roles; emotional wisdom guides decisions",
+        "relationships": "Forgiveness and compassion come easily; family harmony strengthens",
+        "timing_quality": "favorable"
+      },
+      "venus": {
+        "relationship": "neutral",
+        "theme": "Aesthetic pleasure and emotional enjoyment",
+        "effects": [
+          "Appreciation for beauty, art, and comfort deepens",
+          "Romantic feelings intensify during this micro-period",
+          "Desire for pleasant surroundings and good food",
+          "Creative expression flows from emotional depth"
+        ],
+        "health": "Sweet cravings increase; skin and reproductive health need awareness",
+        "career": "Arts, design, hospitality, and beauty industries thrive; routine work feels dull",
+        "relationships": "Romantic and affectionate day; ideal for dates, gifts, and quality time",
+        "timing_quality": "favorable"
+      },
+      "saturn": {
+        "relationship": "neutral",
+        "theme": "Emotional heaviness and karmic melancholy",
+        "effects": [
+          "Feelings of loneliness, sadness, or nostalgia surface",
+          "Old emotional patterns or memories arise for processing",
+          "Domestic responsibilities feel burdensome",
+          "Emotional maturity tested through difficult feelings"
+        ],
+        "health": "Cold, sluggish digestion, and low energy; depression or anxiety may surface",
+        "career": "Routine and structured work provides emotional grounding; avoid emotional decisions",
+        "relationships": "Emotional distance from partner; elders may need care; patience required",
+        "timing_quality": "challenging"
+      },
+      "rahu": {
+        "relationship": "enemy",
+        "theme": "Emotional confusion and amplified anxieties",
+        "effects": [
+          "Irrational fears or phobias surface without clear cause",
+          "Obsessive emotional patterns intensify briefly",
+          "Foreign or unfamiliar emotional experiences arise",
+          "Media or technology amplifies emotional reactions"
+        ],
+        "health": "Sleep disturbances, strange dreams, and unexplained anxiety",
+        "career": "Emotional instability may affect professional judgment; avoid major decisions",
+        "relationships": "Trust issues surface; suspicion without basis; fear of abandonment",
+        "timing_quality": "challenging"
+      },
+      "ketu": {
+        "relationship": "neutral",
+        "theme": "Emotional release and spiritual detachment",
+        "effects": [
+          "Sudden emotional release or catharsis",
+          "Past emotional wounds surface for final healing",
+          "Spiritual insights through emotional surrender",
+          "Detachment from material comforts and attachments"
+        ],
+        "health": "Psychosomatic symptoms may surface and release; digestive sensitivity",
+        "career": "Not ideal for emotional labor roles; research and solitary work preferred",
+        "relationships": "Emotional withdrawal puzzles close ones; need for spiritual solitude",
+        "timing_quality": "mixed"
+      }
+    },
+    "mars": {
+      "sun": {
+        "relationship": "friend",
+        "theme": "Authoritative backing fuels martial energy",
+        "effects": [
+          "Government or leadership support for bold initiatives",
+          "Father or authority figure bolsters confidence",
+          "Physical energy directed toward honorable goals",
+          "Competitive spirit receives recognition and approval"
+        ],
+        "health": "Strong vitality and stamina; watch for overexertion and heat-related issues",
+        "career": "Promotions through merit and courage; military, police, sports roles excel",
+        "relationships": "Protective and loyal energy in partnerships; respect gained through action",
+        "timing_quality": "favorable"
+      },
+      "moon": {
+        "relationship": "friend",
+        "theme": "Emotional fuel for physical action",
+        "effects": [
+          "Protective instincts drive decisive action",
+          "Domestic property matters see active progress",
+          "Physical energy modulated by emotional needs",
+          "Mother or family motivates courageous decisions"
+        ],
+        "health": "Blood and stomach interaction; acidity from physical exertion; hydration critical",
+        "career": "Active pursuit of emotionally meaningful projects; real estate deals progress",
+        "relationships": "Passionate and protective toward loved ones; emotional arguments possible but caring",
+        "timing_quality": "favorable"
+      },
+      "mars": {
+        "relationship": "same",
+        "theme": "Maximum martial intensity and aggression surge",
+        "effects": [
+          "Extreme physical energy and restlessness",
+          "Accident and injury risk at peak for this PD",
+          "Conflicts escalate rapidly and forcefully",
+          "Mechanical or technical breakthroughs through brute effort"
+        ],
+        "health": "High injury risk; fevers, inflammation, blood pressure spikes; caution with sharp objects and vehicles",
+        "career": "Breakthrough or breakdown day; competitions won or confrontations explode",
+        "relationships": "Verbal or physical aggression risk; avoid provocative situations and heated arguments",
+        "timing_quality": "challenging"
+      },
+      "mercury": {
+        "relationship": "enemy",
+        "theme": "Analytical thinking clashes with impulsive action",
+        "effects": [
+          "Impatience with detailed planning and paperwork",
+          "Communication becomes blunt and forceful",
+          "Technical details irritate the action-oriented mind",
+          "Siblings or neighbors may cause friction"
+        ],
+        "health": "Nervous tension from conflicting impulses; skin rashes or allergic reactions",
+        "career": "Misunderstandings in written communications; contracts may have errors; verify details twice",
+        "relationships": "Words wound; harsh speech damages gentle bonds; think before speaking",
+        "timing_quality": "challenging"
+      },
+      "jupiter": {
+        "relationship": "friend",
+        "theme": "Righteous warrior energy guided by wisdom",
+        "effects": [
+          "Courage directed toward dharmic and ethical goals",
+          "Legal matters and disputes resolve favorably",
+          "Physical action aligned with higher purpose",
+          "Teachers or mentors encourage bold steps"
+        ],
+        "health": "Balanced energy; physical vitality supported by good spirits",
+        "career": "Excellent for legal battles, ethical stands, and competitive pursuits with integrity",
+        "relationships": "Protective generosity toward family; disputes resolved through fairness",
+        "timing_quality": "favorable"
+      },
+      "venus": {
+        "relationship": "neutral",
+        "theme": "Passion and desire meet physical drive",
+        "effects": [
+          "Romantic pursuit becomes active and bold",
+          "Physical pleasures sought with intensity",
+          "Creative projects benefit from dynamic energy",
+          "Spending impulse for vehicles, sports equipment, or luxury"
+        ],
+        "health": "Reproductive system vitality; excess physical indulgence may cause strain",
+        "career": "Arts, sports, automotive, or beauty combined with action; dynamic creative output",
+        "relationships": "Passionate romantic energy; pursuit is bold and direct; physical attraction peaks",
+        "timing_quality": "favorable"
+      },
+      "saturn": {
+        "relationship": "neutral",
+        "theme": "Disciplined endurance restrains martial impulse",
+        "effects": [
+          "Frustrating delays to action-oriented plans",
+          "Physical energy feels blocked or suppressed",
+          "Hard manual labor may be required",
+          "Patience demanded in situations that call for speed"
+        ],
+        "health": "Joint and bone stress; chronic pain may flare; muscle fatigue from overwork",
+        "career": "Construction, mining, or heavy industry work possible; obstacles in competitive fields",
+        "relationships": "Cold standoffs; neither party willing to yield; stalemate in conflicts",
+        "timing_quality": "challenging"
+      },
+      "rahu": {
+        "relationship": "enemy",
+        "theme": "Reckless aggression amplified by illusion",
+        "effects": [
+          "Impulsive actions driven by fear or greed",
+          "Unconventional or risky physical ventures tempt",
+          "Foreign elements complicate martial objectives",
+          "Technology or machinery malfunctions possible"
+        ],
+        "health": "Accident risk from unusual circumstances; poisoning or allergic reactions; mysterious injuries",
+        "career": "High-risk ventures attract but carry hidden dangers; verify all safety protocols",
+        "relationships": "Deceptive aggression; hidden enemies surface; trust nothing at face value",
+        "timing_quality": "challenging"
+      },
+      "ketu": {
+        "relationship": "friend",
+        "theme": "Spiritual warrior energy and surgical precision",
+        "effects": [
+          "Intuitive tactical decisions prove remarkably accurate",
+          "Past-life martial skills surface unexpectedly",
+          "Detachment from outcome enables fearless action",
+          "Technical or research breakthroughs through persistence"
+        ],
+        "health": "Sharp, brief pains or sudden healing of old injuries; karmic body release",
+        "career": "Excellent for surgery, research, investigation, and spiritual warrior disciplines",
+        "relationships": "Protective but detached; actions speak louder than words; minimal verbal conflict",
+        "timing_quality": "favorable"
+      }
+    },
+    "mercury": {
+      "sun": {
+        "relationship": "friend",
+        "theme": "Intellectual authority and confident communication",
+        "effects": [
+          "Speaking and writing carry authoritative weight",
+          "Government or official communications favorable",
+          "Business acumen sharpened by leadership energy",
+          "Father or authority figure supports intellectual work"
+        ],
+        "health": "Nervous system energized; eye strain from intense reading or screen work",
+        "career": "Peak day for presentations, official correspondence, and intellectual leadership",
+        "relationships": "Confident communication strengthens bonds; clear expression of needs",
+        "timing_quality": "favorable"
+      },
+      "moon": {
+        "relationship": "enemy",
+        "theme": "Emotions cloud analytical precision",
+        "effects": [
+          "Sentimental thinking interferes with logical analysis",
+          "Mood swings disrupt focus on intellectual tasks",
+          "Public perception affects business decisions inappropriately",
+          "Mother or domestic concerns interrupt work concentration"
+        ],
+        "health": "Nervous stomach; insomnia from overthinking emotional matters",
+        "career": "Difficulty with data analysis and precise work; better for creative writing or empathic tasks",
+        "relationships": "Miscommunication from mixing facts with feelings; listen more, advise less",
+        "timing_quality": "challenging"
+      },
+      "mars": {
+        "relationship": "enemy",
+        "theme": "Hasty speech and impulsive intellectual decisions",
+        "effects": [
+          "Arguments fueled by sharp and cutting words",
+          "Impatience with slow mental processes or dull people",
+          "Technical equipment may malfunction or break",
+          "Siblings or neighbors involved in conflicts"
+        ],
+        "health": "Nervous tension causes headaches; hand and arm strain; skin irritation",
+        "career": "Debates and negotiations become combative; programming or technical errors from rushing",
+        "relationships": "Harsh words cause lasting damage; sarcasm wounds deeply; control the tongue",
+        "timing_quality": "challenging"
+      },
+      "mercury": {
+        "relationship": "same",
+        "theme": "Peak intellectual agility and communicative brilliance",
+        "effects": [
+          "Mental processing speed at maximum within this PD",
+          "Multiple conversations and tasks handled simultaneously",
+          "Commercial instincts exceptionally sharp",
+          "Learning absorption rate at its highest"
+        ],
+        "health": "Nervous energy at peak; tremors or anxiety from mental overstimulation; take breaks",
+        "career": "Outstanding for trading, writing, coding, examinations, and any intellectual contest",
+        "relationships": "Witty and engaging but may over-intellectualize emotions; charm through words",
+        "timing_quality": "favorable"
+      },
+      "jupiter": {
+        "relationship": "neutral",
+        "theme": "Wisdom expands intellectual scope",
+        "effects": [
+          "Big-picture thinking enhances detailed analysis",
+          "Educational pursuits feel deeply meaningful",
+          "Philosophical reading or study attracts",
+          "Business ethics and fair dealing come naturally"
+        ],
+        "health": "Good mental health; weight gain from sedentary intellectual work",
+        "career": "Excellent for teaching, publishing, legal documentation, and advisory roles",
+        "relationships": "Wise counsel offered and received; intellectual compatibility felt with partner",
+        "timing_quality": "favorable"
+      },
+      "venus": {
+        "relationship": "friend",
+        "theme": "Artistic intelligence and charming communication",
+        "effects": [
+          "Words become beautiful and persuasive",
+          "Artistic or design work reaches peak expression",
+          "Commercial success through charm and aesthetics",
+          "Love letters, poetry, or creative writing inspired"
+        ],
+        "health": "Throat and skin glow; indulgence in sweets; overall pleasant physical state",
+        "career": "Design, marketing, copywriting, and media excel; sales through charm",
+        "relationships": "Flirtatious and charming exchanges; words of love flow easily; social grace peaks",
+        "timing_quality": "favorable"
+      },
+      "saturn": {
+        "relationship": "neutral",
+        "theme": "Structured thinking and methodical analysis",
+        "effects": [
+          "Deep, careful analysis replaces quick thinking",
+          "Old documents or data require review",
+          "Communication becomes formal and precise",
+          "Bureaucratic tasks demand intellectual attention"
+        ],
+        "health": "Mental fatigue from repetitive tasks; joint stiffness from sitting too long",
+        "career": "Accounting, auditing, legal review, and compliance work favored; tedious but productive",
+        "relationships": "Conversations feel heavy or serious; humor recedes; practical discussions dominate",
+        "timing_quality": "mixed"
+      },
+      "rahu": {
+        "relationship": "friend",
+        "theme": "Innovative thinking and unconventional ideas",
+        "effects": [
+          "Sudden brilliant insights from unexpected sources",
+          "Technology and digital platforms offer new opportunities",
+          "Foreign language or cross-cultural communication highlighted",
+          "Unconventional business ideas feel compelling"
+        ],
+        "health": "Mental restlessness; screen fatigue; irregular eating from absorbed focus",
+        "career": "Technology, innovation, foreign trade, and digital marketing excel; think outside the box",
+        "relationships": "Interesting new contacts; unconventional social connections; online interactions",
+        "timing_quality": "favorable"
+      },
+      "ketu": {
+        "relationship": "enemy",
+        "theme": "Confusion disrupts intellectual clarity",
+        "effects": [
+          "Mental fog and difficulty concentrating",
+          "Important details overlooked or misunderstood",
+          "Communication breakdowns and technical glitches",
+          "Spiritual or abstract thoughts intrude on practical work"
+        ],
+        "health": "Neurological sensitivity; headaches; difficulty sleeping due to racing abstract thoughts",
+        "career": "Poor day for contracts, exams, or precise work; better for meditation and spiritual study",
+        "relationships": "Miscommunication and missed signals; silence may be better than confused words",
+        "timing_quality": "challenging"
+      }
+    },
+    "jupiter": {
+      "sun": {
+        "relationship": "friend",
+        "theme": "Royal wisdom and dharmic authority",
+        "effects": [
+          "Leadership guided by higher principles",
+          "Government favor for religious or educational initiatives",
+          "Father figure embodies or supports wisdom traditions",
+          "Public honor through moral and ethical conduct"
+        ],
+        "health": "Strong vitality with spiritual underpinning; liver and heart in good balance",
+        "career": "Promotions, awards, and recognition for ethical leadership; educational authority grows",
+        "relationships": "Generous and dignified in all interactions; father-guru energy strong",
+        "timing_quality": "favorable"
+      },
+      "moon": {
+        "relationship": "friend",
+        "theme": "Emotional wisdom and compassionate expansion",
+        "effects": [
+          "Deep emotional understanding guides generous actions",
+          "Mother and maternal figures receive blessings",
+          "Public service motivated by genuine compassion",
+          "Domestic life feels blessed and abundant"
+        ],
+        "health": "Good overall; tendency to overeat comfort foods; water retention",
+        "career": "Counseling, teaching, social work, and nurturing professions excel",
+        "relationships": "Emotional generosity creates warm family atmosphere; forgiveness flows naturally",
+        "timing_quality": "favorable"
+      },
+      "mars": {
+        "relationship": "friend",
+        "theme": "Righteous action and courageous faith",
+        "effects": [
+          "Bold steps guided by moral conviction",
+          "Legal victories through principled fight",
+          "Physical energy directed toward charitable or dharmic ends",
+          "Protection of the weak and vulnerable"
+        ],
+        "health": "Strong physical vitality; slight inflammation risk from excess enthusiasm",
+        "career": "Excellent for legal practice, military chaplaincy, sports coaching, and ethical activism",
+        "relationships": "Protective and loyal; willingness to fight for loved ones; honorable confrontations",
+        "timing_quality": "favorable"
+      },
+      "mercury": {
+        "relationship": "enemy",
+        "theme": "Over-analysis questioning faith and wisdom",
+        "effects": [
+          "Intellectual doubts challenge spiritual beliefs",
+          "Excessive detail work distracts from big-picture vision",
+          "Students or younger people question authority",
+          "Commercial interests conflict with ethical principles"
+        ],
+        "health": "Nervous tension conflicts with digestive ease; liver strain from mental stress",
+        "career": "Difficulty balancing wisdom with practicality; teaching disrupted by administrative details",
+        "relationships": "Intellectual sparring replaces harmonious exchanges; pedantry annoys",
+        "timing_quality": "mixed"
+      },
+      "jupiter": {
+        "relationship": "same",
+        "theme": "Maximum expansive wisdom and abundance",
+        "effects": [
+          "Peak generosity and philosophical insight within this PD",
+          "Religious or educational ceremonies bring joy",
+          "Wealth and abundance flow from multiple sources",
+          "Overwhelming optimism may blind to practical limits"
+        ],
+        "health": "Excellent spirits but risk of excess weight, rich food, and overindulgence",
+        "career": "Peak day for teaching, preaching, advising, and philanthropic work",
+        "relationships": "Boundless generosity; forgiveness for old grievances; family blessings multiply",
+        "timing_quality": "favorable"
+      },
+      "venus": {
+        "relationship": "enemy",
+        "theme": "Pleasure-seeking undermines spiritual discipline",
+        "effects": [
+          "Material desires conflict with spiritual aspirations",
+          "Luxury and comfort distract from higher purpose",
+          "Romantic interests compete with religious duties",
+          "Artistic beauty captivates but diverts from study"
+        ],
+        "health": "Overindulgence in food and drink; liver and kidney stress from excess",
+        "career": "Creative and artistic work benefits; but spiritual or educational focus wavers",
+        "relationships": "Romantic attractions may conflict with ethical boundaries; charm vs. dharma",
+        "timing_quality": "mixed"
+      },
+      "saturn": {
+        "relationship": "neutral",
+        "theme": "Disciplined wisdom and karmic teaching",
+        "effects": [
+          "Lessons learned through patience and hardship",
+          "Old karmic debts surface for resolution through wisdom",
+          "Structured spiritual practice deepens understanding",
+          "Service to the elderly or disadvantaged feels right"
+        ],
+        "health": "Slow digestion; bone or joint discomfort; spiritual fasting may help",
+        "career": "Administrative or organizational aspects of teaching; institutional duties",
+        "relationships": "Serious and weighty conversations; guidance to those suffering; elder care",
+        "timing_quality": "mixed"
+      },
+      "rahu": {
+        "relationship": "neutral",
+        "theme": "Unconventional wisdom and cross-cultural expansion",
+        "effects": [
+          "Foreign philosophies or religions attract interest",
+          "Technology applied to educational or spiritual ends",
+          "Sudden expansion of worldview through unusual encounters",
+          "Risk of being deceived by false gurus or philosophies"
+        ],
+        "health": "Digestive issues from unfamiliar foods or disrupted routine; anxiety about beliefs",
+        "career": "International education, foreign travel for teaching, or technology-enhanced learning",
+        "relationships": "New connections with people from different backgrounds; cross-cultural bonds",
+        "timing_quality": "mixed"
+      },
+      "ketu": {
+        "relationship": "neutral",
+        "theme": "Mystical insight and transcendent wisdom",
+        "effects": [
+          "Deep meditation and spiritual breakthroughs possible",
+          "Past-life wisdom surfaces as intuitive knowing",
+          "Detachment from material wealth and worldly recognition",
+          "Liberation-oriented insights eclipse conventional teaching"
+        ],
+        "health": "Digestive sensitivity; psychosomatic healing through spiritual practice",
+        "career": "Research, metaphysics, and esoteric studies thrive; conventional teaching feels hollow",
+        "relationships": "Spiritual bond with close ones deepens; worldly socializing holds no appeal",
+        "timing_quality": "favorable"
+      }
+    },
+    "venus": {
+      "sun": {
+        "relationship": "enemy",
+        "theme": "Authority clashes with artistic and romantic flow",
+        "effects": [
+          "Government or official matters interrupt creative work",
+          "Ego demands conflict with desire for harmony",
+          "Father figure may oppose romantic or artistic choices",
+          "Creative projects require approval from authority"
+        ],
+        "health": "Heart and reproductive system tension; skin issues from stress",
+        "career": "Difficulty gaining approval for creative projects; official channels resist artistic vision",
+        "relationships": "Power dynamics strain romance; ego clashes with partner; need for mutual respect",
+        "timing_quality": "challenging"
+      },
+      "moon": {
+        "relationship": "enemy",
+        "theme": "Emotional volatility disrupts aesthetic equilibrium",
+        "effects": [
+          "Mood swings affect creative output quality",
+          "Mother or domestic demands interfere with romantic plans",
+          "Emotional eating or comfort-seeking undermines beauty goals",
+          "Public opinion sways artistic confidence"
+        ],
+        "health": "Hormonal fluctuations; water retention affecting appearance; skin sensitivity",
+        "career": "Creative work suffers from emotional instability; hospitality roles feel draining",
+        "relationships": "Emotional neediness complicates romance; clinginess or jealousy surfaces",
+        "timing_quality": "challenging"
+      },
+      "mars": {
+        "relationship": "neutral",
+        "theme": "Passionate energy infuses artistic and romantic life",
+        "effects": [
+          "Bold creative expression and dynamic artistry",
+          "Physical attraction and romantic pursuit intensify",
+          "Spending on vehicles, sports, or physical pleasures",
+          "Dance, sculpture, or physical arts especially inspired"
+        ],
+        "health": "Reproductive vitality; risk of STIs or UTIs if reckless; physical beauty radiates",
+        "career": "Performing arts, fashion, sports modeling, and dynamic creative roles excel",
+        "relationships": "Fiery passion in romance; arguments followed by reconciliation; physical chemistry peaks",
+        "timing_quality": "favorable"
+      },
+      "mercury": {
+        "relationship": "friend",
+        "theme": "Eloquent charm and commercial artistry",
+        "effects": [
+          "Words become seductively beautiful and persuasive",
+          "Business and art merge profitably",
+          "Design, copywriting, and marketing achieve excellence",
+          "Social media presence and networking opportunities expand"
+        ],
+        "health": "Good skin and throat health; light, pleasant physical state",
+        "career": "Peak day for sales, marketing, design presentations, and artistic business proposals",
+        "relationships": "Flirtatious wit and charming conversation; love notes and poetic exchanges",
+        "timing_quality": "favorable"
+      },
+      "jupiter": {
+        "relationship": "neutral",
+        "theme": "Luxurious abundance and graceful expansion",
+        "effects": [
+          "Wealth through artistic or creative channels",
+          "Lavish celebrations or social gatherings",
+          "Philosophical appreciation of beauty and love",
+          "Generous spending on art, decoration, and gifts"
+        ],
+        "health": "Overindulgence in fine food and drink; weight gain; liver and kidney awareness needed",
+        "career": "Luxury goods, jewelry, high-end hospitality, and arts patronage thrive",
+        "relationships": "Generous romantic gestures; lavish dates; love elevated by philosophical depth",
+        "timing_quality": "favorable"
+      },
+      "venus": {
+        "relationship": "same",
+        "theme": "Peak aesthetic sensitivity and romantic intensity",
+        "effects": [
+          "Beauty, art, and love dominate every experience",
+          "Creative output at its most refined within this PD",
+          "Romantic encounters carry heightened significance",
+          "Material pleasures and luxury at maximum appeal"
+        ],
+        "health": "Reproductive and urinary systems sensitive; skin glows; tendency to overindulge",
+        "career": "Fashion, beauty, arts, music, and luxury industry peak day; create and showcase",
+        "relationships": "Deeply romantic and aesthetically attuned; love feels like art; sensuality peaks",
+        "timing_quality": "favorable"
+      },
+      "saturn": {
+        "relationship": "friend",
+        "theme": "Enduring beauty and disciplined artistry",
+        "effects": [
+          "Artistic discipline produces lasting work of quality",
+          "Relationships tested by time and commitment questions",
+          "Mature appreciation of beauty and love",
+          "Financial stability through conservative artistic choices"
+        ],
+        "health": "Skin dryness or aging concerns; joint stiffness; beauty routines require discipline",
+        "career": "Classical arts, architecture, antiques, and time-tested beauty traditions favored",
+        "relationships": "Commitment discussions; mature love deepens; older partners or mentors in love",
+        "timing_quality": "favorable"
+      },
+      "rahu": {
+        "relationship": "friend",
+        "theme": "Exotic allure and unconventional romance",
+        "effects": [
+          "Attraction to foreign, unusual, or taboo beauty",
+          "Technology enhances creative expression",
+          "Unconventional romantic connections form",
+          "Film, digital media, and modern art especially inspired"
+        ],
+        "health": "Substance indulgence risk; mysterious allergies; screen fatigue affecting eyes",
+        "career": "Film industry, digital art, international fashion, and entertainment technology excel",
+        "relationships": "Exotic or cross-cultural attractions; online romance; unconventional relationship dynamics",
+        "timing_quality": "favorable"
+      },
+      "ketu": {
+        "relationship": "friend",
+        "theme": "Transcendent beauty and spiritual love",
+        "effects": [
+          "Artistic expression touches the divine or mystical",
+          "Past-life romantic connections resurface briefly",
+          "Detachment from material beauty toward inner radiance",
+          "Minimalist or spiritual aesthetics attract"
+        ],
+        "health": "Psychosomatic skin conditions; healing through artistic expression; urinary sensitivity",
+        "career": "Sacred art, spiritual music, healing arts, and minimalist design thrive",
+        "relationships": "Soul-level connections felt; past-life partner recognition; love beyond the physical",
+        "timing_quality": "favorable"
+      }
+    },
+    "saturn": {
+      "sun": {
+        "relationship": "enemy",
+        "theme": "Authority conflict intensifies karmic pressure",
+        "effects": [
+          "Government or official opposition creates obstacles",
+          "Father figure becomes source of stress or conflict",
+          "Ego humbled by systemic resistance",
+          "Leadership denied or undermined by circumstances"
+        ],
+        "health": "Bone and joint pain; heart strain; vitality dips; cold and flu susceptibility",
+        "career": "Setbacks from authority figures; denied promotions; governmental red tape blocks progress",
+        "relationships": "Father-related stress; authority clashes in marriage; cold and distant interactions",
+        "timing_quality": "challenging"
+      },
+      "moon": {
+        "relationship": "enemy",
+        "theme": "Emotional depression under karmic weight",
+        "effects": [
+          "Deep sadness or melancholy without clear external cause",
+          "Mother's health or emotional state becomes concerning",
+          "Domestic environment feels cold and unwelcoming",
+          "Sleep disturbances and dark emotional undercurrents"
+        ],
+        "health": "Depression risk; digestive slowdown; cold and damp conditions aggravate; mental health priority",
+        "career": "Low morale affects work output; public-facing roles feel exhausting; retreat to solitary tasks",
+        "relationships": "Emotional withdrawal creates distance; partner feels neglected; mother needs support",
+        "timing_quality": "challenging"
+      },
+      "mars": {
+        "relationship": "enemy",
+        "theme": "Frustrated aggression under karmic restraint",
+        "effects": [
+          "Pent-up anger from blocked action channels",
+          "Accident risk from reckless attempt to break through obstacles",
+          "Physical labor under harsh conditions",
+          "Conflict with laborers, servants, or subordinates"
+        ],
+        "health": "Injury risk from frustration-driven recklessness; bone fractures; muscle tears; blood pressure",
+        "career": "Construction delays; machinery breakdowns; labor disputes; physical work hazards",
+        "relationships": "Explosive arguments from suppressed frustration; violence potential if anger unchecked",
+        "timing_quality": "challenging"
+      },
+      "mercury": {
+        "relationship": "friend",
+        "theme": "Methodical intelligence aids structured endurance",
+        "effects": [
+          "Careful analysis helps navigate karmic obstacles",
+          "Paperwork and documentation finally resolve long-standing matters",
+          "Communication with officials bears fruit through persistence",
+          "Accounting, auditing, and compliance work productive"
+        ],
+        "health": "Nervous tension from prolonged focus; hand and wrist strain; breathing exercises help",
+        "career": "Excellent for legal paperwork, tax filing, regulatory compliance, and systematic problem-solving",
+        "relationships": "Practical conversations about responsibilities; financial planning with partner",
+        "timing_quality": "favorable"
+      },
+      "jupiter": {
+        "relationship": "neutral",
+        "theme": "Wisdom provides perspective on karmic suffering",
+        "effects": [
+          "Philosophical understanding eases the weight of Saturn's lessons",
+          "Charitable giving alleviates karmic burden",
+          "Elders or teachers offer meaningful guidance",
+          "Legal matters see progress through ethical persistence"
+        ],
+        "health": "Moderate improvement in spirits; digestive issues from sedentary reflection; walk in nature helps",
+        "career": "Teaching or advisory roles within institutional structures; progress through patience and wisdom",
+        "relationships": "Guru or elder provides relationship counsel; serious but constructive discussions",
+        "timing_quality": "mixed"
+      },
+      "venus": {
+        "relationship": "friend",
+        "theme": "Beauty and comfort soften karmic harshness",
+        "effects": [
+          "Brief respite from Saturn's weight through aesthetic pleasures",
+          "Art and music provide emotional healing",
+          "Romantic connection offers comfort during difficult times",
+          "Financial gains through disciplined creative work"
+        ],
+        "health": "Comfort-seeking may lead to overindulgence; skin and joint care through gentle treatments",
+        "career": "Arts, crafts, antiques, and beauty industries provide stable income; classical training pays off",
+        "relationships": "Love and affection provide much-needed warmth; mature romance; commitment deepens",
+        "timing_quality": "favorable"
+      },
+      "saturn": {
+        "relationship": "same",
+        "theme": "Peak karmic intensity and maximum endurance test",
+        "effects": [
+          "Heaviest karmic lessons of this PD concentrated into days",
+          "Chronic issues reach a crisis point demanding resolution",
+          "Maximum patience and discipline required",
+          "Old structures completely break down or solidify permanently"
+        ],
+        "health": "Chronic pain peaks; bone, joint, and dental issues; depression or extreme fatigue",
+        "career": "Institutional crises; restructuring; being laid off or taking on enormous responsibility",
+        "relationships": "Relationship tested to breaking point; commitment either cements or dissolves",
+        "timing_quality": "challenging"
+      },
+      "rahu": {
+        "relationship": "friend",
+        "theme": "Unconventional solutions to structural problems",
+        "effects": [
+          "Technology or foreign methods solve long-standing obstacles",
+          "Out-of-the-box thinking breaks karmic stalemates",
+          "Unusual alliances form under pressure",
+          "Hidden or unconventional income sources appear"
+        ],
+        "health": "Strange symptoms from chronic conditions; alternative medicine may help; toxin exposure risk",
+        "career": "Technology disrupts old structures productively; foreign connections ease career blocks",
+        "relationships": "Unconventional relationship arrangements considered; cross-cultural bonds under pressure",
+        "timing_quality": "mixed"
+      },
+      "ketu": {
+        "relationship": "friend",
+        "theme": "Spiritual liberation through karmic surrender",
+        "effects": [
+          "Letting go of material attachments brings unexpected relief",
+          "Past-life karmic debts reach completion point",
+          "Monastic or renunciate impulse surfaces strongly",
+          "Research or investigation uncovers hidden truths"
+        ],
+        "health": "Mysterious symptoms resolve through spiritual practice; psychosomatic release",
+        "career": "Spiritual, research, or investigative work provides meaningful engagement; worldly ambition fades",
+        "relationships": "Detachment from relationship expectations brings paradoxical peace; spiritual bonds deepen",
+        "timing_quality": "mixed"
+      }
+    },
+    "rahu": {
+      "sun": {
+        "relationship": "enemy",
+        "theme": "Authority figures obstruct Rahu's unconventional agenda",
+        "effects": [
+          "Government or official interference with innovative plans",
+          "Father or boss creates friction over non-traditional approaches",
+          "Ego clash with established power structures",
+          "Recognition sought through shortcuts may backfire"
+        ],
+        "health": "Mysterious headaches; eye problems; blood pressure from confrontation stress",
+        "career": "Regulatory obstacles to innovation; authority figures block unconventional proposals",
+        "relationships": "Power struggles with dominant personalities; father-related tensions",
+        "timing_quality": "challenging"
+      },
+      "moon": {
+        "relationship": "enemy",
+        "theme": "Emotional chaos amplifies obsessive patterns",
+        "effects": [
+          "Anxiety and fear magnified by emotional turbulence",
+          "Mother's worry or interference causes distress",
+          "Public opinion triggers obsessive concern",
+          "Domestic instability from external pressures"
+        ],
+        "health": "Severe anxiety episodes; insomnia; nightmares; hormonal disruptions",
+        "career": "Emotional instability undermines professional credibility; public image concerns dominate",
+        "relationships": "Possessiveness and jealousy peak; irrational fears about partner; trust deficit",
+        "timing_quality": "challenging"
+      },
+      "mars": {
+        "relationship": "enemy",
+        "theme": "Reckless aggression without clear direction",
+        "effects": [
+          "Impulsive actions driven by fear and desire simultaneously",
+          "Violence or accident risk from reckless behavior",
+          "Technology or machinery involved in dangerous incidents",
+          "Legal trouble from aggressive or illegal actions"
+        ],
+        "health": "Highest accident risk in this PD; mysterious injuries; blood disorders; poison exposure",
+        "career": "Dangerous workplace situations; conflicts with competitors turn ugly; avoid confrontation",
+        "relationships": "Explosive conflicts; potential for verbal or physical violence; step back and cool down",
+        "timing_quality": "challenging"
+      },
+      "mercury": {
+        "relationship": "friend",
+        "theme": "Brilliant innovation through clever strategy",
+        "effects": [
+          "Ingenious solutions to complex problems",
+          "Technology and digital platforms yield breakthroughs",
+          "Foreign communication channels open productively",
+          "Clever marketing and unconventional business strategies succeed"
+        ],
+        "health": "Mental hyperactivity; screen addiction risk; nervous system needs breaks",
+        "career": "Technology, digital marketing, foreign trade, and innovative communication thrive",
+        "relationships": "Interesting conversations with unusual people; online connections prove valuable",
+        "timing_quality": "favorable"
+      },
+      "jupiter": {
+        "relationship": "neutral",
+        "theme": "Expansion through unconventional wisdom channels",
+        "effects": [
+          "Foreign philosophies or religions attract with compelling power",
+          "Large-scale opportunities appear suddenly from unexpected quarters",
+          "Wealth through unconventional or foreign channels",
+          "Guru figures from outside one's tradition offer guidance"
+        ],
+        "health": "Weight gain from irregular eating; liver needs attention; substance moderation advised",
+        "career": "International expansion; foreign funding; unconventional educational opportunities",
+        "relationships": "Cross-cultural relationships deepen; philosophical differences bridge through openness",
+        "timing_quality": "favorable"
+      },
+      "venus": {
+        "relationship": "friend",
+        "theme": "Exotic pleasures and glamorous allure",
+        "effects": [
+          "Attraction to foreign, luxurious, or taboo experiences",
+          "Entertainment and media opportunities appear suddenly",
+          "Material desires amplified and partially fulfilled",
+          "Romance with unconventional or foreign persons"
+        ],
+        "health": "Substance indulgence risk; STI risk from reckless behavior; mysterious skin conditions",
+        "career": "Film, media, entertainment, international fashion, and luxury technology excel",
+        "relationships": "Glamorous but potentially superficial attractions; excitement over depth; enjoy cautiously",
+        "timing_quality": "favorable"
+      },
+      "saturn": {
+        "relationship": "friend",
+        "theme": "Structured disruption and systematic revolution",
+        "effects": [
+          "Long-term unconventional plans finally take shape",
+          "Institutional change through persistent innovation",
+          "Foreign connections provide structural support",
+          "Technology automates previously burdensome processes"
+        ],
+        "health": "Chronic issues addressed through alternative methods; detoxification beneficial",
+        "career": "Institutional reform; technology implementation; foreign partnerships formalized",
+        "relationships": "Unconventional relationship structures stabilize; long-distance bonds formalize",
+        "timing_quality": "favorable"
+      },
+      "rahu": {
+        "relationship": "same",
+        "theme": "Maximum obsession and amplified worldly desire",
+        "effects": [
+          "Obsessive pursuit of material goals at peak intensity",
+          "Illusion and deception risk at highest level within this PD",
+          "Foreign or technological matters completely dominate awareness",
+          "Addiction and compulsive behavior patterns surface strongly"
+        ],
+        "health": "Highest anxiety and confusion risk; substance abuse danger; mysterious ailments peak",
+        "career": "High-risk, high-reward day; massive opportunities or spectacular failures; gambler's energy",
+        "relationships": "Obsessive attachment or paranoid suspicion; nothing feels stable; ground yourself",
+        "timing_quality": "challenging"
+      },
+      "ketu": {
+        "relationship": "enemy",
+        "theme": "Spiritual conflict with material obsession",
+        "effects": [
+          "Sudden detachment from goals previously pursued with obsession",
+          "Confusion between spiritual aspiration and worldly desire",
+          "Past-life patterns disrupt current material ambitions",
+          "Technology failures or unexpected disconnections"
+        ],
+        "health": "Neurological sensitivity; confusion and disorientation; grounding practices essential",
+        "career": "Plans unravel unexpectedly; previously certain deals fall through; accept and redirect",
+        "relationships": "Sudden emotional detachment confuses partner; hot-cold behavior; inner conflict manifest",
+        "timing_quality": "challenging"
+      }
+    },
+    "ketu": {
+      "sun": {
+        "relationship": "neutral",
+        "theme": "Ego dissolution meets spiritual insight",
+        "effects": [
+          "Authority and identity questioned at a deep level",
+          "Father or government matters trigger spiritual reflection",
+          "Past-life leadership karma surfaces for review",
+          "Brief illumination of the true Self beyond ego"
+        ],
+        "health": "Vague fatigue; eye sensitivity; low vitality but spiritual energy high",
+        "career": "Worldly ambition fades temporarily; behind-the-scenes or research work preferred",
+        "relationships": "Detachment from ego-based relating; partner puzzled by sudden humility",
+        "timing_quality": "mixed"
+      },
+      "moon": {
+        "relationship": "neutral",
+        "theme": "Emotional release and psychic sensitivity",
+        "effects": [
+          "Deep emotional cleansing through tears or meditation",
+          "Past-life emotional memories surface vividly",
+          "Mother or maternal lineage karma activates",
+          "Psychic impressions unusually strong and accurate"
+        ],
+        "health": "Emotional catharsis may trigger physical symptoms; stomach sensitivity; rest needed",
+        "career": "Healing, counseling, and psychic work thrive; routine work feels meaningless",
+        "relationships": "Soul-level emotional exchanges; past-life recognition with close ones; vulnerability sacred",
+        "timing_quality": "mixed"
+      },
+      "mars": {
+        "relationship": "friend",
+        "theme": "Spiritual warrior precision and focused detachment",
+        "effects": [
+          "Surgical precision in cutting away what no longer serves",
+          "Martial arts or yogic discipline reaches new depth",
+          "Investigation and research yield hidden breakthroughs",
+          "Fearless action from a place of non-attachment"
+        ],
+        "health": "Sharp, brief pains that release blocked energy; old scars may ache then heal",
+        "career": "Surgery, research, investigation, forensics, and martial disciplines excel",
+        "relationships": "Clear boundaries set without anger; surgical removal of toxic dynamics",
+        "timing_quality": "favorable"
+      },
+      "mercury": {
+        "relationship": "enemy",
+        "theme": "Intellectual confusion meets spiritual knowing",
+        "effects": [
+          "Rational mind cannot process what intuition reveals",
+          "Communication breakdowns from operating on different wavelengths",
+          "Technical devices malfunction or mislead",
+          "Difficulty translating spiritual insights into practical language"
+        ],
+        "health": "Nervous system overwhelmed by non-rational input; headaches; hand tremors",
+        "career": "Intellectual work suffers; misunderstandings in communications; postpone contracts",
+        "relationships": "Talking past each other; what you mean is not what they hear; practice patience",
+        "timing_quality": "challenging"
+      },
+      "jupiter": {
+        "relationship": "neutral",
+        "theme": "Moksha and liberation wisdom intensifies",
+        "effects": [
+          "Deepest spiritual insights of this PD possible now",
+          "Guru's teachings suddenly make profound sense",
+          "Wealth and expansion feel irrelevant compared to inner peace",
+          "Past-life spiritual accomplishments resurface as present wisdom"
+        ],
+        "health": "Physical needs reduced; fasting comes naturally; spiritual vitality compensates for physical tiredness",
+        "career": "Spiritual teaching, ashram work, and metaphysical research deeply fulfilling",
+        "relationships": "Spiritual companionship valued above all; worldly relationships pale in comparison",
+        "timing_quality": "favorable"
+      },
+      "venus": {
+        "relationship": "friend",
+        "theme": "Transcendent beauty and divine love",
+        "effects": [
+          "Beauty perceived as manifestation of the divine",
+          "Art becomes devotional offering rather than personal expression",
+          "Past-life romantic soulmate connections pulse strongly",
+          "Material beauty appreciated then released"
+        ],
+        "health": "Gentle healing through beauty and art; skin conditions clear through spiritual practice",
+        "career": "Sacred art, devotional music, temple decoration, and healing arts inspired",
+        "relationships": "Love experienced as spiritual union; tantra or sacred sexuality; beyond physical attraction",
+        "timing_quality": "favorable"
+      },
+      "saturn": {
+        "relationship": "friend",
+        "theme": "Deep karmic resolution through spiritual discipline",
+        "effects": [
+          "Ancient karmic patterns finally complete and dissolve",
+          "Severe ascetic discipline feels natural and liberating",
+          "Detachment from worldly suffering through understanding",
+          "Monastery, retreat, or isolation brings peace"
+        ],
+        "health": "Old chronic conditions may resolve permanently; bone and joint realignment through yoga",
+        "career": "Institutional spiritual work; monastic administration; cemetery or end-of-life care",
+        "relationships": "Acceptance of karmic bonds and their eventual dissolution; letting go with grace",
+        "timing_quality": "mixed"
+      },
+      "rahu": {
+        "relationship": "enemy",
+        "theme": "Worldly desire battles spiritual detachment",
+        "effects": [
+          "Material temptations arise just as detachment deepens",
+          "Confusion between genuine spiritual insight and delusion",
+          "Technology or foreign elements disrupt spiritual practice",
+          "Past karma and future desire create inner tug-of-war"
+        ],
+        "health": "Nervous system overloaded by conflicting impulses; grounding practices essential",
+        "career": "Spiritual practice disrupted by worldly urgencies; inability to focus on either realm",
+        "relationships": "Obsessive spiritual bypassing or sudden worldly attachment; find middle ground",
+        "timing_quality": "challenging"
+      },
+      "ketu": {
+        "relationship": "same",
+        "theme": "Maximum spiritual intensity and complete detachment",
+        "effects": [
+          "Deepest possible moksha-oriented experience within this PD",
+          "Complete temporary detachment from material world",
+          "Past-life memories and karmic visions at peak clarity",
+          "Ego dissolution experience possible in meditation"
+        ],
+        "health": "Physical body may feel irrelevant; eat and rest even if not hungry or tired; ground yourself",
+        "career": "Worldly work feels utterly meaningless; only spiritual practice and deep research satisfy",
+        "relationships": "Complete emotional detachment may alarm loved ones; reassure them this is temporary",
+        "timing_quality": "mixed"
+      }
+    }
+  }
+}

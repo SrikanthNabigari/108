@@ -15,12 +15,14 @@ from datetime import datetime, timedelta
 from typing import Any
 
 from packages.context.src.dasha import (
+    NAKSHATRA_LORDS,
     get_antardasha_sequence,
     get_mahadasha_sequence,
     get_pratyantardasha_sequence,
 )
 from packages.core.src.knowledge_loader import get_transit_aspect_effects
-from packages.cosmos.src.ephemeris import get_all_planets, get_julian_day
+from packages.cosmos.src.ephemeris import get_all_planets, get_ayanamsa, get_julian_day
+from packages.cosmos.src.nakshatras import longitude_to_nakshatra
 
 # Parashari special aspects
 _SPECIAL_ASPECTS: dict[str, list[int]] = {
@@ -468,3 +470,112 @@ def get_upcoming_triggers(
     )
 
     return all_triggers
+
+
+def get_nakshatra_transit_triggers(
+    significator_planets: list[str],
+    start_date: datetime | str,
+    end_date: datetime | str,
+) -> list[dict[str, Any]]:
+    """Find dates when Sun/Moon transit nakshatras ruled by significator planets.
+
+    In KP astrology, events manifest when fast-moving planets (Sun, Moon) transit
+    through nakshatras whose lords are significators of an event. Each Vimshottari
+    lord rules exactly 3 nakshatras out of 27.
+
+    Args:
+        significator_planets: List of planet names that are significators
+            (e.g. ["saturn", "venus", "mercury"]).
+        start_date: Start of search window (ISO string or datetime).
+        end_date: End of search window (ISO string or datetime).
+
+    Returns:
+        List of trigger dicts sorted by date, each containing:
+        - date: ISO date string
+        - planet: "sun" or "moon"
+        - nakshatra: Nakshatra name (e.g. "Pushya")
+        - nakshatra_lord: The significator planet being activated
+        - type: "sun_nakshatra_trigger" or "moon_nakshatra_trigger"
+        - precision: Approximate duration ("~13 days" for Sun, "~1 day" for Moon)
+    """
+    # Parse dates
+    start_dt = datetime.fromisoformat(start_date) if isinstance(start_date, str) else start_date
+    end_dt = datetime.fromisoformat(end_date) if isinstance(end_date, str) else end_date
+
+    # Build reverse map: planet -> set of nakshatra numbers
+    planet_to_nakshatras: dict[str, list[int]] = {}
+    for nak_num, lord in NAKSHATRA_LORDS.items():
+        planet_to_nakshatras.setdefault(lord, []).append(nak_num)
+
+    # Collect target nakshatra numbers from significator planets
+    target_nakshatras: set[int] = set()
+    sig_lower = [p.lower() for p in significator_planets]
+    for planet in sig_lower:
+        if planet in planet_to_nakshatras:
+            target_nakshatras.update(planet_to_nakshatras[planet])
+
+    if not target_nakshatras:
+        return []
+
+    triggers: list[dict[str, Any]] = []
+    luminaries = ["sun", "moon"]
+
+    # Track previous day's nakshatra per planet to detect changes
+    prev_nak: dict[str, int] = {}
+
+    total_days = (end_dt - start_dt).days
+    for day_offset in range(total_days + 1):
+        check_dt = start_dt + timedelta(days=day_offset)
+
+        try:
+            jd = get_julian_day(check_dt)
+            positions = get_all_planets(jd)
+            ayanamsa = get_ayanamsa(jd)
+        except Exception:
+            continue
+
+        for body in luminaries:
+            if body not in positions:
+                continue
+
+            tropical_lon = positions[body]["longitude"]
+            sidereal_lon = (tropical_lon - ayanamsa) % 360
+
+            nak_num = int(sidereal_lon / 13.333333333) + 1
+            if nak_num > 27:
+                nak_num = 27
+
+            prev = prev_nak.get(body)
+            prev_nak[body] = nak_num
+
+            # Only emit on nakshatra change (or first day if already in target)
+            if prev is not None and nak_num == prev:
+                continue
+
+            if nak_num in target_nakshatras:
+                # Look up nakshatra name
+                try:
+                    nak_info = longitude_to_nakshatra(sidereal_lon)
+                    nak_name = nak_info["name"]
+                except Exception:
+                    nak_name = f"Nakshatra {nak_num}"
+
+                # Find which significator lord this nakshatra belongs to
+                nak_lord = NAKSHATRA_LORDS.get(nak_num, "unknown")
+
+                triggers.append(
+                    {
+                        "date": check_dt.strftime("%Y-%m-%d"),
+                        "planet": body,
+                        "nakshatra": nak_name,
+                        "nakshatra_lord": nak_lord,
+                        "type": f"{body}_nakshatra_trigger",
+                        "precision": "~13 days" if body == "sun" else "~1 day",
+                    }
+                )
+
+    # Sort by date, then sun before moon
+    body_order = {"sun": 0, "moon": 1}
+    triggers.sort(key=lambda x: (x["date"], body_order.get(x["planet"], 2)))
+
+    return triggers

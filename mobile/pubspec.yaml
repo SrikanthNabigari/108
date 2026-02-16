@@ -50,4 +50,5 @@ flutter:
     - assets/images/
     - assets/animations/
     - assets/icons/
+    - assets/knowledge/
   # Fonts loaded at runtime via google_fonts package (no bundled .ttf needed)

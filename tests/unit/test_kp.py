@@ -460,8 +460,8 @@ class TestAnalyzeKPHouse:
             assert key in result
 
     def test_analyze_house_judgment_is_valid(self):
-        """Test that judgment is one of valid values."""
-        valid_judgments = ["favorable", "unfavorable", "mixed", "neutral"]
+        """Test that judgment is one of valid values (neutral removed — star lord backup)."""
+        valid_judgments = ["favorable", "unfavorable", "mixed"]
         result = analyze_kp_house(7, SAMPLE_PLANETS, SAMPLE_CUSPS)
         assert result["judgment"] in valid_judgments
 
@@ -934,3 +934,149 @@ class TestDataIntegrity:
         valid_planets = set(VIMSHOTTARI_SEQUENCE)
         for planet in SIGN_RULERS.values():
             assert planet in valid_planets
+
+
+# ============================================================================
+# TestKPOverhaul — Phase 1-6 new tests
+# ============================================================================
+
+
+class TestKPOverhaul:
+    """Tests for the Classical KP System Overhaul (Phases 1-6)."""
+
+    def test_star_lord_backup_when_no_sublord_overlap(self):
+        """Phase 1: Star lord backup used when sub-lord has zero overlap.
+
+        The judgment should NOT be 'neutral' anymore — star lord provides a backup.
+        """
+        # Run all 12 houses across all query types; none should be 'neutral'
+        for query_type in KP_HOUSE_GROUPS:
+            groups = KP_HOUSE_GROUPS[query_type]
+            primary_house = groups["primary"]
+            result = analyze_kp_house(primary_house, SAMPLE_PLANETS, SAMPLE_CUSPS, query_type)
+            assert result["judgment"] in ["favorable", "unfavorable", "mixed"], (
+                f"House {primary_house} for {query_type} returned 'neutral' — "
+                f"star lord backup should prevent this"
+            )
+
+    def test_weighted_significator_L1_stronger_than_L4(self):
+        """Phase 2: Weighted scoring gives L1 (weight 4) more influence than L4 (weight 1)."""
+        from packages.self.src.kp import _compute_weighted_score
+
+        # Create mock significators where house 1 has L1 planets and house 2 has only L4
+        mock_sigs = {
+            1: {
+                "level_1": ["jupiter"],
+                "level_2": [],
+                "level_3": [],
+                "level_4": ["saturn"],
+                "all_significators": ["jupiter", "saturn"],
+            },
+            2: {
+                "level_1": [],
+                "level_2": [],
+                "level_3": [],
+                "level_4": ["mars"],
+                "all_significators": ["mars"],
+            },
+        }
+
+        score_h1 = _compute_weighted_score(mock_sigs, [1])
+        score_h2 = _compute_weighted_score(mock_sigs, [2])
+
+        # House 1 has L1 (4) + L4 (1) = 5, House 2 has L4 (1) = 1
+        assert score_h1 > score_h2
+        assert score_h1 == 5.0  # jupiter L1=4, saturn L4=1
+        assert score_h2 == 1.0  # mars L4=1
+
+    def test_ruling_planet_confirmation_boosts_confidence(self):
+        """Phase 3: Passing ruling planets that match significators boosts confidence."""
+        # Get baseline prediction without ruling planets
+        result_base = get_kp_prediction(SAMPLE_PLANETS, SAMPLE_CUSPS, "career")
+
+        # Create ruling planets that overlap with supporting significators
+        supporting = result_base["significator_analysis"]["supporting_significators"]
+        if supporting:
+            mock_rp = {
+                "ruling_planets": [supporting[0]],
+                "frequencies": {supporting[0]: 2},
+                "strongest": supporting[0],
+            }
+            result_boosted = get_kp_prediction(
+                SAMPLE_PLANETS, SAMPLE_CUSPS, "career", ruling_planets=mock_rp
+            )
+            # Confidence should increase (or at minimum not decrease) with matching RP
+            assert result_boosted["confidence"] >= result_base["confidence"]
+
+    def test_ruling_planet_no_match_reduces_confidence(self):
+        """Phase 3: Ruling planets with no significator match slightly reduces confidence."""
+        # Create ruling planets that DON'T match any significators
+        mock_rp = {
+            "ruling_planets": ["nonexistent_planet_xyz"],
+            "frequencies": {"nonexistent_planet_xyz": 1},
+            "strongest": "nonexistent_planet_xyz",
+        }
+        result_base = get_kp_prediction(SAMPLE_PLANETS, SAMPLE_CUSPS, "career")
+        result_reduced = get_kp_prediction(
+            SAMPLE_PLANETS, SAMPLE_CUSPS, "career", ruling_planets=mock_rp
+        )
+        # Should be slightly lower due to -0.05 penalty
+        assert result_reduced["confidence"] <= result_base["confidence"]
+
+    def test_retrograde_no_confidence_reduction(self):
+        """Phase 4: Retrograde planets don't reduce confidence (KP doctrine)."""
+        from packages.self.src.kp import _get_planet_modifiers
+
+        planets_retro = {
+            "mercury": {"longitude": 208.7, "is_retrograde": True},
+            "sun": {"longitude": 227.5},
+        }
+        mods = _get_planet_modifiers("mercury", planets_retro)
+        assert mods["is_retrograde"] is True
+        # Retrograde should NOT cause combustion_strength_loss
+        # (combustion is separate from retrograde)
+        assert "delayed but not denied" in mods["notes"][0]
+
+    def test_combust_reduces_confidence(self):
+        """Phase 4: Combust planet has non-zero combustion_strength_loss."""
+        from packages.self.src.kp import _get_planet_modifiers
+
+        # Place Mercury very close to Sun (combustion threshold is ~14 degrees)
+        planets_combust = {
+            "mercury": {"longitude": 227.0, "is_retrograde": False},
+            "sun": {"longitude": 227.5},
+        }
+        mods = _get_planet_modifiers("mercury", planets_combust)
+        assert mods["is_combust"] is True
+        assert mods["combustion_strength_loss"] > 0
+
+    def test_rich_explanation_includes_house_labels(self):
+        """Phase 6: Rich explanation includes house labels like 'career/status'."""
+        result = analyze_kp_house(10, SAMPLE_PLANETS, SAMPLE_CUSPS, "career")
+        explanation = result["explanation"]
+        # The explanation should contain at least one house label from _HOUSE_LABELS
+        has_label = any(
+            label in explanation
+            for label in [
+                "career/status",
+                "gains/income",
+                "family/wealth",
+                "self/personality",
+                "marriage",
+                "fortune",
+            ]
+        )
+        assert has_label, f"Explanation missing house labels: {explanation}"
+
+    def test_backward_compat_no_ruling_planets(self):
+        """Phase 3: get_kp_prediction works without ruling_planets (backward compat)."""
+        # Should work exactly as before without passing ruling_planets
+        result = get_kp_prediction(SAMPLE_PLANETS, SAMPLE_CUSPS, "marriage")
+        assert result["judgment"] in ["favorable", "unfavorable", "mixed"]
+        assert 0 < result["confidence"] <= 1.0
+        assert result["ruling_planet_confirmation"] is False
+        assert "supporting_significators" in result["significator_analysis"]
+        assert "balance" in result["significator_analysis"]
+        # New weighted fields should be present
+        assert "support_score" in result["significator_analysis"]
+        assert "deny_score" in result["significator_analysis"]

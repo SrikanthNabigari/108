@@ -1,6 +1,6 @@
 {
   "dasha_guide": {
-    "description": "Practical guidance for each of 9 Mahadasha (major planetary period) in the Vimshottari system. Covers themes, focus areas, career, health, relationships, spiritual guidance, and practical advice.",
+    "description": "Practical guidance for each of 9 Mahadasha (major planetary period) in the Vimshottari system. Covers themes, focus areas, career, health, relationships, spiritual, finances, family, education, travel, and practical advice.",
     "sun": {
       "duration_years": 6,
       "theme": "Authority, self-expression, leadership, father, government, vitality",
@@ -9,6 +9,10 @@
       "health": "Focus on heart health, bone strength, and eye care. Sun-related ailments may surface. Pitta (fire) constitution heightened. Regular exercise and sun exposure beneficial.",
       "relationships": "Father figure becomes important. Marriage needs ego balance. Relationships marked by need for respect and admiration. Partner should be supportive of career ambitions.",
       "spiritual": "Self-realization journey begins. Atma-jnana (soul knowledge) develops. Good period for Gayatri mantra and Surya Namaskar. Connection with one's true purpose strengthens.",
+      "finances": "Income through government, authority positions, and leadership roles. Gains from father or paternal inheritance. Expenditure on health and self-improvement. Gold investments favored.",
+      "family": "Father's role is central. Paternal relationships strengthen or face ego-based tension. Family status rises. Children benefit from your growing authority and confidence.",
+      "education": "Interest in political science, administration, and leadership studies. Self-study and independent learning favored over formal education. Knowledge of Vedas and scriptures deepens.",
+      "travel": "Government-related travel likely. Pilgrimage to temples of Sun (Konark, Suryanar). Travel for status and official duties. East direction is auspicious.",
       "practical_advice": [
         "Build connections with authority figures and government",
         "Focus on personal health, especially heart and eyes",
@@ -29,6 +33,10 @@
       "health": "Watch for fluid retention, blood pressure fluctuations, mental health, and hormonal balance. Moon governs the mind, so meditation is essential. Cold and wet conditions may aggravate health.",
       "relationships": "Mother's influence is paramount. Emotional bonds deepen. Marriage is nurturing but may involve mood swings. Partner's emotional needs must be attended to.",
       "spiritual": "Excellent for meditation, bhakti (devotion), and mantra japa. Moon's period favors worship of Divine Mother (Devi). Dreams become prophetic. Intuition heightens.",
+      "finances": "Income fluctuates with emotional state and public favor. Gains from liquid assets, dairy, hospitality, and public-facing businesses. Savings pattern is cyclical like Moon phases.",
+      "family": "Mother becomes the central influence. Domestic happiness increases. Home renovations and property purchase near water favored. Family gatherings and emotional bonding strengthen.",
+      "education": "Learning through intuition and experience rather than textbooks. Psychology, counseling, and nursing studies favored. Creative arts education flourishes.",
+      "travel": "Frequent travel, especially near oceans, rivers, and water bodies. Foreign travel likely. Northwest direction is auspicious. Pilgrimage to Devi temples favored.",
       "practical_advice": [
         "Prioritize mental health and emotional stability",
         "Strengthen relationship with mother",
@@ -50,6 +58,10 @@
       "health": "Watch for inflammation, fevers, blood pressure, accidents, cuts, and burns. Pitta aggravation likely. Surgery may be needed for pre-existing conditions. Physical exercise is essential but avoid overexertion.",
       "relationships": "Mangal Dosha effects are activated. Passion increases but so does conflict. Sibling relationships come into focus. Marriage needs patience and anger management.",
       "spiritual": "Hanuman worship is powerful. Kundalini energy may activate. Good for intense tapas (austerity) and physical yoga practices. Mars period tests courage and willpower.",
+      "finances": "Income through property, real estate, engineering, and competitive fields. Sudden gains from land deals. Expenditure on vehicles, machinery, and sports equipment. Avoid speculative investments.",
+      "family": "Siblings come into sharp focus. Property disputes with family possible. Younger brothers especially affected. Home renovations or construction likely. Family needs patience and anger management.",
+      "education": "Technical and engineering education favored. Military training, martial arts, and sports coaching. Competitive exams bring success. Practical, hands-on learning over theoretical.",
+      "travel": "Travel related to property, land, or military service. South direction is auspicious. Adventure travel and trekking favored. Pilgrimage to Hanuman temples.",
       "practical_advice": [
         "Channel energy into physical exercise and sports",
         "Pursue property and land acquisition",
@@ -71,6 +83,10 @@
       "health": "Watch for nervous disorders, skin diseases, speech problems, and allergies. Mental overwork can cause burnout. Nervous system needs care. Good period for alternative and Ayurvedic treatments.",
       "relationships": "Communication becomes the foundation of relationships. Intellectual compatibility matters. Partner appreciates wit and intelligence. Business partnerships thrive.",
       "spiritual": "Good for mantra meditation, especially Vishnu mantras. Study of scriptures and sacred texts. Mercury period favors intellectual spiritual pursuit — astrology, Jyotish study, Vedanta.",
+      "finances": "Multiple income streams develop. Business profits increase. Income through IT, writing, media, and trade. Financial acumen sharpens. Good period for accounting, investments, and insurance.",
+      "family": "Communication with family improves. Maternal uncle's influence. Younger family members benefit from your guidance. Home becomes a place of learning and intellectual activity.",
+      "education": "Best period for all forms of education. Higher studies, degrees, certifications, and skill development. Learning languages, IT, accounting, and communication arts. Teaching opportunities arise.",
+      "travel": "Frequent short business trips. North direction auspicious. Travel for education and trade. International conferences and networking events. Publishing-related travel.",
       "practical_advice": [
         "Invest in education and skill development",
         "Start or expand a business",
@@ -94,6 +110,10 @@
       "health": "Watch for weight gain, diabetes, liver issues, and cholesterol. Kapha aggravation likely. Moderate exercise and dietary discipline needed. Avoid overindulgence in rich foods.",
       "relationships": "Marriage improves with wisdom and understanding. Children may be born during this period. Family bonds strengthen. Guru-disciple relationships form.",
       "spiritual": "Most auspicious period for spiritual growth. Guru appears in life. Initiation (diksha) may occur. Temple visits, pilgrimage, and religious study flourish. Worship of Brihaspati (Jupiter).",
+      "finances": "Wealth expands naturally. Income through teaching, law, consulting, banking, and religious work. Large financial gains possible. Charitable donations should increase proportionally. Gold and real estate investments favored.",
+      "family": "Children may be born or achieve milestones. Family bonds strengthen through wisdom and generosity. Father figures and elders play positive role. Family gatherings increase. Home feels abundant and blessed.",
+      "education": "Higher education peaks. PhD, law degree, or advanced certifications. Teaching positions offered. Study of philosophy, dharma, and sacred texts. International education opportunities arise.",
+      "travel": "Pilgrimage and spiritual travel most favored. International travel for education or teaching. Northeast direction auspicious. Travel to religious sites and ashrams. Long-distance travel brings fortune.",
       "practical_advice": [
         "Pursue higher education and certifications",
         "Expand business and financial portfolio",
@@ -117,6 +137,10 @@
       "health": "Watch for reproductive issues, kidney problems, diabetes, and conditions from overindulgence. Kapha-Pitta aggravation. Moderate lifestyle is key. Beautification and self-care are beneficial.",
       "relationships": "Marriage and romance flourish. Love deepens. Spouse becomes more important. New relationships may form. Social life enhances. Wedding may occur during this period.",
       "spiritual": "Bhakti (devotion) deepens through beauty and love. Worship of Lakshmi and feminine deities. Art as spiritual practice. Venus period teaches that beauty is a doorway to the divine.",
+      "finances": "Most prosperous period for wealth. Income through arts, beauty, luxury goods, entertainment, and creative businesses. Vehicle and jewelry purchases favored. Financial comfort and savings grow substantially.",
+      "family": "Spouse becomes the center of family life. Marriage ceremony may occur. Domestic harmony and comfort increase. Home beautification and luxury upgrades. Relationships with in-laws improve.",
+      "education": "Arts, music, dance, fashion design, and creative education flourish. Fine arts degrees and certifications. Beauty and aesthetics training. Hospitality and culinary education also favored.",
+      "travel": "Pleasure travel and honeymoons. Southeast direction auspicious. Travel to beautiful and culturally rich destinations. International travel for luxury and leisure. Art and culture tours.",
       "practical_advice": [
         "Invest in relationships and marriage",
         "Pursue artistic and creative passions",
@@ -140,6 +164,10 @@
       "health": "Most challenging period for health. Watch for bones, joints, chronic diseases, depression, and teeth. Vata aggravation. Regular exercise, warm oil massage, and disciplined lifestyle essential.",
       "relationships": "Relationships tested through duty and responsibility. Marriage requires patience. Partner may face health or career difficulties. Loneliness may be felt but character is built.",
       "spiritual": "Deep karmic lessons unfold. Saturn period is the greatest spiritual teacher. Meditation, seva (selfless service), and discipline are the paths. Worship of Hanuman and Shani Dev.",
+      "finances": "Financial growth is slow but lasting. Income through hard work, government service, and labor-intensive industries. Debts may accumulate but disciplined budgeting resolves them. Long-term investments pay off eventually.",
+      "family": "Family responsibilities increase heavily. Elderly family members need care. Property maintenance and repairs. Domestic life feels burdensome but character-building. Separation from family is possible during difficult phases.",
+      "education": "Learning through discipline and hardship. Engineering, law, mining, and agriculture studies. Professional certifications requiring long-term commitment. Education may be delayed but eventually completed.",
+      "travel": "Travel related to work and duty. West direction auspicious. Pilgrimage to Shani temples (Shingnapur, Thirunallar). Travel may feel forced or obligatory. Relocations for career advancement.",
       "practical_advice": [
         "Embrace hard work and discipline",
         "Build structure and routine in daily life",
@@ -164,6 +192,10 @@
       "health": "Watch for mysterious ailments, addictions, poisoning, skin diseases, and mental confusion. Diseases are hard to diagnose. Alternative medicine may help. Avoid intoxicants strictly.",
       "relationships": "Unconventional relationships form. Foreign partner possible. Attraction to unusual people. Marriage may be tested by external influences. Maintain transparency.",
       "spiritual": "Rahu period creates spiritual confusion initially but can lead to deep awakening. Worship of Durga and Saraswati. Mantra meditation is essential. Avoid occult without proper guidance.",
+      "finances": "Sudden and unexpected financial gains or losses. Income through foreign trade, technology, and unconventional means. Speculative gains possible but risky. Cryptocurrency and digital assets highlighted. Avoid get-rich-quick schemes.",
+      "family": "Family dynamics become unconventional. Foreign spouse or mixed-culture family possible. Distance from birth family. In-laws may create complexity. Paternal grandmother's influence surfaces. Adopted or blended family situations.",
+      "education": "Foreign education opportunities. Technology, AI, and unconventional fields of study. Research and investigation skills sharpen. Education may be interrupted and resumed in new form.",
+      "travel": "Foreign travel and relocation strongly indicated. Southwest direction auspicious. Immigration and overseas settlement possible. Travel to unusual and exotic destinations. Pilgrimages to Naga temples.",
       "practical_advice": [
         "Explore foreign and unconventional opportunities",
         "Embrace technology and digital skills",
@@ -187,6 +219,10 @@
       "health": "Watch for mysterious and hard-to-diagnose ailments, skin conditions, infections, and surgical needs. Alternative and spiritual healing methods work well. Ancestral health patterns may manifest.",
       "relationships": "Detachment from worldly relationships. Spiritual bonds strengthen while material bonds weaken. Past-life connections may appear. Partner may undergo spiritual transformation.",
       "spiritual": "Most powerful period for spiritual liberation (moksha). Past-life karmas resolve. Meditation deepens significantly. Worship of Ganesha. Liberation from material attachments accelerates.",
+      "finances": "Material wealth may diminish or feel meaningless. Income through spiritual work, healing, research, and back-end technology. Unexpected inheritance from past-life connections. Detachment from money brings paradoxical abundance.",
+      "family": "Detachment from family bonds. Ancestral karma surfaces. Family patterns repeat and resolve. Mother's spiritual transformation. Children may choose unconventional paths. Past-life family connections revealed.",
+      "education": "Research, occult sciences, and alternative healing studies. Astrology and Jyotish learning deepens. Spiritual education over material. PhD and deep research favored. Education feels like remembering rather than learning.",
+      "travel": "Pilgrimage to ancient and sacred sites strongly indicated. South direction auspicious. Travel to isolated or remote spiritual places. Retreats and ashram visits. Travel diminishes over time as inner journey deepens.",
       "practical_advice": [
         "Focus on spiritual practices and meditation",
         "Let go of attachments that no longer serve",

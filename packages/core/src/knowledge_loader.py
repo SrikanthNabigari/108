@@ -276,6 +276,53 @@ def get_dasha_guide() -> dict[str, Any]:
     return load_interpretation("dasha_guide")
 
 
+def get_sookshma_dasha_guide() -> dict[str, Any]:
+    """Get Sookshma Dasha (Level 4) practical guidance for each planet's micro-period."""
+    return load_interpretation("sookshma_dasha_guide")
+
+
+def get_prana_dasha_guide() -> dict[str, Any]:
+    """Get Prana Dasha (Level 5) ultra-brief guidance for each planet's life-breath period."""
+    return load_interpretation("prana_dasha_guide")
+
+
+def get_deha_dasha_guide() -> dict[str, Any]:
+    """Get Deha Dasha (Level 6) brief somatic guidance for each planet's body-level period."""
+    return load_interpretation("deha_dasha_guide")
+
+
+def get_planet_relationship(planet_a: str, planet_b: str) -> str:
+    """Get natural relationship between two planets from planets.json.
+
+    Returns one of: "same", "friend", "enemy", "neutral".
+    """
+    if planet_a == planet_b:
+        return "same"
+    planets_data = load_definition("planets").get("planets", {})
+    planet_info = planets_data.get(planet_a.lower(), {})
+    b_title = planet_b.capitalize()
+    if b_title in planet_info.get("friends", []):
+        return "friend"
+    if b_title in planet_info.get("enemies", []):
+        return "enemy"
+    return "neutral"
+
+
+def get_sookshma_dasha_effects() -> dict[str, Any]:
+    """Get Sookshma Dasha combination effects (81 combos: PD lord x SD lord)."""
+    return load_rules("sookshma_dasha_effects").get("sookshma_dasha_effects", {})
+
+
+def get_prana_dasha_effects() -> dict[str, Any]:
+    """Get Prana Dasha combination effects (81 combos: SD lord x Prana lord)."""
+    return load_rules("prana_dasha_effects").get("prana_dasha_effects", {})
+
+
+def get_deha_dasha_effects() -> dict[str, Any]:
+    """Get Deha Dasha combination effects (81 combos: Prana lord x Deha lord)."""
+    return load_rules("deha_dasha_effects").get("deha_dasha_effects", {})
+
+
 def clear_cache() -> None:
     """Clear the knowledge cache (useful for testing)."""
     _load_json_file.cache_clear()

@@ -494,6 +494,46 @@ class AstrologyTools:
                     if pratyantar.get("end_date")
                     else None,
                 },
+                "current_sookshma": {
+                    "lord": current.get("sookshma_dasha", {}).get("lord", "") if current else "",
+                    "start": current.get("sookshma_dasha", {}).get("start_date", "").isoformat()
+                    if current and current.get("sookshma_dasha", {}).get("start_date")
+                    else None,
+                    "end": current.get("sookshma_dasha", {}).get("end_date", "").isoformat()
+                    if current and current.get("sookshma_dasha", {}).get("end_date")
+                    else None,
+                    "days_remaining": round(
+                        current.get("sookshma_dasha", {}).get("days_remaining", 0), 1
+                    )
+                    if current and current.get("sookshma_dasha")
+                    else None,
+                },
+                "current_prana": {
+                    "lord": current.get("prana_dasha", {}).get("lord", "") if current else "",
+                    "start": current.get("prana_dasha", {}).get("start_date", "").isoformat()
+                    if current and current.get("prana_dasha", {}).get("start_date")
+                    else None,
+                    "end": current.get("prana_dasha", {}).get("end_date", "").isoformat()
+                    if current and current.get("prana_dasha", {}).get("end_date")
+                    else None,
+                    "days_remaining": round(
+                        current.get("prana_dasha", {}).get("days_remaining", 0), 1
+                    )
+                    if current and current.get("prana_dasha")
+                    else None,
+                },
+                "current_deha": {
+                    "lord": current.get("deha_dasha", {}).get("lord", "") if current else "",
+                    "start": current.get("deha_dasha", {}).get("start_date", "").isoformat()
+                    if current and current.get("deha_dasha", {}).get("start_date")
+                    else None,
+                    "end": current.get("deha_dasha", {}).get("end_date", "").isoformat()
+                    if current and current.get("deha_dasha", {}).get("end_date")
+                    else None,
+                    "hours_remaining": current.get("deha_dasha", {}).get("hours_remaining")
+                    if current and current.get("deha_dasha")
+                    else None,
+                },
                 "dasha_timeline": timeline[:10] if timeline else [],
                 "success": True,
             }

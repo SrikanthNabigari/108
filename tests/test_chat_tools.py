@@ -159,6 +159,22 @@ class TestExecuteTool:
             assert "current_mahadasha" in result
             assert "current_antardasha" in result
 
+    def test_get_current_dasha_includes_sookshma(self):
+        result = execute_tool("get_current_dasha", {}, SAMPLE_BIRTH_CONTEXT)
+        if result.get("success"):
+            assert "current_sookshma" in result
+            sookshma = result["current_sookshma"]
+            assert "lord" in sookshma
+            assert "days_remaining" in sookshma
+
+    def test_get_current_dasha_includes_prana_deha(self):
+        result = execute_tool("get_current_dasha", {}, SAMPLE_BIRTH_CONTEXT)
+        if result.get("success"):
+            assert "current_prana" in result
+            assert "current_deha" in result
+            assert "lord" in result["current_prana"]
+            assert "lord" in result["current_deha"]
+
     def test_get_panchanga_returns_five_limbs(self):
         result = execute_tool("get_panchanga", {}, SAMPLE_BIRTH_CONTEXT)
         if result.get("success"):

@@ -43,11 +43,12 @@ class ApiConstants {
   static const String analysisAtmakaraka = '$apiVersion/analysis/atmakaraka';
   static const String analysisKp = '$apiVersion/analysis/kp';
 
-  /// Dasha effects endpoint with MD/AD/PD query params
-  static String dashaEffects({required String md, String? ad, String? pd}) {
+  /// Dasha effects endpoint with MD/AD/PD/SD query params
+  static String dashaEffects({required String md, String? ad, String? pd, String? sd}) {
     var url = '$apiVersion/analysis/dasha/effects?md=$md';
     if (ad != null) url += '&ad=$ad';
     if (pd != null) url += '&pd=$pd';
+    if (sd != null) url += '&sd=$sd';
     return url;
   }
 
@@ -88,6 +89,7 @@ class ApiConstants {
   static const String events = '$apiVersion/events';
   static String eventDetail(String id) => '$apiVersion/events/$id';
   static const String eventsCorrelate = '$apiVersion/events/correlate';
+  static String eventCorrelate(String id) => '$apiVersion/events/$id/correlate';
 
   // Credits
   static const String creditsBalance = '$apiVersion/credits/balance';

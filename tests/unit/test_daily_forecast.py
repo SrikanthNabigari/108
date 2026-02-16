@@ -12,6 +12,7 @@ Tests cover:
 """
 
 from datetime import datetime
+from typing import ClassVar
 from unittest.mock import patch
 
 from packages.context.src.daily_forecast import (
@@ -483,6 +484,8 @@ class TestGetDailyForecast:
         assert isinstance(result["active_yogas"], list)
         assert isinstance(result["active_doshas"], list)
         assert isinstance(result["is_chandrashtama"], bool)
+        assert "prana_timeline" in result
+        assert isinstance(result["prana_timeline"], list)
 
     @patch("packages.cosmos.src.sunrise_sunset.get_sunrise_sunset")
     @patch("packages.cosmos.src.ephemeris.get_all_planets")
@@ -749,3 +752,449 @@ class TestGetDailyForecast:
         assert ad["antardasha"] == "ketu"
         assert ad["pratyantardasha"] == "venus"
         assert "theme" in ad
+
+    @patch("packages.cosmos.src.sunrise_sunset.get_sunrise_sunset")
+    @patch("packages.cosmos.src.ephemeris.get_all_planets")
+    @patch("packages.cosmos.src.ephemeris.get_julian_day")
+    @patch("packages.cosmos.src.panchanga.get_panchanga")
+    @patch("packages.context.src.dasha.get_current_dasha")
+    @patch("packages.context.src.transit_aspects.get_transit_natal_aspects")
+    def test_prana_timeline_with_sookshma(
+        self, mock_aspects, mock_dasha, mock_panchanga, mock_jd, mock_planets, mock_sun
+    ):
+        """When dasha includes sookshma_dasha, forecast should populate prana_timeline."""
+        mock_jd.return_value = 2460000.0
+        mock_planets.return_value = self._make_mock_planets()
+        mock_panchanga.return_value = {}
+        mock_dasha.return_value = {
+            "mahadasha": {
+                "lord": "mercury",
+                "start_date": datetime(2019, 1, 1),
+                "end_date": datetime(2036, 1, 1),
+                "years": 17,
+                "days_remaining": 3000,
+            },
+            "antardasha": {
+                "lord": "ketu",
+                "start_date": datetime(2025, 1, 1),
+                "end_date": datetime(2026, 6, 1),
+                "years": 1.4,
+                "days_remaining": 300,
+            },
+            "pratyantardasha": {
+                "lord": "venus",
+                "start_date": datetime(2026, 1, 1),
+                "end_date": datetime(2026, 3, 1),
+                "years": 0.16,
+                "days_remaining": 30,
+            },
+            "sookshma_dasha": {
+                "lord": "mars",
+                "start_date": datetime(2026, 2, 5),
+                "end_date": datetime(2026, 2, 12),
+                "years": 0.02,
+                "days_remaining": 5,
+            },
+            "prana_dasha": {
+                "lord": "sun",
+                "start_date": datetime(2026, 2, 7, 6, 0),
+                "end_date": datetime(2026, 2, 7, 18, 0),
+                "years": 0.001,
+                "days_remaining": 0.5,
+            },
+            "deha_dasha": {
+                "lord": "moon",
+                "start_date": datetime(2026, 2, 7, 10, 0),
+                "end_date": datetime(2026, 2, 7, 12, 0),
+                "years": 0.0001,
+                "hours_remaining": 2.0,
+            },
+        }
+        mock_aspects.return_value = []
+        mock_sun.return_value = {
+            "sunrise": datetime(2026, 2, 7, 6, 30),
+            "sunset": datetime(2026, 2, 7, 18, 0),
+        }
+
+        result = get_daily_forecast(
+            birth_datetime="1992-12-03T03:00:00",
+            birth_lat=16.726239,
+            birth_lon=81.288428,
+            natal_planets=NATAL_PLANETS,
+            moon_longitude=326.85,
+            lagna_rashi="libra",
+            query_date="2026-02-07",
+        )
+
+        # prana_timeline should be populated from sookshma_dasha
+        pt = result["prana_timeline"]
+        assert isinstance(pt, list)
+        assert len(pt) > 0
+
+        # Each entry should have full BPHS knowledge-backed fields
+        for entry in pt:
+            assert "lord" in entry
+            assert "start" in entry
+            assert "end" in entry
+            assert "theme" in entry
+            assert "classical_basis" in entry
+            assert "what_happens" in entry
+            assert isinstance(entry["what_happens"], dict)
+            assert "why_it_happens" in entry
+            assert "when_it_peaks" in entry
+            assert "life_areas" in entry
+            assert isinstance(entry["life_areas"], dict)
+            assert "guidance" in entry
+            assert isinstance(entry["guidance"], list)
+            assert "challenges" in entry
+            assert "opportunities" in entry
+            assert "remedy" in entry
+            assert "energy_quality" in entry
+
+            # Deha timeline should be embedded in each prana entry
+            assert "deha_timeline" in entry
+            assert isinstance(entry["deha_timeline"], list)
+            for dh in entry["deha_timeline"]:
+                assert "lord" in dh
+                assert "start" in dh
+                assert "end" in dh
+                assert "theme" in dh
+                assert "relationship_with_prana" in dh
+                assert dh["relationship_with_prana"] in (
+                    "same",
+                    "friend",
+                    "enemy",
+                    "neutral",
+                )
+                assert "combination_with_prana" in dh
+                assert isinstance(dh["combination_with_prana"], dict)
+
+        # active_dasha should include sookshma, prana, deha
+        ad = result["active_dasha"]
+        assert ad["sookshma"] == "mars"
+        assert ad["prana"] == "sun"
+        assert ad["deha"] == "moon"
+
+    @patch("packages.cosmos.src.sunrise_sunset.get_sunrise_sunset")
+    @patch("packages.cosmos.src.ephemeris.get_all_planets")
+    @patch("packages.cosmos.src.ephemeris.get_julian_day")
+    @patch("packages.cosmos.src.panchanga.get_panchanga")
+    @patch("packages.context.src.dasha.get_current_dasha")
+    @patch("packages.context.src.transit_aspects.get_transit_natal_aspects")
+    def test_prana_timeline_empty_without_sookshma(
+        self, mock_aspects, mock_dasha, mock_panchanga, mock_jd, mock_planets, mock_sun
+    ):
+        """Without sookshma_dasha in response, prana_timeline should be empty."""
+        mock_jd.return_value = 2460000.0
+        mock_planets.return_value = self._make_mock_planets()
+        mock_panchanga.return_value = {}
+        mock_dasha.return_value = {
+            "mahadasha": {
+                "lord": "mercury",
+                "start_date": datetime(2019, 1, 1),
+                "end_date": datetime(2036, 1, 1),
+                "years": 17,
+                "days_remaining": 3000,
+            },
+            "antardasha": {
+                "lord": "ketu",
+                "start_date": datetime(2025, 1, 1),
+                "end_date": datetime(2026, 1, 1),
+                "years": 1,
+                "days_remaining": 300,
+            },
+            "pratyantardasha": None,
+        }
+        mock_aspects.return_value = []
+        mock_sun.return_value = {
+            "sunrise": datetime(2026, 2, 7, 6, 30),
+            "sunset": datetime(2026, 2, 7, 18, 0),
+        }
+
+        result = get_daily_forecast(
+            birth_datetime="1992-12-03T03:00:00",
+            birth_lat=16.726239,
+            birth_lon=81.288428,
+            natal_planets=NATAL_PLANETS,
+            moon_longitude=326.85,
+            lagna_rashi="libra",
+            query_date="2026-02-07",
+        )
+
+        assert result["prana_timeline"] == []
+
+
+# ======================================================================
+# Prana Dasha Knowledge Guide Tests
+# ======================================================================
+class TestPranaDashaGuide:
+    """Test prana_dasha_guide.json content via knowledge loader."""
+
+    ALL_PLANETS: ClassVar[list[str]] = [
+        "sun",
+        "moon",
+        "mars",
+        "mercury",
+        "jupiter",
+        "venus",
+        "saturn",
+        "rahu",
+        "ketu",
+    ]
+
+    def test_guide_loads_successfully(self):
+        from packages.core.src.knowledge_loader import get_prana_dasha_guide
+
+        data = get_prana_dasha_guide()
+        guide = data.get("prana_dasha_guide", data)
+        assert guide, "Prana dasha guide should not be empty"
+        assert "description" in guide
+
+    def test_guide_has_all_9_planets(self):
+        from packages.core.src.knowledge_loader import get_prana_dasha_guide
+
+        data = get_prana_dasha_guide()
+        guide = data.get("prana_dasha_guide", data)
+        for planet in self.ALL_PLANETS:
+            assert planet in guide, f"Missing planet: {planet}"
+
+    def test_planet_entries_have_required_fields(self):
+        from packages.core.src.knowledge_loader import get_prana_dasha_guide
+
+        data = get_prana_dasha_guide()
+        guide = data.get("prana_dasha_guide", data)
+        required_fields = {
+            "theme",
+            "energy_quality",
+            "classical_basis",
+            "what_happens",
+            "why_it_happens",
+            "when_it_peaks",
+            "life_areas",
+            "guidance",
+            "challenges",
+            "opportunities",
+            "remedy",
+            "duration_range",
+        }
+        for planet in self.ALL_PLANETS:
+            entry = guide[planet]
+            for field in required_fields:
+                assert field in entry, f"{planet} missing field: {field}"
+
+    def test_guidance_are_lists(self):
+        from packages.core.src.knowledge_loader import get_prana_dasha_guide
+
+        data = get_prana_dasha_guide()
+        guide = data.get("prana_dasha_guide", data)
+        for planet in self.ALL_PLANETS:
+            entry = guide[planet]
+            assert isinstance(entry["guidance"], list)
+            assert len(entry["guidance"]) >= 5, f"{planet} needs at least 5 guidance items"
+
+    def test_what_happens_has_dimensions(self):
+        from packages.core.src.knowledge_loader import get_prana_dasha_guide
+
+        data = get_prana_dasha_guide()
+        guide = data.get("prana_dasha_guide", data)
+        expected_keys = {"mind", "body", "events", "relationships", "career"}
+        for planet in self.ALL_PLANETS:
+            wh = guide[planet]["what_happens"]
+            assert isinstance(wh, dict)
+            for key in expected_keys:
+                assert key in wh, f"{planet} what_happens missing: {key}"
+
+    def test_life_areas_has_four_areas(self):
+        from packages.core.src.knowledge_loader import get_prana_dasha_guide
+
+        data = get_prana_dasha_guide()
+        guide = data.get("prana_dasha_guide", data)
+        expected_keys = {"career", "health", "relationships", "spiritual"}
+        for planet in self.ALL_PLANETS:
+            la = guide[planet]["life_areas"]
+            assert isinstance(la, dict)
+            for key in expected_keys:
+                assert key in la, f"{planet} life_areas missing: {key}"
+
+
+# ======================================================================
+# Deha Dasha Knowledge Guide Tests
+# ======================================================================
+class TestDehaDashaGuide:
+    """Test deha_dasha_guide.json content via knowledge loader."""
+
+    ALL_PLANETS: ClassVar[list[str]] = [
+        "sun",
+        "moon",
+        "mars",
+        "mercury",
+        "jupiter",
+        "venus",
+        "saturn",
+        "rahu",
+        "ketu",
+    ]
+
+    def test_deha_guide_loads_successfully(self):
+        from packages.core.src.knowledge_loader import get_deha_dasha_guide
+
+        data = get_deha_dasha_guide()
+        guide = data.get("deha_dasha_guide", data)
+        assert guide, "Deha dasha guide should not be empty"
+        assert "description" in guide
+
+    def test_deha_guide_has_all_9_planets(self):
+        from packages.core.src.knowledge_loader import get_deha_dasha_guide
+
+        data = get_deha_dasha_guide()
+        guide = data.get("deha_dasha_guide", data)
+        for planet in self.ALL_PLANETS:
+            assert planet in guide, f"Missing planet: {planet}"
+
+    def test_deha_planet_entries_have_required_fields(self):
+        from packages.core.src.knowledge_loader import get_deha_dasha_guide
+
+        data = get_deha_dasha_guide()
+        guide = data.get("deha_dasha_guide", data)
+        required_fields = {"theme", "energy", "body_focus", "micro_advice"}
+        for planet in self.ALL_PLANETS:
+            entry = guide[planet]
+            for field in required_fields:
+                assert field in entry, f"{planet} missing field: {field}"
+
+    def test_micro_advice_are_lists(self):
+        from packages.core.src.knowledge_loader import get_deha_dasha_guide
+
+        data = get_deha_dasha_guide()
+        guide = data.get("deha_dasha_guide", data)
+        for planet in self.ALL_PLANETS:
+            entry = guide[planet]
+            assert isinstance(entry["micro_advice"], list)
+            assert len(entry["micro_advice"]) >= 2, f"{planet} needs at least 2 micro_advice items"
+
+
+# ======================================================================
+# Planet Relationship Tests
+# ======================================================================
+class TestPlanetRelationship:
+    """Test get_planet_relationship() using planets.json data."""
+
+    def test_same_planet(self):
+        from packages.core.src.knowledge_loader import get_planet_relationship
+
+        assert get_planet_relationship("sun", "sun") == "same"
+        assert get_planet_relationship("rahu", "rahu") == "same"
+
+    def test_friend(self):
+        from packages.core.src.knowledge_loader import get_planet_relationship
+
+        # Sun's friends: Moon, Mars, Jupiter
+        assert get_planet_relationship("sun", "moon") == "friend"
+        assert get_planet_relationship("sun", "mars") == "friend"
+        assert get_planet_relationship("sun", "jupiter") == "friend"
+
+    def test_enemy(self):
+        from packages.core.src.knowledge_loader import get_planet_relationship
+
+        # Sun's enemies: Venus, Saturn
+        assert get_planet_relationship("sun", "venus") == "enemy"
+        assert get_planet_relationship("sun", "saturn") == "enemy"
+
+    def test_neutral(self):
+        from packages.core.src.knowledge_loader import get_planet_relationship
+
+        # Sun's neutral: Mercury
+        assert get_planet_relationship("sun", "mercury") == "neutral"
+
+    def test_rahu_ketu_relationships(self):
+        from packages.core.src.knowledge_loader import get_planet_relationship
+
+        # Rahu's friends: Venus, Saturn (per planets.json)
+        assert get_planet_relationship("rahu", "venus") == "friend"
+        assert get_planet_relationship("rahu", "saturn") == "friend"
+        # Rahu's enemies: Sun, Moon, Mars
+        assert get_planet_relationship("rahu", "sun") == "enemy"
+
+
+# ======================================================================
+# Deha Dasha Effects Tests
+# ======================================================================
+class TestDehaDashaEffects:
+    """Test deha_dasha_effects.json content and lookup function."""
+
+    ALL_PLANETS: ClassVar[list[str]] = [
+        "sun",
+        "moon",
+        "mars",
+        "mercury",
+        "jupiter",
+        "venus",
+        "saturn",
+        "rahu",
+        "ketu",
+    ]
+
+    def test_effects_file_loads(self):
+        from packages.core.src.knowledge_loader import get_deha_dasha_effects
+
+        data = get_deha_dasha_effects()
+        assert data, "Deha dasha effects should not be empty"
+        assert len(data) == 9, "Should have 9 outer planets (prana lords)"
+
+    def test_all_81_combinations_present(self):
+        from packages.core.src.knowledge_loader import get_deha_dasha_effects
+
+        data = get_deha_dasha_effects()
+        for prana in self.ALL_PLANETS:
+            assert prana in data, f"Missing prana lord: {prana}"
+            for deha in self.ALL_PLANETS:
+                assert deha in data[prana], f"Missing combo: {prana}x{deha}"
+
+    def test_combo_has_required_fields(self):
+        from packages.core.src.knowledge_loader import get_deha_dasha_effects
+
+        data = get_deha_dasha_effects()
+        required = {
+            "relationship",
+            "theme",
+            "effects",
+            "health",
+            "career",
+            "relationships",
+            "timing_quality",
+        }
+        # Spot-check a few combos
+        for prana, deha in [("sun", "moon"), ("mars", "mars"), ("rahu", "ketu")]:
+            combo = data[prana][deha]
+            for field in required:
+                assert field in combo, f"{prana}x{deha} missing field: {field}"
+
+    def test_effects_are_lists_of_three(self):
+        from packages.core.src.knowledge_loader import get_deha_dasha_effects
+
+        data = get_deha_dasha_effects()
+        for prana, deha in [("sun", "sun"), ("jupiter", "venus"), ("saturn", "rahu")]:
+            effects = data[prana][deha]["effects"]
+            assert isinstance(effects, list)
+            assert len(effects) == 3, f"{prana}x{deha} should have 3 effects"
+
+    def test_lookup_function(self):
+        from packages.context.src.dasha import get_deha_dasha_effect
+
+        effect = get_deha_dasha_effect("mars", "jupiter")
+        assert effect is not None
+        assert "theme" in effect
+        assert effect["relationship"] == "friend"
+
+    def test_lookup_same_planet(self):
+        from packages.context.src.dasha import get_deha_dasha_effect
+
+        effect = get_deha_dasha_effect("saturn", "saturn")
+        assert effect is not None
+        assert effect["relationship"] == "same"
+
+    def test_lookup_not_found(self):
+        from packages.context.src.dasha import get_deha_dasha_effect
+
+        effect = get_deha_dasha_effect("pluto", "mars")
+        assert effect is None

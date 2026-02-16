@@ -157,6 +157,34 @@ def current_dasha(
             }
             if pd_info
             else None,
+            "sookshma_dasha": {
+                "lord": result.get("sookshma_dasha", {}).get("lord"),
+                "start_date": result["sookshma_dasha"]["start_date"].isoformat()
+                if result.get("sookshma_dasha", {}).get("start_date")
+                else None,
+                "end_date": result["sookshma_dasha"]["end_date"].isoformat()
+                if result.get("sookshma_dasha", {}).get("end_date")
+                else None,
+                "days_remaining": result.get("sookshma_dasha", {}).get("days_remaining"),
+            }
+            if result.get("sookshma_dasha")
+            else None,
+            "prana_dasha": {
+                "lord": result["prana_dasha"]["lord"],
+                "start_date": result["prana_dasha"]["start_date"].isoformat(),
+                "end_date": result["prana_dasha"]["end_date"].isoformat(),
+                "days_remaining": result["prana_dasha"]["days_remaining"],
+            }
+            if result.get("prana_dasha")
+            else None,
+            "deha_dasha": {
+                "lord": result["deha_dasha"]["lord"],
+                "start_date": result["deha_dasha"]["start_date"].isoformat(),
+                "end_date": result["deha_dasha"]["end_date"].isoformat(),
+                "hours_remaining": result["deha_dasha"]["hours_remaining"],
+            }
+            if result.get("deha_dasha")
+            else None,
             "interpretation": _get_dasha_interpretation(md_lord, ad_lord),
         }
 

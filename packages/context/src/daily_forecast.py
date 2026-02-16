@@ -447,6 +447,7 @@ def get_daily_forecast(
     dasha_ad = "unknown"
     dasha_pd = "unknown"
     dasha_quality = 0.0
+    bphs_analysis: dict[str, Any] | None = None
     try:
         dasha_info = get_current_dasha(birth_dt, moon_longitude, forecast_date)
         if dasha_info:
@@ -454,19 +455,181 @@ def get_daily_forecast(
             dasha_ad = dasha_info["antardasha"]["lord"]
             if dasha_info.get("pratyantardasha"):
                 dasha_pd = dasha_info["pratyantardasha"]["lord"]
-            # Average quality of MD + AD
+            # Chart-specific quality via functional nature
+            from packages.self.src.transit_lordship import classify_planet_role
+
+            _NATURE_QUALITY = {
+                "yogakaraka": 1.5,
+                "benefic": 1.0,
+                "neutral": 0.0,
+                "malefic": -0.5,
+                "maraka": -0.5,
+            }
+            md_role = classify_planet_role(dasha_md, lagna_idx)
+            ad_role = classify_planet_role(dasha_ad, lagna_idx)
             dasha_quality = (
-                _DASHA_LORD_QUALITY.get(dasha_md, 0.0) + _DASHA_LORD_QUALITY.get(dasha_ad, 0.0)
+                _NATURE_QUALITY.get(md_role["functional_nature"], 0.0)
+                + _NATURE_QUALITY.get(ad_role["functional_nature"], 0.0)
             ) / 2.0
+
+            # BPHS chart-specific analysis
+            from packages.context.src.dasha_interpreter import interpret_dasha_lord
+
+            md_interp = interpret_dasha_lord(dasha_md, natal_planets, lagna_idx)
+            bphs_analysis = {
+                "functional_nature": md_interp["functional_nature"],
+                "houses_ruled": md_interp["houses_ruled"],
+                "house_labels": md_interp["house_labels"],
+                "dignity": md_interp["dignity"],
+                "natal_house": md_interp["natal_house"],
+                "summary": md_interp["summary"],
+            }
     except Exception:
         dasha_info = None
 
-    active_dasha_out = {
+    # Build chart-specific theme or fallback to generic
+    if bphs_analysis and bphs_analysis.get("houses_ruled"):
+        houses_str = ", ".join(f"{h}L" for h in bphs_analysis["houses_ruled"])
+        nature_cap = (bphs_analysis.get("functional_nature") or "neutral").title()
+        dasha_theme_text = f"{dasha_md.title()} ({houses_str}) -- {nature_cap}"
+        if dasha_ad != "unknown":
+            ad_role_data = classify_planet_role(dasha_ad, lagna_idx)
+            ad_houses_str = ", ".join(f"{h}L" for h in ad_role_data["houses_ruled"])
+            dasha_theme_text += f" / {dasha_ad.title()} ({ad_houses_str})"
+    else:
+        dasha_theme_text = _dasha_theme(dasha_md, dasha_ad, dasha_pd)
+
+    active_dasha_out: dict[str, Any] = {
         "mahadasha": dasha_md,
         "antardasha": dasha_ad,
         "pratyantardasha": dasha_pd,
-        "theme": _dasha_theme(dasha_md, dasha_ad, dasha_pd),
+        "theme": dasha_theme_text,
     }
+    if bphs_analysis:
+        active_dasha_out["bphs_analysis"] = bphs_analysis
+
+    # ---- 4b. Sookshma Dasha knowledge + Prana timeline ----
+    prana_timeline: list[dict[str, Any]] = []
+    try:
+        if dasha_info and dasha_info.get("sookshma_dasha"):
+            from packages.context.src.dasha import (
+                get_deha_dasha_effect,
+                get_deha_dasha_sequence,
+                get_prana_dasha_effect,
+                get_prana_dasha_sequence,
+                get_sookshma_dasha_effect,
+            )
+            from packages.core.src.knowledge_loader import (
+                get_deha_dasha_guide,
+                get_planet_relationship,
+                get_prana_dasha_guide,
+                get_sookshma_dasha_guide,
+            )
+
+            sd = dasha_info["sookshma_dasha"]
+            sd_lord = sd["lord"]
+
+            # --- SD knowledge enrichment ---
+            sd_guide_data = get_sookshma_dasha_guide()
+            sd_guide = sd_guide_data.get("sookshma_dasha_guide", sd_guide_data)
+            sd_planet = sd_guide.get(sd_lord, {})
+            sd_combo = get_sookshma_dasha_effect(dasha_pd, sd_lord) or {}
+
+            active_dasha_out["sookshma"] = sd_lord
+            active_dasha_out["sookshma_guide"] = {
+                "theme": sd_planet.get("theme", ""),
+                "energy": sd_planet.get("energy", ""),
+                "favorable_activities": sd_planet.get("favorable_activities", []),
+                "unfavorable_activities": sd_planet.get("unfavorable_activities", []),
+                "health_watch": sd_planet.get("health_watch", ""),
+                "practical_advice": sd_planet.get("practical_advice", []),
+                "blending_rules": sd_planet.get("blending_rules", {}),
+            }
+            if sd_combo:
+                active_dasha_out["sookshma_combination"] = sd_combo
+
+            active_dasha_out["theme"] = _dasha_theme(dasha_md, dasha_ad, dasha_pd, sd_lord)
+
+            if dasha_info.get("prana_dasha"):
+                active_dasha_out["prana"] = dasha_info["prana_dasha"]["lord"]
+            if dasha_info.get("deha_dasha"):
+                active_dasha_out["deha"] = dasha_info["deha_dasha"]["lord"]
+
+            # --- Prana timeline ---
+            pranas = get_prana_dasha_sequence(sd_lord, sd["start_date"], sd["end_date"])
+            prana_guide_data = get_prana_dasha_guide()
+            prana_guide = prana_guide_data.get("prana_dasha_guide", prana_guide_data)
+            deha_guide_data = get_deha_dasha_guide()
+            deha_guide = deha_guide_data.get("deha_dasha_guide", deha_guide_data)
+
+            day_start = datetime(qdate.year, qdate.month, qdate.day, 0, 0, 0)
+            day_end = datetime(qdate.year, qdate.month, qdate.day, 23, 59, 59)
+
+            for pr in pranas:
+                pr_start = pr["start_date"]
+                pr_end = pr["end_date"]
+                if pr_end <= day_start or pr_start > day_end:
+                    continue
+                visible_start = max(pr_start, day_start)
+                visible_end = min(pr_end, day_end)
+                lord = pr["lord"]
+                planet_guide = prana_guide.get(lord, {})
+                combo = get_prana_dasha_effect(sd_lord, lord) or {}
+
+                # Build deha sub-timeline for this prana period
+                deha_entries: list[dict[str, Any]] = []
+                dehas = get_deha_dasha_sequence(lord, pr_start, pr_end)
+                for dh in dehas:
+                    dh_start = dh["start_date"]
+                    dh_end = dh["end_date"]
+                    if dh_end <= day_start or dh_start > day_end:
+                        continue
+                    dh_vis_start = max(dh_start, day_start)
+                    dh_vis_end = min(dh_end, day_end)
+                    dh_lord = dh["lord"]
+                    dh_g = deha_guide.get(dh_lord, {})
+                    dh_combo = get_deha_dasha_effect(lord, dh_lord) or {}
+                    deha_entries.append(
+                        {
+                            "lord": dh_lord,
+                            "start": dh_vis_start.strftime("%H:%M"),
+                            "end": dh_vis_end.strftime("%H:%M"),
+                            "start_dt": dh_vis_start.isoformat(),
+                            "end_dt": dh_vis_end.isoformat(),
+                            "theme": dh_g.get("theme", ""),
+                            "energy": dh_g.get("energy", ""),
+                            "body_focus": dh_g.get("body_focus", ""),
+                            "micro_advice": dh_g.get("micro_advice", []),
+                            "relationship_with_prana": get_planet_relationship(lord, dh_lord),
+                            "combination_with_prana": dh_combo,
+                        }
+                    )
+
+                prana_timeline.append(
+                    {
+                        "lord": lord,
+                        "start": visible_start.strftime("%H:%M"),
+                        "end": visible_end.strftime("%H:%M"),
+                        "start_dt": visible_start.isoformat(),
+                        "end_dt": visible_end.isoformat(),
+                        "duration_range": planet_guide.get("duration_range", ""),
+                        "theme": planet_guide.get("theme", ""),
+                        "classical_basis": planet_guide.get("classical_basis", ""),
+                        "what_happens": planet_guide.get("what_happens", {}),
+                        "why_it_happens": planet_guide.get("why_it_happens", ""),
+                        "when_it_peaks": planet_guide.get("when_it_peaks", ""),
+                        "life_areas": planet_guide.get("life_areas", {}),
+                        "guidance": planet_guide.get("guidance", []),
+                        "challenges": planet_guide.get("challenges", ""),
+                        "opportunities": planet_guide.get("opportunities", ""),
+                        "remedy": planet_guide.get("remedy", ""),
+                        "energy_quality": planet_guide.get("energy_quality", ""),
+                        "combination_with_sd": combo,
+                        "deha_timeline": deha_entries,
+                    }
+                )
+    except Exception:
+        pass
 
     # ---- 5. Transit aspects active today ----
     transit_aspects_today: list[dict[str, Any]] = []
@@ -712,10 +875,11 @@ def get_daily_forecast(
         "sade_sati": sade_sati_info,
         "factor_scores": factor_scores,
         "upcoming_triggers": upcoming_triggers,
+        "prana_timeline": prana_timeline,
     }
 
 
-def _dasha_theme(md: str, ad: str, pd: str) -> str:
+def _dasha_theme(md: str, ad: str, pd: str, sd: str = "") -> str:
     """Generate a short dasha theme description."""
     themes: dict[str, str] = {
         "sun": "authority",
@@ -731,6 +895,9 @@ def _dasha_theme(md: str, ad: str, pd: str) -> str:
     md_t = themes.get(md, md)
     ad_t = themes.get(ad, ad)
     pd_t = themes.get(pd, pd)
+    sd_t = themes.get(sd, sd) if sd else ""
+    if sd_t:
+        return f"{md_t.title()} meets {ad_t}, {pd_t} undertone, {sd_t} micro-lens"
     if pd and pd != "unknown":
         return f"{md_t.title()} meets {ad_t}, with {pd_t} undertone"
     return f"{md_t.title()} meets {ad_t}"

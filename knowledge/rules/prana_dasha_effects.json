@@ -1,0 +1,1096 @@
+{
+  "metadata": {
+    "description": "Prana Dasha (Level 5) combination effects — SD lord x Prana lord = 81 combinations. Prana means 'life breath' and represents the subtlest activated layer of Vimshottari Dasha, lasting from a few hours to approximately 2 days. The Prana lord does not create new themes; it acts as a momentary lens filtering the Sookshma Dasha lord's day-level agenda.",
+    "total_combinations": 81,
+    "source": "BPHS, Phaladeepika",
+    "level": 5,
+    "level_name": "Prana Dasha",
+    "parent_level": "Sookshma Dasha (Level 4)",
+    "duration_range": "~1 hour to ~2 days",
+    "calculation_formula": "SD_duration × Prana_planet_years / 120",
+    "interpretation_principle": "Prana lord provides a momentary breath-energy that sharpens, softens, or disrupts the SD lord's day-level theme. Effects are ultra-micro and experiential rather than event-producing.",
+    "last_updated": "2026-02-15"
+  },
+  "prana_dasha_effects": {
+    "sun": {
+      "sun": {
+        "relationship": "same",
+        "theme": "Peak solar intensity — authority, visibility, and willpower reach maximum concentration for these hours",
+        "effects": [
+          "Ego and self-assertion reach an unmistakable peak; you feel compelled to take charge of whatever situation is at hand",
+          "Authority figures respond to you or become unavoidable; official and government communications arrive with urgency",
+          "Physical vitality surges but so does pitta — brief headaches, eye strain, or heat sensitivity are possible"
+        ],
+        "health": "Heart, eyes, and head are hyper-sensitive for a few hours. Pitta peaks sharply. Stay hydrated and avoid direct sun exposure during this window.",
+        "career": "Maximum visibility window — presentations, official decisions, and leadership moments crystallize. Government channels open briefly.",
+        "relationships": "Ego dominates all interactions; others either admire or resist your authority. Brief but intense power dynamics with father figures or bosses.",
+        "timing_quality": "favorable"
+      },
+      "moon": {
+        "relationship": "friend",
+        "theme": "Solar authority softened by lunar intuition — leadership gains emotional intelligence for a few hours",
+        "effects": [
+          "Emotional awareness enters your authority-driven agenda; decisions benefit from both logic and gut feeling",
+          "Public-facing activities gain a warmer, more approachable tone; people respond to your visibility with genuine warmth",
+          "Mother or maternal figures may briefly enter the picture during this SD window, offering support or requiring attention"
+        ],
+        "health": "Balanced pitta-kapha for these hours. Digestion improves. Mental clarity is good but emotional sensitivity may cause brief mood fluctuations.",
+        "career": "Public relations and people-facing leadership tasks flow naturally. Emotional intelligence enhances authority-based decisions.",
+        "relationships": "Warmth enters power dynamics. Mother-related communications are possible. Partnerships benefit from your softened authority tone.",
+        "timing_quality": "favorable"
+      },
+      "mars": {
+        "relationship": "friend",
+        "theme": "Solar authority energized by martial drive — decisive action and competitive edge sharpen for hours",
+        "effects": [
+          "Courage and willpower combine into an action-oriented burst; hesitation disappears and bold moves feel natural",
+          "Competitive situations resolve in your favor if you act quickly; physical and mental energy peak simultaneously",
+          "Risk of overheating — anger, impulsive decisions, or physical strain from pushing too hard during this brief window"
+        ],
+        "health": "Pitta doubles — heat, inflammation, blood pressure spike possible. Accident-proneness increases briefly. Channel energy into exercise.",
+        "career": "Decisive leadership window. Competitions, negotiations, and bold initiatives succeed. Military, sports, and technical work excel.",
+        "relationships": "Protective instincts surge but so does aggression. Brief authority clashes are possible. Sibling dynamics may activate.",
+        "timing_quality": "favorable"
+      },
+      "mercury": {
+        "relationship": "neutral",
+        "theme": "Solar authority meets intellectual analysis — strategic communication sharpens but overthinking may slow action",
+        "effects": [
+          "Communication becomes authoritative and precise; written and spoken words carry extra weight during these hours",
+          "Strategic planning ability peaks as willpower and intellect merge; complex problems yield to focused analysis",
+          "Nervous energy may undercut confidence briefly; tendency to overanalyze rather than act on solar instinct"
+        ],
+        "health": "Nervous system activates under solar heat. Brief tension headaches from mental overwork. Skin may feel sensitive. Breathing exercises help.",
+        "career": "Excellent for official documentation, business communication, and strategic presentations. Writing under authority carries weight.",
+        "relationships": "Conversations with authority figures become intellectual rather than emotional. Siblings or colleagues may challenge your position through logic.",
+        "timing_quality": "favorable"
+      },
+      "jupiter": {
+        "relationship": "friend",
+        "theme": "Solar authority blessed by Jupiterian wisdom — benevolent leadership and expansive confidence for these hours",
+        "effects": [
+          "Wisdom and generosity infuse your authority; leadership feels natural and inspired rather than forced or ego-driven",
+          "Elder blessings or teacher guidance arrives to support your SD agenda; doors open through goodwill and reputation",
+          "Tendency toward over-optimism or grandiosity during this brief window; promises made now may exceed what you can deliver"
+        ],
+        "health": "Excellent vitality with sattva balance. Tendency to overeat rich food. Liver and digestion sensitive but overall well-being is high.",
+        "career": "Peak window for leadership decisions, educational authority, legal matters, and mentoring. Expansive confidence attracts opportunity.",
+        "relationships": "Benevolent authority earns genuine respect. Teacher-student dynamics activate. Children may need your wise attention briefly.",
+        "timing_quality": "favorable"
+      },
+      "venus": {
+        "relationship": "enemy",
+        "theme": "Solar authority disrupted by Venusian pleasure-seeking — duty and desire pull in different directions for hours",
+        "effects": [
+          "Desire for comfort and pleasure conflicts with the SD's authority agenda; procrastination through indulgence is the main risk",
+          "Social charm temporarily overshadows leadership focus; you attract attention but for personal appeal rather than professional authority",
+          "Creative or aesthetic impulses distract from official duties; the pull toward beauty and luxury feels stronger than the pull toward responsibility"
+        ],
+        "health": "Pitta-kapha confusion. Reproductive system sensitivity. Sugar and luxury food cravings. Skin may flush. Brief energy imbalance.",
+        "career": "Creative and beauty-related authority tasks benefit. But pure leadership and official duties suffer from distraction and pleasure-seeking.",
+        "relationships": "Romantic attraction may interfere with authority dynamics. Social charm is high but professional focus is scattered.",
+        "timing_quality": "mixed"
+      },
+      "saturn": {
+        "relationship": "enemy",
+        "theme": "Solar authority confronts Saturnian obstruction — delays, heaviness, and karmic friction slow the SD agenda for hours",
+        "effects": [
+          "Confidence meets an invisible wall of delays and bureaucratic obstruction; willpower alone cannot force outcomes during this window",
+          "Authority figures become unavailable or obstructive; the channels that were open under Sun SD temporarily close or slow",
+          "Brief melancholy or self-doubt seeps into the otherwise confident SD mood; physical energy drops and fatigue sets in"
+        ],
+        "health": "Joint stiffness, lower back tension, and cold sensitivity arrive under the Sun's heat. Energy crashes. Vata aggravation despite pitta SD.",
+        "career": "Delays in official processes. Authority is challenged or ignored. Patience required — forcing outcomes creates lasting friction.",
+        "relationships": "Elderly relatives or authority figures create obligation or burden. Power dynamics feel heavy and karmic rather than productive.",
+        "timing_quality": "challenging"
+      },
+      "rahu": {
+        "relationship": "neutral",
+        "theme": "Solar authority disturbed by Rahu's illusions — unexpected twists and unconventional opportunities cloud the SD's clear agenda",
+        "effects": [
+          "Reality shimmers around the authority theme; what seemed certain becomes uncertain, and unexpected information arrives",
+          "Foreign or unconventional channels open briefly; technology-driven opportunities arise that do not fit the usual authority framework",
+          "Deception risk increases — verify all official communications and resist the urge to cut corners for quick gains"
+        ],
+        "health": "Sleep disruption during these hours. Mysterious brief symptoms — anxiety, restlessness, or digestive irregularity without clear cause.",
+        "career": "Unconventional authority paths open. Technology and foreign connections advance. But verify all information — Rahu creates compelling illusions.",
+        "relationships": "Unusual people enter your authority sphere. Foreign or cross-cultural interactions. Trust must be verified rather than assumed.",
+        "timing_quality": "mixed"
+      },
+      "ketu": {
+        "relationship": "neutral",
+        "theme": "Solar authority dissolves into Ketu's detachment — ego loosens and spiritual clarity briefly replaces worldly ambition",
+        "effects": [
+          "Desire for recognition and authority fades for these hours; worldly ambition feels temporarily meaningless or exhausting",
+          "Spiritual insight surfaces spontaneously; past-life authority patterns or karmic leadership themes flash through awareness",
+          "Material productivity drops but inner clarity sharpens; things that needed to be released from the SD agenda fall away naturally"
+        ],
+        "health": "Brief mysterious symptoms — dizziness, fatigue, or headache that resolves when Ketu Prana passes. Alternative healing is effective.",
+        "career": "New authority initiatives stall but completion and closure tasks succeed. Research and introspection replace outward action.",
+        "relationships": "Desire for solitude within the authority context. Others may find you distant or unavailable. Past authority relationships flash through memory.",
+        "timing_quality": "mixed"
+      }
+    },
+    "moon": {
+      "sun": {
+        "relationship": "friend",
+        "theme": "Lunar sensitivity illuminated by solar confidence — emotional expression gains clarity and direction for these hours",
+        "effects": [
+          "Emotional awareness combines with confidence; feelings that were vague become clear and expressible during this window",
+          "Authority figures or father figures enter the emotional landscape of the SD; official matters acquire an emotional dimension",
+          "Public visibility increases within the Moon SD's nurturing context; your emotional state becomes more visible to others"
+        ],
+        "health": "Balanced kapha-pitta. Emotional stability improves. Heart and eyes briefly sensitive but overall vitality is good.",
+        "career": "Public-facing and nurturing roles gain authority backing. Emotional leadership is recognized. Official support for caregiving or social roles.",
+        "relationships": "Father or authority figure dynamics enter emotional interactions. Mother-father axis activates. Emotional clarity improves communication.",
+        "timing_quality": "favorable"
+      },
+      "moon": {
+        "relationship": "same",
+        "theme": "Peak lunar intensity — emotions, intuition, and mental sensitivity reach maximum concentration for these hours",
+        "effects": [
+          "Emotional sensitivity peaks to its highest possible level; every feeling is amplified and impossible to ignore",
+          "Intuition becomes remarkably sharp — gut feelings carry genuine accuracy during this brief window",
+          "Risk of emotional overwhelm, mood swings, or depression if Moon is afflicted natally; tears may come without clear reason"
+        ],
+        "health": "Water retention peaks. Sleep disruption or extremely vivid dreams. Hormonal sensitivity. Mental health requires careful attention. Comfort food cravings intensify.",
+        "career": "Creative and intuitive work peaks. Public popularity surges. Emotional burnout risk if the work environment is demanding. Arts and counseling roles excel.",
+        "relationships": "Emotional bonding reaches its deepest point. Mother-related matters intensify. Clingy or dependent tendencies emerge. Empathy is overwhelming.",
+        "timing_quality": "mixed"
+      },
+      "mars": {
+        "relationship": "neutral",
+        "theme": "Lunar sensitivity pierced by martial energy — emotional reactions become sharp, quick, and potentially aggressive for hours",
+        "effects": [
+          "Emotions transform into action impulses; feelings that were flowing become urgent and demand immediate physical expression",
+          "Anger or irritability erupts from emotional sensitivity; the combination of feeling deeply and acting impulsively creates friction",
+          "Protective instincts surge — willingness to fight for those you love, but also risk of emotional aggression toward perceived threats"
+        ],
+        "health": "Inflammation meets fluid sensitivity. Heat in the stomach. Emotional stress triggers physical symptoms — headaches, stomach upset, blood pressure.",
+        "career": "Emotional energy drives competitive action. Good for protecting emotional interests. Risk of workplace conflicts from reactive emotional responses.",
+        "relationships": "Arguments from emotional triggers. Protective love becomes possessive. Sibling dynamics create emotional upheaval. Passion and anger intermingle.",
+        "timing_quality": "challenging"
+      },
+      "mercury": {
+        "relationship": "friend",
+        "theme": "Lunar sensitivity meets Mercurial intellect — feelings become articulate and communicable for these hours",
+        "effects": [
+          "Emotional intelligence peaks; the ability to name, understand, and communicate feelings reaches its highest expression",
+          "Writing, journaling, and verbal expression of inner states flow effortlessly; therapeutic conversations become deeply productive",
+          "Nervous sensitivity may amplify emotional fluctuations; overthinking about feelings can replace genuine feeling"
+        ],
+        "health": "Nervous system mirrors emotional state. Digestive sensitivity. Sleep affected by mental activity. Breathing exercises stabilize both mind and emotion.",
+        "career": "Counseling, writing, teaching, and communication roles benefit from emotional depth. Business communication gains empathetic warmth.",
+        "relationships": "Heart-to-heart conversations flow naturally. Misunderstandings resolve through articulate emotional expression. Sibling bonds deepen.",
+        "timing_quality": "favorable"
+      },
+      "jupiter": {
+        "relationship": "neutral",
+        "theme": "Lunar sensitivity meets Jupiterian wisdom — emotions find meaning and spiritual context for these hours",
+        "effects": [
+          "Emotional experiences feel meaningful rather than random; a sense of being guided or blessed enters the Moon SD's feeling tone",
+          "Generosity and compassion surge; desire to help others emerges from genuine emotional depth rather than obligation",
+          "Over-sentimentality or emotional over-expansion possible; feelings may grow larger than the actual situation warrants"
+        ],
+        "health": "Excellent emotional well-being. Kapha comfort. Tendency to eat rich comfort food. Weight gain risk from emotional eating. Liver sensitive.",
+        "career": "Teaching and counseling roles excel. Emotional wisdom earns respect. Educational and spiritual vocations benefit. Financial intuition sharpens.",
+        "relationships": "Deep emotional wisdom enhances all bonds. Children need nurturing attention. Mother-teacher dynamics activate. Marriage benefits from warmth and wisdom.",
+        "timing_quality": "favorable"
+      },
+      "venus": {
+        "relationship": "neutral",
+        "theme": "Lunar sensitivity harmonized by Venusian beauty — emotional world becomes aesthetically rich and socially warm for hours",
+        "effects": [
+          "Feelings seek beautiful expression; creative arts, music, and aesthetic experiences carry deep emotional resonance",
+          "Social warmth and charm combine with emotional depth; relationships feel both beautiful and genuinely heartfelt",
+          "Risk of emotional escapism through sensory pleasure; comfort-seeking may become indulgence during this window"
+        ],
+        "health": "Kapha dominates. Skin improves, comfort increases but lethargy risk. Reproductive sensitivity. Sugar and luxury food cravings peak.",
+        "career": "Creative and beauty-related emotional work excels. Hospitality, arts, and relationship-based roles benefit. Social events succeed.",
+        "relationships": "Romantic feelings deepen with genuine warmth. Social bonds feel pleasurable and meaningful. Aesthetic experiences shared with loved ones create lasting memories.",
+        "timing_quality": "favorable"
+      },
+      "saturn": {
+        "relationship": "neutral",
+        "theme": "Lunar sensitivity weighed down by Saturnian heaviness — emotions become serious, duty-bound, and melancholic for hours",
+        "effects": [
+          "Emotional tone shifts to seriousness and duty; lighthearted feelings recede and a sense of responsibility or melancholy descends",
+          "Elderly family members or karmic obligations enter the emotional landscape; old emotional wounds may surface for processing",
+          "Brief depression or emotional heaviness that lifts when Saturn Prana passes; patience with one's own feelings is required"
+        ],
+        "health": "Emotional heaviness manifests physically as fatigue, joint ache, and cold sensitivity. Vata aggravation in an already kapha SD. Warm food and rest help.",
+        "career": "Emotional work becomes duty-based rather than inspired. Administrative emotional labor — dealing with complaints, elderly care, or karmic responsibilities.",
+        "relationships": "Elderly relatives need emotional attention. Relationships feel heavy with obligation. Karmic emotional patterns from the past resurface briefly.",
+        "timing_quality": "challenging"
+      },
+      "rahu": {
+        "relationship": "neutral",
+        "theme": "Lunar sensitivity destabilized by Rahu's illusions — emotions become confused, amplified, and unpredictable for hours",
+        "effects": [
+          "Feelings become unreliable; what feels like genuine intuition may be Rahu-amplified anxiety or desire in disguise",
+          "Unusual emotional experiences — attraction to unfamiliar people or situations, restlessness with routine, craving for emotional novelty",
+          "Sleep disturbance and vivid but misleading dreams; the emotional radar picks up signals but misinterprets their source"
+        ],
+        "health": "Sleep disruption peaks. Anxiety without clear cause. Addictive emotional patterns activate — comfort eating, screen dependency, or substance cravings.",
+        "career": "Emotional work encounters unexpected twists. Foreign or unconventional emotional dynamics enter. Technology may disrupt emotional flow. Verify all emotional impressions.",
+        "relationships": "Emotional confusion about existing relationships. Attraction to unusual or foreign people. Trust your long-term emotional knowledge rather than Rahu Prana impulses.",
+        "timing_quality": "challenging"
+      },
+      "ketu": {
+        "relationship": "neutral",
+        "theme": "Lunar sensitivity dissolves into Ketu's detachment — emotional engagement fades and spiritual emptiness or peace replaces it for hours",
+        "effects": [
+          "Emotions become quiet and distant; the rich emotional texture of Moon SD temporarily goes still and empty",
+          "Past emotional patterns flash through awareness and complete themselves; old feelings release without effort",
+          "Meditation and inner silence become deeply accessible; the mind's noise quiets to a whisper for these hours"
+        ],
+        "health": "Brief emotional flatness that may concern those around you. Mysterious fatigue or withdrawal symptoms. Alternative emotional healing is effective.",
+        "career": "Emotional productivity pauses. But emotional closure and release of old patterns advance. Research and contemplation replace active emotional engagement.",
+        "relationships": "Desire for emotional solitude. Forgiveness flows naturally. Past relationship patterns complete. Attachment loosens without pain.",
+        "timing_quality": "mixed"
+      }
+    },
+    "mars": {
+      "sun": {
+        "relationship": "friend",
+        "theme": "Martial energy empowered by solar authority — courage and decisive action gain official backing for these hours",
+        "effects": [
+          "Action impulses gain confidence and direction; courage feels righteous rather than reckless during this window",
+          "Leadership in competitive or physical situations peaks; others follow your decisive energy naturally",
+          "Risk of overconfidence in aggressive action; the combination of Mars energy and Sun authority may bulldoze necessary caution"
+        ],
+        "health": "Double pitta surge. Very high body heat, blood pressure, and accident risk. Physical exercise is essential to channel this energy safely.",
+        "career": "Military, sports, engineering, and leadership roles peak. Competitive advantage is maximum. Bold initiatives succeed if direction is clear.",
+        "relationships": "Protective leadership in relationships. But domineering tendencies intensify. Authority-based conflicts with siblings or rivals peak briefly.",
+        "timing_quality": "favorable"
+      },
+      "moon": {
+        "relationship": "friend",
+        "theme": "Martial energy softened by lunar intuition — aggressive impulses gain emotional intelligence for these hours",
+        "effects": [
+          "Action becomes emotionally informed; courage serves protective instincts rather than pure aggression",
+          "Public response to your assertive energy is warmer; people see your actions as caring rather than threatening",
+          "Brief emotional vulnerability may slow the Mars SD's action agenda; feelings interfere with decisive movement"
+        ],
+        "health": "Pitta-kapha balance. Stomach heat meets fluid sensitivity. Emotional stress triggers physical inflammation. Rest between action bursts.",
+        "career": "Action roles benefit from emotional awareness. Leadership gains a nurturing quality. Physical work with people-facing components excels.",
+        "relationships": "Protective love replaces pure aggression. Mother-related action themes activate. Sibling bonds strengthen through emotional courage.",
+        "timing_quality": "favorable"
+      },
+      "mars": {
+        "relationship": "same",
+        "theme": "Peak martial intensity — raw energy, aggression, and physical drive reach maximum concentration for these hours",
+        "effects": [
+          "Physical energy surges to its absolute peak; the body demands action, movement, and competition immediately",
+          "Courage and fearlessness reach their maximum; no obstacle seems insurmountable during this brief but intense window",
+          "Accident, injury, and anger risk at their highest; the energy is so raw it can become destructive without conscious channeling"
+        ],
+        "health": "Maximum pitta. Blood pressure, body heat, and inflammation peak sharply. Highest accident-proneness window. Must exercise to safely discharge energy.",
+        "career": "Peak competitive advantage. Physical and technical work at maximum output. Military, sports, and surgical precision peak. Risk of workplace conflicts from intensity.",
+        "relationships": "Aggression dominates all interactions. Arguments erupt quickly. Sexual energy peaks. Sibling rivalry intensifies. Channel energy into shared physical activity.",
+        "timing_quality": "mixed"
+      },
+      "mercury": {
+        "relationship": "enemy",
+        "theme": "Martial energy scattered by Mercurial analysis — action impulses stall in overthinking for these hours",
+        "effects": [
+          "Action meets analysis and both suffer; the impulse to do is undercut by the impulse to think, creating frustration",
+          "Communication about competitive or property matters becomes contentious; words carry an aggressive edge that alienates",
+          "Nervous energy amplifies physical restlessness; the body wants to act but the mind insists on more data"
+        ],
+        "health": "Nervous tension meets pitta heat. Headaches from frustrated action. Skin irritation. Digestive upset from stress. Muscle tension from withheld energy.",
+        "career": "Technical communication and competitive analysis roles suffer from internal friction. Avoid important negotiations — words come out more aggressively than intended.",
+        "relationships": "Arguments over logical vs. action-based approaches. Sibling conflicts intensify through miscommunication. Brief but sharp verbal exchanges.",
+        "timing_quality": "challenging"
+      },
+      "jupiter": {
+        "relationship": "friend",
+        "theme": "Martial energy blessed by Jupiterian wisdom — courageous action serves a higher purpose for these hours",
+        "effects": [
+          "Action becomes dharmic; courage serves wisdom rather than mere aggression; physical energy flows toward meaningful goals",
+          "Teacher or elder guidance directs your action energy constructively; property or financial initiatives gain ethical backing",
+          "Over-expansion of action scope; Jupiter's optimism may encourage Mars to take on more than these brief hours can accomplish"
+        ],
+        "health": "Pitta balanced by sattva. Good physical vitality with wise pacing. Tendency to overexert from optimistic energy estimation.",
+        "career": "Action roles benefit from strategic wisdom. Physical work gains ethical direction. Legal action and property matters advance favorably.",
+        "relationships": "Protective actions earn respect and gratitude. Teacher-warrior dynamic activates. Children benefit from your courageous protection.",
+        "timing_quality": "favorable"
+      },
+      "venus": {
+        "relationship": "neutral",
+        "theme": "Martial energy meets Venusian pleasure — aggressive drive softens into passionate desire for these hours",
+        "effects": [
+          "Action energy redirects toward pleasure, romance, and creative expression; competition becomes playful rather than fierce",
+          "Physical attraction and sexual energy peak within the Mars SD's already high-energy context; passion dominates",
+          "Productive aggression may be lost to comfort-seeking; the sharp edge of Mars dulls in Venus's soft embrace"
+        ],
+        "health": "Pitta-kapha blend. Reproductive energy surges. Physical comfort-seeking may undermine exercise discipline. Moderate and balance.",
+        "career": "Creative action roles benefit. Art, entertainment, and beauty-related competitive work excels. Pure physical or military tasks lose focus.",
+        "relationships": "Romantic passion peaks. Physical attraction dominates interactions. Creative collaboration flows. But productive partnership work may stall in pleasure.",
+        "timing_quality": "mixed"
+      },
+      "saturn": {
+        "relationship": "neutral",
+        "theme": "Martial energy obstructed by Saturnian delay — action impulses meet walls of resistance and forced patience for these hours",
+        "effects": [
+          "Physical energy meets immovable obstacles; the desire to act is blocked by bureaucratic, structural, or karmic limitations",
+          "Frustration peaks as Mars wants speed and Saturn enforces patience; this friction can create intense irritability",
+          "Karmic action patterns surface; old action-consequences return for processing during this compressed window"
+        ],
+        "health": "Pitta-vata clash. Joint inflammation meets bone stiffness. Injury risk from frustrated force. Lower back tension. Grounding and slow stretching help.",
+        "career": "Action plans stall in bureaucracy. Physical work encounters structural obstacles. Patience with delays is essential — forcing creates lasting damage.",
+        "relationships": "Elderly or authority figures obstruct your action agenda. Karmic relationship patterns demand patience. Aggression toward delays damages bonds.",
+        "timing_quality": "challenging"
+      },
+      "rahu": {
+        "relationship": "neutral",
+        "theme": "Martial energy diverted by Rahu's illusions — action impulses chase unconventional or possibly deceptive targets for hours",
+        "effects": [
+          "Action energy redirects toward unusual or foreign targets; the Mars SD agenda shifts to unexpected territory",
+          "Unconventional competitive strategies appear promising but may be based on incomplete information",
+          "Risk of misdirected aggression — fighting the wrong battle or pursuing a goal that turns out to be illusory"
+        ],
+        "health": "Accident risk from distraction. Sleep disruption during action-oriented SD. Mysterious inflammation or injury. Verify safety before physical tasks.",
+        "career": "Technology-driven action opportunities. Foreign competitive environments. Verify all intelligence before acting — Rahu can make wrong targets look right.",
+        "relationships": "Unusual people provoke your competitive instincts. Foreign or unconventional relationship dynamics activate. Trust your long-term judgment over impulse.",
+        "timing_quality": "challenging"
+      },
+      "ketu": {
+        "relationship": "friend",
+        "theme": "Martial energy refined by Ketu's spiritual precision — action becomes targeted, minimalist, and karmically significant for these hours",
+        "effects": [
+          "Action becomes surgically precise; unnecessary effort falls away and only essential movement remains",
+          "Spiritual warrior energy activates; courage serves liberation rather than material gain during this brief window",
+          "Material action goals may lose motivation; the body is capable but the will questions whether the target is worth pursuing"
+        ],
+        "health": "Brief mysterious symptoms alongside high energy. Alternative healing for injuries is effective. Past injuries or surgical sites may ache temporarily.",
+        "career": "Research, investigation, and precision work excel. Broad competitive action stalls but targeted surgical strikes succeed. Closure tasks advance.",
+        "relationships": "Past action-based relationship patterns complete. Sibling karmic dynamics process. Detachment from competitive relationships feels freeing.",
+        "timing_quality": "mixed"
+      }
+    },
+    "mercury": {
+      "sun": {
+        "relationship": "friend",
+        "theme": "Intellectual energy empowered by solar authority — communication gains official weight and analytical confidence for these hours",
+        "effects": [
+          "Words and ideas carry authority; presentations, proposals, and official communications land with maximum impact",
+          "Analytical thinking gains confidence; intellectual work that was tentative becomes decisive and authoritative",
+          "Risk of intellectual arrogance; Mercury's analysis combined with Sun's ego can dismiss valid alternative perspectives"
+        ],
+        "health": "Nervous system activated under solar heat. Eye strain from concentrated intellectual work. Brief headaches from mental overwork. Stay hydrated.",
+        "career": "Official documentation, business proposals, and authoritative communication peak. Administrative intellect at its sharpest.",
+        "relationships": "Communication with authority figures flows well. Father-related intellectual discussions. Professional relationships benefit from your articulate authority.",
+        "timing_quality": "favorable"
+      },
+      "moon": {
+        "relationship": "enemy",
+        "theme": "Intellectual energy clouded by lunar emotions — analysis becomes moody and communication carries unintended emotional weight for hours",
+        "effects": [
+          "Thinking becomes emotionally colored; objective analysis is disrupted by feelings that insist on being included",
+          "Communication carries emotional undertones that may confuse or overwhelm recipients expecting pure logic",
+          "Intuition may actually improve intellect if you allow it, but the friction between head and heart creates brief confusion"
+        ],
+        "health": "Nervous system disturbed by emotional fluctuations. Digestive upset from stress. Sleep quality affected. Mental fatigue from head-heart conflict.",
+        "career": "Pure analytical work suffers but emotionally intelligent communication gains depth. Counseling and creative writing benefit. Business logic wavers.",
+        "relationships": "Words carry unintended emotional weight. Misunderstandings from mixing logic with feeling. Mother-related communication may cause confusion.",
+        "timing_quality": "challenging"
+      },
+      "mars": {
+        "relationship": "neutral",
+        "theme": "Intellectual energy sharpened by martial aggression — communication becomes cutting and analysis becomes competitive for these hours",
+        "effects": [
+          "Words become weapons; debates, arguments, and competitive analysis gain a sharp edge that can wound or win",
+          "Technical problem-solving accelerates as analytical patience combines with action urgency; but errors increase from rushing",
+          "Risk of verbal aggression; saying something analytically correct but emotionally destructive during this brief window"
+        ],
+        "health": "Nervous tension meets pitta heat. Headaches, jaw clenching, and hand strain from intense intellectual-physical output. Brief but intense.",
+        "career": "Competitive negotiations and technical debates peak. Analytical precision in engineering and technical fields. Risk of burning bridges with aggressive communication.",
+        "relationships": "Arguments sharpen into intellectual warfare. Sibling debates intensify. Words said during this Prana may carry lasting sting despite their brevity.",
+        "timing_quality": "mixed"
+      },
+      "mercury": {
+        "relationship": "same",
+        "theme": "Peak intellectual intensity — analytical power, verbal fluency, and information processing reach maximum concentration for these hours",
+        "effects": [
+          "Mental speed and verbal precision peak to their absolute maximum; complex calculations and intricate communications flow effortlessly",
+          "Information absorption and processing capacity doubles; reading, studying, and learning are extraordinarily efficient",
+          "Risk of mental overstimulation and nervous system overload; scattered attention from too many simultaneous ideas competing for expression"
+        ],
+        "health": "Maximum nervous system activation. Vata peaks sharply. Insomnia risk. Skin sensitivity. Digestive disruption from nervous energy. Must ground through food and rest.",
+        "career": "Peak window for intellectual output — writing, coding, calculating, presenting, negotiating. Quantity and quality of mental work at maximum.",
+        "relationships": "Conversations become rapid and intellectually stimulating but emotionally thin. Communication quantity peaks but depth may suffer.",
+        "timing_quality": "favorable"
+      },
+      "jupiter": {
+        "relationship": "neutral",
+        "theme": "Intellectual energy expanded by Jupiterian wisdom — analysis gains philosophical depth and strategic breadth for these hours",
+        "effects": [
+          "Thinking becomes simultaneously precise and expansive; details connect to larger patterns and meaning becomes visible",
+          "Educational and philosophical communication flows; teaching, learning, and knowledge-sharing feel natural and productive",
+          "Risk of over-philosophizing practical matters; Jupiter's expansion may dilute Mercury's precision into vague generalities"
+        ],
+        "health": "Balanced nervous and digestive system. Mental well-being improves. Tendency to skip meals when absorbed in philosophical intellectual work.",
+        "career": "Strategic planning, educational work, and philosophical analysis excel. Legal and advisory communication benefits. Publishing and teaching peak.",
+        "relationships": "Intellectual conversations gain warmth and wisdom. Teacher-student dynamics activate. Children's educational matters benefit from this window.",
+        "timing_quality": "favorable"
+      },
+      "venus": {
+        "relationship": "friend",
+        "theme": "Intellectual energy beautified by Venusian aesthetics — communication gains charm and analysis becomes creative for these hours",
+        "effects": [
+          "Words become beautiful; writing, speaking, and presenting gain an aesthetic quality that appeals to both mind and senses",
+          "Creative problem-solving peaks; analytical thinking merges with artistic vision to produce elegant solutions",
+          "Risk of prioritizing how ideas look over whether they are correct; style may overshadow substance briefly"
+        ],
+        "health": "Nervous system soothed by kapha. Skin improves. Creative expression releases tension. Voice quality improves. Overall pleasant physical state.",
+        "career": "Creative communication peaks. Marketing, design, writing, and artistic analysis excel. Business proposals gain visual and aesthetic appeal.",
+        "relationships": "Communication becomes charming and socially warm. Romantic conversations flow. Creative collaboration at its most productive and enjoyable.",
+        "timing_quality": "favorable"
+      },
+      "saturn": {
+        "relationship": "neutral",
+        "theme": "Intellectual energy structured by Saturnian discipline — analysis becomes thorough and methodical but slow for these hours",
+        "effects": [
+          "Thinking slows but deepens; quick intellectual leaps are replaced by careful, step-by-step logical progression",
+          "Administrative and bureaucratic communication tasks that require patience and thoroughness become manageable",
+          "Brief intellectual frustration from Saturn's slowness; Mercury wants speed but Saturn forces meticulous completeness"
+        ],
+        "health": "Nervous system under vata stress. Joint stiffness during desk work. Cold hands and mental fatigue. Warm drinks and movement breaks help.",
+        "career": "Accounting, auditing, legal documentation, and systematic analysis excel. Quick-turnaround intellectual tasks suffer from enforced thoroughness.",
+        "relationships": "Communication becomes formal and duty-bound. Elderly relatives need intellectual attention. Professional relationships benefit from thoroughness.",
+        "timing_quality": "mixed"
+      },
+      "rahu": {
+        "relationship": "friend",
+        "theme": "Intellectual energy amplified by Rahu's unconventional vision — innovative thinking and foreign knowledge streams open for these hours",
+        "effects": [
+          "Thinking breaks free of conventional patterns; innovative and unconventional solutions appear that would not occur under normal Mercury SD flow",
+          "Foreign or cross-cultural intellectual exchanges carry extra significance; technology-driven ideas gain traction",
+          "Risk of intellectual deception — either being deceived by misleading information or deceiving oneself with clever but false logic"
+        ],
+        "health": "Nervous system destabilized. Sleep disruption. Screen-related strain intensifies. Addictive information consumption patterns activate.",
+        "career": "Technology innovation, foreign trade communication, and unconventional business strategies peak. Verify all data — Rahu amplifies both insight and error.",
+        "relationships": "Unusual intellectual connections form. Foreign or online relationships carry extra weight. Verify the reliability of new information sources.",
+        "timing_quality": "mixed"
+      },
+      "ketu": {
+        "relationship": "enemy",
+        "theme": "Intellectual energy dissolved by Ketu's abstraction — analysis loses its object and communication becomes cryptic for these hours",
+        "effects": [
+          "Thinking loses practical grounding; intellectual focus diffuses into abstract or spiritual territory that resists articulation",
+          "Communication becomes unclear or mystical; others may find your words confusing or your logic hard to follow",
+          "Research into hidden or occult subjects gains depth, but practical business and analytical communication suffer"
+        ],
+        "health": "Nervous system quiets but in a disorienting way. Brief mental fog. Headaches from trying to force clarity. Rest the analytical mind.",
+        "career": "Practical intellectual tasks stall. Research, investigation, and spiritual study advance. Writing becomes poetic but less commercially useful.",
+        "relationships": "Communication gaps widen. Words fail to convey meaning. Silence may be more effective than forced conversation during this window.",
+        "timing_quality": "challenging"
+      }
+    },
+    "jupiter": {
+      "sun": {
+        "relationship": "friend",
+        "theme": "Wisdom energy empowered by solar authority — dharmic principles gain official recognition and personal confidence for these hours",
+        "effects": [
+          "Spiritual and ethical convictions gain authoritative expression; your wisdom carries the weight of genuine personal power",
+          "Authority figures support your expansive and educational initiatives; doors to influence open through merit and character",
+          "Risk of self-righteous confidence; wisdom combined with ego can become preachy or condescending during this brief window"
+        ],
+        "health": "Excellent vitality with sattva-pitta balance. Tendency to overcommit physically from optimistic energy assessment. Heart and eyes briefly sensitive.",
+        "career": "Leadership in educational, legal, and spiritual institutions peaks. Advisory and mentoring authority recognized. Government or institutional support for dharmic initiatives.",
+        "relationships": "Wise authority earns genuine respect. Father-guru axis activates. Relationships benefit from confident spiritual leadership.",
+        "timing_quality": "favorable"
+      },
+      "moon": {
+        "relationship": "friend",
+        "theme": "Wisdom energy nourished by lunar compassion — philosophical understanding gains emotional depth and public resonance for these hours",
+        "effects": [
+          "Wisdom becomes emotionally accessible rather than abstractly intellectual; teaching and guidance touch hearts not just minds",
+          "Compassion and philosophical understanding merge into genuine empathy; others feel understood at a deep level",
+          "Over-sentimentalizing wisdom; Jupiter's philosophy may drown in Moon's emotions, producing well-meaning but impractical guidance"
+        ],
+        "health": "Excellent emotional and physical well-being. Kapha comfort with sattva elevation. Tendency to overeat comfort food from contentment.",
+        "career": "Teaching, counseling, and spiritual guidance roles excel. Public speaking gains emotional resonance. Social work and caregiving carry wisdom.",
+        "relationships": "Deep emotional wisdom enhances all bonds. Mother-guru connection activates. Children benefit from wise nurturing. Marriage gains philosophical harmony.",
+        "timing_quality": "favorable"
+      },
+      "mars": {
+        "relationship": "friend",
+        "theme": "Wisdom energy activated by martial courage — dharmic convictions translate into bold action for these hours",
+        "effects": [
+          "Ethical courage peaks; willingness to fight for what is right combines with strategic wisdom about how to fight effectively",
+          "Physical energy serves expansive goals; property matters, legal battles, and educational initiatives advance through bold action",
+          "Risk of righteous aggression; Jupiter's moral certainty plus Mars's force can create crusading energy that harms rather than helps"
+        ],
+        "health": "Good vitality with pitta-sattva blend. Physical energy is high and well-directed. Tendency to overexert from dharmic enthusiasm.",
+        "career": "Legal battles advance favorably. Educational and institutional competition succeeds. Property and financial expansion through courageous initiative.",
+        "relationships": "Protective wisdom in relationships. Willingness to fight for loved ones' welfare. Sibling-guru dynamics activate. Dharmic action within family.",
+        "timing_quality": "favorable"
+      },
+      "mercury": {
+        "relationship": "enemy",
+        "theme": "Wisdom energy fragmented by Mercurial analysis — philosophical breadth is cut by intellectual criticism for these hours",
+        "effects": [
+          "Grand philosophical vision is challenged by analytical details; faith meets skepticism and both suffer from the collision",
+          "Communication about wisdom or guidance becomes over-complicated; simple truths get lost in excessive intellectual qualification",
+          "Teaching and advisory roles suffer as analytical precision undermines the confidence needed to guide others effectively"
+        ],
+        "health": "Nervous tension disrupts sattva balance. Digestive upset from intellectual stress. Liver sensitivity meets nervous agitation. Breathing exercises help.",
+        "career": "Educational and advisory communication becomes awkward. Teaching is over-detailed. Legal arguments become too complex. Simplify to regain effectiveness.",
+        "relationships": "Wisdom-sharing becomes pedantic. Others feel lectured rather than guided. Communication gaps between philosophical and practical minds.",
+        "timing_quality": "challenging"
+      },
+      "jupiter": {
+        "relationship": "same",
+        "theme": "Peak Jupiterian intensity — wisdom, expansion, and dharmic energy reach maximum concentration for these hours",
+        "effects": [
+          "Philosophical understanding and spiritual insight reach their absolute peak; genuine wisdom is accessible in this compressed window",
+          "Generosity, optimism, and faith in life surge; the impulse to share, teach, and bless others feels irresistible",
+          "Risk of over-expansion and unchecked optimism; promises, commitments, and plans made now may be too large for reality to sustain"
+        ],
+        "health": "Maximum sattva. Excellent well-being and contentment. Weight gain and liver sensitivity from overindulgence. Moderate rich food and celebrate vitality.",
+        "career": "Peak window for educational, legal, spiritual, and advisory work. Strategic planning at its most visionary. Publishing and teaching at maximum effectiveness.",
+        "relationships": "Benevolent wisdom radiates to all relationships. Children benefit most. Teacher-student bonds peak. Marriage gains sacred quality briefly.",
+        "timing_quality": "favorable"
+      },
+      "venus": {
+        "relationship": "enemy",
+        "theme": "Wisdom energy distracted by Venusian pleasure — philosophical focus scatters into aesthetic and sensory indulgence for these hours",
+        "effects": [
+          "Dharmic resolve softens into pleasure-seeking; the SD's wise agenda is temporarily hijacked by comfort and beauty desires",
+          "Teaching and guidance become entertainment rather than transformation; truth is diluted to be more palatable and attractive",
+          "Creative and artistic expression of wisdom may genuinely benefit; beauty and dharma can merge if intention remains clear"
+        ],
+        "health": "Kapha dominance. Rich food temptation intensifies. Reproductive energy draws attention away from spiritual pursuits. Sugar cravings peak.",
+        "career": "Educational entertainment and artistic spiritual work benefit. Pure scholarly and legal work suffers from distraction. Creative wisdom projects advance.",
+        "relationships": "Romantic feelings may override philosophical engagement. Spouse demands attention away from dharmic pursuits. Social pleasure competes with wisdom-sharing.",
+        "timing_quality": "mixed"
+      },
+      "saturn": {
+        "relationship": "neutral",
+        "theme": "Wisdom energy tested by Saturnian reality — philosophical optimism meets karmic limitation and duty for these hours",
+        "effects": [
+          "Expansive plans face structural reality checks; Saturn demands practical grounding for Jupiter's philosophical visions",
+          "Wisdom matures through encounter with limitation; the most practically applicable insights emerge from this friction",
+          "Brief pessimism or doubt about the SD's expansive agenda; Saturn's heaviness can temporarily crush Jupiter's optimism"
+        ],
+        "health": "Sattva meets tamas. Energy drops from the expansion high. Joint and bone sensitivity. Digestive slowdown. Warm food and moderate rest restore balance.",
+        "career": "Long-term institutional planning benefits from reality testing. Legal matters encounter procedural delays. Teaching requires extra patience with slow learners.",
+        "relationships": "Elderly relatives need attention. Wisdom must serve duty. Karmic relationship patterns test philosophical patience. Endurance replaces enthusiasm briefly.",
+        "timing_quality": "mixed"
+      },
+      "rahu": {
+        "relationship": "neutral",
+        "theme": "Wisdom energy destabilized by Rahu's illusions — philosophical certainty wavers as unconventional perspectives intrude for these hours",
+        "effects": [
+          "Faith and wisdom encounter doubt from unexpected directions; foreign philosophies or unconventional ideas challenge established beliefs",
+          "Expansion through unconventional channels — foreign education, technology-aided teaching, or cross-cultural wisdom exchange opens briefly",
+          "Risk of philosophical confusion; Rahu can make false teachings seem profound and genuine wisdom seem inadequate"
+        ],
+        "health": "Sleep disruption during a period of otherwise good vitality. Anxiety about philosophical or existential questions. Digestive irregularity.",
+        "career": "Foreign educational opportunities. Technology-enhanced teaching. Unconventional advisory roles. Verify the philosophical foundation before expanding into new territory.",
+        "relationships": "Foreign or unconventional relationship dynamics challenge your wisdom. Cross-cultural encounters test philosophical flexibility. Verify spiritual advisors' credentials.",
+        "timing_quality": "mixed"
+      },
+      "ketu": {
+        "relationship": "neutral",
+        "theme": "Wisdom energy transcended by Ketu's liberation — philosophical knowledge dissolves into direct spiritual experience for these hours",
+        "effects": [
+          "Book-learning gives way to direct knowing; intellectual philosophy is replaced by experiential spiritual insight",
+          "Detachment from the need to teach or guide others; wisdom becomes inward-facing and personally transformative",
+          "Material aspects of the Jupiter SD agenda (finance, legal, educational institutions) lose energy while spiritual depth increases"
+        ],
+        "health": "Brief mysterious symptoms alongside spiritual well-being. Alternative spiritual healing is effective. Past health patterns may flash and resolve.",
+        "career": "Institutional and material expansion pauses. Spiritual teaching deepens. Research into hidden knowledge advances. Worldly advisory roles lose motivation.",
+        "relationships": "Wisdom-based relationships become silent and contemplative. Teacher-student bonds transcend words. Desire for spiritual solitude within wisdom context.",
+        "timing_quality": "mixed"
+      }
+    },
+    "venus": {
+      "sun": {
+        "relationship": "enemy",
+        "theme": "Pleasure energy confronted by solar ego — creative and romantic flow is disrupted by authority demands for these hours",
+        "effects": [
+          "Creative and relationship energy is interrupted by official or ego-driven demands; beauty yields to power dynamics",
+          "Authority figures interfere with the Venus SD's pleasure and harmony agenda; romance meets duty or status concerns",
+          "Brief tension between what feels good and what authority or pride demands; the creative heart and the ambitious ego collide"
+        ],
+        "health": "Pitta disrupts kapha comfort. Heat and skin sensitivity in an otherwise comfortable SD. Eye strain. Heart palpitations possible from ego stress.",
+        "career": "Creative authority roles benefit, but pure creative freedom suffers under official constraints. Art meets administration uncomfortably.",
+        "relationships": "Ego clashes within romantic dynamics. Father figure interferes with relationship flow. Authority demands pull you away from partnership warmth.",
+        "timing_quality": "challenging"
+      },
+      "moon": {
+        "relationship": "enemy",
+        "theme": "Pleasure energy overwhelmed by lunar emotions — aesthetic appreciation drowns in emotional intensity for these hours",
+        "effects": [
+          "Emotional needs overwhelm the Venus SD's harmonious and aesthetic agenda; feelings demand attention that disrupts creative flow",
+          "Romantic energy becomes clingy or needy rather than charming; the desire for love transforms into fear of its absence",
+          "Creative work becomes emotionally loaded rather than aesthetically balanced; art serves catharsis rather than beauty"
+        ],
+        "health": "Kapha overload. Water retention. Emotional eating peaks. Skin breakouts from emotional stress. Reproductive sensitivity. Comfort food cravings intensify.",
+        "career": "Creative and beauty-related work becomes emotionally charged. Client relations suffer from emotional reactivity. Artistic output gains depth but loses polish.",
+        "relationships": "Emotional neediness disrupts romantic harmony. Mother figure interferes with partnership dynamics. Feelings overwhelm the charm that Venus SD normally provides.",
+        "timing_quality": "challenging"
+      },
+      "mars": {
+        "relationship": "neutral",
+        "theme": "Pleasure energy charged by martial passion — creative and romantic life gains intensity and physical urgency for these hours",
+        "effects": [
+          "Romantic and creative energy becomes physically intense; passion transforms from gentle warmth into urgent fire",
+          "Artistic work gains bold energy and physical dynamism; beauty combines with power in creative expression",
+          "Risk of aggressive pursuit of pleasure; romantic passion may become possessive; competitive dynamics enter creative work"
+        ],
+        "health": "Pitta-kapha activates reproductive system. Physical passion increases. Inflammation risk in reproductive organs. Channel energy constructively.",
+        "career": "Creative competition excels. Fashion, entertainment, and beauty industries benefit from bold action. Physical arts (dance, sculpture) peak.",
+        "relationships": "Sexual and romantic passion peaks. Physical attraction dominates. Risk of possessive jealousy. Passion is intense but brief — do not mistake it for lasting commitment.",
+        "timing_quality": "mixed"
+      },
+      "mercury": {
+        "relationship": "friend",
+        "theme": "Pleasure energy articulated by Mercurial intelligence — creative vision gains verbal precision and business acumen for these hours",
+        "effects": [
+          "Creative ideas become communicable; the aesthetic vision of Venus SD gains the words and logic to express itself effectively",
+          "Business aspects of creative work advance; art meets commerce successfully during this brief window",
+          "Romantic communication flows with both charm and intelligence; words of love are both beautiful and precisely meaningful"
+        ],
+        "health": "Good nervous-kapha balance. Mental stimulation with physical comfort. Skin and voice quality improve. Creative expression releases tension.",
+        "career": "Creative business peaks. Marketing, design communication, and artistic proposals succeed. Commerce and beauty merge profitably.",
+        "relationships": "Romantic conversations are witty, charming, and intellectually stimulating. Love letters and heartfelt communications flow effortlessly.",
+        "timing_quality": "favorable"
+      },
+      "jupiter": {
+        "relationship": "neutral",
+        "theme": "Pleasure energy expanded by Jupiterian generosity — creative and romantic life gains philosophical depth and abundance for these hours",
+        "effects": [
+          "Creative and pleasure-seeking energy gains a sense of meaning and purpose; beauty serves dharma and dharma appreciates beauty",
+          "Generosity in relationships and creative sharing increases; abundance consciousness elevates the Venus SD's material focus",
+          "Risk of overindulgence justified by philosophical rationalization; Jupiter can make excess seem wise"
+        ],
+        "health": "Excellent comfort and well-being. Rich food temptation at maximum. Liver sensitivity from indulgence. Weight gain risk. Moderate and enjoy mindfully.",
+        "career": "Luxury, entertainment, education, and creative institutions benefit. Art patronage and cultural work expand. Financial abundance in creative fields.",
+        "relationships": "Romantic generosity and warmth peak. Marriage gains sacred and philosophical dimension. Children benefit from creative nurturing. Social gatherings excel.",
+        "timing_quality": "favorable"
+      },
+      "venus": {
+        "relationship": "same",
+        "theme": "Peak Venusian intensity — beauty, pleasure, romance, and creative expression reach maximum concentration for these hours",
+        "effects": [
+          "Sensory pleasure and aesthetic appreciation reach their absolute peak; beauty in all forms is magnified and irresistible",
+          "Romantic and social charm at maximum; you radiate attraction and warmth that others find genuinely magnetic",
+          "Risk of total immersion in pleasure and beauty; productivity, discipline, and practical concerns vanish completely during this window"
+        ],
+        "health": "Maximum kapha. Reproductive system at peak sensitivity. Sugar and comfort food irresistible. Skin glows. Energy is comfortable but low-drive.",
+        "career": "Peak window for all creative, beauty, entertainment, and luxury work. Fashion, art, design, and relationship-based commerce at maximum.",
+        "relationships": "Romantic peak. Social popularity at maximum. All relationships benefit from warmth and charm. Wedding and celebration energy. Partnership harmony peaks.",
+        "timing_quality": "favorable"
+      },
+      "saturn": {
+        "relationship": "friend",
+        "theme": "Pleasure energy structured by Saturnian discipline — creative work gains patience, durability, and craftsmanship for these hours",
+        "effects": [
+          "Creative expression gains structural integrity; art becomes craft with patience and technique underlying the beauty",
+          "Romantic relationships encounter the question of commitment and long-term structure; duty enters the pleasure equation",
+          "Brief heaviness or melancholy within the otherwise pleasurable SD; Saturn reminds that all pleasure has a cost and a context"
+        ],
+        "health": "Kapha-vata friction. Joint stiffness during creative physical work. Cold sensitivity in an otherwise comfortable SD. Moderate rest needed.",
+        "career": "Craftsmanship and long-term creative projects benefit. Art that requires patience and technique advances. Administrative creative work succeeds.",
+        "relationships": "Commitment conversations in romantic relationships. Duty-based love expressions. Elderly figures enter relationship dynamics. Long-term partnership planning.",
+        "timing_quality": "mixed"
+      },
+      "rahu": {
+        "relationship": "friend",
+        "theme": "Pleasure energy amplified by Rahu's desire — creative and romantic life encounters unconventional and intensely attractive possibilities for hours",
+        "effects": [
+          "Desire for pleasure and beauty amplifies beyond normal bounds; unconventional or foreign aesthetic experiences become irresistible",
+          "Creative innovation through cross-cultural or technology-driven artistic expression; conventional beauty standards break and reform",
+          "Risk of addictive pleasure-seeking; Rahu amplifies Venus's desire nature to potentially harmful levels during this window"
+        ],
+        "health": "Addictive cravings peak. Substance and pleasure dependency risk at highest. Reproductive system overstimulated. Set firm boundaries before this Prana begins.",
+        "career": "Innovative creative work. Foreign or technology-driven art. Unconventional beauty and entertainment ventures. Verify financial commitments — Rahu inflates desire.",
+        "relationships": "Attraction to unusual or foreign partners intensifies. Existing relationships may feel insufficient. Desire amplification creates compelling but possibly illusory romantic prospects.",
+        "timing_quality": "mixed"
+      },
+      "ketu": {
+        "relationship": "friend",
+        "theme": "Pleasure energy transcended by Ketu's renunciation — sensory desire fades and spiritual beauty replaces material beauty for these hours",
+        "effects": [
+          "Material pleasure-seeking dissolves; the Venus SD's normally active desire nature quiets into contemplative appreciation",
+          "Spiritual art, sacred music, and transcendent beauty become deeply accessible; creativity serves liberation rather than enjoyment",
+          "Risk of premature renunciation within the pleasure context; Ketu may prematurely dissolve creative or romantic energy that still has purpose"
+        ],
+        "health": "Brief loss of appetite for pleasure. Mysterious reproductive or skin symptoms that resolve when Ketu Prana passes. Alternative beauty treatments effective.",
+        "career": "Material creative work stalls but spiritual art advances. Sacred music, devotional art, and contemplative creativity flow. Commercial beauty work loses motivation.",
+        "relationships": "Romantic attachment loosens. Spiritual connection replaces physical desire. Past relationship patterns complete. Forgiveness in romantic context flows naturally.",
+        "timing_quality": "mixed"
+      }
+    },
+    "saturn": {
+      "sun": {
+        "relationship": "enemy",
+        "theme": "Karmic discipline confronted by solar ego — duty and authority clash, creating friction and frustrated ambition for these hours",
+        "effects": [
+          "Saturn SD's patience and duty-consciousness is disrupted by sudden ego demands; the desire for recognition conflicts with the need for humility",
+          "Authority figures create additional pressure on an already burdened SD; official demands arrive at the worst possible timing",
+          "Brief but intense power struggle between acceptance (Saturn) and assertion (Sun); neither wins cleanly during this compressed window"
+        ],
+        "health": "Vata-pitta clash. Heart strain under karmic pressure. Blood pressure spikes from frustrated authority. Joint pain intensifies. Lower back and heart are vulnerable.",
+        "career": "Authority-karmic friction peaks. Boss or government creates additional obstacles. Official demands interrupt patient long-term work. Endure without reacting.",
+        "relationships": "Father figures become sources of karmic pressure. Authority clashes damage relationships. Ego demands from self or others strain the duty-bound SD context.",
+        "timing_quality": "challenging"
+      },
+      "moon": {
+        "relationship": "enemy",
+        "theme": "Karmic discipline overwhelmed by lunar emotions — duty becomes emotionally heavy and melancholy deepens for these hours",
+        "effects": [
+          "Emotional sensitivity intensifies Saturn's already heavy mood; melancholy deepens into genuine sadness or depression briefly",
+          "Duty toward mother or family creates emotional burden that feels insurmountable during this compressed window",
+          "Intuition shows the emotional cost of karmic patterns; awareness of suffering becomes acute but without clear resolution"
+        ],
+        "health": "Vata-kapha depression risk. Emotional heaviness manifests as physical fatigue. Water retention with cold stiffness. Mental health requires active care.",
+        "career": "Emotional burnout risk during duty-heavy SD. Administrative emotional labor intensifies. Public-facing duty roles feel exhausting. Take brief emotional breaks.",
+        "relationships": "Emotional burden from elderly family members. Mother-related karmic patterns surface with sadness. Relationships feel heavy with unprocessed emotional debt.",
+        "timing_quality": "challenging"
+      },
+      "mars": {
+        "relationship": "enemy",
+        "theme": "Karmic discipline clashes with martial impatience — frustration boils as enforced patience meets urgent action desire for these hours",
+        "effects": [
+          "Intense frustration as Mars demands action and Saturn enforces waiting; this is the most friction-generating combination at Prana level",
+          "Physical tension and aggression build against immovable obstacles; the body wants to fight but the karmic situation demands surrender",
+          "Risk of injury from forcing action against structural resistance; broken things — objects, relationships, or health — from frustrated force"
+        ],
+        "health": "Maximum physical tension. Joint inflammation meets muscular aggression. Injury risk from frustrated force. Blood pressure dangerous if Mars-Saturn afflicted natally.",
+        "career": "Maximum workplace frustration. Action plans blocked by bureaucracy. Physical labor encounters structural failures. Patience is the only viable strategy.",
+        "relationships": "Arguments from frustrated karmic patience. Aggressive reactions to duty-based restrictions. Sibling and authority figure conflicts reach peak intensity.",
+        "timing_quality": "challenging"
+      },
+      "mercury": {
+        "relationship": "friend",
+        "theme": "Karmic discipline supported by intellectual patience — methodical analysis and careful communication serve duty effectively for these hours",
+        "effects": [
+          "Analytical thinking supports Saturn SD's patience requirements; complex problems yield to step-by-step methodical approach",
+          "Communication becomes careful and precise; legal, administrative, and bureaucratic writing flows with appropriate thoroughness",
+          "Nervous tension may surface but Mercury's flexibility helps navigate Saturn's rigid structures without breaking"
+        ],
+        "health": "Nervous system under steady but manageable strain. Cold extremities from vata. Mental fatigue from meticulous work. Regular breaks and warm drinks help.",
+        "career": "Legal documentation, accounting, auditing, and administrative communication peak. Bureaucratic navigation becomes effective. Patience and precision combine.",
+        "relationships": "Communication about duty, obligation, and structure flows clearly. Elderly relatives respond to patient, careful words. Professional relationships benefit from thoroughness.",
+        "timing_quality": "favorable"
+      },
+      "jupiter": {
+        "relationship": "neutral",
+        "theme": "Karmic discipline illuminated by wisdom — duty finds meaning and patience is rewarded with philosophical insight for these hours",
+        "effects": [
+          "Saturn's heavy duty gains a sense of purpose and meaning through Jupiter's philosophical perspective",
+          "Elder wisdom and teacher guidance arrive to lighten the karmic load; institutional and legal support becomes available",
+          "Brief optimism within the otherwise heavy SD; Jupiter temporarily lifts the karmic weight, allowing a broader perspective"
+        ],
+        "health": "Sattva-tamas balance. Physical comfort improves slightly within Saturn SD. Digestive function improves. Brief respite from chronic heaviness.",
+        "career": "Institutional support for long-term projects. Legal matters advance favorably. Elder mentors provide guidance through bureaucratic challenges. Strategic patience pays.",
+        "relationships": "Wise elders provide comfort during karmic duty. Teacher-student bonds ease isolation. Marriage benefits from philosophical acceptance of difficulties.",
+        "timing_quality": "favorable"
+      },
+      "venus": {
+        "relationship": "friend",
+        "theme": "Karmic discipline softened by Venusian comfort — brief pleasure and beauty lighten the duty-heavy SD for these hours",
+        "effects": [
+          "Brief window of comfort and pleasure within Saturn's demanding schedule; beauty and human warmth ease karmic heaviness",
+          "Creative expression of duty — art, craft, and beauty emerge from disciplined work; aesthetics serve structure",
+          "Risk of using pleasure to escape duty; Venus Prana can become avoidance if the karmic work is abandoned for comfort"
+        ],
+        "health": "Kapha eases vata. Brief physical comfort, warmth, and relaxation. Skin and joint stiffness soften. Comfort food provides genuine temporary relief.",
+        "career": "Creative aspects of disciplined work benefit. Art craftsmanship, structured beauty work, and elegant administration succeed. Brief productive creative breaks.",
+        "relationships": "Romantic warmth provides genuine relief from karmic heaviness. Social connections ease isolation. Partnership support during difficult duties is deeply felt.",
+        "timing_quality": "favorable"
+      },
+      "saturn": {
+        "relationship": "same",
+        "theme": "Peak Saturnian intensity — karmic duty, patience, and structural endurance reach maximum concentration for these hours",
+        "effects": [
+          "Karmic density at absolute maximum; the full weight of duty, obligation, and structural reality presses down simultaneously",
+          "Extraordinary patience and endurance emerge from necessity; what must be done becomes crystal clear even if deeply unpleasant",
+          "Risk of despair, depression, and physical breakdown from concentrated karmic pressure; this is the heaviest possible Prana window"
+        ],
+        "health": "Maximum vata-tamas. Joint, bone, and structural body at peak vulnerability. Chronic conditions flare. Cold and heaviness dominate. Warm oil massage essential.",
+        "career": "Maximum duty and organizational demands. Bureaucratic and structural tasks at their heaviest. Only essential, unavoidable work should be attempted.",
+        "relationships": "Maximum karmic relationship weight. Elderly family duties peak. Isolation and loneliness at their most intense. Reach out for support despite the impulse to withdraw.",
+        "timing_quality": "challenging"
+      },
+      "rahu": {
+        "relationship": "neutral",
+        "theme": "Karmic discipline confused by Rahu's illusions — duty encounters unexpected twists and unconventional complications for these hours",
+        "effects": [
+          "The clear structure of Saturn SD is disrupted by unexpected and unconventional developments; rules change without warning",
+          "Foreign or technology-related complications enter the duty context; new variables make patient planning suddenly inadequate",
+          "Risk of abandoning disciplined patience in favor of Rahu's seemingly clever shortcuts; what looks like a solution may be a trap"
+        ],
+        "health": "Sleep disruption during already heavy SD. Anxiety about unexpected developments. Mysterious symptoms complicate chronic conditions. Grounding is essential.",
+        "career": "Bureaucratic surprises. Technology disrupts structured systems. Foreign complications in duty-based work. Maintain patience — Rahu's disruption is temporary.",
+        "relationships": "Unusual or foreign people create complications within karmic duty context. Trust long-term karmic understanding over Rahu's novel but unreliable impressions.",
+        "timing_quality": "challenging"
+      },
+      "ketu": {
+        "relationship": "neutral",
+        "theme": "Karmic discipline meets Ketu's liberation — duty that has served its purpose naturally completes and releases for these hours",
+        "effects": [
+          "Karmic obligations that are genuinely complete release naturally during this window; duties that were binding loosen without effort",
+          "Spiritual detachment from material duty brings genuine relief; Saturn's heaviness lifts as Ketu dissolves the attachment to outcomes",
+          "Risk of premature release of duties that still have karmic purpose; Ketu's dissolution may abandon responsibilities that Saturn still requires"
+        ],
+        "health": "Brief mysterious relief from chronic symptoms. Past karma-related health patterns flash and may resolve. Spiritual healing of structural body issues.",
+        "career": "Completion of long-standing structural tasks. Projects that were dragging reach natural endpoints. Retirement or role-release impulses surface.",
+        "relationships": "Karmic relationships reach completion points. Forgiveness of karmic debt becomes possible. Elderly relatives' burdens may lift or complete naturally.",
+        "timing_quality": "mixed"
+      }
+    },
+    "rahu": {
+      "sun": {
+        "relationship": "enemy",
+        "theme": "Illusory desire confronted by solar reality — Rahu's unconventional agenda is exposed under Sun's harsh light for these hours",
+        "effects": [
+          "Authority figures or official scrutiny exposes the unconventional nature of Rahu SD's agenda; what was hidden becomes visible",
+          "Ego conflicts arise from the collision of conventional authority and Rahu's boundary-breaking tendencies",
+          "Brief clarity about what is genuine ambition versus Rahu-amplified desire; Sun burns away some of the maya temporarily"
+        ],
+        "health": "Pitta exposes hidden toxins. Eye and head sensitivity under Rahu's already destabilizing SD. Heart palpitations from authority-anxiety collision.",
+        "career": "Official scrutiny of unconventional methods. Authority demands conventional compliance. Technology or foreign ventures face regulatory attention.",
+        "relationships": "Authority figures question your unconventional relationships or choices. Ego clashes expose the unstable foundations of Rahu-driven connections.",
+        "timing_quality": "challenging"
+      },
+      "moon": {
+        "relationship": "enemy",
+        "theme": "Illusory desire amplified by lunar emotions — anxiety and emotional confusion reach peak intensity for these hours",
+        "effects": [
+          "Emotional confusion intensifies Rahu's already unstable SD energy; feelings become amplified, distorted, and unreliable as guides",
+          "Mother or family anxiety surfaces and intermingles with Rahu's restless desire; emotional security feels threatened from multiple directions",
+          "Vivid but misleading dreams or emotional impressions; the feeling-mind picks up signals but amplifies them beyond their actual significance"
+        ],
+        "health": "Maximum sleep disruption. Anxiety peaks. Emotional eating and addictive behaviors at their most tempting. Water retention with mysterious restlessness.",
+        "career": "Emotional confusion disrupts strategic unconventional planning. Public perception becomes unpredictable. Avoid emotional decisions about career moves.",
+        "relationships": "Emotional neediness combines with Rahu's restlessness to create suffocating or erratic relationship dynamics. Mother's anxiety amplifies your own.",
+        "timing_quality": "challenging"
+      },
+      "mars": {
+        "relationship": "enemy",
+        "theme": "Illusory desire ignited by martial aggression — unconventional pursuits become dangerously aggressive and impulsive for these hours",
+        "effects": [
+          "Rahu's already boundary-breaking energy gains Mars's aggression; risk-taking escalates to reckless levels during this window",
+          "Accidents, injuries, and conflicts from impulsive action on poorly verified information; Rahu's illusion plus Mars's force creates danger",
+          "Technology or foreign situations become conflict zones; competitive aggression in unconventional territories creates enemies"
+        ],
+        "health": "Highest accident and injury risk across all Rahu Prana combinations. Inflammation, toxin exposure, and violence risk. Exercise extreme caution with physical activities.",
+        "career": "Reckless competitive moves in unconventional markets. Technology conflicts. Foreign business disputes. Delay all aggressive action until this Prana passes.",
+        "relationships": "Aggression damages unconventional relationships. Foreign or unusual connections become adversarial. Trust no one who encourages reckless action during this window.",
+        "timing_quality": "challenging"
+      },
+      "mercury": {
+        "relationship": "friend",
+        "theme": "Illusory desire channeled through intellectual innovation — unconventional ideas find articulate expression and business application for hours",
+        "effects": [
+          "Rahu's unconventional vision gains Mercury's ability to communicate and systematize; innovative ideas become actionable plans",
+          "Foreign knowledge, technology solutions, and cross-cultural communication flow with unusual effectiveness",
+          "Risk of clever deception — either being intellectually manipulated or using intelligence to manipulate others during this window"
+        ],
+        "health": "Nervous system highly stimulated. Screen addiction risk peaks. Sleep disruption from intellectual excitement. Ground through physical movement.",
+        "career": "Technology innovation and foreign trade communication peak. Unconventional business strategies gain intellectual backing. Verify all data despite excitement.",
+        "relationships": "Intellectual connection with unusual or foreign contacts strengthens. Online and technology-mediated relationships advance. Verify intentions behind charming communication.",
+        "timing_quality": "favorable"
+      },
+      "jupiter": {
+        "relationship": "neutral",
+        "theme": "Illusory desire meets philosophical wisdom — unconventional pursuits encounter ethical questioning and possible dharmic redirection for hours",
+        "effects": [
+          "Jupiter's wisdom briefly challenges Rahu's maya; philosophical perspective reveals whether the unconventional pursuit serves genuine growth or mere desire",
+          "Educational and institutional support for foreign or technology ventures becomes available if the underlying intention is dharmic",
+          "Risk of using philosophical justification to validate Rahu's desires; Jupiter's generosity can be co-opted to enable rather than correct excess"
+        ],
+        "health": "Brief optimism within Rahu's otherwise anxious SD. Digestive improvement. Philosophical acceptance eases restlessness temporarily. Moderate indulgence tendency.",
+        "career": "Foreign educational opportunities. Technology meets institutional support. Philosophical validation of innovative ventures if they have genuine merit.",
+        "relationships": "Teacher or elder guidance about unconventional relationships. Philosophical perspective on foreign connections. Wisdom filters Rahu's relationship illusions.",
+        "timing_quality": "mixed"
+      },
+      "venus": {
+        "relationship": "friend",
+        "theme": "Illusory desire harmonized with Venusian pleasure — unconventional beauty and foreign luxury become irresistibly attractive for these hours",
+        "effects": [
+          "Desire for unconventional pleasure, foreign luxury, and exotic beauty reaches its most compelling expression",
+          "Creative innovation in arts, entertainment, and beauty industries gains both Rahu's vision and Venus's aesthetic grace",
+          "Maximum temptation for addictive pleasure — substance use, compulsive spending, and romantic obsession at their most seductive"
+        ],
+        "health": "Addictive pleasure-seeking at peak. Reproductive system overstimulated. Skin reactions from exotic substances. Set firm boundaries before this window.",
+        "career": "Foreign luxury markets, innovative entertainment, and unconventional beauty ventures thrive. Creative innovation at its most commercially attractive.",
+        "relationships": "Attraction to exotic, foreign, or unconventional partners at maximum intensity. Existing relationships feel boring by comparison. Desire amplification is temporary.",
+        "timing_quality": "mixed"
+      },
+      "saturn": {
+        "relationship": "friend",
+        "theme": "Illusory desire structured by Saturnian discipline — unconventional ambition gains patience and practical framework for these hours",
+        "effects": [
+          "Rahu's restless desire temporarily gains Saturn's ability to plan, structure, and patiently execute; chaos becomes strategy",
+          "Foreign or technology ventures benefit from disciplined implementation; unconventional ideas meet practical execution capacity",
+          "Brief heaviness or delay dampens Rahu's excitement but produces more realistic and sustainable plans"
+        ],
+        "health": "Restlessness meets heaviness — an uncomfortable but grounding combination. Joint stiffness. Anxiety settles into dull worry. Warm grounding activities help.",
+        "career": "Strategic implementation of unconventional plans. Technology infrastructure work. Foreign ventures gain structural foundation. Patience with innovative projects.",
+        "relationships": "Unconventional relationships face the commitment question. Foreign connections encounter structural reality. Long-term viability of unusual bonds becomes testable.",
+        "timing_quality": "favorable"
+      },
+      "rahu": {
+        "relationship": "same",
+        "theme": "Peak Rahu intensity — illusion, desire, and unconventional energy reach maximum concentration for these hours",
+        "effects": [
+          "Maya at absolute maximum; reality becomes completely unreliable and desire amplifies beyond all proportion",
+          "Maximum innovation potential combined with maximum deception risk; breakthroughs and breakdowns equally possible",
+          "Complete loss of conventional bearings; nothing is as it seems; all information must be verified after this Prana passes"
+        ],
+        "health": "Maximum anxiety, insomnia, and addictive vulnerability. Mysterious symptoms at their most intense. Toxic exposure risk. Strict sobriety and grounding essential.",
+        "career": "Maximum innovation potential with maximum risk. Technology breakthroughs or technology disasters equally likely. Commit to nothing permanent during this window.",
+        "relationships": "Maximum attraction to the unconventional and foreign. Maximum deception risk in relationships. Trust absolutely no new commitment made during this Prana.",
+        "timing_quality": "challenging"
+      },
+      "ketu": {
+        "relationship": "neutral",
+        "theme": "Illusory desire cancelled by Ketu's renunciation — Rahu's worldly obsession suddenly dissolves into spiritual emptiness for these hours",
+        "effects": [
+          "The Rahu-Ketu axis activates at Prana level; worldly desire and spiritual detachment collide in a disorienting but potentially liberating flash",
+          "Unconventional pursuits suddenly feel meaningless; the drive that powered the Rahu SD temporarily loses its object and motivation",
+          "Genuine spiritual insight possible if the disorientation is accepted; what was maya can become vidya (true knowledge) in this compressed window"
+        ],
+        "health": "Disorientation and energy dissolution. Brief but intense dissociation possible. Mysterious symptoms. Meditation and spiritual practice are the only effective remedies.",
+        "career": "All unconventional pursuits pause. Worldly ambition dissolves. Research and spiritual investigation replace material innovation. Let it pass without forcing.",
+        "relationships": "Attraction dissolves. Foreign and unconventional connections lose their compelling quality. Past-life relationship dynamics flash through the Rahu context.",
+        "timing_quality": "mixed"
+      }
+    },
+    "ketu": {
+      "sun": {
+        "relationship": "neutral",
+        "theme": "Spiritual detachment meets solar self-assertion — ego briefly re-enters the Ketu SD's renunciation context for these hours",
+        "effects": [
+          "Brief flash of ego-awareness within Ketu's otherwise egoless SD; the self remembers its worldly identity and authority",
+          "Authority figures or official matters demand attention despite the SD's inward-facing spiritual orientation",
+          "Tension between spiritual detachment and worldly responsibility; the soul wants liberation but the personality has unfinished business"
+        ],
+        "health": "Brief pitta flare within vata-dominant SD. Eye sensitivity and headache. Energy surges then dissolves quickly. Do not overcommit during the energy spike.",
+        "career": "Official matters demand brief attention. Authority-related unfinished business surfaces. Handle quickly and return to Ketu SD's inward orientation.",
+        "relationships": "Father figure or authority demands attention within the retreat context. Ego conflicts surface briefly in otherwise detached relationships.",
+        "timing_quality": "mixed"
+      },
+      "moon": {
+        "relationship": "neutral",
+        "theme": "Spiritual detachment floods with lunar emotions — feelings surface intensely within the renunciation context for these hours",
+        "effects": [
+          "Emotions break through Ketu's detachment barrier; feelings that were being transcended return with unexpected intensity",
+          "Mother-related memories or needs surface within the spiritual process; karmic emotional bonds demand attention",
+          "Tears, nostalgia, and deep feeling emerge from the stillness of Ketu SD; this emotional surfacing can be healing if allowed"
+        ],
+        "health": "Emotional release manifests physically. Tears, fatigue, and old emotional patterns discharge through the body. Allow without resisting.",
+        "career": "Material productivity pauses further as emotions demand processing. Creative and emotional closure work advances. Rest and integrate.",
+        "relationships": "Mother-related karmic emotions surface for healing. Past emotional bonds flash through awareness. Deep forgiveness becomes possible through emotional release.",
+        "timing_quality": "mixed"
+      },
+      "mars": {
+        "relationship": "friend",
+        "theme": "Spiritual detachment energized by martial precision — inner warrior activates for targeted karmic action for these hours",
+        "effects": [
+          "Ketu's dissolution gains Mars's surgical precision; spiritual practice becomes intensely focused and powerful",
+          "Past-life warrior energy activates; courage to face karmic fears and spiritual obstacles surges briefly",
+          "Physical energy returns briefly to an otherwise low-energy SD; channel it into spiritual discipline rather than worldly action"
+        ],
+        "health": "Brief energy surge within Ketu's depleted context. Past injury or surgical sites may pulse. Alternative healing of old wounds is effective. Channel energy carefully.",
+        "career": "Research and investigation sharpen. Spiritual practice gains warrior-like intensity. Closure tasks receive decisive energy. Military or martial spiritual traditions activate.",
+        "relationships": "Courageous spiritual conversations. Willingness to sever karmic ties that need cutting. Sibling karma reaches decisive resolution points.",
+        "timing_quality": "favorable"
+      },
+      "mercury": {
+        "relationship": "enemy",
+        "theme": "Spiritual detachment disrupted by intellectual noise — the silent depth of Ketu SD is disturbed by mental chatter for these hours",
+        "effects": [
+          "Analytical thinking disrupts meditative silence; the mind demands logical answers to questions that exist beyond logic",
+          "Communication attempts break the spiritual isolation in ways that may be either helpful reconnection or harmful distraction",
+          "Intellectual doubt challenges spiritual certainty; Mercury's skepticism questions Ketu's faith-based detachment"
+        ],
+        "health": "Nervous system disrupts spiritual quiet. Mental noise creates headaches. Skin sensitivity. Sleep pattern confusion as mind and spirit pull in different directions.",
+        "career": "Practical intellectual demands interrupt spiritual process. Business communication feels jarring. Research may advance but contemplative depth suffers.",
+        "relationships": "Communication creates misunderstanding in the detachment context. Words feel inadequate to express spiritual experience. Others find your speech confusing.",
+        "timing_quality": "challenging"
+      },
+      "jupiter": {
+        "relationship": "neutral",
+        "theme": "Spiritual detachment illuminated by wisdom — Ketu's blind dissolution gains philosophical clarity and purpose for these hours",
+        "effects": [
+          "Spiritual experience gains intellectual framework; what was formless insight receives meaningful structure from Jupiter's wisdom",
+          "Teacher or guru connection strengthens within the moksha context; guidance for the spiritual journey arrives",
+          "Risk of intellectualizing spiritual experience; Jupiter's philosophical understanding may replace Ketu's direct knowing with concepts"
+        ],
+        "health": "Sattva elevates the spiritual process. Brief physical comfort within otherwise ascetic SD. Tendency to break spiritual diet with rich food.",
+        "career": "Spiritual teaching ability peaks. Philosophical writing about transcendent experience flows. Religious and educational institutions offer support for spiritual work.",
+        "relationships": "Guru-disciple bond deepens. Spiritual community connections strengthen. Philosophical companionship eases the isolation of Ketu SD's detachment.",
+        "timing_quality": "favorable"
+      },
+      "venus": {
+        "relationship": "friend",
+        "theme": "Spiritual detachment discovers sacred beauty — renunciation and aesthetic appreciation merge into devotional art for these hours",
+        "effects": [
+          "Beauty becomes a doorway to the divine; Ketu's spiritual dissolution finds expression through Venus's aesthetic sensitivity",
+          "Devotional art, sacred music, and transcendent beauty become deeply accessible; creativity serves moksha",
+          "Risk of pleasure-seeking re-entering the renunciation context; Venus may seduce the soul back toward material attachment"
+        ],
+        "health": "Brief comfort and sensory pleasure within austere SD. Skin and reproductive system reactivate. Sacred food and drink nourish without attachment.",
+        "career": "Sacred art, devotional music, and spiritual aesthetics peak. Beauty-as-prayer flows naturally. Commercial creative work loses relevance.",
+        "relationships": "Devotional love (bhakti) replaces romantic love. Spiritual companionship through shared beauty. Past romantic karma completes through aesthetic release.",
+        "timing_quality": "favorable"
+      },
+      "saturn": {
+        "relationship": "friend",
+        "theme": "Spiritual detachment grounded by Saturnian discipline — the liberation process gains patient endurance and karmic structure for these hours",
+        "effects": [
+          "Saturn's discipline supports Ketu's spiritual process; tapas and structured meditation gain patient endurance during this window",
+          "Karmic duties that align with the liberation path surface and integrate naturally; service becomes sadhana",
+          "Physical grounding through Saturn steadies Ketu's otherwise disorienting dissolution; the spiritual process gains a solid foundation"
+        ],
+        "health": "Grounding energy enters the fatigued SD. Joint and bone awareness but with structural support. Warm oil massage and slow walking ground the spiritual body.",
+        "career": "Disciplined spiritual practice deepens. Temple duties and elder service feel purposeful. Structured karma yoga advances the moksha agenda.",
+        "relationships": "Elderly family members become spiritual companions in duty. Karmic service bonds gain sacred quality. Patient endurance in relationships as spiritual practice.",
+        "timing_quality": "favorable"
+      },
+      "rahu": {
+        "relationship": "neutral",
+        "theme": "Spiritual detachment confronted by worldly desire — Rahu-Ketu axis activates and maya flickers through the moksha process for these hours",
+        "effects": [
+          "Worldly desires suddenly resurge within the spiritual detachment context; what was renounced becomes temporarily compelling again",
+          "The Rahu-Ketu axis activates creating disorientation between material and spiritual poles; neither world feels fully real",
+          "Potential for genuine insight into the nature of maya if the disorientation is witnessed rather than identified with"
+        ],
+        "health": "Sleep and reality disruption. Mysterious symptoms. Anxiety about spiritual progress. Old addictive patterns flash through memory. Ground and observe.",
+        "career": "Worldly ambition flickers within renunciation. Foreign or unconventional opportunities appear but fit poorly with the spiritual SD context. Let them pass.",
+        "relationships": "Past worldly relationship desires resurface. Foreign or unusual connections tempt from the spiritual path. Witness without acting on temporary desire resurgence.",
+        "timing_quality": "challenging"
+      },
+      "ketu": {
+        "relationship": "same",
+        "theme": "Peak Ketu intensity — spiritual dissolution, detachment, and moksha energy reach maximum concentration for these hours",
+        "effects": [
+          "Maximum spiritual depth and worldly dissolution; the material world becomes almost completely transparent during this compressed window",
+          "Past-life memories, karmic completion, and genuine liberation experiences are possible in this most concentrated Ketu moment",
+          "Risk of complete disconnection from practical reality; others may find you utterly unreachable; physical safety awareness drops to minimum"
+        ],
+        "health": "Maximum mysterious symptoms. Complete energy withdrawal from physical body. Dissociation risk. Ensure physical safety. Do not operate machinery or drive.",
+        "career": "Complete material withdrawal. No worldly productivity possible or advisable. Deep meditation and karmic processing are the only appropriate activities.",
+        "relationships": "Complete relational withdrawal. Absolute spiritual solitude. Others cannot reach you and should not try. Past-life relationship patterns process at deepest level.",
+        "timing_quality": "mixed"
+      }
+    }
+  },
+  "interpretation_guidelines": {
+    "level_context": "Prana Dasha (Level 5) effects last from approximately 1 hour to 2 days. They do not create independent life events; they momentarily color the Sookshma Dasha's day-level energy with the Prana lord's breath-signature.",
+    "combined_reading": "Always read Prana effects within the context of MD > AD > PD > SD. The Prana lord is the fifth and subtlest layer — its influence is real but ultra-brief. It determines the momentary quality of experience within the SD's day-level agenda.",
+    "planetary_friendship": "Friend Prana lords support the SD theme, creating hours of flow and ease. Enemy Prana lords create brief friction, confusion, or scattered energy. Same lord combinations reach peak intensity. Neutral combinations provide distinct but non-conflicting micro-energy.",
+    "practical_use": "Prana Dasha is most useful for: (1) choosing the best hours within a day for specific activities, (2) understanding why mood or energy shifts suddenly within an otherwise stable SD period, (3) fine-tuning muhurta by layering Prana lord quality onto electional charts.",
+    "strength_assessment": "Consider the Prana lord's natal strength (dignity, aspects, house placement) to determine whether effects manifest positively or negatively. A well-placed Prana lord delivers its positive effects; an afflicted one triggers the negative manifestations.",
+    "timing_peaks": "Effects are strongest during the first third of the Prana period and during the Prana lord's own vara (weekday) and hora. Night hours mute solar Prana; day hours mute lunar Prana.",
+    "remedial_principle": "Due to the ultra-brief duration, elaborate remedies are impractical. The most effective approach is awareness — knowing which Prana is active allows conscious alignment with its energy rather than unconscious reaction against it."
+  }
+}

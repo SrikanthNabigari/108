@@ -12,6 +12,8 @@ import 'package:one_zero_eight/features/chart/widgets/dosha_detail_panel.dart';
 import 'package:one_zero_eight/features/chart/widgets/strength_detail_panel.dart';
 import 'package:one_zero_eight/features/chart/widgets/house_detail_panel.dart';
 import 'package:one_zero_eight/features/chart/widgets/soul_purpose_detail_panel.dart';
+import 'package:one_zero_eight/features/chart/widgets/planet_info_panel.dart';
+import 'package:one_zero_eight/features/chart/widgets/ashtakavarga_panel.dart';
 
 /// "Your Chart" screen — the WHO layer.
 ///
@@ -107,6 +109,8 @@ class _ChartScreenState extends ConsumerState<ChartScreen> {
           _buildDoshasSection(),
           const SizedBox(height: S.xl),
           _buildStrengthSection(),
+          const SizedBox(height: S.xl),
+          _buildAshtakavargaSection(),
           const SizedBox(height: S.xl),
           _buildSoulPurposeSection(),
           const SizedBox(height: S.xl),
@@ -657,19 +661,87 @@ class _ChartScreenState extends ConsumerState<ChartScreen> {
       children: [
         _sectionLabel('Strength', 'Shadbala'),
         const SizedBox(height: S.sm),
-        SizedBox(
-          height: 110,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemCount: planets.length,
-            separatorBuilder: (_, __) => const SizedBox(width: S.sm),
-            itemBuilder: (_, idx) {
-              final p = planets[idx] as Map<String, dynamic>;
-              return _strengthCard(p);
-            },
+        GlassContainer(
+          padding: const EdgeInsets.all(S.md),
+          blur: 0,
+          child: Column(
+            children: planets.map((p) {
+              final data = p as Map<String, dynamic>;
+              return _strengthRow(data);
+            }).toList(),
           ),
         ),
       ],
+    );
+  }
+
+  Widget _strengthRow(Map<String, dynamic> data) {
+    final name = data['planet'] as String? ?? '';
+    final grade = (data['grade'] as String? ?? 'average').toLowerCase();
+    final total = (data['total_shadbala'] as num?)?.toDouble() ?? 0.5;
+    final color = planetColor(name);
+    final gradeColor = grade == 'very_strong' || grade == 'strong'
+        ? C.positive
+        : grade == 'average'
+            ? C.warning
+            : C.negative;
+    final barWidth = (total / 2.0).clamp(0.0, 1.0);
+
+    return GestureDetector(
+      onTap: () => StrengthDetailPanel.show(context, data: data),
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 6),
+        child: Row(
+          children: [
+            Text(planetGlyph(name),
+                style: TextStyle(fontSize: 14, color: color)),
+            const SizedBox(width: 6),
+            SizedBox(
+              width: 64,
+              child: Text(
+                planetName(name),
+                style: T.caption.copyWith(color: C.textPrimary, fontSize: 11),
+              ),
+            ),
+            Expanded(
+              child: ClipRRect(
+                borderRadius: R.smBr,
+                child: SizedBox(
+                  height: 6,
+                  child: LinearProgressIndicator(
+                    value: barWidth,
+                    backgroundColor: C.glassBorder,
+                    valueColor: AlwaysStoppedAnimation<Color>(color),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(width: 6),
+            Container(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: S.xs, vertical: 1),
+              decoration: BoxDecoration(
+                color: gradeColor.withValues(alpha: 0.15),
+                borderRadius: R.xlBr,
+              ),
+              child: Text(
+                grade.replaceAll('_', ' ').toUpperCase(),
+                style: TextStyle(
+                  fontSize: 8,
+                  color: gradeColor,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 0.5,
+                ),
+              ),
+            ),
+            const SizedBox(width: 4),
+            GestureDetector(
+              onTap: () => PlanetInfoPanel.show(context, planetId: name),
+              child: Icon(Icons.info_outline, size: 14, color: C.textMuted),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -742,6 +814,55 @@ class _ChartScreenState extends ConsumerState<ChartScreen> {
           ],
         ),
       ),
+    );
+  }
+
+  // ===============================================================
+  // ASHTAKAVARGA — bindu grid entry point
+  // ===============================================================
+
+  Widget _buildAshtakavargaSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _sectionLabel('Ashtakavarga', 'Bindu Grid'),
+        const SizedBox(height: S.sm),
+        GestureDetector(
+          onTap: () => AshtakavargaPanel.show(context),
+          child: GlassContainer(
+            padding: const EdgeInsets.all(S.md),
+            blur: 0,
+            child: Row(
+              children: [
+                Container(
+                  width: 36,
+                  height: 36,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: C.accent.withValues(alpha: 0.12),
+                  ),
+                  child: const Icon(Icons.grid_on, color: C.accent, size: 18),
+                ),
+                const SizedBox(width: S.md),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('View Bindu Grid',
+                          style: T.bodySm.copyWith(
+                              color: C.textPrimary, fontWeight: FontWeight.w600)),
+                      Text('7 planets x 12 signs strength matrix',
+                          style: T.caption.copyWith(fontSize: 10)),
+                    ],
+                  ),
+                ),
+                Icon(Icons.chevron_right,
+                    color: C.textMuted.withValues(alpha: 0.5), size: 20),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -839,8 +960,8 @@ class _ChartScreenState extends ConsumerState<ChartScreen> {
   // ===============================================================
 
   Widget _buildGemsSection() {
-    final gems =
-        _gemsData?['recommendations'] as List? ?? _demoGemsList;
+    final gems = _gemsData?['recommendations'] as List? ?? _demoGemsList;
+    final contraindicated = (_gemsData?['contraindicated'] as List?) ?? [];
     if (gems.isEmpty) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -855,24 +976,131 @@ class _ChartScreenState extends ConsumerState<ChartScreen> {
         ],
       );
     }
+
+    final primary = gems[0] as Map<String, dynamic>;
+    final secondary = gems.length > 1 ? gems.sublist(1) : <dynamic>[];
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _sectionLabel('Gems & Remedies', '${gems.length} recommended'),
         const SizedBox(height: S.sm),
-        SizedBox(
-          height: 100,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            itemCount: gems.length,
-            separatorBuilder: (_, __) => const SizedBox(width: S.sm),
-            itemBuilder: (_, idx) {
-              final gem = gems[idx] as Map<String, dynamic>;
-              return _gemCard(gem);
-            },
+        // Primary gem — full-width card
+        _primaryGemCard(primary),
+        // Secondary gems
+        if (secondary.isNotEmpty) ...[
+          const SizedBox(height: S.sm),
+          SizedBox(
+            height: 80,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemCount: secondary.length,
+              separatorBuilder: (_, __) => const SizedBox(width: S.sm),
+              itemBuilder: (_, idx) =>
+                  _gemCard(secondary[idx] as Map<String, dynamic>),
+            ),
           ),
-        ),
+        ],
+        // Contraindicated warning
+        if (contraindicated.isNotEmpty) ...[
+          const SizedBox(height: S.sm),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(horizontal: S.md, vertical: S.sm),
+            decoration: BoxDecoration(
+              borderRadius: R.mdBr,
+              color: C.negative.withValues(alpha: 0.05),
+              border: Border.all(color: C.negative.withValues(alpha: 0.2), width: 0.5),
+            ),
+            child: Row(
+              children: [
+                const Icon(Icons.warning_amber_rounded, color: C.negative, size: 14),
+                const SizedBox(width: S.sm),
+                Expanded(
+                  child: Text(
+                    'Avoid: ${contraindicated.map((g) => g is Map ? g['gem'] ?? g : g).join(', ')}',
+                    style: T.caption.copyWith(color: C.negative, fontSize: 10),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ],
+    );
+  }
+
+  Widget _primaryGemCard(Map<String, dynamic> gem) {
+    final name = gem['gem'] as String? ?? gem['name'] as String? ?? '';
+    final planet = gem['planet'] as String? ?? '';
+    final finger = gem['finger'] as String? ?? '';
+    final day = gem['day'] as String? ?? '';
+    final metal = gem['metal'] as String? ?? '';
+    final color = planetColor(planet);
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(S.lg),
+      decoration: BoxDecoration(
+        borderRadius: R.lgBr,
+        color: color.withValues(alpha: 0.08),
+        border: Border.all(color: color.withValues(alpha: 0.25), width: 0.5),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 48,
+            height: 48,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: color.withValues(alpha: 0.15),
+              border: Border.all(color: color.withValues(alpha: 0.4)),
+            ),
+            child: Center(
+              child: Text(planetGlyph(planet),
+                  style: TextStyle(fontSize: 22, color: color)),
+            ),
+          ),
+          const SizedBox(width: S.md),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(name,
+                    style: T.bodySm.copyWith(
+                        color: C.textPrimary,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 14)),
+                const SizedBox(height: 2),
+                Text('For ${planetName(planet)}',
+                    style: T.caption.copyWith(color: color, fontSize: 11)),
+                const SizedBox(height: S.xs),
+                Row(
+                  children: [
+                    if (finger.isNotEmpty) ...[
+                      Icon(Icons.back_hand_outlined, size: 10, color: C.textMuted),
+                      const SizedBox(width: 3),
+                      Text(finger, style: T.caption.copyWith(fontSize: 10)),
+                      const SizedBox(width: S.md),
+                    ],
+                    if (day.isNotEmpty) ...[
+                      Icon(Icons.calendar_today, size: 10, color: C.textMuted),
+                      const SizedBox(width: 3),
+                      Text(day, style: T.caption.copyWith(fontSize: 10)),
+                      const SizedBox(width: S.md),
+                    ],
+                    if (metal.isNotEmpty) ...[
+                      Icon(Icons.circle, size: 10, color: C.textMuted),
+                      const SizedBox(width: 3),
+                      Text(metal, style: T.caption.copyWith(fontSize: 10)),
+                    ],
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -1123,19 +1351,19 @@ const Map<String, dynamic> _demoAtmakaraka = {
 
 const Map<String, dynamic> _demoGems = {
   'recommendations': [
-    {'gem': 'Diamond', 'planet': 'venus', 'finger': 'ring finger'},
-    {'gem': 'Emerald', 'planet': 'mercury', 'finger': 'little finger'},
-    {
-      'gem': 'Yellow Sapphire',
-      'planet': 'jupiter',
-      'finger': 'index finger'
-    },
+    {'gem': 'Diamond', 'planet': 'venus', 'finger': 'ring finger', 'day': 'Friday', 'metal': 'Silver'},
+    {'gem': 'Emerald', 'planet': 'mercury', 'finger': 'little finger', 'day': 'Wednesday', 'metal': 'Gold'},
+    {'gem': 'Yellow Sapphire', 'planet': 'jupiter', 'finger': 'index finger', 'day': 'Thursday', 'metal': 'Gold'},
+  ],
+  'contraindicated': [
+    {'gem': 'Blue Sapphire', 'planet': 'saturn'},
+    {'gem': 'Hessonite', 'planet': 'rahu'},
   ],
 };
 
 const List<Map<String, dynamic>> _demoGemsList = [
-  {'gem': 'Diamond', 'planet': 'venus', 'finger': 'ring finger'},
-  {'gem': 'Emerald', 'planet': 'mercury', 'finger': 'little finger'},
+  {'gem': 'Diamond', 'planet': 'venus', 'finger': 'ring finger', 'day': 'Friday', 'metal': 'Silver'},
+  {'gem': 'Emerald', 'planet': 'mercury', 'finger': 'little finger', 'day': 'Wednesday', 'metal': 'Gold'},
 ];
 
 // =================================================================

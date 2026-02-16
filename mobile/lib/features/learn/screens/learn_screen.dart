@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:one_zero_eight/core/theme/app_theme.dart';
+import 'package:one_zero_eight/data/services/knowledge_service.dart';
+import 'package:one_zero_eight/features/chart/widgets/nakshatra_info_panel.dart';
+import 'package:one_zero_eight/features/chart/widgets/planet_info_panel.dart';
+import 'package:one_zero_eight/shared/utils/planet_helpers.dart';
 import 'package:one_zero_eight/shared/widgets/ambient_background.dart';
 import 'package:one_zero_eight/shared/widgets/glass_container.dart';
-import 'package:one_zero_eight/shared/utils/planet_helpers.dart';
 
 /// Comprehensive Vedic Astrology guide — the full system explained.
 class LearnScreen extends StatelessWidget {
@@ -378,20 +381,36 @@ class _ExpandableSectionState extends State<_ExpandableSection>
 // SECTION 1: The 9 Planets
 // ════════════════════════════════════════════════════════════════
 
-class _PlanetsSection extends StatelessWidget {
+class _PlanetsSection extends StatefulWidget {
   const _PlanetsSection();
 
-  static const _planets = [
-    ('sun', 'Leo', 'Soul, Father, Authority', 'The king. Vitality, ego, government.'),
-    ('moon', 'Cancer', 'Mind, Mother, Emotions', 'The queen. Feelings, nurture, public.'),
-    ('mars', 'Aries, Scorpio', 'Energy, Siblings, Courage', 'The warrior. Action, aggression, land.'),
-    ('mercury', 'Gemini, Virgo', 'Intellect, Speech, Trade', 'The prince. Communication, analysis, skill.'),
-    ('jupiter', 'Sagittarius, Pisces', 'Wisdom, Children, Fortune', 'The guru. Expansion, dharma, wealth.'),
-    ('venus', 'Taurus, Libra', 'Love, Beauty, Wealth', 'The artist. Pleasure, luxury, marriage.'),
-    ('saturn', 'Capricorn, Aquarius', 'Karma, Discipline, Time', 'The judge. Restriction, structure, labor.'),
-    ('rahu', 'Acts like sign lord', 'Obsession, Foreign, Material', 'The amplifier. North node. Where you are going.'),
-    ('ketu', 'Acts like sign lord', 'Detachment, Spiritual, Past', 'The liberator. South node. Where you have been.'),
+  @override
+  State<_PlanetsSection> createState() => _PlanetsSectionState();
+}
+
+class _PlanetsSectionState extends State<_PlanetsSection> {
+  List<Map<String, dynamic>>? _planets;
+
+  static const _order = [
+    'sun', 'moon', 'mars', 'mercury', 'jupiter', 'venus', 'saturn', 'rahu', 'ketu'
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _load();
+  }
+
+  Future<void> _load() async {
+    final all = await KnowledgeService.instance.getAllPlanets();
+    // Sort by canonical order
+    final sorted = <Map<String, dynamic>>[];
+    for (final id in _order) {
+      final p = all.where((e) => e['id'] == id).firstOrNull;
+      if (p != null) sorted.add(p);
+    }
+    if (mounted) setState(() => _planets = sorted);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -406,12 +425,10 @@ class _PlanetsSection extends StatelessWidget {
           style: T.bodySm.copyWith(color: C.textSecondary, height: 1.5),
         ),
         const SizedBox(height: S.lg),
-        ..._planets.map((p) => _PlanetCard(
-              planet: p.$1,
-              rules: p.$2,
-              karaka: p.$3,
-              description: p.$4,
-            )),
+        if (_planets == null)
+          const Center(child: CircularProgressIndicator(strokeWidth: 2))
+        else
+          ..._planets!.map((p) => _buildPlanetCard(context, p)),
         const SizedBox(height: S.md),
         _InfoBox(
           color: C.rahu,
@@ -422,63 +439,107 @@ class _PlanetsSection extends StatelessWidget {
       ],
     );
   }
-}
 
-class _PlanetCard extends StatelessWidget {
-  final String planet;
-  final String rules;
-  final String karaka;
-  final String description;
+  Widget _buildPlanetCard(BuildContext context, Map<String, dynamic> p) {
+    final id = p['id'] as String;
+    final color = planetColor(id);
+    final sanskrit = p['sanskrit'] as String? ?? '';
+    final nature = p['nature'] as String? ?? '';
+    final owns = (p['owns_signs'] as List?)?.join(', ') ?? '';
+    final gem = p['gem'] as String? ?? '';
+    final karakas = (p['karaka_of'] as List?)?.take(4).join(', ') ?? '';
+    final exalted = p['exalted_in'] as String? ?? '';
+    final debilitated = p['debilitated_in'] as String? ?? '';
 
-  const _PlanetCard({
-    required this.planet,
-    required this.rules,
-    required this.karaka,
-    required this.description,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final color = planetColor(planet);
-    return Container(
-      margin: const EdgeInsets.only(bottom: S.sm),
-      padding: const EdgeInsets.all(S.md),
-      decoration: BoxDecoration(
-        borderRadius: R.mdBr,
-        color: color.withValues(alpha: 0.04),
-        border: Border.all(color: color.withValues(alpha: 0.15)),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(planetGlyph(planet),
-              style: TextStyle(fontSize: 24, color: color)),
-          const SizedBox(width: S.md),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Text(planetName(planet),
-                        style: T.bodySm.copyWith(
-                            color: color, fontWeight: FontWeight.w600)),
-                    const SizedBox(width: S.sm),
-                    Text('Rules: $rules',
+    return GestureDetector(
+      onTap: () => PlanetInfoPanel.show(context, planetId: id),
+      child: Container(
+        margin: const EdgeInsets.only(bottom: S.sm),
+        padding: const EdgeInsets.all(S.md),
+        decoration: BoxDecoration(
+          borderRadius: R.mdBr,
+          color: color.withValues(alpha: 0.04),
+          border: Border.all(color: color.withValues(alpha: 0.15)),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(planetGlyph(id),
+                style: TextStyle(fontSize: 24, color: color)),
+            const SizedBox(width: S.md),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Text(planetName(id),
+                          style: T.bodySm.copyWith(
+                              color: color, fontWeight: FontWeight.w600)),
+                      const SizedBox(width: S.xs),
+                      Text(sanskrit,
+                          style: T.caption
+                              .copyWith(color: C.textMuted, fontSize: 10)),
+                      const Spacer(),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 6, vertical: 1),
+                        decoration: BoxDecoration(
+                          borderRadius: R.smBr,
+                          color: nature == 'benefic'
+                              ? C.positive.withValues(alpha: 0.12)
+                              : C.negative.withValues(alpha: 0.12),
+                        ),
+                        child: Text(nature,
+                            style: T.caption.copyWith(
+                                fontSize: 9,
+                                color: nature == 'benefic'
+                                    ? C.positive
+                                    : C.negative)),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 4),
+                  if (owns.isNotEmpty)
+                    Text('Rules $owns',
                         style: T.caption
-                            .copyWith(color: C.textMuted, fontSize: 10)),
-                  ],
-                ),
-                const SizedBox(height: 2),
-                Text(karaka,
-                    style: T.caption.copyWith(color: C.textSecondary, fontSize: 11)),
-                const SizedBox(height: 4),
-                Text(description,
-                    style: T.caption.copyWith(color: C.textMuted, fontSize: 11, height: 1.4)),
-              ],
+                            .copyWith(color: C.textSecondary, fontSize: 11)),
+                  if (karakas.isNotEmpty)
+                    Text(karakas,
+                        style: T.caption.copyWith(
+                            color: C.textMuted, fontSize: 11, height: 1.3)),
+                  const SizedBox(height: 4),
+                  Row(
+                    children: [
+                      if (gem.isNotEmpty) ...[
+                        Icon(Icons.diamond_outlined,
+                            size: 10, color: color.withValues(alpha: 0.6)),
+                        const SizedBox(width: 2),
+                        Text(gem,
+                            style: T.caption
+                                .copyWith(color: color, fontSize: 10)),
+                        const SizedBox(width: S.md),
+                      ],
+                      if (exalted.isNotEmpty)
+                        Text('Ex: $exalted',
+                            style: T.caption.copyWith(
+                                color: C.positive, fontSize: 10)),
+                      if (exalted.isNotEmpty && debilitated.isNotEmpty)
+                        const SizedBox(width: S.sm),
+                      if (debilitated.isNotEmpty)
+                        Text('Db: $debilitated',
+                            style: T.caption.copyWith(
+                                color: C.negative, fontSize: 10)),
+                      const Spacer(),
+                      Icon(Icons.chevron_right,
+                          size: 14, color: C.textMuted.withValues(alpha: 0.5)),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -488,23 +549,15 @@ class _PlanetCard extends StatelessWidget {
 // SECTION 2: The 12 Houses
 // ════════════════════════════════════════════════════════════════
 
-class _HousesSection extends StatelessWidget {
+class _HousesSection extends StatefulWidget {
   const _HousesSection();
 
-  static const _houses = [
-    ('1st', 'Lagna', 'Self, body, personality, appearance'),
-    ('2nd', 'Dhana', 'Wealth, family, speech, stored money'),
-    ('3rd', 'Sahaja', 'Siblings, courage, short travel, skills'),
-    ('4th', 'Sukha', 'Mother, home, property, education'),
-    ('5th', 'Putra', 'Children, intelligence, creativity'),
-    ('6th', 'Ari', 'Enemies, disease, daily work, debt'),
-    ('7th', 'Yuvati', 'Marriage, partnerships, business'),
-    ('8th', 'Randhra', 'Death, transformation, hidden things'),
-    ('9th', 'Dharma', 'Fortune, father, guru, religion'),
-    ('10th', 'Karma', 'Career, status, public image'),
-    ('11th', 'Labha', 'Gains, income, friends, wishes'),
-    ('12th', 'Vyaya', 'Losses, foreign lands, spirituality'),
-  ];
+  @override
+  State<_HousesSection> createState() => _HousesSectionState();
+}
+
+class _HousesSectionState extends State<_HousesSection> {
+  List<Map<String, dynamic>>? _houses;
 
   static const _categories = [
     ('Kendra', '1, 4, 7, 10', 'Pillars of life (strongest)', C.jupiter),
@@ -513,6 +566,17 @@ class _HousesSection extends StatelessWidget {
     ('Upachaya', '3, 6, 10, 11', 'Growth through effort', C.saturn),
     ('Maraka', '2, 7', 'Death-inflicting houses', C.ketu),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    _load();
+  }
+
+  Future<void> _load() async {
+    final all = await KnowledgeService.instance.getAllHouses();
+    if (mounted) setState(() => _houses = all);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -527,36 +591,10 @@ class _HousesSection extends StatelessWidget {
           style: T.bodySm.copyWith(color: C.textSecondary, height: 1.5),
         ),
         const SizedBox(height: S.lg),
-        // House table
-        ..._houses.map((h) => Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: S.md, vertical: S.sm),
-              decoration: BoxDecoration(
-                border: Border(
-                    bottom: BorderSide(color: C.glassBorder, width: 0.5)),
-              ),
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: 40,
-                    child: Text(h.$1,
-                        style: T.bodySm.copyWith(
-                            color: C.accent, fontWeight: FontWeight.w600, fontSize: 12)),
-                  ),
-                  SizedBox(
-                    width: 56,
-                    child: Text(h.$2,
-                        style: T.caption
-                            .copyWith(color: C.textMuted, fontSize: 10)),
-                  ),
-                  Expanded(
-                    child: Text(h.$3,
-                        style: T.bodySm
-                            .copyWith(color: C.textPrimary, fontSize: 12)),
-                  ),
-                ],
-              ),
-            )),
+        if (_houses == null)
+          const Center(child: CircularProgressIndicator(strokeWidth: 2))
+        else
+          ..._houses!.map(_buildHouseRow),
         const SizedBox(height: S.xl),
         // Categories
         Text('HOUSE CATEGORIES',
@@ -598,26 +636,108 @@ class _HousesSection extends StatelessWidget {
       ],
     );
   }
+
+  static String _ordinal(int n) {
+    if (n == 1) return '1st';
+    if (n == 2) return '2nd';
+    if (n == 3) return '3rd';
+    return '${n}th';
+  }
+
+  Widget _buildHouseRow(Map<String, dynamic> h) {
+    final num = h['number'] as int? ?? 0;
+    final name = h['name'] as String? ?? '';
+    final sanskrit = h['sanskrit'] as String? ?? '';
+    final sigs = (h['significations'] as List?)?.take(4).join(', ') ?? '';
+    final bodyParts = (h['body_parts'] as List?)?.join(', ') ?? '';
+    final karakaStr = h['karaka'] as String? ?? '';
+    // karaka may be comma-separated (e.g. "mars,saturn")
+    final primaryKaraka = karakaStr.split(',').first.trim();
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: S.md, vertical: S.sm),
+      decoration: BoxDecoration(
+        border: Border(
+            bottom: BorderSide(color: C.glassBorder, width: 0.5)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              SizedBox(
+                width: 36,
+                child: Text(_ordinal(num),
+                    style: T.bodySm.copyWith(
+                        color: C.accent,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 12)),
+              ),
+              SizedBox(
+                width: 56,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(name,
+                        style: T.bodySm.copyWith(
+                            color: C.textPrimary, fontSize: 11)),
+                    Text(sanskrit,
+                        style: T.caption.copyWith(
+                            color: C.textMuted, fontSize: 9)),
+                  ],
+                ),
+              ),
+              if (primaryKaraka.isNotEmpty) ...[
+                Text(planetGlyph(primaryKaraka),
+                    style: TextStyle(
+                        fontSize: 12,
+                        color: planetColor(primaryKaraka))),
+                const SizedBox(width: S.xs),
+              ],
+              Expanded(
+                child: Text(sigs,
+                    style: T.bodySm.copyWith(
+                        color: C.textPrimary, fontSize: 11)),
+              ),
+            ],
+          ),
+          if (bodyParts.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.only(left: 36, top: 2),
+              child: Text('Body: $bodyParts',
+                  style: T.caption.copyWith(
+                      color: C.textMuted, fontSize: 9)),
+            ),
+        ],
+      ),
+    );
+  }
 }
 
 // ════════════════════════════════════════════════════════════════
 // SECTION 3: 27 Nakshatras
 // ════════════════════════════════════════════════════════════════
 
-class _NakshatrasSection extends StatelessWidget {
+class _NakshatrasSection extends StatefulWidget {
   const _NakshatrasSection();
 
-  static const _nakshatraData = [
-    ('Ketu', '7 yrs', 'Ashwini, Magha, Mula'),
-    ('Venus', '20 yrs', 'Bharani, P.Phalguni, P.Ashadha'),
-    ('Sun', '6 yrs', 'Krittika, U.Phalguni, U.Ashadha'),
-    ('Moon', '10 yrs', 'Rohini, Hasta, Shravana'),
-    ('Mars', '7 yrs', 'Mrigashira, Chitra, Dhanishtha'),
-    ('Rahu', '18 yrs', 'Ardra, Swati, Shatabhisha'),
-    ('Jupiter', '16 yrs', 'Punarvasu, Vishakha, P.Bhadrapada'),
-    ('Saturn', '19 yrs', 'Pushya, Anuradha, U.Bhadrapada'),
-    ('Mercury', '17 yrs', 'Ashlesha, Jyeshtha, Revati'),
-  ];
+  @override
+  State<_NakshatrasSection> createState() => _NakshatrasSectionState();
+}
+
+class _NakshatrasSectionState extends State<_NakshatrasSection> {
+  List<Map<String, dynamic>>? _nakshatras;
+
+  @override
+  void initState() {
+    super.initState();
+    _load();
+  }
+
+  Future<void> _load() async {
+    final all = await KnowledgeService.instance.getAllNakshatras();
+    if (mounted) setState(() => _nakshatras = all);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -632,78 +752,14 @@ class _NakshatrasSection extends StatelessWidget {
           style: T.bodySm.copyWith(color: C.textSecondary, height: 1.5),
         ),
         const SizedBox(height: S.lg),
-        Text('NAKSHATRA LORDS & DASHA PERIODS',
+        Text('ALL 27 NAKSHATRAS',
             style:
                 T.label.copyWith(color: C.textMuted, letterSpacing: 1.2)),
         const SizedBox(height: S.sm),
-        // Header
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: S.md, vertical: S.xs),
-          decoration: BoxDecoration(
-            color: C.glassBg,
-            border: Border(bottom: BorderSide(color: C.glassBorder)),
-          ),
-          child: Row(
-            children: [
-              SizedBox(
-                  width: 72,
-                  child: Text('Lord',
-                      style: T.label
-                          .copyWith(color: C.textMuted, fontSize: 10))),
-              SizedBox(
-                  width: 52,
-                  child: Text('Dasha',
-                      style: T.label
-                          .copyWith(color: C.textMuted, fontSize: 10))),
-              Expanded(
-                  child: Text('Nakshatras',
-                      style: T.label
-                          .copyWith(color: C.textMuted, fontSize: 10))),
-            ],
-          ),
-        ),
-        ..._nakshatraData.map((n) {
-          final pName = n.$1.toLowerCase();
-          final color = planetColor(pName);
-          return Container(
-            padding:
-                const EdgeInsets.symmetric(horizontal: S.md, vertical: S.sm),
-            decoration: BoxDecoration(
-              border:
-                  Border(bottom: BorderSide(color: C.glassBorder, width: 0.5)),
-            ),
-            child: Row(
-              children: [
-                SizedBox(
-                  width: 72,
-                  child: Row(
-                    children: [
-                      Text(planetGlyph(pName),
-                          style: TextStyle(fontSize: 14, color: color)),
-                      const SizedBox(width: 4),
-                      Text(n.$1,
-                          style: T.bodySm.copyWith(
-                              color: color,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 11)),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  width: 52,
-                  child: Text(n.$2,
-                      style:
-                          T.caption.copyWith(color: C.textSecondary, fontSize: 11)),
-                ),
-                Expanded(
-                  child: Text(n.$3,
-                      style: T.caption
-                          .copyWith(color: C.textPrimary, fontSize: 11)),
-                ),
-              ],
-            ),
-          );
-        }),
+        if (_nakshatras == null)
+          const Center(child: CircularProgressIndicator(strokeWidth: 2))
+        else
+          ..._nakshatras!.map((n) => _buildNakshatraRow(context, n)),
         const SizedBox(height: S.md),
         _InfoBox(
           color: C.moon,
@@ -712,6 +768,93 @@ class _NakshatrasSection extends StatelessWidget {
               'occupied by the Moon at birth.',
         ),
       ],
+    );
+  }
+
+  Widget _buildNakshatraRow(BuildContext context, Map<String, dynamic> n) {
+    final id = n['id'] as String? ?? '';
+    final name = n['name'] as String? ?? '';
+    final num = n['number'] as int? ?? 0;
+    final ruler = n['ruler'] as String? ?? '';
+    final deity = n['deity'] as String? ?? '';
+    final symbol = n['symbol'] as String? ?? '';
+    final shakti = n['shakti'] as String? ?? '';
+    final rulerColor = planetColor(ruler);
+
+    return GestureDetector(
+      onTap: () => NakshatraInfoPanel.show(context, nakshatraId: id),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: S.md, vertical: S.sm),
+        decoration: BoxDecoration(
+          border: Border(
+              bottom: BorderSide(color: C.glassBorder, width: 0.5)),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Number badge
+            Container(
+              width: 22,
+              height: 22,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: rulerColor.withValues(alpha: 0.12),
+              ),
+              child: Center(
+                child: Text('$num',
+                    style: T.caption.copyWith(
+                        color: rulerColor,
+                        fontSize: 9,
+                        fontWeight: FontWeight.w600)),
+              ),
+            ),
+            const SizedBox(width: S.sm),
+            // Name + ruler
+            Expanded(
+              flex: 3,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Flexible(
+                        child: Text(name,
+                            style: T.bodySm.copyWith(
+                                color: C.textPrimary,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 12),
+                            overflow: TextOverflow.ellipsis),
+                      ),
+                      const SizedBox(width: S.xs),
+                      Text(planetGlyph(ruler),
+                          style: TextStyle(
+                              fontSize: 11, color: rulerColor)),
+                    ],
+                  ),
+                  Text('$deity  |  $symbol',
+                      style: T.caption.copyWith(
+                          color: C.textMuted, fontSize: 10),
+                      overflow: TextOverflow.ellipsis),
+                ],
+              ),
+            ),
+            // Shakti (truncated)
+            Expanded(
+              flex: 4,
+              child: Text(shakti,
+                  style: T.caption.copyWith(
+                      color: C.textSecondary,
+                      fontSize: 10,
+                      height: 1.3),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis),
+            ),
+            Icon(Icons.chevron_right,
+                size: 14,
+                color: C.textMuted.withValues(alpha: 0.4)),
+          ],
+        ),
+      ),
     );
   }
 }

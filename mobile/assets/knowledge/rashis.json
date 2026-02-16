@@ -1,0 +1,232 @@
+{
+  "rashis": {
+    "aries": {
+      "id": "aries",
+      "name": "Aries",
+      "sanskrit": "मेष (Mesha)",
+      "number": 1,
+      "symbol": "♈ (Ram)",
+      "element": "fire",
+      "quality": "movable",
+      "gender": "masculine",
+      "ruler": "mars",
+      "exalted_planet": "sun",
+      "debilitated_planet": "saturn",
+      "direction": "east",
+      "body_part": "head",
+      "degrees": {
+        "start": 0,
+        "end": 30
+      }
+    },
+    "taurus": {
+      "id": "taurus",
+      "name": "Taurus",
+      "sanskrit": "वृष (Vrisha)",
+      "number": 2,
+      "symbol": "♉ (Bull)",
+      "element": "earth",
+      "quality": "fixed",
+      "gender": "feminine",
+      "ruler": "venus",
+      "exalted_planet": "moon",
+      "debilitated_planet": null,
+      "direction": "south",
+      "body_part": "face",
+      "degrees": {
+        "start": 30,
+        "end": 60
+      }
+    },
+    "gemini": {
+      "id": "gemini",
+      "name": "Gemini",
+      "sanskrit": "मिथुन (Mithuna)",
+      "number": 3,
+      "symbol": "♊ (Twins)",
+      "element": "air",
+      "quality": "dual",
+      "gender": "masculine",
+      "ruler": "mercury",
+      "exalted_planet": "rahu",
+      "debilitated_planet": null,
+      "direction": "west",
+      "body_part": "arms",
+      "degrees": {
+        "start": 60,
+        "end": 90
+      }
+    },
+    "cancer": {
+      "id": "cancer",
+      "name": "Cancer",
+      "sanskrit": "कर्क (Karka)",
+      "number": 4,
+      "symbol": "♋ (Crab)",
+      "element": "water",
+      "quality": "movable",
+      "gender": "feminine",
+      "ruler": "moon",
+      "exalted_planet": "jupiter",
+      "debilitated_planet": "mars",
+      "direction": "north",
+      "body_part": "chest",
+      "degrees": {
+        "start": 90,
+        "end": 120
+      }
+    },
+    "leo": {
+      "id": "leo",
+      "name": "Leo",
+      "sanskrit": "सिंह (Simha)",
+      "number": 5,
+      "symbol": "♌ (Lion)",
+      "element": "fire",
+      "quality": "fixed",
+      "gender": "masculine",
+      "ruler": "sun",
+      "exalted_planet": null,
+      "debilitated_planet": null,
+      "direction": "east",
+      "body_part": "heart",
+      "degrees": {
+        "start": 120,
+        "end": 150
+      }
+    },
+    "virgo": {
+      "id": "virgo",
+      "name": "Virgo",
+      "sanskrit": "कन्या (Kanya)",
+      "number": 6,
+      "symbol": "♍ (Maiden)",
+      "element": "earth",
+      "quality": "dual",
+      "gender": "feminine",
+      "ruler": "mercury",
+      "exalted_planet": "mercury",
+      "debilitated_planet": "venus",
+      "direction": "south",
+      "body_part": "abdomen",
+      "degrees": {
+        "start": 150,
+        "end": 180
+      }
+    },
+    "libra": {
+      "id": "libra",
+      "name": "Libra",
+      "sanskrit": "तुला (Tula)",
+      "number": 7,
+      "symbol": "♎ (Scales)",
+      "element": "air",
+      "quality": "movable",
+      "gender": "masculine",
+      "ruler": "venus",
+      "exalted_planet": "saturn",
+      "debilitated_planet": "sun",
+      "direction": "west",
+      "body_part": "lower back",
+      "degrees": {
+        "start": 180,
+        "end": 210
+      }
+    },
+    "scorpio": {
+      "id": "scorpio",
+      "name": "Scorpio",
+      "sanskrit": "वृश्चिक (Vrishchika)",
+      "number": 8,
+      "symbol": "♏ (Scorpion)",
+      "element": "water",
+      "quality": "fixed",
+      "gender": "feminine",
+      "ruler": "mars",
+      "exalted_planet": "ketu",
+      "debilitated_planet": "moon",
+      "direction": "north",
+      "body_part": "genitals",
+      "degrees": {
+        "start": 210,
+        "end": 240
+      }
+    },
+    "sagittarius": {
+      "id": "sagittarius",
+      "name": "Sagittarius",
+      "sanskrit": "धनु (Dhanu)",
+      "number": 9,
+      "symbol": "♐ (Archer)",
+      "element": "fire",
+      "quality": "dual",
+      "gender": "masculine",
+      "ruler": "jupiter",
+      "exalted_planet": null,
+      "debilitated_planet": null,
+      "direction": "east",
+      "body_part": "thighs",
+      "degrees": {
+        "start": 240,
+        "end": 270
+      }
+    },
+    "capricorn": {
+      "id": "capricorn",
+      "name": "Capricorn",
+      "sanskrit": "मकर (Makara)",
+      "number": 10,
+      "symbol": "♑ (Goat-fish)",
+      "element": "earth",
+      "quality": "movable",
+      "gender": "feminine",
+      "ruler": "saturn",
+      "exalted_planet": "mars",
+      "debilitated_planet": "jupiter",
+      "direction": "south",
+      "body_part": "knees",
+      "degrees": {
+        "start": 270,
+        "end": 300
+      }
+    },
+    "aquarius": {
+      "id": "aquarius",
+      "name": "Aquarius",
+      "sanskrit": "कुम्भ (Kumbha)",
+      "number": 11,
+      "symbol": "♒ (Water-bearer)",
+      "element": "air",
+      "quality": "fixed",
+      "gender": "masculine",
+      "ruler": "saturn",
+      "exalted_planet": null,
+      "debilitated_planet": null,
+      "direction": "west",
+      "body_part": "ankles",
+      "degrees": {
+        "start": 300,
+        "end": 330
+      }
+    },
+    "pisces": {
+      "id": "pisces",
+      "name": "Pisces",
+      "sanskrit": "मीन (Mina)",
+      "number": 12,
+      "symbol": "♓ (Fishes)",
+      "element": "water",
+      "quality": "dual",
+      "gender": "feminine",
+      "ruler": "jupiter",
+      "exalted_planet": "venus",
+      "debilitated_planet": "mercury",
+      "direction": "north",
+      "body_part": "feet",
+      "degrees": {
+        "start": 330,
+        "end": 360
+      }
+    }
+  }
+}

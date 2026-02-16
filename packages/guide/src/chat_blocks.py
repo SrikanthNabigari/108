@@ -214,6 +214,9 @@ def _blocks_life_area(result: dict[str, Any], tool_input: dict[str, Any]) -> lis
 def _blocks_dasha(result: dict[str, Any]) -> list[dict[str, Any]]:
     maha = result.get("current_mahadasha", {})
     antar = result.get("current_antardasha", {})
+    sookshma = result.get("current_sookshma", {})
+    prana = result.get("current_prana", {})
+    deha = result.get("current_deha", {})
 
     if not maha:
         return []
@@ -230,6 +233,12 @@ def _blocks_dasha(result: dict[str, Any]) -> list[dict[str, Any]]:
                 "maha_end": maha.get("end"),
                 "antar_start": antar.get("start"),
                 "antar_end": antar.get("end"),
+                "sookshma": sookshma.get("lord", ""),
+                "sookshma_days_remaining": sookshma.get("days_remaining"),
+                "prana": prana.get("lord", ""),
+                "prana_days_remaining": prana.get("days_remaining"),
+                "deha": deha.get("lord", ""),
+                "deha_hours_remaining": deha.get("hours_remaining"),
             },
         },
     ]

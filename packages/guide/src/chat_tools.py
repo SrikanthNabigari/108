@@ -67,7 +67,7 @@ TOOL_DEFINITIONS: list[dict[str, Any]] = [
         "name": "get_current_dasha",
         "description": (
             "Get the current Vimshottari dasha periods (Mahadasha, Antardasha, "
-            "Pratyantardasha) with start/end dates and progress percentages."
+            "Pratyantardasha, Sookshma, Prana, Deha) with start/end dates and progress."
         ),
         "input_schema": {
             "type": "object",

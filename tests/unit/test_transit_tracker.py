@@ -11,6 +11,7 @@ from packages.context.src.transit_tracker import (
     _detect_retrograde_stations,
     _detect_sign_ingresses,
     _get_rashi,
+    get_nakshatra_transit_triggers,
     get_upcoming_triggers,
 )
 
@@ -383,3 +384,85 @@ class TestTransitTrackerFiltering:
         aspect_triggers = [t for t in results if t["type"] == "aspect"]
         for t in aspect_triggers:
             assert t["days_from_now"] >= 7, f"Aspect at day {t['days_from_now']}: {t['trigger']}"
+
+
+class TestNakshatraTransitTriggers:
+    """Tests for KP-style nakshatra transit triggers."""
+
+    def test_returns_list(self):
+        result = get_nakshatra_transit_triggers(
+            significator_planets=["saturn", "jupiter"],
+            start_date=datetime(2026, 3, 1),
+            end_date=datetime(2026, 4, 1),
+        )
+        assert isinstance(result, list)
+
+    def test_trigger_has_required_keys(self):
+        result = get_nakshatra_transit_triggers(
+            significator_planets=["saturn", "jupiter"],
+            start_date=datetime(2026, 3, 1),
+            end_date=datetime(2026, 4, 1),
+        )
+        required_keys = {"date", "planet", "nakshatra", "nakshatra_lord", "type", "precision"}
+        for trigger in result:
+            assert required_keys.issubset(
+                trigger.keys()
+            ), f"Missing keys: {required_keys - trigger.keys()}"
+
+    def test_sun_precision(self):
+        result = get_nakshatra_transit_triggers(
+            significator_planets=["saturn"],
+            start_date=datetime(2026, 3, 1),
+            end_date=datetime(2026, 4, 1),
+        )
+        sun_triggers = [t for t in result if t["planet"] == "sun"]
+        for t in sun_triggers:
+            assert t["precision"] == "~13 days"
+
+    def test_moon_precision(self):
+        result = get_nakshatra_transit_triggers(
+            significator_planets=["saturn"],
+            start_date=datetime(2026, 3, 1),
+            end_date=datetime(2026, 4, 1),
+        )
+        moon_triggers = [t for t in result if t["planet"] == "moon"]
+        for t in moon_triggers:
+            assert t["precision"] == "~1 day"
+
+    def test_empty_significators(self):
+        result = get_nakshatra_transit_triggers(
+            significator_planets=[],
+            start_date=datetime(2026, 3, 1),
+            end_date=datetime(2026, 4, 1),
+        )
+        assert result == []
+
+    def test_sorted_by_date(self):
+        result = get_nakshatra_transit_triggers(
+            significator_planets=["saturn", "jupiter"],
+            start_date=datetime(2026, 3, 1),
+            end_date=datetime(2026, 4, 1),
+        )
+        if len(result) >= 2:
+            dates = [t["date"] for t in result]
+            assert dates == sorted(dates)
+
+    def test_30_day_reasonable_count(self):
+        """Over 30 days with 2 significators, expect a reasonable number of triggers."""
+        result = get_nakshatra_transit_triggers(
+            significator_planets=["saturn", "jupiter"],
+            start_date=datetime(2026, 3, 1),
+            end_date=datetime(2026, 4, 1),
+        )
+        # Should have some triggers but not an unreasonable amount
+        assert len(result) > 0, "Should find at least some triggers in 30 days"
+        assert len(result) < 100, f"Too many triggers: {len(result)}"
+
+    def test_string_date_input(self):
+        """Should accept ISO date strings."""
+        result = get_nakshatra_transit_triggers(
+            significator_planets=["saturn"],
+            start_date="2026-03-01",
+            end_date="2026-04-01",
+        )
+        assert isinstance(result, list)

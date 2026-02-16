@@ -235,6 +235,30 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       color: C.sun,
                       onTap: () => context.push('/reports'),
                     ),
+                    _QuickAction(
+                      icon: Icons.access_time_filled,
+                      label: 'Muhurta',
+                      color: C.jupiter,
+                      onTap: () => context.push('/muhurta'),
+                    ),
+                    _QuickAction(
+                      icon: Icons.event_note,
+                      label: 'Events',
+                      color: C.moon,
+                      onTap: () => context.push('/events'),
+                    ),
+                    _QuickAction(
+                      icon: Icons.apps,
+                      label: 'D-Charts',
+                      color: C.mercury,
+                      onTap: () => context.push('/divisional'),
+                    ),
+                    _QuickAction(
+                      icon: Icons.psychology,
+                      label: 'KP Analysis',
+                      color: C.mars,
+                      onTap: () => context.push('/kp-analysis'),
+                    ),
                   ],
                 ),
 

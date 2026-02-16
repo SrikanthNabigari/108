@@ -26,7 +26,16 @@ from packages.core.src.knowledge_loader import (
     get_dasha_rules,
 )
 from packages.core.src.knowledge_loader import (
+    get_deha_dasha_effects as get_deha_dasha_effects_data,
+)
+from packages.core.src.knowledge_loader import (
+    get_prana_dasha_effects as get_prana_dasha_effects_data,
+)
+from packages.core.src.knowledge_loader import (
     get_pratyantardasha_effects as get_pratyantardasha_effects_data,
+)
+from packages.core.src.knowledge_loader import (
+    get_sookshma_dasha_effects as get_sookshma_dasha_effects_data,
 )
 
 # Module-level cache for dasha rules
@@ -369,6 +378,73 @@ def get_antardasha_sequence(
     return periods
 
 
+def _subdivide_dasha_period(
+    parent_lord: str, parent_start: datetime, parent_end: datetime
+) -> list[dict[str, Any]]:
+    """Subdivide a dasha period into 9 sub-periods using Vimshottari proportions.
+
+    This is the universal formula used at every level of the dasha hierarchy:
+    Mahadasha -> Antardasha -> Pratyantardasha -> Sookshma -> Prana -> Deha.
+    Each sub-period's duration is proportional to its lord's standard years / 120.
+
+    Args:
+        parent_lord: Planet ruling the parent period (must be valid planet)
+        parent_start: Start datetime of the parent period
+        parent_end: End datetime of the parent period
+
+    Returns:
+        List of 9 dictionaries, each containing:
+        - lord: Planet ruling the sub-period
+        - start_date: Start datetime of the sub-period
+        - end_date: End datetime of the sub-period
+        - years: Duration of the sub-period in years
+
+    Raises:
+        ValueError: If parent_lord is not a valid planet
+    """
+    dasha_years = _get_dasha_years()
+    dasha_sequence = _get_dasha_sequence()
+
+    if parent_lord not in dasha_years:
+        raise ValueError(f"Invalid dasha lord: {parent_lord}")
+
+    # Use ACTUAL parent duration from dates, not standard planet years.
+    actual_parent_days = (parent_end - parent_start).total_seconds() / 86400
+    actual_parent_years = actual_parent_days / 365.25
+
+    # Start sequence from parent lord
+    start_idx = dasha_sequence.index(parent_lord)
+
+    periods = []
+    current_date = parent_start
+
+    # Generate all 9 sub-periods
+    for i in range(9):
+        lord_idx = (start_idx + i) % 9
+        sub_lord = dasha_sequence[lord_idx]
+        sub_years = dasha_years[sub_lord]
+
+        # Sub-period gets a proportional share of the actual parent duration
+        # proportion = standard_years / 120 (sums to 1.0 across all 9 planets)
+        duration_years = (actual_parent_years * sub_years) / 120
+        duration_days = duration_years * 365.25
+
+        end_date = current_date + timedelta(days=duration_days)
+
+        periods.append(
+            {
+                "lord": sub_lord,
+                "start_date": current_date,
+                "end_date": end_date,
+                "years": duration_years,
+            }
+        )
+
+        current_date = end_date
+
+    return periods
+
+
 def get_pratyantardasha_sequence(
     antardasha_lord: str, antar_start: datetime, _antar_end: datetime
 ) -> list[dict[str, Any]]:
@@ -394,55 +470,79 @@ def get_pratyantardasha_sequence(
     Raises:
         ValueError: If antardasha_lord is not a valid planet
     """
-    dasha_years = _get_dasha_years()
-    dasha_sequence = _get_dasha_sequence()
+    return _subdivide_dasha_period(antardasha_lord, antar_start, _antar_end)
 
-    if antardasha_lord not in dasha_years:
-        raise ValueError(f"Invalid antardasha lord: {antardasha_lord}")
 
-    # Use ACTUAL antardasha duration from dates, not standard planet years.
-    # The standard years (e.g. Venus=20) represent the full Mahadasha period,
-    # but the actual AD is much shorter (e.g. Venus AD in Mercury MD = 2.83 yrs).
-    actual_antar_days = (_antar_end - antar_start).total_seconds() / 86400
-    actual_antar_years = actual_antar_days / 365.25
+def get_sookshma_dasha_sequence(
+    pratyantardasha_lord: str, pd_start: datetime, pd_end: datetime
+) -> list[dict[str, Any]]:
+    """Calculate Sookshma Dasha (level 4) periods within a Pratyantardasha.
 
-    # Start sequence from antardasha lord
-    start_idx = dasha_sequence.index(antardasha_lord)
+    Sookshma means 'subtle' -- these are fine subdivisions of the Pratyantardasha
+    period. Duration typically ranges from 5-25 days depending on the parent period.
 
-    periods = []
-    current_date = antar_start
+    Args:
+        pratyantardasha_lord: Planet ruling the Pratyantardasha
+        pd_start: Start datetime of the Pratyantardasha
+        pd_end: End datetime of the Pratyantardasha
 
-    # Generate all 9 pratyantardasha periods
-    for i in range(9):
-        lord_idx = (start_idx + i) % 9
-        pratyantar_lord = dasha_sequence[lord_idx]
-        pratyantar_years = dasha_years[pratyantar_lord]
+    Returns:
+        List of 9 dictionaries with lord, start_date, end_date, years.
 
-        # Pratyantardasha gets a proportional share of the actual AD duration
-        # proportion = standard_years / 120 (sums to 1.0 across all 9 planets)
-        duration_years = (actual_antar_years * pratyantar_years) / 120
-        duration_days = duration_years * 365.25
+    Raises:
+        ValueError: If pratyantardasha_lord is not a valid planet
+    """
+    return _subdivide_dasha_period(pratyantardasha_lord, pd_start, pd_end)
 
-        end_date = current_date + timedelta(days=duration_days)
 
-        periods.append(
-            {
-                "lord": pratyantar_lord,
-                "start_date": current_date,
-                "end_date": end_date,
-                "years": duration_years,
-            }
-        )
+def get_prana_dasha_sequence(
+    sookshma_lord: str, sd_start: datetime, sd_end: datetime
+) -> list[dict[str, Any]]:
+    """Calculate Prana Dasha (level 5) periods within a Sookshma Dasha.
 
-        current_date = end_date
+    Prana means 'life breath' -- these ultra-fine subdivisions typically last
+    from a few hours to about 5 days.
 
-    return periods
+    Args:
+        sookshma_lord: Planet ruling the Sookshma Dasha
+        sd_start: Start datetime of the Sookshma Dasha
+        sd_end: End datetime of the Sookshma Dasha
+
+    Returns:
+        List of 9 dictionaries with lord, start_date, end_date, years.
+
+    Raises:
+        ValueError: If sookshma_lord is not a valid planet
+    """
+    return _subdivide_dasha_period(sookshma_lord, sd_start, sd_end)
+
+
+def get_deha_dasha_sequence(
+    prana_lord: str, prana_start: datetime, prana_end: datetime
+) -> list[dict[str, Any]]:
+    """Calculate Deha Dasha (level 6) periods within a Prana Dasha.
+
+    Deha means 'body' -- these are the finest subdivisions in the Vimshottari
+    system, typically lasting from about 20 minutes to 14 hours.
+
+    Args:
+        prana_lord: Planet ruling the Prana Dasha
+        prana_start: Start datetime of the Prana Dasha
+        prana_end: End datetime of the Prana Dasha
+
+    Returns:
+        List of 9 dictionaries with lord, start_date, end_date, years.
+
+    Raises:
+        ValueError: If prana_lord is not a valid planet
+    """
+    return _subdivide_dasha_period(prana_lord, prana_start, prana_end)
 
 
 def get_current_dasha(
     birth_datetime: datetime, moon_longitude: float, query_datetime: datetime | None = None
 ) -> dict[str, Any] | None:
-    """Get current Mahadasha, Antardasha, and Pratyantardasha.
+    """Get current Mahadasha, Antardasha, Pratyantardasha, and Sookshma Dasha.
 
     Determines which dasha periods a native is currently experiencing at
     a given moment. If no query datetime is provided, uses current time.
@@ -457,6 +557,7 @@ def get_current_dasha(
         - mahadasha: {lord, start_date, end_date, years, days_remaining}
         - antardasha: {lord, start_date, end_date, years, days_remaining}
         - pratyantardasha: {lord, start_date, end_date, years, days_remaining}
+        - sookshma_dasha: {lord, start_date, end_date, years, days_remaining}
         - current_datetime: The query datetime used
 
         Returns None if query_datetime is outside the 120-year cycle from birth
@@ -533,6 +634,66 @@ def get_current_dasha(
             "days_remaining": days_remaining_pratyantar,
         }
 
+    # Get Sookshma Dashas for current Pratyantardasha
+    sookshma_data = None
+    if current_pratyantar:
+        sookshmas = get_sookshma_dasha_sequence(
+            current_pratyantar["lord"],
+            current_pratyantar["start_date"],
+            current_pratyantar["end_date"],
+        )
+        for sd in sookshmas:
+            if sd["start_date"] <= query_datetime < sd["end_date"]:
+                days_remaining_sookshma = (sd["end_date"] - query_datetime).total_seconds() / 86400
+                sookshma_data = {
+                    "lord": sd["lord"],
+                    "start_date": sd["start_date"],
+                    "end_date": sd["end_date"],
+                    "years": sd["years"],
+                    "days_remaining": days_remaining_sookshma,
+                }
+                break
+
+    # Get Prana Dashas for current Sookshma Dasha
+    prana_data = None
+    if sookshma_data:
+        pranas = get_prana_dasha_sequence(
+            sookshma_data["lord"],
+            sookshma_data["start_date"],
+            sookshma_data["end_date"],
+        )
+        for pr in pranas:
+            if pr["start_date"] <= query_datetime < pr["end_date"]:
+                days_remaining_prana = (pr["end_date"] - query_datetime).total_seconds() / 86400
+                prana_data = {
+                    "lord": pr["lord"],
+                    "start_date": pr["start_date"],
+                    "end_date": pr["end_date"],
+                    "years": pr["years"],
+                    "days_remaining": days_remaining_prana,
+                }
+                break
+
+    # Get Deha Dashas for current Prana Dasha
+    deha_data = None
+    if prana_data:
+        dehas = get_deha_dasha_sequence(
+            prana_data["lord"],
+            prana_data["start_date"],
+            prana_data["end_date"],
+        )
+        for dh in dehas:
+            if dh["start_date"] <= query_datetime < dh["end_date"]:
+                hours_remaining = (dh["end_date"] - query_datetime).total_seconds() / 3600
+                deha_data = {
+                    "lord": dh["lord"],
+                    "start_date": dh["start_date"],
+                    "end_date": dh["end_date"],
+                    "years": dh["years"],
+                    "hours_remaining": round(hours_remaining, 1),
+                }
+                break
+
     return {
         "mahadasha": {
             "lord": current_maha["lord"],
@@ -549,6 +710,9 @@ def get_current_dasha(
             "days_remaining": days_remaining_antar,
         },
         "pratyantardasha": pratyantar_data,
+        "sookshma_dasha": sookshma_data,
+        "prana_dasha": prana_data,
+        "deha_dasha": deha_data,
         "current_datetime": query_datetime,
     }
 
@@ -722,3 +886,59 @@ def get_pratyantardasha_effect(
     md_effects = effects_data.get(mahadasha_lord.lower(), {})
     ad_effects = md_effects.get(antardasha_lord.lower(), {})
     return ad_effects.get(pratyantardasha_lord.lower())
+
+
+def get_sookshma_dasha_effect(
+    pratyantardasha_lord: str, sookshma_lord: str
+) -> dict[str, Any] | None:
+    """Get effects for a specific Sookshma Dasha combination.
+
+    Retrieves interpretation for one of 81 possible PD-SD combinations (9x9).
+
+    Args:
+        pratyantardasha_lord: PD planet (parent period)
+        sookshma_lord: SD planet (current micro-period)
+
+    Returns:
+        Dictionary with effects including theme, effects, health, career,
+        relationships, timing_quality. None if not found.
+    """
+    effects_data = get_sookshma_dasha_effects_data()
+    pd_effects = effects_data.get(pratyantardasha_lord.lower(), {})
+    return pd_effects.get(sookshma_lord.lower())
+
+
+def get_prana_dasha_effect(sookshma_lord: str, prana_lord: str) -> dict[str, Any] | None:
+    """Get effects for a specific Prana Dasha combination.
+
+    Retrieves interpretation for one of 81 possible SD-Prana combinations (9x9).
+
+    Args:
+        sookshma_lord: SD planet (parent period)
+        prana_lord: Prana planet (current life-breath period)
+
+    Returns:
+        Dictionary with effects including theme, effects, health, career,
+        relationships, timing_quality. None if not found.
+    """
+    effects_data = get_prana_dasha_effects_data()
+    sd_effects = effects_data.get(sookshma_lord.lower(), {})
+    return sd_effects.get(prana_lord.lower())
+
+
+def get_deha_dasha_effect(prana_lord: str, deha_lord: str) -> dict[str, Any] | None:
+    """Get effects for a specific Deha Dasha combination.
+
+    Retrieves interpretation for one of 81 possible Prana-Deha combinations (9x9).
+
+    Args:
+        prana_lord: Prana planet (parent period)
+        deha_lord: Deha planet (current body-level period)
+
+    Returns:
+        Dictionary with effects including theme, effects, health, career,
+        relationships, timing_quality. None if not found.
+    """
+    effects_data = get_deha_dasha_effects_data()
+    prana_effects = effects_data.get(prana_lord.lower(), {})
+    return prana_effects.get(deha_lord.lower())

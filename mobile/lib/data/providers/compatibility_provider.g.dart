@@ -6,9 +6,10 @@ part of 'compatibility_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$checkCompatibilityHash() => r'a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4e5f6a1b2';
+String _$checkCompatibilityHash() =>
+    r'3c6317e83aff1461eb87221bb4dc1df01d93020f';
 
-/// Copied from [CheckCompatibility].
+/// See also [CheckCompatibility].
 @ProviderFor(CheckCompatibility)
 final checkCompatibilityProvider = AutoDisposeAsyncNotifierProvider<
     CheckCompatibility, CompatibilityModel?>.internal(

@@ -83,6 +83,7 @@ class _DashaDetailPanelState extends ConsumerState<DashaDetailPanel> {
           md: widget.mdLord,
           ad: widget.adLord,
           pd: widget.pdLord,
+          sd: widget.level == 'sd' ? widget.lord : null,
         ),
         fromJson: (json) => json as Map<String, dynamic>,
       );
@@ -99,6 +100,7 @@ class _DashaDetailPanelState extends ConsumerState<DashaDetailPanel> {
       case 'md': return 'Mahadasha';
       case 'ad': return 'Antardasha';
       case 'pd': return 'Pratyantardasha';
+      case 'sd': return 'Sookshma Dasha';
       default: return 'Period';
     }
   }
@@ -114,6 +116,10 @@ class _DashaDetailPanelState extends ConsumerState<DashaDetailPanel> {
       case 'pd':
         return 'A Pratyantardasha is the finest timing layer, lasting days to weeks. '
             'It triggers specific events within the sub-period.';
+      case 'sd':
+        return 'A Sookshma Dasha is the subtle micro-timing layer (Level 4), '
+            'lasting 1\u201325 days. It fine-tunes the Pratyantardasha\u2019s theme '
+            'with brief, specific planetary impulses.';
       default:
         return '';
     }
@@ -266,6 +272,7 @@ class _DashaDetailPanelState extends ConsumerState<DashaDetailPanel> {
     final pdData = _data?['pratyantardasha'] as Map<String, dynamic>?;
     final cross = _data?['cross_analysis'] as Map<String, dynamic>?;
     final areaScores = _data?['area_scores'] as Map<String, dynamic>?;
+    final bphs = _data?['bphs_analysis'] as Map<String, dynamic>?;
     // Relationship info
     final mdAdRel = _data?['md_ad_relationship'] as Map<String, dynamic>?;
     final adPdRel = _data?['ad_pd_relationship'] as Map<String, dynamic>?;
@@ -280,22 +287,25 @@ class _DashaDetailPanelState extends ConsumerState<DashaDetailPanel> {
         _buildEducationalCard(),
         const SizedBox(height: S.md),
 
+        // BPHS Chart Analysis section
+        if (bphs != null) ...[
+          _buildBphsSection(bphs),
+          const SizedBox(height: S.md),
+        ],
+
         // Relationship chip (AD→MD or PD→AD)
         if (widget.level == 'ad' && mdAdRel != null)
           _buildRelationshipChip(mdAdRel, widget.mdLord, widget.lord),
         if (widget.level == 'pd' && adPdRel != null && widget.adLord != null)
           _buildRelationshipChip(adPdRel, widget.adLord!, widget.lord),
 
-        // Dosha activation section — show activated doshas (period-specific)
-        // or natal doshas (chart-wide) as fallback
+        // Dosha activation — only shown when doshas are activated by
+        // THIS period's lords (per BPHS: doshas manifest during the
+        // dasha of their involved planets, not in every period)
         if ((_data?['activated_doshas'] as List?)?.isNotEmpty ?? false) ...[
           const SizedBox(height: S.md),
           _buildDoshaActivationSection(
               _data!['activated_doshas'] as List, activated: true),
-        ] else if ((_data?['natal_doshas'] as List?)?.isNotEmpty ?? false) ...[
-          const SizedBox(height: S.md),
-          _buildDoshaActivationSection(
-              _data!['natal_doshas'] as List, activated: false),
         ],
 
         // C. Theme quote
@@ -321,6 +331,224 @@ class _DashaDetailPanelState extends ConsumerState<DashaDetailPanel> {
 
         const SizedBox(height: S.xl),
       ],
+    );
+  }
+
+  // ── BPHS Chart Analysis ──
+
+  Widget _buildBphsSection(Map<String, dynamic> bphs) {
+    // Pick the right sub-object based on which level we're viewing
+    final Map<String, dynamic>? levelData;
+    switch (widget.level) {
+      case 'ad':
+        levelData = bphs['antardasha'] as Map<String, dynamic>?;
+      case 'pd':
+        levelData = bphs['pratyantardasha'] as Map<String, dynamic>?;
+      case 'sd':
+        levelData = bphs['sookshma'] as Map<String, dynamic>?;
+      default:
+        levelData = bphs['mahadasha'] as Map<String, dynamic>?;
+    }
+    final data = levelData ?? bphs['mahadasha'] as Map<String, dynamic>? ?? bphs;
+
+    final nature = (data['functional_nature'] as String? ?? 'neutral');
+    final houses = (data['houses_ruled'] as List?)?.cast<int>() ?? [];
+    final houseLabels = (data['house_labels'] as List?)?.cast<String>() ?? [];
+    final dignity = (data['dignity'] as String? ?? 'neutral');
+    final natalHouse = data['natal_house'] as int? ?? 0;
+    final aspects = (data['aspects_received'] as List?) ?? [];
+    final conjunctions = (data['conjunctions'] as List?) ?? [];
+    final yogas = (data['yogas'] as List?) ?? [];
+    final summary = data['summary'] as String? ?? '';
+    final prediction = data['prediction'] as String? ?? '';
+    final posRel = bphs['positional_relationship'] as String?;
+    final combQuality = bphs['combination_quality'] as String?;
+
+    final Color natureColor;
+    switch (nature) {
+      case 'yogakaraka': natureColor = C.positive;
+      case 'benefic': natureColor = C.positive;
+      case 'malefic': natureColor = C.negative;
+      case 'maraka': natureColor = C.negative;
+      default: natureColor = C.warning;
+    }
+
+    return GlassContainer(
+      padding: const EdgeInsets.all(S.md),
+      blur: 0,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Header
+          Row(
+            children: [
+              Icon(Icons.auto_graph, color: _color, size: 18),
+              const SizedBox(width: 6),
+              Text('Chart Analysis',
+                  style: T.bodySm.copyWith(
+                      color: C.textPrimary, fontWeight: FontWeight.w600)),
+            ],
+          ),
+          const SizedBox(height: S.sm),
+
+          // Nature + Dignity + Natal House chips
+          Wrap(
+            spacing: 6,
+            runSpacing: 4,
+            children: [
+              _bphsChip(nature.replaceAll('_', ' '), natureColor),
+              _bphsChip(dignity.replaceAll('_', ' '), C.textSecondary),
+              if (natalHouse > 0)
+                _bphsChip('House $natalHouse', C.accent),
+            ],
+          ),
+
+          // House lordships
+          if (houseLabels.isNotEmpty) ...[
+            const SizedBox(height: S.sm),
+            Wrap(
+              spacing: 6,
+              runSpacing: 4,
+              children: houseLabels.map((label) => Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: _color.withValues(alpha: 0.08),
+                  border: Border.all(color: _color.withValues(alpha: 0.2)),
+                ),
+                child: Text(label,
+                    style: T.caption.copyWith(color: _color, fontSize: 9)),
+              )).toList(),
+            ),
+          ],
+
+          // Positional relationship (MD-AD) — hide when no AD context
+          if (posRel != null && posRel != 'unknown' && combQuality != null && combQuality != 'unknown') ...[
+            const SizedBox(height: S.sm),
+            Row(
+              children: [
+                Container(
+                  width: 8, height: 8,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: combQuality == 'harmonious' ? C.positive
+                        : combQuality == 'challenging' ? C.negative
+                        : C.warning,
+                  ),
+                ),
+                const SizedBox(width: 6),
+                Expanded(
+                  child: Text(
+                    '${posRel[0].toUpperCase()}${posRel.substring(1)} \u2014 ${combQuality[0].toUpperCase()}${combQuality.substring(1)}',
+                    style: T.caption.copyWith(
+                      color: combQuality == 'harmonious' ? C.positive
+                          : combQuality == 'challenging' ? C.negative
+                          : C.warning,
+                      fontSize: 10,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+
+          // Aspects received
+          if (aspects.isNotEmpty) ...[
+            const SizedBox(height: S.sm),
+            ...aspects.take(3).map((a) {
+              final asp = a as Map<String, dynamic>;
+              final aspNature = asp['nature'] as String? ?? 'neutral';
+              final dotColor = aspNature == 'benefic' ? C.positive
+                  : aspNature == 'malefic' ? C.negative
+                  : C.textMuted;
+              final planet = asp['planet'] as String? ?? '';
+              final fromH = asp['from_house'];
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 3),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 6, height: 6,
+                      decoration: BoxDecoration(shape: BoxShape.circle, color: dotColor),
+                    ),
+                    const SizedBox(width: 6),
+                    Text(
+                      '${planet.isNotEmpty ? planet[0].toUpperCase() + planet.substring(1) : ''} from H$fromH ($aspNature)',
+                      style: T.caption.copyWith(color: C.textSecondary, fontSize: 10),
+                    ),
+                  ],
+                ),
+              );
+            }),
+          ],
+
+          // Conjunctions
+          if (conjunctions.isNotEmpty) ...[
+            const SizedBox(height: S.sm),
+            Wrap(
+              spacing: 6,
+              runSpacing: 4,
+              children: conjunctions.take(4).map((c) {
+                final conj = c as Map<String, dynamic>;
+                final p = conj['planet'] as String? ?? '';
+                final rel = conj['relationship'] as String? ?? 'neutral';
+                final chipColor = rel == 'friend' ? C.positive
+                    : rel == 'enemy' ? C.negative
+                    : C.warning;
+                return _bphsChip(
+                  '${p.isNotEmpty ? p[0].toUpperCase() + p.substring(1) : ''} ($rel)',
+                  chipColor,
+                );
+              }).toList(),
+            ),
+          ],
+
+          // Active yogas
+          if (yogas.isNotEmpty) ...[
+            const SizedBox(height: S.sm),
+            Wrap(
+              spacing: 6,
+              runSpacing: 4,
+              children: yogas.take(3).map((y) {
+                final yoga = y as Map<String, dynamic>;
+                return _bphsChip(yoga['name'] as String? ?? '', C.accent);
+              }).toList(),
+            ),
+          ],
+
+          // Summary + Prediction
+          if (summary.isNotEmpty) ...[
+            const SizedBox(height: S.sm),
+            Text(summary,
+                style: T.caption.copyWith(
+                    color: C.textSecondary, height: 1.5, fontSize: 11)),
+          ],
+          if (prediction.isNotEmpty) ...[
+            const SizedBox(height: 4),
+            Text(prediction,
+                style: T.caption.copyWith(
+                    color: _color.withValues(alpha: 0.8),
+                    fontStyle: FontStyle.italic,
+                    height: 1.4, fontSize: 11)),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget _bphsChip(String label, Color color) {
+    if (label.isEmpty) return const SizedBox.shrink();
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: color.withValues(alpha: 0.1),
+        border: Border.all(color: color.withValues(alpha: 0.25)),
+      ),
+      child: Text(
+        label[0].toUpperCase() + label.substring(1),
+        style: T.caption.copyWith(color: color, fontSize: 9, fontWeight: FontWeight.w600),
+      ),
     );
   }
 
@@ -456,6 +684,9 @@ class _DashaDetailPanelState extends ConsumerState<DashaDetailPanel> {
       'relationships': Icons.people_outline,
       'finances': Icons.account_balance_wallet_outlined,
       'spiritual': Icons.self_improvement,
+      'family': Icons.home_outlined,
+      'education': Icons.school_outlined,
+      'travel': Icons.flight_outlined,
     };
     const areaLabels = {
       'career': 'Career',
@@ -463,6 +694,9 @@ class _DashaDetailPanelState extends ConsumerState<DashaDetailPanel> {
       'relationships': 'Relationships',
       'finances': 'Finances',
       'spiritual': 'Spiritual',
+      'family': 'Family',
+      'education': 'Education',
+      'travel': 'Travel',
     };
 
     return Column(
@@ -472,7 +706,7 @@ class _DashaDetailPanelState extends ConsumerState<DashaDetailPanel> {
             style: T.bodySm.copyWith(
                 color: C.textPrimary, fontWeight: FontWeight.w600)),
         const SizedBox(height: S.sm),
-        ...['career', 'health', 'relationships', 'finances', 'spiritual'].map((area) {
+        ...['career', 'health', 'relationships', 'finances', 'spiritual', 'family', 'education', 'travel'].map((area) {
           final score = (scores[area] as num?)?.toInt() ?? 5;
           final barColor = score >= 7
               ? C.positive
@@ -535,6 +769,9 @@ class _DashaDetailPanelState extends ConsumerState<DashaDetailPanel> {
         return adData != null ? _buildAdEffects(adData) : const SizedBox.shrink();
       case 'pd':
         return pdData != null ? _buildPdEffects(pdData) : const SizedBox.shrink();
+      case 'sd':
+        final sdData = _data?['sookshma'] as Map<String, dynamic>?;
+        return sdData != null ? _buildSdEffects(sdData) : const SizedBox.shrink();
       default:
         return const SizedBox.shrink();
     }
@@ -572,7 +809,11 @@ class _DashaDetailPanelState extends ConsumerState<DashaDetailPanel> {
           'Career': md['career'] as String? ?? '',
           'Health': md['health'] as String? ?? '',
           'Relationships': md['relationships'] as String? ?? '',
+          'Finances': md['finances'] as String? ?? '',
           'Spiritual': md['spiritual'] as String? ?? '',
+          'Family': md['family'] as String? ?? '',
+          'Education': md['education'] as String? ?? '',
+          'Travel': md['travel'] as String? ?? '',
         }),
         // Practical advice
         if ((md['practical_advice'] as List?)?.isNotEmpty ?? false) ...[
@@ -638,6 +879,10 @@ class _DashaDetailPanelState extends ConsumerState<DashaDetailPanel> {
           'Health': ad['health'] as String? ?? '',
           'Relationships': ad['relationships'] as String? ?? '',
           'Finances': ad['finances'] as String? ?? '',
+          'Spiritual': ad['spiritual'] as String? ?? '',
+          'Family': ad['family'] as String? ?? '',
+          'Education': ad['education'] as String? ?? '',
+          'Travel': ad['travel'] as String? ?? '',
         }),
       ],
     );
@@ -738,6 +983,197 @@ class _DashaDetailPanelState extends ConsumerState<DashaDetailPanel> {
           'Relationships': _flattenField(pd['relationships']),
         }),
       ],
+    );
+  }
+
+  Widget _buildSdEffects(Map<String, dynamic> sd) {
+    final theme = sd['theme'] as String? ?? '';
+    final energy = sd['energy'] as String? ?? '';
+    final durationRange = sd['duration_range'] as String? ?? '';
+    final healthWatch = sd['health_watch'] as String? ?? '';
+    final favorable = (sd['favorable_activities'] as List?)?.cast<String>() ?? [];
+    final unfavorable = (sd['unfavorable_activities'] as List?)?.cast<String>() ?? [];
+    final advice = (sd['practical_advice'] as List?)?.cast<String>() ?? [];
+    final blending = sd['blending_rules'] as Map<String, dynamic>?;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (durationRange.isNotEmpty) ...[
+          _buildInfoRow(Icons.timelapse, 'Typical Duration', durationRange),
+          const SizedBox(height: S.md),
+        ],
+        if (theme.isNotEmpty) ...[
+          Text('Theme',
+              style: T.bodySm.copyWith(
+                  color: C.textPrimary, fontWeight: FontWeight.w600)),
+          const SizedBox(height: 4),
+          Text(theme, style: T.bodySm.copyWith(color: C.textSecondary)),
+          const SizedBox(height: S.md),
+        ],
+        if (energy.isNotEmpty) ...[
+          _buildInfoRow(Icons.bolt, 'Energy', energy),
+          const SizedBox(height: S.md),
+        ],
+        if (favorable.isNotEmpty)
+          _buildListSection('Favorable Activities', favorable,
+              icon: Icons.check_circle_outline, iconColor: C.positive),
+        if (unfavorable.isNotEmpty) ...[
+          const SizedBox(height: S.md),
+          _buildListSection('Avoid', unfavorable,
+              icon: Icons.cancel_outlined, iconColor: C.negative),
+        ],
+        if (healthWatch.isNotEmpty) ...[
+          const SizedBox(height: S.md),
+          _buildInfoRow(Icons.healing, 'Health Watch', healthWatch),
+        ],
+        if (advice.isNotEmpty) ...[
+          const SizedBox(height: S.md),
+          _buildListSection('Practical Advice', advice,
+              icon: Icons.lightbulb_outline, iconColor: C.warning),
+        ],
+        // Combination effects (PD x SD from sookshma_dasha_effects.json)
+        if (sd['combination_effects'] != null) ...[
+          const SizedBox(height: S.md),
+          _buildCombinationEffects(sd['combination_effects'] as Map<String, dynamic>),
+        ],
+        if (blending != null && blending.isNotEmpty) ...[
+          const SizedBox(height: S.md),
+          Text('Blending with Pratyantardasha',
+              style: T.bodySm.copyWith(
+                  color: C.textPrimary, fontWeight: FontWeight.w600)),
+          const SizedBox(height: S.sm),
+          ...blending.entries.map((e) {
+            final label = e.key.toString().replaceAll('_', ' ');
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 4),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 4),
+                    child: Icon(Icons.circle, size: 6, color: _color.withValues(alpha: 0.5)),
+                  ),
+                  const SizedBox(width: 6),
+                  Expanded(
+                    child: RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: '${label[0].toUpperCase()}${label.substring(1)}: ',
+                            style: T.caption.copyWith(
+                                color: _color, fontWeight: FontWeight.w600),
+                          ),
+                          TextSpan(
+                            text: e.value.toString(),
+                            style: T.caption.copyWith(
+                                color: C.textSecondary, height: 1.4),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }),
+        ],
+      ],
+    );
+  }
+
+  /// Renders PD x SD combination effects (relationship, theme, life areas).
+  Widget _buildCombinationEffects(Map<String, dynamic> combo) {
+    final relationship = combo['relationship'] as String? ?? '';
+    final comboTheme = combo['theme'] as String? ?? '';
+    final effects = (combo['effects'] as List?)?.cast<String>() ?? [];
+    final career = combo['career'] as String? ?? '';
+    final health = combo['health'] as String? ?? '';
+    final relationships = combo['relationships'] as String? ?? '';
+    final timing = combo['timing_quality'] as String? ?? '';
+
+    Color relColor;
+    if (relationship == 'friend' || relationship == 'same') {
+      relColor = C.positive;
+    } else if (relationship == 'enemy') {
+      relColor = C.negative;
+    } else {
+      relColor = C.warning;
+    }
+
+    return GlassContainer(
+      padding: const EdgeInsets.all(S.md),
+      blur: 0,
+      borderColor: relColor.withValues(alpha: 0.3),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.compare_arrows, color: relColor, size: 16),
+              const SizedBox(width: 6),
+              Text('PD \u00d7 SD Interaction',
+                  style: T.bodySm.copyWith(
+                      color: C.textPrimary, fontWeight: FontWeight.w600)),
+              const Spacer(),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                decoration: BoxDecoration(
+                  borderRadius: R.xlBr,
+                  color: relColor.withValues(alpha: 0.15),
+                ),
+                child: Text(
+                  relationship.isNotEmpty
+                      ? relationship[0].toUpperCase() + relationship.substring(1)
+                      : '',
+                  style: T.caption.copyWith(color: relColor, fontSize: 10),
+                ),
+              ),
+            ],
+          ),
+          if (comboTheme.isNotEmpty) ...[
+            const SizedBox(height: S.sm),
+            Text(comboTheme,
+                style: T.bodySm.copyWith(color: C.textSecondary, height: 1.4)),
+          ],
+          if (effects.isNotEmpty) ...[
+            const SizedBox(height: S.sm),
+            ...effects.map((e) => Padding(
+              padding: const EdgeInsets.only(bottom: 3),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 5),
+                    child: Icon(Icons.circle, size: 4, color: relColor),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(child: Text(e,
+                      style: T.caption.copyWith(
+                          color: C.textSecondary, height: 1.4))),
+                ],
+              ),
+            )),
+          ],
+          if (career.isNotEmpty || health.isNotEmpty || relationships.isNotEmpty) ...[
+            const SizedBox(height: S.sm),
+            if (career.isNotEmpty)
+              _buildInfoRow(Icons.work_outline, 'Career', career),
+            if (health.isNotEmpty) ...[
+              const SizedBox(height: 4),
+              _buildInfoRow(Icons.favorite_border, 'Health', health),
+            ],
+            if (relationships.isNotEmpty) ...[
+              const SizedBox(height: 4),
+              _buildInfoRow(Icons.people_outline, 'Relationships', relationships),
+            ],
+          ],
+          if (timing.isNotEmpty) ...[
+            const SizedBox(height: S.sm),
+            _buildInfoRow(Icons.schedule, 'Timing Quality', timing),
+          ],
+        ],
+      ),
     );
   }
 

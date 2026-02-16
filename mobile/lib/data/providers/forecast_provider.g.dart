@@ -6,7 +6,7 @@ part of 'forecast_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$dailyForecastHash() => r'5a69f3ea205f1de74d254cade888ef312c888f7c';
+String _$dailyForecastHash() => r'f6bce94669f47af0821a75a0f8a507d9a9662435';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -170,7 +170,7 @@ class _DailyForecastProviderElement
   DateTime? get date => (origin as DailyForecastProvider).date;
 }
 
-String _$weeklyForecastHash() => r'f27e91c7f1bce98edcb04d463ec84ddbe7f4d134';
+String _$weeklyForecastHash() => r'c1cc74c18da04bb06c1f02277c2da3a024f1e7d5';
 
 /// Get weekly forecast
 ///
@@ -313,7 +313,7 @@ class _WeeklyForecastProviderElement
   DateTime? get startDate => (origin as WeeklyForecastProvider).startDate;
 }
 
-String _$monthlyForecastHash() => r'07c8a24c70e0098c557aca184735902da2f70a44';
+String _$monthlyForecastHash() => r'fdde69db35ae023d9108b3259e563663f315b874';
 
 /// Get monthly forecast
 ///
@@ -456,7 +456,7 @@ class _MonthlyForecastProviderElement
   DateTime? get startDate => (origin as MonthlyForecastProvider).startDate;
 }
 
-String _$yearlyForecastHash() => r'ab2b6863b2486735bb6e5808167480b31f8e00e0';
+String _$yearlyForecastHash() => r'5c5f8aebf0262c4de8fc9c5300e9113b81935a8f';
 
 /// Get yearly forecast
 ///

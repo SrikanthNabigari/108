@@ -17,6 +17,10 @@ import 'features/compatibility/screens/compatibility_screen.dart';
 import 'features/reports/screens/reports_screen.dart';
 import 'features/reports/widgets/report_viewer.dart';
 import 'features/credits/screens/credits_screen.dart';
+import 'features/muhurta/screens/muhurta_screen.dart';
+import 'features/events/screens/events_screen.dart';
+import 'features/chart/screens/divisional_chart_screen.dart';
+import 'features/chart/screens/kp_analysis_screen.dart';
 
 /// Triggers GoRouter redirect re-evaluation on auth changes.
 class _AuthNotifier extends ChangeNotifier {
@@ -124,6 +128,22 @@ final routerProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/credits',
         builder: (_, __) => const CreditsScreen(),
+      ),
+      GoRoute(
+        path: '/muhurta',
+        builder: (_, __) => const MuhurtaScreen(),
+      ),
+      GoRoute(
+        path: '/events',
+        builder: (_, __) => const EventsScreen(),
+      ),
+      GoRoute(
+        path: '/divisional',
+        builder: (_, __) => const DivisionalChartScreen(),
+      ),
+      GoRoute(
+        path: '/kp-analysis',
+        builder: (_, __) => const KpAnalysisScreen(),
       ),
     ],
   );

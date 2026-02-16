@@ -28,11 +28,18 @@ from .dasha import (
     get_current_dasha,
     get_dasha_balance_at_birth,
     get_dasha_periods_for_year,
+    get_deha_dasha_effect,
+    get_deha_dasha_sequence,
     get_mahadasha_sequence,
+    get_prana_dasha_effect,
+    get_prana_dasha_sequence,
     get_pratyantardasha_effect,
     get_pratyantardasha_sequence,
+    get_sookshma_dasha_effect,
+    get_sookshma_dasha_sequence,
     validate_dasha_data,
 )
+from .dasha_interpreter import interpret_dasha_combination, interpret_dasha_lord
 from .dasha_transit import (
     cross_analyze,
     find_activation_windows,
@@ -96,6 +103,7 @@ from .transit_aspects import (
     get_transit_natal_aspects,
 )
 from .transit_tracker import (
+    get_nakshatra_transit_triggers,
     get_upcoming_triggers,
 )
 from .transits import (
@@ -209,6 +217,8 @@ __all__ = [
     "get_daily_forecast",
     "get_dasha_balance_at_birth",
     "get_dasha_periods_for_year",
+    "get_deha_dasha_effect",
+    "get_deha_dasha_sequence",
     "get_dhaiya_dates",
     "get_eclipse_periods",
     "get_enriched_transit_analysis",
@@ -220,12 +230,17 @@ __all__ = [
     "get_marana_kaal",
     "get_monthly_forecast",
     "get_nakshatra_transit_effect",
+    "get_nakshatra_transit_triggers",
     "get_narayana_antardasha",
+    "get_prana_dasha_effect",
+    "get_prana_dasha_sequence",
     "get_pratyantardasha_effect",
     "get_pratyantardasha_sequence",
     "get_progression_direction",
     "get_progression_timeline",
     "get_sade_sati_dates",
+    "get_sookshma_dasha_effect",
+    "get_sookshma_dasha_sequence",
     "get_starting_yogini",
     "get_transit_aspects",
     "get_transit_natal_aspects",
@@ -239,6 +254,8 @@ __all__ = [
     "get_yogini_balance_at_birth",
     "get_yogini_effects",
     "get_yogini_pratyantardasha",
+    "interpret_dasha_combination",
+    "interpret_dasha_lord",
     "is_ashtottari_applicable",
     "is_odd_sign",
     "is_planet_favorable_in_house",

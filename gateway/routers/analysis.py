@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 import logging
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Annotated, Any
 
@@ -31,17 +31,24 @@ from packages.context.src import (
     get_pratyantardasha_effect,
     get_pratyantardasha_sequence,
     get_sade_sati_dates,
+    get_sookshma_dasha_effect,
+    get_sookshma_dasha_sequence,
     get_transit_natal_aspects,
     get_transit_positions,
     get_transit_snapshot,
 )
+from packages.context.src.dasha_interpreter import interpret_dasha_combination
 from packages.context.src.dasha_transit import cross_analyze
-from packages.context.src.transit_tracker import get_upcoming_triggers
+from packages.context.src.transit_tracker import (
+    get_nakshatra_transit_triggers,
+    get_upcoming_triggers,
+)
 from packages.core.src.constants import Planet, Rashi
 from packages.core.src.knowledge_loader import (
     get_dasha_guide,
     get_planet_in_house_interpretations,
     get_planet_in_sign_interpretations,
+    get_sookshma_dasha_guide,
     load_definition,
 )
 from packages.core.src.models import BirthChart, BirthData, HouseCusps, PlanetPosition
@@ -58,8 +65,10 @@ from packages.self.src import (
     get_kp_prediction,
     get_kp_significators,
     get_lordship_summary,
+    get_ruling_planets,
     recommend_remedies,
 )
+from packages.self.src.kp import KP_HOUSE_GROUPS
 
 logger = logging.getLogger(__name__)
 
@@ -533,6 +542,7 @@ async def get_dasha_timeline(
         md = current.get("mahadasha", {}) if current else {}
         ad = current.get("antardasha", {}) if current else {}
         pd = current.get("pratyantardasha", {}) if current else {}
+        sd = current.get("sookshma_dasha", {}) if current else {}
 
         # Mahadasha sequence for life chapters
         periods = get_mahadasha_sequence(birth_dt, moon_longitude, 120)
@@ -550,6 +560,17 @@ async def get_dasha_timeline(
         pd_seq = []
         if ad.get("lord") and ad_start and ad_end:
             pd_seq = get_pratyantardasha_sequence(ad["lord"], ad_start, ad_end)
+
+        # Sookshma Dasha sequence within current PD
+        pd_start = pd.get("start_date")
+        pd_end = pd.get("end_date")
+        sd_seq = []
+        if pd.get("lord") and pd_start and pd_end:
+            pd_start_dt = (
+                datetime.fromisoformat(pd_start) if isinstance(pd_start, str) else pd_start
+            )
+            pd_end_dt = datetime.fromisoformat(pd_end) if isinstance(pd_end, str) else pd_end
+            sd_seq = get_sookshma_dasha_sequence(pd["lord"], pd_start_dt, pd_end_dt)
 
         def _fmt_seq(seq: list) -> list:
             return [
@@ -641,34 +662,70 @@ async def get_dasha_timeline(
         current_md_lord = (md.get("lord") or "").lower()
         current_guide = guide.get(current_md_lord, {})
 
-        # Add theme to each MD in the sequence
+        # Add theme + BPHS enrichment to each MD in the sequence
         md_seq_enriched = _fmt_seq(periods)
+        lagna_rashi_name = chart.get("lagna_rashi", "aries") if chart else "aries"
+        lagna_idx = _SIGN_TO_RASHI.get(
+            lagna_rashi_name.lower() if isinstance(lagna_rashi_name, str) else "aries", 0
+        )
+        natal_planets = chart.get("planets", {}) if chart else {}
+
+        from packages.self.src.transit_lordship import classify_planet_role
+
         for p in md_seq_enriched:
-            lord_guide = guide.get((p.get("lord") or "").lower(), {})
+            lord_name = (p.get("lord") or "").lower()
+            lord_guide = guide.get(lord_name, {})
             p["theme"] = lord_guide.get("theme", "")
+            try:
+                role = classify_planet_role(lord_name, lagna_idx)
+                p["functional_nature"] = role["functional_nature"]
+                p["houses_ruled"] = role["houses_ruled"]
+            except Exception:
+                pass
+
+        # BPHS chart-specific analysis for current period
+        bphs_data: dict[str, Any] | None = None
+        if chart and natal_planets:
+            try:
+                bphs_data = interpret_dasha_combination(
+                    md=current_md_lord,
+                    ad=ad.get("lord", "").lower() or None,
+                    pd=pd.get("lord", "").lower() or None,
+                    natal_planets=_build_planets_for_analysis(natal_planets),
+                    lagna_index=lagna_idx,
+                )
+            except Exception as bphs_err:
+                logger.warning(f"BPHS dasha analysis failed: {bphs_err}")
+
+        current_block: dict[str, Any] = {
+            "mahadasha_lord": md.get("lord"),
+            "mahadasha_start": str(md.get("start_date", "")),
+            "mahadasha_end": str(md.get("end_date", "")),
+            "remaining_years": md.get("years_remaining") or md.get("days_remaining", 0) / 365.25,
+            "antardasha_lord": ad.get("lord"),
+            "antardasha_start": str(ad.get("start_date", "")),
+            "antardasha_end": str(ad.get("end_date", "")),
+            "pratyantardasha_lord": pd.get("lord"),
+            "pratyantardasha_start": str(pd.get("start_date", "")),
+            "pratyantardasha_end": str(pd.get("end_date", "")),
+            "sookshma_lord": sd.get("lord"),
+            "sookshma_start": str(sd.get("start_date", "")),
+            "sookshma_end": str(sd.get("end_date", "")),
+            "theme": current_guide.get("theme", ""),
+            "focus_areas": current_guide.get("focus_areas", []),
+            "practical_advice": current_guide.get("practical_advice", []),
+            "challenges": current_guide.get("challenges", ""),
+            "opportunities": current_guide.get("opportunities", ""),
+        }
+        if bphs_data:
+            current_block["bphs_analysis"] = bphs_data
 
         return {
-            "current": {
-                "mahadasha_lord": md.get("lord"),
-                "mahadasha_start": str(md.get("start_date", "")),
-                "mahadasha_end": str(md.get("end_date", "")),
-                "remaining_years": md.get("years_remaining")
-                or md.get("days_remaining", 0) / 365.25,
-                "antardasha_lord": ad.get("lord"),
-                "antardasha_start": str(ad.get("start_date", "")),
-                "antardasha_end": str(ad.get("end_date", "")),
-                "pratyantardasha_lord": pd.get("lord"),
-                "pratyantardasha_start": str(pd.get("start_date", "")),
-                "pratyantardasha_end": str(pd.get("end_date", "")),
-                "theme": current_guide.get("theme", ""),
-                "focus_areas": current_guide.get("focus_areas", []),
-                "practical_advice": current_guide.get("practical_advice", []),
-                "challenges": current_guide.get("challenges", ""),
-                "opportunities": current_guide.get("opportunities", ""),
-            },
+            "current": current_block,
             "mahadasha_sequence": md_seq_enriched,
             "antardasha_sequence": _fmt_seq(ad_seq),
             "pratyantardasha_sequence": _fmt_seq(pd_seq),
+            "sookshma_sequence": _fmt_seq(sd_seq),
             "alerts": alerts,
             "dosha_markers": dosha_markers,
         }
@@ -683,143 +740,212 @@ async def get_dasha_timeline(
         ) from e
 
 
-_POSITIVE_KEYWORDS = {
-    "excellent",
-    "peak",
-    "growth",
-    "gain",
-    "success",
-    "favorable",
-    "benefit",
-    "prosperity",
-    "wealth",
-    "promotion",
-    "strong",
-    "improve",
-    "good",
-    "best",
-    "powerful",
-    "fortunate",
-    "auspicious",
-    "rise",
-    "expand",
-    "opportunity",
+# ── Classical area scoring (BPHS lordship-based) ──
+
+_SIGN_TO_RASHI: dict[str, int] = {
+    "aries": 0,
+    "taurus": 1,
+    "gemini": 2,
+    "cancer": 3,
+    "leo": 4,
+    "virgo": 5,
+    "libra": 6,
+    "scorpio": 7,
+    "sagittarius": 8,
+    "capricorn": 9,
+    "aquarius": 10,
+    "pisces": 11,
 }
-_NEGATIVE_KEYWORDS = {
-    "challenge",
-    "conflict",
-    "disease",
-    "loss",
-    "accident",
-    "obstacle",
-    "difficulty",
-    "stress",
-    "decline",
-    "weak",
-    "danger",
-    "enemy",
-    "debt",
-    "setback",
-    "delay",
-    "tension",
-    "trouble",
-    "unfavorable",
-    "problem",
-    "fear",
+
+_RASHI_NAMES = [
+    "aries",
+    "taurus",
+    "gemini",
+    "cancer",
+    "leo",
+    "virgo",
+    "libra",
+    "scorpio",
+    "sagittarius",
+    "capricorn",
+    "aquarius",
+    "pisces",
+]
+
+_EXALTATION: dict[str, str] = {
+    "sun": "aries",
+    "moon": "taurus",
+    "mars": "capricorn",
+    "mercury": "virgo",
+    "jupiter": "cancer",
+    "venus": "pisces",
+    "saturn": "libra",
 }
-_AREA_KEYWORDS: dict[str, set[str]] = {
-    "career": {
-        "career",
-        "profession",
-        "job",
-        "promotion",
-        "status",
-        "authority",
-        "business",
-        "work",
-    },
-    "health": {
-        "health",
-        "disease",
-        "vitality",
-        "body",
-        "physical",
-        "illness",
-        "medical",
-        "surgery",
-    },
-    "relationships": {
-        "relationship",
-        "marriage",
-        "partner",
-        "love",
-        "family",
-        "spouse",
-        "romantic",
-    },
-    "finances": {"finance", "wealth", "money", "income", "property", "gain", "loss", "expense"},
-    "spiritual": {"spiritual", "meditation", "mantra", "temple", "dharma", "karma", "devotion"},
+
+_DEBILITATION: dict[str, str] = {
+    "sun": "libra",
+    "moon": "scorpio",
+    "mars": "cancer",
+    "mercury": "pisces",
+    "jupiter": "capricorn",
+    "venus": "virgo",
+    "saturn": "aries",
 }
+
+_OWN_SIGNS: dict[str, list[str]] = {
+    "sun": ["leo"],
+    "moon": ["cancer"],
+    "mars": ["aries", "scorpio"],
+    "mercury": ["gemini", "virgo"],
+    "jupiter": ["sagittarius", "pisces"],
+    "venus": ["taurus", "libra"],
+    "saturn": ["capricorn", "aquarius"],
+}
+
+# Life areas and their associated houses (primary first)
+_AREA_HOUSES: dict[str, list[int]] = {
+    "career": [10, 6, 2],
+    "relationships": [7, 5, 11],
+    "health": [1, 6, 8],
+    "finances": [2, 11, 5],
+    "spiritual": [9, 12, 5],
+    "family": [4, 2, 1],
+    "education": [4, 5, 9],
+    "travel": [3, 9, 12],
+}
+
+# Natural karaka planet for each area
+_AREA_KARAKAS: dict[str, str] = {
+    "career": "saturn",
+    "relationships": "venus",
+    "health": "sun",
+    "finances": "jupiter",
+    "spiritual": "ketu",
+    "family": "moon",
+    "education": "mercury",
+    "travel": "rahu",
+}
+
+# Dusthana lords (6,8,12) bring challenges; trikona lords (1,5,9) bring fortune
+_TRIKONA_HOUSES = {1, 5, 9}
+_DUSTHANA_HOUSES = {6, 8, 12}
 
 
 def _compute_area_scores(
-    md_guide: dict[str, Any],
-    ad_effects: dict[str, Any] | None,
-    pd_effects: dict[str, Any] | None,
+    md_lord: str,
+    ad_lord: str | None,
+    chart: dict[str, Any] | None,
 ) -> dict[str, int]:
-    """Score 5 life areas 1-10 from effects text using keyword matching."""
-    scores: dict[str, float] = {
-        "career": 5,
-        "health": 5,
-        "relationships": 5,
-        "finances": 5,
-        "spiritual": 5,
-    }
+    """Score 8 life areas 1-10 using classical BPHS lordship principles.
 
-    # Collect all text fields into one blob per area
-    area_texts: dict[str, str] = {}
-    for area in scores:
-        parts: list[str] = []
-        # MD guide has explicit area fields
-        if md_guide.get(area):
-            parts.append(str(md_guide[area]).lower())
-        if md_guide.get("challenges"):
-            parts.append(str(md_guide["challenges"]).lower())
-        if md_guide.get("opportunities"):
-            parts.append(str(md_guide["opportunities"]).lower())
-        # AD effects have area fields too
-        if ad_effects:
-            if ad_effects.get(area):
-                parts.append(str(ad_effects[area]).lower())
-            for key in ("positive", "negative", "general_effects"):
-                val = ad_effects.get(key)
-                if isinstance(val, list):
-                    parts.extend(str(v).lower() for v in val)
-                elif val:
-                    parts.append(str(val).lower())
-        # PD effects
-        if pd_effects:
-            if pd_effects.get(area):
-                parts.append(str(pd_effects[area]).lower())
-            effects_list = pd_effects.get("effects")
-            if isinstance(effects_list, list):
-                parts.extend(str(v).lower() for v in effects_list)
-        area_texts[area] = " ".join(parts)
+    Uses the dasha lord's house ownership, natal placement, dignity, and
+    karaka alignment relative to the user's lagna to rate each area.
+    Falls back to neutral 5 for all areas if no chart data available.
+    """
+    scores: dict[str, float] = dict.fromkeys(_AREA_HOUSES, 5.0)
 
-    # Score each area by sentiment of relevant text
-    for area, text in area_texts.items():
-        if not text:
-            continue
-        words = set(text.split())
-        pos_count = len(words & _POSITIVE_KEYWORDS)
-        neg_count = len(words & _NEGATIVE_KEYWORDS)
-        # Also check area-specific keyword density
-        relevance = len(words & _AREA_KEYWORDS.get(area, set()))
-        # Net sentiment: each positive word +0.5, negative -0.5, relevance +0.2
-        delta = (pos_count * 0.5) - (neg_count * 0.5) + (relevance * 0.2)
-        scores[area] = max(1, min(10, round(5 + delta)))
+    if not chart:
+        return {area: int(val) for area, val in scores.items()}
 
-    return {area: int(val) for area, val in scores.items()}
+    lagna = chart.get("lagna_rashi", "").lower()
+    if lagna not in _SIGN_TO_RASHI:
+        return {area: int(val) for area, val in scores.items()}
+
+    lagna_idx = _SIGN_TO_RASHI[lagna]
+    planets = chart.get("planets", {})
+
+    def _get_owned_houses(planet: str) -> list[int]:
+        """Get house numbers (1-12) owned by planet from lagna."""
+        owned_signs = _OWN_SIGNS.get(planet, [])
+        houses = []
+        for sign in owned_signs:
+            sign_idx = _SIGN_TO_RASHI.get(sign)
+            if sign_idx is not None:
+                houses.append(((sign_idx - lagna_idx) % 12) + 1)
+        return houses
+
+    def _get_placement_house(planet: str) -> int | None:
+        """Get house number (1-12) where planet is natally placed."""
+        pdata = planets.get(planet, {})
+        lon = pdata.get("longitude")
+        if lon is None:
+            return None
+        rashi_idx = int(float(lon)) // 30
+        return ((rashi_idx - lagna_idx) % 12) + 1
+
+    def _get_dignity(planet: str) -> str:
+        """Determine dignity: exalted, own, debilitated, or neutral."""
+        pdata = planets.get(planet, {})
+        rashi = pdata.get("rashi", "").lower()
+        if not rashi:
+            lon = pdata.get("longitude")
+            if lon is not None:
+                rashi_idx = int(float(lon)) // 30
+                rashi = _RASHI_NAMES[rashi_idx] if 0 <= rashi_idx < 12 else ""
+        if rashi == _EXALTATION.get(planet):
+            return "exalted"
+        if rashi == _DEBILITATION.get(planet):
+            return "debilitated"
+        if rashi in _OWN_SIGNS.get(planet, []):
+            return "own"
+        return "neutral"
+
+    def _score_lord(lord: str, weight: float) -> None:
+        """Add area score contributions for a dasha lord."""
+        lord = lord.lower()
+        owned = _get_owned_houses(lord)
+        placed = _get_placement_house(lord)
+        dignity = _get_dignity(lord)
+
+        # Dignity modifier (affects all areas)
+        dignity_mod = {"exalted": 1.0, "own": 0.5, "debilitated": -1.5}.get(dignity, 0.0)
+
+        # Functional nature: trikona lords are benefic, dusthana lords are malefic
+        is_trikona_lord = bool(set(owned) & _TRIKONA_HOUSES)
+        is_dusthana_lord = bool(set(owned) & _DUSTHANA_HOUSES)
+        functional_mod = 0.0
+        if is_trikona_lord:
+            functional_mod = 0.5
+        elif is_dusthana_lord:
+            functional_mod = -0.5
+
+        for area, area_houses in _AREA_HOUSES.items():
+            primary = area_houses[0]
+            secondaries = area_houses[1:]
+            delta = 0.0
+
+            # Lordship: does the dasha lord own this area's houses?
+            if primary in owned:
+                delta += 3.0
+            for sec in secondaries:
+                if sec in owned:
+                    delta += 1.0
+
+            # Placement: is the dasha lord sitting in this area's houses?
+            if placed is not None:
+                if placed == primary:
+                    delta += 2.0
+                elif placed in secondaries:
+                    delta += 1.0
+
+            # Natural karaka alignment
+            if lord == _AREA_KARAKAS.get(area):
+                delta += 1.0
+
+            # Apply dignity + functional nature
+            if delta != 0:
+                delta += dignity_mod + functional_mod
+
+            scores[area] += delta * weight
+
+    # MD lord is primary influence (full weight)
+    _score_lord(md_lord, weight=1.0)
+
+    # AD lord modifies the picture (40% weight)
+    if ad_lord:
+        _score_lord(ad_lord, weight=0.4)
+
+    return {area: max(1, min(10, round(val))) for area, val in scores.items()}
 
 
 @router.get("/dasha/effects")
@@ -830,6 +956,7 @@ async def get_dasha_effects(
     db: Annotated[Any, Depends(get_db)],
     ad: str | None = None,
     pd: str | None = None,
+    sd: str | None = None,
 ) -> dict[str, Any]:
     """Get dasha effects and cross-analysis for MD/AD/PD combination.
 
@@ -872,6 +999,10 @@ async def get_dasha_effects(
             "health": md_guide.get("health", ""),
             "relationships": md_guide.get("relationships", ""),
             "spiritual": md_guide.get("spiritual", ""),
+            "finances": md_guide.get("finances", ""),
+            "family": md_guide.get("family", ""),
+            "education": md_guide.get("education", ""),
+            "travel": md_guide.get("travel", ""),
             "challenges": md_guide.get("challenges", ""),
             "opportunities": md_guide.get("opportunities", ""),
             "practical_advice": md_guide.get("practical_advice", []),
@@ -893,62 +1024,102 @@ async def get_dasha_effects(
             if pd_effects:
                 result["pratyantardasha"] = {"lord": pd.lower(), **pd_effects}
 
-        # Area scores (derived from knowledge text — available at all tiers)
-        result["area_scores"] = _compute_area_scores(md_guide, ad_effects, pd_effects)
+        # SD effects (combination PD x SD + per-planet guide)
+        # Flatten guide fields to top level (matches MD/AD/PD pattern)
+        if sd:
+            sd_guide_data = get_sookshma_dasha_guide()
+            sd_guide = sd_guide_data.get("sookshma_dasha_guide", sd_guide_data)
+            sd_planet_guide = sd_guide.get(sd.lower(), {})
+            sd_result: dict[str, Any] = {"lord": sd.lower(), **sd_planet_guide}
+            if pd:
+                sd_combo = get_sookshma_dasha_effect(pd.lower(), sd.lower())
+                if sd_combo:
+                    sd_result["combination_effects"] = sd_combo
+            result["sookshma"] = sd_result
 
         # Relationship info between period lords
         if ad:
             result["md_ad_relationship"] = _get_planet_relationship(md.lower(), ad.lower())
         if ad and pd:
             result["ad_pd_relationship"] = _get_planet_relationship(ad.lower(), pd.lower())
+        if pd and sd:
+            result["pd_sd_relationship"] = _get_planet_relationship(pd.lower(), sd.lower())
+
+        # Load birth chart ONCE for area scores + cross-analysis + doshas
+        chart = await _load_birth_chart(db, str(current_user.id))
+
+        # Area scores — classical lordship-based scoring from user's chart
+        result["area_scores"] = _compute_area_scores(md.lower(), ad.lower() if ad else None, chart)
+
+        # BPHS chart-specific dasha interpretation
+        if chart:
+            try:
+                natal_planets_raw = chart.get("planets", {})
+                lagna_rashi_name = chart.get("lagna_rashi", "aries")
+                lagna_idx = _SIGN_TO_RASHI.get(
+                    lagna_rashi_name.lower() if isinstance(lagna_rashi_name, str) else "aries",
+                    0,
+                )
+                bphs = interpret_dasha_combination(
+                    md=md.lower(),
+                    ad=ad.lower() if ad else None,
+                    pd=pd.lower() if pd else None,
+                    natal_planets=_build_planets_for_analysis(natal_planets_raw),
+                    lagna_index=lagna_idx,
+                    sd=sd.lower() if sd else None,
+                )
+                result["bphs_analysis"] = bphs
+            except Exception as bphs_err:
+                logger.warning(f"BPHS dasha analysis failed: {bphs_err}")
 
         # Cross-analysis (requires birth chart + live transits — pro+ only)
-        if access != AccessLevel.PREVIEW:
-            chart = await _load_birth_chart(db, str(current_user.id))
-            if chart:
-                try:
-                    planets = _build_planets_for_analysis(chart.get("planets", {}))
-                    now_utc = datetime.utcnow()
-                    current_jd = get_julian_day(now_utc)
-                    transit_planets = get_all_planets(current_jd)
-                    transit_dict: dict[str, dict[str, Any]] = {}
-                    for pname, pdata in transit_planets.items():
-                        if isinstance(pdata, dict):
-                            transit_dict[pname] = {
-                                "longitude": float(pdata.get("longitude", 0)),
-                                "rashi": int(float(pdata.get("longitude", 0))) // 30,
-                            }
-                    dasha_info = {
-                        "mahadasha": md.lower(),
-                        "antardasha": ad.lower() if ad else "",
-                        "pratyantardasha": pd.lower() if pd else "",
-                    }
-                    cross = cross_analyze(
-                        natal_planets=planets,
-                        current_transits=transit_dict,
-                        current_dasha=dasha_info,
-                        lagna_rashi=chart.get("lagna_rashi", "aries"),
-                        moon_rashi=chart.get("moon_rashi", "aries"),
-                    )
-                    result["cross_analysis"] = {
-                        "active_themes": cross.get("active_themes", []),
-                        "strongest_house": cross.get("strongest_house"),
-                        "period_quality": cross.get("overall_period_quality", ""),
-                        "score": cross.get("score", 50),
-                    }
-                except Exception as cross_err:
-                    logger.warning(f"Cross-analysis failed: {cross_err}")
+        if access != AccessLevel.PREVIEW and chart:
+            try:
+                planets = _build_planets_for_analysis(chart.get("planets", {}))
+                now_utc = datetime.utcnow()
+                current_jd = get_julian_day(now_utc)
+                transit_planets = get_all_planets(current_jd)
+                transit_dict: dict[str, dict[str, Any]] = {}
+                for pname, pdata in transit_planets.items():
+                    if isinstance(pdata, dict):
+                        transit_dict[pname] = {
+                            "longitude": float(pdata.get("longitude", 0)),
+                            "rashi": int(float(pdata.get("longitude", 0))) // 30,
+                        }
+                dasha_info = {
+                    "mahadasha": md.lower(),
+                    "antardasha": ad.lower() if ad else "",
+                    "pratyantardasha": pd.lower() if pd else "",
+                }
+                cross = cross_analyze(
+                    natal_planets=planets,
+                    current_transits=transit_dict,
+                    current_dasha=dasha_info,
+                    lagna_rashi=chart.get("lagna_rashi", "aries"),
+                    moon_rashi=chart.get("moon_rashi", "aries"),
+                )
+                result["cross_analysis"] = {
+                    "active_themes": cross.get("active_themes", []),
+                    "strongest_house": cross.get("strongest_house"),
+                    "period_quality": cross.get("overall_period_quality", ""),
+                    "score": cross.get("score", 50),
+                }
+            except Exception as cross_err:
+                logger.warning(f"Cross-analysis failed: {cross_err}")
 
-        # Activated doshas for this period + natal doshas for context
-        try:
-            dosha_chart = await _load_birth_chart(db, str(current_user.id))
-            if dosha_chart:
-                all_markers = _detect_dosha_markers(dosha_chart)
+        # Activated doshas — ONLY show doshas whose involved planets
+        # match the current period lords (per BPHS: doshas manifest
+        # during the dasha of involved planets, not at all times)
+        if chart:
+            try:
+                all_markers = _detect_dosha_markers(chart)
                 queried_lords = {md.lower()}
                 if ad:
                     queried_lords.add(ad.lower())
                 if pd:
                     queried_lords.add(pd.lower())
+                if sd:
+                    queried_lords.add(sd.lower())
 
                 activated = []
                 seen: set[str] = set()
@@ -959,19 +1130,8 @@ async def get_dasha_effects(
                             activated.append({**marker, "activated_by": lord})
                 if activated:
                     result["activated_doshas"] = activated
-
-                # Always include natal doshas so detail panel can show them
-                natal_seen: set[str] = set()
-                natal_doshas = []
-                for markers_list in all_markers.values():
-                    for marker in markers_list:
-                        if marker["dosha_id"] not in natal_seen:
-                            natal_seen.add(marker["dosha_id"])
-                            natal_doshas.append(marker)
-                if natal_doshas:
-                    result["natal_doshas"] = natal_doshas
-        except Exception as e:
-            logger.warning(f"Dosha activation check failed: {e}")
+            except Exception as e:
+                logger.warning(f"Dosha activation check failed: {e}")
 
         return result
 
@@ -1055,10 +1215,13 @@ async def get_dasha_sub_periods(
         elif level == "pd":
             sequence = get_pratyantardasha_sequence(parent_lord, start_dt, end_dt)
             context_lord = md_lord or parent_lord  # PD relates to AD (but MD for broader context)
+        elif level == "sd":
+            sequence = get_sookshma_dasha_sequence(parent_lord, start_dt, end_dt)
+            context_lord = md_lord or parent_lord
         else:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
-                detail="level must be 'ad' or 'pd'",
+                detail="level must be 'ad', 'pd', or 'sd'",
             )
 
         periods = []
@@ -1770,41 +1933,268 @@ async def get_kp_predictions(
         planets = _build_planets_for_analysis(chart.get("planets", {}))
         houses = chart.get("houses", {})
 
-        # Get cusps as list (12 house cusps in order)
-        cusps = []
-        for i in range(1, 13):
-            cusp = houses.get(f"house_{i}", {})
-            if isinstance(cusp, dict):
-                cusps.append(float(cusp.get("longitude", 0)))
-            else:
-                cusps.append(float(cusp))
+        # Get cusps — DB stores {"cusps": [12 floats], "ascendant": ..., "mc": ...}
+        raw_cusps = houses.get("cusps", [])
+        if isinstance(raw_cusps, list) and len(raw_cusps) == 12:
+            cusps = [float(c) for c in raw_cusps]
+        else:
+            # Fallback: try house_1..house_12 keys, then equal houses
+            cusps = []
+            for i in range(1, 13):
+                h = houses.get(f"house_{i}")
+                if isinstance(h, dict):
+                    cusps.append(float(h.get("longitude", (i - 1) * 30)))
+                elif h is not None:
+                    cusps.append(float(h))
+                else:
+                    cusps.append(float((i - 1) * 30))
 
-        # Build planets dict for KP (needs longitude)
-        planets_for_kp = {}
-        for planet_name, planet_data in planets.items():
-            planets_for_kp[planet_name] = planet_data.get("longitude", 0)
-
-        # Get KP prediction
-        prediction = get_kp_prediction(
-            planets=planets_for_kp,
-            cusps=cusps,
-            query_datetime=datetime.now().isoformat(),
-            query_type=request.event_type,
-        )
-
-        # Get significators for the event
-        significators = get_kp_significators(
-            event_type=request.event_type,
-            planets=planets_for_kp,
-            cusps=cusps,
-        )
-
-        return {
-            "event_type": request.event_type,
-            "prediction": prediction,
-            "significators": significators,
-            "timing": request.timing_preference,
+        # Map Flutter query IDs to KP house group keys
+        query_map = {
+            "short_travel": "travel_short",
+            "foreign_travel": "travel_foreign",
         }
+        kp_query_type = query_map.get(request.event_type, request.event_type)
+
+        # Phase 3: Get ruling planets at query time for confirmation
+        ruling_planets_data = None
+        try:
+            now_iso = datetime.utcnow().isoformat()
+            lat = chart.get("latitude", 0)
+            lon = chart.get("longitude", 0)
+            if lat and lon:
+                ruling_planets_data = get_ruling_planets(now_iso, float(lat), float(lon))
+        except Exception as rp_err:
+            logger.warning(f"Ruling planets calculation failed: {rp_err}")
+
+        # Get KP prediction (planets already has full dict structure)
+        prediction = get_kp_prediction(
+            planets=planets,
+            cusps=cusps,
+            query_type=kp_query_type,
+            ruling_planets=ruling_planets_data,
+        )
+
+        # Get significators for all houses
+        significators = get_kp_significators(
+            planets=planets,
+            cusps=cusps,
+        )
+
+        # Format cusp_analysis for frontend (flatten field names)
+        cusp_raw = prediction.get("cusp_analysis", {})
+        cusp_analysis = {
+            "sign": cusp_raw.get("cusp_sign", ""),
+            "sign_lord": cusp_raw.get("sign_lord", ""),
+            "star_lord": cusp_raw.get("star_lord", ""),
+            "sub_lord": cusp_raw.get("sub_lord", ""),
+        }
+
+        # Format timing_hints as a flat list for frontend
+        timing_raw = prediction.get("timing_hints", {})
+        timing_hints = timing_raw.get("transit_triggers", []) + [
+            f"Watch {p.title()} dasha" for p in timing_raw.get("dasha_lords_to_watch", [])
+        ]
+
+        # Format significators with string keys for JSON
+        sigs_formatted = {}
+        for house_num, sig_data in significators.items():
+            sigs_formatted[str(house_num)] = sig_data
+
+        # --- KP Classical Timing: per-house significator check ---
+        # Real KP method: event happens when MD+AD+PD lords are ALL significators
+        # of the supporting houses (e.g., 2,7,11 for marriage).
+        kp_groups = KP_HOUSE_GROUPS.get(kp_query_type, {})
+        supporting_houses: list[int] = kp_groups.get("support", [])
+
+        # Build a set of planets that significate each supporting house.
+        house_significator_planets: set[str] = set()
+        for house in supporting_houses:
+            house_sigs = significators.get(house, {}).get("all_significators", [])
+            for sig in house_sigs:
+                house_significator_planets.add(sig.lower())
+
+        timing_windows: list[dict[str, Any]] = []
+        try:
+            birth_dt = chart["birth_datetime"]
+            if isinstance(birth_dt, str):
+                birth_dt = datetime.fromisoformat(birth_dt)
+
+            moon_data = chart.get("planets", {}).get("moon", {})
+            moon_lon = float(moon_data.get("longitude", 0)) if moon_data else 0.0
+
+            if moon_lon and house_significator_planets:
+                now = datetime.now(birth_dt.tzinfo) if birth_dt.tzinfo else datetime.now()
+                now_naive = now.replace(tzinfo=None) if now.tzinfo else now
+                lookback = now_naive.replace(year=now_naive.year - 10)
+                lookahead = now_naive.replace(year=now_naive.year + 15)
+
+                md_sequence = get_mahadasha_sequence(birth_dt, moon_lon, 120)
+
+                for md_item in md_sequence:
+                    md_start = md_item["start_date"]
+                    md_end = md_item["end_date"]
+                    md_lord = md_item["lord"]
+
+                    md_end_naive = md_end.replace(tzinfo=None) if md_end.tzinfo else md_end
+                    md_start_naive = md_start.replace(tzinfo=None) if md_start.tzinfo else md_start
+
+                    if md_end_naive < lookback:
+                        continue
+                    if md_start_naive > lookahead:
+                        break
+
+                    # MD lord must be a significator of supporting houses
+                    md_is_sig = md_lord in house_significator_planets
+                    if not md_is_sig:
+                        continue
+
+                    ad_sequence = get_antardasha_sequence(md_lord, md_start, md_end)
+                    for ad_item in ad_sequence:
+                        ad_start = ad_item["start_date"]
+                        ad_end = ad_item["end_date"]
+                        ad_start_naive = (
+                            ad_start.replace(tzinfo=None) if ad_start.tzinfo else ad_start
+                        )
+                        ad_end_naive = ad_end.replace(tzinfo=None) if ad_end.tzinfo else ad_end
+
+                        if ad_end_naive < lookback:
+                            continue
+                        if ad_start_naive > lookahead:
+                            break
+
+                        ad_lord = ad_item["lord"]
+                        ad_is_sig = ad_lord in house_significator_planets
+
+                        if not ad_is_sig:
+                            continue
+
+                        # Both MD and AD are significators — this is a relevant AD window
+                        is_past = ad_end_naive < now_naive
+                        is_current = ad_start_naive <= now_naive <= ad_end_naive
+
+                        # Drill into PD for precise timing (current + future only)
+                        pd_entries: list[dict[str, Any]] = []
+                        if not is_past:
+                            try:
+                                pd_seq = get_pratyantardasha_sequence(
+                                    ad_lord,
+                                    ad_start,
+                                    ad_end,
+                                )
+                                for pd_item in pd_seq:
+                                    pd_lord = (pd_item.get("lord") or "").lower()
+                                    pd_start_dt = pd_item.get("start_date")
+                                    pd_end_dt = pd_item.get("end_date")
+                                    if not pd_start_dt or not pd_end_dt:
+                                        continue
+                                    pd_is_sig = pd_lord in house_significator_planets
+                                    if pd_is_sig:
+                                        duration_days = (pd_end_dt - pd_start_dt).days
+
+                                        # SD drill-down: Sookshma periods where lord is also a significator
+                                        sd_entries: list[dict[str, Any]] = []
+                                        try:
+                                            sd_seq = get_sookshma_dasha_sequence(
+                                                pd_lord,
+                                                pd_start_dt,
+                                                pd_end_dt,
+                                            )
+                                            for sd_item in sd_seq:
+                                                sd_lord = (sd_item.get("lord") or "").lower()
+                                                if sd_lord in house_significator_planets:
+                                                    sd_start_dt = sd_item["start_date"]
+                                                    sd_end_dt = sd_item["end_date"]
+                                                    sd_entries.append(
+                                                        {
+                                                            "sd_lord": sd_lord.title(),
+                                                            "start": sd_start_dt.strftime(
+                                                                "%Y-%m-%d"
+                                                            ),
+                                                            "end": sd_end_dt.strftime("%Y-%m-%d"),
+                                                            "duration_days": (
+                                                                sd_end_dt - sd_start_dt
+                                                            ).days,
+                                                        }
+                                                    )
+                                        except Exception:
+                                            pass
+
+                                        pd_entries.append(
+                                            {
+                                                "pd_lord": pd_lord.title(),
+                                                "start": pd_start_dt.strftime("%Y-%m-%d"),
+                                                "end": pd_end_dt.strftime("%Y-%m-%d"),
+                                                "duration_days": duration_days,
+                                                "window_type": "peak",
+                                                "sd_periods": sd_entries,
+                                            }
+                                        )
+                            except Exception:
+                                pass
+
+                        timing_windows.append(
+                            {
+                                "md_lord": md_lord.title(),
+                                "ad_lord": ad_lord.title(),
+                                "start": ad_start.strftime("%Y-%m-%d"),
+                                "end": ad_end.strftime("%Y-%m-%d"),
+                                "is_past": is_past,
+                                "is_current": is_current,
+                                "pd_periods": pd_entries,
+                            }
+                        )
+
+                        if len(timing_windows) >= 12:
+                            break
+                    if len(timing_windows) >= 12:
+                        break
+        except Exception:
+            pass  # Timing windows are supplementary — don't fail the endpoint
+
+        # KP nakshatra transit triggers — Sun/Moon entering significator nakshatras
+        transit_trigger_dates: list[dict[str, Any]] = []
+        try:
+            if house_significator_planets:
+                sig_list = list(house_significator_planets)
+                scan_end = now_naive + timedelta(days=365)
+                transit_trigger_dates = get_nakshatra_transit_triggers(
+                    sig_list,
+                    now_naive,
+                    scan_end,
+                )
+        except Exception:
+            pass  # Transit triggers are supplementary
+
+        # Build ruling planets section for response (internal confirmation data)
+        ruling_planets_section = None
+        if ruling_planets_data:
+            ruling_planets_section = {
+                "planets": ruling_planets_data.get("ruling_planets", []),
+                "frequencies": ruling_planets_data.get("frequencies", {}),
+                "strongest": ruling_planets_data.get("strongest", ""),
+                "confirmed": prediction.get("ruling_planet_confirmation", False),
+            }
+
+        result = {
+            "event_type": request.event_type,
+            "prediction": {
+                "query_type": prediction.get("query_type", kp_query_type),
+                "primary_house": prediction.get("primary_house", 1),
+                "cusp_analysis": cusp_analysis,
+                "judgment": prediction.get("judgment", "mixed"),
+                "confidence": int(prediction.get("confidence", 0.5) * 100),
+                "timing_hints": timing_hints,
+                "explanation": prediction.get("explanation", ""),
+            },
+            "significators": sigs_formatted,
+            "timing": request.timing_preference,
+            "timing_windows": timing_windows,
+            "transit_triggers": transit_trigger_dates[:20],
+        }
+        if ruling_planets_section:
+            result["ruling_planets"] = ruling_planets_section
+        return result
 
     except HTTPException:
         raise

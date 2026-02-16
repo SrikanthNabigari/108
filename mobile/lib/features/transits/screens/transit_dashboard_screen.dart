@@ -28,6 +28,7 @@ class _TransitDashboardScreenState extends ConsumerState<TransitDashboardScreen>
   Map<String, dynamic>? _dashaData;
   List<dynamic>? _triggers;
   List<dynamic>? _yogas;
+  List<dynamic>? _aspects;
   bool _loading = true;
 
   @override
@@ -42,6 +43,7 @@ class _TransitDashboardScreenState extends ConsumerState<TransitDashboardScreen>
       _safeFetch(ApiConstants.analysisDasha),
       _safeFetch(ApiConstants.transitTriggers(days: 30)),
       _safeFetch(ApiConstants.analysisYogas),
+      _safeFetch(ApiConstants.transitAspects),
     ]);
 
     if (mounted) {
@@ -50,6 +52,7 @@ class _TransitDashboardScreenState extends ConsumerState<TransitDashboardScreen>
         _dashaData = futures[1]?['current'] as Map<String, dynamic>? ?? _demoDasha;
         _triggers = (futures[2]?['triggers'] as List?) ?? _demoTriggers;
         _yogas = (futures[3]?['yogas'] as List?) ?? [];
+        _aspects = futures[4]?['aspects'] as List?;
         _loading = false;
       });
     }
@@ -108,10 +111,14 @@ class _TransitDashboardScreenState extends ConsumerState<TransitDashboardScreen>
     final favorableCount = gocharaList.where((g) => g['net_effect'] == 'favorable').length;
     final blockedCount = gocharaList.where((g) => g['has_vedha'] == true).length;
 
-    // Active aspects
-    final activeAspects = (_snapshotData?['active_aspects'] as List?)
-        ?.map((a) => a as Map<String, dynamic>)
-        .toList() ?? _demoActiveAspects;
+    // Prefer dedicated aspects endpoint, fall back to snapshot, then demo
+    final activeAspects = (_aspects
+            ?.map((a) => a as Map<String, dynamic>)
+            .toList()) ??
+        (_snapshotData?['active_aspects'] as List?)
+            ?.map((a) => a as Map<String, dynamic>)
+            .toList() ??
+        _demoActiveAspects;
 
     return SingleChildScrollView(
       padding: S.pagePadding,

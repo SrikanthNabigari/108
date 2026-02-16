@@ -37,7 +37,7 @@ DEFAULT_APP_CONFIG: dict[str, Any] = {
         "analysis_transits": {"free": "full", "pro": "full", "premium": "full"},
         "analysis_strength": {"free": "full", "pro": "full", "premium": "full"},
         "analysis_atmakaraka": {"free": "full", "pro": "full", "premium": "full"},
-        "analysis_kp": {"free": "locked", "pro": "locked", "premium": "full"},
+        "analysis_kp": {"free": "full", "pro": "full", "premium": "full"},
         "compatibility_quick": {"free": "full", "pro": "full", "premium": "full"},
         "compatibility_full": {"free": "locked", "pro": "locked", "premium": "full"},
         "state_map": {"free": "full", "pro": "full", "premium": "full"},

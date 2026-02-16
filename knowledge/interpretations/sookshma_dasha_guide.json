@@ -1,0 +1,415 @@
+{
+  "sookshma_dasha_guide": {
+    "description": "Guidance for Sookshma Dasha (Level 4) periods — the subtle micro-timing layer of the Vimshottari system. These periods typically last 1-25 days and provide fine-grained timing for events triggered by the Pratyantardasha. Sookshma periods do not create new themes; they fine-tune and activate the existing PD agenda at a day-level granularity. The Sookshma lord acts as a temporary lens through which the PD energy is filtered.",
+    "sun": {
+      "duration_range": "1-5 days typical",
+      "theme": "Brief burst of authority, visibility, father-related matters",
+      "energy": "Pitta activation, ego expression, leadership impulse",
+      "micro_effects": {
+        "confidence": "Sudden spike in self-assurance and willpower",
+        "visibility": "Others notice you more; good window for presentations or public appearances",
+        "authority_contact": "Government dealings, boss interactions, or authority-related communications peak",
+        "father_theme": "Father or father-figure may contact or come to mind; paternal matters activate",
+        "vitality": "Brief energy boost; physical stamina increases for 1-3 days"
+      },
+      "favorable_activities": [
+        "Important meetings with authority figures",
+        "Government paperwork and applications",
+        "Seeking recognition or promotion",
+        "Health checkups, especially heart and eyes",
+        "Father-related matters and visits",
+        "Signing official documents",
+        "Public speaking or presentations",
+        "Starting a leadership initiative"
+      ],
+      "unfavorable_activities": [
+        "Avoiding responsibilities or authority figures",
+        "Engaging in ego conflicts or power struggles",
+        "Hiding from the spotlight when visibility is needed",
+        "Neglecting health issues during this activation window"
+      ],
+      "health_watch": "Brief eye strain or headache sensitivity; heart palpitations if Sun is afflicted natally. Stay hydrated and avoid overheating.",
+      "emotional_tone": "Assertive and self-directed. May feel a surge of pride or desire for recognition. If natally weak, brief frustration with lack of acknowledgment.",
+      "practical_advice": [
+        "Use this 1-5 day window for decisions requiring confidence and authority",
+        "Schedule important meetings and official signings during Sun SD",
+        "Good for public appearances, interviews, and self-promotion",
+        "Strengthen connection with father figures during this micro-window",
+        "Brief Surya mantra or Gayatri chanting amplifies positive effects",
+        "If Sun is afflicted natally, keep ego in check — the impulse will pass quickly"
+      ],
+      "blending_rules": {
+        "with_friendly_pd": "Sun SD amplifies PD themes with confidence and authority. Decisions made now carry conviction. Government or official channels support PD goals.",
+        "with_enemy_pd": "Ego clashes with PD lord's agenda. Brief power struggles or frustrated ambition. Avoid forcing outcomes — this tension lasts only 1-5 days.",
+        "with_neutral_pd": "Sun provides a distinct but brief authority window within the PD. Use it for official matters without disrupting PD flow."
+      }
+    },
+    "moon": {
+      "duration_range": "2-8 days typical",
+      "theme": "Emotional shifts, intuitive flashes, mother-related matters, mental sensitivity",
+      "energy": "Kapha-Vata fluctuation, emotional receptivity, heightened intuition",
+      "micro_effects": {
+        "emotions": "Mood becomes more fluid and responsive; feelings surface that were buried",
+        "intuition": "Gut feelings are sharper; dreams may carry messages",
+        "mother_theme": "Mother or maternal figure may reach out; nurturing energy activates",
+        "public_response": "Others respond more to your emotional state; social sensitivity heightens",
+        "comfort_seeking": "Desire for home comfort, familiar food, and emotional safety increases"
+      },
+      "favorable_activities": [
+        "Meditation and introspection",
+        "Connecting with mother or maternal figures",
+        "Creative and artistic work",
+        "Counseling or emotional conversations",
+        "Home cooking and domestic activities",
+        "Public relations and social engagement",
+        "Water-related activities or visiting water bodies",
+        "Starting a nurturing or caregiving initiative"
+      ],
+      "unfavorable_activities": [
+        "Making purely rational decisions — emotions will color judgment",
+        "Ignoring emotional signals from body or mind",
+        "Harsh or confrontational communication",
+        "Major financial commitments during emotional flux"
+      ],
+      "health_watch": "Fluid retention and bloating for 1-2 days. Sleep disturbances or vivid dreams. Hormonal sensitivity, especially around actual lunar phases. Drink warm water.",
+      "emotional_tone": "Sensitive and receptive. May feel nostalgic or emotionally tender. If Moon is well-placed natally, intuition is powerful. If afflicted, brief anxiety or mood swings.",
+      "practical_advice": [
+        "Pay attention to dreams and gut feelings during Moon SD — they carry useful information",
+        "Good time for emotional conversations and heart-to-heart talks",
+        "Creative projects benefit from this heightened sensitivity",
+        "Call or visit your mother; maternal bonds activate during this window",
+        "Practice calming pranayama (Chandra Bhedana) to stabilize emotions",
+        "Avoid making irreversible decisions on the most emotionally charged day",
+        "Eat light, sattvic food — the body responds to diet strongly during Moon SD"
+      ],
+      "blending_rules": {
+        "with_friendly_pd": "Moon SD deepens emotional engagement with PD themes. Relationships within PD context improve. Intuitive decisions about PD matters prove correct.",
+        "with_enemy_pd": "Emotional confusion around PD themes. May feel unsupported or misunderstood for 2-8 days. Avoid emotional reactions to PD setbacks — clarity returns after Moon SD ends.",
+        "with_neutral_pd": "A softer, more emotional layer over the PD. Use the window for relationship-building and creative work within PD themes."
+      }
+    },
+    "mars": {
+      "duration_range": "1-5 days typical",
+      "theme": "Energy bursts, quick actions needed, courage activation, sibling contact",
+      "energy": "Pitta surge, physical drive, competitive impulse, action-oriented",
+      "micro_effects": {
+        "energy_spike": "Physical energy suddenly increases; restlessness if not channeled",
+        "action_impulse": "Strong urge to take decisive action; waiting feels intolerable",
+        "courage": "Willingness to confront issues that were being avoided",
+        "sibling_theme": "Siblings may contact or come to mind; protective instincts activate",
+        "property_matters": "Brief activation of land, property, or real estate concerns"
+      },
+      "favorable_activities": [
+        "Physical exercise and sports",
+        "Taking decisive action on pending matters",
+        "Property-related paperwork or visits",
+        "Competitive activities and negotiations",
+        "Sibling bonding and protective actions",
+        "Starting construction or renovation",
+        "Surgery if medically planned",
+        "Confronting issues with courage and directness"
+      ],
+      "unfavorable_activities": [
+        "Suppressing physical energy — it will turn into irritability",
+        "Picking unnecessary fights or arguments",
+        "Handling sharp objects or fire carelessly",
+        "Making anger-driven decisions",
+        "Risky driving or reckless physical activity"
+      ],
+      "health_watch": "Brief spike in body heat, inflammation, or blood pressure. Accident-prone for 1-2 days if Mars is afflicted. Minor cuts, bruises, or burns possible. Channel energy through exercise.",
+      "emotional_tone": "Assertive to aggressive depending on natal Mars dignity. Impatience peaks. Desire to fix things immediately. If well-placed, courageous action. If afflicted, irritability and short temper.",
+      "practical_advice": [
+        "Channel the energy burst into physical activity — gym, sports, or brisk walking",
+        "This is the window for actions you have been postponing due to fear or hesitation",
+        "Handle property and land matters during Mars SD; brevity favors quick decisions",
+        "Reach out to siblings; Mars SD activates protective and bonding instincts",
+        "Avoid arguments during the first day — Mars energy needs a channel before it stabilizes",
+        "If Mars is debilitated or afflicted natally, be extra cautious with fire and sharp objects",
+        "Hanuman chalisa on the first day of Mars SD helps channel the energy constructively"
+      ],
+      "blending_rules": {
+        "with_friendly_pd": "Mars SD injects decisive energy into PD themes. Actions taken now produce quick results. Competitive advantage within PD domain.",
+        "with_enemy_pd": "Aggressive energy clashes with PD lord. Risk of hasty mistakes or confrontation. Wait 1-2 days before taking action on PD matters.",
+        "with_neutral_pd": "Mars adds an action-oriented burst to PD themes. Good for breaking stagnation within the PD period."
+      }
+    },
+    "mercury": {
+      "duration_range": "3-13 days typical",
+      "theme": "Communication opportunities, short trips, intellectual clarity, business deals",
+      "energy": "Vata activation, mental agility, verbal fluency, analytical sharpness",
+      "micro_effects": {
+        "communication": "Words flow easily; writing and speaking ability peaks",
+        "deals_and_trades": "Business opportunities surface; negotiations feel natural",
+        "learning": "Quick absorption of new information; skill acquisition accelerates",
+        "short_travel": "Short trips or commutes become productive; local networking improves",
+        "intellectual_clarity": "Complex problems feel solvable; analytical thinking sharpens"
+      },
+      "favorable_activities": [
+        "Writing important emails, proposals, or documents",
+        "Business negotiations and deal-making",
+        "Learning new skills or starting courses",
+        "Short business trips",
+        "Financial planning and accounting",
+        "Networking and professional socializing",
+        "Signing contracts (if Mercury is not afflicted)",
+        "Media and communication projects",
+        "Medical consultations for diagnosis"
+      ],
+      "unfavorable_activities": [
+        "Avoiding communication when clarity is available",
+        "Overthinking and analysis paralysis beyond day 7",
+        "Gossip or spreading unverified information",
+        "Making verbal promises without written confirmation"
+      ],
+      "health_watch": "Nervous energy and mental overstimulation. Skin sensitivity or minor allergic reactions. Speech-related strain if overused. Take breaks from screens; practice silence for short periods.",
+      "emotional_tone": "Mentally active and curious. Social energy increases. May feel scattered if too many communication channels open simultaneously. Wit and humor surface naturally.",
+      "practical_advice": [
+        "Mercury SD is the prime window for business deals and contract negotiations",
+        "Write that email, proposal, or article you have been drafting in your head",
+        "Short trips during Mercury SD tend to produce useful contacts or information",
+        "Good period for learning — sign up for that course or start that book",
+        "If Mercury is retrograde natally, double-check all written communication",
+        "Avoid verbal commitments without documentation — Mercury energy can make promises that logic later questions",
+        "Vishnu mantra or simple 'Om Budhaya Namaha' sharpens the mental channel",
+        "Network actively — people you meet during Mercury SD often become useful contacts"
+      ],
+      "blending_rules": {
+        "with_friendly_pd": "Mercury SD amplifies PD themes through clear communication and strategic thinking. Business and educational goals within PD context advance rapidly.",
+        "with_enemy_pd": "Mixed signals and miscommunication around PD themes. Contracts may have hidden clauses. Verify all information twice during this window.",
+        "with_neutral_pd": "Mercury adds an intellectual and communicative layer to PD themes. Good for planning and documentation of PD-related projects."
+      }
+    },
+    "jupiter": {
+      "duration_range": "3-12 days typical",
+      "theme": "Wisdom moments, teaching and learning opportunities, blessings, dharmic impulse",
+      "energy": "Sattva activation, expansive optimism, moral clarity, generosity impulse",
+      "micro_effects": {
+        "wisdom_flash": "Moments of clarity about life direction and purpose",
+        "teaching": "Desire to share knowledge; mentoring opportunities appear",
+        "blessings": "Support from elders, teachers, or well-wishers arrives",
+        "dharmic_pull": "Ethical decisions feel natural; conscience is strong",
+        "expansion": "Desire to think bigger; plans expand in scope and vision"
+      },
+      "favorable_activities": [
+        "Religious and spiritual practices",
+        "Teaching, mentoring, and counseling others",
+        "Applying for higher education or certifications",
+        "Seeking blessings from elders and gurus",
+        "Charitable donations and philanthropic activity",
+        "Financial expansion and investment planning",
+        "Legal matters and court appearances",
+        "Children-related decisions and activities",
+        "Long-distance communication with teachers or guides"
+      ],
+      "unfavorable_activities": [
+        "Ignoring wisdom or guidance that arrives during this window",
+        "Over-expanding or over-committing beyond actual capacity",
+        "Unethical shortcuts — Jupiter SD makes karmic consequences swifter",
+        "Dismissing spiritual or philosophical impulses as impractical"
+      ],
+      "health_watch": "Tendency toward overeating or rich food cravings. Liver and digestive system slightly sensitive. Weight gain if Jupiter is in a water sign. Moderation in diet is key.",
+      "emotional_tone": "Optimistic and generous. Faith in life strengthens. May feel philosophical or contemplative. If Jupiter is well-placed, genuine joy and gratitude surface. If afflicted, over-optimism without grounding.",
+      "practical_advice": [
+        "Jupiter SD is the window where wisdom arrives — be receptive to advice from elders",
+        "If you have been considering a donation or charitable act, this is the time",
+        "Good period for applying to educational programs or seeking certifications",
+        "Children-related matters — school admissions, health checkups — are favored",
+        "Legal matters tend to resolve favorably during Jupiter SD if your cause is just",
+        "Avoid overindulgence in food and drink; Jupiter expands whatever it touches",
+        "Brief period of genuine optimism — use it to plan big but commit only what you can sustain",
+        "Visit a temple or seek blessings from a guru during this micro-window"
+      ],
+      "blending_rules": {
+        "with_friendly_pd": "Jupiter SD blesses PD themes with wisdom, expansion, and divine support. Plans made during this window carry forward successfully. Financial and educational PD goals thrive.",
+        "with_enemy_pd": "Over-optimism masks PD challenges. May overcommit or underestimate obstacles. Maintain realistic assessment despite the positive Jupiter feeling.",
+        "with_neutral_pd": "Jupiter adds a philosophical and expansive dimension to PD themes. Good for reflection and strategic planning within PD context."
+      }
+    },
+    "venus": {
+      "duration_range": "4-16 days typical",
+      "theme": "Social events, aesthetic pleasures, romantic openings, creative expression",
+      "energy": "Kapha-Pitta balance, sensory enjoyment, artistic impulse, relational warmth",
+      "micro_effects": {
+        "social_life": "Invitations, gatherings, and social opportunities increase",
+        "romance": "Romantic feelings intensify; attraction and charm heighten",
+        "aesthetics": "Eye for beauty sharpens; desire to beautify surroundings or self",
+        "creativity": "Artistic expression flows naturally; creative blocks dissolve",
+        "comfort": "Desire for luxury, good food, and sensory pleasures peaks"
+      },
+      "favorable_activities": [
+        "Social events, parties, and gatherings",
+        "Romantic dates and relationship nurturing",
+        "Artistic and creative projects",
+        "Buying clothes, jewelry, or luxury items",
+        "Home decoration and beautification",
+        "Music, dance, and performing arts",
+        "Beauty treatments and grooming",
+        "Wedding-related planning or ceremonies",
+        "Financial transactions involving luxury goods",
+        "Reconciliation in strained relationships"
+      ],
+      "unfavorable_activities": [
+        "Excessive spending on luxuries beyond budget",
+        "Overindulgence in food, drink, or sensory pleasures",
+        "Starting relationships purely on physical attraction",
+        "Neglecting responsibilities for pleasure"
+      ],
+      "health_watch": "Reproductive system sensitivity. Kidney and urinary tract awareness needed. Sugar cravings and potential for overeating. Skin glows if Venus is well-placed; breakouts if afflicted.",
+      "emotional_tone": "Warm, sociable, and pleasure-seeking. Desire for harmony and beauty in all interactions. May feel lazy or indulgent if not balanced with discipline. Romantic idealism peaks.",
+      "practical_advice": [
+        "Venus SD is the prime social window — accept invitations and attend gatherings",
+        "If relationship matters need attention, Venus SD provides warmth and receptivity for resolution",
+        "Creative projects started or worked on during Venus SD carry an aesthetic quality",
+        "Good time for wardrobe updates, grooming, and self-presentation improvements",
+        "Buy luxury items you have been planning — taste and judgment for beauty are at their peak",
+        "Avoid purely impulsive romantic decisions; Venus SD creates strong but temporary attractions",
+        "Lakshmi mantra or 'Om Shukraya Namaha' enhances the positive Venus energy",
+        "If Venus is afflicted natally, watch for overspending — set a budget before the SD begins"
+      ],
+      "blending_rules": {
+        "with_friendly_pd": "Venus SD beautifies PD themes with harmony, creativity, and social grace. Relationships within PD context improve significantly. Financial gains through PD activities are likely.",
+        "with_enemy_pd": "Pleasure-seeking energy distracts from PD discipline requirements. May overspend or overindulge within PD context. Maintain focus on PD priorities despite the enjoyable Venus vibe.",
+        "with_neutral_pd": "Venus adds charm and social ease to PD themes. Good for relationship-building and creative problem-solving within PD domain."
+      }
+    },
+    "saturn": {
+      "duration_range": "3-15 days typical",
+      "theme": "Discipline windows, karmic encounters, patience testing, structural focus",
+      "energy": "Vata dominance, contraction and focus, duty awareness, karmic weight",
+      "micro_effects": {
+        "discipline": "Ability to focus on tedious but necessary tasks improves",
+        "karmic_encounter": "People or situations from the past may reappear briefly",
+        "patience_test": "Delays and obstacles test perseverance; results require waiting",
+        "structural_work": "Organizing, filing, repairing, and maintaining things feels right",
+        "duty_awareness": "Sense of responsibility and obligation heightens"
+      },
+      "favorable_activities": [
+        "Organizing and decluttering",
+        "Filing taxes, paperwork, and administrative tasks",
+        "Home and vehicle maintenance and repairs",
+        "Long-term planning and goal-setting",
+        "Visiting elderly family members",
+        "Clearing old debts or obligations",
+        "Discipline-based practices like fasting or structured meditation",
+        "Legal matters requiring patience and documentation",
+        "Job interviews requiring demonstrated experience and maturity"
+      ],
+      "unfavorable_activities": [
+        "Expecting quick results or instant gratification",
+        "Avoiding responsibilities and procrastinating",
+        "Taking shortcuts in professional or legal matters",
+        "Starting celebratory events or parties",
+        "Launching new creative or speculative ventures"
+      ],
+      "health_watch": "Joint stiffness and bone aches for 1-3 days. Lower back and knee sensitivity. Vata aggravation — dryness, constipation, and cold sensitivity. Warm oil massage (sesame) is highly beneficial.",
+      "emotional_tone": "Serious and duty-oriented. May feel heavy or melancholic for 1-2 days. Solitude feels comfortable. If Saturn is well-placed, disciplined productivity. If afflicted, brief depression or feelings of inadequacy.",
+      "practical_advice": [
+        "Saturn SD is the window for tasks you have been avoiding — paperwork, repairs, organizing",
+        "Do not fight the slowdown; use it for thorough, methodical work that requires patience",
+        "Elderly family members benefit from attention during Saturn SD; visit or call them",
+        "Clear old debts, return borrowed items, and resolve pending obligations",
+        "If feeling heavy or melancholic, it passes when Saturn SD ends — do not make major decisions from that emotional state",
+        "Warm sesame oil self-massage before bath relieves Saturn-related physical heaviness",
+        "Shani mantra or Hanuman Chalisa on Saturdays during Saturn SD is particularly effective",
+        "This is a good window for structured meditation and disciplined spiritual practices"
+      ],
+      "blending_rules": {
+        "with_friendly_pd": "Saturn SD adds structure and durability to PD outcomes. Work done during this window lasts longer. Patience within PD context is rewarded.",
+        "with_enemy_pd": "Double restriction and frustration. PD goals face delays and obstacles. Do not force progress — wait for Saturn SD to end before pushing forward on PD matters.",
+        "with_neutral_pd": "Saturn adds a practical, grounding quality to PD themes. Good for consolidation and maintenance of PD achievements."
+      }
+    },
+    "rahu": {
+      "duration_range": "3-14 days typical",
+      "theme": "Unexpected developments, unconventional moves, foreign connections, desire amplification",
+      "energy": "Vata-Pitta disruption, restless ambition, boundary-breaking impulse",
+      "micro_effects": {
+        "surprise_events": "Unexpected news, contacts, or developments arrive without warning",
+        "unconventional_impulse": "Desire to break from routine and try something new or different",
+        "foreign_connection": "Foreign contacts, international matters, or cross-cultural interactions activate",
+        "desire_amplification": "Whatever you want, you want it more intensely during Rahu SD",
+        "confusion_potential": "Information may be incomplete or misleading; verify before acting"
+      },
+      "favorable_activities": [
+        "Exploring new technologies and digital tools",
+        "Foreign trade and international communication",
+        "Innovation and out-of-the-box problem solving",
+        "Breaking free from outdated patterns or habits",
+        "Research into unusual or unexplored topics",
+        "Networking with people outside your usual circle",
+        "Digital marketing and social media initiatives",
+        "Travel to unfamiliar destinations"
+      ],
+      "unfavorable_activities": [
+        "Trusting unverified information or strangers blindly",
+        "Making irreversible commitments based on amplified desire",
+        "Substance use — Rahu SD amplifies addictive tendencies",
+        "Speculative financial decisions without thorough research",
+        "Occult practices without experienced guidance"
+      ],
+      "health_watch": "Sleep disturbances and unusual dreams for 2-3 nights. Mysterious symptoms that resolve on their own when Rahu SD ends. Anxiety or restlessness without clear cause. Avoid intoxicants strictly.",
+      "emotional_tone": "Restless, ambitious, and slightly obsessive. May feel that current life is too small or conventional. If Rahu is well-placed, innovative energy. If afflicted, paranoia or conspiracy thinking.",
+      "practical_advice": [
+        "Expect the unexpected during Rahu SD — flexibility is your best strategy",
+        "Foreign connections and technology initiatives get a boost; explore them actively",
+        "Do not sign important documents during the first 2 days of Rahu SD — information may be incomplete",
+        "If an unusual opportunity appears, investigate thoroughly before committing",
+        "Rahu amplifies desire — notice what you crave intensely and ask if it is genuine or inflated",
+        "Avoid alcohol, recreational substances, and anything addictive — Rahu SD magnifies dependency",
+        "Durga mantra or Rahu beej mantra helps navigate the unpredictable energy",
+        "Use this window for innovation and breaking stale patterns, but verify all facts carefully"
+      ],
+      "blending_rules": {
+        "with_friendly_pd": "Rahu SD accelerates PD themes through unconventional channels. Foreign or technology-based support for PD goals. Unexpected opportunities within PD domain.",
+        "with_enemy_pd": "Confusion and misdirection around PD matters. Rahu amplifies PD frustrations into obsessive worry. Step back and wait for clarity — do not act on incomplete information.",
+        "with_neutral_pd": "Rahu adds an unconventional twist to PD themes. May introduce foreign or technological elements into PD domain. Stay adaptable."
+      }
+    },
+    "ketu": {
+      "duration_range": "1-5 days typical",
+      "theme": "Spiritual insights, letting go moments, past-life flashes, detachment impulse",
+      "energy": "Pitta-Vata dissolution, inward pull, karmic release, non-attachment",
+      "micro_effects": {
+        "spiritual_insight": "Sudden clarity about spiritual matters or life purpose",
+        "letting_go": "Ability to release attachments, grudges, or outdated patterns",
+        "past_life_flash": "Deja vu experiences; unexplained familiarity with places, people, or skills",
+        "detachment": "Temporary disinterest in material pursuits; inner peace surfaces",
+        "healing": "Alternative healing modalities become unusually effective"
+      },
+      "favorable_activities": [
+        "Meditation and contemplative practices",
+        "Decluttering and donating unused possessions",
+        "Forgiveness practices and releasing grudges",
+        "Alternative healing treatments (Reiki, acupuncture, Ayurveda)",
+        "Spiritual reading and self-inquiry",
+        "Visiting ashrams, temples, or sacred sites",
+        "Research and deep investigation",
+        "Completing and closing pending matters",
+        "Ancestor prayers and pitru-related rituals"
+      ],
+      "unfavorable_activities": [
+        "Starting new material ventures or business launches",
+        "Expecting clarity about worldly goals — Ketu obscures material direction",
+        "Fighting the detachment impulse with forced activity",
+        "Making major purchase decisions — perceived value is distorted"
+      ],
+      "health_watch": "Brief mysterious symptoms — headaches, dizziness, or fatigue without clear cause. Skin sensitivity. Stomach upset from sudden dietary changes. Symptoms typically resolve when Ketu SD ends.",
+      "emotional_tone": "Detached and introspective. May feel disconnected from daily concerns. If Ketu is well-placed, serene inner peace. If afflicted, confusion about direction and purpose. Not a time for worldly ambition.",
+      "practical_advice": [
+        "Ketu SD is the window for spiritual breakthroughs — sit in meditation even if only for 15 minutes",
+        "If something feels ready to be released — a grudge, an attachment, an old habit — Ketu SD supports letting go",
+        "Do not force material productivity; Ketu SD is for inner work and completion, not new starts",
+        "Pay attention to deja vu experiences and inexplicable knowing — they carry valid information",
+        "Alternative healing treatments are unusually effective during Ketu SD; schedule them here",
+        "This is the best micro-window for ancestor prayers (pitru tarpana) and family lineage healing",
+        "Ganesha mantra or Ketu beej mantra supports smooth navigation of the dissolution energy",
+        "If you feel directionless, trust that clarity returns when Ketu SD ends — this is temporary"
+      ],
+      "blending_rules": {
+        "with_friendly_pd": "Ketu SD brings spiritual depth to PD themes. Material PD goals may pause briefly while inner alignment occurs. PD achievements feel more meaningful after Ketu SD reflection.",
+        "with_enemy_pd": "Temporary confusion and directionlessness within PD domain. Material PD progress stalls for 1-5 days. Do not abandon PD goals — this is a brief dissolution, not a permanent shift.",
+        "with_neutral_pd": "Ketu adds a contemplative and completive quality to PD themes. Good for wrapping up PD tasks and reflecting on PD direction."
+      }
+    }
+  }
+}

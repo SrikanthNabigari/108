@@ -27,6 +27,7 @@ from packages.core.src.constants import (
     NAKSHATRA_SPAN,
 )
 from packages.cosmos.src.nakshatras import NAKSHATRA_LORDS, longitude_to_nakshatra
+from packages.self.src.combustion import check_combustion
 
 # ============================================================================
 # TYPE DEFINITIONS
@@ -201,6 +202,30 @@ KP_HOUSE_GROUPS: dict[str, dict[str, Any]] = {
     "property": {"primary": 4, "support": [4, 11], "deny": [3, 5, 12]},
     "legal": {"primary": 6, "support": [6, 11], "deny": [7, 12]},
     "spiritual": {"primary": 12, "support": [5, 9, 12], "deny": [1, 3, 10]},
+}
+
+# KP significator level weights (KP Reader 6 standard)
+_SIG_WEIGHTS: dict[str, int] = {
+    "level_1": 4,  # Planets in stars of occupants (strongest)
+    "level_2": 3,  # Occupants
+    "level_3": 2,  # Planets in stars of house lord
+    "level_4": 1,  # House lord (weakest)
+}
+
+# House labels for rich explanations
+_HOUSE_LABELS: dict[int, str] = {
+    1: "self/personality",
+    2: "family/wealth",
+    3: "siblings/short travel",
+    4: "home/mother/education",
+    5: "children/creativity",
+    6: "enemies/service/health issues",
+    7: "marriage/partnerships",
+    8: "longevity/obstacles",
+    9: "fortune/father/higher learning",
+    10: "career/status",
+    11: "gains/income/friends",
+    12: "losses/foreign/spirituality",
 }
 
 # Cache for sub-lord table
@@ -626,6 +651,149 @@ def get_ruling_planets(
     )
 
 
+def _get_planet_modifiers(
+    planet_name: str,
+    planets: dict[str, dict[str, Any]],
+) -> dict[str, Any]:
+    """Get retrograde and combustion modifiers for a planet.
+
+    Per KP doctrine, retrograde means "delayed but not denied" (no confidence
+    penalty). Combustion reduces effectiveness by up to 15%.
+
+    Args:
+        planet_name: Planet name (lowercase).
+        planets: Dict of planet positions.
+
+    Returns:
+        Dict with is_retrograde, is_combust, combustion_strength_loss, and notes.
+    """
+    pdata = planets.get(planet_name, {})
+    if not isinstance(pdata, dict):
+        return {
+            "is_retrograde": False,
+            "is_combust": False,
+            "combustion_strength_loss": 0,
+            "notes": [],
+        }
+
+    is_retro = pdata.get("is_retrograde", False)
+    notes: list[str] = []
+
+    if is_retro:
+        notes.append(f"{planet_name.title()} is retrograde — delayed but not denied")
+
+    # Check combustion (requires Sun position)
+    sun_data = planets.get("sun", {})
+    sun_lon = sun_data.get("longitude") if isinstance(sun_data, dict) else None
+    planet_lon = pdata.get("longitude")
+    is_combust = False
+    strength_loss = 0
+
+    if (
+        planet_lon is not None
+        and sun_lon is not None
+        and planet_name not in ("sun", "rahu", "ketu")
+    ):
+        comb_result = check_combustion(
+            planet=planet_name,
+            planet_lon=planet_lon,
+            sun_lon=sun_lon,
+            is_retrograde=is_retro,
+        )
+        is_combust = comb_result.get("is_combust", False)
+        if is_combust:
+            # strength_loss from combustion is 0-1 scale; map to 0-15% confidence reduction
+            raw_loss = comb_result.get("strength_loss", 0)
+            strength_loss = min(15, round(raw_loss * 15))
+            deep = " (deep)" if comb_result.get("is_deep_combust") else ""
+            notes.append(f"{planet_name.title()} is combust{deep} — delays possible")
+
+    return {
+        "is_retrograde": is_retro,
+        "is_combust": is_combust,
+        "combustion_strength_loss": strength_loss,
+        "notes": notes,
+    }
+
+
+def _build_rich_explanation(
+    sub_lord: str,
+    star_lord: str,
+    sub_lord_significates: list[int],
+    supporting_houses: list[int],
+    denying_houses: list[int],
+    overlap_support: int,
+    overlap_deny: int,
+    star_lord_used: bool = False,
+    star_lord_significates: list[int] | None = None,
+    modifier_notes: list[str] | None = None,
+) -> str:
+    """Build a rich explanation with house labels.
+
+    Args:
+        sub_lord: Sub-lord planet name.
+        star_lord: Star lord planet name.
+        sub_lord_significates: Houses the sub-lord significates.
+        supporting_houses: Houses that support the matter.
+        denying_houses: Houses that deny the matter.
+        overlap_support: Count of supporting overlap.
+        overlap_deny: Count of denying overlap.
+        star_lord_used: Whether star lord was used as backup.
+        star_lord_significates: Houses the star lord significates (if used).
+        modifier_notes: Notes about retrograde/combustion modifiers.
+
+    Returns:
+        Rich explanation string with house labels.
+    """
+
+    def _house_list(houses: list[int]) -> str:
+        parts = []
+        for h in houses:
+            label = _HOUSE_LABELS.get(h, "")
+            parts.append(f"{h} ({label})" if label else str(h))
+        return ", ".join(parts)
+
+    # Sub-lord significates with labels
+    sup_overlap = sorted(set(sub_lord_significates) & set(supporting_houses))
+    den_overlap = sorted(set(sub_lord_significates) & set(denying_houses))
+
+    parts: list[str] = []
+
+    if sup_overlap:
+        parts.append(
+            f"Sub-lord {sub_lord.title()} significates houses {_house_list(sup_overlap)} — "
+            f"{'strong' if overlap_support >= 2 else 'moderate'} support."
+        )
+    if den_overlap:
+        deny_strength = "strong" if overlap_deny >= 2 else "some"
+        parts.append(
+            f"Sub-lord {sub_lord.title()} also significates denying houses "
+            f"{_house_list(den_overlap)} — {deny_strength} opposition."
+        )
+    if not sup_overlap and not den_overlap:
+        parts.append(
+            f"Sub-lord {sub_lord.title()} significates houses {sub_lord_significates} "
+            f"with no direct overlap to supporting or denying houses."
+        )
+
+    # Star lord backup
+    if star_lord_used and star_lord_significates:
+        star_sup = sorted(set(star_lord_significates) & set(supporting_houses))
+        star_den = sorted(set(star_lord_significates) & set(denying_houses))
+        if star_sup:
+            parts.append(f"Star lord {star_lord.title()} backs via houses {_house_list(star_sup)}.")
+        if star_den:
+            parts.append(
+                f"Star lord {star_lord.title()} also indicates houses {_house_list(star_den)}."
+            )
+
+    # Modifier notes (retrograde, combustion)
+    if modifier_notes:
+        parts.extend(modifier_notes)
+
+    return " ".join(parts)
+
+
 def analyze_kp_house(
     house_number: int,
     planets: dict[str, dict[str, Any]],
@@ -689,9 +857,38 @@ def analyze_kp_house(
     overlap_deny = len(set(sub_lord_significates) & set(denying_houses))
     total_overlap = overlap_support + overlap_deny
 
+    # Phase 1: Star lord backup when sub-lord has zero overlap
+    star_lord_used = False
+    star_lord_name = kp_info["star_lord"]
+    star_lord_significates: list[int] = []
+    _STAR_LORD_DAMPENING = 0.7  # Star lord is less precise than sub-lord
+
     if total_overlap == 0:
-        strength = 0.5
-        judgment = "neutral"
+        # Check star lord's significations as backup judge (classical KP)
+        for check_house in range(1, 13):
+            check_sigs = significators.get(check_house, {}).get("all_significators", [])
+            if star_lord_name in check_sigs:
+                star_lord_significates.append(check_house)
+
+        star_support = len(set(star_lord_significates) & set(supporting_houses))
+        star_deny = len(set(star_lord_significates) & set(denying_houses))
+        star_total = star_support + star_deny
+
+        if star_total > 0:
+            star_lord_used = True
+            raw_strength = star_support / star_total
+            # Apply 70% dampening since star lord is less precise
+            strength = 0.5 + (raw_strength - 0.5) * _STAR_LORD_DAMPENING
+            if raw_strength > 0.6:
+                judgment = "favorable"
+            elif raw_strength < 0.4:
+                judgment = "unfavorable"
+            else:
+                judgment = "mixed"
+        else:
+            # Neither sub-lord nor star lord have overlap — truly neutral
+            strength = 0.5
+            judgment = "mixed"
     else:
         strength = overlap_support / total_overlap
         if strength > 0.6:
@@ -701,10 +898,25 @@ def analyze_kp_house(
         else:
             judgment = "mixed"
 
-    explanation = (
-        f"Sub-lord {kp_info['sub_lord'].title()} significates houses {sub_lord_significates}. "
-        f"Overlap with supporting houses {supporting_houses}: {overlap_support}. "
-        f"Overlap with denying houses {denying_houses}: {overlap_deny}."
+    # Phase 4: Retrograde & combustion modifiers for sub-lord
+    modifiers = _get_planet_modifiers(sub_lord, planets)
+    if modifiers["combustion_strength_loss"] > 0:
+        # Combustion reduces confidence — shift strength toward 0.5
+        penalty = modifiers["combustion_strength_loss"] / 100.0
+        strength = strength + (0.5 - strength) * penalty
+
+    # Phase 6: Rich explanation with house labels
+    explanation = _build_rich_explanation(
+        sub_lord=sub_lord,
+        star_lord=star_lord_name,
+        sub_lord_significates=sub_lord_significates,
+        supporting_houses=supporting_houses,
+        denying_houses=denying_houses,
+        overlap_support=overlap_support,
+        overlap_deny=overlap_deny,
+        star_lord_used=star_lord_used,
+        star_lord_significates=star_lord_significates if star_lord_used else None,
+        modifier_notes=modifiers["notes"] if modifiers["notes"] else None,
     )
 
     return KPHouseAnalysis(
@@ -723,10 +935,46 @@ def analyze_kp_house(
     )
 
 
+def _compute_weighted_score(
+    significators: dict[int, KPSignificators],
+    houses: list[int],
+) -> float:
+    """Compute weighted significator score for a set of houses.
+
+    Uses KP Reader 6 standard weights:
+    - Level 1 (planets in stars of occupants) = 4
+    - Level 2 (occupants) = 3
+    - Level 3 (planets in stars of house lord) = 2
+    - Level 4 (house lord) = 1
+
+    Args:
+        significators: Dict of house number to KPSignificators.
+        houses: List of house numbers to score.
+
+    Returns:
+        Total weighted score.
+    """
+    score = 0.0
+    counted: set[str] = set()
+    for house in houses:
+        sigs = significators.get(house)
+        if not sigs:
+            continue
+        for level_key, weight in _SIG_WEIGHTS.items():
+            for planet in sigs.get(level_key, []):
+                # Count each planet only once per house group at its highest weight
+                key = f"{planet}:{house}"
+                if key not in counted:
+                    counted.add(key)
+                    score += weight
+    return score
+
+
 def get_kp_prediction(
     planets: dict[str, dict[str, Any]],
     cusps: list[float],
     query_type: str,
+    ruling_planets: KPRulingPlanets | None = None,
 ) -> KPPredictionResult:
     """Full KP prediction for a life question.
 
@@ -735,6 +983,7 @@ def get_kp_prediction(
         cusps: List of 12 house cusp longitudes.
         query_type: Query type ('marriage', 'career', 'children', 'wealth', 'health',
                    'education', 'travel_short', 'travel_foreign', 'property', 'legal', 'spiritual').
+        ruling_planets: Optional ruling planets at query time for confirmation.
 
     Returns:
         Complete KP prediction with judgment, confidence, and timing hints.
@@ -758,7 +1007,7 @@ def get_kp_prediction(
     # Get significators
     significators = get_kp_significators(planets, cusps)
 
-    # Count supporting vs denying significators
+    # Collect unique supporting/denying significators for response
     supporting_significators: list[str] = []
     denying_significators: list[str] = []
 
@@ -774,32 +1023,63 @@ def get_kp_prediction(
             if sig not in denying_significators:
                 denying_significators.append(sig)
 
-    # Calculate balance
-    if len(supporting_significators) + len(denying_significators) == 0:
-        balance = 0.5
-    else:
-        balance = len(supporting_significators) / (
-            len(supporting_significators) + len(denying_significators)
-        )
+    # Phase 2: Weighted significator scoring (KP Reader 6)
+    support_score = _compute_weighted_score(significators, supporting_houses)
+    deny_score = _compute_weighted_score(significators, denying_houses)
+    total_score = support_score + deny_score
 
-    # Determine judgment and confidence
+    balance = 0.5 if total_score == 0 else support_score / total_score
+
+    # Determine judgment and confidence with graduated ranges
     if house_analysis["judgment"] == "favorable":
         judgment = "favorable"
-        confidence = 0.7 + (balance * 0.25)
+        # Range: 0.65 - 0.95
+        confidence = 0.65 + (balance * 0.30)
     elif house_analysis["judgment"] == "unfavorable":
         judgment = "unfavorable"
-        confidence = 0.3 + ((1 - balance) * 0.25)
+        # Range: 0.65 - 0.95 (inverted)
+        confidence = 0.65 + ((1 - balance) * 0.30)
     else:
         judgment = "mixed"
-        confidence = 0.5
+        # Range: 0.35 - 0.65 (spectrum instead of flat 0.50)
+        confidence = 0.35 + (balance * 0.30)
 
-    confidence = min(1.0, max(0.1, confidence))
+    # Phase 3: Ruling planet confirmation
+    rp_confirmed = False
+    rp_match_count = 0
+    if ruling_planets is not None:
+        rp_list = ruling_planets.get("ruling_planets", [])
+        rp_freq = ruling_planets.get("frequencies", {})
+        for sig in supporting_significators:
+            if sig in rp_list:
+                rp_confirmed = True
+                freq = rp_freq.get(sig, 1)
+                rp_match_count += freq
+                confidence += 0.03 * freq  # Boost per frequency
+        if not rp_confirmed:
+            confidence -= 0.05  # Slight reduction when no match
+
+    # Phase 4: Combustion modifier on key significators
+    modifier_notes: list[str] = []
+    for sig_planet in supporting_significators[:3]:
+        mods = _get_planet_modifiers(sig_planet, planets)
+        if mods["combustion_strength_loss"] > 0:
+            penalty = mods["combustion_strength_loss"] / 100.0
+            confidence -= penalty
+        modifier_notes.extend(mods["notes"])
+
+    confidence = min(0.95, max(0.1, confidence))
 
     # Get timing hints (planets to watch)
     dasha_lords_to_watch = supporting_significators[:3] if supporting_significators else []
     transit_triggers = [
         f"{planet.title()} transit over {primary_house}th cusp" for planet in dasha_lords_to_watch
     ]
+
+    # Build explanation — append modifier notes to house analysis explanation
+    explanation = house_analysis["explanation"]
+    if modifier_notes:
+        explanation += " " + " ".join(modifier_notes)
 
     return KPPredictionResult(
         query_type=query_type,
@@ -809,15 +1089,17 @@ def get_kp_prediction(
             "supporting_significators": supporting_significators,
             "denying_significators": denying_significators,
             "balance": round(balance, 2),
+            "support_score": round(support_score, 1),
+            "deny_score": round(deny_score, 1),
         },
-        ruling_planet_confirmation=True,  # Would need ruling planets to confirm
+        ruling_planet_confirmation=rp_confirmed,
         judgment=judgment,
         confidence=round(confidence, 2),
         timing_hints={
             "dasha_lords_to_watch": dasha_lords_to_watch,
             "transit_triggers": transit_triggers,
         },
-        explanation=house_analysis["explanation"],
+        explanation=explanation,
     )
 
 

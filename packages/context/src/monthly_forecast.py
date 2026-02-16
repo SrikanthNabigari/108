@@ -122,11 +122,12 @@ def _get_dasha_transitions(
     month_start: datetime,
     month_end: datetime,
 ) -> list[dict[str, Any]]:
-    """Find dasha transitions (MD/AD/PD) within the month."""
+    """Find dasha transitions (MD/AD/PD/SD) within the month."""
     from packages.context.src.dasha import (
         get_antardasha_sequence,
         get_mahadasha_sequence,
         get_pratyantardasha_sequence,
+        get_sookshma_dasha_sequence,
     )
 
     transitions: list[dict[str, Any]] = []
@@ -193,6 +194,29 @@ def _get_dasha_transitions(
                                     "level": "pratyantardasha",
                                 }
                             )
+
+                        # Check SD transitions within each PD
+                        if pd["start_date"] <= month_end and pd["end_date"] >= month_start:
+                            try:
+                                sookshmas = get_sookshma_dasha_sequence(
+                                    pd["lord"],
+                                    pd["start_date"],
+                                    pd["end_date"],
+                                )
+                            except Exception:
+                                continue
+
+                            for k, sd in enumerate(sookshmas):
+                                if month_start <= sd["start_date"] <= month_end:
+                                    prev_sd = sookshmas[k - 1]["lord"] if k > 0 else "previous"
+                                    transitions.append(
+                                        {
+                                            "date": sd["start_date"].strftime("%Y-%m-%d"),
+                                            "from": f"SD: {prev_sd.title()}",
+                                            "to": f"SD: {sd['lord'].title()}",
+                                            "level": "sookshma",
+                                        }
+                                    )
 
     transitions.sort(key=lambda x: x["date"])
     return transitions
@@ -571,9 +595,19 @@ def get_monthly_forecast(
     # ---- 2. Dasha transitions ----
     dasha_transitions = _get_dasha_transitions(birth_dt, moon_longitude, month_start, month_end)
 
-    dasha_context = {
+    dasha_pd = "unknown"
+    dasha_sd = "unknown"
+    if dasha_info:
+        if dasha_info.get("pratyantardasha"):
+            dasha_pd = dasha_info["pratyantardasha"]["lord"]
+        if dasha_info.get("sookshma_dasha"):
+            dasha_sd = dasha_info["sookshma_dasha"]["lord"]
+
+    dasha_context: dict[str, Any] = {
         "mahadasha": dasha_md,
         "antardasha": dasha_ad,
+        "pratyantardasha": dasha_pd,
+        "sookshma": dasha_sd,
         "transitions": dasha_transitions,
     }
 
