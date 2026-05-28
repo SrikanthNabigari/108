@@ -275,12 +275,13 @@ h3 {{
 }}
 
 /* ── PARAGRAPHS ── */
+/* Ragged-right (not justified) on a narrow A4 column — avoids the rivers and
+   over-hyphenation that read as cheap; editorial-premium sets left-aligned. */
 p {{
     margin: 0.6em 0 0.9em 0;
-    text-align: justify;
-    text-justify: inter-word;
-    hyphens: auto;
-    color: #d4d4d4;
+    text-align: left;
+    hyphens: none;
+    color: #d6d6d6;
 }}
 
 em {{
@@ -419,8 +420,8 @@ p, blockquote, table, ul, ol {{ orphans: 2; widows: 2; }}
 }}
 
 .caption-small {{
-    font-size: 8.5pt;
-    color: #888;
+    font-size: 9pt;
+    color: #9a9a9a;
     text-align: center;
     font-style: italic;
     margin-top: 12pt;
@@ -597,6 +598,12 @@ p, blockquote, table, ul, ol {{ orphans: 2; widows: 2; }}
 .cusp-note p:first-child {{ margin-top: 0; }}
 .cusp-note p:last-child {{ margin-bottom: 0; }}
 
+/* Life Story Spine — start on a fresh page so its 24pt heading never orphans
+   at the bottom of the preceding section. */
+.life-story-spine {{
+    page-break-before: always;
+}}
+
 /* ── ADD-ON SECTIONS (deep-dives + year-window readings) ──
    NOTE: do NOT set `page-break-inside: avoid` — many add-ons exceed a
    single page and WeasyPrint will then render an EMPTY placeholder page
@@ -640,8 +647,8 @@ p, blockquote, table, ul, ol {{ orphans: 2; widows: 2; }}
 .addon-section[data-domain="career"]       .addon-badge {{ background: #e6c98a; }}  /* Sun */
 .addon-section[data-domain="relationships"] .addon-badge {{ background: #c9a5a5; }} /* Venus */
 .addon-section[data-domain="wealth"]       .addon-badge {{ background: #d4a843; }}  /* Jupiter */
-.addon-section[data-domain="health"]       .addon-badge {{ background: #c84a3e; }}  /* Mars */
-.addon-section[data-domain="spiritual"]    .addon-badge {{ background: #c8843f; }}  /* Ketu */
+.addon-section[data-domain="health"]       .addon-badge {{ background: #c84a3e; color: #f1ede5; }}  /* Mars */
+.addon-section[data-domain="spiritual"]    .addon-badge {{ background: #c8843f; color: #1a1208; }}  /* Ketu */
 .addon-section[data-domain="foreign"]      .addon-badge {{ background: #8b8d92; color: #f1ede5; }} /* Rahu */
 .addon-section[data-domain="education"]    .addon-badge {{ background: #3d8b6e; color: #f1ede5; }} /* Mercury */
 .addon-section[data-domain="property"]     .addon-badge {{ background: #9d7bb8; color: #f1ede5; }} /* Saturn */
@@ -731,9 +738,9 @@ p, blockquote, table, ul, ol {{ orphans: 2; widows: 2; }}
     margin: 2pt 0 4pt 0;
 }}
 .diagram-card-caption {{
-    font-size: 8.5pt;
-    line-height: 1.5;
-    color: #aaa;
+    font-size: 9pt;
+    line-height: 1.55;
+    color: #b0b0b0;
     text-align: left;
     margin-top: 6pt;
     padding-top: 6pt;

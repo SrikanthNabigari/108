@@ -85,12 +85,13 @@ VOICE FOR 108 LIFE READING:
 - 25-35 year old Indian audience. Reference modern life (work, apps, relationships, money) naturally.
 - Say hard things directly. Don't sugarcoat. Don't moralize.
 - Use specific dates and house/planet placements; never vague generalities.
-- QUOTE THE NUMBERS the dossier gives you. When you cite strength/weakness, name
-  the actual figure — Ashtakavarga bindus ("Mercury holds 5/8 in its own sign,
-  34/56 total"), Shadbala virupas vs. required, the exact degree, the chara karaka
-  by name (Atmakaraka/Amatyakaraka/Darakaraka/Putrakaraka), the avastha, the
-  pratyantar date. Never write "thin bindu score" or "strength sits below 40%" —
-  write the number. Specific numbers are what make the reading feel computed, not guessed.
+- QUOTE NUMBERS THAT CARRY A NAMED COMPARISON — never a bare floating decimal.
+  Good: "Mercury holds 5 of 8 bindus in its own sign", "Venus's composite strength
+  sits below the 40% threshold", the exact degree, the chara karaka by name
+  (Atmakaraka/Amatyakaraka/Darakaraka/Putrakaraka), the avastha, the pratyantar
+  date. Bad: a bare "45%" or "50/56" with no referent (reads like a spreadsheet),
+  AND vague hand-waves like "thin bindu score". A number tied to a specific named
+  claim is what makes the reading feel computed; a number floating alone is noise.
 - Length: each section 200-450 words. SHORTER IS BETTER.
 - No bullet lists in narrative sections (data sections handle structure).
 
@@ -622,6 +623,45 @@ OUTPUT: Markdown only. 400-600 words. No preamble.
 """
 
 
+def _canonical_transit_block(data: dict[str, Any], years: int) -> str:
+    """Real Saturn/Jupiter/Rahu sign-ingress dates for the next N years.
+
+    Agents otherwise invent (and contradict) slow-planet transit dates. Feed
+    them the computed truth so they cite it instead of guessing.
+    """
+    try:
+        from datetime import datetime
+
+        from packages.context.src.slow_transits_calendar import (
+            compute_slow_transits_calendar,
+        )
+
+        now = datetime.fromisoformat(data["meta"]["generated_at"]).replace(tzinfo=None)
+        horizon_days = years * 365.25
+        events = compute_slow_transits_calendar(data, years_ahead=years + 1)
+        lines: list[str] = []
+        for e in events:
+            try:
+                d = datetime.fromisoformat(e["date"]).replace(tzinfo=None)
+            except Exception:
+                continue
+            if d < now or (d - now).days > horizon_days:
+                continue
+            hl = e.get("house_from_lagna")
+            lines.append(
+                f"  - {e['date'][:10]}: {e['planet'].title()} enters {e['to_sign']}"
+                f" (house {hl} from Lagna)"
+            )
+        if not lines:
+            return ""
+        return (
+            "CANONICAL TRANSIT DATES (Saturn/Jupiter/Rahu sign-ingresses — "
+            "USE THESE EXACT DATES; do NOT invent or estimate others):\n" + "\n".join(lines)
+        )
+    except Exception:
+        return ""
+
+
 def build_prompt_next_5_years(data: dict[str, Any]) -> str:
     """Add-on: Next 5 Years Map."""
     knowledge = gather_for_section("where_you_are_now", data)
@@ -682,10 +722,15 @@ MAHADASHA SHIFTS in next 5 years:
 ANTARDASHA SHIFTS in next 5 years:
 {ad_block}
 
+{_canonical_transit_block(data, 5)}
+
 REFERENCE MATERIAL:
 {knowledge}
 
 WRITE: A 5-year strategic map. NOT a year-by-year forecast — a chapter-by-chapter view.
+Cite slow-planet transits ONLY from the CANONICAL TRANSIT DATES block above; if a
+date isn't listed there, speak in relative terms ("later in the window") rather than
+inventing a specific date. Never state a transit date earlier than the year you're describing.
 
 OPENING (3 sentences): name dominant MD + ADs spanning the window; name 1-2 slow planet transits running through it; classical maxim that frames it.
 
@@ -1144,15 +1189,13 @@ YOUR OUTPUT — EXACTLY TWO DELIMITED BLOCKS:
 ===COVER_HOOK_END===
 
 ===CLOSING_CTA_START===
-### The three moves that matter most
+### What it comes down to
 
-1. **[Action 1]** — single-sentence rationale tied to a specific placement/dasha.
-2. **[Action 2]** — same.
-3. **[Action 3]** — same.
+[2-3 sentences naming the SINGLE throughline the whole reading points to. Do NOT re-list the action items — the reader just read "Your Move" and will see them as a repeat. Synthesize the pattern, don't repeat the checklist.]
 
 ### The one date to circle
 
-**[Specific date or window]** — what shifts then, what to do, what to avoid.
+**[Specific date or window]** — what shifts then, what to do, what to avoid. (Pick the ONE most decisive date; do not restate the full action list.)
 
 ### A final word
 
@@ -1269,6 +1312,14 @@ def build_all_prompts(data: dict[str, Any]) -> dict[str, str]:
         builder = addon_builders.get(addon)
         if builder:
             prompts[addon] = builder(data)
+    # Ensure EVERY section prompt carries the shared voice rules (incl. the
+    # numeric-specificity rule). Several builders (next_12_months,
+    # hidden_strengths, structural_challenges, the multi-year add-ons, and all
+    # deep-dives via _domain_prompt) historically omitted it, so the rule only
+    # reached ~6 of 23 sections. Prepend once, idempotently.
+    for sid, prompt in prompts.items():
+        if "VOICE FOR 108 LIFE READING:" not in prompt:
+            prompts[sid] = f"{VOICE_GUIDELINES}\n\n{prompt}"
     return prompts
 
 
@@ -1287,27 +1338,72 @@ def quick_voice_intro(data: dict[str, Any]) -> str:
 
 def quick_who_you_are(data: dict[str, Any]) -> str:
     """Section 1 supplement — yoga voice descriptions."""
-    yogas = data.get("yogas", [])[:5]
+    yogas = data.get("yogas", [])[:6]
     out = []
     for y in yogas:
         phrase = yoga_phrase(y["name"])
+        # Only list yogas we can actually explain — never a dangling bare
+        # name ("Hari Yoga") with no read, which looks unfinished.
         if phrase:
             out.append(f"- **{y['name']}** — {phrase}")
-        else:
-            out.append(f"- **{y['name']}**")
+    out = out[:5]
     if not out:
         return ""
     return "\n\n**What these mean in plain English:**\n" + "\n".join(out)
 
 
+# Sign indices: Aries=0 … Pisces=11
+_DEBILITATION_SIGN = {
+    "sun": 6,
+    "moon": 7,
+    "mars": 3,
+    "mercury": 11,
+    "jupiter": 9,
+    "venus": 5,
+    "saturn": 0,
+}
+_EXALTATION_SIGN = {
+    "sun": 0,
+    "moon": 1,
+    "mars": 9,
+    "mercury": 5,
+    "jupiter": 3,
+    "venus": 11,
+    "saturn": 6,
+}
+
+
 def quick_who_you_are_planets(data: dict[str, Any]) -> str:
-    """Section 1 supplement — planet-house plain-language placements."""
+    """Section 1 supplement — planet-house plain-language placements.
+
+    Dignity-aware: a debilitated or retrograde planet gets a corrective
+    clause so the static phrase never contradicts the (dignity-aware) AI
+    narrative — e.g. debilitated+retrograde Mars must not read as
+    "you push hard, break things".
+    """
     natal = data["natal_planets_dict"]
     out: list[str] = []
     for pname, p in natal.items():
         phrase = planet_house_phrase(pname, p["house"])
-        if phrase:
-            out.append(f"- **{pname.title()} in House {p['house']}** — {phrase}")
+        if not phrase:
+            continue
+        key = pname.lower()
+        sign_idx = int(float(p["longitude"]) // 30) % 12
+        debilitated = _DEBILITATION_SIGN.get(key) == sign_idx
+        exalted = _EXALTATION_SIGN.get(key) == sign_idx
+        retro = bool(p.get("is_retrograde"))
+        qualifier = ""
+        if debilitated and retro:
+            qualifier = (
+                " — but debilitated and retrograde here, so this turns inward rather than outward"
+            )
+        elif debilitated:
+            qualifier = " — though debilitated here, so it runs muted until its cancellation conditions activate it"
+        elif retro:
+            qualifier = " — retrograde, so the drive is internalised and revisited rather than spent outward"
+        elif exalted:
+            qualifier = " — and exalted here, so it runs at full strength"
+        out.append(f"- **{pname.title()} in House {p['house']}** — {phrase}{qualifier}")
     if not out:
         return ""
     return "\n\n**Your strongest placement signals:**\n" + "\n".join(out[:4])
