@@ -7,7 +7,7 @@ export default function Buy() {
     <>
       <header className="nav">
         <Link href="/" className="nav-logo">
-          <b>108</b> Life&apos;s Operating System
+          <b>108</b> <span className="logo-text">Life&apos;s Operating System</span>
         </Link>
       </header>
 
@@ -52,6 +52,7 @@ export default function Buy() {
               );
             })}
           </div>
+          <p className="swipe-hint">← swipe the plans →</p>
         </div>
       </section>
 

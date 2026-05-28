@@ -152,7 +152,7 @@ function CheckoutForm() {
   return (
     <>
     <header className="nav">
-      <a href="/" className="nav-logo"><b>108</b> Life&apos;s Operating System</a>
+      <a href="/" className="nav-logo"><b>108</b> <span className="logo-text">Life&apos;s Operating System</span></a>
     </header>
     <main className="wrap" style={{ maxWidth: 600, paddingTop: 32, paddingBottom: 40 }}>
       <p className="eyebrow">Your Details</p>

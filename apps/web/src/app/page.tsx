@@ -79,7 +79,7 @@ export default function Home() {
     <>
       <header className="nav">
         <div className="nav-logo">
-          <b>108</b> Life&apos;s Operating System
+          <b>108</b> <span className="logo-text">Life&apos;s Operating System</span>
         </div>
         <Link href="/buy" className="btn ghost">
           See your reading
@@ -156,6 +156,7 @@ export default function Home() {
               ))}
             </div>
           </Reveal>
+          <p className="swipe-hint">← swipe the texts →</p>
         </div>
       </section>
 
@@ -173,7 +174,7 @@ export default function Home() {
           </Reveal>
           <Reveal delay={80}>
             <div className="plans">
-              {order.map((id, i) => {
+              {order.map((id) => {
                 const p = PACKS[id];
                 const featured = id === "full";
                 return (
@@ -203,6 +204,7 @@ export default function Home() {
               })}
             </div>
           </Reveal>
+          <p className="swipe-hint">← swipe the plans →</p>
         </div>
       </section>
 
