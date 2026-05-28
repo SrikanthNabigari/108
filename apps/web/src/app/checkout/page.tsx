@@ -5,7 +5,7 @@ import { Suspense } from "react";
 import { PACKS, packTotal } from "@/lib/packs";
 
 declare global {
-  interface Window { Cashfree?: any; Razorpay?: any; }
+  interface Window { Cashfree?: any; }
 }
 
 // Sandbox mode: clicking any gateway simulates a successful payment (no real
@@ -95,20 +95,6 @@ function CheckoutForm() {
     window.location.href = `/thanks?status=success&order_id=${orderId}`;
   }
 
-  async function payPayu() {
-    if (IS_SANDBOX) return paySandbox("payu");
-    setBusy(true);
-    const orderId = await createOrder();
-    if (!orderId) return setBusy(false);
-    // PayU create returns a self-submitting HTML form
-    const res = await fetch("/api/payment/payu/create", {
-      method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ orderId }),
-    });
-    const html = await res.text();
-    document.open(); document.write(html); document.close();
-  }
-
   async function payCashfree() {
     if (IS_SANDBOX) return paySandbox("cashfree");
     setBusy(true);
@@ -124,29 +110,6 @@ function CheckoutForm() {
     await loadScript("https://sdk.cashfree.com/js/v3/cashfree.js");
     const cashfree = window.Cashfree({ mode: data.env === "production" ? "production" : "sandbox" });
     cashfree.checkout({ paymentSessionId: data.payment_session_id, redirectTarget: "_self" });
-  }
-
-  async function payRazorpay() {
-    if (IS_SANDBOX) return paySandbox("razorpay");
-    setBusy(true);
-    const orderId = await createOrder();
-    if (!orderId) return setBusy(false);
-    const res = await fetch("/api/payment/razorpay/create", {
-      method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ orderId }),
-    });
-    const data = await res.json();
-    if (!res.ok) { setErr(data.error || "razorpay failed"); return setBusy(false); }
-    await loadScript("https://checkout.razorpay.com/v1/checkout.js");
-    const rzp = new window.Razorpay({
-      key: data.keyId, amount: data.amount, currency: "INR",
-      name: "108 — Life's Operating System", order_id: data.rzpOrderId,
-      prefill: { name: f.full_name, email: f.email, contact: f.phone },
-      handler: () => { window.location.href = `/thanks?status=success&order_id=${orderId}`; },
-      theme: { color: "#b8860b" },
-    });
-    rzp.open();
-    setBusy(false);
   }
 
   return (
@@ -199,13 +162,16 @@ function CheckoutForm() {
         </p>
       )}
       <p className="eyebrow" style={{ marginTop: 24, marginBottom: 12 }}>
-        {IS_SANDBOX ? "Simulate payment with" : "Pay securely with"}
+        {IS_SANDBOX ? "Simulate payment" : "Secure payment"}
       </p>
       <div className="gateways">
-        <button className="btn" disabled={busy} onClick={payRazorpay}>Razorpay</button>
-        <button className="btn ghost" disabled={busy} onClick={payCashfree}>Cashfree</button>
-        <button className="btn ghost" disabled={busy} onClick={payPayu}>PayU</button>
+        <button className="btn lg" disabled={busy} onClick={payCashfree} style={{ flex: 1 }}>
+          {busy ? "Processing…" : IS_SANDBOX ? "Simulate payment (Cashfree)" : `Pay ₹${(amount / 100).toFixed(0)} with Cashfree`}
+        </button>
       </div>
+      <p className="muted" style={{ fontSize: 12, marginTop: 12, textAlign: "center" }}>
+        Cards · UPI · Net Banking · Wallets — secured by Cashfree
+      </p>
 
     </main>
     <footer>108 — Life&apos;s Operating System</footer>
