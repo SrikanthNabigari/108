@@ -61,6 +61,8 @@ ENV = load_env()
 SB_URL = ENV["SUPABASE_URL"]
 SB_KEY = ENV["SUPABASE_SERVICE_ROLE_KEY"]
 HDR = {"apikey": SB_KEY, "Authorization": f"Bearer {SB_KEY}"}
+# "api" (Anthropic SDK) or "claude_code" (assemble from staged agent responses)
+BACKEND = ENV.get("REPORT_BACKEND", "api").lower()
 
 
 # ── Supabase REST helpers ────────────────────────────────────────────────
@@ -183,6 +185,51 @@ def generate_narratives(chart: dict) -> tuple[dict[str, str], dict[str, str], st
     return narratives, pull_quotes, model
 
 
+def generate_narratives_cc(chart: dict, stage: Path) -> tuple[dict[str, str], dict[str, str], str]:
+    """Claude Code path: assemble narratives from staged agent .response.md files.
+
+    Builds the stitcher prompt from the section narratives; if its response
+    isn't staged yet, writes the prompt and exits so the operator can run the
+    108-stitcher agent, then re-run this script.
+    """
+    from packages.report.src.narrative import (
+        build_all_prompts,
+        build_prompt_stitcher,
+        parse_stitcher_output,
+    )
+
+    prompts = build_all_prompts(chart)
+    narratives: dict[str, str] = {}
+    missing = []
+    for sid in prompts:
+        rf = stage / f"{sid}.response.md"
+        if rf.exists() and rf.read_text(encoding="utf-8").strip():
+            narratives[sid] = rf.read_text(encoding="utf-8").strip()
+        else:
+            missing.append(sid)
+    if missing:
+        raise SystemExit(f"missing staged responses for: {', '.join(missing)}")
+
+    pull_quotes: dict[str, str] = {}
+    stitch_resp = stage / "stitcher.response.md"
+    if stitch_resp.exists() and stitch_resp.read_text(encoding="utf-8").strip():
+        stitched = parse_stitcher_output(stitch_resp.read_text(encoding="utf-8"))
+        if stitched.get("cover_hook"):
+            narratives["opening"] = stitched["cover_hook"]
+        if stitched.get("closing_cta"):
+            narratives["closing_cta"] = stitched["closing_cta"]
+        pull_quotes = stitched.get("pull_quotes") or {}
+    else:
+        (stage / "stitcher.prompt.txt").write_text(
+            build_prompt_stitcher(chart, narratives), encoding="utf-8"
+        )
+        raise SystemExit(
+            "STITCHER PENDING — staged stitcher.prompt.txt. Run the 108-stitcher "
+            f"agent on it, save to {stitch_resp}, then re-run this script."
+        )
+    return narratives, pull_quotes, "claude_code"
+
+
 # ── main ─────────────────────────────────────────────────────────────────
 def main() -> None:
     arg = sys.argv[1] if len(sys.argv) > 1 else "--next"
@@ -199,14 +246,15 @@ def main() -> None:
     if order["status"] not in ("paid", "generating"):
         raise SystemExit(f"order status is '{order['status']}', expected paid")
 
-    if ENV.get("REPORT_API_ENABLED", "false").lower() != "true":
-        raise SystemExit(
-            "REPORT_API_ENABLED is not 'true' — Anthropic API path disabled. "
-            "Set REPORT_API_ENABLED=true to bill the API, or use the scheduled "
-            "Claude Code path."
-        )
-    if not ENV.get("ANTHROPIC_API_KEY"):
-        raise SystemExit("ANTHROPIC_API_KEY not set")
+    if BACKEND == "api":
+        if ENV.get("REPORT_API_ENABLED", "false").lower() != "true":
+            raise SystemExit(
+                "REPORT_API_ENABLED is not 'true' — Anthropic API path disabled. "
+                "Set REPORT_API_ENABLED=true to bill the API, or REPORT_BACKEND="
+                "claude_code to assemble from staged agent responses."
+            )
+        if not ENV.get("ANTHROPIC_API_KEY"):
+            raise SystemExit("ANTHROPIC_API_KEY not set")
 
     set_status(oid, "generating")
 
@@ -234,8 +282,12 @@ def main() -> None:
         addons=order.get("addons") or [],
     )
 
-    print("  generating narratives …", file=sys.stderr)
-    narratives, pull_quotes, model = generate_narratives(chart)
+    print(f"  generating narratives (backend={BACKEND}) …", file=sys.stderr)
+    if BACKEND == "claude_code":
+        stage = ROOT / "docs" / "reports" / "v20_orders" / f"order_{oid}" / "prompts"
+        narratives, pull_quotes, model = generate_narratives_cc(chart, stage)
+    else:
+        narratives, pull_quotes, model = generate_narratives(chart)
 
     print("  rendering PDF …", file=sys.stderr)
     md = render_markdown(chart, narratives=narratives, pull_quotes=pull_quotes)
@@ -266,7 +318,7 @@ def main() -> None:
             "public_url": public_url,
             "page_count": page_count,
             "file_size_bytes": len(pdf),
-            "backend": "api",
+            "backend": BACKEND,
             "model_used": model,
             "generated_at": now,
         },
