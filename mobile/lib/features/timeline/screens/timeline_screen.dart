@@ -23,6 +23,10 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
   String? _error;
 
   final _scrollController = ScrollController();
+  final _mdScrollCtrl = ScrollController();
+  final _adScrollCtrl = ScrollController();
+  final _pdScrollCtrl = ScrollController();
+  final _sdScrollCtrl = ScrollController();
   double _scrollHintOpacity = 1.0;
 
   // Selection state — which MD/AD/PD the user has tapped
@@ -58,7 +62,45 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
   @override
   void dispose() {
     _scrollController.dispose();
+    _mdScrollCtrl.dispose();
+    _adScrollCtrl.dispose();
+    _pdScrollCtrl.dispose();
+    _sdScrollCtrl.dispose();
     super.dispose();
+  }
+
+  /// Scroll all horizontal dasha rows to the current/active period.
+  void _scrollAllToCurrent(Map<String, dynamic> data) {
+    final current = data['current'] as Map<String, dynamic>? ?? {};
+    final mdSeq = data['mahadasha_sequence'] as List? ?? [];
+    final adSeq = data['antardasha_sequence'] as List? ?? [];
+    final pdSeq = data['pratyantardasha_sequence'] as List? ?? [];
+    final sdSeq = data['sookshma_sequence'] as List? ?? [];
+    _scrollToCurrentPeriod(_mdScrollCtrl, mdSeq, current['mahadasha_lord'] as String? ?? '', 100, S.sm);
+    _scrollToCurrentPeriod(_adScrollCtrl, adSeq, current['antardasha_lord'] as String? ?? '', 90, S.sm);
+    _scrollToCurrentPeriod(_pdScrollCtrl, pdSeq, current['pratyantardasha_lord'] as String? ?? '', 76, S.xs);
+    _scrollToCurrentPeriod(_sdScrollCtrl, sdSeq, current['sookshma_lord'] as String? ?? '', 76, S.xs);
+  }
+
+  /// Scroll a horizontal ListView to center the current period card.
+  void _scrollToCurrentPeriod(
+    ScrollController ctrl, List<dynamic> items, String currentLord,
+    double cardWidth, double separatorWidth,
+  ) {
+    if (items.isEmpty || currentLord.isEmpty) return;
+    final idx = items.indexWhere((p) {
+      final lord = (p as Map<String, dynamic>)['lord'] as String? ?? '';
+      return lord.toLowerCase() == currentLord.toLowerCase();
+    });
+    if (idx <= 0) return; // first item or not found — no scroll needed
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!ctrl.hasClients) return;
+      final offset = idx * (cardWidth + separatorWidth);
+      final viewport = ctrl.position.viewportDimension;
+      final centered = offset - (viewport / 2) + (cardWidth / 2);
+      final target = centered.clamp(0.0, ctrl.position.maxScrollExtent);
+      ctrl.animateTo(target, duration: const Duration(milliseconds: 400), curve: Curves.easeOutCubic);
+    });
   }
 
   Future<void> _fetchDasha() async {
@@ -67,7 +109,10 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
         ApiConstants.analysisDasha,
         fromJson: (json) => json as Map<String, dynamic>,
       );
-      if (mounted) setState(() { _dashaData = data; _loading = false; });
+      if (mounted) {
+        setState(() { _dashaData = data; _loading = false; });
+        _scrollAllToCurrent(data);
+      }
     } catch (e) {
       if (mounted) setState(() { _error = '$e'; _loading = false; });
     }
@@ -526,6 +571,7 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
             height: 132,
             child: mdSequence.isNotEmpty
                 ? ListView.separated(
+                    controller: _mdScrollCtrl,
                     scrollDirection: Axis.horizontal,
                     itemCount: mdSequence.length,
                     separatorBuilder: (_, __) =>
@@ -571,6 +617,7 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
                               _pdSequence = null;
                               _sdSequence = null;
                             });
+                            if (_dashaData != null) _scrollAllToCurrent(_dashaData!);
                           } else if (pStart.isNotEmpty && pEnd.isNotEmpty) {
                             _fetchAdForMd(lord, pStart, pEnd);
                           }
@@ -598,6 +645,7 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
             SizedBox(
               height: 100,
               child: ListView.separated(
+                controller: _adScrollCtrl,
                 scrollDirection: Axis.horizontal,
                 itemCount: adSequence.length,
                 separatorBuilder: (_, __) =>
@@ -639,6 +687,7 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
                           _pdSequence = null;
                           _sdSequence = null;
                         });
+                        if (_dashaData != null) _scrollAllToCurrent(_dashaData!);
                       } else if (pStart.isNotEmpty && pEnd.isNotEmpty) {
                         _fetchPdForAd(lord, pStart, pEnd);
                       }
@@ -666,6 +715,7 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
             SizedBox(
               height: 86,
               child: ListView.separated(
+                controller: _pdScrollCtrl,
                 scrollDirection: Axis.horizontal,
                 itemCount: pdSequence.length,
                 separatorBuilder: (_, __) =>
@@ -707,6 +757,7 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
                           _selectedPdLord = null;
                           _sdSequence = null;
                         });
+                        if (_dashaData != null) _scrollAllToCurrent(_dashaData!);
                       } else if (pStart.isNotEmpty && pEnd.isNotEmpty) {
                         _fetchSdForPd(lord, pStart, pEnd);
                       }
@@ -733,6 +784,7 @@ class _TimelineScreenState extends ConsumerState<TimelineScreen> {
             SizedBox(
               height: 86,
               child: ListView.separated(
+                controller: _sdScrollCtrl,
                 scrollDirection: Axis.horizontal,
                 itemCount: sdSequence.length,
                 separatorBuilder: (_, __) =>

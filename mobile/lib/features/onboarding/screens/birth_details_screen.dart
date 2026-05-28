@@ -176,7 +176,9 @@ class _BirthDetailsScreenState extends ConsumerState<BirthDetailsScreen> {
 
     final birthDt = DateTime(
         _date!.year, _date!.month, _date!.day, _time!.hour, _time!.minute);
-    final tz = (_lon! / 15).round().toDouble();
+    // Use half-hour precision: round to nearest 0.5 to handle IST (+5:30),
+    // Iran (+3:30), Nepal (+5:45→5.5), Myanmar (+6:30), etc.
+    final tz = ((_lon! / 15) * 2).round() / 2.0;
 
     try {
       await ApiService().put(

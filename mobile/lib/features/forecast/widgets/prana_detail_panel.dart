@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:one_zero_eight/core/theme/app_theme.dart';
 import 'package:one_zero_eight/shared/widgets/glass_container.dart';
 import 'package:one_zero_eight/shared/utils/planet_helpers.dart';
+import 'package:one_zero_eight/features/forecast/widgets/deha_detail_panel.dart';
 
 /// Bottom sheet panel showing rich Prana Dasha details with Deha timeline.
 ///
@@ -131,7 +132,7 @@ class PranaDetailPanel extends StatelessWidget {
               const SizedBox(height: S.md),
 
             // 9. Deha Timeline
-            if (dehas.isNotEmpty) _buildDehaTimeline(dehas, color),
+            if (dehas.isNotEmpty) _buildDehaTimeline(context, dehas, color, lord),
             if (dehas.isNotEmpty) const SizedBox(height: S.md),
 
             // 11. Ask AI button
@@ -493,7 +494,7 @@ class PranaDetailPanel extends StatelessWidget {
 
   // ── 9. Deha Timeline ──
 
-  Widget _buildDehaTimeline(List<dynamic> dehas, Color pranaColor) {
+  Widget _buildDehaTimeline(BuildContext context, List<dynamic> dehas, Color pranaColor, String pranaLord) {
     final now = DateTime.now();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -502,7 +503,7 @@ class PranaDetailPanel extends StatelessWidget {
             style: T.bodySm.copyWith(
                 color: C.textPrimary, fontWeight: FontWeight.w600)),
         const SizedBox(height: 2),
-        Text('Body-level micro-periods',
+        Text('Micro-period predictions',
             style: T.caption.copyWith(color: C.textMuted, fontSize: 10)),
         const SizedBox(height: S.sm),
         ...dehas.asMap().entries.map((entry) {
@@ -517,7 +518,18 @@ class PranaDetailPanel extends StatelessWidget {
           final relationship =
               dh['relationship_with_prana'] as String? ?? 'neutral';
           final combo = dh['combination_with_prana'] as Map<String, dynamic>?;
+          // Show actionable life predictions, not just body/somatic themes
+          final comboCareer = combo?['career'] as String? ?? '';
+          final comboRelationships = combo?['relationships'] as String? ?? '';
           final comboTheme = combo?['theme'] as String? ?? '';
+          // Build display: career first, then relationships, body theme as fallback
+          final displayLines = <String>[
+            if (comboCareer.isNotEmpty) comboCareer,
+            if (comboRelationships.isNotEmpty) comboRelationships,
+          ];
+          final displayText = displayLines.isNotEmpty
+              ? displayLines.join(' | ')
+              : comboTheme;
 
           // Check if NOW
           bool isNow = false;
@@ -537,7 +549,13 @@ class PranaDetailPanel extends StatelessWidget {
 
           final isLast = i == dehas.length - 1;
 
-          return Padding(
+          return GestureDetector(
+            onTap: () => DehaDetailPanel.show(
+              context,
+              dehaData: dh,
+              pranaLord: pranaLord,
+            ),
+            child: Padding(
             padding: EdgeInsets.only(bottom: isLast ? 0 : S.xs),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -648,16 +666,20 @@ class PranaDetailPanel extends StatelessWidget {
                                       fontSize: 8,
                                       fontWeight: FontWeight.w600)),
                             ),
+                            const SizedBox(width: 2),
+                            Icon(Icons.chevron_right,
+                                size: 12,
+                                color: dhColor.withValues(alpha: 0.4)),
                           ],
                         ),
-                        if (comboTheme.isNotEmpty) ...[
+                        if (displayText.isNotEmpty) ...[
                           const SizedBox(height: 1),
-                          Text(comboTheme,
+                          Text(displayText,
                               style: T.caption.copyWith(
                                   color: C.textSecondary,
                                   fontSize: 9,
                                   height: 1.2),
-                              maxLines: 2,
+                              maxLines: 3,
                               overflow: TextOverflow.ellipsis),
                         ] else if (theme.isNotEmpty) ...[
                           const SizedBox(height: 1),
@@ -685,6 +707,7 @@ class PranaDetailPanel extends StatelessWidget {
                 ),
               ],
             ),
+          ),
           );
         }),
       ],

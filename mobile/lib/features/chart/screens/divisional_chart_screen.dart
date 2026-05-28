@@ -126,6 +126,8 @@ class _DivisionalChartScreenState extends ConsumerState<DivisionalChartScreen> {
   int _selectedIndex = 5; // default D9 (index 5 in _kDivisions)
   List<Map<String, dynamic>> _planets = [];
   bool _loading = true;
+  String _description = '';
+  String _significance = '';
 
   @override
   void initState() {
@@ -145,6 +147,8 @@ class _DivisionalChartScreenState extends ConsumerState<DivisionalChartScreen> {
       setState(() {
         _planets = (result['planets'] as List<dynamic>)
             .cast<Map<String, dynamic>>();
+        _description = result['description'] as String? ?? '';
+        _significance = result['significance'] as String? ?? '';
         _loading = false;
       });
     } catch (_) {
@@ -278,7 +282,7 @@ class _DivisionalChartScreenState extends ConsumerState<DivisionalChartScreen> {
 
                       const SizedBox(height: S.xl),
 
-                      // Educational card
+                      // Educational card — use API knowledge when available
                       GlassContainer(
                         padding: const EdgeInsets.all(S.lg),
                         borderColor: C.saturn.withValues(alpha: 0.2),
@@ -301,9 +305,19 @@ class _DivisionalChartScreenState extends ConsumerState<DivisionalChartScreen> {
                             ),
                             const SizedBox(height: S.sm),
                             Text(
-                              _educationalText(div),
+                              _description.isNotEmpty
+                                  ? _description
+                                  : _educationalText(div),
                               style: T.bodySm.copyWith(height: 1.6),
                             ),
+                            if (_significance.isNotEmpty) ...[
+                              const SizedBox(height: S.sm),
+                              Text(
+                                _significance,
+                                style: T.bodySm.copyWith(
+                                    color: C.textSecondary, height: 1.5),
+                              ),
+                            ],
                           ],
                         ),
                       ),
@@ -337,55 +351,221 @@ class _DivisionalChartScreenState extends ConsumerState<DivisionalChartScreen> {
     final name = (planet['name'] as String?) ?? '';
     final rashi = (planet['rashi'] as String?) ?? '';
     final degree = (planet['degree_in_sign'] as num?)?.toDouble() ?? 0;
+    final interp = planet['interpretation'] as Map<String, dynamic>?;
     final pKey = name.toLowerCase();
     final glyph = planetGlyph(pKey);
     final color = planetColor(pKey);
     final dig = _dignity(pKey, rashi);
     final digColor = _dignityColor(dig);
 
-    return GlassContainer(
-      padding: const EdgeInsets.all(S.sm),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          // Glyph
-          Text(glyph,
-              style: TextStyle(fontSize: 22, color: color)),
-          const SizedBox(height: S.xs),
-          // Name
-          Text(name,
-              style: T.bodySm.copyWith(
-                  color: C.textPrimary,
-                  fontWeight: FontWeight.w600,
-                  fontSize: 12)),
-          const SizedBox(height: 2),
-          // Rashi + degree
-          Text(
-            '$rashi ${degree.toStringAsFixed(1)}',
-            style: T.caption.copyWith(fontSize: 10),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: S.xs),
-          // Dignity badge
-          Container(
-            padding: const EdgeInsets.symmetric(
-                horizontal: S.sm, vertical: 2),
-            decoration: BoxDecoration(
-              color: digColor.withValues(alpha: 0.12),
-              borderRadius: BorderRadius.circular(10),
+    return GestureDetector(
+      onTap: interp != null
+          ? () => _showPlanetDetail(context, name, rashi, degree, dig, interp)
+          : null,
+      child: GlassContainer(
+        padding: const EdgeInsets.all(S.sm),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Glyph
+            Text(glyph,
+                style: TextStyle(fontSize: 22, color: color)),
+            const SizedBox(height: S.xs),
+            // Name
+            Text(name,
+                style: T.bodySm.copyWith(
+                    color: C.textPrimary,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 12)),
+            const SizedBox(height: 2),
+            // Rashi + degree
+            Text(
+              '$rashi ${degree.toStringAsFixed(1)}',
+              style: T.caption.copyWith(fontSize: 10),
+              textAlign: TextAlign.center,
             ),
-            child: Text(
-              dig,
-              style: T.caption.copyWith(
-                color: digColor,
-                fontWeight: FontWeight.w600,
-                fontSize: 9,
+            const SizedBox(height: S.xs),
+            // Dignity badge
+            Container(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: S.sm, vertical: 2),
+              decoration: BoxDecoration(
+                color: digColor.withValues(alpha: 0.12),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Text(
+                dig,
+                style: T.caption.copyWith(
+                  color: digColor,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 9,
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
+  }
+
+  void _showPlanetDetail(
+    BuildContext context,
+    String name,
+    String rashi,
+    double degree,
+    String dignity,
+    Map<String, dynamic> interp,
+  ) {
+    final pKey = name.toLowerCase();
+    final color = planetColor(pKey);
+    final div = _kDivisions[_selectedIndex];
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (_) => DraggableScrollableSheet(
+        initialChildSize: 0.65,
+        minChildSize: 0.3,
+        maxChildSize: 0.9,
+        builder: (context, scrollController) => Container(
+          decoration: const BoxDecoration(
+            color: Color(0xFF0A0A1A),
+            borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+          ),
+          child: ListView(
+            controller: scrollController,
+            padding: const EdgeInsets.all(S.md),
+            children: [
+              // Drag handle
+              Center(
+                child: Container(
+                  width: 40, height: 4,
+                  decoration: BoxDecoration(
+                    color: C.glassBorder,
+                    borderRadius: BorderRadius.circular(2),
+                  ),
+                ),
+              ),
+              const SizedBox(height: S.md),
+
+              // Header
+              Row(
+                children: [
+                  Text(planetGlyph(pKey),
+                      style: TextStyle(fontSize: 28, color: color)),
+                  const SizedBox(width: S.sm),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('D${div.number} ${div.name}',
+                            style: T.caption.copyWith(color: C.textMuted)),
+                        const SizedBox(height: 2),
+                        Text('$name in $rashi',
+                            style: T.h2.copyWith(color: color)),
+                        Text('${degree.toStringAsFixed(1)}\u00b0 \u2022 $dignity',
+                            style: T.caption.copyWith(color: C.textSecondary)),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: S.lg),
+
+              // Theme
+              if ((interp['theme'] as String?)?.isNotEmpty ?? false)
+                GlassContainer(
+                  padding: const EdgeInsets.all(S.md),
+                  blur: 0,
+                  child: Text(
+                    '\u201c${interp['theme']}\u201d',
+                    style: T.bodySm.copyWith(
+                      color: color.withValues(alpha: 0.85),
+                      fontStyle: FontStyle.italic,
+                      height: 1.5,
+                    ),
+                  ),
+                ),
+              const SizedBox(height: S.md),
+
+              // Interpretation fields
+              ..._interpFields(interp, color),
+
+              const SizedBox(height: S.lg),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  List<Widget> _interpFields(Map<String, dynamic> interp, Color color) {
+    const fieldConfig = <String, (IconData, String)>{
+      'marriage': (Icons.favorite_outline, 'Marriage'),
+      'dharma': (Icons.self_improvement, 'Dharma'),
+      'characteristics': (Icons.psychology, 'Characteristics'),
+      'career': (Icons.work_outline, 'Career'),
+      'professional_nature': (Icons.business, 'Professional Nature'),
+      'public_image': (Icons.visibility, 'Public Image'),
+      'success_areas': (Icons.emoji_events, 'Success Areas'),
+      'wealth_nature': (Icons.account_balance_wallet, 'Wealth Nature'),
+      'earning_style': (Icons.trending_up, 'Earning Style'),
+      'siblings': (Icons.people_outline, 'Siblings'),
+      'courage': (Icons.shield, 'Courage'),
+      'children': (Icons.child_care, 'Children'),
+      'property': (Icons.home, 'Property'),
+      'spiritual': (Icons.brightness_high, 'Spiritual'),
+      'parents': (Icons.family_restroom, 'Parents'),
+      'education': (Icons.school, 'Education'),
+      'misfortune': (Icons.warning_amber, 'Challenges'),
+    };
+
+    final widgets = <Widget>[];
+    for (final entry in interp.entries) {
+      if (entry.key == 'theme' || entry.key == 'strength') continue;
+      final val = entry.value?.toString() ?? '';
+      if (val.isEmpty) continue;
+
+      final config = fieldConfig[entry.key];
+      final icon = config?.$1 ?? Icons.circle;
+      final label = config?.$2 ??
+          (entry.key[0].toUpperCase() + entry.key.substring(1));
+
+      widgets.add(
+        Padding(
+          padding: const EdgeInsets.only(bottom: S.sm),
+          child: GlassContainer(
+            padding: const EdgeInsets.all(S.sm),
+            blur: 0,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(icon, size: 16, color: color),
+                const SizedBox(width: S.sm),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(label,
+                          style: T.caption.copyWith(
+                              color: color,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 10)),
+                      const SizedBox(height: 2),
+                      Text(val,
+                          style: T.caption.copyWith(
+                              color: C.textSecondary, height: 1.4)),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+    return widgets;
   }
 
   String _educationalText(_DivisionInfo div) {
