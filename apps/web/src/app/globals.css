@@ -14,7 +14,7 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-html, body { background: var(--bg); color: var(--ink); }
+html, body { background: var(--bg); color: var(--ink); color-scheme: dark; }
 body {
   font-family: var(--font-body), -apple-system, "Segoe UI", Roboto, sans-serif;
   line-height: 1.65;
@@ -190,4 +190,93 @@ footer { text-align: center; color: var(--muted); font-size: 13px; padding: 64px
   .plan { flex: 0 0 85%; }
   .plan .tagline { min-height: 0; }
   .swipe-hint { display: block; text-align: center; color: var(--muted); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-top: 12px; }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   V2 — CINEMATIC SCROLLYTELLING LAYER
+   Content sits above the fixed CosmicBackground (z-index:0).
+   ════════════════════════════════════════════════════════════════ */
+body { background: #000; }
+
+/* every content block rides above the cosmic backdrop */
+.nav-fixed, .hero-cine, .section, footer { position: relative; z-index: 1; }
+
+/* scroll progress bar */
+.scroll-progress {
+  position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 100;
+  background: linear-gradient(90deg, var(--gold), #efdca6);
+  transform-origin: 0 50%;
+}
+
+/* fixed nav that fades in after the hero */
+.nav-fixed {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 60;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px clamp(20px, 5vw, 48px);
+  background: linear-gradient(180deg, rgba(0,0,0,0.7), rgba(0,0,0,0));
+  backdrop-filter: blur(10px);
+}
+.btn.sm { padding: 9px 18px; font-size: 13px; }
+
+/* cinematic hero — full viewport, content centered over the wheel */
+.hero-cine {
+  position: relative; z-index: 1; min-height: 100svh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 80px 24px;
+}
+.hero-cine .hero-inner { max-width: 840px; }
+.hero-cine .lead { max-width: 600px; margin: 0 auto 36px; }
+.scroll-cue {
+  position: absolute; bottom: 34px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted);
+}
+.scroll-cue span {
+  width: 1px; height: 42px;
+  background: linear-gradient(180deg, var(--gold), rgba(201,168,92,0));
+  animation: cue 2.2s ease-in-out infinite;
+}
+@keyframes cue { 0%,100% { opacity: 0.3; transform: scaleY(0.6); } 50% { opacity: 1; transform: scaleY(1); } }
+
+/* manifesto — big centered statements */
+.manifesto { padding: 12vh 0; }
+.manifesto .section-narrow { max-width: 820px; margin: 0 auto; }
+.manifesto-line {
+  font-family: var(--font-display), serif;
+  font-size: clamp(24px, 4vw, 40px); line-height: 1.28; color: var(--ink);
+  text-align: center; margin: 0 0 0.5em; letter-spacing: -0.5px;
+}
+.manifesto-line:last-child { color: var(--gold); }
+
+.center { text-align: center; }
+.section-narrow .lead, .center .lead { margin-left: auto; margin-right: auto; margin-top: 18px; }
+
+/* glass panels — opaque enough to read as distinct cards over the cosmos,
+   translucent enough to feel like layered glass (app-premium). */
+.prop { background: rgba(14,14,19,0.82); backdrop-filter: blur(10px); }
+.props { background: var(--line-soft); border-color: var(--line-soft); }
+.text-card { background: rgba(14,14,19,0.8); backdrop-filter: blur(10px); }
+.texts { background: var(--line-soft); border-color: var(--line-soft); }
+.text-card:hover { background: rgba(24,24,30,0.9); }
+.plan {
+  background: rgba(15,15,19,0.86); backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 24px 60px -30px rgba(0,0,0,0.9);
+}
+.plan.featured {
+  background: rgba(22,18,11,0.9);
+  border-color: var(--gold);
+  box-shadow: 0 24px 70px -28px rgba(201,168,92,0.35);
+}
+
+/* fade section seams (borders look harsh over the cosmos) */
+.section { border-top: 1px solid var(--line-soft); }
+.manifesto, .closing { border-top: none; }
+.closing { padding-bottom: 14vh; }
+
+footer { background: rgba(0,0,0,0.5); backdrop-filter: blur(6px); }
+
+@media (max-width: 700px) {
+  .hero-cine { min-height: 92svh; padding: 60px 20px; }
+  .nav-fixed { padding: 12px 20px; }
 }

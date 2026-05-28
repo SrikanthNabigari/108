@@ -2,6 +2,8 @@
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
+import { motion } from "framer-motion";
+import CosmicBackground from "@/components/CosmicBackground";
 import { PACKS, packTotal } from "@/lib/packs";
 
 declare global {
@@ -114,10 +116,12 @@ function CheckoutForm() {
 
   return (
     <>
-    <header className="nav">
+    <CosmicBackground />
+    <header className="nav nav-fixed">
       <a href="/" className="nav-logo"><b>108</b> <span className="logo-text">Life&apos;s Operating System</span></a>
     </header>
-    <main className="wrap" style={{ maxWidth: 600, paddingTop: 32, paddingBottom: 40 }}>
+    <motion.main className="wrap" style={{ maxWidth: 600, paddingTop: 110, paddingBottom: 56, position: "relative", zIndex: 1 }}
+      initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}>
       <p className="eyebrow">Your Details</p>
       <h2 className="serif" style={{ fontSize: 38 }}>{pack.name}</h2>
       <p className="muted" style={{ marginBottom: 28 }}>
@@ -173,7 +177,7 @@ function CheckoutForm() {
         Cards · UPI · Net Banking · Wallets — secured by Cashfree
       </p>
 
-    </main>
+    </motion.main>
     <footer>108 — Life&apos;s Operating System</footer>
     </>
   );

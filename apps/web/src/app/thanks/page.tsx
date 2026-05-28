@@ -1,6 +1,8 @@
 "use client";
 import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { motion } from "framer-motion";
+import CosmicBackground from "@/components/CosmicBackground";
 
 function Thanks() {
   const params = useSearchParams();
@@ -30,10 +32,12 @@ function Thanks() {
 
   return (
     <>
-      <header className="nav">
+      <CosmicBackground />
+      <header className="nav nav-fixed">
         <a href="/" className="nav-logo"><b>108</b> <span className="logo-text">Life&apos;s Operating System</span></a>
       </header>
-      <main className="wrap" style={{ maxWidth: 620, textAlign: "center", padding: "80px 24px" }}>
+      <motion.main className="wrap" style={{ maxWidth: 620, textAlign: "center", padding: "130px 24px 80px", position: "relative", zIndex: 1 }}
+        initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
         {status === "success" ? (
           <>
             <p className="eyebrow">Payment received</p>
@@ -68,7 +72,7 @@ function Thanks() {
             Generating{orderStatus && ` · ${orderStatus}`} — this page updates automatically.
           </p>
         )}
-      </main>
+      </motion.main>
       <footer>108 — Life&apos;s Operating System</footer>
     </>
   );
