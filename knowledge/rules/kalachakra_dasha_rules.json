@@ -1,0 +1,140 @@
+{
+  "kalachakra_dasha_rules": {
+    "metadata": {
+      "source": "Brihat Parashara Hora Shastra, Chapter 46",
+      "principle": "Kalachakra Dasha is a sign-based dasha system derived from the Moon's nakshatra and navamsha position at birth. It shows the wheel of time (Kala = Time, Chakra = Wheel) operating through the soul's journey.",
+      "total_cycle": "173 years (one complete Kalachakra cycle)",
+      "starting_point": "Moon's navamsha (D-9) sign at birth",
+      "direction": "Savya nakshatras go forward (Aries→Pisces), Apasavya go backward (Pisces→Aries)"
+    },
+    "dasha_years": {
+      "Aries": 7,
+      "Taurus": 16,
+      "Gemini": 9,
+      "Cancer": 21,
+      "Leo": 5,
+      "Virgo": 9,
+      "Libra": 19,
+      "Scorpio": 15,
+      "Sagittarius": 12,
+      "Capricorn": 27,
+      "Aquarius": 21,
+      "Pisces": 12,
+      "total": 173
+    },
+    "savya_nakshatras": {
+      "description": "Forward-moving nakshatras — sequence goes Aries→Taurus→...→Pisces",
+      "list": ["Ashwini", "Mrigashira", "Punarvasu", "Pushya", "Uttara Phalguni", "Hasta", "Anuradha", "Uttara Ashadha", "Shravana", "Uttara Bhadrapada", "Revati"]
+    },
+    "apasavya_nakshatras": {
+      "description": "Backward-moving nakshatras — sequence goes Pisces→Aquarius→...→Aries",
+      "list": ["Bharani", "Krittika", "Rohini", "Ardra", "Ashlesha", "Magha", "Purva Phalguni", "Chitra", "Swati", "Vishakha", "Jyeshtha", "Mula", "Purva Ashadha", "Dhanishtha", "Shatabhisha", "Purva Bhadrapada"]
+    },
+    "sign_interpretations": {
+      "Aries": {
+        "years": 7,
+        "lord": "Mars",
+        "nature": "Movable, Fire",
+        "themes": "New beginnings, initiatives, physical action, pioneering",
+        "favorable_for": ["starting ventures", "physical activities", "leadership"],
+        "caution": "Impulsive decisions, conflicts"
+      },
+      "Taurus": {
+        "years": 16,
+        "lord": "Venus",
+        "nature": "Fixed, Earth",
+        "themes": "Material accumulation, stability, sensual pleasures, arts",
+        "favorable_for": ["wealth building", "property", "artistic pursuits"],
+        "caution": "Stubbornness, over-indulgence"
+      },
+      "Gemini": {
+        "years": 9,
+        "lord": "Mercury",
+        "nature": "Dual, Air",
+        "themes": "Communication, learning, networking, versatility",
+        "favorable_for": ["education", "writing", "business", "travel"],
+        "caution": "Inconsistency, scattered energy"
+      },
+      "Cancer": {
+        "years": 21,
+        "lord": "Moon",
+        "nature": "Movable, Water",
+        "themes": "Emotions, home, family, public connection, nourishing",
+        "favorable_for": ["family harmony", "real estate", "public work"],
+        "caution": "Mood swings, emotional vulnerability"
+      },
+      "Leo": {
+        "years": 5,
+        "lord": "Sun",
+        "nature": "Fixed, Fire",
+        "themes": "Authority, creativity, recognition, leadership, government",
+        "favorable_for": ["career advancement", "creative expression", "recognition"],
+        "caution": "Ego conflicts, pride"
+      },
+      "Virgo": {
+        "years": 9,
+        "lord": "Mercury",
+        "nature": "Dual, Earth",
+        "themes": "Service, health, analytical skills, detail work",
+        "favorable_for": ["health improvement", "service", "research"],
+        "caution": "Over-criticism, perfectionism"
+      },
+      "Libra": {
+        "years": 19,
+        "lord": "Venus",
+        "nature": "Movable, Air",
+        "themes": "Balance, partnerships, harmony, justice, relationships",
+        "favorable_for": ["partnerships", "legal matters", "arts"],
+        "caution": "Indecisiveness, dependency"
+      },
+      "Scorpio": {
+        "years": 15,
+        "lord": "Mars/Ketu",
+        "nature": "Fixed, Water",
+        "themes": "Transformation, research, occult, hidden knowledge, intensity",
+        "favorable_for": ["deep research", "transformation", "hidden wealth"],
+        "caution": "Obsessive behavior, power struggles"
+      },
+      "Sagittarius": {
+        "years": 12,
+        "lord": "Jupiter",
+        "nature": "Dual, Fire",
+        "themes": "Wisdom, teaching, long travel, philosophy, higher learning",
+        "favorable_for": ["higher education", "spiritual growth", "publishing"],
+        "caution": "Over-optimism, dogmatism"
+      },
+      "Capricorn": {
+        "years": 27,
+        "lord": "Saturn",
+        "nature": "Movable, Earth",
+        "themes": "Discipline, long-term achievement, authority, patience, karma",
+        "favorable_for": ["career building", "authority", "disciplined effort"],
+        "caution": "Delays, isolation, overwork"
+      },
+      "Aquarius": {
+        "years": 21,
+        "lord": "Saturn/Rahu",
+        "nature": "Fixed, Air",
+        "themes": "Innovation, groups, humanitarian causes, technology",
+        "favorable_for": ["group achievement", "technology", "social causes"],
+        "caution": "Eccentric behavior, detachment"
+      },
+      "Pisces": {
+        "years": 12,
+        "lord": "Jupiter/Ketu",
+        "nature": "Dual, Water",
+        "themes": "Spirituality, imagination, compassion, dissolution, moksha",
+        "favorable_for": ["spiritual practice", "arts", "healing", "foreign travel"],
+        "caution": "Confusion, escapism"
+      }
+    },
+    "interpretation_principles": {
+      "long_dashas": "Capricorn (27), Cancer (21), Aquarius (21), Taurus (16) — long periods shape entire life chapters",
+      "short_dashas": "Leo (5), Aries (7), Gemini (9), Virgo (9), Sagittarius (12), Pisces (12) — concentrated intense periods",
+      "benefic_signs": "Taurus, Cancer, Libra, Sagittarius, Pisces generally favorable",
+      "malefic_signs": "Aries, Scorpio, Capricorn bring challenges but also growth",
+      "lagna_lord_dasha": "If dasha sign lord is also natal lagna lord — very important life period",
+      "atmakaraka_sign": "Dasha of Atmakaraka's natal sign — soul's core mission activates"
+    }
+  }
+}

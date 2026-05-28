@@ -1,0 +1,319 @@
+{
+  "chandra_kala_nadi_rules": {
+    "metadata": {
+      "source": "Deva Keralam / Chandra Kala Nadi",
+      "author": "Achyuta",
+      "system": "Planet combinations in signs → life event predictions",
+      "timing_mechanism": "Jupiter transit over the sign activates the combination",
+      "moon_reference": "Moon sign (Janma Rashi) is primary reference point"
+    },
+    "principles": [
+      "Moon is the Chandra Kala — everything is counted from Moon's position",
+      "When Jupiter transits a sign, all planets in that sign natally are activated",
+      "Planet pairs in the same sign produce specific predicted outcomes",
+      "The 2nd and 12th from Moon are gates of income and expenditure",
+      "7th from Moon governs partnerships and marriage activation"
+    ],
+    "single_planet_in_sign": {
+      "sun_alone": {
+        "life_areas": ["father", "authority", "government", "career", "health_vitality"],
+        "when_jupiter_transits": "Recognition from authority, father-related events, career visibility",
+        "house_from_moon_1": "Self-identity crisis or renewal around father/authority",
+        "positive": ["Government favor", "Career recognition", "Father's health improves"],
+        "challenging": ["Ego conflicts with authority", "Father's health concerns", "Excessive pride"]
+      },
+      "moon_alone": {
+        "life_areas": ["mother", "mind", "emotions", "public", "nourishment"],
+        "when_jupiter_transits": "Emotional clarity, mother-related events, public recognition",
+        "positive": ["Mental peace", "Mother's wellbeing", "Public support"],
+        "challenging": ["Emotional instability", "Mother's health", "Mental restlessness"]
+      },
+      "mars_alone": {
+        "life_areas": ["siblings", "property", "courage", "competition", "surgery"],
+        "when_jupiter_transits": "Property acquisition or disputes, sibling events, physical courage activated",
+        "positive": ["Property gains", "Courage increases", "Sibling support"],
+        "challenging": ["Property disputes", "Accidents", "Aggression from others"]
+      },
+      "mercury_alone": {
+        "life_areas": ["intellect", "business", "communication", "education", "trade"],
+        "when_jupiter_transits": "Business expansion, educational success, communication breakthroughs",
+        "positive": ["Business gains", "Intellectual recognition", "Skill development"],
+        "challenging": ["Communication misunderstandings", "Business confusion", "Nervous system stress"]
+      },
+      "jupiter_alone": {
+        "life_areas": ["wisdom", "children", "dharma", "teacher", "expansion"],
+        "when_jupiter_transits": "Self-transit — powerful activation of wisdom, children events, spiritual growth",
+        "note": "Jupiter transiting its own natal position is a major 12-year milestone",
+        "positive": ["Wisdom deepens", "Children's success", "Spiritual elevation", "Teacher meets student"],
+        "challenging": ["Overexpansion", "Excessive optimism", "Weight gain"]
+      },
+      "venus_alone": {
+        "life_areas": ["marriage", "relationships", "beauty", "luxury", "arts"],
+        "when_jupiter_transits": "Marriage events, relationship breakthroughs, artistic success, material gains",
+        "positive": ["Marriage/partnership", "Financial gains", "Creative success", "Beauty and pleasure"],
+        "challenging": ["Relationship complications", "Overindulgence", "Vanity"]
+      },
+      "saturn_alone": {
+        "life_areas": ["karma", "discipline", "longevity", "servants", "masses"],
+        "when_jupiter_transits": "Karmic reckoning, discipline pays off or breaks down, service-related events",
+        "positive": ["Long-term efforts recognized", "Discipline brings results", "Karmic clearing"],
+        "challenging": ["Delays and obstructions", "Health of bones/joints", "Isolation"]
+      },
+      "rahu_alone": {
+        "life_areas": ["foreign", "ambition", "unconventional", "technology", "illusion"],
+        "when_jupiter_transits": "Foreign connections activated, unconventional gains, ambition peaks",
+        "positive": ["Foreign travel or gains", "Technology breakthroughs", "Unusual opportunities"],
+        "challenging": ["Deception", "Compulsive behavior", "Foreign-related losses"]
+      },
+      "ketu_alone": {
+        "life_areas": ["spirituality", "moksha", "past_karma", "detachment", "occult"],
+        "when_jupiter_transits": "Spiritual experiences, past karma completing, occult knowledge awakens",
+        "positive": ["Spiritual breakthrough", "Past karma cleared", "Psychic abilities sharpen"],
+        "challenging": ["Sudden losses", "Detachment from world", "Health mysteries"]
+      }
+    },
+    "planet_pairs_same_sign": {
+      "sun_moon": {
+        "condition": "Sun and Moon in same sign (Amavasya-like natal)",
+        "life_prediction": "New Moon soul — intense, singular focus. Mother and father themes merge. Public and private self unified. When triggered: major identity events, parents-related milestones, public recognition tied to personal transformation.",
+        "timing": "Jupiter transiting this sign = major personal milestone year",
+        "health": "Heart and mind need balancing — pitta constitution",
+        "relationships": "Difficulty seeing others' perspective — self-referential",
+        "career": "Leadership roles, public-facing careers favored"
+      },
+      "sun_mars": {
+        "condition": "Sun and Mars in same sign",
+        "life_prediction": "Fiery warrior combination. Father-son or authority-action themes. Physical courage peaks. When triggered: conflicts with authority OR victories through bold action, property/sibling events involving father.",
+        "timing": "Jupiter transit = peak career assertion year, possible confrontations",
+        "health": "Pitta aggravation, blood pressure, fevers",
+        "positive": ["Fearlessness", "Executive leadership", "Physical vitality"],
+        "challenging": ["Aggression", "Conflicts with authority", "Accidents from rashness"]
+      },
+      "sun_mercury": {
+        "condition": "Sun and Mercury in same sign (Budhaditya Yoga)",
+        "life_prediction": "Intelligence illuminated by authority. Communication gifts. Business through government or authority. When triggered: intellectual recognition, writing/speaking achievements, business-government connections.",
+        "yoga": "Budhaditya Yoga — intelligence, business acumen, communication skills",
+        "timing": "Jupiter transit = peak intellectual recognition, writing/speaking success",
+        "health": "Nervous system under solar heat — eye strain, mental fatigue"
+      },
+      "sun_jupiter": {
+        "condition": "Sun and Jupiter in same sign",
+        "life_prediction": "Dharmic leader. Father as teacher or spiritual guide. Authority through wisdom. When triggered: elevation in dharmic/spiritual matters, father-related blessings, status through knowledge.",
+        "timing": "Jupiter transit = 12-year dharmic milestone, possible guru connection",
+        "positive": ["Status elevation", "Wisdom recognized", "Father's blessing"],
+        "challenging": ["Ego inflation", "Pride in knowledge"]
+      },
+      "sun_venus": {
+        "condition": "Sun and Venus in same sign",
+        "life_prediction": "Charismatic combination. Beauty and authority. Arts and government intersect. When triggered: romantic events involving status, creative recognition, luxury gains.",
+        "timing": "Jupiter transit = peak charisma year, possible marriage or public artistic success",
+        "health": "Venus combust Sun weakens this — relationship difficulties if Venus very close to Sun"
+      },
+      "sun_saturn": {
+        "condition": "Sun and Saturn in same sign",
+        "life_prediction": "Most challenging combination. Father-karma heavy. Authority vs. discipline clash. When triggered: major karmic events around father, authority, government — either debt paid OR new debt incurred.",
+        "timing": "Jupiter transit = karmic reckoning with authority/father themes",
+        "bphs_note": "Visha Yoga when in certain houses — requires careful analysis",
+        "health": "Bones, heart, chronic conditions from stress",
+        "remedies": ["Worship Shiva", "Serve father/authority figures humbly", "Saturday fasting"]
+      },
+      "sun_rahu": {
+        "condition": "Sun and Rahu in same sign (Grahan Yoga)",
+        "life_prediction": "Grahan (eclipse) energy. Father or authority figures have Rahu-like qualities (foreign, unconventional, obsessive). Identity eclipse — the self seeks something beyond ordinary. When triggered: sudden foreign connections, unconventional career moves, identity upheavals.",
+        "dosha": "Surya Grahan Dosha — can affect father's health and native's authority",
+        "timing": "Jupiter transit = eclipse activation, unexpected foreign-authority events",
+        "remedies": ["Surya namaskar daily", "Ruby after consultation", "Offer water to Sun"]
+      },
+      "sun_ketu": {
+        "condition": "Sun and Ketu in same sign",
+        "life_prediction": "Past-life authority themes. Natural detachment from ego. Spiritual leadership without ego. When triggered: past karma with father/authority completing, spiritual recognition.",
+        "timing": "Jupiter transit = spiritual milestone, ego-death and renewal"
+      },
+      "moon_mars": {
+        "condition": "Moon and Mars in same sign",
+        "life_prediction": "Emotional intensity and volatility. Mother and sibling themes intertwined. Chandra-Mangal Yoga for material gains (if well-placed). When triggered: emotional confrontations, mother-sibling events, property matters involving mother.",
+        "yoga": "Chandra-Mangal Yoga — business acumen, material gains through emotional intelligence",
+        "timing": "Jupiter transit = emotional peak year, possible property purchase, mother events",
+        "health": "Blood and bile disorders, emotional inflammation",
+        "positive": ["Business success", "Real estate gains", "Emotional courage"],
+        "challenging": ["Anger from mother or toward mother", "Emotional instability", "Blood disorders"]
+      },
+      "moon_mercury": {
+        "condition": "Moon and Mercury in same sign",
+        "life_prediction": "Emotional intelligence, creative writing, healing abilities. Mind and heart aligned. When triggered: educational success through emotional intelligence, writing/healing career peaks.",
+        "timing": "Jupiter transit = emotional-intellectual peak, healing/writing recognition"
+      },
+      "moon_jupiter": {
+        "condition": "Moon and Jupiter in same sign (Gaja Kesari potential)",
+        "life_prediction": "Wisdom flows through emotion. Nurturing teacher. Mother as spiritual guide. When triggered: emotional wisdom recognized, spiritual teachings given or received, mother's blessings.",
+        "yoga": "Potential Gaja Kesari Yoga if in angular houses — prosperity and recognition",
+        "timing": "Jupiter transit = major emotional-spiritual milestone, recognition"
+      },
+      "moon_venus": {
+        "condition": "Moon and Venus in same sign",
+        "life_prediction": "Deep beauty sense, artistic gifts, love of comfort. Mother and wife themes connected. When triggered: marriage events, artistic recognition, material comfort peaks, mother-related relationship events.",
+        "timing": "Jupiter transit = peak relationship/marriage year",
+        "positive": ["Marriage", "Artistic success", "Material comforts", "Beauty"],
+        "health": "Kapha constitution — weight, water retention"
+      },
+      "moon_saturn": {
+        "condition": "Moon and Saturn in same sign (Visha Yoga potential)",
+        "life_prediction": "Emotional restriction and karmic duty. Mother with Saturn qualities (disciplined, cold, or ill). Emotional maturity through suffering. When triggered: major karmic emotional clearing, mother health events, depression or breakthrough.",
+        "yoga": "Possible Visha Yoga — emotional poison that becomes medicine through tapas",
+        "timing": "Jupiter transit = karmic emotional reckoning, possibly mother health event",
+        "remedies": ["Worship Durga or Shiva", "Service to elderly women", "Saturday fasting"]
+      },
+      "moon_rahu": {
+        "condition": "Moon and Rahu in same sign",
+        "life_prediction": "Unusual mother or unusual emotional nature. Foreign emotional connections. Obsessive mind. When triggered: foreign travel with emotional significance, unusual relationships, obsessive episodes.",
+        "timing": "Jupiter transit = peak foreign-emotional activation, unusual relationship events"
+      },
+      "moon_ketu": {
+        "condition": "Moon and Ketu in same sign",
+        "life_prediction": "Psychic and past-life emotional memories. Detached mother. Spiritual sensitivity. When triggered: past-life memories surface, spiritual experiences through emotions, mother's spiritual journey.",
+        "timing": "Jupiter transit = spiritual-emotional peak, past karma with mother completing"
+      },
+      "mars_mercury": {
+        "condition": "Mars and Mercury in same sign",
+        "life_prediction": "Engineering mind, debate champion, sharp communication. Business through courage. When triggered: technical achievements, business victories through communication, sibling-education events.",
+        "timing": "Jupiter transit = peak technical/debate achievement year"
+      },
+      "mars_jupiter": {
+        "condition": "Mars and Jupiter in same sign",
+        "life_prediction": "Dharma warrior. Legal victories. Land and property through wisdom. When triggered: legal wins, property purchases, dharmic assertion, possible guru or military connection.",
+        "timing": "Jupiter transit = major land/property year, legal victory or challenge"
+      },
+      "mars_venus": {
+        "condition": "Mars and Venus in same sign",
+        "life_prediction": "Passionate relationships. Arts and physical activity linked. Desire activated. When triggered: intense romantic events, creative physical work, passion peaks.",
+        "timing": "Jupiter transit = peak desire/relationship activation"
+      },
+      "mars_saturn": {
+        "condition": "Mars and Saturn in same sign",
+        "life_prediction": "Discipline through pain. Slow but powerful action. Karmic warrior. When triggered: major karmic confrontations involving property/siblings, disciplined effort peaks, possible surgery or accident.",
+        "timing": "Jupiter transit = karmic action reckoning, test of discipline"
+      },
+      "mars_rahu": {
+        "condition": "Mars and Rahu in same sign (Angarak Yoga)",
+        "life_prediction": "Explosive, unpredictable energy. Foreign aggression or unconventional warfare. When triggered: sudden aggressive events, foreign conflicts, technical/military events.",
+        "yoga": "Angarak Yoga — explosive combination, needs careful management",
+        "timing": "Jupiter transit = most volatile year, explosive events possible"
+      },
+      "mars_ketu": {
+        "condition": "Mars and Ketu in same sign",
+        "life_prediction": "Past-life warrior energy. Martial spirituality. Sudden courage or sudden retreat. When triggered: past karma with siblings/property completing, spiritual martial events.",
+        "timing": "Jupiter transit = past-life warrior karma activation"
+      },
+      "mercury_jupiter": {
+        "condition": "Mercury and Jupiter in same sign",
+        "life_prediction": "Scholar-businessman. Teaching and trade united. When triggered: educational peaks, teaching recognition, business-wisdom integration.",
+        "timing": "Jupiter transit = peak scholarly or business-wisdom year"
+      },
+      "mercury_venus": {
+        "condition": "Mercury and Venus in same sign",
+        "life_prediction": "Creative communicator. Arts and commerce linked. Beauty in words. When triggered: artistic-business success, creative communication peaks.",
+        "timing": "Jupiter transit = peak artistic-commercial recognition"
+      },
+      "mercury_saturn": {
+        "condition": "Mercury and Saturn in same sign",
+        "life_prediction": "Systematic thinker, meticulous analyst. Slow but deep communication. When triggered: technical mastery recognized, systematic business events.",
+        "timing": "Jupiter transit = recognition for systematic work, technical mastery"
+      },
+      "mercury_rahu": {
+        "condition": "Mercury and Rahu in same sign",
+        "life_prediction": "Unconventional intellect, technology innovator. Foreign communication links. When triggered: technology breakthroughs, foreign education, unconventional business.",
+        "timing": "Jupiter transit = technology/foreign communication peak year"
+      },
+      "mercury_ketu": {
+        "condition": "Mercury and Ketu in same sign",
+        "life_prediction": "Intuitive intellect, past-life knowledge. Communication dissolves into silence. When triggered: deep past-life knowledge surfaces, mystical communication, intellectual detachment.",
+        "timing": "Jupiter transit = mystical knowledge activation"
+      },
+      "jupiter_venus": {
+        "condition": "Jupiter and Venus in same sign",
+        "life_prediction": "Abundance and beauty. Dharma and desire aligned. Marriage through dharmic connections. When triggered: peak abundance year, marriage through dharmic channels, artistic-spiritual success.",
+        "timing": "Jupiter transit = most auspicious year for marriage and material abundance"
+      },
+      "jupiter_saturn": {
+        "condition": "Jupiter and Saturn in same sign",
+        "life_prediction": "The Great Conjunction energy. Wisdom through discipline. Dharma through karma. 20-year cycles. When triggered: major life restructuring, wisdom through hardship, karmic rewards.",
+        "timing": "Jupiter transit = 12-year dharmic-karmic reckoning"
+      },
+      "jupiter_rahu": {
+        "condition": "Jupiter and Rahu in same sign (Guru-Chandal Yoga)",
+        "life_prediction": "Wisdom from unconventional sources. Foreign guru. Dharma through taboo-breaking. When triggered: unconventional wisdom peaks, foreign spiritual connections, dharma challenged.",
+        "yoga": "Guru-Chandal Yoga — wisdom tested through taboo or foreign influences",
+        "timing": "Jupiter transit = peak unconventional wisdom activation"
+      },
+      "jupiter_ketu": {
+        "condition": "Jupiter and Ketu in same sign",
+        "life_prediction": "Moksha-seeking wisdom. Past-life spiritual knowledge. Teacher who renounces. When triggered: spiritual moksha experiences, past-life wisdom integrates, possible spiritual renunciation.",
+        "timing": "Jupiter transit = peak spiritual-moksha activation"
+      },
+      "venus_saturn": {
+        "condition": "Venus and Saturn in same sign",
+        "life_prediction": "Love through duty. Restricted or delayed relationships. Discipline in arts. When triggered: marriage after delay, karmic relationship events, artistic discipline recognized.",
+        "timing": "Jupiter transit = karmic relationship resolution year"
+      },
+      "venus_rahu": {
+        "condition": "Venus and Rahu in same sign",
+        "life_prediction": "Unconventional beauty, foreign relationships, obsessive love. When triggered: foreign romantic events, unusual artistic breakthroughs, obsessive relationship patterns.",
+        "timing": "Jupiter transit = peak foreign-romance activation"
+      },
+      "venus_ketu": {
+        "condition": "Venus and Ketu in same sign",
+        "life_prediction": "Spiritual beauty, detachment from relationships, past-life love karma completing. When triggered: past relationship karma completing, spiritual art, beauty of detachment.",
+        "timing": "Jupiter transit = past romantic karma resolution"
+      },
+      "saturn_rahu": {
+        "condition": "Saturn and Rahu in same sign (Shrapit Yoga potential)",
+        "life_prediction": "Cursed karma — extreme karmic debt from past lives. Foreign-karmic difficulties. When triggered: major karmic events, foreign-related hardships, karmic debt peaks.",
+        "yoga": "Possible Shrapit Yoga — requires remedies",
+        "timing": "Jupiter transit = peak karmic reckoning"
+      },
+      "saturn_ketu": {
+        "condition": "Saturn and Ketu in same sign",
+        "life_prediction": "Double detachment and karma. Ascetic energy. Past-life karmic completion through discipline. When triggered: ascetic experiences, past karma completing through hardship.",
+        "timing": "Jupiter transit = peak karmic completion through austerity"
+      },
+      "rahu_ketu": {
+        "condition": "Rahu and Ketu — always in opposite signs (axis)",
+        "note": "Never conjunct — they form the karmic axis between two signs"
+      }
+    },
+    "triple_conjunctions": {
+      "sun_moon_rahu": {
+        "life_prediction": "Solar eclipse energy natally. Intense identity with karmic foreign overlays. Powerful but unstable.",
+        "timing": "Jupiter transit = identity eclipse events, possible foreign upheaval"
+      },
+      "moon_mars_saturn": {
+        "life_prediction": "Triple emotional pressure. Mother, aggression, and karma together. Powerful transformative suffering.",
+        "timing": "Jupiter transit = most intense emotional-karmic year"
+      },
+      "jupiter_venus_mercury": {
+        "life_prediction": "Triple abundance — wisdom, beauty, intellect. Peak prosperity combination.",
+        "timing": "Jupiter transit = most abundant year of the 12-year cycle"
+      }
+    },
+    "jupiter_timing_rules": {
+      "description": "Jupiter takes 12 years to complete one cycle. Each transit through a sign activates natal planets there.",
+      "activation_window": "Jupiter within 5° of natal planet = approaching activation; exact conjunction = peak; within 5° past = settling",
+      "current_positions_note": "Check current Jupiter sign vs natal planet signs for active activations",
+      "retrograde_effect": "Jupiter retrograde in a sign = second activation of those natal planets — review and internalize",
+      "12_year_cycle": {
+        "year_1": "Jupiter transits natal planet sign — direct results manifested",
+        "year_6": "Jupiter in 7th from natal sign — relationship mirror of those themes",
+        "year_12": "Jupiter returns — completion and renewal of those themes"
+      }
+    },
+    "ckn_reading_methodology": {
+      "step_1": "Identify all planets and their natal signs",
+      "step_2": "Group planets by sign — find all conjunctions",
+      "step_3": "For each conjunction, look up the planet_pairs_same_sign rules",
+      "step_4": "Identify current Jupiter sign — which natal planets is it activating?",
+      "step_5": "Check Jupiter's distance from each natal planet for activation status",
+      "step_6": "Read the 'when_jupiter_transits' result for currently activated combinations",
+      "step_7": "Note upcoming Jupiter transits for future event predictions"
+    }
+  }
+}

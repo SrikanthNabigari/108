@@ -1,0 +1,139 @@
+{
+  "sensitive_points_rules": {
+    "metadata": {
+      "sources": ["Brighu Nadi tradition", "BPHS Chapter 35", "Jyotish classical tradition"],
+      "overview": "Sensitive points (Sphutas) are mathematically derived degrees that act as trigger points for specific life themes. Unlike planets, they have no independent motion — they are activated only when planets transit over them or aspect them."
+    },
+    "bhrigu_bindu": {
+      "definition": "The midpoint between Rahu and natal Moon. The most sensitive timing degree in a birth chart.",
+      "source": "Brighu Nadi tradition",
+      "formula": "Midpoint of Rahu longitude and Moon longitude (shorter arc)",
+      "orb_for_activation": 1.0,
+      "activation_rule": "Any planet transiting within 1° of Bhrigu Bindu = major life event in that planet's significations",
+      "natal_conjunction_rule": "Any natal planet conjunct Bhrigu Bindu (within 3°) = that planet's themes are karmically fated and operate through sudden, destined events",
+      "why_it_works": "Rahu represents karmic obsession and desire; Moon represents the mind and emotional self. Their midpoint is the exact degree where desire and mind intersect — the karmic meeting point. Any activation here triggers the subconscious into manifestation.",
+      "transit_activators": {
+        "jupiter": "Most auspicious activation — dharma, wisdom, children, expansion events",
+        "saturn": "Karmic reckoning activation — discipline, losses, restructuring events",
+        "rahu": "Obsessive, foreign, unconventional activation — sudden changes",
+        "ketu": "Spiritual, past-karma activation — endings, detachment, liberation",
+        "mars": "Action, property, conflict activation — sudden assertive events",
+        "venus": "Relationship, wealth, beauty activation — romantic or financial events",
+        "sun": "Authority, father, career activation — recognition or confrontation",
+        "moon": "Monthly activation — emotional events, mother, public matters"
+      },
+      "house_significance_by_sign": {
+        "aries": "Events around self, identity, beginnings",
+        "taurus": "Events around wealth, speech, food, family",
+        "gemini": "Events around communication, siblings, short travel, business",
+        "cancer": "Events around home, mother, property, emotional foundation",
+        "leo": "Events around children, creativity, speculation, romance",
+        "virgo": "Events around health, enemies, service, debts",
+        "libra": "Events around partnerships, marriage, contracts",
+        "scorpio": "Events around transformation, occult, inheritance, death-rebirth",
+        "sagittarius": "Events around dharma, father, foreign travel, higher learning",
+        "capricorn": "Events around career, authority, public standing, government",
+        "aquarius": "Events around gains, elder siblings, networks, aspirations",
+        "pisces": "Events around losses, foreign lands, spirituality, liberation"
+      },
+      "advanced_rules": [
+        "When Jupiter transits Bhrigu Bindu = the single most auspicious timing point in any year — major positive events",
+        "When Saturn transits BB = major karmic event — can be difficult or culminating depending on Saturn's strength",
+        "When the current dasha lord's natal position is conjunct BB = peak manifestation of that dasha's themes",
+        "BB in a kendra (1,4,7,10) from lagna = events are very visible and public",
+        "BB in a trikona (1,5,9) = dharmic, auspicious events when activated",
+        "BB in a dusthana (6,8,12) = private, hidden events; challenges before rewards"
+      ]
+    },
+    "indu_lagna": {
+      "definition": "The wealth sensitive point calculated from Jupiter and Moon house lords' Bindu values. Shows when and through what channel wealth flows.",
+      "source": "BPHS Chapter 35",
+      "formula": "Jupiter's house lord Bindu + Moon's house lord Bindu, counted from lagna",
+      "bindu_table": {
+        "sun": 30,
+        "moon": 16,
+        "mars": 6,
+        "mercury": 8,
+        "jupiter": 10,
+        "venus": 12,
+        "saturn": 1,
+        "rahu": 0,
+        "ketu": 0
+      },
+      "interpretation_by_sign": {
+        "aries": "Wealth through courage, pioneering ventures, sports, military, leadership",
+        "taurus": "Wealth through land, food, beauty, arts, accumulated assets, banking",
+        "gemini": "Wealth through communication, business, technology, writing, trading",
+        "cancer": "Wealth through property, real estate, nourishment, public service, mother",
+        "leo": "Wealth through authority, government, creative arts, speculation",
+        "virgo": "Wealth through service, analysis, health, editing, systematic work",
+        "libra": "Wealth through partnerships, beauty, luxury, design, legal work",
+        "scorpio": "Wealth through research, transformation, occult, inheritance, deep investigation",
+        "sagittarius": "Wealth through dharma, teaching, foreign connections, publishing, philosophy",
+        "capricorn": "Wealth through discipline, hard work, government, long-term ventures",
+        "aquarius": "Wealth through technology, innovation, networks, humanitarian work",
+        "pisces": "Wealth through spirituality, foreign lands, research, creativity, hidden sources"
+      },
+      "indu_lagna_lord_rules": {
+        "strong_lord": "When Indu Lagna lord is strong (own sign, exalted, well-placed) = wealth flows abundantly through that channel",
+        "weak_lord": "When Indu Lagna lord is weak (debilitated, combust, in dusthana) = wealth channel is obstructed",
+        "dasha_activation": "When the Indu Lagna lord runs as dasha lord = peak wealth period",
+        "transit_activation": "Jupiter transiting Indu Lagna = major wealth inflow that year",
+        "saturn_transit": "Saturn transiting Indu Lagna = wealth through discipline/effort or wealth restriction"
+      },
+      "timing_rules": [
+        "Jupiter transiting Indu Lagna sign = best year for wealth accumulation in that 12-year cycle",
+        "Dasha of Indu Lagna lord = sustained wealth period",
+        "Antardasha of Indu Lagna lord within any Mahadasha = wealth sub-period",
+        "When multiple transits activate Indu Lagna simultaneously = windfall possible"
+      ]
+    },
+    "sree_lagna": {
+      "definition": "The prosperity sensitive point calculated from Moon + Venus. The degree of abundance and material fulfillment.",
+      "source": "Jyotish classical tradition",
+      "formula": "(Moon longitude + Venus longitude) mod 360",
+      "why_it_works": "Moon represents desire and nourishment; Venus represents beauty and material comfort. Their combined longitude creates the degree of maximum material fulfillment — where both emotional satisfaction and material comfort converge.",
+      "interpretation_by_sign": {
+        "aries": "Prosperity through action, initiation, physical work, sports",
+        "taurus": "Prosperity through beauty, food, luxury, land, arts — most natural Sree Lagna placement",
+        "gemini": "Prosperity through intellect, commerce, communication networks",
+        "cancer": "Prosperity through nourishment, real estate, public service, emotional resonance",
+        "leo": "Prosperity through creativity, performance, authority, speculation",
+        "virgo": "Prosperity through service, precision work, health, analysis",
+        "libra": "Prosperity through partnerships, beauty, balanced exchange, contracts",
+        "scorpio": "Prosperity through transformation, research, inheritance, depth of knowledge",
+        "sagittarius": "Prosperity through wisdom, teaching, foreign connections, expansion",
+        "capricorn": "Prosperity through structured work, government, long-term discipline",
+        "aquarius": "Prosperity through innovation, technology, groups, humanitarian causes",
+        "pisces": "Prosperity through spirituality, creativity, foreign income, hidden channels"
+      },
+      "relationship_to_indu_lagna": "Indu Lagna shows the CHANNEL of wealth (how it comes). Sree Lagna shows the DEGREE of prosperity (how much abundance is possible). When both are activated simultaneously = peak prosperity period.",
+      "house_from_lagna_rules": {
+        "house_1": "Prosperity tied to personal identity and self-expression",
+        "house_2": "Natural placement — direct wealth accumulation, family resources",
+        "house_3": "Prosperity through effort, communication, skills, siblings",
+        "house_4": "Prosperity through property, mother, emotional intelligence",
+        "house_5": "Prosperity through speculation, creativity, children, intelligence",
+        "house_6": "Prosperity requires overcoming obstacles, service, health work",
+        "house_7": "Prosperity through partnerships, business, spouse",
+        "house_8": "Hidden prosperity — inheritance, transformation, research",
+        "house_9": "Prosperity through dharma, teaching, father, foreign connections",
+        "house_10": "Career-linked prosperity — public recognition brings abundance",
+        "house_11": "Best placement — gains, networks, aspirations all support prosperity",
+        "house_12": "Spiritual prosperity or prosperity in foreign lands"
+      },
+      "activation_rules": [
+        "Benefic planet transiting Sree Lagna = prosperity activation that month",
+        "Jupiter transiting Sree Lagna = peak prosperity year in 12-year cycle",
+        "Dasha of Sree Lagna lord = sustained prosperity period",
+        "When Sree Lagna lord is the same as Indu Lagna lord = double wealth concentration — very auspicious"
+      ]
+    },
+    "combined_analysis": {
+      "all_three_active": "When Bhrigu Bindu, Indu Lagna, and Sree Lagna are all activated simultaneously by Jupiter transit = the single most powerful financial-karmic year in a 12-year cycle",
+      "bb_in_indu_lagna_sign": "When Bhrigu Bindu falls in the same sign as Indu Lagna = karmic destined wealth — wealth events come through fated encounters",
+      "sree_in_bb_sign": "When Sree Lagna falls in the same sign as Bhrigu Bindu = prosperity and fate are linked — abundance comes through unexpected channels",
+      "natal_planets_on_sphutas": "Any natal planet within 3° of any sphuta = that planet operates through that sphuta's energy — fated expression of that planet's themes"
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "sudarshana_chakra_rules": {
+    "metadata": {
+      "source": "Brihat Parashara Hora Shastra",
+      "principle": "Parasara's rule: no prediction should be made from lagna alone. Always verify from Lagna, Chandra (Moon), and Surya (Sun) simultaneously.",
+      "three_wheels": {
+        "lagna": "Body and outer self — physical manifestation, worldly identity",
+        "chandra": "Mind and emotional self — inner experience, habitual patterns",
+        "surya": "Soul and core self — dharmic direction, fundamental motivations"
+      }
+    },
+    "confirmation_strength": {
+      "3_of_3": "Certain — all three wheels confirm. Event WILL manifest.",
+      "2_of_3": "Likely — two wheels confirm. Event will probably manifest.",
+      "1_of_3": "Possible — only one wheel confirms. Event may manifest under right dasha.",
+      "0_of_3": "Weak — no wheel activates this theme. Theme is dormant or minimal."
+    },
+    "house_verdicts": {
+      "1": {"theme": "Self, health, identity, beginnings, longevity"},
+      "2": {"theme": "Wealth, speech, family, food, face"},
+      "3": {"theme": "Siblings, courage, communication, short travel, skills"},
+      "4": {"theme": "Home, mother, property, vehicles, happiness, education"},
+      "5": {"theme": "Children, intelligence, creativity, speculation, past karma"},
+      "6": {"theme": "Enemies, disease, debt, service, competition"},
+      "7": {"theme": "Partnership, marriage, business, foreign travel"},
+      "8": {"theme": "Transformation, occult, longevity, inheritance, hidden"},
+      "9": {"theme": "Dharma, fortune, father, higher learning, guru"},
+      "10": {"theme": "Career, authority, public life, government, recognition"},
+      "11": {"theme": "Gains, aspirations, elder siblings, networks, fulfillment"},
+      "12": {"theme": "Losses, foreign, spirituality, liberation, seclusion"}
+    },
+    "life_area_reading": {
+      "marriage": {
+        "primary_house": 7,
+        "rule": "Check H7 from all 3 wheels. If 2+ wheels have planets in H7 or its sign = marriage strongly supported. If H7 from all 3 is empty = marriage happens through dasha timing alone, not chart promise."
+      },
+      "career": {
+        "primary_house": 10,
+        "rule": "H10 from Surya wheel = soul-level career direction (most important for career dharma). H10 from Lagna = visible career. H10 from Chandra = emotional satisfaction from career."
+      },
+      "wealth": {
+        "primary_house": 2,
+        "supporting": [11, 9],
+        "rule": "H2 and H11 from all 3 wheels. When Jupiter transits over a sign occupied in H2/H11 from any wheel = wealth event."
+      },
+      "children": {
+        "primary_house": 5,
+        "rule": "H5 from Chandra wheel = emotional readiness for children. H5 from Lagna = physical capacity. H5 from Surya = karmic readiness."
+      }
+    },
+    "timing_with_sudarshana": {
+      "rule": "For event timing: when current dasha lord's sign is activated simultaneously in 2+ wheels = peak manifestation year",
+      "surya_wheel_special": "The Surya wheel shows WHEN the soul is ready — events in Surya H10 require soul alignment, not just circumstances"
+    }
+  }
+}

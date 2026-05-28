@@ -1,0 +1,646 @@
+{
+  "numerology": {
+    "system": "Vedic-Chaldean Numerology with Jyotish Planet Mapping",
+    "description": "Numerology is the science of numbers and their cosmic vibrations. In Vedic tradition, each number 1-9 corresponds to a graha (planet), creating a bridge between numerology and Jyotish. The Chaldean system is preferred for name analysis as it assigns values based on sound vibration rather than alphabetical order.",
+    "numbers": {
+      "1": {
+        "digit": 1,
+        "planet": "sun",
+        "sanskrit_planet": "Surya",
+        "deity": "Surya Deva",
+        "qualities": ["leadership", "independence", "originality", "ambition", "pioneering", "willpower", "self-reliance"],
+        "element": "fire",
+        "color": "red",
+        "secondary_color": "gold",
+        "gem": "ruby",
+        "secondary_gem": "garnet",
+        "metal": "gold",
+        "day": "Sunday",
+        "direction": "East",
+        "body_parts": ["heart", "eyes", "spine", "right eye"],
+        "health_vulnerabilities": ["heart conditions", "eye problems", "high blood pressure", "bone disorders"],
+        "positive_traits": ["confident", "creative", "driven", "courageous", "decisive", "ambitious", "dignified"],
+        "negative_traits": ["arrogant", "domineering", "stubborn", "impatient", "egotistical", "boastful"],
+        "career_areas": ["government", "politics", "administration", "entertainment", "medicine", "invention", "executive roles", "self-employment"],
+        "compatible_numbers": [1, 3, 5, 9],
+        "neutral_numbers": [2, 4],
+        "incompatible_numbers": [6, 7, 8],
+        "lucky_dates": [1, 10, 19, 28],
+        "lucky_months": ["January", "October", "July"],
+        "master_of": "self-expression and willpower",
+        "life_lesson": "Learning to lead without dominating, to shine without overshadowing others",
+        "spiritual_significance": "The Atman — the individual soul expressing divine will",
+        "vedic_mantra": "Om Hraam Hreem Hraum Sah Suryaya Namah"
+      },
+      "2": {
+        "digit": 2,
+        "planet": "moon",
+        "sanskrit_planet": "Chandra",
+        "deity": "Chandra Deva",
+        "qualities": ["diplomacy", "sensitivity", "cooperation", "receptivity", "intuition", "adaptability", "nurturing"],
+        "element": "water",
+        "color": "white",
+        "secondary_color": "cream",
+        "gem": "pearl",
+        "secondary_gem": "moonstone",
+        "metal": "silver",
+        "day": "Monday",
+        "direction": "Northwest",
+        "body_parts": ["stomach", "breasts", "left eye", "lymphatic system", "blood"],
+        "health_vulnerabilities": ["digestive issues", "mental anxiety", "cold and cough", "water retention", "insomnia"],
+        "positive_traits": ["gentle", "diplomatic", "intuitive", "imaginative", "cooperative", "romantic", "empathetic"],
+        "negative_traits": ["oversensitive", "indecisive", "moody", "easily influenced", "timid", "possessive"],
+        "career_areas": ["counseling", "nursing", "hospitality", "psychology", "music", "art", "public relations", "food industry"],
+        "compatible_numbers": [1, 2, 7, 9],
+        "neutral_numbers": [3, 6],
+        "incompatible_numbers": [4, 5, 8],
+        "lucky_dates": [2, 11, 20, 29],
+        "lucky_months": ["January", "February", "July"],
+        "master_of": "emotional intelligence and intuition",
+        "life_lesson": "Learning to balance sensitivity with inner strength, to cooperate without losing identity",
+        "spiritual_significance": "Manas — the mind reflecting the light of consciousness",
+        "vedic_mantra": "Om Shraam Shreem Shraum Sah Chandraya Namah"
+      },
+      "3": {
+        "digit": 3,
+        "planet": "jupiter",
+        "sanskrit_planet": "Guru",
+        "deity": "Brihaspati",
+        "qualities": ["expansion", "optimism", "wisdom", "creativity", "expression", "generosity", "teaching"],
+        "element": "ether",
+        "color": "yellow",
+        "secondary_color": "purple",
+        "gem": "yellow sapphire",
+        "secondary_gem": "citrine",
+        "metal": "gold",
+        "day": "Thursday",
+        "direction": "Northeast",
+        "body_parts": ["liver", "thighs", "fat tissue", "arterial system"],
+        "health_vulnerabilities": ["liver disorders", "obesity", "diabetes", "skin eruptions", "nerve strain"],
+        "positive_traits": ["optimistic", "generous", "jovial", "inspiring", "knowledgeable", "articulate", "philosophical"],
+        "negative_traits": ["extravagant", "over-confident", "scattered", "preachy", "superficial", "gossipy"],
+        "career_areas": ["teaching", "law", "banking", "writing", "publishing", "advisory", "priesthood", "philosophy", "judiciary"],
+        "compatible_numbers": [1, 3, 5, 6, 9],
+        "neutral_numbers": [2, 8],
+        "incompatible_numbers": [4, 7],
+        "lucky_dates": [3, 12, 21, 30],
+        "lucky_months": ["March", "June", "September", "December"],
+        "master_of": "wisdom and creative expansion",
+        "life_lesson": "Learning to focus creative energy, to teach through example rather than sermon",
+        "spiritual_significance": "Guru Tattva — the principle of divine wisdom and grace",
+        "vedic_mantra": "Om Graam Greem Graum Sah Gurave Namah"
+      },
+      "4": {
+        "digit": 4,
+        "planet": "rahu",
+        "sanskrit_planet": "Rahu",
+        "deity": "Rahu (Shadow planet)",
+        "qualities": ["structure", "discipline", "unconventionality", "hard work", "rebellion", "transformation", "practicality"],
+        "element": "air",
+        "color": "blue",
+        "secondary_color": "grey",
+        "gem": "hessonite",
+        "secondary_gem": "gomed",
+        "metal": "lead",
+        "day": "Saturday",
+        "direction": "Southwest",
+        "body_parts": ["legs", "skin", "respiratory system"],
+        "health_vulnerabilities": ["mysterious ailments", "depression", "respiratory issues", "skin diseases", "chronic conditions"],
+        "positive_traits": ["hardworking", "determined", "systematic", "reliable", "practical", "inventive", "detail-oriented"],
+        "negative_traits": ["rigid", "pessimistic", "argumentative", "secretive", "rebellious", "melancholic", "suspicious"],
+        "career_areas": ["technology", "engineering", "research", "occult sciences", "aviation", "foreign trade", "unconventional fields", "electronics"],
+        "compatible_numbers": [1, 2, 5, 6, 7],
+        "neutral_numbers": [3, 9],
+        "incompatible_numbers": [4, 8],
+        "lucky_dates": [4, 13, 22, 31],
+        "lucky_months": ["February", "June", "August"],
+        "master_of": "unconventional solutions and transformation",
+        "life_lesson": "Learning to build stable foundations while embracing change, finding order in chaos",
+        "spiritual_significance": "Maya — the illusion that drives worldly experience and ultimate awakening",
+        "vedic_mantra": "Om Bhraam Bhreem Bhraum Sah Rahave Namah"
+      },
+      "5": {
+        "digit": 5,
+        "planet": "mercury",
+        "sanskrit_planet": "Budha",
+        "deity": "Vishnu",
+        "qualities": ["communication", "versatility", "adaptability", "intellect", "curiosity", "commerce", "speed"],
+        "element": "earth",
+        "color": "green",
+        "secondary_color": "turquoise",
+        "gem": "emerald",
+        "secondary_gem": "peridot",
+        "metal": "bronze",
+        "day": "Wednesday",
+        "direction": "North",
+        "body_parts": ["nervous system", "arms", "hands", "tongue", "skin"],
+        "health_vulnerabilities": ["nervous disorders", "speech defects", "skin diseases", "insomnia", "mental restlessness"],
+        "positive_traits": ["witty", "versatile", "adaptable", "intelligent", "communicative", "youthful", "quick-thinking"],
+        "negative_traits": ["restless", "inconsistent", "superficial", "cunning", "nervous", "indecisive", "unreliable"],
+        "career_areas": ["trade", "writing", "journalism", "accounting", "travel", "astrology", "teaching", "media", "advertising"],
+        "compatible_numbers": [1, 3, 4, 5, 6, 7, 8, 9],
+        "neutral_numbers": [2],
+        "incompatible_numbers": [],
+        "lucky_dates": [5, 14, 23],
+        "lucky_months": ["May", "June", "September"],
+        "master_of": "communication and intellectual agility",
+        "life_lesson": "Learning to channel mental energy into depth rather than breadth, to commit rather than scatter",
+        "spiritual_significance": "Buddhi — the discriminating intellect that bridges matter and spirit",
+        "vedic_mantra": "Om Braam Breem Braum Sah Budhaya Namah"
+      },
+      "6": {
+        "digit": 6,
+        "planet": "venus",
+        "sanskrit_planet": "Shukra",
+        "deity": "Shukracharya",
+        "qualities": ["love", "beauty", "harmony", "responsibility", "domesticity", "artistic sense", "luxury"],
+        "element": "water",
+        "color": "white",
+        "secondary_color": "pink",
+        "gem": "diamond",
+        "secondary_gem": "white sapphire",
+        "metal": "silver",
+        "day": "Friday",
+        "direction": "Southeast",
+        "body_parts": ["reproductive system", "kidneys", "throat", "face", "cheeks"],
+        "health_vulnerabilities": ["kidney disorders", "diabetes", "throat infections", "reproductive issues", "skin conditions"],
+        "positive_traits": ["loving", "responsible", "artistic", "harmonious", "nurturing", "magnetic", "charming"],
+        "negative_traits": ["vain", "jealous", "possessive", "lazy", "self-indulgent", "obstinate", "interfering"],
+        "career_areas": ["arts", "fashion", "interior design", "music", "entertainment", "luxury goods", "hospitality", "beauty", "perfumery"],
+        "compatible_numbers": [3, 4, 5, 6, 9],
+        "neutral_numbers": [1, 2, 8],
+        "incompatible_numbers": [7],
+        "lucky_dates": [6, 15, 24],
+        "lucky_months": ["April", "May", "October"],
+        "master_of": "love, beauty, and harmonious relationships",
+        "life_lesson": "Learning to love without possessing, to beautify without vanity, to serve without martyrdom",
+        "spiritual_significance": "Prema — divine love expressing through earthly beauty and relationships",
+        "vedic_mantra": "Om Draam Dreem Draum Sah Shukraya Namah"
+      },
+      "7": {
+        "digit": 7,
+        "planet": "ketu",
+        "sanskrit_planet": "Ketu",
+        "deity": "Ketu (Shadow planet)",
+        "qualities": ["spirituality", "mysticism", "analysis", "introspection", "solitude", "wisdom", "detachment"],
+        "element": "fire",
+        "color": "grey",
+        "secondary_color": "smoky white",
+        "gem": "cat's eye",
+        "secondary_gem": "tiger's eye",
+        "metal": "lead",
+        "day": "Monday",
+        "direction": "Northeast",
+        "body_parts": ["spine", "feet", "lower abdomen"],
+        "health_vulnerabilities": ["mysterious ailments", "skin diseases", "digestive issues", "insomnia", "psychosomatic disorders"],
+        "positive_traits": ["philosophical", "spiritual", "analytical", "intuitive", "wise", "contemplative", "inventive"],
+        "negative_traits": ["aloof", "pessimistic", "secretive", "impractical", "eccentric", "isolated", "escapist"],
+        "career_areas": ["research", "philosophy", "occult", "healing", "psychology", "spiritual teaching", "marine", "investigation", "data analysis"],
+        "compatible_numbers": [2, 4, 5, 7],
+        "neutral_numbers": [1, 9],
+        "incompatible_numbers": [3, 6, 8],
+        "lucky_dates": [7, 16, 25],
+        "lucky_months": ["January", "February", "July"],
+        "master_of": "spiritual wisdom and inner truth",
+        "life_lesson": "Learning to bridge the spiritual and material worlds, to share insights without isolation",
+        "spiritual_significance": "Moksha — liberation through knowledge, the tail of the cosmic serpent releasing attachment",
+        "vedic_mantra": "Om Sraam Sreem Sraum Sah Ketave Namah"
+      },
+      "8": {
+        "digit": 8,
+        "planet": "saturn",
+        "sanskrit_planet": "Shani",
+        "deity": "Shani Deva",
+        "qualities": ["karma", "justice", "authority", "endurance", "material mastery", "discipline", "limitation"],
+        "element": "air",
+        "color": "dark blue",
+        "secondary_color": "black",
+        "gem": "blue sapphire",
+        "secondary_gem": "amethyst",
+        "metal": "iron",
+        "day": "Saturday",
+        "direction": "West",
+        "body_parts": ["bones", "teeth", "joints", "knees", "spleen"],
+        "health_vulnerabilities": ["arthritis", "paralysis", "chronic diseases", "depression", "dental problems", "fractures"],
+        "positive_traits": ["disciplined", "patient", "responsible", "authoritative", "just", "persevering", "ambitious"],
+        "negative_traits": ["cold", "ruthless", "miserly", "vengeful", "fatalistic", "power-hungry", "dictatorial"],
+        "career_areas": ["mining", "real estate", "judiciary", "iron/steel", "oil", "agriculture", "politics", "construction", "archaeology"],
+        "compatible_numbers": [4, 5, 6, 8],
+        "neutral_numbers": [1, 2, 3],
+        "incompatible_numbers": [7, 9],
+        "lucky_dates": [8, 17, 26],
+        "lucky_months": ["January", "March", "October"],
+        "master_of": "material mastery through karmic discipline",
+        "life_lesson": "Learning that limitations are teachers, that true power comes through patience and righteous action",
+        "spiritual_significance": "Karma — the cosmic law of cause and effect, the great equalizer and teacher",
+        "vedic_mantra": "Om Praam Preem Praum Sah Shanaischaraya Namah"
+      },
+      "9": {
+        "digit": 9,
+        "planet": "mars",
+        "sanskrit_planet": "Mangal",
+        "deity": "Kartikeya (Skanda)",
+        "qualities": ["courage", "energy", "action", "passion", "humanitarianism", "completion", "universal love"],
+        "element": "fire",
+        "color": "red",
+        "secondary_color": "scarlet",
+        "gem": "red coral",
+        "secondary_gem": "carnelian",
+        "metal": "copper",
+        "day": "Tuesday",
+        "direction": "South",
+        "body_parts": ["muscles", "blood", "head", "bone marrow", "adrenal glands"],
+        "health_vulnerabilities": ["fevers", "inflammations", "injuries", "blood disorders", "surgeries", "burns"],
+        "positive_traits": ["courageous", "energetic", "passionate", "humanitarian", "generous", "protective", "dynamic"],
+        "negative_traits": ["aggressive", "impulsive", "short-tempered", "violent", "hasty", "quarrelsome", "domineering"],
+        "career_areas": ["military", "surgery", "engineering", "sports", "firefighting", "law enforcement", "martial arts", "metallurgy"],
+        "compatible_numbers": [1, 2, 3, 5, 6, 9],
+        "neutral_numbers": [4, 7],
+        "incompatible_numbers": [8],
+        "lucky_dates": [9, 18, 27],
+        "lucky_months": ["March", "April", "October", "November"],
+        "master_of": "courage, energy, and completing the cycle of experience",
+        "life_lesson": "Learning to channel martial energy constructively, to fight for justice rather than domination",
+        "spiritual_significance": "Shakti — the dynamic cosmic energy that destroys ignorance and protects dharma",
+        "vedic_mantra": "Om Kraam Kreem Kraum Sah Bhaumaya Namah"
+      }
+    },
+    "master_numbers": {
+      "11": {
+        "digit": 11,
+        "reduces_to": 2,
+        "title": "The Spiritual Messenger",
+        "qualities": ["intuition", "spiritual insight", "inspiration", "idealism", "visionary thinking", "psychic ability"],
+        "significance": "Heightened Moon energy with spiritual awakening potential. The individual channels cosmic messages and serves as a bridge between the material and spiritual worlds.",
+        "planet_amplification": "Double Sun vibration channeled through Moon — illuminating the subconscious mind",
+        "challenges": ["nervous tension", "extreme sensitivity", "impracticality", "self-doubt", "overwhelm from psychic impressions"],
+        "famous_pattern": "Prophets, spiritual leaders, artists with divine inspiration",
+        "karmic_duty": "To inspire and uplift humanity through spiritual insight and creative expression"
+      },
+      "22": {
+        "digit": 22,
+        "reduces_to": 4,
+        "title": "The Master Builder",
+        "qualities": ["manifestation", "large-scale vision", "practical idealism", "architectural thinking", "global impact"],
+        "significance": "Amplified Rahu energy capable of building lasting structures that serve humanity. Combines the vision of 11 with practical ability to manifest in the material world.",
+        "planet_amplification": "Double Moon vibration channeled through Rahu — dreams made manifest on a grand scale",
+        "challenges": ["immense pressure", "nervous breakdowns from responsibility", "tendency to manipulate for the greater good", "workaholic tendencies"],
+        "famous_pattern": "Empire builders, architects of institutions, visionary entrepreneurs",
+        "karmic_duty": "To build enduring structures and systems that benefit humanity across generations"
+      },
+      "33": {
+        "digit": 33,
+        "reduces_to": 6,
+        "title": "The Master Teacher",
+        "qualities": ["compassion", "healing", "selfless service", "cosmic love", "martyrdom", "devotional mastery"],
+        "significance": "Elevated Venus energy expressing universal love and wisdom. The rarest master number, representing the Christ/Buddha consciousness of selfless service.",
+        "planet_amplification": "Double Jupiter vibration channeled through Venus — divine wisdom expressed through unconditional love",
+        "challenges": ["self-sacrifice to the point of self-destruction", "taking on others' suffering", "difficulty maintaining personal boundaries", "unrealistic expectations"],
+        "famous_pattern": "Great spiritual teachers, healers, those who sacrifice for humanity",
+        "karmic_duty": "To embody and teach unconditional love, healing the world through compassion and example"
+      },
+      "44": {
+        "digit": 44,
+        "reduces_to": 8,
+        "title": "The Master Healer",
+        "qualities": ["metamorphosis", "transmutation", "material-spiritual integration", "karmic mastery"],
+        "significance": "Double Rahu vibration channeled through Saturn — mastering the material world to serve spiritual purposes. Extremely rare and demanding vibration.",
+        "planet_amplification": "Rahu-Saturn axis amplified — ability to transform karmic debts into spiritual gold",
+        "challenges": ["crushing responsibility", "physical exhaustion", "encounters with the darkest aspects of human nature"],
+        "famous_pattern": "Transformational leaders who rise from great adversity",
+        "karmic_duty": "To heal through personal transformation, showing others that suffering can be transmuted into wisdom"
+      }
+    },
+    "number_types": {
+      "psychic_number": {
+        "calculation": "Single digit sum of birth day (e.g., born on 28th: 2+8=10, 1+0=1)",
+        "significance": "Reveals inner nature, how you see yourself, personal desires and approach to life",
+        "most_active_period": "Birth to age 35-40",
+        "jyotish_correlation": "Similar to Lagna (Ascendant) — your personality filter"
+      },
+      "destiny_number": {
+        "calculation": "Single digit sum of full birth date (day+month+year)",
+        "significance": "Reveals life purpose, what the world sees, karmic path and opportunities",
+        "most_active_period": "Age 35-40 onwards, increasingly dominant",
+        "jyotish_correlation": "Similar to Moon sign — your destined emotional and life path"
+      },
+      "name_number": {
+        "calculation": "Single digit sum of full name using letter-number mapping (Chaldean preferred)",
+        "significance": "Reveals social identity, how others perceive you, professional success vibration",
+        "most_active_period": "Active throughout life, can be modified by changing name spelling",
+        "jyotish_correlation": "Similar to 10th house — your public image and worldly expression"
+      },
+      "soul_urge_number": {
+        "calculation": "Single digit sum of all vowels in full birth name",
+        "significance": "Reveals innermost desires, what truly motivates the soul",
+        "most_active_period": "Constant undercurrent throughout life",
+        "jyotish_correlation": "Similar to Atmakaraka — the soul's deepest longing"
+      },
+      "personality_number": {
+        "calculation": "Single digit sum of all consonants in full birth name",
+        "significance": "Reveals outer personality, first impression on others",
+        "most_active_period": "Constant in social interactions",
+        "jyotish_correlation": "Similar to Arudha Lagna — the projected image"
+      }
+    },
+    "chaldean_letter_map": {
+      "A": 1, "I": 1, "J": 1, "Q": 1, "Y": 1,
+      "B": 2, "K": 2, "R": 2,
+      "C": 3, "G": 3, "L": 3, "S": 3,
+      "D": 4, "M": 4, "T": 4,
+      "E": 5, "H": 5, "N": 5, "X": 5,
+      "U": 6, "V": 6, "W": 6,
+      "O": 7, "Z": 7,
+      "F": 8, "P": 8
+    },
+    "pythagorean_letter_map": {
+      "A": 1, "J": 1, "S": 1,
+      "B": 2, "K": 2, "T": 2,
+      "C": 3, "L": 3, "U": 3,
+      "D": 4, "M": 4, "V": 4,
+      "E": 5, "N": 5, "W": 5,
+      "F": 6, "O": 6, "X": 6,
+      "G": 7, "P": 7, "Y": 7,
+      "H": 8, "Q": 8, "Z": 8,
+      "I": 9, "R": 9
+    },
+    "number_planet_map": {
+      "1": "sun",
+      "2": "moon",
+      "3": "jupiter",
+      "4": "rahu",
+      "5": "mercury",
+      "6": "venus",
+      "7": "ketu",
+      "8": "saturn",
+      "9": "mars"
+    },
+    "lo_shu_grid": {
+      "description": "The Lo Shu grid is a 3x3 magic square from ancient Chinese numerology adopted into Vedic practice. Numbers from the birth date are placed in the grid to reveal strengths and missing elements.",
+      "positions": {
+        "top_left": 4,
+        "top_center": 9,
+        "top_right": 2,
+        "middle_left": 3,
+        "middle_center": 5,
+        "middle_right": 7,
+        "bottom_left": 8,
+        "bottom_center": 1,
+        "bottom_right": 6
+      },
+      "magic_constant": 15,
+      "planes": {
+        "mental": {
+          "positions": [4, 9, 2],
+          "row": "top",
+          "meaning": "Thinking, memory, analytical ability, imagination",
+          "present": "Strong thinker, good memory, analytical mind",
+          "absent": "May rely more on feelings than logic"
+        },
+        "emotional": {
+          "positions": [3, 5, 7],
+          "row": "middle",
+          "meaning": "Feelings, intuition, spiritual awareness, inner life",
+          "present": "Emotionally balanced, strong intuition, spiritual depth",
+          "absent": "Emotional detachment, difficulty expressing feelings"
+        },
+        "practical": {
+          "positions": [8, 1, 6],
+          "row": "bottom",
+          "meaning": "Physical ability, material matters, creativity, action",
+          "present": "Practical, good with hands, materially capable",
+          "absent": "May struggle with practical affairs and material goals"
+        },
+        "thought": {
+          "positions": [4, 3, 8],
+          "column": "left",
+          "meaning": "Ideas, planning, organization, intention",
+          "present": "Good planner, organized thinker, follows through on ideas",
+          "absent": "Difficulty with planning, disorganized approach"
+        },
+        "will": {
+          "positions": [9, 5, 1],
+          "column": "center",
+          "meaning": "Determination, persistence, motivation, core drive",
+          "present": "Strong willpower, persistent, self-motivated",
+          "absent": "Wavering determination, needs external motivation"
+        },
+        "action": {
+          "positions": [2, 7, 6],
+          "column": "right",
+          "meaning": "Activity, execution, manifestation, completion",
+          "present": "Action-oriented, good at execution and finishing projects",
+          "absent": "Difficulty completing tasks, procrastination tendencies"
+        }
+      },
+      "arrows": {
+        "present_arrows": {
+          "determination": {
+            "numbers": [1, 5, 9],
+            "direction": "diagonal_bottom_left_to_top_right",
+            "meaning": "Strong willpower and persistence. Never gives up. Can achieve anything through sheer determination.",
+            "strength": "major"
+          },
+          "compassion": {
+            "numbers": [3, 5, 7],
+            "direction": "horizontal_middle",
+            "meaning": "Emotional sensitivity and empathy. Deep understanding of human nature. Natural healer and counselor.",
+            "strength": "major"
+          },
+          "intellect": {
+            "numbers": [3, 6, 9],
+            "direction": "diagonal_bottom_right_to_top_center",
+            "meaning": "Brilliant mind with exceptional mental clarity. Strong memory, quick understanding, creative thinking.",
+            "strength": "major"
+          },
+          "spirituality": {
+            "numbers": [2, 5, 8],
+            "direction": "diagonal_top_right_to_bottom_left",
+            "meaning": "Deep spiritual awareness and serenity. Inner peace, philosophical nature, connection to higher realms.",
+            "strength": "major"
+          },
+          "planner": {
+            "numbers": [1, 2, 3],
+            "direction": "horizontal_bottom_to_middle",
+            "meaning": "Organized thinking, excellent at planning and strategy. Good memory and sequential processing.",
+            "strength": "minor"
+          },
+          "willpower": {
+            "numbers": [4, 5, 6],
+            "direction": "horizontal_middle",
+            "meaning": "Exceptional patience and willpower. Can endure any hardship. Persistent effort over long periods.",
+            "strength": "minor"
+          },
+          "activity": {
+            "numbers": [7, 8, 9],
+            "direction": "horizontal_top",
+            "meaning": "High energy and physical activity. Dynamic, action-oriented, restless until goals are achieved.",
+            "strength": "minor"
+          },
+          "practical_action": {
+            "numbers": [1, 4, 7],
+            "direction": "vertical_left",
+            "meaning": "Strong practical abilities. Excellent at implementing ideas and working with hands.",
+            "strength": "minor"
+          },
+          "emotional_balance": {
+            "numbers": [2, 5, 8],
+            "direction": "vertical_center",
+            "meaning": "Emotional stability and balance. Well-centered personality with good coping skills.",
+            "strength": "minor"
+          },
+          "creative_force": {
+            "numbers": [3, 6, 9],
+            "direction": "vertical_right",
+            "meaning": "Powerful creative energy. Artistic talent, imagination, ability to manifest visions.",
+            "strength": "minor"
+          }
+        },
+        "missing_arrows": {
+          "frustration": {
+            "missing_numbers": [4, 5, 6],
+            "meaning": "Lack of patience, prone to frustration and short temper. Difficulty with sustained effort.",
+            "remedy": "Practice meditation, develop patience through Saturn-related remedies"
+          },
+          "disappointment": {
+            "missing_numbers": [2, 5, 8],
+            "meaning": "Repeated setbacks and disappointments. Difficulty learning from past experiences.",
+            "remedy": "Develop emotional resilience, practice gratitude, strengthen Moon"
+          },
+          "loneliness": {
+            "missing_numbers": [1, 5, 9],
+            "meaning": "Feels isolated and disconnected. Difficulty maintaining close relationships.",
+            "remedy": "Build community connections, volunteer service, strengthen Sun and Mars"
+          },
+          "sensitivity": {
+            "missing_numbers": [3, 5, 7],
+            "meaning": "Emotional coldness or inability to connect with feelings of others.",
+            "remedy": "Practice empathy exercises, connect with nature, strengthen Moon and Ketu"
+          },
+          "confusion": {
+            "missing_numbers": [4, 9, 2],
+            "meaning": "Scattered thinking, poor memory, difficulty with analysis and decision-making.",
+            "remedy": "Mental exercises, study discipline, strengthen Mercury and Rahu"
+          },
+          "impracticality": {
+            "missing_numbers": [8, 1, 6],
+            "meaning": "Difficulty with material affairs, money management, and practical tasks.",
+            "remedy": "Develop routine, practical skills, strengthen Saturn and Sun"
+          },
+          "indecision": {
+            "missing_numbers": [1, 4, 7],
+            "meaning": "Difficulty making decisions and taking practical action on ideas.",
+            "remedy": "Practice decisiveness, take small risks daily, strengthen Sun and Rahu"
+          },
+          "aimlessness": {
+            "missing_numbers": [3, 6, 9],
+            "meaning": "Lack of direction, difficulty setting and achieving goals.",
+            "remedy": "Set clear intentions, work with mentor/guru, strengthen Jupiter"
+          }
+        }
+      }
+    },
+    "personal_year_meanings": {
+      "1": {
+        "theme": "New Beginnings",
+        "meaning": "New beginnings, fresh starts, independence. Plant seeds for the 9-year cycle. Take initiative, start new projects. This is the year to be bold and self-reliant.",
+        "keywords": ["initiation", "independence", "courage", "new ventures"],
+        "planet": "sun",
+        "advice": "Start something new. Be assertive. Do not wait for others.",
+        "avoid": "Depending on others, clinging to the past, hesitation"
+      },
+      "2": {
+        "theme": "Patience and Partnership",
+        "meaning": "Patience, cooperation, relationships. Nurture what was started in Year 1. Form partnerships, develop diplomacy. Seeds planted need time to grow.",
+        "keywords": ["cooperation", "patience", "diplomacy", "partnership"],
+        "planet": "moon",
+        "advice": "Be patient. Cooperate. Focus on relationships and details.",
+        "avoid": "Forcing outcomes, impatience, going solo"
+      },
+      "3": {
+        "theme": "Creative Expression",
+        "meaning": "Creativity, self-expression, social expansion. Joy and communication. Year of fun, socializing, and expressing your creative talents.",
+        "keywords": ["creativity", "joy", "expression", "socializing"],
+        "planet": "jupiter",
+        "advice": "Express yourself. Create. Socialize. Expand your network.",
+        "avoid": "Withdrawal, seriousness, hoarding"
+      },
+      "4": {
+        "theme": "Building Foundations",
+        "meaning": "Hard work, foundations, discipline. Build structures for the future. Year of effort, practical matters, and laying groundwork.",
+        "keywords": ["work", "discipline", "foundation", "structure"],
+        "planet": "rahu",
+        "advice": "Work hard. Build. Organize. Pay attention to details.",
+        "avoid": "Shortcuts, laziness, risky ventures"
+      },
+      "5": {
+        "theme": "Change and Freedom",
+        "meaning": "Change, freedom, adventure. Expect the unexpected. Year of travel, variety, and major life changes. Adaptability is key.",
+        "keywords": ["change", "freedom", "adventure", "versatility"],
+        "planet": "mercury",
+        "advice": "Embrace change. Travel. Try new things. Be flexible.",
+        "avoid": "Rigidity, routine, fear of change"
+      },
+      "6": {
+        "theme": "Love and Responsibility",
+        "meaning": "Responsibility, family, home. Service to others. Year focused on domestic matters, love relationships, and taking on responsibilities.",
+        "keywords": ["love", "family", "responsibility", "service"],
+        "planet": "venus",
+        "advice": "Focus on home and family. Accept responsibilities. Beautify your surroundings.",
+        "avoid": "Neglecting family, selfishness, irresponsibility"
+      },
+      "7": {
+        "theme": "Introspection and Wisdom",
+        "meaning": "Introspection, spirituality, wisdom. Inner growth and analysis. Year for study, research, meditation, and deep self-reflection.",
+        "keywords": ["reflection", "spirituality", "study", "solitude"],
+        "planet": "ketu",
+        "advice": "Go within. Study. Meditate. Seek wisdom over action.",
+        "avoid": "Excessive socializing, material pursuits, superficiality"
+      },
+      "8": {
+        "theme": "Power and Achievement",
+        "meaning": "Power, abundance, achievement. Material rewards for past efforts. Year of recognition, financial gains, and karmic returns.",
+        "keywords": ["power", "money", "achievement", "karma"],
+        "planet": "saturn",
+        "advice": "Focus on career and finances. Claim your power. Think big.",
+        "avoid": "Greed, power abuse, ignoring ethics"
+      },
+      "9": {
+        "theme": "Completion and Release",
+        "meaning": "Completion, endings, transformation. Let go and prepare for renewal. Year of tying loose ends, philanthropy, and clearing the way for a new cycle.",
+        "keywords": ["completion", "release", "charity", "transformation"],
+        "planet": "mars",
+        "advice": "Let go of what no longer serves you. Give back. Complete unfinished business.",
+        "avoid": "Starting new ventures, clinging, selfishness"
+      }
+    },
+    "personal_month_calculation": "Add personal year number + calendar month number, reduce to single digit",
+    "personal_day_calculation": "Add personal month number + calendar day number, reduce to single digit",
+    "pinnacle_cycles": {
+      "description": "Four pinnacle cycles divide life into major phases, each ruled by a number derived from the birth date",
+      "first_pinnacle": {
+        "calculation": "Birth month + Birth day (reduced)",
+        "duration": "Birth to age 36 minus life path number"
+      },
+      "second_pinnacle": {
+        "calculation": "Birth day + Birth year (reduced)",
+        "duration": "9 years after first pinnacle ends"
+      },
+      "third_pinnacle": {
+        "calculation": "First pinnacle + Second pinnacle (reduced)",
+        "duration": "9 years after second pinnacle ends"
+      },
+      "fourth_pinnacle": {
+        "calculation": "Birth month + Birth year (reduced)",
+        "duration": "Third pinnacle end to death"
+      }
+    },
+    "challenge_numbers": {
+      "description": "Challenge numbers reveal obstacles to overcome during each pinnacle period",
+      "first_challenge": "Absolute difference of birth month and birth day digits",
+      "second_challenge": "Absolute difference of birth day and birth year digits",
+      "third_challenge": "Absolute difference of first and second challenge",
+      "fourth_challenge": "Absolute difference of birth month and birth year digits"
+    }
+  }
+}

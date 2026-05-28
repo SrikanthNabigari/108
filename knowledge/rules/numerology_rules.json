@@ -1,0 +1,740 @@
+{
+  "numerology_rules": {
+    "bphs_ref": "Anka Shastra (Science of Numbers) — Vedic Numerology integrated with Jyotish",
+    "description": "Rules for numerological analysis including compound number interpretations (Cheiro system), compatibility matrices, psychic-destiny combinations, remedies, and effects of missing and repeated numbers in the Lo Shu grid.",
+    "compound_numbers": {
+      "10": {
+        "name": "Wheel of Fortune",
+        "planet": "sun+moon",
+        "meaning": "Symbol of honor, faith, self-confidence, rise and fall. The wheel turns — what rises must also descend unless anchored in righteous action. Carries the full power of 1 with the completeness of 0.",
+        "favorable": true,
+        "keywords": ["honor", "confidence", "cycles", "completion"]
+      },
+      "11": {
+        "name": "Hidden Dangers",
+        "planet": "sun+sun",
+        "meaning": "A number of hidden trials and treachery from others. Warns of deception and betrayal. However, it carries immense spiritual potential — the double Sun creates a gateway to higher consciousness when lived purely.",
+        "master": true,
+        "favorable": "mixed",
+        "keywords": ["spiritual mastery", "hidden enemies", "psychic ability", "trials"]
+      },
+      "12": {
+        "name": "The Sacrifice",
+        "planet": "sun+moon",
+        "meaning": "Symbolizes suffering, anxiety, and sacrifice. The individual is often used by others or must sacrifice personal desires for a greater cause. Represents the victim or the martyr, but also the one who gains wisdom through sacrifice.",
+        "favorable": false,
+        "keywords": ["sacrifice", "anxiety", "wisdom through suffering", "selflessness"]
+      },
+      "13": {
+        "name": "Transformation",
+        "planet": "sun+jupiter",
+        "meaning": "Number of upheaval and destruction of the old to build the new. Not unlucky as commonly believed — it is the power of transformation. Associated with Shiva's destructive-creative energy. Brings change of plans and places.",
+        "favorable": "mixed",
+        "keywords": ["transformation", "change", "rebirth", "power"]
+      },
+      "14": {
+        "name": "Movement and Combination",
+        "planet": "sun+rahu",
+        "meaning": "Number of movement, change, travel, and risk-taking. Danger from natural elements, fire, water, and storms. Good for speculation if controlled. Must guard against overconfidence in material ventures.",
+        "favorable": "mixed",
+        "keywords": ["movement", "risk", "change", "speculation"]
+      },
+      "15": {
+        "name": "The Magician",
+        "planet": "sun+mercury",
+        "meaning": "Associated with eloquence, music, art, and a magnetic personality. The person can use words and charm to achieve anything. Gift of persuasion. If used selfishly, brings downfall through temptation.",
+        "favorable": true,
+        "keywords": ["magic", "eloquence", "charisma", "art", "temptation"]
+      },
+      "16": {
+        "name": "The Shattered Citadel",
+        "planet": "sun+venus",
+        "meaning": "Warns of sudden catastrophe, accidents, or defeat of plans. The tower struck by lightning. Ego and pride lead to dramatic falls. However, it also represents awakening through shock — spiritual rebirth after material collapse.",
+        "favorable": false,
+        "keywords": ["catastrophe", "awakening", "fall from grace", "rebirth"]
+      },
+      "17": {
+        "name": "The Star of the Magi",
+        "planet": "sun+ketu",
+        "meaning": "Highly spiritual and fortunate. The Star of Venus — brings peace, love, and immortality of name. Rise above trials through faith and inner light. One of the most fortunate compound numbers.",
+        "favorable": true,
+        "keywords": ["spirituality", "fortune", "immortality", "hope", "peace"]
+      },
+      "18": {
+        "name": "Spiritual-Material Conflict",
+        "planet": "sun+saturn",
+        "meaning": "Associated with bitter quarrels, wars, social upheaval, and family feuds. The battle between materialism and spirituality. Deception from both friends and enemies. A difficult number that tests character through conflict.",
+        "favorable": false,
+        "keywords": ["conflict", "deception", "quarrels", "testing"]
+      },
+      "19": {
+        "name": "The Prince of Heaven",
+        "planet": "sun+mars",
+        "meaning": "One of the most fortunate numbers. Promises happiness, success, esteem, and honor. The Sun in full glory. Ensures fulfillment of ambitions and recognition. Success in all undertakings.",
+        "favorable": true,
+        "keywords": ["success", "honor", "fulfillment", "glory", "happiness"]
+      },
+      "20": {
+        "name": "The Awakening",
+        "planet": "moon+moon",
+        "meaning": "Symbolizes a call to action, a new purpose, and spiritual awakening. Delays and obstacles in early life that lead to profound spiritual insights. The judgment — rising from slumber to fulfill divine purpose.",
+        "favorable": "mixed",
+        "keywords": ["awakening", "purpose", "delays", "spiritual call"]
+      },
+      "21": {
+        "name": "The Crown of the Magi",
+        "planet": "moon+sun",
+        "meaning": "Extremely fortunate. Advancement, honors, elevation in life, and general success. The world is open to this vibration. Victory and triumph after long efforts. Connected to completion and mastery.",
+        "favorable": true,
+        "keywords": ["success", "triumph", "advancement", "mastery"]
+      },
+      "22": {
+        "name": "Submission and Caution",
+        "planet": "moon+moon",
+        "meaning": "As a master number, carries enormous potential for building on a grand scale. As a compound number, warns of false judgment, living in a fool's paradise, and making mistakes through overconfidence in others. Must ground visions in practical reality.",
+        "master": true,
+        "favorable": "mixed",
+        "keywords": ["master builder", "caution", "illusion", "grand vision"]
+      },
+      "23": {
+        "name": "The Royal Star of the Lion",
+        "planet": "moon+jupiter",
+        "meaning": "Promises success, help from superiors and people in high positions. Protection from those in authority. Known as the Royal Star — assures fame and fortune. One of the most fortunate numbers.",
+        "favorable": true,
+        "keywords": ["royal protection", "fame", "fortune", "help from authority"]
+      },
+      "24": {
+        "name": "Love and Money",
+        "planet": "moon+rahu",
+        "meaning": "Favorable for love, romance, and gaining assistance from the opposite sex. Financial gains through partnerships and associates. Promises help and support from others, especially in emotional and financial matters.",
+        "favorable": true,
+        "keywords": ["love", "financial gain", "partnership", "assistance"]
+      },
+      "25": {
+        "name": "Strength Through Trial",
+        "planet": "moon+mercury",
+        "meaning": "Strength gained through experience and observation of others. Initial failure leads to wisdom and ultimate success. The native learns through watching rather than doing, gaining strength from adversity.",
+        "favorable": "mixed",
+        "keywords": ["wisdom", "observation", "learning", "delayed success"]
+      },
+      "26": {
+        "name": "Partnerships and Warning",
+        "planet": "moon+venus",
+        "meaning": "Warns of disasters brought about through associations with others. Partnerships, whether business or personal, may bring ruin. Bad advice from trusted persons. Must exercise extreme caution in whom to trust.",
+        "favorable": false,
+        "keywords": ["partnership danger", "bad advice", "betrayal", "caution"]
+      },
+      "27": {
+        "name": "The Sceptre",
+        "planet": "moon+ketu",
+        "meaning": "Excellent for those in positions of authority. Promises reward, power, and command. The individual has a natural authority that others respect. Success through determination and commanding personality.",
+        "favorable": true,
+        "keywords": ["authority", "command", "reward", "power"]
+      },
+      "28": {
+        "name": "The Trusting Lamb",
+        "planet": "moon+saturn",
+        "meaning": "Full of contradictions. Promises great gains and then losses through trusting others, lawsuits and legal battles. What is built up is destroyed by opposition. Must be fiercely independent to overcome this vibration.",
+        "favorable": false,
+        "keywords": ["contradictions", "loss through trust", "legal troubles", "independence needed"]
+      },
+      "29": {
+        "name": "Grace Under Pressure",
+        "planet": "moon+mars",
+        "meaning": "Number of great extremes — uncertainties, treachery, deception by others. Life swings between extremes of success and failure. Must develop unshakeable inner faith. Spiritual development through intense life experiences.",
+        "favorable": "mixed",
+        "keywords": ["extremes", "uncertainty", "faith", "spiritual intensity"]
+      },
+      "30": {
+        "name": "The Loner Intellect",
+        "planet": "jupiter+moon",
+        "meaning": "Neither fortunate nor unfortunate. A number of thoughtful deduction, mental superiority over others, but often inclined to put material desires above spiritual growth. Can be highly artistic and intellectual but lonely.",
+        "favorable": "mixed",
+        "keywords": ["intellect", "thoughtfulness", "artistic ability", "solitude"]
+      },
+      "31": {
+        "name": "The Hermit",
+        "planet": "jupiter+sun",
+        "meaning": "Similar to 30 but more isolated and self-contained. The individual is their own best company. Prefers solitude to society. Strong intellect and independent thinking, but may miss the warmth of human connection.",
+        "favorable": "mixed",
+        "keywords": ["solitude", "independence", "intellectual power", "self-reliance"]
+      },
+      "32": {
+        "name": "Communication Power",
+        "planet": "jupiter+moon",
+        "meaning": "A magical number of communication. If embraced, it grants the power to influence masses through speech, writing, or media. The vibration attracts others magnetically. Must be used for positive purposes.",
+        "favorable": true,
+        "keywords": ["communication", "influence", "magnetism", "media"]
+      },
+      "33": {
+        "name": "The Master Teacher",
+        "planet": "jupiter+jupiter",
+        "meaning": "As a master number, the most powerful teacher vibration. As a compound, it has no particular individual meaning beyond the master number — it is complete in itself. Universal love, cosmic consciousness, selfless service.",
+        "master": true,
+        "favorable": true,
+        "keywords": ["master teacher", "cosmic love", "selfless service", "healing"]
+      },
+      "34": {
+        "name": "Struggle and Progress",
+        "planet": "jupiter+rahu",
+        "meaning": "Similar energy to number 7. Progress through struggle, innovation through necessity. The individual must work harder than most but gains deep wisdom and spiritual insight through the process.",
+        "favorable": "mixed",
+        "keywords": ["struggle", "innovation", "deep wisdom", "hard-won progress"]
+      },
+      "35": {
+        "name": "The Investigator",
+        "planet": "jupiter+mercury",
+        "meaning": "Number of investigation, research, and experimentation. Good for scientists, detectives, and researchers. The mind is sharp and probing. Success through intellectual pursuits and systematic inquiry.",
+        "favorable": true,
+        "keywords": ["research", "investigation", "intellectual pursuit", "discovery"]
+      },
+      "36": {
+        "name": "The Humanitarian",
+        "planet": "jupiter+venus",
+        "meaning": "Vibration of service, humanitarianism, and self-sacrifice for others. Strong creative ability combined with desire to help. Can achieve great things when motivated by service rather than personal gain.",
+        "favorable": true,
+        "keywords": ["service", "humanitarianism", "creativity", "selflessness"]
+      },
+      "37": {
+        "name": "The Mystic",
+        "planet": "jupiter+ketu",
+        "meaning": "Number of good fortune in friendships, love, and partnerships. Highly creative and artistic. Connected to mystical and occult abilities. The individual has a gift for seeing beyond the material veil.",
+        "favorable": true,
+        "keywords": ["friendship", "love", "mysticism", "artistic gifts"]
+      },
+      "38": {
+        "name": "Unfulfilled Ambitions",
+        "planet": "jupiter+saturn",
+        "meaning": "Same vibration as 29 and 11, but less intense. Ambitions may remain unfulfilled or delayed due to trust issues and betrayal. Must develop self-reliance and careful judgment of character.",
+        "favorable": "mixed",
+        "keywords": ["delayed ambition", "trust issues", "self-reliance needed"]
+      },
+      "39": {
+        "name": "The Dynamo",
+        "planet": "jupiter+mars",
+        "meaning": "Extremely dynamic and fortunate. Power, energy, and protection. Success in creative and athletic pursuits. The individual is a force of nature — energetic, charismatic, and destined for achievement.",
+        "favorable": true,
+        "keywords": ["dynamic energy", "power", "achievement", "charisma"]
+      },
+      "40": {
+        "name": "The Organizer",
+        "planet": "rahu+moon",
+        "meaning": "Practical, methodical, and organized. Good for business, management, and systematic work. May lack imagination but excels in execution and implementation. The power of structure.",
+        "favorable": true,
+        "keywords": ["organization", "method", "practical success", "business"]
+      },
+      "41": {
+        "name": "The Achiever",
+        "planet": "rahu+sun",
+        "meaning": "A powerful number for material achievement and worldly success. Great ambition combined with practical ability. The individual rises through determination and is noticed by people of power and influence.",
+        "favorable": true,
+        "keywords": ["achievement", "ambition", "worldly success", "recognition"]
+      },
+      "42": {
+        "name": "The Strategist",
+        "planet": "rahu+moon",
+        "meaning": "Success through careful planning and strategy. Not impulsive — the individual thinks three steps ahead. Good for military, business strategy, and political maneuvering. Patience rewarded.",
+        "favorable": true,
+        "keywords": ["strategy", "planning", "patience", "calculated success"]
+      },
+      "43": {
+        "name": "Revolution and Upheaval",
+        "planet": "rahu+jupiter",
+        "meaning": "Warns of revolution, upheaval, strife, and conflict. Similar energy to 13 but more external — the upheaval comes from social or political forces rather than personal transformation.",
+        "favorable": false,
+        "keywords": ["upheaval", "conflict", "revolution", "external disruption"]
+      },
+      "44": {
+        "name": "The Master Healer",
+        "planet": "rahu+rahu",
+        "meaning": "As a master number, represents the power to heal and transform through material mastery. As a compound, doubles the energy of 4 — extreme discipline, hard work, and eventual mastery of the physical plane.",
+        "master": true,
+        "favorable": "mixed",
+        "keywords": ["healing", "material mastery", "discipline", "transformation"]
+      },
+      "45": {
+        "name": "The Warrior Scholar",
+        "planet": "rahu+mercury",
+        "meaning": "Combines the energy of 4 (unconventional) with 5 (intellect). The warrior who fights with wisdom rather than force. Success in all intellectual and unconventional pursuits. Strong planet Mercury influence.",
+        "favorable": true,
+        "keywords": ["intellectual warrior", "wisdom", "unconventional success"]
+      },
+      "46": {
+        "name": "The Material Provider",
+        "planet": "rahu+venus",
+        "meaning": "Abundance in material affairs, love, and comforts. The individual has a natural ability to attract wealth and luxury. Good for business, especially luxury goods and artistic ventures.",
+        "favorable": true,
+        "keywords": ["abundance", "luxury", "material comfort", "artistic business"]
+      },
+      "47": {
+        "name": "The Spiritual Seeker",
+        "planet": "rahu+ketu",
+        "meaning": "Combines the worldly ambition of Rahu with the spiritual detachment of Ketu — a powerful axis of seeking. The individual oscillates between material and spiritual pursuits until integration is achieved.",
+        "favorable": "mixed",
+        "keywords": ["spiritual seeking", "integration", "Rahu-Ketu axis", "oscillation"]
+      },
+      "48": {
+        "name": "The Counselor",
+        "planet": "rahu+saturn",
+        "meaning": "Same vibration as 3. The individual has the wisdom to counsel and guide others. Jupiter-like energy expressed through practical channels. Good for teaching, law, and advisory roles.",
+        "favorable": true,
+        "keywords": ["counsel", "wisdom", "guidance", "advisory"]
+      },
+      "49": {
+        "name": "The Karmic Teacher",
+        "planet": "rahu+mars",
+        "meaning": "Powerful karmic number. Lessons must be learned and taught simultaneously. The individual goes through intense life experiences that qualify them to teach others about transformation and survival.",
+        "favorable": "mixed",
+        "keywords": ["karma", "teaching through experience", "intensity", "transformation"]
+      },
+      "50": {
+        "name": "The Communicator",
+        "planet": "mercury+moon",
+        "meaning": "Pure Mercury energy doubled. Exceptional ability in communication, writing, and intellectual pursuits. Highly versatile and adaptable. The pen is mightier than the sword for this vibration.",
+        "favorable": true,
+        "keywords": ["communication", "versatility", "writing", "intellectual mastery"]
+      },
+      "51": {
+        "name": "The Warrior of Light",
+        "planet": "mercury+sun",
+        "meaning": "Extremely powerful and fortunate. Similar to 15 and 6. Success through the power of speech and personal magnetism. The individual fights darkness with knowledge and eloquence.",
+        "favorable": true,
+        "keywords": ["power", "eloquence", "fortune", "fighting darkness"]
+      },
+      "52": {
+        "name": "The Magician's Heir",
+        "planet": "mercury+moon",
+        "meaning": "Similar to 25. Knowledge gained through observation and experience. The individual inherits the power of 7 and must learn to use it wisely. Delayed rewards that prove more valuable for the waiting.",
+        "favorable": "mixed",
+        "keywords": ["inherited wisdom", "observation", "delayed reward", "careful progress"]
+      }
+    },
+    "compatibility_matrix": {
+      "description": "Numerological compatibility scores (0-100) and relationship nature between psychic/destiny numbers. Based on planetary friendship in Vedic astrology.",
+      "1": {
+        "1": {"score": 70, "nature": "competitive", "description": "Two leaders may clash over dominance. Mutual respect possible if egos are managed. Strong partnership when roles are clearly defined."},
+        "2": {"score": 80, "nature": "complementary", "description": "Sun-Moon harmony. 1 leads, 2 supports. Natural and nurturing combination. One of the best pairings in numerology."},
+        "3": {"score": 90, "nature": "excellent", "description": "Sun-Jupiter friendship. Mutual admiration, shared ambition, creative synergy. Both are optimistic and forward-moving."},
+        "4": {"score": 55, "nature": "challenging", "description": "Sun-Rahu tension. Different worldviews and methods. 1 is direct, 4 is unconventional. Can work if both are flexible."},
+        "5": {"score": 85, "nature": "dynamic", "description": "Sun-Mercury friendship. Intellectual stimulation, shared love of variety. Both are quick and adaptable."},
+        "6": {"score": 50, "nature": "strained", "description": "Sun-Venus enmity. Different values — 1 seeks power, 6 seeks beauty and love. Can work in romantic relationships with effort."},
+        "7": {"score": 55, "nature": "distant", "description": "Sun-Ketu friction. 1 is outgoing, 7 is withdrawn. Can teach each other much, but daily compatibility is challenging."},
+        "8": {"score": 40, "nature": "conflicting", "description": "Sun-Saturn enmity. Natural opposition. 1 wants to lead, 8 wants to control. Power struggles likely. Avoid business partnerships."},
+        "9": {"score": 90, "nature": "excellent", "description": "Sun-Mars friendship. Dynamic, energetic, and achievement-oriented. Both are passionate and action-driven. Great combination."}
+      },
+      "2": {
+        "1": {"score": 80, "nature": "complementary", "description": "Moon-Sun harmony. 2 brings emotional depth to 1's leadership. Natural supportive dynamic."},
+        "2": {"score": 65, "nature": "sensitive", "description": "Double Moon — too much emotion without grounding. Both are sensitive, creating either deep empathy or mutual insecurity."},
+        "3": {"score": 70, "nature": "friendly", "description": "Moon-Jupiter friendship. 3 encourages 2's creativity. Good social combination. 2 may feel overshadowed."},
+        "4": {"score": 50, "nature": "uneasy", "description": "Moon-Rahu creates emotional disruption. Unpredictable moods. 4 may unsettle 2's need for stability."},
+        "5": {"score": 55, "nature": "restless", "description": "Moon-Mercury creates mental restlessness. Both are changeable. Exciting but unstable long-term."},
+        "6": {"score": 75, "nature": "nurturing", "description": "Moon-Venus harmony. Love, beauty, and emotional fulfillment. Excellent for romance and domestic life."},
+        "7": {"score": 85, "nature": "spiritual", "description": "Moon-Ketu spiritual bond. Deep intuitive connection. Both are reflective and emotionally deep. One of the best spiritual pairings."},
+        "8": {"score": 40, "nature": "difficult", "description": "Moon-Saturn opposition. 8 is cold and pragmatic, 2 is warm and emotional. Very challenging for emotional fulfillment."},
+        "9": {"score": 75, "nature": "protective", "description": "Moon-Mars creates protective dynamic. 9 protects 2, who nurtures 9. Good complementary energy."}
+      },
+      "3": {
+        "1": {"score": 90, "nature": "excellent", "description": "Jupiter-Sun friendship. Mutual inspiration and ambition. Both are naturally positive and growth-oriented."},
+        "2": {"score": 70, "nature": "friendly", "description": "Jupiter-Moon creates warmth. 3 uplifts 2's mood. Good social pairing. May lack practical grounding."},
+        "3": {"score": 75, "nature": "expansive", "description": "Double Jupiter — enormous optimism and expansion. Can become excessive. Great creative partnership if disciplined."},
+        "4": {"score": 45, "nature": "incompatible", "description": "Jupiter-Rahu natural enmity. Different philosophies and approaches. 3 is open, 4 is secretive. Trust issues likely."},
+        "5": {"score": 80, "nature": "stimulating", "description": "Jupiter-Mercury creates intellectual fire. Excellent for writing, teaching, and media. Both are communicative and curious."},
+        "6": {"score": 85, "nature": "harmonious", "description": "Jupiter-Venus creates love, beauty, and expansion. Excellent for all relationships. Both value harmony and pleasure."},
+        "7": {"score": 45, "nature": "mismatched", "description": "Jupiter-Ketu friction. 3 is social, 7 is solitary. Different life orientations. Can work in teacher-student dynamic."},
+        "8": {"score": 55, "nature": "neutral", "description": "Jupiter-Saturn neutral relationship. Can work through discipline. 8 grounds 3's expansiveness, but may dampen creativity."},
+        "9": {"score": 90, "nature": "excellent", "description": "Jupiter-Mars best friend combination. Dynamic, fortunate, and achievement-oriented. Great for all forms of partnership."}
+      },
+      "4": {
+        "1": {"score": 55, "nature": "challenging", "description": "Rahu-Sun creates tension. 4 rebels against 1's authority. Can work if common unconventional goals exist."},
+        "2": {"score": 50, "nature": "uneasy", "description": "Rahu-Moon emotional disruption. 4's unpredictability unsettles 2's need for security."},
+        "3": {"score": 45, "nature": "incompatible", "description": "Rahu-Jupiter enmity. Philosophical differences. 3 is traditional, 4 breaks traditions."},
+        "4": {"score": 35, "nature": "volatile", "description": "Double Rahu — extreme unpredictability and mutual suspicion. Not recommended for close relationships."},
+        "5": {"score": 70, "nature": "adventurous", "description": "Rahu-Mercury creates unconventional intelligence. Both love change and variety. Exciting but unstable."},
+        "6": {"score": 75, "nature": "supportive", "description": "Rahu-Venus friendship. 6 provides stability and beauty that 4 craves. Good romantic pairing."},
+        "7": {"score": 80, "nature": "mystical", "description": "Rahu-Ketu axis — the most karmically significant pairing. Deep spiritual connection. Transformative relationship."},
+        "8": {"score": 45, "nature": "frustrating", "description": "Rahu-Saturn creates delays and frustrations. Both are heavy energies. Double struggle without relief."},
+        "9": {"score": 55, "nature": "tense", "description": "Rahu-Mars creates conflict. Both are intense and uncompromising. Can work in crisis situations."}
+      },
+      "5": {
+        "1": {"score": 85, "nature": "dynamic", "description": "Mercury-Sun friendship. Quick, bright, and action-oriented. Excellent for business and creative ventures."},
+        "2": {"score": 55, "nature": "restless", "description": "Mercury-Moon creates mental agitation. Communication issues — different emotional languages."},
+        "3": {"score": 80, "nature": "stimulating", "description": "Mercury-Jupiter intellectual harmony. Both are natural communicators and teachers. Great for creative work."},
+        "4": {"score": 70, "nature": "adventurous", "description": "Mercury-Rahu creates inventive energy. Both love novelty and unconventional approaches."},
+        "5": {"score": 65, "nature": "scattered", "description": "Double Mercury — too much mental energy without grounding. Exciting but may lack follow-through."},
+        "6": {"score": 80, "nature": "harmonious", "description": "Mercury-Venus natural friendship. Love of beauty, art, and communication. Excellent romantic and creative pairing."},
+        "7": {"score": 70, "nature": "intellectual", "description": "Mercury-Ketu creates analytical depth. Both are curious and investigative. Good for research and study."},
+        "8": {"score": 60, "nature": "practical", "description": "Mercury-Saturn creates practical intelligence. Business-minded combination. May lack warmth."},
+        "9": {"score": 75, "nature": "energetic", "description": "Mercury-Mars creates sharp intellect with drive. Dynamic and action-oriented. Good for competitive fields."}
+      },
+      "6": {
+        "1": {"score": 50, "nature": "strained", "description": "Venus-Sun enmity. Different priorities — love vs power. Can create beautiful tension in romance."},
+        "2": {"score": 75, "nature": "nurturing", "description": "Venus-Moon creates emotional and aesthetic harmony. Beautiful domestic life. Both value love and comfort."},
+        "3": {"score": 85, "nature": "harmonious", "description": "Venus-Jupiter creates abundance, love, and joy. One of the best combinations. Everything grows."},
+        "4": {"score": 75, "nature": "supportive", "description": "Venus-Rahu friendship. 6 provides beauty, 4 provides unconventional excitement. Attractive combination."},
+        "5": {"score": 80, "nature": "harmonious", "description": "Venus-Mercury natural friends. Communication, art, and intellectual beauty. Great creative partnership."},
+        "6": {"score": 70, "nature": "indulgent", "description": "Double Venus — excessive luxury and pleasure-seeking. Beautiful but may lack discipline and depth."},
+        "7": {"score": 40, "nature": "incompatible", "description": "Venus-Ketu creates fundamental tension between material and spiritual. 6 wants pleasure, 7 wants renunciation."},
+        "8": {"score": 65, "nature": "material", "description": "Venus-Saturn creates focus on material acquisition. Good for business. May lack emotional warmth."},
+        "9": {"score": 80, "nature": "passionate", "description": "Venus-Mars creates intense passion and attraction. Highly magnetic combination. Great for romance."}
+      },
+      "7": {
+        "1": {"score": 55, "nature": "distant", "description": "Ketu-Sun creates spiritual tension. 1 is worldly, 7 is otherworldly. Learning opportunity but daily friction."},
+        "2": {"score": 85, "nature": "spiritual", "description": "Ketu-Moon deep spiritual bond. The most intuitive pairing. Both sense what the other feels without words."},
+        "3": {"score": 45, "nature": "mismatched", "description": "Ketu-Jupiter creates philosophical tension. Different approaches to wisdom and truth."},
+        "4": {"score": 80, "nature": "mystical", "description": "Ketu-Rahu axis. Intensely karmic connection. Past-life bonds. Transformative but sometimes difficult."},
+        "5": {"score": 70, "nature": "intellectual", "description": "Ketu-Mercury analytical depth. Both love investigation and research. Good for scholarly pursuits."},
+        "6": {"score": 40, "nature": "incompatible", "description": "Ketu-Venus fundamental opposition. Material vs spiritual values. Very challenging pairing."},
+        "7": {"score": 60, "nature": "isolated", "description": "Double Ketu — extreme introversion and spiritual intensity. May become too detached from the world."},
+        "8": {"score": 35, "nature": "very_difficult", "description": "Ketu-Saturn creates heavy karmic burden. Both are limiting and isolating. Depression and frustration likely."},
+        "9": {"score": 60, "nature": "respectful", "description": "Ketu-Mars creates spiritual warrior energy. Can work if both respect each other's path."}
+      },
+      "8": {
+        "1": {"score": 40, "nature": "conflicting", "description": "Saturn-Sun natural enmity. Power struggle between authority and control. Avoid if possible."},
+        "2": {"score": 40, "nature": "difficult", "description": "Saturn-Moon emotional coldness. 8 is pragmatic, 2 is emotional. Communication breakdown."},
+        "3": {"score": 55, "nature": "neutral", "description": "Saturn-Jupiter creates tension between restriction and expansion. Can balance but often frustrates."},
+        "4": {"score": 45, "nature": "frustrating", "description": "Saturn-Rahu compounds delays and obstacles. Both carry heavy energy. Mutual struggle."},
+        "5": {"score": 60, "nature": "practical", "description": "Saturn-Mercury creates practical intelligence. Good for business but lacking in emotional depth."},
+        "6": {"score": 65, "nature": "material", "description": "Saturn-Venus friendship. Material comfort through discipline. Good for long-term financial building."},
+        "7": {"score": 35, "nature": "very_difficult", "description": "Saturn-Ketu double isolation. Extremely heavy and karmic. Not recommended for personal relationships."},
+        "8": {"score": 50, "nature": "burdensome", "description": "Double Saturn — extreme discipline or extreme heaviness. Can achieve great things but at enormous personal cost."},
+        "9": {"score": 35, "nature": "hostile", "description": "Saturn-Mars natural enmity. Constant friction and conflict. Arguments over authority and action. Avoid."}
+      },
+      "9": {
+        "1": {"score": 90, "nature": "excellent", "description": "Mars-Sun friendship. Dynamic duo of energy and authority. Both are leaders who inspire action."},
+        "2": {"score": 75, "nature": "protective", "description": "Mars-Moon creates warrior-protector dynamic. 9 defends, 2 nurtures. Complementary."},
+        "3": {"score": 90, "nature": "excellent", "description": "Mars-Jupiter the best friendship in Jyotish. Action meets wisdom. Unstoppable combination."},
+        "4": {"score": 55, "nature": "tense", "description": "Mars-Rahu creates tension between direct action and indirect methods. Can work in revolutionary contexts."},
+        "5": {"score": 75, "nature": "energetic", "description": "Mars-Mercury creates sharp, action-oriented intelligence. Good for competitive and analytical fields."},
+        "6": {"score": 80, "nature": "passionate", "description": "Mars-Venus creates intense romantic and creative chemistry. Highly attractive pairing."},
+        "7": {"score": 60, "nature": "respectful", "description": "Mars-Ketu spiritual warrior energy. Both are intense but in different dimensions. Mutual respect possible."},
+        "8": {"score": 35, "nature": "hostile", "description": "Mars-Saturn the most difficult combination. Fire meets ice. Constant conflict and frustration. Avoid."},
+        "9": {"score": 75, "nature": "intense", "description": "Double Mars — extreme energy and passion. Can achieve incredible things or destroy through aggression. Channel wisely."}
+      }
+    },
+    "psychic_destiny_combinations": {
+      "description": "When psychic number (from birth day) and destiny number (from full date) interact, specific life themes emerge. The psychic number shows inner nature, the destiny number shows outer path.",
+      "1_1": {"harmony": "high", "theme": "Pure Sun energy. Born leader who walks their destined path of authority with confidence. Life and identity are aligned.", "challenge": "Ego inflation, inability to accept guidance from others"},
+      "1_2": {"harmony": "medium", "theme": "Sun soul with Moon destiny. Inner authority must learn to express through sensitivity and cooperation.", "challenge": "Emotional fluctuation, tension between leading and following"},
+      "1_3": {"harmony": "high", "theme": "Sun inner nature guided toward Jupiter's wisdom. Natural teacher and mentor who leads through knowledge.", "challenge": "Overconfidence in own wisdom, preachiness"},
+      "1_4": {"harmony": "low", "theme": "Sun personality forced into Rahu's unconventional path. Must learn to lead in alternative ways.", "challenge": "Frustration with obstacles, feeling like an outsider despite leadership ability"},
+      "1_5": {"harmony": "high", "theme": "Sun personality with Mercury destiny. Leader who communicates and connects. Great for politics and media.", "challenge": "Scattered energy, too many interests"},
+      "1_8": {"harmony": "very_low", "theme": "Sun soul with Saturn destiny. The king who must serve. Ego is constantly humbled by karmic obligations.", "challenge": "Depression, power struggles, feeling restricted and unrecognized"},
+      "1_9": {"harmony": "very_high", "theme": "Sun and Mars in perfect alignment. Warrior-king energy. Immense drive, courage, and achievement.", "challenge": "Aggression, burnout, inability to rest"},
+      "2_2": {"harmony": "high", "theme": "Pure Moon energy. Deeply intuitive and emotionally gifted. Life centered on relationships and nurturing.", "challenge": "Over-sensitivity, codependence, indecisiveness"},
+      "2_5": {"harmony": "medium", "theme": "Moon soul with Mercury destiny. Emotional nature must learn intellectual expression. Good for counseling and writing.", "challenge": "Head vs heart conflicts, restless emotions"},
+      "2_7": {"harmony": "very_high", "theme": "Moon-Ketu the most spiritual combination. Deep psychic gifts, intuitive wisdom, and meditative nature.", "challenge": "Escapism, too much withdrawal, difficulty with material life"},
+      "2_9": {"harmony": "high", "theme": "Moon personality with Mars destiny. Sensitive soul who must take courageous action. The gentle warrior.", "challenge": "Emotional volatility, passive-aggressive tendencies"},
+      "3_3": {"harmony": "high", "theme": "Pure Jupiter energy. Optimism, wisdom, and expansion define the entire life. Born teacher and guide.", "challenge": "Excess in all things, inability to handle limitations"},
+      "3_6": {"harmony": "very_high", "theme": "Jupiter-Venus the great benefic combination. Life of beauty, love, wisdom, and abundance.", "challenge": "Laziness, overindulgence, taking blessings for granted"},
+      "3_9": {"harmony": "very_high", "theme": "Jupiter-Mars the divine friendship. Wisdom combined with action. Fortunate and dynamic life.", "challenge": "Overconfidence, taking too many risks"},
+      "4_4": {"harmony": "low", "theme": "Double Rahu — life of extreme unconventionality. Nothing goes as planned but everything has deep purpose.", "challenge": "Chronic dissatisfaction, paranoia, difficulty trusting anyone"},
+      "4_7": {"harmony": "high", "theme": "Rahu-Ketu axis complete. The seeker's journey — from material obsession to spiritual liberation.", "challenge": "Constant oscillation between extremes, difficulty finding balance"},
+      "4_8": {"harmony": "low", "theme": "Rahu-Saturn double darkness before dawn. Extremely hard life that builds extraordinary character.", "challenge": "Depression, chronic obstacles, feeling cursed"},
+      "5_5": {"harmony": "medium", "theme": "Pure Mercury — brilliant mind, endless curiosity, master communicator. Life of variety and learning.", "challenge": "Extreme restlessness, inability to commit, nervous exhaustion"},
+      "5_6": {"harmony": "high", "theme": "Mercury-Venus the artistic communicator. Beauty expressed through words and ideas.", "challenge": "Superficiality, valuing charm over substance"},
+      "6_6": {"harmony": "high", "theme": "Pure Venus — life devoted to love, beauty, and harmony. Magnetic personality and artistic gifts.", "challenge": "Vanity, possessiveness, difficulty with hardship"},
+      "6_9": {"harmony": "high", "theme": "Venus-Mars passionate life. Intense relationships, creative fire, and dynamic expression.", "challenge": "Jealousy, possessiveness, emotional intensity"},
+      "7_7": {"harmony": "medium", "theme": "Pure Ketu — the ultimate mystic and spiritual seeker. Life of deep introspection and otherworldly wisdom.", "challenge": "Complete disconnection from material reality, depression, isolation"},
+      "7_9": {"harmony": "medium", "theme": "Ketu-Mars spiritual warrior. Must fight inner demons and emerge victorious. Intense spiritual path.", "challenge": "Anger turned inward, self-destructive tendencies"},
+      "8_1": {"harmony": "very_low", "theme": "Saturn soul with Sun destiny. Must earn through hard work what 1 receives naturally. Slow rise to power.", "challenge": "Resentment, feeling life is unfair, delayed recognition"},
+      "8_8": {"harmony": "low", "theme": "Double Saturn — the karmic master. Life of extreme discipline, delays, and eventual material mastery.", "challenge": "Chronic hardship, depression, workaholism, loneliness"},
+      "8_9": {"harmony": "very_low", "theme": "Saturn-Mars the fiercest conflict. Life is a constant battle. Great achievement possible but at enormous cost.", "challenge": "Anger, accidents, legal troubles, health issues from stress"},
+      "9_9": {"harmony": "high", "theme": "Pure Mars — the ultimate warrior. Life of action, courage, and passionate engagement with the world.", "challenge": "Aggression, impatience, inability to compromise, burnout"}
+    },
+    "number_remedies": {
+      "description": "Vedic remedies for strengthening weak or afflicted numbers. These correspond to planetary remedies in Jyotish.",
+      "1": {
+        "mantra": "Om Hraam Hreem Hraum Sah Suryaya Namah",
+        "mantra_count": 7000,
+        "yantra": "Surya Yantra",
+        "fast_day": "Sunday",
+        "donation": "Wheat, jaggery, copper vessels, red cloth, red flowers",
+        "donation_day": "Sunday before sunset",
+        "color_therapy": "Wear red, orange, or gold on Sundays",
+        "gemstone": "Ruby (minimum 3 carats) in gold ring on ring finger, Sunday morning",
+        "deity_worship": "Lord Surya, Lord Rama, Lord Vishnu",
+        "food_offering": "Offer water to Sun at sunrise (Arghya)",
+        "specific_remedy": "Rise at sunrise daily and offer water mixed with red sandalwood to the Sun while chanting Gayatri mantra 108 times",
+        "charity": "Donate to the blind, provide eye-care services"
+      },
+      "2": {
+        "mantra": "Om Shraam Shreem Shraum Sah Chandraya Namah",
+        "mantra_count": 11000,
+        "yantra": "Chandra Yantra",
+        "fast_day": "Monday",
+        "donation": "Rice, white cloth, silver, milk, white flowers, camphor",
+        "donation_day": "Monday evening",
+        "color_therapy": "Wear white, cream, or light blue on Mondays",
+        "gemstone": "Pearl (minimum 4 carats) in silver ring on little finger, Monday morning during Shukla Paksha",
+        "deity_worship": "Goddess Parvati, Lord Shiva, Goddess Durga",
+        "food_offering": "Offer milk and white rice to Shiva Linga on Mondays",
+        "specific_remedy": "Keep a silver vessel with water by bedside. Drink water first thing in morning. Maintain loving relationship with mother.",
+        "charity": "Donate to women's shelters, feed the elderly"
+      },
+      "3": {
+        "mantra": "Om Graam Greem Graum Sah Gurave Namah",
+        "mantra_count": 19000,
+        "yantra": "Guru (Jupiter) Yantra",
+        "fast_day": "Thursday",
+        "donation": "Yellow cloth, turmeric, chickpeas (chana dal), bananas, yellow sweets, gold",
+        "donation_day": "Thursday morning",
+        "color_therapy": "Wear yellow, gold, or saffron on Thursdays",
+        "gemstone": "Yellow Sapphire (minimum 3 carats) in gold ring on index finger, Thursday morning",
+        "deity_worship": "Lord Brihaspati, Lord Vishnu, Goddess Lakshmi",
+        "food_offering": "Offer turmeric rice and bananas at Vishnu temple on Thursdays",
+        "specific_remedy": "Respect and serve teachers, elders, and Brahmins. Study sacred texts. Teach others freely.",
+        "charity": "Donate to educational institutions, sponsor a student's education"
+      },
+      "4": {
+        "mantra": "Om Bhraam Bhreem Bhraum Sah Rahave Namah",
+        "mantra_count": 18000,
+        "yantra": "Rahu Yantra",
+        "fast_day": "Saturday",
+        "donation": "Blue cloth, mustard oil, black sesame, coconut, blankets",
+        "donation_day": "Saturday evening at a crossroads",
+        "color_therapy": "Wear blue, grey, or electric blue on Saturdays",
+        "gemstone": "Hessonite/Gomed (minimum 5 carats) in silver ring on middle finger, Saturday evening",
+        "deity_worship": "Goddess Durga, Lord Hanuman, Goddess Saraswati",
+        "food_offering": "Offer coconut and blue flowers at Durga temple",
+        "specific_remedy": "Feed birds daily. Keep a piece of sandalwood in pocket. Avoid intoxicants. Practice grounding meditation.",
+        "charity": "Donate to orphanages, help the homeless, serve at soup kitchens"
+      },
+      "5": {
+        "mantra": "Om Braam Breem Braum Sah Budhaya Namah",
+        "mantra_count": 9000,
+        "yantra": "Budha (Mercury) Yantra",
+        "fast_day": "Wednesday",
+        "donation": "Green cloth, moong dal, emerald, green vegetables, books",
+        "donation_day": "Wednesday morning",
+        "color_therapy": "Wear green, turquoise, or light green on Wednesdays",
+        "gemstone": "Emerald (minimum 3 carats) in gold ring on little finger, Wednesday morning",
+        "deity_worship": "Lord Vishnu, Lord Ganesha, Goddess Saraswati",
+        "food_offering": "Offer green moong dal and green vegetables at Vishnu temple",
+        "specific_remedy": "Practice focused breathing for 15 minutes daily. Study a new subject regularly. Keep green plants in workspace.",
+        "charity": "Donate books, sponsor education for children, contribute to libraries"
+      },
+      "6": {
+        "mantra": "Om Draam Dreem Draum Sah Shukraya Namah",
+        "mantra_count": 16000,
+        "yantra": "Shukra (Venus) Yantra",
+        "fast_day": "Friday",
+        "donation": "White cloth, white flowers, sugar, ghee, perfume, silk, rice",
+        "donation_day": "Friday morning",
+        "color_therapy": "Wear white, pink, or pastel colors on Fridays",
+        "gemstone": "Diamond or White Sapphire (minimum 1 carat) in platinum or silver ring on ring finger, Friday morning",
+        "deity_worship": "Goddess Lakshmi, Goddess Mahalakshmi, Lord Krishna",
+        "food_offering": "Offer white sweets and flowers to Lakshmi on Fridays",
+        "specific_remedy": "Keep your home clean and beautiful. Practice generosity in relationships. Wear fragrance daily. Donate to arts programs.",
+        "charity": "Support artists, donate to women's causes, feed cows with green fodder"
+      },
+      "7": {
+        "mantra": "Om Sraam Sreem Sraum Sah Ketave Namah",
+        "mantra_count": 7000,
+        "yantra": "Ketu Yantra",
+        "fast_day": "Tuesday",
+        "donation": "Grey or multi-colored cloth, sesame, blankets to sadhus, dog food",
+        "donation_day": "Tuesday or Saturday evening",
+        "color_therapy": "Wear grey, white, or smoke-colored clothes on Tuesdays",
+        "gemstone": "Cat's Eye/Lehsunia (minimum 3 carats) in silver ring on ring finger, Tuesday or Saturday",
+        "deity_worship": "Lord Ganesha, Lord Hanuman, Goddess Kali, Chitragupta",
+        "food_offering": "Offer sesame and jaggery laddoos at Ganesha temple",
+        "specific_remedy": "Practice daily meditation. Keep a dog or feed stray dogs. Visit pilgrimage sites. Study spiritual texts. Burn camphor daily.",
+        "charity": "Donate to animal shelters, support meditation centers, serve at ashrams"
+      },
+      "8": {
+        "mantra": "Om Praam Preem Praum Sah Shanaischaraya Namah",
+        "mantra_count": 23000,
+        "yantra": "Shani (Saturn) Yantra",
+        "fast_day": "Saturday",
+        "donation": "Black cloth, iron, mustard oil, black sesame, black urad dal",
+        "donation_day": "Saturday evening, preferably at a Shani temple",
+        "color_therapy": "Wear dark blue, black, or violet on Saturdays",
+        "gemstone": "Blue Sapphire (minimum 3 carats) in silver or iron ring on middle finger, Saturday evening — MUST test for 3 days first",
+        "deity_worship": "Lord Shani Dev, Lord Hanuman, Lord Yama, Lord Ayyanar",
+        "food_offering": "Offer black urad dal and mustard oil at Shani temple on Saturdays",
+        "specific_remedy": "Pour mustard oil on Shani idol every Saturday. Feed crows. Serve the elderly and disabled. Never disrespect servants or workers.",
+        "charity": "Donate iron items, serve the physically challenged, contribute to old-age homes"
+      },
+      "9": {
+        "mantra": "Om Kraam Kreem Kraum Sah Bhaumaya Namah",
+        "mantra_count": 10000,
+        "yantra": "Mangal (Mars) Yantra",
+        "fast_day": "Tuesday",
+        "donation": "Red cloth, red lentils (masoor dal), copper, jaggery, red coral, swords/knives",
+        "donation_day": "Tuesday morning at Hanuman temple",
+        "color_therapy": "Wear red, scarlet, or maroon on Tuesdays",
+        "gemstone": "Red Coral (minimum 5 carats) in gold or copper ring on ring finger, Tuesday morning",
+        "deity_worship": "Lord Hanuman, Lord Kartikeya, Lord Mangal, Goddess Durga",
+        "food_offering": "Offer red flowers and jaggery at Hanuman temple on Tuesdays",
+        "specific_remedy": "Recite Hanuman Chalisa daily. Practice physical exercise. Plant a pomegranate or red flowering tree. Channel anger through martial arts or sports.",
+        "charity": "Donate blood, support fire stations, serve military veterans, donate to emergency services"
+      }
+    },
+    "missing_number_effects": {
+      "description": "When a number is completely absent from the birth date (not appearing in day, month, or year), its energy is weak in the native's life. These are interpreted through the Lo Shu grid.",
+      "1": {
+        "effect": "Lack of confidence and self-identity. Difficulty in making decisions and taking initiative.",
+        "life_area": "Willpower and self-expression",
+        "planet_weak": "sun",
+        "remedy": "Chant Surya mantra, wear ruby or garnet, wake at sunrise"
+      },
+      "2": {
+        "effect": "Emotional instability, difficulty in partnerships and cooperative relationships. Problems with patience.",
+        "life_area": "Emotions and relationships",
+        "planet_weak": "moon",
+        "remedy": "Chant Chandra mantra, wear pearl or moonstone, practice emotional awareness meditation"
+      },
+      "3": {
+        "effect": "Limited creativity, problems with self-expression and communication. Difficulty with optimism.",
+        "life_area": "Creativity and wisdom",
+        "planet_weak": "jupiter",
+        "remedy": "Chant Guru mantra, wear yellow sapphire, study and teach regularly"
+      },
+      "4": {
+        "effect": "Lack of discipline, organizational issues. Difficulty with structure and routine.",
+        "life_area": "Structure and unconventional thinking",
+        "planet_weak": "rahu",
+        "remedy": "Chant Rahu mantra, wear hessonite, create daily routines, practice grounding"
+      },
+      "5": {
+        "effect": "Resistance to change, communication problems. Difficulty with adaptability and learning.",
+        "life_area": "Communication and adaptability",
+        "planet_weak": "mercury",
+        "remedy": "Chant Budha mantra, wear emerald, practice public speaking, learn new languages"
+      },
+      "6": {
+        "effect": "Relationship difficulties, lack of responsibility and aesthetic sense. Trouble with love and commitment.",
+        "life_area": "Love and domestic harmony",
+        "planet_weak": "venus",
+        "remedy": "Chant Shukra mantra, wear diamond or white sapphire, beautify surroundings, practice acts of love"
+      },
+      "7": {
+        "effect": "Spiritual disconnection, lack of introspection and analytical depth. Surface-level living.",
+        "life_area": "Spirituality and analysis",
+        "planet_weak": "ketu",
+        "remedy": "Chant Ketu mantra, wear cat's eye, practice daily meditation, study philosophy"
+      },
+      "8": {
+        "effect": "Financial challenges, issues with authority and power. Difficulty with long-term planning.",
+        "life_area": "Material success and karma",
+        "planet_weak": "saturn",
+        "remedy": "Chant Shani mantra, wear blue sapphire (with caution), practice discipline and service"
+      },
+      "9": {
+        "effect": "Lack of compassion, inability to let go and complete cycles. Problems with anger management.",
+        "life_area": "Courage and humanitarianism",
+        "planet_weak": "mars",
+        "remedy": "Chant Mangal mantra, wear red coral, practice physical exercise, volunteer for humanitarian causes"
+      }
+    },
+    "repeated_number_effects": {
+      "description": "When a number appears multiple times in the birth date, its energy is amplified. Each additional repetition intensifies the effect — positively or negatively.",
+      "1": {
+        "2x": {"effect": "Strong leadership and self-confidence. Natural authority that others follow.", "nature": "positive"},
+        "3x": {"effect": "Extreme individualism, potential dictatorial tendencies. Difficulty accepting others' opinions.", "nature": "mixed"},
+        "4x_plus": {"effect": "Exceptional willpower but completely self-absorbed. May become a tyrant or a solitary genius.", "nature": "challenging"}
+      },
+      "2": {
+        "2x": {"effect": "Heightened intuition and emotional sensitivity. Strong empathy and psychic ability.", "nature": "positive"},
+        "3x": {"effect": "Over-emotional and easily influenced. May become codependent or manipulative through emotion.", "nature": "mixed"},
+        "4x_plus": {"effect": "Extreme emotional vulnerability. Psychic overwhelm. Must learn strong boundaries.", "nature": "challenging"}
+      },
+      "3": {
+        "2x": {"effect": "Excellent memory, strong imagination, creative brilliance. Natural storyteller and teacher.", "nature": "positive"},
+        "3x": {"effect": "Tendency to live in fantasy. Over-active imagination may disconnect from reality.", "nature": "mixed"},
+        "4x_plus": {"effect": "Prone to escapism, exaggeration, and scattered energy. Creative genius or delusional — thin line.", "nature": "challenging"}
+      },
+      "4": {
+        "2x": {"effect": "Very hardworking and systematic. Excellent at building and organizing. Practical intelligence.", "nature": "positive"},
+        "3x": {"effect": "Workaholic tendencies. May become obsessed with details and miss the big picture.", "nature": "mixed"},
+        "4x_plus": {"effect": "Extreme rigidity, paranoia about deception, chronic dissatisfaction with normal life.", "nature": "challenging"}
+      },
+      "5": {
+        "2x": {"effect": "Exceptional communicator with quick wit. Great adaptability and love of learning.", "nature": "positive"},
+        "3x": {"effect": "Extreme restlessness, difficulty with commitment. Over-stimulated nervous system.", "nature": "mixed"},
+        "4x_plus": {"effect": "Cannot stay in one place, job, or relationship. Nervous exhaustion likely. Brilliant but scattered.", "nature": "challenging"}
+      },
+      "6": {
+        "2x": {"effect": "Deep love nature, artistic talent, strong sense of responsibility. Attractive personality.", "nature": "positive"},
+        "3x": {"effect": "Over-protective and possessive in relationships. May interfere in others' affairs excessively.", "nature": "mixed"},
+        "4x_plus": {"effect": "Suffocating love, extreme vanity, potential for jealousy-driven destructive behavior.", "nature": "challenging"}
+      },
+      "7": {
+        "2x": {"effect": "Strong spiritual inclination and analytical mind. Natural researcher and philosopher.", "nature": "positive"},
+        "3x": {"effect": "Tendency toward isolation, depression, and disconnection from society.", "nature": "mixed"},
+        "4x_plus": {"effect": "Complete withdrawal from material life. May develop psychosomatic illnesses or extreme eccentricity.", "nature": "challenging"}
+      },
+      "8": {
+        "2x": {"effect": "Strong material ambition and discipline. Good with finances and authority.", "nature": "positive"},
+        "3x": {"effect": "Obsession with material success. May sacrifice relationships and health for career.", "nature": "mixed"},
+        "4x_plus": {"effect": "Extreme karmic burden. Either great material success through enormous sacrifice, or crushing defeats.", "nature": "challenging"}
+      },
+      "9": {
+        "2x": {"effect": "Dynamic energy, courage, and humanitarian impulse. Natural leader and protector.", "nature": "positive"},
+        "3x": {"effect": "Aggressive tendencies, difficulty controlling temper. Accident-prone.", "nature": "mixed"},
+        "4x_plus": {"effect": "Explosive energy that must be channeled. Potential for violence or extraordinary athletic/military achievement.", "nature": "challenging"}
+      }
+    },
+    "name_number_analysis": {
+      "description": "Rules for analyzing the name number and its relationship to psychic and destiny numbers.",
+      "ideal_relationship": "Name number should be friendly to both psychic and destiny numbers for maximum harmony",
+      "name_change_rules": [
+        "The name number should ideally equal or be friendly to the destiny number",
+        "Changing name spelling changes the vibration — even one letter matters in Chaldean system",
+        "The Chaldean system is preferred for name analysis as it is based on sound vibration",
+        "Number 9 is never assigned to any letter in the Chaldean system — it is considered too sacred",
+        "Vowels carry the soul energy (soul urge), consonants carry the outer personality",
+        "The full name at birth carries the original karmic vibration — changed names overlay but do not erase it"
+      ],
+      "business_name_rules": [
+        "Business name number should be compatible with owner's psychic or destiny number",
+        "Numbers 1, 5, 6, and 9 are generally favorable for business names",
+        "Number 8 in business name brings delays but eventual massive success",
+        "Number 4 in business name is unconventional — good for tech and innovation businesses",
+        "Number 7 in business name is poor for commercial enterprises but good for spiritual organizations"
+      ]
+    },
+    "yearly_forecast_rules": {
+      "description": "Rules for combining personal year number with natal numbers for annual predictions",
+      "interpretation_priority": [
+        "1. Personal Year number sets the general theme",
+        "2. Interaction with psychic number shows inner experience",
+        "3. Interaction with destiny number shows external events",
+        "4. Interaction with name number shows social/professional impact"
+      ],
+      "transit_peaks": {
+        "1": {"peak_months": [1, 4, 10], "description": "Leadership opportunities peak in these months"},
+        "2": {"peak_months": [2, 7, 11], "description": "Relationship developments peak in these months"},
+        "3": {"peak_months": [3, 6, 12], "description": "Creative breakthroughs peak in these months"},
+        "4": {"peak_months": [2, 6, 8], "description": "Building and foundation work peaks in these months"},
+        "5": {"peak_months": [5, 6, 9], "description": "Major changes and travel peak in these months"},
+        "6": {"peak_months": [4, 5, 10], "description": "Love and family matters peak in these months"},
+        "7": {"peak_months": [1, 2, 7], "description": "Spiritual insights and study peak in these months"},
+        "8": {"peak_months": [1, 3, 10], "description": "Financial and power developments peak in these months"},
+        "9": {"peak_months": [3, 4, 11], "description": "Completions and transformations peak in these months"}
+      }
+    },
+    "jyotish_integration": {
+      "description": "Rules for integrating numerological analysis with Vedic Jyotish chart readings",
+      "cross_reference_rules": [
+        "Psychic number planet should be cross-referenced with its position in the natal chart",
+        "If psychic number planet is strong in chart (exalted, own sign, digbala), numerological effects are amplified positively",
+        "If psychic number planet is weak in chart (debilitated, combust, enemy sign), numerological negative traits are more prominent",
+        "Destiny number planet's dasha period activates the destiny number's full potential",
+        "Name number planet in good houses (1, 4, 5, 7, 9, 10) amplifies professional success",
+        "Missing numbers in Lo Shu correspond to weak planets in the natal chart — confirm with Shadbala",
+        "Personal year number should be read alongside current dasha and transit for comprehensive timing"
+      ],
+      "planet_number_strength": {
+        "description": "A number is strong when its ruling planet is strong in the Jyotish chart",
+        "exalted": "Number's positive traits fully manifest, negative traits minimal",
+        "own_sign": "Number operates naturally and comfortably, reliable results",
+        "friendly_sign": "Number functions well with support, good but not exceptional",
+        "neutral_sign": "Number gives mixed results depending on other factors",
+        "enemy_sign": "Number's negative traits more prominent, requires remedies",
+        "debilitated": "Number's energy is severely weakened, strong remedies needed",
+        "combust": "Number's identity is overshadowed, lacks independent expression"
+      }
+    }
+  }
+}

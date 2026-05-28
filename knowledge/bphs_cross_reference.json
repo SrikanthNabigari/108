@@ -1,0 +1,498 @@
+{
+  "_description": "Cross-reference mapping from 108-core MCP tools to BPHS chapters. Used by bphs_enricher.py to add authoritative Parasara verse references to tool responses.",
+  "_total_chapters": 100,
+  "_total_tools_mapped": 56,
+
+  "tool_mappings": {
+
+    "detect_yogas": {
+      "chapters": [36, 37, 38, 39, 40, 41, 42, 43, 44, 76, 77],
+      "description": "Yoga detection across all categories",
+      "yoga_specific": {
+        "pancha_mahapurusha": {"chapters": [76], "keywords": ["hamsa", "malavya", "ruchaka", "bhadra", "shasha"]},
+        "nabhasa_yoga": {"chapters": [37], "keywords": ["rajju", "musala", "nala", "mala", "sarpa", "gada", "shakata", "vihaga", "shringataka", "hala", "vajra", "yava", "kamala", "vapi", "yupa", "shara", "shakti", "danda", "nauka", "kuta", "chhatra", "chapa", "ardha_chandra", "chakra", "samudra"]},
+        "raja_yoga": {"chapters": [41, 42], "keywords": ["raja", "royal"]},
+        "dhana_yoga": {"chapters": [43], "keywords": ["dhana", "wealth"]},
+        "daridra_yoga": {"chapters": [44], "keywords": ["daridra", "penury", "poverty"]},
+        "lunar_yoga": {"chapters": [39], "keywords": ["sunapha", "anapha", "durudhara", "kemadruma", "gajakesari", "chandra", "adhiyoga"]},
+        "solar_yoga": {"chapters": [40], "keywords": ["veshi", "vashi", "ubhayachari"]},
+        "other_yoga": {"chapters": [38, 77], "keywords": ["parivartana", "viparita", "neecha_bhanga"]}
+      }
+    },
+
+    "detect_doshas": {
+      "chapters": [11, 12, 48, 80, 81, 94, 95, 96, 97, 98],
+      "description": "Dosha and affliction detection",
+      "dosha_specific": {
+        "mangal_dosha": {"chapters": [81], "keywords": ["mangal", "mars", "kuja"]},
+        "kaal_sarp": {"chapters": [48], "keywords": ["kaal_sarp", "rahu", "ketu"]},
+        "gandanta": {"chapters": [94], "keywords": ["gandanta"]},
+        "abhukta_moola": {"chapters": [95], "keywords": ["abhukta", "moola"]},
+        "pitra_dosha": {"chapters": [11, 12], "keywords": ["pitra", "ancestors"]},
+        "grahan_dosha": {"chapters": [11], "keywords": ["grahan", "eclipse"]},
+        "female_horoscopy": {"chapters": [80], "keywords": ["female", "stri"]}
+      }
+    },
+
+    "check_yoga_cancellations": {
+      "chapters": [38, 76, 77],
+      "description": "Yoga Bhanga (cancellation) rules"
+    },
+
+    "detect_neecha_bhanga_yoga": {
+      "chapters": [38, 77],
+      "description": "Neecha Bhanga Raja Yoga detection"
+    },
+
+    "detect_planetary_wars_tool": {
+      "chapters": [3, 29],
+      "description": "Graha Yuddha (planetary war) detection"
+    },
+
+    "calculate_strength": {
+      "chapters": [29, 30],
+      "description": "Shadbala six-fold strength calculation",
+      "component_specific": {
+        "sthana_bala": {"chapters": [29]},
+        "dig_bala": {"chapters": [29]},
+        "kala_bala": {"chapters": [29]},
+        "cheshta_bala": {"chapters": [29]},
+        "naisargika_bala": {"chapters": [29]},
+        "drik_bala": {"chapters": [29]},
+        "ishta_kashta": {"chapters": [30]}
+      }
+    },
+
+    "ashtakavarga": {
+      "chapters": [67, 68, 69, 70, 71, 72, 73],
+      "description": "Ashtakavarga system with SAV and transits",
+      "planet_specific": {
+        "sun": {"chapters": [67]},
+        "moon": {"chapters": [68]},
+        "mars": {"chapters": [68]},
+        "mercury": {"chapters": [69]},
+        "jupiter": {"chapters": [69]},
+        "venus": {"chapters": [70]},
+        "saturn": {"chapters": [70]},
+        "sarvashtakavarga": {"chapters": [71]},
+        "transits": {"chapters": [72]},
+        "longevity": {"chapters": [73]}
+      }
+    },
+
+    "bhava_bala": {
+      "chapters": [13, 31],
+      "description": "House strength calculation"
+    },
+
+    "all_bhava_balas": {
+      "chapters": [13, 31],
+      "description": "All 12 house strengths"
+    },
+
+    "bhava_chalit_chart": {
+      "chapters": [13, 31],
+      "description": "Bhava Chalit house shift analysis"
+    },
+
+    "planetary_aspects": {
+      "chapters": [9, 28],
+      "description": "Parashari Graha Drishti (planetary aspects)"
+    },
+
+    "combustion_check": {
+      "chapters": [3, 47],
+      "description": "Combustion (Asta) effects"
+    },
+
+    "retrograde_effects": {
+      "chapters": [47],
+      "description": "Retrograde (Vakri) planetary states"
+    },
+
+    "vimshopaka_strength": {
+      "chapters": [7, 8],
+      "description": "Vimshopaka Bala across divisional charts"
+    },
+
+    "all_vimshopaka": {
+      "chapters": [7, 8],
+      "description": "All planets Vimshopaka Bala"
+    },
+
+    "current_dasha": {
+      "chapters": [48, 49, 50, 51, 52, 53],
+      "description": "Current Vimshottari Dasha periods",
+      "dasha_level": {
+        "mahadasha": {"chapters": [48, 49]},
+        "antardasha": {"chapters": [53]}
+      }
+    },
+
+    "dasha_periods": {
+      "chapters": [48, 49],
+      "description": "Complete Mahadasha timeline"
+    },
+
+    "antardasha_periods": {
+      "chapters": [53, 54, 55, 56, 57, 58, 59, 60, 61, 62],
+      "description": "Antardasha sub-period breakdown"
+    },
+
+    "antardasha_effects": {
+      "chapters": [54, 55, 56, 57, 58, 59, 60, 61, 62],
+      "description": "Detailed Antardasha effects (81 combinations)",
+      "planet_specific": {
+        "sun": {"chapters": [54]},
+        "moon": {"chapters": [55]},
+        "mars": {"chapters": [56]},
+        "rahu": {"chapters": [57]},
+        "jupiter": {"chapters": [58]},
+        "saturn": {"chapters": [59]},
+        "mercury": {"chapters": [60]},
+        "ketu": {"chapters": [61]},
+        "venus": {"chapters": [62]}
+      }
+    },
+
+    "pratyantardasha_effects": {
+      "chapters": [63],
+      "description": "Pratyantardasha effects (729 combinations)"
+    },
+
+    "lookup_antardasha_effects": {
+      "chapters": [54, 55, 56, 57, 58, 59, 60, 61, 62],
+      "description": "Antardasha effect lookups from knowledge base"
+    },
+
+    "lookup_pratyantardasha_effects": {
+      "chapters": [63],
+      "description": "Pratyantardasha effect lookups (729 combinations)"
+    },
+
+    "yogini_dasha": {
+      "chapters": [48],
+      "description": "Yogini Dasha 36-year cycle"
+    },
+
+    "ashtottari_dasha": {
+      "chapters": [48],
+      "description": "Ashtottari Dasha 108-year cycle"
+    },
+
+    "narayana_dasha": {
+      "chapters": [52],
+      "description": "Narayana/Chara Dasha (Jaimini sign-based)"
+    },
+
+    "compare_dashas": {
+      "chapters": [48, 49],
+      "description": "Vimshottari vs Yogini Dasha comparison"
+    },
+
+    "transit_analysis": {
+      "chapters": [67, 68, 72],
+      "description": "Gochara transit effects from natal Moon"
+    },
+
+    "enriched_transit": {
+      "chapters": [67, 68, 72],
+      "description": "Enhanced transit with nakshatra effects"
+    },
+
+    "transit_natal_aspects_tool": {
+      "chapters": [28, 72],
+      "description": "Transit-natal aspect calculations"
+    },
+
+    "dasha_transit_cross_analysis": {
+      "chapters": [48, 72],
+      "description": "Dasha-transit cross-correlation"
+    },
+
+    "sade_sati_status": {
+      "chapters": [59, 72, 90],
+      "description": "Saturn Sade Sati transit status"
+    },
+
+    "dhaiya_status": {
+      "chapters": [59, 72],
+      "description": "Dhaiya/Kantaka Shani status"
+    },
+
+    "muhurta_check": {
+      "chapters": [99],
+      "description": "Muhurta quality evaluation"
+    },
+
+    "find_good_muhurta": {
+      "chapters": [99],
+      "description": "Find auspicious muhurta dates"
+    },
+
+    "abhijit_muhurta": {
+      "chapters": [99],
+      "description": "Abhijit Muhurta calculation"
+    },
+
+    "prashna_analysis": {
+      "chapters": [78, 99],
+      "description": "Prashna (Horary) analysis"
+    },
+
+    "chara_karakas": {
+      "chapters": [34],
+      "description": "Jaimini Chara Karakas (7 significators)"
+    },
+
+    "atmakaraka_analysis": {
+      "chapters": [34, 35],
+      "description": "Atmakaraka and Karakamsa analysis"
+    },
+
+    "jaimini_aspects": {
+      "chapters": [9],
+      "description": "Jaimini sign-based aspects"
+    },
+
+    "arudha_padas": {
+      "chapters": [31],
+      "description": "12 Arudha Pada calculations"
+    },
+
+    "chara_dasha": {
+      "chapters": [52],
+      "description": "Jaimini Chara Dasha periods"
+    },
+
+    "upapada_analysis": {
+      "chapters": [32],
+      "description": "Upapada Lagna marriage analysis"
+    },
+
+    "kundali_matching": {
+      "chapters": [78, 80],
+      "description": "Ashta Kuta compatibility matching"
+    },
+
+    "synastry_analysis": {
+      "chapters": [20, 32, 80],
+      "description": "Relationship compatibility analysis"
+    },
+
+    "navamsha_spouse_analysis": {
+      "chapters": [7, 20, 32, 35],
+      "description": "D9 Navamsha spouse characteristics"
+    },
+
+    "gem_recommendation": {
+      "chapters": [84, 85, 86, 87, 88, 89, 90, 91, 92, 93],
+      "description": "Gemstone recommendations based on chart"
+    },
+
+    "check_gem_compatibility_tool": {
+      "chapters": [84, 85, 86, 87, 88, 89, 90, 91, 92],
+      "description": "Gemstone safety compatibility check"
+    },
+
+    "recommend_chart_remedies": {
+      "chapters": [12, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98],
+      "description": "Prioritized remedy recommendations"
+    },
+
+    "lookup_planet": {
+      "chapters": [3],
+      "description": "Planet definition lookup"
+    },
+
+    "lookup_rashi": {
+      "chapters": [4],
+      "description": "Zodiac sign definition lookup"
+    },
+
+    "lookup_house": {
+      "chapters": [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25],
+      "description": "House definition and effects lookup"
+    },
+
+    "lookup_yoga": {
+      "chapters": [36, 37, 38, 39, 40, 41, 42, 43, 44, 76, 77],
+      "description": "Yoga definition lookup"
+    },
+
+    "lookup_dosha": {
+      "chapters": [11, 12, 80, 81],
+      "description": "Dosha definition lookup"
+    },
+
+    "lookup_avastha": {
+      "chapters": [47],
+      "description": "Planetary state definitions"
+    },
+
+    "lookup_nakshatra": {
+      "chapters": [93],
+      "description": "Nakshatra definition with remedies"
+    },
+
+    "brahma_muhurta": {
+      "chapters": [99],
+      "description": "Brahma Muhurta calculation (spiritual time)"
+    },
+
+    "eclipse_periods": {
+      "chapters": [11, 48],
+      "description": "Solar and lunar eclipse periods"
+    },
+
+    "marana_kaal": {
+      "chapters": [99],
+      "description": "Marana Kaal inauspicious periods"
+    },
+
+    "secondary_progressions": {
+      "chapters": [48, 49],
+      "description": "Secondary progressions (day-for-year technique)"
+    },
+
+    "correlate_life_event": {
+      "chapters": [48, 49, 72],
+      "description": "Life event correlation with dasha and transit"
+    },
+
+    "upcoming_transit_triggers": {
+      "chapters": [67, 68, 72],
+      "description": "Upcoming significant transit triggers"
+    }
+  },
+
+  "house_chapters": {
+    "1": {"chapter": 14, "title": "Effects of the 1st House"},
+    "2": {"chapter": 15, "title": "Effects of the 2nd House"},
+    "3": {"chapter": 16, "title": "Effects of the 3rd House"},
+    "4": {"chapter": 17, "title": "Effects of the 4th House"},
+    "5": {"chapter": 18, "title": "Effects of the 5th House"},
+    "6": {"chapter": 19, "title": "Effects of the 6th House"},
+    "7": {"chapter": 20, "title": "Effects of the 7th House"},
+    "8": {"chapter": 21, "title": "Effects of the 8th House"},
+    "9": {"chapter": 22, "title": "Effects of the 9th House"},
+    "10": {"chapter": 23, "title": "Effects of the 10th House"},
+    "11": {"chapter": 24, "title": "Effects of the 11th House"},
+    "12": {"chapter": 25, "title": "Effects of the 12th House"}
+  },
+
+  "planet_dasha_chapters": {
+    "sun": {"mahadasha": 49, "antardasha": 54, "remedies": 84},
+    "moon": {"mahadasha": 50, "antardasha": 55, "remedies": 85},
+    "mars": {"mahadasha": 51, "antardasha": 56, "remedies": 86},
+    "rahu": {"mahadasha": 49, "antardasha": 57, "remedies": 91},
+    "jupiter": {"mahadasha": 49, "antardasha": 58, "remedies": 88},
+    "saturn": {"mahadasha": 49, "antardasha": 59, "remedies": 90},
+    "mercury": {"mahadasha": 49, "antardasha": 60, "remedies": 87},
+    "ketu": {"mahadasha": 49, "antardasha": 61, "remedies": 92},
+    "venus": {"mahadasha": 49, "antardasha": 62, "remedies": 89}
+  },
+
+  "chapter_to_tools": {
+    "1": ["lookup_rashi"],
+    "2": [],
+    "3": ["lookup_planet", "combustion_check", "detect_planetary_wars_tool"],
+    "4": ["lookup_rashi"],
+    "5": [],
+    "6": [],
+    "7": ["vimshopaka_strength", "all_vimshopaka", "navamsha_spouse_analysis"],
+    "8": ["vimshopaka_strength", "all_vimshopaka"],
+    "9": ["planetary_aspects", "jaimini_aspects"],
+    "10": [],
+    "11": ["detect_doshas", "eclipse_periods"],
+    "12": ["detect_doshas", "recommend_chart_remedies"],
+    "13": ["lookup_house", "bhava_bala", "all_bhava_balas", "bhava_chalit_chart"],
+    "14": ["lookup_house"],
+    "15": ["lookup_house"],
+    "16": ["lookup_house"],
+    "17": ["lookup_house"],
+    "18": ["lookup_house"],
+    "19": ["lookup_house"],
+    "20": ["lookup_house", "synastry_analysis", "navamsha_spouse_analysis"],
+    "21": ["lookup_house"],
+    "22": ["lookup_house"],
+    "23": ["lookup_house"],
+    "24": ["lookup_house"],
+    "25": ["lookup_house"],
+    "26": [],
+    "27": [],
+    "28": ["planetary_aspects", "transit_natal_aspects_tool"],
+    "29": ["calculate_strength", "detect_planetary_wars_tool"],
+    "30": ["calculate_strength"],
+    "31": ["arudha_padas", "bhava_bala", "all_bhava_balas", "bhava_chalit_chart"],
+    "32": ["upapada_analysis", "synastry_analysis", "navamsha_spouse_analysis"],
+    "33": [],
+    "34": ["chara_karakas", "atmakaraka_analysis"],
+    "35": ["atmakaraka_analysis", "navamsha_spouse_analysis"],
+    "36": ["detect_yogas", "lookup_yoga"],
+    "37": ["detect_yogas", "lookup_yoga"],
+    "38": ["detect_yogas", "check_yoga_cancellations", "detect_neecha_bhanga_yoga", "lookup_yoga"],
+    "39": ["detect_yogas", "lookup_yoga"],
+    "40": ["detect_yogas", "lookup_yoga"],
+    "41": ["detect_yogas", "lookup_yoga"],
+    "42": ["detect_yogas", "lookup_yoga"],
+    "43": ["detect_yogas", "lookup_yoga"],
+    "44": ["detect_yogas", "lookup_yoga"],
+    "45": [],
+    "46": [],
+    "47": ["lookup_avastha", "combustion_check", "retrograde_effects"],
+    "48": ["current_dasha", "dasha_periods", "yogini_dasha", "ashtottari_dasha", "compare_dashas", "dasha_transit_cross_analysis", "eclipse_periods", "secondary_progressions", "correlate_life_event"],
+    "49": ["current_dasha", "dasha_periods", "compare_dashas", "secondary_progressions", "correlate_life_event"],
+    "50": ["dasha_periods"],
+    "51": [],
+    "52": ["narayana_dasha", "chara_dasha"],
+    "53": ["antardasha_periods", "current_dasha"],
+    "54": ["antardasha_effects", "lookup_antardasha_effects"],
+    "55": ["antardasha_effects", "lookup_antardasha_effects"],
+    "56": ["antardasha_effects", "lookup_antardasha_effects"],
+    "57": ["antardasha_effects", "lookup_antardasha_effects"],
+    "58": ["antardasha_effects", "lookup_antardasha_effects"],
+    "59": ["antardasha_effects", "lookup_antardasha_effects", "sade_sati_status", "dhaiya_status"],
+    "60": ["antardasha_effects", "lookup_antardasha_effects"],
+    "61": ["antardasha_effects", "lookup_antardasha_effects"],
+    "62": ["antardasha_effects", "lookup_antardasha_effects"],
+    "63": ["pratyantardasha_effects", "lookup_pratyantardasha_effects"],
+    "64": [],
+    "65": [],
+    "66": [],
+    "67": ["ashtakavarga", "transit_analysis", "enriched_transit", "upcoming_transit_triggers"],
+    "68": ["ashtakavarga", "transit_analysis", "enriched_transit", "upcoming_transit_triggers"],
+    "69": ["ashtakavarga"],
+    "70": ["ashtakavarga"],
+    "71": ["ashtakavarga"],
+    "72": ["ashtakavarga", "transit_analysis", "enriched_transit", "transit_natal_aspects_tool", "dasha_transit_cross_analysis", "sade_sati_status", "dhaiya_status", "correlate_life_event", "upcoming_transit_triggers"],
+    "73": ["ashtakavarga"],
+    "74": [],
+    "75": [],
+    "76": ["detect_yogas", "check_yoga_cancellations", "lookup_yoga"],
+    "77": ["detect_yogas", "check_yoga_cancellations", "detect_neecha_bhanga_yoga", "lookup_yoga"],
+    "78": ["prashna_analysis", "kundali_matching"],
+    "79": [],
+    "80": ["detect_doshas", "kundali_matching", "lookup_dosha"],
+    "81": ["detect_doshas", "lookup_dosha"],
+    "82": [],
+    "83": [],
+    "84": ["gem_recommendation", "check_gem_compatibility_tool", "recommend_chart_remedies"],
+    "85": ["gem_recommendation", "check_gem_compatibility_tool", "recommend_chart_remedies"],
+    "86": ["gem_recommendation", "check_gem_compatibility_tool", "recommend_chart_remedies"],
+    "87": ["gem_recommendation", "check_gem_compatibility_tool", "recommend_chart_remedies"],
+    "88": ["gem_recommendation", "check_gem_compatibility_tool", "recommend_chart_remedies"],
+    "89": ["gem_recommendation", "check_gem_compatibility_tool", "recommend_chart_remedies"],
+    "90": ["gem_recommendation", "check_gem_compatibility_tool", "recommend_chart_remedies", "sade_sati_status"],
+    "91": ["gem_recommendation", "check_gem_compatibility_tool", "recommend_chart_remedies"],
+    "92": ["gem_recommendation", "check_gem_compatibility_tool", "recommend_chart_remedies"],
+    "93": ["lookup_nakshatra", "recommend_chart_remedies"],
+    "94": ["detect_doshas", "recommend_chart_remedies"],
+    "95": ["detect_doshas", "recommend_chart_remedies"],
+    "96": ["recommend_chart_remedies"],
+    "97": ["recommend_chart_remedies"],
+    "98": ["recommend_chart_remedies"],
+    "99": ["muhurta_check", "find_good_muhurta", "abhijit_muhurta", "brahma_muhurta", "marana_kaal", "prashna_analysis"],
+    "100": []
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "karakamsha_rules": {
+    "metadata": {
+      "source": "Brihat Parashara Hora Shastra, Chapter 35",
+      "principle": "The Atmakaraka's position in the Navamsha (D-9) chart is called the Karakamsha Lagna. It reveals soul-level karma — what the soul seeks, what it brings from past lives, and why it incarnated.",
+      "atmakaraka_definition": "The planet with the highest degree in its sign (excluding Rahu and Ketu). This planet represents the soul's deepest desires and karmic agenda.",
+      "importance": "Karakamsha is the second most important lagna after the natal ascendant. Where the natal lagna shows outer destiny, KL shows inner soul purpose."
+    },
+    "atmakaraka_planets": {
+      "sun": "Soul seeks authority, recognition, and service to the divine principle. The ego must be transcended through service.",
+      "moon": "Soul seeks emotional connection, nurturing, and public life. Must learn to give without attachment.",
+      "mars": "Soul seeks action, courage, and conquest. Must channel energy from aggression to dharmic action.",
+      "mercury": "Soul seeks knowledge, communication, and trade. Must evolve from cleverness to wisdom.",
+      "jupiter": "Highest natural Atmakaraka. Soul seeks wisdom, teaching, and dharmic expansion. Born to guide others.",
+      "venus": "Soul seeks beauty, love, and harmony. Must evolve from sensual enjoyment to devotional love.",
+      "saturn": "Soul seeks to complete karma through discipline, service, and patience. Heavy karmic load but great potential for liberation.",
+      "rahu": "Indicates unusual soul journey — foreign influences, unconventional paths, obsessive seeking. Soul needs to face and transcend its obsessions."
+    },
+    "karakamsha_lagna_signs": {
+      "aries": "KL in Aries — soul is pioneering, courageous, action-oriented. Karmic theme: leadership and initiative.",
+      "taurus": "KL in Taurus — soul seeks stability, beauty, and material harmony. Karmic theme: wealth and sense gratification to be transcended.",
+      "gemini": "KL in Gemini — soul seeks knowledge, communication, duality. Karmic theme: integration of opposites.",
+      "cancer": "KL in Cancer — soul seeks emotional security, home, and public connection. Karmic theme: nourishing others.",
+      "leo": "KL in Leo — soul seeks recognition, creativity, and self-expression. Karmic theme: ego vs. soul expression.",
+      "virgo": "KL in Virgo — soul seeks service, analysis, and practical skills. Karmic theme: discrimination and purification.",
+      "libra": "KL in Libra — soul seeks balance, partnership, and justice. Karmic theme: harmony through relationship.",
+      "scorpio": "KL in Scorpio — soul seeks transformation, hidden knowledge, and intensity. Karmic theme: death and rebirth of the ego.",
+      "sagittarius": "KL in Sagittarius — soul seeks wisdom, teaching, and higher truth. Karmic theme: dharma and spiritual teaching.",
+      "capricorn": "KL in Capricorn — soul seeks disciplined achievement and authority. Karmic theme: karma yoga through worldly action.",
+      "aquarius": "KL in Aquarius — soul seeks innovation, humanitarian service, and group consciousness. Karmic theme: serving collective evolution.",
+      "pisces": "KL in Pisces — soul seeks liberation, spiritual dissolution, and divine love. Karmic theme: moksha and transcendence."
+    },
+    "house_results_from_kl": {
+      "h1": {
+        "theme": "Soul nature, fundamental self at the deepest level",
+        "ketu": "Liberation-seeking soul. Primary purpose is moksha. Likely a highly evolved soul on final incarnation.",
+        "jupiter": "Dharmic soul. Born to teach, guide, and expand wisdom. Very auspicious.",
+        "sun": "Royal soul. Seeks authority and divine service.",
+        "saturn": "Karma-completing soul. Heavy responsibility but great eventual liberation."
+      },
+      "h2": {
+        "theme": "Soul-level speech, family values, and wealth channel",
+        "jupiter": "Wealthy through dharmic means. Eloquent and wise speech. Family is dharmic.",
+        "venus": "Wealth through arts and beauty. Charming, pleasing speech.",
+        "mercury": "Wealth through intelligence and trade. Clever, quick speech."
+      },
+      "h4": {
+        "theme": "Soul's relationship with mother, home, and emotional foundation",
+        "moon": "Very strong mother connection. Emotionally deep home life.",
+        "jupiter": "Dharmic home environment. Mother is spiritually elevated.",
+        "ketu": "Detached from home and mother. Spiritual home life or foreign residence."
+      },
+      "h5": {
+        "theme": "Poorvapunya — past life merit, intelligence, children",
+        "jupiter": "Highest past life merit. Born with divine grace and wisdom. Excellent children.",
+        "ketu": "Spiritual past life karma. Previous ascetic or yogi. Detached from children.",
+        "sun": "Past life served authority. Intelligence is strong and authoritative.",
+        "saturn": "Past life karma through service and discipline. Few children, but disciplined."
+      },
+      "h7": {
+        "theme": "Soul-level partnership — deepest marriage karma",
+        "venus": "Beautiful, artistic spouse. Love marriage. Harmonious partnership karma.",
+        "jupiter": "Dharmic, wise spouse. Marriage through dharmic channels.",
+        "saturn": "Karmic marriage. Older or disciplined spouse. Marriage serves karmic completion.",
+        "ketu": "Past life partner. Detached marriage or highly evolved spouse."
+      },
+      "h9": {
+        "theme": "Soul's relationship with dharma and the divine",
+        "jupiter": "Born to teach dharma. Highest spiritual fortune. Father as guru.",
+        "ketu": "Moksha-oriented dharma. Previous ascetic. Guru in past life.",
+        "sun": "Solar worship. Dharma through authority and leadership.",
+        "saturn": "Dharma through karma yoga and austerity."
+      },
+      "h12": {
+        "theme": "Moksha potential — spiritual liberation and transcendence",
+        "ketu": "Natural moksha karaka in moksha house. Liberation is primary soul purpose.",
+        "jupiter": "High moksha potential through wisdom and dharma.",
+        "saturn": "Liberation through karma yoga and service.",
+        "venus": "Liberation through bhakti — love and devotion to the divine.",
+        "sun": "Liberation through surrendering the ego to divine will."
+      }
+    },
+    "special_combinations": {
+      "ketu_in_h1_from_kl": "Most powerful moksha indicator. Soul has completed most karma and seeks liberation.",
+      "jupiter_in_h9_from_kl": "Dharmacharya — born to teach and guide. Greatest spiritual fortune.",
+      "saturn_in_h5_from_kl": "Heavy past karma to process. Discipline brings liberation.",
+      "venus_in_h12_from_kl": "Liberation through devotion and beauty. Bhakti yoga path.",
+      "sun_in_h10_from_kl": "Born to hold authority and serve. Career is dharmic mission."
+    }
+  }
+}

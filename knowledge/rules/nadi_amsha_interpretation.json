@@ -1,0 +1,83 @@
+{
+  "nadi_amsha_interpretation": {
+    "metadata": {
+      "division": 150,
+      "name": "Nadi Amsha",
+      "part_size_degrees": 0.2,
+      "part_size_arc_minutes": 12,
+      "total_parts_per_sign": 150,
+      "total_parts_zodiac": 1800,
+      "source": "Nadi Jyotish tradition, KP (Krishnamurti Paddhati)",
+      "birth_time_sensitivity": "1 minute error = ~0.17 degrees = ~0.85 amshas — very sensitive to accurate birth time"
+    },
+    "nadi_types": {
+      "adi": {
+        "amsha_range": "0-49 within each sign",
+        "meaning": "Beginning / Origin",
+        "quality": "Vata (air) — movement, initiation, communication",
+        "body_channel": "Ida Nadi (left, lunar, feminine)",
+        "life_themes": ["beginnings", "initiation", "movement", "communication", "travel"],
+        "personality": "Initiating, restless, communicative, changeable"
+      },
+      "madhya": {
+        "amsha_range": "50-99 within each sign",
+        "meaning": "Middle / Balance",
+        "quality": "Pitta (fire) — action, transformation, digestion",
+        "body_channel": "Pingala Nadi (right, solar, masculine)",
+        "life_themes": ["action", "transformation", "leadership", "digestion", "midpoints"],
+        "personality": "Active, transformative, leadership-oriented, intense"
+      },
+      "antya": {
+        "amsha_range": "100-149 within each sign",
+        "meaning": "End / Completion",
+        "quality": "Kapha (water/earth) — stability, completion, consolidation",
+        "body_channel": "Sushumna Nadi (central, balanced)",
+        "life_themes": ["completion", "consolidation", "stability", "endings", "moksha"],
+        "personality": "Stabilizing, completing, grounded, consolidating"
+      }
+    },
+    "lagna_nadi_amsha": {
+      "description": "Nadi Amsha of the Ascendant indicates the soul's fundamental nature",
+      "adi_lagna": "Soul here to initiate — pioneering, restless, communicative lifetime",
+      "madhya_lagna": "Soul here to transform — active, leadership, intense lifetime",
+      "antya_lagna": "Soul here to complete — consolidating, stabilizing, moksha-oriented lifetime"
+    },
+    "planet_nadi_amsha_signs": {
+      "description": "The sign each planet falls in within D-150 shows its most refined karmic quality",
+      "interpretation_principle": "Read the D-150 sign lord and its relationship to D-1 chart — the sublord reveals the finest operational level of each planet's energy",
+      "sun": "D-150 Sun sign = the soul's deepest ego-expression channel",
+      "moon": "D-150 Moon sign = the most refined emotional-karmic channel",
+      "mars": "D-150 Mars sign = the precise karma of action and assertion",
+      "mercury": "D-150 Mercury sign = the finest intellectual-communication karma",
+      "jupiter": "D-150 Jupiter sign = the deepest wisdom and dharma channel",
+      "venus": "D-150 Venus sign = the most refined relationship-beauty karma",
+      "saturn": "D-150 Saturn sign = the precise karmic debt and discipline channel",
+      "rahu": "D-150 Rahu sign = the exact foreign/unconventional karmic direction",
+      "ketu": "D-150 Ketu sign = the most precise past-life liberation channel"
+    },
+    "kp_sublord_connection": {
+      "description": "In KP system, Nadi Amsha is the foundation of sublord theory",
+      "how_it_works": "Each house cusp falls in a specific Nadi Amsha — the lord of that amsha is the 'sublord' of the cusp",
+      "sublord_rules": [
+        "If sublord of a house is significator of another house, those houses' themes merge",
+        "Marriage (7th house): if sublord of 7th is in 11th — marriage through friends/network",
+        "Career (10th house): if sublord of 10th is Saturn — disciplined, slow-building career",
+        "Birth time accuracy critical — each minute shifts the cusp sublords"
+      ]
+    },
+    "d150_vs_d60_comparison": {
+      "d60_shastiamsha": "60 parts per sign (0.5°) — karmic patterns from past lives (Parashari)",
+      "d150_nadi_amsha": "150 parts per sign (0.2°) — finest karmic resolution, KP sublords",
+      "when_to_use_d150": "For precise event timing when birth time is accurate to ±30 seconds",
+      "when_to_use_d60": "For broad karmic patterns when birth time is accurate to ±2 minutes"
+    },
+    "chart_reading_approach": {
+      "step_1": "Calculate D-150 position of all planets and Ascendant",
+      "step_2": "Identify which Nadi type (Adi/Madhya/Antya) each planet falls in",
+      "step_3": "Note the D-150 sign of each planet — its sublord quality",
+      "step_4": "Check if D-150 Lagna, D-1 Lagna, and D-9 Lagna are in same sign — triple alignment = powerful life theme",
+      "step_5": "Look for planets with same D-150 sign as Lagna — they operate at the soul level",
+      "step_6": "The D-150 Moon sign = the most refined emotional karma"
+    }
+  }
+}
