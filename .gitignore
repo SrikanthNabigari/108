@@ -73,6 +73,25 @@ data/
 # Ephemeris files (large)
 *.se1
 
+# Generated report output + customer data (never commit — PII + large binaries)
+docs/reports/
+docs/tmp/
+*.pdf
+
+# Research corpus (large reference material, not source)
+research/
+
+# UI reference screenshots (large binaries)
+docs/ui-references/Screenshot*
+docs/ui-references/Simulator*
+
+# Claude Code runtime
+.claude/scheduled_tasks.lock
+
+# Conversation exports / scratch
+*-this-session-is-being-continued-*.txt
+/test_*_demo.py
+
 # Secrets
 secrets/
 *.pem
