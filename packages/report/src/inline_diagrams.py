@@ -385,7 +385,7 @@ def vimshottari_wheel_svg(chart_data: dict[str, Any]) -> str:
     import math
     from datetime import datetime
 
-    _strip_tz = _strip_tz_local  # noqa: alias for in-function brevity
+    _strip_tz = _strip_tz_local  # alias for in-function brevity
     cur = chart_data["dasha"]["current"]
     md_seq = chart_data["dasha"].get("mahadasha_sequence", [])
     birth_dt = datetime.fromisoformat(chart_data["birth"]["datetime"].replace("Z", "+00:00"))
@@ -416,7 +416,7 @@ def vimshottari_wheel_svg(chart_data: dict[str, Any]) -> str:
     birth_md_end = _strip_tz(birth_md.get("end") or birth_md.get("end_date"))
     full_md_years = SEQ_DICT.get(birth_md_lord, 7)
     years_used_at_birth = full_md_years - ((birth_md_end - birth_dt).days / 365.25)
-    seq_idx = next((i for i, (l, _) in enumerate(SEQ) if l == birth_md_lord), 0)
+    seq_idx = next((i for i, (ld, _) in enumerate(SEQ) if ld == birth_md_lord), 0)
     seq_start_deg = sum(y for _, y in SEQ[:seq_idx]) * deg_per_year
     birth_angle = seq_start_deg + years_used_at_birth * deg_per_year
     elapsed_years = (now - birth_dt).days / 365.25
@@ -449,13 +449,13 @@ def vimshottari_wheel_svg(chart_data: dict[str, Any]) -> str:
         or (cur.get("sukshma") or {}).get("lord")
         or current_pd_lord
     )
-    current_pr_lord = (cur.get("prana") or {}).get("lord") or current_sd_lord
+    _current_pr_lord = (cur.get("prana") or {}).get("lord") or current_sd_lord
 
     # Rotate so current MD's mid-point sits at top (12 o'clock).
     # The reference customer's current MD wedge sits at the very top — that's
     # what gives the NOW radial its iconic vertical line.
     current_md_seq_idx = next(
-        (i for i, (l, _) in enumerate(SEQ) if l == cur["mahadasha"]["lord"]), 0
+        (i for i, (ld, _) in enumerate(SEQ) if ld == cur["mahadasha"]["lord"]), 0
     )
     current_md_start_deg = sum(y for _, y in SEQ[:current_md_seq_idx]) * deg_per_year
     current_md_yrs = SEQ_DICT.get(cur["mahadasha"]["lord"], 7)
@@ -502,7 +502,7 @@ def vimshottari_wheel_svg(chart_data: dict[str, Any]) -> str:
         if angle <= now_angle < angle + md_w:
             now_path[0] = (angle, angle + md_w, md_lord)
         # AD ring
-        md_seq_idx = next(i for i, (l, _) in enumerate(SEQ) if l == md_lord)
+        md_seq_idx = next(i for i, (ld, _) in enumerate(SEQ) if ld == md_lord)
         ad_order = [SEQ[(md_seq_idx + i) % 9] for i in range(9)]
         a = angle
         for ad_lord, ad_full_yrs in ad_order:
@@ -512,7 +512,7 @@ def vimshottari_wheel_svg(chart_data: dict[str, Any]) -> str:
             if a <= now_angle < a + ad_w:
                 now_path[1] = (a, a + ad_w, ad_lord)
             # PD ring
-            ad_seq_idx = next(i for i, (l, _) in enumerate(SEQ) if l == ad_lord)
+            ad_seq_idx = next(i for i, (ld, _) in enumerate(SEQ) if ld == ad_lord)
             pd_order = [SEQ[(ad_seq_idx + i) % 9] for i in range(9)]
             p = a
             for pd_lord, pd_full_yrs in pd_order:
@@ -522,7 +522,7 @@ def vimshottari_wheel_svg(chart_data: dict[str, Any]) -> str:
                 if p <= now_angle < p + pd_w:
                     now_path[2] = (p, p + pd_w, pd_lord)
                 # SD ring — full sunburst across whole wheel
-                pd_seq_idx = next(i for i, (l, _) in enumerate(SEQ) if l == pd_lord)
+                pd_seq_idx = next(i for i, (ld, _) in enumerate(SEQ) if ld == pd_lord)
                 sd_order = [SEQ[(pd_seq_idx + i) % 9] for i in range(9)]
                 s = p
                 for sd_lord, sd_full_yrs in sd_order:
@@ -532,7 +532,7 @@ def vimshottari_wheel_svg(chart_data: dict[str, Any]) -> str:
                     if s <= now_angle < s + sd_w:
                         now_path[3] = (s, s + sd_w, sd_lord)
                         # only compute Prana label for the wedge containing NOW
-                        sd_seq_idx = next(i for i, (l, _) in enumerate(SEQ) if l == sd_lord)
+                        sd_seq_idx = next(i for i, (ld, _) in enumerate(SEQ) if ld == sd_lord)
                         pr_order = [SEQ[(sd_seq_idx + i) % 9] for i in range(9)]
                         pr = s
                         for pr_lord, pr_full_yrs in pr_order:
@@ -641,7 +641,7 @@ def vimshottari_wheel_svg(chart_data: dict[str, Any]) -> str:
 
     md_start_dt = _strip_tz(cur["mahadasha"]["start_date"])
     md_end_dt = _strip_tz(cur["mahadasha"]["end_date"])
-    md_yrs_full = SEQ_DICT.get(current_md_lord, int(round((md_end_dt - md_start_dt).days / 365.25)))
+    md_yrs_full = SEQ_DICT.get(current_md_lord, round((md_end_dt - md_start_dt).days / 365.25))
     elapsed_in_md = (now - md_start_dt).days / 365.25
     md_start_str = md_start_dt.strftime("%d %b %Y").upper()
     md_end_str = md_end_dt.strftime("%d %b %Y").upper()
@@ -1138,7 +1138,7 @@ def nakshatra_rashi_wheel_svg(chart_data: dict[str, Any]) -> str:
         a = math.radians(p_lon - 90)
         # Stagger if a planet is within 4° of an already-placed one
         offset_r = 0
-        for ol, op, ox, oy in placed:
+        for ol, _op, _ox, _oy in placed:
             if abs(p_lon - ol) < 4 or abs(p_lon - ol) > 356:
                 offset_r += 12
         r = base_r - offset_r
@@ -1426,7 +1426,7 @@ def kaal_sarp_arc_diagram(
             f'font-family="Inter,sans-serif" font-size="8" fill="#888">{RASHI_SHORT[i]}</text>'
         )
     # Rahu / Ketu markers
-    for sign_idx, name, color, symbol in [
+    for sign_idx, _name, color, symbol in [
         (rahu_sign_idx, "Rahu", "#8b8d92", "☊"),
         (ketu_sign_idx, "Ketu", "#c8843f", "☋"),
     ]:
@@ -1534,10 +1534,7 @@ def mangal_dosha_diagram(mars_house_from_lagna: int) -> str:
 
 
 def _ordinal(n: int) -> str:
-    if 10 <= n % 100 <= 20:
-        suffix = "th"
-    else:
-        suffix = {1: "st", 2: "nd", 3: "rd"}.get(n % 10, "th")
+    suffix = "th" if 10 <= n % 100 <= 20 else {1: "st", 2: "nd", 3: "rd"}.get(n % 10, "th")
     return f"{n}{suffix}"
 
 

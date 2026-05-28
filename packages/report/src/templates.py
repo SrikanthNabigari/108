@@ -809,7 +809,7 @@ def section_chart_vitals(data: dict[str, Any], narrative: str | None = None) -> 
         convergence_diagram_svg,
     )
 
-    natal = data.get("natal_planets_dict", {})
+    _natal = data.get("natal_planets_dict", {})
     convergence_html = convergence_diagram_svg(data)
 
     # Planet table — sign, house, dignity flag

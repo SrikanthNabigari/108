@@ -804,7 +804,7 @@ OUTPUT: Markdown only. 700-900 words. No preamble.
 # ── DOMAIN DEEP-DIVE PROMPT BUILDERS ──
 
 
-def _domain_prompt(domain: str, title: str, lenses_block: str, data: dict[str, Any]) -> str:  # noqa: ARG001
+def _domain_prompt(domain: str, title: str, lenses_block: str, data: dict[str, Any]) -> str:
     knowledge = gather_for_section("answering_your_question", data)  # topic-aware
     natal = data["natal_planets_dict"]
     placements = "\n".join(f"  {p}: H{d['house']}" for p, d in natal.items())

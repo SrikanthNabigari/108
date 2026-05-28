@@ -29,6 +29,14 @@ dependencies = [
     "python-dotenv>=1.0.0",
     "alembic>=1.18.3",
     "psycopg2-binary>=2.9.11",
+    "pandas>=3.0.1",
+    "scipy>=1.17.0",
+    "chromadb>=1.0.0",
+    "sentence-transformers>=2.0.0",
+    "pymupdf>=1.27.2.3",
+    "weasyprint>=68.1",
+    "markdown-it-py>=4.0.0",
+    "supabase>=2.30.0",
 ]
 
 [project.optional-dependencies]
@@ -119,6 +127,11 @@ section-order = ["future", "standard-library", "third-party", "first-party", "lo
 
 [tool.ruff.lint.per-file-ignores]
 "gateway/**" = ["TCH", "ARG"]  # FastAPI needs runtime types; gateway has TODO stubs
+# Report package: section renderers share a uniform (data, narrative) signature
+# (some args unused by design — same rationale as gateway); Callable is used at
+# runtime in the SECTION_RENDERERS dict; diagram/voice modules intentionally use
+# mathematical/typographic unicode (× multiplication sign, – en-dash).
+"packages/report/**" = ["ARG", "TCH", "RUF001", "RUF002", "RUF003"]
 
 [tool.ruff.format]
 quote-style = "double"
