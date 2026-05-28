@@ -230,9 +230,37 @@ def generate_narratives_cc(chart: dict, stage: Path) -> tuple[dict[str, str], di
     return narratives, pull_quotes, "claude_code"
 
 
+def _pdf_page_count(path: Path) -> int | None:
+    try:
+        from pypdf import PdfReader
+
+        return len(PdfReader(str(path)).pages)
+    except Exception:
+        pass
+    try:
+        import re
+        import subprocess
+
+        out = subprocess.run(["pdfinfo", str(path)], capture_output=True, text=True, timeout=20)
+        m = re.search(r"^Pages:\s+(\d+)", out.stdout, re.MULTILINE)
+        return int(m.group(1)) if m else None
+    except Exception:
+        return None
+
+
 # ── main ─────────────────────────────────────────────────────────────────
 def main() -> None:
     arg = sys.argv[1] if len(sys.argv) > 1 else "--next"
+    if arg == "--list-paid":
+        rows = sb_req(
+            "GET",
+            "/rest/v1/los_orders?status=eq.paid&select=id,full_name,pack_id,email&order=paid_at.asc",
+        )
+        for o in rows or []:
+            print(f"{o['id']}\t{o['pack_id']}\t{o['full_name']}\t{o['email']}")
+        if not rows:
+            print("(no paid orders)", file=sys.stderr)
+        return
     order = next_paid_order() if arg == "--next" else get_order(arg)
     if not order:
         print("No paid order to process.")
@@ -297,13 +325,7 @@ def main() -> None:
     pdf = markdown_to_pdf(md, output_path=pdf_path, chart_data=chart)
     (out_dir / f"order_{oid}.md").write_text(md, encoding="utf-8")
 
-    page_count = None
-    try:
-        from pypdf import PdfReader
-
-        page_count = len(PdfReader(str(pdf_path)).pages)
-    except Exception:
-        pass
+    page_count = _pdf_page_count(pdf_path)
 
     print("  uploading to los-reports bucket …", file=sys.stderr)
     public_url, obj_path = upload_pdf(oid, pdf)
