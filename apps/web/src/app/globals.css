@@ -1,0 +1,51 @@
+:root {
+  --bg: #0b0b0d;
+  --ink: #e8e8ec;
+  --muted: #9b9ba1;
+  --gold: #d4c08c;
+  --gold-deep: #b8860b;
+  --card: #16161a;
+  --border: #2c2c33;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--bg); color: var(--ink); }
+body {
+  font-family: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--gold); text-decoration: none; }
+.serif { font-family: Georgia, "Cormorant Garamond", serif; }
+.wrap { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+.hero { text-align: center; padding: 80px 20px 48px; }
+.hero h1 {
+  font-family: Georgia, serif; font-size: 44px; color: var(--gold);
+  letter-spacing: 0.5px; margin-bottom: 14px;
+}
+.hero p { color: var(--muted); font-size: 18px; max-width: 560px; margin: 0 auto; }
+.btn {
+  display: inline-block; background: var(--gold-deep); color: #fff;
+  padding: 13px 30px; border-radius: 8px; font-weight: 600; border: none;
+  cursor: pointer; font-size: 16px; margin-top: 28px;
+}
+.btn:hover { filter: brightness(1.08); }
+.btn.secondary { background: transparent; border: 1px solid var(--border); color: var(--ink); }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin: 40px 0; }
+.pack {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 24px; display: flex; flex-direction: column;
+}
+.pack h3 { font-family: Georgia, serif; color: var(--gold); font-size: 22px; }
+.pack .price { font-size: 30px; font-weight: 700; margin: 12px 0; }
+.pack ul { list-style: none; color: var(--muted); font-size: 14px; flex: 1; }
+.pack li { padding: 4px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+.field { margin: 14px 0; }
+.field label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+.field input, .field select, .field textarea {
+  width: 100%; background: #0e0e12; border: 1px solid var(--border);
+  border-radius: 8px; padding: 11px 13px; color: var(--ink); font-size: 15px;
+}
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+footer { text-align: center; color: var(--muted); font-size: 13px; padding: 48px 20px; }
+.gateways { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 18px; }
+.gateways button { flex: 1; min-width: 140px; }
