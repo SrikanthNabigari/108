@@ -28,6 +28,7 @@ from packages.core.src import (  # noqa: E402
     PlanetPosition,
     Rashi,
 )
+from packages.core.src.bphs_enricher import enrich_response  # noqa: E402
 from packages.cosmos.src.divisional import (  # noqa: E402
     calculate_vimshopaka_bala,
     get_all_vimshopaka,
@@ -140,13 +141,17 @@ def detect_yogas(
                 }
             )
 
-        return {
+        result = {
             "lagna": lagna_rashi.lower(),
             "total_yogas_found": len(yogas),
             "yogas": yogas,
             "categories": _group_by_category(yogas),
             "success": True,
         }
+        yoga_names = [y.get("name", "") for y in yogas if y.get("is_present")]
+        return enrich_response(
+            "detect_yogas", result, {"yogas": yoga_names, "lagna_rashi": lagna_rashi}
+        )
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__, "success": False}
@@ -212,7 +217,7 @@ def detect_doshas(
                 }
             )
 
-        return {
+        result = {
             "lagna": lagna_rashi.lower(),
             "total_doshas_found": len(doshas),
             "doshas": doshas,
@@ -220,6 +225,10 @@ def detect_doshas(
             "has_kaal_sarp": any(d["id"] == "kaal_sarp_dosha" for d in doshas),
             "success": True,
         }
+        dosha_names = [d.get("name", "") for d in doshas if d.get("is_present")]
+        return enrich_response(
+            "detect_doshas", result, {"doshas": dosha_names, "lagna_rashi": lagna_rashi}
+        )
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__, "success": False}
@@ -304,7 +313,7 @@ def calculate_strength(
         # Get dignity status
         dignity = strength_calc.get_planet_dignity(planet_enum, rashi_enum)
 
-        return {
+        result = {
             "planet": planet_lower,
             "longitude": round(longitude, 4),
             "house": house,
@@ -317,6 +326,7 @@ def calculate_strength(
             "strength_rating": _get_strength_rating(total_strength),
             "success": True,
         }
+        return enrich_response("calculate_strength", result, {"planet": planet_lower})
 
     except ValueError as e:
         return {"error": str(e), "type": "ValueError", "success": False}
@@ -421,7 +431,7 @@ def ashtakavarga(planets: dict[str, dict[str, Any]], lagna_rashi: str) -> dict[s
             signs[i].capitalize(): result["sarvashtakavarga"][i] for i in range(12)
         }
 
-        return result
+        return enrich_response("ashtakavarga", result, {"lagna_rashi": lagna_rashi})
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__, "success": False}
@@ -461,11 +471,12 @@ def kundali_matching(
             girl_rashi=girl_rashi,
         )
         verdict = get_compatibility_verdict(result["total_score"])
-        return {
+        res = {
             **result,
             "verdict": verdict,
             "success": True,
         }
+        return enrich_response("kundali_matching", res)
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__, "success": False}
 
@@ -498,7 +509,8 @@ def combustion_check(
     """
     try:
         result = _check_combustion(planet, planet_longitude, sun_longitude, is_retrograde)
-        return {**result, "success": True}
+        res = {**result, "success": True}
+        return enrich_response("combustion_check", res, {"planet": planet.lower()})
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__, "success": False}
 
@@ -529,7 +541,8 @@ def retrograde_effects(
     """
     try:
         result = _get_retrograde_effects(planet, is_natal=is_natal, house=house)
-        return {**result, "success": True}
+        res = {**result, "success": True}
+        return enrich_response("retrograde_effects", res, {"planet": planet.lower()})
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__, "success": False}
 
@@ -563,7 +576,7 @@ def chara_karakas(
         chart = _build_chart_for_yoga(planets, lagna_rashi, moon_rashi, houses)
         karakas = calculate_chara_karakas(chart)
 
-        return {
+        result = {
             "karakas": [
                 {
                     "karaka": k.karaka.value,
@@ -576,6 +589,7 @@ def chara_karakas(
             "atmakaraka": karakas[0].planet.value if karakas else None,
             "success": True,
         }
+        return enrich_response("chara_karakas", result, {"lagna_rashi": lagna_rashi})
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__, "success": False}
@@ -604,12 +618,13 @@ def jaimini_aspects(rashi: str) -> dict[str, Any]:
         rashi_enum = Rashi(rashi.lower())
         aspected = get_jaimini_aspects(rashi_enum)
 
-        return {
+        result = {
             "from_rashi": rashi.lower(),
             "aspects": [r.value for r in aspected],
             "count": len(aspected),
             "success": True,
         }
+        return enrich_response("jaimini_aspects", result)
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__, "success": False}
@@ -644,7 +659,7 @@ def arudha_padas(
         chart = _build_chart_for_yoga(planets, lagna_rashi, moon_rashi, houses)
         padas = calculate_all_arudha_padas(chart)
 
-        return {
+        result = {
             "arudha_padas": [
                 {
                     "house": p.house_number,
@@ -657,6 +672,7 @@ def arudha_padas(
             ],
             "success": True,
         }
+        return enrich_response("arudha_padas", result, {"lagna_rashi": lagna_rashi})
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__, "success": False}
@@ -701,7 +717,7 @@ def chara_dasha(
         chart = _build_chart_for_yoga(planets, lagna_rashi, moon_rashi, houses)
         periods = calculate_chara_dasha(birth_dt, chart, years)
 
-        return {
+        result = {
             "system": "chara",
             "birth_datetime": birth_datetime,
             "lagna": lagna_rashi.lower(),
@@ -717,6 +733,7 @@ def chara_dasha(
             "total_periods": len(periods),
             "success": True,
         }
+        return enrich_response("chara_dasha", result, {"lagna_rashi": lagna_rashi})
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__, "success": False}
@@ -761,7 +778,7 @@ def prashna_analysis(
 
         result = _analyze_prashna(question, dt, latitude, longitude, cat)
 
-        return {
+        res = {
             "question": question,
             "datetime": datetime_iso,
             "category": category,
@@ -778,6 +795,7 @@ def prashna_analysis(
             },
             "success": True,
         }
+        return enrich_response("prashna_analysis", res)
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__, "success": False}
@@ -808,7 +826,8 @@ def vimshopaka_strength(
     """
     try:
         result = calculate_vimshopaka_bala(planet.lower(), longitude, scheme)
-        return {**result, "planet": planet.lower(), "success": True}
+        res = {**result, "planet": planet.lower(), "success": True}
+        return enrich_response("vimshopaka_strength", res, {"planet": planet.lower()})
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__, "success": False}
@@ -847,7 +866,7 @@ def all_vimshopaka(
             reverse=True,
         )
 
-        return {
+        res = {
             "scheme": scheme,
             "planets": result,
             "ranking": [
@@ -855,6 +874,7 @@ def all_vimshopaka(
             ],
             "success": True,
         }
+        return enrich_response("all_vimshopaka", res)
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__, "success": False}
@@ -893,7 +913,10 @@ def bhava_bala(
     try:
         chart = _build_chart_for_yoga(planets, lagna_rashi, moon_rashi, houses)
         result = strength_calc.calculate_bhava_bala(house_number, chart)
-        return {**result, "success": True}
+        res = {**result, "success": True}
+        return enrich_response(
+            "bhava_bala", res, {"house": house_number, "lagna_rashi": lagna_rashi}
+        )
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__, "success": False}
@@ -932,7 +955,7 @@ def all_bhava_balas(
         bhava_dict = {str(k): v for k, v in result.items()}
         ranked = sorted(result.items(), key=lambda x: x[1].get("total", 0), reverse=True)
 
-        return {
+        res = {
             "houses": bhava_dict,
             "ranking": [
                 {
@@ -944,6 +967,7 @@ def all_bhava_balas(
             ],
             "success": True,
         }
+        return enrich_response("all_bhava_balas", res, {"lagna_rashi": lagna_rashi})
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__, "success": False}
@@ -979,7 +1003,8 @@ def upapada_analysis(
     try:
         chart = _build_chart_for_yoga(planets, lagna_rashi, moon_rashi, houses)
         result = interpret_upapada(chart)
-        return {**result, "success": True}
+        res = {**result, "success": True}
+        return enrich_response("upapada_analysis", res, {"lagna_rashi": lagna_rashi})
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__, "success": False}
@@ -1044,7 +1069,7 @@ def check_yoga_cancellations(
         cancelled_count = sum(1 for r in results if r.get("cancellation", {}).get("cancelled"))
         partial_count = sum(1 for r in results if r.get("cancellation", {}).get("partial"))
 
-        return {
+        res = {
             "total_yogas": len(results),
             "cancelled_count": cancelled_count,
             "partial_count": partial_count,
@@ -1052,6 +1077,10 @@ def check_yoga_cancellations(
             "yogas": results,
             "success": True,
         }
+        yoga_names = [y.get("name", "") for y in yogas]
+        return enrich_response(
+            "check_yoga_cancellations", res, {"yogas": yoga_names, "lagna_rashi": lagna_rashi}
+        )
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__, "success": False}
@@ -1094,12 +1123,15 @@ def detect_neecha_bhanga_yoga(
             planet_lower, planet_data, planets, lagna_rashi.lower(), d9_positions
         )
 
-        return {
+        res = {
             "planet": planet_lower,
             "lagna": lagna_rashi.lower(),
             **result,
             "success": True,
         }
+        return enrich_response(
+            "detect_neecha_bhanga_yoga", res, {"planet": planet_lower, "lagna_rashi": lagna_rashi}
+        )
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__, "success": False}
@@ -1150,11 +1182,12 @@ def detect_planetary_wars_tool(
                 war["affected_houses"] = effects.get("affected_houses", [])
                 war["remedial_notes"] = effects.get("remedial_notes", "")
 
-        return {
+        res = {
             "wars_found": len(wars),
             "wars": wars,
             "success": True,
         }
+        return enrich_response("detect_planetary_wars_tool", res)
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__, "success": False}
@@ -1196,12 +1229,13 @@ def bhava_chalit_chart(
         result = _calc_bhava_chalit(planets, cusps, ascendant)
         shifted = _get_shifted(result)
 
-        return {
+        res = {
             "planets": result,
             "shifted_planets": shifted,
             "shift_count": len(shifted),
             "success": True,
         }
+        return enrich_response("bhava_chalit_chart", res)
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__, "success": False}
@@ -1249,7 +1283,11 @@ def recommend_chart_remedies(
             lagna_rashi=lagna_rashi.lower() if lagna_rashi else "",
         )
 
-        return {**result, "success": True}
+        res = {**result, "success": True}
+        ctx = {"lagna_rashi": lagna_rashi.lower() if lagna_rashi else ""}
+        if current_dasha:
+            ctx["mahadasha_lord"] = current_dasha.get("mahadasha_lord", "")
+        return enrich_response("recommend_chart_remedies", res, ctx)
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__, "success": False}
@@ -1350,7 +1388,7 @@ def navamsha_spouse_analysis(
                     )
             result["d9_7th_house_planets"] = planet_influences
 
-        return result
+        return enrich_response("navamsha_spouse_analysis", result)
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__, "success": False}
@@ -1409,7 +1447,8 @@ def synastry_analysis(
             native_moon_nakshatra=native_moon_nakshatra,
             partner_moon_nakshatra=partner_moon_nakshatra,
         )
-        return {"success": True, **result}
+        res = {"success": True, **result}
+        return enrich_response("synastry_analysis", res)
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__, "success": False}
 
@@ -1452,7 +1491,8 @@ def gem_recommendation(
             current_dasha=current_dasha,
             active_doshas=active_doshas,
         )
-        return {"success": True, **result}
+        res = {"success": True, **result}
+        return enrich_response("gem_recommendation", res, {"lagna_rashi": lagna_rashi})
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__, "success": False}
 
@@ -1492,7 +1532,8 @@ def atmakaraka_analysis(
 
         chart = _build_chart_for_yoga(planets, lagna_rashi, moon_rashi, houses)
         result = get_atmakaraka_analysis(chart)
-        return {"success": True, **result}
+        res = {"success": True, **result}
+        return enrich_response("atmakaraka_analysis", res, {"lagna_rashi": lagna_rashi})
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__, "success": False}
 
@@ -1530,7 +1571,12 @@ def check_gem_compatibility_tool(
             lagna_rashi=lagna_rashi,
             planets=planets,
         )
-        return {"success": True, **result}
+        res = {"success": True, **result}
+        return enrich_response(
+            "check_gem_compatibility_tool",
+            res,
+            {"planet": gem_planet.lower(), "lagna_rashi": lagna_rashi},
+        )
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__, "success": False}
 
@@ -1799,6 +1845,162 @@ async def kp_prediction(planets: dict, cusps: list, query_type: str) -> dict:
 
     cusps_float = [float(c) for c in cusps]
     return get_kp_prediction(planets, cusps_float, query_type)
+
+
+@mcp.tool()
+async def chandra_kala_nadi_reading(
+    natal_planets: dict,
+    current_jupiter_sign: str,
+    moon_rashi: str | None = None,
+) -> dict:
+    """
+    Generate a Chandra Kala Nadi (CKN) reading for a birth chart.
+
+    Based on Deva Keralam / Chandra Kala Nadi by Achyuta.
+    Reads planet combinations in natal signs and predicts life events
+    using Jupiter's transit as the timing trigger.
+
+    Args:
+        natal_planets: Birth chart positions {planet: {longitude, rashi, house}}
+        current_jupiter_sign: Current Jupiter transit sign (e.g. "gemini")
+        moon_rashi: Natal Moon sign for Chandra Kala house counting (e.g. "aquarius")
+
+    Returns:
+        CKN reading with conjunctions, active Jupiter activations,
+        single planet readings, and 12-year Jupiter timeline
+    """
+    from packages.self.src.chandra_kala_nadi import get_ckn_reading
+
+    return get_ckn_reading(natal_planets, current_jupiter_sign, moon_rashi)
+
+
+@mcp.tool()
+async def nadi_amsha_chart(
+    natal_planets: dict,
+    lagna_longitude: float | None = None,
+) -> dict:
+    """
+    Calculate Nadi Amsha (D-150) divisional chart.
+
+    Divides each sign into 150 parts of 0.2° (12 arc minutes).
+    Used in Nadi Jyotish for precise karmic analysis and in KP
+    (Krishnamurti Paddhati) as the sublord foundation.
+
+    Requires birth time accurate to ±30 seconds for reliable results.
+
+    Args:
+        natal_planets: Birth chart positions {planet: {longitude, ...}}
+        lagna_longitude: Ascendant sidereal longitude (optional, for D-150 lagna)
+
+    Returns:
+        D-150 chart with planet positions, nadi types (Adi/Madhya/Antya),
+        dominant nadi, moon sublord analysis, and birth time warning
+    """
+    from packages.self.src.nadi_amsha_interpreter import get_nadi_amsha_chart
+
+    return get_nadi_amsha_chart(natal_planets, lagna_longitude)
+
+
+@mcp.tool()
+def sensitive_points(
+    natal_planets: dict,
+    lagna_rashi: str,
+    lagna_longitude: float | None = None,
+) -> dict:
+    """
+    Calculate classical Jyotish sensitive points (Sphutas) for a birth chart.
+
+    Computes three key sensitive degrees:
+    - Bhrigu Bindu: Rahu-Moon midpoint — the most sensitive timing degree.
+      Any planet transiting within 1° triggers major life events.
+    - Indu Lagna: Wealth sensitive point (BPHS Ch.35). Shows when and through
+      what channel wealth flows.
+    - Sree Lagna: Prosperity indicator (Moon+Venus). The degree of abundance.
+
+    Args:
+        natal_planets: Birth chart {planet: {longitude, rashi, house}}
+        lagna_rashi: Ascendant sign (e.g. "libra")
+        lagna_longitude: Ascendant longitude in degrees (optional, for house calculation)
+
+    Returns:
+        All three sensitive points with interpretations, natal conjunctions,
+        and activation summary
+    """
+    from packages.self.src.sensitive_points import get_all_sensitive_points
+
+    return get_all_sensitive_points(natal_planets, lagna_rashi, lagna_longitude)
+
+
+@mcp.tool()
+def sudarshana_chakra(
+    natal_planets: dict,
+    lagna_rashi: str,
+    moon_rashi: str,
+    sun_rashi: str,
+) -> dict:
+    """
+    Sudarshana Chakra — triple-wheel simultaneous chart analysis.
+
+    Parasara's rule: verify every theme from 3 simultaneous ascendants:
+    Lagna (body), Chandra/Moon (mind), Surya/Sun (soul).
+    3/3=certain, 2/3=likely, 1/3=possible, 0/3=dormant.
+
+    Args:
+        natal_planets: {planet: {rashi, longitude, house}}
+        lagna_rashi: Ascendant sign (e.g. "libra")
+        moon_rashi: Moon sign (e.g. "aquarius")
+        sun_rashi: Sun sign (e.g. "sagittarius")
+
+    Returns:
+        All 12 house analyses from 3 wheels + life area scores
+    """
+    from packages.self.src.sudarshana_chakra import get_sudarshana_chakra
+
+    return get_sudarshana_chakra(natal_planets, lagna_rashi, moon_rashi, sun_rashi)
+
+
+@mcp.tool()
+def karakamsha_analysis(
+    natal_planets: dict,
+    d9_planets: dict | None = None,
+) -> dict:
+    """
+    Karakamsha Lagna — soul-level karmic analysis from BPHS Chapter 35.
+
+    Atmakaraka in D-9 = Karakamsha Lagna. Houses from KL reveal soul karma:
+    H1=soul nature, H5=past life merit, H9=dharma, H12=moksha potential.
+
+    Args:
+        natal_planets: D-1 birth chart {planet: {longitude, rashi, house}}
+        d9_planets: D-9 navamsha chart (optional, computed if not provided)
+
+    Returns:
+        Atmakaraka, KL sign/lord, 12-house soul analysis, soul_summary
+    """
+    from packages.self.src.karakamsha import analyze_karakamsha
+
+    return analyze_karakamsha(natal_planets, d9_planets)
+
+
+@mcp.tool()
+def nakshatra_pada_analysis(
+    planets: dict,
+) -> dict:
+    """
+    Nakshatra Pada (108 divisions) analysis for all chart planets.
+
+    27 nakshatras x 4 padas = 108 total. Pada sign = (nak*4 + pada) % 12.
+    Detects vargottama (same sign D1+D9) and pushkara navamsha positions.
+
+    Args:
+        planets: {planet: {longitude, ...}} for all natal planets
+
+    Returns:
+        All planets' pada details + vargottama/pushkara highlights + chart summary
+    """
+    from packages.cosmos.src.nakshatras import get_chart_pada_summary
+
+    return get_chart_pada_summary(planets)
 
 
 # Main entry point for MCP server

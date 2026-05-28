@@ -572,6 +572,81 @@ TOOL_DEFINITIONS: list[dict[str, Any]] = [
             "required": ["query", "category"],
         },
     },
+    {
+        "name": "get_numerology",
+        "description": (
+            "Get the user's numerology profile including psychic number, destiny number, "
+            "personal year/month/day cycles, Lo Shu grid analysis, and ruling planet mappings. "
+            "Use when the user asks about their numerology, lucky numbers, name analysis, "
+            "or numerological compatibility."
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Name to analyze (optional, for name number calculation)",
+                },
+            },
+            "required": [],
+        },
+    },
+    {
+        "name": "get_chara_dasha_overlay",
+        "description": (
+            "Jaimini Chara Dasha + transit cross-analysis. Returns current "
+            "Chara Dasha sign + lord, where the dasha sign-lord is transiting "
+            "(bhava-from-dasha-sign themes), planets directly in the dasha sign, "
+            "Jaimini aspects (5/8/11 from dasha sign) currently active, and a "
+            "full padakrama. Use for long-arc / life-chapter questions where "
+            "Vimshottari feels too granular — career direction, dharma path, "
+            "decade-scale themes."
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {},
+            "required": [],
+        },
+    },
+    {
+        "name": "get_tithi_pravesha",
+        "description": (
+            "Cast a Tithi Pravesha annual chart — the lunar-anniversary chart "
+            "for the user's current lunar year. Shows year ruler (planet that "
+            "governs the year), TP chart planets, and how natal house placements "
+            "shift in the TP chart (Jupiter moving from H12 to H9 = pilgrimage "
+            "year, etc.). Use for 'what will this year bring' / 'theme of this "
+            "year' / 'annual outlook' questions. Lunar-year analogue of Varshaphal."
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "year_offset": {
+                    "type": "integer",
+                    "description": "Lunar year # since birth (default = native's current age)",
+                },
+            },
+            "required": [],
+        },
+    },
+    {
+        "name": "get_ambient_signals",
+        "description": (
+            "Get the slow-burn classical timing picture: where Jupiter, Saturn, "
+            "Rahu, Ketu are sitting now (months-long influence), where the current "
+            "MD/AD/PD lords are transiting, Sade Sati phase, Kantaka/Ashtama Shani, "
+            "Janma Moon nakshatra, and an aggregated list of life domains that are "
+            "ACTIVE right now per BPHS bhava + lordship logic. "
+            "USE THIS WHENEVER the user asks 'will I X', 'when will X happen', "
+            "'how is my X', 'what's coming for X' — it captures persistent themes "
+            "(e.g. Jupiter in 9th = pilgrimage year) that get_upcoming_events misses."
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {},
+            "required": [],
+        },
+    },
 ]
 
 
@@ -657,6 +732,14 @@ def execute_tool(
             return _exec_jaimini_analysis(birth_context)
         elif tool_name == "lookup_knowledge":
             return _exec_lookup_knowledge(tool_input)
+        elif tool_name == "get_numerology":
+            return _exec_numerology(tool_input, birth_context)
+        elif tool_name == "get_ambient_signals":
+            return _exec_ambient_signals(birth_context)
+        elif tool_name == "get_tithi_pravesha":
+            return _exec_tithi_pravesha(tool_input, birth_context)
+        elif tool_name == "get_chara_dasha_overlay":
+            return _exec_chara_dasha_overlay(birth_context)
         else:
             return {"success": False, "error": f"Unknown tool: {tool_name}"}
     except Exception as e:
@@ -807,13 +890,21 @@ def _exec_compatibility(inp: dict[str, Any], ctx: dict[str, Any]) -> dict[str, A
         birth_dt = datetime.fromisoformat(birth_dt)
 
     partner_dt = datetime.fromisoformat(inp["partner_birth_datetime"])
+    # Accept both partner_lat/partner_lon (form-style) and partner_latitude/longitude (verbose)
+    p_lat = inp.get("partner_lat", inp.get("partner_latitude"))
+    p_lon = inp.get("partner_lon", inp.get("partner_longitude"))
+    if p_lat is None or p_lon is None:
+        return {
+            "success": False,
+            "error": "partner_lat and partner_lon (or _latitude/_longitude) required",
+        }
     return tools.get_synastry_report(
         native_birth_dt=birth_dt,
         native_lat=ctx["birth_lat"],
         native_lon=ctx["birth_lon"],
         partner_birth_dt=partner_dt,
-        partner_lat=inp["partner_latitude"],
-        partner_lon=inp["partner_longitude"],
+        partner_lat=float(p_lat),
+        partner_lon=float(p_lon),
     )
 
 
@@ -849,6 +940,93 @@ def _exec_upcoming_events(inp: dict[str, Any], ctx: dict[str, Any]) -> dict[str,
         days_ahead=days,
         birth_datetime=ctx.get("birth_datetime"),
         moon_longitude=ctx.get("moon_longitude"),
+    )
+
+
+def _exec_ambient_signals(ctx: dict[str, Any]) -> dict[str, Any]:
+    from packages.context.src.transit_tracker import get_ambient_signals
+
+    return get_ambient_signals(
+        natal_planets=ctx.get("natal_planets", {}),
+        lagna_rashi=ctx.get("lagna_rashi", "aries"),
+        moon_longitude=ctx.get("moon_longitude", 0.0),
+        birth_datetime=ctx.get("birth_datetime"),
+    )
+
+
+def _exec_tithi_pravesha(inp: dict[str, Any], ctx: dict[str, Any]) -> dict[str, Any]:
+    from packages.context.src.tithi_pravesha import (
+        cast_tithi_pravesha_chart,
+        interpret_tithi_pravesha,
+    )
+
+    birth_iso = ctx.get("birth_datetime")
+    if not birth_iso:
+        return {"success": False, "error": "Birth datetime required for Tithi Pravesha"}
+
+    birth_dt = datetime.fromisoformat(birth_iso)
+    natal = ctx.get("natal_planets", {}) or {}
+    natal_sun = (
+        float(natal.get("sun", {}).get("longitude", 0.0))
+        if isinstance(natal.get("sun"), dict)
+        else 0.0
+    )
+    natal_moon = float(ctx.get("moon_longitude") or natal.get("moon", {}).get("longitude", 0.0))
+
+    # Default offset = native's current lunar age
+    if inp.get("year_offset"):
+        year_offset = int(inp["year_offset"])
+    else:
+        delta_days = (datetime.now(tz=birth_dt.tzinfo) - birth_dt).days
+        year_offset = max(1, int(delta_days / 354.36707))
+
+    tp = cast_tithi_pravesha_chart(
+        birth_dt,
+        natal_sun,
+        natal_moon,
+        target_year_offset=year_offset,
+        location_lat=ctx.get("birth_lat"),
+        location_lon=ctx.get("birth_lon"),
+    )
+
+    # Add interpretation
+    lagna_rashi_str = (ctx.get("lagna_rashi") or "aries").lower()
+    rashi_names = [
+        "aries",
+        "taurus",
+        "gemini",
+        "cancer",
+        "leo",
+        "virgo",
+        "libra",
+        "scorpio",
+        "sagittarius",
+        "capricorn",
+        "aquarius",
+        "pisces",
+    ]
+    lagna_idx = rashi_names.index(lagna_rashi_str) if lagna_rashi_str in rashi_names else 0
+    if natal:
+        tp["interpretation"] = interpret_tithi_pravesha(tp, natal, lagna_idx)
+    return tp
+
+
+def _exec_chara_dasha_overlay(ctx: dict[str, Any]) -> dict[str, Any]:
+    from packages.context.src.chara_dasha_transit import get_chara_dasha_overlay_from_raw
+
+    birth_iso = ctx.get("birth_datetime")
+    if not birth_iso:
+        return {"success": False, "error": "Birth datetime required"}
+    birth_dt = datetime.fromisoformat(birth_iso)
+
+    return get_chara_dasha_overlay_from_raw(
+        birth_datetime=birth_dt,
+        birth_lat=ctx.get("birth_lat", 0.0),
+        birth_lon=ctx.get("birth_lon", 0.0),
+        natal_planets=ctx.get("natal_planets", {}),
+        lagna_rashi=ctx.get("lagna_rashi", "aries"),
+        moon_longitude=ctx.get("moon_longitude", 0.0),
+        moon_rashi=ctx.get("moon_rashi"),
     )
 
 
@@ -929,10 +1107,11 @@ def _exec_correlate_event(inp: dict[str, Any], ctx: dict[str, Any]) -> dict[str,
     from packages.guide.src.tools import get_tools
 
     tools = get_tools()
+    # event_type, event_description, and description are all optional with sensible defaults
     return tools.correlate_life_event(
-        event_date=inp["event_date"],
-        event_type=inp["event_type"],
-        event_description=inp["description"],
+        event_date=inp.get("event_date", ""),
+        event_type=inp.get("event_type", "general"),
+        event_description=inp.get("description", inp.get("event_description", "")),
         birth_datetime=ctx["birth_datetime"]
         if isinstance(ctx["birth_datetime"], str)
         else ctx["birth_datetime"].isoformat(),
@@ -972,8 +1151,32 @@ def _exec_divisional_chart(inp: dict[str, Any], ctx: dict[str, Any]) -> dict[str
     from packages.guide.src.tools import get_tools
 
     tools = get_tools()
-    chart_num = inp.get("chart_number", 9)
-    return tools.get_divisional_charts(ctx.get("natal_planets", {}), charts=[chart_num])
+    # Accept either chart_number (int) or chart_type (string like "navamsha")
+    chart_num = inp.get("chart_number")
+    if chart_num is None:
+        name_to_num = {
+            "rashi": 1,
+            "hora": 2,
+            "drekkana": 3,
+            "chaturthamsha": 4,
+            "saptamsha": 7,
+            "navamsha": 9,
+            "dashamsha": 10,
+            "dwadashamsha": 12,
+            "shodashamsha": 16,
+            "vimshamsha": 20,
+            "chaturvimshamsha": 24,
+            "siddhamsha": 24,
+            "bhamsha": 27,
+            "trimshamsha": 30,
+            "khavedamsha": 40,
+            "akshavedamsha": 45,
+            "shashtiamsha": 60,
+            "shashtyamsha": 60,
+        }
+        chart_type = (inp.get("chart_type") or "navamsha").lower()
+        chart_num = name_to_num.get(chart_type, 9)
+    return tools.get_divisional_charts(ctx.get("natal_planets", {}), charts=[int(chart_num)])
 
 
 def _exec_yoga_cancellation(ctx: dict[str, Any]) -> dict[str, Any]:
@@ -1061,19 +1264,57 @@ def _exec_kp_prediction(inp: dict[str, Any], ctx: dict[str, Any]) -> dict[str, A
     birth_dt = ctx["birth_datetime"]
     if isinstance(birth_dt, str):
         birth_dt = datetime.fromisoformat(birth_dt)
+    # Accept query_type or question_type or topic; valid KP categories include
+    # 'career','marriage','children','wealth','health','education','travel_short',
+    # 'travel_foreign','property','legal','spiritual'
+    qt = inp.get("query_type") or inp.get("question_type") or inp.get("topic") or "career"
     return tools.get_kp_analysis(
         birth_dt,
         ctx["birth_lat"],
         ctx["birth_lon"],
-        query_type=inp.get("question_type", "career"),
+        query_type=qt,
     )
 
 
 def _exec_prashna(inp: dict[str, Any], ctx: dict[str, Any]) -> dict[str, Any]:
+    from packages.core.src.constants import PrashnaCategory
     from packages.self.src.prashna import analyze_prashna
 
-    category = inp.get("category", "general")
-    question = inp.get("question", "")
+    # Map common words → enum value. "general" not a valid PrashnaCategory, so
+    # we auto-classify from question keywords or fall back to CAREER.
+    category_str = (inp.get("category") or "").lower()
+    question = inp.get("question", "") or ""
+    q_lower = question.lower()
+    if not category_str or category_str == "general":
+        # Auto-classify based on question keywords
+        if any(w in q_lower for w in ["marry", "marriage", "spouse", "wedding", "wife", "husband"]):
+            category_str = "marriage"
+        elif any(w in q_lower for w in ["health", "illness", "sick", "disease", "body"]):
+            category_str = "health"
+        elif any(w in q_lower for w in ["job", "career", "promotion", "work", "business"]):
+            category_str = "career"
+        elif any(w in q_lower for w in ["travel", "trip", "journey", "abroad", "foreign"]):
+            category_str = "travel"
+        elif any(w in q_lower for w in ["money", "wealth", "rich", "income"]):
+            category_str = "wealth"
+        elif any(w in q_lower for w in ["lost", "stolen", "missing"]):
+            category_str = "lost_objects"
+        elif any(w in q_lower for w in ["legal", "court", "lawsuit", "case"]):
+            category_str = "legal"
+        elif any(w in q_lower for w in ["god", "spiritual", "moksha", "meditation"]):
+            category_str = "spiritual"
+        elif any(w in q_lower for w in ["child", "children", "baby", "pregnancy"]):
+            category_str = "children"
+        elif any(w in q_lower for w in ["study", "education", "exam", "school", "college"]):
+            category_str = "education"
+        else:
+            category_str = "career"  # safe default
+
+    try:
+        category = PrashnaCategory(category_str)
+    except ValueError:
+        category = PrashnaCategory.CAREER
+
     now = datetime.utcnow()
 
     result = analyze_prashna(
@@ -1085,10 +1326,10 @@ def _exec_prashna(inp: dict[str, Any], ctx: dict[str, Any]) -> dict[str, Any]:
     )
     # Convert pydantic model or dict
     if hasattr(result, "model_dump"):
-        return {**result.model_dump(), "success": True}
+        return {**result.model_dump(), "category": category.value, "success": True}
     elif isinstance(result, dict):
-        return {**result, "success": True}
-    return {"result": str(result), "success": True}
+        return {**result, "category": category.value, "success": True}
+    return {"result": str(result), "category": category.value, "success": True}
 
 
 def _exec_ashtakavarga(ctx: dict[str, Any]) -> dict[str, Any]:
@@ -1134,21 +1375,35 @@ def _exec_alternative_dasha(inp: dict[str, Any], ctx: dict[str, Any]) -> dict[st
     if isinstance(birth_dt, str):
         birth_dt = datetime.fromisoformat(birth_dt)
 
-    moon_lon = ctx.get("moon_longitude", 0)
-    # Calculate nakshatra index and degree
-    nak_idx = int((moon_lon * 27) / 360) + 1
-    degree_in_nak = (moon_lon % (360 / 27)) * (13.333 / (360 / 27))
+    moon_lon = float(ctx.get("moon_longitude", 0))
+    # Nakshatra is 13°20' wide. 27 nakshatras across 360°.
+    nak_span = 360.0 / 27.0  # 13.333...
+    nak_idx = int(moon_lon // nak_span) + 1  # 1..27
+    if nak_idx > 27:
+        nak_idx = 27
+    degree_in_nak = moon_lon % nak_span  # 0..13.333
+    pada = int(degree_in_nak / (nak_span / 4)) + 1  # 1..4
+    if pada > 4:
+        pada = 4
 
     if system == "yogini":
         from packages.context.src.yogini_dasha import get_current_yogini_dasha
 
-        result = get_current_yogini_dasha(nak_idx, degree_in_nak, birth_dt)
-        return {**result, "system": "yogini", "success": True}
+        # Signature: (birth_dt, nakshatra_num, pada, degree_in_nakshatra, query_dt)
+        try:
+            result = get_current_yogini_dasha(birth_dt, nak_idx, pada, degree_in_nak)
+            return {**result, "system": "yogini", "success": True}
+        except Exception as e:
+            return {"success": False, "error": f"yogini dasha failed: {e}"}
     elif system == "ashtottari":
         from packages.context.src.ashtottari_dasha import get_current_ashtottari
 
-        result = get_current_ashtottari(nak_idx, degree_in_nak, birth_dt)
-        return {**result, "system": "ashtottari", "success": True}
+        # Signature: (birth_datetime, moon_nakshatra, degree_in_nakshatra, query_datetime)
+        try:
+            result = get_current_ashtottari(birth_dt, nak_idx, degree_in_nak)
+            return {**result, "system": "ashtottari", "success": True}
+        except Exception as e:
+            return {"success": False, "error": f"ashtottari dasha failed: {e}"}
     elif system == "narayana":
         from packages.guide.src.tools import get_tools
 
@@ -1273,6 +1528,36 @@ def _exec_lookup_knowledge(inp: dict[str, Any]) -> dict[str, Any]:
         "result_count": len(results),
         "success": True,
     }
+
+
+def _exec_numerology(inp: dict[str, Any], ctx: dict[str, Any]) -> dict[str, Any]:
+    """Execute numerology profile calculation."""
+    from packages.self.src.numerology import (
+        calculate_full_profile,
+        cross_reference_jyotish,
+    )
+
+    birth_dt = ctx["birth_datetime"]
+    if isinstance(birth_dt, str):
+        birth_dt = datetime.fromisoformat(birth_dt)
+    birth_date = birth_dt.date() if isinstance(birth_dt, datetime) else birth_dt
+
+    name = inp.get("name")
+    profile = calculate_full_profile(birth_date, name=name)
+    result = profile.model_dump()
+
+    # Add Jyotish cross-reference if natal planets available
+    natal_planets = ctx.get("natal_planets", {})
+    if natal_planets:
+        jyotish_ref = cross_reference_jyotish(
+            profile.psychic_number,
+            profile.destiny_number,
+            birth_chart_planets=natal_planets,
+        )
+        result["jyotish_cross_reference"] = jyotish_ref
+
+    result["success"] = True
+    return result
 
 
 def _search_knowledge(data: Any, query: str) -> list[dict[str, Any]]:

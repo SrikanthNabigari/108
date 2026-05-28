@@ -53,6 +53,12 @@ from .house_activation import (
     get_house_activations,
     get_transit_snapshot,
 )
+from .kalachakra_dasha import (
+    get_current_kalachakra_dasha,
+    get_kalachakra_antardasha,
+    get_kalachakra_dasha_periods,
+    get_kalachakra_effects,
+)
 from .monthly_forecast import get_monthly_forecast
 from .muhurta import (
     ACTIVITY_RULES,
@@ -210,6 +216,7 @@ __all__ = [
     "get_choghadiya_at_time",
     "get_current_ashtottari",
     "get_current_dasha",
+    "get_current_kalachakra_dasha",
     "get_current_narayana_dasha",
     "get_current_progressions",
     "get_current_varshaphal",
@@ -226,6 +233,9 @@ __all__ = [
     "get_gochara",
     "get_hora_lord",
     "get_house_activations",
+    "get_kalachakra_antardasha",
+    "get_kalachakra_dasha_periods",
+    "get_kalachakra_effects",
     "get_mahadasha_sequence",
     "get_marana_kaal",
     "get_monthly_forecast",

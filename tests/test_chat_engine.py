@@ -186,7 +186,7 @@ class TestChatEngineInit:
         engine = ChatEngine(api_key="test-key")
         assert engine.rules is not None
         assert "identity" in engine.rules
-        assert len(engine.tool_defs) == 29
+        assert len(engine.tool_defs) == 33
         assert engine.model == DEFAULT_MODEL
 
     @patch("packages.guide.src.chat_engine.anthropic.Anthropic")
@@ -427,7 +427,7 @@ class TestChatEngineChat:
 class TestToolDefinitionsIntegration:
     def test_definitions_count(self):
         defs = get_tool_definitions()
-        assert len(defs) == 29
+        assert len(defs) == 33
 
     def test_all_definitions_have_input_schema(self):
         for d in get_tool_definitions():

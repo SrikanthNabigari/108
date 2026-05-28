@@ -17,6 +17,7 @@ from gateway.models import AccessLevel, UserContext
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from packages.core.src.knowledge_loader import (
+    get_divisional_interpretation,
     get_planet_in_house_interpretations,
     get_planet_in_sign_interpretations,
     load_definition,
@@ -343,7 +344,7 @@ async def get_divisional(
     """
     try:
         # Validate division number
-        valid_divisions = [2, 3, 7, 9, 10, 12, 16, 20, 24, 27, 30, 40, 45, 60]
+        valid_divisions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 16, 20, 24, 27, 30, 40, 45, 60]
         if division not in valid_divisions:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
@@ -387,28 +388,67 @@ async def get_divisional(
         # Calculate divisional chart
         divisional = get_divisional_chart(planets_dict, division)
 
-        # Build response
-        div_planets = []
-        for planet_name, div_data in divisional.items():
-            rashi_num = int(div_data.get("rashi", 0))
-            rashi_name = RASHI_NAMES[rashi_num - 1] if 1 <= rashi_num <= 12 else "Unknown"
+        # Build response — iterate positions, not the top-level chart dict
+        # DivisionalPosition.rashi is 0-indexed (0=Aries..11=Pisces)
+        # Load divisional interpretations
+        div_knowledge = get_divisional_interpretation()
+        _DIV_KEYS = {
+            2: "d2_hora",
+            3: "d3_drekkana",
+            4: "d4_chaturthamsha",
+            7: "d7_saptamsha",
+            9: "d9_navamsha",
+            10: "d10_dashamsha",
+            12: "d12_dwadashamsha",
+            16: "d16_shodashamsha",
+            20: "d20_vimshamsha",
+            24: "d24_chaturvimshamsha",
+            27: "d27_nakshatramsha",
+            30: "d30_trimshamsha",
+            60: "d60_shashtiamsha",
+        }
+        div_section = div_knowledge.get(_DIV_KEYS.get(division, ""), {})
+        planet_interps = div_section.get("planet_in_signs", {})
 
-            div_planets.append(
-                {
-                    "name": planet_name,
-                    "longitude": float(div_data.get("longitude", 0)),
-                    "rashi": rashi_name,
-                    "rashi_number": rashi_num,
-                    "degree_in_sign": float(div_data.get("degree_in_sign", 0)),
-                }
+        div_planets = []
+        for planet_name, div_data in divisional["positions"].items():
+            rashi_idx = int(div_data.get("rashi", 0))
+            rashi_name = div_data.get(
+                "rashi_name", RASHI_NAMES[rashi_idx] if 0 <= rashi_idx <= 11 else "Unknown"
             )
 
-        return {
+            # Look up interpretation for this planet in this sign
+            interp = planet_interps.get(planet_name.lower(), {}).get(rashi_name.lower(), {})
+
+            entry = {
+                "name": planet_name,
+                "longitude": div_data.get("subdivisional_degree", 0.0),
+                "rashi": rashi_name,
+                "rashi_number": rashi_idx + 1,
+                "degree_in_sign": float(div_data.get("degree_in_sign", 0)),
+            }
+            if interp:
+                entry["interpretation"] = interp
+
+            div_planets.append(entry)
+
+        # Include chart-level description and significance
+        chart_info: dict[str, Any] = {
             "user_id": str(current_user.id),
             "division": division,
             "division_name": f"D{division}",
             "planets": div_planets,
         }
+        if div_section.get("description"):
+            chart_info["description"] = div_section["description"]
+        if div_section.get("significance"):
+            chart_info["significance"] = div_section["significance"]
+        if div_section.get("house_meanings"):
+            chart_info["house_meanings"] = div_section["house_meanings"]
+        if div_section.get("special_rules"):
+            chart_info["special_rules"] = div_section["special_rules"]
+
+        return chart_info
 
     except HTTPException:
         raise

@@ -496,3 +496,209 @@ def validate_nakshatra_name(name: str) -> bool:
         return True
     except ValueError:
         return False
+
+
+# Nakshatra Pada System (108 divisions)
+
+SIGNS = [
+    "Aries",
+    "Taurus",
+    "Gemini",
+    "Cancer",
+    "Leo",
+    "Virgo",
+    "Libra",
+    "Scorpio",
+    "Sagittarius",
+    "Capricorn",
+    "Aquarius",
+    "Pisces",
+]
+
+SIGN_LORDS = {
+    "Aries": "mars",
+    "Taurus": "venus",
+    "Gemini": "mercury",
+    "Cancer": "moon",
+    "Leo": "sun",
+    "Virgo": "mercury",
+    "Libra": "venus",
+    "Scorpio": "mars",
+    "Sagittarius": "jupiter",
+    "Capricorn": "saturn",
+    "Aquarius": "saturn",
+    "Pisces": "jupiter",
+}
+
+NAKSHATRA_NAMES = [
+    "Ashwini",
+    "Bharani",
+    "Krittika",
+    "Rohini",
+    "Mrigashira",
+    "Ardra",
+    "Punarvasu",
+    "Pushya",
+    "Ashlesha",
+    "Magha",
+    "Purva Phalguni",
+    "Uttara Phalguni",
+    "Hasta",
+    "Chitra",
+    "Swati",
+    "Vishakha",
+    "Anuradha",
+    "Jyeshtha",
+    "Mula",
+    "Purva Ashadha",
+    "Uttara Ashadha",
+    "Shravana",
+    "Dhanishtha",
+    "Shatabhisha",
+    "Purva Bhadrapada",
+    "Uttara Bhadrapada",
+    "Revati",
+]
+
+
+class PadaResult(TypedDict):
+    """Result from get_nakshatra_pada_details function."""
+
+    longitude: float
+    nakshatra: str
+    nakshatra_number: int
+    pada: int
+    pada_sign: str
+    pada_lord: str
+    pada_index_global: int
+    is_vargottama: bool
+    is_pushkara_navamsha: bool
+    degree_in_nakshatra: float
+    degree_in_pada: float
+    interpretation: str
+
+
+class ChartPadaSummary(TypedDict):
+    """Result from get_chart_pada_summary function."""
+
+    success: bool
+    planet_padas: dict[str, PadaResult]
+    vargottama_planets: list[str]
+    pushkara_planets: list[str]
+    total_padas: int
+    system: str
+
+
+def get_nakshatra_pada_details(longitude: float) -> PadaResult:
+    """
+    Get detailed nakshatra pada information for a longitude.
+
+    Each pada is 3°20' (200 arc minutes). The pada sign follows the
+    zodiac sequence starting from Aries at Ashwini Pada 1.
+
+    Args:
+        longitude: Sidereal longitude (0-360°)
+
+    Returns:
+        Dict with nakshatra, pada number (1-4), pada sign, pada lord,
+        navamsha sign (same as pada sign — padas = navamshas), and
+        interpretation context
+    """
+    lon = longitude % 360.0
+
+    # Each nakshatra = 13°20' = 13.3333°
+    nak_size = 360.0 / 27  # = 13.3333°
+    pada_size = nak_size / 4  # = 3.3333°
+
+    nak_index = int(lon / nak_size)  # 0-26
+    nak_index = min(nak_index, 26)
+    degree_in_nak = lon % nak_size
+
+    pada_index = int(degree_in_nak / pada_size)  # 0-3
+    pada_index = min(pada_index, 3)
+    pada_number = pada_index + 1  # 1-4
+
+    # Pada sign: sequence starts at Aries (0) and cycles
+    # Ashwini Pada1=Aries(0), Pada2=Taurus(1), Pada3=Gemini(2), Pada4=Cancer(3)
+    # Bharani Pada1=Leo(4), Pada2=Virgo(5)...
+    pada_sign_index = (nak_index * 4 + pada_index) % 12
+    pada_sign = SIGNS[pada_sign_index]
+    pada_lord = SIGN_LORDS[pada_sign]
+
+    nakshatra_name = NAKSHATRA_NAMES[nak_index]
+
+    # Vargottama check: if D-1 sign == navamsha sign (pada sign)
+    d1_sign_index = int(lon / 30)
+    is_vargottama = d1_sign_index == pada_sign_index
+
+    # Pushkara Navamsha — auspicious padas: specific pada signs are pushkara
+    # Pushkara nakshatras: Ashwini4, Rohini2, Mrigashira1, Punarvasu4, Pushya3,
+    # Uttara Phalguni1, Hasta4, Swati3, Anuradha2, Uttara Ashadha4, Shravana2,
+    # Dhanishtha1, Uttara Bhadrapada3, Revati4 (14 pushkara padas total)
+    pushkara_padas = {
+        (0, 3),
+        (3, 1),
+        (4, 0),
+        (6, 3),
+        (7, 2),
+        (11, 0),
+        (12, 3),
+        (14, 2),
+        (16, 1),
+        (20, 3),
+        (21, 1),
+        (22, 0),
+        (25, 2),
+        (26, 3),
+    }
+    is_pushkara = (nak_index, pada_index) in pushkara_padas
+
+    return PadaResult(
+        longitude=round(lon, 4),
+        nakshatra=nakshatra_name,
+        nakshatra_number=nak_index + 1,
+        pada=pada_number,
+        pada_sign=pada_sign,
+        pada_lord=pada_lord,
+        pada_index_global=nak_index * 4 + pada_index + 1,  # 1-108
+        is_vargottama=is_vargottama,
+        is_pushkara_navamsha=is_pushkara,
+        degree_in_nakshatra=round(degree_in_nak, 4),
+        degree_in_pada=round(degree_in_nak % pada_size, 4),
+        interpretation=f"{nakshatra_name} Pada {pada_number} — {pada_sign} quality ({pada_lord} sublord flavor)",
+    )
+
+
+def get_chart_pada_summary(planets: dict) -> ChartPadaSummary:
+    """
+    Get nakshatra pada details for all planets in a chart.
+
+    Args:
+        planets: {planet_name: longitude} or {planet_name: {longitude: float}}
+
+    Returns:
+        Dict of pada details per planet + vargottama/pushkara highlights
+    """
+    results = {}
+    vargottama_planets = []
+    pushkara_planets = []
+
+    for planet, data in planets.items():
+        lon = float(data.get("longitude", 0)) if isinstance(data, dict) else float(data)
+
+        pada = get_nakshatra_pada_details(lon)
+        results[planet] = pada
+
+        if pada["is_vargottama"]:
+            vargottama_planets.append(planet)
+        if pada["is_pushkara_navamsha"]:
+            pushkara_planets.append(planet)
+
+    return ChartPadaSummary(
+        success=True,
+        planet_padas=results,
+        vargottama_planets=vargottama_planets,
+        pushkara_planets=pushkara_planets,
+        total_padas=108,
+        system="Nakshatra Pada — 108 divisions of the zodiac",
+    )

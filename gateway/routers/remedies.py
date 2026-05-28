@@ -58,7 +58,7 @@ async def get_remedies(
         # TODO: Load user's birth chart from DB
         # For now, use placeholder data
         birth_datetime = "1992-12-03T03:00:00+05:30"
-        moon_longitude = 326.85
+        moon_longitude = 324.11
         _ = "libra"  # lagna_rashi placeholder for DB integration
 
         # Get current dasha

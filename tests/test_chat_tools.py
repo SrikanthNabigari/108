@@ -50,7 +50,7 @@ class TestToolDefinitions:
     def test_get_tool_definitions_returns_list(self):
         defs = get_tool_definitions()
         assert isinstance(defs, list)
-        assert len(defs) == 29
+        assert len(defs) == 33
 
     def test_each_tool_has_required_keys(self):
         for tool in TOOL_DEFINITIONS:
@@ -105,6 +105,13 @@ class TestToolDefinitions:
             "get_alternative_dasha",
             "get_jaimini_analysis",
             "lookup_knowledge",
+            "get_numerology",
+            # Ambient (BPHS slow-burn) signals
+            "get_ambient_signals",
+            # Tithi Pravesha annual chart (lunar varshaphal)
+            "get_tithi_pravesha",
+            # Jaimini Chara Dasha + transit cross-analysis
+            "get_chara_dasha_overlay",
         }
         assert expected == names
 

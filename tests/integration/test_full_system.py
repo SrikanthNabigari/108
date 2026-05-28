@@ -3,8 +3,8 @@
 Birth Data:
 - DateTime: 1992-12-03T03:00:00+05:30 (UTC: 1992-12-02T21:30:00)
 - Location: lat 16.726239, lon 81.288428
-- Known facts: Lagna=Libra, Moon=Aquarius (~326.85°), Purva Bhadrapada Pada 3,
-  Mercury Mahadasha (2019-2036)
+- Known facts: Lagna=Libra, Moon=Aquarius (~324.11°), Purva Bhadrapada Pada 2,
+  Mercury Mahadasha (2022-2039)
 
 Tests flow through all 5 layers:
   COSMOS → SELF → CONTEXT → (GUIDE + MEMORY tested separately)
@@ -165,16 +165,16 @@ class TestFullSystemWithBirthData:
     # ===================================================================
 
     def test_ephemeris_positions(self, planets_raw: dict):
-        """Verify planet positions — Moon must be in Aquarius ~326.85°."""
+        """Verify planet positions — Moon must be in Aquarius ~324.11°."""
         assert len(planets_raw) == 9, "Should have 9 Vedic planets"
 
         moon = planets_raw["moon"]
         moon_lon = moon["longitude"]
 
-        # Moon at ~326.85° → Aquarius (300-330°)
+        # Moon at ~324.11° → Aquarius (300-330°)
         assert 300 <= moon_lon < 330, f"Moon should be in Aquarius (300-330°), got {moon_lon:.2f}°"
-        # Allow ±3° tolerance for ayanamsa variations
-        assert abs(moon_lon - 326.85) < 3.0, f"Moon should be near 326.85°, got {moon_lon:.2f}°"
+        # Allow ±1° tolerance for ayanamsa variations
+        assert abs(moon_lon - 324.11) < 1.0, f"Moon should be near 324.11°, got {moon_lon:.2f}°"
 
         # All 9 planets present
         expected_planets = {
@@ -317,7 +317,7 @@ class TestFullSystemWithBirthData:
     # ===================================================================
 
     def test_vimshottari_dasha(self, birth_chart: BirthChart):
-        """Current MD should be Mercury (2019-2036)."""
+        """Current MD should be Mercury (2022-2039)."""
         moon_lon = birth_chart.planets[Planet.MOON].longitude
 
         current = get_current_dasha(BIRTH_DT_UTC, moon_lon)

@@ -830,6 +830,287 @@ _AREA_KARAKAS: dict[str, str] = {
 _TRIKONA_HOUSES = {1, 5, 9}
 _DUSTHANA_HOUSES = {6, 8, 12}
 
+# All 8 life area keys for overlay iteration
+_AREA_KEYS = list(_AREA_HOUSES.keys())
+
+# House signification labels for focus_areas generation
+_HOUSE_THEME_LABELS: dict[int, str] = {
+    1: "Self & Personality",
+    2: "Wealth & Speech",
+    3: "Courage & Communication",
+    4: "Home & Education",
+    5: "Intelligence & Creativity",
+    6: "Service & Health",
+    7: "Partnerships & Marriage",
+    8: "Transformation & Hidden Matters",
+    9: "Dharma & Fortune",
+    10: "Career & Status",
+    11: "Gains & Aspirations",
+    12: "Moksha & Foreign Lands",
+}
+
+# ── BPHS Overlay Helpers ──
+# These functions generate chart-specific text from interpret_dasha_combination()
+# output, replacing generic knowledge text in the dasha effects response.
+
+
+def _bphs_focus_areas(lord_bphs: dict) -> list[str]:
+    """Generate focus areas from houses ruled by the dasha lord.
+
+    Returns top 2 signification themes per ruled house.
+    """
+    houses = lord_bphs.get("houses_ruled", [])
+    if not houses:
+        return []
+    areas = []
+    for h in houses:
+        label = _HOUSE_THEME_LABELS.get(h)
+        if label:
+            areas.append(label)
+    return areas
+
+
+def _bphs_area_text(lord_bphs: dict, area: str) -> str:
+    """Generate chart-specific area text from BPHS analysis.
+
+    Checks lordship connection, placement connection, dignity, and
+    relevant aspects to produce a 2-3 sentence paragraph.
+    """
+    area_houses = _AREA_HOUSES.get(area)
+    if not area_houses:
+        return ""
+
+    houses_ruled = set(lord_bphs.get("houses_ruled", []))
+    natal_house = lord_bphs.get("natal_house")
+    dignity = lord_bphs.get("dignity", "neutral")
+    lord_name = lord_bphs.get("lord", "").title()
+    aspects = lord_bphs.get("aspects_received", [])
+
+    sentences = []
+
+    # 1. Lordship connection
+    overlap = houses_ruled & set(area_houses)
+    if overlap:
+        house_labels = []
+        for h in sorted(overlap):
+            label = _HOUSE_THEME_LABELS.get(h, f"house {h}")
+            house_labels.append(f"{h}th ({label.split(' & ')[0].lower()})")
+        sentences.append(
+            f"As {', '.join(house_labels)} lord, {lord_name} directly activates "
+            f"this area through house ownership."
+        )
+
+    # 2. Placement connection
+    if natal_house and natal_house in area_houses:
+        house_label = _HOUSE_THEME_LABELS.get(natal_house, "")
+        sentences.append(
+            f"Placed in {natal_house}th house"
+            + (f" ({house_label})" if house_label else "")
+            + " -- personal initiative and direct experience shape outcomes."
+        )
+
+    # 3. Dignity modifier
+    dignity_text = {
+        "exalted": "Exalted dignity delivers strong, amplified results.",
+        "own_sign": "In own sign -- confident, natural expression of results.",
+        "debilitated": "Debilitated placement weakens natural significations; remedial measures help.",
+    }.get(dignity, "")
+    if dignity_text and (overlap or (natal_house and natal_house in area_houses)):
+        sentences.append(dignity_text)
+
+    # 4. Relevant aspects hitting area houses
+    for asp in aspects:
+        asp_planet = asp.get("planet", "").title()
+        from_house = asp.get("from_house")
+        nature = asp.get("nature", "neutral")
+        if from_house and from_house in area_houses:
+            verb = (
+                "strengthens"
+                if nature == "benefic"
+                else "challenges"
+                if nature == "malefic"
+                else "influences"
+            )
+            sentences.append(f"{asp_planet}'s aspect from {from_house}th house {verb} this area.")
+
+    return " ".join(sentences) if sentences else ""
+
+
+def _bphs_opportunities(lord_bphs: dict) -> str:
+    """Generate opportunities text from benefic aspects, good dignity, and yogas."""
+    parts = []
+    dignity = lord_bphs.get("dignity", "neutral")
+    lord_name = lord_bphs.get("lord", "").title()
+
+    # Good dignity
+    if dignity == "exalted":
+        parts.append(f"Exalted {lord_name} delivers peak results across all significations.")
+    elif dignity == "own_sign":
+        parts.append(f"{lord_name} in own sign operates with confidence and natural authority.")
+
+    # Benefic aspects
+    for asp in lord_bphs.get("aspects_received", []):
+        if asp.get("nature") == "benefic":
+            asp_planet = asp.get("planet", "").title()
+            from_house = asp.get("from_house", "")
+            parts.append(
+                f"Benefic aspect from {asp_planet} (house {from_house}) strengthens results."
+            )
+
+    # Friendly conjunctions
+    for conj in lord_bphs.get("conjunctions", []):
+        if conj.get("relationship") == "friendly":
+            parts.append(f"Conjunction with {conj['planet'].title()} (friend) enhances outcomes.")
+
+    # Yogas
+    for yoga in lord_bphs.get("yogas", []):
+        parts.append(f"{yoga['name']} active -- amplifies positive potential.")
+
+    return " ".join(parts) if parts else ""
+
+
+def _bphs_challenges(lord_bphs: dict) -> str:
+    """Generate challenges text from malefic aspects, debilitation, combustion."""
+    parts = []
+    dignity = lord_bphs.get("dignity", "neutral")
+    lord_name = lord_bphs.get("lord", "").title()
+
+    # Debilitation
+    if dignity == "debilitated":
+        parts.append(
+            f"Debilitated {lord_name} weakens natural significations -- remedial measures recommended."
+        )
+
+    # Combustion
+    if lord_bphs.get("is_combust"):
+        parts.append(
+            f"{lord_name} combust by Sun -- results less visible externally, inner growth emphasized."
+        )
+
+    # Retrograde
+    if lord_bphs.get("is_retrograde"):
+        parts.append(
+            "Retrograde energy internalizes results -- patience needed for external outcomes."
+        )
+
+    # Malefic aspects
+    for asp in lord_bphs.get("aspects_received", []):
+        if asp.get("nature") == "malefic":
+            asp_planet = asp.get("planet", "").title()
+            parts.append(
+                f"Malefic aspect from {asp_planet} creates obstacles and competitive pressure."
+            )
+
+    # Enemy conjunctions
+    for conj in lord_bphs.get("conjunctions", []):
+        if conj.get("relationship") == "hostile":
+            parts.append(f"Conjunction with {conj['planet'].title()} (enemy) creates tension.")
+
+    return " ".join(parts) if parts else ""
+
+
+def _bphs_practical_advice(lord_bphs: dict) -> list[str]:
+    """Generate practical advice from house_lord_reading and dignity."""
+    advice = []
+    reading = lord_bphs.get("house_lord_reading", {})
+    dignity = lord_bphs.get("dignity", "neutral")
+
+    # House lord reading positives (actionable items)
+    for item in reading.get("positive", [])[:3]:
+        advice.append(item)
+
+    # Dignity-based advice
+    if dignity == "exalted":
+        advice.append("Leverage this period's exalted energy for bold initiatives and leadership.")
+    elif dignity == "own_sign":
+        advice.append(
+            "Trust natural instincts -- own-sign placement supports authentic self-expression."
+        )
+    elif dignity == "debilitated":
+        advice.append("Focus on remedial practices and avoid overcommitting during this period.")
+
+    # Yoga-specific advice
+    for yoga in lord_bphs.get("yogas", [])[:2]:
+        advice.append(
+            f"Activate {yoga['name']} potential through conscious effort in related areas."
+        )
+
+    return advice
+
+
+def _bphs_positive(lord_bphs: dict) -> list[str]:
+    """Generate positive effects list from benefic aspects, dignity, yogas."""
+    items = []
+    dignity = lord_bphs.get("dignity", "neutral")
+    lord_name = lord_bphs.get("lord", "").title()
+
+    # Good dignity
+    if dignity == "exalted":
+        items.append(f"Exalted {lord_name} delivers strong results in all significations.")
+    elif dignity == "own_sign":
+        items.append(f"{lord_name} in own sign brings confident, natural outcomes.")
+
+    # Benefic aspects
+    for asp in lord_bphs.get("aspects_received", []):
+        if asp.get("nature") == "benefic":
+            items.append(
+                f"{asp['planet'].title()}'s aspect from house {asp.get('from_house', '')} brings blessings."
+            )
+
+    # Friendly conjunctions
+    for conj in lord_bphs.get("conjunctions", []):
+        if conj.get("relationship") == "friendly":
+            items.append(
+                f"Conjunction with {conj['planet'].title()} (friend) enhances this sub-period."
+            )
+
+    # Yogas
+    for yoga in lord_bphs.get("yogas", []):
+        items.append(f"{yoga['name']} active -- {yoga.get('strength', 0):.0%} strength.")
+
+    # House lord reading positives
+    for item in lord_bphs.get("house_lord_reading", {}).get("positive", [])[:2]:
+        items.append(item)
+
+    return items if items else ["Standard results expected for this period."]
+
+
+def _bphs_negative(lord_bphs: dict) -> list[str]:
+    """Generate negative effects list from malefic aspects, debilitation, combustion."""
+    items = []
+    dignity = lord_bphs.get("dignity", "neutral")
+    lord_name = lord_bphs.get("lord", "").title()
+
+    # Debilitation
+    if dignity == "debilitated":
+        items.append(f"Debilitated {lord_name} weakens natural significations.")
+
+    # Combustion
+    if lord_bphs.get("is_combust"):
+        items.append(f"{lord_name} combust -- diminished external visibility of results.")
+
+    # Retrograde
+    if lord_bphs.get("is_retrograde"):
+        items.append("Retrograde motion delays or internalizes expected outcomes.")
+
+    # Malefic aspects
+    for asp in lord_bphs.get("aspects_received", []):
+        if asp.get("nature") == "malefic":
+            items.append(
+                f"{asp['planet'].title()}'s malefic aspect from house {asp.get('from_house', '')} creates pressure."
+            )
+
+    # Enemy conjunctions
+    for conj in lord_bphs.get("conjunctions", []):
+        if conj.get("relationship") == "hostile":
+            items.append(f"Tension from {conj['planet'].title()} conjunction (enemy relationship).")
+
+    # House lord reading negatives
+    for item in lord_bphs.get("house_lord_reading", {}).get("negative", [])[:2]:
+        items.append(item)
+
+    return items if items else ["No significant challenges indicated for this period."]
+
 
 def _compute_area_scores(
     md_lord: str,
@@ -1069,6 +1350,60 @@ async def get_dasha_effects(
                     sd=sd.lower() if sd else None,
                 )
                 result["bphs_analysis"] = bphs
+
+                # ── BPHS Overlay: replace generic text with chart-specific content ──
+                md_bphs = bphs.get("mahadasha")
+                if md_bphs:
+                    focus = _bphs_focus_areas(md_bphs)
+                    if focus:
+                        md_response["focus_areas"] = focus
+                    for area_key in _AREA_KEYS:
+                        text = _bphs_area_text(md_bphs, area_key)
+                        if text:
+                            md_response[area_key] = text
+                    opp = _bphs_opportunities(md_bphs)
+                    if opp:
+                        md_response["opportunities"] = opp
+                    chall = _bphs_challenges(md_bphs)
+                    if chall:
+                        md_response["challenges"] = chall
+                    adv = _bphs_practical_advice(md_bphs)
+                    if adv:
+                        md_response["practical_advice"] = adv
+
+                # AD overlay
+                ad_bphs = bphs.get("antardasha")
+                if ad_bphs and "antardasha" in result:
+                    ad_resp = result["antardasha"]
+                    ad_resp["general_effects"] = [
+                        ad_bphs["summary"],
+                        ad_bphs["prediction"],
+                    ]
+                    ad_resp["positive"] = _bphs_positive(ad_bphs)
+                    ad_resp["negative"] = _bphs_negative(ad_bphs)
+                    for area_key in _AREA_KEYS:
+                        text = _bphs_area_text(ad_bphs, area_key)
+                        if text:
+                            ad_resp[area_key] = text
+
+                # PD overlay
+                pd_bphs = bphs.get("pratyantardasha")
+                if pd_bphs and "pratyantardasha" in result:
+                    pd_resp = result["pratyantardasha"]
+                    pd_resp["theme"] = pd_bphs["summary"]
+                    effects = [pd_bphs["summary"], pd_bphs["prediction"]]
+                    # Add aspect/conjunction notes
+                    for asp in pd_bphs.get("aspects_received", []):
+                        effects.append(
+                            f"{asp['planet'].title()} aspects from house {asp.get('from_house', '')}."
+                        )
+                    pd_resp["effects"] = effects
+
+                # SD overlay
+                sd_bphs = bphs.get("sookshma")
+                if sd_bphs and "sookshma" in result:
+                    result["sookshma"]["theme"] = sd_bphs["summary"]
+
             except Exception as bphs_err:
                 logger.warning(f"BPHS dasha analysis failed: {bphs_err}")
 

@@ -240,6 +240,8 @@ def create_app() -> FastAPI:
         events,
         forecast,
         muhurta,
+        nadi,
+        numerology,
         remedies,
         reports,
         state,
@@ -260,6 +262,8 @@ def create_app() -> FastAPI:
     app.include_router(compatibility.router, prefix="/api/v1/compatibility", tags=["compatibility"])
     app.include_router(muhurta.router, prefix="/api/v1/muhurta", tags=["muhurta"])
     app.include_router(state.router, prefix="/api/v1/state", tags=["state"])
+    app.include_router(numerology.router, prefix="/api/v1/numerology", tags=["numerology"])
+    app.include_router(nadi.router, prefix="/api/v1/nadi", tags=["nadi"])
     app.include_router(webhooks.router, prefix="/webhooks", tags=["webhooks"])
 
     return app

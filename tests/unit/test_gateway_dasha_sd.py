@@ -22,7 +22,7 @@ from packages.core.src.knowledge_loader import (
 
 # User's birth data
 BIRTH_DT = datetime(1992, 12, 3, 3, 0, 0)
-MOON_LON = 326.85
+MOON_LON = 324.11
 QUERY_DT = datetime(2026, 2, 15, 12, 0, 0)
 
 # All 9 planets

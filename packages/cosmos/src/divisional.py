@@ -119,6 +119,7 @@ DIVISIONAL_NAMES = {
     40: "Khavedamsha",
     45: "Akshavedamsha",
     60: "Shashtiamsha",
+    150: "Nadi Amsha",
 }
 
 
@@ -824,6 +825,50 @@ def get_shashtiamsha(longitude: float) -> DivisionalPosition:
     )
 
 
+def get_nadi_amsha(longitude: float) -> DivisionalPosition:
+    """D-150: Nadi Amsha — each sign divided into 150 parts of 0.2° each.
+
+    Used in Nadi Jyotish for precise karmic detail and KP sublord analysis.
+    At this resolution, 1-minute birth time error = ~0.17° = ~0.85 amshas shift.
+
+    Args:
+        longitude: Longitude in degrees (0-360°)
+
+    Returns:
+        DivisionalPosition: Position in Nadi Amsha chart
+    """
+    longitude = _normalize_longitude(longitude)
+    rashi = int(longitude / 30)
+    degree = longitude % 30
+    amsha_num = int(degree / 0.2)  # 0-149
+    result_rashi = (rashi * 150 + amsha_num) % 12
+    subdivisional_degree = degree % 0.2
+    return DivisionalPosition(
+        rashi=result_rashi,
+        rashi_name=RASHI_NAMES[result_rashi],
+        degree_in_sign=subdivisional_degree,
+        division=150,
+        subdivisional_degree=subdivisional_degree,
+    )
+
+
+def get_nadi_type_from_amsha(amsha_num: int) -> str:
+    """Returns Adi, Madhya, or Antya based on D-150 amsha number (0-149).
+
+    Args:
+        amsha_num: Amsha number from 0 to 149
+
+    Returns:
+        str: Nadi type - "Adi", "Madhya", or "Antya"
+    """
+    if amsha_num < 50:
+        return "Adi"
+    elif amsha_num < 100:
+        return "Madhya"
+    else:
+        return "Antya"
+
+
 def get_divisional_position(longitude: float, division: int) -> DivisionalPosition:
     """Get divisional chart position for any D1-D60 chart.
 
@@ -832,7 +877,7 @@ def get_divisional_position(longitude: float, division: int) -> DivisionalPositi
 
     Args:
         longitude: Longitude in degrees (0-360°)
-        division: Division number (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 16, 20, 24, 27, 30, 40, 45, 60)
+        division: Division number (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 16, 20, 24, 27, 30, 40, 45, 60, 150)
 
     Returns:
         DivisionalPosition: Position in the requested divisional chart
@@ -861,6 +906,7 @@ def get_divisional_position(longitude: float, division: int) -> DivisionalPositi
         40: get_khavedamsha,
         45: get_akshavedamsha,
         60: get_shashtiamsha,
+        150: get_nadi_amsha,
     }
 
     if division not in division_map:
@@ -880,7 +926,7 @@ def get_divisional_chart(planets: dict[str, float], division: int) -> Divisional
     Args:
         planets: Dictionary mapping planet names to longitudes in degrees
                  Example: {"sun": 125.5, "moon": 215.3, "mars": 45.2}
-        division: Division number (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 16, 20, 24, 27, 30, 40, 45, 60)
+        division: Division number (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 16, 20, 24, 27, 30, 40, 45, 60, 150)
 
     Returns:
         DivisionalChart: Complete chart with positions for all planets
@@ -1294,6 +1340,8 @@ __all__ = [
     "get_dwadashamsha",
     "get_hora",
     "get_khavedamsha",
+    "get_nadi_amsha",
+    "get_nadi_type_from_amsha",
     "get_navamsha",
     "get_planet_dignity_in_sign",
     "get_saptamsha",

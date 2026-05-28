@@ -1607,10 +1607,13 @@ def _score_yoga_with_natal(
     transit_positions: dict[str, int],
     lagna_index: int,
     raw_planets: dict[str, Any] | None = None,
+    vry_yogas: list[dict[str, Any]] | None = None,
+    dasha_lords: tuple[str, str] | None = None,
 ) -> tuple[float, str, str]:
     """Score yoga activation using actual natal yogas + transit activation.
 
-    Combines generic transit quality with natal yoga activation check.
+    Combines generic transit quality with natal yoga activation check, plus
+    Vipreet Raja Yoga activation when a VRY lord runs as MD/AD.
     """
     if not transit_positions:
         return 5.0, "jupiter", "No transit data for yoga"
@@ -1653,10 +1656,28 @@ def _score_yoga_with_natal(
             # Boost score based on yoga strength
             base_score += yoga.get("strength", 0.5) * 0.5
 
+    # ── Vipreet Raja Yoga activation (BPHS) ──
+    # When MD or AD lord = natal VRY lord, the yoga manifests as success
+    # arising from defeated enemies / overcome obstacles / dissolved losses.
+    vry_active: list[str] = []
+    if vry_yogas and dasha_lords:
+        md_lord, ad_lord = dasha_lords
+        for vry in vry_yogas:
+            lord = vry.get("lord_planet", "")
+            if lord and lord == md_lord:
+                base_score += 1.2  # MD activation = strong
+                vry_active.append(f"{vry['name']} (MD)")
+                dominant = lord
+            elif lord and lord == ad_lord:
+                base_score += 0.6  # AD activation = moderate
+                vry_active.append(f"{vry['name']} (AD)")
+
     total = len(natal_yogas)
     desc = f"{active_count}/{total} yogas active" + (
         f" ({', '.join(active_names[:3])})" if active_names else ""
     )
+    if vry_active:
+        desc += f" + VRY active: {', '.join(vry_active)}"
 
     # Dominant planet from most impactful active yoga
     if active_names and natal_yogas:
@@ -1823,6 +1844,179 @@ _NATURE_ASPECT_SCORE: dict[str, float] = {
 }
 
 
+def _compute_natal_support_score(
+    area_id: str,
+    area_houses: list[int],
+    natal_planets: dict[str, Any],
+    lagna_index: int,
+    birth_chart: BirthChart | None,
+) -> tuple[float, dict[str, Any]]:
+    """Score the natal "structural support" for a life area.
+
+    BPHS principle: a house's results depend on (1) its lord, (2) its karaka,
+    (3) the dispositor of its karaka, (4) Jaimini argala on the house. The
+    other area components score current/transit conditions; this one scores
+    the FIXED natal support that conditions everything else.
+
+    Two sub-signals (each 0-10):
+    1. Karaka dispositor (60%): for the area's natural karaka, find its natal
+       sign-lord (dispositor). Score by the dispositor's house placement,
+       dignity, and functional role for the lagna. A dispositor in
+       kendra/trikona = strong long-term support; in dusthana = persistent drag.
+    2. Argala on primary house (40%): Jaimini intervention from the 2nd, 4th,
+       5th, 11th from the area's primary house, net of obstruction.
+
+    Returns (score 0-10, debug_info dict).
+    """
+    karaka = AREA_PLANETS.get(area_id, "")
+    primary_house = area_houses[0] if area_houses else 1
+
+    info: dict[str, Any] = {
+        "karaka": karaka,
+        "primary_house": primary_house,
+    }
+
+    # ── 1. Karaka dispositor sub-score ──
+    dispositor_score = 5.0
+    dispositor_planet: str | None = None
+    karaka_data = natal_planets.get(karaka, {}) if karaka else {}
+    if isinstance(karaka_data, dict):
+        karaka_lon = float(karaka_data.get("longitude", 0.0))
+        karaka_rashi_idx = (
+            int(karaka_lon // 30) % 12 if karaka_lon else int(karaka_data.get("rashi", -1))
+        )
+        if 0 <= karaka_rashi_idx < 12:
+            # Sign lord = dispositor
+            from packages.cosmos.src.houses import SIGN_RULERS
+
+            dispositor_planet = SIGN_RULERS.get(karaka_rashi_idx)
+            if dispositor_planet:
+                disp_data = natal_planets.get(dispositor_planet, {})
+                if isinstance(disp_data, dict):
+                    disp_lon = float(disp_data.get("longitude", 0.0))
+                    disp_rashi_idx = (
+                        int(disp_lon // 30) % 12 if disp_lon else int(disp_data.get("rashi", -1))
+                    )
+                    disp_house = int(disp_data.get("house", 0))
+                    if disp_house <= 0 and 0 <= disp_rashi_idx < 12:
+                        disp_house = _house_from_lagna(disp_rashi_idx, lagna_index)
+
+                    # House quality (Kendra/Trikona vs Dusthana)
+                    if disp_house in (1, 5, 9):
+                        dispositor_score = 8.5
+                    elif disp_house in (4, 7, 10):
+                        dispositor_score = 7.5
+                    elif disp_house in (2, 11):
+                        dispositor_score = 6.5
+                    elif disp_house in (3,):
+                        dispositor_score = 5.5
+                    elif disp_house in (6, 8, 12):
+                        dispositor_score = 3.0
+                    else:
+                        dispositor_score = 5.0
+
+                    # Dignity adjustment
+                    dispositor_score += (
+                        _dignity_for_planet(dispositor_planet, natal_planets) - 5.0
+                    ) * 0.3
+
+                    # Functional nature for the lagna
+                    try:
+                        from packages.self.src.transit_lordship import classify_planet_role
+
+                        role = classify_planet_role(dispositor_planet, lagna_index)
+                        nature = role.get("functional_nature", "neutral")
+                        nature_adj = {
+                            "yogakaraka": 1.5,
+                            "benefic": 0.8,
+                            "neutral": 0.0,
+                            "malefic": -0.8,
+                            "maraka": -0.5,
+                        }.get(nature, 0.0)
+                        dispositor_score += nature_adj
+                        info["dispositor_nature"] = nature
+                    except Exception:
+                        pass
+
+                    info["dispositor"] = dispositor_planet
+                    info["dispositor_house"] = disp_house
+
+    dispositor_score = _clamp(dispositor_score)
+
+    # ── 2. Argala on primary house ──
+    argala_score = 5.0
+    argala_active = 0
+    if birth_chart is not None:
+        try:
+            from packages.self.src.jaimini import calculate_argala
+
+            arg = calculate_argala(birth_chart)
+            primary = arg.get(primary_house, {})
+            argala_active = int(primary.get("active_argala_count", 0))
+            # 0 active = no support (3.0); 4 active = full Dhana+Sukha+Labha+Putra (9.0)
+            argala_score = 3.0 + 1.5 * argala_active
+            argala_score = _clamp(argala_score)
+            info["argala_active_count"] = argala_active
+        except Exception as e:  # pragma: no cover
+            logger.debug(f"Argala calculation failed for {area_id}: {e}")
+
+    # Blend: dispositor 60%, argala 40%
+    score = dispositor_score * 0.60 + argala_score * 0.40
+    info["dispositor_score"] = round(dispositor_score, 2)
+    info["argala_score"] = round(argala_score, 2)
+    return _clamp(score), info
+
+
+def _detect_vipreet_raja_yogas(
+    natal_planets: dict[str, Any],
+    lagna_index: int,
+) -> list[dict[str, Any]]:
+    """Detect Harsha (6L), Sarala (8L), Vimala (12L) Vipreet Raja Yogas.
+
+    Per BPHS: dusthana lords (6/8/12) lose dignity in normal terms, but when
+    they sit in another dusthana house, the "negative + negative = positive"
+    yoga forms — the planet's affliction-causing potential gets neutralized
+    and turns into raja yoga. These are the Vipreet ("reversed") Raja Yogas.
+
+    Returns list of {name, lord_planet, lord_of_house, sits_in_house}.
+    Activation = when this lord runs as MD/AD or transits a kendra/trikona.
+    """
+    yogas: list[dict[str, Any]] = []
+    try:
+        from packages.self.src.transit_lordship import get_planet_lordships
+    except Exception:
+        return yogas
+
+    dusthanas = {6, 8, 12}
+    yoga_names = {6: "Harsha Yoga", 8: "Sarala Yoga", 12: "Vimala Yoga"}
+
+    for planet, pdata in natal_planets.items():
+        if not isinstance(pdata, dict):
+            continue
+        ruled = get_planet_lordships(planet.lower(), lagna_index)
+        if not any(h in dusthanas for h in ruled):
+            continue
+        # Use natal house if provided, else derive from longitude
+        natal_house = int(pdata.get("house", 0))
+        if natal_house <= 0:
+            lon = float(pdata.get("longitude", 0.0))
+            natal_house = _house_from_lagna(int(lon // 30) % 12, lagna_index)
+        if natal_house not in dusthanas:
+            continue
+        # Find the dusthana house this planet rules (the one creating the yoga)
+        for h in ruled:
+            if h in dusthanas:
+                yogas.append(
+                    {
+                        "name": yoga_names[h],
+                        "lord_planet": planet.lower(),
+                        "lord_of_house": h,
+                        "sits_in_house": natal_house,
+                    }
+                )
+    return yogas
+
+
 def _compute_area_scores(
     factor_scores: list[dict[str, Any]],
     transit_positions: dict[str, int],
@@ -1837,14 +2031,15 @@ def _compute_area_scores(
     dasha_result: dict[str, Any] | None = None,
     birth_chart: Any | None = None,
 ) -> list[dict[str, Any]]:
-    """Compute 8 life area scores using BPHS-aligned 5-component model.
+    """Compute 8 life area scores using BPHS-aligned 6-component model.
 
-    Classical hierarchy (Brihat Parashara Hora Shastra):
-    1. Dasha Analysis (40%) — lordship, natal placement, aspects, dignity, MD x AD
+    Classical hierarchy (Brihat Parashara Hora Shastra + Jaimini):
+    1. Dasha Analysis (35%) — lordship, natal placement, aspects, dignity, MD x AD
     2. Ashtakavarga-Weighted Transits (25%) — BAV bindus filter transit strength
     3. Double Transit (15%) — Jupiter + Saturn activation
-    4. Yoga/Dosha Status (15%) — active yogas boost, doshas penalize
-    5. Panchanga Baseline (5%) — daily timing quality (muhurta, not predictive)
+    4. Natal Support (10%) — karaka dispositor placement + Jaimini argala
+    5. Yoga/Dosha Status (10%) — active yogas boost, doshas penalize
+    6. Panchanga Baseline (5%) — daily timing quality (muhurta, not predictive)
 
     Falls back to simplified model when birth_chart unavailable.
     """
@@ -1880,7 +2075,12 @@ def _compute_area_scores(
         # ── Component 3: Double Transit (15%) ──
         dt_score, has_double_transit = _compute_double_transit_area_score(houses, house_activations)
 
-        # ── Component 4: Yoga/Dosha Status (10%) ──
+        # ── Component 4: Natal Support (karaka dispositor + Jaimini argala) ──
+        natal_support, natal_support_info = _compute_natal_support_score(
+            area_id, houses, natal_planets or {}, lagna_index, birth_chart
+        )
+
+        # ── Component 5: Yoga/Dosha Status (10%) ──
         yoga_dosha = 5.0  # neutral base
         area_active_yogas: list[str] = []
         for ay in active_yogas or []:
@@ -1890,15 +2090,16 @@ def _compute_area_scores(
                 yoga_dosha += ay.get("strength", 0.5) * 2.0
                 area_active_yogas.append(ay.get("yoga_name", ""))
 
-        # ── Component 5: Panchanga Baseline (10%) ──
+        # ── Component 6: Panchanga Baseline (5%) ──
         pan_score = factor_map.get("panchanga", 5.0)
 
-        # ── Final BPHS blend ──
+        # ── Final BPHS + Jaimini blend ──
         area_score = (
-            _clamp(dasha_area) * 0.40
+            _clamp(dasha_area) * 0.35
             + _clamp(ashta_transit) * 0.25
             + _clamp(dt_score) * 0.15
-            + _clamp(yoga_dosha) * 0.15
+            + _clamp(natal_support) * 0.10
+            + _clamp(yoga_dosha) * 0.10
             + _clamp(pan_score) * 0.05
         )
 
@@ -1945,6 +2146,10 @@ def _compute_area_scores(
             "double_transit": has_double_transit,
             "active_yogas": area_active_yogas,
             "lordship_quality": best_nature,
+            "natal_support": {
+                "score": round(natal_support, 1),
+                **natal_support_info,
+            },
         }
         areas.append(area_dict)
 
@@ -2106,16 +2311,23 @@ def compute_state_vector(
     # ── 7a. Natal Yogas & Doshas (real detectors: 522 yogas, 55 doshas) ──
     natal_yogas, natal_yogas_raw = _detect_natal_yogas(natal_planets, lagna_index, birth_chart)
     natal_doshas = _detect_natal_doshas(natal_planets, lagna_index, birth_chart)
+    natal_vry = _detect_vipreet_raja_yogas(natal_planets, lagna_index)
 
     # Sade Sati detail (already in transit_result, extract for dosha scoring)
     sade_sati_detail = transit_result.get("sade_sati", {})
 
-    # Yoga activation with real natal yoga data
+    # Pull current MD/AD lords for VRY activation check
+    _md_lord = (dasha_result or {}).get("mahadasha", {}).get("lord", "") if dasha_result else ""
+    _ad_lord = (dasha_result or {}).get("antardasha", {}).get("lord", "") if dasha_result else ""
+
+    # Yoga activation with real natal yoga data + VRY activation by current dasha
     yog_score, yog_planet, yog_desc = _score_yoga_with_natal(
         natal_yogas,
         transit_positions,
         lagna_index,
         raw_planets if transit_positions else None,
+        vry_yogas=natal_vry,
+        dasha_lords=(_md_lord, _ad_lord) if _md_lord else None,
     )
 
     # Dosha area penalties
@@ -2277,6 +2489,7 @@ def compute_state_vector(
         "hora_lord": hora_lord,
         "natal_yogas": [y["name"] for y in natal_yogas],
         "natal_doshas": [d["name"] for d in natal_doshas],
+        "natal_vipreet_raja_yogas": natal_vry,
         "sade_sati": {
             "active": sade_sati_detail.get("active", False),
             "phase": sade_sati_detail.get("phase"),

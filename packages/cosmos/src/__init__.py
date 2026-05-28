@@ -136,14 +136,19 @@ from .houses import (
 )
 from .nakshatras import (
     # Type definitions
+    ChartPadaSummary,
     NakshatraResult,
     PadaNavamshaResult,
+    PadaResult,
     TarabalaResult,
     get_all_nakshatras,
+    # Nakshatra pada functions
+    get_chart_pada_summary,
     get_nakshatra_lord,
     # Utility functions
     get_nakshatra_name_by_number,
     get_nakshatra_number_by_name,
+    get_nakshatra_pada_details,
     get_pada_navamsha,
     get_tarabala,
     # Core functions
@@ -198,10 +203,12 @@ __all__ = [
     "TITHI_NAMES",
     "VARA_NAMES",
     "YOGA_NAMES",
+    "ChartPadaSummary",
     "DivisionalChart",
     "DivisionalPosition",
     "NakshatraResult",
     "PadaNavamshaResult",
+    "PadaResult",
     "TarabalaResult",
     "VargaStrength",
     "calculate_all_upagrahas",
@@ -231,6 +238,7 @@ __all__ = [
     "get_aspect_strength",
     "get_ayanamsa",
     "get_bhamsha",
+    "get_chart_pada_summary",
     "get_chaturthamsha",
     "get_chaturvimshamsha",
     "get_d1_position",
@@ -258,6 +266,7 @@ __all__ = [
     "get_nakshatra_lord",
     "get_nakshatra_name_by_number",
     "get_nakshatra_number_by_name",
+    "get_nakshatra_pada_details",
     "get_navamsha",
     "get_pada_navamsha",
     "get_panchanga",

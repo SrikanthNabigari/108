@@ -5,6 +5,7 @@ Provides lookup tools for Jyotish knowledge base - planets, nakshatras, yogas, e
 """
 
 import json
+import os
 import sys
 from pathlib import Path
 from typing import Any
@@ -14,6 +15,7 @@ SERVICES_ROOT = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(SERVICES_ROOT))
 
 from mcp.server.fastmcp import FastMCP  # noqa: E402
+from packages.core.src.bphs_enricher import enrich_response  # noqa: E402
 from packages.core.src.knowledge_loader import (  # noqa: E402
     get_avastha_definitions,
     get_karana_definitions,
@@ -30,8 +32,18 @@ KNOWLEDGE_DIR = SERVICES_ROOT / "knowledge"
 DEFINITIONS_DIR = KNOWLEDGE_DIR / "definitions"
 RULES_DIR = KNOWLEDGE_DIR / "rules"
 
+# BPHS knowledge base paths (extracted BPHS text + ChromaDB vector DB)
+BPHS_ROOT = Path(
+    os.environ.get("BPHS_KNOWLEDGE_PATH", str(SERVICES_ROOT.parent / "108" / "knowledge"))
+)
+BPHS_JSON_DIR = BPHS_ROOT / "04_JSON"
+BPHS_VECTOR_DB_DIR = BPHS_ROOT / "05_VectorDB"
+
 # Cache for loaded JSON files
 _cache: dict[str, Any] = {}
+
+# Lazy-initialized ChromaDB collection
+_bphs_collection = None
 
 
 def _load_json(filepath: Path) -> dict:
@@ -90,11 +102,12 @@ def lookup_planet(planet_id: str) -> dict[str, Any]:
 
         if planet_key in planets:
             data = planets[planet_key]
-            return {
+            result = {
                 "found": True,
                 "planet": data,
                 "summary": f"{data['name']} ({data['sanskrit']}) is a {data['nature']} planet ruling {', '.join(data['owns_signs'])}.",
             }
+            return enrich_response("lookup_planet", result, {"planet": planet_key})
         else:
             return {
                 "found": False,
@@ -123,11 +136,12 @@ def lookup_rashi(rashi_id: str) -> dict[str, Any]:
 
         if rashi_key in rashis:
             data = rashis[rashi_key]
-            return {
+            result = {
                 "found": True,
                 "rashi": data,
                 "summary": f"{data['name']} ({data['sanskrit']}) is a {data['element']} {data['quality']} sign ruled by {data['ruler']}.",
             }
+            return enrich_response("lookup_rashi", result)
         else:
             return {
                 "found": False,
@@ -157,11 +171,12 @@ def lookup_nakshatra(nakshatra_name: str) -> dict[str, Any]:
         for nak in nakshatras:
             nak_name = nak["name"].lower().replace(" ", "")
             if nak_name == search_name or search_name in nak_name:
-                return {
+                result = {
                     "found": True,
                     "nakshatra": nak,
                     "summary": f"{nak['name']} ({nak.get('sanskrit', '')}) is ruled by {nak['ruler']}, deity: {nak['deity']}, symbol: {nak['symbol']}.",
                 }
+                return enrich_response("lookup_nakshatra", result)
 
         return {
             "found": False,
@@ -190,11 +205,12 @@ def lookup_house(house_number: int) -> dict[str, Any]:
 
         if house_key in houses:
             data = houses[house_key]
-            return {
+            result = {
                 "found": True,
                 "house": data,
                 "summary": f"House {house_number} ({data['name']}/{data['sanskrit']}) signifies: {', '.join(data['significations'][:5])}...",
             }
+            return enrich_response("lookup_house", result, {"house": house_number})
         else:
             return {
                 "found": False,
@@ -224,21 +240,23 @@ def lookup_yoga(yoga_id: str) -> dict[str, Any]:
         # Try exact match first
         if yoga_key in yogas:
             data = yogas[yoga_key]
-            return {
+            result = {
                 "found": True,
                 "yoga": data,
                 "summary": f"{data['name']}: {data.get('description', 'No description')}",
             }
+            return enrich_response("lookup_yoga", result, {"yogas": [yoga_key]})
 
         # Try partial match
         for key, data in yogas.items():
             if yoga_key in key or yoga_key in data.get("name", "").lower():
-                return {
+                result = {
                     "found": True,
                     "yoga": data,
                     "matched_id": key,
                     "summary": f"{data['name']}: {data.get('description', 'No description')}",
                 }
+                return enrich_response("lookup_yoga", result, {"yogas": [key]})
 
         return {
             "found": False,
@@ -267,21 +285,23 @@ def lookup_dosha(dosha_id: str) -> dict[str, Any]:
 
         if dosha_key in doshas:
             data = doshas[dosha_key]
-            return {
+            result = {
                 "found": True,
                 "dosha": data,
                 "summary": f"{data['name']}: {data.get('description', 'No description')}",
             }
+            return enrich_response("lookup_dosha", result, {"doshas": [dosha_key]})
 
         # Try partial match
         for key, data in doshas.items():
             if dosha_key in key or dosha_key in data.get("name", "").lower():
-                return {
+                result = {
                     "found": True,
                     "dosha": data,
                     "matched_id": key,
                     "summary": f"{data['name']}: {data.get('description', 'No description')}",
                 }
+                return enrich_response("lookup_dosha", result, {"doshas": [key]})
 
         return {
             "found": False,
@@ -318,7 +338,7 @@ def lookup_antardasha_effects(mahadasha_lord: str, antardasha_lord: str) -> dict
         ad_effects = md_effects.get(ad_key)
 
         if ad_effects:
-            return {
+            result = {
                 "found": True,
                 "mahadasha": md_key,
                 "antardasha": ad_key,
@@ -332,6 +352,11 @@ def lookup_antardasha_effects(mahadasha_lord: str, antardasha_lord: str) -> dict
                     )
                 ),
             }
+            return enrich_response(
+                "lookup_antardasha_effects",
+                result,
+                {"mahadasha_lord": md_key, "antardasha_lord": ad_key},
+            )
         else:
             return {
                 "found": False,
@@ -372,7 +397,7 @@ def lookup_pratyantardasha_effects(
         pd_effects = effects.get(md_key, {}).get(ad_key, {}).get(pd_key)
 
         if pd_effects:
-            return {
+            result = {
                 "found": True,
                 "mahadasha": md_key,
                 "antardasha": ad_key,
@@ -383,6 +408,9 @@ def lookup_pratyantardasha_effects(
                     f"Pratyantardasha: {pd_effects.get('theme', 'Effects data available')}"
                 ),
             }
+            return enrich_response(
+                "lookup_pratyantardasha_effects", result, {"mahadasha_lord": md_key}
+            )
         else:
             return {
                 "found": False,
@@ -742,6 +770,296 @@ def lookup_nitya_yoga(yoga_number: int) -> dict[str, Any]:
                     return {"found": True, "nitya_yoga": y}
 
         return {"found": False, "error": f"Nitya Yoga {yoga_number} not found"}
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__}
+
+
+def _get_bphs_collection():
+    """Get ChromaDB collection for BPHS semantic search (lazy init)."""
+    global _bphs_collection
+    if _bphs_collection is None:
+        import chromadb
+
+        client = chromadb.PersistentClient(path=str(BPHS_VECTOR_DB_DIR))
+        _bphs_collection = client.get_collection(name="bphs_knowledge")
+    return _bphs_collection
+
+
+def _get_bphs_master_index() -> dict:
+    """Load BPHS master index."""
+    return _load_json(BPHS_JSON_DIR / "bphs_master_index.json")
+
+
+def _get_bphs_knowledge() -> dict:
+    """Load BPHS knowledge entries."""
+    return _load_json(BPHS_JSON_DIR / "bphs_knowledge.json")
+
+
+@mcp.tool()
+def search_bphs(
+    query: str,
+    max_results: int = 10,
+    chapter: int | None = None,
+    volume: int | None = None,
+    topic: str | None = None,
+) -> dict[str, Any]:
+    """
+    Semantic search across BPHS (Brihat Parashara Hora Shastra) text.
+
+    Uses vector embeddings to find conceptually related content even without
+    exact keyword matches. For example, searching "marriage timing" will find
+    content about 7th house lord, Venus placement, and dasha periods.
+
+    Args:
+        query: Natural language search query (e.g., "marriage timing from dasha",
+               "raja yoga conditions", "remedies for weak saturn")
+        max_results: Maximum results to return (default: 10)
+        chapter: Filter by chapter number (1-100)
+        volume: Filter by volume (1 or 2)
+        topic: Filter by topic keyword (e.g., "raja_yogas", "saturn_remedies")
+
+    Returns:
+        Ranked results with text, chapter context, and similarity scores
+    """
+    try:
+        # Try ChromaDB first, fall back to JSON keyword search
+        try:
+            collection = _get_bphs_collection()
+            return _search_bphs_chromadb(collection, query, max_results, chapter, volume, topic)
+        except Exception:
+            # ChromaDB not available — fall back to JSON keyword search
+            return _search_bphs_json_fallback(query, max_results, chapter, volume, topic)
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__}
+
+
+def _search_bphs_chromadb(collection, query, max_results, chapter, volume, topic):
+    """Semantic search using ChromaDB vector embeddings."""
+    where_clauses = []
+    if chapter is not None:
+        where_clauses.append({"chapter": {"$eq": chapter}})
+    if volume is not None:
+        where_clauses.append({"volume": {"$eq": volume}})
+    if topic is not None:
+        where_clauses.append({"topics": {"$contains": topic}})
+
+    where = None
+    if len(where_clauses) == 1:
+        where = where_clauses[0]
+    elif len(where_clauses) > 1:
+        where = {"$and": where_clauses}
+
+    fetch_n = min(max_results * 3, collection.count())
+
+    results = collection.query(
+        query_texts=[query],
+        n_results=fetch_n,
+        where=where,
+        include=["documents", "metadatas", "distances"],
+    )
+
+    if not results["documents"][0]:
+        return {"query": query, "total_results": 0, "results": [], "search_mode": "semantic"}
+
+    seen_entries = set()
+    output = []
+
+    for doc, meta, dist in zip(
+        results["documents"][0],
+        results["metadatas"][0],
+        results["distances"][0],
+        strict=False,
+    ):
+        entry_idx = meta["entry_index"]
+        if entry_idx in seen_entries:
+            continue
+        seen_entries.add(entry_idx)
+
+        output.append(
+            {
+                "text": doc,
+                "chapter": meta["chapter"],
+                "chapter_title": meta["chapter_title"],
+                "volume": meta["volume"],
+                "verse_ref": meta["verse_ref"],
+                "type": meta["type"],
+                "topics": meta["topics"],
+                "score": round(1 - dist, 4),
+            }
+        )
+
+        if len(output) >= max_results:
+            break
+
+    return {
+        "query": query,
+        "total_results": len(output),
+        "results": output,
+        "search_mode": "semantic",
+    }
+
+
+def _search_bphs_json_fallback(query, max_results, chapter, volume, topic):
+    """Keyword-based fallback search on bphs_knowledge.json when ChromaDB unavailable."""
+    knowledge = _get_bphs_knowledge()
+    entries = knowledge.get("entries", [])
+    query_lower = query.lower()
+    query_words = query_lower.split()
+
+    scored = []
+    for entry in entries:
+        # Apply filters
+        if chapter is not None and entry.get("chapter") != chapter:
+            continue
+        if volume is not None and entry.get("volume") != volume:
+            continue
+        if topic is not None:
+            entry_topics = entry.get("topics", [])
+            if isinstance(entry_topics, str):
+                entry_topics = [t.strip() for t in entry_topics.split(",")]
+            if not any(topic.lower() in t.lower() for t in entry_topics):
+                continue
+
+        # Score by keyword matching
+        text = entry.get("text", "").lower()
+        keywords = entry.get("keywords", [])
+        if isinstance(keywords, list):
+            keywords_str = " ".join(k.lower() for k in keywords)
+        else:
+            keywords_str = str(keywords).lower()
+        topics_str = (
+            " ".join(t.lower() for t in entry.get("topics", []))
+            if isinstance(entry.get("topics"), list)
+            else str(entry.get("topics", "")).lower()
+        )
+
+        combined = f"{text} {keywords_str} {topics_str}"
+
+        # Count matching words
+        matches = sum(1 for w in query_words if w in combined)
+        if matches == 0:
+            continue
+
+        # Score: proportion of query words matched + bonus for keyword hits
+        score = matches / len(query_words)
+        keyword_bonus = sum(0.1 for w in query_words if w in keywords_str)
+        score += keyword_bonus
+
+        scored.append((score, entry))
+
+    # Sort by score descending
+    scored.sort(key=lambda x: x[0], reverse=True)
+
+    output = []
+    for score, entry in scored[:max_results]:
+        output.append(
+            {
+                "text": entry.get("text", ""),
+                "chapter": entry.get("chapter"),
+                "chapter_title": entry.get("chapter_title", ""),
+                "volume": entry.get("volume"),
+                "verse_ref": entry.get("verse_ref", ""),
+                "type": entry.get("type", ""),
+                "topics": ", ".join(entry["topics"])
+                if isinstance(entry.get("topics"), list)
+                else str(entry.get("topics", "")),
+                "score": round(score, 4),
+            }
+        )
+
+    return {
+        "query": query,
+        "total_results": len(output),
+        "results": output,
+        "search_mode": "keyword_fallback",
+    }
+
+
+@mcp.tool()
+def get_bphs_chapter(chapter_number: int) -> dict[str, Any]:
+    """
+    Get structured content for a specific BPHS chapter.
+
+    Returns all sections (verse translations, notes, headers) for the chapter.
+
+    Args:
+        chapter_number: Chapter number (1-100)
+
+    Returns:
+        Chapter data with title, volume, topics, and all text sections
+    """
+    try:
+        chapter_file = BPHS_JSON_DIR / "chapters" / f"ch{chapter_number:03d}.json"
+        if not chapter_file.exists():
+            return {
+                "found": False,
+                "error": f"Chapter {chapter_number} not found (valid: 1-100)",
+            }
+
+        data = _load_json(chapter_file)
+        title = data.get("chapter_title") or data.get("title", "Unknown")
+
+        # Add related MCP tools from cross-reference
+        from packages.core.src.bphs_enricher import get_tools_for_chapter
+
+        related_tools = get_tools_for_chapter(chapter_number)
+
+        return {
+            "found": True,
+            "chapter": data,
+            "related_tools": related_tools,
+            "summary": (
+                f"Ch.{chapter_number}: {title} "
+                f"(Vol.{data.get('volume', '?')}, {len(data.get('sections', []))} sections, "
+                f"{len(related_tools)} related MCP tools)"
+            ),
+        }
+
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__}
+
+
+@mcp.tool()
+def get_bphs_topics() -> dict[str, Any]:
+    """
+    List all available BPHS topics with chapter mappings.
+
+    Returns the complete topic index from the BPHS master index,
+    mapping each topic to the chapters that cover it.
+
+    Returns:
+        Topic index with chapter numbers, plus chapter listing
+    """
+    try:
+        index = _get_bphs_master_index()
+        topic_index = index.get("topic_index", {})
+        chapters = index.get("chapters", [])
+
+        # Add related tools from cross-reference to each chapter
+        from packages.core.src.bphs_enricher import get_tools_for_chapter
+
+        chapter_list = [
+            {
+                "number": ch["number"],
+                "title": ch["title"],
+                "volume": ch["volume"],
+                "related_tools": get_tools_for_chapter(ch["number"]),
+            }
+            for ch in chapters
+        ]
+
+        # Count how many chapters have tool mappings
+        mapped_chapters = sum(1 for ch in chapter_list if ch["related_tools"])
+
+        return {
+            "total_topics": len(topic_index),
+            "total_chapters": len(chapter_list),
+            "chapters_with_tool_mappings": mapped_chapters,
+            "topic_index": topic_index,
+            "chapters": chapter_list,
+        }
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__}

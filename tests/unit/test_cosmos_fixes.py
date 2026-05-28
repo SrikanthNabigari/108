@@ -701,3 +701,253 @@ class TestDignityIntegration:
         d1_entry = next(v for v in result["varga_details"] if v["division"] == 1)
         assert d1_entry["dignity"] == "exalted"
         assert d1_entry["score"] == 20  # DIGNITY_SCORES["exalted"] = 20
+
+
+# =============================================================================
+# New Feature: Nadi Amsha (D-150) Tests
+# =============================================================================
+class TestNadiAmsha:
+    """Tests for D-150 Nadi Amsha divisional chart."""
+
+    def test_basic_calculation(self):
+        """Aries 0° = amsha 0, should be Aries."""
+        from packages.cosmos.src.divisional import get_nadi_amsha
+
+        pos = get_nadi_amsha(0.0)
+        assert pos["division"] == 150
+        assert pos["rashi"] == 0  # Aries
+
+    def test_amsha_boundary(self):
+        """Aries 0.2° = amsha 1."""
+        from packages.cosmos.src.divisional import get_nadi_amsha
+
+        pos = get_nadi_amsha(0.2)
+        assert pos["rashi"] == 1  # Taurus
+
+    def test_nadi_type_adi(self):
+        """Amsha numbers 0-49 should be Adi Nadi."""
+        from packages.cosmos.src.divisional import get_nadi_type_from_amsha
+
+        assert get_nadi_type_from_amsha(0) == "Adi"
+        assert get_nadi_type_from_amsha(49) == "Adi"
+
+    def test_nadi_type_madhya(self):
+        """Amsha numbers 50-99 should be Madhya Nadi."""
+        from packages.cosmos.src.divisional import get_nadi_type_from_amsha
+
+        assert get_nadi_type_from_amsha(50) == "Madhya"
+        assert get_nadi_type_from_amsha(99) == "Madhya"
+
+    def test_nadi_type_antya(self):
+        """Amsha numbers 100-149 should be Antya Nadi."""
+        from packages.cosmos.src.divisional import get_nadi_type_from_amsha
+
+        assert get_nadi_type_from_amsha(100) == "Antya"
+        assert get_nadi_type_from_amsha(149) == "Antya"
+
+    def test_user_moon(self):
+        """User's Moon at 324.11° (Aquarius 24.11°)."""
+        from packages.cosmos.src.divisional import get_nadi_amsha
+
+        pos = get_nadi_amsha(324.11)
+        assert pos["division"] == 150
+        # degree_in_sign = 24.11, amsha_num = int(24.11/0.2) = 120
+        # result_rashi = (10*150 + 120) % 12 = (1500+120)%12 = 1620%12 = 0 → Aries
+        assert pos["rashi_name"] == "Aries"
+
+    def test_division_name_in_dict(self):
+        """D-150 should be named 'Nadi Amsha' in DIVISIONAL_NAMES."""
+        from packages.cosmos.src.divisional import DIVISIONAL_NAMES
+
+        assert DIVISIONAL_NAMES[150] == "Nadi Amsha"
+
+    def test_get_divisional_position_d150(self):
+        """get_divisional_position should work with division=150."""
+        from packages.cosmos.src.divisional import get_divisional_position
+
+        pos = get_divisional_position(45.5, 150)  # Taurus 15.5°
+        assert pos["division"] == 150
+        assert pos["rashi_name"] in [
+            "Aries",
+            "Taurus",
+            "Gemini",
+            "Cancer",
+            "Leo",
+            "Virgo",
+            "Libra",
+            "Scorpio",
+            "Sagittarius",
+            "Capricorn",
+            "Aquarius",
+            "Pisces",
+        ]
+
+    def test_get_divisional_chart_d150(self):
+        """get_divisional_chart should work with division=150."""
+        from packages.cosmos.src.divisional import get_divisional_chart
+
+        planets = {"sun": 125.5, "moon": 324.11}
+        chart = get_divisional_chart(planets, 150)
+        assert chart["division"] == 150
+        assert chart["division_name"] == "Nadi Amsha"
+        assert "sun" in chart["positions"]
+        assert "moon" in chart["positions"]
+        assert chart["positions"]["sun"]["division"] == 150
+        assert chart["positions"]["moon"]["division"] == 150
+
+    def test_linear_pattern_verification(self):
+        """Verify D-150 follows linear pattern: (rashi * 150 + amsha_num) % 12."""
+        from packages.cosmos.src.divisional import get_nadi_amsha
+
+        # Test Aries 10° = amsha 50
+        pos = get_nadi_amsha(10.0)
+        expected_rashi = (0 * 150 + 50) % 12  # = 50 % 12 = 2 (Gemini)
+        assert pos["rashi"] == expected_rashi
+
+        # Test Leo 20° = amsha 100
+        pos = get_nadi_amsha(140.0)  # Leo 20°
+        expected_rashi = (4 * 150 + 100) % 12  # = 700 % 12 = 4 (Leo)
+        assert pos["rashi"] == expected_rashi
+
+    def test_subdivisional_degree_accuracy(self):
+        """Subdivisional degree should be remainder after 0.2°."""
+        from packages.cosmos.src.divisional import get_nadi_amsha
+
+        # 10.15° = amsha 50 (10.0°), remainder = 0.15°
+        pos = get_nadi_amsha(10.15)
+        assert abs(pos["subdivisional_degree"] - 0.15) < 1e-10
+
+    def test_functions_exportable_from_package(self):
+        """New functions should be exportable from package."""
+        from packages.cosmos.src.divisional import get_nadi_amsha, get_nadi_type_from_amsha
+
+        assert callable(get_nadi_amsha)
+        assert callable(get_nadi_type_from_amsha)
+
+
+# =============================================================================
+# New Feature: Nakshatra Padas (108 divisions)
+# =============================================================================
+class TestNakshatraPadas:
+    """Tests for nakshatra pada (108 divisions) system."""
+
+    def test_ashwini_pada1(self):
+        """0° = Ashwini Pada 1 = Aries."""
+        from packages.cosmos.src.nakshatras import get_nakshatra_pada_details
+
+        result = get_nakshatra_pada_details(0.0)
+        assert result["nakshatra"] == "Ashwini"
+        assert result["pada"] == 1
+        assert result["pada_sign"] == "Aries"
+        assert result["pada_lord"] == "mars"
+
+    def test_ashwini_pada4(self):
+        """10° = Ashwini Pada 4 = Cancer."""
+        from packages.cosmos.src.nakshatras import get_nakshatra_pada_details
+
+        result = get_nakshatra_pada_details(10.0)
+        assert result["nakshatra"] == "Ashwini"
+        assert result["pada"] == 4
+        assert result["pada_sign"] == "Cancer"
+
+    def test_bharani_pada1(self):
+        """13.333° = Bharani Pada 1 = Leo."""
+        from packages.cosmos.src.nakshatras import get_nakshatra_pada_details
+
+        result = get_nakshatra_pada_details(13.34)
+        assert result["nakshatra"] == "Bharani"
+        assert result["pada"] == 1
+        assert result["pada_sign"] == "Leo"
+
+    def test_user_moon_pada(self):
+        """Moon at 324.11° = Aquarius 24.11° = Purva Bhadrapada Pada 2."""
+        from packages.cosmos.src.nakshatras import get_nakshatra_pada_details
+
+        result = get_nakshatra_pada_details(324.11)
+        assert result["nakshatra"] == "Purva Bhadrapada"
+        assert result["pada"] == 2
+        # Purva Bhadrapada is nakshatra 25 (index 24)
+        # Pada 2 (index 1): (24*4+1)%12 = (97)%12 = 1 = Taurus
+        assert result["pada_sign"] == "Taurus"
+
+    def test_global_pada_index_range(self):
+        """Global pada index should be 1-108."""
+        from packages.cosmos.src.nakshatras import get_nakshatra_pada_details
+
+        result = get_nakshatra_pada_details(0.0)
+        assert result["pada_index_global"] == 1
+        result = get_nakshatra_pada_details(359.9)
+        assert result["pada_index_global"] == 108
+
+    def test_chart_summary(self):
+        """Chart summary should work with both dict and direct longitude formats."""
+        from packages.cosmos.src.nakshatras import get_chart_pada_summary
+
+        planets = {
+            "moon": {"longitude": 324.11},
+            "sun": {"longitude": 227.2154},
+        }
+        result = get_chart_pada_summary(planets)
+        assert result["success"] is True
+        assert "moon" in result["planet_padas"]
+        assert "sun" in result["planet_padas"]
+
+    def test_vargottama_detection(self):
+        """Vargottama detection when D1 sign equals navamsha sign."""
+        from packages.cosmos.src.nakshatras import get_nakshatra_pada_details
+
+        # Test exact Aries boundary where D1 and navamsha might match
+        result = get_nakshatra_pada_details(0.0)
+        # Both D1 and navamsha should be Aries (sign index 0)
+        assert result["is_vargottama"]
+
+    def test_pushkara_navamsha_detection(self):
+        """Pushkara navamsha detection for auspicious padas."""
+        from packages.cosmos.src.nakshatras import get_nakshatra_pada_details
+
+        # Ashwini Pada 4 is pushkara (nakshatra index 0, pada index 3)
+        result = get_nakshatra_pada_details(10.0)  # Near 10° = Ashwini Pada 4
+        assert result["is_pushkara_navamsha"]
+
+    def test_degree_calculations(self):
+        """Degree in nakshatra and pada calculations."""
+        from packages.cosmos.src.nakshatras import get_nakshatra_pada_details
+
+        # 5° should be in Ashwini (0-13.333°), around Pada 2
+        result = get_nakshatra_pada_details(5.0)
+        assert result["nakshatra"] == "Ashwini"
+        assert result["degree_in_nakshatra"] == 5.0
+        assert 0 <= result["degree_in_pada"] <= 3.3333
+
+    def test_interpretation_text(self):
+        """Interpretation should include nakshatra, pada, sign, and sublord."""
+        from packages.cosmos.src.nakshatras import get_nakshatra_pada_details
+
+        result = get_nakshatra_pada_details(0.0)
+        interp = result["interpretation"]
+        assert "Ashwini" in interp
+        assert "Pada 1" in interp
+        assert "Aries" in interp
+        assert "mars" in interp
+
+    def test_chart_summary_vargottama_pushkara(self):
+        """Chart summary should identify vargottama and pushkara planets."""
+        from packages.cosmos.src.nakshatras import get_chart_pada_summary
+
+        planets = {
+            "sun": 0.0,  # Ashwini Pada 1, possibly vargottama
+            "moon": 10.0,  # Ashwini Pada 4, pushkara
+        }
+        result = get_chart_pada_summary(planets)
+
+        # Check that lists exist
+        assert isinstance(result["vargottama_planets"], list)
+        assert isinstance(result["pushkara_planets"], list)
+        assert "moon" in result["pushkara_planets"]  # Ashwini Pada 4 is pushkara
+
+    def test_functions_exportable_from_cosmos(self):
+        """New functions should be exportable from cosmos package."""
+        from packages.cosmos.src import get_chart_pada_summary, get_nakshatra_pada_details
+
+        assert callable(get_nakshatra_pada_details)
+        assert callable(get_chart_pada_summary)

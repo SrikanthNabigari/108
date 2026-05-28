@@ -579,3 +579,278 @@ def get_nakshatra_transit_triggers(
     triggers.sort(key=lambda x: (x["date"], body_order.get(x["planet"], 2)))
 
     return triggers
+
+
+# ── Ambient (slow-burn) transit signals ──
+#
+# Discrete-event triggers (above) only fire on ingresses, exact aspects, retros,
+# and dasha changes. They miss the BPHS reality that a slow planet sitting in
+# a house for months is the dominant timing signal — Jupiter in 9H is "the
+# pilgrimage year" whether or not anything new happens this week.
+
+# Slow planets and their typical sign-occupation duration in days
+_SLOW_PLANETS = {
+    "jupiter": 365,  # ~1 year per sign
+    "saturn": 912,  # ~2.5 years per sign
+    "rahu": 548,  # ~1.5 years per sign (retrograde)
+    "ketu": 548,  # ~1.5 years per sign (retrograde)
+}
+
+# House → life-domain map used by ambient narrator (BPHS bhavas)
+_HOUSE_DOMAINS: dict[int, list[str]] = {
+    1: ["self", "vitality", "identity"],
+    2: ["wealth", "family", "speech"],
+    3: ["short journeys", "courage", "siblings"],
+    4: ["home", "mother", "happiness"],
+    5: ["children", "creativity", "intelligence", "purva-punya"],
+    6: ["work", "health", "enemies", "debts"],
+    7: ["spouse", "partnership", "business"],
+    8: ["transformation", "longevity", "occult"],
+    9: ["long journeys", "dharma", "guru", "fortune", "pilgrimage"],
+    10: ["career", "status", "public role"],
+    11: ["gains", "friends", "fulfillment"],
+    12: ["foreign lands", "moksha", "isolation", "spiritual retreat", "expenses"],
+}
+
+
+def get_ambient_signals(
+    natal_planets: dict[str, dict[str, Any]],  # noqa: ARG001 — reserved for natal-Saturn refinements
+    lagna_rashi: str | int,
+    moon_longitude: float,
+    query_datetime: datetime | str | None = None,
+    birth_datetime: datetime | str | None = None,
+) -> dict[str, Any]:
+    """Return the slow-burn transit picture: what's been true for weeks/months.
+
+    Classical BPHS timing rests on three pillars: (1) the dasha lord's nature
+    and current transit position, (2) the house occupation of slow benefics
+    (Jupiter, Venus) and slow malefics (Saturn, Rahu, Ketu), and (3) functional
+    lordship for the lagna. None of these change daily, so they don't appear in
+    discrete-event triggers — but they ARE the dominant signal for "what
+    domains are active right now." This function surfaces them.
+
+    Args:
+        natal_planets: {planet: {longitude, ...}} for at least the natal Moon.
+        lagna_rashi: Lagna sign (name or 0-11 index).
+        moon_longitude: Natal Moon longitude (0-360).
+        query_datetime: Moment to evaluate (default: now).
+        birth_datetime: Birth datetime (needed for dasha lord identification).
+
+    Returns:
+        {
+          "query_date": ISO,
+          "slow_transits": [ {planet, house_from_lagna, house_from_moon,
+                              functional_nature, days_in_sign, days_until_exit,
+                              activated_domains, themes} ],
+          "dasha_lord_transits": [ {level, lord, house_from_lagna,
+                                    house_from_moon, functional_nature, themes} ],
+          "moon_signals": {janma_nakshatra_active: bool, chandra_ashtama: bool},
+          "saturn_signals": {sade_sati_phase, kantaka_shani_house, ashtama_shani},
+          "active_domains": [ {domain, weight, sources} ],   # cross-aggregated
+        }
+    """
+    from packages.self.src.transit_lordship import classify_planet_role
+
+    rashi_names = [
+        "aries",
+        "taurus",
+        "gemini",
+        "cancer",
+        "leo",
+        "virgo",
+        "libra",
+        "scorpio",
+        "sagittarius",
+        "capricorn",
+        "aquarius",
+        "pisces",
+    ]
+    if isinstance(lagna_rashi, str):
+        lagna_idx = (
+            rashi_names.index(lagna_rashi.lower()) if lagna_rashi.lower() in rashi_names else 0
+        )
+    else:
+        lagna_idx = int(lagna_rashi) % 12
+
+    moon_rashi_idx = int(moon_longitude // 30) % 12
+
+    if query_datetime is None:
+        query_dt = datetime.now()
+    elif isinstance(query_datetime, str):
+        query_dt = datetime.fromisoformat(query_datetime)
+    else:
+        query_dt = query_datetime
+
+    jd = get_julian_day(query_dt)
+    raw = get_all_planets(jd)
+
+    def _house_from(rashi_idx: int, ref_idx: int) -> int:
+        return ((rashi_idx - ref_idx) % 12) + 1
+
+    # ── Slow-planet narrator ──
+    slow_transits: list[dict[str, Any]] = []
+    for planet, typical_days in _SLOW_PLANETS.items():
+        if planet not in raw:
+            continue
+        lon = float(raw[planet]["longitude"])
+        rashi_idx = int(lon // 30) % 12
+        deg_in_sign = lon % 30
+        speed = float(raw[planet].get("speed", 0))
+        is_retro = bool(raw[planet].get("is_retrograde", False)) or speed < 0
+
+        house_lagna = _house_from(rashi_idx, lagna_idx)
+        house_moon = _house_from(rashi_idx, moon_rashi_idx)
+
+        # Estimate days remaining in current sign — coarse but useful
+        if abs(speed) > 1e-6:
+            if speed > 0:
+                days_until_exit = int((30 - deg_in_sign) / speed)
+            else:
+                days_until_exit = int(deg_in_sign / abs(speed))
+        else:
+            days_until_exit = typical_days // 2
+        days_in_sign = max(0, typical_days - days_until_exit)
+
+        role = classify_planet_role(planet, lagna_idx)
+
+        slow_transits.append(
+            {
+                "planet": planet,
+                "rashi": rashi_names[rashi_idx],
+                "is_retrograde": is_retro,
+                "house_from_lagna": house_lagna,
+                "house_from_moon": house_moon,
+                "functional_nature": role["functional_nature"],
+                "houses_ruled": role["houses_ruled"],
+                "days_in_sign": days_in_sign,
+                "days_until_exit": days_until_exit,
+                "themes_lagna": _HOUSE_DOMAINS.get(house_lagna, []),
+                "themes_moon": _HOUSE_DOMAINS.get(house_moon, []),
+            }
+        )
+
+    # ── Dasha lord transit positions (BPHS: dasha lord's transit = manifestation) ──
+    dasha_lord_transits: list[dict[str, Any]] = []
+    if birth_datetime is not None:
+        try:
+            from packages.context.src.dasha import get_current_dasha
+
+            if isinstance(birth_datetime, str):
+                birth_dt = datetime.fromisoformat(birth_datetime)
+            else:
+                birth_dt = birth_datetime
+            dasha = get_current_dasha(birth_dt, moon_longitude, query_dt)
+            if dasha:
+                for level in ("mahadasha", "antardasha", "pratyantardasha"):
+                    info = dasha.get(level) or {}
+                    lord = info.get("lord")
+                    if not lord or lord not in raw:
+                        continue
+                    lon = float(raw[lord]["longitude"])
+                    rashi_idx = int(lon // 30) % 12
+                    h_lag = _house_from(rashi_idx, lagna_idx)
+                    h_moon = _house_from(rashi_idx, moon_rashi_idx)
+                    role = classify_planet_role(lord, lagna_idx)
+                    dasha_lord_transits.append(
+                        {
+                            "level": level,
+                            "lord": lord,
+                            "rashi": rashi_names[rashi_idx],
+                            "house_from_lagna": h_lag,
+                            "house_from_moon": h_moon,
+                            "functional_nature": role["functional_nature"],
+                            "houses_ruled": role["houses_ruled"],
+                            "themes_lagna": _HOUSE_DOMAINS.get(h_lag, []),
+                            "is_in_own_lordship_house": h_lag in role["houses_ruled"],
+                        }
+                    )
+        except Exception:
+            pass
+
+    # ── Moon signals ──
+    moon_signals: dict[str, Any] = {}
+    if "moon" in raw:
+        transit_moon_lon = float(raw["moon"]["longitude"])
+        natal_nak = int(moon_longitude // 13.333333333) % 27
+        transit_nak = int(transit_moon_lon // 13.333333333) % 27
+        transit_moon_rashi = int(transit_moon_lon // 30) % 12
+        h_from_natal_moon = _house_from(transit_moon_rashi, moon_rashi_idx)
+        moon_signals = {
+            "janma_nakshatra_active": natal_nak == transit_nak,
+            "chandra_ashtama": h_from_natal_moon == 8,
+            "transit_house_from_moon": h_from_natal_moon,
+        }
+
+    # ── Saturn signals: Sade Sati phase, Kantaka Shani, Ashtama Shani ──
+    saturn_signals: dict[str, Any] = {}
+    if "saturn" in raw:
+        sat_lon = float(raw["saturn"]["longitude"])
+        sat_rashi = int(sat_lon // 30) % 12
+        h_from_moon = _house_from(sat_rashi, moon_rashi_idx)
+        sade_sati_phase: str | None = None
+        if h_from_moon == 12:
+            sade_sati_phase = "rising"
+        elif h_from_moon == 1:
+            sade_sati_phase = "peak"
+        elif h_from_moon == 2:
+            sade_sati_phase = "setting"
+        saturn_signals = {
+            "transit_house_from_moon": h_from_moon,
+            "sade_sati_phase": sade_sati_phase,
+            "in_sade_sati": sade_sati_phase is not None,
+            "kantaka_shani": h_from_moon in (4, 7, 10),
+            "ashtama_shani": h_from_moon == 8,
+        }
+
+    # ── Aggregate active domains (slow transits + dasha lord transits) ──
+    domain_acc: dict[str, dict[str, Any]] = {}
+
+    def _add(domain: str, weight: float, source: str) -> None:
+        slot = domain_acc.setdefault(domain, {"weight": 0.0, "sources": []})
+        slot["weight"] += weight
+        slot["sources"].append(source)
+
+    nature_weight = {
+        "yogakaraka": 1.4,
+        "benefic": 1.2,
+        "neutral": 0.7,
+        "malefic": 0.5,
+        "maraka": 0.4,
+    }
+    planet_weight = {"jupiter": 2.0, "saturn": 1.6, "rahu": 1.4, "ketu": 1.4}
+
+    for st in slow_transits:
+        w = planet_weight.get(st["planet"], 1.0) * nature_weight.get(st["functional_nature"], 0.7)
+        for d in st["themes_lagna"]:
+            _add(d, w, f"{st['planet']} in H{st['house_from_lagna']}")
+        # House lordship activation: domains of houses this planet rules
+        for ruled in st["houses_ruled"]:
+            for d in _HOUSE_DOMAINS.get(ruled, []):
+                _add(
+                    d,
+                    w * 0.6,
+                    f"{st['planet']} (lord of H{ruled}) transits H{st['house_from_lagna']}",
+                )
+
+    level_weight = {"mahadasha": 2.5, "antardasha": 1.8, "pratyantardasha": 1.0}
+    for dl in dasha_lord_transits:
+        w = level_weight.get(dl["level"], 1.0) * nature_weight.get(dl["functional_nature"], 0.7)
+        for d in dl["themes_lagna"]:
+            _add(d, w, f"{dl['level']} lord {dl['lord']} transits H{dl['house_from_lagna']}")
+        for ruled in dl["houses_ruled"]:
+            for d in _HOUSE_DOMAINS.get(ruled, []):
+                _add(d, w * 0.7, f"{dl['lord']} (lord of H{ruled}) active in {dl['level']}")
+
+    active_domains = [
+        {"domain": d, "weight": round(v["weight"], 2), "sources": v["sources"][:5]}
+        for d, v in sorted(domain_acc.items(), key=lambda x: -x[1]["weight"])
+    ]
+
+    return {
+        "query_date": query_dt.isoformat(),
+        "slow_transits": slow_transits,
+        "dasha_lord_transits": dasha_lord_transits,
+        "moon_signals": moon_signals,
+        "saturn_signals": saturn_signals,
+        "active_domains": active_domains[:15],
+    }

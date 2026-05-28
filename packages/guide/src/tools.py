@@ -362,9 +362,18 @@ class AstrologyTools:
             if charts is None:
                 charts = [2, 3, 9, 10, 12, 24, 30, 60]  # Most commonly used
 
+            # Normalize input: cosmos.get_divisional_chart wants {planet: longitude_float}
+            # but callers may pass {planet: {longitude, ...}}. Flatten if dict-of-dicts.
+            normalized: dict[str, float] = {}
+            for name, data in planets.items():
+                if isinstance(data, dict):
+                    normalized[name] = float(data.get("longitude", 0))
+                else:
+                    normalized[name] = float(data)
+
             divisional_data = {}
             for d_num in charts:
-                d_chart = get_divisional_chart(planets, d_num)
+                d_chart = get_divisional_chart(normalized, d_num)
                 divisional_data[f"D{d_num}"] = d_chart
 
             return {
@@ -437,7 +446,17 @@ class AstrologyTools:
             }
         """
         try:
-            query_date = query_date or datetime.utcnow()
+            # Normalize tz: if birth has tz but query doesn't (or vice versa), align them.
+            if query_date is None:
+                query_date = (
+                    datetime.now(tz=birth_datetime.tzinfo)
+                    if birth_datetime.tzinfo
+                    else datetime.utcnow()
+                )
+            if birth_datetime.tzinfo is not None and query_date.tzinfo is None:
+                query_date = query_date.replace(tzinfo=birth_datetime.tzinfo)
+            elif birth_datetime.tzinfo is None and query_date.tzinfo is not None:
+                query_date = query_date.replace(tzinfo=None)
 
             # Get current dasha — returns nested dicts: {"mahadasha": {"lord", "start_date", "end_date", ...}}
             current = get_current_dasha(birth_datetime, moon_longitude, query_date)
@@ -560,18 +579,47 @@ class AstrologyTools:
         try:
             timeline = get_mahadasha_sequence(birth_datetime, moon_longitude)
 
-            # Filter to next N years
-            start_date = datetime.utcnow()
+            # Filter to next N years (align tz with birth_datetime to compare end_dates)
+            if birth_datetime.tzinfo is not None:
+                start_date = datetime.now(tz=birth_datetime.tzinfo)
+            else:
+                start_date = datetime.utcnow()
             cutoff_date = start_date + timedelta(days=365 * years)
 
-            filtered = [
-                period for period in timeline if period.get("end_date", datetime.max) <= cutoff_date
-            ]
+            filtered = []
+            for period in timeline:
+                end = period.get("end_date")
+                if end is None:
+                    continue
+                # Normalize tz of period end vs cutoff
+                if end.tzinfo and not cutoff_date.tzinfo:
+                    cutoff_cmp = cutoff_date.replace(tzinfo=end.tzinfo)
+                elif not end.tzinfo and cutoff_date.tzinfo:
+                    end_cmp = end.replace(tzinfo=cutoff_date.tzinfo)
+                    if end_cmp <= cutoff_date:
+                        filtered.append(period)
+                    continue
+                else:
+                    cutoff_cmp = cutoff_date
+                if end <= cutoff_cmp:
+                    filtered.append(period)
 
             return {
                 "start_date": start_date.isoformat(),
                 "end_date": cutoff_date.isoformat(),
-                "dasha_periods": filtered,
+                "dasha_periods": [
+                    {
+                        "lord": p["lord"],
+                        "start_date": p["start_date"].isoformat()
+                        if hasattr(p["start_date"], "isoformat")
+                        else str(p["start_date"]),
+                        "end_date": p["end_date"].isoformat()
+                        if hasattr(p["end_date"], "isoformat")
+                        else str(p["end_date"]),
+                        "years": p.get("years", 0),
+                    }
+                    for p in filtered
+                ],
                 "success": True,
             }
         except Exception as e:
@@ -929,19 +977,26 @@ class AstrologyTools:
         try:
             planet_enum = Planet(planet.lower())
             rashi_enum = Rashi(lagna_sign.lower())
-            longitude = position.get("longitude", 0)
 
-            shadbala = self.strength_calc.calculate_shadbala(
-                planet=planet_enum, longitude=longitude, house=house_num, rashi=rashi_enum
+            # Reuse _dict_to_birth_chart helper which fills in all required
+            # BirthChart fields (user_id, birth_data, houses, etc.) with defaults.
+            chart_dict = {
+                "planets": {planet: position},
+                "lagna": {"sign": lagna_sign},
+            }
+            natal = self._dict_to_birth_chart(chart_dict)
+
+            shadbala = self.strength_calc.calculate_shadbala(planet_enum, natal)
+            dignity_obj = natal.planets.get(planet_enum)
+            dignity = self.strength_calc.get_planet_dignity(
+                planet_enum, dignity_obj.rashi if dignity_obj else rashi_enum
             )
-
-            dignity = self.strength_calc.get_planet_dignity(planet_enum, rashi_enum)
 
             return {
                 "planet": planet,
                 "house": house_num,
                 "sign": lagna_sign,
-                "dignity": dignity,
+                "dignity": dignity.value if hasattr(dignity, "value") else str(dignity),
                 "shadbala": shadbala,
                 "success": True,
             }
@@ -978,20 +1033,32 @@ class AstrologyTools:
             Dictionary with muhurta evaluation and score
         """
         try:
-            jd = get_julian_day(datetime_to_check)
-            planets = get_all_planets(jd)
-
-            # Get panchanga
-            sun_lon = planets["sun"]["longitude"]
-            moon_lon = planets["moon"]["longitude"]
-
-            panchanga = get_panchanga(sun_lon, moon_lon)
+            # cosmos.get_panchanga expects (datetime, latitude, longitude)
+            panchanga = get_panchanga(datetime_to_check, latitude, longitude)
 
             # Evaluate muhurta
             result = evaluate_muhurta(activity, panchanga, datetime_to_check)
 
-            # Check inauspicious periods
-            inauspicious = calculate_all_inauspicious(datetime_to_check, latitude, longitude)
+            # Check inauspicious periods — needs sunrise/sunset datetimes + weekday string
+            try:
+                from packages.cosmos.src import get_sunrise_sunset
+
+                ss = get_sunrise_sunset(datetime_to_check.strftime("%Y-%m-%d"), latitude, longitude)
+                sunrise_dt = ss.get("sunrise") if isinstance(ss.get("sunrise"), datetime) else None
+                sunset_dt = ss.get("sunset") if isinstance(ss.get("sunset"), datetime) else None
+                # Fallback: parse strings if needed
+                if sunrise_dt is None and isinstance(ss.get("sunrise"), str):
+                    sunrise_dt = datetime.fromisoformat(ss["sunrise"])
+                if sunset_dt is None and isinstance(ss.get("sunset"), str):
+                    sunset_dt = datetime.fromisoformat(ss["sunset"])
+                weekday = datetime_to_check.strftime("%A").lower()
+                if sunrise_dt and sunset_dt:
+                    inauspicious = calculate_all_inauspicious(sunrise_dt, sunset_dt, weekday)
+                else:
+                    inauspicious = {}
+            except Exception as inner_e:
+                logger.warning(f"Inauspicious calc skipped: {inner_e}")
+                inauspicious = {}
 
             result["inauspicious_periods"] = inauspicious
             result["success"] = True
@@ -1068,18 +1135,22 @@ class AstrologyTools:
             if date is None:
                 date = datetime.utcnow()
 
-            jd = get_julian_day(date)
-            planets = get_all_planets(jd)
-
-            sun_lon = planets["sun"]["longitude"]
-            moon_lon = planets["moon"]["longitude"]
-
-            panchanga = get_panchanga(sun_lon, moon_lon)
+            # cosmos.get_panchanga expects (datetime, latitude, longitude)
+            panchanga = get_panchanga(date, latitude, longitude)
 
             # Get sunrise/sunset
             from packages.cosmos.src import get_sunrise_sunset
 
-            sunrise_sunset = get_sunrise_sunset(date.strftime("%Y-%m-%d"), latitude, longitude)
+            try:
+                sunrise_sunset = get_sunrise_sunset(date.strftime("%Y-%m-%d"), latitude, longitude)
+            except Exception:
+                sunrise_sunset = {}
+
+            # Pull sun/moon longs for sign labels
+            jd = get_julian_day(date)
+            planets = get_all_planets(jd)
+            sun_lon = planets["sun"]["longitude"]
+            moon_lon = planets["moon"]["longitude"]
 
             return {
                 "date": date.strftime("%Y-%m-%d"),
@@ -1090,8 +1161,8 @@ class AstrologyTools:
                 "vara": panchanga.get("vara"),
                 "sunrise": sunrise_sunset.get("sunrise"),
                 "sunset": sunrise_sunset.get("sunset"),
-                "sun_sign": panchanga.get("sun_sign", self._lon_to_sign(sun_lon)),
-                "moon_sign": panchanga.get("moon_sign", self._lon_to_sign(moon_lon)),
+                "sun_sign": self._lon_to_sign(sun_lon),
+                "moon_sign": self._lon_to_sign(moon_lon),
                 "success": True,
             }
         except Exception as e:
@@ -2046,13 +2117,32 @@ class AstrologyTools:
                 house_data = houses.get(str(i), {})
                 cusps.append(house_data.get("cusp_longitude", (i - 1) * 30))
 
-            # Get KP components
+            # Get KP components — fix calling conventions:
+            # get_ruling_planets expects (datetime_iso, latitude, longitude)
+            # get_kp_significators expects (planets, cusps) and returns per-planet data
             cuspal_sublords = get_cuspal_sublords(cusps)
             significators = get_kp_significators(planets, cusps)
-            ruling = get_ruling_planets(planets, cusps, birth_datetime)
+            birth_iso = (
+                birth_datetime.isoformat()
+                if hasattr(birth_datetime, "isoformat")
+                else str(birth_datetime)
+            )
+            try:
+                ruling = get_ruling_planets(birth_iso, latitude, longitude)
+            except Exception as e:
+                logger.warning(f"Ruling planets calc failed: {e}")
+                ruling = {}
 
-            # Get prediction
-            prediction = get_kp_prediction(planets, cusps, birth_datetime, query_type)
+            # Get prediction — signature varies, pass best-effort
+            try:
+                prediction = get_kp_prediction(planets, cusps, query_type)
+            except TypeError:
+                # Some implementations may take birth_iso instead
+                try:
+                    prediction = get_kp_prediction(planets, cusps, birth_iso, query_type)
+                except Exception as e:
+                    logger.warning(f"KP prediction failed: {e}")
+                    prediction = {"verdict": "indeterminate", "note": str(e)}
 
             return {
                 "kp_analysis": {

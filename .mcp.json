@@ -1,40 +1,37 @@
 {
   "mcpServers": {
-    "ephemeris": {
+    "108-ephemeris": {
+      "type": "stdio",
       "command": "uv",
-      "args": ["run", "python", "-m", "services.mcp.ephemeris"],
+      "args": ["run", "python", "services/mcp/ephemeris_server.py"],
       "env": {
-        "PYTHONPATH": "packages"
+        "PYTHONPATH": "."
       }
     },
-    "biorhythm": {
+    "108-patterns": {
+      "type": "stdio",
       "command": "uv",
-      "args": ["run", "python", "-m", "services.mcp.biorhythm"],
+      "args": ["run", "python", "services/mcp/patterns_server.py"],
       "env": {
-        "PYTHONPATH": "packages"
+        "PYTHONPATH": "."
       }
     },
-    "knowledge": {
+    "108-context": {
+      "type": "stdio",
       "command": "uv",
-      "args": ["run", "python", "-m", "services.mcp.knowledge"],
+      "args": ["run", "python", "services/mcp/context_server.py"],
       "env": {
-        "PYTHONPATH": "packages",
-        "KNOWLEDGE_PATH": "knowledge"
+        "PYTHONPATH": "."
       }
     },
-    "memory": {
+    "108-knowledge": {
+      "type": "stdio",
       "command": "uv",
-      "args": ["run", "python", "-m", "services.mcp.memory"],
+      "args": ["run", "python", "services/mcp/knowledge_server.py"],
       "env": {
-        "PYTHONPATH": "packages",
-        "DATABASE_URL": "${DATABASE_URL}"
-      }
-    },
-    "patterns": {
-      "command": "uv",
-      "args": ["run", "python", "-m", "services.mcp.patterns"],
-      "env": {
-        "PYTHONPATH": "packages"
+        "PYTHONPATH": ".",
+        "KNOWLEDGE_PATH": "knowledge",
+        "BPHS_KNOWLEDGE_PATH": "../108/knowledge"
       }
     }
   }

@@ -31,7 +31,7 @@ LONG_END = datetime(2025, 7, 15)  # ~195 days
 
 # User birth data
 BIRTH_DT = datetime(1992, 12, 3, 3, 0, 0)
-MOON_LON = 326.85
+MOON_LON = 324.11
 
 
 # Helper: expected sequence starting from a given lord

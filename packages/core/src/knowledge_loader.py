@@ -323,6 +323,29 @@ def get_deha_dasha_effects() -> dict[str, Any]:
     return load_rules("deha_dasha_effects").get("deha_dasha_effects", {})
 
 
+def get_bphs_cross_reference() -> dict[str, Any]:
+    """Get BPHS cross-reference mapping (tools → chapters).
+
+    Returns the deterministic mapping from MCP tool names to BPHS chapters
+    and verse ranges. Used by bphs_enricher.py for automatic citation.
+    """
+    return _load_json_file(str(KNOWLEDGE_DIR / "bphs_cross_reference.json"))
+
+
+def get_bphs_chapters_for_tool(tool_name: str) -> list[int]:
+    """Get BPHS chapter numbers relevant to a specific MCP tool.
+
+    Args:
+        tool_name: MCP tool function name (e.g., "detect_yogas", "current_dasha")
+
+    Returns:
+        List of BPHS chapter numbers (1-100)
+    """
+    xref = get_bphs_cross_reference()
+    mapping = xref.get("tool_mappings", {}).get(tool_name, {})
+    return list(mapping.get("chapters", []))
+
+
 def clear_cache() -> None:
     """Clear the knowledge cache (useful for testing)."""
     _load_json_file.cache_clear()

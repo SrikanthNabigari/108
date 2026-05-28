@@ -36,6 +36,9 @@ from packages.context.src.ashtottari_dasha import (  # noqa: E402
     get_current_ashtottari,
     is_ashtottari_applicable,
 )
+from packages.context.src.chara_dasha_transit import (  # noqa: E402
+    get_chara_dasha_overlay_from_raw as _get_chara_dasha_overlay_from_raw,
+)
 from packages.context.src.dasha_transit import cross_analyze as _cross_analyze  # noqa: E402
 from packages.context.src.event_correlator import correlate_event as _correlate_event  # noqa: E402
 from packages.context.src.muhurta import (  # noqa: E402
@@ -49,8 +52,17 @@ from packages.context.src.narayana_dasha import (  # noqa: E402
     get_current_narayana_dasha,
 )
 from packages.context.src.progressions import get_current_progressions  # noqa: E402
+from packages.context.src.tithi_pravesha import (  # noqa: E402
+    cast_tithi_pravesha_chart as _cast_tithi_pravesha_chart,
+)
+from packages.context.src.tithi_pravesha import (  # noqa: E402
+    interpret_tithi_pravesha as _interpret_tithi_pravesha,
+)
 from packages.context.src.transit_aspects import (  # noqa: E402
     get_transit_natal_aspects as _get_transit_natal_aspects,
+)
+from packages.context.src.transit_tracker import (  # noqa: E402
+    get_ambient_signals as _get_ambient_signals,
 )
 from packages.context.src.transit_tracker import (  # noqa: E402
     get_upcoming_triggers as _get_upcoming_triggers,
@@ -61,6 +73,7 @@ from packages.context.src.yogini_dasha import (  # noqa: E402
     get_current_yogini_dasha,
     get_yogini_antardasha,
 )
+from packages.core.src.bphs_enricher import enrich_response  # noqa: E402
 
 # Import cosmos constants
 from packages.cosmos.src import (  # noqa: E402
@@ -187,6 +200,9 @@ def current_dasha(
             else None,
             "interpretation": _get_dasha_interpretation(md_lord, ad_lord),
         }
+        return enrich_response(
+            "current_dasha", result, {"mahadasha_lord": md_lord, "antardasha_lord": ad_lord}
+        )
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__}
@@ -235,7 +251,7 @@ def dasha_periods(
                 }
             )
 
-        return {
+        result = {
             "birth_datetime": birth_datetime,
             "moon_longitude": moon_longitude,
             "birth_nakshatra_lord": balance["lord"],
@@ -243,6 +259,7 @@ def dasha_periods(
             "count": len(periods),
             "mahadashas": periods,
         }
+        return enrich_response("dasha_periods", result)
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__}
@@ -291,13 +308,14 @@ def transit_analysis(natal_moon_rashi: str, transit_positions: dict[str, str]) -
         # Check Dhaiya
         dhaiya = check_dhaiya(moon_idx, saturn_idx) if saturn_idx >= 0 else {"active": False}
 
-        return {
+        result = {
             "natal_moon": natal_moon_rashi,
             "planets": planet_analysis,
             "sade_sati": sade_sati,
             "dhaiya": dhaiya,
             "overall_assessment": _assess_transits(planet_analysis, sade_sati, dhaiya),
         }
+        return enrich_response("transit_analysis", result)
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__}
@@ -332,7 +350,7 @@ def sade_sati_status(natal_moon_rashi: str, saturn_rashi: str) -> dict[str, Any]
 
         if result["active"]:
             phase = result.get("phase", "unknown")
-            return {
+            res = {
                 "is_active": True,
                 "natal_moon": natal_moon_rashi,
                 "saturn_current": saturn_rashi,
@@ -351,7 +369,7 @@ def sade_sati_status(natal_moon_rashi: str, saturn_rashi: str) -> dict[str, Any]
                 ],
             }
         else:
-            return {
+            res = {
                 "is_active": False,
                 "natal_moon": natal_moon_rashi,
                 "saturn_current": saturn_rashi,
@@ -359,6 +377,7 @@ def sade_sati_status(natal_moon_rashi: str, saturn_rashi: str) -> dict[str, Any]
                 "distance": _calculate_house_distance(moon_idx, saturn_idx),
                 "years_until_sade_sati": _years_until_sade_sati(moon_idx, saturn_idx),
             }
+        return enrich_response("sade_sati_status", res)
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__}
@@ -390,7 +409,7 @@ def dhaiya_status(natal_moon_rashi: str, saturn_rashi: str) -> dict[str, Any]:
 
         if result["active"]:
             result.get("phase", "unknown")
-            return {
+            res = {
                 "is_active": True,
                 "type": "Dhaiya (Kantaka Shani)",
                 "natal_moon": natal_moon_rashi,
@@ -412,13 +431,14 @@ def dhaiya_status(natal_moon_rashi: str, saturn_rashi: str) -> dict[str, Any]:
                 ],
             }
         else:
-            return {
+            res = {
                 "is_active": False,
                 "type": "Dhaiya (Kantaka Shani)",
                 "natal_moon": natal_moon_rashi,
                 "saturn_current": saturn_rashi,
                 "note": "Dhaiya is not currently active",
             }
+        return enrich_response("dhaiya_status", res)
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__}
@@ -496,7 +516,7 @@ def muhurta_check(
 
         inauspicious = calculate_all_inauspicious(sunrise, sunset, weekday)
 
-        return {
+        result = {
             "datetime": datetime_iso,
             "activity": activity,
             "panchanga": panchanga,
@@ -532,6 +552,7 @@ def muhurta_check(
                 },
             },
         }
+        return enrich_response("muhurta_check", result)
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__}
@@ -579,12 +600,13 @@ def find_good_muhurta(
                 }
             )
 
-        return {
+        result = {
             "activity": activity,
             "search_period": {"start": start_date, "end": end_date},
             "muhurtas_found": len(muhurtas),
             "recommendations": muhurtas,
         }
+        return enrich_response("find_good_muhurta", result)
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__}
@@ -629,12 +651,14 @@ def antardasha_periods(
                 }
             )
 
-        return {
+        result = {
             "birth_datetime": birth_datetime,
             "mahadasha_lord": mahadasha_lord,
             "antardasha_count": len(periods),
             "antardashas": periods,
         }
+        ctx = {"mahadasha_lord": mahadasha_lord} if mahadasha_lord else {}
+        return enrich_response("antardasha_periods", result, ctx)
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__}
@@ -670,19 +694,24 @@ def antardasha_effects(mahadasha_lord: str, antardasha_lord: str) -> dict[str, A
         effects = get_antardasha_effect(mahadasha_lord, antardasha_lord)
 
         if effects:
-            return {
+            res = {
                 "mahadasha": mahadasha_lord.lower(),
                 "antardasha": antardasha_lord.lower(),
                 "found": True,
                 **effects,
             }
         else:
-            return {
+            res = {
                 "mahadasha": mahadasha_lord.lower(),
                 "antardasha": antardasha_lord.lower(),
                 "found": False,
                 "message": f"No effects data found for {mahadasha_lord}-{antardasha_lord} combination",
             }
+        return enrich_response(
+            "antardasha_effects",
+            res,
+            {"mahadasha_lord": mahadasha_lord, "antardasha_lord": antardasha_lord},
+        )
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__}
@@ -722,7 +751,7 @@ def pratyantardasha_effects(
         effects = get_pratyantardasha_effect(mahadasha_lord, antardasha_lord, pratyantardasha_lord)
 
         if effects:
-            return {
+            res = {
                 "mahadasha": mahadasha_lord.lower(),
                 "antardasha": antardasha_lord.lower(),
                 "pratyantardasha": pratyantardasha_lord.lower(),
@@ -730,7 +759,7 @@ def pratyantardasha_effects(
                 **effects,
             }
         else:
-            return {
+            res = {
                 "mahadasha": mahadasha_lord.lower(),
                 "antardasha": antardasha_lord.lower(),
                 "pratyantardasha": pratyantardasha_lord.lower(),
@@ -740,6 +769,7 @@ def pratyantardasha_effects(
                     f"{mahadasha_lord}-{antardasha_lord}-{pratyantardasha_lord} combination"
                 ),
             }
+        return enrich_response("pratyantardasha_effects", res, {"mahadasha_lord": mahadasha_lord})
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__}
@@ -793,7 +823,7 @@ def enriched_transit(
             }
 
         result = get_enriched_transit_analysis(moon_idx, typed_data)
-        return result
+        return enrich_response("enriched_transit", result)
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__}
@@ -860,16 +890,17 @@ def yogini_dasha(
         if current_maha:
             antardashas = get_yogini_antardasha(current_maha)
 
-        return {
+        yogini_lord = (
+            current["lord"].value if hasattr(current["lord"], "value") else str(current["lord"])
+        )
+        result = {
             "system": "yogini",
             "birth_datetime": birth_datetime,
             "current": {
                 "yogini": current["yogini"].value
                 if hasattr(current["yogini"], "value")
                 else str(current["yogini"]),
-                "lord": current["lord"].value
-                if hasattr(current["lord"], "value")
-                else str(current["lord"]),
+                "lord": yogini_lord,
                 "start_date": current["start_date"].isoformat(),
                 "end_date": current["end_date"].isoformat(),
                 "remaining_days": current["remaining_days"],
@@ -898,6 +929,7 @@ def yogini_dasha(
                 for p in periods
             ],
         }
+        return enrich_response("yogini_dasha", result, {"mahadasha_lord": yogini_lord})
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__}
@@ -991,7 +1023,7 @@ def narayana_dasha(
 
         current = get_current_narayana_dasha(birth_dt, chart, query_dt)
 
-        return {
+        result = {
             "system": "narayana",
             "birth_datetime": birth_datetime,
             "current": {
@@ -1013,6 +1045,7 @@ def narayana_dasha(
                 for p in periods
             ],
         }
+        return enrich_response("narayana_dasha", result, {"lagna_rashi": lagna_str})
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__}
@@ -1045,7 +1078,7 @@ def compare_dashas(
         Side-by-side comparison of Vimshottari and Yogini dasha periods
 
     Example:
-        compare_dashas("1992-12-03T03:00:00+05:30", 326.85, 25, 3, 10.0)
+        compare_dashas("1992-12-03T03:00:00+05:30", 324.11, 25, 2, 10.0)
     """
     try:
         birth_dt = datetime.fromisoformat(birth_datetime.replace("Z", "+00:00"))
@@ -1065,7 +1098,7 @@ def compare_dashas(
             birth_dt, moon_nakshatra, moon_pada, degree_in_nakshatra, query_dt
         )
 
-        return {
+        result = {
             "query_date": (query_dt or datetime.now()).isoformat(),
             "vimshottari": {
                 "mahadasha_lord": vimshottari["mahadasha"]["lord"],
@@ -1084,6 +1117,9 @@ def compare_dashas(
                 "remaining_days": yogini_current["remaining_days"],
             },
         }
+        return enrich_response(
+            "compare_dashas", result, {"mahadasha_lord": vimshottari["mahadasha"]["lord"]}
+        )
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__}
@@ -1122,7 +1158,7 @@ def abhijit_muhurta(datetime_iso: str, latitude: float, longitude: float) -> dic
 
         start, end = get_abhijit_muhurta(sunrise, sunset)
 
-        return {
+        result = {
             "datetime": datetime_iso,
             "location": {"latitude": latitude, "longitude": longitude},
             "abhijit_start": start.isoformat(),
@@ -1132,6 +1168,7 @@ def abhijit_muhurta(datetime_iso: str, latitude: float, longitude: float) -> dic
             "sunset": sunset.isoformat(),
             "success": True,
         }
+        return enrich_response("abhijit_muhurta", result)
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__}
@@ -1168,7 +1205,7 @@ def brahma_muhurta(datetime_iso: str, latitude: float, longitude: float) -> dict
 
         start, end = get_brahma_muhurta(sunrise)
 
-        return {
+        result = {
             "datetime": datetime_iso,
             "location": {"latitude": latitude, "longitude": longitude},
             "brahma_start": start.isoformat(),
@@ -1177,6 +1214,7 @@ def brahma_muhurta(datetime_iso: str, latitude: float, longitude: float) -> dict
             "sunrise": sunrise.isoformat(),
             "success": True,
         }
+        return enrich_response("brahma_muhurta", result)
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__}
@@ -1221,13 +1259,14 @@ def eclipse_periods(year: int, month: int) -> dict[str, Any]:
                 }
             )
 
-        return {
+        result = {
             "year": year,
             "month": month,
             "eclipse_count": len(formatted),
             "eclipses": formatted,
             "success": True,
         }
+        return enrich_response("eclipse_periods", result)
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__}
@@ -1254,13 +1293,14 @@ def marana_kaal(weekday: int) -> dict[str, Any]:
         day_names = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
         periods = get_marana_kaal(weekday)
 
-        return {
+        result = {
             "weekday": weekday,
             "day_name": day_names[weekday],
             "periods": [{"start": p[0], "end": p[1]} for p in periods],
             "count": len(periods),
             "success": True,
         }
+        return enrich_response("marana_kaal", result)
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__}
@@ -1316,7 +1356,7 @@ def ashtottari_dasha(
         # Get full sequence
         periods = calculate_ashtottari_sequence(birth_dt, moon_nakshatra, degree_in_nakshatra)
 
-        return {
+        result = {
             "system": "ashtottari",
             "applicable": applicable,
             "birth_datetime": birth_datetime,
@@ -1346,6 +1386,9 @@ def ashtottari_dasha(
             ],
             "success": True,
         }
+        return enrich_response(
+            "ashtottari_dasha", result, {"mahadasha_lord": current["mahadasha"]["lord"]}
+        )
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__}
@@ -1389,7 +1432,7 @@ def secondary_progressions(
 
         result = get_current_progressions(birth_dt, birth_lat, birth_lon, query_dt)
 
-        return {
+        res = {
             "system": "secondary_progressions",
             "birth_datetime": birth_datetime,
             "query_datetime": query_datetime or datetime.now().isoformat(),
@@ -1399,6 +1442,7 @@ def secondary_progressions(
             "active_aspects": result.get("active_aspects", []),
             "success": True,
         }
+        return enrich_response("secondary_progressions", res)
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__}
@@ -1442,7 +1486,9 @@ def dasha_transit_cross_analysis(
         result = _cross_analyze(
             natal_planets, current_transits, current_dasha, lagna_rashi, moon_rashi
         )
-        return {**result, "success": True}
+        res = {**result, "success": True}
+        ctx = {"mahadasha_lord": current_dasha.get("mahadasha", ""), "lagna_rashi": lagna_rashi}
+        return enrich_response("dasha_transit_cross_analysis", res, ctx)
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__}
@@ -1474,7 +1520,7 @@ def transit_natal_aspects_tool(
 
     Example:
         transit_natal_aspects_tool(
-            {"sun": {"longitude": 228.5}, "moon": {"longitude": 326.85}},
+            {"sun": {"longitude": 228.5}, "moon": {"longitude": 324.11}},
             {"saturn": {"longitude": 310.0, "speed": 0.03}, "jupiter": {"longitude": 88.5, "speed": 0.08}},
             5.0
         )
@@ -1488,13 +1534,14 @@ def transit_natal_aspects_tool(
             t = asp.get("aspect_type", "unknown")
             type_counts[t] = type_counts.get(t, 0) + 1
 
-        return {
+        result = {
             "total_aspects": len(aspects),
             "aspects": aspects,
             "type_counts": type_counts,
             "tightest": aspects[:3] if aspects else [],
             "success": True,
         }
+        return enrich_response("transit_natal_aspects_tool", result)
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__}
@@ -1537,7 +1584,7 @@ def correlate_life_event(
             "2020-03-15", "career", "Got promoted to manager",
             "1992-12-03T03:00:00+05:30",
             {"sun": {"longitude": 228.5}, "mercury": {"longitude": 245.0}, ...},
-            326.85, "libra"
+            324.11, "libra"
         )
     """
     try:
@@ -1550,7 +1597,8 @@ def correlate_life_event(
             moon_longitude=moon_longitude,
             lagna_rashi=lagna_rashi,
         )
-        return {**result, "success": True}
+        res = {**result, "success": True}
+        return enrich_response("correlate_life_event", res, {"lagna_rashi": lagna_rashi})
 
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__}
@@ -1591,9 +1639,9 @@ def upcoming_transit_triggers(
 
     Example:
         upcoming_transit_triggers(
-            {"sun": {"longitude": 228.5}, "moon": {"longitude": 326.85}},
+            {"sun": {"longitude": 228.5}, "moon": {"longitude": 324.11}},
             "libra", "aquarius", "2026-02-07", 30,
-            "1992-12-03T03:00:00+05:30", 326.85
+            "1992-12-03T03:00:00+05:30", 324.11
         )
     """
     try:
@@ -1617,14 +1665,181 @@ def upcoming_transit_triggers(
             ttype = t.get("type", "unknown")
             type_counts[ttype] = type_counts.get(ttype, 0) + 1
 
-        return {
+        result = {
             "total_triggers": len(triggers),
             "triggers": triggers,
             "type_counts": type_counts,
             "high_significance": [t for t in triggers if t.get("significance") == "high"],
             "success": True,
         }
+        return enrich_response("upcoming_transit_triggers", result, {"lagna_rashi": lagna_rashi})
 
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__}
+
+
+@mcp.tool()
+def chara_dasha_overlay(
+    birth_datetime: str,
+    birth_lat: float,
+    birth_lon: float,
+    natal_planets: dict[str, dict[str, Any]],
+    lagna_rashi: str,
+    moon_longitude: float,
+    moon_rashi: str | None = None,
+    query_datetime: str | None = None,
+) -> dict[str, Any]:
+    """
+    Jaimini Chara Dasha + transit cross-analysis.
+
+    Returns the current Chara Dasha sign (and lord), where the dasha sign-lord
+    is currently transiting (with bhava-from-dasha-sign themes), planets directly
+    in the dasha sign, Jaimini aspects (5/8/11 from dasha sign) currently active,
+    and a full padakrama (1st-12th from dasha sign for every transiting planet).
+
+    Use this for sign-based timing complementing Vimshottari, especially for
+    long-arc questions where Chara Dasha sub-periods feel more relevant
+    (career direction, dharma path, life chapters).
+
+    Args:
+        birth_datetime: ISO birth datetime.
+        birth_lat: Birth latitude.
+        birth_lon: Birth longitude.
+        natal_planets: {planet: {longitude, ...}}.
+        lagna_rashi: Ascendant sign name.
+        moon_longitude: Natal Moon sidereal longitude.
+        moon_rashi: Moon sign name (optional).
+        query_datetime: Moment to evaluate (default: now).
+    """
+    try:
+        birth_dt = datetime.fromisoformat(birth_datetime.replace("Z", "+00:00"))
+        query_dt = (
+            datetime.fromisoformat(query_datetime.replace("Z", "+00:00"))
+            if query_datetime
+            else None
+        )
+        result = _get_chara_dasha_overlay_from_raw(
+            birth_dt,
+            birth_lat,
+            birth_lon,
+            natal_planets,
+            lagna_rashi,
+            moon_longitude,
+            moon_rashi,
+            query_dt,
+        )
+        return enrich_response("chara_dasha_overlay", result, {"lagna_rashi": lagna_rashi})
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__}
+
+
+@mcp.tool()
+def tithi_pravesha_chart(
+    birth_datetime: str,
+    natal_sun_longitude: float,
+    natal_moon_longitude: float,
+    target_year_offset: int = 1,
+    location_lat: float | None = None,
+    location_lon: float | None = None,
+    natal_planets: dict[str, dict[str, Any]] | None = None,
+    lagna_index: int | None = None,
+) -> dict[str, Any]:
+    """
+    Tithi Pravesha Chakra (TPC) — annual lunar-anniversary chart.
+
+    The lunar-month analogue of Varshaphal. Cast for the moment when the
+    Sun-Moon angular distance returns to the natal tithi value (recurs
+    roughly every 354 days). Indicates themes of the upcoming lunar year.
+
+    Args:
+        birth_datetime: ISO birth datetime.
+        natal_sun_longitude: Sun's sidereal longitude at birth (0-360).
+        natal_moon_longitude: Moon's sidereal longitude at birth (0-360).
+        target_year_offset: Which year (1 = first anniversary; for current year
+            of life, pass current_age).
+        location_lat: TP chart location latitude (default: natal location).
+        location_lon: TP chart location longitude.
+        natal_planets: Full natal planet dict (for interpretation overlay).
+        lagna_index: Natal lagna 0-11 (for interpretation overlay).
+
+    Returns:
+        TP chart with planet positions, year ruler, and natal-vs-TP shifts.
+
+    Example:
+        tithi_pravesha_chart(
+            "1992-12-03T03:00:00+05:30", 227.21, 324.11, 34
+        )
+    """
+    try:
+        birth_dt = datetime.fromisoformat(birth_datetime.replace("Z", "+00:00"))
+        tp = _cast_tithi_pravesha_chart(
+            birth_dt,
+            natal_sun_longitude,
+            natal_moon_longitude,
+            target_year_offset=target_year_offset,
+            location_lat=location_lat,
+            location_lon=location_lon,
+        )
+        if natal_planets and lagna_index is not None:
+            tp["interpretation"] = _interpret_tithi_pravesha(tp, natal_planets, lagna_index)
+        return enrich_response("tithi_pravesha_chart", tp, {})
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__}
+
+
+@mcp.tool()
+def ambient_signals(
+    natal_planets: dict[str, dict[str, Any]],
+    lagna_rashi: str,
+    moon_longitude: float,
+    query_datetime: str | None = None,
+    birth_datetime: str | None = None,
+) -> dict[str, Any]:
+    """
+    Slow-burn classical timing signals (BPHS bhava + lordship + Moon/Saturn yogas).
+
+    Discrete-event triggers (upcoming_transit_triggers) only fire on ingresses,
+    aspects, retros, dasha changes. They miss the dominant classical signal:
+    where slow planets (Jupiter, Saturn, Rahu, Ketu) and the current dasha
+    lords are SITTING right now. Jupiter in 9H is "the pilgrimage year"
+    even when nothing else fires this week.
+
+    Returns:
+    - slow_transits: Jupiter/Saturn/Rahu/Ketu house position from lagna AND
+      from natal Moon, days_until_exit, functional nature for the lagna,
+      activated bhava themes.
+    - dasha_lord_transits: where the current MD/AD/PD lords are transiting
+      (BPHS: dasha lord's transit position = manifestation theme).
+    - moon_signals: janma_nakshatra_active, chandra_ashtama.
+    - saturn_signals: sade_sati_phase (rising/peak/setting), kantaka_shani
+      (Saturn 4/7/10 from Moon), ashtama_shani (Saturn 8 from Moon).
+    - active_domains: aggregated life-domains active right now, ranked by
+      weight, with sources cited.
+
+    Use this for any "will I X / when will X happen / how is my X" question.
+
+    Args:
+        natal_planets: {planet: {longitude, ...}} (at least Moon).
+        lagna_rashi: Ascendant sign name (e.g. "libra").
+        moon_longitude: Natal Moon sidereal longitude.
+        query_datetime: ISO moment to evaluate (default: now).
+        birth_datetime: ISO birth datetime (needed for dasha lord lookup).
+
+    Example:
+        ambient_signals(
+            {"moon": {"longitude": 324.11}, "sun": {"longitude": 227.2}},
+            "libra", 324.11, "2026-05-10", "1992-12-03T03:00:00+05:30"
+        )
+    """
+    try:
+        result = _get_ambient_signals(
+            natal_planets=natal_planets,
+            lagna_rashi=lagna_rashi,
+            moon_longitude=moon_longitude,
+            query_datetime=query_datetime,
+            birth_datetime=birth_datetime,
+        )
+        return enrich_response("ambient_signals", result, {"lagna_rashi": lagna_rashi})
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__}
 
@@ -1784,7 +1999,7 @@ def daily_forecast(
 
     Example:
         daily_forecast("1992-12-03T03:00:00+05:30", 16.73, 81.29,
-            {"sun": {"longitude": 240.5}}, 326.85, "libra")
+            {"sun": {"longitude": 240.5}}, 324.11, "libra")
     """
     try:
         from packages.context.src.daily_forecast import get_daily_forecast
@@ -1841,7 +2056,7 @@ def weekly_forecast(
 
     Example:
         weekly_forecast("1992-12-03T03:00:00+05:30", 16.73, 81.29,
-            {"sun": {"longitude": 240.5}}, 326.85, "libra")
+            {"sun": {"longitude": 240.5}}, 324.11, "libra")
     """
     try:
         from packages.context.src.weekly_forecast import get_weekly_forecast
@@ -1901,7 +2116,7 @@ def monthly_forecast(
 
     Example:
         monthly_forecast("1992-12-03T03:00:00+05:30", 16.73, 81.29,
-            {"sun": {"longitude": 240.5}}, 326.85, "libra", month=2, year=2026)
+            {"sun": {"longitude": 240.5}}, 324.11, "libra", month=2, year=2026)
     """
     try:
         from packages.context.src.monthly_forecast import get_monthly_forecast
@@ -1963,7 +2178,7 @@ def state_vector(
 
     Example:
         state_vector("1992-12-03T03:00:00+05:30", 16.73, 81.29,
-            {"sun": {"longitude": 240.5}}, 326.85, "libra")
+            {"sun": {"longitude": 240.5}}, 324.11, "libra")
     """
     try:
         from packages.context.src.state_engine import compute_state_vector
@@ -2025,7 +2240,7 @@ def state_range(
 
     Example:
         state_range("1992-12-03T03:00:00+05:30", 16.73, 81.29,
-            {"sun": {"longitude": 240.5}}, 326.85, "libra",
+            {"sun": {"longitude": 240.5}}, 324.11, "libra",
             start_date="2026-01-01", end_date="2026-01-31")
     """
     try:
@@ -2046,6 +2261,41 @@ def state_range(
             location_lon=location_lon,
         )
         return {"success": True, **result}
+    except Exception as e:
+        return {"error": str(e), "type": type(e).__name__, "success": False}
+
+
+@mcp.tool()
+async def kalachakra_dasha(
+    birth_datetime: str,
+    moon_longitude: float,
+    query_datetime: str | None = None,
+    periods_count: int = 12,
+) -> dict:
+    """
+    Kalachakra Dasha — sign-based dasha system from BPHS Chapter 46.
+
+    Uses Moon's navamsha sign as starting point. Direction (Savya=forward /
+    Apasavya=backward) determined by Moon's nakshatra. 173-year total cycle.
+
+    Dasha years: Aries=7, Taurus=16, Gemini=9, Cancer=21, Leo=5, Virgo=9,
+    Libra=19, Scorpio=15, Sagittarius=12, Capricorn=27, Aquarius=21, Pisces=12.
+
+    Args:
+        birth_datetime: ISO birth datetime (e.g. "1992-12-03T03:00:00+05:30")
+        moon_longitude: Moon's sidereal longitude at birth (degrees)
+        query_datetime: Date to check current dasha (default: today)
+        periods_count: Number of periods to return (default 12)
+
+    Returns:
+        Current dasha period, direction, moon navamsha sign, all periods
+    """
+    try:
+        from packages.context.src.kalachakra_dasha import get_kalachakra_dasha_periods
+
+        return get_kalachakra_dasha_periods(
+            birth_datetime, moon_longitude, query_datetime, periods_count
+        )
     except Exception as e:
         return {"error": str(e), "type": type(e).__name__, "success": False}
 

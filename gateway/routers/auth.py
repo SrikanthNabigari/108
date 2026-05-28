@@ -182,14 +182,15 @@ async def update_birth_details(
 
         moon_nakshatra_data = longitude_to_nakshatra(moon_lon)
         moon_nakshatra = moon_nakshatra_data.get("name", "ashwini")
+        moon_nakshatra_pada = moon_nakshatra_data.get("pada", 1)
 
         # Upsert birth_charts table — use actual schema column names
         chart_query = """
             INSERT INTO birth_charts
             (user_id, birth_datetime, latitude, longitude,
              timezone, place_name, lagna_rashi, moon_rashi,
-             moon_nakshatra, planets, houses, calculated_at)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, NOW())
+             moon_nakshatra, moon_nakshatra_pada, planets, houses, calculated_at)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, NOW())
             ON CONFLICT (user_id) DO UPDATE SET
                 birth_datetime = $2,
                 latitude = $3,
@@ -199,8 +200,9 @@ async def update_birth_details(
                 lagna_rashi = $7,
                 moon_rashi = $8,
                 moon_nakshatra = $9,
-                planets = $10,
-                houses = $11,
+                moon_nakshatra_pada = $10,
+                planets = $11,
+                houses = $12,
                 calculated_at = NOW()
             RETURNING *
         """
@@ -216,6 +218,7 @@ async def update_birth_details(
             lagna_rashi,
             moon_rashi,
             moon_nakshatra,
+            moon_nakshatra_pada,
             json.dumps(planets_data),
             json.dumps(houses_data),
         )

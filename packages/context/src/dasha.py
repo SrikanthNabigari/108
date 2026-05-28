@@ -38,6 +38,26 @@ from packages.core.src.knowledge_loader import (
     get_sookshma_dasha_effects as get_sookshma_dasha_effects_data,
 )
 
+
+def _normalize_pair(birth_dt: datetime, query_dt: datetime) -> tuple[datetime, datetime]:
+    """Return (birth, query) with consistent tz state for comparison.
+
+    Why: callers may pass aware birth + naive query (or vice versa). Direct
+    comparison raises TypeError. Per BPHS the dasha clock runs in the native's
+    local civil time, so we align both to birth's frame: if birth is aware and
+    query is naive, attach birth's tzinfo to query; if birth is naive and query
+    is aware, convert query to birth's wall time then drop tz; if mixed-aware,
+    convert query into birth's tz. Result: both aware OR both naive.
+    """
+    if birth_dt.tzinfo is None and query_dt.tzinfo is None:
+        return birth_dt, query_dt
+    if birth_dt.tzinfo is not None and query_dt.tzinfo is not None:
+        return birth_dt, query_dt.astimezone(birth_dt.tzinfo)
+    if birth_dt.tzinfo is not None and query_dt.tzinfo is None:
+        return birth_dt, query_dt.replace(tzinfo=birth_dt.tzinfo)
+    return birth_dt.replace(tzinfo=query_dt.tzinfo), query_dt
+
+
 # Module-level cache for dasha rules
 _dasha_rules_cache: dict[str, Any] | None = None
 
@@ -574,7 +594,11 @@ def get_current_dasha(
         'ketu'
     """
     if query_datetime is None:
-        query_datetime = datetime.now()
+        query_datetime = (
+            datetime.now(tz=birth_datetime.tzinfo) if birth_datetime.tzinfo else datetime.now()
+        )
+
+    birth_datetime, query_datetime = _normalize_pair(birth_datetime, query_datetime)
 
     # Get all Mahadashas
     mahadashas = get_mahadasha_sequence(birth_datetime, moon_longitude)
