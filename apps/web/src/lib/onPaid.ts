@@ -9,7 +9,7 @@ import { PACKS } from "./packs";
 // No WhatsApp intake step — we generate straight off the purchase form fields.
 export async function onPaymentConfirmed(args: {
   orderId: string;
-  gateway: "razorpay" | "payu" | "cashfree";
+  gateway: "razorpay" | "payu" | "cashfree" | "manual";
   gatewayPaymentId: string;
   gatewayOrderId?: string;
   amountInr: number; // paise

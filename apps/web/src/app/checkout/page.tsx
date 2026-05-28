@@ -8,6 +8,12 @@ declare global {
   interface Window { Cashfree?: any; Razorpay?: any; }
 }
 
+// Sandbox mode: clicking any gateway simulates a successful payment (no real
+// charge) via /api/payment/sandbox/confirm. Set NEXT_PUBLIC_PAYMENT_MODE=sandbox
+// (and PAYMENT_MODE=sandbox server-side) to enable. Defaults to production.
+const PAYMENT_MODE = process.env.NEXT_PUBLIC_PAYMENT_MODE || "production";
+const IS_SANDBOX = PAYMENT_MODE === "sandbox";
+
 function CheckoutForm() {
   const params = useSearchParams();
   const packId = params.get("pack") || "core";
@@ -75,7 +81,22 @@ function CheckoutForm() {
     return data.orderId as string;
   }
 
+  // Sandbox bypass — simulates success for whichever gateway was clicked.
+  async function paySandbox(gateway: string) {
+    setBusy(true);
+    const orderId = await createOrder();
+    if (!orderId) return setBusy(false);
+    const res = await fetch("/api/payment/sandbox/confirm", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ orderId, gateway }),
+    });
+    const data = await res.json();
+    if (!res.ok) { setErr(data.error || "sandbox payment failed"); return setBusy(false); }
+    window.location.href = `/thanks?status=success&order_id=${orderId}`;
+  }
+
   async function payPayu() {
+    if (IS_SANDBOX) return paySandbox("payu");
     setBusy(true);
     const orderId = await createOrder();
     if (!orderId) return setBusy(false);
@@ -89,6 +110,7 @@ function CheckoutForm() {
   }
 
   async function payCashfree() {
+    if (IS_SANDBOX) return paySandbox("cashfree");
     setBusy(true);
     const orderId = await createOrder();
     if (!orderId) return setBusy(false);
@@ -105,6 +127,7 @@ function CheckoutForm() {
   }
 
   async function payRazorpay() {
+    if (IS_SANDBOX) return paySandbox("razorpay");
     setBusy(true);
     const orderId = await createOrder();
     if (!orderId) return setBusy(false);
@@ -165,7 +188,14 @@ function CheckoutForm() {
 
       {err && <p style={{ color: "#e36", fontSize: 14 }}>{err}</p>}
 
-      <p style={{ color: "var(--muted)", fontSize: 13, marginTop: 18 }}>Pay securely with:</p>
+      {IS_SANDBOX && (
+        <p style={{ background: "rgba(184,134,11,0.12)", border: "1px solid var(--border)", borderRadius: 8, padding: "10px 13px", fontSize: 13, color: "#d6a83a", marginTop: 18 }}>
+          ⚙️ Sandbox mode — payments are simulated. Clicking any button completes the order without a real charge.
+        </p>
+      )}
+      <p style={{ color: "var(--muted)", fontSize: 13, marginTop: 18 }}>
+        {IS_SANDBOX ? "Simulate payment with:" : "Pay securely with:"}
+      </p>
       <div className="gateways">
         <button className="btn" disabled={busy} onClick={payRazorpay}>Razorpay</button>
         <button className="btn" disabled={busy} onClick={payCashfree}>Cashfree</button>
