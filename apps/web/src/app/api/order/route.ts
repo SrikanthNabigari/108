@@ -25,10 +25,13 @@ export async function POST(req: NextRequest) {
   try {
     const json = await req.json();
     const input = OrderInput.parse(json);
-    if (!PACKS[input.pack_id]) {
+    const pack = PACKS[input.pack_id];
+    if (!pack) {
       return NextResponse.json({ error: "invalid pack_id" }, { status: 400 });
     }
     const amount = packTotal(input.pack_id, input.addons);
+    // The report sections this tier generates (drives report depth downstream).
+    const reportAddons = Array.from(new Set([...pack.report_addons, ...input.addons]));
     const sb = supabaseAdmin();
     const { data, error } = await sb
       .from("los_orders")
@@ -43,7 +46,7 @@ export async function POST(req: NextRequest) {
         birth_place_name: input.birth_place_name ?? null,
         timezone: input.timezone,
         pack_id: input.pack_id,
-        addons: input.addons,
+        addons: reportAddons,
         user_question: input.user_question ?? null,
         amount_inr: amount,
         status: "created",

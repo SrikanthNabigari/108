@@ -29,40 +29,48 @@ function Thanks() {
   }, [orderId]);
 
   return (
-    <main className="wrap" style={{ maxWidth: 600 }}>
-      <section className="hero">
+    <>
+      <header className="nav">
+        <a href="/" className="nav-logo"><b>108</b> Life&apos;s Operating System</a>
+      </header>
+      <main className="wrap" style={{ maxWidth: 620, textAlign: "center", padding: "80px 24px" }}>
         {status === "success" ? (
           <>
-            <h1 style={{ fontSize: 32 }}>Payment received 🙏</h1>
-            <p>
-              Your 108 reading is being decoded now. We&apos;ve emailed your
-              confirmation — your download link arrives shortly.
+            <p className="eyebrow">Payment received</p>
+            <h2 className="serif">Your reading is being decoded</h2>
+            <p className="lead" style={{ marginTop: 18 }}>
+              We&apos;ve emailed your confirmation — your download link arrives shortly.
             </p>
           </>
         ) : status === "failed" ? (
           <>
-            <h1 style={{ fontSize: 32 }}>Payment didn&apos;t go through</h1>
-            <p>No charge was made. You can try again from the checkout page.</p>
+            <p className="eyebrow">Payment</p>
+            <h2 className="serif">It didn&apos;t go through</h2>
+            <p className="lead" style={{ marginTop: 18 }}>
+              No charge was made. You can try again from the checkout page.
+            </p>
           </>
         ) : (
           <>
-            <h1 style={{ fontSize: 32 }}>Confirming your payment…</h1>
-            <p>This takes a few seconds.</p>
+            <p className="eyebrow">One moment</p>
+            <h2 className="serif">Confirming your payment…</h2>
+            <p className="lead" style={{ marginTop: 18 }}>This takes a few seconds.</p>
           </>
         )}
 
         {report?.public_url && (
-          <a href={report.public_url} className="btn">Download your reading (PDF)</a>
+          <div style={{ marginTop: 34 }}>
+            <a href={report.public_url} className="btn lg">Download your reading (PDF)</a>
+          </div>
         )}
         {!report && status === "success" && (
-          <p style={{ color: "var(--muted)", fontSize: 14, marginTop: 24 }}>
-            Generating… {orderStatus && `(status: ${orderStatus})`} This page will
-            update automatically.
+          <p className="muted" style={{ fontSize: 14, marginTop: 28 }}>
+            Generating{orderStatus && ` · ${orderStatus}`} — this page updates automatically.
           </p>
         )}
-      </section>
+      </main>
       <footer>108 — Life&apos;s Operating System</footer>
-    </main>
+    </>
   );
 }
 

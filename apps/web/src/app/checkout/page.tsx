@@ -150,11 +150,16 @@ function CheckoutForm() {
   }
 
   return (
-    <main className="wrap" style={{ maxWidth: 620 }}>
-      <section className="hero" style={{ paddingBottom: 12 }}>
-        <h1 style={{ fontSize: 30 }}>{pack.name}</h1>
-        <p>₹{(amount / 100).toFixed(0)} · one-time</p>
-      </section>
+    <>
+    <header className="nav">
+      <a href="/" className="nav-logo"><b>108</b> Life&apos;s Operating System</a>
+    </header>
+    <main className="wrap" style={{ maxWidth: 600, paddingTop: 32, paddingBottom: 40 }}>
+      <p className="eyebrow">Your Details</p>
+      <h2 className="serif" style={{ fontSize: 38 }}>{pack.name}</h2>
+      <p className="muted" style={{ marginBottom: 28 }}>
+        ₹{(amount / 100).toFixed(0)} · one-time · {pack.pages}
+      </p>
 
       <div className="field"><label>Full name *</label><input value={f.full_name} onChange={upd("full_name")} /></div>
       <div className="row">
@@ -169,10 +174,10 @@ function CheckoutForm() {
         <label>Birth place * (start typing your city)</label>
         <input placeholder="e.g. Bhimavaram, Andhra Pradesh" value={f.birth_place_name} onChange={onPlaceType} autoComplete="off" />
         {placeResults.length > 0 && (
-          <div style={{ position: "absolute", zIndex: 10, left: 0, right: 0, background: "#0e0e12", border: "1px solid var(--border)", borderRadius: 8, marginTop: 4, overflow: "hidden" }}>
+          <div style={{ position: "absolute", zIndex: 10, left: 0, right: 0, background: "#0e0e12", border: "1px solid var(--line)", borderRadius: 2, marginTop: 4, overflow: "hidden" }}>
             {placeResults.map((r) => (
               <div key={r.description} onClick={() => pickPlace(r)}
-                style={{ padding: "10px 13px", cursor: "pointer", fontSize: 14, borderBottom: "1px solid rgba(255,255,255,0.04)" }}>
+                style={{ padding: "11px 14px", cursor: "pointer", fontSize: 14, borderBottom: "1px solid var(--line)" }}>
                 {r.description}
               </div>
             ))}
@@ -189,21 +194,22 @@ function CheckoutForm() {
       {err && <p style={{ color: "#e36", fontSize: 14 }}>{err}</p>}
 
       {IS_SANDBOX && (
-        <p style={{ background: "rgba(184,134,11,0.12)", border: "1px solid var(--border)", borderRadius: 8, padding: "10px 13px", fontSize: 13, color: "#d6a83a", marginTop: 18 }}>
-          ⚙️ Sandbox mode — payments are simulated. Clicking any button completes the order without a real charge.
+        <p style={{ background: "var(--gold-soft)", border: "1px solid var(--line)", borderRadius: 2, padding: "11px 14px", fontSize: 13, color: "var(--gold)", marginTop: 20 }}>
+          Sandbox mode — payments are simulated. Clicking any button completes the order without a real charge.
         </p>
       )}
-      <p style={{ color: "var(--muted)", fontSize: 13, marginTop: 18 }}>
-        {IS_SANDBOX ? "Simulate payment with:" : "Pay securely with:"}
+      <p className="eyebrow" style={{ marginTop: 24, marginBottom: 12 }}>
+        {IS_SANDBOX ? "Simulate payment with" : "Pay securely with"}
       </p>
       <div className="gateways">
         <button className="btn" disabled={busy} onClick={payRazorpay}>Razorpay</button>
-        <button className="btn" disabled={busy} onClick={payCashfree}>Cashfree</button>
-        <button className="btn secondary" disabled={busy} onClick={payPayu}>PayU</button>
+        <button className="btn ghost" disabled={busy} onClick={payCashfree}>Cashfree</button>
+        <button className="btn ghost" disabled={busy} onClick={payPayu}>PayU</button>
       </div>
 
-      <footer>108 — Life&apos;s Operating System</footer>
     </main>
+    <footer>108 — Life&apos;s Operating System</footer>
+    </>
   );
 }
 
