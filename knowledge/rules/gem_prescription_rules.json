@@ -1,5 +1,6 @@
 {
   "gem_prescription_rules": {
+    "bphs_ref": "Ch.84-93 - Planetary Propitiation and Gemstones",
     "description": "Lagna-wise gemstone prescription rules based on BPHS, Phaladeepika, and traditional Jyotish gem therapy principles. Gems strengthen the planet they represent — only wear gems of benefic lords for your Lagna.",
     "version": "1.0",
     "lagna_wise": {

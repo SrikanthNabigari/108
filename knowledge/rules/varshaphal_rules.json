@@ -1,5 +1,6 @@
 {
   "varshaphal_rules": {
+    "bphs_ref": "Ch.65-66 - Varshaphal (Solar Return)",
     "description": "Varshaphal (Solar Return / Annual Chart) rules from Tajika system",
     "version": "1.0.0",
     "general_principles": {

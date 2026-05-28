@@ -1,4 +1,5 @@
 {
+  "bphs_ref": "Ch.76 - Pancha Mahapurusha Yogas",
   "metadata": {"part": 6, "description": "Divisional Chart Yogas, Navamsa Yogas, Transit Yogas, Dasha Yogas"},
   "yoga_rules": {
     "vargottama_sun": {"id": "vargottama_sun", "name": "Vargottama Sun", "category": "special", "source": "BPHS", "description": "Sun in same sign in D1 and D9. Strengthens authority.", "detection": {"conditions": [{"type": "sun_vargottama"}]}, "effects": ["Strong authority", "Father blessed", "Government success", "Clear ego"]},

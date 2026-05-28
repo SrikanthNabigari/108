@@ -1,5 +1,6 @@
 {
   "atmakaraka_rules": {
+    "bphs_ref": "Ch.34-35 - Atmakaraka and Karakamsha",
     "description": "Atmakaraka (soul significator) interpretation rules based on Jaimini Sutras and BPHS. The Atmakaraka is the planet with the highest degree in any sign, representing the soul's deepest desires and karmic lessons.",
     "version": "1.0",
     "ak_by_planet": {

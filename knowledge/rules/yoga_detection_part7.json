@@ -1,4 +1,5 @@
 {
+  "bphs_ref": "Ch.77 - Other Important Yogas",
   "metadata": {"part": 7, "description": "House Position Yogas, Sign Position Yogas, Final Special Combinations"},
   "yoga_rules": {
     "sun_in_1st": {"id": "sun_in_1st", "name": "Sun in 1st House", "category": "special", "description": "Sun in Lagna. Leadership personality.", "effects": ["Leadership", "Authority", "Father connection", "Ego prominent"]},

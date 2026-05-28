@@ -1,5 +1,6 @@
 {
   "navamsha_spouse_rules": {
+    "bphs_ref": "Ch.7, 78-80 - Navamsha and Marriage",
     "description": "D9 Navamsha spouse prediction rules from BPHS and Jaimini Sutras",
     "version": "1.0",
     "d9_7th_lord_in_sign": [

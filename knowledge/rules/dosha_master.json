@@ -15,6 +15,14 @@
       "nakshatra": "Nakshatra-based doshas",
       "yoga_dosha": "Yoga-based afflictions",
       "muhurta": "Timing-based doshas"
+    },
+    "bphs_ref": {
+      "mangal_dosha": "Ch.81 - Effects of Kuja Dosha",
+      "kaal_sarp_dosha": "Ch.48 - Rahu-Ketu Axis",
+      "gandanta_dosha": "Ch.94 - Gandanta Birth Remedies",
+      "abhukta_moola": "Ch.95 - Abhukta Moola Birth",
+      "pitra_dosha": "Ch.11-12 - Ancestral Karma",
+      "female_horoscopy": "Ch.80 - Female Horoscopy"
     }
   },
   "dosha_rules": {

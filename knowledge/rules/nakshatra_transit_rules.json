@@ -1,5 +1,6 @@
 {
   "nakshatra_transit_rules": {
+    "bphs_ref": "Ch.67-68 - Nakshatra Transit Effects",
     "description": "Effects of planetary transits through 27 Nakshatras - 243 combinations covering all planetary movements through lunar mansions",
     "version": "1.0.0",
     "general_principles": {

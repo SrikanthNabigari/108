@@ -1,6 +1,7 @@
 {
   "shadbala_rules": {
     "description": "Complete Shadbala (Six-fold Strength) rules from BPHS Chapter 27",
+    "bphs_ref": "Ch.29-30 - Shadbala (Six-fold Strength) and Ishta-Kashta Phalas",
     "total_max_virupas": 360,
     "components": {
       "sthana_bala": {

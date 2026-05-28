@@ -29,6 +29,16 @@
       "sanyasa": "Renunciation and spiritual yogas",
       "special": "Special combination yogas",
       "nakshatra": "Lunar mansion based yogas"
+    },
+    "bphs_ref": {
+      "pancha_mahapurusha": "Ch.76 - Pancha Maha Purusha Yogas",
+      "nabhasa_yoga": "Ch.37 - Nabhasa Yogas",
+      "raja_yoga": "Ch.41-42 - Raja Yogas",
+      "dhana_yoga": "Ch.43 - Dhana Yogas",
+      "daridra_yoga": "Ch.44 - Daridra Yogas",
+      "chandra_yoga": "Ch.39 - Lunar Yogas",
+      "surya_yoga": "Ch.40 - Solar Yogas",
+      "other_yoga": "Ch.38, 77 - Other Yogas and Combinations"
     }
   },
   "yoga_rules": {

@@ -1,5 +1,6 @@
 {
   "combustion_rules": {
+    "bphs_ref": "Ch.26 - Combustion (Asta) of Planets",
     "description": "Planetary combustion (Asta) occurs when a planet comes too close to the Sun, causing it to lose its strength and become unable to deliver its full results. The Sun's intense rays overpower the planet's significations.",
     "general_principles": {
       "definition": "A planet is combust when it is within specific degrees of the Sun, measured by celestial longitude",

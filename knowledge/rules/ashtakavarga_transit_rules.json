@@ -1,5 +1,6 @@
 {
   "ashtakavarga_transit_rules": {
+    "bphs_ref": "Ch.69-72 - Ashtakavarga Transit Rules",
     "description": "Ashtakavarga-based transit prediction rules from BPHS Chapter 66",
     "version": "1.0",
     "sav_thresholds": [

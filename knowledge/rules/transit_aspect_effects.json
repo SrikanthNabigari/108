@@ -1,5 +1,6 @@
 {
   "metadata": {
+    "bphs_ref": "Ch.67-68 - Transit Aspect Effects",
     "description": "Transit aspect effects for all planet-to-planet combinations across 5 aspect types",
     "total_combinations": 405,
     "structure": "9 transit planets x 9 natal planets x 5 aspect types",
